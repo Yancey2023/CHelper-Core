@@ -1,0 +1,3 @@
+D:/CLion/project/CHelper/cmake-build-debug/CMakeFiles/CHelper.dir
+D:/CLion/project/CHelper/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/CLion/project/CHelper/cmake-build-debug/CMakeFiles/rebuild_cache.dir
