@@ -9,31 +9,27 @@
 #include "StringReader.h"
 #include "Token.h"
 
-class Lexer {
+namespace CHelper {
 
-    StringReader stringReader;
+    class Lexer {
+        StringReader stringReader;
 
-public:
+    public:
+        [[maybe_unused]] explicit Lexer(std::string content, std::string filename);
 
-    [[maybe_unused]] explicit Lexer(std::string content, std::string filename);
+        [[maybe_unused]] explicit Lexer(StringReader stringReader);
 
-    [[maybe_unused]] explicit Lexer(StringReader stringReader);
+        std::vector<Token> lex();
 
-    std::vector<Token> lex();
+        TokenType::TokenType nextTokenType();
 
-    TokenType nextTokenType();
+        Token nextTokenNumber(bool whiteSpace);
 
-    Token nextTokenNumber(bool whiteSpace);
+        Token nextTokenSymbol(bool whiteSpace);
 
-    Token nextTokenSymbol(bool whiteSpace);
+        Token nextTokenString(bool whiteSpace);
+    };
 
-    Token nextTokenString(bool whiteSpace);
-};
-
-bool isNum(char ch);
-
-bool isEndChar(char ch);
-
-bool isSymbol(char ch);
+}
 
 #endif //CHELPER_LEXER_H

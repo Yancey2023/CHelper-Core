@@ -4,4 +4,4 @@
 
 #include "Parser.h"
 
-Parser::Parser(const std::vector<Token> &tokenList) : tokenList(tokenList) {}
+Parser::Parser(const std::vector<CHelper::Token> &tokenList) : tokenList(tokenList) {}

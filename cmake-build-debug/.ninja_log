@@ -1,8 +1,0 @@
-# ninja log v5
-3	699	7209640577206752	CMakeFiles/CHelper.dir/main.cpp.obj	ba2e014501686a48
-7	354	7209046301300968	CMakeFiles/CHelper.dir/token/pos.cpp.obj	c247e66e135d2ffb
-18	534	7209625411836893	CMakeFiles/CHelper.dir/StringReader.cpp.obj	f4aedba2faf08640
-18	927	7209583155393760	CMakeFiles/CHelper.dir/Pos.cpp.obj	6a5daf64b327a8e2
-11	676	7209636318019597	CMakeFiles/CHelper.dir/Token.cpp.obj	5238fffaca2dd735
-4	639	7209648112566430	CMakeFiles/CHelper.dir/Lexer.cpp.obj	4d4afabdf4bd321f
-640	795	7209648114064671	CHelper.exe	aacfa2d90cc8551a

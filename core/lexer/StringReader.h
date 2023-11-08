@@ -5,33 +5,35 @@
 #ifndef CHELPER_STRINGREADER_H
 #define CHELPER_STRINGREADER_H
 
-
 #include <string>
 #include "Pos.h"
 
-class StringReader {
-public:
-    Pos pos, posBackup;
-    std::string content;
+namespace CHelper {
 
-    StringReader(std::string content, std::string filename);
+    class StringReader {
+    public:
+        CHelper::Pos pos, posBackup;
+        std::string content;
 
-    [[nodiscard]] bool ready() const;
+        StringReader(std::string content, std::string filename);
 
-    [[nodiscard]] char read();
+        [[nodiscard]] bool ready() const;
 
-    bool skip();
+        [[nodiscard]] char read();
 
-    [[nodiscard]] char next();
+        bool skip();
 
-    [[nodiscard]] char peek();
+        [[nodiscard]] char next();
 
-    void mark();
+        [[nodiscard]] char peek();
 
-    void reset();
+        void mark();
 
-    [[nodiscard]] std::string collect() const;
-};
+        void reset();
 
+        [[nodiscard]] std::string collect() const;
+    };
+
+}
 
 #endif //CHELPER_STRINGREADER_H

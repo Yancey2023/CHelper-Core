@@ -4,15 +4,18 @@
 
 #include "StringReader.h"
 
-StringReader::StringReader(std::string content, std::string filePath) : content(std::move(content)),
-                                                                        pos(Pos(1, 0, 0, std::move(filePath))),
-                                                                        posBackup(pos) {}
+CHelper::StringReader::StringReader(
+        std::string content,
+        std::string filePath)
+        : content(std::move(content)),
+          pos(CHelper::Pos(1, 0, 0, std::move(filePath))),
+          posBackup(pos) {}
 
-bool StringReader::ready() const {
+bool CHelper::StringReader::ready() const {
     return pos.which < content.length();
 }
 
-char StringReader::read() {
+char CHelper::StringReader::read() {
     if (!ready()) {
         return -1;
     }
@@ -21,7 +24,7 @@ char StringReader::read() {
     return ch;
 }
 
-bool StringReader::skip() {
+bool CHelper::StringReader::skip() {
     if (!ready()) {
         return false;
     }
@@ -29,30 +32,30 @@ bool StringReader::skip() {
     return true;
 }
 
-char StringReader::next() {
+char CHelper::StringReader::next() {
     skip();
     return peek();
 }
 
-char StringReader::peek() {
+char CHelper::StringReader::peek() {
     if (!ready()) {
         return -1;
     }
     return content[pos.which];
 }
 
-void StringReader::mark() {
+void CHelper::StringReader::mark() {
     posBackup.line = pos.line;
     posBackup.col = pos.col;
     posBackup.which = pos.which;
 }
 
-void StringReader::reset() {
+void CHelper::StringReader::reset() {
     pos.line = posBackup.line;
     pos.col = posBackup.col;
     pos.which = posBackup.which;
 }
 
-std::string StringReader::collect() const {
-    return {content, (size_t) posBackup.which, (size_t) (pos.which - posBackup.which)};
+std::string CHelper::StringReader::collect() const {
+    return {content, (size_t) posBackup.which, (size_t)(pos.which - posBackup.which)};
 }

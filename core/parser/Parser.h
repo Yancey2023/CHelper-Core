@@ -10,10 +10,10 @@
 #include "../lexer/Token.h"
 
 class Parser {
-    std::vector<Token> tokenList;
+    std::vector<CHelper::Token> tokenList;
 
 public:
-    explicit Parser(const std::vector<Token> &tokenList);
+    explicit Parser(const std::vector<CHelper::Token> &tokenList);
 };
 
 

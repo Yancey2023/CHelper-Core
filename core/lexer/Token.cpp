@@ -5,20 +5,24 @@
 #include "Token.h"
 #include <iostream>
 
-Token::Token(TokenType type, bool whiteSpace, Pos pos, std::string content) : type(type),
-                                                                              whiteSpace(whiteSpace),
-                                                                              pos(std::move(pos)),
-                                                                              content(std::move(content)) {}
+CHelper::Token::Token(TokenType::TokenType type,
+                      bool whiteSpace,
+                      CHelper::Pos pos,
+                      std::string content)
+        : type(type),
+          whiteSpace(whiteSpace),
+          pos(std::move(pos)),
+          content(std::move(content)) {}
 
-std::ostream &operator<<(std::ostream &os, const TokenType &tokenType) {
+std::ostream &CHelper::operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType) {
     switch (tokenType) {
-        case NUMBER:
+        case CHelper::TokenType::NUMBER:
             os << "数字";
             break;
-        case STRING:
+        case CHelper::TokenType::STRING:
             os << "文字";
             break;
-        case SYMBOL:
+        case CHelper::TokenType::SYMBOL:
             os << "符号";
             break;
         default:
@@ -28,6 +32,14 @@ std::ostream &operator<<(std::ostream &os, const TokenType &tokenType) {
     return os;
 }
 
-std::ostream &operator<<(std::ostream &os, const Token &token) {
-    return os << '[' << token.type << "] "<< token.pos << " (前面" << (token.whiteSpace ? "有" : "没有") << "空格) " << token.content << "";
+std::ostream &CHelper::operator<<(std::ostream &os, const CHelper::Token &token) {
+    return os << '['
+              << token.type
+              << "] "
+              << token.pos
+              << " (前面"
+              << (token.whiteSpace ? "有" : "没有")
+              << "空格) "
+              << token.content
+              << "";
 }

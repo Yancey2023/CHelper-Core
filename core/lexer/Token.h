@@ -5,27 +5,33 @@
 #ifndef CHELPER_TOKEN_H
 #define CHELPER_TOKEN_H
 
-
 #include "Pos.h"
 
-enum TokenType{
-    STRING,
-    NUMBER,
-    SYMBOL
-};
+namespace CHelper {
 
-std::ostream &operator<<(std::ostream &os, const TokenType &tokenType);
+    namespace TokenType {
 
-class Token {
-public:
-    const TokenType type;
-    const bool whiteSpace; //前面有没有空格
-    const Pos pos;
-    const std::string content;
+        enum TokenType {
+            STRING,
+            NUMBER,
+            SYMBOL
+        };
+    }
 
-    Token(TokenType type, bool whiteSpace, Pos pos, std::string content);
-};
+    std::ostream &operator<<(std::ostream &os, const TokenType::TokenType &tokenType);
 
-std::ostream &operator<<(std::ostream &os, const Token &token);
+    class Token {
+    public:
+        const TokenType::TokenType type;
+        const bool whiteSpace; //前面有没有空格
+        const Pos pos;
+        const std::string content;
+
+        Token(TokenType::TokenType type, bool whiteSpace, Pos pos, std::string content);
+    };
+
+    std::ostream &operator<<(std::ostream &os, const Token &token);
+
+}
 
 #endif //CHELPER_TOKEN_H

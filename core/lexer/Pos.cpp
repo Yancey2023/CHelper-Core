@@ -5,12 +5,17 @@
 #include "Pos.h"
 #include <iostream>
 
-Pos::Pos(int line, int col, int which, std::string filePath) : line(line),
-                                                               col(col),
-                                                               which(which),
-                                                               filePath(std::move(filePath)) {}
 
-void Pos::next(char ch) {
+CHelper::Pos::Pos(int line,
+                  int col,
+                  int which,
+                  std::string filePath)
+        : line(line),
+          col(col),
+          which(which),
+          filePath(std::move(filePath)) {}
+
+void CHelper::Pos::next(char ch) {
     which++;
     if (ch == '\n') {
         line++;
@@ -20,6 +25,9 @@ void Pos::next(char ch) {
     }
 }
 
-std::ostream &operator<<(std::ostream &os, const Pos &pos) {
-    return os << '(' << pos.line << ',' << pos.col << ')';
+std::ostream &CHelper::operator<<(std::ostream &os, const CHelper::Pos &pos) {
+    return os << '('
+              << pos.line
+              << ',' << pos.col
+              << ')';
 }
