@@ -16,6 +16,7 @@
 #include "../resources/command/node/NodeText.h"
 #include "../resources/command/node/NodeItem.h"
 #include "Exception.h"
+#include "../resources/command/node/NodePosition.h"
 
 namespace CHelper {
 
@@ -54,6 +55,8 @@ namespace CHelper {
                     return std::make_shared<NodeText>(j);
                 } else if (type == NodeType::STR_ITEM) {
                     return std::make_shared<NodeItem>(j);
+                } else if (type == NodeType::STR_POSITION) {
+                    return std::make_shared<NodePosition>(j);
                 } else {
                     throw Exception::UnknownNodeType(type);
                 }

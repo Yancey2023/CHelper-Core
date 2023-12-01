@@ -24,7 +24,8 @@ namespace CHelper::Node {
             NORMAL_ID,
             TARGET_SELECTOR,
             TEXT,
-            ITEM
+            ITEM,
+            POSITION
         };
 
 //        const std::string STR_UNKNOWN = "UNKNOWN";
@@ -40,6 +41,7 @@ namespace CHelper::Node {
         const std::string STR_TARGET_SELECTOR = "TARGET_SELECTOR";
         const std::string STR_TEXT = "TEXT";
         const std::string STR_ITEM = "ITEM";
+        const std::string STR_POSITION = "POSITION";
 
     } // NodeType
 
