@@ -1,0 +1,1 @@
+{"node":[{"isMustPlayer":true,"isOnlyOne":false,"isMustNPC":false,"description":"要踢出的玩家","id":"0","type":"TARGET_SELECTOR"},{"canContainSpace":false,"description":"踢出原因","ignoreLater":false,"id":"1","type":"STRING"}],"ast":[["0","1"],["0","LF"],["1","LF"]],"name":["kick"],"start":["0"],"description":"将一位玩家踢出服务器"}

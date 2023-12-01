@@ -1,0 +1,1 @@
+{"node":[{"examples":[],"canContainSpace":false,"description":"消息","ignoreLater":false,"id":"0","type":"STRING"}],"ast":[["0","LF"]],"name":["say"],"start":["0"],"description":"通过聊天框向多个玩家发送消息"}

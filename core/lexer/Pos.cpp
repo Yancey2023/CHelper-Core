@@ -3,8 +3,6 @@
 //
 
 #include "Pos.h"
-#include <iostream>
-
 
 CHelper::Pos::Pos(int line,
                   int col,
@@ -28,6 +26,7 @@ void CHelper::Pos::next(char ch) {
 std::ostream &CHelper::operator<<(std::ostream &os, const CHelper::Pos &pos) {
     return os << '('
               << pos.line
-              << ',' << pos.col
+              << ','
+              << pos.col
               << ')';
 }

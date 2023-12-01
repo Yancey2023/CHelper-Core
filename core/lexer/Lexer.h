@@ -5,7 +5,7 @@
 #ifndef CHELPER_LEXER_H
 #define CHELPER_LEXER_H
 
-#include <vector>
+#include "pch.h"
 #include "StringReader.h"
 #include "Token.h"
 
@@ -21,6 +21,7 @@ namespace CHelper {
 
         std::vector<Token> lex();
 
+    private:
         TokenType::TokenType nextTokenType();
 
         Token nextTokenNumber(bool whiteSpace);

@@ -1,0 +1,1 @@
+{"node":[{"isMustPlayer":true,"isOnlyOne":false,"isMustNPC":false,"description":"被给予物品的玩家","id":"0","type":"TARGET_SELECTOR"},{"nodeItemType":1,"description":"要给予实体的物品","id":"1","type":"ITEM"}],"ast":[["0","1"],["1","LF"]],"name":["give"],"start":["0"],"description":"给予实体一种指定数量的物品"}

@@ -2,7 +2,7 @@
 // Created by Yancey666 on 2023/11/6.
 //
 
-#include <algorithm>
+
 #include "Lexer.h"
 
 char endChars[] = " ,@~^/$&\"'!#%+*=[{]}\\|<>`\n";

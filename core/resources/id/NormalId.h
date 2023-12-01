@@ -5,37 +5,24 @@
 #ifndef CHELPER_NORMALID_H
 #define CHELPER_NORMALID_H
 
-#include <string>
-#include <optional>
-#include "nlohmann/json.hpp"
-#include "../../util/JsonUtil.h"
+#include "pch.h"
 
 namespace CHelper {
 
-    class NormalId {
+    class NormalId : public JsonUtil::ToJson{
     public:
         std::string name;
         std::optional<std::string> description;
 
         NormalId(std::string name, const std::optional<std::string> &description);
+
+        explicit NormalId(const nlohmann::json &j);
+
+        void toJson(nlohmann::json &j) const override;
     };
 
-}
+} // CHelper
 
-template<>
-struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::NormalId> {
-
-    static CHelper::NormalId from_json(const nlohmann::json &j) {
-        return {
-                FROM_JSON(j, name, std::string),
-                FROM_JSON_OPTIONAL(j, description, std::string),
-        };
-    };
-
-    static void to_json(nlohmann::json &j, const CHelper::NormalId &t) {
-        TO_JSON(j, t, name);
-        TO_JSON_OPTIONAL(j, t, description);
-    };
-};
+CREATE_ADL_SERIALIZER(CHelper::NormalId);
 
 #endif //CHELPER_NORMALID_H

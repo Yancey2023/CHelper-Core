@@ -5,6 +5,7 @@
 #ifndef CHELPER_TOKEN_H
 #define CHELPER_TOKEN_H
 
+#include "pch.h"
 #include "Pos.h"
 
 namespace CHelper {

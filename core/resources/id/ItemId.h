@@ -5,53 +5,30 @@
 #ifndef CHELPER_ITEMID_H
 #define CHELPER_ITEMID_H
 
-
-#include <optional>
-#include <string>
-#include <vector>
-#include "nlohmann/json.hpp"
-#include "../../util/JsonUtil.h"
+#include "pch.h"
+#include "NamespaceId.h"
 
 namespace CHelper {
 
-    class ItemId {
+    class ItemId : public NamespaceId{
     public:
-        std::optional<std::string> nameSpace;
-        std::string name;
-        std::optional<std::string> description;
         std::optional<int> max;
         std::optional<std::vector<std::string>> descriptions;
 
     public:
         ItemId(const std::optional<std::string> &nameSpace,
-               std::string name,
+               const std::string& name,
                const std::optional<std::string> &description,
                const std::optional<int> &max,
                const std::optional<std::vector<std::string>> &descriptions);
+
+        explicit ItemId(const nlohmann::json &j);
+
+        void toJson(nlohmann::json &j) const override;
     };
 
-}
+} // CHelper
 
-template<>
-struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::ItemId> {
-
-    static CHelper::ItemId from_json(const nlohmann::json &j) {
-        return {
-                FROM_JSON_OPTIONAL(j, nameSpace, std::string),
-                FROM_JSON(j, name, std::string),
-                FROM_JSON_OPTIONAL(j, description, std::string),
-                FROM_JSON_OPTIONAL(j, max, int),
-                FROM_JSON_OPTIONAL(j, descriptions, std::vector<std::string>)
-        };
-    };
-
-    static void to_json(nlohmann::json &j, CHelper::ItemId t) {
-        TO_JSON_OPTIONAL(j, t, nameSpace)
-        TO_JSON(j, t, name);
-        TO_JSON_OPTIONAL(j, t, description)
-        TO_JSON_OPTIONAL(j, t, max)
-        TO_JSON_OPTIONAL(j, t, descriptions)
-    };
-};
+CREATE_ADL_SERIALIZER(CHelper::ItemId);
 
 #endif //CHELPER_ITEMID_H

@@ -1,0 +1,1 @@
+{"node":[{"isMustPlayer":true,"isOnlyOne":false,"isMustNPC":false,"description":"要被清除物品的玩家(默认为命令执行者)","id":"0","type":"TARGET_SELECTOR"},{"nodeItemType":0,"description":"要被清除的物品","id":"1","type":"ITEM"}],"ast":[["0","1"],["0","LF"],["1","LF"]],"name":["clear"],"start":["0"],"description":"清除玩家物品栏的物品"}

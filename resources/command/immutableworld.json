@@ -1,0 +1,1 @@
+{"node":[{"descriptionFalse":"世界不可以发生变化","description":"世界是否可以发生变化","descriptionTrue":"世界可以发生变化","id":"0","type":"BOOLEAN"}],"ast":[["0","LF"]],"name":["immutableworld"],"start":["0"],"description":"设置世界是否可发生变化"}

@@ -5,11 +5,8 @@
 #ifndef CHELPER_BLOCKID_H
 #define CHELPER_BLOCKID_H
 
-
-#include <optional>
-#include <string>
-#include <nlohmann/json.hpp>
-#include "../../util/JsonUtil.h"
+#include "pch.h"
+#include "ItemId.h"
 
 namespace CHelper {
 
@@ -21,27 +18,23 @@ namespace CHelper {
         };
     }
 
-    class BlockStateValue {
+    class BlockStateValue : public JsonUtil::ToJson {
     public:
         BlockStateType::BlockStateType type;
-        // std::string不是基本数据类型，不能在union中共享内存
-        std::string valueString;
-        union {
-            bool valueBoolean{};
-            int valueInteger;
-        };
+        std::variant<std::string, int, bool> value;
         std::optional<std::string> description;
 
-        BlockStateValue(std::string value, const std::optional<std::string> &description);
+        BlockStateValue(BlockStateType::BlockStateType type,
+                        const std::variant<std::string, int, bool> &value,
+                        const std::optional<std::string> &description);
 
-        BlockStateValue(bool value, const std::optional<std::string> &description);
+        explicit BlockStateValue(const nlohmann::json &j);
 
-        BlockStateValue(int value, const std::optional<std::string> &description);
-
+        void toJson(nlohmann::json &j) const override;
 
     };
 
-    class BlockState {
+    class BlockState : public JsonUtil::ToJson {
     public:
         std::string key;
         std::optional<std::string> description;
@@ -52,100 +45,34 @@ namespace CHelper {
                    const std::optional<std::string> &description,
                    const std::vector<BlockStateValue> &values,
                    int defaultValue);
+
+        explicit BlockState(const nlohmann::json &j);
+
+        void toJson(nlohmann::json &j) const override;
     };
 
-    class BlockId {
+    class BlockId : public ItemId {
     public:
-        std::optional<std::string> nameSpace;
-        std::string name;
-        std::optional<std::string> description;
-        std::vector<BlockState> blockStates;
-        std::optional<int> max;
-        std::optional<std::vector<std::string>> descriptions;
+        std::optional<std::vector<BlockState>> blockStates;
 
         BlockId(const std::optional<std::string> &nameSpace,
                 const std::string &name,
                 const std::optional<std::string> &description,
-                const std::vector<BlockState> &blockStateIds,
                 const std::optional<int> &max,
-                const std::optional<std::vector<std::string>> &descriptions);
+                const std::optional<std::vector<std::string>> &descriptions,
+                const std::optional<std::vector<BlockState>> &blockStates);
+
+        explicit BlockId(const nlohmann::json &j);
+
+        void toJson(nlohmann::json &j) const override;
     };
 
-}
+} // CHelper
 
-template<>
-struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::BlockStateValue> {
+CREATE_ADL_SERIALIZER(CHelper::BlockStateValue);
 
-    static CHelper::BlockStateValue from_json(const nlohmann::json &j) {
-        const nlohmann::json &name = j.at("name");
-        std::optional<std::string> description = FROM_JSON_OPTIONAL(j, description, std::string);
-        if (name.is_number_integer()) {
-            return {name.get<int>(), description};
-        } else if (name.is_boolean()) {
-            return {name.get<bool>(), description};
-        } else {
-            return {name.get<std::string>(), description};
-        }
-    };
+CREATE_ADL_SERIALIZER(CHelper::BlockState);
 
-    static void to_json(nlohmann::json &j, CHelper::BlockStateValue t) {
-        switch (t.type) {
-            case CHelper::BlockStateType::STRING:
-                TO_JSON(j, t, valueString);
-                break;
-            case CHelper::BlockStateType::BOOLEAN:
-                TO_JSON(j, t, valueBoolean);
-                break;
-            case CHelper::BlockStateType::INTEGER:
-                TO_JSON(j, t, valueInteger);
-                break;
-        }
-        TO_JSON_OPTIONAL(j, t, description)
-    };
-};
-
-template<>
-struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::BlockState> {
-
-    static CHelper::BlockState from_json(const nlohmann::json &j) {
-        return {
-                FROM_JSON(j, key, std::string),
-                FROM_JSON_OPTIONAL(j, description, std::string),
-                FROM_JSON(j, values, std::vector<CHelper::BlockStateValue>),
-                FROM_JSON(j, defaultValue, int)
-        };
-    };
-
-    static void to_json(nlohmann::json &j, CHelper::BlockState t) {
-        TO_JSON(j, t, key);
-        TO_JSON_OPTIONAL(j, t, description)
-        TO_JSON(j, t, values);
-        TO_JSON(j, t, defaultValue);
-    };
-};
-
-template<>
-struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::BlockId> {
-
-    static CHelper::BlockId from_json(const nlohmann::json &j) {
-        return {
-                FROM_JSON_OPTIONAL(j, nameSpace, std::string),
-                FROM_JSON(j, name, std::string),
-                FROM_JSON_OPTIONAL(j, description, std::string),
-                FROM_JSON(j, blockStates, std::vector<CHelper::BlockState>),
-                FROM_JSON_OPTIONAL(j, max, int),
-                FROM_JSON_OPTIONAL(j, descriptions, std::vector<std::string>)
-        };
-    };
-
-    static void to_json(nlohmann::json &j, CHelper::BlockId t) {
-        TO_JSON_OPTIONAL(j, t, nameSpace)
-        TO_JSON(j, t, name);
-        TO_JSON_OPTIONAL(j, t, description)
-        TO_JSON(j, t, blockStates);
-        TO_JSON_OPTIONAL(j, t, max)
-        TO_JSON_OPTIONAL(j, t, descriptions)
-    };
-};
+CREATE_ADL_SERIALIZER(CHelper::BlockId);
 
 #endif //CHELPER_BLOCKID_H

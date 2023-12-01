@@ -5,7 +5,7 @@
 #ifndef CHELPER_MAIN_H
 #define CHELPER_MAIN_H
 
-#include <string>
+#include "pch.h"
 
 void testLexer(const std::string& str);
 

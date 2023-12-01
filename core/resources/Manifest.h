@@ -5,63 +5,47 @@
 #ifndef CHELPER_MANIFEST_H
 #define CHELPER_MANIFEST_H
 
-
-#include <string>
-#include <optional>
-#include "nlohmann/json.hpp"
+#include "pch.h"
 #include "id/NormalId.h"
-#include "../util/JsonUtil.h"
 
+namespace CHelper {
 
-class Manifest {
-public:
-    std::optional<std::string> name, description, minecraftVersion, author, updateDate;
-    std::string packId;
-    int version;
-    std::optional<bool> isBasicPack, isDefault;
+    class Manifest : public JsonUtil::ToJson {
+    public:
+        std::optional<std::string> name, description, minecraftVersion, author, updateDate;
+        std::string packId;
+        int version;
+        std::optional<bool> isBasicPack, isDefault;
 
-    Manifest(const std::optional<std::string> &name,
-             const std::optional<std::string> &description,
-             const std::optional<std::string> &minecraftVersion,
-             const std::optional<std::string> &author,
-             const std::optional<std::string> &updateDate,
-             std::string packId,
-             int version,
-             const std::optional<bool> &isBasicPack,
-             const std::optional<bool> &isDefault);
+        Manifest(const std::optional<std::string> &name,
+                 const std::optional<std::string> &description,
+                 const std::optional<std::string> &minecraftVersion,
+                 const std::optional<std::string> &author,
+                 const std::optional<std::string> &updateDate,
+                 std::string packId,
+                 int version,
+                 const std::optional<bool> &isBasicPack,
+                 const std::optional<bool> &isDefault);
 
-};
+        explicit Manifest(const nlohmann::json &j);
 
-template<>
-struct [[maybe_unused]] nlohmann::adl_serializer<Manifest> {
-
-    static Manifest from_json(const nlohmann::json &j) {
-        return {
-                FROM_JSON_OPTIONAL(j, name, std::string),
-                FROM_JSON_OPTIONAL(j, description, std::string),
-                FROM_JSON_OPTIONAL(j, minecraftVersion, std::string),
-                FROM_JSON_OPTIONAL(j, author, std::string),
-                FROM_JSON_OPTIONAL(j, updateDate, std::string),
-                FROM_JSON(j, packId, std::string),
-                FROM_JSON(j, version, int),
-                FROM_JSON_OPTIONAL(j, isBasicPack, bool),
-                FROM_JSON_OPTIONAL(j, isDefault, bool)
+        void toJson(nlohmann::json &j) const override {
+            TO_JSON_OPTIONAL(j, name)
+            TO_JSON_OPTIONAL(j, description)
+            TO_JSON_OPTIONAL(j, minecraftVersion)
+            TO_JSON_OPTIONAL(j, author)
+            TO_JSON_OPTIONAL(j, updateDate)
+            TO_JSON(j, packId);
+            TO_JSON(j, version);
+            TO_JSON_OPTIONAL(j, isBasicPack)
+            TO_JSON_OPTIONAL(j, isDefault)
         };
-    }
 
-    static void to_json(nlohmann::json &j, Manifest t) {
-        TO_JSON_OPTIONAL(j, t, name)
-        TO_JSON_OPTIONAL(j, t, description)
-        TO_JSON_OPTIONAL(j, t, minecraftVersion)
-        TO_JSON_OPTIONAL(j, t, author)
-        TO_JSON_OPTIONAL(j, t, updateDate)
-        TO_JSON(j, t, packId);
-        TO_JSON(j, t, version);
-        TO_JSON_OPTIONAL(j, t, isBasicPack)
-        TO_JSON_OPTIONAL(j, t, isDefault)
-    }
-};
+    };
+}
 
-std::ostream &operator<<(std::ostream &os, const Manifest &manifest);
+CREATE_ADL_SERIALIZER(CHelper::Manifest);
+
+std::ostream &operator<<(std::ostream &os, const CHelper::Manifest &manifest);
 
 #endif //CHELPER_MANIFEST_H

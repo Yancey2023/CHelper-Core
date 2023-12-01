@@ -2,7 +2,7 @@
 // Created by Yancey666 on 2023/11/6.
 //
 
-#include <string>
+#include "pch.h"
 
 #ifndef CHELPER_POS_H
 #define CHELPER_POS_H

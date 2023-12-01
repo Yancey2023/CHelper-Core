@@ -3,7 +3,6 @@
 //
 
 #include "Token.h"
-#include <iostream>
 
 CHelper::Token::Token(TokenType::TokenType type,
                       bool whiteSpace,

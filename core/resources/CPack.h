@@ -5,27 +5,24 @@
 #ifndef CHELPER_CPACK_H
 #define CHELPER_CPACK_H
 
-#include <unordered_map>
-#include <iostream>
+#include <pch.h>
 #include "Manifest.h"
 #include "id/BlockId.h"
 #include "id/ItemId.h"
+#include "command/Command.h"
 
 namespace CHelper {
 
     class CPack {
     public:
         Manifest manifest;
-        std::unordered_map<std::string, std::vector<CHelper::NormalId>> normalIds;
-        std::vector<CHelper::BlockId> blockIds;
-        std::vector<CHelper::ItemId> itemIds;
+        std::unordered_map<std::string, std::vector<NormalId>> normalIds;
+        std::unordered_map<std::string, std::vector<NamespaceId>> namespaceIds;
+        std::vector<BlockId> blockIds;
+        std::vector<ItemId> itemIds;
+        std::vector<CHelper::Command> commands;
 
-        CPack(Manifest manifest,
-              const std::unordered_map<std::string, std::vector<CHelper::NormalId>> &normalIds,
-              const std::vector<CHelper::BlockId> &blockIds,
-              const std::vector<CHelper::ItemId> &itemIds);
-
-        static CPack getInstance(const std::filesystem::path& path);
+        CPack(Manifest manifest);
     };
 
 }

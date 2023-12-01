@@ -5,7 +5,7 @@
 #ifndef CHELPER_STRINGREADER_H
 #define CHELPER_STRINGREADER_H
 
-#include <string>
+#include "pch.h"
 #include "Pos.h"
 
 namespace CHelper {

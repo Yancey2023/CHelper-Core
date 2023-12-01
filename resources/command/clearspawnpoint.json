@@ -1,0 +1,1 @@
+{"node":[{"isMustPlayer":true,"isOnlyOne":false,"isMustNPC":false,"description":"被删除出生点的玩家","id":"0","type":"TARGET_SELECTOR"}],"ast":[["0","LF"]],"name":["clearspawnpoint"],"start":["0"],"description":"清除世界中设置的重生点"}
