@@ -15,12 +15,12 @@ namespace CHelper {
     public:
         std::vector<std::string> name;
         std::optional<std::string> description;
-        std::optional<std::vector<std::shared_ptr<Node::NodeBase>>> startNodes;
+        std::vector<std::shared_ptr<Node::NodeBase>> startNodes;
 
     public:
         Command(const std::vector<std::string> &name,
                 const std::optional<std::string> &description,
-                const std::optional<std::vector<std::shared_ptr<Node::NodeBase>>> &startNodes);
+                const std::vector<std::shared_ptr<Node::NodeBase>> &startNodes);
 
         void addToSet(std::unordered_set<std::shared_ptr<Node::NodeBase>> &nodes) const;
 

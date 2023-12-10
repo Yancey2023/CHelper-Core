@@ -4,19 +4,16 @@
 
 #include "NodePosition.h"
 
-namespace CHelper {
+namespace CHelper::Node {
 
-    Node::NodePosition::NodePosition(Node::NodeType::NodeType type,
-                                     const std::optional<std::string> &id,
-                                     const std::optional<std::string> &description)
-            : NodeBase(type, id, description) {}
+    NODE_TYPE(POSITION, NodePosition);
 
-    Node::NodePosition::NodePosition(const nlohmann::json &j)
-            : NodeBase(NodeType::POSITION, j) {}
+    NodePosition::NodePosition(const std::optional<std::string> &id,
+                               const std::optional<std::string> &description)
+            : NodeBase(id, description) {}
 
-    void Node::NodePosition::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        j.push_back({"type", NodeType::STR_POSITION});
-    }
+    NodePosition::NodePosition(const nlohmann::json &j,
+                               const CPack &cpack)
+            : NodeBase(j, cpack) {}
 
-} // CHelper
+} // CHelper::Node

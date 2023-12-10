@@ -22,7 +22,7 @@ namespace CHelper {
         std::vector<ItemId> itemIds;
         std::vector<CHelper::Command> commands;
 
-        CPack(Manifest manifest);
+        explicit CPack(Manifest manifest);
     };
 
 }

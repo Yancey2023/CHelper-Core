@@ -1,1 +1,254 @@
-{"node":[{"description":"要被召唤的实体类型","id":"0","type":"NAMESPACE_ID"},{"description":"该实体的召唤位置。如果未指定，默认为命令执行位置","id":"1","type":"POSITION"},{"description":"该实体的垂直旋转角度","id":"2","type":"FLOAT"},{"description":"该实体的水平旋转角度","id":"3","type":"FLOAT"},{"contentMode":true,"description":"该实体的召唤时附带的游戏内事件","id":"4","type":"NORMAL_ID","key":"entityEvent"},{"canContainSpace":true,"description":"该实体的名称","ignoreLater":false,"id":"5","type":"STRING"},{"description":"要被召唤的实体类型","id":"6","type":"NAMESPACE_ID"},{"canContainSpace":true,"description":"该实体的名称","ignoreLater":false,"id":"7","type":"STRING"},{"description":"该实体的召唤位置。如果未指定，默认为命令执行位置","id":"8","type":"POSITION"},{"description":"要被召唤的实体类型","id":"9","type":"NAMESPACE_ID"},{"description":"该实体的召唤位置。如果未指定，默认为命令执行位置","id":"10","type":"POSITION"},{"data":{"name":"facing","description":"朝向某个实体或坐标"},"description":"朝向某个实体或坐标","id":"11","type":"TEXT"},{"isMustPlayer":false,"isOnlyOne":true,"isMustNPC":false,"description":"该实体朝向的实体","id":"12","type":"TARGET_SELECTOR"},{"contentMode":true,"description":"该实体的召唤时附带的游戏内事件","id":"13","type":"NORMAL_ID","key":"entityEvent"},{"canContainSpace":true,"description":"该实体的名称","ignoreLater":false,"id":"14","type":"STRING"},{"description":"要被召唤的实体类型","id":"15","type":"NAMESPACE_ID"},{"description":"该实体的召唤位置。如果未指定，默认为命令执行位置","id":"16","type":"POSITION"},{"data":{"name":"facing","description":"朝向某个实体或坐标"},"description":"朝向某个实体或坐标","id":"17","type":"TEXT"},{"description":"该实体朝向的坐标","id":"18","type":"POSITION"},{"contentMode":true,"description":"该实体的召唤时附带的游戏内事件","id":"19","type":"NORMAL_ID","key":"entityEvent"},{"canContainSpace":true,"description":"该实体的名称","ignoreLater":false,"id":"20","type":"STRING"}],"ast":[["0","1"],["0","LF"],["1","2"],["1","LF"],["2","3"],["2","LF"],["3","4"],["3","LF"],["4","5"],["4","LF"],["5","LF"],["6","7"],["7","8"],["8","LF"],["9","10"],["10","11"],["11","12"],["12","13"],["13","14"],["14","LF"],["15","16"],["16","17"],["17","18"],["18","19"],["19","20"],["20","LF"]],"name":["summon"],"start":["0","6","9","15"],"description":"召唤一个实体"}
+{
+  "node": [
+    {
+      "description": "要被召唤的实体类型",
+      "id": "0",
+      "type": "NAMESPACE_ID",
+      "key": "entities"
+    },
+    {
+      "description": "该实体的召唤位置。如果未指定，默认为命令执行位置",
+      "id": "1",
+      "type": "POSITION"
+    },
+    {
+      "description": "该实体的垂直旋转角度",
+      "id": "2",
+      "type": "FLOAT"
+    },
+    {
+      "description": "该实体的水平旋转角度",
+      "id": "3",
+      "type": "FLOAT"
+    },
+    {
+      "contentMode": true,
+      "description": "该实体的召唤时附带的游戏内事件",
+      "id": "4",
+      "type": "NORMAL_ID",
+      "key": "entityEvent"
+    },
+    {
+      "canContainSpace": true,
+      "description": "该实体的名称",
+      "ignoreLater": false,
+      "id": "5",
+      "type": "STRING"
+    },
+    {
+      "description": "要被召唤的实体类型",
+      "id": "6",
+      "type": "NAMESPACE_ID",
+      "key": "entities"
+    },
+    {
+      "canContainSpace": true,
+      "description": "该实体的名称",
+      "ignoreLater": false,
+      "id": "7",
+      "type": "STRING"
+    },
+    {
+      "description": "该实体的召唤位置。如果未指定，默认为命令执行位置",
+      "id": "8",
+      "type": "POSITION"
+    },
+    {
+      "description": "要被召唤的实体类型",
+      "id": "9",
+      "type": "NAMESPACE_ID",
+      "key": "entities"
+    },
+    {
+      "description": "该实体的召唤位置。如果未指定，默认为命令执行位置",
+      "id": "10",
+      "type": "POSITION"
+    },
+    {
+      "data": {
+        "name": "facing",
+        "description": "朝向某个实体或坐标"
+      },
+      "description": "朝向某个实体或坐标",
+      "id": "11",
+      "type": "TEXT"
+    },
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": true,
+      "isMustNPC": false,
+      "description": "该实体朝向的实体",
+      "id": "12",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "contentMode": true,
+      "description": "该实体的召唤时附带的游戏内事件",
+      "id": "13",
+      "type": "NORMAL_ID",
+      "key": "entityEvent"
+    },
+    {
+      "canContainSpace": true,
+      "description": "该实体的名称",
+      "ignoreLater": false,
+      "id": "14",
+      "type": "STRING"
+    },
+    {
+      "description": "要被召唤的实体类型",
+      "id": "15",
+      "type": "NAMESPACE_ID",
+      "key": "entities"
+    },
+    {
+      "description": "该实体的召唤位置。如果未指定，默认为命令执行位置",
+      "id": "16",
+      "type": "POSITION"
+    },
+    {
+      "data": {
+        "name": "facing",
+        "description": "朝向某个实体或坐标"
+      },
+      "description": "朝向某个实体或坐标",
+      "id": "17",
+      "type": "TEXT"
+    },
+    {
+      "description": "该实体朝向的坐标",
+      "id": "18",
+      "type": "POSITION"
+    },
+    {
+      "contentMode": true,
+      "description": "该实体的召唤时附带的游戏内事件",
+      "id": "19",
+      "type": "NORMAL_ID",
+      "key": "entityEvent"
+    },
+    {
+      "canContainSpace": true,
+      "description": "该实体的名称",
+      "ignoreLater": false,
+      "id": "20",
+      "type": "STRING"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "1"
+    ],
+    [
+      "0",
+      "LF"
+    ],
+    [
+      "1",
+      "2"
+    ],
+    [
+      "1",
+      "LF"
+    ],
+    [
+      "2",
+      "3"
+    ],
+    [
+      "2",
+      "LF"
+    ],
+    [
+      "3",
+      "4"
+    ],
+    [
+      "3",
+      "LF"
+    ],
+    [
+      "4",
+      "5"
+    ],
+    [
+      "4",
+      "LF"
+    ],
+    [
+      "5",
+      "LF"
+    ],
+    [
+      "6",
+      "7"
+    ],
+    [
+      "7",
+      "8"
+    ],
+    [
+      "8",
+      "LF"
+    ],
+    [
+      "9",
+      "10"
+    ],
+    [
+      "10",
+      "11"
+    ],
+    [
+      "11",
+      "12"
+    ],
+    [
+      "12",
+      "13"
+    ],
+    [
+      "13",
+      "14"
+    ],
+    [
+      "14",
+      "LF"
+    ],
+    [
+      "15",
+      "16"
+    ],
+    [
+      "16",
+      "17"
+    ],
+    [
+      "17",
+      "18"
+    ],
+    [
+      "18",
+      "19"
+    ],
+    [
+      "19",
+      "20"
+    ],
+    [
+      "20",
+      "LF"
+    ]
+  ],
+  "name": [
+    "summon"
+  ],
+  "start": [
+    "0",
+    "6",
+    "9",
+    "15"
+  ],
+  "description": "召唤一个实体"
+}

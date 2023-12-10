@@ -26,7 +26,10 @@ namespace CHelper::Node {
                   const std::optional<std::string> &description,
                   NodeBlockType::NodeBlockType nodeBlockType);
 
-        explicit NodeBlock(const nlohmann::json &j);
+        NodeBlock(const nlohmann::json &j,
+                  const CPack &cpack);
+
+        NODE_TYPE_H;
 
         void toJson(nlohmann::json &j) const override;
     };

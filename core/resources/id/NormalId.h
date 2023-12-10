@@ -9,7 +9,7 @@
 
 namespace CHelper {
 
-    class NormalId : public JsonUtil::ToJson{
+    class NormalId : public JsonUtil::ToJson {
     public:
         std::string name;
         std::optional<std::string> description;

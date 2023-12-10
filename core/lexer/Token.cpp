@@ -16,29 +16,28 @@ CHelper::Token::Token(TokenType::TokenType type,
 std::ostream &CHelper::operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType) {
     switch (tokenType) {
         case CHelper::TokenType::NUMBER:
-            os << "数字";
+            os << "NUMBER";
             break;
         case CHelper::TokenType::STRING:
-            os << "文字";
+            os << "STRING";
             break;
         case CHelper::TokenType::SYMBOL:
-            os << "符号";
+            os << "SYMBOL";
             break;
         default:
-            os << "未知";
+            os << "UNKNOWN";
             break;
     }
     return os;
 }
 
 std::ostream &CHelper::operator<<(std::ostream &os, const CHelper::Token &token) {
-    return os << '['
-              << token.type
-              << "] "
-              << token.pos
-              << " (前面"
-              << (token.whiteSpace ? "有" : "没有")
-              << "空格) "
-              << token.content
-              << "";
+    os << '['
+       << token.type
+       << "] "
+       << token.pos;
+    if (token.whiteSpace) {
+        os << "after whitespace";
+    }
+    return os << token.content;
 }

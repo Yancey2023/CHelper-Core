@@ -9,14 +9,15 @@
 
 namespace CHelper::Node {
 
-    class NodePosition : public NodeBase{
+    class NodePosition : public NodeBase {
     public:
-        NodePosition(NodeType::NodeType type, const std::optional<std::string> &id,
+        NodePosition(const std::optional<std::string> &id,
                      const std::optional<std::string> &description);
 
-        explicit NodePosition(const nlohmann::json &j);
+        NodePosition(const nlohmann::json &j,
+                     const CPack &cpack);
 
-        void toJson(nlohmann::json &j) const override;
+        NODE_TYPE_H;
     };
 
 } // CHelper::Node

@@ -57,5 +57,5 @@ void CHelper::StringReader::reset() {
 }
 
 std::string CHelper::StringReader::collect() const {
-    return {content, (size_t) posBackup.which, (size_t)(pos.which - posBackup.which)};
+    return {content, (size_t) posBackup.which, (size_t) (pos.which - posBackup.which)};
 }

@@ -7,18 +7,23 @@
 
 namespace CHelper::Node {
 
-    NodeBase::NodeBase(NodeType::NodeType type,
-                       const std::optional<std::string> &id,
+    NodeType NodeBase::TYPE("UNKNOWN", [](const nlohmann::json &j, const CPack &cpack) {
+        return std::shared_ptr<NodeBase>();
+    });
+
+    NodeBase::NodeBase(const std::optional<std::string> &id,
                        const std::optional<std::string> &description)
-            : type(type),
-              id(id),
+            : id(id),
               description(description) {}
 
-    NodeBase::NodeBase(NodeType::NodeType type,
-                       const nlohmann::json &j)
-            : type(type),
-              id(FROM_JSON_OPTIONAL(j, id, std::string)),
+    NodeBase::NodeBase(const nlohmann::json &j,
+                       const CPack &cpack)
+            : id(FROM_JSON_OPTIONAL(j, id, std::string)),
               description(FROM_JSON_OPTIONAL(j, description, std::string)) {}
+
+    NodeType NodeBase::getNodeType() const {
+        return NodeBase::TYPE;
+    }
 
     void NodeBase::addToSet(std::unordered_set<std::shared_ptr<NodeBase>> &nodes) {
         if (!nextNodes.empty()) {
@@ -36,6 +41,7 @@ namespace CHelper::Node {
     void NodeBase::toJson(nlohmann::json &j) const {
         TO_JSON_OPTIONAL(j, id)
         TO_JSON_OPTIONAL(j, description)
+        j.push_back({"type", getNodeType().nodeName});
     }
 
 } // CHelper::Node

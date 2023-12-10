@@ -11,10 +11,10 @@ Helper.
 
 ## Plan
 
-- [x] make a lexer, which let the command string become token list
-- [ ] make cpack, which is a resources pack contained ID and command.
+- [×] make a lexer, which let the command string become token list.
+- [×] make cpack, which is a resources pack contained ID and command.
 - [ ] parser, which let token list become element list. Element can contain many elements.
-- [ ] checker, which will check the element though other element.
+- [ ] checker, which will check the element through other element.
 - [ ] ...
 
 ## Why choose c++

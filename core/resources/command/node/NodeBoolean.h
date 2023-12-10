@@ -18,7 +18,10 @@ namespace CHelper::Node {
                     const std::optional<std::string> &descriptionTrue,
                     const std::optional<std::string> &descriptionFalse);
 
-        explicit NodeBoolean(const nlohmann::json &j);
+        NodeBoolean(const nlohmann::json &j,
+                    const CPack &cpack);
+
+        NODE_TYPE_H;
 
         void toJson(nlohmann::json &j) const override;
     };

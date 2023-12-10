@@ -7,7 +7,7 @@
 namespace CHelper {
 
     ItemId::ItemId(const std::optional<std::string> &nameSpace,
-                   const std::string& name,
+                   const std::string &name,
                    const std::optional<std::string> &description,
                    const std::optional<int> &max,
                    const std::optional<std::vector<std::string>> &descriptions)

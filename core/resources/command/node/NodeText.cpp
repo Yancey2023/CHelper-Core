@@ -4,21 +4,24 @@
 
 #include "NodeText.h"
 
-#include <utility>
+namespace CHelper::Node {
 
-CHelper::Node::NodeText::NodeText(CHelper::Node::NodeType::NodeType type,
-                                  const std::optional<std::string> &id,
-                                  const std::optional<std::string> &description,
-                                  CHelper::NormalId data)
-        : NodeBase(type, id, description),
-          data(std::move(data)) {}
+    NODE_TYPE(TEXT, NodeText);
 
-CHelper::Node::NodeText::NodeText(const nlohmann::json &j)
-        : NodeBase(NodeType::TEXT, j),
-          data(FROM_JSON(j, data, NormalId)) {}
+    CHelper::Node::NodeText::NodeText(const std::optional<std::string> &id,
+                                      const std::optional<std::string> &description,
+                                      CHelper::NormalId data)
+            : NodeBase(id, description),
+              data(std::move(data)) {}
 
-void CHelper::Node::NodeText::toJson(nlohmann::json &j) const {
-    NodeBase::toJson(j);
-    j.push_back({NodeType::STR_TEXT});
-    TO_JSON(j, data);
-}
+    CHelper::Node::NodeText::NodeText(const nlohmann::json &j,
+                                      const CPack &cpack)
+            : NodeBase(j, cpack),
+              data(FROM_JSON(j, data, NormalId)) {}
+
+    void CHelper::Node::NodeText::toJson(nlohmann::json &j) const {
+        NodeBase::toJson(j);
+        TO_JSON(j, data);
+    }
+
+} // CHelper::Node

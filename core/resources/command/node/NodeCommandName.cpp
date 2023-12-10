@@ -6,16 +6,14 @@
 
 namespace CHelper::Node {
 
+    NODE_TYPE(COMMAND_NAME, NodeCommandName);
+
     NodeCommandName::NodeCommandName(const std::optional<std::string> &id,
                                      const std::optional<std::string> &description)
-            : NodeBase(NodeType::COMMAND_NAME, id, description) {}
+            : NodeBase(id, description) {}
 
-    NodeCommandName::NodeCommandName(const nlohmann::json &j)
-            : NodeBase(NodeType::COMMAND_NAME, j) {}
-
-    void NodeCommandName::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        j.push_back({"type", NodeType::STR_COMMAND_NAME});
-    }
+    NodeCommandName::NodeCommandName(const nlohmann::json &j,
+                                     const CPack &cpack)
+            : NodeBase(j, cpack) {}
 
 } // CHelper::Node

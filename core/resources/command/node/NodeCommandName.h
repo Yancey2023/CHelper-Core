@@ -6,6 +6,7 @@
 #define CHELPER_NODECOMMANDNAME_H
 
 #include "NodeBase.h"
+#include "../type/NodeType.h"
 
 namespace CHelper::Node {
 
@@ -14,9 +15,10 @@ namespace CHelper::Node {
         NodeCommandName(const std::optional<std::string> &id,
                         const std::optional<std::string> &description);
 
-        explicit NodeCommandName(const nlohmann::json &j);
+        NodeCommandName(const nlohmann::json &j,
+                        const CPack &cpack);
 
-        void toJson(nlohmann::json &j) const override;
+        NODE_TYPE_H;
 
     };
 

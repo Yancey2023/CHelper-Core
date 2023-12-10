@@ -11,18 +11,19 @@
 namespace CHelper::Node {
 
     class NodeTargetSelector : public NodeBase {
-
+    public:
         const bool isMustPlayer, isMustNPC, isOnlyOne;
 
-    public:
-        NodeTargetSelector(NodeType::NodeType type,
-                           const std::optional<std::string> &id,
+        NodeTargetSelector(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
                            bool isMustPlayer,
                            bool isMustNpc,
                            bool isOnlyOne);
 
-        explicit NodeTargetSelector(const nlohmann::json &j);
+        explicit NodeTargetSelector(const nlohmann::json &j,
+                                    const CPack &cpack);
+
+        NODE_TYPE_H;
 
         void toJson(nlohmann::json &j) const override;
 

@@ -3,25 +3,12 @@
 //
 
 #include "CPackUtil.h"
-#include "../resources/command/node/NodeBoolean.h"
-#include "../resources/command/node/NodeBlock.h"
-#include "../resources/command/node/NodeNormalId.h"
-#include "../resources/command/node/NodeNamespaceId.h"
-#include "../resources/command/node/NodeInteger.h"
-#include "../resources/command/node/NodeFloat.h"
-#include "../resources/command/node/NodeCommandName.h"
-#include "../resources/command/node/NodeCommand.h"
-#include "../resources/command/node/NodeTargetSelector.h"
-#include "../resources/command/node/NodeLF.h"
-#include "../resources/command/node/NodeText.h"
-#include "../resources/command/node/NodeItem.h"
+#include "..\resources\command\type\NodeType.h"
+#include "..\resources\command\node\NodeLF.h"
 #include "Exception.h"
-#include "../resources/command/node/NodePosition.h"
 
 namespace CHelper {
-
     namespace Node {
-
         std::shared_ptr<NodeBase> getNodeFromJson(const nlohmann::json &j,
                                                   const CPack &cpack) {
             std::string state = Color::RED + "unknown state" +
@@ -33,33 +20,12 @@ namespace CHelper {
                 state = Color::RED + "loading node " +
                         Color::PURPLE + type +
                         Color::NORMAL;
-                if (type == NodeType::STR_BLOCK) {
-                    return std::make_shared<NodeBlock>(j);
-                } else if (type == NodeType::STR_BOOLEAN) {
-                    return std::make_shared<NodeBoolean>(j);
-                } else if (type == NodeType::STR_COMMAND) {
-                    return std::make_shared<NodeCommand>(j);
-                } else if (type == NodeType::STR_COMMAND_NAME) {
-                    return std::make_shared<NodeCommandName>(j);
-                } else if (type == NodeType::STR_FLOAT) {
-                    return std::make_shared<NodeFloat>(j);
-                } else if (type == NodeType::STR_INTEGER) {
-                    return std::make_shared<NodeInteger>(j);
-                } else if (type == NodeType::STR_NAMESPACE_ID) {
-                    return std::make_shared<NodeNamespaceId>(j, cpack);
-                } else if (type == NodeType::STR_NORMAL_ID) {
-                    return std::make_shared<NodeNormalId>(j, cpack);
-                } else if (type == NodeType::STR_TARGET_SELECTOR) {
-                    return std::make_shared<NodeTargetSelector>(j);
-                } else if (type == NodeType::STR_TEXT) {
-                    return std::make_shared<NodeText>(j);
-                } else if (type == NodeType::STR_ITEM) {
-                    return std::make_shared<NodeItem>(j);
-                } else if (type == NodeType::STR_POSITION) {
-                    return std::make_shared<NodePosition>(j);
-                } else {
-                    throw Exception::UnknownNodeType(type);
+                for (const auto &item: NodeType::NODE_TYPES) {
+                    if (item->nodeName == type) {
+                        return item->createNodeByJson(j, cpack);
+                    }
                 }
+                throw Exception::UnknownNodeType(type);
             } catch (Exception::CHelperException &e) {
                 throw Exception::NodeLoadFailed(state, Color::RED + e.reason());
             } catch (std::exception &e) {
@@ -88,26 +54,26 @@ namespace CHelper {
                             Color::NORMAL;
         try {
             std::vector<std::shared_ptr<Node::NodeBase>> nodes;
-            state = Color::RED + "loading nodes" +
-                    Color::NORMAL;
-            for (const auto &item: j.at("node")) {
-                nodes.push_back(Node::getNodeFromJson(item, cpack));
-            }
-            if (nodes.empty()) {
-                return {name, description, std::nullopt};
+            if (j.contains("node")) {
+                state = Color::RED + "loading nodes" +
+                        Color::NORMAL;
+                for (const auto &item: j.at("node")) {
+                    nodes.push_back(Node::getNodeFromJson(item, cpack));
+                }
             }
             state = Color::RED + "loading start nodes" +
                     Color::NORMAL;
             std::vector<std::shared_ptr<Node::NodeBase>> startNodes;
             auto startNodeIds = FROM_JSON(j, start, std::vector<std::string>);
-            state = Color::RED + "loading ast" +
-                    Color::NORMAL;
-            auto ast = FROM_JSON(j, ast, std::vector<std::vector<std::string>>);
             for (const auto &startNodeId: startNodeIds) {
                 state = std::string(Color::RED).append("linking startNode \"")
                         .append(Color::PURPLE).append(startNodeId)
                         .append(Color::RED).append("\" to nodes")
                         .append(Color::NORMAL);
+                if (startNodeId == "LF") {
+                    startNodes.push_back(Node::NodeLF::getInstance());
+                    continue;
+                }
                 for (auto &node: nodes) {
                     if (node->id == startNodeId) {
                         startNodes.push_back(node);
@@ -115,54 +81,59 @@ namespace CHelper {
                     }
                 }
             }
-            for (const auto &childNodes: ast) {
-                state = std::string(Color::RED).append("linking child nodes to parent node")
-                        .append(Color::NORMAL);
-                if (childNodes.empty()) {
-                    throw Exception::RequireParentNodeId(name);
-                }
-                auto parentNodeId = childNodes.at(0);
-                state = std::string(Color::RED).append("linking child nodes to parent node \"")
-                        .append(Color::PURPLE).append(parentNodeId)
-                        .append(Color::RED);
-                state.push_back('\"');
-                state.append(Color::NORMAL);
-                if (childNodes.size() == 1) {
-                    throw Exception::RequireChildNodeIds(name, parentNodeId);
-                }
-                std::shared_ptr<Node::NodeBase> parentNode = nullptr;
-                for (auto &node: nodes) {
-                    if (node->id == parentNodeId) {
-                        parentNode = node;
-                        break;
-                    }
-                }
-                if (parentNode == nullptr) {
-                    throw Exception::UnknownNodeId(name, parentNodeId);
-                }
-                for_each(childNodes.begin() + 1, childNodes.end(), [&](const auto &childNodeId) {
-                    state = std::string(Color::RED).append("linking child node \"")
-                            .append(Color::PURPLE).append(childNodeId)
-                            .append(Color::RED).append("\" to parent node \"")
-                            .append(Color::PURPLE).append(parentNodeId)
-                            .append(Color::RED).append("\"")
+            if (j.contains("ast")) {
+                state = Color::RED + "loading ast" +
+                        Color::NORMAL;
+                auto ast = FROM_JSON(j, ast, std::vector<std::vector<std::string>>);
+                for (const auto &childNodes: ast) {
+                    state = std::string(Color::RED).append("linking child nodes to parent node")
                             .append(Color::NORMAL);
-                    if (childNodeId == "LF") {
-                        parentNode->nextNodes.insert(Node::NodeLF::getInstance());
-                        return;
+                    if (childNodes.empty()) {
+                        throw Exception::RequireParentNodeId(name);
                     }
-                    std::shared_ptr<Node::NodeBase> childNode = nullptr;
+                    auto parentNodeId = childNodes.at(0);
+                    state = std::string(Color::RED).append("linking child nodes to parent node \"")
+                            .append(Color::PURPLE).append(parentNodeId)
+                            .append(Color::RED);
+                    state.push_back('\"');
+                    state.append(Color::NORMAL);
+                    if (childNodes.size() == 1) {
+                        throw Exception::RequireChildNodeIds(name, parentNodeId);
+                    }
+                    std::shared_ptr<Node::NodeBase> parentNode = nullptr;
                     for (auto &node: nodes) {
-                        if (node->id == childNodeId) {
-                            childNode = node;
+                        if (node->id == parentNodeId) {
+                            parentNode = node;
                             break;
                         }
                     }
-                    if (childNode == nullptr) {
-                        throw Exception::UnknownNodeId(name, childNodeId);
+                    if (parentNode == nullptr) {
+                        throw Exception::UnknownNodeId(name, parentNodeId);
                     }
-                    parentNode->nextNodes.insert(childNode);
-                });
+                    for_each(childNodes.begin() + 1, childNodes.end(), [&](const auto &childNodeId) {
+                        state = std::string(Color::RED).append("linking child node \"")
+                                .append(Color::PURPLE).append(childNodeId)
+                                .append(Color::RED).append("\" to parent node \"")
+                                .append(Color::PURPLE).append(parentNodeId)
+                                .append(Color::RED).append("\"")
+                                .append(Color::NORMAL);
+                        if (childNodeId == "LF") {
+                            parentNode->nextNodes.insert(Node::NodeLF::getInstance());
+                            return;
+                        }
+                        std::shared_ptr<Node::NodeBase> childNode = nullptr;
+                        for (auto &node: nodes) {
+                            if (node->id == childNodeId) {
+                                childNode = node;
+                                break;
+                            }
+                        }
+                        if (childNode == nullptr) {
+                            throw Exception::UnknownNodeId(name, childNodeId);
+                        }
+                        parentNode->nextNodes.insert(childNode);
+                    });
+                }
             }
             return {name, description, startNodes};
         } catch (Exception::CHelperException &e) {
@@ -218,7 +189,7 @@ namespace CHelper {
                 } else if (type == "namespace") {
                     cpack.namespaceIds.emplace(
                             FROM_JSON(j, id, std::string),
-                            FROM_JSON(j, namespaceId, std::vector<NamespaceId>)
+                            FROM_JSON(j, content, std::vector<NamespaceId>)
                     );
                 } else {
                     throw Exception::UnknownIdType(file.path().filename().string(), type);
@@ -251,6 +222,7 @@ namespace CHelper {
                                                     Color::NORMAL + " -> " +
                                                     Color::RED + s);
         }
+
     }
 
 } // CHelper

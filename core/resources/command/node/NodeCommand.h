@@ -2,12 +2,12 @@
 // Created by Yancey666 on 2023/11/11.
 //
 
-#ifndef CHELPER_NODECOMMAND_H
+#ifndef CHELPER_COMMAND_H
 #define CHELPER_NODECOMMAND_H
 
 #include "NodeBase.h"
 
-namespace CHelper::Node{
+namespace CHelper::Node {
 
     class NodeCommand : public NodeBase {
 
@@ -15,9 +15,10 @@ namespace CHelper::Node{
         NodeCommand(const std::optional<std::string> &id,
                     const std::optional<std::string> &description);
 
-        explicit NodeCommand(const nlohmann::json &j);
+        NodeCommand(const nlohmann::json &j,
+                    const CPack &cpack);
 
-        void toJson(nlohmann::json &j) const override;
+        NODE_TYPE_H;
 
     };
 
@@ -25,4 +26,4 @@ namespace CHelper::Node{
 
 CREATE_ADL_SERIALIZER(CHelper::Node::NodeCommand);
 
-#endif //CHELPER_NODECOMMAND_H
+#endif //CHELPER_COMMAND_H

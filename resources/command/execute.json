@@ -1,1 +1,0 @@
-{"node":[{"description":"子命令","id":"0","type":"EXECUTE"},{"description":"执行的另一条命令","id":"1","type":"COMMAND"}],"ast":[["0","1"],["1","LF"]],"name":["execute"],"start":["0"],"description":"在改变执行者、执行位置和角度，添加限制条件，并储存其输出值的情况下执行另一条命令"}

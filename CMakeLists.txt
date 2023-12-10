@@ -74,4 +74,8 @@ add_executable(CHelper
         core/resources/command/node/NodeItem.h
         core/resources/command/node/NodePosition.cpp
         core/resources/command/node/NodePosition.h
+        core/resources/command/node/NodeString.cpp
+        core/resources/command/node/NodeString.h
+        core/resources/command/type/NodeType.cpp
+        core/resources/command/type/NodeType.h
 )

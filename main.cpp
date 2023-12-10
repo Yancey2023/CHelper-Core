@@ -4,6 +4,7 @@
 
 #define CHelperLogger INFO
 
+#include <ctime>
 #include "main.h"
 #include "core/lexer/Lexer.h"
 #include "core/resources/CPack.h"
@@ -17,8 +18,15 @@ using namespace std::filesystem;
 int main() {
     CHELPER_INFO("CHelper start");
     try {
+        clock_t start, end;
+        start = clock();
         CPack cpack = getCPack(path(R"(D:\CLion\project\CHelper\resources)"));
-        CHELPER_INFO("CHelper end");
+        end = clock();
+        CHELPER_INFO(Color::BLUE + "[CHelper] " +
+                     Color::GREEN + "CPack load successfully (" +
+                     Color::PURPLE + to_string(end - start) + "ms" +
+                     Color::GREEN + ")" +
+                     Color::NORMAL);
     } catch (Exception::CPackLoadFailed &e) {
         CHELPER_ERROR(e.reason());
     }
