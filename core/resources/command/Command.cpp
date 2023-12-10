@@ -8,17 +8,15 @@ namespace CHelper {
 
     Command::Command(const std::vector<std::string> &name,
                      const std::optional<std::string> &description,
-                     const std::optional<std::vector<std::shared_ptr<Node::NodeBase>>> &startNodes)
+                     const std::vector<std::shared_ptr<Node::NodeBase>> &startNodes)
             : name(name),
               description(description),
               startNodes(startNodes) {}
 
     void Command::addToSet(std::unordered_set<std::shared_ptr<Node::NodeBase>> &nodes) const {
-        if (startNodes.has_value()) {
-            for (const auto &startNode: startNodes.value()) {
-                if (nodes.insert(startNode).second) {
-                    startNode->addToSet(nodes);
-                }
+        for (const auto &startNode: startNodes) {
+            if (nodes.insert(startNode).second) {
+                startNode->addToSet(nodes);
             }
         }
     }

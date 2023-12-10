@@ -6,68 +6,55 @@
 #define CHELPER_NODEBASE_H
 
 #include <pch.h>
+#include "../type/NodeType.h"
 
-namespace CHelper::Node {
+#define NODE_TYPE(nodeName, nodeClass)                                                           \
+NodeType nodeClass::TYPE(#nodeName, [](const nlohmann::json &j, const CPack &cpack) { \
+return (std::shared_ptr<NodeBase>) std::make_shared<nodeClass>(j, cpack);                        \
+});                                                                                              \
+                                                                                                 \
+NodeType nodeClass::getNodeType() const {                                                        \
+    return nodeClass::TYPE;                                                                      \
+}
 
-    namespace NodeType {
+#define NODE_TYPE_H                    \
+static NodeType TYPE;                  \
+                                       \
+NodeType getNodeType() const override;
 
-        enum NodeType {
-//            UNKNOWN,
-            EOL,
-            BLOCK,
-            BOOLEAN,
-            COMMAND,
-            COMMAND_NAME,
-            FLOAT,
-            INTEGER,
-            NAMESPACE_ID,
-            NORMAL_ID,
-            TARGET_SELECTOR,
-            TEXT,
-            ITEM,
-            POSITION
+namespace CHelper {
+
+    class CPack;
+
+    namespace Node {
+
+        class NodeType;
+
+        class NodeBase : public JsonUtil::ToJson {
+        public:
+            static NodeType TYPE;
+            const std::optional<std::string> id;
+            const std::optional<std::string> description;
+            std::unordered_set<std::shared_ptr<NodeBase>> nextNodes;
+
+        protected:
+            NodeBase(const std::optional<std::string> &id,
+                     const std::optional<std::string> &description);
+
+            NodeBase(const nlohmann::json &j,
+                     const CPack &cpack);
+
+        public:
+            virtual NodeType getNodeType() const;
+
+            void addToSet(std::unordered_set<std::shared_ptr<NodeBase>> &nodes);
+
+            void toJson(nlohmann::json &j) const override;
         };
 
-//        const std::string STR_UNKNOWN = "UNKNOWN";
-//        const std::string STR_EOL = "EOL";
-        const std::string STR_BLOCK = "BLOCK";
-        const std::string STR_BOOLEAN = "BOOLEAN";
-        const std::string STR_COMMAND = "COMMAND";
-        const std::string STR_COMMAND_NAME = "COMMAND_NAME";
-        const std::string STR_FLOAT = "FLOAT";
-        const std::string STR_INTEGER = "INTEGER";
-        const std::string STR_NAMESPACE_ID = "NAMESPACE_ID";
-        const std::string STR_NORMAL_ID = "NORMAL_ID";
-        const std::string STR_TARGET_SELECTOR = "TARGET_SELECTOR";
-        const std::string STR_TEXT = "TEXT";
-        const std::string STR_ITEM = "ITEM";
-        const std::string STR_POSITION = "POSITION";
+    } // Node
 
-    } // NodeType
-
-    class NodeBase : public JsonUtil::ToJson {
-    public:
-        const NodeType::NodeType type;
-        const std::optional<std::string> id;
-        const std::optional<std::string> description;
-        std::unordered_set<std::shared_ptr<NodeBase>> nextNodes;
-
-    protected:
-        NodeBase(NodeType::NodeType type,
-                 const std::optional<std::string> &id,
-                 const std::optional<std::string> &description);
-
-        NodeBase(NodeType::NodeType type,
-                 const nlohmann::json &j);
-
-    public:
-
-        void addToSet(std::unordered_set<std::shared_ptr<NodeBase>> &nodes);
-
-        void toJson(nlohmann::json &j) const override;
-    };
-
-} // CHelper::Node
+} // CHelper
 
 template<>
 struct [[maybe_unused]] nlohmann::adl_serializer<std::shared_ptr<CHelper::Node::NodeBase>> {

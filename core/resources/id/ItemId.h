@@ -10,14 +10,14 @@
 
 namespace CHelper {
 
-    class ItemId : public NamespaceId{
+    class ItemId : public NamespaceId {
     public:
         std::optional<int> max;
         std::optional<std::vector<std::string>> descriptions;
 
     public:
         ItemId(const std::optional<std::string> &nameSpace,
-               const std::string& name,
+               const std::string &name,
                const std::optional<std::string> &description,
                const std::optional<int> &max,
                const std::optional<std::vector<std::string>> &descriptions);

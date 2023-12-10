@@ -6,19 +6,21 @@
 
 namespace CHelper::Node {
 
+    NODE_TYPE(ITEM, NodeItem);
+
     NodeItem::NodeItem(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
                        CHelper::Node::NodeItemType::NodeItemType nodeItemType)
-            : NodeBase(NodeType::ITEM, id, description),
+            : NodeBase(id, description),
               nodeItemType(nodeItemType) {}
 
-    NodeItem::NodeItem(const nlohmann::json &j) :
-            NodeBase(NodeType::ITEM, j),
+    NodeItem::NodeItem(const nlohmann::json &j,
+                       const CPack &cpack) :
+            NodeBase(j, cpack),
             nodeItemType(FROM_JSON(j, nodeItemType, CHelper::Node::NodeItemType::NodeItemType)) {}
 
     void NodeItem::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        j.push_back({"type", NodeType::STR_ITEM});
         TO_JSON(j, nodeItemType);
     }
 

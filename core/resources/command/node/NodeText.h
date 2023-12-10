@@ -14,12 +14,14 @@ namespace CHelper::Node {
         NormalId data;
 
     public:
-        NodeText(NodeType::NodeType type,
-                 const std::optional<std::string> &id,
+        NodeText(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
                  NormalId data);
 
-        explicit NodeText(const nlohmann::json &j);
+        explicit NodeText(const nlohmann::json &j,
+                          const CPack &cpack);
+
+        NODE_TYPE_H;
 
         void toJson(nlohmann::json &j) const override;
     };

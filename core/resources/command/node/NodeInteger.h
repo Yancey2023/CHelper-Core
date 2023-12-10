@@ -18,7 +18,10 @@ namespace CHelper::Node {
                     const std::optional<int> &min,
                     const std::optional<int> &max);
 
-        explicit NodeInteger(const nlohmann::json &j);
+        NodeInteger(const nlohmann::json &j,
+                    const CPack &cpack);
+
+        NODE_TYPE_H;
 
         void toJson(nlohmann::json &j) const override;
     };

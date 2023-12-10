@@ -7,11 +7,11 @@
 
 #include "pch.h"
 
-namespace CHelper::HashUtil{
+namespace CHelper::HashUtil {
 
     struct PairHash {
         template<typename T1, typename T2>
-        std::size_t operator()(const std::pair<T1, T2> &p) const ;
+        std::size_t operator()(const std::pair<T1, T2> &p) const;
     };
 
 } // CHelper::HashUtil

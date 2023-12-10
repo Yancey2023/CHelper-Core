@@ -5,10 +5,10 @@
 #ifndef CHELPER_NODENORMALID_H
 #define CHELPER_NODENORMALID_H
 
+#include "pch.h"
 #include "NodeBase.h"
 #include "../../id/NormalId.h"
 #include "../../CPack.h"
-#include <vector>
 
 namespace CHelper::Node {
 
@@ -26,6 +26,8 @@ namespace CHelper::Node {
                      const CPack &cpack);
 
         ~NodeNormalId();
+
+        NODE_TYPE_H;
 
         void toJson(nlohmann::json &j) const override;
 
