@@ -17,6 +17,7 @@
 #include <algorithm>
 #include <fstream>
 #include "nlohmann/json.hpp"
+#include "format/Format.h"
 #include "../core/util/JsonUtil.h"
 #include "../core/util/SimpleLogger.h"
 

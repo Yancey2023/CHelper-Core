@@ -6,13 +6,13 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE(TEXT, NodeText);
+    NODE_TYPE("TEXT", NodeText)
 
     CHelper::Node::NodeText::NodeText(const std::optional<std::string> &id,
                                       const std::optional<std::string> &description,
-                                      CHelper::NormalId data)
+                                      const CHelper::NormalId& data)
             : NodeBase(id, description),
-              data(std::move(data)) {}
+              data(data) {}
 
     CHelper::Node::NodeText::NodeText(const nlohmann::json &j,
                                       const CPack &cpack)
@@ -22,6 +22,10 @@ namespace CHelper::Node {
     void CHelper::Node::NodeText::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
         TO_JSON(j, data);
+    }
+
+    ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+        return getStringASTNode(tokenReader);
     }
 
 } // CHelper::Node

@@ -2,9 +2,8 @@
 // Created by Yancey666 on 2023/11/30.
 //
 
+#include <iostream>
 #include "Exception.h"
-
-#include <utility>
 
 namespace CHelper::Exception {
 
@@ -15,6 +14,20 @@ namespace CHelper::Exception {
     std::string CHelperException::reason() const {
         return Color::BLUE + "[CHelper] " +
                Color::RED + "Unknown Exception" +
+               Color::NORMAL;
+    }
+
+    CantCreateInstance::CantCreateInstance(std::string className)
+            : className(std::move(className)) {}
+
+    const char *CantCreateInstance::what() const noexcept {
+        return "[CHelper] You create a instance which you shouldn't create";
+    }
+
+    std::string CantCreateInstance::reason() const {
+        return Color::BLUE + "[CHelper] " +
+               Color::RED + "You create a instance which you shouldn't create : " +
+               Color::PURPLE + className +
                Color::NORMAL;
     }
 
@@ -184,5 +197,21 @@ namespace CHelper::Exception {
                Color::RED + details +
                Color::NORMAL;
     }
+
+    WrongRange::WrongRange(size_t start, size_t end)
+            : start(start),
+              end(end) {}
+
+    const char *WrongRange::what() const noexcept {
+        return "[CHelper] wrong range";
+    }
+
+    std::string WrongRange::reason() const {
+        return Color::BLUE + "[CHelper] " +
+               Color::RED + "wrong range: " +
+               Color::PURPLE + "(" + std::to_string(start) + ", " + std::to_string(end) + ")" +
+               Color::NORMAL;
+    }
+
 
 } // CHelper::Exception

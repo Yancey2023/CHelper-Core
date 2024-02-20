@@ -6,25 +6,28 @@
 #define CHELPER_NODEITEM_H
 
 #include "NodeBase.h"
+#include "NodeNamespaceId.h"
 
 namespace CHelper::Node {
 
     namespace NodeItemType {
         enum NodeItemType {
-            // <物品ID> <附加值 | 方块状态>
-            ITEM_NORMAL = 0,
-            // <物品ID> <附加值>
-            ITEM_ONLY_META_DATA = 1
+            // <物品ID> <物品数量> <附加值> [物品组件]
+            ITEM_GIVE = 0,
+            // <物品ID> <附加值> <物品数量>
+            ITEM_CLEAR = 1
         };
     }
 
     class NodeItem : public NodeBase {
     public:
-        NodeItemType::NodeItemType nodeItemType;
+        const NodeItemType::NodeItemType nodeItemType;
+        const std::shared_ptr<NodeNamespaceId> nodeItemId;
 
         NodeItem(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
-                 NodeItemType::NodeItemType nodeItemType);
+                 NodeItemType::NodeItemType nodeItemType,
+                 const std::vector<std::shared_ptr<CHelper::NamespaceId>> *contents);
 
         NodeItem(const nlohmann::json &j,
                  const CPack &cpack);
@@ -32,6 +35,8 @@ namespace CHelper::Node {
         NODE_TYPE_H;
 
         void toJson(nlohmann::json &j) const override;
+
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
     };
 
 } // CHelper::Node

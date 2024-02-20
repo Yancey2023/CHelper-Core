@@ -17,7 +17,7 @@ namespace CHelper {
 
     void NormalId::toJson(nlohmann::json &j) const {
         TO_JSON(j, name);
-        TO_JSON_OPTIONAL(j, description);
+        TO_JSON_OPTIONAL(j, description)
     }
 
 } // CHelper

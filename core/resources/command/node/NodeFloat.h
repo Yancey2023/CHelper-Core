@@ -25,6 +25,8 @@ namespace CHelper::Node {
         NODE_TYPE_H;
 
         void toJson(nlohmann::json &j) const override;
+
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
     };
 
 } // CHelper::Node

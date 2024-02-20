@@ -6,7 +6,7 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE(BOOLEAN, NodeBoolean)
+    NODE_TYPE("BOOLEAN", NodeBoolean)
 
     NodeBoolean::NodeBoolean(const std::optional<std::string> &id,
                              const std::optional<std::string> &description,
@@ -26,6 +26,10 @@ namespace CHelper::Node {
         NodeBase::toJson(j);
         TO_JSON_OPTIONAL(j, descriptionTrue)
         TO_JSON_OPTIONAL(j, descriptionFalse)
+    }
+
+    ASTNode NodeBoolean::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+        return getStringASTNode(tokenReader);
     }
 
 } // CHelper::Node

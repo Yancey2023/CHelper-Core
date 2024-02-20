@@ -11,9 +11,9 @@ namespace CHelper::Node {
 
     namespace NodeBlockType {
         enum NodeBlockType {
-            // <方块ID> <附加值 | 方块状态>
+            // (已废弃附加值) <方块ID> <附加值 | 方块状态>
             BLOCK_NORMAL = 0,
-            // <方块ID> <附加值>
+            // (已废弃) <方块ID> <附加值>
             BLOCK_ONLY_META_DATA = 1
         };
     }
@@ -32,6 +32,8 @@ namespace CHelper::Node {
         NODE_TYPE_H;
 
         void toJson(nlohmann::json &j) const override;
+
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
     };
 
 } // CHelper::Node

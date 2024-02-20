@@ -15,21 +15,23 @@ namespace CHelper::Node {
     class NodeNormalId : public NodeBase {
     public:
         const std::optional<std::string> key;
-        const std::vector<NormalId> *contents;
+        const std::vector<std::shared_ptr<NormalId>> *contents;
 
         NodeNormalId(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
                      const std::optional<std::string> &key,
-                     const std::vector<NormalId> *contents);
+                     const std::vector<std::shared_ptr<NormalId>> *contents);
 
         NodeNormalId(const nlohmann::json &j,
                      const CPack &cpack);
 
-        ~NodeNormalId();
+        ~NodeNormalId() override;
 
         NODE_TYPE_H;
 
         void toJson(nlohmann::json &j) const override;
+
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
     };
 

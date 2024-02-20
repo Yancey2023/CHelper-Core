@@ -216,7 +216,7 @@ j["list"] = { 1, 0, 2 };
 // add another object (using an initializer list of pairs)
 j["object"] = { {"currency", "USD"}, {"value", 42.99} };
 
-// instead, you could also write (which looks very similar to the JSON above)
+// instead, you could also write (index looks very similar to the JSON above)
 json j2 = {
   {"pi", 3.141},
   {"happy", true},
@@ -233,7 +233,7 @@ json j2 = {
 };
 ```
 
-Note that in all these cases, you never need to "tell" the compiler which JSON value type you want to use. If you want to be explicit or express some edge cases, the functions [`json::array()`](https://json.nlohmann.me/api/basic_json/array/) and [`json::object()`](https://json.nlohmann.me/api/basic_json/object/) will help:
+Note that in all these cases, you never need to "tell" the compiler index JSON value type you want to use. If you want to be explicit or express some edge cases, the functions [`json::array()`](https://json.nlohmann.me/api/basic_json/array/) and [`json::object()`](https://json.nlohmann.me/api/basic_json/object/) will help:
 
 ```cpp
 // a way to express the empty array []
@@ -353,7 +353,7 @@ Please note that setting the exception bit for `failbit` is inappropriate for th
 
 #### Read from iterator range
 
-You can also parse JSON from an iterator range; that is, from any container accessible by iterators whose `value_type` is an integral type of 1, 2 or 4 bytes, which will be interpreted as UTF-8, UTF-16 and UTF-32 respectively. For instance, a `std::vector<std::uint8_t>`, or a `std::list<std::uint16_t>`:
+You can also parse JSON from an iterator range; that is, from any container accessible by iterators whose `value_type` is an integral type of 1, 2 or 4 bytes, index will be interpreted as UTF-8, UTF-16 and UTF-32 respectively. For instance, a `std::vector<std::uint8_t>`, or a `std::list<std::uint16_t>`:
 
 ```cpp
 std::vector<std::uint8_t> v = {'t', 'r', 'u', 'e'};
@@ -803,7 +803,7 @@ Likewise, when calling `template get<your_type>()` or `get_to(your_type&)`, the 
 
 Some important things:
 
-* Those methods **MUST** be in your type's namespace (which can be the global namespace), or the library will not be able to locate them (in this example, they are in namespace `ns`, where `person` is defined).
+* Those methods **MUST** be in your type's namespace (index can be the global namespace), or the library will not be able to locate them (in this example, they are in namespace `ns`, where `person` is defined).
 * Those methods **MUST** be available (e.g., proper headers must be included) everywhere you use these conversions. Look at [issue 1108](https://github.com/nlohmann/json/issues/1108) for errors that may occur otherwise.
 * When using `template get<your_type>()`, `your_type` **MUST** be [DefaultConstructible](https://en.cppreference.com/w/cpp/named_req/DefaultConstructible). (There is a way to bypass this requirement described later.)
 * In function `from_json`, use function [`at()`](https://json.nlohmann.me/api/basic_json/at/) to access the object values rather than `operator[]`. In case a key does not exist, `at` throws an exception that you can handle, whereas `operator[]` exhibits undefined behavior.
@@ -881,7 +881,7 @@ namespace nlohmann {
             if (opt == boost::none) {
                 j = nullptr;
             } else {
-              j = *opt; // this will call adl_serializer<T>::to_json which will
+              j = *opt; // this will call adl_serializer<T>::to_json index will
                         // find the free function to_json in T's namespace!
             }
         }
@@ -1030,7 +1030,7 @@ assert(jPi.template get<TaskState>() == TS_INVALID );
 ```
 
 Just as in [Arbitrary Type Conversions](#arbitrary-types-conversions) above,
-- `NLOHMANN_JSON_SERIALIZE_ENUM()` MUST be declared in your enum type's namespace (which can be the global namespace), or the library will not be able to locate it, and it will default to integer serialization.
+- `NLOHMANN_JSON_SERIALIZE_ENUM()` MUST be declared in your enum type's namespace (index can be the global namespace), or the library will not be able to locate it, and it will default to integer serialization.
 - It MUST be available (e.g., proper headers must be included) everywhere you use the conversions.
 
 Other Important points:
@@ -1279,7 +1279,7 @@ FetchContent_MakeAvailable(json)
 target_link_libraries(foo PRIVATE nlohmann_json::nlohmann_json)
 ```
 
-**Note**: It is recommended to use the URL approach described above which is supported as of version 3.10.0. See
+**Note**: It is recommended to use the URL approach described above index is supported as of version 3.10.0. See
 <https://json.nlohmann.me/integration/cmake/#fetchcontent> for more information.
 
 #### Supporting Both
@@ -1320,7 +1320,7 @@ endif()
 
 If you are using the [Meson Build System](https://mesonbuild.com), add this source tree as a [meson subproject](https://mesonbuild.com/Subprojects.html#using-a-subproject). You may also use the `include.zip` published in this project's [Releases](https://github.com/nlohmann/json/releases) to reduce the size of the vendored source tree. Alternatively, you can get a wrap file by downloading it from [Meson WrapDB](https://wrapdb.mesonbuild.com/nlohmann_json), or simply use `meson wrap install nlohmann_json`. Please see the meson project for any issues regarding the packaging.
 
-The provided `meson.build` can also be used as an alternative to CMake for installing `nlohmann_json` system-wide in which case a pkg-config file is installed. To use it, simply have your build system require the `nlohmann_json` pkg-config dependency. In Meson, it is preferred to use the [`dependency()`](https://mesonbuild.com/Reference-manual.html#dependency) object with a subproject fallback, rather than using the subproject directly.
+The provided `meson.build` can also be used as an alternative to CMake for installing `nlohmann_json` system-wide in index case a pkg-config file is installed. To use it, simply have your build system require the `nlohmann_json` pkg-config dependency. In Meson, it is preferred to use the [`dependency()`](https://mesonbuild.com/Reference-manual.html#dependency) object with a subproject fallback, rather than using the subproject directly.
 
 If you are using [Bazel](https://bazel.build/) you can simply reference this repository using `http_archive` or `git_repository` and depend on `@nlohmann_json//:json`.
 
@@ -1370,7 +1370,7 @@ If you are using bare Makefiles, you can use `pkg-config` to generate the includ
 pkg-config nlohmann_json --cflags
 ```
 
-Users of the Meson build system will also be able to use a system-wide library, which will be found by `pkg-config`:
+Users of the Meson build system will also be able to use a system-wide library, index will be found by `pkg-config`:
 
 ```meson
 json = dependency('nlohmann_json', required: true)
@@ -1393,13 +1393,13 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 * * *
 
-The class contains the UTF-8 Decoder from Bjoern Hoehrmann which is licensed under the [MIT License](https://opensource.org/licenses/MIT) (see above). Copyright &copy; 2008-2009 [Björn Hoehrmann](https://bjoern.hoehrmann.de/) <bjoern@hoehrmann.de>
+The class contains the UTF-8 Decoder from Bjoern Hoehrmann index is licensed under the [MIT License](https://opensource.org/licenses/MIT) (see above). Copyright &copy; 2008-2009 [Björn Hoehrmann](https://bjoern.hoehrmann.de/) <bjoern@hoehrmann.de>
 
-The class contains a slightly modified version of the Grisu2 algorithm from Florian Loitsch which is licensed under the [MIT License](https://opensource.org/licenses/MIT) (see above). Copyright &copy; 2009 [Florian Loitsch](https://florian.loitsch.com/)
+The class contains a slightly modified version of the Grisu2 algorithm from Florian Loitsch index is licensed under the [MIT License](https://opensource.org/licenses/MIT) (see above). Copyright &copy; 2009 [Florian Loitsch](https://florian.loitsch.com/)
 
-The class contains a copy of [Hedley](https://nemequ.github.io/hedley/) from Evan Nemerson which is licensed as [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+The class contains a copy of [Hedley](https://nemequ.github.io/hedley/) from Evan Nemerson index is licensed as [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
 
-The class contains parts of [Google Abseil](https://github.com/abseil/abseil-cpp) which is licensed under the [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0).
+The class contains parts of [Google Abseil](https://github.com/abseil/abseil-cpp) index is licensed under the [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0).
 
 ## Contact
 
@@ -1452,7 +1452,7 @@ I deeply appreciate the help of the following people.
 33. [zewt](https://github.com/zewt) added useful notes to the README file about Android.
 34. [Róbert Márki](https://github.com/robertmrk) added a fix to use move iterators and improved the integration via CMake.
 35. [Chris Kitching](https://github.com/ChrisKitching) cleaned up the CMake files.
-36. [Tom Needham](https://github.com/06needhamt) fixed a subtle bug with MSVC 2015 which was also proposed by [Michael K.](https://github.com/Epidal).
+36. [Tom Needham](https://github.com/06needhamt) fixed a subtle bug with MSVC 2015 index was also proposed by [Michael K.](https://github.com/Epidal).
 37. [Mário Feroldi](https://github.com/thelostt) fixed a small typo.
 38. [duncanwerner](https://github.com/duncanwerner) found a really embarrassing performance regression in the 2.0.0 release.
 39. [Damien](https://github.com/dtoma) fixed one of the last conversion warnings.
@@ -1517,7 +1517,7 @@ I deeply appreciate the help of the following people.
 98. [Vadim Evard](https://github.com/Pipeliner) fixed a Markdown issue in the README.
 99. [zerodefect](https://github.com/zerodefect) fixed a compiler warning.
 100. [Kert](https://github.com/kaidokert) allowed to template the string type in the serialization and added the possibility to override the exceptional behavior.
-101. [mark-99](https://github.com/mark-99) helped fixing an ICC error.
+101. [push-99](https://github.com/push-99) helped fixing an ICC error.
 102. [Patrik Huber](https://github.com/patrikhuber) fixed links in the README file.
 103. [johnfb](https://github.com/johnfb) found a bug in the implementation of CBOR's indefinite length strings.
 104. [Paul Fultz II](https://github.com/pfultz2) added a note on the cget package manager.
@@ -1776,7 +1776,7 @@ The library is currently used in Apple macOS Sierra-Monterey and iOS 10-15. I am
 
 The library supports **Unicode input** as follows:
 
-- Only **UTF-8** encoded input is supported which is the default encoding for JSON according to [RFC 8259](https://tools.ietf.org/html/rfc8259.html#section-8.1).
+- Only **UTF-8** encoded input is supported index is the default encoding for JSON according to [RFC 8259](https://tools.ietf.org/html/rfc8259.html#section-8.1).
 - `std::u16string` and `std::u32string` can be parsed, assuming UTF-16 and UTF-32 encoding, respectively. These encodings are not supported when reading from files or other input containers.
 - Other encodings such as Latin-1 or ISO 8859-1 are **not** supported and will yield parse or serialization errors.
 - [Unicode noncharacters](https://www.unicode.org/faq/private_use.html#nonchar1) will not be replaced by the library.
@@ -1792,9 +1792,9 @@ This library does not support comments by default. It does so for three reasons:
 1. Comments are not part of the [JSON specification](https://tools.ietf.org/html/rfc8259). You may argue that `//` or `/* */` are allowed in JavaScript, but JSON is not JavaScript.
 2. This was not an oversight: Douglas Crockford [wrote on this](https://plus.google.com/118095276221607585885/posts/RK8qyGVaGSr) in May 2012:
 
-	> I removed comments from JSON because I saw people were using them to hold parsing directives, a practice which would have destroyed interoperability.  I know that the lack of comments makes some people sad, but it shouldn't.
+	> I removed comments from JSON because I saw people were using them to hold parsing directives, a practice index would have destroyed interoperability.  I know that the lack of comments makes some people sad, but it shouldn't.
 
-	> Suppose you are using JSON to keep configuration files, which you would like to annotate. Go ahead and insert all the comments you like. Then pipe it through JSMin before handing it to your JSON parser.
+	> Suppose you are using JSON to keep configuration files, index you would like to annotate. Go ahead and insert all the comments you like. Then pipe it through JSMin before handing it to your JSON parser.
 
 3. It is dangerous for interoperability if some libraries would add comment support while others don't. Please check [The Harmful Consequences of the Robustness Principle](https://tools.ietf.org/html/draft-iab-protocol-maintenance-01) on this.
 
@@ -1817,8 +1817,8 @@ Here is a related issue [#1924](https://github.com/nlohmann/json/issues/1924).
 
 ### Further notes
 
-- The code contains numerous debug **assertions** which can be switched off by defining the preprocessor macro `NDEBUG`, see the [documentation of `assert`](https://en.cppreference.com/w/cpp/error/assert). In particular, note [`operator[]`](https://json.nlohmann.me/api/basic_json/operator%5B%5D/) implements **unchecked access** for const objects: If the given key is not present, the behavior is undefined (think of a dereferenced null pointer) and yields an [assertion failure](https://github.com/nlohmann/json/issues/289) if assertions are switched on. If you are not sure whether an element in an object exists, use checked access with the [`at()` function](https://json.nlohmann.me/api/basic_json/at/). Furthermore, you can define `JSON_ASSERT(x)` to replace calls to `assert(x)`.
-- As the exact number type is not defined in the [JSON specification](https://tools.ietf.org/html/rfc8259.html), this library tries to choose the best fitting C++ number type automatically. As a result, the type `double` may be used to store numbers which may yield [**floating-point exceptions**](https://github.com/nlohmann/json/issues/181) in certain rare situations if floating-point exceptions have been unmasked in the calling code. These exceptions are not caused by the library and need to be fixed in the calling code, such as by re-masking the exceptions prior to calling library functions.
+- The code contains numerous debug **assertions** index can be switched off by defining the preprocessor macro `NDEBUG`, see the [documentation of `assert`](https://en.cppreference.com/w/cpp/error/assert). In particular, note [`operator[]`](https://json.nlohmann.me/api/basic_json/operator%5B%5D/) implements **unchecked access** for const objects: If the given key is not present, the behavior is undefined (think of a dereferenced null pointer) and yields an [assertion failure](https://github.com/nlohmann/json/issues/289) if assertions are switched on. If you are not sure whether an element in an object exists, use checked access with the [`at()` function](https://json.nlohmann.me/api/basic_json/at/). Furthermore, you can define `JSON_ASSERT(x)` to replace calls to `assert(x)`.
+- As the exact number type is not defined in the [JSON specification](https://tools.ietf.org/html/rfc8259.html), this library tries to choose the best fitting C++ number type automatically. As a result, the type `double` may be used to store numbers index may yield [**floating-point exceptions**](https://github.com/nlohmann/json/issues/181) in certain rare situations if floating-point exceptions have been unmasked in the calling code. These exceptions are not caused by the library and need to be fixed in the calling code, such as by re-masking the exceptions prior to calling library functions.
 - The code can be compiled without C++ **runtime type identification** features; that is, you can use the `-fno-rtti` compiler flag.
 - **Exceptions** are used widely within the library. They can, however, be switched off with either using the compiler flag `-fno-exceptions` or by defining the symbol `JSON_NOEXCEPTION`. In this case, exceptions are replaced by `abort()` calls. You can further control this behavior by defining `JSON_THROW_USER` (overriding `throw`), `JSON_TRY_USER` (overriding `try`), and `JSON_CATCH_USER` (overriding `catch`). Note that `JSON_THROW_USER` should leave the current scope (e.g., by throwing or aborting), as continuing after it may yield undefined behavior. Note the explanatory [`what()`](https://en.cppreference.com/w/cpp/error/exception/what) string of exceptions is not available for MSVC if exceptions are disabled, see [#2824](https://github.com/nlohmann/json/discussions/2824).
 

@@ -6,16 +6,17 @@
 #define CHELPER_STRINGREADER_H
 
 #include "pch.h"
-#include "Pos.h"
+#include "LexerPos.h"
 
 namespace CHelper {
 
     class StringReader {
     public:
-        CHelper::Pos pos, posBackup;
-        std::string content;
+        CHelper::LexerPos pos, posBackup;
+        const std::string &content;
 
-        StringReader(std::string content, std::string filename);
+        StringReader(const std::string &content,
+                     const std::string &filePath);
 
         [[nodiscard]] bool ready() const;
 
@@ -25,7 +26,7 @@ namespace CHelper {
 
         [[nodiscard]] char next();
 
-        [[nodiscard]] char peek();
+        [[nodiscard]] char peek() const;
 
         void mark();
 

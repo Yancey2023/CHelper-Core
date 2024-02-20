@@ -6,7 +6,7 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE(COMMAND_NAME, NodeCommandName);
+    NODE_TYPE("COMMAND_NAME", NodeCommandName)
 
     NodeCommandName::NodeCommandName(const std::optional<std::string> &id,
                                      const std::optional<std::string> &description)
@@ -15,5 +15,9 @@ namespace CHelper::Node {
     NodeCommandName::NodeCommandName(const nlohmann::json &j,
                                      const CPack &cpack)
             : NodeBase(j, cpack) {}
+
+    ASTNode NodeCommandName::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+        return getStringASTNode(tokenReader);
+    }
 
 } // CHelper::Node

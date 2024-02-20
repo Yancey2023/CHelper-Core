@@ -11,10 +11,11 @@ include_directories(include)
 add_executable(CHelper
         main.cpp
         main.h
+        include/pch.h
         core/lexer/Token.cpp
         core/lexer/Token.h
-        core/lexer/Pos.cpp
-        core/lexer/Pos.h
+        core/lexer/LexerPos.cpp
+        core/lexer/LexerPos.h
         core/lexer/Lexer.cpp
         core/lexer/Lexer.h
         core/lexer/StringReader.cpp
@@ -33,8 +34,8 @@ add_executable(CHelper
         core/resources/id/BlockId.h
         core/resources/id/ItemId.cpp
         core/resources/id/ItemId.h
-        core/resources/command/Command.cpp
-        core/resources/command/Command.h
+        core/resources/command/node/NodePerCommand.cpp
+        core/resources/command/node/NodePerCommand.h
         core/resources/command/node/NodeBase.cpp
         core/resources/command/node/NodeBase.h
         core/resources/command/node/NodeInteger.cpp
@@ -59,9 +60,6 @@ add_executable(CHelper
         core/util/HashUtil.h
         core/resources/command/node/NodeLF.cpp
         core/resources/command/node/NodeLF.h
-        include/pch.h
-        core/util/CPackUtil.cpp
-        core/util/CPackUtil.h
         core/util/Exception.cpp
         core/util/Exception.h
         core/util/SimpleLogger.cpp
@@ -78,4 +76,34 @@ add_executable(CHelper
         core/resources/command/node/NodeString.h
         core/resources/command/type/NodeType.cpp
         core/resources/command/type/NodeType.h
+        core/parser/ASTNode.cpp
+        core/parser/ASTNode.h
+        core/parser/TokenReader.cpp
+        core/parser/TokenReader.h
+        core/util/VectorView.cpp
+        core/util/VectorView.h
+        core/resources/command/node/block/NodeBlockName.cpp
+        core/resources/command/node/block/NodeBlockName.h
+        core/resources/command/node/block/NodeBlockState.cpp
+        core/resources/command/node/block/NodeBlockState.h
+        core/resources/command/node/util/NodeSingleSymbol.cpp
+        core/resources/command/node/util/NodeSingleSymbol.h
+        core/resources/command/node/NodeRelativeFloat.cpp
+        core/resources/command/node/NodeRelativeFloat.h
+        core/resources/command/node/util/NodeAnd.cpp
+        core/resources/command/node/util/NodeAnd.h
+        core/resources/command/node/util/NodeOr.cpp
+        core/resources/command/node/util/NodeOr.h
+        core/resources/command/node/util/NodeEntry.cpp
+        core/resources/command/node/util/NodeEntry.h
+        core/resources/command/node/util/NodeList.cpp
+        core/resources/command/node/util/NodeList.h
+        core/parser/ErrorReason.cpp
+        core/parser/ErrorReason.h
+        core/util/StringUtil.cpp
+        core/util/StringUtil.h
+        core/resources/command/node/selector/NodeTargetSelectorVariable.cpp
+        core/resources/command/node/selector/NodeTargetSelectorVariable.h
+        core/resources/command/node/selector/NodeTaregtSelectorArgument.cpp
+        core/resources/command/node/selector/NodeTaregtSelectorArgument.h
 )

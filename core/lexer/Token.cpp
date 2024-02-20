@@ -4,16 +4,37 @@
 
 #include "Token.h"
 
-CHelper::Token::Token(TokenType::TokenType type,
-                      bool whiteSpace,
-                      CHelper::Pos pos,
-                      std::string content)
-        : type(type),
-          whiteSpace(whiteSpace),
-          pos(std::move(pos)),
-          content(std::move(content)) {}
+namespace CHelper {
 
-std::ostream &CHelper::operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType) {
+    namespace TokenType {
+        std::string getName(TokenType tokenType) {
+            switch (tokenType) {
+                case STRING:
+                    return "字符串类型";
+                case NUMBER:
+                    return "数字类型";
+                case SYMBOL:
+                    return "符号类型";
+                case LF:
+                    return "换行符类型";
+                default:
+                    return "未知类型";
+            }
+        }
+    }
+
+   Token::Token(TokenType::TokenType type,
+                          bool whiteSpace,
+                          CHelper::LexerPos pos,
+                          std::string content)
+            : type(type),
+              whiteSpace(whiteSpace),
+              pos(pos),
+              content(std::move(content)) {}
+
+}
+
+std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType) {
     switch (tokenType) {
         case CHelper::TokenType::NUMBER:
             os << "NUMBER";
@@ -31,13 +52,13 @@ std::ostream &CHelper::operator<<(std::ostream &os, const CHelper::TokenType::To
     return os;
 }
 
-std::ostream &CHelper::operator<<(std::ostream &os, const CHelper::Token &token) {
+std::ostream &operator<<(std::ostream &os, const CHelper::Token &token) {
     os << '['
        << token.type
        << "] "
        << token.pos;
     if (token.whiteSpace) {
-        os << "after whitespace";
+        os << " (after whitespace)";
     }
-    return os << token.content;
+    return os << ' ' << token.content;
 }

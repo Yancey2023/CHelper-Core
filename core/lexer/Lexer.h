@@ -15,9 +15,9 @@ namespace CHelper {
         StringReader stringReader;
 
     public:
-        [[maybe_unused]] explicit Lexer(std::string content, std::string filename);
+        explicit Lexer(const std::string &content, const std::string &filename);
 
-        [[maybe_unused]] explicit Lexer(StringReader stringReader);
+        explicit Lexer(StringReader stringReader);
 
         std::vector<Token> lex();
 
@@ -29,6 +29,8 @@ namespace CHelper {
         Token nextTokenSymbol(bool whiteSpace);
 
         Token nextTokenString(bool whiteSpace);
+
+        Token nextTokenLF(bool whiteSpace);
     };
 
 }

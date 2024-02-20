@@ -11,12 +11,9 @@ namespace CHelper::Node {
 
     class NodeLF : public NodeBase {
     public:
-        NodeLF(const std::optional<std::string> &id,
-               const std::optional<std::string> &description);
+        NODE_TYPE_INSTANCE_H(NodeLF);
 
-        static std::shared_ptr<NodeLF> getInstance();
-
-        NODE_TYPE_H;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
     };
 

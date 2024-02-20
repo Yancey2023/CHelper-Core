@@ -25,6 +25,7 @@ namespace CHelper::Node {
 
         NODE_TYPE_H;
 
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
     };
 
 } // CHelper::Node

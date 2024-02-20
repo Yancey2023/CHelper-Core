@@ -3,16 +3,15 @@
 //
 
 #include "NodeNormalId.h"
-#include "../../../util/Exception.h"
 
 namespace CHelper::Node {
 
-    NODE_TYPE(NORMAL_ID, NodeNormalId);
+    NODE_TYPE("NORMAL_ID", NodeNormalId)
 
     NodeNormalId::NodeNormalId(const std::optional<std::string> &id,
                                const std::optional<std::string> &description,
                                const std::optional<std::string> &key,
-                               const std::vector<NormalId> *contents)
+                               const std::vector<std::shared_ptr<NormalId>> *contents)
             : NodeBase(id, description),
               key(key),
               contents(contents) {}
@@ -36,10 +35,10 @@ namespace CHelper::Node {
             contents = &cpack.normalIds.find(key.value())->second;
         } else {
             nlohmann::json jsonArray = j.at("contents");
-            auto *contents0 = new std::vector<NormalId>();
+            auto *contents0 = new std::vector<std::shared_ptr<NormalId>>();
             contents0->reserve(jsonArray.size());
             for (const auto &item: jsonArray) {
-                contents0->push_back(item);
+                contents0->push_back(std::make_shared<NormalId>(item));
             }
             contents = contents0;
         }
@@ -55,8 +54,16 @@ namespace CHelper::Node {
         NodeBase::toJson(j);
         TO_JSON_OPTIONAL(j, key)
         if (!key.has_value()) {
-            TO_JSON(j, *contents);
+            nlohmann::json content;
+            for (const auto &item: *contents) {
+                content.push_back(*item);
+            }
+            j.push_back({"contents", content});
         }
+    }
+
+    ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+        return getStringASTNode(tokenReader);
     }
 
 } // CHelper::Node

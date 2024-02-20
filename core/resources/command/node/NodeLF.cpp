@@ -6,23 +6,17 @@
 
 namespace CHelper::Node {
 
-    NodeType NodeLF::TYPE("LF", [](const nlohmann::json &j, const CPack &cpack) {
-        return (std::shared_ptr<NodeBase>) NodeLF::getInstance();
-    });
+    NODE_TYPE_INSTANCE("LF", NodeLF, "line feet")
 
-    NodeType NodeLF::getNodeType() const { return NodeLF::TYPE; }
-
-
-    NodeLF::NodeLF(const std::optional<std::string> &id,
-                   const std::optional<std::string> &description)
-            : NodeBase(id, description) {}
-
-    std::shared_ptr<NodeLF> NodeLF::getInstance() {
-        static std::shared_ptr<Node::NodeLF> INSTANCE;
-        if (INSTANCE == nullptr) {
-            INSTANCE = std::make_shared<NodeLF>(std::optional("LF"), std::optional("Line Feet"));
+    ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+        tokenReader.push();
+        tokenReader.skipAll();
+        VectorView<Token> tokens = tokenReader.collect();
+        std::shared_ptr<ErrorReason> errorReason;
+        if (tokens.hasValue()) {
+            errorReason = ErrorReason::excess(tokens, "命令后面有多余部分");
         }
-        return INSTANCE;
+        return ASTNode::simpleNode(this, tokens, errorReason);
     }
 
 } // CHelper::Node

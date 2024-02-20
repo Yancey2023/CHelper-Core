@@ -16,19 +16,23 @@ namespace CHelper::Node {
     class NodeNamespaceId : public NodeBase {
     public:
         const std::optional<std::string> key;
-        const std::vector<CHelper::NamespaceId> *contents;
+        const std::vector<std::shared_ptr<CHelper::NamespaceId>> *contents;
 
         NodeNamespaceId(const std::optional<std::string> &id,
                         const std::optional<std::string> &description,
                         const std::optional<std::string> &key,
-                        const std::vector<NamespaceId> *contents);
+                        const std::vector<std::shared_ptr<NamespaceId>> *contents);
 
         NodeNamespaceId(const nlohmann::json &j,
                         const CPack &cpack);
 
+        ~NodeNamespaceId() override;
+
         NODE_TYPE_H;
 
         void toJson(nlohmann::json &j) const override;
+
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
     };
 
 }

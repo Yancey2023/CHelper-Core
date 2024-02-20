@@ -4,7 +4,7 @@
 
 #include "JsonUtil.h"
 
-nlohmann::json CHelper::JsonUtil::getJsonFromPath(const std::filesystem::path& path){
+nlohmann::json CHelper::JsonUtil::getJsonFromPath(const std::filesystem::path &path) {
     std::ifstream f(path);
     nlohmann::json j = nlohmann::json::parse(f);
     f.close();

@@ -7,17 +7,19 @@
 
 #include "pch.h"
 #include "NodeBase.h"
+#include "selector/NodeTargetSelectorVariable.h"
 
 namespace CHelper::Node {
 
     class NodeTargetSelector : public NodeBase {
     public:
         const bool isMustPlayer, isMustNPC, isOnlyOne;
+        const NodeTargetSelectorVariable nodeTargetSelectorVariable;
 
         NodeTargetSelector(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
                            bool isMustPlayer,
-                           bool isMustNpc,
+                           bool isMustNPC,
                            bool isOnlyOne);
 
         explicit NodeTargetSelector(const nlohmann::json &j,
@@ -27,6 +29,7 @@ namespace CHelper::Node {
 
         void toJson(nlohmann::json &j) const override;
 
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
     };
 
 } // CHelper::Node

@@ -6,13 +6,28 @@
 
 namespace CHelper::HashUtil {
 
+    static std::size_t hashCode() {
+        return 0;
+    }
+
+    template<typename T, typename... Args>
+    static int hashCode(const T &first, const Args &...args) {
+        int a = std::hash<T>{}(first);
+        int b = hashCode(args...);
+        if (b == 0) {
+            return a;
+        } else {
+            return 31 * a + b;
+        }
+    }
+
     template<typename T1, typename T2>
     std::size_t PairHash::operator()(const std::pair<T1, T2> &p) const {
-        auto h1 = std::hash<T1>{}(p.first);
-        auto h2 = std::hash<T2>{}(p.second);
+        return hashCode(p.first, p.second);
+    }
 
-        // 主要的想法是将第一个元素的哈希值移位，然后与第二个元素的哈希值进行异或操作。
-        return h1 ^ h2;
+    std::size_t ErrorReasonHash::operator()(const ErrorReason &errorReason) const {
+        return hashCode(errorReason.errorReason, errorReason.tokens.start, errorReason.tokens.end);
     }
 
 } // CHelper::HashUtil

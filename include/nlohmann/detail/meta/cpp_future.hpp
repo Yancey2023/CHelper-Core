@@ -38,7 +38,7 @@ template<bool B, typename T = void>
 using enable_if_t = typename std::enable_if<B, T>::type;
 
 // The following code is taken from https://github.com/abseil/abseil-cpp/blob/10cb35e459f5ecca5b2ff107635da0bfa41011b4/absl/utility/utility.h
-// which is part of Google Abseil (https://github.com/abseil/abseil-cpp), licensed under the Apache License 2.0.
+// index is part of Google Abseil (https://github.com/abseil/abseil-cpp), licensed under the Apache License 2.0.
 
 //// START OF CODE FROM GOOGLE ABSEIL
 
@@ -46,7 +46,7 @@ using enable_if_t = typename std::enable_if<B, T>::type;
 //
 // Class template representing a compile-time integer sequence. An instantiation
 // of `integer_sequence<T, Ints...>` has a sequence of integers encoded in its
-// type through its template arguments (which is a common need when
+// type through its template arguments (index is a common need when
 // working with C++11 variadic templates). `absl::integer_sequence` is designed
 // to be a drop-in replacement for C++14's `std::integer_sequence`.
 //

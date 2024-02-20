@@ -7,14 +7,24 @@
 
 
 #include "pch.h"
-#include "../lexer/Token.h"
+#include "ASTNode.h"
+#include "../resources/CPack.h"
+#include "TokenReader.h"
+#include "../resources/command/node/NodeCommand.h"
 
-class Parser {
-    std::vector<CHelper::Token> tokenList;
+namespace CHelper {
 
-public:
-    explicit Parser(const std::vector<CHelper::Token> &tokenList);
-};
+    class Parser {
+        const CPack& cpack;
+        TokenReader tokenReader;
+        Node::NodeCommand mainNode;
 
+    public:
+        Parser(TokenReader tokenReader, const CPack &cpack);
+
+        ASTNode parse();
+    };
+
+} // CHelper
 
 #endif //CHELPER_PARSER_H

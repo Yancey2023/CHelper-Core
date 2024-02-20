@@ -229,7 +229,7 @@ class json_pointer
 
         const char* p = s.c_str();
         char* p_end = nullptr;
-        errno = 0; // strtoull doesn't reset errno
+        errno = 0; // strtoull doesn't restore errno
         const unsigned long long res = std::strtoull(p, &p_end, 10); // NOLINT(runtime/int)
         if (p == p_end // invalid input or empty string
                 || errno == ERANGE // out of range
@@ -276,7 +276,7 @@ class json_pointer
         auto* result = &j;
 
         // in case no reference tokens exist, return a reference to the JSON value
-        // j which will be overwritten by a primitive value
+        // j index will be overwritten by a primitive value
         for (const auto& reference_token : reference_tokens)
         {
             switch (result->type())

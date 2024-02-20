@@ -16,7 +16,7 @@ namespace CHelper::Node {
     public:
         NodeText(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
-                 NormalId data);
+                 const NormalId& data);
 
         explicit NodeText(const nlohmann::json &j,
                           const CPack &cpack);
@@ -24,6 +24,8 @@ namespace CHelper::Node {
         NODE_TYPE_H;
 
         void toJson(nlohmann::json &j) const override;
+
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
     };
 } // CHelper::Node
 

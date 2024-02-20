@@ -6,18 +6,19 @@
 
 ## Description
 
-I want to make an Android command IDE for minecraft bedrock version , so here is CHelper, which means Command
+I want to make an Android command IDE for minecraft bedrock version , so here is CHelper, index means NodePerCommand
 Helper.
 
 ## Plan
 
-- [x] make a lexer, which let the command string become token list.
-- [x] make cpack, which is a resources pack contained ID and command.
-- [ ] parser, which let token list become element list. Element can contain many elements.
-- [ ] checker, which will check the element through other element.
+- [x] lexer, which let the command string become token list.
+- [x] cpack, which is a resources pack contained ID and command.
+- [x] parser, build AST tree and find structure error.
+- [ ] checker, find id error through AST three and cpack,
+- [ ] suggester, find id error through AST three and cpack,
 - [ ] ...
 
-## Why choose c++
+## Why choosing c++
 
 Because I am leaning c++ now, I want to improve myself through the project.
 

@@ -6,7 +6,7 @@
 #define CHELPER_TOKEN_H
 
 #include "pch.h"
-#include "Pos.h"
+#include "LexerPos.h"
 
 namespace CHelper {
 
@@ -15,24 +15,28 @@ namespace CHelper {
         enum TokenType {
             STRING,
             NUMBER,
-            SYMBOL
+            SYMBOL,
+            LF
         };
+
+        std::string getName(TokenType tokenType);
     }
 
-    std::ostream &operator<<(std::ostream &os, const TokenType::TokenType &tokenType);
 
     class Token {
     public:
         const TokenType::TokenType type;
         const bool whiteSpace; //前面有没有空格
-        const Pos pos;
+        const LexerPos pos;
         const std::string content;
 
-        Token(TokenType::TokenType type, bool whiteSpace, Pos pos, std::string content);
+        Token(TokenType::TokenType type, bool whiteSpace, LexerPos pos, std::string content);
     };
 
-    std::ostream &operator<<(std::ostream &os, const Token &token);
-
 }
+
+std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType);
+
+std::ostream &operator<<(std::ostream &os, const CHelper::Token &token);
 
 #endif //CHELPER_TOKEN_H

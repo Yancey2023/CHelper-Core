@@ -6,12 +6,17 @@
 #define CHELPER_HASHUTIL_H
 
 #include "pch.h"
+#include "../parser/ErrorReason.h"
 
 namespace CHelper::HashUtil {
 
     struct PairHash {
         template<typename T1, typename T2>
-        std::size_t operator()(const std::pair<T1, T2> &p) const;
+        std::size_t operator()(const std::pair<T1, T2> &pair) const;
+    };
+
+    struct ErrorReasonHash {
+        std::size_t operator()(const ErrorReason &errorReason) const;
     };
 
 } // CHelper::HashUtil

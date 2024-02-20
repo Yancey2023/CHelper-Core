@@ -6,7 +6,7 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE(INTEGER, NodeInteger);
+    NODE_TYPE("INTEGER", NodeInteger)
 
     NodeInteger::NodeInteger(const std::optional<std::string> &id,
                              const std::optional<std::string> &description,
@@ -26,6 +26,10 @@ namespace CHelper::Node {
         NodeBase::toJson(j);
         TO_JSON_OPTIONAL(j, min)
         TO_JSON_OPTIONAL(j, max)
+    }
+
+    ASTNode NodeInteger::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+        return getIntegerASTNode(tokenReader);
     }
 
 } // CHelper::Node

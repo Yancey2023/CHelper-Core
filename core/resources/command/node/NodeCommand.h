@@ -2,10 +2,11 @@
 // Created by Yancey666 on 2023/11/11.
 //
 
-#ifndef CHELPER_COMMAND_H
+#ifndef CHELPER_NODECOMMAND_H
 #define CHELPER_NODECOMMAND_H
 
 #include "NodeBase.h"
+#include "util/NodeOr.h"
 
 namespace CHelper::Node {
 
@@ -13,12 +14,16 @@ namespace CHelper::Node {
 
     public:
         NodeCommand(const std::optional<std::string> &id,
-                    const std::optional<std::string> &description);
+                    const std::optional<std::string> &description,
+                    const std::vector<std::shared_ptr<Node::NodeBase>>& nodeCommand);
 
         NodeCommand(const nlohmann::json &j,
                     const CPack &cpack);
 
         NODE_TYPE_H;
+
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+
 
     };
 
@@ -26,4 +31,4 @@ namespace CHelper::Node {
 
 CREATE_ADL_SERIALIZER(CHelper::Node::NodeCommand);
 
-#endif //CHELPER_COMMAND_H
+#endif //CHELPER_NODECOMMAND_H

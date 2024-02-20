@@ -6,7 +6,7 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE(FLOAT, NodeFloat);
+    NODE_TYPE("FLOAT", NodeFloat)
 
     NodeFloat::NodeFloat(const std::optional<std::string> &id,
                          const std::optional<std::string> &description,
@@ -26,6 +26,10 @@ namespace CHelper::Node {
         NodeBase::toJson(j);
         TO_JSON_OPTIONAL(j, min)
         TO_JSON_OPTIONAL(j, max)
+    }
+
+    ASTNode NodeFloat::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+        return getFloatASTNode(tokenReader);
     }
 
 } // CHelper::Node

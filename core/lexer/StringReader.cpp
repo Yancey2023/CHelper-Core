@@ -4,58 +4,62 @@
 
 #include "StringReader.h"
 
-CHelper::StringReader::StringReader(
-        std::string content,
-        std::string filePath)
-        : content(std::move(content)),
-          pos(CHelper::Pos(1, 0, 0, std::move(filePath))),
-          posBackup(pos) {}
+namespace CHelper {
 
-bool CHelper::StringReader::ready() const {
-    return pos.which < content.length();
-}
+    CHelper::StringReader::StringReader(
+            const std::string &content,
+            const std::string &filePath)
+            : content(content),
+              pos(CHelper::LexerPos(1, 0, 0, filePath)),
+              posBackup(pos) {}
 
-char CHelper::StringReader::read() {
-    if (!ready()) {
-        return -1;
+    bool CHelper::StringReader::ready() const {
+        return pos.index < content.length();
     }
-    char ch = content[pos.which];
-    pos.next(ch);
-    return ch;
-}
 
-bool CHelper::StringReader::skip() {
-    if (!ready()) {
-        return false;
+    char CHelper::StringReader::read() {
+        if (!ready()) {
+            return EOF;
+        }
+        char ch = content[pos.index];
+        pos.next(ch);
+        return ch;
     }
-    pos.next(content[pos.which]);
-    return true;
-}
 
-char CHelper::StringReader::next() {
-    skip();
-    return peek();
-}
-
-char CHelper::StringReader::peek() {
-    if (!ready()) {
-        return -1;
+    bool CHelper::StringReader::skip() {
+        if (!ready()) {
+            return false;
+        }
+        pos.next(content[pos.index]);
+        return true;
     }
-    return content[pos.which];
-}
 
-void CHelper::StringReader::mark() {
-    posBackup.line = pos.line;
-    posBackup.col = pos.col;
-    posBackup.which = pos.which;
-}
+    char CHelper::StringReader::next() {
+        skip();
+        return peek();
+    }
 
-void CHelper::StringReader::reset() {
-    pos.line = posBackup.line;
-    pos.col = posBackup.col;
-    pos.which = posBackup.which;
-}
+    char CHelper::StringReader::peek() const {
+        if (!ready()) {
+            return EOF;
+        }
+        return content[pos.index];
+    }
 
-std::string CHelper::StringReader::collect() const {
-    return {content, (size_t) posBackup.which, (size_t) (pos.which - posBackup.which)};
+    void CHelper::StringReader::mark() {
+        posBackup.line = pos.line;
+        posBackup.col = pos.col;
+        posBackup.index = pos.index;
+    }
+
+    void CHelper::StringReader::reset() {
+        pos.line = posBackup.line;
+        pos.col = posBackup.col;
+        pos.index = posBackup.index;
+    }
+
+    std::string CHelper::StringReader::collect() const {
+        return {content, (size_t) posBackup.index, (size_t) (pos.index - posBackup.index)};
+    }
+
 }

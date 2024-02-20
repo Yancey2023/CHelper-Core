@@ -18,6 +18,17 @@ namespace CHelper::Exception {
         [[nodiscard]] virtual std::string reason() const;
     };
 
+    class CantCreateInstance : public CHelperException {
+    public:
+        std::string className;
+
+        explicit CantCreateInstance(std::string className);
+
+        [[nodiscard]] const char *what() const noexcept override;
+
+        [[nodiscard]] std::string reason() const override;
+    };
+
     class CPackLoadFailed : public CHelperException {
     public:
         std::string state;
@@ -111,6 +122,18 @@ namespace CHelper::Exception {
         std::string details;
 
         NodeLoadFailed(std::string state, std::string details);
+
+        [[nodiscard]] const char *what() const noexcept override;
+
+        [[nodiscard]] std::string reason() const override;
+    };
+
+    // end < start || start < 0
+    class WrongRange : public CHelperException {
+    public:
+        size_t start, end;
+
+        WrongRange(size_t start, size_t end);
 
         [[nodiscard]] const char *what() const noexcept override;
 

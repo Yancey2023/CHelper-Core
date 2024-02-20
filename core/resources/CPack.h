@@ -9,20 +9,20 @@
 #include "Manifest.h"
 #include "id/BlockId.h"
 #include "id/ItemId.h"
-#include "command/Command.h"
+#include "command/node/NodePerCommand.h"
 
 namespace CHelper {
 
     class CPack {
     public:
         Manifest manifest;
-        std::unordered_map<std::string, std::vector<NormalId>> normalIds;
-        std::unordered_map<std::string, std::vector<NamespaceId>> namespaceIds;
-        std::vector<BlockId> blockIds;
-        std::vector<ItemId> itemIds;
-        std::vector<CHelper::Command> commands;
+        std::unordered_map<std::string, std::vector<std::shared_ptr<NormalId>>> normalIds;
+        std::unordered_map<std::string, std::vector<std::shared_ptr<NamespaceId>>> namespaceIds;
+        std::vector<std::shared_ptr<BlockId>> blockIds;
+        std::vector<std::shared_ptr<ItemId>> itemIds;
+        std::vector<std::shared_ptr<Node::NodeBase>> commands;
 
-        explicit CPack(Manifest manifest);
+        explicit CPack(const std::filesystem::path &path);
     };
 
 }

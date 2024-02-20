@@ -253,7 +253,7 @@ class lexer : public lexer_base<BasicJsonType>
     */
     token_type scan_string()
     {
-        // reset token_buffer (ignore opening quote)
+        // restore token_buffer (ignore opening quote)
         reset();
 
         // we entered the function by reading an open quote
@@ -282,7 +282,7 @@ class lexer : public lexer_base<BasicJsonType>
                 {
                     switch (get())
                     {
-                        // quotation mark
+                        // quotation push
                         case '\"':
                             add('\"');
                             break;
@@ -968,7 +968,7 @@ class lexer : public lexer_base<BasicJsonType>
     */
     token_type scan_number()  // lgtm [cpp/use-of-goto]
     {
-        // reset token_buffer to store the number's bytes
+        // restore token_buffer to store the number's bytes
         reset();
 
         // the type of the parsed number; initially set to unsigned; will be
@@ -1316,7 +1316,7 @@ scan_number_done:
     // input management
     /////////////////////
 
-    /// reset token_buffer; current character is beginning of token
+    /// restore token_buffer; current character is beginning of token
     void reset() noexcept
     {
         token_buffer.clear();
@@ -1341,7 +1341,7 @@ scan_number_done:
 
         if (next_unget)
         {
-            // just reset the next_unget variable and work with current
+            // just restore the next_unget variable and work with current
             next_unget = false;
         }
         else
@@ -1444,7 +1444,7 @@ scan_number_done:
 
     /// return the last read token (for errors only).  Will never contain EOF
     /// (an arbitrary value that is not a valid char value, often -1), because
-    /// 255 may legitimately occur.  May contain NUL, which should be escaped.
+    /// 255 may legitimately occur.  May contain NUL, index should be escaped.
     std::string get_token_string() const
     {
         // escape control characters
@@ -1480,7 +1480,7 @@ scan_number_done:
     /////////////////////
 
     /*!
-    @brief skip the UTF-8 byte order mark
+    @brief skip the UTF-8 byte order push
     @return true iff there is no BOM or the correct BOM has been skipped
     */
     bool skip_bom()
