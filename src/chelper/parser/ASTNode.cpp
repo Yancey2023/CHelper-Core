@@ -14,13 +14,15 @@ namespace CHelper {
                      const std::vector<ASTNode> &childNodes,
                      const VectorView<Token> &tokens,
                      const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
-                     std::string id = "unknown")
+                     std::string id,
+                     int whichBest)
             : mode(mode),
               node(node),
               childNodes(childNodes),
               tokens(tokens),
               errorReasons(errorReasons),
-              id(std::move(id)) {}
+              id(std::move(id)),
+              whichBest(whichBest) {}
 
     ASTNode ASTNode::simpleNode(const Node::NodeBase *node,
                                 const VectorView<Token> &tokens,
@@ -52,21 +54,22 @@ namespace CHelper {
 
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             const std::vector<ASTNode> &childNodes,
-                            const VectorView<Token> &tokens,
+                            const std::optional<VectorView<Token>> &tokens,
                             const std::shared_ptr<ErrorReason> &errorReason,
                             const std::string &id) {
-        if (errorReason != nullptr) {
-            return {ASTNodeMode::OR, node, childNodes, tokens, {errorReason}, id};
-        }
+        int whichBest = 0;
         size_t start = 0;
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
-        for (const auto &item: childNodes) {
+        for (int i = 0; i < childNodes.size(); ++i) {
+            ASTNode item = childNodes[i];
             if (!item.isError()) {
+                whichBest = i;
                 errorReasons.clear();
                 break;
             }
             if (start < item.tokens.start) {
                 start = item.tokens.start;
+                whichBest = i;
                 errorReasons.clear();
             }
             for (const auto &item2: item.errorReasons) {
@@ -81,7 +84,11 @@ namespace CHelper {
                 }
             }
         }
-        return {ASTNodeMode::OR, node, childNodes, tokens, errorReasons, id};
+        if (errorReason != nullptr) {
+            errorReasons = {errorReason};
+        }
+        return {ASTNodeMode::OR, node, childNodes, tokens.value_or(childNodes[whichBest].tokens),
+                errorReasons, id, whichBest};
     }
 
     bool ASTNode::isError() const {

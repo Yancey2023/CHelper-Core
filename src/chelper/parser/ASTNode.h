@@ -33,12 +33,15 @@ namespace CHelper {
     class ASTNode {
     public:
         const ASTNodeMode::ASTNodeMode mode;
-        //一个Node可能会生成多个ASTNode，这些ASTNode使用id进行区分
-        const std::string id;
         const Node::NodeBase *node;
+        //子节点为AND类型和OR类型特有
         const std::optional<std::vector<ASTNode>> childNodes;
         const VectorView<Token> tokens;
         const std::vector<std::shared_ptr<ErrorReason>> errorReasons;
+        //一个Node可能会生成多个ASTNode，这些ASTNode使用id进行区分
+        const std::string id;
+        //哪个节点最好，OR类型特有，获取颜色和生成命令格式文本的时候使用
+        const int whichBest;
 
     private:
         ASTNode(ASTNodeMode::ASTNodeMode mode,
@@ -46,7 +49,8 @@ namespace CHelper {
                 const std::vector<ASTNode> &childNodes,
                 const VectorView<Token> &tokens,
                 const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
-                std::string id);
+                std::string id,
+                int whichBest = -1);
 
     public:
         static ASTNode simpleNode(const Node::NodeBase *node,
@@ -62,7 +66,7 @@ namespace CHelper {
 
         static ASTNode orNode(const Node::NodeBase *node,
                               const std::vector<ASTNode> &childNodes,
-                              const VectorView<Token> &tokens,
+                              const std::optional<VectorView<Token>> &tokens = std::nullopt,
                               const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                               const std::string &id = "unknown");
 

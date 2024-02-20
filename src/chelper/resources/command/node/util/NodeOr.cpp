@@ -32,31 +32,16 @@ namespace CHelper::Node {
             tokenReader.restore();
         }
         //TODO NodeOr当isAttachToEnd为false的时候，应该检测成功的内容，如果有多个成功，应该以第一个为准，并给出警告
-        if (isAttachToEnd) {
-            tokenReader.push();
-            while (tokenReader.ready()) {
-                if (tokenReader.read()->type == TokenType::LF) {
-                    break;
-                }
-            }
-            return ASTNode::orNode(this, childASTNodes, tokenReader.collect());
+        if (!isAttachToEnd) {
+            return ASTNode::orNode(this, childASTNodes);
         }
-        int whichBest = 0;
-        size_t start = 0;
-        for (int i = 0; i < childASTNodes.size(); ++i) {
-            ASTNode item = childASTNodes[i];
-            if (!item.isError()) {
-                whichBest = i;
+        tokenReader.push();
+        while (tokenReader.ready()) {
+            if (tokenReader.read()->type == TokenType::LF) {
                 break;
             }
-            for (const auto &item2: item.errorReasons) {
-                if (item2->tokens.start > start) {
-                    start = item2->tokens.start;
-                    whichBest = i;
-                }
-            }
         }
-        return ASTNode::orNode(this, childASTNodes, childASTNodes[whichBest].tokens);
+        return ASTNode::orNode(this, childASTNodes, tokenReader.collect());
     }
 
 } // CHelper::Node
