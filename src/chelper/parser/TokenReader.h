@@ -15,7 +15,7 @@ namespace CHelper {
     public:
         const std::vector<CHelper::Token> &tokenList;
         size_t index = 0;
-        std::vector<size_t> indexQueue;
+        std::vector<size_t> indexStack;
 
         explicit TokenReader(const std::vector<CHelper::Token> &tokenList);
 
@@ -25,7 +25,7 @@ namespace CHelper {
 
         bool skip();
 
-        void skipAll();
+        void skipToLF();
 
         [[nodiscard]] const Token *next();
 

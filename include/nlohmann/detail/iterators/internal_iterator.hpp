@@ -18,7 +18,7 @@ namespace detail
 /*!
 @brief an iterator value
 
-@note This structure could easily be a union, but MSVC currently does not allow
+@note This getStructure could easily be a union, but MSVC currently does not allow
 unions members with complex constructors, see https://github.com/nlohmann/json/pull/105.
 */
 template<typename BasicJsonType> struct internal_iterator

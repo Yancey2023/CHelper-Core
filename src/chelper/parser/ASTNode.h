@@ -10,6 +10,8 @@
 #include "../util/VectorView.h"
 #include "ErrorReason.h"
 #include "../util/HashUtil.h"
+#include "Suggestion.h"
+#include "StructureBuilder.h"
 
 namespace CHelper {
 
@@ -35,7 +37,7 @@ namespace CHelper {
         const ASTNodeMode::ASTNodeMode mode;
         const Node::NodeBase *node;
         //子节点为AND类型和OR类型特有
-        const std::optional<std::vector<ASTNode>> childNodes;
+        const std::vector<ASTNode> childNodes;
         const VectorView<Token> tokens;
         const std::vector<std::shared_ptr<ErrorReason>> errorReasons;
         //一个Node可能会生成多个ASTNode，这些ASTNode使用id进行区分
@@ -56,28 +58,49 @@ namespace CHelper {
         static ASTNode simpleNode(const Node::NodeBase *node,
                                   const VectorView<Token> &tokens,
                                   const std::shared_ptr<ErrorReason> &errorReason = nullptr,
-                                  const std::string &id = "unknown");
+                                  const std::string &id = "");
 
         static ASTNode andNode(const Node::NodeBase *node,
                                const std::vector<ASTNode> &childNodes,
                                const VectorView<Token> &tokens,
                                const std::shared_ptr<ErrorReason> &errorReason = nullptr,
-                               const std::string &id = "unknown");
+                               const std::string &id = "");
 
         static ASTNode orNode(const Node::NodeBase *node,
                               const std::vector<ASTNode> &childNodes,
                               const std::optional<VectorView<Token>> &tokens = std::nullopt,
                               const std::shared_ptr<ErrorReason> &errorReason = nullptr,
-                              const std::string &id = "unknown");
+                              const std::string &id = "");
 
         [[nodiscard]] bool isError() const;
 
         [[nodiscard]] bool hasChildNode() const;
 
+    private:
+        [[nodiscard]] std::optional<std::string> collectDescription(size_t index) const;
+
+        void collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
+
+        void collectSuggestions(std::vector<Suggestion> &suggestions, size_t index) const;
+
+        void collectStructure(StructureBuilder &structureBuilder) const;
+
+    public:
+        [[nodiscard]] std::string getDescription(size_t index) const;
+
+        [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
+
+        [[nodiscard]] std::vector<Suggestion> getSuggestions(size_t index) const;
+
+        [[nodiscard]] std::string getStructure() const;
+
+        [[nodiscard]] std::string getColors() const;
+
     };
+
+    std::ostream &operator<<(std::ostream &os, const CHelper::ASTNode &astNode);
 
 } // CHelper
 
-std::ostream &operator<<(std::ostream &os, const CHelper::ASTNode &astNode);
 
 #endif //CHELPER_ASTNODE_H

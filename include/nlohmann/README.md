@@ -192,7 +192,7 @@ Assume you want to create the JSON object
 With this library, you could write:
 
 ```cpp
-// create an empty structure (null)
+// create an empty getStructure (null)
 json j;
 
 // add a number that is stored as double (note the implicit conversion of j to an object)
@@ -1340,7 +1340,7 @@ If you are using [CocoaPods](https://cocoapods.org), you can use the library by 
 
 If you are using [Swift Package Manager](https://swift.org/package-manager/), you can use the library by adding a package dependency to this repository. And target dependency as `.product(name: "nlohmann-json", package: "json")`.
 
-If you are using [NuGet](https://www.nuget.org), you can use the package [nlohmann.json](https://www.nuget.org/packages/nlohmann.json/). Please check [this extensive description](https://github.com/nlohmann/json/issues/1132#issuecomment-452250255) on how to use the package. Please file issues [here](https://github.com/hnkb/nlohmann-json-nuget/issues).
+If you are using [NuGet](https://www.nuget.org), you can use the package [nlohmann.json](https://www.nuget.org/packages/nlohmann.json/). Please check [this extensive getDescription](https://github.com/nlohmann/json/issues/1132#issuecomment-452250255) on how to use the package. Please file issues [here](https://github.com/hnkb/nlohmann-json-nuget/issues).
 
 If you are using [conda](https://conda.io/), you can use the package [nlohmann_json](https://github.com/conda-forge/nlohmann_json-feedstock) from [conda-forge](https://conda-forge.org) executing `conda install -c conda-forge nlohmann_json`. Please file issues [here](https://github.com/conda-forge/nlohmann_json-feedstock/issues).
 
@@ -1485,7 +1485,7 @@ I deeply appreciate the help of the following people.
 66. [ftillier](https://github.com/ftillier) fixed a compiler warning.
 67. [tinloaf](https://github.com/tinloaf) made sure all pushed warnings are properly popped.
 68. [Fytch](https://github.com/Fytch) found a bug in the documentation.
-69. [Jay Sistar](https://github.com/Type1J) implemented a Meson build description.
+69. [Jay Sistar](https://github.com/Type1J) implemented a Meson build getDescription.
 70. [Henry Lee](https://github.com/HenryRLee) fixed a warning in ICC and improved the iterator implementation.
 71. [Vincent Thiery](https://github.com/vthiery) maintains a package for the Conan package manager.
 72. [Steffen](https://github.com/koemeet) fixed a potential issue with MSVC and `std::min`.
@@ -1711,7 +1711,7 @@ I deeply appreciate the help of the following people.
 292. [Alexander “weej” Jones](https://github.com/alexweej) fixed an example in the README.
 293. [Eli Schwartz](https://github.com/eli-schwartz) added more files to the `include.zip` archive.
 294. [Kevin Lu](https://github.com/kevinlul) fixed a compilation issue when typedefs with certain names were present.
-295. [Trevor Hickey](https://github.com/luxe) improved the description of an example.
+295. [Trevor Hickey](https://github.com/luxe) improved the getDescription of an example.
 296. [Jef LeCompte](https://github.com/jef) updated the year in the README file.
 297. [Alexandre Hamez](https://github.com/ahamez) fixed a warning.
 298. [Maninderpal Badhan](https://github.com/mbadhan) fixed a typo.

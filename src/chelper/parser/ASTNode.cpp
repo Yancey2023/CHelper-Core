@@ -3,9 +3,9 @@
 //
 
 #include "ASTNode.h"
-
-#include <utility>
-#include "../resources/command/node/NodeBase.h"
+#include "../node/NodeBase.h"
+#include "../util/StringUtil.h"
+#include "../util/TokenUtil.h"
 
 namespace CHelper {
 
@@ -57,26 +57,37 @@ namespace CHelper {
                             const std::optional<VectorView<Token>> &tokens,
                             const std::shared_ptr<ErrorReason> &errorReason,
                             const std::string &id) {
+        bool isError = true;
         int whichBest = 0;
         size_t start = 0;
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
         for (int i = 0; i < childNodes.size(); ++i) {
-            ASTNode item = childNodes[i];
+            const ASTNode &item = childNodes[i];
             if (!item.isError()) {
+                if (isError) {
+                    start = 0;
+                }
+                isError = false;
                 whichBest = i;
                 errorReasons.clear();
-                break;
             }
-            if (start < item.tokens.start) {
-                start = item.tokens.start;
-                whichBest = i;
-                errorReasons.clear();
+            if (!isError) {
+                continue;
             }
             for (const auto &item2: item.errorReasons) {
+                if (start > item2->tokens.start) {
+                    continue;
+                }
                 bool isAdd = true;
-                for (const auto &item3: errorReasons) {
-                    if (*item2 == *item3) {
-                        isAdd = false;
+                if (start < item2->tokens.start) {
+                    start = item2->tokens.start;
+                    whichBest = i;
+                    errorReasons.clear();
+                } else {
+                    for (const auto &item3: errorReasons) {
+                        if (*item2 == *item3) {
+                            isAdd = false;
+                        }
                     }
                 }
                 if (isAdd) {
@@ -96,90 +107,190 @@ namespace CHelper {
     }
 
     bool ASTNode::hasChildNode() const {
-        return childNodes.has_value();
+        return !childNodes.empty();
     }
 
-}
-
-std::ostream &operator<<(std::ostream &os, const CHelper::ASTNode &astNode) {
-    os << R"({"isError": )"
-       << (astNode.isError() ? "true" : "false")
-       << R"(, "mode": )";
-    switch (astNode.mode) {
-        case CHelper::ASTNodeMode::NONE:
-            os << R"("NONE")";
-            break;
-        case CHelper::ASTNodeMode::AND:
-            os << R"("AND")";
-            break;
-        case CHelper::ASTNodeMode::OR:
-            os << R"("OR")";
-            break;
-        default:
-            os << R"("UNKNOWN")";
-            break;
-    }
-    os << R"(, "type": )"
-       << "\"" << astNode.node->getNodeType().nodeName << "\""
-       << R"(, "description": )"
-       << "\"" << astNode.node->description.value_or("unknown") << "\""
-       << R"(, "content": ")";
-    std::string result;
-    astNode.tokens.for_each([&result](const CHelper::Token &token) {
-        if (!result.empty() && token.whiteSpace) {
-            result.push_back(' ');
+    std::optional<std::string> ASTNode::collectDescription(size_t index) const {
+        std::optional<std::string> description = node->getDescription(this, index);
+        if (description.has_value()) {
+            return description;
         }
-        result.append(token.content);
-    });
-    os << result;
-    os << R"(", "errorReason": )";
-    if (astNode.isError()) {
-        os << "[";
-        bool isFirst = true;
-        for (const auto &item: astNode.errorReasons) {
-            if (item->errorReason.find("指令名字不匹配") != std::string::npos) {
-                continue;
-            }
-            if (isFirst) {
-                isFirst = false;
-            } else {
-                os << ", ";
-            }
-            os << R"({"content": ")";
-            std::string result1;
-            item->tokens.for_each([&result1](const CHelper::Token &token) {
-                if (!result1.empty() && token.whiteSpace) {
-                    result1.push_back(' ');
+        switch (mode) {
+            case ASTNodeMode::NONE:
+                return std::nullopt;
+            case ASTNodeMode::AND:
+                for (const ASTNode &astNode: childNodes) {
+                    description = astNode.collectDescription(index);
+                    if (description.has_value()) {
+                        return description;
+                    }
                 }
-                result1.append(token.content);
-            });
-            os << result1;
-            os << R"(", "reason": ")";
-            os << item->errorReason;
-            os << R"("})";
+                return std::nullopt;
+            case ASTNodeMode::OR:
+                return childNodes[whichBest].collectDescription(index);
         }
-        os << "]";
-    } else {
-        os << "null";
+        return std::nullopt;
     }
-    os << R"(, "childNodes": )";
-    if (astNode.childNodes.has_value()) {
-        os << "[";
-        bool isFirst = true;
-        for (const auto &item: astNode.childNodes.value()) {
-            if (item.childNodes.value().size() < 2) {
-                continue;
-            }
-            if (isFirst) {
-                isFirst = false;
-            } else {
-                os << ", ";
-            }
-            os << item;
+
+    //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
+    void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
+        if (node->collectIdError(this, idErrorReasons)) {
+            return;
         }
-        os << "]";
-    } else {
-        os << "null";
+        switch (mode) {
+            case ASTNodeMode::NONE:
+                break;
+            case ASTNodeMode::AND:
+                for (const ASTNode &astNode: childNodes) {
+                    astNode.collectIdErrors(idErrorReasons);
+                }
+                break;
+            case ASTNodeMode::OR:
+                childNodes[whichBest].collectIdErrors(idErrorReasons);
+                break;
+        }
     }
-    return os << "}";
-}
+
+    void ASTNode::collectSuggestions(std::vector<Suggestion> &suggestions, size_t index) const {
+        if (index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens)) {
+            return;
+        }
+        if (node->collectSuggestions(this, suggestions)) {
+            return;
+        }
+        switch (mode) {
+            case ASTNodeMode::NONE:
+                break;
+            case ASTNodeMode::AND:
+                for (const ASTNode &astNode: childNodes) {
+                    astNode.collectSuggestions(suggestions, index);
+                }
+                break;
+            case ASTNodeMode::OR:
+                childNodes[whichBest].collectSuggestions(suggestions, index);
+                break;
+        }
+    }
+
+    void ASTNode::collectStructure(StructureBuilder &structure) const {
+        node->collectStructure(this, structure);
+        if (structure.isDirty()) {
+            return;
+        }
+        switch (mode) {
+            case ASTNodeMode::NONE:
+                structure.appendUnknownIfNotDirty();
+                break;
+            case ASTNodeMode::AND:
+                for (const ASTNode &astNode: childNodes) {
+                    astNode.collectStructure(structure);
+                }
+                break;
+            case ASTNodeMode::OR:
+                childNodes[whichBest].collectStructure(structure);
+                break;
+        }
+    }
+
+    std::string ASTNode::getDescription(size_t index) const {
+        return collectDescription(index).value_or("未知");
+    }
+
+    std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
+        //TODO 根据错误等级调整错误的位置
+        //因为大多数情况下优先先显示ID错误，所以先添加ID错误
+        std::vector<std::shared_ptr<ErrorReason>> result;
+        collectIdErrors(result);
+        for (const auto &item: errorReasons) {
+            result.push_back(item);
+        }
+        return result;
+    }
+
+    std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
+        std::vector<Suggestion> result;
+        collectSuggestions(result, index);
+        return result;
+    }
+
+    std::string ASTNode::getStructure() const {
+        StructureBuilder structureBuilder;
+        collectStructure(structureBuilder);
+        return structureBuilder.build();
+    }
+
+    std::string ASTNode::getColors() const {
+        //TODO getColors()
+        return node->getNodeType().nodeName;
+    }
+
+    std::ostream &operator<<(std::ostream &os, const CHelper::ASTNode &astNode) {
+        os << R"({"isError": )"
+           << (astNode.isError() ? "true" : "false")
+           << R"(, "mode": )";
+        switch (astNode.mode) {
+            case CHelper::ASTNodeMode::NONE:
+                os << R"("NONE")";
+                break;
+            case CHelper::ASTNodeMode::AND:
+                os << R"("AND")";
+                break;
+            case CHelper::ASTNodeMode::OR:
+                os << R"("OR")";
+                break;
+            default:
+                os << R"("UNKNOWN")";
+                break;
+        }
+        os << R"(, "type": )"
+           << "\"" << astNode.node->getNodeType().nodeName << "\""
+           << R"(, "description": )"
+           << "\"" << astNode.node->description.value_or("unknown") << "\""
+           << R"(, "content": ")"
+           << CHelper::TokenUtil::toString(astNode.tokens)
+           << R"(", "errorReasons": )";
+        if (astNode.isError()) {
+            os << "[";
+            bool isFirst = true;
+            for (const auto &item: astNode.errorReasons) {
+                if (item->errorReason.find("指令名字不匹配") != std::string::npos) {
+                    continue;
+                }
+                if (isFirst) {
+                    isFirst = false;
+                } else {
+                    os << ", ";
+                }
+                os << R"({"content": ")"
+                   << CHelper::TokenUtil::toString(item->tokens)
+                   << R"(", "reason": ")"
+                   << item->errorReason
+                   << R"("})";
+            }
+            os << "]";
+        } else {
+            os << "null";
+        }
+        os << R"(, "childNodes": )";
+        if (astNode.hasChildNode()) {
+            os << "[";
+            bool isFirst = true;
+            for (const CHelper::ASTNode &item: astNode.childNodes) {
+                if (astNode.id == "command" && item.childNodes.size() < 2) {
+                    continue;
+                }
+                if (isFirst) {
+                    isFirst = false;
+                } else {
+                    os << ", ";
+                }
+                os << item;
+            }
+            os << "]";
+        } else {
+            os << "null";
+        }
+        return os << "}";
+    }
+
+} // CHelper

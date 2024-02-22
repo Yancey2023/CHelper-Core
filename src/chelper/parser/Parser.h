@@ -10,7 +10,7 @@
 #include "ASTNode.h"
 #include "../resources/CPack.h"
 #include "TokenReader.h"
-#include "../resources/command/node/NodeCommand.h"
+#include "../node/param/NodeCommand.h"
 
 namespace CHelper {
 
@@ -22,7 +22,7 @@ namespace CHelper {
     public:
         Parser(TokenReader tokenReader, const CPack &cpack);
 
-        ASTNode parse();
+        [[nodiscard]] ASTNode parse();
     };
 
 } // CHelper

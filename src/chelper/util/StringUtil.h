@@ -8,12 +8,11 @@
 #include <string>
 #include <vector>
 #include "VectorView.h"
+#include "../lexer/Token.h"
 
 namespace CHelper::StringUtil {
 
     std::string join(const std::string &joining, const std::vector<std::string> &strings);
-
-    std::string toString(VectorView<Token> tokens);
 
 } //CHelper::StringUtil
 

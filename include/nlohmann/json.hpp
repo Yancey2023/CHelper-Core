@@ -3105,7 +3105,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
         const auto old_capacity = m_data.m_value.array->capacity();
         m_data.m_value.array->push_back(std::move(val));
         set_parent(m_data.m_value.array->back(), old_capacity);
-        // if val is moved from, basic_json move constructor indexQueue it null, so we do not call the destructor
+        // if val is moved from, basic_json move constructor indexStack it null, so we do not call the destructor
     }
 
     /// @brief add an object to an array

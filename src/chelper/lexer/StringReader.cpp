@@ -10,7 +10,7 @@ namespace CHelper {
             const std::string &content,
             const std::string &filePath)
             : content(content),
-              pos(CHelper::LexerPos(1, 0, 0, filePath)),
+              pos(LexerPos(1, 0, 0, filePath)),
               posBackup(pos) {}
 
     bool CHelper::StringReader::ready() const {

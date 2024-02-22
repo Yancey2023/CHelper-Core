@@ -34,76 +34,86 @@ add_executable(CHelper
         src/chelper/resources/id/BlockId.h
         src/chelper/resources/id/ItemId.cpp
         src/chelper/resources/id/ItemId.h
-        src/chelper/resources/command/node/NodePerCommand.cpp
-        src/chelper/resources/command/node/NodePerCommand.h
-        src/chelper/resources/command/node/NodeBase.cpp
-        src/chelper/resources/command/node/NodeBase.h
-        src/chelper/resources/command/node/NodeInteger.cpp
-        src/chelper/resources/command/node/NodeInteger.h
-        src/chelper/resources/command/node/NodeFloat.cpp
-        src/chelper/resources/command/node/NodeFloat.h
-        src/chelper/resources/command/node/NodeBlock.cpp
-        src/chelper/resources/command/node/NodeBlock.h
-        src/chelper/resources/command/node/NodeBoolean.cpp
-        src/chelper/resources/command/node/NodeBoolean.h
-        src/chelper/resources/command/node/NodeNormalId.cpp
-        src/chelper/resources/command/node/NodeNormalId.h
-        src/chelper/resources/command/node/NodeCommand.cpp
-        src/chelper/resources/command/node/NodeCommand.h
-        src/chelper/resources/command/node/NodeCommandName.cpp
-        src/chelper/resources/command/node/NodeCommandName.h
+        src/chelper/node/param/NodePerCommand.cpp
+        src/chelper/node/param/NodePerCommand.h
+        src/chelper/node/NodeBase.cpp
+        src/chelper/node/NodeBase.h
+        src/chelper/node/param/NodeInteger.cpp
+        src/chelper/node/param/NodeInteger.h
+        src/chelper/node/param/NodeFloat.cpp
+        src/chelper/node/param/NodeFloat.h
+        src/chelper/node/param/NodeBlock.cpp
+        src/chelper/node/param/NodeBlock.h
+        src/chelper/node/param/NodeBoolean.cpp
+        src/chelper/node/param/NodeBoolean.h
+        src/chelper/node/param/NodeNormalId.cpp
+        src/chelper/node/param/NodeNormalId.h
+        src/chelper/node/param/NodeCommand.cpp
+        src/chelper/node/param/NodeCommand.h
+        src/chelper/node/param/NodeCommandName.cpp
+        src/chelper/node/param/NodeCommandName.h
         src/chelper/resources/id/NamespaceId.cpp
         src/chelper/resources/id/NamespaceId.h
-        src/chelper/resources/command/node/NodeNamespaceId.cpp
-        src/chelper/resources/command/node/NodeNamespaceId.h
+        src/chelper/node/param/NodeNamespaceId.cpp
+        src/chelper/node/param/NodeNamespaceId.h
         src/chelper/util/HashUtil.cpp
         src/chelper/util/HashUtil.h
-        src/chelper/resources/command/node/NodeLF.cpp
-        src/chelper/resources/command/node/NodeLF.h
+        src/chelper/node/param/NodeLF.cpp
+        src/chelper/node/param/NodeLF.h
         src/chelper/util/Exception.cpp
         src/chelper/util/Exception.h
         src/chelper/util/SimpleLogger.cpp
         src/chelper/util/SimpleLogger.h
-        src/chelper/resources/command/node/NodeTargetSelector.cpp
-        src/chelper/resources/command/node/NodeTargetSelector.h
-        src/chelper/resources/command/node/NodeText.cpp
-        src/chelper/resources/command/node/NodeText.h
-        src/chelper/resources/command/node/NodeItem.cpp
-        src/chelper/resources/command/node/NodeItem.h
-        src/chelper/resources/command/node/NodePosition.cpp
-        src/chelper/resources/command/node/NodePosition.h
-        src/chelper/resources/command/node/NodeString.cpp
-        src/chelper/resources/command/node/NodeString.h
-        src/chelper/resources/command/type/NodeType.cpp
-        src/chelper/resources/command/type/NodeType.h
+        src/chelper/node/param/NodeTargetSelector.cpp
+        src/chelper/node/param/NodeTargetSelector.h
+        src/chelper/node/param/NodeText.cpp
+        src/chelper/node/param/NodeText.h
+        src/chelper/node/param/NodeItem.cpp
+        src/chelper/node/param/NodeItem.h
+        src/chelper/node/param/NodePosition.cpp
+        src/chelper/node/param/NodePosition.h
+        src/chelper/node/param/NodeString.cpp
+        src/chelper/node/param/NodeString.h
+        src/chelper/node/NodeType.cpp
+        src/chelper/node/NodeType.h
         src/chelper/parser/ASTNode.cpp
         src/chelper/parser/ASTNode.h
         src/chelper/parser/TokenReader.cpp
         src/chelper/parser/TokenReader.h
         src/chelper/util/VectorView.cpp
         src/chelper/util/VectorView.h
-        src/chelper/resources/command/node/block/NodeBlockName.cpp
-        src/chelper/resources/command/node/block/NodeBlockName.h
-        src/chelper/resources/command/node/block/NodeBlockState.cpp
-        src/chelper/resources/command/node/block/NodeBlockState.h
-        src/chelper/resources/command/node/util/NodeSingleSymbol.cpp
-        src/chelper/resources/command/node/util/NodeSingleSymbol.h
-        src/chelper/resources/command/node/NodeRelativeFloat.cpp
-        src/chelper/resources/command/node/NodeRelativeFloat.h
-        src/chelper/resources/command/node/util/NodeAnd.cpp
-        src/chelper/resources/command/node/util/NodeAnd.h
-        src/chelper/resources/command/node/util/NodeOr.cpp
-        src/chelper/resources/command/node/util/NodeOr.h
-        src/chelper/resources/command/node/util/NodeEntry.cpp
-        src/chelper/resources/command/node/util/NodeEntry.h
-        src/chelper/resources/command/node/util/NodeList.cpp
-        src/chelper/resources/command/node/util/NodeList.h
+        src/chelper/node/block/NodeBlockName.cpp
+        src/chelper/node/block/NodeBlockName.h
+        src/chelper/node/block/NodeBlockState.cpp
+        src/chelper/node/block/NodeBlockState.h
+        src/chelper/node/util/NodeSingleSymbol.cpp
+        src/chelper/node/util/NodeSingleSymbol.h
+        src/chelper/node/param/NodeRelativeFloat.cpp
+        src/chelper/node/param/NodeRelativeFloat.h
+        src/chelper/node/util/NodeAnd.cpp
+        src/chelper/node/util/NodeAnd.h
+        src/chelper/node/util/NodeOr.cpp
+        src/chelper/node/util/NodeOr.h
+        src/chelper/node/util/NodeEntry.cpp
+        src/chelper/node/util/NodeEntry.h
+        src/chelper/node/util/NodeList.cpp
+        src/chelper/node/util/NodeList.h
         src/chelper/parser/ErrorReason.cpp
         src/chelper/parser/ErrorReason.h
         src/chelper/util/StringUtil.cpp
         src/chelper/util/StringUtil.h
-        src/chelper/resources/command/node/selector/NodeTargetSelectorVariable.cpp
-        src/chelper/resources/command/node/selector/NodeTargetSelectorVariable.h
-        src/chelper/resources/command/node/selector/NodeTaregtSelectorArgument.cpp
-        src/chelper/resources/command/node/selector/NodeTaregtSelectorArgument.h
+        src/chelper/node/selector/NodeTargetSelectorVariable.cpp
+        src/chelper/node/selector/NodeTargetSelectorVariable.h
+        src/chelper/node/selector/NodeTaregtSelectorArgument.cpp
+        src/chelper/node/selector/NodeTaregtSelectorArgument.h
+        src/chelper/parser/Suggestion.cpp
+        src/chelper/parser/Suggestion.h
+        src/chelper/parser/StructureBuilder.cpp
+        src/chelper/parser/StructureBuilder.h
+        src/chelper/util/ColorStringBuilder.cpp
+        src/chelper/util/ColorStringBuilder.h
+        src/chelper/util/Profile.cpp
+        src/chelper/util/Profile.h
+        src/chelper/util/TokenUtil.cpp
+        src/chelper/util/TokenUtil.h
 )

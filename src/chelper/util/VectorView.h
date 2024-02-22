@@ -5,9 +5,9 @@
 #ifndef CHELPER_VECTORVIEW_H
 #define CHELPER_VECTORVIEW_H
 
-#include "pch.h"
-#include "../lexer/Token.h"
 #include "Exception.h"
+//因为泛型T为Token，所以要include Token.h
+#include "../lexer/Token.h"
 
 namespace CHelper {
 
@@ -23,7 +23,7 @@ namespace CHelper {
                   start(start),
                   end(end) {
 #if CHelperDebug == true
-            if (start > end || start < 0) {
+            if (start > end) {
                 throw Exception::WrongRange(start, end);
             }
 #endif

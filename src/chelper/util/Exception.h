@@ -5,139 +5,85 @@
 #ifndef CHELPER_EXCEPTION_H
 #define CHELPER_EXCEPTION_H
 
-#include "pch.h"
+#include <vector>
+#include <string>
 
 namespace CHelper::Exception {
 
-    class CHelperException : public std::exception {
+void printStackTrace(const std::exception& e);
+
+class CantCreateInstance : public std::exception {
     public:
-        CHelperException() = default;
+        explicit CantCreateInstance(const std::string& className);
 
         [[nodiscard]] const char *what() const noexcept override;
-
-        [[nodiscard]] virtual std::string reason() const;
     };
 
-    class CantCreateInstance : public CHelperException {
+    class CPackLoadFailed : public std::exception {
     public:
-        std::string className;
-
-        explicit CantCreateInstance(std::string className);
+        CPackLoadFailed();
 
         [[nodiscard]] const char *what() const noexcept override;
-
-        [[nodiscard]] std::string reason() const override;
     };
 
-    class CPackLoadFailed : public CHelperException {
+    class UnknownIdType : public std::exception {
     public:
-        std::string state;
-        std::string details;
-
-        CPackLoadFailed(std::string state, std::string details);
+        UnknownIdType(const std::string& fileName, const std::string& idType);
 
         [[nodiscard]] const char *what() const noexcept override;
-
-        [[nodiscard]] std::string reason() const override;
     };
 
-    class UnknownIdType : public CHelperException {
-
+    class UnknownNodeType : public std::exception {
     public:
-        std::string fileName;
-        std::string idType;
-
-        UnknownIdType(std::string fileName, std::string idType);
+        explicit UnknownNodeType(const std::string& nodeType);
 
         [[nodiscard]] const char *what() const noexcept override;
-
-        [[nodiscard]] std::string reason() const override;
     };
 
-    class UnknownNodeType : public CHelperException {
+    class UnknownNodeId : public std::exception {
     public:
-        std::string nodeType;
-
-        explicit UnknownNodeType(std::string nodeType);
+        UnknownNodeId(const std::vector<std::string>& commandName, const std::string& nodeId);
 
         [[nodiscard]] const char *what() const noexcept override;
-
-        [[nodiscard]] std::string reason() const override;
     };
 
-    class UnknownNodeId : public CHelperException {
-
+    class RequireParentNodeId : public std::exception {
     public:
-        std::vector<std::string> commandName;
-        std::string nodeId;
-
-        UnknownNodeId(std::vector<std::string> commandName, std::string nodeId);
+        explicit RequireParentNodeId(const std::vector<std::string>& commandName);
 
         [[nodiscard]] const char *what() const noexcept override;
-
-        [[nodiscard]] std::string reason() const override;
-    };
-
-    class RequireParentNodeId : public CHelperException {
-    public:
-        std::vector<std::string> commandName;
-
-        explicit RequireParentNodeId(std::vector<std::string> commandName);
-
-        [[nodiscard]] const char *what() const noexcept override;
-
-        [[nodiscard]] std::string reason() const override;
 
     };
 
-    class RequireChildNodeIds : public CHelperException {
+    class RequireChildNodeIds : public std::exception {
     public:
-        std::vector<std::string> commandName;
-        std::string parentNodeId;
-
-        RequireChildNodeIds(std::vector<std::string> commandName, std::string parentNodeId);
+        RequireChildNodeIds(const std::vector<std::string>& commandName, const std::string& parentNodeId);
 
         [[nodiscard]] const char *what() const noexcept override;
-
-        [[nodiscard]] std::string reason() const override;
     };
 
     std::string getCommandName(const std::vector<std::string> &commandName);
 
-    class CommandLoadFailed : public CHelperException {
+    class CommandLoadFailed : public std::exception {
     public:
-        std::string state;
-        std::string details;
-
-        CommandLoadFailed(std::string state, std::string details);
+        CommandLoadFailed();
 
         [[nodiscard]] const char *what() const noexcept override;
-
-        [[nodiscard]] std::string reason() const override;
     };
 
-    class NodeLoadFailed : public CHelperException {
+    class NodeLoadFailed : public std::exception {
     public:
-        std::string state;
-        std::string details;
-
-        NodeLoadFailed(std::string state, std::string details);
+        NodeLoadFailed();
 
         [[nodiscard]] const char *what() const noexcept override;
-
-        [[nodiscard]] std::string reason() const override;
     };
 
     // end < start || start < 0
-    class WrongRange : public CHelperException {
+    class WrongRange : public std::exception {
     public:
-        size_t start, end;
-
         WrongRange(size_t start, size_t end);
 
         [[nodiscard]] const char *what() const noexcept override;
-
-        [[nodiscard]] std::string reason() const override;
     };
 
 } // CHelper::Exception

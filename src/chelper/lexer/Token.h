@@ -31,6 +31,10 @@ namespace CHelper {
         const std::string content;
 
         Token(TokenType::TokenType type, bool whiteSpace, LexerPos pos, std::string content);
+
+        [[nodiscard]] size_t getStartIndex() const;
+
+        [[nodiscard]] size_t getEndIndex() const;
     };
 
 }

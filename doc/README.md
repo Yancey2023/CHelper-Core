@@ -3,7 +3,7 @@ There should be a file named `manifest.json` in the root directory of the pack:
 ```json
 {
   "name": "example pack",
-  "description": "CHelper扩展包的官方示例",
+  "getDescription": "CHelper扩展包的官方示例",
   "minecraftVersion": "1.20",
   "author": "Yancey",
   "updateDate": "2023-11-7",
@@ -19,7 +19,7 @@ There should be a file named `manifest.json` in the root directory of the pack:
 |       name       |  type   |       meaning        |                          markup                           |      is must have      |
 |:----------------:|:-------:|:--------------------:|:---------------------------------------------------------:|:----------------------:|
 |       name       | string  |      pack name       |                        for showing                        |    no(hope to have)    |
-|   description    | string  |   pack description   |                        for showing                        |           no           |
+|   getDescription    | string  |   pack getDescription   |                        for showing                        |           no           |
 | minecraftVersion | string  |  minecraft version   |                        for showing                        |           no           |
 |      author      | string  |        author        |                        for showing                        |           no           |
 |    updateDate    | string  |  latest update date  |                        for showing                        |           no           |

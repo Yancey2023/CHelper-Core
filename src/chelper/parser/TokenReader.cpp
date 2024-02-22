@@ -28,8 +28,12 @@ namespace CHelper {
         return true;
     }
 
-    void TokenReader::skipAll() {
-        index = tokenList.size();
+    void TokenReader::skipToLF() {
+        while (ready()) {
+            if (read()->type == TokenType::LF) {
+                break;
+            }
+        }
     }
 
     const Token *TokenReader::next() {
@@ -48,25 +52,25 @@ namespace CHelper {
      * 将当前指针加入栈中
      */
     void TokenReader::push() {
-        indexQueue.push_back(index);
+        indexStack.push_back(index);
     }
 
     /**
      * 从栈中移除指针，不恢复指针
      */
     void TokenReader::pop() {
-        indexQueue.pop_back();
+        indexStack.pop_back();
     }
 
     /**
      * 从栈中移除并获取最后指针，不恢复指针
      */
     size_t TokenReader::getAndPopLastIndex() {
-        size_t size = indexQueue.size();
+        size_t size = indexStack.size();
         if (size == 0) {
             return 0;
         }
-        size_t result = indexQueue[size - 1];
+        size_t result = indexStack[size - 1];
         pop();
         return result;
     }

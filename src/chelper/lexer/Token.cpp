@@ -23,14 +23,22 @@ namespace CHelper {
         }
     }
 
-   Token::Token(TokenType::TokenType type,
-                          bool whiteSpace,
-                          CHelper::LexerPos pos,
-                          std::string content)
+    Token::Token(TokenType::TokenType type,
+                 bool whiteSpace,
+                 CHelper::LexerPos pos,
+                 std::string content)
             : type(type),
               whiteSpace(whiteSpace),
               pos(pos),
               content(std::move(content)) {}
+
+    size_t Token::getStartIndex() const {
+        return pos.index;
+    }
+
+    size_t Token::getEndIndex() const {
+        return pos.index + content.size();
+    }
 
 }
 

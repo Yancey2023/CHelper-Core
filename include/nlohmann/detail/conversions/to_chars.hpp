@@ -32,7 +32,7 @@ http://florian.loitsch.com/publications (bench.tar.gz).
 
 The code is distributed under the MIT license, Copyright (c) 2009 Florian Loitsch.
 
-For a detailed description of the algorithm see:
+For a detailed getDescription of the algorithm see:
 
 [1] Loitsch, "Printing Floating-Point Numbers Quickly and Accurately with
     Integers", Proceedings of the ACM SIGPLAN 2010 Conference on Programming
@@ -1102,7 +1102,7 @@ char* to_chars(char* first, const char* last, FloatType value)
 
     JSON_ASSERT(len <= std::numeric_limits<FloatType>::max_digits10);
 
-    // Format the buffer like printf("%.*g", prec, value)
+    // format the buffer like printf("%.*g", prec, value)
     constexpr int kMinExp = -4;
     // Use digits10 here to increase compatibility with version 2.
     constexpr int kMaxExp = std::numeric_limits<FloatType>::digits10;

@@ -249,7 +249,7 @@ class lexer : public lexer_base<BasicJsonType>
             token_type::parse_error otherwise
 
     @note In case of errors, variable error_message contains a textual
-          description.
+          getDescription.
     */
     token_type scan_string()
     {
@@ -1616,7 +1616,7 @@ scan_number_done:
     /// buffer for variable-length tokens (numbers, strings)
     string_t token_buffer {};
 
-    /// a description of occurred lexer errors
+    /// a getDescription of occurred lexer errors
     const char* error_message = "";
 
     // number values

@@ -4,9 +4,9 @@
 
 #include "LexerPos.h"
 
-CHelper::LexerPos::LexerPos(int line,
-                            int col,
-                            int which,
+CHelper::LexerPos::LexerPos(size_t line,
+                            size_t col,
+                            size_t which,
                             const std::string &filePath)
         : line(line),
           col(col),

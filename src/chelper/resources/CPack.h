@@ -9,7 +9,7 @@
 #include "Manifest.h"
 #include "id/BlockId.h"
 #include "id/ItemId.h"
-#include "command/node/NodePerCommand.h"
+#include "../node/param/NodePerCommand.h"
 
 namespace CHelper {
 
@@ -21,8 +21,10 @@ namespace CHelper {
         std::vector<std::shared_ptr<BlockId>> blockIds;
         std::vector<std::shared_ptr<ItemId>> itemIds;
         std::vector<std::shared_ptr<Node::NodeBase>> commands;
-
+    private:
         explicit CPack(const std::filesystem::path &path);
+    public:
+        static CPack create(const std::filesystem::path &path);
     };
 
 }

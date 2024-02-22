@@ -18,7 +18,11 @@
 #include <fstream>
 #include "nlohmann/json.hpp"
 #include "format/Format.h"
-#include "../core/util/JsonUtil.h"
-#include "../core/util/SimpleLogger.h"
+#include "../src/chelper/util/ColorStringBuilder.h"
+#include "../src/chelper/util/Profile.h"
+#include "../src/chelper/util/Exception.h"
+#include "../src/chelper/util/JsonUtil.h"
+#include "../src/chelper/util/SimpleLogger.h"
+#include "../src/chelper/util/VectorView.h"
 
 #endif //CHELPER_PCH_H

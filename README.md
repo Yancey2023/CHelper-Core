@@ -13,8 +13,8 @@ Helper.
 
 - [x] lexer, which let the command string become token list.
 - [x] cpack, which is a resources pack contained ID and command.
-- [x] parser, build AST tree and find structure error.
-- [ ] checker, find id error through AST three and cpack,
+- [x] parser, build AST tree and find getStructure error.
+- [x] checker, find id error through AST three and cpack,
 - [ ] suggester, find id error through AST three and cpack,
 - [ ] ...
 
@@ -24,6 +24,6 @@ Because I am leaning c++ now, I want to improve myself through the project.
 
 ## Dependencies
 
-|                 project                  |     description     |                                 license                                  |
+|                 project                  |     getDescription     |                                 license                                  |
 |:----------------------------------------:|:-------------------:|:------------------------------------------------------------------------:|
 | [json](https://github.com/nlohmann/json) | JSON for Modern C++ | [MIT license](https://github.com/nlohmann/json/blob/develop/LICENSE.MIT) |

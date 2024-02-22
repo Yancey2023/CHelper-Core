@@ -28,6 +28,8 @@ namespace CHelper {
 
         static std::shared_ptr<ErrorReason> other(VectorView <Token> tokens, const std::string &errorReason);
 
+        static std::shared_ptr<ErrorReason> idError(VectorView <Token> tokens, const std::string &errorReason);
+
         static std::shared_ptr<ErrorReason> excess(VectorView <Token> tokens, const std::string &errorReason);
 
         bool operator==(const CHelper::ErrorReason &reason) const;
