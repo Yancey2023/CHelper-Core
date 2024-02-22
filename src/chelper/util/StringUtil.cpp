@@ -21,4 +21,8 @@ namespace CHelper::StringUtil {
         return result;
     }
 
+    bool isStartOf(std::string_view a, std::string_view b) {
+        return a.length() >= b.length() && a.substr(0, b.length()) == b;
+    }
+
 } //CHelper::StringUtil

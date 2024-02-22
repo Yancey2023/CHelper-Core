@@ -182,21 +182,24 @@ namespace CHelper::Node {
         return ASTNode::andNode(this, childASTNodes, tokenReader.collect(), nullptr, astNodeId);
     }
 
+    std::optional<std::string> NodeBase::getDescription(const ASTNode *node, size_t index) const {
+        return description;
+    }
+
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     bool NodeBase::collectIdError(const ASTNode *astNode,
+                                  const CPack &cpack,
                                   std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         return false;
     }
 
-    bool NodeBase::collectSuggestions(const ASTNode *pNode, std::vector<Suggestion> &vector) const {
+    bool NodeBase::collectSuggestions(const ASTNode *astNode,
+                                      const CPack &cpack,
+                                      std::vector<Suggestion> &suggestions) const {
         return false;
     }
 
     std::optional<std::string> NodeBase::collectStructure(const ASTNode *astNode, StructureBuilder &structure) const {
-        return std::nullopt;
-    }
-
-    std::optional<std::string> NodeBase::getDescription(const ASTNode *pNode, size_t index) const {
         return std::nullopt;
     }
 

@@ -82,8 +82,8 @@ add_executable(CHelper
         src/chelper/parser/TokenReader.h
         src/chelper/util/VectorView.cpp
         src/chelper/util/VectorView.h
-        src/chelper/node/block/NodeBlockName.cpp
-        src/chelper/node/block/NodeBlockName.h
+        src/chelper/node/block/NodeBlockId.cpp
+        src/chelper/node/block/NodeBlockId.h
         src/chelper/node/block/NodeBlockState.cpp
         src/chelper/node/block/NodeBlockState.h
         src/chelper/node/util/NodeSingleSymbol.cpp
@@ -116,4 +116,6 @@ add_executable(CHelper
         src/chelper/util/Profile.h
         src/chelper/util/TokenUtil.cpp
         src/chelper/util/TokenUtil.h
+        src/chelper/node/item/NodeItemId.cpp
+        src/chelper/node/item/NodeItemId.h
 )

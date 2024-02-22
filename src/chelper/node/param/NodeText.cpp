@@ -29,6 +29,7 @@ namespace CHelper::Node {
     }
 
     bool NodeText::collectIdError(const ASTNode *astNode,
+                                  const CPack &cpack,
                                   std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (astNode->isError()) {
             return true;

@@ -14,7 +14,9 @@ int main();
 
 namespace CHelper::Test {
 
-    void test(const std::vector<std::string>& commands);
+    void test(const std::string &testFilePath);
+
+    void test(const std::string &cpackPath, const std::vector<std::string> &commands);
 
     CPack getCPack(const std::string &source);
 
@@ -26,9 +28,9 @@ namespace CHelper::Test {
 
     std::string getDescription(const ASTNode &node, size_t index);
 
-    std::vector<std::shared_ptr<ErrorReason>> getErrorReasons(const ASTNode &node);
+    std::vector<std::shared_ptr<ErrorReason>> getErrorReasons(const CPack &cpack, const ASTNode &node);
 
-    std::vector<Suggestion> getSuggestions(const ASTNode &node, size_t index);
+    std::vector<Suggestion> getSuggestions(const CPack &cpack, const ASTNode &node, size_t index);
 
     std::string getStructure(const ASTNode &node);
 

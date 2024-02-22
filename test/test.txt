@@ -1,0 +1,4 @@
+D:\CLion\project\CHelper\resources
+-setblock ~1~2~.3 minecraft:stone
+give @s mi
+-give @s minecraft:st

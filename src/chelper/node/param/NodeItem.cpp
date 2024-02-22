@@ -6,6 +6,7 @@
 #include "NodeNamespaceId.h"
 #include "NodeInteger.h"
 #include "NodeString.h"
+#include "../item/NodeItemId.h"
 
 namespace CHelper::Node {
 
@@ -24,15 +25,12 @@ namespace CHelper::Node {
                        const CHelper::Node::NodeItemType::NodeItemType nodeItemType,
                        const std::vector<std::shared_ptr<CHelper::NamespaceId>> *contents)
             : NodeBase(id, description),
-              nodeItemType(nodeItemType),
-              nodeItemId(std::make_shared<NodeNamespaceId>("ITEM_NAMESPACE_ID", "物品ID", "items", contents)) {}
+              nodeItemType(nodeItemType) {}
 
     NodeItem::NodeItem(const nlohmann::json &j,
                        const CPack &cpack) :
             NodeBase(j, cpack),
-            nodeItemType(FROM_JSON(j, nodeItemType, CHelper::Node::NodeItemType::NodeItemType)),
-            nodeItemId(std::make_shared<NodeNamespaceId>("ITEM_NAMESPACE_ID", "物品ID", "items",
-                                                         &cpack.namespaceIds.find("items")->second)) {}
+            nodeItemType(FROM_JSON(j, nodeItemType, CHelper::Node::NodeItemType::NodeItemType)) {}
 
     void NodeItem::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
@@ -42,12 +40,19 @@ namespace CHelper::Node {
     ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         switch (nodeItemType) {
             case NodeItemType::ITEM_GIVE:
-                return getOptionalASTNode(tokenReader, cpack, false, {nodeItemId, nodeCount, nodeData, nodeComponent});
+                return getOptionalASTNode(tokenReader, cpack, false,
+                                          {NodeItemId::getInstance(), nodeCount, nodeData, nodeComponent});
             case NodeItemType::ITEM_CLEAR:
-                return getOptionalASTNode(tokenReader, cpack, false, {nodeItemId, nodeData, nodeCount});
+                return getOptionalASTNode(tokenReader, cpack, false,
+                                          {NodeItemId::getInstance(), nodeData, nodeCount});
             default:
-                return getOptionalASTNode(tokenReader, cpack, false, {nodeItemId, nodeCount, nodeData, nodeComponent});
+                return getOptionalASTNode(tokenReader, cpack, false,
+                                          {NodeItemId::getInstance(), nodeCount, nodeData, nodeComponent});
         }
+    }
+
+    std::optional<std::string> NodeItem::getDescription(const ASTNode *node, size_t index) const {
+        return std::nullopt;
     }
 
 } // CHelper::Node

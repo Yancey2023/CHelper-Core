@@ -150,4 +150,11 @@ namespace CHelper::Node {
                                 nullptr, StringUtil::join(", ", name));
     }
 
+    std::optional<std::string> NodePerCommand::getDescription(const ASTNode *node, size_t index) const {
+        if (node->tokens.start == index) {
+            return description;
+        }
+        return std::nullopt;
+    }
+
 } // CHelper::Node

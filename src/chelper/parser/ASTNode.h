@@ -15,6 +15,8 @@
 
 namespace CHelper {
 
+    class CPack;
+
     namespace Node {
 
         class NodeBase;
@@ -79,18 +81,18 @@ namespace CHelper {
     private:
         [[nodiscard]] std::optional<std::string> collectDescription(size_t index) const;
 
-        void collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
+        void collectIdErrors(const CPack &cpack, std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
 
-        void collectSuggestions(std::vector<Suggestion> &suggestions, size_t index) const;
+        void collectSuggestions(const CPack &cpack, std::vector<Suggestion> &suggestions, size_t index) const;
 
         void collectStructure(StructureBuilder &structureBuilder) const;
 
     public:
         [[nodiscard]] std::string getDescription(size_t index) const;
 
-        [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
+        [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons(const CPack &cpack) const;
 
-        [[nodiscard]] std::vector<Suggestion> getSuggestions(size_t index) const;
+        [[nodiscard]] std::vector<Suggestion> getSuggestions(const CPack &cpack, size_t index) const;
 
         [[nodiscard]] std::string getStructure() const;
 

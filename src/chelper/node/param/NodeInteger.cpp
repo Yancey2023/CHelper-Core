@@ -32,5 +32,9 @@ namespace CHelper::Node {
         return getIntegerASTNode(tokenReader);
     }
 
+    std::optional<std::string> NodeInteger::getDescription(const ASTNode *node, size_t index) const {
+        return std::nullopt;
+    }
+
 } // CHelper::Node
 

@@ -33,6 +33,8 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
+        std::optional<std::string> getDescription(const ASTNode *pNode, size_t index) const override;
+
     }; // NodePerCommand::Node
 
 } // CHelper

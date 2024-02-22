@@ -133,8 +133,8 @@ namespace CHelper {
     }
 
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
-    void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (node->collectIdError(this, idErrorReasons)) {
+    void ASTNode::collectIdErrors(const CPack &cpack, std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
+        if (node->collectIdError(this, cpack, idErrorReasons)) {
             return;
         }
         switch (mode) {
@@ -142,20 +142,23 @@ namespace CHelper {
                 break;
             case ASTNodeMode::AND:
                 for (const ASTNode &astNode: childNodes) {
-                    astNode.collectIdErrors(idErrorReasons);
+                    astNode.collectIdErrors(cpack, idErrorReasons);
                 }
                 break;
             case ASTNodeMode::OR:
-                childNodes[whichBest].collectIdErrors(idErrorReasons);
+                childNodes[whichBest].collectIdErrors(cpack, idErrorReasons);
                 break;
         }
     }
 
-    void ASTNode::collectSuggestions(std::vector<Suggestion> &suggestions, size_t index) const {
+    void ASTNode::collectSuggestions(const CPack &cpack, std::vector<Suggestion> &suggestions, size_t index) const {
         if (index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens)) {
             return;
         }
-        if (node->collectSuggestions(this, suggestions)) {
+        Profile::push("collect suggestions: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
+        auto flag = node->collectSuggestions(this, cpack, suggestions);
+        Profile::pop();
+        if (flag) {
             return;
         }
         switch (mode) {
@@ -163,11 +166,11 @@ namespace CHelper {
                 break;
             case ASTNodeMode::AND:
                 for (const ASTNode &astNode: childNodes) {
-                    astNode.collectSuggestions(suggestions, index);
+                    astNode.collectSuggestions(cpack, suggestions, index);
                 }
                 break;
             case ASTNodeMode::OR:
-                childNodes[whichBest].collectSuggestions(suggestions, index);
+                childNodes[whichBest].collectSuggestions(cpack, suggestions, index);
                 break;
         }
     }
@@ -193,35 +196,47 @@ namespace CHelper {
     }
 
     std::string ASTNode::getDescription(size_t index) const {
-        return collectDescription(index).value_or("未知");
-    }
-
-    std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
-        //TODO 根据错误等级调整错误的位置
-        //因为大多数情况下优先先显示ID错误，所以先添加ID错误
-        std::vector<std::shared_ptr<ErrorReason>> result;
-        collectIdErrors(result);
-        for (const auto &item: errorReasons) {
-            result.push_back(item);
-        }
+        Profile::push("start getting description: " + TokenUtil::toString(tokens));
+        auto result = collectDescription(index).value_or("未知");
+        Profile::pop();
         return result;
     }
 
-    std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
+    std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons(const CPack &cpack) const {
+        //TODO 根据错误等级调整错误的位置
+        //因为大多数情况下优先先显示ID错误，所以先添加ID错误
+        Profile::push("start getting error reasons: " + TokenUtil::toString(tokens));
+        std::vector<std::shared_ptr<ErrorReason>> result;
+        collectIdErrors(cpack, result);
+        for (const auto &item: errorReasons) {
+            result.push_back(item);
+        }
+        Profile::pop();
+        return result;
+    }
+
+    std::vector<Suggestion> ASTNode::getSuggestions(const CPack &cpack, size_t index) const {
+        Profile::push("start getting suggestions: " + TokenUtil::toString(tokens));
         std::vector<Suggestion> result;
-        collectSuggestions(result, index);
+        collectSuggestions(cpack, result, index);
+        Profile::pop();
         return result;
     }
 
     std::string ASTNode::getStructure() const {
+        Profile::push("start getting structure: " + TokenUtil::toString(tokens));
         StructureBuilder structureBuilder;
         collectStructure(structureBuilder);
+        Profile::pop();
         return structureBuilder.build();
     }
 
     std::string ASTNode::getColors() const {
         //TODO getColors()
-        return node->getNodeType().nodeName;
+        Profile::push("start getting colors: " + TokenUtil::toString(tokens));
+        auto result = node->getNodeType().nodeName;
+        Profile::pop();
+        return result;
     }
 
     std::ostream &operator<<(std::ostream &os, const CHelper::ASTNode &astNode) {

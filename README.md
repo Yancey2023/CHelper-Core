@@ -14,9 +14,11 @@ Helper.
 - [x] lexer, which let the command string become token list.
 - [x] cpack, which is a resources pack contained ID and command.
 - [x] parser, build AST tree and find structure error.
-- [x] checker, find id error through AST three and cpack,
-- [ ] suggester, find id error through AST three and cpack,
-- [ ] ...
+- [x] description, get description of the node which is writing.
+- [x] check id, find id error through AST three and cpack.
+- [ ] get suggestion, find id error through AST three and cpack.
+- [ ] get structure, build command structure string
+- [ ] get colors
 
 ## Why choosing c++
 
@@ -24,6 +26,12 @@ Because I am leaning c++ now, I want to improve myself through the project.
 
 ## Dependencies
 
-|                 project                  |     getDescription     |                                 license                                  |
+|                 project                  |   getDescription    |                                 license                                  |
 |:----------------------------------------:|:-------------------:|:------------------------------------------------------------------------:|
 | [json](https://github.com/nlohmann/json) | JSON for Modern C++ | [MIT license](https://github.com/nlohmann/json/blob/develop/LICENSE.MIT) |
+
+## Special Thanks
+
+-  JetBrains open source programs supporting
+
+![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)

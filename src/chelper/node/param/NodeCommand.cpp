@@ -32,4 +32,11 @@ namespace CHelper::Node {
         return ASTNode::orNode(this, childASTNodes, tokenReader.collect(), nullptr, "command");
     }
 
+    std::optional<std::string> NodeCommand::getDescription(const ASTNode *node, size_t index) const {
+        if (node->tokens.start == index) {
+            return description;
+        }
+        return std::nullopt;
+    }
+
 } // CHelper::Node

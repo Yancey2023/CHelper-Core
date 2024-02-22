@@ -12,6 +12,7 @@
 namespace CHelper {
 
     class Suggestion {
+    public:
         //TODO 建议的优先级
         //要被替换的内容
         const VectorView<Token> tokens;

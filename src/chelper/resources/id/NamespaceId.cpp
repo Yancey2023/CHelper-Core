@@ -9,12 +9,16 @@ namespace CHelper {
     NamespaceId::NamespaceId(const std::optional<std::string> &nameSpace,
                              const std::string &name,
                              const std::optional<std::string> &description)
-            : nameSpace(nameSpace),
-              NormalId(name, description) {}
+            : NormalId(name, description),
+              nameSpace(nameSpace),
+              idWithNamespace(std::make_shared<NormalId>(std::string(nameSpace.value_or("minecraft"))
+                      .append(":").append(name), description)) {}
 
     NamespaceId::NamespaceId(const nlohmann::json &j)
             : NormalId(j),
-              nameSpace(FROM_JSON_OPTIONAL(j, nameSpace, std::string)) {}
+              nameSpace(FROM_JSON_OPTIONAL(j, nameSpace, std::string)),
+              idWithNamespace(std::make_shared<NormalId>(std::string(nameSpace.value_or("minecraft")).
+                      append(":").append(name), description)) {}
 
     void NamespaceId::toJson(nlohmann::json &j) const {
         NormalId::toJson(j);

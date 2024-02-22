@@ -15,7 +15,7 @@ namespace CHelper::Node {
     public:
         NodeCommand(const std::optional<std::string> &id,
                     const std::optional<std::string> &description,
-                    const std::vector<std::shared_ptr<Node::NodeBase>>& nodeCommand);
+                    const std::vector<std::shared_ptr<Node::NodeBase>> &nodeCommand);
 
         NodeCommand(const nlohmann::json &j,
                     const CPack &cpack);
@@ -24,6 +24,7 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
+        std::optional<std::string> getDescription(const ASTNode *node, size_t index) const override;
 
     };
 

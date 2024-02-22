@@ -3,7 +3,7 @@
 //
 
 #include "NodeBlock.h"
-#include "../block/NodeBlockName.h"
+#include "../block/NodeBlockId.h"
 #include "../block/NodeBlockState.h"
 
 namespace CHelper::Node {
@@ -28,7 +28,11 @@ namespace CHelper::Node {
 
     ASTNode NodeBlock::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         return getOptionalASTNode(tokenReader, cpack, false,
-                                  {NodeBlockName::getInstance(), NodeBlockState::getInstance()});
+                                  {NodeBlockId::getInstance(), NodeBlockState::getInstance()});
+    }
+
+    std::optional<std::string> NodeBlock::getDescription(const ASTNode *node, size_t index) const {
+        return std::nullopt;
     }
 
 } // CHelper::Node

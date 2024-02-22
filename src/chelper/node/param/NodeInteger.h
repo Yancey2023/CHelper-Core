@@ -26,6 +26,9 @@ namespace CHelper::Node {
         void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+
+        std::optional<std::string> getDescription(const ASTNode *node, size_t index) const override;
+
     };
 
 } // CHelper::Node

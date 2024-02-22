@@ -4,6 +4,7 @@
 
 #include "NodeNamespaceId.h"
 #include "NodeString.h"
+#include "../../util/StringUtil.h"
 
 namespace CHelper::Node {
 
@@ -74,6 +75,7 @@ namespace CHelper::Node {
     }
 
     bool NodeNamespaceId::collectIdError(const ASTNode *astNode,
+                                         const CPack &cpack,
                                          std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (astNode->isError()) {
             return true;
@@ -94,5 +96,29 @@ namespace CHelper::Node {
         idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, "找不到ID -> " + str));
         return true;
     }
+
+    bool NodeNamespaceId::collectSuggestions(const ASTNode *astNode,
+                                             const CPack &cpack,
+                                             std::vector<Suggestion> &suggestions) const {
+        if (astNode->isError()) {
+            return true;
+        }
+        std::string_view str = astNode->tokens[0].content;
+        //省略minecraft命名空间
+        for (const auto &item: *contents) {
+            if ((!item->nameSpace.has_value() || item->nameSpace.value() == "minecraft") &&
+                StringUtil::isStartOf(item->name, str)) {
+                suggestions.emplace_back(astNode->tokens, item);
+            }
+        }
+        //带有命名空间
+        for (const auto &item: *contents) {
+            if (StringUtil::isStartOf(item->idWithNamespace->name, str)) {
+                suggestions.emplace_back(astNode->tokens, item->idWithNamespace);
+            }
+        }
+        return true;
+    }
+
 }
 // CHelper::Node

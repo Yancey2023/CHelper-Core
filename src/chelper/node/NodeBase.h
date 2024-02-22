@@ -82,15 +82,18 @@ namespace CHelper {
                                        const std::string &astNodeId = "") const;
 
         public:
+            virtual std::optional<std::string> getDescription(const ASTNode *node, size_t index) const;
+
             virtual bool collectIdError(const ASTNode *astNode,
+                                        const CPack &cpack,
                                         std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
 
-            virtual bool collectSuggestions(const ASTNode *pNode, std::vector<Suggestion> &vector) const;
+            virtual bool collectSuggestions(const ASTNode *astNode,
+                                            const CPack &cpack,
+                                            std::vector<Suggestion> &suggestions) const;
 
             virtual std::optional<std::string> collectStructure(const ASTNode *astNode,
                                                                 StructureBuilder &structure) const;
-
-            virtual std::optional<std::string> getDescription(const ASTNode *pNode, size_t index) const;
 
         };
 

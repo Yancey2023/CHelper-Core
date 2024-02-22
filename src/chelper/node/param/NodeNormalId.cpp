@@ -3,6 +3,7 @@
 //
 
 #include "NodeNormalId.h"
+#include "../../util/StringUtil.h"
 
 namespace CHelper::Node {
 
@@ -68,6 +69,7 @@ namespace CHelper::Node {
     }
 
     bool NodeNormalId::collectIdError(const ASTNode *astNode,
+                                      const CPack &cpack,
                                       std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (astNode->isError()) {
             return true;
@@ -79,6 +81,21 @@ namespace CHelper::Node {
             }
         }
         idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, "找不到ID -> " + str));
+        return true;
+    }
+
+    bool NodeNormalId::collectSuggestions(const ASTNode *astNode,
+                                          const CPack &cpack,
+                                          std::vector<Suggestion> &suggestions) const {
+        if (astNode->isError()) {
+            return true;
+        }
+        std::string_view str = astNode->tokens[0].content;
+        for (const auto &item: *contents) {
+            if (StringUtil::isStartOf(item->name, str)) {
+                suggestions.emplace_back(astNode->tokens, item);
+            }
+        }
         return true;
     }
 

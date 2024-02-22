@@ -19,10 +19,8 @@ namespace CHelper::TokenUtil {
     size_t getEndIndex(VectorView<Token> tokens) {
         if (tokens.end == 0) {
             return 0;
-        } else if (tokens.end == tokens.vector->size()) {
-            return tokens.vector->at(tokens.end - 1).getEndIndex();
         } else {
-            return tokens.vector->at(tokens.end).getStartIndex();
+            return tokens.vector->at(tokens.end - 1).getEndIndex();
         }
     }
 

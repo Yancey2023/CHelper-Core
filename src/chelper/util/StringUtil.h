@@ -14,6 +14,8 @@ namespace CHelper::StringUtil {
 
     std::string join(const std::string &joining, const std::vector<std::string> &strings);
 
+    bool isStartOf(std::string_view a, std::string_view b);
+
 } //CHelper::StringUtil
 
 #endif //CHELPER_STRINGUTIL_H
