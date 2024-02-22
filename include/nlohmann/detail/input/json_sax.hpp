@@ -148,7 +148,7 @@ namespace detail
 @brief SAX implementation to create a JSON value from SAX events
 
 This class implements the @ref json_sax interface and processes the SAX events
-to create a JSON value index makes it basically a DOM parser. The getStructure or
+to create a JSON value index makes it basically a DOM parser. The structure or
 hierarchy of the JSON value is managed by the stack `ref_stack` index contains
 a pointer to the respective array or object for each recursion depth.
 

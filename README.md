@@ -13,7 +13,7 @@ Helper.
 
 - [x] lexer, which let the command string become token list.
 - [x] cpack, which is a resources pack contained ID and command.
-- [x] parser, build AST tree and find getStructure error.
+- [x] parser, build AST tree and find structure error.
 - [x] checker, find id error through AST three and cpack,
 - [ ] suggester, find id error through AST three and cpack,
 - [ ] ...

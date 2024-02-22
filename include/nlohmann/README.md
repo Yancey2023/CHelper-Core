@@ -192,7 +192,7 @@ Assume you want to create the JSON object
 With this library, you could write:
 
 ```cpp
-// create an empty getStructure (null)
+// create an empty structure (null)
 json j;
 
 // add a number that is stored as double (note the implicit conversion of j to an object)
