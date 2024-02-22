@@ -71,14 +71,17 @@ namespace CHelper::Node {
                                        const std::string &requireType,
                                        const std::string &astNodeId,
                                        const std::function<std::shared_ptr<ErrorReason>(const std::string &str,
-                                                                                        const VectorView<Token> &tokens)> &check) const {
+                                                                                        const VectorView <Token> &tokens)> &check) const {
+        bool whitespace = tokenReader.skipWhitespace();
         tokenReader.push();
         const Token *token = tokenReader.read();
-        VectorView<Token> tokens = tokenReader.collect();
+        VectorView <Token> tokens = tokenReader.collect();
         std::shared_ptr<ErrorReason> errorReason;
         if (token == nullptr) {
-            errorReason = ErrorReason::incomplete(tokens,
-                                                  FormatUtil::format("指令不完整，需要的参数类型为{0}", requireType));
+            if (!whitespace) {
+                errorReason = ErrorReason::incomplete(tokens,
+                                                      FormatUtil::format("指令不完整，需要的参数类型为{0}", requireType));
+            }
         } else if (token->type != type) {
             errorReason = ErrorReason::errorType(
                     tokens, FormatUtil::format("类型不匹配，正确的参数类型为{0}，但当前参数类型为{1}",
@@ -92,7 +95,7 @@ namespace CHelper::Node {
     ASTNode NodeBase::getStringASTNode(TokenReader &tokenReader, const std::string &astNodeId) const {
         return getSimpleASTNode(tokenReader, TokenType::STRING, "字符串类型", astNodeId,
                                 [](const std::string &str,
-                                   const VectorView<Token> &tokens) -> std::shared_ptr<ErrorReason> {
+                                   const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
                                     return nullptr;
                                 });
     }
@@ -100,7 +103,7 @@ namespace CHelper::Node {
     ASTNode NodeBase::getIntegerASTNode(TokenReader &tokenReader, const std::string &astNodeId) const {
         return getSimpleASTNode(tokenReader, TokenType::NUMBER, "整数类型", astNodeId,
                                 [](const std::string &str,
-                                   const VectorView<Token> &tokens) -> std::shared_ptr<ErrorReason> {
+                                   const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
                                     for (const auto &ch: str) {
                                         if (ch == '.') {
                                             return ErrorReason::errorContent(
@@ -114,7 +117,7 @@ namespace CHelper::Node {
     ASTNode NodeBase::getFloatASTNode(TokenReader &tokenReader, const std::string &astNodeId) const {
         return getSimpleASTNode(tokenReader, TokenType::NUMBER, "数字类型", astNodeId,
                                 [](const std::string &str,
-                                   const VectorView<Token> &tokens) -> std::shared_ptr<ErrorReason> {
+                                   const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
                                     bool isHavePoint = false;
                                     for (const auto &ch: str) {
                                         if (ch != '.') {
@@ -132,7 +135,7 @@ namespace CHelper::Node {
     ASTNode NodeBase::getSymbolASTNode(TokenReader &tokenReader, char ch, const std::string &astNodeId) const {
         return getSimpleASTNode(tokenReader, TokenType::SYMBOL, "符号类型", astNodeId,
                                 [&ch](const std::string &str,
-                                      const VectorView<Token> &tokens) -> std::shared_ptr<ErrorReason> {
+                                      const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
                                     if (str.length() != 1 || str[0] != ch) {
                                         return ErrorReason::errorContent(tokens, FormatUtil::format(
                                                 "内容不匹配，正确的符号为{0}，但当前内容为{1}",
@@ -158,6 +161,7 @@ namespace CHelper::Node {
                                          bool isIgnoreChildNodesError,
                                          const std::vector<std::shared_ptr<NodeBase>> &childNodes,
                                          const std::string &astNodeId) const {
+
 #if CHelperDebug == true
         if (childNodes.size() <= 1) {
             Logger::warn("NodeBase", "getOptionalASTNode()传入的子节点数量应该大于1");

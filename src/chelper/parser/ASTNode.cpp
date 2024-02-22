@@ -134,7 +134,14 @@ namespace CHelper {
 
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     void ASTNode::collectIdErrors(const CPack &cpack, std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (node->collectIdError(this, cpack, idErrorReasons)) {
+#if CHelperDebug == true
+        Profile::push("collect suggestions: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
+#endif
+        auto flag = node->collectIdError(this, cpack, idErrorReasons);
+#if CHelperDebug == true
+        Profile::pop();
+#endif
+        if (flag) {
             return;
         }
         switch (mode) {
@@ -155,9 +162,13 @@ namespace CHelper {
         if (index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens)) {
             return;
         }
+#if CHelperDebug == true
         Profile::push("collect suggestions: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
+#endif
         auto flag = node->collectSuggestions(this, cpack, suggestions);
+#if CHelperDebug == true
         Profile::pop();
+#endif
         if (flag) {
             return;
         }
@@ -176,7 +187,13 @@ namespace CHelper {
     }
 
     void ASTNode::collectStructure(StructureBuilder &structure) const {
+#if CHelperDebug == true
+        Profile::push("collect structure: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
+#endif
         node->collectStructure(this, structure);
+#if CHelperDebug == true
+        Profile::pop();
+#endif
         if (structure.isDirty()) {
             return;
         }

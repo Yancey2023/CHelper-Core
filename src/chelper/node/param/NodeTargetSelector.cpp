@@ -6,7 +6,7 @@
 #include "NodeString.h"
 #include "../util/NodeSingleSymbol.h"
 #include "../util/NodeList.h"
-#include "../selector/NodeTaregtSelectorArgument.h"
+#include "../selector/NodeTargetSelectorArgument.h"
 
 namespace CHelper::Node {
 

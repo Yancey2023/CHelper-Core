@@ -116,6 +116,10 @@ namespace CHelper::Node {
         tokenReader.push();
         //命令名字的检查
         ASTNode astNodeCommandName = getStringASTNode(tokenReader);
+        if (astNodeCommandName.tokens.size() == 0) {
+            return ASTNode::andNode(this, {astNodeCommandName}, astNodeCommandName.tokens,
+                                    ErrorReason::errorContent(astNodeCommandName.tokens, "指令名字为空"));
+        }
         const Token &token = astNodeCommandName.tokens[0];
         bool isError = astNodeCommandName.isError();
         if (!isError) {

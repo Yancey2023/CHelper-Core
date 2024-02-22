@@ -42,26 +42,21 @@ std::vector<CHelper::Token> CHelper::Lexer::lex() {
         if (ch == EOF) {
             break;
         }
-        whiteSpace = false;
-        while (ch == ' ') {
-            ch = stringReader.next();
-            whiteSpace = true;
-        }
-        if (ch == EOF) {
-            break;
-        }
         switch (nextTokenType()) {
             case CHelper::TokenType::NUMBER:
-                tokenList.push_back(nextTokenNumber(whiteSpace));
+                tokenList.push_back(nextTokenNumber());
                 break;
             case CHelper::TokenType::SYMBOL:
-                tokenList.push_back(nextTokenSymbol(whiteSpace));
+                tokenList.push_back(nextTokenSymbol());
                 break;
             case CHelper::TokenType::STRING:
-                tokenList.push_back(nextTokenString(whiteSpace));
+                tokenList.push_back(nextTokenString());
+                break;
+            case CHelper::TokenType::WHITE_SPACE:
+                tokenList.push_back(nextTokenWhiteSpace());
                 break;
             case TokenType::LF:
-                tokenList.push_back(nextTokenLF(whiteSpace));
+                tokenList.push_back(nextTokenLF());
                 break;
         }
     }
@@ -72,6 +67,8 @@ CHelper::TokenType::TokenType CHelper::Lexer::nextTokenType() {
     char ch = stringReader.peek();
     if (ch == '\n') {
         return CHelper::TokenType::LF;
+    } else if (ch == ' ') {
+        return CHelper::TokenType::WHITE_SPACE;
     } else if (isNum(ch)) {
         return CHelper::TokenType::NUMBER;
     } else if (ch == '+' || ch == '-') {
@@ -90,7 +87,7 @@ CHelper::TokenType::TokenType CHelper::Lexer::nextTokenType() {
     }
 }
 
-CHelper::Token CHelper::Lexer::nextTokenNumber(bool whiteSpace) {
+CHelper::Token CHelper::Lexer::nextTokenNumber() {
     stringReader.mark();
     char ch = stringReader.peek();
     if (ch == '+' || ch == '-') {
@@ -99,19 +96,19 @@ CHelper::Token CHelper::Lexer::nextTokenNumber(bool whiteSpace) {
     while (isNum(ch)) {
         ch = stringReader.next();
     }
-    return {CHelper::TokenType::NUMBER, whiteSpace, stringReader.posBackup, stringReader.collect()};
+    return {CHelper::TokenType::NUMBER, stringReader.posBackup, stringReader.collect()};
 }
 
-CHelper::Token CHelper::Lexer::nextTokenSymbol(bool whiteSpace) {
+CHelper::Token CHelper::Lexer::nextTokenSymbol() {
     char ch = stringReader.peek();
     std::string str = std::string();
     str.push_back(ch);
-    Token result = {CHelper::TokenType::SYMBOL, whiteSpace, stringReader.pos, str};
+    Token result = {CHelper::TokenType::SYMBOL, stringReader.pos, str};
     stringReader.skip();
     return result;
 }
 
-CHelper::Token CHelper::Lexer::nextTokenString(bool whiteSpace) {
+CHelper::Token CHelper::Lexer::nextTokenString() {
     stringReader.mark();
     char ch = stringReader.peek();
     bool containSpace = ch == '"';
@@ -132,14 +129,23 @@ CHelper::Token CHelper::Lexer::nextTokenString(bool whiteSpace) {
         }
         ch = stringReader.next();
     }
-    return {CHelper::TokenType::STRING, whiteSpace, stringReader.posBackup, stringReader.collect()};
+    return {CHelper::TokenType::STRING, stringReader.posBackup, stringReader.collect()};
 }
 
-CHelper::Token CHelper::Lexer::nextTokenLF(bool whiteSpace) {
+CHelper::Token CHelper::Lexer::nextTokenWhiteSpace() {
     char ch = stringReader.peek();
     std::string str = std::string();
     str.push_back(ch);
-    Token result = {CHelper::TokenType::LF, whiteSpace, stringReader.pos, str};
+    Token result = {CHelper::TokenType::WHITE_SPACE, stringReader.pos, str};
+    stringReader.skip();
+    return result;
+}
+
+CHelper::Token CHelper::Lexer::nextTokenLF() {
+    char ch = stringReader.peek();
+    std::string str = std::string();
+    str.push_back(ch);
+    Token result = {CHelper::TokenType::LF, stringReader.pos, str};
     stringReader.skip();
     return result;
 }

@@ -1,17 +1,11 @@
 cmake_minimum_required(VERSION 3.26)
 project(CHelper)
 
-#set(CMAKE_CXX_STANDARD 17)
-
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -save-temps=obj")
-#set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -save-temps=obj")
-
-include_directories(include)
+set(CMAKE_CXX_STANDARD 17)
 
 add_executable(CHelper
         src/main.cpp
         src/main.h
-        include/pch.h
         src/chelper/lexer/Token.cpp
         src/chelper/lexer/Token.h
         src/chelper/lexer/LexerPos.cpp
@@ -56,8 +50,6 @@ add_executable(CHelper
         src/chelper/resources/id/NamespaceId.h
         src/chelper/node/param/NodeNamespaceId.cpp
         src/chelper/node/param/NodeNamespaceId.h
-        src/chelper/util/HashUtil.cpp
-        src/chelper/util/HashUtil.h
         src/chelper/node/param/NodeLF.cpp
         src/chelper/node/param/NodeLF.h
         src/chelper/util/Exception.cpp
@@ -104,8 +96,8 @@ add_executable(CHelper
         src/chelper/util/StringUtil.h
         src/chelper/node/selector/NodeTargetSelectorVariable.cpp
         src/chelper/node/selector/NodeTargetSelectorVariable.h
-        src/chelper/node/selector/NodeTaregtSelectorArgument.cpp
-        src/chelper/node/selector/NodeTaregtSelectorArgument.h
+        src/chelper/node/selector/NodeTargetSelectorArgument.cpp
+        src/chelper/node/selector/NodeTargetSelectorArgument.h
         src/chelper/parser/Suggestion.cpp
         src/chelper/parser/Suggestion.h
         src/chelper/parser/StructureBuilder.cpp
@@ -119,3 +111,6 @@ add_executable(CHelper
         src/chelper/node/item/NodeItemId.cpp
         src/chelper/node/item/NodeItemId.h
 )
+
+target_include_directories(CHelper PUBLIC include)
+target_precompile_headers(CHelper PRIVATE include/pch.h)

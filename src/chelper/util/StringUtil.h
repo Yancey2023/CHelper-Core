@@ -7,8 +7,6 @@
 
 #include <string>
 #include <vector>
-#include "VectorView.h"
-#include "../lexer/Token.h"
 
 namespace CHelper::StringUtil {
 

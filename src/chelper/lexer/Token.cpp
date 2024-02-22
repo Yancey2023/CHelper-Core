@@ -15,6 +15,8 @@ namespace CHelper {
                     return "数字类型";
                 case SYMBOL:
                     return "符号类型";
+                case WHITE_SPACE:
+                    return "空格";
                 case LF:
                     return "换行符类型";
                 default:
@@ -24,11 +26,9 @@ namespace CHelper {
     }
 
     Token::Token(TokenType::TokenType type,
-                 bool whiteSpace,
                  CHelper::LexerPos pos,
                  std::string content)
             : type(type),
-              whiteSpace(whiteSpace),
               pos(pos),
               content(std::move(content)) {}
 
@@ -53,6 +53,9 @@ std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &
         case CHelper::TokenType::SYMBOL:
             os << "SYMBOL";
             break;
+        case CHelper::TokenType::WHITE_SPACE:
+            os << "WHITE_SPACE";
+            break;
         default:
             os << "UNKNOWN";
             break;
@@ -61,12 +64,10 @@ std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &
 }
 
 std::ostream &operator<<(std::ostream &os, const CHelper::Token &token) {
-    os << '['
-       << token.type
-       << "] "
-       << token.pos;
-    if (token.whiteSpace) {
-        os << " (after whitespace)";
-    }
-    return os << ' ' << token.content;
+    return os << '['
+              << token.type
+              << "] "
+              << token.pos
+              << ' '
+              << token.content;
 }

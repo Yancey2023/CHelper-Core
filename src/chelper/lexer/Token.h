@@ -16,6 +16,7 @@ namespace CHelper {
             STRING,
             NUMBER,
             SYMBOL,
+            WHITE_SPACE,
             LF
         };
 
@@ -26,11 +27,10 @@ namespace CHelper {
     class Token {
     public:
         const TokenType::TokenType type;
-        const bool whiteSpace; //前面有没有空格
         const LexerPos pos;
         const std::string content;
 
-        Token(TokenType::TokenType type, bool whiteSpace, LexerPos pos, std::string content);
+        Token(TokenType::TokenType type, LexerPos pos, std::string content);
 
         [[nodiscard]] size_t getStartIndex() const;
 

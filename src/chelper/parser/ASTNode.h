@@ -9,7 +9,6 @@
 #include "../lexer/Token.h"
 #include "../util/VectorView.h"
 #include "ErrorReason.h"
-#include "../util/HashUtil.h"
 #include "Suggestion.h"
 #include "StructureBuilder.h"
 

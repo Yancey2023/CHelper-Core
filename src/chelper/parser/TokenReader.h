@@ -21,15 +21,17 @@ namespace CHelper {
 
         [[nodiscard]] bool ready() const;
 
+        [[nodiscard]] const Token *peek() const;
+
         [[nodiscard]] const Token *read();
-
-        bool skip();
-
-        void skipToLF();
 
         [[nodiscard]] const Token *next();
 
-        [[nodiscard]] const Token *peek() const;
+        bool skip();
+
+        bool skipWhitespace();
+
+        void skipToLF();
 
         void push();
 
@@ -39,8 +41,7 @@ namespace CHelper {
 
         void restore();
 
-        VectorView<Token> collect();
-//        [[nodiscard]] VectorView<Token> collect();
+        [[nodiscard]] VectorView<Token> collect();
     };
 
 } // CHelper

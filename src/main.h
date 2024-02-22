@@ -10,7 +10,9 @@
 #include "chelper/parser/Parser.h"
 #include "chelper/parser/Suggestion.h"
 
-int main();
+int initWindows(HINSTANCE hInstance, int nCmdShow);
+
+LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 namespace CHelper::Test {
 

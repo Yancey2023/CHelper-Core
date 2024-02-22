@@ -2,7 +2,7 @@
 // Created by Yancey666 on 2024/2/20.
 //
 
-#include "NodeTaregtSelectorArgument.h"
+#include "NodeTargetSelectorArgument.h"
 
 namespace CHelper::Node {
 

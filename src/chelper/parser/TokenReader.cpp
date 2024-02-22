@@ -13,11 +13,24 @@ namespace CHelper {
         return index < tokenList.size();
     }
 
-    const Token *TokenReader::read() {
+    const Token *TokenReader::peek() const {
         if (!ready()) {
             return nullptr;
         }
-        return &tokenList[index++];
+        return &tokenList[index];
+    }
+
+    const Token *TokenReader::read() {
+        const Token *result = peek();
+        if(result != nullptr){
+            skip();
+        }
+        return result;
+    }
+
+    const Token *TokenReader::next() {
+        skip();
+        return peek();
     }
 
     bool TokenReader::skip() {
@@ -28,24 +41,19 @@ namespace CHelper {
         return true;
     }
 
+    bool TokenReader::skipWhitespace() {
+        bool flag = false;
+        while (ready() && peek()->type == TokenType::WHITE_SPACE) {
+            skip();
+            flag = true;
+        }
+        return flag;
+    }
+
     void TokenReader::skipToLF() {
-        while (ready()) {
-            if (read()->type == TokenType::LF) {
-                break;
-            }
+        while (ready() && peek()->type != TokenType::LF) {
+            skip();
         }
-    }
-
-    const Token *TokenReader::next() {
-        skip();
-        return peek();
-    }
-
-    const Token *TokenReader::peek() const {
-        if (!ready()) {
-            return nullptr;
-        }
-        return &tokenList[index];
     }
 
     /**
@@ -86,7 +94,7 @@ namespace CHelper {
     /**
      * 收集栈中最后一个指针位置到当前指针的token，从栈中移除指针，不恢复指针
      */
-    VectorView<Token> CHelper::TokenReader::collect() {
+    VectorView <Token> CHelper::TokenReader::collect() {
         return {&tokenList, getAndPopLastIndex(), index};
     }
 

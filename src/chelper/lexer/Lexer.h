@@ -24,13 +24,15 @@ namespace CHelper {
     private:
         TokenType::TokenType nextTokenType();
 
-        Token nextTokenNumber(bool whiteSpace);
+        Token nextTokenNumber();
 
-        Token nextTokenSymbol(bool whiteSpace);
+        Token nextTokenSymbol();
 
-        Token nextTokenString(bool whiteSpace);
+        Token nextTokenString();
 
-        Token nextTokenLF(bool whiteSpace);
+        Token nextTokenWhiteSpace();
+
+        Token nextTokenLF();
     };
 
 }

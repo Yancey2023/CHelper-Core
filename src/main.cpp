@@ -2,18 +2,178 @@
 // Created by Yancey666 on 2023/11/5.
 //
 
-#define CHelperLogger INFO
-#define CHelperDebug true
-
 #include "main.h"
-#include <ctime>
 #include "chelper/util/StringUtil.h"
 #include "chelper/lexer/Lexer.h"
 #include "chelper/parser/ASTNode.h"
 #include "chelper/util/TokenUtil.h"
 
-int main() {
-    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)");
+#pragma comment(lib, "comctl32.lib")
+
+static size_t ID_INPUT = 1;
+static size_t ID_DESCRIPTION = 2;
+static size_t ID_LIST_VIEW = 3;
+
+static TCHAR szWindowClass[] = "CHelper";
+static TCHAR szTitle[] = "CHelper";
+
+static std::shared_ptr<CHelper::CPack> cpack;
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)");
+//    return 0;
+    return initWindows(hInstance, nCmdShow);
+}
+
+/**
+ * @param hInstance 应用程序的当前实例的句柄
+ * @param hPrevInstance 应用程序上一个实例的句柄
+ * @param lpCmdLine 应用程序的命令行，不包括程序名称
+ * @param nCmdShow 控制窗口的显示方式
+ */
+int initWindows(HINSTANCE hInstance, int nCmdShow) {
+    cpack = std::make_shared<CHelper::CPack>(CHelper::CPack::create(R"(D:\CLion\project\CHelper\resources)"));
+    //窗口数据
+    WNDCLASSEX wcex;
+    wcex.cbWndExtra = 0;
+    wcex.cbClsExtra = 0;
+    wcex.cbSize = sizeof(WNDCLASSEX);
+    wcex.style = CS_HREDRAW | CS_VREDRAW;
+    wcex.lpfnWndProc = WndProc;
+    wcex.hInstance = hInstance;
+    wcex.hIcon = LoadIcon(wcex.hInstance, IDI_APPLICATION);
+    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
+    wcex.lpszMenuName = nullptr;
+    wcex.lpszClassName = szWindowClass;
+    wcex.hIconSm = LoadIcon(wcex.hInstance, IDI_APPLICATION);
+    //注册窗口
+    if (!RegisterClassEx(&wcex)) {
+        MessageBox(nullptr,
+                   "Call to RegisterClassEx failed!",
+                   "CHelper",
+                   NULL);
+
+        return 1;
+    }
+    //创建窗口
+    HWND hWnd = CreateWindowEx(
+            WS_EX_OVERLAPPEDWINDOW,
+            szWindowClass,
+            szTitle,
+            WS_OVERLAPPEDWINDOW,
+            CW_USEDEFAULT, CW_USEDEFAULT,
+            500, 500,
+            nullptr, nullptr,
+            hInstance, nullptr
+    );
+    if (!hWnd) {
+        MessageBox(nullptr,
+                   "Call to CreateWindow failed!",
+                   "CHelper",
+                   NULL);
+
+        return 1;
+    }
+    //显示并更新窗口
+    ShowWindow(hWnd, nCmdShow);
+    UpdateWindow(hWnd);
+    //循环
+    MSG msg;
+    while (GetMessage(&msg, nullptr, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+    return (int) msg.wParam;
+}
+
+LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    static HWND hWndInput, hWndDescription, hWndListBox;
+    switch (uMsg) {
+        case WM_CREATE:
+            hWndInput = CreateWindow("EDIT", "", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL,
+                                     0, 0, 0, 0, hWnd, (HMENU) ID_INPUT, nullptr, nullptr);
+            hWndDescription = CreateWindow("STATIC", "", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL,
+                                           0, 0, 0, 0, hWnd, (HMENU) ID_DESCRIPTION, nullptr, nullptr);
+            hWndListBox = CreateWindow(WC_LISTBOX, "", WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | LBS_NOTIFY,
+                                       0, 0, 0, 0, hWnd, (HMENU) ID_LIST_VIEW, nullptr, nullptr);
+            break;
+        case WM_COMMAND:
+            if (LOWORD(wParam) == ID_INPUT && HIWORD(wParam) == EN_CHANGE) {
+                clock_t start, end;
+                start = clock();
+                try {
+                    int length = GetWindowTextLength(hWndInput);
+                    char buffer[length + 1];
+                    GetWindowText(hWndInput, buffer, length + 1);
+                    std::string command(buffer);
+                    std::vector<CHelper::Token> tokens = CHelper::Lexer(command, "unknown").lex();
+                    auto parser = CHelper::Parser(CHelper::TokenReader(tokens), *cpack);
+                    auto node = parser.parse();
+                    std::string description;
+                    auto errorReasons = node.getErrorReasons(*cpack);
+                    if (errorReasons.empty()) {
+                        description = node.getDescription(command.size());
+                    } else {
+                        if (errorReasons.size() == 1) {
+                            const auto &errorReason = errorReasons[0];
+                            description = errorReason->errorReason;
+                        } else {
+                            description.append("错误原因：");
+                            int i = 0;
+                            for (const auto &item: errorReasons) {
+                                description.append("\n").append(std::to_string(i))
+                                        .append(". ").append(item->errorReason);
+                            }
+                        }
+                    }
+                    {
+                        int len = MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, nullptr, 0);
+                        wchar_t wstr[len];
+                        MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, wstr, len);
+                        SetWindowTextW(hWndDescription, wstr);
+                    }
+                    auto suggestions = node.getSuggestions(*cpack, command.size());
+                    SendMessage(hWndListBox, LB_RESETCONTENT, 0, 0);
+                    //由于添加全部结果非常耗时，这里只保留前10个
+                    int i = 0;
+                    for (const auto &suggestion: suggestions) {
+                        if (++i > 10) {
+                            break;
+                        }
+                        auto content = std::string(suggestion.content->name).append(" - ")
+                                .append(suggestion.content->description.value_or(""));
+                        int len = MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, nullptr, 0);
+                        wchar_t wstr[len];
+                        MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, wstr, len);
+                        SendMessageW(hWndListBox, LB_ADDSTRING, 0, (LPARAM) wstr);
+                    }
+                } catch (const std::exception &e) {
+                    CHelper::Exception::printStackTrace(e);
+                    exit(-1);
+                }
+                end = clock();
+                CHELPER_INFO(CHelper::ColorStringBuilder()
+                                     .green("parse load successfully (")
+                                     .purple(std::to_string(end - start) + "ms")
+                                     .green(")")
+                                     .build());
+            }
+            break;
+        case WM_SIZE:
+            MoveWindow(hWndInput, 10, HIWORD(lParam) - 30, LOWORD(lParam) - 20, 20, TRUE);
+            MoveWindow(hWndDescription, 10, 10, LOWORD(lParam) - 20, 20, TRUE);
+            MoveWindow(hWndListBox, 10, 40, LOWORD(lParam) - 20, HIWORD(lParam) - 70, TRUE);
+            break;
+        case WM_CLOSE:
+            DestroyWindow(hWnd);
+            break;
+        case WM_DESTROY:
+            PostQuitMessage(0);
+            break;
+        default:
+            return DefWindowProc(hWnd, uMsg, wParam, lParam);
+    }
     return 0;
 }
 
