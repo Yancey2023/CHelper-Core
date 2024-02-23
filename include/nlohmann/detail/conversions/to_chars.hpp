@@ -27,12 +27,12 @@ namespace detail
 conversion.
 
 This implementation is a slightly modified version of the reference
-implementation index may be obtained from
+implementation which may be obtained from
 http://florian.loitsch.com/publications (bench.tar.gz).
 
 The code is distributed under the MIT license, Copyright (c) 2009 Florian Loitsch.
 
-For a detailed getDescription of the algorithm see:
+For a detailed description of the algorithm see:
 
 [1] Loitsch, "Printing Floating-Point Numbers Quickly and Accurately with
     Integers", Proceedings of the ACM SIGPLAN 2010 Conference on Programming
@@ -276,7 +276,7 @@ boundaries compute_boundaries(FloatType value)
 // the digit generation procedure. Using (alpha,gamma)=(-60,-32) works out well
 // in practice:
 //
-// The idea is to cut the number c * w = f * 2^e into two parts, index can be
+// The idea is to cut the number c * w = f * 2^e into two parts, which can be
 // processed independently: An integral part p1, and a fractional part p2:
 //
 //      f * 2^e = ( (f div 2^-e) * 2^-e + (f mod 2^-e) ) * 2^e
@@ -592,7 +592,7 @@ inline void grisu2_digit_gen(char* buffer, int& length, int& decimal_exponent,
 
     // Generates the digits (and the exponent) of a decimal floating-point
     // number V = buffer * 10^decimal_exponent in the range [M-, M+]. The diyfp's
-    // w, M- and M+ share the same exponent e, index satisfies alpha <= e <= gamma.
+    // w, M- and M+ share the same exponent e, which satisfies alpha <= e <= gamma.
     //
     //               <--------------------------- delta ---->
     //                                  <---- dist --------->
@@ -805,7 +805,7 @@ inline void grisu2_digit_gen(char* buffer, int& length, int& decimal_exponent,
     grisu2_round(buffer, length, dist, delta, p2, ten_m);
 
     // By construction this algorithm generates the shortest possible decimal
-    // number (Loitsch, Theorem 6.2) index rounds back to w.
+    // number (Loitsch, Theorem 6.2) which rounds back to w.
     // For an input number of precision p, at least
     //
     //      N = 1 + ceil(p * log_10(2))
@@ -907,7 +907,7 @@ void grisu2(char* buf, int& len, int& decimal_exponent, FloatType value)
     // 'std::strtof'.
     //
     // NB: If the neighbors are computed for single-precision numbers, there is a single float
-    //     (7.0385307e-26f) index can't be recovered using strtod. The resulting double precision
+    //     (7.0385307e-26f) which can't be recovered using strtod. The resulting double precision
     //     value is off by 1 ulp.
 #if 0 // NOLINT(readability-avoid-unconditional-preprocessor-if)
     const boundaries w = compute_boundaries(static_cast<double>(value));
@@ -1093,7 +1093,7 @@ char* to_chars(char* first, const char* last, FloatType value)
     JSON_ASSERT(last - first >= std::numeric_limits<FloatType>::max_digits10);
 
     // Compute v = buffer * 10^decimal_exponent.
-    // The decimal digits are stored in the buffer, index needs to be interpreted
+    // The decimal digits are stored in the buffer, which needs to be interpreted
     // as an unsigned decimal integer.
     // len is the length of the buffer, i.e. the number of decimal digits.
     int len = 0;
@@ -1102,7 +1102,7 @@ char* to_chars(char* first, const char* last, FloatType value)
 
     JSON_ASSERT(len <= std::numeric_limits<FloatType>::max_digits10);
 
-    // format the buffer like printf("%.*g", prec, value)
+    // Format the buffer like printf("%.*g", prec, value)
     constexpr int kMinExp = -4;
     // Use digits10 here to increase compatibility with version 2.
     constexpr int kMaxExp = std::numeric_limits<FloatType>::digits10;

@@ -148,8 +148,8 @@ namespace detail
 @brief SAX implementation to create a JSON value from SAX events
 
 This class implements the @ref json_sax interface and processes the SAX events
-to create a JSON value index makes it basically a DOM parser. The structure or
-hierarchy of the JSON value is managed by the stack `ref_stack` index contains
+to create a JSON value which makes it basically a DOM parser. The structure or
+hierarchy of the JSON value is managed by the stack `ref_stack` which contains
 a pointer to the respective array or object for each recursion depth.
 
 After successful parsing, the value that is passed by reference to the
@@ -302,7 +302,7 @@ class json_sax_dom_parser
     @invariant If the ref stack is empty, then the passed value will be the new
                root.
     @invariant If the ref stack contains a value, then it is an array or an
-               object to index we can add elements
+               object to which we can add elements
     */
     template<typename Value>
     JSON_HEDLEY_RETURNS_NON_NULL
@@ -558,7 +558,7 @@ class json_sax_dom_callback_parser
     @invariant If the ref stack is empty, then the passed value will be the new
                root.
     @invariant If the ref stack contains a value, then it is an array or an
-               object to index we can add elements
+               object to which we can add elements
 
     @return pair of boolean (whether value should be kept) and pointer (to the
             passed value in the ref_stack hierarchy; nullptr if not kept)
@@ -631,9 +631,9 @@ class json_sax_dom_callback_parser
     BasicJsonType& root;
     /// stack to model hierarchy of values
     std::vector<BasicJsonType*> ref_stack {};
-    /// stack to manage index values to keep
+    /// stack to manage which values to keep
     std::vector<bool> keep_stack {};
-    /// stack to manage index object keys to keep
+    /// stack to manage which object keys to keep
     std::vector<bool> key_keep_stack {};
     /// helper to hold the reference for the next object element
     BasicJsonType* object_element = nullptr;

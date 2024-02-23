@@ -340,7 +340,7 @@ class binary_reader
     @brief Read a BSON element list (as specified in the BSON-spec)
 
     The same binary layout is used for objects and arrays, hence it must be
-    indicated with the argument @a is_array index one is expected
+    indicated with the argument @a is_array which one is expected
     (true --> array, false --> object).
 
     @param[in] is_array Determines if the element list being read is to be

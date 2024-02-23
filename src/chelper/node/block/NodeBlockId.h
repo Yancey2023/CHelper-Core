@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/18.
+// Created by Yancey on 2023/12/18.
 //
 
 #ifndef CHELPER_NODEBLOCKID_H
@@ -20,8 +20,12 @@ namespace CHelper::Node {
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
-                                        const CPack &cpack,
-                                        std::vector<Suggestion> &vector) const override;
+                                const CPack &cpack,
+                                std::vector<Suggestion> &suggestions) const override;
+
+        void collectStructure(const ASTNode *astNode,
+                              StructureBuilder &structure,
+                              bool isMustHave) const override;
 
     };
 

@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/11/11.
+// Created by Yancey on 2023/11/11.
 //
 
 #include "NodeCommand.h"
@@ -11,8 +11,7 @@ namespace CHelper::Node {
     NODE_TYPE("COMMAND", NodeCommand)
 
     NodeCommand::NodeCommand(const std::optional<std::string> &id,
-                             const std::optional<std::string> &description,
-                             const std::vector<std::shared_ptr<Node::NodeBase>> &commands)
+                             const std::optional<std::string> &description)
             : NodeBase(id, description) {}
 
     NodeCommand::NodeCommand(const nlohmann::json &j,
@@ -32,11 +31,20 @@ namespace CHelper::Node {
         return ASTNode::orNode(this, childASTNodes, tokenReader.collect(), nullptr, "command");
     }
 
-    std::optional<std::string> NodeCommand::getDescription(const ASTNode *node, size_t index) const {
-        if (node->tokens.start == index) {
+    std::optional<std::string> NodeCommand::getDescription(const ASTNode *astNode, size_t index) const {
+        if (astNode->tokens.start == index) {
             return description;
         }
         return std::nullopt;
+    }
+
+    void NodeCommand::collectStructure(const ASTNode *astNode,
+                                       StructureBuilder &structure,
+                                       bool isMustHave) const {
+        if (astNode->tokens.size() > 1) {
+            return;
+        }
+        structure.append(isMustHave, "命令");
     }
 
 } // CHelper::Node

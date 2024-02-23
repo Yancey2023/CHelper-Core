@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/18.
+// Created by Yancey on 2023/12/18.
 //
 
 #ifndef CHELPER_NODEBLOCKSTATE_H
@@ -14,6 +14,10 @@ namespace CHelper::Node {
         NODE_TYPE_INSTANCE_H(NodeBlockState);
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+
+        void collectStructure(const ASTNode *astNode,
+                              StructureBuilder &structure,
+                              bool isMustHave) const override;
 
     };
 

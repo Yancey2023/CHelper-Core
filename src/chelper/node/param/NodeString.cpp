@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/10.
+// Created by Yancey on 2023/12/10.
 //
 
 #include "NodeString.h"
@@ -43,6 +43,14 @@ namespace CHelper::Node {
         }
         //普通字符串
         return getStringASTNode(tokenReader);
+    }
+
+    void NodeString::collectStructure(const ASTNode *astNode,
+                                      StructureBuilder &structure,
+                                      bool isMustHave) const {
+        if (astNode->id == "string") {
+            structure.append(isMustHave, description.value_or("字符串"));
+        }
     }
 
 } // CHelper::Node

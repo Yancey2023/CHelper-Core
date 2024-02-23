@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/11/7.
+// Created by Yancey on 2023/11/7.
 //
 
 #ifndef CHELPER_CPACK_H
@@ -20,7 +20,7 @@ namespace CHelper {
         std::unordered_map<std::string, std::vector<std::shared_ptr<NamespaceId>>> namespaceIds;
         std::vector<std::shared_ptr<BlockId>> blockIds;
         std::vector<std::shared_ptr<ItemId>> itemIds;
-        std::vector<std::shared_ptr<Node::NodeBase>> commands;
+        std::vector<std::shared_ptr<Node::NodePerCommand>> commands;
     private:
         explicit CPack(const std::filesystem::path &path);
     public:

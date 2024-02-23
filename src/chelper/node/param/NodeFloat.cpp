@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/11/11.
+// Created by Yancey on 2023/11/11.
 //
 
 #include "NodeFloat.h"
@@ -30,6 +30,12 @@ namespace CHelper::Node {
 
     ASTNode NodeFloat::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         return getFloatASTNode(tokenReader);
+    }
+
+    void NodeFloat::collectStructure(const ASTNode *astNode,
+                                     StructureBuilder &structure,
+                                     bool isMustHave) const {
+        structure.append(isMustHave, description.value_or("数字"));
     }
 
 } // CHelper::Node

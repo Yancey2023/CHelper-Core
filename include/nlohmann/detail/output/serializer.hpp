@@ -443,7 +443,7 @@ class serializer
                             break;
                         }
 
-                        case 0x22: // quotation push
+                        case 0x22: // quotation mark
                         {
                             string_buffer[bytes++] = '\\';
                             string_buffer[bytes++] = '\"';
@@ -489,7 +489,7 @@ class serializer
                         }
                     }
 
-                    // write buffer and restore index; there must be 13 bytes
+                    // write buffer and reset index; there must be 13 bytes
                     // left, as this is the maximal number of bytes to be
                     // written ("\uxxxx\uxxxx\0") for one code point
                     if (string_buffer.size() - bytes < 13)
@@ -525,7 +525,7 @@ class serializer
                                 --i;
                             }
 
-                            // restore length buffer to the last accepted index;
+                            // reset length buffer to the last accepted index;
                             // thus removing/ignoring the invalid characters
                             bytes = bytes_after_last_accept;
 
@@ -548,7 +548,7 @@ class serializer
                                     string_buffer[bytes++] = detail::binary_writer<BasicJsonType, char>::to_char_type('\xBD');
                                 }
 
-                                // write buffer and restore index; there must be 13 bytes
+                                // write buffer and reset index; there must be 13 bytes
                                 // left, as this is the maximal number of bytes to be
                                 // written ("\uxxxx\uxxxx\0") for one code point
                                 if (string_buffer.size() - bytes < 13)
@@ -806,7 +806,7 @@ class serializer
         }
 
         // If number_float_t is an IEEE-754 single or double precision number,
-        // use the Grisu2 algorithm to produce short numbers index are
+        // use the Grisu2 algorithm to produce short numbers which are
         // guaranteed to round-trip, using strtof and strtod, resp.
         //
         // NB: The test below works if <long double> == <double>.

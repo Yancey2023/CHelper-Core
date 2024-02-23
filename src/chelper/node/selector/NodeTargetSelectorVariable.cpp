@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2024/2/14.
+// Created by Yancey on 2024/2/14.
 //
 
 #include "NodeTargetSelectorVariable.h"
@@ -45,7 +45,7 @@ namespace CHelper::Node {
         if (astNode->isError()) {
             return true;
         }
-        std::string str = astNode->tokens[0].content;
+        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
         if (str != "p" && str != "r" && str != "a" &&
             str != "e" && str != "s" && str != "c" &&
             str != "v" && str != "initiator") {

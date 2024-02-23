@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/1.
+// Created by Yancey on 2023/12/1.
 //
 
 #include "NodeTargetSelector.h"
@@ -59,7 +59,7 @@ namespace CHelper::Node {
         if (at.isError()) {
             //不是@符号开头，当作玩家名处理
             tokenReader.restore();
-            return getByChildNode(tokenReader, cpack, nodePlayerName);
+            return getByChildNode(tokenReader, cpack, nodePlayerName, "target selector");
         }
         //@符号开头，进入目标选择器检测
         //目标选择器变量
@@ -69,10 +69,20 @@ namespace CHelper::Node {
         tokenReader.restore();
         if (lestBracket.isError()) {
             //没有后面的[...]
-            return ASTNode::andNode(this, {{at, targetSelectorVariable}}, tokenReader.collect());
+            return ASTNode::andNode(this, {{at, targetSelectorVariable}},
+                                    tokenReader.collect(), nullptr, "target selector");
         }
         //TODO 目标选择器的解析
-        return ASTNode::andNode(this, {{at, targetSelectorVariable}}, tokenReader.collect());
+        return ASTNode::andNode(this, {{at, targetSelectorVariable}}, tokenReader.collect(),
+                                nullptr, "target selector");
+    }
+
+    void NodeTargetSelector::collectStructure(const ASTNode *astNode,
+                                              StructureBuilder &structure,
+                                              bool isMustHave) const {
+        if (astNode->id == "target selector") {
+            structure.append(isMustHave, "目标选择器");
+        }
     }
 
 } // CHelper::Node

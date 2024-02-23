@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/11/6.
+// Created by Yancey on 2023/11/6.
 //
 
 #ifndef CHELPER_PARSER_H
@@ -11,20 +11,18 @@
 #include "../resources/CPack.h"
 #include "TokenReader.h"
 #include "../node/param/NodeCommand.h"
+#include "../lexer/StringReader.h"
 
-namespace CHelper {
+namespace CHelper::Parser {
 
-    class Parser {
-        const CPack& cpack;
-        TokenReader tokenReader;
-        Node::NodeCommand mainNode;
+    std::pair<std::shared_ptr<std::vector<Token>>, ASTNode> parse(const std::string &content, const CPack &cpack);
 
-    public:
-        Parser(TokenReader tokenReader, const CPack &cpack);
+    std::pair<std::shared_ptr<std::vector<Token>>, ASTNode> parse(StringReader &&stringReader, const CPack &cpack);
 
-        [[nodiscard]] ASTNode parse();
-    };
+    ASTNode parse(const std::vector<Token> &tokens, const CPack &cpack);
 
-} // CHelper
+    ASTNode parse(TokenReader &&tokenReader, const CPack &cpack);
+
+} // CHelper::Parser
 
 #endif //CHELPER_PARSER_H

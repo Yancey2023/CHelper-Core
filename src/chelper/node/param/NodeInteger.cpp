@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/11/11.
+// Created by Yancey on 2023/11/11.
 //
 
 #include "NodeInteger.h"
@@ -34,6 +34,12 @@ namespace CHelper::Node {
 
     std::optional<std::string> NodeInteger::getDescription(const ASTNode *node, size_t index) const {
         return std::nullopt;
+    }
+
+    void NodeInteger::collectStructure(const ASTNode *astNode,
+                                       StructureBuilder &structure,
+                                       bool isMustHave) const {
+        structure.append(isMustHave, description.value_or("整数"));
     }
 
 } // CHelper::Node

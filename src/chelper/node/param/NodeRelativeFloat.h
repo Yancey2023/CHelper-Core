@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/20.
+// Created by Yancey on 2023/12/20.
 //
 
 #ifndef CHELPER_NODERELATIVEFLOAT_H
@@ -27,9 +27,14 @@ namespace CHelper::Node {
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
         static std::pair<int, ASTNode> getASTNode(const NodeBase *node,
-                                           TokenReader &tokenReader,
-                                           const CPack &cpack,
-                                           bool canUseCaretNotation);
+                                                  TokenReader &tokenReader,
+                                                  const CPack &cpack,
+                                                  bool canUseCaretNotation);
+
+        void collectStructure(const ASTNode *astNode,
+                              StructureBuilder &structure,
+                              bool isMustHave) const override;
+
     };
 
 } // CHelper::Node

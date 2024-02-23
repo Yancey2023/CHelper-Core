@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2024/2/13.
+// Created by Yancey on 2024/2/13.
 //
 
 #ifndef CHELPER_STRINGUTIL_H

@@ -1,13 +1,11 @@
 //
-// Created by Yancey666 on 2023/12/18.
+// Created by Yancey on 2023/12/18.
 //
 
 #ifndef CHELPER_VECTORVIEW_H
 #define CHELPER_VECTORVIEW_H
 
 #include "Exception.h"
-//因为泛型T为Token，所以要include Token.h
-#include "../lexer/Token.h"
 
 namespace CHelper {
 

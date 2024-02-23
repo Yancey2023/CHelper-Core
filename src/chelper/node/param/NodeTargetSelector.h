@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/1.
+// Created by Yancey on 2023/12/1.
 //
 
 #ifndef CHELPER_NODETARGETSELECTOR_H
@@ -30,6 +30,11 @@ namespace CHelper::Node {
         void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+
+        void collectStructure(const ASTNode *astNode,
+                              StructureBuilder &structure,
+                              bool isMustHave) const override;
+
     };
 
 } // CHelper::Node

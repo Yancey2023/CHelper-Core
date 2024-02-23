@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/18.
+// Created by Yancey on 2023/12/18.
 //
 
 #include "NodeBlockState.h"
@@ -56,7 +56,7 @@ namespace CHelper::Node {
                                                      false)
                                      },
                                      false
-                                     );
+            );
     static std::shared_ptr<NodeBase> nodeEntry =
             std::make_shared<NodeEntry>("BLOCK_STATE_ENTRY",
                                         "方块状态键值对",
@@ -80,7 +80,15 @@ namespace CHelper::Node {
                                        nodeRightBracket);
 
     ASTNode NodeBlockState::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
-        return getByChildNode(tokenReader, cpack, nodeBlockState);
+        return getByChildNode(tokenReader, cpack, nodeBlockState, "blockState");
+    }
+
+    void NodeBlockState::collectStructure(const ASTNode *astNode,
+                                          StructureBuilder &structure,
+                                          bool isMustHave) const {
+        if (astNode->id == "blockState") {
+            structure.append(true, "方块状态");
+        }
     }
 
 } // CHelper::Node

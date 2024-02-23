@@ -1,10 +1,10 @@
 //
-// Created by Yancey666 on 2023/11/10.
+// Created by Yancey on 2023/11/10.
 //
 
 #include "NodePerCommand.h"
 #include "NodeLF.h"
-#include "../../util/StringUtil.h"
+#include "../../resources/CPack.h"
 
 namespace CHelper::Node {
 
@@ -115,7 +115,7 @@ namespace CHelper::Node {
     ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();
         //命令名字的检查
-        ASTNode astNodeCommandName = getStringASTNode(tokenReader);
+        ASTNode astNodeCommandName = getStringASTNode(tokenReader, "commandName");
         if (astNodeCommandName.tokens.size() == 0) {
             return ASTNode::andNode(this, {astNodeCommandName}, astNodeCommandName.tokens,
                                     ErrorReason::errorContent(astNodeCommandName.tokens, "指令名字为空"));
@@ -136,7 +136,7 @@ namespace CHelper::Node {
             return ASTNode::andNode(this, {astNodeCommandName}, astNodeCommandName.tokens,
                                     ErrorReason::errorContent(astNodeCommandName.tokens, FormatUtil::format(
                                             "指令名字不匹配，找不到名为{0}的指令", token.content)),
-                                    StringUtil::join(", ", name));
+                                    "perCommand");
         }
         //命令检测
         std::vector<ASTNode> childASTNodes;
@@ -151,14 +151,45 @@ namespace CHelper::Node {
         ASTNode astNodePerCommand = ASTNode::orNode(this, childASTNodes, tokenReader.collect());
         //返回结果
         return ASTNode::andNode(this, {astNodeCommandName, astNodePerCommand}, tokenReader.collect(),
-                                nullptr, StringUtil::join(", ", name));
+                                nullptr, "perCommand");
     }
 
     std::optional<std::string> NodePerCommand::getDescription(const ASTNode *node, size_t index) const {
-        if (node->tokens.start == index) {
+        if (node->id == "commandName") {
             return description;
         }
         return std::nullopt;
+    }
+
+    bool NodePerCommand::collectSuggestions(const ASTNode *astNode,
+                                            const CPack &cpack,
+                                            std::vector<Suggestion> &suggestions) const {
+        if (astNode->id != "commandName") {
+            return false;
+        }
+        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
+        for (const auto &item: name) {
+            if (StringUtil::isStartOf(item, str)) {
+                suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(item, description));
+            }
+        }
+        return true;
+    }
+
+    void NodePerCommand::collectStructure(const ASTNode *astNode,
+                                          StructureBuilder &structure,
+                                          bool isMustHave) const {
+        if (astNode->id == "perCommand") {
+            if (astNode->tokens.size() <= 1 || astNode->childNodes[0].isError()) {
+                structure.append(isMustHave, "命令");
+            }
+        } else if (astNode->id == "commandName") {
+            if (astNode->isError()) {
+                structure.append(isMustHave, "命令");
+            } else {
+                structure.append(isMustHave, astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content);
+            }
+        }
     }
 
 } // CHelper::Node

@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/11/11.
+// Created by Yancey on 2023/11/11.
 //
 
 #include "NodeBoolean.h"
@@ -30,6 +30,12 @@ namespace CHelper::Node {
 
     ASTNode NodeBoolean::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         return getStringASTNode(tokenReader);
+    }
+
+    void NodeBoolean::collectStructure(const ASTNode *astNode,
+                                       StructureBuilder &structure,
+                                       bool isMustHave) const {
+        structure.append(isMustHave, description.value_or("布尔值"));
     }
 
 } // CHelper::Node

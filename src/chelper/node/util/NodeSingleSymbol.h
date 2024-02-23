@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/19.
+// Created by Yancey on 2023/12/19.
 //
 
 #ifndef CHELPER_NODESINGLESYMBOL_H

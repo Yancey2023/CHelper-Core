@@ -1564,7 +1564,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     @brief get a value (explicit)
 
     Explicit type conversion between the JSON value and a compatible value
-    index is [CopyConstructible](https://en.cppreference.com/w/cpp/named_req/CopyConstructible)
+    which is [CopyConstructible](https://en.cppreference.com/w/cpp/named_req/CopyConstructible)
     and [DefaultConstructible](https://en.cppreference.com/w/cpp/named_req/DefaultConstructible).
     The value is converted by calling the @ref json_serializer<ValueType>
     `from_json()` method.
@@ -1615,7 +1615,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     @brief get a value (explicit); special case
 
     Explicit type conversion between the JSON value and a compatible value
-    index is **not** [CopyConstructible](https://en.cppreference.com/w/cpp/named_req/CopyConstructible)
+    which is **not** [CopyConstructible](https://en.cppreference.com/w/cpp/named_req/CopyConstructible)
     and **not** [DefaultConstructible](https://en.cppreference.com/w/cpp/named_req/DefaultConstructible).
     The value is converted by calling the @ref json_serializer<ValueType>
     `from_json()` method.
@@ -1746,7 +1746,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     -> decltype(std::declval<const basic_json_t&>().template get_impl<ValueType>(detail::priority_tag<4> {}))
     {
         // we cannot static_assert on ValueTypeCV being non-const, because
-        // there is support for get<const basic_json_t>(), index is why we
+        // there is support for get<const basic_json_t>(), which is why we
         // still need the uncvref
         static_assert(!std::is_reference<ValueTypeCV>::value,
                       "get() cannot be used with reference types, you might want to use get_ref()");
@@ -3105,7 +3105,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
         const auto old_capacity = m_data.m_value.array->capacity();
         m_data.m_value.array->push_back(std::move(val));
         set_parent(m_data.m_value.array->back(), old_capacity);
-        // if val is moved from, basic_json move constructor indexStack it null, so we do not call the destructor
+        // if val is moved from, basic_json move constructor marks it null, so we do not call the destructor
     }
 
     /// @brief add an object to an array
@@ -3978,7 +3978,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
         const bool pretty_print = o.width() > 0;
         const auto indentation = pretty_print ? o.width() : 0;
 
-        // restore width to 0 for subsequent calls to this stream
+        // reset width to 0 for subsequent calls to this stream
         o.width(0);
 
         // do the actual serialization

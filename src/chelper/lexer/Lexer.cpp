@@ -1,7 +1,6 @@
 //
-// Created by Yancey666 on 2023/11/6.
+// Created by Yancey on 2023/11/6.
 //
-
 
 #include "Lexer.h"
 
@@ -34,12 +33,10 @@ CHelper::Lexer::Lexer(StringReader stringReader)
         : stringReader(stringReader) {}
 
 std::vector<CHelper::Token> CHelper::Lexer::lex() {
+    Profile::push("start lex: " + stringReader.content);
     std::vector<Token> tokenList = std::vector<Token>();
-    char ch;
-    bool whiteSpace;
     while (true) {
-        ch = stringReader.peek();
-        if (ch == EOF) {
+        if (stringReader.peek() == EOF) {
             break;
         }
         switch (nextTokenType()) {
@@ -60,6 +57,7 @@ std::vector<CHelper::Token> CHelper::Lexer::lex() {
                 break;
         }
     }
+    Profile::pop();
     return tokenList;
 }
 

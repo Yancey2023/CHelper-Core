@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2024/2/22.
+// Created by Yancey on 2024/2/22.
 //
 
 #ifndef CHELPER_NODEITEMID_H
@@ -21,7 +21,11 @@ namespace CHelper::Node {
 
         bool collectSuggestions(const ASTNode *astNode,
                                 const CPack &cpack,
-                                std::vector<Suggestion> &vector) const override;
+                                std::vector<Suggestion> &suggestions) const override;
+
+        void collectStructure(const ASTNode *astNode,
+                              StructureBuilder &structure,
+                              bool isMustHave) const override;
 
     };
 

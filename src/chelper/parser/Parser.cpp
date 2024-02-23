@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/11/6.
+// Created by Yancey on 2023/11/6.
 //
 
 #include "Parser.h"
@@ -8,14 +8,24 @@
 
 #include <utility>
 
-namespace CHelper {
+namespace CHelper::Parser {
 
-    Parser::Parser(TokenReader tokenReader, const CPack &cpack)
-            : tokenReader(std::move(tokenReader)),
-              cpack(cpack),
-              mainNode("MAIN_NODE", "main node", cpack.commands) {}
+    static Node::NodeCommand mainNode("MAIN_NODE", "main node");
 
-    ASTNode Parser::parse() {
+    std::pair<std::shared_ptr<std::vector<Token>>, ASTNode> parse(const std::string &content, const CPack &cpack) {
+        return parse(StringReader(content, "unknown"), cpack);
+    }
+
+    std::pair<std::shared_ptr<std::vector<Token>>, ASTNode> parse(StringReader &&stringReader, const CPack &cpack) {
+        std::shared_ptr<std::vector<Token>> tokens = std::make_shared<std::vector<Token>>(Lexer(stringReader).lex());
+        return {tokens, parse(*tokens, cpack)};
+    }
+
+    ASTNode parse(const std::vector<Token> &tokens, const CPack &cpack) {
+        return parse(TokenReader(tokens), cpack);
+    }
+
+    ASTNode parse(TokenReader &&tokenReader, const CPack &cpack) {
         VectorView <Token> tokens = {&tokenReader.tokenList, 0, tokenReader.tokenList.size()};
         Profile::push("start parsing: " + TokenUtil::toString(tokens));
         auto result = mainNode.getASTNode(tokenReader, cpack);
@@ -23,4 +33,4 @@ namespace CHelper {
         return result;
     }
 
-} // CHelper
+} // CHelper::Parser

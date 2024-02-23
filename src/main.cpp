@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/11/5.
+// Created by Yancey on 2023/11/5.
 //
 
 #include "main.h"
@@ -32,7 +32,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
  * @param nCmdShow 控制窗口的显示方式
  */
 int initWindows(HINSTANCE hInstance, int nCmdShow) {
+    clock_t start, end;
+    start = clock();
     cpack = std::make_shared<CHelper::CPack>(CHelper::CPack::create(R"(D:\CLion\project\CHelper\resources)"));
+    end = clock();
+    CHELPER_INFO(CHelper::ColorStringBuilder()
+                         .green("CPack load successfully (")
+                         .purple(std::to_string(end - start) + "ms")
+                         .green(")")
+                         .build());
     //窗口数据
     WNDCLASSEX wcex;
     wcex.cbWndExtra = 0;
@@ -87,8 +95,9 @@ int initWindows(HINSTANCE hInstance, int nCmdShow) {
     return (int) msg.wParam;
 }
 
+static HWND hWndInput, hWndDescription, hWndListBox;
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-    static HWND hWndInput, hWndDescription, hWndListBox;
     switch (uMsg) {
         case WM_CREATE:
             hWndInput = CreateWindow("EDIT", "", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL,
@@ -97,67 +106,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
                                            0, 0, 0, 0, hWnd, (HMENU) ID_DESCRIPTION, nullptr, nullptr);
             hWndListBox = CreateWindow(WC_LISTBOX, "", WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | LBS_NOTIFY,
                                        0, 0, 0, 0, hWnd, (HMENU) ID_LIST_VIEW, nullptr, nullptr);
+            onTextChanged("");
             break;
         case WM_COMMAND:
             if (LOWORD(wParam) == ID_INPUT && HIWORD(wParam) == EN_CHANGE) {
-                clock_t start, end;
-                start = clock();
-                try {
-                    int length = GetWindowTextLength(hWndInput);
-                    char buffer[length + 1];
-                    GetWindowText(hWndInput, buffer, length + 1);
-                    std::string command(buffer);
-                    std::vector<CHelper::Token> tokens = CHelper::Lexer(command, "unknown").lex();
-                    auto parser = CHelper::Parser(CHelper::TokenReader(tokens), *cpack);
-                    auto node = parser.parse();
-                    std::string description;
-                    auto errorReasons = node.getErrorReasons(*cpack);
-                    if (errorReasons.empty()) {
-                        description = node.getDescription(command.size());
-                    } else {
-                        if (errorReasons.size() == 1) {
-                            const auto &errorReason = errorReasons[0];
-                            description = errorReason->errorReason;
-                        } else {
-                            description.append("错误原因：");
-                            int i = 0;
-                            for (const auto &item: errorReasons) {
-                                description.append("\n").append(std::to_string(i))
-                                        .append(". ").append(item->errorReason);
-                            }
-                        }
-                    }
-                    {
-                        int len = MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, nullptr, 0);
-                        wchar_t wstr[len];
-                        MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, wstr, len);
-                        SetWindowTextW(hWndDescription, wstr);
-                    }
-                    auto suggestions = node.getSuggestions(*cpack, command.size());
-                    SendMessage(hWndListBox, LB_RESETCONTENT, 0, 0);
-                    //由于添加全部结果非常耗时，这里只保留前10个
-                    int i = 0;
-                    for (const auto &suggestion: suggestions) {
-                        if (++i > 10) {
-                            break;
-                        }
-                        auto content = std::string(suggestion.content->name).append(" - ")
-                                .append(suggestion.content->description.value_or(""));
-                        int len = MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, nullptr, 0);
-                        wchar_t wstr[len];
-                        MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, wstr, len);
-                        SendMessageW(hWndListBox, LB_ADDSTRING, 0, (LPARAM) wstr);
-                    }
-                } catch (const std::exception &e) {
-                    CHelper::Exception::printStackTrace(e);
-                    exit(-1);
-                }
-                end = clock();
-                CHELPER_INFO(CHelper::ColorStringBuilder()
-                                     .green("parse load successfully (")
-                                     .purple(std::to_string(end - start) + "ms")
-                                     .green(")")
-                                     .build());
+                CHelper::Profile::push("get command from input");
+                int length = GetWindowTextLength(hWndInput);
+                char buffer[length + 1];
+                GetWindowText(hWndInput, buffer, length + 1);
+                CHelper::Profile::pop();
+                onTextChanged(buffer);
             }
             break;
         case WM_SIZE:
@@ -175,6 +133,68 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
             return DefWindowProc(hWnd, uMsg, wParam, lParam);
     }
     return 0;
+}
+
+void onTextChanged(const std::string& command) {
+    try {
+        clock_t start, end;
+        start = clock();
+        auto parseResult = CHelper::Parser::parse(command, *cpack);
+        auto node = parseResult.second;
+        CHelper::Profile::push("get description text view content");
+        std::string description;
+        auto errorReasons = node.getErrorReasons(*cpack);
+        if (errorReasons.empty()) {
+            description = node.getDescription(command.size());
+        } else {
+            if (errorReasons.size() == 1) {
+                const auto &errorReason = errorReasons[0];
+                description = errorReason->errorReason;
+            } else {
+                description.append("错误原因：");
+                int i = 0;
+                for (const auto &item: errorReasons) {
+                    description.append("\n").append(std::to_string(i))
+                            .append(". ").append(item->errorReason);
+                }
+            }
+        }
+        CHelper::Profile::pop();
+        {
+            CHelper::Profile::push("update description text view");
+            int len = MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, nullptr, 0);
+            wchar_t wstr[len];
+            MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, wstr, len);
+            SetWindowTextW(hWndDescription, wstr);
+            CHelper::Profile::pop();
+        }
+        CHelper::Profile::push("update suggestion list view");
+        auto suggestions = node.getSuggestions(*cpack, command.size());
+        SendMessage(hWndListBox, LB_RESETCONTENT, 0, 0);
+        //由于添加全部结果非常耗时，这里只保留前30个
+        int i = 0;
+        for (const auto &suggestion: suggestions) {
+            if (++i > 30) {
+                break;
+            }
+            auto content = std::string(suggestion.content->name).append(" - ")
+                    .append(suggestion.content->description.value_or(""));
+            int len = MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, nullptr, 0);
+            wchar_t wstr[len];
+            MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, wstr, len);
+            SendMessageW(hWndListBox, LB_ADDSTRING, 0, (LPARAM) wstr);
+        }
+        CHelper::Profile::pop();
+        end = clock();
+        CHELPER_INFO(CHelper::ColorStringBuilder()
+                             .green("parse load successfully (")
+                             .purple(std::to_string(end - start) + "ms")
+                             .green(")")
+                             .build());
+    } catch (const std::exception &e) {
+        CHELPER_INFO(CHelper::ColorStringBuilder().red("parse load failed").build());
+        CHelper::Exception::printStackTrace(e);
+    }
 }
 
 namespace CHelper::Test {
@@ -203,7 +223,7 @@ namespace CHelper::Test {
         try {
             clock_t start, end;
             start = clock();
-            auto cpack = getCPack(cpackPath);
+            auto cpack = CPack::create(cpackPath);
             end = clock();
             CHELPER_INFO(ColorStringBuilder()
                                  .green("CPack load successfully (")
@@ -213,14 +233,13 @@ namespace CHelper::Test {
             std::cout << std::endl;
             for (const auto &command: commands) {
                 start = clock();
-                const auto tokens = lex(command);
-                auto parser = getParser(cpack, tokens);
-                const ASTNode node = parse(parser);
-                const auto description = getDescription(node, command.length() - 1);
-                const auto errorReasons = getErrorReasons(cpack, node);
-                const auto suggestions = getSuggestions(cpack, node, command.length() - 1);
-                const auto structure = getStructure(node);
-                const auto colors = getColors(node);
+                auto parseResult = Parser::parse(command, cpack);
+                auto node = parseResult.second;
+                auto description = node.getDescription(command.length() - 1);
+                auto errorReasons = node.getErrorReasons(cpack);
+                auto suggestions = node.getSuggestions(cpack, command.length() - 1);
+                auto structure = node.getStructure();
+//                auto colors = node.getColors();
                 end = clock();
                 CHELPER_INFO(ColorStringBuilder()
                                      .green("parse successfully(")
@@ -229,6 +248,7 @@ namespace CHelper::Test {
                                      .normal(" : ")
                                      .purple(command)
                                      .build());
+                CHELPER_INFO("structure: " + structure);
                 CHELPER_INFO("description: " + description);
                 if (errorReasons.empty()) {
                     CHELPER_INFO("no error");
@@ -270,42 +290,6 @@ namespace CHelper::Test {
             Exception::printStackTrace(e);
             exit(-1);
         }
-    }
-
-    CPack getCPack(const std::string &source) {
-        return CPack::create(source);
-    }
-
-    std::vector<Token> lex(const std::string &str) {
-        return Lexer(str, "unknown").lex();
-    }
-
-    Parser getParser(const CPack &cpack, const std::vector<Token> &tokenList) {
-        return {TokenReader(tokenList), cpack};
-    }
-
-    ASTNode parse(Parser &parser) {
-        return parser.parse();
-    }
-
-    std::string getDescription(const ASTNode &node, size_t index) {
-        return node.getDescription(index);
-    }
-
-    std::vector<std::shared_ptr<ErrorReason>> getErrorReasons(const CPack &cpack, const ASTNode &node) {
-        return node.getErrorReasons(cpack);
-    }
-
-    std::vector<Suggestion> getSuggestions(const CPack &cpack, const ASTNode &node, size_t index) {
-        return node.getSuggestions(cpack, index);
-    }
-
-    std::string getStructure(const ASTNode &node) {
-        return node.getStructure();
-    }
-
-    std::string getColors(const ASTNode &node) {
-        return node.getColors();
     }
 
 } // CHelper::Test

@@ -1,10 +1,9 @@
 //
-// Created by Yancey666 on 2023/11/12.
+// Created by Yancey on 2023/11/12.
 //
 
 #include "NodeNamespaceId.h"
 #include "NodeString.h"
-#include "../../util/StringUtil.h"
 
 namespace CHelper::Node {
 
@@ -80,7 +79,7 @@ namespace CHelper::Node {
         if (astNode->isError()) {
             return true;
         }
-        std::string str = astNode->tokens[0].content;
+        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
         std::string_view nameSpace = "minecraft";
         std::string_view value = str;
         size_t index = str.find(':');
@@ -103,7 +102,7 @@ namespace CHelper::Node {
         if (astNode->isError()) {
             return true;
         }
-        std::string_view str = astNode->tokens[0].content;
+        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
         //省略minecraft命名空间
         for (const auto &item: *contents) {
             if ((!item->nameSpace.has_value() || item->nameSpace.value() == "minecraft") &&
@@ -118,6 +117,12 @@ namespace CHelper::Node {
             }
         }
         return true;
+    }
+
+    void NodeNamespaceId::collectStructure(const ASTNode *astNode,
+                                           StructureBuilder &structure,
+                                           bool isMustHave) const {
+        structure.append(isMustHave, description.value_or("ID"));
     }
 
 }

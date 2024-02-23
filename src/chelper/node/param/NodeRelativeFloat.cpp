@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/20.
+// Created by Yancey on 2023/12/20.
 //
 
 #include "NodeRelativeFloat.h"
@@ -70,16 +70,26 @@ namespace CHelper::Node {
         //数值部分
         childNodes.push_back(nodeValue.getASTNode(tokenReader, cpack));
         //判断有没有错误
-        VectorView<Token> tokens = tokenReader.collect();
+        VectorView <Token> tokens = tokenReader.collect();
         if (isUseCaretNotation && !canUseCaretNotation) {
-            return {type, ASTNode::andNode(node, childNodes, tokens, ErrorReason::other(tokens, "不能使用局部坐标"))};
+            return {type, ASTNode::andNode(node, childNodes, tokens,
+                                           ErrorReason::other(tokens, "不能使用局部坐标"),
+                                           "relativeFloat")};
         }
-        ASTNode result = ASTNode::andNode(node, childNodes, tokens);
+        ASTNode result = ASTNode::andNode(node, childNodes, tokens, nullptr, "relativeFloat");
         if (result.isError()) {
             return {type, ASTNode::andNode(node, childNodes, tokens, ErrorReason::errorType(tokens, FormatUtil::format(
-                    "类型不匹配，{0}不是有效的坐标参数", TokenUtil::toString(tokens))))};
+                    "类型不匹配，{0}不是有效的坐标参数", TokenUtil::toString(tokens))), "relativeFloat")};
         } else {
             return {type, result};
+        }
+    }
+
+    void NodeRelativeFloat::collectStructure(const ASTNode *astNode,
+                                             StructureBuilder &structure,
+                                             bool isMustHave) const {
+        if (astNode->id == "relativeFloat") {
+            NodeBase::collectStructure(astNode, structure, isMustHave);
         }
     }
 

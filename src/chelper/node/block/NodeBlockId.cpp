@@ -1,26 +1,28 @@
 //
-// Created by Yancey666 on 2023/12/18.
+// Created by Yancey on 2023/12/18.
 //
 
 #include "NodeBlockId.h"
 #include "../../resources/CPack.h"
-#include "../../util/StringUtil.h"
 
 namespace CHelper::Node {
 
-    NODE_TYPE_INSTANCE("BLOCK_ID", NodeBlockId, "block id")
+    NODE_TYPE_INSTANCE("BLOCK_ID", NodeBlockId, "方块id")
 
     ASTNode NodeBlockId::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
-        return getStringASTNode(tokenReader);
+        return getStringASTNode(tokenReader, "block id");
     }
 
     bool NodeBlockId::collectIdError(const ASTNode *astNode,
                                      const CPack &cpack,
                                      std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
+        if(astNode->id != "block id"){
+            return false;
+        }
         if (astNode->isError()) {
             return true;
         }
-        std::string str = astNode->tokens[0].content;
+        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
         std::string_view nameSpace = "minecraft";
         std::string_view value = str;
         size_t index = str.find(':');
@@ -40,10 +42,13 @@ namespace CHelper::Node {
     bool NodeBlockId::collectSuggestions(const ASTNode *astNode,
                                          const CPack &cpack,
                                          std::vector<Suggestion> &suggestions) const {
+        if(astNode->id != "block id"){
+            return false;
+        }
         if (astNode->isError()) {
             return true;
         }
-        std::string_view str = astNode->tokens[0].content;
+        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
         //省略minecraft命名空间
         for (const auto &item: cpack.blockIds) {
             if ((!item->nameSpace.has_value() || item->nameSpace.value() == "minecraft") &&
@@ -58,6 +63,15 @@ namespace CHelper::Node {
             }
         }
         return true;
+    }
+
+    void NodeBlockId::collectStructure(const ASTNode *astNode,
+                                       StructureBuilder &structure,
+                                       bool isMustHave) const {
+        if(astNode->id != "block id"){
+            return;
+        }
+        structure.append(true, "方块ID");
     }
 
 } // CHelper::Node

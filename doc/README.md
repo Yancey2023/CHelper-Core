@@ -19,7 +19,7 @@ There should be a file named `manifest.json` in the root directory of the pack:
 |       name       |  type   |       meaning        |                          markup                           |      is must have      |
 |:----------------:|:-------:|:--------------------:|:---------------------------------------------------------:|:----------------------:|
 |       name       | string  |      pack name       |                        for showing                        |    no(hope to have)    |
-|   getDescription    | string  |   pack getDescription   |                        for showing                        |           no           |
+|  getDescription  | string  | pack getDescription  |                        for showing                        |           no           |
 | minecraftVersion | string  |  minecraft version   |                        for showing                        |           no           |
 |      author      | string  |        author        |                        for showing                        |           no           |
 |    updateDate    | string  |  latest update date  |                        for showing                        |           no           |

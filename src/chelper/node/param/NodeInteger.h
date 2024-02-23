@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/11/11.
+// Created by Yancey on 2023/11/11.
 //
 
 #ifndef CHELPER_NODEINTEGER_H
@@ -28,6 +28,10 @@ namespace CHelper::Node {
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
         std::optional<std::string> getDescription(const ASTNode *node, size_t index) const override;
+
+        void collectStructure(const ASTNode *astNode,
+                              StructureBuilder &structure,
+                              bool isMustHave) const override;
 
     };
 

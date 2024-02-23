@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/11/10.
+// Created by Yancey on 2023/11/10.
 //
 
 #ifndef CHELPER_NODEBASE_H
@@ -53,7 +53,7 @@ namespace CHelper {
                                      const std::string &requireType,
                                      const std::string &astNodeId,
                                      const std::function<std::shared_ptr<ErrorReason>(const std::string &str,
-                                                                                      const VectorView<Token> &tokens)> &check) const;
+                                                                                      const VectorView <Token> &tokens)> &check) const;
 
         protected:
             ASTNode getStringASTNode(TokenReader &tokenReader,
@@ -92,8 +92,9 @@ namespace CHelper {
                                             const CPack &cpack,
                                             std::vector<Suggestion> &suggestions) const;
 
-            virtual std::optional<std::string> collectStructure(const ASTNode *astNode,
-                                                                StructureBuilder &structure) const;
+            virtual void collectStructure(const ASTNode *astNode,
+                                          StructureBuilder &structure,
+                                          bool isMustHave) const;
 
         };
 
@@ -103,7 +104,6 @@ namespace CHelper {
 
 template<>
 struct [[maybe_unused]] nlohmann::adl_serializer<std::shared_ptr<CHelper::Node::NodeBase>> {
-
     static void to_json(nlohmann::json &j, const std::shared_ptr<CHelper::Node::NodeBase> &t) {
         t->toJson(j);
     };

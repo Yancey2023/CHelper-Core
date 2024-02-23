@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/2.
+// Created by Yancey on 2023/12/2.
 //
 
 #ifndef CHELPER_NODETEXT_H
@@ -16,7 +16,7 @@ namespace CHelper::Node {
     public:
         NodeText(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
-                 const NormalId& data);
+                 const NormalId &data);
 
         explicit NodeText(const nlohmann::json &j,
                           const CPack &cpack);
@@ -30,6 +30,11 @@ namespace CHelper::Node {
         bool collectIdError(const ASTNode *astNode,
                             const CPack &cpack,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
+
+        void collectStructure(const ASTNode *astNode,
+                              StructureBuilder &structure,
+                              bool isMustHave) const override;
+
     };
 } // CHelper::Node
 

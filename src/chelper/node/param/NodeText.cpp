@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/2.
+// Created by Yancey on 2023/12/2.
 //
 
 #include "NodeText.h"
@@ -34,11 +34,17 @@ namespace CHelper::Node {
         if (astNode->isError()) {
             return true;
         }
-        std::string str = astNode->tokens[0].content;
+        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
         if (str != data.name) {
             idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, "找不到含义 -> " + str));
         }
         return true;
+    }
+
+    void NodeText::collectStructure(const ASTNode *astNode,
+                                    StructureBuilder &structure,
+                                    bool isMustHave) const {
+        structure.appendWhiteSpace().append(data.name);
     }
 
 } // CHelper::Node

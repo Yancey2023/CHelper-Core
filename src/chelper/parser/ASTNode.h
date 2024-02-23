@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/15.
+// Created by Yancey on 2023/12/15.
 //
 
 #ifndef CHELPER_ASTNODE_H
@@ -69,7 +69,12 @@ namespace CHelper {
 
         static ASTNode orNode(const Node::NodeBase *node,
                               const std::vector<ASTNode> &childNodes,
-                              const std::optional<VectorView<Token>> &tokens = std::nullopt,
+                              const VectorView<Token> &tokens,
+                              const std::shared_ptr<ErrorReason> &errorReason = nullptr,
+                              const std::string &id = "");
+
+        static ASTNode orNode(const Node::NodeBase *node,
+                              const std::vector<ASTNode> &childNodes,
                               const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                               const std::string &id = "");
 
@@ -84,7 +89,7 @@ namespace CHelper {
 
         void collectSuggestions(const CPack &cpack, std::vector<Suggestion> &suggestions, size_t index) const;
 
-        void collectStructure(StructureBuilder &structureBuilder) const;
+        void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 
     public:
         [[nodiscard]] std::string getDescription(size_t index) const;

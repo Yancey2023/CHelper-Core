@@ -1,11 +1,8 @@
 //
-// Created by Yancey666 on 2023/12/2.
+// Created by Yancey on 2023/12/2.
 //
 
 #include "NodePosition.h"
-#include "../util/NodeSingleSymbol.h"
-#include "NodeFloat.h"
-#include "../../util/StringUtil.h"
 #include "NodeRelativeFloat.h"
 
 namespace CHelper::Node {
@@ -31,8 +28,8 @@ namespace CHelper::Node {
             threeChildNodes.push_back(node.second);
         }
         //判断有没有错误
-        VectorView<Token> tokens = tokenReader.collect();
-        ASTNode result = ASTNode::andNode(this, threeChildNodes, tokens);
+        VectorView <Token> tokens = tokenReader.collect();
+        ASTNode result = ASTNode::andNode(this, threeChildNodes, tokens, nullptr, "position");
         if (!result.isError()) {
             int type = 0;
             for (int i: types) {
@@ -42,11 +39,20 @@ namespace CHelper::Node {
                     type = i;
                 } else {
                     return ASTNode::andNode(this, threeChildNodes, tokenReader.collect(),
-                                            ErrorReason::other(tokens, "坐标参数不能同时使用相对坐标和局部坐标"));
+                                            ErrorReason::other(tokens, "坐标参数不能同时使用相对坐标和局部坐标"),
+                                            "position");
                 }
             }
         }
         return result;
+    }
+
+    void NodePosition::collectStructure(const ASTNode *astNode,
+                                        StructureBuilder &structure,
+                                        bool isMustHave) const {
+        if (astNode->id == "position") {
+            structure.append(isMustHave, description.value_or("位置"));
+        }
     }
 
 } // CHelper::Node

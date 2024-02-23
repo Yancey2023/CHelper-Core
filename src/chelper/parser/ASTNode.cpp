@@ -1,10 +1,10 @@
 //
-// Created by Yancey666 on 2023/12/15.
+// Created by Yancey on 2023/12/15.
 //
 
 #include "ASTNode.h"
 #include "../node/NodeBase.h"
-#include "../util/StringUtil.h"
+#include "../node/param/NodeLF.h"
 #include "../util/TokenUtil.h"
 
 namespace CHelper {
@@ -12,7 +12,7 @@ namespace CHelper {
     ASTNode::ASTNode(ASTNodeMode::ASTNodeMode mode,
                      const Node::NodeBase *node,
                      const std::vector<ASTNode> &childNodes,
-                     const VectorView<Token> &tokens,
+                     const VectorView <Token> &tokens,
                      const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
                      std::string id,
                      int whichBest)
@@ -25,7 +25,7 @@ namespace CHelper {
               whichBest(whichBest) {}
 
     ASTNode ASTNode::simpleNode(const Node::NodeBase *node,
-                                const VectorView<Token> &tokens,
+                                const VectorView <Token> &tokens,
                                 const std::shared_ptr<ErrorReason> &errorReason,
                                 const std::string &id) {
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
@@ -35,10 +35,9 @@ namespace CHelper {
         return {ASTNodeMode::NONE, node, {}, tokens, errorReasons, id};
     }
 
-
     ASTNode ASTNode::andNode(const Node::NodeBase *node,
                              const std::vector<ASTNode> &childNodes,
-                             const VectorView<Token> &tokens,
+                             const VectorView <Token> &tokens,
                              const std::shared_ptr<ErrorReason> &errorReason,
                              const std::string &id) {
         if (errorReason != nullptr) {
@@ -54,7 +53,7 @@ namespace CHelper {
 
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             const std::vector<ASTNode> &childNodes,
-                            const std::optional<VectorView<Token>> &tokens,
+                            const VectorView <Token> &tokens,
                             const std::shared_ptr<ErrorReason> &errorReason,
                             const std::string &id) {
         bool isError = true;
@@ -98,8 +97,55 @@ namespace CHelper {
         if (errorReason != nullptr) {
             errorReasons = {errorReason};
         }
-        return {ASTNodeMode::OR, node, childNodes, tokens.value_or(childNodes[whichBest].tokens),
-                errorReasons, id, whichBest};
+        return {ASTNodeMode::OR, node, childNodes, tokens, errorReasons, id, whichBest};
+    }
+
+    ASTNode ASTNode::orNode(const Node::NodeBase *node,
+                            const std::vector<ASTNode> &childNodes,
+                            const std::shared_ptr<ErrorReason> &errorReason,
+                            const std::string &id) {
+        bool isError = true;
+        int whichBest = 0;
+        size_t start = 0;
+        std::vector<std::shared_ptr<ErrorReason>> errorReasons;
+        for (int i = 0; i < childNodes.size(); ++i) {
+            const ASTNode &item = childNodes[i];
+            if (!item.isError()) {
+                if (isError) {
+                    start = 0;
+                }
+                isError = false;
+                whichBest = i;
+                errorReasons.clear();
+            }
+            if (!isError) {
+                continue;
+            }
+            for (const auto &item2: item.errorReasons) {
+                if (start > item2->tokens.start) {
+                    continue;
+                }
+                bool isAdd = true;
+                if (start < item2->tokens.start) {
+                    start = item2->tokens.start;
+                    whichBest = i;
+                    errorReasons.clear();
+                } else {
+                    for (const auto &item3: errorReasons) {
+                        if (*item2 == *item3) {
+                            isAdd = false;
+                        }
+                    }
+                }
+                if (isAdd) {
+                    errorReasons.push_back(item2);
+                }
+            }
+        }
+        if (errorReason != nullptr) {
+            errorReasons = {errorReason};
+        }
+        return {ASTNodeMode::OR, node, childNodes, childNodes[whichBest].tokens, errorReasons, id, whichBest};
     }
 
     bool ASTNode::isError() const {
@@ -111,16 +157,21 @@ namespace CHelper {
     }
 
     std::optional<std::string> ASTNode::collectDescription(size_t index) const {
-        std::optional<std::string> description = node->getDescription(this, index);
-        if (description.has_value()) {
-            return description;
+        if (index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens)) {
+            return std::nullopt;
+        }
+        if (id != "compound") {
+            auto description = node->getDescription(this, index);
+            if (description.has_value()) {
+                return description;
+            }
         }
         switch (mode) {
             case ASTNodeMode::NONE:
                 return std::nullopt;
             case ASTNodeMode::AND:
                 for (const ASTNode &astNode: childNodes) {
-                    description = astNode.collectDescription(index);
+                    auto description = astNode.collectDescription(index);
                     if (description.has_value()) {
                         return description;
                     }
@@ -134,15 +185,17 @@ namespace CHelper {
 
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     void ASTNode::collectIdErrors(const CPack &cpack, std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
+        if (id != "compound") {
 #if CHelperDebug == true
-        Profile::push("collect suggestions: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
+            Profile::push("collect id errors: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
 #endif
-        auto flag = node->collectIdError(this, cpack, idErrorReasons);
+            auto flag = node->collectIdError(this, cpack, idErrorReasons);
 #if CHelperDebug == true
-        Profile::pop();
+            Profile::pop();
 #endif
-        if (flag) {
-            return;
+            if (flag) {
+                return;
+            }
         }
         switch (mode) {
             case ASTNodeMode::NONE:
@@ -162,15 +215,18 @@ namespace CHelper {
         if (index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens)) {
             return;
         }
+        if (id != "compound") {
 #if CHelperDebug == true
-        Profile::push("collect suggestions: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
+            Profile::push("collect suggestions: " + node->getNodeType().nodeName
+                          + " " + node->description.value_or(""));
 #endif
-        auto flag = node->collectSuggestions(this, cpack, suggestions);
+            auto flag = node->collectSuggestions(this, cpack, suggestions);
 #if CHelperDebug == true
-        Profile::pop();
+            Profile::pop();
 #endif
-        if (flag) {
-            return;
+            if (flag) {
+                return;
+            }
         }
         switch (mode) {
             case ASTNodeMode::NONE:
@@ -181,33 +237,44 @@ namespace CHelper {
                 }
                 break;
             case ASTNodeMode::OR:
-                childNodes[whichBest].collectSuggestions(cpack, suggestions, index);
+                for (const ASTNode &astNode: childNodes) {
+                    astNode.collectSuggestions(cpack, suggestions, index);
+                }
                 break;
         }
     }
 
-    void ASTNode::collectStructure(StructureBuilder &structure) const {
+    void ASTNode::collectStructure(StructureBuilder &structure, bool isMustHave) const {
+        if (id != "compound") {
 #if CHelperDebug == true
-        Profile::push("collect structure: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
+            Profile::push("collect structure: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
 #endif
-        node->collectStructure(this, structure);
+            node->collectStructure(this, structure, isMustHave);
 #if CHelperDebug == true
-        Profile::pop();
+            Profile::pop();
 #endif
-        if (structure.isDirty()) {
-            return;
+            if (structure.isDirty()) {
+                return;
+            }
         }
         switch (mode) {
             case ASTNodeMode::NONE:
-                structure.appendUnknownIfNotDirty();
+                structure.appendUnknownIfNotDirty(isMustHave);
                 break;
             case ASTNodeMode::AND:
                 for (const ASTNode &astNode: childNodes) {
-                    astNode.collectStructure(structure);
+                    astNode.collectStructure(structure, isMustHave);
+                    if (isMustHave) {
+                        for (const auto &item: astNode.node->nextNodes) {
+                            if (item == Node::NodeLF::getInstance()) {
+                                isMustHave = false;
+                            }
+                        }
+                    }
                 }
                 break;
             case ASTNodeMode::OR:
-                childNodes[whichBest].collectStructure(structure);
+                childNodes[whichBest].collectStructure(structure, isMustHave);
                 break;
         }
     }
@@ -243,7 +310,7 @@ namespace CHelper {
     std::string ASTNode::getStructure() const {
         Profile::push("start getting structure: " + TokenUtil::toString(tokens));
         StructureBuilder structureBuilder;
-        collectStructure(structureBuilder);
+        collectStructure(structureBuilder, true);
         Profile::pop();
         return structureBuilder.build();
     }

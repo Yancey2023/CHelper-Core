@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2024/2/21.
+// Created by Yancey on 2024/2/21.
 //
 
 #ifndef CHELPER_STRUCTUREBUILDER_H
@@ -15,21 +15,21 @@ namespace CHelper {
         bool dirty = false;
 
     public:
-        bool isDirty() const;
+        [[nodiscard]] bool isDirty() const;
 
-        void appendUnknownIfNotDirty();
+        StructureBuilder& appendUnknownIfNotDirty(bool isMustHave);
 
-        void appendSymbol(char ch);
+        StructureBuilder& appendSymbol(char ch);
 
-        void append(const std::string &str);
+        StructureBuilder& append(const std::string &str);
 
-        void appendWhiteSpace();
+        StructureBuilder& appendWhiteSpace();
 
-        void appendLeftBracket(bool isMustHave);
+        StructureBuilder& appendLeftBracket(bool isMustHave);
 
-        void appendRightBracket(bool isMustHave);
+        StructureBuilder& appendRightBracket(bool isMustHave);
 
-        void append(bool isMustHave, const std::string &str);
+        StructureBuilder& append(bool isMustHave, const std::string &str);
 
         std::string build();
 

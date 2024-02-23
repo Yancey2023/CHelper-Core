@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/11/10.
+// Created by Yancey on 2023/11/10.
 //
 
 #ifndef CHELPER_NODEPERCOMMAND_H
@@ -34,6 +34,14 @@ namespace CHelper::Node {
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
         std::optional<std::string> getDescription(const ASTNode *pNode, size_t index) const override;
+
+        bool collectSuggestions(const ASTNode *astNode,
+                                const CPack &cpack,
+                                std::vector<Suggestion> &suggestions) const override;
+
+        void collectStructure(const ASTNode *astNode,
+                              StructureBuilder &structure,
+                              bool isMustHave) const override;
 
     }; // NodePerCommand::Node
 

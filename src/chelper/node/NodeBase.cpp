@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/11/10.
+// Created by Yancey on 2023/11/10.
 //
 
 #include "NodeBase.h"
@@ -62,8 +62,8 @@ namespace CHelper::Node {
         }
         tokenReader.push();
         tokenReader.skipToLF();
-        ASTNode nextASTNode = ASTNode::orNode(this, childASTNodes, tokenReader.collect());
-        return ASTNode::andNode(this, {currentASTNode, nextASTNode}, tokenReader.collect());
+        ASTNode nextASTNode = ASTNode::orNode(this, childASTNodes, tokenReader.collect(), nullptr, "compound");
+        return ASTNode::andNode(this, {currentASTNode, nextASTNode}, tokenReader.collect(), nullptr, "compound");
     }
 
     ASTNode NodeBase::getSimpleASTNode(TokenReader &tokenReader,
@@ -80,7 +80,8 @@ namespace CHelper::Node {
         if (token == nullptr) {
             if (!whitespace) {
                 errorReason = ErrorReason::incomplete(tokens,
-                                                      FormatUtil::format("指令不完整，需要的参数类型为{0}", requireType));
+                                                      FormatUtil::format("指令不完整，需要的参数类型为{0}",
+                                                                         requireType));
             }
         } else if (token->type != type) {
             errorReason = ErrorReason::errorType(
@@ -203,8 +204,10 @@ namespace CHelper::Node {
         return false;
     }
 
-    std::optional<std::string> NodeBase::collectStructure(const ASTNode *astNode, StructureBuilder &structure) const {
-        return std::nullopt;
+    void NodeBase::collectStructure(const ASTNode *astNode,
+                                    StructureBuilder &structure,
+                                    bool isMustHave) const {
+
     }
 
 } // CHelper::Node

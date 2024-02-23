@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/2.
+// Created by Yancey on 2023/12/2.
 //
 
 #ifndef CHELPER_NODEPOSITION_H
@@ -20,6 +20,11 @@ namespace CHelper::Node {
         NODE_TYPE_H;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+
+        void collectStructure(const ASTNode *astNode,
+                              StructureBuilder &structure,
+                              bool isMustHave) const override;
+
     };
 
 } // CHelper::Node

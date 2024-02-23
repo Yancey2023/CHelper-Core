@@ -1,5 +1,5 @@
 //
-// Created by Yancey666 on 2023/12/1.
+// Created by Yancey on 2023/12/1.
 //
 
 #ifndef CHELPER_SIMPLELOGGER_H
