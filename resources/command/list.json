@@ -1,1 +1,9 @@
-{"name":["list"],"start":["LF"],"description":"列出在服务器上的玩家"}
+{
+  "name": [
+    "list"
+  ],
+  "start": [
+    "LF"
+  ],
+  "description": "列出在服务器上的玩家"
+}

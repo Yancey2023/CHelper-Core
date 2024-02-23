@@ -26,12 +26,12 @@ Because I am leaning c++ now, I want to improve myself through the project.
 
 ## Dependencies
 
-|                 project                  |   getDescription    |                                 license                                  |
+|                 project                  |     description     |                                 license                                  |
 |:----------------------------------------:|:-------------------:|:------------------------------------------------------------------------:|
 | [json](https://github.com/nlohmann/json) | JSON for Modern C++ | [MIT license](https://github.com/nlohmann/json/blob/develop/LICENSE.MIT) |
 
 ## Special Thanks
 
--  JetBrains open source programs supporting
+- JetBrains open source programs supporting
 
 ![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)

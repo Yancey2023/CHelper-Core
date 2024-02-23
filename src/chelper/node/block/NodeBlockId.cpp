@@ -16,7 +16,7 @@ namespace CHelper::Node {
     bool NodeBlockId::collectIdError(const ASTNode *astNode,
                                      const CPack &cpack,
                                      std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if(astNode->id != "block id"){
+        if (astNode->id != "block id") {
             return false;
         }
         if (astNode->isError()) {
@@ -42,7 +42,7 @@ namespace CHelper::Node {
     bool NodeBlockId::collectSuggestions(const ASTNode *astNode,
                                          const CPack &cpack,
                                          std::vector<Suggestion> &suggestions) const {
-        if(astNode->id != "block id"){
+        if (astNode->id != "block id") {
             return false;
         }
         if (astNode->isError()) {
@@ -68,7 +68,7 @@ namespace CHelper::Node {
     void NodeBlockId::collectStructure(const ASTNode *astNode,
                                        StructureBuilder &structure,
                                        bool isMustHave) const {
-        if(astNode->id != "block id"){
+        if (astNode->id != "block id") {
             return;
         }
         structure.append(true, "方块ID");

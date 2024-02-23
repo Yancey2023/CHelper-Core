@@ -51,7 +51,7 @@ namespace CHelper::Node {
         }
     }
 
-    std::optional<std::string> NodeItem::getDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::string> NodeItem::collectDescription(const ASTNode *node, size_t index) const {
         return std::nullopt;
     }
 

@@ -1,1 +1,1814 @@
-{"id":"animation","type":"normal","content":[{"name":"animation.actor.billboard","description":""},{"name":"animation.agent.move","description":""},{"name":"animation.agent.shrug","description":""},{"name":"animation.agent.swing_arms","description":""},{"name":"animation.allay.dance","description":""},{"name":"animation.allay.fly","description":""},{"name":"animation.allay.hold_item","description":""},{"name":"animation.allay.hold_item_fly","description":""},{"name":"animation.allay.idle","description":""},{"name":"animation.allay.look_at_target.default","description":""},{"name":"animation.armor.boots.offset","description":""},{"name":"animation.armor.chestplate.offset","description":""},{"name":"animation.armor.helmet.offset","description":""},{"name":"animation.armor.leggings.offset","description":""},{"name":"animation.armor_stand.athena_pose","description":""},{"name":"animation.armor_stand.brandish_pose","description":""},{"name":"animation.armor_stand.cancan_a_pose","description":""},{"name":"animation.armor_stand.cancan_b_pose","description":""},{"name":"animation.armor_stand.default_pose","description":""},{"name":"animation.armor_stand.entertain_pose","description":""},{"name":"animation.armor_stand.hero_pose","description":""},{"name":"animation.armor_stand.honor_pose","description":""},{"name":"animation.armor_stand.no_pose","description":""},{"name":"animation.armor_stand.riposte_pose","description":""},{"name":"animation.armor_stand.salute_pose","description":""},{"name":"animation.armor_stand.solemn_pose","description":""},{"name":"animation.armor_stand.wiggle","description":""},{"name":"animation.armor_stand.zombie_pose","description":""},{"name":"animation.arrow.move","description":""},{"name":"animation.axolotl.idle_floor","description":""},{"name":"animation.axolotl.idle_floor_underwater","description":""},{"name":"animation.axolotl.idle_underwater","description":""},{"name":"animation.axolotl.play_dead","description":""},{"name":"animation.axolotl.swim","description":""},{"name":"animation.axolotl.swim_angle","description":""},{"name":"animation.axolotl.walk_floor","description":""},{"name":"animation.axolotl.walk_floor_underwater","description":""},{"name":"animation.bat.flying","description":""},{"name":"animation.bat.resting","description":""},{"name":"animation.bee.fly.bobbing","description":""},{"name":"animation.bee.flying","description":""},{"name":"animation.bee.no_stinger","description":""},{"name":"animation.bee.sting","description":""},{"name":"animation.blaze.move","description":""},{"name":"animation.bow.wield","description":""},{"name":"animation.bow.wield_first_person_pull","description":""},{"name":"animation.camel.dash","description":""},{"name":"animation.camel.dash_sound","description":""},{"name":"animation.camel.idle","description":""},{"name":"animation.camel.look_at_target","description":""},{"name":"animation.camel.sit","description":""},{"name":"animation.camel.sit_down","description":""},{"name":"animation.camel.stand_up","description":""},{"name":"animation.camel.walk","description":""},{"name":"animation.cat.baby_transform","description":""},{"name":"animation.cat.lie_down","description":""},{"name":"animation.cat.sit","description":""},{"name":"animation.cat.sneak","description":""},{"name":"animation.cat.sprint","description":""},{"name":"animation.cat.walk","description":""},{"name":"animation.chicken.baby_transform","description":""},{"name":"animation.chicken.general","description":""},{"name":"animation.chicken.general.v1.0","description":""},{"name":"animation.chicken.move","description":""},{"name":"animation.cod.flop","description":""},{"name":"animation.cod.swim","description":""},{"name":"animation.common.look_at_target","description":""},{"name":"animation.cow.baby_transform","description":""},{"name":"animation.cow.setup","description":""},{"name":"animation.cow.setup.v1.0","description":""},{"name":"animation.creeper.legs","description":""},{"name":"animation.creeper.swelling","description":""},{"name":"animation.crossbow.wield","description":""},{"name":"animation.crossbow.wield_first_person_pull","description":""},{"name":"animation.dolphin.move","description":""},{"name":"animation.drowned.attack.rotations","description":""},{"name":"animation.drowned.attack.rotations.v1.0","description":""},{"name":"animation.drowned.swimming.v1.0","description":""},{"name":"animation.elytra.default","description":""},{"name":"animation.elytra.gliding","description":""},{"name":"animation.elytra.sleeping","description":""},{"name":"animation.elytra.sneaking","description":""},{"name":"animation.elytra.swimming","description":""},{"name":"animation.ender_crystal.move","description":""},{"name":"animation.ender_dragon.jaw_movement","description":""},{"name":"animation.ender_dragon.neck_head_movement","description":""},{"name":"animation.ender_dragon.setup","description":""},{"name":"animation.ender_dragon.tail_movement","description":""},{"name":"animation.ender_dragon.wings_limbs_movement","description":""},{"name":"animation.enderman.arms_legs","description":""},{"name":"animation.enderman.base_pose","description":""},{"name":"animation.enderman.base_pose_v1.0","description":""},{"name":"animation.enderman.carrying","description":""},{"name":"animation.enderman.scary_face","description":""},{"name":"animation.enderman.scary_face_v1.0","description":""},{"name":"animation.endermite.move","description":""},{"name":"animation.evocation_fang.bite","description":""},{"name":"animation.evoker.casting","description":""},{"name":"animation.evoker.casting.v1.0","description":""},{"name":"animation.evoker.general","description":""},{"name":"animation.evoker.general.v1.0","description":""},{"name":"animation.evoker.move","description":""},{"name":"animation.fireworks_rocket.move","description":""},{"name":"animation.fox.baby_transform","description":""},{"name":"animation.fox.crouch","description":""},{"name":"animation.fox.pounce","description":""},{"name":"animation.fox.setup","description":""},{"name":"animation.fox.sit","description":""},{"name":"animation.fox.sleep","description":""},{"name":"animation.fox.stuck","description":""},{"name":"animation.fox.wiggle","description":""},{"name":"animation.frog.croak","description":""},{"name":"animation.frog.idle.water","description":""},{"name":"animation.frog.jump","description":""},{"name":"animation.frog.swim","description":""},{"name":"animation.frog.tongue","description":""},{"name":"animation.frog.walk","description":""},{"name":"animation.ghast.move","description":""},{"name":"animation.ghast.scale","description":""},{"name":"animation.goat.attack","description":""},{"name":"animation.goat.baby_scaling","description":""},{"name":"animation.goat.look_at_target","description":""},{"name":"animation.goat.ram_attack","description":""},{"name":"animation.goat.walk","description":""},{"name":"animation.guardian.move_eye","description":""},{"name":"animation.guardian.move_eye.v1.0","description":""},{"name":"animation.guardian.setup","description":""},{"name":"animation.guardian.spikes","description":""},{"name":"animation.guardian.spikes.v1.0","description":""},{"name":"animation.guardian.swim","description":""},{"name":"animation.hoglin.attack","description":""},{"name":"animation.hoglin.baby_scaling","description":""},{"name":"animation.hoglin.look_at_target","description":""},{"name":"animation.hoglin.walk","description":""},{"name":"animation.horse.baby_transform","description":""},{"name":"animation.horse.eat","description":""},{"name":"animation.horse.look_at_player","description":""},{"name":"animation.horse.mouth","description":""},{"name":"animation.horse.setup","description":""},{"name":"animation.horse.shake_tail","description":""},{"name":"animation.horse.stand","description":""},{"name":"animation.horse.v2.baby_transform","description":""},{"name":"animation.horse.v2.eat","description":""},{"name":"animation.horse.v2.setup","description":""},{"name":"animation.horse.v2.stand","description":""},{"name":"animation.horse.v2.tail","description":""},{"name":"animation.horse.v2.walk","description":""},{"name":"animation.horse.v3.baby_transform","description":""},{"name":"animation.horse.v3.eat","description":""},{"name":"animation.horse.v3.look_at_player","description":""},{"name":"animation.horse.v3.rear","description":""},{"name":"animation.horse.v3.tail","description":""},{"name":"animation.horse.v3.walk","description":""},{"name":"animation.horse.walk","description":""},{"name":"animation.humanoid.attack.rotations","description":""},{"name":"animation.humanoid.attack.rotations.v1.0","description":""},{"name":"animation.humanoid.base_pose","description":""},{"name":"animation.humanoid.base_pose.v1.0","description":""},{"name":"animation.humanoid.big_head","description":""},{"name":"animation.humanoid.big_head.v1.0","description":""},{"name":"animation.humanoid.bob","description":""},{"name":"animation.humanoid.bob.v1.0","description":""},{"name":"animation.humanoid.bow_and_arrow","description":""},{"name":"animation.humanoid.bow_and_arrow.v1.0","description":""},{"name":"animation.humanoid.brandish_spear","description":""},{"name":"animation.humanoid.brandish_spear.v1.0","description":""},{"name":"animation.humanoid.brushing","description":""},{"name":"animation.humanoid.celebrating","description":""},{"name":"animation.humanoid.charging","description":""},{"name":"animation.humanoid.charging.v1.0","description":""},{"name":"animation.humanoid.damage_nearby_mobs","description":""},{"name":"animation.humanoid.damage_nearby_mobs.v1.0","description":""},{"name":"animation.humanoid.fishing_rod","description":""},{"name":"animation.humanoid.holding","description":""},{"name":"animation.humanoid.holding.v1.0","description":""},{"name":"animation.humanoid.holding_brush","description":""},{"name":"animation.humanoid.holding_spyglass","description":""},{"name":"animation.humanoid.look_at_target.default","description":""},{"name":"animation.humanoid.look_at_target.default.v1.0","description":""},{"name":"animation.humanoid.look_at_target.gliding","description":""},{"name":"animation.humanoid.look_at_target.gliding.v1.0","description":""},{"name":"animation.humanoid.look_at_target.swimming","description":""},{"name":"animation.humanoid.look_at_target.swimming.v1.0","description":""},{"name":"animation.humanoid.move","description":""},{"name":"animation.humanoid.move.v1.0","description":""},{"name":"animation.humanoid.riding.arms","description":""},{"name":"animation.humanoid.riding.arms.v1.0","description":""},{"name":"animation.humanoid.riding.legs","description":""},{"name":"animation.humanoid.riding.legs.v1.0","description":""},{"name":"animation.humanoid.sneaking","description":""},{"name":"animation.humanoid.sneaking.v1.0","description":""},{"name":"animation.humanoid.swimming","description":""},{"name":"animation.humanoid.swimming.v1.0","description":""},{"name":"animation.humanoid.tooting_goat_horn","description":""},{"name":"animation.humanoid.use_item_progress","description":""},{"name":"animation.humanoid.use_item_progress.v1.0","description":""},{"name":"animation.idle_arm_1","description":""},{"name":"animation.idle_back_1","description":""},{"name":"animation.idle_bottom_1","description":""},{"name":"animation.idle_torso_1","description":""},{"name":"animation.iron_golem.attack","description":""},{"name":"animation.iron_golem.flower","description":""},{"name":"animation.iron_golem.move","description":""},{"name":"animation.iron_golem.move_to_target","description":""},{"name":"animation.iron_golem.walk","description":""},{"name":"animation.iron_golem.walk_to_target","description":""},{"name":"animation.llama.baby_transform","description":""},{"name":"animation.llama.baby_transform.v1.0","description":""},{"name":"animation.llama.setup","description":""},{"name":"animation.llama.setup.v1.0","description":""},{"name":"animation.llama_spit.setup","description":""},{"name":"animation.magma_cube.move","description":""},{"name":"animation.minecart.move","description":""},{"name":"animation.minecart.move.v1.0","description":""},{"name":"animation.mooshroom.baby_transform","description":""},{"name":"animation.mooshroom.setup","description":""},{"name":"animation.mooshroom.setup.v1.0","description":""},{"name":"animation.npc.baby_transform","description":""},{"name":"animation.npc.general","description":""},{"name":"animation.npc.get_in_bed","description":""},{"name":"animation.npc.move","description":""},{"name":"animation.npc.raise_arms","description":""},{"name":"animation.ocelot.baby_transform","description":""},{"name":"animation.ocelot.sit","description":""},{"name":"animation.ocelot.sneak","description":""},{"name":"animation.ocelot.sprint","description":""},{"name":"animation.ocelot.walk","description":""},{"name":"animation.ocelot_v1.0.baby_transform","description":""},{"name":"animation.ocelot_v1.0.setup","description":""},{"name":"animation.ocelot_v1.0.sit","description":""},{"name":"animation.ocelot_v1.0.sneak","description":""},{"name":"animation.ocelot_v1.0.sprint","description":""},{"name":"animation.ocelot_v1.0.walk","description":""},{"name":"animation.panda.baby_transform","description":""},{"name":"animation.panda.lying","description":""},{"name":"animation.panda.rolling","description":""},{"name":"animation.panda.sitting","description":""},{"name":"animation.panda.sneezing","description":""},{"name":"animation.panda.unhappy","description":""},{"name":"animation.parrot.base","description":""},{"name":"animation.parrot.dance","description":""},{"name":"animation.parrot.flying","description":""},{"name":"animation.parrot.moving","description":""},{"name":"animation.parrot.sitting","description":""},{"name":"animation.parrot.standing","description":""},{"name":"animation.phantom.base_pose","description":""},{"name":"animation.phantom.move","description":""},{"name":"animation.pig.baby_transform","description":""},{"name":"animation.pig.setup","description":""},{"name":"animation.pig.setup.v1.0","description":""},{"name":"animation.piglin.admire","description":""},{"name":"animation.piglin.celebrate_hunt","description":""},{"name":"animation.piglin.celebrate_hunt_special","description":""},{"name":"animation.piglin.crossbow.charge","description":""},{"name":"animation.piglin.crossbow.hold","description":""},{"name":"animation.piglin.hand.attack","description":""},{"name":"animation.piglin.move","description":""},{"name":"animation.piglin.sword.attack","description":""},{"name":"animation.pillager.crossbow.charge","description":""},{"name":"animation.pillager.crossbow.hold","description":""},{"name":"animation.player.attack.positions","description":""},{"name":"animation.player.attack.rotations","description":""},{"name":"animation.player.base_pose.upside_down","description":""},{"name":"animation.player.bob","description":""},{"name":"animation.player.bob.stationary","description":""},{"name":"animation.player.bow_equipped","description":""},{"name":"animation.player.cape","description":""},{"name":"animation.player.crawl","description":""},{"name":"animation.player.crawl.legs","description":""},{"name":"animation.player.crossbow_equipped","description":""},{"name":"animation.player.crossbow_hold","description":""},{"name":"animation.player.first_person.attack_rotation","description":""},{"name":"animation.player.first_person.attack_rotation_item","description":""},{"name":"animation.player.first_person.base_pose","description":""},{"name":"animation.player.first_person.breathing_bob","description":""},{"name":"animation.player.first_person.crossbow_equipped","description":""},{"name":"animation.player.first_person.crossbow_hold","description":""},{"name":"animation.player.first_person.empty_hand","description":""},{"name":"animation.player.first_person.map_hold","description":""},{"name":"animation.player.first_person.map_hold_attack","description":""},{"name":"animation.player.first_person.map_hold_main_hand","description":""},{"name":"animation.player.first_person.map_hold_off_hand","description":""},{"name":"animation.player.first_person.shield_block","description":""},{"name":"animation.player.first_person.swap_item","description":""},{"name":"animation.player.first_person.vr_attack_rotation","description":""},{"name":"animation.player.first_person.walk","description":""},{"name":"animation.player.glide","description":""},{"name":"animation.player.holding","description":""},{"name":"animation.player.holding.zombie","description":""},{"name":"animation.player.look_at_target.inverted","description":""},{"name":"animation.player.look_at_target.ui","description":""},{"name":"animation.player.move.arms","description":""},{"name":"animation.player.move.arms.single","description":""},{"name":"animation.player.move.arms.stationary","description":""},{"name":"animation.player.move.arms.statue_of_liberty","description":""},{"name":"animation.player.move.arms.zombie","description":""},{"name":"animation.player.move.legs","description":""},{"name":"animation.player.move.legs.inverted","description":""},{"name":"animation.player.move.legs.single","description":""},{"name":"animation.player.move.legs.stationary","description":""},{"name":"animation.player.riding.arms","description":""},{"name":"animation.player.riding.arms.zombie","description":""},{"name":"animation.player.riding.legs","description":""},{"name":"animation.player.shield_block_main_hand","description":""},{"name":"animation.player.shield_block_off_hand","description":""},{"name":"animation.player.sleeping","description":""},{"name":"animation.player.sneaking","description":""},{"name":"animation.player.sneaking.inverted","description":""},{"name":"animation.player.swim","description":""},{"name":"animation.player.swim.legs","description":""},{"name":"animation.player.swim.legs.single","description":""},{"name":"animation.player.swim.legs.stationary","description":""},{"name":"animation.polarbear.baby_transform","description":""},{"name":"animation.polarbear.move","description":""},{"name":"animation.pufferfish.flop","description":""},{"name":"animation.pufferfish.swim","description":""},{"name":"animation.quadruped.walk","description":""},{"name":"animation.rabbit.baby_transform","description":""},{"name":"animation.rabbit.move","description":""},{"name":"animation.ravager.biting","description":""},{"name":"animation.ravager.idle_mouth","description":""},{"name":"animation.ravager.roaring","description":""},{"name":"animation.ravager.stunned","description":""},{"name":"animation.ravager.walk","description":""},{"name":"animation.react_arm_1","description":""},{"name":"animation.react_arm_2","description":""},{"name":"animation.react_back_1","description":""},{"name":"animation.react_back_2","description":""},{"name":"animation.react_bored_1","description":""},{"name":"animation.react_bored_arm_1","description":""},{"name":"animation.react_bored_back_1","description":""},{"name":"animation.react_bored_bottom_1","description":""},{"name":"animation.react_bored_head_1","description":""},{"name":"animation.react_bored_torso_1","description":""},{"name":"animation.react_bottom_1","description":""},{"name":"animation.react_bottom_2","description":""},{"name":"animation.react_bottom_3","description":""},{"name":"animation.react_confirm_1","description":""},{"name":"animation.react_confirm_2","description":""},{"name":"animation.react_head_1","description":""},{"name":"animation.react_head_2","description":""},{"name":"animation.react_idle","description":""},{"name":"animation.react_offer_1","description":""},{"name":"animation.react_offer_2","description":""},{"name":"animation.react_offer_arm_1","description":""},{"name":"animation.react_offer_arm_2","description":""},{"name":"animation.react_offer_back_1","description":""},{"name":"animation.react_offer_back_2","description":""},{"name":"animation.react_offer_bottom_1","description":""},{"name":"animation.react_offer_bottom_2","description":""},{"name":"animation.react_offer_head_1","description":""},{"name":"animation.react_offer_head_2","description":""},{"name":"animation.react_offer_torso_1","description":""},{"name":"animation.react_offer_torso_2","description":""},{"name":"animation.react_torso_1","description":""},{"name":"animation.react_torso_2","description":""},{"name":"animation.salmon.flop","description":""},{"name":"animation.salmon.swim","description":""},{"name":"animation.sheep.baby_transform","description":""},{"name":"animation.sheep.grazing","description":""},{"name":"animation.sheep.setup","description":""},{"name":"animation.shield.wield_first_person_blocking","description":""},{"name":"animation.shield.wield_main_hand_first_person","description":""},{"name":"animation.shield.wield_main_hand_first_person_blocking","description":""},{"name":"animation.shield.wield_off_hand_first_person","description":""},{"name":"animation.shield.wield_off_hand_first_person_blocking","description":""},{"name":"animation.shield.wield_third_person","description":""},{"name":"animation.shulker.facing","description":""},{"name":"animation.shulker.facing.v1.0","description":""},{"name":"animation.shulker.move","description":""},{"name":"animation.shulker.move.v1.0","description":""},{"name":"animation.shulker_bullet.move","description":""},{"name":"animation.silverfish.move","description":""},{"name":"animation.skeleton.attack","description":""},{"name":"animation.skeleton.attack.v1.0","description":""},{"name":"animation.sniffer.baby_transform","description":""},{"name":"animation.sniffer.dig","description":""},{"name":"animation.sniffer.feeling_happy","description":""},{"name":"animation.sniffer.longsniff","description":""},{"name":"animation.sniffer.search","description":""},{"name":"animation.sniffer.sniffsniff","description":""},{"name":"animation.sniffer.stand_up","description":""},{"name":"animation.sniffer.walk","description":""},{"name":"animation.snowgolem.arms","description":""},{"name":"animation.snowgolem.move","description":""},{"name":"animation.snowgolem.move.v1.8","description":""},{"name":"animation.spider.default_leg_pose","description":""},{"name":"animation.spider.look_at_target","description":""},{"name":"animation.spider.walk","description":""},{"name":"animation.spyglass.holding","description":""},{"name":"animation.spyglass.scoping","description":""},{"name":"animation.squid.move","description":""},{"name":"animation.squid.rotate","description":""},{"name":"animation.strider.bristle_flow","description":""},{"name":"animation.strider.look_at_target.default","description":""},{"name":"animation.strider.walk","description":""},{"name":"animation.tadpole.swim","description":""},{"name":"animation.trident.wield_first_person","description":""},{"name":"animation.trident.wield_first_person_raise","description":""},{"name":"animation.trident.wield_first_person_raise_shake","description":""},{"name":"animation.trident.wield_first_person_riptide","description":""},{"name":"animation.trident.wield_third_person","description":""},{"name":"animation.trident.wield_third_person_raise","description":""},{"name":"animation.tripod_camera.neutral","description":""},{"name":"animation.tropicalfish.flop","description":""},{"name":"animation.tropicalfish.swim","description":""},{"name":"animation.turtle.general","description":""},{"name":"animation.turtle.ground_move","description":""},{"name":"animation.turtle.move","description":""},{"name":"animation.vex.attack.rotations.v1.0","description":""},{"name":"animation.vex.charge","description":""},{"name":"animation.vex.idle","description":""},{"name":"animation.vex.move","description":""},{"name":"animation.villager.baby_transform","description":""},{"name":"animation.villager.general","description":""},{"name":"animation.villager.general.v1.0","description":""},{"name":"animation.villager.get_in_bed","description":""},{"name":"animation.villager.move","description":""},{"name":"animation.villager.raise_arms","description":""},{"name":"animation.vindicator.attack","description":""},{"name":"animation.vindicator.base","description":""},{"name":"animation.vindicator.hand_attack","description":""},{"name":"animation.vindicator.riding.arms","description":""},{"name":"animation.vindicator.riding.legs","description":""},{"name":"animation.vindicator.walk","description":""},{"name":"animation.warden.attack","description":""},{"name":"animation.warden.bob","description":""},{"name":"animation.warden.dig","description":""},{"name":"animation.warden.emerge","description":""},{"name":"animation.warden.hurt","description":""},{"name":"animation.warden.look_at_target.default","description":""},{"name":"animation.warden.move","description":""},{"name":"animation.warden.roar","description":""},{"name":"animation.warden.shiver","description":""},{"name":"animation.warden.sniff","description":""},{"name":"animation.warden.sonic_boom","description":""},{"name":"animation.witch.general","description":""},{"name":"animation.wither_boss.look_at_target","description":""},{"name":"animation.wither_boss.move","description":""},{"name":"animation.wither_boss.scale","description":""},{"name":"animation.wither_skeleton.attack","description":""},{"name":"animation.wither_skull.move","description":""},{"name":"animation.wolf.angry","description":""},{"name":"animation.wolf.baby_scaling","description":""},{"name":"animation.wolf.head_rot_z","description":""},{"name":"animation.wolf.leg_default","description":""},{"name":"animation.wolf.setup","description":""},{"name":"animation.wolf.shaking","description":""},{"name":"animation.wolf.sitting","description":""},{"name":"animation.wolf.tail_default","description":""},{"name":"animation.zombie.attack_bare_hand","description":""},{"name":"animation.zombie.swimming","description":""}]}
+{
+  "id": "animation",
+  "type": "normal",
+  "content": [
+    {
+      "name": "animation.actor.billboard",
+      "description": ""
+    },
+    {
+      "name": "animation.agent.move",
+      "description": ""
+    },
+    {
+      "name": "animation.agent.shrug",
+      "description": ""
+    },
+    {
+      "name": "animation.agent.swing_arms",
+      "description": ""
+    },
+    {
+      "name": "animation.allay.dance",
+      "description": ""
+    },
+    {
+      "name": "animation.allay.fly",
+      "description": ""
+    },
+    {
+      "name": "animation.allay.hold_item",
+      "description": ""
+    },
+    {
+      "name": "animation.allay.hold_item_fly",
+      "description": ""
+    },
+    {
+      "name": "animation.allay.idle",
+      "description": ""
+    },
+    {
+      "name": "animation.allay.look_at_target.default",
+      "description": ""
+    },
+    {
+      "name": "animation.armor.boots.offset",
+      "description": ""
+    },
+    {
+      "name": "animation.armor.chestplate.offset",
+      "description": ""
+    },
+    {
+      "name": "animation.armor.helmet.offset",
+      "description": ""
+    },
+    {
+      "name": "animation.armor.leggings.offset",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.athena_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.brandish_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.cancan_a_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.cancan_b_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.default_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.entertain_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.hero_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.honor_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.no_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.riposte_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.salute_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.solemn_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.wiggle",
+      "description": ""
+    },
+    {
+      "name": "animation.armor_stand.zombie_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.arrow.move",
+      "description": ""
+    },
+    {
+      "name": "animation.axolotl.idle_floor",
+      "description": ""
+    },
+    {
+      "name": "animation.axolotl.idle_floor_underwater",
+      "description": ""
+    },
+    {
+      "name": "animation.axolotl.idle_underwater",
+      "description": ""
+    },
+    {
+      "name": "animation.axolotl.play_dead",
+      "description": ""
+    },
+    {
+      "name": "animation.axolotl.swim",
+      "description": ""
+    },
+    {
+      "name": "animation.axolotl.swim_angle",
+      "description": ""
+    },
+    {
+      "name": "animation.axolotl.walk_floor",
+      "description": ""
+    },
+    {
+      "name": "animation.axolotl.walk_floor_underwater",
+      "description": ""
+    },
+    {
+      "name": "animation.bat.flying",
+      "description": ""
+    },
+    {
+      "name": "animation.bat.resting",
+      "description": ""
+    },
+    {
+      "name": "animation.bee.fly.bobbing",
+      "description": ""
+    },
+    {
+      "name": "animation.bee.flying",
+      "description": ""
+    },
+    {
+      "name": "animation.bee.no_stinger",
+      "description": ""
+    },
+    {
+      "name": "animation.bee.sting",
+      "description": ""
+    },
+    {
+      "name": "animation.blaze.move",
+      "description": ""
+    },
+    {
+      "name": "animation.bow.wield",
+      "description": ""
+    },
+    {
+      "name": "animation.bow.wield_first_person_pull",
+      "description": ""
+    },
+    {
+      "name": "animation.camel.dash",
+      "description": ""
+    },
+    {
+      "name": "animation.camel.dash_sound",
+      "description": ""
+    },
+    {
+      "name": "animation.camel.idle",
+      "description": ""
+    },
+    {
+      "name": "animation.camel.look_at_target",
+      "description": ""
+    },
+    {
+      "name": "animation.camel.sit",
+      "description": ""
+    },
+    {
+      "name": "animation.camel.sit_down",
+      "description": ""
+    },
+    {
+      "name": "animation.camel.stand_up",
+      "description": ""
+    },
+    {
+      "name": "animation.camel.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.cat.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.cat.lie_down",
+      "description": ""
+    },
+    {
+      "name": "animation.cat.sit",
+      "description": ""
+    },
+    {
+      "name": "animation.cat.sneak",
+      "description": ""
+    },
+    {
+      "name": "animation.cat.sprint",
+      "description": ""
+    },
+    {
+      "name": "animation.cat.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.chicken.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.chicken.general",
+      "description": ""
+    },
+    {
+      "name": "animation.chicken.general.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.chicken.move",
+      "description": ""
+    },
+    {
+      "name": "animation.cod.flop",
+      "description": ""
+    },
+    {
+      "name": "animation.cod.swim",
+      "description": ""
+    },
+    {
+      "name": "animation.common.look_at_target",
+      "description": ""
+    },
+    {
+      "name": "animation.cow.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.cow.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.cow.setup.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.creeper.legs",
+      "description": ""
+    },
+    {
+      "name": "animation.creeper.swelling",
+      "description": ""
+    },
+    {
+      "name": "animation.crossbow.wield",
+      "description": ""
+    },
+    {
+      "name": "animation.crossbow.wield_first_person_pull",
+      "description": ""
+    },
+    {
+      "name": "animation.dolphin.move",
+      "description": ""
+    },
+    {
+      "name": "animation.drowned.attack.rotations",
+      "description": ""
+    },
+    {
+      "name": "animation.drowned.attack.rotations.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.drowned.swimming.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.elytra.default",
+      "description": ""
+    },
+    {
+      "name": "animation.elytra.gliding",
+      "description": ""
+    },
+    {
+      "name": "animation.elytra.sleeping",
+      "description": ""
+    },
+    {
+      "name": "animation.elytra.sneaking",
+      "description": ""
+    },
+    {
+      "name": "animation.elytra.swimming",
+      "description": ""
+    },
+    {
+      "name": "animation.ender_crystal.move",
+      "description": ""
+    },
+    {
+      "name": "animation.ender_dragon.jaw_movement",
+      "description": ""
+    },
+    {
+      "name": "animation.ender_dragon.neck_head_movement",
+      "description": ""
+    },
+    {
+      "name": "animation.ender_dragon.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.ender_dragon.tail_movement",
+      "description": ""
+    },
+    {
+      "name": "animation.ender_dragon.wings_limbs_movement",
+      "description": ""
+    },
+    {
+      "name": "animation.enderman.arms_legs",
+      "description": ""
+    },
+    {
+      "name": "animation.enderman.base_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.enderman.base_pose_v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.enderman.carrying",
+      "description": ""
+    },
+    {
+      "name": "animation.enderman.scary_face",
+      "description": ""
+    },
+    {
+      "name": "animation.enderman.scary_face_v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.endermite.move",
+      "description": ""
+    },
+    {
+      "name": "animation.evocation_fang.bite",
+      "description": ""
+    },
+    {
+      "name": "animation.evoker.casting",
+      "description": ""
+    },
+    {
+      "name": "animation.evoker.casting.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.evoker.general",
+      "description": ""
+    },
+    {
+      "name": "animation.evoker.general.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.evoker.move",
+      "description": ""
+    },
+    {
+      "name": "animation.fireworks_rocket.move",
+      "description": ""
+    },
+    {
+      "name": "animation.fox.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.fox.crouch",
+      "description": ""
+    },
+    {
+      "name": "animation.fox.pounce",
+      "description": ""
+    },
+    {
+      "name": "animation.fox.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.fox.sit",
+      "description": ""
+    },
+    {
+      "name": "animation.fox.sleep",
+      "description": ""
+    },
+    {
+      "name": "animation.fox.stuck",
+      "description": ""
+    },
+    {
+      "name": "animation.fox.wiggle",
+      "description": ""
+    },
+    {
+      "name": "animation.frog.croak",
+      "description": ""
+    },
+    {
+      "name": "animation.frog.idle.water",
+      "description": ""
+    },
+    {
+      "name": "animation.frog.jump",
+      "description": ""
+    },
+    {
+      "name": "animation.frog.swim",
+      "description": ""
+    },
+    {
+      "name": "animation.frog.tongue",
+      "description": ""
+    },
+    {
+      "name": "animation.frog.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.ghast.move",
+      "description": ""
+    },
+    {
+      "name": "animation.ghast.scale",
+      "description": ""
+    },
+    {
+      "name": "animation.goat.attack",
+      "description": ""
+    },
+    {
+      "name": "animation.goat.baby_scaling",
+      "description": ""
+    },
+    {
+      "name": "animation.goat.look_at_target",
+      "description": ""
+    },
+    {
+      "name": "animation.goat.ram_attack",
+      "description": ""
+    },
+    {
+      "name": "animation.goat.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.guardian.move_eye",
+      "description": ""
+    },
+    {
+      "name": "animation.guardian.move_eye.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.guardian.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.guardian.spikes",
+      "description": ""
+    },
+    {
+      "name": "animation.guardian.spikes.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.guardian.swim",
+      "description": ""
+    },
+    {
+      "name": "animation.hoglin.attack",
+      "description": ""
+    },
+    {
+      "name": "animation.hoglin.baby_scaling",
+      "description": ""
+    },
+    {
+      "name": "animation.hoglin.look_at_target",
+      "description": ""
+    },
+    {
+      "name": "animation.hoglin.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.eat",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.look_at_player",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.mouth",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.shake_tail",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.stand",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.v2.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.v2.eat",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.v2.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.v2.stand",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.v2.tail",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.v2.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.v3.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.v3.eat",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.v3.look_at_player",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.v3.rear",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.v3.tail",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.v3.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.horse.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.attack.rotations",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.attack.rotations.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.base_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.base_pose.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.big_head",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.big_head.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.bob",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.bob.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.bow_and_arrow",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.bow_and_arrow.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.brandish_spear",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.brandish_spear.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.brushing",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.celebrating",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.charging",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.charging.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.damage_nearby_mobs",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.damage_nearby_mobs.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.fishing_rod",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.holding",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.holding.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.holding_brush",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.holding_spyglass",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.look_at_target.default",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.look_at_target.default.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.look_at_target.gliding",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.look_at_target.gliding.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.look_at_target.swimming",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.look_at_target.swimming.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.move",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.move.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.riding.arms",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.riding.arms.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.riding.legs",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.riding.legs.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.sneaking",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.sneaking.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.swimming",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.swimming.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.tooting_goat_horn",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.use_item_progress",
+      "description": ""
+    },
+    {
+      "name": "animation.humanoid.use_item_progress.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.idle_arm_1",
+      "description": ""
+    },
+    {
+      "name": "animation.idle_back_1",
+      "description": ""
+    },
+    {
+      "name": "animation.idle_bottom_1",
+      "description": ""
+    },
+    {
+      "name": "animation.idle_torso_1",
+      "description": ""
+    },
+    {
+      "name": "animation.iron_golem.attack",
+      "description": ""
+    },
+    {
+      "name": "animation.iron_golem.flower",
+      "description": ""
+    },
+    {
+      "name": "animation.iron_golem.move",
+      "description": ""
+    },
+    {
+      "name": "animation.iron_golem.move_to_target",
+      "description": ""
+    },
+    {
+      "name": "animation.iron_golem.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.iron_golem.walk_to_target",
+      "description": ""
+    },
+    {
+      "name": "animation.llama.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.llama.baby_transform.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.llama.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.llama.setup.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.llama_spit.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.magma_cube.move",
+      "description": ""
+    },
+    {
+      "name": "animation.minecart.move",
+      "description": ""
+    },
+    {
+      "name": "animation.minecart.move.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.mooshroom.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.mooshroom.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.mooshroom.setup.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.npc.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.npc.general",
+      "description": ""
+    },
+    {
+      "name": "animation.npc.get_in_bed",
+      "description": ""
+    },
+    {
+      "name": "animation.npc.move",
+      "description": ""
+    },
+    {
+      "name": "animation.npc.raise_arms",
+      "description": ""
+    },
+    {
+      "name": "animation.ocelot.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.ocelot.sit",
+      "description": ""
+    },
+    {
+      "name": "animation.ocelot.sneak",
+      "description": ""
+    },
+    {
+      "name": "animation.ocelot.sprint",
+      "description": ""
+    },
+    {
+      "name": "animation.ocelot.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.ocelot_v1.0.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.ocelot_v1.0.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.ocelot_v1.0.sit",
+      "description": ""
+    },
+    {
+      "name": "animation.ocelot_v1.0.sneak",
+      "description": ""
+    },
+    {
+      "name": "animation.ocelot_v1.0.sprint",
+      "description": ""
+    },
+    {
+      "name": "animation.ocelot_v1.0.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.panda.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.panda.lying",
+      "description": ""
+    },
+    {
+      "name": "animation.panda.rolling",
+      "description": ""
+    },
+    {
+      "name": "animation.panda.sitting",
+      "description": ""
+    },
+    {
+      "name": "animation.panda.sneezing",
+      "description": ""
+    },
+    {
+      "name": "animation.panda.unhappy",
+      "description": ""
+    },
+    {
+      "name": "animation.parrot.base",
+      "description": ""
+    },
+    {
+      "name": "animation.parrot.dance",
+      "description": ""
+    },
+    {
+      "name": "animation.parrot.flying",
+      "description": ""
+    },
+    {
+      "name": "animation.parrot.moving",
+      "description": ""
+    },
+    {
+      "name": "animation.parrot.sitting",
+      "description": ""
+    },
+    {
+      "name": "animation.parrot.standing",
+      "description": ""
+    },
+    {
+      "name": "animation.phantom.base_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.phantom.move",
+      "description": ""
+    },
+    {
+      "name": "animation.pig.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.pig.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.pig.setup.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.piglin.admire",
+      "description": ""
+    },
+    {
+      "name": "animation.piglin.celebrate_hunt",
+      "description": ""
+    },
+    {
+      "name": "animation.piglin.celebrate_hunt_special",
+      "description": ""
+    },
+    {
+      "name": "animation.piglin.crossbow.charge",
+      "description": ""
+    },
+    {
+      "name": "animation.piglin.crossbow.hold",
+      "description": ""
+    },
+    {
+      "name": "animation.piglin.hand.attack",
+      "description": ""
+    },
+    {
+      "name": "animation.piglin.move",
+      "description": ""
+    },
+    {
+      "name": "animation.piglin.sword.attack",
+      "description": ""
+    },
+    {
+      "name": "animation.pillager.crossbow.charge",
+      "description": ""
+    },
+    {
+      "name": "animation.pillager.crossbow.hold",
+      "description": ""
+    },
+    {
+      "name": "animation.player.attack.positions",
+      "description": ""
+    },
+    {
+      "name": "animation.player.attack.rotations",
+      "description": ""
+    },
+    {
+      "name": "animation.player.base_pose.upside_down",
+      "description": ""
+    },
+    {
+      "name": "animation.player.bob",
+      "description": ""
+    },
+    {
+      "name": "animation.player.bob.stationary",
+      "description": ""
+    },
+    {
+      "name": "animation.player.bow_equipped",
+      "description": ""
+    },
+    {
+      "name": "animation.player.cape",
+      "description": ""
+    },
+    {
+      "name": "animation.player.crawl",
+      "description": ""
+    },
+    {
+      "name": "animation.player.crawl.legs",
+      "description": ""
+    },
+    {
+      "name": "animation.player.crossbow_equipped",
+      "description": ""
+    },
+    {
+      "name": "animation.player.crossbow_hold",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.attack_rotation",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.attack_rotation_item",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.base_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.breathing_bob",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.crossbow_equipped",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.crossbow_hold",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.empty_hand",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.map_hold",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.map_hold_attack",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.map_hold_main_hand",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.map_hold_off_hand",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.shield_block",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.swap_item",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.vr_attack_rotation",
+      "description": ""
+    },
+    {
+      "name": "animation.player.first_person.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.player.glide",
+      "description": ""
+    },
+    {
+      "name": "animation.player.holding",
+      "description": ""
+    },
+    {
+      "name": "animation.player.holding.zombie",
+      "description": ""
+    },
+    {
+      "name": "animation.player.look_at_target.inverted",
+      "description": ""
+    },
+    {
+      "name": "animation.player.look_at_target.ui",
+      "description": ""
+    },
+    {
+      "name": "animation.player.move.arms",
+      "description": ""
+    },
+    {
+      "name": "animation.player.move.arms.single",
+      "description": ""
+    },
+    {
+      "name": "animation.player.move.arms.stationary",
+      "description": ""
+    },
+    {
+      "name": "animation.player.move.arms.statue_of_liberty",
+      "description": ""
+    },
+    {
+      "name": "animation.player.move.arms.zombie",
+      "description": ""
+    },
+    {
+      "name": "animation.player.move.legs",
+      "description": ""
+    },
+    {
+      "name": "animation.player.move.legs.inverted",
+      "description": ""
+    },
+    {
+      "name": "animation.player.move.legs.single",
+      "description": ""
+    },
+    {
+      "name": "animation.player.move.legs.stationary",
+      "description": ""
+    },
+    {
+      "name": "animation.player.riding.arms",
+      "description": ""
+    },
+    {
+      "name": "animation.player.riding.arms.zombie",
+      "description": ""
+    },
+    {
+      "name": "animation.player.riding.legs",
+      "description": ""
+    },
+    {
+      "name": "animation.player.shield_block_main_hand",
+      "description": ""
+    },
+    {
+      "name": "animation.player.shield_block_off_hand",
+      "description": ""
+    },
+    {
+      "name": "animation.player.sleeping",
+      "description": ""
+    },
+    {
+      "name": "animation.player.sneaking",
+      "description": ""
+    },
+    {
+      "name": "animation.player.sneaking.inverted",
+      "description": ""
+    },
+    {
+      "name": "animation.player.swim",
+      "description": ""
+    },
+    {
+      "name": "animation.player.swim.legs",
+      "description": ""
+    },
+    {
+      "name": "animation.player.swim.legs.single",
+      "description": ""
+    },
+    {
+      "name": "animation.player.swim.legs.stationary",
+      "description": ""
+    },
+    {
+      "name": "animation.polarbear.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.polarbear.move",
+      "description": ""
+    },
+    {
+      "name": "animation.pufferfish.flop",
+      "description": ""
+    },
+    {
+      "name": "animation.pufferfish.swim",
+      "description": ""
+    },
+    {
+      "name": "animation.quadruped.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.rabbit.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.rabbit.move",
+      "description": ""
+    },
+    {
+      "name": "animation.ravager.biting",
+      "description": ""
+    },
+    {
+      "name": "animation.ravager.idle_mouth",
+      "description": ""
+    },
+    {
+      "name": "animation.ravager.roaring",
+      "description": ""
+    },
+    {
+      "name": "animation.ravager.stunned",
+      "description": ""
+    },
+    {
+      "name": "animation.ravager.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.react_arm_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_arm_2",
+      "description": ""
+    },
+    {
+      "name": "animation.react_back_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_back_2",
+      "description": ""
+    },
+    {
+      "name": "animation.react_bored_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_bored_arm_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_bored_back_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_bored_bottom_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_bored_head_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_bored_torso_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_bottom_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_bottom_2",
+      "description": ""
+    },
+    {
+      "name": "animation.react_bottom_3",
+      "description": ""
+    },
+    {
+      "name": "animation.react_confirm_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_confirm_2",
+      "description": ""
+    },
+    {
+      "name": "animation.react_head_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_head_2",
+      "description": ""
+    },
+    {
+      "name": "animation.react_idle",
+      "description": ""
+    },
+    {
+      "name": "animation.react_offer_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_offer_2",
+      "description": ""
+    },
+    {
+      "name": "animation.react_offer_arm_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_offer_arm_2",
+      "description": ""
+    },
+    {
+      "name": "animation.react_offer_back_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_offer_back_2",
+      "description": ""
+    },
+    {
+      "name": "animation.react_offer_bottom_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_offer_bottom_2",
+      "description": ""
+    },
+    {
+      "name": "animation.react_offer_head_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_offer_head_2",
+      "description": ""
+    },
+    {
+      "name": "animation.react_offer_torso_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_offer_torso_2",
+      "description": ""
+    },
+    {
+      "name": "animation.react_torso_1",
+      "description": ""
+    },
+    {
+      "name": "animation.react_torso_2",
+      "description": ""
+    },
+    {
+      "name": "animation.salmon.flop",
+      "description": ""
+    },
+    {
+      "name": "animation.salmon.swim",
+      "description": ""
+    },
+    {
+      "name": "animation.sheep.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.sheep.grazing",
+      "description": ""
+    },
+    {
+      "name": "animation.sheep.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.shield.wield_first_person_blocking",
+      "description": ""
+    },
+    {
+      "name": "animation.shield.wield_main_hand_first_person",
+      "description": ""
+    },
+    {
+      "name": "animation.shield.wield_main_hand_first_person_blocking",
+      "description": ""
+    },
+    {
+      "name": "animation.shield.wield_off_hand_first_person",
+      "description": ""
+    },
+    {
+      "name": "animation.shield.wield_off_hand_first_person_blocking",
+      "description": ""
+    },
+    {
+      "name": "animation.shield.wield_third_person",
+      "description": ""
+    },
+    {
+      "name": "animation.shulker.facing",
+      "description": ""
+    },
+    {
+      "name": "animation.shulker.facing.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.shulker.move",
+      "description": ""
+    },
+    {
+      "name": "animation.shulker.move.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.shulker_bullet.move",
+      "description": ""
+    },
+    {
+      "name": "animation.silverfish.move",
+      "description": ""
+    },
+    {
+      "name": "animation.skeleton.attack",
+      "description": ""
+    },
+    {
+      "name": "animation.skeleton.attack.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.sniffer.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.sniffer.dig",
+      "description": ""
+    },
+    {
+      "name": "animation.sniffer.feeling_happy",
+      "description": ""
+    },
+    {
+      "name": "animation.sniffer.longsniff",
+      "description": ""
+    },
+    {
+      "name": "animation.sniffer.search",
+      "description": ""
+    },
+    {
+      "name": "animation.sniffer.sniffsniff",
+      "description": ""
+    },
+    {
+      "name": "animation.sniffer.stand_up",
+      "description": ""
+    },
+    {
+      "name": "animation.sniffer.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.snowgolem.arms",
+      "description": ""
+    },
+    {
+      "name": "animation.snowgolem.move",
+      "description": ""
+    },
+    {
+      "name": "animation.snowgolem.move.v1.8",
+      "description": ""
+    },
+    {
+      "name": "animation.spider.default_leg_pose",
+      "description": ""
+    },
+    {
+      "name": "animation.spider.look_at_target",
+      "description": ""
+    },
+    {
+      "name": "animation.spider.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.spyglass.holding",
+      "description": ""
+    },
+    {
+      "name": "animation.spyglass.scoping",
+      "description": ""
+    },
+    {
+      "name": "animation.squid.move",
+      "description": ""
+    },
+    {
+      "name": "animation.squid.rotate",
+      "description": ""
+    },
+    {
+      "name": "animation.strider.bristle_flow",
+      "description": ""
+    },
+    {
+      "name": "animation.strider.look_at_target.default",
+      "description": ""
+    },
+    {
+      "name": "animation.strider.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.tadpole.swim",
+      "description": ""
+    },
+    {
+      "name": "animation.trident.wield_first_person",
+      "description": ""
+    },
+    {
+      "name": "animation.trident.wield_first_person_raise",
+      "description": ""
+    },
+    {
+      "name": "animation.trident.wield_first_person_raise_shake",
+      "description": ""
+    },
+    {
+      "name": "animation.trident.wield_first_person_riptide",
+      "description": ""
+    },
+    {
+      "name": "animation.trident.wield_third_person",
+      "description": ""
+    },
+    {
+      "name": "animation.trident.wield_third_person_raise",
+      "description": ""
+    },
+    {
+      "name": "animation.tripod_camera.neutral",
+      "description": ""
+    },
+    {
+      "name": "animation.tropicalfish.flop",
+      "description": ""
+    },
+    {
+      "name": "animation.tropicalfish.swim",
+      "description": ""
+    },
+    {
+      "name": "animation.turtle.general",
+      "description": ""
+    },
+    {
+      "name": "animation.turtle.ground_move",
+      "description": ""
+    },
+    {
+      "name": "animation.turtle.move",
+      "description": ""
+    },
+    {
+      "name": "animation.vex.attack.rotations.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.vex.charge",
+      "description": ""
+    },
+    {
+      "name": "animation.vex.idle",
+      "description": ""
+    },
+    {
+      "name": "animation.vex.move",
+      "description": ""
+    },
+    {
+      "name": "animation.villager.baby_transform",
+      "description": ""
+    },
+    {
+      "name": "animation.villager.general",
+      "description": ""
+    },
+    {
+      "name": "animation.villager.general.v1.0",
+      "description": ""
+    },
+    {
+      "name": "animation.villager.get_in_bed",
+      "description": ""
+    },
+    {
+      "name": "animation.villager.move",
+      "description": ""
+    },
+    {
+      "name": "animation.villager.raise_arms",
+      "description": ""
+    },
+    {
+      "name": "animation.vindicator.attack",
+      "description": ""
+    },
+    {
+      "name": "animation.vindicator.base",
+      "description": ""
+    },
+    {
+      "name": "animation.vindicator.hand_attack",
+      "description": ""
+    },
+    {
+      "name": "animation.vindicator.riding.arms",
+      "description": ""
+    },
+    {
+      "name": "animation.vindicator.riding.legs",
+      "description": ""
+    },
+    {
+      "name": "animation.vindicator.walk",
+      "description": ""
+    },
+    {
+      "name": "animation.warden.attack",
+      "description": ""
+    },
+    {
+      "name": "animation.warden.bob",
+      "description": ""
+    },
+    {
+      "name": "animation.warden.dig",
+      "description": ""
+    },
+    {
+      "name": "animation.warden.emerge",
+      "description": ""
+    },
+    {
+      "name": "animation.warden.hurt",
+      "description": ""
+    },
+    {
+      "name": "animation.warden.look_at_target.default",
+      "description": ""
+    },
+    {
+      "name": "animation.warden.move",
+      "description": ""
+    },
+    {
+      "name": "animation.warden.roar",
+      "description": ""
+    },
+    {
+      "name": "animation.warden.shiver",
+      "description": ""
+    },
+    {
+      "name": "animation.warden.sniff",
+      "description": ""
+    },
+    {
+      "name": "animation.warden.sonic_boom",
+      "description": ""
+    },
+    {
+      "name": "animation.witch.general",
+      "description": ""
+    },
+    {
+      "name": "animation.wither_boss.look_at_target",
+      "description": ""
+    },
+    {
+      "name": "animation.wither_boss.move",
+      "description": ""
+    },
+    {
+      "name": "animation.wither_boss.scale",
+      "description": ""
+    },
+    {
+      "name": "animation.wither_skeleton.attack",
+      "description": ""
+    },
+    {
+      "name": "animation.wither_skull.move",
+      "description": ""
+    },
+    {
+      "name": "animation.wolf.angry",
+      "description": ""
+    },
+    {
+      "name": "animation.wolf.baby_scaling",
+      "description": ""
+    },
+    {
+      "name": "animation.wolf.head_rot_z",
+      "description": ""
+    },
+    {
+      "name": "animation.wolf.leg_default",
+      "description": ""
+    },
+    {
+      "name": "animation.wolf.setup",
+      "description": ""
+    },
+    {
+      "name": "animation.wolf.shaking",
+      "description": ""
+    },
+    {
+      "name": "animation.wolf.sitting",
+      "description": ""
+    },
+    {
+      "name": "animation.wolf.tail_default",
+      "description": ""
+    },
+    {
+      "name": "animation.zombie.attack_bare_hand",
+      "description": ""
+    },
+    {
+      "name": "animation.zombie.swimming",
+      "description": ""
+    }
+  ]
+}

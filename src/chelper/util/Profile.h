@@ -10,11 +10,11 @@
 //这个类是为了跟踪代码的运行，在遇到bug的时候方便排查错误的位置
 namespace CHelper::Profile {
 
-    void push(const std::string& str);
+    void push(const std::string &str);
 
     void pop();
 
-    void next(const std::string& str);
+    void next(const std::string &str);
 
     void clear();
 

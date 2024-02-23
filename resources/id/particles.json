@@ -1,1 +1,570 @@
-{"id":"particles","type":"normal","content":[{"name":"minecraft:arrow_spell_emitter","description":""},{"name":"minecraft:balloon_gas_particle","description":""},{"name":"minecraft:basic_bubble_particle","description":""},{"name":"minecraft:basic_bubble_particle_manual","description":""},{"name":"minecraft:basic_crit_particle","description":""},{"name":"minecraft:basic_flame_particle","description":""},{"name":"minecraft:basic_portal_particle","description":""},{"name":"minecraft:basic_smoke_particle","description":""},{"name":"minecraft:bleach","description":""},{"name":"minecraft:block_destruct","description":""},{"name":"minecraft:block_slide","description":""},{"name":"minecraft:blue_flame_particle","description":""},{"name":"minecraft:breaking_item_icon","description":""},{"name":"minecraft:breaking_item_terrain","description":""},{"name":"minecraft:bubble_column_bubble","description":""},{"name":"minecraft:bubble_column_down_particle","description":""},{"name":"minecraft:bubble_column_up_particle","description":""},{"name":"minecraft:camera_shoot_explosion","description":""},{"name":"minecraft:campfire_smoke_particle","description":""},{"name":"minecraft:campfire_tall_smoke_particle","description":""},{"name":"minecraft:candle_flame_particle","description":""},{"name":"minecraft:cauldron_bubble_particle","description":""},{"name":"minecraft:cauldron_explosion_emitter","description":""},{"name":"minecraft:cauldron_spell_emitter","description":""},{"name":"minecraft:cauldron_splash_particle","description":""},{"name":"minecraft:cherry_leaves_particle","description":""},{"name":"minecraft:colored_flame_particle","description":""},{"name":"minecraft:conduit_absorb_particle","description":""},{"name":"minecraft:conduit_attack_emitter","description":""},{"name":"minecraft:conduit_particle","description":""},{"name":"minecraft:critical_hit_emitter","description":""},{"name":"minecraft:crop_growth_area_emitter","description":""},{"name":"minecraft:crop_growth_emitter","description":""},{"name":"minecraft:death_explosion_emitter","description":""},{"name":"minecraft:dolphin_move_particle","description":""},{"name":"minecraft:dragon_breath_fire","description":""},{"name":"minecraft:dragon_breath_lingering","description":""},{"name":"minecraft:dragon_breath_trail","description":""},{"name":"minecraft:dragon_death_explosion_emitter","description":""},{"name":"minecraft:dragon_destroy_block","description":""},{"name":"minecraft:dragon_dying_explosion","description":""},{"name":"minecraft:egg_destroy_emitter","description":""},{"name":"minecraft:electric_spark_particle","description":""},{"name":"minecraft:elephant_tooth_paste_vapor_particle","description":""},{"name":"minecraft:enchanting_table_particle","description":""},{"name":"minecraft:end_chest","description":""},{"name":"minecraft:endrod","description":""},{"name":"minecraft:evocation_fang_particle","description":""},{"name":"minecraft:evoker_spell","description":""},{"name":"minecraft:explosion_manual","description":""},{"name":"minecraft:explosion_particle","description":""},{"name":"minecraft:eye_of_ender_bubble_particle","description":""},{"name":"minecraft:eyeofender_death_explode_particle","description":""},{"name":"minecraft:falling_border_dust_particle","description":""},{"name":"minecraft:falling_dust","description":""},{"name":"minecraft:falling_dust_concrete_powder_particle","description":""},{"name":"minecraft:falling_dust_dragon_egg_particle","description":""},{"name":"minecraft:falling_dust_gravel_particle","description":""},{"name":"minecraft:falling_dust_red_sand_particle","description":""},{"name":"minecraft:falling_dust_sand_particle","description":""},{"name":"minecraft:falling_dust_scaffolding_particle","description":""},{"name":"minecraft:falling_dust_top_snow_particle","description":""},{"name":"minecraft:fish_hook_particle","description":""},{"name":"minecraft:fish_pos_particle","description":""},{"name":"minecraft:glow_particle","description":""},{"name":"minecraft:guardian_attack_particle","description":""},{"name":"minecraft:guardian_water_move_particle","description":""},{"name":"minecraft:heart_particle","description":""},{"name":"minecraft:honey_drip_particle","description":""},{"name":"minecraft:huge_explosion_emitter","description":""},{"name":"minecraft:huge_explosion_lab_misc_emitter","description":""},{"name":"minecraft:ice_evaporation_emitter","description":""},{"name":"minecraft:ink_emitter","description":""},{"name":"minecraft:knockback_roar_particle","description":""},{"name":"minecraft:lab_table_heatblock_dust_particle","description":""},{"name":"minecraft:lab_table_misc_mystical_particle","description":""},{"name":"minecraft:large_explosion","description":""},{"name":"minecraft:lava_drip_particle","description":""},{"name":"minecraft:lava_particle","description":""},{"name":"minecraft:llama_spit_smoke","description":""},{"name":"minecraft:magnesium_salts_emitter","description":""},{"name":"minecraft:misc_fire_vapor_particle","description":""},{"name":"minecraft:mob_block_spawn_emitter","description":""},{"name":"minecraft:mob_portal","description":""},{"name":"minecraft:mobflame_emitter","description":""},{"name":"minecraft:mobflame_single","description":""},{"name":"minecraft:mobspell_ambient","description":""},{"name":"minecraft:mobspell_emitter","description":""},{"name":"minecraft:mycelium_dust_particle","description":""},{"name":"minecraft:nectar_drip_particle","description":""},{"name":"minecraft:note_particle","description":""},{"name":"minecraft:obsidian_glow_dust_particle","description":""},{"name":"minecraft:obsidian_tear_particle","description":""},{"name":"minecraft:phantom_trail_particle","description":""},{"name":"minecraft:portal_directional","description":""},{"name":"minecraft:portal_east_west","description":""},{"name":"minecraft:portal_north_south","description":""},{"name":"minecraft:portal_reverse_particle","description":""},{"name":"minecraft:rain_splash_particle","description":""},{"name":"minecraft:redstone_ore_dust_particle","description":""},{"name":"minecraft:redstone_repeater_dust_particle","description":""},{"name":"minecraft:redstone_torch_dust_particle","description":""},{"name":"minecraft:redstone_wire_dust_particle","description":""},{"name":"minecraft:rising_border_dust_particle","description":""},{"name":"minecraft:sculk_charge_particle","description":""},{"name":"minecraft:sculk_charge_pop_particle","description":""},{"name":"minecraft:sculk_sensor_redstone_particle","description":""},{"name":"minecraft:sculk_soul_particle","description":""},{"name":"minecraft:shriek_particle","description":""},{"name":"minecraft:shulker_bullet","description":""},{"name":"minecraft:silverfish_grief_emitter","description":""},{"name":"minecraft:snowflake_particle","description":""},{"name":"minecraft:sonic_explosion","description":""},{"name":"minecraft:soul_particle","description":""},{"name":"minecraft:sparkler_emitter","description":""},{"name":"minecraft:splash_spell_emitter","description":""},{"name":"minecraft:sponge_absorb_water_particle","description":""},{"name":"minecraft:spore_blossom_ambient_particle","description":""},{"name":"minecraft:spore_blossom_shower_particle","description":""},{"name":"minecraft:squid_flee_particle","description":""},{"name":"minecraft:squid_ink_bubble","description":""},{"name":"minecraft:squid_move_particle","description":""},{"name":"minecraft:stalactite_lava_drip_particle","description":""},{"name":"minecraft:stalactite_water_drip_particle","description":""},{"name":"minecraft:stunned_emitter","description":""},{"name":"minecraft:totem_manual","description":""},{"name":"minecraft:totem_particle","description":""},{"name":"minecraft:underwater_torch_particle","description":""},{"name":"minecraft:vibration_signal","description":""},{"name":"minecraft:villager_angry","description":""},{"name":"minecraft:villager_happy","description":""},{"name":"minecraft:warden_dig","description":""},{"name":"minecraft:water_drip_particle","description":""},{"name":"minecraft:water_evaporation_actor_emitter","description":""},{"name":"minecraft:water_evaporation_bucket_emitter","description":""},{"name":"minecraft:water_evaporation_manual","description":""},{"name":"minecraft:water_splash_particle","description":""},{"name":"minecraft:water_splash_particle_manual","description":""},{"name":"minecraft:water_wake_particle","description":""},{"name":"minecraft:wax_particle","description":""},{"name":"minecraft:wither_boss_invulnerable","description":""}]}
+{
+  "id": "particles",
+  "type": "normal",
+  "content": [
+    {
+      "name": "minecraft:arrow_spell_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:balloon_gas_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:basic_bubble_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:basic_bubble_particle_manual",
+      "description": ""
+    },
+    {
+      "name": "minecraft:basic_crit_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:basic_flame_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:basic_portal_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:basic_smoke_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:bleach",
+      "description": ""
+    },
+    {
+      "name": "minecraft:block_destruct",
+      "description": ""
+    },
+    {
+      "name": "minecraft:block_slide",
+      "description": ""
+    },
+    {
+      "name": "minecraft:blue_flame_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:breaking_item_icon",
+      "description": ""
+    },
+    {
+      "name": "minecraft:breaking_item_terrain",
+      "description": ""
+    },
+    {
+      "name": "minecraft:bubble_column_bubble",
+      "description": ""
+    },
+    {
+      "name": "minecraft:bubble_column_down_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:bubble_column_up_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:camera_shoot_explosion",
+      "description": ""
+    },
+    {
+      "name": "minecraft:campfire_smoke_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:campfire_tall_smoke_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:candle_flame_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:cauldron_bubble_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:cauldron_explosion_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:cauldron_spell_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:cauldron_splash_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:cherry_leaves_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:colored_flame_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:conduit_absorb_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:conduit_attack_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:conduit_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:critical_hit_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:crop_growth_area_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:crop_growth_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:death_explosion_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:dolphin_move_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:dragon_breath_fire",
+      "description": ""
+    },
+    {
+      "name": "minecraft:dragon_breath_lingering",
+      "description": ""
+    },
+    {
+      "name": "minecraft:dragon_breath_trail",
+      "description": ""
+    },
+    {
+      "name": "minecraft:dragon_death_explosion_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:dragon_destroy_block",
+      "description": ""
+    },
+    {
+      "name": "minecraft:dragon_dying_explosion",
+      "description": ""
+    },
+    {
+      "name": "minecraft:egg_destroy_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:electric_spark_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:elephant_tooth_paste_vapor_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:enchanting_table_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:end_chest",
+      "description": ""
+    },
+    {
+      "name": "minecraft:endrod",
+      "description": ""
+    },
+    {
+      "name": "minecraft:evocation_fang_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:evoker_spell",
+      "description": ""
+    },
+    {
+      "name": "minecraft:explosion_manual",
+      "description": ""
+    },
+    {
+      "name": "minecraft:explosion_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:eye_of_ender_bubble_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:eyeofender_death_explode_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:falling_border_dust_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:falling_dust",
+      "description": ""
+    },
+    {
+      "name": "minecraft:falling_dust_concrete_powder_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:falling_dust_dragon_egg_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:falling_dust_gravel_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:falling_dust_red_sand_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:falling_dust_sand_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:falling_dust_scaffolding_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:falling_dust_top_snow_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:fish_hook_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:fish_pos_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:glow_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:guardian_attack_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:guardian_water_move_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:heart_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:honey_drip_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:huge_explosion_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:huge_explosion_lab_misc_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:ice_evaporation_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:ink_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:knockback_roar_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:lab_table_heatblock_dust_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:lab_table_misc_mystical_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:large_explosion",
+      "description": ""
+    },
+    {
+      "name": "minecraft:lava_drip_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:lava_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:llama_spit_smoke",
+      "description": ""
+    },
+    {
+      "name": "minecraft:magnesium_salts_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:misc_fire_vapor_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:mob_block_spawn_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:mob_portal",
+      "description": ""
+    },
+    {
+      "name": "minecraft:mobflame_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:mobflame_single",
+      "description": ""
+    },
+    {
+      "name": "minecraft:mobspell_ambient",
+      "description": ""
+    },
+    {
+      "name": "minecraft:mobspell_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:mycelium_dust_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:nectar_drip_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:note_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:obsidian_glow_dust_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:obsidian_tear_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:phantom_trail_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:portal_directional",
+      "description": ""
+    },
+    {
+      "name": "minecraft:portal_east_west",
+      "description": ""
+    },
+    {
+      "name": "minecraft:portal_north_south",
+      "description": ""
+    },
+    {
+      "name": "minecraft:portal_reverse_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:rain_splash_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:redstone_ore_dust_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:redstone_repeater_dust_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:redstone_torch_dust_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:redstone_wire_dust_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:rising_border_dust_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:sculk_charge_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:sculk_charge_pop_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:sculk_sensor_redstone_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:sculk_soul_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:shriek_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:shulker_bullet",
+      "description": ""
+    },
+    {
+      "name": "minecraft:silverfish_grief_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:snowflake_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:sonic_explosion",
+      "description": ""
+    },
+    {
+      "name": "minecraft:soul_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:sparkler_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:splash_spell_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:sponge_absorb_water_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:spore_blossom_ambient_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:spore_blossom_shower_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:squid_flee_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:squid_ink_bubble",
+      "description": ""
+    },
+    {
+      "name": "minecraft:squid_move_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:stalactite_lava_drip_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:stalactite_water_drip_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:stunned_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:totem_manual",
+      "description": ""
+    },
+    {
+      "name": "minecraft:totem_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:underwater_torch_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:vibration_signal",
+      "description": ""
+    },
+    {
+      "name": "minecraft:villager_angry",
+      "description": ""
+    },
+    {
+      "name": "minecraft:villager_happy",
+      "description": ""
+    },
+    {
+      "name": "minecraft:warden_dig",
+      "description": ""
+    },
+    {
+      "name": "minecraft:water_drip_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:water_evaporation_actor_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:water_evaporation_bucket_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:water_evaporation_manual",
+      "description": ""
+    },
+    {
+      "name": "minecraft:water_splash_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:water_splash_particle_manual",
+      "description": ""
+    },
+    {
+      "name": "minecraft:water_wake_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:wax_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:wither_boss_invulnerable",
+      "description": ""
+    }
+  ]
+}

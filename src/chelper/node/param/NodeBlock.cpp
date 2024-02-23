@@ -31,7 +31,7 @@ namespace CHelper::Node {
                                   {NodeBlockId::getInstance(), NodeBlockState::getInstance()});
     }
 
-    std::optional<std::string> NodeBlock::getDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::string> NodeBlock::collectDescription(const ASTNode *node, size_t index) const {
         return std::nullopt;
     }
 

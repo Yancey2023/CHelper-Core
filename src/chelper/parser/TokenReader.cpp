@@ -22,7 +22,7 @@ namespace CHelper {
 
     const Token *TokenReader::read() {
         const Token *result = peek();
-        if(result != nullptr){
+        if (result != nullptr) {
             skip();
         }
         return result;

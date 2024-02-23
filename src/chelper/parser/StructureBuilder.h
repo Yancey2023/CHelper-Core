@@ -17,19 +17,19 @@ namespace CHelper {
     public:
         [[nodiscard]] bool isDirty() const;
 
-        StructureBuilder& appendUnknownIfNotDirty(bool isMustHave);
+        StructureBuilder &appendUnknownIfNotDirty(bool isMustHave);
 
-        StructureBuilder& appendSymbol(char ch);
+        StructureBuilder &appendSymbol(char ch);
 
-        StructureBuilder& append(const std::string &str);
+        StructureBuilder &append(const std::string &str);
 
-        StructureBuilder& appendWhiteSpace();
+        StructureBuilder &appendWhiteSpace();
 
-        StructureBuilder& appendLeftBracket(bool isMustHave);
+        StructureBuilder &appendLeftBracket(bool isMustHave);
 
-        StructureBuilder& appendRightBracket(bool isMustHave);
+        StructureBuilder &appendRightBracket(bool isMustHave);
 
-        StructureBuilder& append(bool isMustHave, const std::string &str);
+        StructureBuilder &append(bool isMustHave, const std::string &str);
 
         std::string build();
 

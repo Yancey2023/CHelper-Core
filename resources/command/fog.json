@@ -1,1 +1,108 @@
-{"node":[{"isMustPlayer":true,"isOnlyOne":false,"isMustNPC":false,"description":"修改玩家迷雾效果的目标","id":"0","type":"TARGET_SELECTOR"},{"data":{"name":"push","description":"更改玩家的迷雾效果"},"description":"更改玩家的迷雾效果","id":"1","type":"TEXT"},{"contentMode":true,"description":"修改的迷雾ID","id":"2","type":"NORMAL_ID","key":"fogs"},{"canContainSpace":true,"description":"迷雾设置的名称","ignoreLater":false,"id":"3","type":"STRING"},{"isMustPlayer":true,"isOnlyOne":false,"isMustNPC":false,"description":"删除玩家迷雾效果的目标","id":"4","type":"TARGET_SELECTOR"},{"contents":[{"name":"pop","description":"只移除第一个"},{"name":"remove","description":"移除全部"}],"contentMode":false,"description":"删除的模式","id":"5","type":"NORMAL_ID"},{"canContainSpace":true,"description":"迷雾设置的名称","ignoreLater":false,"id":"6","type":"STRING"}],"ast":[["0","1"],["1","2"],["2","3"],["2","LF"],["3","LF"],["4","5"],["5","6"],["6","LF"]],"name":["fog"],"start":["0","4"],"description":"更改玩家的迷雾效果"}
+{
+  "node": [
+    {
+      "isMustPlayer": true,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "修改玩家迷雾效果的目标",
+      "id": "0",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "data": {
+        "name": "push",
+        "description": "更改玩家的迷雾效果"
+      },
+      "description": "更改玩家的迷雾效果",
+      "id": "1",
+      "type": "TEXT"
+    },
+    {
+      "contentMode": true,
+      "description": "修改的迷雾ID",
+      "id": "2",
+      "type": "NORMAL_ID",
+      "key": "fogs"
+    },
+    {
+      "canContainSpace": true,
+      "description": "迷雾设置的名称",
+      "ignoreLater": false,
+      "id": "3",
+      "type": "STRING"
+    },
+    {
+      "isMustPlayer": true,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "删除玩家迷雾效果的目标",
+      "id": "4",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "contents": [
+        {
+          "name": "pop",
+          "description": "只移除第一个"
+        },
+        {
+          "name": "remove",
+          "description": "移除全部"
+        }
+      ],
+      "contentMode": false,
+      "description": "删除的模式",
+      "id": "5",
+      "type": "NORMAL_ID"
+    },
+    {
+      "canContainSpace": true,
+      "description": "迷雾设置的名称",
+      "ignoreLater": false,
+      "id": "6",
+      "type": "STRING"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "1"
+    ],
+    [
+      "1",
+      "2"
+    ],
+    [
+      "2",
+      "3"
+    ],
+    [
+      "2",
+      "LF"
+    ],
+    [
+      "3",
+      "LF"
+    ],
+    [
+      "4",
+      "5"
+    ],
+    [
+      "5",
+      "6"
+    ],
+    [
+      "6",
+      "LF"
+    ]
+  ],
+  "name": [
+    "fog"
+  ],
+  "start": [
+    "0",
+    "4"
+  ],
+  "description": "更改玩家的迷雾效果"
+}

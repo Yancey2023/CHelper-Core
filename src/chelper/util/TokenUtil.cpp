@@ -6,7 +6,7 @@
 
 namespace CHelper::TokenUtil {
 
-    size_t getStartIndex(VectorView<Token> tokens) {
+    size_t getStartIndex(VectorView <Token> tokens) {
         if (tokens.start == 0) {
             return 0;
         } else if (tokens.start == tokens.vector->size()) {
@@ -16,7 +16,7 @@ namespace CHelper::TokenUtil {
         }
     }
 
-    size_t getEndIndex(VectorView<Token> tokens) {
+    size_t getEndIndex(VectorView <Token> tokens) {
         if (tokens.end == 0) {
             return 0;
         } else {
@@ -24,7 +24,7 @@ namespace CHelper::TokenUtil {
         }
     }
 
-    std::string toString(VectorView<Token> tokens) {
+    std::string toString(VectorView <Token> tokens) {
         std::string result;
         tokens.for_each([&result](const CHelper::Token &token) {
             result.append(token.content);

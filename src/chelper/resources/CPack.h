@@ -23,6 +23,7 @@ namespace CHelper {
         std::vector<std::shared_ptr<Node::NodePerCommand>> commands;
     private:
         explicit CPack(const std::filesystem::path &path);
+
     public:
         static CPack create(const std::filesystem::path &path);
     };

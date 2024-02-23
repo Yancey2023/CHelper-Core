@@ -10,11 +10,11 @@
 
 namespace CHelper::Exception {
 
-void printStackTrace(const std::exception& e);
+    void printStackTrace(const std::exception &e);
 
-class CantCreateInstance : public std::exception {
+    class CantCreateInstance : public std::exception {
     public:
-        explicit CantCreateInstance(const std::string& className);
+        explicit CantCreateInstance(const std::string &className);
 
         [[nodiscard]] const char *what() const noexcept override;
     };
@@ -28,28 +28,28 @@ class CantCreateInstance : public std::exception {
 
     class UnknownIdType : public std::exception {
     public:
-        UnknownIdType(const std::string& fileName, const std::string& idType);
+        UnknownIdType(const std::string &fileName, const std::string &idType);
 
         [[nodiscard]] const char *what() const noexcept override;
     };
 
     class UnknownNodeType : public std::exception {
     public:
-        explicit UnknownNodeType(const std::string& nodeType);
+        explicit UnknownNodeType(const std::string &nodeType);
 
         [[nodiscard]] const char *what() const noexcept override;
     };
 
     class UnknownNodeId : public std::exception {
     public:
-        UnknownNodeId(const std::vector<std::string>& commandName, const std::string& nodeId);
+        UnknownNodeId(const std::vector<std::string> &commandName, const std::string &nodeId);
 
         [[nodiscard]] const char *what() const noexcept override;
     };
 
     class RequireParentNodeId : public std::exception {
     public:
-        explicit RequireParentNodeId(const std::vector<std::string>& commandName);
+        explicit RequireParentNodeId(const std::vector<std::string> &commandName);
 
         [[nodiscard]] const char *what() const noexcept override;
 
@@ -57,7 +57,7 @@ class CantCreateInstance : public std::exception {
 
     class RequireChildNodeIds : public std::exception {
     public:
-        RequireChildNodeIds(const std::vector<std::string>& commandName, const std::string& parentNodeId);
+        RequireChildNodeIds(const std::vector<std::string> &commandName, const std::string &parentNodeId);
 
         [[nodiscard]] const char *what() const noexcept override;
     };

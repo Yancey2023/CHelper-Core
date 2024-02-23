@@ -39,7 +39,7 @@ namespace CHelper {
         const Node::NodeBase *node;
         //子节点为AND类型和OR类型特有
         const std::vector<ASTNode> childNodes;
-        const VectorView<Token> tokens;
+        const VectorView <Token> tokens;
         const std::vector<std::shared_ptr<ErrorReason>> errorReasons;
         //一个Node可能会生成多个ASTNode，这些ASTNode使用id进行区分
         const std::string id;
@@ -50,26 +50,26 @@ namespace CHelper {
         ASTNode(ASTNodeMode::ASTNodeMode mode,
                 const Node::NodeBase *node,
                 const std::vector<ASTNode> &childNodes,
-                const VectorView<Token> &tokens,
+                const VectorView <Token> &tokens,
                 const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
                 std::string id,
                 int whichBest = -1);
 
     public:
         static ASTNode simpleNode(const Node::NodeBase *node,
-                                  const VectorView<Token> &tokens,
+                                  const VectorView <Token> &tokens,
                                   const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                                   const std::string &id = "");
 
         static ASTNode andNode(const Node::NodeBase *node,
                                const std::vector<ASTNode> &childNodes,
-                               const VectorView<Token> &tokens,
+                               const VectorView <Token> &tokens,
                                const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                                const std::string &id = "");
 
         static ASTNode orNode(const Node::NodeBase *node,
                               const std::vector<ASTNode> &childNodes,
-                              const VectorView<Token> &tokens,
+                              const VectorView <Token> &tokens,
                               const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                               const std::string &id = "");
 

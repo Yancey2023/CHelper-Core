@@ -1,1 +1,24 @@
-{"node":[{"canContainSpace":true,"description":"要显示的信息","ignoreLater":false,"id":"0","type":"STRING"}],"ast":[["0","LF"]],"name":["me"],"start":["0"],"description":"显示一条关于你自己的信息"}
+{
+  "node": [
+    {
+      "canContainSpace": true,
+      "description": "要显示的信息",
+      "ignoreLater": false,
+      "id": "0",
+      "type": "STRING"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "LF"
+    ]
+  ],
+  "name": [
+    "me"
+  ],
+  "start": [
+    "0"
+  ],
+  "description": "显示一条关于你自己的信息"
+}

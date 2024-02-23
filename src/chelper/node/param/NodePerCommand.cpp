@@ -154,7 +154,7 @@ namespace CHelper::Node {
                                 nullptr, "perCommand");
     }
 
-    std::optional<std::string> NodePerCommand::getDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::string> NodePerCommand::collectDescription(const ASTNode *node, size_t index) const {
         if (node->id == "commandName") {
             return description;
         }

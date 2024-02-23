@@ -15,10 +15,10 @@ namespace CHelper {
     class ErrorReason {
     public:
         int level;
-        VectorView<Token> tokens;
+        VectorView <Token> tokens;
         std::string errorReason;
 
-        ErrorReason(int level, VectorView<Token> tokens, std::string errorReason);
+        ErrorReason(int level, VectorView <Token> tokens, std::string errorReason);
 
         static std::shared_ptr<ErrorReason> incomplete(VectorView <Token> tokens, const std::string &errorReason);
 

@@ -41,7 +41,7 @@ namespace CHelper {
 
         void restore();
 
-        [[nodiscard]] VectorView<Token> collect();
+        [[nodiscard]] VectorView <Token> collect();
     };
 
 } // CHelper

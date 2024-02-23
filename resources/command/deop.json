@@ -1,1 +1,25 @@
-{"node":[{"isMustPlayer":true,"isOnlyOne":false,"isMustNPC":false,"description":"从管理员列表中移除的玩家","id":"0","type":"TARGET_SELECTOR"}],"ast":[["0","LF"]],"name":["deop"],"start":["0"],"description":"撤销玩家的管理员权限"}
+{
+  "node": [
+    {
+      "isMustPlayer": true,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "从管理员列表中移除的玩家",
+      "id": "0",
+      "type": "TARGET_SELECTOR"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "LF"
+    ]
+  ],
+  "name": [
+    "deop"
+  ],
+  "start": [
+    "0"
+  ],
+  "description": "撤销玩家的管理员权限"
+}

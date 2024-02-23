@@ -3,7 +3,7 @@
 ```json
 {
   "name": "扩展包示例",
-  "getDescription": "CHelper扩展包的官方示例",
+  "description": "CHelper扩展包的官方示例",
   "minecraftVersion": "1.20",
   "author": "Yancey",
   "updateDate": "2023-11-7",
@@ -19,7 +19,7 @@
 |        名字        | 类型  |     含义      |          备注           |    是否必须有    |
 |:----------------:|:---:|:-----------:|:---------------------:|:-----------:|
 |       name       | 字符串 |   扩展包的名字    |         用于显示          |  否（不建议忽略）   |
-|  getDescription  | 字符串 |   扩展包的简介    |         用于显示          |      否      |
+|   description    | 字符串 |   扩展包的简介    |         用于显示          |      否      |
 | minecraftVersion | 字符串 |   对应的游戏版本   |         用于显示          |      否      |
 |      author      | 字符串 |     作者      |         用于显示          |      否      |
 |    updateDate    | 字符串 |    更新日期     |         用于显示          |      否      |

@@ -161,7 +161,7 @@ namespace CHelper {
             return std::nullopt;
         }
         if (id != "compound") {
-            auto description = node->getDescription(this, index);
+            auto description = node->collectDescription(this, index);
             if (description.has_value()) {
                 return description;
             }

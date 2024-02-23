@@ -1,1 +1,50 @@
-{"node":[{"contents":[{"name":"clear","description":"将天气设为晴天"},{"name":"rain","description":"将天气设为雨天（寒冷的生物群系会下雪）"},{"name":"thunder","description":"将天气设为雷暴雨（寒冷的生物群系会下雷暴雪）"}],"contentMode":false,"description":"天气","id":"0","type":"NORMAL_ID"},{"description":"以游戏刻为单位的天气持续时间(未指定或设为0，天气时长将在300秒到900秒中随机取值)","id":"1","type":"INTEGER"}],"ast":[["0","1"],["0","LF"],["1","LF"]],"name":["weather"],"start":["0"],"description":"更改游戏中的天气"}
+{
+  "node": [
+    {
+      "contents": [
+        {
+          "name": "clear",
+          "description": "将天气设为晴天"
+        },
+        {
+          "name": "rain",
+          "description": "将天气设为雨天（寒冷的生物群系会下雪）"
+        },
+        {
+          "name": "thunder",
+          "description": "将天气设为雷暴雨（寒冷的生物群系会下雷暴雪）"
+        }
+      ],
+      "contentMode": false,
+      "description": "天气",
+      "id": "0",
+      "type": "NORMAL_ID"
+    },
+    {
+      "description": "以游戏刻为单位的天气持续时间(未指定或设为0，天气时长将在300秒到900秒中随机取值)",
+      "id": "1",
+      "type": "INTEGER"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "1"
+    ],
+    [
+      "0",
+      "LF"
+    ],
+    [
+      "1",
+      "LF"
+    ]
+  ],
+  "name": [
+    "weather"
+  ],
+  "start": [
+    "0"
+  ],
+  "description": "更改游戏中的天气"
+}

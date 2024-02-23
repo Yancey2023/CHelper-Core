@@ -1,1 +1,24 @@
-{"node":[{"descriptionFalse":"不锁定昼夜更替","description":"是否锁定日夜更替","descriptionTrue":"锁定昼夜更替","id":"0","type":"BOOLEAN"}],"ast":[["0","LF"]],"name":["alwaysday"],"start":["0"],"description":"锁定或解锁日夜循环，同/daylock"}
+{
+  "node": [
+    {
+      "descriptionFalse": "不锁定昼夜更替",
+      "description": "是否锁定日夜更替",
+      "descriptionTrue": "锁定昼夜更替",
+      "id": "0",
+      "type": "BOOLEAN"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "LF"
+    ]
+  ],
+  "name": [
+    "alwaysday"
+  ],
+  "start": [
+    "0"
+  ],
+  "description": "锁定或解锁日夜循环，同/daylock"
+}

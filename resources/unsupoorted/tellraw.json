@@ -1,1 +1,45 @@
-{"node":[{"isMustPlayer":true,"isOnlyOne":false,"isMustNPC":false,"description":"私聊消息的接收玩家","id":"0","type":"TARGET_SELECTOR"},{"description":"要发送的消息","jsonObject":{"dataList":[{"value":"yancey.chelper.core.json.JsonArray@fa700bf9","key":"yancey.chelper.core.json.JsonString@e5a12b9e"}],"isMustHave":false,"description":"要发送的消息","id":1},"id":"1","type":"JSON"}],"ast":[["0","1"],["1","LF"]],"name":["tellraw"],"start":["0"],"description":"向一个或多个玩家发送一条JSON文本消息"}
+{
+  "node": [
+    {
+      "isMustPlayer": true,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "私聊消息的接收玩家",
+      "id": "0",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "description": "要发送的消息",
+      "jsonObject": {
+        "dataList": [
+          {
+            "value": "yancey.chelper.core.json.JsonArray@fa700bf9",
+            "key": "yancey.chelper.core.json.JsonString@e5a12b9e"
+          }
+        ],
+        "isMustHave": false,
+        "description": "要发送的消息",
+        "id": 1
+      },
+      "id": "1",
+      "type": "JSON"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "1"
+    ],
+    [
+      "1",
+      "LF"
+    ]
+  ],
+  "name": [
+    "tellraw"
+  ],
+  "start": [
+    "0"
+  ],
+  "description": "向一个或多个玩家发送一条JSON文本消息"
+}

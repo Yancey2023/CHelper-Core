@@ -33,7 +33,7 @@ namespace CHelper {
             NodeBase(const nlohmann::json &j,
                      const CPack &cpack);
 
-            virtual ~NodeBase() = default;
+            virtual ~NodeBase();
 
         public:
             static std::shared_ptr<NodeBase> getNodeFromJson(const nlohmann::json &j,
@@ -82,7 +82,7 @@ namespace CHelper {
                                        const std::string &astNodeId = "") const;
 
         public:
-            virtual std::optional<std::string> getDescription(const ASTNode *node, size_t index) const;
+            virtual std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const;
 
             virtual bool collectIdError(const ASTNode *astNode,
                                         const CPack &cpack,

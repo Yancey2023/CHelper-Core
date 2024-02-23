@@ -1,1 +1,208 @@
-{"node":[{"data":{"name":"play","description":"播放音乐"},"description":"播放音乐","id":"0","type":"TEXT"},{"canContainSpace":false,"description":"播放音乐名","ignoreLater":false,"id":"1","type":"STRING"},{"min":0,"max":1,"description":"音乐音量","id":"2","type":"FLOAT"},{"min":0,"max":10,"description":"音乐淡入/淡出时间","id":"3","type":"FLOAT"},{"contents":[{"name":"loop","description":"循环播放音乐"},{"name":"play_once","description":"不循环播放音乐"}],"contentMode":false,"description":"是否循环播放音乐","id":"4","type":"NORMAL_ID"},{"data":{"name":"queue","description":"将音乐添加到队列中"},"description":"将音乐添加到队列中","id":"5","type":"TEXT"},{"canContainSpace":false,"description":"播放音乐名","ignoreLater":false,"id":"6","type":"STRING"},{"min":0,"max":1,"description":"音乐音量","id":"7","type":"FLOAT"},{"min":0,"max":10,"description":"音乐淡入/淡出时间","id":"8","type":"FLOAT"},{"contents":[{"name":"loop","description":"循环播放音乐"},{"name":"play_once","description":"不循环播放音乐"}],"contentMode":false,"description":"是否循环播放音乐","id":"9","type":"NORMAL_ID"},{"data":{"name":"stop","description":"停止播放音乐"},"description":"停止播放音乐","id":"10","type":"TEXT"},{"min":0,"max":10,"description":"音乐淡入/淡出时间","id":"11","type":"FLOAT"},{"data":{"name":"volume","description":"调整音乐音量"},"description":"调整音乐音量","id":"12","type":"TEXT"},{"min":0,"max":1,"description":"音乐音量","id":"13","type":"FLOAT"}],"ast":[["0","1"],["1","2"],["1","LF"],["2","3"],["2","LF"],["3","4"],["3","LF"],["4","LF"],["5","6"],["6","7"],["7","8"],["8","9"],["9","LF"],["10","11"],["11","LF"],["12","13"],["13","LF"]],"name":["music"],"start":["0","5","10","12"],"description":"控制音乐，同/tell和/w"}
+{
+  "node": [
+    {
+      "data": {
+        "name": "play",
+        "description": "播放音乐"
+      },
+      "description": "播放音乐",
+      "id": "0",
+      "type": "TEXT"
+    },
+    {
+      "canContainSpace": false,
+      "description": "播放音乐名",
+      "ignoreLater": false,
+      "id": "1",
+      "type": "STRING"
+    },
+    {
+      "min": 0,
+      "max": 1,
+      "description": "音乐音量",
+      "id": "2",
+      "type": "FLOAT"
+    },
+    {
+      "min": 0,
+      "max": 10,
+      "description": "音乐淡入/淡出时间",
+      "id": "3",
+      "type": "FLOAT"
+    },
+    {
+      "contents": [
+        {
+          "name": "loop",
+          "description": "循环播放音乐"
+        },
+        {
+          "name": "play_once",
+          "description": "不循环播放音乐"
+        }
+      ],
+      "contentMode": false,
+      "description": "是否循环播放音乐",
+      "id": "4",
+      "type": "NORMAL_ID"
+    },
+    {
+      "data": {
+        "name": "queue",
+        "description": "将音乐添加到队列中"
+      },
+      "description": "将音乐添加到队列中",
+      "id": "5",
+      "type": "TEXT"
+    },
+    {
+      "canContainSpace": false,
+      "description": "播放音乐名",
+      "ignoreLater": false,
+      "id": "6",
+      "type": "STRING"
+    },
+    {
+      "min": 0,
+      "max": 1,
+      "description": "音乐音量",
+      "id": "7",
+      "type": "FLOAT"
+    },
+    {
+      "min": 0,
+      "max": 10,
+      "description": "音乐淡入/淡出时间",
+      "id": "8",
+      "type": "FLOAT"
+    },
+    {
+      "contents": [
+        {
+          "name": "loop",
+          "description": "循环播放音乐"
+        },
+        {
+          "name": "play_once",
+          "description": "不循环播放音乐"
+        }
+      ],
+      "contentMode": false,
+      "description": "是否循环播放音乐",
+      "id": "9",
+      "type": "NORMAL_ID"
+    },
+    {
+      "data": {
+        "name": "stop",
+        "description": "停止播放音乐"
+      },
+      "description": "停止播放音乐",
+      "id": "10",
+      "type": "TEXT"
+    },
+    {
+      "min": 0,
+      "max": 10,
+      "description": "音乐淡入/淡出时间",
+      "id": "11",
+      "type": "FLOAT"
+    },
+    {
+      "data": {
+        "name": "volume",
+        "description": "调整音乐音量"
+      },
+      "description": "调整音乐音量",
+      "id": "12",
+      "type": "TEXT"
+    },
+    {
+      "min": 0,
+      "max": 1,
+      "description": "音乐音量",
+      "id": "13",
+      "type": "FLOAT"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "1"
+    ],
+    [
+      "1",
+      "2"
+    ],
+    [
+      "1",
+      "LF"
+    ],
+    [
+      "2",
+      "3"
+    ],
+    [
+      "2",
+      "LF"
+    ],
+    [
+      "3",
+      "4"
+    ],
+    [
+      "3",
+      "LF"
+    ],
+    [
+      "4",
+      "LF"
+    ],
+    [
+      "5",
+      "6"
+    ],
+    [
+      "6",
+      "7"
+    ],
+    [
+      "7",
+      "8"
+    ],
+    [
+      "8",
+      "9"
+    ],
+    [
+      "9",
+      "LF"
+    ],
+    [
+      "10",
+      "11"
+    ],
+    [
+      "11",
+      "LF"
+    ],
+    [
+      "12",
+      "13"
+    ],
+    [
+      "13",
+      "LF"
+    ]
+  ],
+  "name": [
+    "music"
+  ],
+  "start": [
+    "0",
+    "5",
+    "10",
+    "12"
+  ],
+  "description": "控制音乐，同/tell和/w"
+}

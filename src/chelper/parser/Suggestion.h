@@ -15,12 +15,12 @@ namespace CHelper {
     public:
         //TODO 建议的优先级
         //要被替换的内容
-        const VectorView<Token> tokens;
+        const VectorView <Token> tokens;
         //内容
         std::shared_ptr<NormalId> content;
 
     public:
-        Suggestion(const VectorView<Token> &tokens, const std::shared_ptr<NormalId> &content);
+        Suggestion(const VectorView <Token> &tokens, const std::shared_ptr<NormalId> &content);
     };
 
 } // CHelper

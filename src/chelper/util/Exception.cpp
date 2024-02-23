@@ -9,7 +9,7 @@
 
 namespace CHelper::Exception {
 
-    void printStackTrace(const std::exception& e) {
+    void printStackTrace(const std::exception &e) {
         CHELPER_ERROR(std::string(e.what()) + "\nstack trace:\n" + Profile::getStackTrace());
         Profile::clear();
     }

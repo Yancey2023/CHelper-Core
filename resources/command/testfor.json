@@ -1,1 +1,25 @@
-{"node":[{"isMustPlayer":false,"isOnlyOne":false,"isMustNPC":false,"description":"计数的目标","id":"0","type":"TARGET_SELECTOR"}],"ast":[["0","LF"]],"name":["testfor"],"start":["0"],"description":"检测并统计符合指定条件的实体"}
+{
+  "node": [
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "计数的目标",
+      "id": "0",
+      "type": "TARGET_SELECTOR"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "LF"
+    ]
+  ],
+  "name": [
+    "testfor"
+  ],
+  "start": [
+    "0"
+  ],
+  "description": "检测并统计符合指定条件的实体"
+}

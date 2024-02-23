@@ -12,7 +12,7 @@ namespace CHelper {
             : NormalId(name, description),
               nameSpace(nameSpace),
               idWithNamespace(std::make_shared<NormalId>(std::string(nameSpace.value_or("minecraft"))
-                      .append(":").append(name), description)) {}
+                                                                 .append(":").append(name), description)) {}
 
     NamespaceId::NamespaceId(const nlohmann::json &j)
             : NormalId(j),

@@ -6,7 +6,7 @@
 
 namespace CHelper {
 
-    Suggestion::Suggestion(const VectorView<Token> &tokens,
+    Suggestion::Suggestion(const VectorView <Token> &tokens,
                            const std::shared_ptr<NormalId> &content)
             : tokens(tokens),
               content(content) {}

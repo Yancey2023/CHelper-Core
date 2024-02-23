@@ -1,1 +1,40 @@
-{"node":[{"isMustPlayer":true,"isOnlyOne":false,"isMustNPC":false,"description":"声音的接收者","id":"0","type":"TARGET_SELECTOR"},{"contentMode":true,"description":"要停止的声音","id":"1","type":"NORMAL_ID","key":"sound"}],"ast":[["0","1"],["0","LF"],["1","LF"]],"name":["stopsound"],"start":["0"],"description":"停止声音播放"}
+{
+  "node": [
+    {
+      "isMustPlayer": true,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "声音的接收者",
+      "id": "0",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "contentMode": true,
+      "description": "要停止的声音",
+      "id": "1",
+      "type": "NORMAL_ID",
+      "key": "sound"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "1"
+    ],
+    [
+      "0",
+      "LF"
+    ],
+    [
+      "1",
+      "LF"
+    ]
+  ],
+  "name": [
+    "stopsound"
+  ],
+  "start": [
+    "0"
+  ],
+  "description": "停止声音播放"
+}

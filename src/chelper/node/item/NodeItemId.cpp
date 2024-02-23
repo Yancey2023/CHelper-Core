@@ -16,7 +16,7 @@ namespace CHelper::Node {
     bool NodeItemId::collectIdError(const ASTNode *astNode,
                                     const CPack &cpack,
                                     std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if(astNode->id != "item id"){
+        if (astNode->id != "item id") {
             return false;
         }
         if (astNode->isError()) {
@@ -42,7 +42,7 @@ namespace CHelper::Node {
     bool NodeItemId::collectSuggestions(const ASTNode *astNode,
                                         const CPack &cpack,
                                         std::vector<Suggestion> &suggestions) const {
-        if(astNode->id != "item id"){
+        if (astNode->id != "item id") {
             return false;
         }
         if (astNode->isError()) {
@@ -67,7 +67,7 @@ namespace CHelper::Node {
     void NodeItemId::collectStructure(const ASTNode *astNode,
                                       StructureBuilder &structure,
                                       bool isMustHave) const {
-        if(astNode->id != "item id"){
+        if (astNode->id != "item id") {
             return;
         }
         structure.append(isMustHave, "物品ID");

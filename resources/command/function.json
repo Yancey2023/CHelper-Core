@@ -1,1 +1,24 @@
-{"node":[{"canContainSpace":false,"description":"要执行的函数或函数标签","ignoreLater":false,"id":"0","type":"STRING"}],"ast":[["0","LF"]],"name":["function"],"start":["0"],"description":"运行行为包内的1个函数"}
+{
+  "node": [
+    {
+      "canContainSpace": false,
+      "description": "要执行的函数或函数标签",
+      "ignoreLater": false,
+      "id": "0",
+      "type": "STRING"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "LF"
+    ]
+  ],
+  "name": [
+    "function"
+  ],
+  "start": [
+    "0"
+  ],
+  "description": "运行行为包内的1个函数"
+}

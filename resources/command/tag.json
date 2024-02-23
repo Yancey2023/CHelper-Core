@@ -1,1 +1,82 @@
-{"node":[{"isMustPlayer":false,"isOnlyOne":false,"isMustNPC":false,"description":"要操作的实体目标","id":"0","type":"TARGET_SELECTOR"},{"contents":[{"name":"add","description":" 为目标添加一个标签"},{"name":"remove","description":" 移除目标的一个标签"}],"contentMode":false,"description":"为目标添加一个标签或移除目标的一个标签","id":"1","type":"NORMAL_ID"},{"canContainSpace":true,"description":"要被添加或被移除的标签名称","ignoreLater":false,"id":"2","type":"STRING"},{"isMustPlayer":false,"isOnlyOne":false,"isMustNPC":false,"description":"要操作的实体目标","id":"3","type":"TARGET_SELECTOR"},{"data":{"name":"list","description":"列出目标所拥有的所有标签"},"description":"列出目标所拥有的所有标签","id":"4","type":"TEXT"}],"ast":[["0","1"],["1","2"],["2","LF"],["3","4"],["4","LF"]],"name":["tag"],"start":["0","3"],"description":"管理实体的记分板标签"}
+{
+  "node": [
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "要操作的实体目标",
+      "id": "0",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "contents": [
+        {
+          "name": "add",
+          "description": " 为目标添加一个标签"
+        },
+        {
+          "name": "remove",
+          "description": " 移除目标的一个标签"
+        }
+      ],
+      "contentMode": false,
+      "description": "为目标添加一个标签或移除目标的一个标签",
+      "id": "1",
+      "type": "NORMAL_ID"
+    },
+    {
+      "canContainSpace": true,
+      "description": "要被添加或被移除的标签名称",
+      "ignoreLater": false,
+      "id": "2",
+      "type": "STRING"
+    },
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "要操作的实体目标",
+      "id": "3",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "data": {
+        "name": "list",
+        "description": "列出目标所拥有的所有标签"
+      },
+      "description": "列出目标所拥有的所有标签",
+      "id": "4",
+      "type": "TEXT"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "1"
+    ],
+    [
+      "1",
+      "2"
+    ],
+    [
+      "2",
+      "LF"
+    ],
+    [
+      "3",
+      "4"
+    ],
+    [
+      "4",
+      "LF"
+    ]
+  ],
+  "name": [
+    "tag"
+  ],
+  "start": [
+    "0",
+    "3"
+  ],
+  "description": "管理实体的记分板标签"
+}

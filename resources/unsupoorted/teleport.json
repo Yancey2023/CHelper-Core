@@ -1,1 +1,426 @@
-{"node":[{"isMustPlayer":false,"isOnlyOne":true,"isMustNPC":false,"description":"要被传送到的实体","id":"0","type":"TARGET_SELECTOR"},{"descriptionFalse":"不进行检查，直接进行传送","description":"是否检测目的地方块遮挡情况","descriptionTrue":"只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效","id":"1","type":"BOOLEAN"},{"isMustPlayer":false,"isOnlyOne":false,"isMustNPC":false,"description":"要被传送的实体","id":"2","type":"TARGET_SELECTOR"},{"isMustPlayer":false,"isOnlyOne":true,"isMustNPC":false,"description":"要被传送到的实体","id":"3","type":"TARGET_SELECTOR"},{"descriptionFalse":"不进行检查，直接进行传送","description":"是否检测目的地方块遮挡情况","descriptionTrue":"只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效","id":"4","type":"BOOLEAN"},{"description":"要被传送到的坐标","id":"5","type":"POSITION"},{"descriptionFalse":"不进行检查，直接进行传送","description":"是否检测目的地方块遮挡情况","descriptionTrue":"只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效","id":"6","type":"BOOLEAN"},{"isMustPlayer":false,"isOnlyOne":false,"isMustNPC":false,"description":"要被传送的实体","id":"7","type":"TARGET_SELECTOR"},{"description":"要被传送到的坐标","id":"8","type":"POSITION"},{"descriptionFalse":"不进行检查，直接进行传送","description":"是否检测目的地方块遮挡情况","descriptionTrue":"只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效","id":"9","type":"BOOLEAN"},{"description":"要被传送到的坐标","id":"10","type":"POSITION"},{"description":"实体传送后的y轴旋转角度","canUseCaretNotation":false,"id":"11","type":"RELATIVE_FLOAT"},{"description":"实体传送后的x轴旋转角度","canUseCaretNotation":false,"id":"12","type":"RELATIVE_FLOAT"},{"descriptionFalse":"不进行检查，直接进行传送","description":"是否检测目的地方块遮挡情况","descriptionTrue":"只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效","id":"13","type":"BOOLEAN"},{"description":"要被传送到的坐标","id":"14","type":"POSITION"},{"data":{"name":"facing","description":"使被传送的实体面向某个坐标或另一个实体"},"description":"使被传送的实体面向某个坐标或另一个实体","id":"15","type":"TEXT"},{"description":"实体传送后朝向的坐标","id":"16","type":"POSITION"},{"descriptionFalse":"不进行检查，直接进行传送","description":"是否检测目的地方块遮挡情况","descriptionTrue":"只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效","id":"17","type":"BOOLEAN"},{"description":"要被传送到的坐标","id":"18","type":"POSITION"},{"data":{"name":"facing","description":"使被传送的实体面向某个坐标或另一个实体"},"description":"使被传送的实体面向某个坐标或另一个实体","id":"19","type":"TEXT"},{"isMustPlayer":false,"isOnlyOne":true,"isMustNPC":false,"description":"该实体朝向的实体","id":"20","type":"TARGET_SELECTOR"},{"descriptionFalse":"不进行检查，直接进行传送","description":"是否检测目的地方块遮挡情况","descriptionTrue":"只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效","id":"21","type":"BOOLEAN"},{"isMustPlayer":false,"isOnlyOne":false,"isMustNPC":false,"description":"要被传送的实体","id":"22","type":"TARGET_SELECTOR"},{"description":"要被传送到的坐标","id":"23","type":"POSITION"},{"description":"实体传送后的y轴旋转角度","canUseCaretNotation":false,"id":"24","type":"RELATIVE_FLOAT"},{"description":"实体传送后的x轴旋转角度","canUseCaretNotation":false,"id":"25","type":"RELATIVE_FLOAT"},{"descriptionFalse":"不进行检查，直接进行传送","description":"是否检测目的地方块遮挡情况","descriptionTrue":"只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效","id":"26","type":"BOOLEAN"},{"isMustPlayer":false,"isOnlyOne":false,"isMustNPC":false,"description":"要被传送的实体","id":"27","type":"TARGET_SELECTOR"},{"description":"要被传送到的坐标","id":"28","type":"POSITION"},{"data":{"name":"facing","description":"使被传送的实体面向某个坐标或另一个实体"},"description":"使被传送的实体面向某个坐标或另一个实体","id":"29","type":"TEXT"},{"description":"实体传送后朝向的坐标","id":"30","type":"POSITION"},{"descriptionFalse":"不进行检查，直接进行传送","description":"是否检测目的地方块遮挡情况","descriptionTrue":"只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效","id":"31","type":"BOOLEAN"},{"isMustPlayer":false,"isOnlyOne":false,"isMustNPC":false,"description":"要被传送的实体","id":"32","type":"TARGET_SELECTOR"},{"description":"要被传送到的坐标","id":"33","type":"POSITION"},{"data":{"name":"facing","description":"使被传送的实体面向某个坐标或另一个实体"},"description":"使被传送的实体面向某个坐标或另一个实体","id":"34","type":"TEXT"},{"isMustPlayer":false,"isOnlyOne":true,"isMustNPC":false,"description":"该实体朝向的实体","id":"35","type":"TARGET_SELECTOR"},{"descriptionFalse":"不进行检查，直接进行传送","description":"是否检测目的地方块遮挡情况","descriptionTrue":"只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效","id":"36","type":"BOOLEAN"}],"ast":[["0","1"],["0","LF"],["1","LF"],["2","3"],["3","4"],["4","LF"],["5","6"],["6","LF"],["7","8"],["8","9"],["9","LF"],["10","11"],["11","12"],["12","13"],["13","LF"],["14","15"],["15","16"],["16","17"],["17","LF"],["18","19"],["19","20"],["20","21"],["21","LF"],["22","23"],["23","24"],["24","25"],["25","26"],["26","LF"],["27","28"],["28","29"],["29","30"],["30","31"],["31","LF"],["32","33"],["33","34"],["34","35"],["35","36"],["36","LF"]],"name":["teleport"],"start":["0","2","5","7","10","14","18","22","27","32"],"description":"传送实体到指定地点，并修改其旋转角度，同/tp"}
+{
+  "node": [
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": true,
+      "isMustNPC": false,
+      "description": "要被传送到的实体",
+      "id": "0",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "descriptionFalse": "不进行检查，直接进行传送",
+      "description": "是否检测目的地方块遮挡情况",
+      "descriptionTrue": "只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效",
+      "id": "1",
+      "type": "BOOLEAN"
+    },
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "要被传送的实体",
+      "id": "2",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": true,
+      "isMustNPC": false,
+      "description": "要被传送到的实体",
+      "id": "3",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "descriptionFalse": "不进行检查，直接进行传送",
+      "description": "是否检测目的地方块遮挡情况",
+      "descriptionTrue": "只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效",
+      "id": "4",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "要被传送到的坐标",
+      "id": "5",
+      "type": "POSITION"
+    },
+    {
+      "descriptionFalse": "不进行检查，直接进行传送",
+      "description": "是否检测目的地方块遮挡情况",
+      "descriptionTrue": "只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效",
+      "id": "6",
+      "type": "BOOLEAN"
+    },
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "要被传送的实体",
+      "id": "7",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "description": "要被传送到的坐标",
+      "id": "8",
+      "type": "POSITION"
+    },
+    {
+      "descriptionFalse": "不进行检查，直接进行传送",
+      "description": "是否检测目的地方块遮挡情况",
+      "descriptionTrue": "只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效",
+      "id": "9",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "要被传送到的坐标",
+      "id": "10",
+      "type": "POSITION"
+    },
+    {
+      "description": "实体传送后的y轴旋转角度",
+      "canUseCaretNotation": false,
+      "id": "11",
+      "type": "RELATIVE_FLOAT"
+    },
+    {
+      "description": "实体传送后的x轴旋转角度",
+      "canUseCaretNotation": false,
+      "id": "12",
+      "type": "RELATIVE_FLOAT"
+    },
+    {
+      "descriptionFalse": "不进行检查，直接进行传送",
+      "description": "是否检测目的地方块遮挡情况",
+      "descriptionTrue": "只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效",
+      "id": "13",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "要被传送到的坐标",
+      "id": "14",
+      "type": "POSITION"
+    },
+    {
+      "data": {
+        "name": "facing",
+        "description": "使被传送的实体面向某个坐标或另一个实体"
+      },
+      "description": "使被传送的实体面向某个坐标或另一个实体",
+      "id": "15",
+      "type": "TEXT"
+    },
+    {
+      "description": "实体传送后朝向的坐标",
+      "id": "16",
+      "type": "POSITION"
+    },
+    {
+      "descriptionFalse": "不进行检查，直接进行传送",
+      "description": "是否检测目的地方块遮挡情况",
+      "descriptionTrue": "只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效",
+      "id": "17",
+      "type": "BOOLEAN"
+    },
+    {
+      "description": "要被传送到的坐标",
+      "id": "18",
+      "type": "POSITION"
+    },
+    {
+      "data": {
+        "name": "facing",
+        "description": "使被传送的实体面向某个坐标或另一个实体"
+      },
+      "description": "使被传送的实体面向某个坐标或另一个实体",
+      "id": "19",
+      "type": "TEXT"
+    },
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": true,
+      "isMustNPC": false,
+      "description": "该实体朝向的实体",
+      "id": "20",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "descriptionFalse": "不进行检查，直接进行传送",
+      "description": "是否检测目的地方块遮挡情况",
+      "descriptionTrue": "只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效",
+      "id": "21",
+      "type": "BOOLEAN"
+    },
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "要被传送的实体",
+      "id": "22",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "description": "要被传送到的坐标",
+      "id": "23",
+      "type": "POSITION"
+    },
+    {
+      "description": "实体传送后的y轴旋转角度",
+      "canUseCaretNotation": false,
+      "id": "24",
+      "type": "RELATIVE_FLOAT"
+    },
+    {
+      "description": "实体传送后的x轴旋转角度",
+      "canUseCaretNotation": false,
+      "id": "25",
+      "type": "RELATIVE_FLOAT"
+    },
+    {
+      "descriptionFalse": "不进行检查，直接进行传送",
+      "description": "是否检测目的地方块遮挡情况",
+      "descriptionTrue": "只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效",
+      "id": "26",
+      "type": "BOOLEAN"
+    },
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "要被传送的实体",
+      "id": "27",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "description": "要被传送到的坐标",
+      "id": "28",
+      "type": "POSITION"
+    },
+    {
+      "data": {
+        "name": "facing",
+        "description": "使被传送的实体面向某个坐标或另一个实体"
+      },
+      "description": "使被传送的实体面向某个坐标或另一个实体",
+      "id": "29",
+      "type": "TEXT"
+    },
+    {
+      "description": "实体传送后朝向的坐标",
+      "id": "30",
+      "type": "POSITION"
+    },
+    {
+      "descriptionFalse": "不进行检查，直接进行传送",
+      "description": "是否检测目的地方块遮挡情况",
+      "descriptionTrue": "只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效",
+      "id": "31",
+      "type": "BOOLEAN"
+    },
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": false,
+      "isMustNPC": false,
+      "description": "要被传送的实体",
+      "id": "32",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "description": "要被传送到的坐标",
+      "id": "33",
+      "type": "POSITION"
+    },
+    {
+      "data": {
+        "name": "facing",
+        "description": "使被传送的实体面向某个坐标或另一个实体"
+      },
+      "description": "使被传送的实体面向某个坐标或另一个实体",
+      "id": "34",
+      "type": "TEXT"
+    },
+    {
+      "isMustPlayer": false,
+      "isOnlyOne": true,
+      "isMustNPC": false,
+      "description": "该实体朝向的实体",
+      "id": "35",
+      "type": "TARGET_SELECTOR"
+    },
+    {
+      "descriptionFalse": "不进行检查，直接进行传送",
+      "description": "是否检测目的地方块遮挡情况",
+      "descriptionTrue": "只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效",
+      "id": "36",
+      "type": "BOOLEAN"
+    }
+  ],
+  "ast": [
+    [
+      "0",
+      "1"
+    ],
+    [
+      "0",
+      "LF"
+    ],
+    [
+      "1",
+      "LF"
+    ],
+    [
+      "2",
+      "3"
+    ],
+    [
+      "3",
+      "4"
+    ],
+    [
+      "4",
+      "LF"
+    ],
+    [
+      "5",
+      "6"
+    ],
+    [
+      "6",
+      "LF"
+    ],
+    [
+      "7",
+      "8"
+    ],
+    [
+      "8",
+      "9"
+    ],
+    [
+      "9",
+      "LF"
+    ],
+    [
+      "10",
+      "11"
+    ],
+    [
+      "11",
+      "12"
+    ],
+    [
+      "12",
+      "13"
+    ],
+    [
+      "13",
+      "LF"
+    ],
+    [
+      "14",
+      "15"
+    ],
+    [
+      "15",
+      "16"
+    ],
+    [
+      "16",
+      "17"
+    ],
+    [
+      "17",
+      "LF"
+    ],
+    [
+      "18",
+      "19"
+    ],
+    [
+      "19",
+      "20"
+    ],
+    [
+      "20",
+      "21"
+    ],
+    [
+      "21",
+      "LF"
+    ],
+    [
+      "22",
+      "23"
+    ],
+    [
+      "23",
+      "24"
+    ],
+    [
+      "24",
+      "25"
+    ],
+    [
+      "25",
+      "26"
+    ],
+    [
+      "26",
+      "LF"
+    ],
+    [
+      "27",
+      "28"
+    ],
+    [
+      "28",
+      "29"
+    ],
+    [
+      "29",
+      "30"
+    ],
+    [
+      "30",
+      "31"
+    ],
+    [
+      "31",
+      "LF"
+    ],
+    [
+      "32",
+      "33"
+    ],
+    [
+      "33",
+      "34"
+    ],
+    [
+      "34",
+      "35"
+    ],
+    [
+      "35",
+      "36"
+    ],
+    [
+      "36",
+      "LF"
+    ]
+  ],
+  "name": [
+    "teleport"
+  ],
+  "start": [
+    "0",
+    "2",
+    "5",
+    "7",
+    "10",
+    "14",
+    "18",
+    "22",
+    "27",
+    "32"
+  ],
+  "description": "传送实体到指定地点，并修改其旋转角度，同/tp"
+}
