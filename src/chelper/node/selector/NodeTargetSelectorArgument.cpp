@@ -6,7 +6,9 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE_INSTANCE("TARGET_SELECTOR_ARGUMENT", NodeTargetSelectorArgument, "目标选择器参数")
+    NodeTargetSelectorArgument::NodeTargetSelectorArgument(const std::optional<std::string> &id,
+                                                           const std::optional<std::string> &description)
+            : NodeBase(id, description) {}
 
     ASTNode NodeTargetSelectorArgument::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         //TODO 目标选择器参数

@@ -6,27 +6,18 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE("OR", NodeOr)
-
     NodeOr::NodeOr(const std::optional<std::string> &id,
                    const std::optional<std::string> &description,
-                   const std::vector<std::shared_ptr<NodeBase>> &childNodes,
+                   const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes,
                    const bool isAttachToEnd)
             : NodeBase(id, description),
               isAttachToEnd(isAttachToEnd),
               childNodes(childNodes) {}
 
-    NodeOr::NodeOr(const nlohmann::json &j,
-                   const CPack &cpack) :
-            NodeBase(j, cpack),
-            isAttachToEnd(false) {
-        throw Exception::CantCreateInstance("CHelper::Node::NodeAnd");
-    }
-
     ASTNode NodeOr::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         std::vector<ASTNode> childASTNodes;
-        childASTNodes.reserve(childNodes.size());
-        for (const auto &item: childNodes) {
+        childASTNodes.reserve(childNodes->size());
+        for (const auto &item: *childNodes) {
             tokenReader.push();
             childASTNodes.push_back(item->getASTNode(tokenReader, cpack));
             tokenReader.restore();

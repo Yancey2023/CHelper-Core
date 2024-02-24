@@ -17,7 +17,7 @@ namespace CHelper::Node {
         NodePosition(const nlohmann::json &j,
                      const CPack &cpack);
 
-        NODE_TYPE_H;
+        [[nodiscard]] NodeType getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 

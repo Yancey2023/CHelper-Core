@@ -21,7 +21,7 @@ namespace CHelper::Node {
         NodeBoolean(const nlohmann::json &j,
                     const CPack &cpack);
 
-        NODE_TYPE_H;
+        [[nodiscard]] NodeType getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
@@ -34,7 +34,5 @@ namespace CHelper::Node {
     };
 
 } // CHelper::Node
-
-CREATE_ADL_SERIALIZER(CHelper::Node::NodeBoolean);
 
 #endif //CHELPER_NODEBOOLEAN_H

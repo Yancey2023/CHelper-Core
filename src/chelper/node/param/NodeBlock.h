@@ -6,6 +6,7 @@
 #define CHELPER_NODEBLOCK_H
 
 #include "../NodeBase.h"
+#include "NodeNamespaceId.h"
 
 namespace CHelper::Node {
 
@@ -21,15 +22,17 @@ namespace CHelper::Node {
     class NodeBlock : public NodeBase {
     public:
         NodeBlockType::NodeBlockType nodeBlockType;
+        std::shared_ptr<NodeNamespaceId> nodeBlockId;
 
         NodeBlock(const std::optional<std::string> &id,
                   const std::optional<std::string> &description,
-                  NodeBlockType::NodeBlockType nodeBlockType);
+                  NodeBlockType::NodeBlockType nodeBlockType,
+                  const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>& contents);
 
         NodeBlock(const nlohmann::json &j,
                   const CPack &cpack);
 
-        NODE_TYPE_H;
+        [[nodiscard]] NodeType getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
@@ -40,7 +43,5 @@ namespace CHelper::Node {
     };
 
 } // CHelper::Node
-
-CREATE_ADL_SERIALIZER(CHelper::Node::NodeBlock);
 
 #endif //CHELPER_NODEBLOCK_H

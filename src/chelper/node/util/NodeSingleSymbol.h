@@ -18,11 +18,6 @@ namespace CHelper::Node {
                          const std::optional<std::string> &description,
                          char symbol);
 
-        NodeSingleSymbol(const nlohmann::json &j,
-                         const CPack &cpack);
-
-        NODE_TYPE_H
-
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
     };

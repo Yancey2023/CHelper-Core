@@ -29,11 +29,11 @@ struct [[maybe_unused]] nlohmann::adl_serializer<type> {                        
                                                                                   \
     static type from_json(const nlohmann::json &j) {                              \
         return type(j);                                                           \
-    };                                                                            \
+    }                                                                             \
                                                                                   \
     static void to_json(nlohmann::json &j, const type &t) {                       \
         t.toJson(j);                                                              \
-    };                                                                            \
+    }                                                                             \
 }
 
 namespace CHelper::JsonUtil {

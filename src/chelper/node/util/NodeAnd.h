@@ -11,16 +11,11 @@ namespace CHelper::Node {
 
     class NodeAnd : public NodeBase {
     public:
-        const std::vector<std::shared_ptr<NodeBase>> childNodes;
+        const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> childNodes;
 
         NodeAnd(const std::optional<std::string> &id,
                 const std::optional<std::string> &description,
-                const std::vector<std::shared_ptr<NodeBase>> &childNodes);
-
-        NodeAnd(const nlohmann::json &j,
-                const CPack &cpack);
-
-        NODE_TYPE_H
+                const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes);
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 

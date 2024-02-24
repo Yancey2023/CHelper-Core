@@ -9,32 +9,10 @@
 #include "StringReader.h"
 #include "Token.h"
 
-namespace CHelper {
+namespace CHelper::Lexer {
 
-    class Lexer {
-        StringReader stringReader;
+    std::vector<Token> lex(StringReader &stringReader);
 
-    public:
-        explicit Lexer(const std::string &content, const std::string &filename);
-
-        explicit Lexer(StringReader stringReader);
-
-        std::vector<Token> lex();
-
-    private:
-        TokenType::TokenType nextTokenType();
-
-        Token nextTokenNumber();
-
-        Token nextTokenSymbol();
-
-        Token nextTokenString();
-
-        Token nextTokenWhiteSpace();
-
-        Token nextTokenLF();
-    };
-
-}
+} // CHelper::Lexer
 
 #endif //CHELPER_LEXER_H

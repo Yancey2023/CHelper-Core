@@ -13,8 +13,6 @@ namespace CHelper::Node {
     static NodeSingleSymbol nodeCaretNotation("RELATIVE_FLOAT_CARET_NOTATION", "局部坐标（^左 ^上 ^右）", '^');
     static NodeFloat nodeValue("RELATIVE_FLOAT_FLOAT", "坐标参数的数值", std::nullopt, std::nullopt);
 
-    NODE_TYPE("RELATIVE_FLOAT", NodeRelativeFloat)
-
     NodeRelativeFloat::NodeRelativeFloat(const std::optional<std::string> &id,
                                          const std::optional<std::string> &description,
                                          bool canUseCaretNotation)
@@ -25,6 +23,10 @@ namespace CHelper::Node {
                                          const CPack &cpack)
             : NodeBase(j, cpack),
               canUseCaretNotation(FROM_JSON(j, canUseCaretNotation, bool)) {}
+
+    NodeType NodeRelativeFloat::getNodeType() const {
+        return NodeType::RELATIVE_FLOAT;
+    }
 
     void NodeRelativeFloat::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);

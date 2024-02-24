@@ -18,8 +18,6 @@ namespace CHelper {
 
         explicit NormalId(const nlohmann::json &j);
 
-        virtual ~NormalId() = default;
-
         void toJson(nlohmann::json &j) const override;
     };
 

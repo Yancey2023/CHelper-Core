@@ -23,11 +23,6 @@ namespace CHelper::Node {
                  std::shared_ptr<NodeBase> &nodeSeparator,
                  std::shared_ptr<NodeBase> &nodeRight);
 
-        NodeList(const nlohmann::json &j,
-                 const CPack &cpack);
-
-        NODE_TYPE_H;
-
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
     };

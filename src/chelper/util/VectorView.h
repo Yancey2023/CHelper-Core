@@ -13,10 +13,10 @@ namespace CHelper {
     class VectorView {
     public:
         //vector如果使用引用就不可以复制了，所以这里使用指针
-        const std::vector<T> *vector;
+        std::shared_ptr<std::vector<T>> vector;
         size_t start, end;
 
-        VectorView(const std::vector<T> *vector, size_t start, size_t end)
+        VectorView(const std::shared_ptr<std::vector<T>> vector, size_t start, size_t end)
                 : vector(vector),
                   start(start),
                   end(end) {

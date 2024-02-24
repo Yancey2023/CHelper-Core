@@ -8,8 +8,6 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE("PER_COMMAND", NodePerCommand)
-
     NodePerCommand::NodePerCommand(const std::optional<std::string> &id,
                                    std::vector<std::string> name,
                                    const std::optional<std::string> &description,
@@ -106,6 +104,17 @@ namespace CHelper::Node {
         Profile::pop();
     }
 
+    //因为节点可能之间互相绑定，所以要在析构的时候解除绑定
+    NodePerCommand::~NodePerCommand() {
+        for (const auto &item: nodes) {
+            item->nextNodes.clear();
+        }
+    }
+
+    NodeType NodePerCommand::getNodeType() const {
+        return NodeType::PER_COMMAND;
+    }
+
     void NodePerCommand::toJson(nlohmann::json &j) const {
         TO_JSON(j, name);
         TO_JSON_OPTIONAL(j, description)
@@ -181,13 +190,13 @@ namespace CHelper::Node {
                                           bool isMustHave) const {
         if (astNode->id == "perCommand") {
             if (astNode->tokens.size() <= 1 || astNode->childNodes[0].isError()) {
-                structure.append(isMustHave, "命令");
+                structure.appendWhiteSpace().append("命令");
             }
         } else if (astNode->id == "commandName") {
             if (astNode->isError()) {
-                structure.append(isMustHave, "命令");
+                structure.appendWhiteSpace().append("命令");
             } else {
-                structure.append(isMustHave, astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content);
+                structure.appendWhiteSpace().append(astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content);
             }
         }
     }

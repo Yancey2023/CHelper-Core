@@ -7,6 +7,7 @@
 
 #define CHelperLogger INFO
 #define CHelperDebug true
+#define CHelperAndroid false
 
 #include <iostream>
 #include <string>
@@ -24,6 +25,8 @@
 #include <ctime>
 #include "nlohmann/json.hpp"
 #include "format/Format.h"
+#include "android/jni.h"
+#include "android/log.h"
 #include "../src/chelper/util/ColorStringBuilder.h"
 #include "../src/chelper/util/Exception.h"
 #include "../src/chelper/util/JsonUtil.h"

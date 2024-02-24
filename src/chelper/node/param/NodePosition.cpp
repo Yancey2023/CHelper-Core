@@ -7,8 +7,6 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE("POSITION", NodePosition)
-
     NodePosition::NodePosition(const std::optional<std::string> &id,
                                const std::optional<std::string> &description)
             : NodeBase(id, description) {}
@@ -16,6 +14,10 @@ namespace CHelper::Node {
     NodePosition::NodePosition(const nlohmann::json &j,
                                const CPack &cpack)
             : NodeBase(j, cpack) {}
+
+    NodeType NodePosition::getNodeType() const {
+        return NodeType::POSITION;
+    }
 
     ASTNode NodePosition::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();

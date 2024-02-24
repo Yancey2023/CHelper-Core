@@ -7,8 +7,6 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE("COMMAND_NAME", NodeCommandName)
-
     NodeCommandName::NodeCommandName(const std::optional<std::string> &id,
                                      const std::optional<std::string> &description)
             : NodeBase(id, description) {}
@@ -16,6 +14,10 @@ namespace CHelper::Node {
     NodeCommandName::NodeCommandName(const nlohmann::json &j,
                                      const CPack &cpack)
             : NodeBase(j, cpack) {}
+
+    NodeType NodeCommandName::getNodeType() const {
+        return NodeType::COMMAND_NAME;
+    }
 
     ASTNode NodeCommandName::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         return getStringASTNode(tokenReader);
@@ -28,8 +30,8 @@ namespace CHelper::Node {
             return true;
         }
         std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
-        for (const auto &command: cpack.commands) {
-            for (const auto &name: command->name) {
+        for (const auto &command: *cpack.commands) {
+            for (const auto &name: std::static_pointer_cast<Node::NodePerCommand>(command)->name) {
                 if (str == name) {
                     return true;
                 }
@@ -45,8 +47,8 @@ namespace CHelper::Node {
             return true;
         }
         std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
-        for (const auto &command: cpack.commands) {
-            for (const auto &name: command->name) {
+        for (const auto &command: *cpack.commands) {
+            for (const auto &name: std::static_pointer_cast<Node::NodePerCommand>(command)->name) {
                 if (StringUtil::isStartOf(name, str)) {
                     suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(name, command->description));
                 }

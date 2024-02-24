@@ -6,8 +6,6 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE("LIST", NodeList)
-
     NodeList::NodeList(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
                        std::shared_ptr<NodeBase> &nodeLeft,
@@ -19,12 +17,6 @@ namespace CHelper::Node {
               nodeElement(nodeElement),
               nodeSeparator(nodeSeparator),
               nodeRight(nodeRight) {}
-
-    NodeList::NodeList(const nlohmann::json &j,
-                       const CPack &cpack) :
-            NodeBase(j, cpack) {
-        throw Exception::CantCreateInstance("CHelper::Node::NodeList");
-    }
 
     ASTNode NodeList::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         //标记整个[...]，在最后进行收集

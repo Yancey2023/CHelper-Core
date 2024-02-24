@@ -12,20 +12,6 @@ namespace CHelper::Exception {
 
     void printStackTrace(const std::exception &e);
 
-    class CantCreateInstance : public std::exception {
-    public:
-        explicit CantCreateInstance(const std::string &className);
-
-        [[nodiscard]] const char *what() const noexcept override;
-    };
-
-    class CPackLoadFailed : public std::exception {
-    public:
-        CPackLoadFailed();
-
-        [[nodiscard]] const char *what() const noexcept override;
-    };
-
     class UnknownIdType : public std::exception {
     public:
         UnknownIdType(const std::string &fileName, const std::string &idType);
@@ -63,13 +49,6 @@ namespace CHelper::Exception {
     };
 
     std::string getCommandName(const std::vector<std::string> &commandName);
-
-    class CommandLoadFailed : public std::exception {
-    public:
-        CommandLoadFailed();
-
-        [[nodiscard]] const char *what() const noexcept override;
-    };
 
     class NodeLoadFailed : public std::exception {
     public:

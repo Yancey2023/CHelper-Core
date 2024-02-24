@@ -11,7 +11,9 @@ namespace CHelper::Node {
 
     class NodeBlockState : public NodeBase {
     public:
-        NODE_TYPE_INSTANCE_H(NodeBlockState);
+        NodeBlockState(const std::optional<std::string> &id, const std::optional<std::string> &description);
+
+        static std::shared_ptr<NodeBlockState> getInstance();
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 

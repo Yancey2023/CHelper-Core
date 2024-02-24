@@ -20,7 +20,7 @@ namespace CHelper::Node {
         NodeRelativeFloat(const nlohmann::json &j,
                           const CPack &cpack);
 
-        NODE_TYPE_H;
+        [[nodiscard]] NodeType getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 

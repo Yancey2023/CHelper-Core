@@ -6,8 +6,6 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE("FLOAT", NodeFloat)
-
     NodeFloat::NodeFloat(const std::optional<std::string> &id,
                          const std::optional<std::string> &description,
                          const std::optional<float> &min,
@@ -21,6 +19,10 @@ namespace CHelper::Node {
             : NodeBase(j, cpack),
               min(FROM_JSON_OPTIONAL(j, min, float)),
               max(FROM_JSON_OPTIONAL(j, max, float)) {}
+
+    NodeType NodeFloat::getNodeType() const {
+        return NodeType::FLOAT;
+    }
 
     void NodeFloat::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);

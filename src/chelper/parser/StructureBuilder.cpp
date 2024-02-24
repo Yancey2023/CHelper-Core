@@ -31,6 +31,10 @@ namespace CHelper {
     }
 
     StructureBuilder &StructureBuilder::appendWhiteSpace() {
+        if (structure.empty()) {
+            dirty = true;
+            return *this;
+        }
         return appendSymbol(' ');
     }
 

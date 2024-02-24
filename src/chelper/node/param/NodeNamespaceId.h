@@ -16,19 +16,17 @@ namespace CHelper::Node {
     class NodeNamespaceId : public NodeBase {
     public:
         const std::optional<std::string> key;
-        const std::vector<std::shared_ptr<CHelper::NamespaceId>> *contents;
+        const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> contents;
 
         NodeNamespaceId(const std::optional<std::string> &id,
                         const std::optional<std::string> &description,
                         const std::optional<std::string> &key,
-                        const std::vector<std::shared_ptr<NamespaceId>> *contents);
+                        const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
 
         NodeNamespaceId(const nlohmann::json &j,
                         const CPack &cpack);
 
-        ~NodeNamespaceId() override;
-
-        NODE_TYPE_H;
+        [[nodiscard]] NodeType getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
@@ -50,7 +48,5 @@ namespace CHelper::Node {
 
 }
 // CHelper::Node
-
-CREATE_ADL_SERIALIZER(CHelper::Node::NodeNamespaceId);
 
 #endif //CHELPER_NODENAMESPACEID_H

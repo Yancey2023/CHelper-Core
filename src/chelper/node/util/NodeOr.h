@@ -11,18 +11,13 @@ namespace CHelper::Node {
 
     class NodeOr : public NodeBase {
     public:
-        const std::vector<std::shared_ptr<NodeBase>> childNodes;
+        const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> childNodes;
         const bool isAttachToEnd;
 
         NodeOr(const std::optional<std::string> &id,
                const std::optional<std::string> &description,
-               const std::vector<std::shared_ptr<NodeBase>> &childNodes,
+               const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes,
                bool isAttachToEnd);
-
-        NodeOr(const nlohmann::json &j,
-               const CPack &cpack);
-
-        NODE_TYPE_H
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 

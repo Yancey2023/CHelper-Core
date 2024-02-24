@@ -6,8 +6,6 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE("STRING", NodeString)
-
     NodeString::NodeString(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
                            const bool canContainSpace,
@@ -21,6 +19,10 @@ namespace CHelper::Node {
             : NodeBase(j, cpack),
               canContainSpace(FROM_JSON(j, canContainSpace, bool)),
               ignoreLater(FROM_JSON(j, ignoreLater, bool)) {}
+
+    NodeType NodeString::getNodeType() const {
+        return NodeType::STRING;
+    }
 
     ASTNode NodeString::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         if (ignoreLater) {

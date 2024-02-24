@@ -6,12 +6,10 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE("NORMAL_ID", NodeNormalId)
-
     NodeNormalId::NodeNormalId(const std::optional<std::string> &id,
                                const std::optional<std::string> &description,
                                const std::optional<std::string> &key,
-                               const std::vector<std::shared_ptr<NormalId>> *contents)
+                               std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents)
             : NodeBase(id, description),
               key(key),
               contents(contents) {}
@@ -33,22 +31,19 @@ namespace CHelper::Node {
                                       .build());
                 throw Exception::NodeLoadFailed();
             }
-            contents = &cpack.normalIds.find(key.value())->second;
+            contents = it->second;
         } else {
             nlohmann::json jsonArray = j.at("contents");
-            auto *contents0 = new std::vector<std::shared_ptr<NormalId>>();
-            contents0->reserve(jsonArray.size());
+            contents = std::make_shared<std::vector<std::shared_ptr<NormalId>>>();
+            contents->reserve(jsonArray.size());
             for (const auto &item: jsonArray) {
-                contents0->push_back(std::make_shared<NormalId>(item));
+                contents->push_back(std::make_shared<NormalId>(item));
             }
-            contents = contents0;
         }
     }
 
-    NodeNormalId::~NodeNormalId() {
-        if (!key.has_value()) {
-            delete contents;
-        }
+    NodeType NodeNormalId::getNodeType() const {
+        return NodeType::NORMAL_ID;
     }
 
     void NodeNormalId::toJson(nlohmann::json &j) const {

@@ -65,9 +65,9 @@ namespace CHelper {
         TO_JSON(j, defaultValue);
     }
 
-    BlockId::BlockId(const std::optional<std::__cxx11::basic_string<char>> &nameSpace,
-                     const std::__cxx11::basic_string<char> &name,
-                     const std::optional<std::__cxx11::basic_string<char>> &description,
+    BlockId::BlockId(const std::optional<std::string> &nameSpace,
+                     const std::string &name,
+                     const std::optional<std::string> &description,
                      const std::optional<int> &max,
                      const std::optional<std::vector<std::string>> &descriptions,
                      const std::optional<std::vector<BlockState>> &blockStates)

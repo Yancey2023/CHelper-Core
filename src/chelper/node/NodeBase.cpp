@@ -6,10 +6,6 @@
 
 namespace CHelper::Node {
 
-    NodeType NodeBase::TYPE("UNKNOWN", [](const nlohmann::json &j, const CPack &cpack) -> std::shared_ptr<NodeBase> {
-        return nullptr;
-    });
-
     NodeBase::NodeBase(const std::optional<std::string> &id,
                        const std::optional<std::string> &description)
             : id(id),
@@ -34,13 +30,8 @@ namespace CHelper::Node {
         throw Exception::UnknownNodeType(type);
     }
 
-    NodeBase::~NodeBase() {
-        //因为节点可能之间互相绑定，所以要在析构函数清除子节点
-        nextNodes.clear();
-    }
-
     NodeType NodeBase::getNodeType() const {
-        return NodeBase::TYPE;
+        return NodeType::UNKNOWN;
     }
 
     void NodeBase::toJson(nlohmann::json &j) const {

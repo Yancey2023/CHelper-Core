@@ -20,13 +20,6 @@ namespace CHelper::Node {
                                    bool isMustNPC,
                                    bool isOnlyOne);
 
-        explicit NodeTargetSelectorVariable(const nlohmann::json &j,
-                                            const CPack &cpack);
-
-        NODE_TYPE_H;
-
-        void toJson(nlohmann::json &j) const override;
-
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
         bool collectIdError(const ASTNode *astNode,

@@ -15,11 +15,11 @@
 
 namespace CHelper::Parser {
 
-    std::pair<std::shared_ptr<std::vector<Token>>, ASTNode> parse(const std::string &content, const CPack &cpack);
+    ASTNode parse(const std::string &content, const CPack &cpack);
 
-    std::pair<std::shared_ptr<std::vector<Token>>, ASTNode> parse(StringReader &&stringReader, const CPack &cpack);
+    ASTNode parse(StringReader &&stringReader, const CPack &cpack);
 
-    ASTNode parse(const std::vector<Token> &tokens, const CPack &cpack);
+    ASTNode parse(const std::shared_ptr<std::vector<Token>> &tokens, const CPack &cpack);
 
     ASTNode parse(TokenReader &&tokenReader, const CPack &cpack);
 

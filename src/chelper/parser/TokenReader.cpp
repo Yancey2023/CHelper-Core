@@ -6,18 +6,18 @@
 
 namespace CHelper {
 
-    TokenReader::TokenReader(const std::vector<CHelper::Token> &tokenList)
+    TokenReader::TokenReader(const std::shared_ptr<std::vector<Token>>& tokenList)
             : tokenList(tokenList) {}
 
     bool TokenReader::ready() const {
-        return index < tokenList.size();
+        return index < tokenList->size();
     }
 
     const Token *TokenReader::peek() const {
         if (!ready()) {
             return nullptr;
         }
-        return &tokenList[index];
+        return &(*tokenList)[index];
     }
 
     const Token *TokenReader::read() {
@@ -95,7 +95,7 @@ namespace CHelper {
      * 收集栈中最后一个指针位置到当前指针的token，从栈中移除指针，不恢复指针
      */
     VectorView <Token> CHelper::TokenReader::collect() {
-        return {&tokenList, getAndPopLastIndex(), index};
+        return {tokenList, getAndPopLastIndex(), index};
     }
 
 

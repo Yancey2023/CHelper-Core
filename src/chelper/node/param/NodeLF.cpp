@@ -6,7 +6,18 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE_INSTANCE("LF", NodeLF, "line feet")
+    NodeLF::NodeLF(const std::optional<std::string> &id,
+                   const std::optional<std::string> &description)
+            : NodeBase(id, description) {}
+
+    NodeType NodeLF::getNodeType() const {
+        return NodeType::LF;
+    }
+
+    std::shared_ptr<NodeLF> NodeLF::getInstance() {
+        static std::shared_ptr<NodeLF> INSTANCE = std::make_shared<NodeLF>("LF", "line feet");
+        return INSTANCE;
+    }
 
     ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();

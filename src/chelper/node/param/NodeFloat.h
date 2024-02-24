@@ -11,7 +11,6 @@ namespace CHelper::Node {
 
     class NodeFloat : public NodeBase {
     public:
-
         std::optional<int> min, max;
 
         NodeFloat(const std::optional<std::string> &id,
@@ -22,7 +21,7 @@ namespace CHelper::Node {
         NodeFloat(const nlohmann::json &j,
                   const CPack &cpack);
 
-        NODE_TYPE_H;
+        [[nodiscard]] NodeType getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
@@ -35,7 +34,5 @@ namespace CHelper::Node {
     };
 
 } // CHelper::Node
-
-CREATE_ADL_SERIALIZER(CHelper::Node::NodeFloat);
 
 #endif //CHELPER_NODEFLOAT_H

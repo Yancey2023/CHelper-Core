@@ -35,18 +35,18 @@ namespace CHelper {
 
     class ASTNode {
     public:
-        const ASTNodeMode::ASTNodeMode mode;
-        const Node::NodeBase *node;
+        ASTNodeMode::ASTNodeMode mode;
         //子节点为AND类型和OR类型特有
-        const std::vector<ASTNode> childNodes;
-        const VectorView <Token> tokens;
-        const std::vector<std::shared_ptr<ErrorReason>> errorReasons;
+        std::vector<ASTNode> childNodes;
+        VectorView <Token> tokens;
         //一个Node可能会生成多个ASTNode，这些ASTNode使用id进行区分
-        const std::string id;
+        std::string id;
+        const Node::NodeBase *node;
+        //不要直接用这个，这里不包括ID错误，只有结构错误，应该用getErrorReason()
+        std::vector<std::shared_ptr<ErrorReason>> errorReasons;
         //哪个节点最好，OR类型特有，获取颜色和生成命令格式文本的时候使用
-        const int whichBest;
+        int whichBest;
 
-    private:
         ASTNode(ASTNodeMode::ASTNodeMode mode,
                 const Node::NodeBase *node,
                 const std::vector<ASTNode> &childNodes,
@@ -78,6 +78,7 @@ namespace CHelper {
                               const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                               const std::string &id = "");
 
+        //是否有结构错误（不包括ID错误）
         [[nodiscard]] bool isError() const;
 
         [[nodiscard]] bool hasChildNode() const;

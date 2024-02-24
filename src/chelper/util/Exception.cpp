@@ -14,27 +14,6 @@ namespace CHelper::Exception {
         Profile::clear();
     }
 
-    CantCreateInstance::CantCreateInstance(const std::string &className) {
-        Profile::push(ColorStringBuilder()
-                              .red("You create a instance which you shouldn't create : ")
-                              .purple(className)
-                              .build());
-    }
-
-    const char *CantCreateInstance::what() const noexcept {
-        return "[CHelper] You create a instance which you shouldn't create";
-    }
-
-    CPackLoadFailed::CPackLoadFailed() {
-        Profile::push(ColorStringBuilder()
-                              .red("CPack load failed")
-                              .build());
-    }
-
-    const char *CPackLoadFailed::what() const noexcept {
-        return "[CHelper] CPack load failed";
-    }
-
     UnknownIdType::UnknownIdType(const std::string &fileName, const std::string &idType) {
         Profile::push(ColorStringBuilder()
                               .red("unknown id type")
@@ -120,16 +99,6 @@ namespace CHelper::Exception {
             result.push_back('\"');
         }
         return result;
-    }
-
-    CommandLoadFailed::CommandLoadFailed() {
-        Profile::push(ColorStringBuilder()
-                              .red("command load failed")
-                              .build());
-    }
-
-    const char *CommandLoadFailed::what() const noexcept {
-        return "[CHelper] CPack load failed";
     }
 
     NodeLoadFailed::NodeLoadFailed() {

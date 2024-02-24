@@ -6,8 +6,6 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE("ENTRY", NodeEntry)
-
     NodeEntry::NodeEntry(const std::optional<std::string> &id,
                          const std::optional<std::string> &description,
                          std::shared_ptr<NodeBase> &nodeKey,
@@ -17,12 +15,6 @@ namespace CHelper::Node {
               nodeKey(nodeKey),
               nodeSeparator(nodeSeparator),
               nodeValue(nodeValue) {}
-
-    NodeEntry::NodeEntry(const nlohmann::json &j,
-                         const CPack &cpack)
-            : NodeBase(j, cpack) {
-        throw Exception::CantCreateInstance("CHelper::Node::NodeEntry");
-    }
 
     ASTNode NodeEntry::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();

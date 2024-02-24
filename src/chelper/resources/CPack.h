@@ -16,11 +16,13 @@ namespace CHelper {
     class CPack {
     public:
         Manifest manifest;
-        std::unordered_map<std::string, std::vector<std::shared_ptr<NormalId>>> normalIds;
-        std::unordered_map<std::string, std::vector<std::shared_ptr<NamespaceId>>> namespaceIds;
-        std::vector<std::shared_ptr<BlockId>> blockIds;
-        std::vector<std::shared_ptr<ItemId>> itemIds;
-        std::vector<std::shared_ptr<Node::NodePerCommand>> commands;
+        std::unordered_map<std::string, std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>> normalIds;
+        std::unordered_map<std::string, std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> namespaceIds;
+        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> blockIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
+        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
+        std::shared_ptr<std::vector<std::shared_ptr<Node::NodeBase>>> commands = std::make_shared<std::vector<std::shared_ptr<Node::NodeBase>>>();
+        //从这个节点开始检测
+        std::shared_ptr<Node::NodeBase> mainNode;
     private:
         explicit CPack(const std::filesystem::path &path);
 

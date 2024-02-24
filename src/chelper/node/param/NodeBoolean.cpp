@@ -6,8 +6,6 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE("BOOLEAN", NodeBoolean)
-
     NodeBoolean::NodeBoolean(const std::optional<std::string> &id,
                              const std::optional<std::string> &description,
                              const std::optional<std::string> &descriptionTrue,
@@ -21,6 +19,10 @@ namespace CHelper::Node {
             : NodeBase(j, cpack),
               descriptionTrue(FROM_JSON_OPTIONAL(j, descriptionTrue, std::string)),
               descriptionFalse(FROM_JSON_OPTIONAL(j, descriptionFalse, std::string)) {}
+
+    NodeType NodeBoolean::getNodeType() const {
+        return NodeType::BOOLEAN;
+    }
 
     void NodeBoolean::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);

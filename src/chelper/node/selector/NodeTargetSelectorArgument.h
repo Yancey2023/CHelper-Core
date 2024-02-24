@@ -11,8 +11,8 @@ namespace CHelper::Node {
 
     class NodeTargetSelectorArgument : public NodeBase {
     public:
-
-        NODE_TYPE_INSTANCE_H(NodeTargetSelectorArgument);
+        NodeTargetSelectorArgument(const std::optional<std::string> &id,
+                                   const std::optional<std::string> &description);
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
     };

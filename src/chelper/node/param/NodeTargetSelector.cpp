@@ -23,8 +23,6 @@ namespace CHelper::Node {
             "TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
             nodeLeft, nodeArgument, nodeSeparator, nodeRight);
 
-    NODE_TYPE("TARGET_SELECTOR", NodeTargetSelector)
-
     NodeTargetSelector::NodeTargetSelector(const std::optional<std::string> &id,
                                            const std::optional<std::string> &description,
                                            const bool isMustPlayer,
@@ -45,6 +43,10 @@ namespace CHelper::Node {
               isOnlyOne(FROM_JSON(j, isOnlyOne, bool)),
               nodeTargetSelectorVariable("TARGET_SELECTOR_VARIABLE", "目标选择器变量",
                                          isMustPlayer, isMustNPC, isOnlyOne) {}
+
+    NodeType NodeTargetSelector::getNodeType() const {
+        return NodeType::TARGET_SELECTOR;
+    }
 
     void NodeTargetSelector::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);

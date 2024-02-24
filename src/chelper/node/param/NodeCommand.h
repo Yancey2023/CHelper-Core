@@ -11,15 +11,17 @@
 namespace CHelper::Node {
 
     class NodeCommand : public NodeBase {
-
     public:
+        NodeOr nodeCommand;
+
         NodeCommand(const std::optional<std::string> &id,
-                    const std::optional<std::string> &description);
+                    const std::optional<std::string> &description,
+                    const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes);
 
         NodeCommand(const nlohmann::json &j,
                     const CPack &cpack);
 
-        NODE_TYPE_H;
+        [[nodiscard]] NodeType getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
@@ -32,7 +34,5 @@ namespace CHelper::Node {
     };
 
 } // CHelper::Node
-
-CREATE_ADL_SERIALIZER(CHelper::Node::NodeCommand);
 
 #endif //CHELPER_NODECOMMAND_H

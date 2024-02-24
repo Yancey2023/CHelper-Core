@@ -18,7 +18,7 @@ namespace CHelper::Node {
         NodeCommandName(const nlohmann::json &j,
                         const CPack &cpack);
 
-        NODE_TYPE_H;
+        [[nodiscard]] NodeType getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
@@ -37,7 +37,5 @@ namespace CHelper::Node {
     };
 
 } // CHelper::Node
-
-CREATE_ADL_SERIALIZER(CHelper::Node::NodeCommandName);
 
 #endif //CHELPER_NODECOMMANDNAME_H

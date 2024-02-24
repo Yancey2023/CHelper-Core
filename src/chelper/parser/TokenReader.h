@@ -13,11 +13,11 @@ namespace CHelper {
 
     class TokenReader {
     public:
-        const std::vector<CHelper::Token> &tokenList;
+        const std::shared_ptr<std::vector<Token>> tokenList;
         size_t index = 0;
         std::vector<size_t> indexStack;
 
-        explicit TokenReader(const std::vector<CHelper::Token> &tokenList);
+        explicit TokenReader(const std::shared_ptr<std::vector<Token>> &tokenList);
 
         [[nodiscard]] bool ready() const;
 

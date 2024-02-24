@@ -7,25 +7,23 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE("NAMESPACE_ID", NodeNamespaceId)
-
     NodeNamespaceId::NodeNamespaceId(const std::optional<std::string> &id,
                                      const std::optional<std::string> &description,
                                      const std::optional<std::string> &key,
-                                     const std::vector<std::shared_ptr<NamespaceId>> *contents)
+                                     const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
             : NodeBase(id, description),
               key(key),
               contents(contents) {}
 
-    NodeNamespaceId::NodeNamespaceId(const nlohmann::json &j,
-                                     const CPack &cpack)
-            : NodeBase(j, cpack),
-              key(FROM_JSON_OPTIONAL(j, key, std::string)) {
+    std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> getContentFromCPack(const nlohmann::json &j,
+                                                                                   const CPack &cpack,
+                                                                                   const std::optional<std::string> &key) {
         if (key.has_value()) {
             auto it = cpack.namespaceIds.find(key.value());
             if (it == cpack.namespaceIds.end()) {
                 Profile::push(ColorStringBuilder()
                                       .red("linking contents to ")
+                                      .purple(key.value())
                                       .build());
                 Profile::push(ColorStringBuilder()
                                       .red("failed to find namespace id in the cpack")
@@ -34,22 +32,26 @@ namespace CHelper::Node {
                                       .build());
                 throw Exception::NodeLoadFailed();
             }
-            contents = &cpack.namespaceIds.find(key.value())->second;
+            return it->second;
         } else {
             nlohmann::json jsonArray = j.at("contents");
-            auto *contents0 = new std::vector<std::shared_ptr<NamespaceId>>();
-            contents0->reserve(jsonArray.size());
+            auto contents = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
+            contents->reserve(jsonArray.size());
             for (const auto &item: jsonArray) {
-                contents0->push_back(std::make_shared<NamespaceId>(item));
+                contents->push_back(std::make_shared<NamespaceId>(item));
             }
-            contents = contents0;
+            return contents;
         }
     }
 
-    NodeNamespaceId::~NodeNamespaceId() {
-        if (!key.has_value()) {
-            delete contents;
-        }
+    NodeNamespaceId::NodeNamespaceId(const nlohmann::json &j,
+                                     const CPack &cpack)
+            : NodeBase(j, cpack),
+              key(FROM_JSON_OPTIONAL(j, key, std::string)),
+              contents(getContentFromCPack(j, cpack, key)) {}
+
+    NodeType NodeNamespaceId::getNodeType() const {
+        return NodeType::NAMESPACE_ID;
     }
 
     void NodeNamespaceId::toJson(nlohmann::json &j) const {
@@ -65,11 +67,8 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
-        // 格式
         // namespace:id
-        // id
-
-        //字符串中可以包含冒号
+        // 字符串中已经包含冒号，因为冒号不是结束字符
         return getStringASTNode(tokenReader);
     }
 

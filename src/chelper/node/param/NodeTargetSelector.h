@@ -25,7 +25,7 @@ namespace CHelper::Node {
         explicit NodeTargetSelector(const nlohmann::json &j,
                                     const CPack &cpack);
 
-        NODE_TYPE_H;
+        [[nodiscard]] NodeType getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
@@ -38,7 +38,5 @@ namespace CHelper::Node {
     };
 
 } // CHelper::Node
-
-CREATE_ADL_SERIALIZER(CHelper::Node::NodeTargetSelector);
 
 #endif //CHELPER_NODETARGETSELECTOR_H

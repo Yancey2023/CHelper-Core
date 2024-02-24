@@ -8,20 +8,25 @@
 
 namespace CHelper::Node {
 
-    NODE_TYPE("COMMAND", NodeCommand)
-
     NodeCommand::NodeCommand(const std::optional<std::string> &id,
-                             const std::optional<std::string> &description)
-            : NodeBase(id, description) {}
+                             const std::optional<std::string> &description,
+                             const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes)
+            : NodeBase(id, description),
+              nodeCommand("COMMAND", "命令", childNodes, true) {}
 
     NodeCommand::NodeCommand(const nlohmann::json &j,
                              const CPack &cpack)
-            : NodeBase(j, cpack) {}
+            : NodeBase(j, cpack),
+              nodeCommand("COMMAND", "命令", cpack.commands, true) {}
+
+    NodeType NodeCommand::getNodeType() const {
+        return NodeType::COMMAND;
+    }
 
     ASTNode NodeCommand::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         std::vector<ASTNode> childASTNodes;
-        childASTNodes.reserve(cpack.commands.size());
-        for (const auto &item: cpack.commands) {
+        childASTNodes.reserve(cpack.commands->size());
+        for (const auto &item: *cpack.commands) {
             tokenReader.push();
             childASTNodes.push_back(item->getASTNode(tokenReader, cpack));
             tokenReader.restore();

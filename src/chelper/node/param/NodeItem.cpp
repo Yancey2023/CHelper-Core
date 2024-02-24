@@ -6,7 +6,6 @@
 #include "NodeNamespaceId.h"
 #include "NodeInteger.h"
 #include "NodeString.h"
-#include "../item/NodeItemId.h"
 
 namespace CHelper::Node {
 
@@ -18,19 +17,23 @@ namespace CHelper::Node {
     const static std::shared_ptr<NodeString> nodeComponent = std::make_shared<NodeString>
             ("ITEM_COMPONENT", "物品组件", true, true);
 
-    NODE_TYPE("ITEM", NodeItem)
-
     NodeItem::NodeItem(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
                        const CHelper::Node::NodeItemType::NodeItemType nodeItemType,
-                       const std::vector<std::shared_ptr<CHelper::NamespaceId>> *contents)
+                       const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
             : NodeBase(id, description),
-              nodeItemType(nodeItemType) {}
+              nodeItemType(nodeItemType),
+              nodeItemId(std::make_shared<NodeNamespaceId>("ITEM_ID", "物品ID", "items", contents)) {}
 
     NodeItem::NodeItem(const nlohmann::json &j,
                        const CPack &cpack) :
             NodeBase(j, cpack),
-            nodeItemType(FROM_JSON(j, nodeItemType, CHelper::Node::NodeItemType::NodeItemType)) {}
+            nodeItemType(FROM_JSON(j, nodeItemType, CHelper::Node::NodeItemType::NodeItemType)),
+            nodeItemId(std::make_shared<NodeNamespaceId>("ITEM_ID", "物品ID", "items", cpack.itemIds)) {}
+
+    NodeType NodeItem::getNodeType() const {
+        return NodeType::ITEM;
+    }
 
     void NodeItem::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
@@ -41,13 +44,13 @@ namespace CHelper::Node {
         switch (nodeItemType) {
             case NodeItemType::ITEM_GIVE:
                 return getOptionalASTNode(tokenReader, cpack, false,
-                                          {NodeItemId::getInstance(), nodeCount, nodeData, nodeComponent});
+                                          {nodeItemId, nodeCount, nodeData, nodeComponent});
             case NodeItemType::ITEM_CLEAR:
                 return getOptionalASTNode(tokenReader, cpack, false,
-                                          {NodeItemId::getInstance(), nodeData, nodeCount});
+                                          {nodeItemId, nodeData, nodeCount});
             default:
                 return getOptionalASTNode(tokenReader, cpack, false,
-                                          {NodeItemId::getInstance(), nodeCount, nodeData, nodeComponent});
+                                          {nodeItemId, nodeCount, nodeData, nodeComponent});
         }
     }
 

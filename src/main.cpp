@@ -7,6 +7,7 @@
 #include "chelper/lexer/Lexer.h"
 #include "chelper/parser/ASTNode.h"
 #include "chelper/util/TokenUtil.h"
+#include "chelper/Core.h"
 
 #pragma comment(lib, "comctl32.lib")
 
@@ -17,12 +18,13 @@ static size_t ID_LIST_VIEW = 3;
 static TCHAR szWindowClass[] = "CHelper";
 static TCHAR szTitle[] = "CHelper";
 
-static std::shared_ptr<CHelper::CPack> cpack;
+static std::shared_ptr<CHelper::Core> core;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)");
-//    return 0;
-    return initWindows(hInstance, nCmdShow);
+
+    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)");
+    return 0;
+//    return initWindows(hInstance, nCmdShow);
 }
 
 /**
@@ -32,15 +34,21 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
  * @param nCmdShow 控制窗口的显示方式
  */
 int initWindows(HINSTANCE hInstance, int nCmdShow) {
-    clock_t start, end;
-    start = clock();
-    cpack = std::make_shared<CHelper::CPack>(CHelper::CPack::create(R"(D:\CLion\project\CHelper\resources)"));
-    end = clock();
-    CHELPER_INFO(CHelper::ColorStringBuilder()
-                         .green("CPack load successfully (")
-                         .purple(std::to_string(end - start) + "ms")
-                         .green(")")
-                         .build());
+    try {
+        clock_t start, end;
+        start = clock();
+        core = std::make_shared<CHelper::Core>(CHelper::Core::create(R"(D:\CLion\project\CHelper\resources)"));
+        end = clock();
+        CHELPER_INFO(CHelper::ColorStringBuilder()
+                             .green("CPack load successfully (")
+                             .purple(std::to_string(end - start) + "ms")
+                             .green(")")
+                             .build());
+    } catch (const std::exception &e) {
+        CHELPER_INFO(CHelper::ColorStringBuilder().red("parse load failed").build());
+        CHelper::Exception::printStackTrace(e);
+        exit(-1);
+    }
     //窗口数据
     WNDCLASSEX wcex;
     wcex.cbWndExtra = 0;
@@ -135,17 +143,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     return 0;
 }
 
-void onTextChanged(const std::string& command) {
+void onTextChanged(const std::string &command) {
     try {
         clock_t start, end;
         start = clock();
-        auto parseResult = CHelper::Parser::parse(command, *cpack);
-        auto node = parseResult.second;
+        core->onTextChanged(command, command.length());
         CHelper::Profile::push("get description text view content");
         std::string description;
-        auto errorReasons = node.getErrorReasons(*cpack);
+        auto errorReasons = core->getErrorReasons();
         if (errorReasons.empty()) {
-            description = node.getDescription(command.size());
+            description = core->getDescription();
         } else {
             if (errorReasons.size() == 1) {
                 const auto &errorReason = errorReasons[0];
@@ -169,7 +176,7 @@ void onTextChanged(const std::string& command) {
             CHelper::Profile::pop();
         }
         CHelper::Profile::push("update suggestion list view");
-        auto suggestions = node.getSuggestions(*cpack, command.size());
+        auto suggestions = core->getSuggestions();
         SendMessage(hWndListBox, LB_RESETCONTENT, 0, 0);
         //由于添加全部结果非常耗时，这里只保留前30个
         int i = 0;
@@ -223,7 +230,7 @@ namespace CHelper::Test {
         try {
             clock_t start, end;
             start = clock();
-            auto cpack = CPack::create(cpackPath);
+            auto core = Core::create(cpackPath);
             end = clock();
             CHELPER_INFO(ColorStringBuilder()
                                  .green("CPack load successfully (")
@@ -233,14 +240,12 @@ namespace CHelper::Test {
             std::cout << std::endl;
             for (const auto &command: commands) {
                 start = clock();
-                auto parseResult = Parser::parse(command, cpack);
-                auto node = parseResult.second;
-                auto description = node.getDescription(command.length() - 1);
-                auto errorReasons = node.getErrorReasons(cpack);
-                auto suggestions = node.getSuggestions(cpack, command.length() - 1);
-                auto structure = node.getStructure();
-//                auto colors = node.getColors();
+                core.onTextChanged(command, commands.size());
                 end = clock();
+                auto description = core.getDescription();
+                auto errorReasons = core.getErrorReasons();
+                auto suggestions = core.getSuggestions();
+                auto structure = core.getStructure();
                 CHELPER_INFO(ColorStringBuilder()
                                      .green("parse successfully(")
                                      .purple(std::to_string(end - start) + "ms")

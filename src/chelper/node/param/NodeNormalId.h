@@ -15,19 +15,17 @@ namespace CHelper::Node {
     class NodeNormalId : public NodeBase {
     public:
         const std::optional<std::string> key;
-        const std::vector<std::shared_ptr<NormalId>> *contents;
+        std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> contents;
 
         NodeNormalId(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
                      const std::optional<std::string> &key,
-                     const std::vector<std::shared_ptr<NormalId>> *contents);
+                     std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>& contents);
 
         NodeNormalId(const nlohmann::json &j,
                      const CPack &cpack);
 
-        ~NodeNormalId() override;
-
-        NODE_TYPE_H;
+        [[nodiscard]] NodeType getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
@@ -48,14 +46,5 @@ namespace CHelper::Node {
     };
 
 }
-
-template<>
-struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::Node::NodeNormalId> {
-
-    static void to_json(nlohmann::json &j, const CHelper::Node::NodeNormalId &t) {
-        t.toJson(j);
-    };
-
-};
 
 #endif //CHELPER_NODENORMALID_H

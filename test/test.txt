@@ -3,5 +3,6 @@ D:\CLion\project\CHelper\resources
 -give @s mi
 -give @s minecraft:st
 -give
-gi
-g
+-gi
+-g
+summon a

@@ -27,7 +27,9 @@ namespace CHelper::Node {
         NodePerCommand(const nlohmann::json &j,
                        const CPack &cpack);
 
-        NODE_TYPE_H;
+         ~NodePerCommand();
+
+        [[nodiscard]] NodeType getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
@@ -46,7 +48,5 @@ namespace CHelper::Node {
     }; // NodePerCommand::Node
 
 } // CHelper
-
-CREATE_ADL_SERIALIZER(CHelper::Node::NodePerCommand);
 
 #endif //CHELPER_NODEPERCOMMAND_H

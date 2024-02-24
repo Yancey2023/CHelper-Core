@@ -3,6 +3,7 @@
 //
 
 #include "CPack.h"
+#include "../node/param/NodeCommand.h"
 
 namespace CHelper {
 
@@ -24,39 +25,29 @@ namespace CHelper {
                                   .purple(file.path().string())
                                   .red("\"").build());
             if (type == "normal") {
-                std::vector<std::shared_ptr<NormalId>> content;
+                std::string id = FROM_JSON(j, id, std::string);
+                auto content = std::make_shared<std::vector<std::shared_ptr<NormalId>>>();
                 for (const auto &item: j.at("content")) {
-                    content.push_back(std::make_shared<NormalId>(item));
+                    content->push_back(std::make_shared<NormalId>(item));
                 }
-                normalIds.emplace(
-                        FROM_JSON(j, id, std::string),
-                        content
-                );
+                normalIds.emplace(std::move(id), std::move(content));
             } else if (type == "block") {
-                std::vector<std::shared_ptr<NamespaceId>> blocks;
                 for (const auto &item: j.at("blocks")) {
                     std::shared_ptr<BlockId> ptr = std::make_shared<BlockId>(item);
-                    blockIds.push_back(ptr);
-                    blocks.push_back(ptr);
+                    blockIds->push_back(ptr);
                 }
-                namespaceIds.emplace("blocks", blocks);
             } else if (type == "item") {
-                std::vector<std::shared_ptr<NamespaceId>> items;
                 for (const auto &item: j.at("items")) {
-                    std::shared_ptr<ItemId> ptr = std::make_shared<ItemId>(item);
-                    itemIds.push_back(ptr);
-                    items.push_back(ptr);
+                    std::shared_ptr<NamespaceId> ptr = std::make_shared<ItemId>(item);
+                    itemIds->push_back(ptr);
                 }
-                namespaceIds.emplace("items", items);
             } else if (type == "namespace") {
-                std::vector<std::shared_ptr<NamespaceId>> content;
+                std::string id = FROM_JSON(j, id, std::string);
+                auto content = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
                 for (const auto &item: j.at("content")) {
-                    content.push_back(std::make_shared<NamespaceId>(item));
+                    content->push_back(std::make_shared<NamespaceId>(item));
                 }
-                namespaceIds.emplace(
-                        FROM_JSON(j, id, std::string),
-                        content
-                );
+                namespaceIds.emplace(std::move(id), std::move(content));
             } else {
                 throw Exception::UnknownIdType(file.path().filename().string(), type);
             }
@@ -68,9 +59,10 @@ namespace CHelper {
                                   .purple(file.path().string())
                                   .red("\"")
                                   .build());
-            commands.push_back(std::make_shared<Node::NodePerCommand>(JsonUtil::getJsonFromPath(file), *this));
+            commands->push_back(std::make_shared<Node::NodePerCommand>(JsonUtil::getJsonFromPath(file), *this));
         }
         Profile::pop();
+        mainNode = std::make_shared<Node::NodeCommand>("MAIN_NODE", "主节点", commands);
     }
 
     CPack CPack::create(const std::filesystem::path &path) {

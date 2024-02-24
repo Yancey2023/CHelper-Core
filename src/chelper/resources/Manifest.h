@@ -29,17 +29,7 @@ namespace CHelper {
 
         explicit Manifest(const nlohmann::json &j);
 
-        void toJson(nlohmann::json &j) const override {
-            TO_JSON_OPTIONAL(j, name)
-            TO_JSON_OPTIONAL(j, description)
-            TO_JSON_OPTIONAL(j, minecraftVersion)
-            TO_JSON_OPTIONAL(j, author)
-            TO_JSON_OPTIONAL(j, updateDate)
-            TO_JSON(j, packId);
-            TO_JSON(j, version);
-            TO_JSON_OPTIONAL(j, isBasicPack)
-            TO_JSON_OPTIONAL(j, isDefault)
-        };
+        void toJson(nlohmann::json &j) const override;
 
     };
 }
