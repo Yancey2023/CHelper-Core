@@ -33,7 +33,23 @@ namespace CHelper {
 
             static std::vector<const NodeType *> NODE_TYPES;
 
-            static NodeType UNKNOWN, BLOCK, BOOLEAN, COMMAND, COMMAND_NAME, FLOAT, INTEGER, ITEM, LF, NAMESPACE_ID, NORMAL_ID, PER_COMMAND, POSITION, RELATIVE_FLOAT, STRING, TARGET_SELECTOR, TEXT;
+            static NodeType UNKNOWN;
+            static NodeType BLOCK;
+            static NodeType BOOLEAN;
+            static NodeType COMMAND;
+            static NodeType COMMAND_NAME;
+            static NodeType FLOAT;
+            static NodeType INTEGER;
+            static NodeType ITEM;
+            static NodeType LF;
+            static NodeType NAMESPACE_ID;
+            static NodeType NORMAL_ID;
+            static NodeType PER_COMMAND;
+            static NodeType POSITION;
+            static NodeType RELATIVE_FLOAT;
+            static NodeType STRING;
+            static NodeType TARGET_SELECTOR;
+            static NodeType TEXT;
 
             static void init();
         };

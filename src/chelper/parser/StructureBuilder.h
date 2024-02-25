@@ -12,12 +12,11 @@ namespace CHelper {
     class StructureBuilder {
     private:
         std::string structure;
-        bool dirty = false;
 
     public:
-        [[nodiscard]] bool isDirty() const;
+        bool isDirty = false;
 
-        StructureBuilder &appendUnknownIfNotDirty(bool isMustHave);
+        StructureBuilder &appendUnknown(bool isMustHave);
 
         StructureBuilder &appendSymbol(char ch);
 

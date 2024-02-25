@@ -4,9 +4,11 @@
 
 #ifndef CHELPER_ANDROIDNATIVE_H
 #define CHELPER_ANDROIDNATIVE_H
-#if CHelperAndroid == true
 
 #include "pch.h"
+
+#if CHelperAndroid == true
+
 #include "../chelper/Core.h"
 
 std::string jstring2string(JNIEnv *env, jstring jStr) {
@@ -18,52 +20,34 @@ std::string jstring2string(JNIEnv *env, jstring jStr) {
 
 std::shared_ptr<CHelper::Core> core;
 
-extern "C"
-JNIEXPORT jboolean JNICALL
-Java_yancey_chelper_core_CHelperCore_init(JNIEnv *env, jobject thiz,
-                                          jstring cpack_path) {
-    try {
-        clock_t start, end;
-        start = clock();
-        core = std::make_shared<CHelper::Core>(CHelper::Core::create(jstring2string(env, cpack_path)));
-        end = clock();
-        CHELPER_INFO("CPack load successfully (" + std::to_string(end - start) + "ms)");
-        return true;
-    } catch (const std::exception &e) {
-        CHELPER_ERROR("parse failed");
-        CHelper::Exception::printStackTrace(e);
-        CHelper::Profile::clear();
-        return false;
-    }
+extern "C" JNIEXPORT jboolean JNICALL
+Java_yancey_chelper_core_CHelperCore_init(
+        JNIEnv *env, jobject thiz, jstring cpack_path) {
+    core = CHelper::Core::create(jstring2string(env, cpack_path));
+    return core != nullptr;
 }
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_yancey_chelper_core_CHelperCore_onTextChanged(JNIEnv *env,
-                                                   jobject thiz,
-                                                   jstring cpack_path,
-                                                   jint index) {
+extern "C" JNIEXPORT void JNICALL
+Java_yancey_chelper_core_CHelperCore_onTextChanged(
+        JNIEnv *env, jobject thiz, jstring cpack_path, jint index) {
     if (core == nullptr) {
         return;
     }
     core->onTextChanged(jstring2string(env, cpack_path), index);
 }
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_yancey_chelper_core_CHelperCore_onSelectionChanged(JNIEnv *env,
-                                                        jobject thiz,
-                                                        jint index) {
+extern "C" JNIEXPORT void JNICALL
+Java_yancey_chelper_core_CHelperCore_onSelectionChanged(
+        JNIEnv *env, jobject thiz, jint index) {
     if (core == nullptr) {
         return;
     }
     core->onSelectionChanged(index);
 }
 
-extern "C"
-JNIEXPORT jstring JNICALL
-Java_yancey_chelper_core_CHelperCore_getDescription(JNIEnv *env,
-                                                    jobject thiz) {
+extern "C" JNIEXPORT jstring JNICALL
+Java_yancey_chelper_core_CHelperCore_getDescription(
+        JNIEnv *env, jobject thiz) {
     if (core == nullptr) {
         return nullptr;
     }
@@ -71,10 +55,9 @@ Java_yancey_chelper_core_CHelperCore_getDescription(JNIEnv *env,
     return env->NewStringUTF(description.c_str());
 }
 
-extern "C"
-JNIEXPORT jstring JNICALL
-Java_yancey_chelper_core_CHelperCore_getErrorReasons(JNIEnv *env,
-                                                     jobject thiz) {
+extern "C" JNIEXPORT jstring JNICALL
+Java_yancey_chelper_core_CHelperCore_getErrorReasons(
+        JNIEnv *env, jobject thiz) {
     if (core == nullptr) {
         return nullptr;
     }
@@ -94,10 +77,9 @@ Java_yancey_chelper_core_CHelperCore_getErrorReasons(JNIEnv *env,
     }
 }
 
-extern "C"
-JNIEXPORT jstring JNICALL
-Java_yancey_chelper_core_CHelperCore_getSuggestions(JNIEnv *env,
-                                                    jobject thiz) {
+extern "C" JNIEXPORT jstring JNICALL
+Java_yancey_chelper_core_CHelperCore_getSuggestions(
+        JNIEnv *env, jobject thiz) {
     if (core == nullptr) {
         return nullptr;
     }
@@ -115,15 +97,28 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions(JNIEnv *env,
     return env->NewStringUTF(result.c_str());
 }
 
-extern "C"
-JNIEXPORT jstring JNICALL
-Java_yancey_chelper_core_CHelperCore_getStructure(JNIEnv *env,
-                                                  jobject thiz) {
+extern "C" JNIEXPORT jstring JNICALL
+Java_yancey_chelper_core_CHelperCore_getStructure(
+        JNIEnv *env, jobject thiz) {
     if (core == nullptr) {
         return nullptr;
     }
     std::string structure = core->getStructure();
     return env->NewStringUTF(structure.c_str());
+}
+
+extern "C" JNIEXPORT jstring JNICALL
+Java_yancey_chelper_core_CHelperCore_onSuggestionClick(
+        JNIEnv *env, jobject thiz, jint which) {
+    if (core == nullptr) {
+        return nullptr;
+    }
+    std::optional<std::string> result = core->onSuggestionClick(which);
+    if (result.has_value()) {
+        return env->NewStringUTF(result.value().c_str());
+    } else {
+        return nullptr;
+    }
 }
 
 #endif

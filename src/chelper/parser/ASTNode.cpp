@@ -53,7 +53,7 @@ namespace CHelper {
 
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             const std::vector<ASTNode> &childNodes,
-                            const VectorView <Token> &tokens,
+                            const VectorView <Token> *tokens,
                             const std::shared_ptr<ErrorReason> &errorReason,
                             const std::string &id) {
         bool isError = true;
@@ -97,55 +97,24 @@ namespace CHelper {
         if (errorReason != nullptr) {
             errorReasons = {errorReason};
         }
-        return {ASTNodeMode::OR, node, childNodes, tokens, errorReasons, id, whichBest};
+        return {ASTNodeMode::OR, node, childNodes,
+                tokens == nullptr ? childNodes[whichBest].tokens : *tokens,
+                errorReasons, id, whichBest};
+    }
+
+    ASTNode ASTNode::orNode(const Node::NodeBase *node,
+                            const std::vector<ASTNode> &childNodes,
+                            const VectorView <Token> &tokens,
+                            const std::shared_ptr<ErrorReason> &errorReason,
+                            const std::string &id) {
+        return orNode(node, childNodes, &tokens, errorReason, id);
     }
 
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             const std::vector<ASTNode> &childNodes,
                             const std::shared_ptr<ErrorReason> &errorReason,
                             const std::string &id) {
-        bool isError = true;
-        int whichBest = 0;
-        size_t start = 0;
-        std::vector<std::shared_ptr<ErrorReason>> errorReasons;
-        for (int i = 0; i < childNodes.size(); ++i) {
-            const ASTNode &item = childNodes[i];
-            if (!item.isError()) {
-                if (isError) {
-                    start = 0;
-                }
-                isError = false;
-                whichBest = i;
-                errorReasons.clear();
-            }
-            if (!isError) {
-                continue;
-            }
-            for (const auto &item2: item.errorReasons) {
-                if (start > item2->tokens.start) {
-                    continue;
-                }
-                bool isAdd = true;
-                if (start < item2->tokens.start) {
-                    start = item2->tokens.start;
-                    whichBest = i;
-                    errorReasons.clear();
-                } else {
-                    for (const auto &item3: errorReasons) {
-                        if (*item2 == *item3) {
-                            isAdd = false;
-                        }
-                    }
-                }
-                if (isAdd) {
-                    errorReasons.push_back(item2);
-                }
-            }
-        }
-        if (errorReason != nullptr) {
-            errorReasons = {errorReason};
-        }
-        return {ASTNodeMode::OR, node, childNodes, childNodes[whichBest].tokens, errorReasons, id, whichBest};
+        return orNode(node, childNodes, nullptr, errorReason, id);
     }
 
     bool ASTNode::isError() const {
@@ -156,11 +125,18 @@ namespace CHelper {
         return !childNodes.empty();
     }
 
+    bool ASTNode::isAllWhitespaceError() const {
+        return isError() && std::all_of(errorReasons.begin(), errorReasons.end(),
+                                        [](const auto &item) {
+                                            return item->level == ErrorReasonLevel::REQUIRE_WHITE_SPACE;
+                                        });
+    }
+
     std::optional<std::string> ASTNode::collectDescription(size_t index) const {
         if (index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens)) {
             return std::nullopt;
         }
-        if (id != "compound") {
+        if (id != "compound" && id != "nextNode" && !isAllWhitespaceError()) {
             auto description = node->collectDescription(this, index);
             if (description.has_value()) {
                 return description;
@@ -184,8 +160,8 @@ namespace CHelper {
     }
 
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
-    void ASTNode::collectIdErrors(const CPack &cpack, std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (id != "compound") {
+    void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
+        if (id != "compound" && id != "nextNode" && !isAllWhitespaceError()) {
 #if CHelperDebug == true
             Profile::push("collect id errors: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
 #endif
@@ -202,20 +178,20 @@ namespace CHelper {
                 break;
             case ASTNodeMode::AND:
                 for (const ASTNode &astNode: childNodes) {
-                    astNode.collectIdErrors(cpack, idErrorReasons);
+                    astNode.collectIdErrors(idErrorReasons);
                 }
                 break;
             case ASTNodeMode::OR:
-                childNodes[whichBest].collectIdErrors(cpack, idErrorReasons);
+                childNodes[whichBest].collectIdErrors(idErrorReasons);
                 break;
         }
     }
 
-    void ASTNode::collectSuggestions(const CPack &cpack, size_t index, std::vector<Suggestion> &suggestions) const {
+    void ASTNode::collectSuggestions(size_t index, std::vector<Suggestion> &suggestions) const {
         if (index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens)) {
             return;
         }
-        if (id != "compound") {
+        if (id != "compound" && id != "nextNode" && !isAllWhitespaceError()) {
 #if CHelperDebug == true
             Profile::push("collect suggestions: " + node->getNodeType().nodeName
                           + " " + node->description.value_or(""));
@@ -233,33 +209,36 @@ namespace CHelper {
                 break;
             case ASTNodeMode::AND:
                 for (const ASTNode &astNode: childNodes) {
-                    astNode.collectSuggestions(cpack, index, suggestions);
+                    astNode.collectSuggestions(index, suggestions);
                 }
                 break;
             case ASTNodeMode::OR:
                 for (const ASTNode &astNode: childNodes) {
-                    astNode.collectSuggestions(cpack, index, suggestions);
+                    astNode.collectSuggestions(index, suggestions);
                 }
                 break;
         }
     }
 
     void ASTNode::collectStructure(StructureBuilder &structure, bool isMustHave) const {
-        if (id != "compound") {
+        bool isCompound = id == "compound";
+        if (!isCompound && id != "nextNode") {
 #if CHelperDebug == true
             Profile::push("collect structure: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
 #endif
-            node->collectStructure(this, structure, isMustHave);
+            node->collectStructure(isAllWhitespaceError() ? nullptr : this, structure, isMustHave);
 #if CHelperDebug == true
             Profile::pop();
 #endif
-            if (structure.isDirty()) {
+            if (structure.isDirty) {
+                structure.isDirty = false;
                 return;
             }
         }
         switch (mode) {
             case ASTNodeMode::NONE:
-                structure.appendUnknownIfNotDirty(isMustHave);
+                structure.appendUnknown(isMustHave);
+                structure.isDirty = false;
                 break;
             case ASTNodeMode::AND:
                 for (const ASTNode &astNode: childNodes) {
@@ -277,6 +256,9 @@ namespace CHelper {
                 childNodes[whichBest].collectStructure(structure, isMustHave);
                 break;
         }
+        if (isCompound && childNodes.size() <= 1 && !node->nextNodes.empty()) {
+            node->nextNodes[0]->collectStructureNormal(structure, isMustHave);
+        }
     }
 
     std::string ASTNode::getDescription(size_t index) const {
@@ -286,37 +268,46 @@ namespace CHelper {
         return result;
     }
 
-    std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons(const CPack &cpack) const {
-        //TODO 根据错误等级调整错误的位置
-        //因为大多数情况下优先先显示ID错误，所以先添加ID错误
+    std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
+        std::vector<std::shared_ptr<ErrorReason>> input = errorReasons, output;
         Profile::push("start getting error reasons: " + TokenUtil::toString(tokens));
-        std::vector<std::shared_ptr<ErrorReason>> result;
-        collectIdErrors(cpack, result);
-        for (const auto &item: errorReasons) {
-            result.push_back(item);
-        }
+        collectIdErrors(input);
         Profile::pop();
-        return result;
+        for (int i = ErrorReasonLevel::maxLevel; i >= 0; --i) {
+            for (const auto &item: input) {
+                if (item->level == i) {
+                    output.push_back(item);
+                }
+            }
+        }
+        return output;
     }
 
-    std::vector<Suggestion> ASTNode::getSuggestions(const CPack &cpack, size_t index) const {
+    std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
         Profile::push("start getting suggestions: " + TokenUtil::toString(tokens));
         std::vector<Suggestion> result;
-        collectSuggestions(cpack, index, result);
+        collectSuggestions(index, result);
         Profile::pop();
         return result;
     }
 
     std::string ASTNode::getStructure() const {
+        if (tokens.size() <= 1) {
+            return "CHelper";
+        }
         Profile::push("start getting structure: " + TokenUtil::toString(tokens));
         StructureBuilder structureBuilder;
         collectStructure(structureBuilder, true);
         Profile::pop();
-        return structureBuilder.build();
+        std::string result = structureBuilder.build();
+        if (!result.empty() && result[result.size() - 1] == '\n') {
+            result.pop_back();
+        }
+        return result;
     }
 
     std::string ASTNode::getColors() const {
-        //TODO getColors()
+        //TODO 代码高亮显示，获取颜色
         Profile::push("start getting colors: " + TokenUtil::toString(tokens));
         auto result = node->getNodeType().nodeName;
         Profile::pop();

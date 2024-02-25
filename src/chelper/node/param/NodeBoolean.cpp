@@ -10,13 +10,13 @@ namespace CHelper::Node {
                              const std::optional<std::string> &description,
                              const std::optional<std::string> &descriptionTrue,
                              const std::optional<std::string> &descriptionFalse)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               descriptionTrue(descriptionTrue),
               descriptionFalse(descriptionFalse) {}
 
     NodeBoolean::NodeBoolean(const nlohmann::json &j,
                              const CPack &cpack)
-            : NodeBase(j, cpack),
+            : NodeBase(j),
               descriptionTrue(FROM_JSON_OPTIONAL(j, descriptionTrue, std::string)),
               descriptionFalse(FROM_JSON_OPTIONAL(j, descriptionFalse, std::string)) {}
 
@@ -31,7 +31,7 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeBoolean::getASTNode(TokenReader &tokenReader) const {
-        return getStringASTNode(tokenReader);
+        return tokenReader.getStringASTNode(this);
     }
 
     void NodeBoolean::collectStructure(const ASTNode *astNode,

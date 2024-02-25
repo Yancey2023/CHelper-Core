@@ -10,13 +10,13 @@ namespace CHelper::Node {
                              const std::optional<std::string> &description,
                              const std::optional<int> &min,
                              const std::optional<int> &max)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               min(min),
               max(max) {}
 
     NodeInteger::NodeInteger(const nlohmann::json &j,
                              const CPack &cpack)
-            : NodeBase(j, cpack),
+            : NodeBase(j),
               min(FROM_JSON_OPTIONAL(j, min, int)),
               max(FROM_JSON_OPTIONAL(j, max, int)) {}
 
@@ -31,7 +31,7 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeInteger::getASTNode(TokenReader &tokenReader) const {
-        return getIntegerASTNode(tokenReader);
+        return tokenReader.getIntegerASTNode(this);
     }
 
     void NodeInteger::collectStructure(const ASTNode *astNode,

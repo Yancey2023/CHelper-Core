@@ -16,7 +16,7 @@ namespace CHelper::Node {
 
     NodeBlockState::NodeBlockState(const std::optional<std::string> &id,
                                    const std::optional<std::string> &description)
-            : NodeBase(id, description) {}
+            : NodeBase(id, description, false) {}
 
     std::shared_ptr<NodeBlockState> NodeBlockState::getInstance() {
         static std::shared_ptr<NodeBlockState> INSTANCE = std::make_shared<NodeBlockState>("BLOCK_STATE", "方块状态");
@@ -96,7 +96,7 @@ namespace CHelper::Node {
     void NodeBlockState::collectStructure(const ASTNode *astNode,
                                           StructureBuilder &structure,
                                           bool isMustHave) const {
-        if (astNode->id == "blockState") {
+        if (astNode == nullptr || astNode->id == "blockState") {
             structure.append(true, "方块状态");
         }
     }

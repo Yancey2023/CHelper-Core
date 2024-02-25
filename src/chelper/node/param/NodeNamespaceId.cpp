@@ -4,6 +4,7 @@
 
 #include "NodeNamespaceId.h"
 #include "NodeString.h"
+#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -11,13 +12,13 @@ namespace CHelper::Node {
                                      const std::optional<std::string> &description,
                                      const std::optional<std::string> &key,
                                      const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               key(key),
               contents(contents) {}
 
-    std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> getContentFromCPack(const nlohmann::json &j,
-                                                                                   const CPack &cpack,
-                                                                                   const std::optional<std::string> &key) {
+    std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> getNamespaceIdContentFromCPack(const nlohmann::json &j,
+                                                                                              const CPack &cpack,
+                                                                                              const std::optional<std::string> &key) {
         if (key.has_value()) {
             auto it = cpack.namespaceIds.find(key.value());
             if (it == cpack.namespaceIds.end()) {
@@ -46,9 +47,9 @@ namespace CHelper::Node {
 
     NodeNamespaceId::NodeNamespaceId(const nlohmann::json &j,
                                      const CPack &cpack)
-            : NodeBase(j, cpack),
+            : NodeBase(j),
               key(FROM_JSON_OPTIONAL(j, key, std::string)),
-              contents(getContentFromCPack(j, cpack, key)) {}
+              contents(getNamespaceIdContentFromCPack(j, cpack, key)) {}
 
     NodeType NodeNamespaceId::getNodeType() const {
         return NodeType::NAMESPACE_ID;
@@ -69,7 +70,7 @@ namespace CHelper::Node {
     ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader) const {
         // namespace:id
         // 字符串中已经包含冒号，因为冒号不是结束字符
-        return getStringASTNode(tokenReader);
+        return tokenReader.getStringASTNode(this);
     }
 
     bool NodeNamespaceId::collectIdError(const ASTNode *astNode,
@@ -77,7 +78,7 @@ namespace CHelper::Node {
         if (astNode->isError()) {
             return true;
         }
-        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
+        std::string str = TokenUtil::toString(astNode->tokens);
         std::string_view nameSpace = "minecraft";
         std::string_view value = str;
         size_t index = str.find(':');
@@ -90,16 +91,15 @@ namespace CHelper::Node {
                 return true;
             }
         }
-        idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, "找不到ID -> " + str));
+        idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("找不到ID -> ").append(str)));
         return true;
     }
 
-    bool NodeNamespaceId::collectSuggestions(const ASTNode *astNode, size_t index,
+    bool NodeNamespaceId::collectSuggestions(const ASTNode *astNode,
+                                             size_t index,
                                              std::vector<Suggestion> &suggestions) const {
-        if (astNode->isError()) {
-            return true;
-        }
-        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content.substr(0, index);
+        std::string str = TokenUtil::toString(astNode->tokens)
+                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         //省略minecraft命名空间
         for (const auto &item: *contents) {
             if ((!item->nameSpace.has_value() || item->nameSpace.value() == "minecraft") &&

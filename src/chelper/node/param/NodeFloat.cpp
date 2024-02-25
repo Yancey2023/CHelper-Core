@@ -10,13 +10,13 @@ namespace CHelper::Node {
                          const std::optional<std::string> &description,
                          const std::optional<float> &min,
                          const std::optional<float> &max)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               min(min),
               max(max) {}
 
     NodeFloat::NodeFloat(const nlohmann::json &j,
                          const CPack &cpack)
-            : NodeBase(j, cpack),
+            : NodeBase(j),
               min(FROM_JSON_OPTIONAL(j, min, float)),
               max(FROM_JSON_OPTIONAL(j, max, float)) {}
 
@@ -31,7 +31,7 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeFloat::getASTNode(TokenReader &tokenReader) const {
-        return getFloatASTNode(tokenReader);
+        return tokenReader.getFloatASTNode(this);
     }
 
     void NodeFloat::collectStructure(const ASTNode *astNode,

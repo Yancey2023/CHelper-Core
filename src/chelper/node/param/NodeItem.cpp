@@ -13,7 +13,7 @@ namespace CHelper::Node {
             ("ITEM_COUNT", "物品数量", 0, std::nullopt);
     const static std::shared_ptr<NodeInteger> nodeData = std::make_shared<NodeInteger>
             ("ITEM_DATA", "物品附加值", -1, std::nullopt);
-    //TODO 物品组件解析
+    //TODO 物品组件Json解析
     const static std::shared_ptr<NodeString> nodeComponent = std::make_shared<NodeString>
             ("ITEM_COMPONENT", "物品组件", true, true);
 
@@ -21,13 +21,13 @@ namespace CHelper::Node {
                        const std::optional<std::string> &description,
                        const CHelper::Node::NodeItemType::NodeItemType nodeItemType,
                        const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               nodeItemType(nodeItemType),
               nodeItemId(std::make_shared<NodeNamespaceId>("ITEM_ID", "物品ID", "items", contents)) {}
 
     NodeItem::NodeItem(const nlohmann::json &j,
                        const CPack &cpack) :
-            NodeBase(j, cpack),
+            NodeBase(j),
             nodeItemType(FROM_JSON(j, nodeItemType, CHelper::Node::NodeItemType::NodeItemType)),
             nodeItemId(std::make_shared<NodeNamespaceId>("ITEM_ID", "物品ID", "items", cpack.itemIds)) {}
 
@@ -56,6 +56,28 @@ namespace CHelper::Node {
 
     std::optional<std::string> NodeItem::collectDescription(const ASTNode *node, size_t index) const {
         return std::nullopt;
+    }
+
+    void NodeItem::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {
+        switch (nodeItemType) {
+            case NodeItemType::ITEM_GIVE:
+                nodeItemId->collectStructure(nullptr, structure, isMustHave);
+                nodeCount->collectStructure(nullptr, structure, false);
+                nodeData->collectStructure(nullptr, structure, false);
+                nodeComponent->collectStructure(nullptr, structure, false);
+                break;
+            case NodeItemType::ITEM_CLEAR:
+                nodeItemId->collectStructure(nullptr, structure, isMustHave);
+                nodeData->collectStructure(nullptr, structure, false);
+                nodeCount->collectStructure(nullptr, structure, false);
+                break;
+            default:
+                nodeItemId->collectStructure(nullptr, structure, isMustHave);
+                nodeCount->collectStructure(nullptr, structure, false);
+                nodeData->collectStructure(nullptr, structure, false);
+                nodeComponent->collectStructure(nullptr, structure, false);
+                break;
+        }
     }
 
 } // CHelper::Node

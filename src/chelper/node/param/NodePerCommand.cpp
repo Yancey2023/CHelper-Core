@@ -5,6 +5,7 @@
 #include "NodePerCommand.h"
 #include "NodeLF.h"
 #include "../../resources/CPack.h"
+#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -13,14 +14,14 @@ namespace CHelper::Node {
                                    const std::optional<std::string> &description,
                                    std::vector<std::shared_ptr<Node::NodeBase>> nodes,
                                    std::vector<std::shared_ptr<Node::NodeBase>> startNodes)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               name(std::move(name)),
               nodes(std::move(nodes)),
               startNodes(std::move(startNodes)) {}
 
     NodePerCommand::NodePerCommand(const nlohmann::json &j,
                                    const CPack &cpack)
-            : NodeBase(j, cpack) {
+            : NodeBase(j) {
         Profile::push(ColorStringBuilder().red("loading node name").build());
         name = FROM_JSON(j, name, std::vector<std::string>);
         if (j.contains("node")) {
@@ -124,17 +125,17 @@ namespace CHelper::Node {
     ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader) const {
         tokenReader.push();
         //命令名字的检查
-        ASTNode astNodeCommandName = getStringASTNode(tokenReader, "commandName");
-        if (astNodeCommandName.tokens.size() == 0) {
-            return ASTNode::andNode(this, {astNodeCommandName}, astNodeCommandName.tokens,
-                                    ErrorReason::errorContent(astNodeCommandName.tokens, "指令名字为空"));
+        ASTNode commandName = tokenReader.getStringASTNode(this, "commandName");
+        if (commandName.tokens.size() == 0) {
+            return ASTNode::andNode(this, {commandName}, commandName.tokens,
+                                    ErrorReason::contentError(commandName.tokens, "指令名字为空"));
         }
-        const Token &token = astNodeCommandName.tokens[0];
-        bool isError = astNodeCommandName.isError();
+        std::string str = TokenUtil::toString(commandName.tokens);
+        bool isError = commandName.isError();
         if (!isError) {
             isError = true;
             for (const auto &item: name) {
-                if (token.content == item) {
+                if (str == item) {
                     isError = false;
                     break;
                 }
@@ -142,9 +143,9 @@ namespace CHelper::Node {
         }
         if (isError) {
             tokenReader.pop();
-            return ASTNode::andNode(this, {astNodeCommandName}, astNodeCommandName.tokens,
-                                    ErrorReason::errorContent(astNodeCommandName.tokens, FormatUtil::format(
-                                            "指令名字不匹配，找不到名为{0}的指令", token.content)),
+            return ASTNode::andNode(this, {commandName}, commandName.tokens,
+                                    ErrorReason::contentError(commandName.tokens, FormatUtil::format(
+                                            "指令名字不匹配，找不到名为{0}的指令", str)),
                                     "perCommand");
         }
         //命令检测
@@ -159,7 +160,7 @@ namespace CHelper::Node {
         tokenReader.skipToLF();
         ASTNode astNodePerCommand = ASTNode::orNode(this, childASTNodes, tokenReader.collect());
         //返回结果
-        return ASTNode::andNode(this, {astNodeCommandName, astNodePerCommand}, tokenReader.collect(),
+        return ASTNode::andNode(this, {commandName, astNodePerCommand}, tokenReader.collect(),
                                 nullptr, "perCommand");
     }
 
@@ -170,13 +171,13 @@ namespace CHelper::Node {
         return std::nullopt;
     }
 
-    bool
-    NodePerCommand::collectSuggestions(const ASTNode *astNode, size_t index,
-                                       std::vector<Suggestion> &suggestions) const {
+    bool NodePerCommand::collectSuggestions(const ASTNode *astNode, size_t index,
+                                            std::vector<Suggestion> &suggestions) const {
         if (astNode->id != "commandName") {
             return false;
         }
-        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content.substr(index);
+        std::string str = TokenUtil::toString(astNode->tokens)
+                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         for (const auto &item: name) {
             if (StringUtil::isStartOf(item, str)) {
                 suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(item, description));
@@ -188,7 +189,9 @@ namespace CHelper::Node {
     void NodePerCommand::collectStructure(const ASTNode *astNode,
                                           StructureBuilder &structure,
                                           bool isMustHave) const {
-        if (astNode->id == "perCommand") {
+        if (astNode == nullptr) {
+            structure.appendWhiteSpace().append("命令");
+        } else if (astNode->id == "perCommand") {
             if (astNode->tokens.size() <= 1 || astNode->childNodes[0].isError()) {
                 structure.appendWhiteSpace().append("命令");
             }
@@ -196,7 +199,7 @@ namespace CHelper::Node {
             if (astNode->isError()) {
                 structure.appendWhiteSpace().append("命令");
             } else {
-                structure.appendWhiteSpace().append(astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content);
+                structure.appendWhiteSpace().append(TokenUtil::toString(astNode->tokens));
             }
         }
     }

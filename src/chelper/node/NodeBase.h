@@ -22,15 +22,17 @@ namespace CHelper {
         public:
             const std::optional<std::string> id;
             const std::optional<std::string> description;
+            //true-一定要在空格后 false-不一定在空格后
+            const bool isMustAfterWhiteSpace;
             //存储下一个节点，需要调用构造函数之后再进行添加
             std::vector<std::shared_ptr<NodeBase>> nextNodes;
 
         protected:
             NodeBase(const std::optional<std::string> &id,
-                     const std::optional<std::string> &description);
+                     const std::optional<std::string> &description,
+                     bool isMustAfterWhiteSpace);
 
-            NodeBase(const nlohmann::json &j,
-                     const CPack &cpack);
+            NodeBase(const nlohmann::json &j);
 
         public:
             static std::shared_ptr<NodeBase> getNodeFromJson(const nlohmann::json &j,
@@ -45,27 +47,7 @@ namespace CHelper {
 
             [[nodiscard]] ASTNode getASTNodeWithNextNode(TokenReader &tokenReader) const;
 
-        private:
-            ASTNode getSimpleASTNode(TokenReader &tokenReader,
-                                     TokenType::TokenType type,
-                                     const std::string &requireType,
-                                     const std::string &astNodeId,
-                                     std::shared_ptr<ErrorReason>(*check)(const std::string &str,
-                                                                          const VectorView <Token> &tokens)) const;
-
         protected:
-            ASTNode getStringASTNode(TokenReader &tokenReader,
-                                     const std::string &astNodeId = "") const;
-
-            ASTNode getIntegerASTNode(TokenReader &tokenReader,
-                                      const std::string &astNodeId = "") const;
-
-            ASTNode getFloatASTNode(TokenReader &tokenReader,
-                                    const std::string &astNodeId = "") const;
-
-            ASTNode getSymbolASTNode(TokenReader &tokenReader,
-                                     const std::string &astNodeId = "") const;
-
             ASTNode getByChildNode(TokenReader &tokenReader,
                                    const std::shared_ptr<NodeBase> &childNode,
                                    const std::string &astNodeId = "") const;
@@ -89,6 +71,9 @@ namespace CHelper {
             virtual void collectStructure(const ASTNode *astNode,
                                           StructureBuilder &structure,
                                           bool isMustHave) const;
+
+            void collectStructureNormal(StructureBuilder &structure,
+                                        bool isMustHave) const;
 
         };
 

@@ -69,6 +69,12 @@ namespace CHelper {
 
         static ASTNode orNode(const Node::NodeBase *node,
                               const std::vector<ASTNode> &childNodes,
+                              const VectorView <Token> *tokens,
+                              const std::shared_ptr<ErrorReason> &errorReason = nullptr,
+                              const std::string &id = "");
+
+        static ASTNode orNode(const Node::NodeBase *node,
+                              const std::vector<ASTNode> &childNodes,
                               const VectorView <Token> &tokens,
                               const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                               const std::string &id = "");
@@ -83,26 +89,28 @@ namespace CHelper {
 
         [[nodiscard]] bool hasChildNode() const;
 
+        [[nodiscard]] bool isAllWhitespaceError() const;
+
     private:
+
         [[nodiscard]] std::optional<std::string> collectDescription(size_t index) const;
 
-        void collectIdErrors(const CPack &cpack, std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
+        void collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
 
-        void collectSuggestions(const CPack &cpack, size_t index, std::vector<Suggestion> &suggestions) const;
+        void collectSuggestions(size_t index, std::vector<Suggestion> &suggestions) const;
 
         void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 
     public:
         [[nodiscard]] std::string getDescription(size_t index) const;
 
-        [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons(const CPack &cpack) const;
+        [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
 
-        [[nodiscard]] std::vector<Suggestion> getSuggestions(const CPack &cpack, size_t index) const;
+        [[nodiscard]] std::vector<Suggestion> getSuggestions(size_t index) const;
 
         [[nodiscard]] std::string getStructure() const;
 
         [[nodiscard]] std::string getColors() const;
-
     };
 
     std::ostream &operator<<(std::ostream &os, const CHelper::ASTNode &astNode);

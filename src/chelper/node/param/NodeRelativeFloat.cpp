@@ -16,12 +16,12 @@ namespace CHelper::Node {
     NodeRelativeFloat::NodeRelativeFloat(const std::optional<std::string> &id,
                                          const std::optional<std::string> &description,
                                          bool canUseCaretNotation)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               canUseCaretNotation(canUseCaretNotation) {}
 
     NodeRelativeFloat::NodeRelativeFloat(const nlohmann::json &j,
                                          const CPack &cpack)
-            : NodeBase(j, cpack),
+            : NodeBase(j),
               canUseCaretNotation(FROM_JSON(j, canUseCaretNotation, bool)) {}
 
     NodeType NodeRelativeFloat::getNodeType() const {
@@ -74,12 +74,12 @@ namespace CHelper::Node {
         VectorView <Token> tokens = tokenReader.collect();
         if (isUseCaretNotation && !canUseCaretNotation) {
             return {type, ASTNode::andNode(node, childNodes, tokens,
-                                           ErrorReason::other(tokens, "不能使用局部坐标"),
+                                           ErrorReason::logicError(tokens, "不能使用局部坐标"),
                                            "relativeFloat")};
         }
         ASTNode result = ASTNode::andNode(node, childNodes, tokens, nullptr, "relativeFloat");
         if (result.isError()) {
-            return {type, ASTNode::andNode(node, childNodes, tokens, ErrorReason::errorType(tokens, FormatUtil::format(
+            return {type, ASTNode::andNode(node, childNodes, tokens, ErrorReason::typeError(tokens, FormatUtil::format(
                     "类型不匹配，{0}不是有效的坐标参数", TokenUtil::toString(tokens))), "relativeFloat")};
         } else {
             return {type, result};
@@ -89,7 +89,7 @@ namespace CHelper::Node {
     void NodeRelativeFloat::collectStructure(const ASTNode *astNode,
                                              StructureBuilder &structure,
                                              bool isMustHave) const {
-        if (astNode->id == "relativeFloat") {
+        if (astNode == nullptr || astNode->id == "relativeFloat") {
             NodeBase::collectStructure(astNode, structure, isMustHave);
         }
     }

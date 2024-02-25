@@ -62,7 +62,7 @@ namespace CHelper {
             commands->push_back(std::make_shared<Node::NodePerCommand>(JsonUtil::getJsonFromPath(file), *this));
         }
         Profile::pop();
-        mainNode = std::make_shared<Node::NodeCommand>("MAIN_NODE", "主节点", commands);
+        mainNode = std::make_shared<Node::NodeCommand>("MAIN_NODE", "欢迎使用命令助手(作者：Yancey)", commands);
     }
 
     CPack CPack::create(const std::filesystem::path &path) {

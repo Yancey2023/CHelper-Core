@@ -3,19 +3,22 @@
 //
 
 #include "NodeText.h"
+#include "../../util/TokenUtil.h"
+
+#include <utility>
 
 namespace CHelper::Node {
 
     CHelper::Node::NodeText::NodeText(const std::optional<std::string> &id,
                                       const std::optional<std::string> &description,
-                                      const CHelper::NormalId &data)
-            : NodeBase(id, description),
-              data(data) {}
+                                      std::shared_ptr<NormalId> data)
+            : NodeBase(id, description, false),
+              data(std::move(data)) {}
 
     CHelper::Node::NodeText::NodeText(const nlohmann::json &j,
-                                      const CPack &cpack)
-            : NodeBase(j, cpack),
-              data(FROM_JSON(j, data, NormalId)) {}
+                                      [[maybe_unused]] const CPack &cpack)
+            : NodeBase(j),
+              data(std::make_shared<NormalId>(j.at("data"))) {}
 
     NodeType NodeText::getNodeType() const {
         return NodeType::TEXT;
@@ -23,21 +26,34 @@ namespace CHelper::Node {
 
     void CHelper::Node::NodeText::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        TO_JSON(j, data);
+        nlohmann::json dataJson;
+        data->toJson(dataJson);
+        j.push_back(dataJson);
     }
 
     ASTNode NodeText::getASTNode(TokenReader &tokenReader) const {
-        return getStringASTNode(tokenReader);
+        return tokenReader.getStringASTNode(this);
     }
 
-    bool
-    NodeText::collectIdError(const ASTNode *astNode, std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
+    bool NodeText::collectIdError(const ASTNode *astNode,
+                                  std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (astNode->isError()) {
             return true;
         }
-        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
-        if (str != data.name) {
+        std::string str = TokenUtil::toString(astNode->tokens);
+        if (str != data->name) {
             idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, "找不到含义 -> " + str));
+        }
+        return true;
+    }
+
+    bool NodeText::collectSuggestions(const ASTNode *astNode,
+                                      size_t index,
+                                      std::vector<Suggestion> &suggestions) const {
+        std::string str = TokenUtil::toString(astNode->tokens)
+                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+        if (StringUtil::isStartOf(data->name, str)) {
+            suggestions.emplace_back(astNode->tokens, data);
         }
         return true;
     }
@@ -45,7 +61,7 @@ namespace CHelper::Node {
     void NodeText::collectStructure(const ASTNode *astNode,
                                     StructureBuilder &structure,
                                     bool isMustHave) const {
-        structure.appendWhiteSpace().append(data.name);
+        structure.appendWhiteSpace().append(data->name);
     }
 
 } // CHelper::Node

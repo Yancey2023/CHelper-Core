@@ -14,13 +14,13 @@ namespace CHelper::Node {
                            const std::optional<std::string> &description,
                            const bool canContainSpace,
                            const bool ignoreLater)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               canContainSpace(canContainSpace),
               ignoreLater(ignoreLater) {}
 
     NodeString::NodeString(const nlohmann::json &j,
                            const CPack &cpack)
-            : NodeBase(j, cpack),
+            : NodeBase(j),
               canContainSpace(FROM_JSON(j, canContainSpace, bool)),
               ignoreLater(FROM_JSON(j, ignoreLater, bool)) {}
 
@@ -40,7 +40,7 @@ namespace CHelper::Node {
             ASTNode doubleQuotationMarkStart = doubleQuotationMark->getASTNode(tokenReader);
             if (!doubleQuotationMarkStart.isError()) {
                 //使用双引号
-                ASTNode stringNode = getStringASTNode(tokenReader);
+                ASTNode stringNode = tokenReader.getStringASTNode(this);
                 ASTNode doubleQuotationMarkEnd = doubleQuotationMark->getASTNode(tokenReader);
                 return ASTNode::andNode(this, {doubleQuotationMarkStart, stringNode, doubleQuotationMarkEnd},
                                         tokenReader.collect());
@@ -48,13 +48,13 @@ namespace CHelper::Node {
             tokenReader.restore();
         }
         //普通字符串
-        return getStringASTNode(tokenReader);
+        return tokenReader.getStringASTNode(this);
     }
 
     void NodeString::collectStructure(const ASTNode *astNode,
                                       StructureBuilder &structure,
                                       bool isMustHave) const {
-        if (astNode->id == "string") {
+        if (astNode == nullptr || astNode->id == "string") {
             structure.append(isMustHave, description.value_or("字符串"));
         }
     }

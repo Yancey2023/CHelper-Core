@@ -13,7 +13,7 @@ namespace CHelper {
 
     class Suggestion {
     public:
-        //TODO 建议的优先级
+        //TODO 为代码补全建议添加优先级
         //要被替换的内容
         const VectorView <Token> tokens;
         //内容
@@ -21,6 +21,8 @@ namespace CHelper {
 
     public:
         Suggestion(const VectorView <Token> &tokens, const std::shared_ptr<NormalId> &content);
+
+        std::string onClick();
     };
 
 } // CHelper

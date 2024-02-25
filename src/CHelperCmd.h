@@ -2,22 +2,15 @@
 // Created by Yancey on 2023/11/6.
 //
 
-#ifndef CHELPER_MAIN_H
-#define CHELPER_MAIN_H
+#ifndef CHELPER_CHELPERCMD_H
+#define CHELPER_CHELPERCMD_H
 
 #include "pch.h"
 #include "chelper/resources/CPack.h"
 #include "chelper/parser/Parser.h"
 #include "chelper/parser/Suggestion.h"
-#include <windows.h>
 
-#pragma comment(lib, "comctl32.lib")
-
-int initWindows(HINSTANCE hInstance, int nCmdShow);
-
-LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-
-void onTextChanged(const std::string& command);
+int main();
 
 namespace CHelper::Test {
 
@@ -27,4 +20,4 @@ namespace CHelper::Test {
 
 } // CHelper::Test
 
-#endif //CHELPER_MAIN_H
+#endif //CHELPER_CHELPERCMD_H

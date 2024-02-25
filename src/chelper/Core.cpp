@@ -12,10 +12,25 @@ namespace CHelper {
             : cpack(std::move(cpack)),
               astNode(std::move(astNode)) {}
 
-    Core Core::create(const std::string &cpackPath) {
+    std::shared_ptr<Core> Core::create(const std::string &cpackPath) {
         Node::NodeType::init();
-        CPack cPack = CPack::create(cpackPath);
-        return {cPack, Parser::parse("", cPack)};
+        try {
+            clock_t start, end;
+            start = clock();
+            CPack cPack = CPack::create(cpackPath);
+            end = clock();
+            CHELPER_INFO(ColorStringBuilder()
+                                 .green("CPack load successfully (")
+                                 .purple(std::to_string(end - start) + "ms")
+                                 .green(")")
+                                 .build());
+            return std::make_shared<Core>(cPack, Parser::parse("", cPack));
+        } catch (const std::exception &e) {
+            CHELPER_ERROR("parse failed");
+            CHelper::Exception::printStackTrace(e);
+            CHelper::Profile::clear();
+            return nullptr;
+        }
     }
 
     void Core::onTextChanged(const std::string &content, size_t index0) {
@@ -32,11 +47,13 @@ namespace CHelper {
     }
 
     std::vector<std::shared_ptr<ErrorReason>> Core::getErrorReasons() const {
-        return astNode.getErrorReasons(cpack);
+        return astNode.getErrorReasons();
     }
 
-    std::vector<Suggestion> Core::getSuggestions() const {
-        return astNode.getSuggestions(cpack, index);
+    std::vector<Suggestion> Core::getSuggestions() {
+        auto result = astNode.getSuggestions(index);
+        suggestions = std::make_shared<std::vector<Suggestion>>(result);
+        return result;
     }
 
     std::string Core::getStructure() const {
@@ -45,6 +62,13 @@ namespace CHelper {
 
     std::string Core::getColors() const {
         return astNode.getColors();
+    }
+
+    std::optional<std::string> Core::onSuggestionClick(size_t which) const {
+        if(suggestions == nullptr || which >= suggestions->size()){
+            return std::nullopt;
+        }
+        return suggestions->at(which).onClick();
     }
 
 } // CHelper

@@ -10,7 +10,7 @@ namespace CHelper::Node {
                    const std::optional<std::string> &description,
                    const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes,
                    const bool isAttachToEnd)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               isAttachToEnd(isAttachToEnd),
               childNodes(childNodes) {}
 
@@ -22,7 +22,6 @@ namespace CHelper::Node {
             childASTNodes.push_back(item->getASTNode(tokenReader));
             tokenReader.restore();
         }
-        //TODO NodeOr当isAttachToEnd为false的时候，应该检测成功的内容，如果有多个成功，应该以第一个为准，并给出警告
         if (!isAttachToEnd) {
             return ASTNode::orNode(this, childASTNodes);
         }

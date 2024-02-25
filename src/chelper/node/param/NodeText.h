@@ -11,15 +11,15 @@
 namespace CHelper::Node {
 
     class NodeText : public NodeBase {
-        NormalId data;
+        std::shared_ptr<NormalId> data;
 
     public:
         NodeText(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
-                 const NormalId &data);
+                 std::shared_ptr<NormalId> data);
 
         explicit NodeText(const nlohmann::json &j,
-                          const CPack &cpack);
+                          [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType getNodeType() const override;
 
@@ -29,6 +29,10 @@ namespace CHelper::Node {
 
         bool collectIdError(const ASTNode *astNode,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
+
+        bool collectSuggestions(const ASTNode *astNode,
+                                size_t index,
+                                std::vector<Suggestion> &suggestions) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

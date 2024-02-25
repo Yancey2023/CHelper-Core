@@ -17,11 +17,12 @@ namespace CHelper {
         size_t index = 0;
         CPack cpack;
         ASTNode astNode;
-
-        Core(CPack cpack, ASTNode astNode);
+        std::shared_ptr<std::vector<Suggestion>> suggestions;
 
     public:
-        static Core create(const std::string &cpackPath);
+        Core(CPack cpack, ASTNode astNode);
+
+        static std::shared_ptr<Core> create(const std::string &cpackPath);
 
         void onTextChanged(const std::string &content, size_t index);
 
@@ -31,12 +32,13 @@ namespace CHelper {
 
         std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
 
-        std::vector<Suggestion> getSuggestions() const;
+        std::vector<Suggestion> getSuggestions();
 
         std::string getStructure() const;
 
         std::string getColors() const;
 
+        std::optional<std::string> onSuggestionClick(size_t which) const;
     };
 
 } // CHelper

@@ -11,7 +11,7 @@ namespace CHelper::Node {
                          std::shared_ptr<NodeBase> &nodeKey,
                          std::shared_ptr<NodeBase> &nodeSeparator,
                          std::shared_ptr<NodeBase> &nodeValue)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               nodeKey(nodeKey),
               nodeSeparator(nodeSeparator),
               nodeValue(nodeValue) {}

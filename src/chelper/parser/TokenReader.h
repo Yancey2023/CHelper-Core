@@ -8,8 +8,15 @@
 #include "pch.h"
 #include "../lexer/Token.h"
 #include "../util/VectorView.h"
+#include "ASTNode.h"
 
 namespace CHelper {
+
+    namespace Node {
+
+        class NodeBase;
+
+    } // Node
 
     class TokenReader {
     public:
@@ -29,7 +36,7 @@ namespace CHelper {
 
         bool skip();
 
-        bool skipWhitespace();
+        size_t skipWhitespace();
 
         void skipToLF();
 
@@ -42,6 +49,28 @@ namespace CHelper {
         void restore();
 
         [[nodiscard]] VectorView <Token> collect();
+
+    private:
+        ASTNode getSimpleASTNode(const Node::NodeBase *node,
+                                 TokenType::TokenType type,
+                                 const std::string &requireType,
+                                 const std::string &astNodeId,
+                                 std::shared_ptr<ErrorReason>(*check)(const std::string &str,
+                                                                      const VectorView <Token> &tokens));
+
+    public:
+        ASTNode getStringASTNode(const Node::NodeBase *node,
+                                 const std::string &astNodeId = "");
+
+        ASTNode getIntegerASTNode(const Node::NodeBase *node,
+                                  const std::string &astNodeId = "");
+
+        ASTNode getFloatASTNode(const Node::NodeBase *node,
+                                const std::string &astNodeId = "");
+
+        ASTNode getSymbolASTNode(const Node::NodeBase *node,
+                                 const std::string &astNodeId = "");
+
     };
 
 } // CHelper

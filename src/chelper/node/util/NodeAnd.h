@@ -11,7 +11,7 @@ namespace CHelper::Node {
 
     class NodeAnd : public NodeBase {
     public:
-        const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> childNodes;
+        std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> childNodes;
 
         NodeAnd(const std::optional<std::string> &id,
                 const std::optional<std::string> &description,

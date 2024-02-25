@@ -9,11 +9,11 @@ namespace CHelper::Node {
 
     NodePosition::NodePosition(const std::optional<std::string> &id,
                                const std::optional<std::string> &description)
-            : NodeBase(id, description) {}
+            : NodeBase(id, description, false) {}
 
     NodePosition::NodePosition(const nlohmann::json &j,
                                const CPack &cpack)
-            : NodeBase(j, cpack) {}
+            : NodeBase(j) {}
 
     NodeType NodePosition::getNodeType() const {
         return NodeType::POSITION;
@@ -41,7 +41,7 @@ namespace CHelper::Node {
                     type = i;
                 } else {
                     return ASTNode::andNode(this, threeChildNodes, tokenReader.collect(),
-                                            ErrorReason::other(tokens, "坐标参数不能同时使用相对坐标和局部坐标"),
+                                            ErrorReason::logicError(tokens, "坐标参数不能同时使用相对坐标和局部坐标"),
                                             "position");
                 }
             }
@@ -52,7 +52,7 @@ namespace CHelper::Node {
     void NodePosition::collectStructure(const ASTNode *astNode,
                                         StructureBuilder &structure,
                                         bool isMustHave) const {
-        if (astNode->id == "position") {
+        if (astNode == nullptr || astNode->id == "position") {
             structure.append(isMustHave, description.value_or("位置"));
         }
     }

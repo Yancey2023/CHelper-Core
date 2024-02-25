@@ -11,12 +11,12 @@ namespace CHelper::Node {
     NodeCommand::NodeCommand(const std::optional<std::string> &id,
                              const std::optional<std::string> &description,
                              const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               nodeCommand(std::make_shared<NodeOr>("COMMAND", "命令", childNodes, true)) {}
 
     NodeCommand::NodeCommand(const nlohmann::json &j,
                              const CPack &cpack)
-            : NodeBase(j, cpack),
+            : NodeBase(j),
               nodeCommand(std::make_shared<NodeOr>("COMMAND", "命令", cpack.commands, true)) {}
 
     NodeType NodeCommand::getNodeType() const {
@@ -37,7 +37,7 @@ namespace CHelper::Node {
     void NodeCommand::collectStructure(const ASTNode *astNode,
                                        StructureBuilder &structure,
                                        bool isMustHave) const {
-        if (astNode->tokens.size() > 1) {
+        if (astNode != nullptr && astNode->tokens.size() > 1) {
             return;
         }
         structure.append(isMustHave, "命令");

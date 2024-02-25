@@ -3,21 +3,23 @@
 //
 
 #include "NodeNormalId.h"
+#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
     NodeNormalId::NodeNormalId(const std::optional<std::string> &id,
                                const std::optional<std::string> &description,
                                const std::optional<std::string> &key,
-                               std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents)
-            : NodeBase(id, description),
+                               const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
+                               ASTNode(*getNormalIdASTNode)(const NodeBase *node, TokenReader &tokenReader))
+            : NodeBase(id, description, false),
               key(key),
-              contents(contents) {}
+              contents(contents),
+              getNormalIdASTNode(getNormalIdASTNode) {}
 
-    NodeNormalId::NodeNormalId(const nlohmann::json &j,
-                               const CPack &cpack)
-            : NodeBase(j, cpack),
-              key(FROM_JSON_OPTIONAL(j, key, std::string)) {
+    std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> getNormalIdContentFromCPack(const nlohmann::json &j,
+                                                                                        const CPack &cpack,
+                                                                                        const std::optional<std::string> &key) {
         if (key.has_value()) {
             auto it = cpack.normalIds.find(key.value());
             if (it == cpack.normalIds.end()) {
@@ -31,16 +33,26 @@ namespace CHelper::Node {
                                       .build());
                 throw Exception::NodeLoadFailed();
             }
-            contents = it->second;
+            return it->second;
         } else {
             nlohmann::json jsonArray = j.at("contents");
-            contents = std::make_shared<std::vector<std::shared_ptr<NormalId>>>();
+            auto contents = std::make_shared<std::vector<std::shared_ptr<NormalId>>>();
             contents->reserve(jsonArray.size());
             for (const auto &item: jsonArray) {
                 contents->push_back(std::make_shared<NormalId>(item));
             }
+            return contents;
         }
     }
+
+    NodeNormalId::NodeNormalId(const nlohmann::json &j,
+                               const CPack &cpack)
+            : NodeBase(j),
+              key(FROM_JSON_OPTIONAL(j, key, std::string)),
+              contents(getNormalIdContentFromCPack(j, cpack, key)),
+              getNormalIdASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
+                  return tokenReader.getStringASTNode(node);
+              }) {}
 
     NodeType NodeNormalId::getNodeType() const {
         return NodeType::NORMAL_ID;
@@ -59,7 +71,7 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader) const {
-        return getStringASTNode(tokenReader);
+        return getNormalIdASTNode(this, tokenReader);
     }
 
     bool NodeNormalId::collectIdError(const ASTNode *astNode,
@@ -67,22 +79,21 @@ namespace CHelper::Node {
         if (astNode->isError()) {
             return true;
         }
-        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
+        std::string str = TokenUtil::toString(astNode->tokens);
         for (const auto &item: *contents) {
             if (str == item->name) {
                 return true;
             }
         }
-        idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, "找不到ID -> " + str));
+        idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("找不到ID -> ").append(str)));
         return true;
     }
 
-    bool
-    NodeNormalId::collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestion> &suggestions) const {
-        if (astNode->isError()) {
-            return true;
-        }
-        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content.substr(index);
+    bool NodeNormalId::collectSuggestions(const ASTNode *astNode,
+                                          size_t index,
+                                          std::vector<Suggestion> &suggestions) const {
+        std::string str = TokenUtil::toString(astNode->tokens)
+                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         for (const auto &item: *contents) {
             if (StringUtil::isStartOf(item->name, str)) {
                 suggestions.emplace_back(astNode->tokens, item);

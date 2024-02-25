@@ -6,33 +6,25 @@
 
 namespace CHelper {
 
-    bool StructureBuilder::isDirty() const {
-        return dirty;
-    }
-
-    StructureBuilder &StructureBuilder::appendUnknownIfNotDirty(bool isMustHave) {
-        if (!dirty) {
-            append(isMustHave, "未知");
-        }
-        dirty = false;
-        return *this;
+    StructureBuilder &StructureBuilder::appendUnknown(bool isMustHave) {
+        return append(isMustHave, "未知");
     }
 
     StructureBuilder &StructureBuilder::appendSymbol(char ch) {
         structure.push_back(ch);
-        dirty = true;
+        isDirty = true;
         return *this;
     }
 
     StructureBuilder &StructureBuilder::append(const std::string &str) {
         structure.append(str);
-        dirty = true;
+        isDirty = true;
         return *this;
     }
 
     StructureBuilder &StructureBuilder::appendWhiteSpace() {
         if (structure.empty()) {
-            dirty = true;
+            isDirty = true;
             return *this;
         }
         return appendSymbol(' ');

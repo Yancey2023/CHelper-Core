@@ -11,13 +11,13 @@ namespace CHelper::Node {
                          const std::optional<std::string> &description,
                          NodeBlockType::NodeBlockType nodeBlockType,
                          const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               nodeBlockType(nodeBlockType),
               nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", contents)) {}
 
     NodeBlock::NodeBlock(const nlohmann::json &j,
                          const CPack &cpack) :
-            NodeBase(j, cpack),
+            NodeBase(j),
             nodeBlockType(FROM_JSON(j, nodeBlockType, NodeBlockType::NodeBlockType)),
             nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", cpack.blockIds)) {}
 
@@ -37,6 +37,11 @@ namespace CHelper::Node {
 
     std::optional<std::string> NodeBlock::collectDescription(const ASTNode *node, size_t index) const {
         return std::nullopt;
+    }
+
+    void NodeBlock::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {
+        nodeBlockId->collectStructure(nullptr, structure, isMustHave);
+        NodeBlockState::getInstance()->collectStructure(nullptr, structure, false);
     }
 
 } // CHelper::Node

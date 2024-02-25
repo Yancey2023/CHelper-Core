@@ -9,7 +9,7 @@ namespace CHelper::Node {
     NodeAnd::NodeAnd(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
                      const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes)
-            : NodeBase(id, description),
+            : NodeBase(id, description, false),
               childNodes(childNodes) {}
 
     ASTNode NodeAnd::getASTNode(TokenReader &tokenReader) const {
