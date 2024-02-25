@@ -2,14 +2,14 @@
 // Created by Yancey on 2023/11/5.
 //
 
+
 #include "main.h"
+#include <commctrl.h>
 #include "chelper/util/StringUtil.h"
 #include "chelper/lexer/Lexer.h"
 #include "chelper/parser/ASTNode.h"
 #include "chelper/util/TokenUtil.h"
 #include "chelper/Core.h"
-
-#pragma comment(lib, "comctl32.lib")
 
 static size_t ID_INPUT = 1;
 static size_t ID_DESCRIPTION = 2;
@@ -22,9 +22,9 @@ static std::shared_ptr<CHelper::Core> core;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
 
-    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)");
-    return 0;
-//    return initWindows(hInstance, nCmdShow);
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)");
+//    return 0;
+    return initWindows(hInstance, nCmdShow);
 }
 
 /**
@@ -45,8 +45,9 @@ int initWindows(HINSTANCE hInstance, int nCmdShow) {
                              .green(")")
                              .build());
     } catch (const std::exception &e) {
-        CHELPER_INFO(CHelper::ColorStringBuilder().red("parse load failed").build());
+        CHELPER_INFO(CHelper::ColorStringBuilder().red("parse failed").build());
         CHelper::Exception::printStackTrace(e);
+        CHelper::Profile::clear();
         exit(-1);
     }
     //窗口数据
@@ -65,11 +66,7 @@ int initWindows(HINSTANCE hInstance, int nCmdShow) {
     wcex.hIconSm = LoadIcon(wcex.hInstance, IDI_APPLICATION);
     //注册窗口
     if (!RegisterClassEx(&wcex)) {
-        MessageBox(nullptr,
-                   "Call to RegisterClassEx failed!",
-                   "CHelper",
-                   NULL);
-
+        MessageBox(nullptr,"Call to RegisterClassEx failed!","CHelper",0);
         return 1;
     }
     //创建窗口
@@ -84,11 +81,7 @@ int initWindows(HINSTANCE hInstance, int nCmdShow) {
             hInstance, nullptr
     );
     if (!hWnd) {
-        MessageBox(nullptr,
-                   "Call to CreateWindow failed!",
-                   "CHelper",
-                   NULL);
-
+        MessageBox(nullptr,"Call to CreateWindow failed!","CHelper",0);
         return 1;
     }
     //显示并更新窗口
@@ -194,13 +187,14 @@ void onTextChanged(const std::string &command) {
         CHelper::Profile::pop();
         end = clock();
         CHELPER_INFO(CHelper::ColorStringBuilder()
-                             .green("parse load successfully (")
+                             .green("parse successfully (")
                              .purple(std::to_string(end - start) + "ms")
                              .green(")")
                              .build());
     } catch (const std::exception &e) {
-        CHELPER_INFO(CHelper::ColorStringBuilder().red("parse load failed").build());
+        CHELPER_INFO(CHelper::ColorStringBuilder().red("parse failed").build());
         CHelper::Exception::printStackTrace(e);
+        CHelper::Profile::clear();
     }
 }
 
@@ -293,6 +287,7 @@ namespace CHelper::Test {
             }
         } catch (const std::exception &e) {
             Exception::printStackTrace(e);
+            Profile::clear();
             exit(-1);
         }
     }

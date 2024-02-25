@@ -6,8 +6,6 @@
 #include "../util/TokenUtil.h"
 #include "../lexer/Lexer.h"
 
-#include <utility>
-
 namespace CHelper::Parser {
 
     ASTNode parse(const std::string &content, const CPack &cpack) {
@@ -25,7 +23,7 @@ namespace CHelper::Parser {
     ASTNode parse(TokenReader &&tokenReader, const CPack &cpack) {
         VectorView <Token> tokens = {tokenReader.tokenList, 0, tokenReader.tokenList->size()};
         Profile::push("start parsing: " + TokenUtil::toString(tokens));
-        auto result = cpack.mainNode->getASTNode(tokenReader, cpack);
+        auto result = cpack.mainNode->getASTNode(tokenReader);
         Profile::pop();
         return result;
     }

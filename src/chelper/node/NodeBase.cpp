@@ -40,10 +40,10 @@ namespace CHelper::Node {
         j.push_back({"type", getNodeType().nodeName});
     }
 
-    ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader) const {
         tokenReader.push();
         //当前节点
-        ASTNode currentASTNode = getASTNode(tokenReader, cpack);
+        ASTNode currentASTNode = getASTNode(tokenReader);
         if (currentASTNode.isError() || nextNodes.empty()) {
             tokenReader.pop();
             return currentASTNode;
@@ -53,7 +53,7 @@ namespace CHelper::Node {
         childASTNodes.reserve(nextNodes.size());
         for (const auto &item: nextNodes) {
             tokenReader.push();
-            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader, cpack));
+            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader));
             tokenReader.restore();
         }
         tokenReader.push();
@@ -66,8 +66,8 @@ namespace CHelper::Node {
                                        const TokenType::TokenType type,
                                        const std::string &requireType,
                                        const std::string &astNodeId,
-                                       const std::function<std::shared_ptr<ErrorReason>(const std::string &str,
-                                                                                        const VectorView <Token> &tokens)> &check) const {
+                                       std::shared_ptr<ErrorReason>(*check)(const std::string &str,
+                                                                            const VectorView <Token> &tokens)) const {
         bool whitespace = tokenReader.skipWhitespace();
         tokenReader.push();
         const Token *token = tokenReader.read();
@@ -129,24 +129,18 @@ namespace CHelper::Node {
                                 });
     }
 
-    ASTNode NodeBase::getSymbolASTNode(TokenReader &tokenReader, char ch, const std::string &astNodeId) const {
+    ASTNode NodeBase::getSymbolASTNode(TokenReader &tokenReader, const std::string &astNodeId) const {
         return getSimpleASTNode(tokenReader, TokenType::SYMBOL, "符号类型", astNodeId,
-                                [&ch](const std::string &str,
-                                      const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
-                                    if (str.length() != 1 || str[0] != ch) {
-                                        return ErrorReason::errorContent(tokens, FormatUtil::format(
-                                                "内容不匹配，正确的符号为{0}，但当前内容为{1}",
-                                                ch, str));
-                                    }
+                                [](const std::string &str,
+                                   const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
                                     return nullptr;
                                 });
     }
 
     ASTNode NodeBase::getByChildNode(TokenReader &tokenReader,
-                                     const CPack &cpack,
                                      const std::shared_ptr<NodeBase> &childNode,
                                      const std::string &astNodeId) const {
-        ASTNode node = childNode->getASTNode(tokenReader, cpack);
+        ASTNode node = childNode->getASTNode(tokenReader);
         return ASTNode::andNode(this, {node}, node.tokens, nullptr, astNodeId);
     }
 
@@ -154,21 +148,20 @@ namespace CHelper::Node {
     //true - 第一个错误节点到后面都不算做子节点
     //false - 第一个内容为空的错误节点到后面都不算做子节点
     ASTNode NodeBase::getOptionalASTNode(TokenReader &tokenReader,
-                                         const CPack &cpack,
                                          bool isIgnoreChildNodesError,
                                          const std::vector<std::shared_ptr<NodeBase>> &childNodes,
                                          const std::string &astNodeId) const {
 
 #if CHelperDebug == true
         if (childNodes.size() <= 1) {
-            Logger::warn("NodeBase", "getOptionalASTNode()传入的子节点数量应该大于1");
+            CHELPER_WARN("[NodeBase] getOptionalASTNode()传入的子节点数量应该大于1");
         }
 #endif
         tokenReader.push();
         std::vector<ASTNode> childASTNodes;
         for (const auto &item: childNodes) {
             tokenReader.push();
-            ASTNode astNode = item->getASTNode(tokenReader, cpack);
+            ASTNode astNode = item->getASTNode(tokenReader);
             if (astNode.isError() && (!isIgnoreChildNodesError || astNode.tokens.start != astNode.tokens.end)) {
                 if (childASTNodes.empty()) {
                     tokenReader.pop();
@@ -188,15 +181,13 @@ namespace CHelper::Node {
     }
 
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
-    bool NodeBase::collectIdError(const ASTNode *astNode,
-                                  const CPack &cpack,
-                                  std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
+    bool
+    NodeBase::collectIdError(const ASTNode *astNode, std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         return false;
     }
 
-    bool NodeBase::collectSuggestions(const ASTNode *astNode,
-                                      const CPack &cpack,
-                                      std::vector<Suggestion> &suggestions) const {
+    bool
+    NodeBase::collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestion> &suggestions) const {
         return false;
     }
 

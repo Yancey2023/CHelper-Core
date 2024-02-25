@@ -9,6 +9,13 @@
 #define CHelperDebug true
 #define CHelperAndroid false
 
+#if CHelperAndroid == true
+
+#include "android/jni.h"
+#include "android/log.h"
+
+#endif
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -20,13 +27,9 @@
 #include <scoped_allocator>
 #include <algorithm>
 #include <fstream>
-#include <windows.h>
-#include <commctrl.h>
 #include <ctime>
 #include "nlohmann/json.hpp"
 #include "format/Format.h"
-#include "android/jni.h"
-#include "android/log.h"
 #include "../src/chelper/util/ColorStringBuilder.h"
 #include "../src/chelper/util/Exception.h"
 #include "../src/chelper/util/JsonUtil.h"

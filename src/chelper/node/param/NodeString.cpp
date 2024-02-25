@@ -3,8 +3,12 @@
 //
 
 #include "NodeString.h"
+#include "../util/NodeSingleSymbol.h"
 
 namespace CHelper::Node {
+
+    std::shared_ptr<NodeSingleSymbol> doubleQuotationMark = std::make_shared<NodeSingleSymbol>(
+            "DOUBLE_QUOTATION_MARK", "双引号", '"');
 
     NodeString::NodeString(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
@@ -24,7 +28,7 @@ namespace CHelper::Node {
         return NodeType::STRING;
     }
 
-    ASTNode NodeString::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeString::getASTNode(TokenReader &tokenReader) const {
         if (ignoreLater) {
             //后面的所有内容都算作这个字符串
             tokenReader.push();
@@ -33,11 +37,11 @@ namespace CHelper::Node {
         }
         if (canContainSpace) {
             tokenReader.push();
-            ASTNode doubleQuotationMarkStart = getSymbolASTNode(tokenReader, '"');
+            ASTNode doubleQuotationMarkStart = doubleQuotationMark->getASTNode(tokenReader);
             if (!doubleQuotationMarkStart.isError()) {
                 //使用双引号
                 ASTNode stringNode = getStringASTNode(tokenReader);
-                ASTNode doubleQuotationMarkEnd = getSymbolASTNode(tokenReader, '"');
+                ASTNode doubleQuotationMarkEnd = doubleQuotationMark->getASTNode(tokenReader);
                 return ASTNode::andNode(this, {doubleQuotationMarkStart, stringNode, doubleQuotationMarkEnd},
                                         tokenReader.collect());
             }

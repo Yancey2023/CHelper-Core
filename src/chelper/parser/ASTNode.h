@@ -88,7 +88,7 @@ namespace CHelper {
 
         void collectIdErrors(const CPack &cpack, std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
 
-        void collectSuggestions(const CPack &cpack, std::vector<Suggestion> &suggestions, size_t index) const;
+        void collectSuggestions(const CPack &cpack, size_t index, std::vector<Suggestion> &suggestions) const;
 
         void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 

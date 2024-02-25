@@ -6,7 +6,7 @@
 
 namespace CHelper {
 
-    TokenReader::TokenReader(const std::shared_ptr<std::vector<Token>>& tokenList)
+    TokenReader::TokenReader(const std::shared_ptr<std::vector<Token>> &tokenList)
             : tokenList(tokenList) {}
 
     bool TokenReader::ready() const {

@@ -25,6 +25,8 @@ namespace CHelper {
 
         void onTextChanged(const std::string &content, size_t index);
 
+        void onSelectionChanged(size_t index0);
+
         std::string getDescription() const;
 
         std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;

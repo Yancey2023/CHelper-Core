@@ -4,6 +4,7 @@
 
 #ifndef CHELPER_ANDROIDNATIVE_H
 #define CHELPER_ANDROIDNATIVE_H
+#if CHelperAndroid == true
 
 #include "pch.h"
 #include "../chelper/Core.h"
@@ -19,38 +20,51 @@ std::shared_ptr<CHelper::Core> core;
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_yancey_chelper_android_fragment_WritingCommandFragment_init(JNIEnv *env, jobject thiz,
-                                                                 jstring cpack_path) {
+Java_yancey_chelper_core_CHelperCore_init(JNIEnv *env, jobject thiz,
+                                          jstring cpack_path) {
     try {
         clock_t start, end;
         start = clock();
         core = std::make_shared<CHelper::Core>(CHelper::Core::create(jstring2string(env, cpack_path)));
         end = clock();
-        __android_log_print(ANDROID_LOG_INFO, "NativeCHelper", "CPack load successfully (%.0ldms)", end - start);
+        CHELPER_INFO("CPack load successfully (" + std::to_string(end - start) + "ms)");
         return true;
     } catch (const std::exception &e) {
-        __android_log_print(ANDROID_LOG_ERROR, "NativeCHelper", "parse load failed");
+        CHELPER_ERROR("parse failed");
         CHelper::Exception::printStackTrace(e);
+        CHelper::Profile::clear();
         return false;
     }
 }
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_yancey_chelper_android_fragment_WritingCommandFragment_onTextChanged(JNIEnv *env, jobject thiz,
-                                                                          jstring cpack_path,
-                                                                          jint index) {
-    if(core == nullptr){
+Java_yancey_chelper_core_CHelperCore_onTextChanged(JNIEnv *env,
+                                                   jobject thiz,
+                                                   jstring cpack_path,
+                                                   jint index) {
+    if (core == nullptr) {
         return;
     }
     core->onTextChanged(jstring2string(env, cpack_path), index);
 }
 
 extern "C"
+JNIEXPORT void JNICALL
+Java_yancey_chelper_core_CHelperCore_onSelectionChanged(JNIEnv *env,
+                                                        jobject thiz,
+                                                        jint index) {
+    if (core == nullptr) {
+        return;
+    }
+    core->onSelectionChanged(index);
+}
+
+extern "C"
 JNIEXPORT jstring JNICALL
-Java_yancey_chelper_android_fragment_WritingCommandFragment_getDescription(JNIEnv *env,
-                                                                           jobject thiz) {
-    if(core == nullptr){
+Java_yancey_chelper_core_CHelperCore_getDescription(JNIEnv *env,
+                                                    jobject thiz) {
+    if (core == nullptr) {
         return nullptr;
     }
     std::string description = core->getDescription();
@@ -59,9 +73,9 @@ Java_yancey_chelper_android_fragment_WritingCommandFragment_getDescription(JNIEn
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_yancey_chelper_android_fragment_WritingCommandFragment_getErrorReasons(JNIEnv *env,
-                                                                            jobject thiz) {
-    if(core == nullptr){
+Java_yancey_chelper_core_CHelperCore_getErrorReasons(JNIEnv *env,
+                                                     jobject thiz) {
+    if (core == nullptr) {
         return nullptr;
     }
     auto errorReasons = core->getErrorReasons();
@@ -82,9 +96,9 @@ Java_yancey_chelper_android_fragment_WritingCommandFragment_getErrorReasons(JNIE
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_yancey_chelper_android_fragment_WritingCommandFragment_getSuggestions(JNIEnv *env,
-                                                                           jobject thiz) {
-    if(core == nullptr){
+Java_yancey_chelper_core_CHelperCore_getSuggestions(JNIEnv *env,
+                                                    jobject thiz) {
+    if (core == nullptr) {
         return nullptr;
     }
     auto suggestions = core->getSuggestions();
@@ -103,13 +117,14 @@ Java_yancey_chelper_android_fragment_WritingCommandFragment_getSuggestions(JNIEn
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_yancey_chelper_android_fragment_WritingCommandFragment_getStructure(JNIEnv *env,
-                                                                         jobject thiz) {
-    if(core == nullptr){
+Java_yancey_chelper_core_CHelperCore_getStructure(JNIEnv *env,
+                                                  jobject thiz) {
+    if (core == nullptr) {
         return nullptr;
     }
     std::string structure = core->getStructure();
     return env->NewStringUTF(structure.c_str());
 }
 
+#endif
 #endif //CHELPER_ANDROIDNATIVE_H

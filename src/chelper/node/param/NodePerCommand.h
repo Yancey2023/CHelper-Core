@@ -27,18 +27,18 @@ namespace CHelper::Node {
         NodePerCommand(const nlohmann::json &j,
                        const CPack &cpack);
 
-         ~NodePerCommand();
+        ~NodePerCommand();
 
         [[nodiscard]] NodeType getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader) const override;
 
         std::optional<std::string> collectDescription(const ASTNode *pNode, size_t index) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
-                                const CPack &cpack,
+                                size_t index,
                                 std::vector<Suggestion> &suggestions) const override;
 
         void collectStructure(const ASTNode *astNode,

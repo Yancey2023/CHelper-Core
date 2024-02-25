@@ -11,6 +11,8 @@
 namespace CHelper::Node {
 
     std::shared_ptr<NodeBase> nodePlayerName = std::make_shared<NodeString>("PLAYER_NAME", "玩家名字", true, false);
+    std::shared_ptr<NodeBase> nodeAt = std::make_shared<NodeSingleSymbol>(
+            "TARGET_SELECTOR_AT", "@符号", '@');
     std::shared_ptr<NodeBase> nodeLeft = std::make_shared<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENTS_LEFT", "目标选择器参数左括号", '[');
     std::shared_ptr<NodeBase> nodeRight = std::make_shared<NodeSingleSymbol>(
@@ -55,19 +57,19 @@ namespace CHelper::Node {
         TO_JSON(j, isOnlyOne);
     }
 
-    ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader) const {
         tokenReader.push();
-        ASTNode at = getSymbolASTNode(tokenReader, '@');
+        ASTNode at = nodeAt->getASTNode(tokenReader);
         if (at.isError()) {
             //不是@符号开头，当作玩家名处理
             tokenReader.restore();
-            return getByChildNode(tokenReader, cpack, nodePlayerName, "target selector");
+            return getByChildNode(tokenReader, nodePlayerName, "target selector");
         }
         //@符号开头，进入目标选择器检测
         //目标选择器变量
-        ASTNode targetSelectorVariable = nodeTargetSelectorVariable.getASTNode(tokenReader, cpack);
+        ASTNode targetSelectorVariable = nodeTargetSelectorVariable.getASTNode(tokenReader);
         tokenReader.push();
-        ASTNode lestBracket = getSymbolASTNode(tokenReader, '[');
+        ASTNode lestBracket = nodeLeft->getASTNode(tokenReader);
         tokenReader.restore();
         if (lestBracket.isError()) {
             //没有后面的[...]

@@ -4,45 +4,29 @@
 
 #include "SimpleLogger.h"
 
-#if CHelperLogger == INFO || CHelperLogger == DEBUG || CHelperLogger == WARN || CHelperLogger == ERROR
+#if CHelperLogger == DEBUG || CHelperLogger == INFO || CHelperLogger == WARN || CHelperLogger == ERROR
 
 namespace CHelper::Logger {
 
-#if CHelperLogger == INFO || CHelperLogger == DEBUG || CHelperLogger == WARN || CHelperLogger == ERROR
-
-    void info(const std::string &message) {
 #if CHelperAndroid == true
-        __android_log_print(ANDROID_LOG_INFO, "NativeCHelper", "%s", message.c_str());
-#else
-        std::cout << Color::NORMAL << message << std::endl;
+    const char* KEY = "NativeCHelper";
 #endif
-    }
-
-    void info(const std::string &key, const std::string &message) {
-#if CHelperAndroid == true
-        __android_log_print(ANDROID_LOG_INFO, "NativeCHelper", "%s", message.c_str());
-#else
-        std::cout << Color::NORMAL << Color::NORMAL << message << std::endl;
-#endif
-    }
-
-#endif
-
-#if CHelperLogger == DEBUG || CHelperLogger == WARN || CHelperLogger == ERROR
 
     void debug(const std::string &message) {
 #if CHelperAndroid == true
-        __android_log_print(ANDROID_LOG_DEBUG, "NativeCHelper", "%s", message.c_str());
+        __android_log_print(ANDROID_LOG_DEBUG, KEY, "%s", message.c_str());
 #else
-        std::cout << Color::GREEN << message << std::endl;
+        std::cout << ColorStringBuilder().green(message).build() << std::endl;
 #endif
     }
 
-    void debug(const std::string &key, const std::string &message) {
+#if CHelperLogger == INFO || CHelperLogger == WARN || CHelperLogger == ERROR
+
+    void info(const std::string &message) {
 #if CHelperAndroid == true
-        __android_log_print(ANDROID_LOG_DEBUG, "NativeCHelper", "%s", message.c_str());
+        __android_log_print(ANDROID_LOG_INFO, KEY, "%s", message.c_str());
 #else
-        std::cout << Color::GREEN << Color::GREEN << message << std::endl;
+        std::cout << ColorStringBuilder().normal(message).build() << std::endl;
 #endif
     }
 
@@ -52,17 +36,9 @@ namespace CHelper::Logger {
 
     void warn(const std::string &message) {
 #if CHelperAndroid == true
-        __android_log_print(ANDROID_LOG_WARN, "NativeCHelper", "%s", message.c_str());
+        __android_log_print(ANDROID_LOG_WARN, KEY, "%s", message.c_str());
 #else
-        std::cout << Color::YELLOW << message << std::endl;
-#endif
-    }
-
-    void warn(const std::string &key, const std::string &message) {
-#if CHelperAndroid == true
-        __android_log_print(ANDROID_LOG_WARN, "NativeCHelper", "%s", message.c_str());
-#else
-        std::cout << Color::YELLOW << Color::YELLOW << message << std::endl;
+        std::cout << ColorStringBuilder().yellow(message).build() << std::endl;
 #endif
     }
 
@@ -72,17 +48,9 @@ namespace CHelper::Logger {
 
     void error(const std::string &message) {
 #if CHelperAndroid == true
-        __android_log_print(ANDROID_LOG_ERROR, "NativeCHelper", "%s", message.c_str());
+        __android_log_print(ANDROID_LOG_ERROR, KEY, "%s", message.c_str());
 #else
-        std::cout << Color::RED << message << std::endl;
-#endif
-    }
-
-    void error(const std::string &key, const std::string &message) {
-#if CHelperAndroid == true
-        __android_log_print(ANDROID_LOG_ERROR, "NativeCHelper", "%s", message.c_str());
-#else
-        std::cout << Color::RED << Color::RED << message << std::endl;
+        std::cout << ColorStringBuilder().red(message).build() << std::endl;
 #endif
     }
 

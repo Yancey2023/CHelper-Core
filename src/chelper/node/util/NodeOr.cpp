@@ -14,12 +14,12 @@ namespace CHelper::Node {
               isAttachToEnd(isAttachToEnd),
               childNodes(childNodes) {}
 
-    ASTNode NodeOr::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeOr::getASTNode(TokenReader &tokenReader) const {
         std::vector<ASTNode> childASTNodes;
         childASTNodes.reserve(childNodes->size());
         for (const auto &item: *childNodes) {
             tokenReader.push();
-            childASTNodes.push_back(item->getASTNode(tokenReader, cpack));
+            childASTNodes.push_back(item->getASTNode(tokenReader));
             tokenReader.restore();
         }
         //TODO NodeOr当isAttachToEnd为false的时候，应该检测成功的内容，如果有多个成功，应该以第一个为准，并给出警告
@@ -29,6 +29,10 @@ namespace CHelper::Node {
         tokenReader.push();
         tokenReader.skipToLF();
         return ASTNode::orNode(this, childASTNodes, tokenReader.collect());
+    }
+
+    std::optional<std::string> NodeOr::collectDescription(const ASTNode *node, size_t index) const {
+        return std::nullopt;
     }
 
 } // CHelper::Node

@@ -4,7 +4,6 @@
 
 #include "Core.h"
 
-#include <utility>
 #include "parser/Parser.h"
 
 namespace CHelper {
@@ -21,6 +20,10 @@ namespace CHelper {
 
     void Core::onTextChanged(const std::string &content, size_t index0) {
         astNode = Parser::parse(content, cpack);
+        index = index0;
+    }
+
+    void Core::onSelectionChanged(size_t index0) {
         index = index0;
     }
 

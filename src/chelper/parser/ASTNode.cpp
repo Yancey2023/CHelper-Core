@@ -189,7 +189,7 @@ namespace CHelper {
 #if CHelperDebug == true
             Profile::push("collect id errors: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
 #endif
-            auto flag = node->collectIdError(this, cpack, idErrorReasons);
+            auto flag = node->collectIdError(this, idErrorReasons);
 #if CHelperDebug == true
             Profile::pop();
 #endif
@@ -211,7 +211,7 @@ namespace CHelper {
         }
     }
 
-    void ASTNode::collectSuggestions(const CPack &cpack, std::vector<Suggestion> &suggestions, size_t index) const {
+    void ASTNode::collectSuggestions(const CPack &cpack, size_t index, std::vector<Suggestion> &suggestions) const {
         if (index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens)) {
             return;
         }
@@ -220,7 +220,7 @@ namespace CHelper {
             Profile::push("collect suggestions: " + node->getNodeType().nodeName
                           + " " + node->description.value_or(""));
 #endif
-            auto flag = node->collectSuggestions(this, cpack, suggestions);
+            auto flag = node->collectSuggestions(this, index, suggestions);
 #if CHelperDebug == true
             Profile::pop();
 #endif
@@ -233,12 +233,12 @@ namespace CHelper {
                 break;
             case ASTNodeMode::AND:
                 for (const ASTNode &astNode: childNodes) {
-                    astNode.collectSuggestions(cpack, suggestions, index);
+                    astNode.collectSuggestions(cpack, index, suggestions);
                 }
                 break;
             case ASTNodeMode::OR:
                 for (const ASTNode &astNode: childNodes) {
-                    astNode.collectSuggestions(cpack, suggestions, index);
+                    astNode.collectSuggestions(cpack, index, suggestions);
                 }
                 break;
         }
@@ -302,7 +302,7 @@ namespace CHelper {
     std::vector<Suggestion> ASTNode::getSuggestions(const CPack &cpack, size_t index) const {
         Profile::push("start getting suggestions: " + TokenUtil::toString(tokens));
         std::vector<Suggestion> result;
-        collectSuggestions(cpack, result, index);
+        collectSuggestions(cpack, index, result);
         Profile::pop();
         return result;
     }

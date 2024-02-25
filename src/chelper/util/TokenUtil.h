@@ -9,11 +9,11 @@
 
 namespace CHelper::TokenUtil {
 
-    size_t getStartIndex(const VectorView <Token>& tokens);
+    size_t getStartIndex(const VectorView <Token> &tokens);
 
-    size_t getEndIndex(const VectorView <Token>& tokens);
+    size_t getEndIndex(const VectorView <Token> &tokens);
 
-    std::string toString(const VectorView <Token>& tokens);
+    std::string toString(const VectorView <Token> &tokens);
 
 } // CHelper::TokenUtil
 

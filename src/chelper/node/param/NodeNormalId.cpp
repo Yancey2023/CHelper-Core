@@ -58,12 +58,11 @@ namespace CHelper::Node {
         }
     }
 
-    ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader) const {
         return getStringASTNode(tokenReader);
     }
 
     bool NodeNormalId::collectIdError(const ASTNode *astNode,
-                                      const CPack &cpack,
                                       std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (astNode->isError()) {
             return true;
@@ -78,13 +77,12 @@ namespace CHelper::Node {
         return true;
     }
 
-    bool NodeNormalId::collectSuggestions(const ASTNode *astNode,
-                                          const CPack &cpack,
-                                          std::vector<Suggestion> &suggestions) const {
+    bool
+    NodeNormalId::collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestion> &suggestions) const {
         if (astNode->isError()) {
             return true;
         }
-        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
+        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content.substr(index);
         for (const auto &item: *contents) {
             if (StringUtil::isStartOf(item->name, str)) {
                 suggestions.emplace_back(astNode->tokens, item);

@@ -9,6 +9,9 @@
 #include "chelper/resources/CPack.h"
 #include "chelper/parser/Parser.h"
 #include "chelper/parser/Suggestion.h"
+#include <windows.h>
+
+#pragma comment(lib, "comctl32.lib")
 
 int initWindows(HINSTANCE hInstance, int nCmdShow);
 

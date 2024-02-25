@@ -19,7 +19,9 @@ namespace CHelper::Node {
                const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes,
                bool isAttachToEnd);
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader) const override;
+
+        std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
 
     };
 

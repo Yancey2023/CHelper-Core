@@ -12,22 +12,24 @@ namespace CHelper::Node {
 
     class NodeCommandName : public NodeBase {
     public:
+        const std::shared_ptr<std::vector<std::shared_ptr<Node::NodeBase>>> commands;
+
         NodeCommandName(const std::optional<std::string> &id,
-                        const std::optional<std::string> &description);
+                        const std::optional<std::string> &description,
+                        const std::shared_ptr<std::vector<std::shared_ptr<Node::NodeBase>>> &commands);
 
         NodeCommandName(const nlohmann::json &j,
                         const CPack &cpack);
 
         [[nodiscard]] NodeType getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader) const override;
 
         bool collectIdError(const ASTNode *astNode,
-                            const CPack &cpack,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
-                                const CPack &cpack,
+                                size_t index,
                                 std::vector<Suggestion> &suggestions) const override;
 
         void collectStructure(const ASTNode *astNode,

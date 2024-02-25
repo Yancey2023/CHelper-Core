@@ -24,11 +24,10 @@ namespace CHelper::Node {
 
         void toJson(nlohmann::json &j) const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader) const override;
 
         static std::pair<int, ASTNode> getASTNode(const NodeBase *node,
                                                   TokenReader &tokenReader,
-                                                  const CPack &cpack,
                                                   bool canUseCaretNotation);
 
         void collectStructure(const ASTNode *astNode,

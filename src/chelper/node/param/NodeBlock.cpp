@@ -10,7 +10,7 @@ namespace CHelper::Node {
     NodeBlock::NodeBlock(const std::optional<std::string> &id,
                          const std::optional<std::string> &description,
                          NodeBlockType::NodeBlockType nodeBlockType,
-                         const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>& contents)
+                         const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
             : NodeBase(id, description),
               nodeBlockType(nodeBlockType),
               nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", contents)) {}
@@ -30,8 +30,8 @@ namespace CHelper::Node {
         TO_JSON(j, nodeBlockType);
     }
 
-    ASTNode NodeBlock::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
-        return getOptionalASTNode(tokenReader, cpack, false,
+    ASTNode NodeBlock::getASTNode(TokenReader &tokenReader) const {
+        return getOptionalASTNode(tokenReader, false,
                                   {nodeBlockId, NodeBlockState::getInstance()});
     }
 

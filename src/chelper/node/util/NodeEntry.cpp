@@ -16,14 +16,18 @@ namespace CHelper::Node {
               nodeSeparator(nodeSeparator),
               nodeValue(nodeValue) {}
 
-    ASTNode NodeEntry::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeEntry::getASTNode(TokenReader &tokenReader) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes = {
-                nodeKey->getASTNode(tokenReader, cpack),
-                nodeSeparator->getASTNode(tokenReader, cpack),
-                nodeValue->getASTNode(tokenReader, cpack)
+                nodeKey->getASTNode(tokenReader),
+                nodeSeparator->getASTNode(tokenReader),
+                nodeValue->getASTNode(tokenReader)
         };
         return ASTNode::andNode(this, childNodes, tokenReader.collect());
+    }
+
+    std::optional<std::string> NodeEntry::collectDescription(const ASTNode *node, size_t index) const {
+        return std::nullopt;
     }
 
 } // CHelper::Node

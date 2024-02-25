@@ -20,7 +20,7 @@ namespace CHelper::Node {
         NodeNormalId(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
                      const std::optional<std::string> &key,
-                     std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>& contents);
+                     std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents);
 
         NodeNormalId(const nlohmann::json &j,
                      const CPack &cpack);
@@ -29,14 +29,13 @@ namespace CHelper::Node {
 
         void toJson(nlohmann::json &j) const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader) const override;
 
         bool collectIdError(const ASTNode *astNode,
-                            const CPack &cpack,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
-                                const CPack &cpack,
+                                size_t index,
                                 std::vector<Suggestion> &suggestions) const override;
 
         void collectStructure(const ASTNode *astNode,

@@ -121,7 +121,7 @@ namespace CHelper::Node {
         TO_JSON(j, nodes);
     }
 
-    ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader) const {
         tokenReader.push();
         //命令名字的检查
         ASTNode astNodeCommandName = getStringASTNode(tokenReader, "commandName");
@@ -152,7 +152,7 @@ namespace CHelper::Node {
         childASTNodes.reserve(startNodes.size());
         for (const auto &item: startNodes) {
             tokenReader.push();
-            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader, cpack));
+            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader));
             tokenReader.restore();
         }
         tokenReader.push();
@@ -170,13 +170,13 @@ namespace CHelper::Node {
         return std::nullopt;
     }
 
-    bool NodePerCommand::collectSuggestions(const ASTNode *astNode,
-                                            const CPack &cpack,
-                                            std::vector<Suggestion> &suggestions) const {
+    bool
+    NodePerCommand::collectSuggestions(const ASTNode *astNode, size_t index,
+                                       std::vector<Suggestion> &suggestions) const {
         if (astNode->id != "commandName") {
             return false;
         }
-        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
+        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content.substr(index);
         for (const auto &item: name) {
             if (StringUtil::isStartOf(item, str)) {
                 suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(item, description));

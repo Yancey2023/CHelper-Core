@@ -12,14 +12,18 @@ namespace CHelper::Node {
             : NodeBase(id, description),
               childNodes(childNodes) {}
 
-    ASTNode NodeAnd::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeAnd::getASTNode(TokenReader &tokenReader) const {
         tokenReader.push();
         std::vector<ASTNode> childASTNodes;
         childASTNodes.reserve(childNodes->size());
         for (const auto &item: *childNodes) {
-            childASTNodes.push_back(item->getASTNode(tokenReader, cpack));
+            childASTNodes.push_back(item->getASTNode(tokenReader));
         }
         return ASTNode::andNode(this, childASTNodes, tokenReader.collect());
+    }
+
+    std::optional<std::string> NodeAnd::collectDescription(const ASTNode *node, size_t index) const {
+        return std::nullopt;
     }
 
 } // CHelper::Node

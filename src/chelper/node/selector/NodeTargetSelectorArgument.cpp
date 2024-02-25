@@ -10,7 +10,7 @@ namespace CHelper::Node {
                                                            const std::optional<std::string> &description)
             : NodeBase(id, description) {}
 
-    ASTNode NodeTargetSelectorArgument::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeTargetSelectorArgument::getASTNode(TokenReader &tokenReader) const {
         //TODO 目标选择器参数
         return getStringASTNode(tokenReader);
     }

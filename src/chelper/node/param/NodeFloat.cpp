@@ -30,7 +30,7 @@ namespace CHelper::Node {
         TO_JSON_OPTIONAL(j, max)
     }
 
-    ASTNode NodeFloat::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeFloat::getASTNode(TokenReader &tokenReader) const {
         return getFloatASTNode(tokenReader);
     }
 

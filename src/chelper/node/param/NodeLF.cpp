@@ -15,11 +15,11 @@ namespace CHelper::Node {
     }
 
     std::shared_ptr<NodeLF> NodeLF::getInstance() {
-        static std::shared_ptr<NodeLF> INSTANCE = std::make_shared<NodeLF>("LF", "line feet");
+        static std::shared_ptr<NodeLF> INSTANCE = std::make_shared<NodeLF>("LF", "命令终止");
         return INSTANCE;
     }
 
-    ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeLF::getASTNode(TokenReader &tokenReader) const {
         tokenReader.push();
         tokenReader.skipToLF();
         VectorView <Token> tokens = tokenReader.collect();

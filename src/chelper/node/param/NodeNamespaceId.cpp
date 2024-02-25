@@ -66,14 +66,13 @@ namespace CHelper::Node {
         }
     }
 
-    ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader) const {
         // namespace:id
         // 字符串中已经包含冒号，因为冒号不是结束字符
         return getStringASTNode(tokenReader);
     }
 
     bool NodeNamespaceId::collectIdError(const ASTNode *astNode,
-                                         const CPack &cpack,
                                          std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (astNode->isError()) {
             return true;
@@ -95,13 +94,12 @@ namespace CHelper::Node {
         return true;
     }
 
-    bool NodeNamespaceId::collectSuggestions(const ASTNode *astNode,
-                                             const CPack &cpack,
+    bool NodeNamespaceId::collectSuggestions(const ASTNode *astNode, size_t index,
                                              std::vector<Suggestion> &suggestions) const {
         if (astNode->isError()) {
             return true;
         }
-        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content;
+        std::string str = astNode->tokens.size() == 0 ? "" : astNode->tokens[0].content.substr(0, index);
         //省略minecraft命名空间
         for (const auto &item: *contents) {
             if ((!item->nameSpace.has_value() || item->nameSpace.value() == "minecraft") &&

@@ -11,7 +11,6 @@ namespace CHelper::Exception {
 
     void printStackTrace(const std::exception &e) {
         CHELPER_ERROR(std::string(e.what()) + "\nstack trace:\n" + Profile::getStackTrace());
-        Profile::clear();
     }
 
     UnknownIdType::UnknownIdType(const std::string &fileName, const std::string &idType) {

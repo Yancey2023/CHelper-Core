@@ -33,20 +33,19 @@ namespace CHelper::Node {
         TO_JSON(j, canUseCaretNotation);
     }
 
-    ASTNode NodeRelativeFloat::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
-        return getASTNode(this, tokenReader, cpack, canUseCaretNotation).second;
+    ASTNode NodeRelativeFloat::getASTNode(TokenReader &tokenReader) const {
+        return getASTNode(this, tokenReader, canUseCaretNotation).second;
     }
 
     std::pair<int, ASTNode> NodeRelativeFloat::getASTNode(const NodeBase *node,
                                                           TokenReader &tokenReader,
-                                                          const CPack &cpack,
                                                           bool canUseCaretNotation) {
         tokenReader.push();
         tokenReader.push();
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
         int type;
         std::vector<ASTNode> childNodes;
-        ASTNode relativeNotation = nodeRelativeNotation.getASTNode(tokenReader, cpack);
+        ASTNode relativeNotation = nodeRelativeNotation.getASTNode(tokenReader);
         bool isUseCaretNotation = false;
         if (!relativeNotation.isError()) {
             //相对坐标
@@ -56,7 +55,7 @@ namespace CHelper::Node {
         } else {
             tokenReader.restore();
             tokenReader.push();
-            ASTNode caretNotation = nodeCaretNotation.getASTNode(tokenReader, cpack);
+            ASTNode caretNotation = nodeCaretNotation.getASTNode(tokenReader);
             if (!caretNotation.isError()) {
                 //局部坐标
                 type = 2;
@@ -70,7 +69,7 @@ namespace CHelper::Node {
             }
         }
         //数值部分
-        childNodes.push_back(nodeValue.getASTNode(tokenReader, cpack));
+        childNodes.push_back(nodeValue.getASTNode(tokenReader));
         //判断有没有错误
         VectorView <Token> tokens = tokenReader.collect();
         if (isUseCaretNotation && !canUseCaretNotation) {

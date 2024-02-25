@@ -41,17 +41,17 @@ namespace CHelper {
 
             void toJson(nlohmann::json &j) const override;
 
-            [[nodiscard]] virtual ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const = 0;
+            [[nodiscard]] virtual ASTNode getASTNode(TokenReader &tokenReader) const = 0;
 
-            [[nodiscard]] ASTNode getASTNodeWithNextNode(TokenReader &tokenReader, const CPack &cpack) const;
+            [[nodiscard]] ASTNode getASTNodeWithNextNode(TokenReader &tokenReader) const;
 
         private:
             ASTNode getSimpleASTNode(TokenReader &tokenReader,
                                      TokenType::TokenType type,
                                      const std::string &requireType,
                                      const std::string &astNodeId,
-                                     const std::function<std::shared_ptr<ErrorReason>(const std::string &str,
-                                                                                      const VectorView <Token> &tokens)> &check) const;
+                                     std::shared_ptr<ErrorReason>(*check)(const std::string &str,
+                                                                          const VectorView <Token> &tokens)) const;
 
         protected:
             ASTNode getStringASTNode(TokenReader &tokenReader,
@@ -64,17 +64,14 @@ namespace CHelper {
                                     const std::string &astNodeId = "") const;
 
             ASTNode getSymbolASTNode(TokenReader &tokenReader,
-                                     char ch,
                                      const std::string &astNodeId = "") const;
 
             ASTNode getByChildNode(TokenReader &tokenReader,
-                                   const CPack &cpack,
                                    const std::shared_ptr<NodeBase> &childNode,
                                    const std::string &astNodeId = "") const;
 
             //当childNodes只需要有第一个node并且其他node不一定需要的时侯使用
             ASTNode getOptionalASTNode(TokenReader &tokenReader,
-                                       const CPack &cpack,
                                        bool isIgnoreChildNodesError,
                                        const std::vector<std::shared_ptr<NodeBase>> &childNodes,
                                        const std::string &astNodeId = "") const;
@@ -83,11 +80,10 @@ namespace CHelper {
             virtual std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const;
 
             virtual bool collectIdError(const ASTNode *astNode,
-                                        const CPack &cpack,
                                         std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
 
             virtual bool collectSuggestions(const ASTNode *astNode,
-                                            const CPack &cpack,
+                                            size_t index,
                                             std::vector<Suggestion> &suggestions) const;
 
             virtual void collectStructure(const ASTNode *astNode,

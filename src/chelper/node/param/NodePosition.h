@@ -19,7 +19,7 @@ namespace CHelper::Node {
 
         [[nodiscard]] NodeType getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

@@ -89,8 +89,8 @@ namespace CHelper::Node {
                                        nodeSeparator,
                                        nodeRightBracket);
 
-    ASTNode NodeBlockState::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
-        return getByChildNode(tokenReader, cpack, nodeBlockState, "blockState");
+    ASTNode NodeBlockState::getASTNode(TokenReader &tokenReader) const {
+        return getByChildNode(tokenReader, nodeBlockState, "blockState");
     }
 
     void NodeBlockState::collectStructure(const ASTNode *astNode,

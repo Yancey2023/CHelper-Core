@@ -17,14 +17,13 @@ namespace CHelper::Node {
               isMustNPC(isMustNPC),
               isOnlyOne(isOnlyOne) {}
 
-    ASTNode NodeTargetSelectorVariable::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeTargetSelectorVariable::getASTNode(TokenReader &tokenReader) const {
         //TODO 在资源包中支持自定义目标选择器变量
         //目标选择器变量在ID检查阶段进行检测
         return getStringASTNode(tokenReader);
     }
 
     bool NodeTargetSelectorVariable::collectIdError(const ASTNode *astNode,
-                                                    const CPack &cpack,
                                                     std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (astNode->isError()) {
             return true;

@@ -14,7 +14,7 @@ namespace CHelper::Node {
         NodeTargetSelectorArgument(const std::optional<std::string> &id,
                                    const std::optional<std::string> &description);
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader) const override;
     };
 
 } // CHelper::Node

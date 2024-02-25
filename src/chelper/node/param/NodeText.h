@@ -25,10 +25,9 @@ namespace CHelper::Node {
 
         void toJson(nlohmann::json &j) const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader) const override;
 
         bool collectIdError(const ASTNode *astNode,
-                            const CPack &cpack,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
 
         void collectStructure(const ASTNode *astNode,

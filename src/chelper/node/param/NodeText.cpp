@@ -26,13 +26,12 @@ namespace CHelper::Node {
         TO_JSON(j, data);
     }
 
-    ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeText::getASTNode(TokenReader &tokenReader) const {
         return getStringASTNode(tokenReader);
     }
 
-    bool NodeText::collectIdError(const ASTNode *astNode,
-                                  const CPack &cpack,
-                                  std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
+    bool
+    NodeText::collectIdError(const ASTNode *astNode, std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (astNode->isError()) {
             return true;
         }

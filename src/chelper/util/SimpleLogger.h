@@ -13,15 +13,11 @@ namespace CHelper::Logger {
 
     void info(const std::string &message);
 
-    void info(const std::string &key, const std::string &message);
-
 #endif
 
 #if CHelperLogger == DEBUG || CHelperLogger == WARN || CHelperLogger == ERROR
 
     void debug(const std::string &message);
-
-    void debug(const std::string &key, const std::string &message);
 
 #endif
 
@@ -29,30 +25,26 @@ namespace CHelper::Logger {
 
     void warn(const std::string &message);
 
-    void warn(const std::string &key, const std::string &message);
-
 #endif
 
 #if CHelperLogger == ERROR
 
     void error(const std::string &message);
 
-    void error(const std::string &key, const std::string &message);
-
 #endif
 
 } // CHelper::Logger
 
-#if CHELPER_LOGGER == INFO || CHelperLogger == DEBUG || CHelperLogger == WARN || CHelperLogger == ERROR
-#define CHELPER_INFO(message) CHelper::Logger::info(message)
-#else
-#define CHELPER_LOG(message)
-#endif
-
-#if CHelperLogger == DEBUG || CHelperLogger == WARN || CHelperLogger == ERROR
+#if CHelperLogger == DEBUG || CHelperLogger == INFO || CHelperLogger == WARN || CHelperLogger == ERROR
 #define CHELPER_DEBUG(message) CHelper::Logger::debug(message)
 #else
 #define CHELPER_DEBUG(message)
+#endif
+
+#if CHelperLogger == INFO || CHelperLogger == WARN || CHelperLogger == ERROR
+#define CHELPER_INFO(message) CHelper::Logger::info(message)
+#else
+#define CHELPER_LOG(message)
 #endif
 
 #if CHelperLogger == WARN || CHelperLogger == ERROR

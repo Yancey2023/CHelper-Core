@@ -27,7 +27,7 @@ namespace CHelper::Node {
         NodeItem(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
                  NodeItemType::NodeItemType nodeItemType,
-                 const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>& contents);
+                 const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
 
         NodeItem(const nlohmann::json &j,
                  const CPack &cpack);
@@ -36,7 +36,7 @@ namespace CHelper::Node {
 
         void toJson(nlohmann::json &j) const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader) const override;
 
         std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
 
