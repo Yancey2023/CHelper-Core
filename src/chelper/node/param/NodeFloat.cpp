@@ -31,7 +31,7 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeFloat::getASTNode(TokenReader &tokenReader) const {
-        return tokenReader.getFloatASTNode(this);
+        return tokenReader.readFloatASTNode(this);
     }
 
     void NodeFloat::collectStructure(const ASTNode *astNode,

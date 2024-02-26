@@ -32,7 +32,15 @@ namespace CHelper {
                      const std::optional<std::string> &description,
                      bool isMustAfterWhiteSpace);
 
-            NodeBase(const nlohmann::json &j);
+            explicit NodeBase(const nlohmann::json &j);
+
+            template<class T>
+            void checkNullptr(std::shared_ptr<T> content, const std::string &name) {
+                if (content == nullptr) {
+                    Profile::push("nullptr -> " + name);
+                    throw Exception::NodeLoadFailed();
+                }
+            }
 
         public:
             static std::shared_ptr<NodeBase> getNodeFromJson(const nlohmann::json &j,

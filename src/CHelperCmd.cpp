@@ -10,8 +10,8 @@
 #include "chelper/Core.h"
 
 int main() {
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)");
-    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)", {"give @s "});
+    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)");
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)", {"give @s "});
     return 0;
 }
 
@@ -85,7 +85,7 @@ namespace CHelper::Test {
                 CHELPER_INFO("suggestions: ");
                 int i = 0;
                 for (const auto &item: suggestions) {
-                    if (i == 10) {
+                    if (i == 30) {
                         CHELPER_INFO("...");
                         break;
                     }

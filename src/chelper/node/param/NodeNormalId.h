@@ -25,7 +25,7 @@ namespace CHelper::Node {
                      const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
                      ASTNode(*getNormalIdASTNode)(const NodeBase *node, TokenReader &tokenReader) =
                      [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-                         return tokenReader.getStringASTNode(node);
+                         return tokenReader.readStringASTNode(node);
                      });
 
         NodeNormalId(const nlohmann::json &j,

@@ -10,14 +10,16 @@
 #include "../util/NodeOr.h"
 #include "../util/NodeAnd.h"
 #include "NodeNormalId.h"
+#include "NodeItem.h"
+#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
-    std::shared_ptr<NodeBase> nodePlayerName = std::make_shared<NodeString>(
+    static std::shared_ptr<NodeBase> nodePlayerName = std::make_shared<NodeString>(
             "TARGET_SELECTOR_PLAYER_NAME", "玩家名字", true, false);
-    std::shared_ptr<NodeBase> nodeAt = std::make_shared<NodeSingleSymbol>(
+    static std::shared_ptr<NodeBase> nodeAt = std::make_shared<NodeSingleSymbol>(
             "TARGET_SELECTOR_AT", "@符号", '@');
-    std::shared_ptr<NodeBase> nodeTargetSelectorVariable = std::make_shared<NodeNormalId>(
+    static std::shared_ptr<NodeBase> nodeTargetSelectorVariable = std::make_shared<NodeNormalId>(
             "TARGET_SELECTOR_VARIABLE", "目标选择器变量", std::nullopt,
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     std::make_shared<NormalId>("@e", "选择所有实体(只选择活着的实体)"),
@@ -28,38 +30,55 @@ namespace CHelper::Node {
                     std::make_shared<NormalId>("@initiator", "选择当前与该NPC进行交互(在NPC内置的命令界面中使用)")
             }), [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 tokenReader.push();
-                auto childNodes = {tokenReader.getSymbolASTNode(node), tokenReader.getStringASTNode(node)};
+                auto childNodes = {tokenReader.readSymbolASTNode(node), tokenReader.readStringASTNode(node)};
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
             }
     );
-    std::shared_ptr<NodeBase> nodeLeft = std::make_shared<NodeSingleSymbol>(
+    static std::shared_ptr<NodeBase> nodeLeft = std::make_shared<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENTS_LEFT", "目标选择器参数左括号", '[');
-    std::shared_ptr<NodeBase> nodeRight = std::make_shared<NodeSingleSymbol>(
+    static std::shared_ptr<NodeBase> nodeRight = std::make_shared<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENTS_RIGHT", "目标选择器参数右括号", ']');
-    std::shared_ptr<NodeBase> nodeSeparator = std::make_shared<NodeSingleSymbol>(
+    static std::shared_ptr<NodeBase> nodeSeparator = std::make_shared<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENTS_SEPARATOR", "目标选择器参数分隔符", ',');
-    std::shared_ptr<NodeBase> nodeArgument = std::make_shared<NodeTargetSelectorArgument>(
-            "TARGET_SELECTOR_ARGUMENTS_ARGUMENT", "目标选择器单个参数");
-    std::shared_ptr<NodeList> nodeArguments = std::make_shared<NodeList>(
-            "TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
-            nodeLeft, nodeArgument, nodeSeparator, nodeRight);
 
     NodeTargetSelector::NodeTargetSelector(const std::optional<std::string> &id,
                                            const std::optional<std::string> &description,
                                            const bool isMustPlayer,
                                            const bool isMustNPC,
-                                           const bool isOnlyOne)
+                                           const bool isOnlyOne,
+                                           const std::shared_ptr<NodeBase> &nodeItem,
+                                           const std::shared_ptr<NodeBase> &nodeFamily,
+                                           const std::shared_ptr<NodeBase> &nodeGameMode,
+                                           const std::shared_ptr<NodeBase> &nodeItemLocation)
             : NodeBase(id, description, false),
               isMustPlayer(isMustPlayer),
               isMustNPC(isMustNPC),
-              isOnlyOne(isOnlyOne) {}
+              isOnlyOne(isOnlyOne),
+              nodeArgument(std::make_shared<NodeTargetSelectorArgument>(
+                      "TARGET_SELECTOR_ARGUMENT", "目标选择器单个参数",
+                      nodeItem, nodeFamily, nodeGameMode, nodeItemLocation)),
+              nodeArguments(std::make_shared<NodeList>(
+                      "TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
+                      nodeLeft, nodeArgument, nodeSeparator, nodeRight)) {
+        //TODO nullptr检测
+    }
 
     NodeTargetSelector::NodeTargetSelector(const nlohmann::json &j,
                                            [[maybe_unused]] const CPack &cpack)
             : NodeBase(j),
               isMustPlayer(FROM_JSON(j, isMustPlayer, bool)),
               isMustNPC(FROM_JSON(j, isMustNPC, bool)),
-              isOnlyOne(FROM_JSON(j, isOnlyOne, bool)) {}
+              isOnlyOne(FROM_JSON(j, isOnlyOne, bool)),
+              nodeArgument(std::make_shared<NodeTargetSelectorArgument>(
+                      "TARGET_SELECTOR_ARGUMENT", "目标选择器单个参数",
+                      NodeItem::getNodeItemId(cpack.itemIds),
+                      cpack.getNormalId("FAMILIES", "族", "families"),
+                      cpack.getNormalId("GAME_MODES", "游戏模式", "gameModes"),
+                      cpack.getNormalId("SLOT", "物品栏", "slot")
+              )),
+              nodeArguments(std::make_shared<NodeList>(
+                      "TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
+                      nodeLeft, nodeArgument, nodeSeparator, nodeRight)) {}
 
     NodeType NodeTargetSelector::getNodeType() const {
         return NodeType::TARGET_SELECTOR;
@@ -75,43 +94,62 @@ namespace CHelper::Node {
     ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader) const {
         tokenReader.skipWhitespace();
         tokenReader.push();
+        DEBUG_GET_NODE_BEGIN(nodeAt)
         ASTNode at = nodeAt->getASTNode(tokenReader);
+        DEBUG_GET_NODE_END(nodeAt)
         tokenReader.restore();
         if (at.isError()) {
             //不是@符号开头，当作玩家名处理
-            return getByChildNode(tokenReader, nodePlayerName, "target selector");
+            return getByChildNode(tokenReader, nodePlayerName, "target selector player name");
         }
         //@符号开头，进入目标选择器检测
         //目标选择器变量
-        ASTNode targetSelectorVariable = nodeTargetSelectorVariable->getASTNode(tokenReader);
         tokenReader.push();
+        DEBUG_GET_NODE_BEGIN(nodeTargetSelectorVariable)
+        ASTNode targetSelectorVariable = nodeTargetSelectorVariable->getASTNode(tokenReader);
+        DEBUG_GET_NODE_END(nodeTargetSelectorVariable)
+        tokenReader.push();
+        DEBUG_GET_NODE_BEGIN(nodeLeft)
         ASTNode leftBracket = nodeLeft->getASTNode(tokenReader);
+        DEBUG_GET_NODE_END(nodeLeft)
         tokenReader.restore();
         if (leftBracket.isError()) {
             //没有后面的[...]
             return ASTNode::andNode(this, {targetSelectorVariable}, tokenReader.collect(),
-                                    nullptr, "target selector");
+                                    nullptr, "target selector no arguments");
         }
-        //TODO 目标选择器的解析
-        return ASTNode::andNode(this, {targetSelectorVariable}, tokenReader.collect(),
-                                nullptr, "target selector");
+        DEBUG_GET_NODE_BEGIN(nodeArguments)
+        ASTNode arguments = nodeArguments->getASTNode(tokenReader);
+        DEBUG_GET_NODE_END(nodeArguments)
+        return ASTNode::andNode(this, {targetSelectorVariable, arguments}, tokenReader.collect(),
+                                nullptr, "target selector with arguments");
     }
 
     bool NodeTargetSelector::collectSuggestions(const ASTNode *astNode,
                                                 size_t index,
                                                 std::vector<Suggestion> &suggestions) const {
-        if (!astNode->tokens.isEmpty()) {
-            return false;
+        if (astNode->tokens.isEmpty()) {
+            VectorView <Token> tokens = {astNode->tokens.vector, astNode->tokens.end, astNode->tokens.end};
+            ASTNode newAstNode = ASTNode::simpleNode(this, tokens);
+            nodeTargetSelectorVariable->collectSuggestions(astNode, index, suggestions);
+            nodePlayerName->collectSuggestions(astNode, index, suggestions);
+            return true;
         }
-        nodeAt->collectSuggestions(astNode, index, suggestions);
-        nodePlayerName->collectSuggestions(astNode, index, suggestions);
-        return true;
+        if (!astNode->isError() && astNode->id == "target selector no arguments") {
+            VectorView <Token> tokens = {astNode->tokens.vector, astNode->tokens.end, astNode->tokens.end};
+            ASTNode newAstNode = ASTNode::simpleNode(this, tokens);
+            nodeLeft->collectSuggestions(&newAstNode, index, suggestions);
+        }
+        return false;
     }
 
     void NodeTargetSelector::collectStructure(const ASTNode *astNode,
                                               StructureBuilder &structure,
                                               bool isMustHave) const {
-        if (astNode == nullptr || astNode->id == "target selector") {
+        if (astNode == nullptr ||
+            astNode->id == "target selector player name" ||
+            astNode->id == "target selector no arguments" ||
+            astNode->id == "target selector with arguments") {
             structure.append(isMustHave, "目标选择器");
         }
     }

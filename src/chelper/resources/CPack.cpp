@@ -4,6 +4,8 @@
 
 #include "CPack.h"
 #include "../node/param/NodeCommand.h"
+#include "../node/param/NodeNormalId.h"
+#include "../node/param/NodeNamespaceId.h"
 
 namespace CHelper {
 
@@ -70,6 +72,26 @@ namespace CHelper {
         CPack cpack = CPack(std::filesystem::path(path));
         Profile::pop();
         return cpack;
+    }
+
+    std::shared_ptr<Node::NodeBase> CPack::getNormalId(const std::optional<std::string> &id,
+                                                       const std::optional<std::string> &description,
+                                                       const std::string &key) const {
+        auto it = normalIds.find(key);
+        if (it == normalIds.end()) {
+            return nullptr;
+        }
+        return std::make_shared<Node::NodeNormalId>(id, description, key, it->second);
+    }
+
+    std::shared_ptr<Node::NodeBase> CPack::getNamespaceId(const std::optional<std::string> &id,
+                                                          const std::optional<std::string> &description,
+                                                          const std::string &key) const {
+        auto it = namespaceIds.find(key);
+        if (it == namespaceIds.end()) {
+            return nullptr;
+        }
+        return std::make_shared<Node::NodeNamespaceId>(id, description, key, it->second);
     }
 
 

@@ -55,7 +55,9 @@ namespace CHelper::Node {
         tokenReader.pop();
         tokenReader.push();
         //当前节点
+        DEBUG_GET_NODE_BEGIN(this)
         ASTNode currentASTNode = getASTNode(tokenReader);
+        DEBUG_GET_NODE_END(this)
         if (currentASTNode.isError() || nextNodes.empty()) {
             tokenReader.pop();
             return ASTNode::andNode(this, {currentASTNode}, currentASTNode.tokens, nullptr, "compound");
@@ -97,7 +99,7 @@ namespace CHelper::Node {
             tokenReader.push();
             tokenReader.push();
             ASTNode astNode = item->getASTNode(tokenReader);
-            const VectorView<Token> tokens = tokenReader.collect();
+            const VectorView <Token> tokens = tokenReader.collect();
             if (astNode.isError() && !childASTNodes.empty() && (isIgnoreChildNodesError || tokens.isEmpty())) {
                 tokenReader.restore();
                 break;

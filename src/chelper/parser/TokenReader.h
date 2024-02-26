@@ -10,6 +10,25 @@
 #include "../util/VectorView.h"
 #include "ASTNode.h"
 
+#if CHelperDebug == true
+#define DEBUG_GET_NODE_BEGIN(node) size_t node##Index = tokenReader.indexStack.size();
+#else
+#define DEBUG_TOKEN_READER_INDEX(node)
+#endif
+
+#if CHelperDebug == true
+#define DEBUG_GET_NODE_END(node)                          \
+    if (node##Index != tokenReader.indexStack.size()) {   \
+        Profile::push("TokenReaderIndexError: " +         \
+            node->getNodeType().nodeName + " " +          \
+            node->id.value_or("") + " " +                 \
+            node->description.value_or(""));              \
+        throw Exception::TokenReaderIndexError();         \
+    }
+#else
+#define DEBUG_TOKEN_READER_INDEX(node)
+#endif
+
 namespace CHelper {
 
     namespace Node {
@@ -51,25 +70,25 @@ namespace CHelper {
         [[nodiscard]] VectorView <Token> collect();
 
     private:
-        ASTNode getSimpleASTNode(const Node::NodeBase *node,
-                                 TokenType::TokenType type,
-                                 const std::string &requireType,
-                                 const std::string &astNodeId,
-                                 std::shared_ptr<ErrorReason>(*check)(const std::string &str,
-                                                                      const VectorView <Token> &tokens));
+        ASTNode readSimpleASTNode(const Node::NodeBase *node,
+                                  TokenType::TokenType type,
+                                  const std::string &requireType,
+                                  const std::string &astNodeId,
+                                  std::shared_ptr<ErrorReason>(*check)(const std::string &str,
+                                                                       const VectorView <Token> &tokens));
 
     public:
-        ASTNode getStringASTNode(const Node::NodeBase *node,
-                                 const std::string &astNodeId = "");
-
-        ASTNode getIntegerASTNode(const Node::NodeBase *node,
+        ASTNode readStringASTNode(const Node::NodeBase *node,
                                   const std::string &astNodeId = "");
 
-        ASTNode getFloatASTNode(const Node::NodeBase *node,
-                                const std::string &astNodeId = "");
+        ASTNode readIntegerASTNode(const Node::NodeBase *node,
+                                   const std::string &astNodeId = "");
 
-        ASTNode getSymbolASTNode(const Node::NodeBase *node,
+        ASTNode readFloatASTNode(const Node::NodeBase *node,
                                  const std::string &astNodeId = "");
+
+        ASTNode readSymbolASTNode(const Node::NodeBase *node,
+                                  const std::string &astNodeId = "");
 
     };
 

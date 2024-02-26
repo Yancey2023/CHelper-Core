@@ -16,8 +16,11 @@ Helper.
 - [x] parser, build AST tree and find structure error.
 - [x] description, get description of the node which is writing.
 - [x] check id, find id error through AST three and cpack.
-- [ ] get suggestion, find id error through AST three and cpack.
-- [ ] get structure, build command structure string
+- [x] get suggestion, find id error through AST three and cpack.
+- [x] get structure, build command structure string
+- [ ] target selector command param
+- [ ] execute command
+- [ ] json command param
 - [ ] get colors
 
 ## Why choosing c++

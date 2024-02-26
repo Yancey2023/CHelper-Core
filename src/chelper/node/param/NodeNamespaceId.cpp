@@ -14,9 +14,11 @@ namespace CHelper::Node {
                                      const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
             : NodeBase(id, description, false),
               key(key),
-              contents(contents) {}
+              contents(contents) {
+        //TODO nullptr检测
+    }
 
-    std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> getNamespaceIdContentFromCPack(const nlohmann::json &j,
+    static std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> getIdContentFromCPack(const nlohmann::json &j,
                                                                                               const CPack &cpack,
                                                                                               const std::optional<std::string> &key) {
         if (key.has_value()) {
@@ -49,7 +51,7 @@ namespace CHelper::Node {
                                      const CPack &cpack)
             : NodeBase(j),
               key(FROM_JSON_OPTIONAL(j, key, std::string)),
-              contents(getNamespaceIdContentFromCPack(j, cpack, key)) {}
+              contents(getIdContentFromCPack(j, cpack, key)) {}
 
     NodeType NodeNamespaceId::getNodeType() const {
         return NodeType::NAMESPACE_ID;
@@ -70,7 +72,7 @@ namespace CHelper::Node {
     ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader) const {
         // namespace:id
         // 字符串中已经包含冒号，因为冒号不是结束字符
-        return tokenReader.getStringASTNode(this);
+        return tokenReader.readStringASTNode(this);
     }
 
     bool NodeNamespaceId::collectIdError(const ASTNode *astNode,

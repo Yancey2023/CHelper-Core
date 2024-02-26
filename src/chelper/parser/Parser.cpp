@@ -23,7 +23,10 @@ namespace CHelper::Parser {
     ASTNode parse(TokenReader &&tokenReader, const CPack &cpack) {
         VectorView <Token> tokens = {tokenReader.tokenList, 0, tokenReader.tokenList->size()};
         Profile::push("start parsing: " + TokenUtil::toString(tokens));
-        auto result = cpack.mainNode->getASTNode(tokenReader);
+        auto mainNode = cpack.mainNode;
+        DEBUG_GET_NODE_BEGIN(mainNode)
+        auto result = mainNode->getASTNode(tokenReader);
+        DEBUG_GET_NODE_END(mainNode)
         Profile::pop();
         return result;
     }

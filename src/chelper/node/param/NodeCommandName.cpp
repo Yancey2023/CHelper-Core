@@ -24,7 +24,7 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeCommandName::getASTNode(TokenReader &tokenReader) const {
-        return tokenReader.getStringASTNode(this);
+        return tokenReader.readStringASTNode(this);
     }
 
     bool NodeCommandName::collectIdError(const ASTNode *astNode,

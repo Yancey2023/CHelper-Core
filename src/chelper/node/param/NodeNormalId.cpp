@@ -15,11 +15,13 @@ namespace CHelper::Node {
             : NodeBase(id, description, false),
               key(key),
               contents(contents),
-              getNormalIdASTNode(getNormalIdASTNode) {}
+              getNormalIdASTNode(getNormalIdASTNode) {
+        //TODO nullptr检测
+    }
 
-    std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> getNormalIdContentFromCPack(const nlohmann::json &j,
-                                                                                        const CPack &cpack,
-                                                                                        const std::optional<std::string> &key) {
+    static std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> getIdContentFromCPack(const nlohmann::json &j,
+                                                                                         const CPack &cpack,
+                                                                                         const std::optional<std::string> &key) {
         if (key.has_value()) {
             auto it = cpack.normalIds.find(key.value());
             if (it == cpack.normalIds.end()) {
@@ -49,9 +51,9 @@ namespace CHelper::Node {
                                const CPack &cpack)
             : NodeBase(j),
               key(FROM_JSON_OPTIONAL(j, key, std::string)),
-              contents(getNormalIdContentFromCPack(j, cpack, key)),
+              contents(getIdContentFromCPack(j, cpack, key)),
               getNormalIdASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-                  return tokenReader.getStringASTNode(node);
+                  return tokenReader.readStringASTNode(node);
               }) {}
 
     NodeType NodeNormalId::getNodeType() const {
@@ -71,7 +73,10 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader) const {
-        return getNormalIdASTNode(this, tokenReader);
+        DEBUG_GET_NODE_BEGIN(this)
+        auto result = getNormalIdASTNode(this, tokenReader);
+        DEBUG_GET_NODE_END(this)
+        return result;
     }
 
     bool NodeNormalId::collectIdError(const ASTNode *astNode,

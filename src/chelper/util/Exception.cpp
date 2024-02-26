@@ -121,5 +121,15 @@ namespace CHelper::Exception {
         return "[CHelper] wrong range";
     }
 
+    TokenReaderIndexError::TokenReaderIndexError() {
+        Profile::push(ColorStringBuilder()
+                              .red("token reader index error")
+                              .build());
+    }
+
+    const char *TokenReaderIndexError::what() const noexcept {
+        return "[CHelper] token reader index error";
+    }
+
 
 } // CHelper::Exception

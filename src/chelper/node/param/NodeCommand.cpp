@@ -24,7 +24,10 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeCommand::getASTNode(TokenReader &tokenReader) const {
-        return getByChildNode(tokenReader, {nodeCommand}, "command");
+        DEBUG_GET_NODE_BEGIN(nodeCommand)
+        auto result = getByChildNode(tokenReader, {nodeCommand}, "command");
+        DEBUG_GET_NODE_END(nodeCommand)
+        return result;
     }
 
     std::optional<std::string> NodeCommand::collectDescription(const ASTNode *astNode, size_t index) const {

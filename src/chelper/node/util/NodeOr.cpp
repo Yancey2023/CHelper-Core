@@ -15,19 +15,25 @@ namespace CHelper::Node {
               childNodes(childNodes) {}
 
     ASTNode NodeOr::getASTNode(TokenReader &tokenReader) const {
+        size_t size = childNodes->size();
         std::vector<ASTNode> childASTNodes;
-        childASTNodes.reserve(childNodes->size());
-        for (const auto &item: *childNodes) {
+        childASTNodes.reserve(size);
+        size_t indexes[size];
+        for (int i = 0; i < size; ++i) {
             tokenReader.push();
-            childASTNodes.push_back(item->getASTNode(tokenReader));
+            childASTNodes.push_back(childNodes->at(i)->getASTNode(tokenReader));
+            indexes[i] = tokenReader.index;
             tokenReader.restore();
         }
-        if (!isAttachToEnd) {
-            return ASTNode::orNode(this, childASTNodes);
+        if (isAttachToEnd) {
+            tokenReader.push();
+            tokenReader.skipToLF();
+            return ASTNode::orNode(this, childASTNodes, tokenReader.collect());
+        } else {
+            ASTNode result = ASTNode::orNode(this, childASTNodes);
+            tokenReader.index = indexes[result.whichBest];
+            return result;
         }
-        tokenReader.push();
-        tokenReader.skipToLF();
-        return ASTNode::orNode(this, childASTNodes, tokenReader.collect());
     }
 
     std::optional<std::string> NodeOr::collectDescription(const ASTNode *node, size_t index) const {

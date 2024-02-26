@@ -31,7 +31,7 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeInteger::getASTNode(TokenReader &tokenReader) const {
-        return tokenReader.getIntegerASTNode(this);
+        return tokenReader.readIntegerASTNode(this);
     }
 
     void NodeInteger::collectStructure(const ASTNode *astNode,

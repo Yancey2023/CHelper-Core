@@ -11,12 +11,18 @@
 namespace CHelper::Node {
 
     class NodeText : public NodeBase {
-        std::shared_ptr<NormalId> data;
+        const std::shared_ptr<NormalId> data;
+
+        ASTNode (*getTextASTNode)(const NodeBase *tokenReader, TokenReader &reader);
 
     public:
         NodeText(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
-                 std::shared_ptr<NormalId> data);
+                 const std::shared_ptr<NormalId> &data,
+                 ASTNode(*getNormalIdASTNode)(const NodeBase *node, TokenReader &tokenReader) =
+                 [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
+                     return tokenReader.readStringASTNode(node);
+                 });
 
         explicit NodeText(const nlohmann::json &j,
                           [[maybe_unused]] const CPack &cpack);

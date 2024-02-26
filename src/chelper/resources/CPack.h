@@ -28,6 +28,15 @@ namespace CHelper {
 
     public:
         static CPack create(const std::filesystem::path &path);
+
+        std::shared_ptr<Node::NodeBase> getNormalId(const std::optional<std::string> &id,
+                                                    const std::optional<std::string> &description,
+                                                    const std::string &key) const;
+
+        std::shared_ptr<Node::NodeBase> getNamespaceId(const std::optional<std::string> &id,
+                                                       const std::optional<std::string> &description,
+                                                       const std::string &key) const;
+
     };
 
 }

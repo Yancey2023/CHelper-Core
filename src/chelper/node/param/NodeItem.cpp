@@ -9,12 +9,12 @@
 
 namespace CHelper::Node {
 
-    const static std::shared_ptr<NodeInteger> nodeCount = std::make_shared<NodeInteger>
+    static std::shared_ptr<NodeInteger> nodeCount = std::make_shared<NodeInteger>
             ("ITEM_COUNT", "物品数量", 0, std::nullopt);
-    const static std::shared_ptr<NodeInteger> nodeData = std::make_shared<NodeInteger>
+    static std::shared_ptr<NodeInteger> nodeData = std::make_shared<NodeInteger>
             ("ITEM_DATA", "物品附加值", -1, std::nullopt);
     //TODO 物品组件Json解析
-    const static std::shared_ptr<NodeString> nodeComponent = std::make_shared<NodeString>
+    static std::shared_ptr<NodeString> nodeComponent = std::make_shared<NodeString>
             ("ITEM_COMPONENT", "物品组件", true, true);
 
     NodeItem::NodeItem(const std::optional<std::string> &id,
@@ -23,13 +23,13 @@ namespace CHelper::Node {
                        const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
             : NodeBase(id, description, false),
               nodeItemType(nodeItemType),
-              nodeItemId(std::make_shared<NodeNamespaceId>("ITEM_ID", "物品ID", "items", contents)) {}
+              nodeItemId(getNodeItemId(contents)) {}
 
     NodeItem::NodeItem(const nlohmann::json &j,
                        const CPack &cpack) :
             NodeBase(j),
             nodeItemType(FROM_JSON(j, nodeItemType, CHelper::Node::NodeItemType::NodeItemType)),
-            nodeItemId(std::make_shared<NodeNamespaceId>("ITEM_ID", "物品ID", "items", cpack.itemIds)) {}
+            nodeItemId(getNodeItemId(cpack.itemIds)) {}
 
     NodeType NodeItem::getNodeType() const {
         return NodeType::ITEM;
@@ -78,6 +78,11 @@ namespace CHelper::Node {
                 nodeComponent->collectStructure(nullptr, structure, false);
                 break;
         }
+    }
+
+    std::shared_ptr<NodeBase>
+    NodeItem::getNodeItemId(const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents) {
+        return std::make_shared<NodeNamespaceId>("ITEM_ID", "物品ID", "items", contents);
     }
 
 } // CHelper::Node

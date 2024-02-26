@@ -4,6 +4,7 @@
 
 #include "CHelperWindows.h"
 #include "chelper/Core.h"
+#include "chelper/util/TokenUtil.h"
 #include <commctrl.h>
 
 static size_t ID_INPUT = 1;
@@ -180,7 +181,43 @@ void onTextChanged(const std::string &command) {
                              .green(", command is ")
                              .purple(command.size() <= 100 ? command : command.substr(0, 100))
                              .build());
-
+        CHELPER_INFO("structure: " + structure);
+        CHELPER_INFO("description: " + description);
+        if (errorReasons.empty()) {
+            CHELPER_INFO("no error");
+        } else if (errorReasons.size() == 1) {
+            const auto &errorReason = errorReasons[0];
+            CHELPER_INFO(CHelper::ColorStringBuilder()
+                                 .normal("error reason: ")
+                                 .red(CHelper::TokenUtil::toString(errorReason->tokens) + " ")
+                                 .blue(errorReason->errorReason)
+                                 .build());
+        } else {
+            CHELPER_INFO("error reasons:");
+            int i = 0;
+            for (const auto &item: errorReasons) {
+                CHELPER_INFO(CHelper::ColorStringBuilder()
+                                     .normal(std::to_string(++i) + ". ")
+                                     .red(CHelper::TokenUtil::toString(item->tokens) + " ")
+                                     .blue(item->errorReason)
+                                     .build());
+            }
+        }
+        CHELPER_INFO("suggestions: ");
+        int j = 0;
+        for (const auto &item: suggestions) {
+            if (j == 30) {
+                CHELPER_INFO("...");
+                break;
+            }
+            CHELPER_INFO(CHelper::ColorStringBuilder()
+                                 .normal(std::to_string(++j) + ". ")
+                                 .blue(CHelper::TokenUtil::toString(item.tokens) + " ")
+                                 .yellow(item.content->name + " ")
+                                 .normal(item.content->description.value_or(""))
+                                 .build());
+        }
+        std::cout << std::endl;
     } catch (const std::exception &e) {
         CHELPER_INFO(CHelper::ColorStringBuilder().red("parse failed").build());
         CHelper::Exception::printStackTrace(e);

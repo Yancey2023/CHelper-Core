@@ -5,20 +5,23 @@
 #include "NodeText.h"
 #include "../../util/TokenUtil.h"
 
-#include <utility>
-
 namespace CHelper::Node {
 
     CHelper::Node::NodeText::NodeText(const std::optional<std::string> &id,
                                       const std::optional<std::string> &description,
-                                      std::shared_ptr<NormalId> data)
+                                      const std::shared_ptr<NormalId> &data,
+                                      ASTNode(*getTextASTNode)(const NodeBase *node, TokenReader &tokenReader))
             : NodeBase(id, description, false),
-              data(std::move(data)) {}
+              data(data),
+              getTextASTNode(getTextASTNode) {}
 
     CHelper::Node::NodeText::NodeText(const nlohmann::json &j,
                                       [[maybe_unused]] const CPack &cpack)
             : NodeBase(j),
-              data(std::make_shared<NormalId>(j.at("data"))) {}
+              data(std::make_shared<NormalId>(j.at("data"))),
+              getTextASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
+                  return tokenReader.readStringASTNode(node);
+              }) {}
 
     NodeType NodeText::getNodeType() const {
         return NodeType::TEXT;
@@ -32,7 +35,10 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeText::getASTNode(TokenReader &tokenReader) const {
-        return tokenReader.getStringASTNode(this);
+        DEBUG_GET_NODE_BEGIN(this)
+        auto result = getTextASTNode(this, tokenReader);
+        DEBUG_GET_NODE_END(this)
+        return result;
     }
 
     bool NodeText::collectIdError(const ASTNode *astNode,

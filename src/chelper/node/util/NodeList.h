@@ -15,6 +15,8 @@ namespace CHelper::Node {
         std::shared_ptr<NodeBase> nodeElement;
         std::shared_ptr<NodeBase> nodeSeparator;
         std::shared_ptr<NodeBase> nodeRight;
+        std::shared_ptr<NodeBase> nodeElementOrRight;
+        std::shared_ptr<NodeBase> nodeSeparatorOrRight;
 
         NodeList(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,

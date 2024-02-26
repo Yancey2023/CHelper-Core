@@ -99,12 +99,12 @@ namespace CHelper {
         return {tokenList, getAndPopLastIndex(), index};
     }
 
-    ASTNode TokenReader::getSimpleASTNode(const Node::NodeBase *node,
-                                       const TokenType::TokenType type,
-                                       const std::string &requireType,
-                                       const std::string &astNodeId,
-                                       std::shared_ptr<ErrorReason>(*check)(const std::string &str,
-                                                                            const VectorView <Token> &tokens)) {
+    ASTNode TokenReader::readSimpleASTNode(const Node::NodeBase *node,
+                                           TokenType::TokenType type,
+                                           const std::string &requireType,
+                                           const std::string &astNodeId,
+                                           std::shared_ptr<ErrorReason>(*check)(const std::string &str,
+                                                                                const VectorView <Token> &tokens)) {
         skipWhitespace();
         push();
         const Token *token = read();
@@ -123,56 +123,56 @@ namespace CHelper {
         return ASTNode::simpleNode(node, tokens, errorReason, astNodeId);
     }
 
-    ASTNode TokenReader::getStringASTNode(const Node::NodeBase *node,
-                                       const std::string &astNodeId) {
-        return getSimpleASTNode(node, TokenType::STRING, "字符串类型", astNodeId,
-                                [](const std::string &str,
-                                   const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
-                                    return nullptr;
-                                });
+    ASTNode TokenReader::readStringASTNode(const Node::NodeBase *node,
+                                           const std::string &astNodeId) {
+        return readSimpleASTNode(node, TokenType::STRING, "字符串类型", astNodeId,
+                                 [](const std::string &str,
+                                    const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
+                                     return nullptr;
+                                 });
     }
 
-    ASTNode TokenReader::getIntegerASTNode(const Node::NodeBase *node,
-                                        const std::string &astNodeId) {
-        return getSimpleASTNode(node, TokenType::NUMBER, "整数类型", astNodeId,
-                                [](const std::string &str,
-                                   const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
-                                    for (const auto &ch: str) {
-                                        if (ch == '.') {
-                                            return ErrorReason::contentError(
-                                                    tokens, "类型不匹配，正确的参数类型为整数，但当前参数类型为小数");
-                                        }
-                                    }
-                                    return nullptr;
-                                });
+    ASTNode TokenReader::readIntegerASTNode(const Node::NodeBase *node,
+                                            const std::string &astNodeId) {
+        return readSimpleASTNode(node, TokenType::NUMBER, "整数类型", astNodeId,
+                                 [](const std::string &str,
+                                    const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
+                                     for (const auto &ch: str) {
+                                         if (ch == '.') {
+                                             return ErrorReason::contentError(
+                                                     tokens, "类型不匹配，正确的参数类型为整数，但当前参数类型为小数");
+                                         }
+                                     }
+                                     return nullptr;
+                                 });
     }
 
-    ASTNode TokenReader::getFloatASTNode(const Node::NodeBase *node,
-                                      const std::string &astNodeId) {
-        return getSimpleASTNode(node, TokenType::NUMBER, "数字类型", astNodeId,
-                                [](const std::string &str,
-                                   const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
-                                    bool isHavePoint = false;
-                                    for (const auto &ch: str) {
-                                        if (ch != '.') {
-                                            continue;
-                                        }
-                                        if (isHavePoint) {
-                                            return ErrorReason::contentError(tokens, "数字格式错误");
-                                        }
-                                        isHavePoint = true;
-                                    }
-                                    return nullptr;
-                                });
+    ASTNode TokenReader::readFloatASTNode(const Node::NodeBase *node,
+                                          const std::string &astNodeId) {
+        return readSimpleASTNode(node, TokenType::NUMBER, "数字类型", astNodeId,
+                                 [](const std::string &str,
+                                    const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
+                                     bool isHavePoint = false;
+                                     for (const auto &ch: str) {
+                                         if (ch != '.') {
+                                             continue;
+                                         }
+                                         if (isHavePoint) {
+                                             return ErrorReason::contentError(tokens, "数字格式错误");
+                                         }
+                                         isHavePoint = true;
+                                     }
+                                     return nullptr;
+                                 });
     }
 
-    ASTNode TokenReader::getSymbolASTNode(const Node::NodeBase *node,
-                                       const std::string &astNodeId) {
-        return getSimpleASTNode(node, TokenType::SYMBOL, "符号类型", astNodeId,
-                                [](const std::string &str,
-                                   const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
-                                    return nullptr;
-                                });
+    ASTNode TokenReader::readSymbolASTNode(const Node::NodeBase *node,
+                                           const std::string &astNodeId) {
+        return readSimpleASTNode(node, TokenType::SYMBOL, "符号类型", astNodeId,
+                                 [](const std::string &str,
+                                    const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
+                                     return nullptr;
+                                 });
     }
 
 

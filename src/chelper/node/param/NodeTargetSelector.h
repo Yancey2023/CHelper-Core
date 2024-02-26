@@ -9,18 +9,26 @@
 #include "../NodeBase.h"
 #include "../util/NodeAnd.h"
 #include "../util/NodeOr.h"
+#include "../selector/NodeTargetSelectorArgument.h"
+#include "../util/NodeList.h"
 
 namespace CHelper::Node {
 
     class NodeTargetSelector : public NodeBase {
     public:
         const bool isMustPlayer, isMustNPC, isOnlyOne;
+        std::shared_ptr<NodeBase> nodeArgument;
+        std::shared_ptr<NodeBase> nodeArguments;
 
         NodeTargetSelector(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
                            bool isMustPlayer,
                            bool isMustNPC,
-                           bool isOnlyOne);
+                           bool isOnlyOne,
+                           const std::shared_ptr<NodeBase> &nodeItem,
+                           const std::shared_ptr<NodeBase> &nodeFamily,
+                           const std::shared_ptr<NodeBase> &nodeGameMode,
+                           const std::shared_ptr<NodeBase> &nodeItemLocation);
 
         explicit NodeTargetSelector(const nlohmann::json &j,
                                     [[maybe_unused]] const CPack &cpack);

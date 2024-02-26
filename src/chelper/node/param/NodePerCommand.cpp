@@ -125,8 +125,9 @@ namespace CHelper::Node {
     ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader) const {
         tokenReader.push();
         //命令名字的检查
-        ASTNode commandName = tokenReader.getStringASTNode(this, "commandName");
+        ASTNode commandName = tokenReader.readStringASTNode(this, "commandName");
         if (commandName.tokens.size() == 0) {
+            tokenReader.pop();
             return ASTNode::andNode(this, {commandName}, commandName.tokens,
                                     ErrorReason::contentError(commandName.tokens, "指令名字为空"));
         }
@@ -153,7 +154,9 @@ namespace CHelper::Node {
         childASTNodes.reserve(startNodes.size());
         for (const auto &item: startNodes) {
             tokenReader.push();
+            DEBUG_GET_NODE_BEGIN(item)
             childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader));
+            DEBUG_GET_NODE_END(item)
             tokenReader.restore();
         }
         tokenReader.push();

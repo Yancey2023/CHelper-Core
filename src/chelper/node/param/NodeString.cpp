@@ -40,7 +40,7 @@ namespace CHelper::Node {
             ASTNode doubleQuotationMarkStart = doubleQuotationMark->getASTNode(tokenReader);
             if (!doubleQuotationMarkStart.isError()) {
                 //使用双引号
-                ASTNode stringNode = tokenReader.getStringASTNode(this);
+                ASTNode stringNode = tokenReader.readStringASTNode(this);
                 ASTNode doubleQuotationMarkEnd = doubleQuotationMark->getASTNode(tokenReader);
                 return ASTNode::andNode(this, {doubleQuotationMarkStart, stringNode, doubleQuotationMarkEnd},
                                         tokenReader.collect());
@@ -48,7 +48,12 @@ namespace CHelper::Node {
             tokenReader.restore();
         }
         //普通字符串
-        return tokenReader.getStringASTNode(this);
+        ASTNode result = tokenReader.readStringASTNode(this);
+        if (!result.isError() && result.tokens.isEmpty()) {
+            result = ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(
+                    result.tokens, "字符串参数内容为空"));
+        }
+        return result;
     }
 
     void NodeString::collectStructure(const ASTNode *astNode,

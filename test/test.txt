@@ -7,4 +7,4 @@ D:\CLion\project\CHelper\resources
 -g
 -summon a
 -give @a command_block
-give
+give @s[r

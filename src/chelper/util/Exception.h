@@ -65,6 +65,14 @@ namespace CHelper::Exception {
         [[nodiscard]] const char *what() const noexcept override;
     };
 
+    // tokenReader指针栈的位置不正确
+    class TokenReaderIndexError : public std::exception {
+    public:
+        TokenReaderIndexError();
+
+        [[nodiscard]] const char *what() const noexcept override;
+    };
+
 } // CHelper::Exception
 
 #endif //CHELPER_EXCEPTION_H

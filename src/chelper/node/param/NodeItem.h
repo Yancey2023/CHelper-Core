@@ -22,7 +22,7 @@ namespace CHelper::Node {
     class NodeItem : public NodeBase {
     public:
         const NodeItemType::NodeItemType nodeItemType;
-        std::shared_ptr<NodeNamespaceId> nodeItemId;
+        const std::shared_ptr<NodeBase> nodeItemId;
 
         NodeItem(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
@@ -43,6 +43,9 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
+
+        static std::shared_ptr<NodeBase>
+        getNodeItemId(const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
 
     };
 

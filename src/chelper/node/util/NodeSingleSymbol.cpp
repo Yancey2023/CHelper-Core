@@ -14,7 +14,7 @@ namespace CHelper::Node {
               symbol(symbol) {}
 
     ASTNode NodeSingleSymbol::getASTNode(TokenReader &tokenReader) const {
-        ASTNode symbolNode = tokenReader.getSymbolASTNode(this, "single node");
+        ASTNode symbolNode = tokenReader.readSymbolASTNode(this, "single node");
         std::shared_ptr<ErrorReason> errorReason;
         if (symbolNode.isError()) {
             return symbolNode;
