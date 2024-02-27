@@ -50,6 +50,7 @@ namespace CHelper {
             static NodeType STRING;
             static NodeType TARGET_SELECTOR;
             static NodeType TEXT;
+            static NodeType RANGE;
 
             static void init();
         };

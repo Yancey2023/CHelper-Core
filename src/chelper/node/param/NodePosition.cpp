@@ -12,7 +12,7 @@ namespace CHelper::Node {
             : NodeBase(id, description, false) {}
 
     NodePosition::NodePosition(const nlohmann::json &j,
-                               const CPack &cpack)
+                               [[maybe_unused]] const CPack &cpack)
             : NodeBase(j) {}
 
     NodeType NodePosition::getNodeType() const {

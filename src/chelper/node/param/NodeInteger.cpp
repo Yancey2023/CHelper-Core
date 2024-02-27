@@ -3,6 +3,7 @@
 //
 
 #include "NodeInteger.h"
+#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -15,7 +16,7 @@ namespace CHelper::Node {
               max(max) {}
 
     NodeInteger::NodeInteger(const nlohmann::json &j,
-                             const CPack &cpack)
+                             [[maybe_unused]] const CPack &cpack)
             : NodeBase(j),
               min(FROM_JSON_OPTIONAL(j, min, int)),
               max(FROM_JSON_OPTIONAL(j, max, int)) {}
@@ -32,6 +33,37 @@ namespace CHelper::Node {
 
     ASTNode NodeInteger::getASTNode(TokenReader &tokenReader) const {
         return tokenReader.readIntegerASTNode(this);
+    }
+
+    std::optional<int> str2int(const std::string &string) {
+        if (string.length() > 11) {
+            return std::nullopt;
+        }
+        long long result;
+        std::stringstream stringStream;
+        stringStream << string;
+        stringStream >> result;
+        stringStream.clear();
+        if (result < -2147483648 || result > 2147483647) {
+            return std::nullopt;
+        }
+        return result;
+    }
+
+    bool NodeInteger::collectIdError(const ASTNode *astNode,
+                                     std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
+        if (astNode->isError()) {
+            return true;
+        }
+        std::string str = TokenUtil::toString(astNode->tokens);
+        std::optional<int> num = str2int(str);
+        if (!num.has_value() || (min.has_value() && num.value() < min) || (max.has_value() && num.value() > max)) {
+            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("数值不在范围")
+                    .append("[").append(std::to_string(min.value_or(-2147483648)))
+                    .append(", ").append(std::to_string(min.value_or(2147483647)))
+                    .append("]").append("内 -> ").append(str)));
+        }
+        return true;
     }
 
     void NodeInteger::collectStructure(const ASTNode *astNode,

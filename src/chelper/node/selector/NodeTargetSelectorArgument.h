@@ -13,7 +13,8 @@ namespace CHelper::Node {
 
     class NodeTargetSelectorArgument : public NodeBase {
     private:
-        std::shared_ptr<NodeBase> nodeItem, nodeFamily, nodeGameMode, nodeItemLocation;
+        std::shared_ptr<NodeBase> nodeFamily, nodeGameMode, nodeEntities,
+                nodeHasItemElement, nodeHasItemList1, nodeHasItemList2, nodeHasItem;
 
     public:
         NodeTargetSelectorArgument(const std::optional<std::string> &id,
@@ -21,7 +22,8 @@ namespace CHelper::Node {
                                    const std::shared_ptr<NodeBase> &nodeItem,
                                    const std::shared_ptr<NodeBase> &nodeFamily,
                                    const std::shared_ptr<NodeBase> &nodeGameMode,
-                                   const std::shared_ptr<NodeBase> &nodeItemLocation);
+                                   const std::shared_ptr<NodeBase> &nodeSlot,
+                                   const std::shared_ptr<NodeBase> &nodeEntities);
 
         ASTNode getASTNode(TokenReader &tokenReader) const override;
     };

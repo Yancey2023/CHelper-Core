@@ -15,7 +15,7 @@ namespace CHelper::Node {
               descriptionFalse(descriptionFalse) {}
 
     NodeBoolean::NodeBoolean(const nlohmann::json &j,
-                             const CPack &cpack)
+                             [[maybe_unused]] const CPack &cpack)
             : NodeBase(j),
               descriptionTrue(FROM_JSON_OPTIONAL(j, descriptionTrue, std::string)),
               descriptionFalse(FROM_JSON_OPTIONAL(j, descriptionFalse, std::string)) {}

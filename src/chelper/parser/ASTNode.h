@@ -23,7 +23,7 @@ namespace CHelper {
     } // Node
 
     namespace ASTNodeMode {
-        enum ASTNodeMode {
+        enum ASTNodeMode : std::uint8_t {
             //没有向下的分支
             NONE,
             //有向下的分支，子节点为and关系
@@ -45,7 +45,7 @@ namespace CHelper {
         //不要直接用这个，这里不包括ID错误，只有结构错误，应该用getErrorReason()
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
         //哪个节点最好，OR类型特有，获取颜色和生成命令格式文本的时候使用
-        int whichBest;
+        size_t whichBest;
 
         ASTNode(ASTNodeMode::ASTNodeMode mode,
                 const Node::NodeBase *node,
@@ -53,7 +53,7 @@ namespace CHelper {
                 const VectorView <Token> &tokens,
                 const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
                 std::string id,
-                int whichBest = -1);
+                size_t whichBest = -1);
 
     public:
         static ASTNode simpleNode(const Node::NodeBase *node,
@@ -76,11 +76,6 @@ namespace CHelper {
         static ASTNode orNode(const Node::NodeBase *node,
                               const std::vector<ASTNode> &childNodes,
                               const VectorView <Token> &tokens,
-                              const std::shared_ptr<ErrorReason> &errorReason = nullptr,
-                              const std::string &id = "");
-
-        static ASTNode orNode(const Node::NodeBase *node,
-                              const std::vector<ASTNode> &childNodes,
                               const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                               const std::string &id = "");
 

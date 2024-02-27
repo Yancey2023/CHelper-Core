@@ -18,9 +18,10 @@ Helper.
 - [x] check id, find id error through AST three and cpack.
 - [x] get suggestion, find id error through AST three and cpack.
 - [x] get structure, build command structure string
-- [ ] target selector command param
+- [x] target selector command param
 - [ ] execute command
 - [ ] json command param
+- [ ] block state
 - [ ] get colors
 
 ## Why choosing c++

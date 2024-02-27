@@ -17,6 +17,7 @@
 #include "param/NodeTargetSelector.h"
 #include "param/NodeText.h"
 #include "param/NodeFloat.h"
+#include "param/NodeRange.h"
 
 namespace CHelper::Node {
 
@@ -66,6 +67,7 @@ namespace CHelper::Node {
     NodeType NodeType::TARGET_SELECTOR = NodeType::create<NodeTargetSelector>("TARGET_SELECTOR");
 
     NodeType NodeType::TEXT = NodeType::create<NodeText>("TEXT");
+    NodeType NodeType::RANGE = NodeType::create<NodeRange>("RANGE");
 
     inline void registerNodeType(const NodeType &nodeType) {
         NodeType::NODE_TYPES.push_back(&nodeType);

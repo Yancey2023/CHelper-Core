@@ -11,7 +11,7 @@
 namespace CHelper::Node {
 
     namespace NodeBlockType {
-        enum NodeBlockType {
+        enum NodeBlockType : std::uint8_t {
             // (已废弃附加值) <方块ID> <附加值 | 方块状态>
             BLOCK_NORMAL = 0,
             // (已废弃) <方块ID> <附加值>

@@ -117,7 +117,7 @@ namespace CHelper::Node {
         return description;
     }
 
-//创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
+    //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     bool NodeBase::collectIdError(const ASTNode *astNode,
                                   std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         return false;

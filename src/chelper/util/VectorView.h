@@ -44,7 +44,7 @@ namespace CHelper {
         }
 
         template<typename Function>
-        Function for_each(Function function) const {
+        Function forEach(Function function) const {
             return std::for_each(vector->begin() + start, vector->begin() + end, function);
         }
     };

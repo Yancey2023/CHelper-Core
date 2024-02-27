@@ -12,7 +12,7 @@ namespace CHelper {
 
     namespace TokenType {
 
-        enum TokenType {
+        enum TokenType : std::uint8_t {
             STRING,
             NUMBER,
             SYMBOL,

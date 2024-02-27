@@ -28,6 +28,8 @@ namespace CHelper {
 
         void onSelectionChanged(size_t index0);
 
+        const ASTNode &getAstNode() const;
+
         std::string getDescription() const;
 
         std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;

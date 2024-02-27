@@ -181,6 +181,7 @@ void onTextChanged(const std::string &command) {
                              .green(", command is ")
                              .purple(command.size() <= 100 ? command : command.substr(0, 100))
                              .build());
+        std::cout << core->getAstNode() << std::endl;
         CHELPER_INFO("structure: " + structure);
         CHELPER_INFO("description: " + description);
         if (errorReasons.empty()) {

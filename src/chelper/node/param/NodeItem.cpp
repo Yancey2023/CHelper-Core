@@ -15,7 +15,7 @@ namespace CHelper::Node {
             ("ITEM_DATA", "物品附加值", -1, std::nullopt);
     //TODO 物品组件Json解析
     static std::shared_ptr<NodeString> nodeComponent = std::make_shared<NodeString>
-            ("ITEM_COMPONENT", "物品组件", true, true);
+            ("ITEM_COMPONENT", "物品组件", false, true, true);
 
     NodeItem::NodeItem(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,

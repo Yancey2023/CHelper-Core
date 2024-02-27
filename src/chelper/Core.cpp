@@ -42,6 +42,10 @@ namespace CHelper {
         index = index0;
     }
 
+    const ASTNode &Core::getAstNode() const {
+        return astNode;
+    }
+
     std::string Core::getDescription() const {
         return astNode.getDescription(index);
     }
@@ -65,7 +69,7 @@ namespace CHelper {
     }
 
     std::optional<std::string> Core::onSuggestionClick(size_t which) const {
-        if(suggestions == nullptr || which >= suggestions->size()){
+        if (suggestions == nullptr || which >= suggestions->size()) {
             return std::nullopt;
         }
         return suggestions->at(which).onClick();

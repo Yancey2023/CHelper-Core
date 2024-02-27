@@ -26,7 +26,7 @@ namespace CHelper::TokenUtil {
 
     std::string toString(const VectorView <Token> &tokens) {
         std::string result;
-        tokens.for_each([&result](const CHelper::Token &token) {
+        tokens.forEach([&result](const CHelper::Token &token) {
             result.append(token.content);
         });
         return result;

@@ -7,4 +7,5 @@ D:\CLion\project\CHelper\resources
 -g
 -summon a
 -give @a command_block
-give @s[r
+give @s[hasitem={
+give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m

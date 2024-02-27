@@ -30,7 +30,7 @@ namespace CHelper::Node {
             tokenReader.skipToLF();
             return ASTNode::orNode(this, childASTNodes, tokenReader.collect());
         } else {
-            ASTNode result = ASTNode::orNode(this, childASTNodes);
+            ASTNode result = ASTNode::orNode(this, childASTNodes, nullptr);
             tokenReader.index = indexes[result.whichBest];
             return result;
         }

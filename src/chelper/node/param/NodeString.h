@@ -12,16 +12,18 @@ namespace CHelper::Node {
 
     class NodeString : public NodeBase {
     public:
+        const bool allowMissingString;
         const bool canContainSpace;
         const bool ignoreLater;
 
         NodeString(const std::optional<std::string> &id,
                    const std::optional<std::string> &description,
+                   bool allowMissingString,
                    bool canContainSpace,
                    bool ignoreLater);
 
         NodeString(const nlohmann::json &j,
-                   const CPack &cpack);
+                   [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType getNodeType() const override;
 

@@ -15,7 +15,7 @@ namespace CHelper {
                      const VectorView <Token> &tokens,
                      const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
                      std::string id,
-                     int whichBest)
+                     size_t whichBest)
             : mode(mode),
               node(node),
               childNodes(childNodes),
@@ -57,21 +57,14 @@ namespace CHelper {
                             const std::shared_ptr<ErrorReason> &errorReason,
                             const std::string &id) {
         bool isError = true;
-        int whichBest = 0;
+        size_t whichBest = 0;
         size_t start = 0;
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
         for (int i = 0; i < childNodes.size(); ++i) {
             const ASTNode &item = childNodes[i];
             if (!item.isError()) {
-                if (isError) {
-                    start = 0;
-                }
                 isError = false;
-                whichBest = i;
-                errorReasons.clear();
-            }
-            if (!isError) {
-                continue;
+                break;
             }
             for (const auto &item2: item.errorReasons) {
                 if (start > item2->tokens.start) {
@@ -94,6 +87,20 @@ namespace CHelper {
                 }
             }
         }
+        if (!isError) {
+            size_t maxEnd = 0;
+            errorReasons.clear();
+            for (int i = 0; i < childNodes.size(); ++i) {
+                const ASTNode &item = childNodes[i];
+                if (item.isError()) {
+                    continue;
+                }
+                if (maxEnd < item.tokens.size()) {
+                    whichBest = i;
+                    maxEnd = item.tokens.size();
+                }
+            }
+        }
         if (errorReason != nullptr) {
             errorReasons = {errorReason};
         }
@@ -108,13 +115,6 @@ namespace CHelper {
                             const std::shared_ptr<ErrorReason> &errorReason,
                             const std::string &id) {
         return orNode(node, childNodes, &tokens, errorReason, id);
-    }
-
-    ASTNode ASTNode::orNode(const Node::NodeBase *node,
-                            const std::vector<ASTNode> &childNodes,
-                            const std::shared_ptr<ErrorReason> &errorReason,
-                            const std::string &id) {
-        return orNode(node, childNodes, nullptr, errorReason, id);
     }
 
     bool ASTNode::isError() const {

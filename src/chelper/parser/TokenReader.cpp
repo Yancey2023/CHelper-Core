@@ -46,7 +46,7 @@ namespace CHelper {
         size_t result = 0;
         while (ready() && peek()->type == TokenType::WHITE_SPACE) {
             skip();
-            result = true;
+            result++;
         }
         return result;
     }

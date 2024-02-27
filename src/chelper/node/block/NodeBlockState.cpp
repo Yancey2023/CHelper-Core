@@ -26,7 +26,7 @@ namespace CHelper::Node {
     static std::shared_ptr<NodeBase> nodeLeftBracket = std::make_shared<NodeSingleSymbol>(
             "BLOCK_STATE_LEFT_BRACKET", "方块状态左括号", '[');
     static std::shared_ptr<NodeBase> nodeEntryKey = std::make_shared<NodeString>(
-            "BLOCK_STATE_ENTRY_KEY", "方块状态键值对的键", true, false);
+            "BLOCK_STATE_ENTRY_KEY", "方块状态键值对的键", false, true, false);
     static std::shared_ptr<NodeBase> nodeEntrySeparator = std::make_shared<NodeSingleSymbol>(
             "BLOCK_STATE_ENTRY_SEPARATOR", "方块状态键值对分隔符", '=');
     static std::shared_ptr<NodeBase> nodeEntryValue = std::make_shared<NodeOr>(
@@ -34,25 +34,17 @@ namespace CHelper::Node {
             std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
                     std::vector<std::shared_ptr<NodeBase>>{
                             std::make_shared<NodeBoolean>(
-                                    "BLOCK_STATE_ENTRY_VALUE_BOOLEAN",
-                                    "方块状态键值对的值（布尔值）",
-                                    std::nullopt,
-                                    std::nullopt),
+                                    "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", "方块状态键值对的值（布尔值）",
+                                    std::nullopt, std::nullopt),
                             std::make_shared<NodeInteger>(
-                                    "BLOCK_STATE_ENTRY_VALUE_INTEGER",
-                                    "方块状态键值对的值（整数）",
-                                    std::nullopt,
-                                    std::nullopt),
+                                    "BLOCK_STATE_ENTRY_VALUE_INTEGER", "方块状态键值对的值（整数）",
+                                    std::nullopt, std::nullopt),
                             std::make_shared<NodeFloat>(
-                                    "BLOCK_STATE_ENTRY_VALUE_FLOAT",
-                                    "方块状态键值对的值（小数）",
-                                    std::nullopt,
-                                    std::nullopt),
+                                    "BLOCK_STATE_ENTRY_VALUE_FLOAT", "方块状态键值对的值（小数）",
+                                    std::nullopt, std::nullopt),
                             std::make_shared<NodeString>(
-                                    "BLOCK_STATE_ENTRY_VALUE_STRING",
-                                    "方块状态键值对的值（字符串）",
-                                    true,
-                                    false)
+                                    "BLOCK_STATE_ENTRY_VALUE_STRING", "方块状态键值对的值（字符串）",
+                                    false, true, false)
                     }
             ),
             false

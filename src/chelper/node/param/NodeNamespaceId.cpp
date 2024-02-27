@@ -14,13 +14,11 @@ namespace CHelper::Node {
                                      const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
             : NodeBase(id, description, false),
               key(key),
-              contents(contents) {
-        //TODO nullptr检测
-    }
+              contents(contents) {}
 
     static std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> getIdContentFromCPack(const nlohmann::json &j,
-                                                                                              const CPack &cpack,
-                                                                                              const std::optional<std::string> &key) {
+                                                                                            const CPack &cpack,
+                                                                                            const std::optional<std::string> &key) {
         if (key.has_value()) {
             auto it = cpack.namespaceIds.find(key.value());
             if (it == cpack.namespaceIds.end()) {

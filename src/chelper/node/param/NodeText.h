@@ -33,9 +33,6 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader) const override;
 
-        bool collectIdError(const ASTNode *astNode,
-                            std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
-
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
                                 std::vector<Suggestion> &suggestions) const override;

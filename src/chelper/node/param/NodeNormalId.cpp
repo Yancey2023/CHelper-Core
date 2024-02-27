@@ -11,13 +11,13 @@ namespace CHelper::Node {
                                const std::optional<std::string> &description,
                                const std::optional<std::string> &key,
                                const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
+                               bool allowsMissingID,
                                ASTNode(*getNormalIdASTNode)(const NodeBase *node, TokenReader &tokenReader))
             : NodeBase(id, description, false),
               key(key),
               contents(contents),
-              getNormalIdASTNode(getNormalIdASTNode) {
-        //TODO nullptr检测
-    }
+              allowsMissingID(allowsMissingID),
+              getNormalIdASTNode(getNormalIdASTNode) {}
 
     static std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> getIdContentFromCPack(const nlohmann::json &j,
                                                                                          const CPack &cpack,
@@ -52,6 +52,7 @@ namespace CHelper::Node {
             : NodeBase(j),
               key(FROM_JSON_OPTIONAL(j, key, std::string)),
               contents(getIdContentFromCPack(j, cpack, key)),
+              allowsMissingID(false),
               getNormalIdASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                   return tokenReader.readStringASTNode(node);
               }) {}
@@ -73,9 +74,22 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader) const {
+        tokenReader.push();
         DEBUG_GET_NODE_BEGIN(this)
         auto result = getNormalIdASTNode(this, tokenReader);
         DEBUG_GET_NODE_END(this)
+        if (allowsMissingID) {
+            if (result.isError()) {
+                tokenReader.restore();
+                tokenReader.push();
+                return ASTNode::simpleNode(this, tokenReader.collect());
+            }
+        } else if (result.tokens.isEmpty()) {
+            tokenReader.pop();
+            return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
+                    result.tokens, "ID为空"));
+        }
+        tokenReader.pop();
         return result;
     }
 

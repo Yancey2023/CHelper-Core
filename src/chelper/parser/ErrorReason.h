@@ -14,7 +14,7 @@ namespace CHelper {
 
     namespace ErrorReasonLevel {
 
-        enum ErrorReasonLevel {
+        enum ErrorReasonLevel : std::uint8_t{
             //命令后面有多余部分
             EXCESS = 0,
             //缺少空格

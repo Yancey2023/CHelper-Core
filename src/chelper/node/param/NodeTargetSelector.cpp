@@ -16,7 +16,7 @@
 namespace CHelper::Node {
 
     static std::shared_ptr<NodeBase> nodePlayerName = std::make_shared<NodeString>(
-            "TARGET_SELECTOR_PLAYER_NAME", "玩家名字", true, false);
+            "TARGET_SELECTOR_PLAYER_NAME", "玩家名字", false, true, false);
     static std::shared_ptr<NodeBase> nodeAt = std::make_shared<NodeSingleSymbol>(
             "TARGET_SELECTOR_AT", "@符号", '@');
     static std::shared_ptr<NodeBase> nodeTargetSelectorVariable = std::make_shared<NodeNormalId>(
@@ -28,7 +28,9 @@ namespace CHelper::Node {
                     std::make_shared<NormalId>("@p", "选择最近的玩家(若距离相同，会在其中选择最晚进入服务器的玩家)"),
                     std::make_shared<NormalId>("@s", "命令的执行者(只选择唯一一个实体)(包括已死亡玩家)"),
                     std::make_shared<NormalId>("@initiator", "选择当前与该NPC进行交互(在NPC内置的命令界面中使用)")
-            }), [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
+            }),
+            false,
+            [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 tokenReader.push();
                 auto childNodes = {tokenReader.readSymbolASTNode(node), tokenReader.readStringASTNode(node)};
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
@@ -49,19 +51,18 @@ namespace CHelper::Node {
                                            const std::shared_ptr<NodeBase> &nodeItem,
                                            const std::shared_ptr<NodeBase> &nodeFamily,
                                            const std::shared_ptr<NodeBase> &nodeGameMode,
-                                           const std::shared_ptr<NodeBase> &nodeItemLocation)
+                                           const std::shared_ptr<NodeBase> &nodeItemLocation,
+                                           const std::shared_ptr<NodeBase> &nodeEntities)
             : NodeBase(id, description, false),
               isMustPlayer(isMustPlayer),
               isMustNPC(isMustNPC),
               isOnlyOne(isOnlyOne),
               nodeArgument(std::make_shared<NodeTargetSelectorArgument>(
                       "TARGET_SELECTOR_ARGUMENT", "目标选择器单个参数",
-                      nodeItem, nodeFamily, nodeGameMode, nodeItemLocation)),
+                      nodeItem, nodeFamily, nodeGameMode, nodeItemLocation, nodeEntities)),
               nodeArguments(std::make_shared<NodeList>(
                       "TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
-                      nodeLeft, nodeArgument, nodeSeparator, nodeRight)) {
-        //TODO nullptr检测
-    }
+                      nodeLeft, nodeArgument, nodeSeparator, nodeRight)) {}
 
     NodeTargetSelector::NodeTargetSelector(const nlohmann::json &j,
                                            [[maybe_unused]] const CPack &cpack)
@@ -74,7 +75,8 @@ namespace CHelper::Node {
                       NodeItem::getNodeItemId(cpack.itemIds),
                       cpack.getNormalId("FAMILIES", "族", "families"),
                       cpack.getNormalId("GAME_MODES", "游戏模式", "gameModes"),
-                      cpack.getNormalId("SLOT", "物品栏", "slot")
+                      cpack.getNormalId("SLOT", "物品栏", "slot"),
+                      cpack.getNamespaceId("ENTITIES", "实体", "entities")
               )),
               nodeArguments(std::make_shared<NodeList>(
                       "TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
@@ -100,7 +102,10 @@ namespace CHelper::Node {
         tokenReader.restore();
         if (at.isError()) {
             //不是@符号开头，当作玩家名处理
-            return getByChildNode(tokenReader, nodePlayerName, "target selector player name");
+            DEBUG_GET_NODE_BEGIN(nodePlayerName)
+            ASTNode result = getByChildNode(tokenReader, nodePlayerName, "target selector player name");
+            DEBUG_GET_NODE_END(nodePlayerName)
+            return result;
         }
         //@符号开头，进入目标选择器检测
         //目标选择器变量

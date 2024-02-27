@@ -38,19 +38,17 @@ namespace CHelper::Node {
         DEBUG_GET_NODE_BEGIN(this)
         auto result = getTextASTNode(this, tokenReader);
         DEBUG_GET_NODE_END(this)
-        return result;
-    }
-
-    bool NodeText::collectIdError(const ASTNode *astNode,
-                                  std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (astNode->isError()) {
-            return true;
-        }
-        std::string str = TokenUtil::toString(astNode->tokens);
+        std::string str = TokenUtil::toString(result.tokens);
         if (str != data->name) {
-            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, "找不到含义 -> " + str));
+            if (str.empty()) {
+                return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::contentError(
+                        result.tokens, "找不到内容 -> " + data->name));
+            } else {
+                return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::contentError(
+                        result.tokens, "找不到含义 -> " + str));
+            }
         }
-        return true;
+        return result;
     }
 
     bool NodeText::collectSuggestions(const ASTNode *astNode,

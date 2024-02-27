@@ -13,7 +13,7 @@
 #if CHelperDebug == true
 #define DEBUG_GET_NODE_BEGIN(node) size_t node##Index = tokenReader.indexStack.size();
 #else
-#define DEBUG_TOKEN_READER_INDEX(node)
+#define DEBUG_GET_NODE_BEGIN(node)
 #endif
 
 #if CHelperDebug == true
@@ -26,7 +26,7 @@
         throw Exception::TokenReaderIndexError();         \
     }
 #else
-#define DEBUG_TOKEN_READER_INDEX(node)
+#define DEBUG_GET_NODE_END(node)
 #endif
 
 namespace CHelper {

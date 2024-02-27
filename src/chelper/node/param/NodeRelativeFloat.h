@@ -18,7 +18,7 @@ namespace CHelper::Node {
                           bool canUseCaretNotation);
 
         NodeRelativeFloat(const nlohmann::json &j,
-                          const CPack &cpack);
+                          [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType getNodeType() const override;
 

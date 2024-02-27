@@ -11,7 +11,7 @@
 namespace CHelper::Node {
 
     namespace NodeItemType {
-        enum NodeItemType {
+        enum NodeItemType : std::uint8_t {
             // <物品ID> <物品数量> <附加值> [物品组件]
             ITEM_GIVE = 0,
             // <物品ID> <附加值> <物品数量>

@@ -20,7 +20,7 @@ namespace CHelper::Node {
               canUseCaretNotation(canUseCaretNotation) {}
 
     NodeRelativeFloat::NodeRelativeFloat(const nlohmann::json &j,
-                                         const CPack &cpack)
+                                         [[maybe_unused]] const CPack &cpack)
             : NodeBase(j),
               canUseCaretNotation(FROM_JSON(j, canUseCaretNotation, bool)) {}
 

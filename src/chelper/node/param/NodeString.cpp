@@ -12,15 +12,18 @@ namespace CHelper::Node {
 
     NodeString::NodeString(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
+                           bool allowMissingString,
                            const bool canContainSpace,
                            const bool ignoreLater)
             : NodeBase(id, description, false),
+              allowMissingString(allowMissingString),
               canContainSpace(canContainSpace),
               ignoreLater(ignoreLater) {}
 
     NodeString::NodeString(const nlohmann::json &j,
-                           const CPack &cpack)
+                           [[maybe_unused]] const CPack &cpack)
             : NodeBase(j),
+              allowMissingString(false),
               canContainSpace(FROM_JSON(j, canContainSpace, bool)),
               ignoreLater(FROM_JSON(j, ignoreLater, bool)) {}
 
@@ -48,11 +51,19 @@ namespace CHelper::Node {
             tokenReader.restore();
         }
         //普通字符串
+        tokenReader.push();
         ASTNode result = tokenReader.readStringASTNode(this);
-        if (!result.isError() && result.tokens.isEmpty()) {
+        if (allowMissingString) {
+            if (result.isError()) {
+                tokenReader.restore();
+                tokenReader.push();
+                return ASTNode::simpleNode(this, tokenReader.collect());
+            }
+        } else if (result.tokens.isEmpty()) {
             result = ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(
                     result.tokens, "字符串参数内容为空"));
         }
+        tokenReader.pop();
         return result;
     }
 

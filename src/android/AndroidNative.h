@@ -71,7 +71,7 @@ Java_yancey_chelper_core_CHelperCore_getErrorReasons(
         std::string result = "可能的错误原因：";
         int i = 0;
         for (const auto &item: errorReasons) {
-            result.append("\n").append(std::to_string(i++)).append(". ").append(item->errorReason);
+            result.append("\n").append(std::to_string(++i)).append(". ").append(item->errorReason);
         }
         return env->NewStringUTF(result.c_str());
     }

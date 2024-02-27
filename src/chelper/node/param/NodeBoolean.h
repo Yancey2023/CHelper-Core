@@ -19,7 +19,7 @@ namespace CHelper::Node {
                     const std::optional<std::string> &descriptionFalse);
 
         NodeBoolean(const nlohmann::json &j,
-                    const CPack &cpack);
+                    [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType getNodeType() const override;
 

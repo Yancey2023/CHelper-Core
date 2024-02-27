@@ -60,6 +60,7 @@ namespace CHelper::Test {
                                      .normal(" : ")
                                      .purple(command)
                                      .build());
+                std::cout << core->getAstNode() << std::endl;
                 CHELPER_INFO("structure: " + structure);
                 CHELPER_INFO("description: " + description);
                 if (errorReasons.empty()) {

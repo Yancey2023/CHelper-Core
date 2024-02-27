@@ -19,13 +19,16 @@ namespace CHelper::Node {
                   const std::optional<float> &max);
 
         NodeFloat(const nlohmann::json &j,
-                  const CPack &cpack);
+                  [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader) const override;
+
+        bool collectIdError(const ASTNode *astNode,
+                            std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
