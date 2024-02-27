@@ -6,27 +6,26 @@
 
 ## Description
 
-I want to make an Android command IDE for minecraft bedrock version , so here is CHelper, index means NodePerCommand
-Helper.
+I want to make an Android command IDE for minecraft bedrock version , so here is CHelper, which means Command Helper.
 
 ## Plan
 
-- [x] lexer, which let the command string become token list.
-- [x] cpack, which is a resources pack contained ID and command.
-- [x] parser, build AST tree and find structure error.
-- [x] description, get description of the node which is writing.
-- [x] check id, find id error through AST three and cpack.
-- [x] get suggestion, find id error through AST three and cpack.
-- [x] get structure, build command structure string
-- [x] target selector command param
-- [ ] execute command
-- [ ] json command param
-- [ ] block state
-- [ ] get colors
+- [x] **Lexer**: transforms command strings into a token list
+- [x] **CPack**: a resource pack containing IDs and commands
+- [x] **Parser**: builds an Abstract Syntax Tree (AST) and identifies structural errors
+- [x] **Description**: retrieves the description of the currently written node
+- [x] **ID Checker**: finds ID errors based on the AST
+- [x] **Suggestion Getter**: provides completion suggestions for IDs based on the AST
+- [x] **Structure Retriever**: constructs a command structure string
+- [x] **Target Selector**: target selector command param
+- [ ] **`execute` command support**: support a command named `execute`
+- [ ] **json support**: json command param
+- [ ] **block state support**: block states command param
+- [ ] **highlight command **: obtains the highlight color for displayed commands
 
 ## Why choosing c++
 
-Because I am leaning c++ now, I want to improve myself through the project.
+Because I am leaning c++ now. I want to improve myself through this project.
 
 ## Dependencies
 
@@ -36,6 +35,6 @@ Because I am leaning c++ now, I want to improve myself through the project.
 
 ## Special Thanks
 
-- JetBrains open source programs supporting
+- JetBrains License for Open Source Development
 
 ![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)

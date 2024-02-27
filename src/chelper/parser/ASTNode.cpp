@@ -307,7 +307,7 @@ namespace CHelper {
     }
 
     std::string ASTNode::getColors() const {
-        //TODO 代码高亮显示，获取颜色
+        //TODO 命令语法高亮显示，获取颜色
         Profile::push("start getting colors: " + TokenUtil::toString(tokens));
         auto result = node->getNodeType().nodeName;
         Profile::pop();
@@ -343,9 +343,6 @@ namespace CHelper {
             os << "[";
             bool isFirst = true;
             for (const auto &item: astNode.errorReasons) {
-                if (item->errorReason.find("指令名字不匹配") != std::string::npos) {
-                    continue;
-                }
                 if (isFirst) {
                     isFirst = false;
                 } else {
