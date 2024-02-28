@@ -12,10 +12,10 @@ namespace CHelper::Node {
 
     namespace NodeBlockType {
         enum NodeBlockType : std::uint8_t {
-            // (已废弃附加值) <方块ID> <附加值 | 方块状态>
-            BLOCK_NORMAL = 0,
-            // (已废弃) <方块ID> <附加值>
-            BLOCK_ONLY_META_DATA = 1
+            // <方块ID> <方块状态>
+            BLOCK_WITH_BLOCK_STATE = 0,
+            // <方块ID>
+            BLOCK = 1
         };
     }
 
@@ -32,7 +32,7 @@ namespace CHelper::Node {
         NodeBlock(const nlohmann::json &j,
                   const CPack &cpack);
 
-        [[nodiscard]] NodeType getNodeType() const override;
+        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 

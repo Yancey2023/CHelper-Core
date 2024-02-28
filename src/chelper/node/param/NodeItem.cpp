@@ -6,6 +6,7 @@
 #include "NodeNamespaceId.h"
 #include "NodeInteger.h"
 #include "NodeString.h"
+#include "NodeJson.h"
 
 namespace CHelper::Node {
 
@@ -13,25 +14,25 @@ namespace CHelper::Node {
             ("ITEM_COUNT", "物品数量", 0, std::nullopt);
     static std::shared_ptr<NodeInteger> nodeData = std::make_shared<NodeInteger>
             ("ITEM_DATA", "物品附加值", -1, std::nullopt);
-    //TODO 物品组件Json解析
-    static std::shared_ptr<NodeString> nodeComponent = std::make_shared<NodeString>
-            ("ITEM_COMPONENT", "物品组件", false, true, true);
 
     NodeItem::NodeItem(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
                        const CHelper::Node::NodeItemType::NodeItemType nodeItemType,
-                       const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
+                       const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents,
+                       const std::shared_ptr<NodeBase> &nodeComponent)
             : NodeBase(id, description, false),
               nodeItemType(nodeItemType),
-              nodeItemId(getNodeItemId(contents)) {}
+              nodeItemId(getNodeItemId(contents)),
+              nodeComponent(nodeComponent) {}
 
     NodeItem::NodeItem(const nlohmann::json &j,
                        const CPack &cpack) :
-            NodeBase(j),
+            NodeBase(j, true),
             nodeItemType(FROM_JSON(j, nodeItemType, CHelper::Node::NodeItemType::NodeItemType)),
-            nodeItemId(getNodeItemId(cpack.itemIds)) {}
+            nodeItemId(getNodeItemId(cpack.itemIds)),
+            nodeComponent(std::make_shared<NodeJson>("ITEM_COMPONENT", "物品组件", cpack, "components")) {}
 
-    NodeType NodeItem::getNodeType() const {
+    std::shared_ptr<NodeType> NodeItem::getNodeType() const {
         return NodeType::ITEM;
     }
 

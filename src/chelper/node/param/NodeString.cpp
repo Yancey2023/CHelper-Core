@@ -4,11 +4,9 @@
 
 #include "NodeString.h"
 #include "../util/NodeSingleSymbol.h"
+#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
-
-    std::shared_ptr<NodeSingleSymbol> doubleQuotationMark = std::make_shared<NodeSingleSymbol>(
-            "DOUBLE_QUOTATION_MARK", "双引号", '"');
 
     NodeString::NodeString(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
@@ -22,13 +20,19 @@ namespace CHelper::Node {
 
     NodeString::NodeString(const nlohmann::json &j,
                            [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j),
+            : NodeBase(j, true),
               allowMissingString(false),
               canContainSpace(FROM_JSON(j, canContainSpace, bool)),
               ignoreLater(FROM_JSON(j, ignoreLater, bool)) {}
 
-    NodeType NodeString::getNodeType() const {
+    std::shared_ptr<NodeType> NodeString::getNodeType() const {
         return NodeType::STRING;
+    }
+
+    void NodeString::toJson(nlohmann::json &j) const {
+        NodeBase::toJson(j);
+        TO_JSON(j, canContainSpace);
+        TO_JSON(j, ignoreLater);
     }
 
     ASTNode NodeString::getASTNode(TokenReader &tokenReader) const {
@@ -38,32 +42,21 @@ namespace CHelper::Node {
             tokenReader.skipToLF();
             return ASTNode::simpleNode(this, tokenReader.collect());
         }
-        if (canContainSpace) {
-            tokenReader.push();
-            ASTNode doubleQuotationMarkStart = doubleQuotationMark->getASTNode(tokenReader);
-            if (!doubleQuotationMarkStart.isError()) {
-                //使用双引号
-                ASTNode stringNode = tokenReader.readStringASTNode(this);
-                ASTNode doubleQuotationMarkEnd = doubleQuotationMark->getASTNode(tokenReader);
-                return ASTNode::andNode(this, {doubleQuotationMarkStart, stringNode, doubleQuotationMarkEnd},
-                                        tokenReader.collect());
-            }
-            tokenReader.restore();
-        }
-        //普通字符串
         tokenReader.push();
         ASTNode result = tokenReader.readStringASTNode(this);
-        if (allowMissingString) {
-            if (result.isError()) {
-                tokenReader.restore();
-                tokenReader.push();
-                return ASTNode::simpleNode(this, tokenReader.collect());
-            }
-        } else if (result.tokens.isEmpty()) {
-            result = ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(
-                    result.tokens, "字符串参数内容为空"));
+        if (result.isError() && allowMissingString) {
+            tokenReader.restore();
+            tokenReader.push();
+            return ASTNode::simpleNode(this, tokenReader.collect());
         }
         tokenReader.pop();
+        if (!allowMissingString && result.tokens.isEmpty()) {
+            result = ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(
+                    result.tokens, "字符串参数内容为空"));
+        } else if (!canContainSpace && TokenUtil::toString(result.tokens).find(' ') != std::string::npos) {
+            result = ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(
+                    result.tokens, "字符串参数内容不可以包含空格"));
+        }
         return result;
     }
 

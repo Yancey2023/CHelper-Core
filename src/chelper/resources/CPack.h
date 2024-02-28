@@ -20,9 +20,11 @@ namespace CHelper {
         std::unordered_map<std::string, std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> namespaceIds;
         std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> blockIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
         std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
+        std::vector<std::shared_ptr<Node::NodeBase>> jsonNodes;
         std::shared_ptr<std::vector<std::shared_ptr<Node::NodeBase>>> commands = std::make_shared<std::vector<std::shared_ptr<Node::NodeBase>>>();
         //从这个节点开始检测
         std::shared_ptr<Node::NodeBase> mainNode;
+
     private:
         explicit CPack(const std::filesystem::path &path);
 

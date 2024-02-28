@@ -3,24 +3,27 @@
 //
 
 #include "Suggestion.h"
+#include "../util/TokenUtil.h"
 
 namespace CHelper {
 
-    Suggestion::Suggestion(const VectorView <Token> &tokens,
+    Suggestion::Suggestion(size_t start,
+                           size_t end,
                            const std::shared_ptr<NormalId> &content)
-            : tokens(tokens),
+            : start(start),
+              end(end),
               content(content) {}
 
-    std::string Suggestion::onClick() {
-        std::string result;
-        for (size_t i = 0; i < tokens.start; ++i) {
-            result.append(tokens.vector->at(i).content);
-        }
-        result.append(content->name);
-        for (size_t i = tokens.end; i < tokens.vector->size(); ++i) {
-            result.append(tokens.vector->at(i).content);
-        }
-        return result;
+    Suggestion::Suggestion(const VectorView <Token> &tokens,
+                           const std::shared_ptr<NormalId> &content)
+            : start(TokenUtil::getStartIndex(tokens)),
+              end(TokenUtil::getEndIndex(tokens)),
+              content(content) {}
+
+    std::string Suggestion::onClick(const std::string &before) {
+        return before.substr(0, start)
+                .append(content->name)
+                .append(before.substr(end));
     }
 
 } // CHelper

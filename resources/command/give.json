@@ -9,7 +9,7 @@
       "type": "TARGET_SELECTOR"
     },
     {
-      "nodeItemType": 1,
+      "nodeItemType": 0,
       "description": "要给予实体的物品",
       "id": "1",
       "type": "ITEM"

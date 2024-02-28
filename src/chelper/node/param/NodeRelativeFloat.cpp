@@ -21,10 +21,10 @@ namespace CHelper::Node {
 
     NodeRelativeFloat::NodeRelativeFloat(const nlohmann::json &j,
                                          [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j),
+            : NodeBase(j, true),
               canUseCaretNotation(FROM_JSON(j, canUseCaretNotation, bool)) {}
 
-    NodeType NodeRelativeFloat::getNodeType() const {
+    std::shared_ptr<NodeType> NodeRelativeFloat::getNodeType() const {
         return NodeType::RELATIVE_FLOAT;
     }
 

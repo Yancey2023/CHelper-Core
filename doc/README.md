@@ -1,9 +1,18 @@
+English | [简体中文](README_CN.md)
+
+# CPack document
+
+Cpack(Command Pack) is the resource pack of CHelper(Command Helper), which is a command helper for minecraft bedrock
+version.
+
+## manifest.json
+
 There should be a file named `manifest.json` in the root directory of the pack:
 
 ```json
 {
   "name": "example pack",
-  "description": "CHelper扩展包的官方示例",
+  "description": "CHelper official extension pack",
   "minecraftVersion": "1.20",
   "author": "Yancey",
   "updateDate": "2023-11-7",
@@ -16,14 +25,22 @@ There should be a file named `manifest.json` in the root directory of the pack:
 }
 ```
 
-|       name       |  type   |       meaning        |                          markup                           |      is must have      |
-|:----------------:|:-------:|:--------------------:|:---------------------------------------------------------:|:----------------------:|
-|       name       | string  |      pack name       |                        for showing                        |    no(hope to have)    |
-|   description    | string  |   pack description   |                        for showing                        |           no           |
-| minecraftVersion | string  |  minecraft version   |                        for showing                        |           no           |
-|      author      | string  |        author        |                        for showing                        |           no           |
-|    updateDate    | string  |  latest update date  |                        for showing                        |           no           |
-|      packId      | string  |       pack ID        |                   for recognizing pack                    |          yes           |
-|   requiredPack   |  array  | IDs of required pack |               for recognizing dependencies                | no(default is nothing) |
-|     version      | integer |     version code     |                  for recognizing version                  |          yes           |
-|   isBasicPack    | boolean | if it is basic pack  | only one basic pack and more expend pack at the same time |  no(default is false)  |
+|       name       |  type   |       meaning        |                                    Remarks                                     |            Required            |
+|:----------------:|:-------:|:--------------------:|:------------------------------------------------------------------------------:|:------------------------------:|
+|       name       | string  |      pack name       |                                Used for display                                | No (not recommended to ignore) |
+|   description    | string  |   pack description   |                                Used for display                                |               No               |
+| minecraftVersion | string  |  minecraft version   |                                Used for display                                |               No               |
+|      author      | string  |        author        |                                Used for display                                |               No               |
+|    updateDate    | string  |  latest update date  |                                Used for display                                |               No               |
+|      packId      | string  |       pack ID        |                           Used for recognizing pack                            |               No               |
+|   requiredPack   |  array  | IDs of required pack |                       Used for recognizing dependencies                        |  No(no default dependencies)   |
+|     version      | integer |     version code     |                          Used for recognizing version                          |              Yes               |
+|   isBasicPack    | boolean | if it is basic pack  | only one basic pack and multiple extension pack can be loaded at the same time |      No(default is false)      |
+
+> Note: Extension pack is not currently supported. You only can use basic pack now.
+
+I am currently too lazy to write the English document.
+
+If you need, please refer to the [Chinese document](README_CN.md).
+
+The English document will be updated after CHelper is finished.

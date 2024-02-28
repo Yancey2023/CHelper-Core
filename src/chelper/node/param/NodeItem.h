@@ -23,16 +23,18 @@ namespace CHelper::Node {
     public:
         const NodeItemType::NodeItemType nodeItemType;
         const std::shared_ptr<NodeBase> nodeItemId;
+        const std::shared_ptr<NodeBase> nodeComponent;
 
         NodeItem(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
                  NodeItemType::NodeItemType nodeItemType,
-                 const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
+                 const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents,
+                 const std::shared_ptr<NodeBase>& nodeComponent);
 
         NodeItem(const nlohmann::json &j,
                  const CPack &cpack);
 
-        [[nodiscard]] NodeType getNodeType() const override;
+        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 

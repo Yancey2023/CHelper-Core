@@ -17,11 +17,11 @@ namespace CHelper::Node {
 
     NodeInteger::NodeInteger(const nlohmann::json &j,
                              [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j),
+            : NodeBase(j, true),
               min(FROM_JSON_OPTIONAL(j, min, int)),
               max(FROM_JSON_OPTIONAL(j, max, int)) {}
 
-    NodeType NodeInteger::getNodeType() const {
+    std::shared_ptr<NodeType> NodeInteger::getNodeType() const {
         return NodeType::INTEGER;
     }
 
@@ -35,7 +35,7 @@ namespace CHelper::Node {
         return tokenReader.readIntegerASTNode(this);
     }
 
-    std::optional<int> str2int(const std::string &string) {
+    static std::optional<int> str2int(const std::string &string) {
         if (string.length() > 11) {
             return std::nullopt;
         }

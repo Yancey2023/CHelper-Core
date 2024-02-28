@@ -17,11 +17,11 @@ namespace CHelper::Node {
 
     NodeBlock::NodeBlock(const nlohmann::json &j,
                          const CPack &cpack) :
-            NodeBase(j),
+            NodeBase(j, true),
             nodeBlockType(FROM_JSON(j, nodeBlockType, NodeBlockType::NodeBlockType)),
             nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", cpack.blockIds)) {}
 
-    NodeType NodeBlock::getNodeType() const {
+    std::shared_ptr<NodeType> NodeBlock::getNodeType() const {
         return NodeType::BLOCK;
     }
 
@@ -31,8 +31,16 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeBlock::getASTNode(TokenReader &tokenReader) const {
-        return getOptionalASTNode(tokenReader, false,
-                                  {nodeBlockId, NodeBlockState::getInstance()});
+        switch (nodeBlockType) {
+            case NodeBlockType::BLOCK_WITH_BLOCK_STATE:
+                return getOptionalASTNode(tokenReader, false,
+                                          {nodeBlockId, NodeBlockState::getInstance()});
+            case NodeBlockType::BLOCK:
+                return getByChildNode(tokenReader, nodeBlockId);
+            default:
+                return getOptionalASTNode(tokenReader, false,
+                                          {nodeBlockId, NodeBlockState::getInstance()});
+        }
     }
 
     std::optional<std::string> NodeBlock::collectDescription(const ASTNode *node, size_t index) const {
@@ -40,8 +48,20 @@ namespace CHelper::Node {
     }
 
     void NodeBlock::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {
-        nodeBlockId->collectStructure(nullptr, structure, isMustHave);
-        NodeBlockState::getInstance()->collectStructure(nullptr, structure, false);
+        switch (nodeBlockType) {
+            case NodeBlockType::BLOCK_WITH_BLOCK_STATE:
+                nodeBlockId->collectStructure(nullptr, structure, isMustHave);
+                NodeBlockState::getInstance()->collectStructure(nullptr, structure, false);
+                break;
+            case NodeBlockType::BLOCK:
+                nodeBlockId->collectStructure(nullptr, structure, isMustHave);
+                break;
+            default:
+                nodeBlockId->collectStructure(nullptr, structure, isMustHave);
+                NodeBlockState::getInstance()->collectStructure(nullptr, structure, false);
+                break;
+        }
+
     }
 
 } // CHelper::Node

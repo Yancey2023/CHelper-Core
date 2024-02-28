@@ -21,7 +21,7 @@ namespace CHelper::Node {
         NodeCommand(const nlohmann::json &j,
                     const CPack &cpack);
 
-        [[nodiscard]] NodeType getNodeType() const override;
+        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader) const override;
 

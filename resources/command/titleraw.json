@@ -54,17 +54,7 @@
     },
     {
       "description": "要显示的文本",
-      "jsonObject": {
-        "dataList": [
-          {
-            "value": "yancey.chelper.core.json.JsonArray@fa700bf9",
-            "key": "yancey.chelper.core.json.JsonString@e5a12b9e"
-          }
-        ],
-        "isMustHave": false,
-        "description": "要显示的文本",
-        "id": 1
-      },
+      "key": "rawtext",
       "id": "4",
       "type": "JSON"
     },

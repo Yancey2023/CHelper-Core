@@ -20,7 +20,7 @@
 #define DEBUG_GET_NODE_END(node)                          \
     if (node##Index != tokenReader.indexStack.size()) {   \
         Profile::push("TokenReaderIndexError: " +         \
-            node->getNodeType().nodeName + " " +          \
+            node->getNodeType()->nodeName + " " +         \
             node->id.value_or("") + " " +                 \
             node->description.value_or(""));              \
         throw Exception::TokenReaderIndexError();         \

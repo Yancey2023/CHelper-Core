@@ -213,7 +213,7 @@ void onTextChanged(const std::string &command) {
             }
             CHELPER_INFO(CHelper::ColorStringBuilder()
                                  .normal(std::to_string(++j) + ". ")
-                                 .blue(CHelper::TokenUtil::toString(item.tokens) + " ")
+                                 .blue(command.substr(item.start, item.end) + " ")
                                  .yellow(item.content->name + " ")
                                  .normal(item.content->description.value_or(""))
                                  .build());

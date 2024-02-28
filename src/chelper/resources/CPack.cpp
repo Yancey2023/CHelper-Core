@@ -6,6 +6,10 @@
 #include "../node/param/NodeCommand.h"
 #include "../node/param/NodeNormalId.h"
 #include "../node/param/NodeNamespaceId.h"
+#include "../node/util/NodeList.h"
+#include "../node/json/NodeJsonList.h"
+#include "../node/json/NodeJsonObject.h"
+#include "../node/json/NodeJsonElement.h"
 
 namespace CHelper {
 
@@ -27,7 +31,7 @@ namespace CHelper {
                                   .purple(file.path().string())
                                   .red("\"").build());
             if (type == "normal") {
-                std::string id = FROM_JSON(j, id, std::string);
+                auto id = j.at("id").get<std::string>();
                 auto content = std::make_shared<std::vector<std::shared_ptr<NormalId>>>();
                 for (const auto &item: j.at("content")) {
                     content->push_back(std::make_shared<NormalId>(item));
@@ -44,7 +48,7 @@ namespace CHelper {
                     itemIds->push_back(ptr);
                 }
             } else if (type == "namespace") {
-                std::string id = FROM_JSON(j, id, std::string);
+                auto id = j.at("id").get<std::string>();
                 auto content = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
                 for (const auto &item: j.at("content")) {
                     content->push_back(std::make_shared<NamespaceId>(item));
@@ -54,6 +58,17 @@ namespace CHelper {
                 throw Exception::UnknownIdType(file.path().filename().string(), type);
             }
         }
+        Profile::next(ColorStringBuilder().red("loading json data").build());
+        Node::NodeType::canLoadNodeJson = true;
+        for (const auto &file: std::filesystem::recursive_directory_iterator(path / "json")) {
+            Profile::next(ColorStringBuilder()
+                                  .red("loading json data in path \"")
+                                  .purple(file.path().string())
+                                  .red("\"")
+                                  .build());
+            jsonNodes.push_back(std::make_shared<Node::NodeJsonElement>(JsonUtil::getJsonFromPath(file), *this));
+        }
+        Node::NodeType::canLoadNodeJson = false;
         Profile::next(ColorStringBuilder().red("loading commands").build());
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "command")) {
             Profile::next(ColorStringBuilder()
@@ -93,7 +108,6 @@ namespace CHelper {
         }
         return std::make_shared<Node::NodeNamespaceId>(id, description, key, it->second);
     }
-
 
 } // CHelper
 

@@ -17,11 +17,11 @@ namespace CHelper::Node {
 
     NodeFloat::NodeFloat(const nlohmann::json &j,
                          [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j),
+            : NodeBase(j, true),
               min(FROM_JSON_OPTIONAL(j, min, float)),
               max(FROM_JSON_OPTIONAL(j, max, float)) {}
 
-    NodeType NodeFloat::getNodeType() const {
+    std::shared_ptr<NodeType> NodeFloat::getNodeType() const {
         return NodeType::FLOAT;
     }
 
@@ -35,7 +35,7 @@ namespace CHelper::Node {
         return tokenReader.readFloatASTNode(this);
     }
 
-    std::optional<float> str2float(const std::string &string) {
+    static std::optional<float> str2float(const std::string &string) {
         //TODO 需要更好的字符串转小数
         double result;
         std::stringstream stringStream;

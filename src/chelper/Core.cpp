@@ -5,6 +5,7 @@
 #include "Core.h"
 
 #include "parser/Parser.h"
+#include "util/TokenUtil.h"
 
 namespace CHelper {
 
@@ -72,7 +73,7 @@ namespace CHelper {
         if (suggestions == nullptr || which >= suggestions->size()) {
             return std::nullopt;
         }
-        return suggestions->at(which).onClick();
+        return suggestions->at(which).onClick(TokenUtil::toString(astNode.tokens));
     }
 
 } // CHelper

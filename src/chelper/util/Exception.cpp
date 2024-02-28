@@ -40,12 +40,23 @@ namespace CHelper::Exception {
         return "[CHelper] unknown node type";
     }
 
-    UnknownNodeId::UnknownNodeId(const std::vector<std::string> &commandName, const std::string &nodeId) {
+    UnknownNodeId::UnknownNodeId(const std::string &currentNodeId, const std::string &requiredNodeId) {
         Profile::push(ColorStringBuilder()
                               .red("unknown node id")
                               .normal(" -> ")
-                              .purple(nodeId)
+                              .purple(requiredNodeId)
                               .red(" (in node \"")
+                              .purple(currentNodeId)
+                              .red("\")")
+                              .build());
+    }
+
+    UnknownNodeId::UnknownNodeId(const std::vector<std::string> &commandName, const std::string &requiredNodeId) {
+        Profile::push(ColorStringBuilder()
+                              .red("unknown node id")
+                              .normal(" -> ")
+                              .purple(requiredNodeId)
+                              .red(" (in command \"")
                               .purple(getCommandName(commandName))
                               .red("\")")
                               .build());

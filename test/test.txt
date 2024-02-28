@@ -2,10 +2,10 @@ D:\CLion\project\CHelper\resources
 -setblock ~1~2~.3 minecraft:stone
 -give @s mi
 -give @s minecraft:st
--give
 -gi
--g
 -summon a
 -give @a command_block
-give @s[hasitem={
-give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m
+-give @s[hasitem={
+-give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m
+-t
+-titleraw a

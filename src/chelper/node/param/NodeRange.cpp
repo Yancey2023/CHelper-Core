@@ -17,9 +17,9 @@ namespace CHelper::Node {
 
     NodeRange::NodeRange(const nlohmann::json &j,
                          [[maybe_unused]] const CPack &cpack) :
-            NodeBase(j) {}
+            NodeBase(j, true) {}
 
-    NodeType NodeRange::getNodeType() const {
+    std::shared_ptr<NodeType> NodeRange::getNodeType() const {
         return NodeType::RANGE;
     }
 

@@ -17,13 +17,13 @@ namespace CHelper::Node {
 
     CHelper::Node::NodeText::NodeText(const nlohmann::json &j,
                                       [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j),
+            : NodeBase(j, true),
               data(std::make_shared<NormalId>(j.at("data"))),
               getTextASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                   return tokenReader.readStringASTNode(node);
               }) {}
 
-    NodeType NodeText::getNodeType() const {
+    std::shared_ptr<NodeType> NodeText::getNodeType() const {
         return NodeType::TEXT;
     }
 

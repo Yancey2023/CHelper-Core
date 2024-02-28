@@ -4,13 +4,13 @@
 
 #include "LexerPos.h"
 
-CHelper::LexerPos::LexerPos(size_t line,
-                            size_t col,
-                            size_t which,
-                            const std::string &filePath)
+CHelper::LexerPos::LexerPos(const std::string &filePath,
+                            size_t index,
+                            size_t line,
+                            size_t col)
         : line(line),
           col(col),
-          index(which),
+          index(index),
           filePath(filePath) {}
 
 void CHelper::LexerPos::next(char ch) {

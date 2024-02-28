@@ -13,7 +13,7 @@ namespace CHelper::Node {
     public:
         NodeLF(const std::optional<std::string> &id, const std::optional<std::string> &description);
 
-        [[nodiscard]] NodeType getNodeType() const override;
+        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
 
         static std::shared_ptr<NodeLF> getInstance();
 

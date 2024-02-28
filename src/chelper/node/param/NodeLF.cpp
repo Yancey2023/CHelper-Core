@@ -10,7 +10,7 @@ namespace CHelper::Node {
                    const std::optional<std::string> &description)
             : NodeBase(id, description, false) {}
 
-    NodeType NodeLF::getNodeType() const {
+    std::shared_ptr<NodeType> NodeLF::getNodeType() const {
         return NodeType::LF;
     }
 

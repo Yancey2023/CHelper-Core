@@ -16,11 +16,11 @@ namespace CHelper::Node {
 
     NodeBoolean::NodeBoolean(const nlohmann::json &j,
                              [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j),
+            : NodeBase(j, true),
               descriptionTrue(FROM_JSON_OPTIONAL(j, descriptionTrue, std::string)),
               descriptionFalse(FROM_JSON_OPTIONAL(j, descriptionFalse, std::string)) {}
 
-    NodeType NodeBoolean::getNodeType() const {
+    std::shared_ptr<NodeType> NodeBoolean::getNodeType() const {
         return NodeType::BOOLEAN;
     }
 

@@ -18,39 +18,41 @@ namespace CHelper {
         class NodeType {
         public:
             std::string nodeName;
-
-            std::shared_ptr<NodeBase> (*createNodeByJson)(const nlohmann::json &j, const CPack &cpack);
+            std::function<std::shared_ptr<NodeBase>(const nlohmann::json &j, const CPack &cpack)> createNodeByJson;
 
             NodeType(std::string nodeName,
-                     std::shared_ptr<NodeBase>(*createNodeByJson)(const nlohmann::json &j, const CPack &cpack));
+                     std::function<std::shared_ptr<NodeBase>(const nlohmann::json &j, const CPack &cpack)> createNodeByJson);
 
-            template<class T>
-            static NodeType create(const std::string &nodeName) {
-                return NodeType(nodeName, [](const nlohmann::json &j, const CPack &cpack) -> std::shared_ptr<NodeBase> {
-                    return std::make_shared<T>(j, cpack);
-                });
-            }
+            static std::vector<std::shared_ptr<NodeType>> NODE_TYPES;
 
-            static std::vector<const NodeType *> NODE_TYPES;
+            static bool canLoadNodeJson;
 
-            static NodeType UNKNOWN;
-            static NodeType BLOCK;
-            static NodeType BOOLEAN;
-            static NodeType COMMAND;
-            static NodeType COMMAND_NAME;
-            static NodeType FLOAT;
-            static NodeType INTEGER;
-            static NodeType ITEM;
-            static NodeType LF;
-            static NodeType NAMESPACE_ID;
-            static NodeType NORMAL_ID;
-            static NodeType PER_COMMAND;
-            static NodeType POSITION;
-            static NodeType RELATIVE_FLOAT;
-            static NodeType STRING;
-            static NodeType TARGET_SELECTOR;
-            static NodeType TEXT;
-            static NodeType RANGE;
+            static std::shared_ptr<NodeType> UNKNOWN;
+            static std::shared_ptr<NodeType> BLOCK;
+            static std::shared_ptr<NodeType> BOOLEAN;
+            static std::shared_ptr<NodeType> COMMAND;
+            static std::shared_ptr<NodeType> COMMAND_NAME;
+            static std::shared_ptr<NodeType> FLOAT;
+            static std::shared_ptr<NodeType> INTEGER;
+            static std::shared_ptr<NodeType> ITEM;
+            static std::shared_ptr<NodeType> LF;
+            static std::shared_ptr<NodeType> NAMESPACE_ID;
+            static std::shared_ptr<NodeType> NORMAL_ID;
+            static std::shared_ptr<NodeType> PER_COMMAND;
+            static std::shared_ptr<NodeType> POSITION;
+            static std::shared_ptr<NodeType> RELATIVE_FLOAT;
+            static std::shared_ptr<NodeType> STRING;
+            static std::shared_ptr<NodeType> TARGET_SELECTOR;
+            static std::shared_ptr<NodeType> TEXT;
+            static std::shared_ptr<NodeType> RANGE;
+            static std::shared_ptr<NodeType> JSON;
+            static std::shared_ptr<NodeType> JSON_OBJECT;
+            static std::shared_ptr<NodeType> JSON_LIST;
+            static std::shared_ptr<NodeType> JSON_STRING;
+            static std::shared_ptr<NodeType> JSON_INTEGER;
+            static std::shared_ptr<NodeType> JSON_FLOAT;
+            static std::shared_ptr<NodeType> JSON_BOOLEAN;
+            static std::shared_ptr<NodeType> JSON_NULL;
 
             static void init();
         };

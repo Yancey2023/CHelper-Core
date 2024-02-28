@@ -9,10 +9,10 @@ namespace CHelper::Node {
 
     NodeList::NodeList(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
-                       std::shared_ptr<NodeBase> &nodeLeft,
-                       std::shared_ptr<NodeBase> &nodeElement,
-                       std::shared_ptr<NodeBase> &nodeSeparator,
-                       std::shared_ptr<NodeBase> &nodeRight)
+                       const std::shared_ptr<NodeBase> &nodeLeft,
+                       const std::shared_ptr<NodeBase> &nodeElement,
+                       const std::shared_ptr<NodeBase> &nodeSeparator,
+                       const std::shared_ptr<NodeBase> &nodeRight)
             : NodeBase(id, description, false),
               nodeLeft(nodeLeft),
               nodeElement(nodeElement),

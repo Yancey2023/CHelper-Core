@@ -7,6 +7,46 @@
 
 #include "pch.h"
 
+namespace CHelper::JsonUtil {
+
+    class ToJson {
+    public:
+        virtual void toJson(nlohmann::json &j) const = 0;
+    };
+
+    nlohmann::json getJsonFromPath(const std::filesystem::path &path);
+
+    template<class T>
+    inline T fromJson(nlohmann::json json, const std::string &name) {
+        return json.at(name).get<T>();
+    }
+
+    template<class T>
+    inline std::optional<T> fromJsonOptional(nlohmann::json json, const std::string &name) {
+        return json.contains(name) ? std::optional<T>(json.at(name).get<T>()) : std::nullopt;
+    }
+
+    template<class T>
+    inline void toJson(nlohmann::json json, const std::string &name, T data) {
+        json.push_back(name, data);
+    }
+
+    template<class T>
+    inline void toJson(nlohmann::json json, const std::string &name, const ToJson *data) {
+        nlohmann::json child;
+        data->toJson(child);
+        json.push_back({name, child});
+    }
+
+    template<class T>
+    inline void toJsonOptional(nlohmann::json json, const std::string &name, std::optional<T> data) {
+        if (data.has_value()) {
+            json.push_back({name, data.value()});
+        }
+    }
+
+}
+
 // 把json文本转为对象
 #define FROM_JSON(json, name, type...) json.at(#name).get<type>()
 
@@ -34,17 +74,6 @@ struct [[maybe_unused]] nlohmann::adl_serializer<type> {                        
     static void to_json(nlohmann::json &j, const type &t) {                       \
         t.toJson(j);                                                              \
     }                                                                             \
-}
-
-namespace CHelper::JsonUtil {
-
-    class ToJson {
-    public:
-        virtual void toJson(nlohmann::json &j) const = 0;
-    };
-
-    nlohmann::json getJsonFromPath(const std::filesystem::path &path);
-
 }
 
 #endif //CHELPER_JSONUTIL_H

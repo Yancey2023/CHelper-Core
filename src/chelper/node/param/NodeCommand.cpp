@@ -16,10 +16,10 @@ namespace CHelper::Node {
 
     NodeCommand::NodeCommand(const nlohmann::json &j,
                              const CPack &cpack)
-            : NodeBase(j),
+            : NodeBase(j, true),
               nodeCommand(std::make_shared<NodeOr>("COMMAND", "命令", cpack.commands, true)) {}
 
-    NodeType NodeCommand::getNodeType() const {
+    std::shared_ptr<NodeType> NodeCommand::getNodeType() const {
         return NodeType::COMMAND;
     }
 

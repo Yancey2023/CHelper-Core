@@ -13,9 +13,9 @@ namespace CHelper::Node {
 
     NodePosition::NodePosition(const nlohmann::json &j,
                                [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j) {}
+            : NodeBase(j, true) {}
 
-    NodeType NodePosition::getNodeType() const {
+    std::shared_ptr<NodeType> NodePosition::getNodeType() const {
         return NodeType::POSITION;
     }
 

@@ -9,7 +9,7 @@
       "type": "TARGET_SELECTOR"
     },
     {
-      "nodeItemType": 0,
+      "nodeItemType": 1,
       "description": "要被清除的物品",
       "id": "1",
       "type": "ITEM"

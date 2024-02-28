@@ -29,17 +29,14 @@
       "type": "INTEGER"
     },
     {
-      "nodeItemType": 0,
+      "nodeItemType": 1,
       "description": "被放置于方块或实体的物品栏槽位内的物品",
       "id": "4",
       "type": "ITEM"
     },
     {
       "description": "被放置物品的物品组件",
-      "jsonObject": {
-        "id": 7,
-        "key": "components"
-      },
+      "key": "components",
       "id": "5",
       "type": "JSON"
     },
@@ -88,17 +85,14 @@
       "type": "NORMAL_ID"
     },
     {
-      "nodeItemType": 0,
+      "nodeItemType": 1,
       "description": "被放置于方块或实体的物品栏槽位内的物品",
       "id": "11",
       "type": "ITEM"
     },
     {
       "description": "被放置物品的物品组件",
-      "jsonObject": {
-        "id": 7,
-        "key": "components"
-      },
+      "key": "components",
       "id": "12",
       "type": "JSON"
     },
@@ -132,17 +126,14 @@
       "type": "INTEGER"
     },
     {
-      "nodeItemType": 0,
+      "nodeItemType": 1,
       "description": "被放置于方块或实体的物品栏槽位内的物品",
       "id": "17",
       "type": "ITEM"
     },
     {
       "description": "被放置物品的物品组件",
-      "jsonObject": {
-        "id": 7,
-        "key": "components"
-      },
+      "key": "components",
       "id": "18",
       "type": "JSON"
     },
@@ -192,17 +183,14 @@
       "type": "NORMAL_ID"
     },
     {
-      "nodeItemType": 0,
+      "nodeItemType": 1,
       "description": "被放置于方块或实体的物品栏槽位内的物品",
       "id": "24",
       "type": "ITEM"
     },
     {
       "description": "被放置物品的物品组件",
-      "jsonObject": {
-        "id": 7,
-        "key": "components"
-      },
+      "key": "components",
       "id": "25",
       "type": "JSON"
     }

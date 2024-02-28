@@ -33,7 +33,7 @@ namespace CHelper::Node {
         explicit NodeTargetSelector(const nlohmann::json &j,
                                     [[maybe_unused]] const CPack &cpack);
 
-        [[nodiscard]] NodeType getNodeType() const override;
+        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 

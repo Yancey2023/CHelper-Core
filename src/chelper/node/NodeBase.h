@@ -32,14 +32,14 @@ namespace CHelper {
                      const std::optional<std::string> &description,
                      bool isMustAfterWhiteSpace);
 
-            explicit NodeBase(const nlohmann::json &j);
+            NodeBase(const nlohmann::json &j,
+                     bool isMustAfterWhiteSpace);
 
         public:
             static std::shared_ptr<NodeBase> getNodeFromJson(const nlohmann::json &j,
                                                              const CPack &cpack);
 
-            // 导出Json文件的时候使用，一般用不到
-            [[nodiscard]] virtual NodeType getNodeType() const;
+            [[nodiscard]] virtual std::shared_ptr<NodeType> getNodeType() const;
 
             void toJson(nlohmann::json &j) const override;
 

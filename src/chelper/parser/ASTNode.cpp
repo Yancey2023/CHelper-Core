@@ -163,7 +163,7 @@ namespace CHelper {
     void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (id != "compound" && id != "nextNode" && !isAllWhitespaceError()) {
 #if CHelperDebug == true
-            Profile::push("collect id errors: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
+            Profile::push("collect id errors: " + node->getNodeType()->nodeName + " " + node->description.value_or(""));
 #endif
             auto flag = node->collectIdError(this, idErrorReasons);
 #if CHelperDebug == true
@@ -193,7 +193,7 @@ namespace CHelper {
         }
         if (id != "compound" && id != "nextNode" && !isAllWhitespaceError()) {
 #if CHelperDebug == true
-            Profile::push("collect suggestions: " + node->getNodeType().nodeName
+            Profile::push("collect suggestions: " + node->getNodeType()->nodeName
                           + " " + node->description.value_or(""));
 #endif
             auto flag = node->collectSuggestions(this, index, suggestions);
@@ -224,7 +224,7 @@ namespace CHelper {
         bool isCompound = id == "compound";
         if (!isCompound && id != "nextNode") {
 #if CHelperDebug == true
-            Profile::push("collect structure: " + node->getNodeType().nodeName + " " + node->description.value_or(""));
+            Profile::push("collect structure: " + node->getNodeType()->nodeName + " " + node->description.value_or(""));
 #endif
             node->collectStructure(isAllWhitespaceError() ? nullptr : this, structure, isMustHave);
 #if CHelperDebug == true
@@ -309,7 +309,7 @@ namespace CHelper {
     std::string ASTNode::getColors() const {
         //TODO 命令语法高亮显示，获取颜色
         Profile::push("start getting colors: " + TokenUtil::toString(tokens));
-        auto result = node->getNodeType().nodeName;
+        auto result = node->getNodeType()->nodeName;
         Profile::pop();
         return result;
     }
@@ -333,7 +333,7 @@ namespace CHelper {
                 break;
         }
         os << R"(, "type": )"
-           << "\"" << astNode.node->getNodeType().nodeName << "\""
+           << "\"" << astNode.node->getNodeType()->nodeName << "\""
            << R"(, "description": )"
            << "\"" << astNode.node->description.value_or("unknown") << "\""
            << R"(, "content": ")"

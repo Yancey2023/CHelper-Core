@@ -75,15 +75,28 @@ namespace CHelper::Lexer {
     Token nextTokenString(StringReader &stringReader) {
         stringReader.mark();
         char ch = stringReader.peek();
-        bool containSpace = ch == '"';
-        if (containSpace) {
+        bool isDoubleQuotation = ch == '"';
+        if (isDoubleQuotation) {
             ch = stringReader.next();
         }
         while (true) {
             if (ch == EOF) {
                 break;
             }
-            if (containSpace) {
+            if (ch == '\\') {
+                //转义字符
+                ch = stringReader.next();
+                if (ch == 'u') {
+                    for (int i = 0; i < 4; ++i) {
+                        if (!stringReader.skip()) {
+                            break;
+                        }
+                    }
+                } else if (ch == EOF) {
+                    break;
+                }
+            } else if (isDoubleQuotation) {
+                //如果是双引号开头，只能使用双引号结尾，否则检测到字符串结束字符进行结尾
                 if (ch == '"') {
                     stringReader.skip();
                     break;

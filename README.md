@@ -18,8 +18,8 @@ I want to make an Android command IDE for minecraft bedrock version , so here is
 - [x] **Suggestion Getter**: provides completion suggestions for IDs based on the AST
 - [x] **Structure Retriever**: constructs a command structure string
 - [x] **Target Selector**: target selector command param
+- [x] **json support**: json command param
 - [ ] **`execute` command support**: support a command named `execute`
-- [ ] **json support**: json command param
 - [ ] **block state support**: block states command param
 - [ ] **highlight command **: obtains the highlight color for displayed commands
 
@@ -33,8 +33,15 @@ Because I am leaning c++ now. I want to improve myself through this project.
 |:----------------------------------------:|:-------------------:|:------------------------------------------------------------------------:|
 | [json](https://github.com/nlohmann/json) | JSON for Modern C++ | [MIT license](https://github.com/nlohmann/json/blob/develop/LICENSE.MIT) |
 
+## CPack Document
+
+[English](doc/README.md)
+
+[Chinese](doc/README_CN.md)
+
 ## Special Thanks
 
 - JetBrains License for Open Source Development
 
 ![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
+

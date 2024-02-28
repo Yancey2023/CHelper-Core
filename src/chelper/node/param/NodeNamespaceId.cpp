@@ -47,11 +47,11 @@ namespace CHelper::Node {
 
     NodeNamespaceId::NodeNamespaceId(const nlohmann::json &j,
                                      const CPack &cpack)
-            : NodeBase(j),
+            : NodeBase(j, true),
               key(FROM_JSON_OPTIONAL(j, key, std::string)),
               contents(getIdContentFromCPack(j, cpack, key)) {}
 
-    NodeType NodeNamespaceId::getNodeType() const {
+    std::shared_ptr<NodeType> NodeNamespaceId::getNodeType() const {
         return NodeType::NAMESPACE_ID;
     }
 

@@ -14,10 +14,24 @@ namespace CHelper::Node {
               description(description),
               isMustAfterWhiteSpace(isMustAfterWhiteSpace) {}
 
-    NodeBase::NodeBase(const nlohmann::json &j)
+    NodeBase::NodeBase(const nlohmann::json &j,
+                       bool isMustAfterWhiteSpace)
             : id(FROM_JSON_OPTIONAL(j, id, std::string)),
               description(FROM_JSON_OPTIONAL(j, description, std::string)),
-              isMustAfterWhiteSpace(true) {
+              isMustAfterWhiteSpace(isMustAfterWhiteSpace) {
+//#if CHelperDebug
+//        if (!description.has_value()) {
+//            return;
+//        }
+//        auto type = FROM_JSON_OPTIONAL(j, type, std::string);
+//        if (!type.has_value() || type.value() == "PER_COMMAND" || type.value() == "TARGET_SELECTOR") {
+//            return;
+//        }
+//        static std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+//        if (converter.from_bytes(description.value()).length() > 5) {
+//            CHELPER_WARN("节点介绍长度过长 " + description.value());
+//        }
+//#endif
     }
 
     std::shared_ptr<NodeBase> NodeBase::getNodeFromJson(const nlohmann::json &j,
@@ -27,21 +41,22 @@ namespace CHelper::Node {
         Profile::next(ColorStringBuilder().red("loading node ").purple(type).build());
         for (const auto &item: NodeType::NODE_TYPES) {
             if (item->nodeName == type) {
+                auto result = item->createNodeByJson(j, cpack);
                 Profile::pop();
-                return item->createNodeByJson(j, cpack);
+                return result;
             }
         }
         throw Exception::UnknownNodeType(type);
     }
 
-    NodeType NodeBase::getNodeType() const {
+    std::shared_ptr<NodeType> NodeBase::getNodeType() const {
         return NodeType::UNKNOWN;
     }
 
     void NodeBase::toJson(nlohmann::json &j) const {
         TO_JSON_OPTIONAL(j, id)
         TO_JSON_OPTIONAL(j, description)
-        j.push_back({"type", getNodeType().nodeName});
+        j.push_back({"type", getNodeType()->nodeName});
     }
 
     ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader) const {

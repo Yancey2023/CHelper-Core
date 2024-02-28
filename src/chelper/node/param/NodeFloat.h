@@ -11,7 +11,7 @@ namespace CHelper::Node {
 
     class NodeFloat : public NodeBase {
     public:
-        std::optional<int> min, max;
+        std::optional<float> min, max;
 
         NodeFloat(const std::optional<std::string> &id,
                   const std::optional<std::string> &description,
@@ -21,7 +21,7 @@ namespace CHelper::Node {
         NodeFloat(const nlohmann::json &j,
                   [[maybe_unused]] const CPack &cpack);
 
-        [[nodiscard]] NodeType getNodeType() const override;
+        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 

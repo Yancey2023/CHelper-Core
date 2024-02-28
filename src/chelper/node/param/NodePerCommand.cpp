@@ -21,7 +21,7 @@ namespace CHelper::Node {
 
     NodePerCommand::NodePerCommand(const nlohmann::json &j,
                                    const CPack &cpack)
-            : NodeBase(j) {
+            : NodeBase(j, true) {
         Profile::push(ColorStringBuilder().red("loading node name").build());
         name = FROM_JSON(j, name, std::vector<std::string>);
         if (j.contains("node")) {
@@ -112,14 +112,20 @@ namespace CHelper::Node {
         }
     }
 
-    NodeType NodePerCommand::getNodeType() const {
+    std::shared_ptr<NodeType> NodePerCommand::getNodeType() const {
         return NodeType::PER_COMMAND;
     }
 
     void NodePerCommand::toJson(nlohmann::json &j) const {
         TO_JSON(j, name);
         TO_JSON_OPTIONAL(j, description)
-        TO_JSON(j, nodes);
+        j.push_back({"node", nodes});
+        std::vector<std::string> startIds;
+        for (const auto &item: startNodes){
+            startIds.push_back(item->id.value());
+        }
+        j.push_back({"start", startIds});
+        //TODO ast toJson()
     }
 
     ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader) const {

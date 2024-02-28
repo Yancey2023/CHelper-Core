@@ -27,6 +27,7 @@ namespace CHelper::Node {
             if (it == cpack.normalIds.end()) {
                 Profile::push(ColorStringBuilder()
                                       .red("linking contents to ")
+                                      .purple(key.value())
                                       .build());
                 Profile::push(ColorStringBuilder()
                                       .red("failed to find normal id in the cpack")
@@ -49,7 +50,7 @@ namespace CHelper::Node {
 
     NodeNormalId::NodeNormalId(const nlohmann::json &j,
                                const CPack &cpack)
-            : NodeBase(j),
+            : NodeBase(j, true),
               key(FROM_JSON_OPTIONAL(j, key, std::string)),
               contents(getIdContentFromCPack(j, cpack, key)),
               allowsMissingID(false),
@@ -57,7 +58,7 @@ namespace CHelper::Node {
                   return tokenReader.readStringASTNode(node);
               }) {}
 
-    NodeType NodeNormalId::getNodeType() const {
+    std::shared_ptr<NodeType> NodeNormalId::getNodeType() const {
         return NodeType::NORMAL_ID;
     }
 
