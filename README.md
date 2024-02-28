@@ -21,7 +21,7 @@ I want to make an Android command IDE for minecraft bedrock version , so here is
 - [x] **json support**: json command param
 - [ ] **`execute` command support**: support a command named `execute`
 - [ ] **block state support**: block states command param
-- [ ] **highlight command **: obtains the highlight color for displayed commands
+- [ ] **highlight command**: obtains the highlight color for displayed commands
 
 ## Why choosing c++
 
@@ -43,5 +43,4 @@ Because I am leaning c++ now. I want to improve myself through this project.
 
 - JetBrains License for Open Source Development
 
-![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
-
+  ![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
