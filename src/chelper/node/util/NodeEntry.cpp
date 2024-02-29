@@ -16,20 +16,20 @@ namespace CHelper::Node {
               nodeSeparator(nodeSeparator),
               nodeValue(nodeValue) {}
 
-    ASTNode NodeEntry::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeEntry::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
-        auto key = nodeKey->getASTNode(tokenReader);
+        auto key = nodeKey->getASTNode(tokenReader, cpack);
         childNodes.push_back(key);
         if (key.isError()) {
             return ASTNode::andNode(this, childNodes, tokenReader.collect());
         }
-        auto separator = nodeSeparator->getASTNode(tokenReader);
+        auto separator = nodeSeparator->getASTNode(tokenReader, cpack);
         childNodes.push_back(separator);
         if (separator.isError()) {
             return ASTNode::andNode(this, childNodes, tokenReader.collect());
         }
-        childNodes.push_back(nodeValue->getASTNode(tokenReader));
+        childNodes.push_back(nodeValue->getASTNode(tokenReader, cpack));
         return ASTNode::andNode(this, childNodes, tokenReader.collect());
     }
 

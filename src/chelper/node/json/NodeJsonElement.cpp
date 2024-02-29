@@ -59,12 +59,12 @@ namespace CHelper::Node {
     NodeJsonElement::~NodeJsonElement() {
         for (const auto &item: nodes) {
             if (item->getNodeType() == NodeType::JSON_LIST) {
-                if(item != nullptr){
+                if (item != nullptr) {
                     std::static_pointer_cast<NodeJsonList>(item) = nullptr;
                 }
             } else if (item->getNodeType() == NodeType::JSON_OBJECT) {
                 for (const auto &item2: *std::static_pointer_cast<NodeJsonObject>(item)->data) {
-                    if(item2 != nullptr){
+                    if (item2 != nullptr) {
                         std::static_pointer_cast<NodeJsonEntry>(item2)->nodeEntry = nullptr;
                     }
                 }
@@ -74,12 +74,12 @@ namespace CHelper::Node {
 
     void NodeJsonElement::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        j.push_back({"node", nodes});
-        j.push_back({"start", start->id.value()});
+        j["node"] = nodes;
+        j["start"] = start->id.value();
     }
 
-    ASTNode NodeJsonElement::getASTNode(TokenReader &tokenReader) const {
-        return getByChildNode(tokenReader, start);
+    ASTNode NodeJsonElement::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+        return getByChildNode(tokenReader, cpack, start);
     }
 
 } // CHelper::Node

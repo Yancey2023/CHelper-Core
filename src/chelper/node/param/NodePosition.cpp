@@ -19,13 +19,13 @@ namespace CHelper::Node {
         return NodeType::POSITION;
     }
 
-    ASTNode NodePosition::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodePosition::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
         std::vector<ASTNode> threeChildNodes;
         int types[3];
         for (int &type: types) {
-            auto node = NodeRelativeFloat::getASTNode(this, tokenReader, true);
+            auto node = NodeRelativeFloat::getASTNode(this, cpack, tokenReader, true);
             type = node.first;
             threeChildNodes.push_back(node.second);
         }

@@ -14,18 +14,18 @@ namespace CHelper::Node {
         std::optional<int> min, max;
 
         NodeJsonInteger(const std::optional<std::string> &id,
-                    const std::optional<std::string> &description,
-                    const std::optional<int> &min,
-                    const std::optional<int> &max);
+                        const std::optional<std::string> &description,
+                        const std::optional<int> &min,
+                        const std::optional<int> &max);
 
         NodeJsonInteger(const nlohmann::json &j,
-                    [[maybe_unused]] const CPack &cpack);
+                        [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
         bool collectIdError(const ASTNode *astNode,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;

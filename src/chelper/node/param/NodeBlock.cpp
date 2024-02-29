@@ -30,15 +30,15 @@ namespace CHelper::Node {
         TO_JSON(j, nodeBlockType);
     }
 
-    ASTNode NodeBlock::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeBlock::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         switch (nodeBlockType) {
             case NodeBlockType::BLOCK_WITH_BLOCK_STATE:
-                return getOptionalASTNode(tokenReader, false,
+                return getOptionalASTNode(tokenReader, cpack, false,
                                           {nodeBlockId, NodeBlockState::getInstance()});
             case NodeBlockType::BLOCK:
-                return getByChildNode(tokenReader, nodeBlockId);
+                return getByChildNode(tokenReader, cpack, nodeBlockId);
             default:
-                return getOptionalASTNode(tokenReader, false,
+                return getOptionalASTNode(tokenReader, cpack, false,
                                           {nodeBlockId, NodeBlockState::getInstance()});
         }
     }

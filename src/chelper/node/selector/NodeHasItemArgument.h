@@ -20,7 +20,7 @@ namespace CHelper::Node {
                             const std::shared_ptr<NodeBase> &nodeItem,
                             const std::shared_ptr<NodeBase> &nodeSlot);
 
-        ASTNode getASTNode(TokenReader &tokenReader) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
     };
 
 } // CHelper::Node

@@ -50,8 +50,8 @@ namespace CHelper::Node {
         return NodeType::JSON_LIST;
     }
 
-    ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader) const {
-        return getByChildNode(tokenReader, nodeList);
+    ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+        return getByChildNode(tokenReader, cpack, nodeList);
     }
 
 } // CHelper::Node

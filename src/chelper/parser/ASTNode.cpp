@@ -24,6 +24,162 @@ namespace CHelper {
               id(std::move(id)),
               whichBest(whichBest) {}
 
+    nlohmann::json ASTNode::toJson() const {
+        nlohmann::json j;
+        j["isError"] = isError();
+        std::string modeStr;
+        switch (mode) {
+            case CHelper::ASTNodeMode::NONE:
+                modeStr = "NONE";
+                break;
+            case CHelper::ASTNodeMode::AND:
+                modeStr = "AND";
+                break;
+            case CHelper::ASTNodeMode::OR:
+                modeStr = "OR";
+                break;
+            default:
+                modeStr = "UNKNOWN";
+                break;
+        }
+        j["mode"] = modeStr;
+        j["type"] = node->getNodeType()->nodeName;
+        j["description"] = node->description.value_or("unknown");
+        j["content"] = TokenUtil::toString(tokens);
+        std::string content = TokenUtil::toString({tokens.vector, 0, tokens.vector->size()});
+        if (isError()) {
+            std::vector<nlohmann::json> errorReasonJsonList;
+            for (const auto &item: errorReasons) {
+                nlohmann::json errorJson;
+                errorJson["content"] = content.substr(item->start, item->end - item->start);
+                errorJson["reason"] = item->errorReason;
+                errorJson["start"] = item->start;
+                errorJson["end"] = item->end;
+                errorReasonJsonList.push_back(errorJson);
+            }
+            j["errorReasons"] = errorReasonJsonList;
+        } else {
+            j["errorReasons"] = nullptr;
+        }
+        if (hasChildNode()) {
+            std::vector<nlohmann::json> childNodeJsonList;
+            childNodeJsonList.reserve(childNodes.size());
+            for (const auto &item: childNodes) {
+                childNodeJsonList.push_back(item.toJson());
+            }
+            j["childNodes"] = childNodeJsonList;
+        } else {
+            j["childNodes"] = nullptr;
+        }
+        return j;
+    }
+
+    nlohmann::json ASTNode::toOptimizedJson() const {
+        nlohmann::json j;
+        j["isError"] = isError();
+        std::string modeStr;
+        switch (mode) {
+            case CHelper::ASTNodeMode::NONE:
+                modeStr = "NONE";
+                break;
+            case CHelper::ASTNodeMode::AND:
+                modeStr = "AND";
+                break;
+            case CHelper::ASTNodeMode::OR:
+                modeStr = "OR";
+                break;
+            default:
+                modeStr = "UNKNOWN";
+                break;
+        }
+        j["mode"] = modeStr;
+        j["type"] = node->getNodeType()->nodeName;
+        j["description"] = node->description.value_or("unknown");
+        j["content"] = TokenUtil::toString(tokens);
+        std::string content = TokenUtil::toString({tokens.vector, 0, tokens.vector->size()});
+        if (isError()) {
+            std::vector<nlohmann::json> errorReasonJsonList;
+            for (const auto &item: errorReasons) {
+                nlohmann::json errorJson;
+                errorJson["content"] = content.substr(item->start, item->end - item->start);
+                errorJson["reason"] = item->errorReason;
+                errorJson["start"] = item->start;
+                errorJson["end"] = item->end;
+                errorReasonJsonList.push_back(errorJson);
+            }
+            j["errorReasons"] = errorReasonJsonList;
+        } else {
+            j["errorReasons"] = nullptr;
+        }
+        if (hasChildNode()) {
+            std::vector<nlohmann::json> childNodeJsonList;
+            childNodeJsonList.reserve(childNodes.size());
+            for (const auto &item: childNodes) {
+                if (id == "command_or" && item.childNodes.size() < 2) {
+                    continue;
+                }
+                childNodeJsonList.push_back(item.toOptimizedJson());
+            }
+            j["childNodes"] = childNodeJsonList;
+        } else {
+            j["childNodes"] = nullptr;
+        }
+        return j;
+    }
+
+    nlohmann::json ASTNode::toBestJson() const {
+        if (mode == ASTNodeMode::OR) {
+            return childNodes[whichBest].toBestJson();
+        }
+        nlohmann::json j;
+        j["isError"] = isError();
+        std::string modeStr;
+        switch (mode) {
+            case CHelper::ASTNodeMode::NONE:
+                modeStr = "NONE";
+                break;
+            case CHelper::ASTNodeMode::AND:
+                modeStr = "AND";
+                break;
+            case CHelper::ASTNodeMode::OR:
+                modeStr = "OR";
+                break;
+            default:
+                modeStr = "UNKNOWN";
+                break;
+        }
+        j["mode"] = modeStr;
+        j["type"] = node->getNodeType()->nodeName;
+        j["description"] = node->description.value_or("unknown");
+        j["content"] = TokenUtil::toString(tokens);
+        std::string content = TokenUtil::toString({tokens.vector, 0, tokens.vector->size()});
+        if (isError()) {
+            std::vector<nlohmann::json> errorReasonJsonList;
+            for (const auto &item: errorReasons) {
+                nlohmann::json errorJson;
+                errorJson["content"] = content.substr(item->start, item->end - item->start);
+                errorJson["reason"] = item->errorReason;
+                errorJson["start"] = item->start;
+                errorJson["end"] = item->end;
+                errorReasonJsonList.push_back(errorJson);
+            }
+            j["errorReasons"] = errorReasonJsonList;
+        } else {
+            j["errorReasons"] = nullptr;
+        }
+        if (childNodes.empty()) {
+            j["childNodes"] = nullptr;
+        } else {
+            std::vector<nlohmann::json> childNodeJsonList;
+            childNodeJsonList.reserve(childNodes.size());
+            for (const auto &item: childNodes) {
+                childNodeJsonList.push_back(item.toBestJson());
+            }
+            j["childNodes"] = childNodeJsonList;
+        }
+        return j;
+    }
+
     ASTNode ASTNode::simpleNode(const Node::NodeBase *node,
                                 const VectorView <Token> &tokens,
                                 const std::shared_ptr<ErrorReason> &errorReason,
@@ -67,12 +223,12 @@ namespace CHelper {
                 break;
             }
             for (const auto &item2: item.errorReasons) {
-                if (start > item2->tokens.start) {
+                if (start > item2->start) {
                     continue;
                 }
                 bool isAdd = true;
-                if (start < item2->tokens.start) {
-                    start = item2->tokens.start;
+                if (start < item2->start) {
+                    start = item2->start;
                     whichBest = i;
                     errorReasons.clear();
                 } else {
@@ -163,7 +319,10 @@ namespace CHelper {
     void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (id != "compound" && id != "nextNode" && !isAllWhitespaceError()) {
 #if CHelperDebug == true
-            Profile::push("collect id errors: " + node->getNodeType()->nodeName + " " + node->description.value_or(""));
+            Profile::push(std::string("collect id errors: ")
+                                  .append(node->getNodeType()->nodeName)
+                                  .append(" ")
+                                  .append(node->description.value_or("")));
 #endif
             auto flag = node->collectIdError(this, idErrorReasons);
 #if CHelperDebug == true
@@ -268,6 +427,21 @@ namespace CHelper {
         return result;
     }
 
+    std::vector<std::shared_ptr<ErrorReason>> ASTNode::getIdErrors() const {
+        std::vector<std::shared_ptr<ErrorReason>> input, output;
+        Profile::push("start getting id error: " + TokenUtil::toString(tokens));
+        collectIdErrors(input);
+        Profile::pop();
+        for (int i = ErrorReasonLevel::maxLevel; i >= 0; --i) {
+            for (const auto &item: input) {
+                if (item->level == i) {
+                    output.push_back(item);
+                }
+            }
+        }
+        return output;
+    }
+
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
         std::vector<std::shared_ptr<ErrorReason>> input = errorReasons, output;
         Profile::push("start getting error reasons: " + TokenUtil::toString(tokens));
@@ -312,72 +486,6 @@ namespace CHelper {
         auto result = node->getNodeType()->nodeName;
         Profile::pop();
         return result;
-    }
-
-    std::ostream &operator<<(std::ostream &os, const CHelper::ASTNode &astNode) {
-        os << R"({"isError": )"
-           << (astNode.isError() ? "true" : "false")
-           << R"(, "mode": )";
-        switch (astNode.mode) {
-            case CHelper::ASTNodeMode::NONE:
-                os << R"("NONE")";
-                break;
-            case CHelper::ASTNodeMode::AND:
-                os << R"("AND")";
-                break;
-            case CHelper::ASTNodeMode::OR:
-                os << R"("OR")";
-                break;
-            default:
-                os << R"("UNKNOWN")";
-                break;
-        }
-        os << R"(, "type": )"
-           << "\"" << astNode.node->getNodeType()->nodeName << "\""
-           << R"(, "description": )"
-           << "\"" << astNode.node->description.value_or("unknown") << "\""
-           << R"(, "content": ")"
-           << CHelper::TokenUtil::toString(astNode.tokens)
-           << R"(", "errorReasons": )";
-        if (astNode.isError()) {
-            os << "[";
-            bool isFirst = true;
-            for (const auto &item: astNode.errorReasons) {
-                if (isFirst) {
-                    isFirst = false;
-                } else {
-                    os << ", ";
-                }
-                os << R"({"content": ")"
-                   << CHelper::TokenUtil::toString(item->tokens)
-                   << R"(", "reason": ")"
-                   << item->errorReason
-                   << R"("})";
-            }
-            os << "]";
-        } else {
-            os << "null";
-        }
-        os << R"(, "childNodes": )";
-        if (astNode.hasChildNode()) {
-            os << "[";
-            bool isFirst = true;
-            for (const CHelper::ASTNode &item: astNode.childNodes) {
-                if (astNode.id == "command" && item.childNodes.size() < 2) {
-                    continue;
-                }
-                if (isFirst) {
-                    isFirst = false;
-                } else {
-                    os << ", ";
-                }
-                os << item;
-            }
-            os << "]";
-        } else {
-            os << "null";
-        }
-        return os << "}";
     }
 
 } // CHelper

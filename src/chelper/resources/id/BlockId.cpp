@@ -31,13 +31,13 @@ namespace CHelper {
     void BlockStateValue::toJson(nlohmann::json &j) const {
         switch (type) {
             case CHelper::BlockStateType::STRING:
-                j.push_back({"value", std::get<std::string>(value)});
+                j["value"] = std::get<std::string>(value);
                 break;
             case CHelper::BlockStateType::BOOLEAN:
-                j.push_back({"value", std::get<bool>(value)});
+                j["value"] = std::get<bool>(value);
                 break;
             case CHelper::BlockStateType::INTEGER:
-                j.push_back({"value", std::get<int>(value)});
+                j["value"] = std::get<int>(value);
                 break;
         }
         TO_JSON_OPTIONAL(j, description)

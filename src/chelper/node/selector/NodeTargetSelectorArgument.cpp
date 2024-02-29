@@ -165,17 +165,17 @@ namespace CHelper::Node {
               nodeGameMode(nodeGameMode),
               nodeEntities(nodeEntities) {}
 
-    ASTNode NodeTargetSelectorArgument::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeTargetSelectorArgument::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         // key
-        ASTNode astNodeKey = getByChildNode(tokenReader, nodeKey, "key");
+        ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey, "key");
         childNodes.push_back(astNodeKey);
         if (astNodeKey.isError()) {
             return ASTNode::andNode(this, childNodes, tokenReader.collect());
         }
         // = or !=
-        ASTNode astNodeSeparator = getByChildNode(tokenReader, nodeSeparator, "separator");
+        ASTNode astNodeSeparator = getByChildNode(tokenReader, cpack, nodeSeparator, "separator");
         childNodes.push_back(astNodeSeparator);
         if (astNodeSeparator.isError()) {
             return ASTNode::andNode(this, childNodes, tokenReader.collect());
@@ -183,31 +183,31 @@ namespace CHelper::Node {
         //value
         std::string key = TokenUtil::toString(astNodeKey.tokens);
         if (key == "x" || key == "y" || key == "z") {
-            childNodes.push_back(nodeRelativeFloat->getASTNode(tokenReader));
+            childNodes.push_back(nodeRelativeFloat->getASTNode(tokenReader, cpack));
         } else if (key == "r" || key == "rm" || key == "dx" || key == "dy" || key == "dz" ||
                    key == "rx" || key == "rxm" || key == "ry" || key == "rym" ||
                    key == "l" || key == "lm") {
-            childNodes.push_back(nodeFloat->getASTNode(tokenReader));
+            childNodes.push_back(nodeFloat->getASTNode(tokenReader, cpack));
         } else if (key == "scores") {
-            childNodes.push_back(nodeScore->getASTNode(tokenReader));
+            childNodes.push_back(nodeScore->getASTNode(tokenReader, cpack));
         } else if (key == "tag" || key == "name") {
-            childNodes.push_back(nodeString->getASTNode(tokenReader));
+            childNodes.push_back(nodeString->getASTNode(tokenReader, cpack));
         } else if (key == "type") {
-            childNodes.push_back(nodeEntities->getASTNode(tokenReader));
+            childNodes.push_back(nodeEntities->getASTNode(tokenReader, cpack));
         } else if (key == "family") {
-            childNodes.push_back(nodeFamily->getASTNode(tokenReader));
+            childNodes.push_back(nodeFamily->getASTNode(tokenReader, cpack));
         } else if (key == "hasitem") {
-            childNodes.push_back(nodeHasItem->getASTNode(tokenReader));
+            childNodes.push_back(nodeHasItem->getASTNode(tokenReader, cpack));
         } else if (key == "has_property") {
-            childNodes.push_back(nodeHasProperty->getASTNode(tokenReader));
+            childNodes.push_back(nodeHasProperty->getASTNode(tokenReader, cpack));
         } else if (key == "haspermission") {
-            childNodes.push_back(nodeHasPermission->getASTNode(tokenReader));
+            childNodes.push_back(nodeHasPermission->getASTNode(tokenReader, cpack));
         } else if (key == "m") {
-            childNodes.push_back(nodeGameMode->getASTNode(tokenReader));
+            childNodes.push_back(nodeGameMode->getASTNode(tokenReader, cpack));
         } else if (key == "c") {
-            childNodes.push_back(nodeInteger->getASTNode(tokenReader));
+            childNodes.push_back(nodeInteger->getASTNode(tokenReader, cpack));
         } else {
-            childNodes.push_back(nodeValue->getASTNode(tokenReader));
+            childNodes.push_back(nodeValue->getASTNode(tokenReader, cpack));
         }
         return ASTNode::andNode(this, childNodes, tokenReader.collect());
     }

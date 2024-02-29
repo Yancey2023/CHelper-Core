@@ -19,7 +19,7 @@ namespace CHelper::Node {
         return NodeType::JSON_NULL;
     }
 
-    ASTNode NodeJsonNull::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeJsonNull::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();
         auto result = tokenReader.readStringASTNode(this);
         tokenReader.pop();

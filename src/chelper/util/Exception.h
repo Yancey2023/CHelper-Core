@@ -28,7 +28,7 @@ namespace CHelper::Exception {
 
     class UnknownNodeId : public std::exception {
     public:
-        UnknownNodeId(const std::string& currentNodeId, const std::string &requiredNodeId);
+        UnknownNodeId(const std::string &currentNodeId, const std::string &requiredNodeId);
 
         UnknownNodeId(const std::vector<std::string> &commandName, const std::string &requiredNodeId);
 

@@ -21,7 +21,8 @@ namespace CHelper {
             std::function<std::shared_ptr<NodeBase>(const nlohmann::json &j, const CPack &cpack)> createNodeByJson;
 
             NodeType(std::string nodeName,
-                     std::function<std::shared_ptr<NodeBase>(const nlohmann::json &j, const CPack &cpack)> createNodeByJson);
+                     std::function<std::shared_ptr<NodeBase>(const nlohmann::json &j,
+                                                             const CPack &cpack)> createNodeByJson);
 
             static std::vector<std::shared_ptr<NodeType>> NODE_TYPES;
 

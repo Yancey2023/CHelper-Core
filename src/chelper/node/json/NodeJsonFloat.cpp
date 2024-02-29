@@ -8,15 +8,15 @@
 namespace CHelper::Node {
 
     NodeJsonFloat::NodeJsonFloat(const std::optional<std::string> &id,
-                         const std::optional<std::string> &description,
-                         const std::optional<float> &min,
-                         const std::optional<float> &max)
+                                 const std::optional<std::string> &description,
+                                 const std::optional<float> &min,
+                                 const std::optional<float> &max)
             : NodeBase(id, description, false),
               min(min),
               max(max) {}
 
     NodeJsonFloat::NodeJsonFloat(const nlohmann::json &j,
-                         [[maybe_unused]] const CPack &cpack)
+                                 [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, false),
               min(FROM_JSON_OPTIONAL(j, min, float)),
               max(FROM_JSON_OPTIONAL(j, max, float)) {}
@@ -31,7 +31,7 @@ namespace CHelper::Node {
         TO_JSON_OPTIONAL(j, max)
     }
 
-    ASTNode NodeJsonFloat::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeJsonFloat::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         return tokenReader.readFloatASTNode(this);
     }
 
@@ -46,7 +46,7 @@ namespace CHelper::Node {
     }
 
     bool NodeJsonFloat::collectIdError(const ASTNode *astNode,
-                                   std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
+                                       std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (astNode->isError()) {
             return true;
         }

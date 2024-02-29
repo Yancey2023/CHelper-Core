@@ -35,8 +35,8 @@
     },
     {
       "type": "JSON_STRING",
-      "id": "ITEM_LOCK",
-      "description": "锁定模式",
+      "id": "ITEM_LOCK_MODE",
+      "description": "物品锁定模式",
       "dataType": "normal",
       "data": [
         {
@@ -53,6 +53,18 @@
               "description": "阻止该物品被从玩家物品栏的该槽位移动、移除、丢弃或用于合成。"
             }
           ]
+        }
+      ]
+    },
+    {
+      "type": "JSON_OBJECT",
+      "id": "ITEM_LOCK",
+      "description": "物品锁定模式",
+      "data": [
+        {
+          "key": "mode",
+          "description": "物品锁定模式",
+          "value": "ITEM_LOCK_MODE"
         }
       ]
     },
@@ -79,12 +91,12 @@
         },
         {
           "key": "minecraft:item_lock",
-          "description": "将该物品锁定在玩家的物品栏。用mode参数来指定锁定的类型。必须是lock_in_inventory或lock_in_slot",
+          "description": "将该物品锁定在玩家的物品栏",
           "value": "ITEM_LOCK"
         },
         {
           "key": "minecraft:keep_on_death",
-          "description": "使该物品在玩家死亡时不会掉落。 ",
+          "description": "使该物品在玩家死亡时不会掉落",
           "value": "KEEP_ON_DEATH"
         }
       ]

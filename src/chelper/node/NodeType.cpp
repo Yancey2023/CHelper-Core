@@ -95,7 +95,7 @@ namespace CHelper::Node {
     std::shared_ptr<NodeType> NodeType::JSON_BOOLEAN = createJson<NodeJsonBoolean>("JSON_BOOLEAN");
     std::shared_ptr<NodeType> NodeType::JSON_NULL = createJson<NodeJsonNull>("JSON_NULL");
 
-    inline void registerNodeType(const std::shared_ptr<NodeType>& nodeType) {
+    inline void registerNodeType(const std::shared_ptr<NodeType> &nodeType) {
         NodeType::NODE_TYPES.push_back(nodeType);
     }
 

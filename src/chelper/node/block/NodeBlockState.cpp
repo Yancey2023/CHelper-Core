@@ -58,8 +58,8 @@ namespace CHelper::Node {
     static std::shared_ptr<NodeBase> nodeBlockState = std::make_shared<NodeList>(
             "BLOCK_STATE", "方块状态", nodeLeftBracket, nodeEntry, nodeSeparator, nodeRightBracket);
 
-    ASTNode NodeBlockState::getASTNode(TokenReader &tokenReader) const {
-        return getByChildNode(tokenReader, nodeBlockState, "blockState");
+    ASTNode NodeBlockState::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+        return getByChildNode(tokenReader, cpack, nodeBlockState, "blockState");
     }
 
     void NodeBlockState::collectStructure(const ASTNode *astNode,

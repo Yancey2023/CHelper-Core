@@ -56,6 +56,12 @@ namespace CHelper {
                 size_t whichBest = -1);
 
     public:
+        [[nodiscard]] nlohmann::json toJson() const;
+
+        [[nodiscard]] nlohmann::json toOptimizedJson() const;
+
+        [[nodiscard]] nlohmann::json toBestJson() const;
+
         static ASTNode simpleNode(const Node::NodeBase *node,
                                   const VectorView <Token> &tokens,
                                   const std::shared_ptr<ErrorReason> &errorReason = nullptr,
@@ -99,6 +105,8 @@ namespace CHelper {
     public:
         [[nodiscard]] std::string getDescription(size_t index) const;
 
+        [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getIdErrors() const;
+
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
 
         [[nodiscard]] std::vector<Suggestion> getSuggestions(size_t index) const;
@@ -107,8 +115,6 @@ namespace CHelper {
 
         [[nodiscard]] std::string getColors() const;
     };
-
-    std::ostream &operator<<(std::ostream &os, const CHelper::ASTNode &astNode);
 
 } // CHelper
 

@@ -9,3 +9,12 @@ D:\CLion\project\CHelper\resources
 -give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m
 -t
 -titleraw a
+-give @p iron_shovel 1 0 {"minecraft:can_destroy":{"blocks":["grass"]},"minecraft:item_lock":{"mode":"lock_in_slot"}}
+-give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":[
+-give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["
+give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["s
+-give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["st
+-give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["sto
+-give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["ston
+-give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["stone
+-give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["stone"

@@ -25,7 +25,7 @@ namespace CHelper::Node {
 
         void init(const std::vector<std::shared_ptr<NodeBase>> &dataList);
 
-        ASTNode getASTNode(TokenReader &tokenReader) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
     };
 

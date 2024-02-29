@@ -35,7 +35,7 @@ namespace CHelper::Node {
         TO_JSON(j, ignoreLater);
     }
 
-    ASTNode NodeString::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeString::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         if (ignoreLater) {
             //后面的所有内容都算作这个字符串
             tokenReader.push();

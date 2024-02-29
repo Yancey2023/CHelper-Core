@@ -23,7 +23,7 @@ namespace CHelper::Node {
         return NodeType::COMMAND_NAME;
     }
 
-    ASTNode NodeCommandName::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeCommandName::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         return tokenReader.readStringASTNode(this);
     }
 

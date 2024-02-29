@@ -145,16 +145,14 @@ void onTextChanged(const std::string &command) {
                 }
             }
         }
-        CHelper::Profile::pop();
         {
-            CHelper::Profile::push("update description text view");
+            CHelper::Profile::next("update description text view");
             int len = MultiByteToWideChar(CP_UTF8, 0, descriptionShow.c_str(), -1, nullptr, 0);
             wchar_t wstr[len];
             MultiByteToWideChar(CP_UTF8, 0, descriptionShow.c_str(), -1, wstr, len);
             SetWindowTextW(hWndDescription, wstr);
-            CHelper::Profile::pop();
         }
-        CHelper::Profile::push("update suggestion list view");
+        CHelper::Profile::next("update suggestion list view");
         SendMessage(hWndListBox, LB_RESETCONTENT, 0, 0);
         //由于添加全部结果非常耗时，这里只保留前30个
         int i = 0;
@@ -179,9 +177,9 @@ void onTextChanged(const std::string &command) {
                              .green(", show in ")
                              .purple(std::to_string(end2 - start2) + "ms")
                              .green(", command is ")
-                             .purple(command.size() <= 100 ? command : command.substr(0, 100))
+                             .purple(command.size() <= 100 ? command : command.substr(0, 100) + "...")
                              .build());
-        std::cout << core->getAstNode() << std::endl;
+        std::cout << core->getAstNode().toOptimizedJson() << std::endl;
         CHELPER_INFO("structure: " + structure);
         CHELPER_INFO("description: " + description);
         if (errorReasons.empty()) {
@@ -190,17 +188,29 @@ void onTextChanged(const std::string &command) {
             const auto &errorReason = errorReasons[0];
             CHELPER_INFO(CHelper::ColorStringBuilder()
                                  .normal("error reason: ")
-                                 .red(CHelper::TokenUtil::toString(errorReason->tokens) + " ")
+                                 .red(command.substr(errorReason->start,
+                                                     errorReason->end - errorReason->start) + " ")
                                  .blue(errorReason->errorReason)
+                                 .build());
+            CHELPER_INFO(CHelper::ColorStringBuilder()
+                                 .normal(command.substr(0, errorReason->start))
+                                 .red(command.substr(errorReason->start, errorReason->end - errorReason->start))
+                                 .normal(command.substr(errorReason->end))
                                  .build());
         } else {
             CHELPER_INFO("error reasons:");
-            int i = 0;
-            for (const auto &item: errorReasons) {
+            int i2 = 0;
+            for (const auto &errorReason: errorReasons) {
                 CHELPER_INFO(CHelper::ColorStringBuilder()
-                                     .normal(std::to_string(++i) + ". ")
-                                     .red(CHelper::TokenUtil::toString(item->tokens) + " ")
-                                     .blue(item->errorReason)
+                                     .normal(std::to_string(++i2) + ". ")
+                                     .red(command.substr(errorReason->start,
+                                                         errorReason->end - errorReason->start) + " ")
+                                     .blue(errorReason->errorReason)
+                                     .build());
+                CHELPER_INFO(CHelper::ColorStringBuilder()
+                                     .normal(command.substr(0, errorReason->start))
+                                     .red(command.substr(errorReason->start, errorReason->end - errorReason->start))
+                                     .normal(command.substr(errorReason->end))
                                      .build());
             }
         }
@@ -213,7 +223,8 @@ void onTextChanged(const std::string &command) {
             }
             CHELPER_INFO(CHelper::ColorStringBuilder()
                                  .normal(std::to_string(++j) + ". ")
-                                 .blue(command.substr(item.start, item.end) + " ")
+                                 .blue(command.substr(item.start, item.end - item.start))
+                                 .normal(" -> ")
                                  .yellow(item.content->name + " ")
                                  .normal(item.content->description.value_or(""))
                                  .build());

@@ -48,8 +48,8 @@ namespace CHelper::Node {
         throw Exception::UnknownNodeId(value, id.value_or("UNKNOWN"));
     }
 
-    ASTNode NodeJsonEntry::getASTNode(TokenReader &tokenReader) const {
-        return getByChildNode(tokenReader, nodeEntry);
+    ASTNode NodeJsonEntry::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+        return getByChildNode(tokenReader, cpack, nodeEntry);
     }
 
 } // CHelper::Node

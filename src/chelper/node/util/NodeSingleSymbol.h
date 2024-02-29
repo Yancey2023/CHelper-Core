@@ -18,7 +18,7 @@ namespace CHelper::Node {
                          const std::optional<std::string> &description,
                          char symbol);
 
-        ASTNode getASTNode(TokenReader &tokenReader) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,

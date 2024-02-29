@@ -56,10 +56,10 @@ namespace CHelper::Node {
     void NodeBase::toJson(nlohmann::json &j) const {
         TO_JSON_OPTIONAL(j, id)
         TO_JSON_OPTIONAL(j, description)
-        j.push_back({"type", getNodeType()->nodeName});
+        j["type"] = getNodeType()->nodeName;
     }
 
-    ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader) const {
+    ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack &cpack) const {
         //TODO 把所有定位的getASTNode()改为getASTNodeWithNextNode()
         //空格检测
         tokenReader.push();
@@ -71,7 +71,7 @@ namespace CHelper::Node {
         tokenReader.push();
         //当前节点
         DEBUG_GET_NODE_BEGIN(this)
-        ASTNode currentASTNode = getASTNode(tokenReader);
+        ASTNode currentASTNode = getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(this)
         if (currentASTNode.isError() || nextNodes.empty()) {
             tokenReader.pop();
@@ -82,7 +82,7 @@ namespace CHelper::Node {
         childASTNodes.reserve(nextNodes.size());
         for (const auto &item: nextNodes) {
             tokenReader.push();
-            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader));
+            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader, cpack));
             tokenReader.restore();
         }
         tokenReader.push();
@@ -92,9 +92,10 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeBase::getByChildNode(TokenReader &tokenReader,
+                                     const CPack &cpack,
                                      const std::shared_ptr<NodeBase> &childNode,
                                      const std::string &astNodeId) const {
-        ASTNode node = childNode->getASTNode(tokenReader);
+        ASTNode node = childNode->getASTNode(tokenReader, cpack);
         return ASTNode::andNode(this, {node}, node.tokens, nullptr, astNodeId);
     }
 
@@ -105,6 +106,7 @@ namespace CHelper::Node {
      *                                false - 第一个内容为空的错误节点到后面都不算做子节点
      */
     ASTNode NodeBase::getOptionalASTNode(TokenReader &tokenReader,
+                                         const CPack &cpack,
                                          bool isIgnoreChildNodesError,
                                          const std::vector<std::shared_ptr<NodeBase>> &childNodes,
                                          const std::string &astNodeId) const {
@@ -113,7 +115,7 @@ namespace CHelper::Node {
         for (const auto &item: childNodes) {
             tokenReader.push();
             tokenReader.push();
-            ASTNode astNode = item->getASTNode(tokenReader);
+            ASTNode astNode = item->getASTNode(tokenReader, cpack);
             const VectorView <Token> tokens = tokenReader.collect();
             if (astNode.isError() && !childASTNodes.empty() && (isIgnoreChildNodesError || tokens.isEmpty())) {
                 tokenReader.restore();

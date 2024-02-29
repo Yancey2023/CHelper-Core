@@ -12,14 +12,14 @@ namespace CHelper::Node {
     class NodeJsonNull : public NodeBase {
     public:
         NodeJsonNull(const std::optional<std::string> &id,
-                        const std::optional<std::string> &description);
+                     const std::optional<std::string> &description);
 
         NodeJsonNull(const nlohmann::json &j,
-                        [[maybe_unused]]const CPack &cpack);
+                     [[maybe_unused]]const CPack &cpack);
 
         [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,

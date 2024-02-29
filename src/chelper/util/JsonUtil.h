@@ -35,13 +35,13 @@ namespace CHelper::JsonUtil {
     inline void toJson(nlohmann::json json, const std::string &name, const ToJson *data) {
         nlohmann::json child;
         data->toJson(child);
-        json.push_back({name, child});
+        json[name] = child;
     }
 
     template<class T>
     inline void toJsonOptional(nlohmann::json json, const std::string &name, std::optional<T> data) {
         if (data.has_value()) {
-            json.push_back({name, data.value()});
+            json[name] = data.value();
         }
     }
 
@@ -54,12 +54,12 @@ namespace CHelper::JsonUtil {
 #define FROM_JSON_OPTIONAL(json, name, type...) json.contains(#name) ? std::optional<type>(json.at(#name).get<type>()) : std::nullopt
 
 // 把对象转json文本
-#define TO_JSON(json, name) json.push_back({#name, name})
+#define TO_JSON(json, name) json[#name] = name
 
 // 把象转json文本，数据不一定存在
 #define TO_JSON_OPTIONAL(json, name)                                              \
 if (name.has_value()) {                                                           \
-    json.push_back({#name, name.value()});                                        \
+    json[#name] = name.value();                                                   \
 }
 
 // 让这个类支持json序列化（还需要在这个类中创建构造方法用于把json文本转为对象，创建一个to_json方法用于把对象转json文本）

@@ -12,20 +12,20 @@ namespace CHelper::Node {
                              const std::optional<std::string> &description,
                              const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes)
             : NodeBase(id, description, false),
-              nodeCommand(std::make_shared<NodeOr>("COMMAND", "命令", childNodes, true)) {}
+              nodeCommand(std::make_shared<NodeOr>("COMMAND", "命令", childNodes, true, "command_or")) {}
 
     NodeCommand::NodeCommand(const nlohmann::json &j,
                              const CPack &cpack)
             : NodeBase(j, true),
-              nodeCommand(std::make_shared<NodeOr>("COMMAND", "命令", cpack.commands, true)) {}
+              nodeCommand(std::make_shared<NodeOr>("COMMAND", "命令", cpack.commands, true, "command_or")) {}
 
     std::shared_ptr<NodeType> NodeCommand::getNodeType() const {
         return NodeType::COMMAND;
     }
 
-    ASTNode NodeCommand::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeCommand::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         DEBUG_GET_NODE_BEGIN(nodeCommand)
-        auto result = getByChildNode(tokenReader, {nodeCommand}, "command");
+        auto result = getByChildNode(tokenReader, cpack, {nodeCommand}, "command");
         DEBUG_GET_NODE_END(nodeCommand)
         return result;
     }

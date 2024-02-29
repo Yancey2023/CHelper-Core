@@ -1,0 +1,31 @@
+{
+  "name": [
+    "execute"
+  ],
+  "description": "在改变执行者、执行位置和角度，添加限制条件，并储存其输出值的情况下执行另一条命令",
+  "start": [
+    "executeParam"
+  ],
+  "node": [
+    {
+      "type": "EXECUTE",
+      "id": "executeParam",
+      "description": "子命令"
+    },
+    {
+      "type": "COMMAND",
+      "id": "command",
+      "description": "执行的另一条命令"
+    }
+  ],
+  "ast": [
+    [
+      "executeParam",
+      "command"
+    ],
+    [
+      "command",
+      "LF"
+    ]
+  ]
+}

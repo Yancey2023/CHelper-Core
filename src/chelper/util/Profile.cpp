@@ -8,8 +8,6 @@
 
 namespace CHelper::Profile {
 
-    std::vector<std::string> stack;
-
     void push(const std::string &str) {
         stack.push_back(str);
     }

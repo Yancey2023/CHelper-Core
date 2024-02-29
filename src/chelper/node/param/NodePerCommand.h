@@ -33,7 +33,7 @@ namespace CHelper::Node {
 
         void toJson(nlohmann::json &j) const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
         std::optional<std::string> collectDescription(const ASTNode *pNode, size_t index) const override;
 

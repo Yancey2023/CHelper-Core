@@ -15,7 +15,7 @@ namespace CHelper::Node {
 
         static std::shared_ptr<NodeBlockState> getInstance();
 
-        ASTNode getASTNode(TokenReader &tokenReader) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

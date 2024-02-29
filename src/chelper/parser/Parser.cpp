@@ -25,7 +25,7 @@ namespace CHelper::Parser {
         Profile::push("start parsing: " + TokenUtil::toString(tokens));
         auto mainNode = cpack.mainNode;
         DEBUG_GET_NODE_BEGIN(mainNode)
-        auto result = mainNode->getASTNode(tokenReader);
+        auto result = mainNode->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(mainNode)
         Profile::pop();
         return result;

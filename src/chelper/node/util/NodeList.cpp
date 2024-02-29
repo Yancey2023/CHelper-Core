@@ -31,10 +31,10 @@ namespace CHelper::Node {
                                       nodeSeparator, nodeRight
                               }), false)) {}
 
-    ASTNode NodeList::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeList::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         //标记整个[...]，在最后进行收集
         tokenReader.push();
-        auto left = nodeLeft->getASTNode(tokenReader);
+        auto left = nodeLeft->getASTNode(tokenReader, cpack);
         std::vector<ASTNode> childNodes = {left};
         if (left.isError()) {
             return ASTNode::andNode(this, childNodes, tokenReader.collect());
@@ -43,11 +43,11 @@ namespace CHelper::Node {
             //检测[]中间有没有内容
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(nodeRight)
-            auto rightBracket1 = nodeRight->getASTNode(tokenReader);
+            auto rightBracket1 = nodeRight->getASTNode(tokenReader, cpack);
             DEBUG_GET_NODE_END(nodeRight)
             tokenReader.restore();
             DEBUG_GET_NODE_BEGIN(nodeElementOrRight)
-            auto elementOrRight = nodeElementOrRight->getASTNode(tokenReader);
+            auto elementOrRight = nodeElementOrRight->getASTNode(tokenReader, cpack);
             DEBUG_GET_NODE_END(nodeElementOrRight)
             childNodes.push_back(elementOrRight);
             if (!rightBracket1.isError() || elementOrRight.isError()) {
@@ -58,11 +58,11 @@ namespace CHelper::Node {
             //检测是分隔符还是右括号
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(nodeRight)
-            auto rightBracket = nodeRight->getASTNode(tokenReader);
+            auto rightBracket = nodeRight->getASTNode(tokenReader, cpack);
             DEBUG_GET_NODE_END(nodeRight)
             tokenReader.restore();
             DEBUG_GET_NODE_BEGIN(nodeSeparator)
-            auto separatorOrRight = nodeSeparatorOrRight->getASTNode(tokenReader);
+            auto separatorOrRight = nodeSeparatorOrRight->getASTNode(tokenReader, cpack);
             DEBUG_GET_NODE_END(nodeSeparator)
             childNodes.push_back(separatorOrRight);
             if (!rightBracket.isError() || separatorOrRight.isError()) {
@@ -70,7 +70,7 @@ namespace CHelper::Node {
             }
             //检测是不是元素
             DEBUG_GET_NODE_BEGIN(nodeElement)
-            auto element = nodeElement->getASTNode(tokenReader);
+            auto element = nodeElement->getASTNode(tokenReader, cpack);
             DEBUG_GET_NODE_END(nodeElement)
             childNodes.push_back(element);
             if (element.isError()) {

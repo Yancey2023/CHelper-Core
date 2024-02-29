@@ -19,7 +19,7 @@ namespace CHelper::Node {
         return INSTANCE;
     }
 
-    ASTNode NodeLF::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();
         tokenReader.skipToLF();
         VectorView <Token> tokens = tokenReader.collect();

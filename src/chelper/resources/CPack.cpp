@@ -15,6 +15,9 @@ namespace CHelper {
 
     CPack::CPack(const std::filesystem::path &path)
             : manifest(JsonUtil::getJsonFromPath(path / "manifest.json").get<Manifest>()) {
+#if CHelperDebug == true
+        size_t stackSize = Profile::stack.size();
+#endif
         Profile::push(ColorStringBuilder().red("list path of id").build());
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "id")) {
             Profile::next(ColorStringBuilder()
@@ -80,6 +83,11 @@ namespace CHelper {
         }
         Profile::pop();
         mainNode = std::make_shared<Node::NodeCommand>("MAIN_NODE", "欢迎使用命令助手(作者：Yancey)", commands);
+#if CHelperDebug == true
+        if (Profile::stack.size() != stackSize) {
+            CHELPER_WARN("error profile stack after loading cpack");
+        }
+#endif
     }
 
     CPack CPack::create(const std::filesystem::path &path) {

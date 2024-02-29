@@ -62,17 +62,17 @@ namespace CHelper::Node {
               nodeItem(nodeItem),
               nodeSlot(nodeSlot) {}
 
-    ASTNode NodeHasItemArgument::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeHasItemArgument::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         // key
-        ASTNode astNodeKey = getByChildNode(tokenReader, nodeKey, "key");
+        ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey, "key");
         childNodes.push_back(astNodeKey);
         if (astNodeKey.isError()) {
             return ASTNode::andNode(this, childNodes, tokenReader.collect());
         }
         // = or !=
-        ASTNode astNodeSeparator = getByChildNode(tokenReader, nodeSeparator, "separator");
+        ASTNode astNodeSeparator = getByChildNode(tokenReader, cpack, nodeSeparator, "separator");
         childNodes.push_back(astNodeSeparator);
         if (astNodeSeparator.isError()) {
             return ASTNode::andNode(this, childNodes, tokenReader.collect());
@@ -80,17 +80,17 @@ namespace CHelper::Node {
         //value
         std::string key = TokenUtil::toString(astNodeKey.tokens);
         if (key == "item") {
-            childNodes.push_back(nodeItem->getASTNode(tokenReader));
+            childNodes.push_back(nodeItem->getASTNode(tokenReader, cpack));
         } else if (key == "data") {
-            childNodes.push_back(nodeData->getASTNode(tokenReader));
+            childNodes.push_back(nodeData->getASTNode(tokenReader, cpack));
         } else if (key == "quantity") {
-            childNodes.push_back(nodeQuantity->getASTNode(tokenReader));
+            childNodes.push_back(nodeQuantity->getASTNode(tokenReader, cpack));
         } else if (key == "location") {
-            childNodes.push_back(nodeSlot->getASTNode(tokenReader));
+            childNodes.push_back(nodeSlot->getASTNode(tokenReader, cpack));
         } else if (key == "slot") {
-            childNodes.push_back(nodeSlotRange->getASTNode(tokenReader));
+            childNodes.push_back(nodeSlotRange->getASTNode(tokenReader, cpack));
         } else {
-            childNodes.push_back(nodeValue->getASTNode(tokenReader));
+            childNodes.push_back(nodeValue->getASTNode(tokenReader, cpack));
         }
         return ASTNode::andNode(this, childNodes, tokenReader.collect());
     }

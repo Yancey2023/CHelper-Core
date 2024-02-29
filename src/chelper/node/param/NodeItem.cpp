@@ -41,16 +41,16 @@ namespace CHelper::Node {
         TO_JSON(j, nodeItemType);
     }
 
-    ASTNode NodeItem::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         switch (nodeItemType) {
             case NodeItemType::ITEM_GIVE:
-                return getOptionalASTNode(tokenReader, false,
+                return getOptionalASTNode(tokenReader, cpack, false,
                                           {nodeItemId, nodeCount, nodeData, nodeComponent});
             case NodeItemType::ITEM_CLEAR:
-                return getOptionalASTNode(tokenReader, false,
+                return getOptionalASTNode(tokenReader, cpack, false,
                                           {nodeItemId, nodeData, nodeCount});
             default:
-                return getOptionalASTNode(tokenReader, false,
+                return getOptionalASTNode(tokenReader, cpack, false,
                                           {nodeItemId, nodeCount, nodeData, nodeComponent});
         }
     }

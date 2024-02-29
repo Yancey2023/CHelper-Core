@@ -33,23 +33,23 @@ namespace CHelper::Node {
                                                          const std::optional<std::string> &description)
             : NodeBase(id, description, false) {}
 
-    ASTNode NodeHasPermissionArgument::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeHasPermissionArgument::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         // key
-        ASTNode astNodeKey = getByChildNode(tokenReader, nodeKey, "key");
+        ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey, "key");
         childNodes.push_back(astNodeKey);
         if (astNodeKey.isError()) {
             return ASTNode::andNode(this, childNodes, tokenReader.collect());
         }
         // = or !=
-        ASTNode astNodeSeparator = getByChildNode(tokenReader, nodeEqual, "separator");
+        ASTNode astNodeSeparator = getByChildNode(tokenReader, cpack, nodeEqual, "separator");
         childNodes.push_back(astNodeSeparator);
         if (astNodeSeparator.isError()) {
             return ASTNode::andNode(this, childNodes, tokenReader.collect());
         }
         //value
-        childNodes.push_back(nodeValue->getASTNode(tokenReader));
+        childNodes.push_back(nodeValue->getASTNode(tokenReader, cpack));
         return ASTNode::andNode(this, childNodes, tokenReader.collect());
     }
 

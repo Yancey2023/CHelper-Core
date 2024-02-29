@@ -93,17 +93,17 @@ namespace CHelper::Node {
         TO_JSON(j, isOnlyOne);
     }
 
-    ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.skipWhitespace();
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(nodeAt)
-        ASTNode at = nodeAt->getASTNode(tokenReader);
+        ASTNode at = nodeAt->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeAt)
         tokenReader.restore();
         if (at.isError()) {
             //不是@符号开头，当作玩家名处理
             DEBUG_GET_NODE_BEGIN(nodePlayerName)
-            ASTNode result = getByChildNode(tokenReader, nodePlayerName, "target selector player name");
+            ASTNode result = getByChildNode(tokenReader, cpack, nodePlayerName, "target selector player name");
             DEBUG_GET_NODE_END(nodePlayerName)
             return result;
         }
@@ -111,11 +111,11 @@ namespace CHelper::Node {
         //目标选择器变量
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(nodeTargetSelectorVariable)
-        ASTNode targetSelectorVariable = nodeTargetSelectorVariable->getASTNode(tokenReader);
+        ASTNode targetSelectorVariable = nodeTargetSelectorVariable->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeTargetSelectorVariable)
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(nodeLeft)
-        ASTNode leftBracket = nodeLeft->getASTNode(tokenReader);
+        ASTNode leftBracket = nodeLeft->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeLeft)
         tokenReader.restore();
         if (leftBracket.isError()) {
@@ -124,7 +124,7 @@ namespace CHelper::Node {
                                     nullptr, "target selector no arguments");
         }
         DEBUG_GET_NODE_BEGIN(nodeArguments)
-        ASTNode arguments = nodeArguments->getASTNode(tokenReader);
+        ASTNode arguments = nodeArguments->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeArguments)
         return ASTNode::andNode(this, {targetSelectorVariable, arguments}, tokenReader.collect(),
                                 nullptr, "target selector with arguments");

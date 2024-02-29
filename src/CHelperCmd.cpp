@@ -60,7 +60,8 @@ namespace CHelper::Test {
                                      .normal(" : ")
                                      .purple(command)
                                      .build());
-                std::cout << core->getAstNode() << std::endl;
+                std::cout << core->getAstNode().toOptimizedJson() << std::endl;
+                std::cout << core->getAstNode().toBestJson() << std::endl;
                 CHELPER_INFO("structure: " + structure);
                 CHELPER_INFO("description: " + description);
                 if (errorReasons.empty()) {
@@ -69,33 +70,55 @@ namespace CHelper::Test {
                     const auto &errorReason = errorReasons[0];
                     CHELPER_INFO(ColorStringBuilder()
                                          .normal("error reason: ")
-                                         .red(TokenUtil::toString(errorReason->tokens) + " ")
+                                         .red(command.substr(errorReason->start,
+                                                             errorReason->end - errorReason->start) + " ")
                                          .blue(errorReason->errorReason)
+                                         .build());
+                    CHELPER_INFO(ColorStringBuilder()
+                                         .normal(command.substr(0, errorReason->start))
+                                         .red(command.substr(errorReason->start, errorReason->end - errorReason->start))
+                                         .normal(command.substr(errorReason->end))
                                          .build());
                 } else {
                     CHELPER_INFO("error reasons:");
                     int i = 0;
-                    for (const auto &item: errorReasons) {
+                    for (const auto &errorReason: errorReasons) {
                         CHELPER_INFO(ColorStringBuilder()
                                              .normal(std::to_string(++i) + ". ")
-                                             .red(TokenUtil::toString(item->tokens) + " ")
-                                             .blue(item->errorReason)
+                                             .red(command.substr(errorReason->start,
+                                                                 errorReason->end - errorReason->start) + " ")
+                                             .blue(errorReason->errorReason)
+                                             .build());
+                        CHELPER_INFO(ColorStringBuilder()
+                                             .normal(command.substr(0, errorReason->start))
+                                             .red(errorReason->start == errorReason->end ? "~" :
+                                                  command.substr(errorReason->start,
+                                                                 errorReason->end - errorReason->start))
+                                             .normal(command.substr(errorReason->end))
                                              .build());
                     }
                 }
-                CHELPER_INFO("suggestions: ");
-                int i = 0;
-                for (const auto &item: suggestions) {
-                    if (i == 30) {
-                        CHELPER_INFO("...");
-                        break;
+                if (suggestions.empty()) {
+                    CHELPER_INFO("no suggestion");
+                } else {
+                    CHELPER_INFO("suggestions: ");
+                    int i = 0;
+                    for (const auto &item: suggestions) {
+                        if (i == 30) {
+                            CHELPER_INFO("...");
+                            break;
+                        }
+                        CHELPER_INFO(ColorStringBuilder()
+                                             .normal(std::to_string(++i) + ". ")
+                                             .green(item.content->name + " ")
+                                             .blue(item.content->description.value_or(""))
+                                             .build());
+                        CHELPER_INFO(ColorStringBuilder()
+                                             .normal(command.substr(0, item.start))
+                                             .green(item.content->name)
+                                             .normal(command.substr(item.end))
+                                             .build());
                     }
-                    CHELPER_INFO(ColorStringBuilder()
-                                         .normal(std::to_string(++i) + ". ")
-                                         .blue(TokenUtil::toString(item.tokens) + " ")
-                                         .yellow(item.content->name + " ")
-                                         .normal(item.content->description.value_or(""))
-                                         .build());
                 }
                 std::cout << std::endl;
             }

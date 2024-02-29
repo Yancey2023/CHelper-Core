@@ -6,22 +6,22 @@
 
 namespace CHelper::TokenUtil {
 
-    size_t getStartIndex(const VectorView <Token> &tokens) {
-        if (tokens.start == 0) {
+    size_t getIndex(const VectorView <Token> &tokens, size_t tokenIndex) {
+        if (tokenIndex == 0) {
             return 0;
-        } else if (tokens.start == tokens.vector->size()) {
-            return tokens.vector->at(tokens.start - 1).getEndIndex();
+        } else if (tokenIndex == tokens.vector->size()) {
+            return tokens.vector->at(tokenIndex - 1).getEndIndex();
         } else {
-            return tokens.vector->at(tokens.start).getStartIndex();
+            return tokens.vector->at(tokenIndex).getStartIndex();
         }
     }
 
+    size_t getStartIndex(const VectorView <Token> &tokens) {
+        return getIndex(tokens, tokens.start);
+    }
+
     size_t getEndIndex(const VectorView <Token> &tokens) {
-        if (tokens.end == 0) {
-            return 0;
-        } else {
-            return tokens.vector->at(tokens.end - 1).getEndIndex();
-        }
+        return getIndex(tokens, tokens.end);
     }
 
     std::string toString(const VectorView <Token> &tokens) {

@@ -15,16 +15,15 @@ namespace CHelper {
     public:
         //TODO 为代码补全建议添加优先级
         //要被替换的位置
-        const size_t start, end;
+        size_t start, end;
         //内容
         std::shared_ptr<NormalId> content;
 
-    public:
         Suggestion(size_t start, size_t end, const std::shared_ptr<NormalId> &content);
 
         Suggestion(const VectorView <Token> &tokens, const std::shared_ptr<NormalId> &content);
 
-        std::string onClick(const std::string& before);
+        std::string onClick(const std::string &before);
     };
 
 } // CHelper

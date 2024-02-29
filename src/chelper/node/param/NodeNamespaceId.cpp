@@ -63,11 +63,11 @@ namespace CHelper::Node {
             for (const auto &item: *contents) {
                 content.push_back(*item);
             }
-            j.push_back({"contents", content});
+            j["contents"] = content;
         }
     }
 
-    ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         // namespace:id
         // 字符串中已经包含冒号，因为冒号不是结束字符
         return tokenReader.readStringASTNode(this);

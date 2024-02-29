@@ -26,7 +26,7 @@ namespace CHelper::Node {
 
         [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
     };
 

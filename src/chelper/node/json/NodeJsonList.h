@@ -21,11 +21,11 @@ namespace CHelper::Node {
         NodeJsonList(const nlohmann::json &j,
                      [[maybe_unused]] const CPack &cpack);
 
-        void init(const std::vector<std::shared_ptr<NodeBase>>& dataList);
+        void init(const std::vector<std::shared_ptr<NodeBase>> &dataList);
 
         [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
     };
 

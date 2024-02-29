@@ -70,11 +70,11 @@ namespace CHelper::Node {
             for (const auto &item: *contents) {
                 content.push_back(*item);
             }
-            j.push_back({"contents", content});
+            j["contents"] = content;
         }
     }
 
-    ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(this)
         auto result = getNormalIdASTNode(this, tokenReader);

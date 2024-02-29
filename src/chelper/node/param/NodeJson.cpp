@@ -57,8 +57,8 @@ namespace CHelper::Node {
         TO_JSON(j, key);
     }
 
-    ASTNode NodeJson::getASTNode(TokenReader &tokenReader) const {
-        return getByChildNode(tokenReader, nodeJson);
+    ASTNode NodeJson::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+        return getByChildNode(tokenReader, cpack, nodeJson);
     }
 
     void NodeJson::collectStructure(const ASTNode *astNode,

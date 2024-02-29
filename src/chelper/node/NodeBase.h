@@ -43,17 +43,19 @@ namespace CHelper {
 
             void toJson(nlohmann::json &j) const override;
 
-            [[nodiscard]] virtual ASTNode getASTNode(TokenReader &tokenReader) const = 0;
+            [[nodiscard]] virtual ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const = 0;
 
-            [[nodiscard]] ASTNode getASTNodeWithNextNode(TokenReader &tokenReader) const;
+            [[nodiscard]] ASTNode getASTNodeWithNextNode(TokenReader &tokenReader, const CPack &cpack) const;
 
         protected:
             ASTNode getByChildNode(TokenReader &tokenReader,
+                                   const CPack &cpack,
                                    const std::shared_ptr<NodeBase> &childNode,
                                    const std::string &astNodeId = "") const;
 
             //当childNodes只需要有第一个node并且其他node不一定需要的时侯使用
             ASTNode getOptionalASTNode(TokenReader &tokenReader,
+                                       const CPack &cpack,
                                        bool isIgnoreChildNodesError,
                                        const std::vector<std::shared_ptr<NodeBase>> &childNodes,
                                        const std::string &astNodeId = "") const;

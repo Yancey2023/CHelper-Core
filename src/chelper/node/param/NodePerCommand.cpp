@@ -119,16 +119,28 @@ namespace CHelper::Node {
     void NodePerCommand::toJson(nlohmann::json &j) const {
         TO_JSON(j, name);
         TO_JSON_OPTIONAL(j, description)
-        j.push_back({"node", nodes});
+        j["node"] = nodes;
         std::vector<std::string> startIds;
-        for (const auto &item: startNodes){
+        startIds.reserve(startNodes.size());
+        for (const auto &item: startNodes) {
             startIds.push_back(item->id.value());
         }
-        j.push_back({"start", startIds});
-        //TODO ast toJson()
+        j["start"] = startIds;
+        std::vector<std::vector<std::string>> ast;
+        for (const auto &item: nodes) {
+            if (item->nextNodes.empty()) {
+                continue;
+            }
+            std::vector<std::string> ast1;
+            ast1.push_back(item->id.value());
+            for (const auto &item2: item->nextNodes) {
+                ast1.push_back(item2->id.value());
+            }
+            ast.push_back(ast1);
+        }
     }
 
-    ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader) const {
+    ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();
         //命令名字的检查
         ASTNode commandName = tokenReader.readStringASTNode(this, "commandName");
@@ -161,7 +173,7 @@ namespace CHelper::Node {
         for (const auto &item: startNodes) {
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(item)
-            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader));
+            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader, cpack));
             DEBUG_GET_NODE_END(item)
             tokenReader.restore();
         }
