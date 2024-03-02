@@ -10,10 +10,17 @@
 
 namespace CHelper {
 
+    namespace Node {
+
+        class NodeBase;
+
+    } // Node
+
     class ItemId : public NamespaceId {
     public:
         std::optional<int> max;
         std::optional<std::vector<std::string>> descriptions;
+        std::shared_ptr<Node::NodeBase> nodeData;
 
         ItemId(const std::optional<std::string> &nameSpace,
                const std::string &name,

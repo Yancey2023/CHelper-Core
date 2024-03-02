@@ -22,11 +22,11 @@ namespace CHelper::Node {
         size_t size = childNodes->size();
         std::vector<ASTNode> childASTNodes;
         childASTNodes.reserve(size);
-        size_t indexes[size];
-        for (int i = 0; i < size; ++i) {
+        std::vector<size_t> indexes;
+        for (const auto &item: *childNodes) {
             tokenReader.push();
-            childASTNodes.push_back(childNodes->at(i)->getASTNode(tokenReader, cpack));
-            indexes[i] = tokenReader.index;
+            childASTNodes.push_back(item->getASTNode(tokenReader, cpack));
+            indexes.push_back(tokenReader.index);
             tokenReader.restore();
         }
         if (isAttachToEnd) {

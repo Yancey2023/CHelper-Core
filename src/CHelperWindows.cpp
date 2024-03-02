@@ -90,10 +90,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
             if (LOWORD(wParam) == ID_INPUT && HIWORD(wParam) == EN_CHANGE) {
                 CHelper::Profile::push("get command from input");
                 int length = GetWindowTextLength(hWndInput);
-                char buffer[length + 1];
+                auto* buffer = new char[length + 1];
                 GetWindowText(hWndInput, buffer, length + 1);
                 CHelper::Profile::pop();
                 onTextChanged(buffer);
+                delete[] buffer;
             }
             break;
         case WM_SIZE:
@@ -148,9 +149,10 @@ void onTextChanged(const std::string &command) {
         {
             CHelper::Profile::next("update description text view");
             int len = MultiByteToWideChar(CP_UTF8, 0, descriptionShow.c_str(), -1, nullptr, 0);
-            wchar_t wstr[len];
+            auto* wstr = new wchar_t[len + 1];
             MultiByteToWideChar(CP_UTF8, 0, descriptionShow.c_str(), -1, wstr, len);
             SetWindowTextW(hWndDescription, wstr);
+            delete[] wstr;
         }
         CHelper::Profile::next("update suggestion list view");
         SendMessage(hWndListBox, LB_RESETCONTENT, 0, 0);
@@ -163,9 +165,10 @@ void onTextChanged(const std::string &command) {
             auto content = std::string(suggestion.content->name).append(" - ")
                     .append(suggestion.content->description.value_or(""));
             int len = MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, nullptr, 0);
-            wchar_t wstr[len];
+            auto* wstr = new wchar_t[len];
             MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, wstr, len);
             SendMessageW(hWndListBox, LB_ADDSTRING, 0, (LPARAM) wstr);
+            delete[] wstr;
         }
         CHelper::Profile::pop();
         end2 = clock();

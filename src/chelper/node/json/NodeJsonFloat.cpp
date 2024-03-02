@@ -42,7 +42,7 @@ namespace CHelper::Node {
         stringStream << string;
         stringStream >> std::setprecision(16) >> result;
         stringStream.clear();
-        return result;
+        return static_cast<float>(result);
     }
 
     bool NodeJsonFloat::collectIdError(const ASTNode *astNode,

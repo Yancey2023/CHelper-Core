@@ -23,7 +23,9 @@ D:\CLion\project\CHelper\resources
 -give @s stone 12 21 {"minecraft:item_lock":{"mode":" "lock_in_inventory"
 -give @s stone 12 21 {"minecraft:item_lock":{"mode":"l
 -execute if block ~~~ anvil["aaa"=90.5] run
-setblock ~~~ stone[
+-setblock ~~~ stone[
 -give @s stone 12 12 {
 -give @s stone 12 12 {"minecraft:can_place_on":
 -give @s stone 12 12 {"minecraft:can_place_on":{"blocks":["bamboo",{}]
+setblock ~~~ s
+give @s s

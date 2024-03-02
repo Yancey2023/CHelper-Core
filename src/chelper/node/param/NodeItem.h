@@ -22,6 +22,7 @@ namespace CHelper::Node {
     class NodeItem : public NodeBase {
     public:
         const NodeItemType::NodeItemType nodeItemType;
+        const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds;
         const std::shared_ptr<NodeBase> nodeItemId;
         const std::shared_ptr<NodeBase> nodeComponent;
 

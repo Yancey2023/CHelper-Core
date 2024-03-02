@@ -10,14 +10,14 @@
 #include "chelper/Core.h"
 
 int main() {
-    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)");
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)", {"execute if block ~~~ anvil[\"aaa\"=90.5] run "});
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)", true);
+    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)", {"give @s "}, true);
     return 0;
 }
 
 namespace CHelper::Test {
 
-    void test(const std::string &testFilePath) {
+    void test(const std::string &testFilePath, bool isTestTime) {
         std::vector<std::string> commands;
         std::ifstream fin;
         fin.open(testFilePath, std::ios::in);
@@ -34,10 +34,10 @@ namespace CHelper::Test {
             }
         }
         fin.close();
-        CHelper::Test::test(cpackPath, commands);
+        CHelper::Test::test(cpackPath, commands, isTestTime);
     }
 
-    void test(const std::string &cpackPath, const std::vector<std::string> &commands) {
+    void test(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime) {
         try {
             auto core = Core::create(cpackPath);
             std::cout << std::endl;
@@ -45,23 +45,50 @@ namespace CHelper::Test {
                 return;
             }
             for (const auto &command: commands) {
-                clock_t start, end;
-                start = clock();
+                clock_t startParse, endParse,
+                        startDescription, endDescription,
+                        startErrorReasons, endErrorReasons,
+                        startSuggestions, endSuggestions,
+                        startStructure, endStructure;
+                startParse = clock();
                 core->onTextChanged(command, command.length());
+                endParse = clock();
+                startDescription = clock();
                 auto description = core->getDescription();
+                endDescription = clock();
+                startErrorReasons = clock();
                 auto errorReasons = core->getErrorReasons();
+                endErrorReasons = clock();
+                startSuggestions = clock();
                 auto suggestions = core->getSuggestions();
+                endSuggestions = clock();
+                startStructure = clock();
                 auto structure = core->getStructure();
-                end = clock();
+                endStructure = clock();
                 CHELPER_INFO(ColorStringBuilder()
                                      .green("parse successfully(")
-                                     .purple(std::to_string(end - start) + "ms")
+                                     .purple(std::to_string(endStructure - startParse) + "ms")
                                      .green(")")
                                      .normal(" : ")
                                      .purple(command)
                                      .build());
-//                std::cout << core->getAstNode().toOptimizedJson() << std::endl;
-//                std::cout << core->getAstNode().toBestJson() << std::endl;
+                if (isTestTime) {
+                    CHELPER_INFO(ColorStringBuilder().blue("parse in ").purple(
+                            std::to_string(endParse - startParse) + "ms").build());
+                    CHELPER_INFO(ColorStringBuilder().blue("get description in ").purple(
+                            std::to_string(endDescription - startDescription) + "ms").build());
+                    CHELPER_INFO(ColorStringBuilder().blue("get error reasons in ").purple(
+                            std::to_string(endErrorReasons - startErrorReasons) + "ms").build());
+                    CHELPER_INFO(ColorStringBuilder().blue("get suggestions in ").purple(
+                            std::to_string(endSuggestions - startSuggestions) + "ms").build());
+                    CHELPER_INFO(ColorStringBuilder().blue("get structure in ").purple(
+                            std::to_string(endStructure - startStructure) + "ms").build());
+
+                }
+                std::cout << core->getAstNode().toOptimizedJson().dump(
+                        -1, ' ', true, nlohmann::detail::error_handler_t::replace) << std::endl;
+                std::cout << core->getAstNode().toBestJson().dump(
+                        -1, ' ', true, nlohmann::detail::error_handler_t::replace) << std::endl;
                 CHELPER_INFO("structure: " + structure);
                 CHELPER_INFO("description: " + description);
                 if (errorReasons.empty()) {
@@ -129,6 +156,10 @@ namespace CHelper::Test {
             Profile::clear();
             exit(-1);
         }
+    }
+
+    void testTime(const std::string &cpackPath, const std::vector<std::string> &commands) {
+
     }
 
 } // CHelper::Test

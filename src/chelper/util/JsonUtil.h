@@ -48,10 +48,10 @@ namespace CHelper::JsonUtil {
 }
 
 // 把json文本转为对象
-#define FROM_JSON(json, name, type...) json.at(#name).get<type>()
+#define FROM_JSON(json, name, type) json.at(#name).get<type>()
 
 // 把json文本转为对象，数据不一定存在
-#define FROM_JSON_OPTIONAL(json, name, type...) json.contains(#name) ? std::optional<type>(json.at(#name).get<type>()) : std::nullopt
+#define FROM_JSON_OPTIONAL(json, name, type) json.contains(#name) ? std::optional<type>(json.at(#name).get<type>()) : std::nullopt
 
 // 把对象转json文本
 #define TO_JSON(json, name) json[#name] = name

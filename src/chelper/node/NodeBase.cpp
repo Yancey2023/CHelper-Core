@@ -99,7 +99,7 @@ namespace CHelper::Node {
     }
 
     /**
-     * 第一个节点一定要有，其他节点不一定有
+     * 节点不一定有
      *
      * @param isIgnoreChildNodesError true - 第一个错误节点到后面都不算做子节点
      *                                false - 第一个内容为空的错误节点到后面都不算做子节点

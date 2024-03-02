@@ -64,7 +64,9 @@ namespace CHelper::Node {
 
     NodeJsonElement::~NodeJsonElement() {
         for (const auto &item: nodes) {
-            if (item->getNodeType() == NodeType::JSON_LIST) {
+            if (item == nullptr) {
+                continue;
+            } else if (item->getNodeType() == NodeType::JSON_LIST) {
                 if (item != nullptr) {
                     std::static_pointer_cast<NodeJsonList>(item) = nullptr;
                 }

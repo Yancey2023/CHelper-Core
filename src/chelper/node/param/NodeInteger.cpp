@@ -47,7 +47,7 @@ namespace CHelper::Node {
         if (result < -2147483648 || result > 2147483647) {
             return std::nullopt;
         }
-        return result;
+        return static_cast<int>(result);
     }
 
     bool NodeInteger::collectIdError(const ASTNode *astNode,

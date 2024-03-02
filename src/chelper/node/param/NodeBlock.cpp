@@ -81,12 +81,11 @@ namespace CHelper::Node {
 
     ASTNode NodeBlock::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();
-        ASTNode blockId = getByChildNode(tokenReader, cpack, nodeBlockId);
+        ASTNode blockId = getByChildNode(tokenReader, cpack, nodeBlockId, "blockId");
         if (nodeBlockType == NodeBlockType::BLOCK || blockId.isError()) {
             tokenReader.pop();
             return blockId;
         }
-        //查找方块ID
         std::string blockIdStr = TokenUtil::toString(blockId.tokens);
         std::string_view nameSpace = "minecraft";
         std::string_view value = blockIdStr;
@@ -102,23 +101,19 @@ namespace CHelper::Node {
                 break;
             }
         }
-        if (currentBlock == nullptr) {
-            //找不到方块ID
-            auto blockState = nodeAllBlockState->getASTNode(tokenReader, cpack);
-            return ASTNode::andNode(this, {blockId, blockState}, tokenReader.collect());
-        }
-        //找到方块ID
         auto nodeBlockState = currentBlock == nullptr ? nodeAllBlockState :
                               std::static_pointer_cast<BlockId>(currentBlock)->nodeBlockState;
-        auto astNodeBlockState = nodeBlockState->getASTNode(tokenReader, cpack);
+        auto astNodeBlockState = getByChildNode(tokenReader, cpack, nodeBlockState, "blockState");
         return ASTNode::andNode(this, {blockId, astNodeBlockState}, tokenReader.collect());
     }
 
     std::optional<std::string> NodeBlock::collectDescription(const ASTNode *node, size_t index) const {
-        if (nodeBlockType == NodeBlockType::BLOCK) {
+        if (node->id == "blockId") {
             return "方块ID";
+        } else if (node->id == "blockState") {
+            return "方块状态";
         } else {
-            return "方块ID+方块状态";
+            return std::nullopt;
         }
     }
 

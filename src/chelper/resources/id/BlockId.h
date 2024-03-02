@@ -10,13 +10,6 @@
 
 namespace CHelper {
 
-    namespace Node {
-
-        class NodeBase;
-
-    } // Node
-
-
     namespace BlockStateType {
         enum BlockStateType : std::uint8_t {
             STRING,
