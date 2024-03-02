@@ -13,7 +13,7 @@ namespace CHelper {
 
     NormalId::NormalId(const nlohmann::json &j)
             : name(FROM_JSON(j, name, std::string)),
-              description(FROM_JSON(j, description, std::string)) {}
+              description(FROM_JSON_OPTIONAL(j, description, std::string)) {}
 
     void NormalId::toJson(nlohmann::json &j) const {
         TO_JSON(j, name);

@@ -21,8 +21,9 @@ namespace CHelper::Node {
 
     class NodeBlock : public NodeBase {
     public:
-        NodeBlockType::NodeBlockType nodeBlockType;
-        std::shared_ptr<NodeNamespaceId> nodeBlockId;
+        const NodeBlockType::NodeBlockType nodeBlockType;
+        const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> blockIds;
+        const std::shared_ptr<NodeBase> nodeBlockId;
 
         NodeBlock(const std::optional<std::string> &id,
                   const std::optional<std::string> &description,

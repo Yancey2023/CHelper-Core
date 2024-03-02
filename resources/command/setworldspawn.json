@@ -1,22 +1,23 @@
 {
+  "name": [
+    "setworldspawn"
+  ],
+  "description": "设置世界出生点",
+  "start": [
+    "spawnPoint",
+    "LF"
+  ],
   "node": [
     {
-      "description": "世界出生点坐标",
-      "id": "0",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "spawnPoint",
+      "description": "世界出生点坐标"
     }
   ],
   "ast": [
     [
-      "0",
+      "spawnPoint",
       "LF"
     ]
-  ],
-  "name": [
-    "setworldspawn"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "设置世界出生点"
+  ]
 }

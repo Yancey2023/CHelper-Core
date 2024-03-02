@@ -42,10 +42,12 @@ namespace CHelper {
             static std::shared_ptr<NodeType> PER_COMMAND;
             static std::shared_ptr<NodeType> POSITION;
             static std::shared_ptr<NodeType> RELATIVE_FLOAT;
+            static std::shared_ptr<NodeType> REPEAT;
             static std::shared_ptr<NodeType> STRING;
             static std::shared_ptr<NodeType> TARGET_SELECTOR;
             static std::shared_ptr<NodeType> TEXT;
             static std::shared_ptr<NodeType> RANGE;
+            static std::shared_ptr<NodeType> XP_INTEGER;
             static std::shared_ptr<NodeType> JSON;
             static std::shared_ptr<NodeType> JSON_OBJECT;
             static std::shared_ptr<NodeType> JSON_LIST;

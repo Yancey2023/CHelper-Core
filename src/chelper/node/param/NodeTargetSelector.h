@@ -30,8 +30,8 @@ namespace CHelper::Node {
                            const std::shared_ptr<NodeBase> &nodeItemLocation,
                            const std::shared_ptr<NodeBase> &nodeEntities);
 
-        explicit NodeTargetSelector(const nlohmann::json &j,
-                                    [[maybe_unused]] const CPack &cpack);
+        NodeTargetSelector(const nlohmann::json &j,
+                           [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
 

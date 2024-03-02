@@ -1,37 +1,33 @@
 {
+  "name": [
+    "particle"
+  ],
+  "description": "在指定位置显示粒子效果",
+  "start": [
+    "effect"
+  ],
   "node": [
     {
-      "contentMode": true,
-      "description": "要创造的粒子类型",
-      "id": "0",
       "type": "NORMAL_ID",
+      "id": "effect",
+      "description": "要创造的粒子类型",
       "key": "particles"
     },
     {
-      "description": "创造粒子的位置",
-      "id": "1",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "position",
+      "description": "创造粒子的位置"
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
-    ],
-    [
-      "0",
+      "effect",
+      "position",
       "LF"
     ],
     [
-      "1",
+      "position",
       "LF"
     ]
-  ],
-  "name": [
-    "particle"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "在指定位置显示粒子效果"
+  ]
 }

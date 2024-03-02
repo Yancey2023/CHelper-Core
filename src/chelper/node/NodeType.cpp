@@ -27,6 +27,8 @@
 #include "json/NodeJsonBoolean.h"
 #include "json/NodeJsonFloat.h"
 #include "json/NodeJsonNull.h"
+#include "param/NodeXpInteger.h"
+#include "param/NodeRepeat.h"
 
 namespace CHelper::Node {
 
@@ -37,33 +39,34 @@ namespace CHelper::Node {
               createNodeByJson(std::move(createNodeByJson)) {}
 
     template<class T>
-    static std::unique_ptr<NodeType> create(const std::string &nodeName) {
-        return std::make_unique<NodeType>(nodeName,
-                                          [](const nlohmann::json &j, const CPack &cpack) -> std::shared_ptr<NodeBase> {
-                                              return std::make_shared<T>(j, cpack);
-                                          });
+    static std::shared_ptr<NodeType> create(const std::string &nodeName) {
+        return std::make_unique<NodeType>(
+                nodeName, [](const nlohmann::json &j, const CPack &cpack) -> std::shared_ptr<NodeBase> {
+                    return std::make_shared<T>(j, cpack);
+                });
     }
 
     template<class T>
-    static std::unique_ptr<NodeType> createJson(const std::string &nodeName) {
-        return std::make_unique<NodeType>(nodeName,
-                                          [&nodeName](const nlohmann::json &j,
-                                                      const CPack &cpack) -> std::shared_ptr<NodeBase> {
-                                              if (!NodeType::canLoadNodeJson) {
-                                                  throw Exception::UnknownNodeType(nodeName);
-                                              }
-                                              return std::make_shared<T>(j, cpack);
-                                          });
+    static std::shared_ptr<NodeType> createJson(const std::string &nodeName) {
+        return std::make_unique<NodeType>(
+                nodeName, [&nodeName](const nlohmann::json &j, const CPack &cpack) -> std::shared_ptr<NodeBase> {
+                    if (!NodeType::canLoadNodeJson) {
+                        //这些节点在注册Json数据的时候创建，在命令注册的时候创建就抛出错误
+                        throw Exception::UnknownNodeType(nodeName);
+                    }
+                    return std::make_shared<T>(j, cpack);
+                });
     }
 
     std::vector<std::shared_ptr<NodeType>> NodeType::NODE_TYPES;
 
     bool NodeType::canLoadNodeJson = false;
 
-    std::shared_ptr<NodeType> NodeType::UNKNOWN = std::make_unique<NodeType>("UNKNOWN", [](const nlohmann::json &j,
-                                                                                           const CPack &cpack) -> std::shared_ptr<NodeBase> {
-        throw Exception::UnknownNodeType(NodeType::UNKNOWN->nodeName);
-    });
+    std::shared_ptr<NodeType> NodeType::UNKNOWN = std::make_unique<NodeType>(
+            "UNKNOWN", [](const nlohmann::json &j, const CPack &cpack) -> std::shared_ptr<NodeBase> {
+                throw Exception::UnknownNodeType(
+                        NodeType::UNKNOWN->nodeName);
+            });
     std::shared_ptr<NodeType> NodeType::BLOCK = create<NodeBlock>("BLOCK");
     std::shared_ptr<NodeType> NodeType::BOOLEAN = create<NodeBoolean>("BOOLEAN");
     std::shared_ptr<NodeType> NodeType::COMMAND = create<NodeCommand>("COMMAND");
@@ -71,22 +74,36 @@ namespace CHelper::Node {
     std::shared_ptr<NodeType> NodeType::FLOAT = create<NodeFloat>("FLOAT");
     std::shared_ptr<NodeType> NodeType::INTEGER = create<NodeInteger>("INTEGER");
     std::shared_ptr<NodeType> NodeType::ITEM = create<NodeItem>("ITEM");
-    std::shared_ptr<NodeType> NodeType::LF = std::make_unique<NodeType>("LF",
-                                                                        [](const nlohmann::json &j,
-                                                                           const CPack &cpack) -> std::shared_ptr<NodeBase> {
-                                                                            return NodeLF::getInstance();
-                                                                        });
+    std::shared_ptr<NodeType> NodeType::LF = std::make_unique<NodeType>(
+            "LF", [](const nlohmann::json &j, const CPack &cpack) -> std::shared_ptr<NodeBase> {
+                return NodeLF::getInstance();
+            });
     std::shared_ptr<NodeType> NodeType::NAMESPACE_ID = create<NodeNamespaceId>("NAMESPACE_ID");
     std::shared_ptr<NodeType> NodeType::NORMAL_ID = create<NodeNormalId>("NORMAL_ID");
     std::shared_ptr<NodeType> NodeType::PER_COMMAND = create<NodePerCommand>("PER_COMMAND");
     std::shared_ptr<NodeType> NodeType::POSITION = create<NodePosition>("POSITION");
     std::shared_ptr<NodeType> NodeType::RELATIVE_FLOAT = create<NodeRelativeFloat>("RELATIVE_FLOAT");
+    std::shared_ptr<NodeType> NodeType::REPEAT = std::make_unique<NodeType>(
+            "REPEAT", [](const nlohmann::json &j, const CPack &cpack) -> std::shared_ptr<NodeBase> {
+                if (NodeType::canLoadNodeJson) {
+                    //这个节点只能在命令注册的时候创建，在注册Json数据的时候创建就抛出错误
+                    throw Exception::UnknownNodeType(NodeType::REPEAT->nodeName);
+                }
+                return std::make_shared<NodeRepeat>(j, cpack);
+            });
     std::shared_ptr<NodeType> NodeType::STRING = create<NodeString>("STRING");
     std::shared_ptr<NodeType> NodeType::TARGET_SELECTOR = create<NodeTargetSelector>("TARGET_SELECTOR");
     std::shared_ptr<NodeType> NodeType::TEXT = create<NodeText>("TEXT");
     std::shared_ptr<NodeType> NodeType::RANGE = create<NodeRange>("RANGE");
-    std::shared_ptr<NodeType> NodeType::JSON = create<NodeJson>("JSON");
-
+    std::shared_ptr<NodeType> NodeType::XP_INTEGER = create<NodeXpInteger>("XP_INTEGER");
+    std::shared_ptr<NodeType> NodeType::JSON = std::make_unique<NodeType>(
+            "JSON", [](const nlohmann::json &j, const CPack &cpack) -> std::shared_ptr<NodeBase> {
+                if (NodeType::canLoadNodeJson) {
+                    //这个节点只能在命令注册的时候创建，在注册Json数据的时候创建就抛出错误
+                    throw Exception::UnknownNodeType(NodeType::JSON->nodeName);
+                }
+                return std::make_shared<NodeJson>(j, cpack);
+            });
     std::shared_ptr<NodeType> NodeType::JSON_OBJECT = createJson<NodeJsonObject>("JSON_OBJECT");
     std::shared_ptr<NodeType> NodeType::JSON_LIST = createJson<NodeJsonList>("JSON_LIST");
     std::shared_ptr<NodeType> NodeType::JSON_STRING = createJson<NodeJsonString>("JSON_STRING");
@@ -120,10 +137,12 @@ namespace CHelper::Node {
         registerNodeType(PER_COMMAND);
         registerNodeType(POSITION);
         registerNodeType(RELATIVE_FLOAT);
+        registerNodeType(REPEAT);
         registerNodeType(STRING);
         registerNodeType(TARGET_SELECTOR);
         registerNodeType(TEXT);
         registerNodeType(RANGE);
+        registerNodeType(XP_INTEGER);
         registerNodeType(JSON);
         registerNodeType(JSON_OBJECT);
         registerNodeType(JSON_LIST);

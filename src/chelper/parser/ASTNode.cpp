@@ -130,6 +130,8 @@ namespace CHelper {
     nlohmann::json ASTNode::toBestJson() const {
         if (mode == ASTNodeMode::OR) {
             return childNodes[whichBest].toBestJson();
+        } else if (id == "compound" && childNodes.size() == 1) {
+            return childNodes[0].toBestJson();
         }
         nlohmann::json j;
         j["isError"] = isError();
@@ -459,16 +461,28 @@ namespace CHelper {
 
     std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
         Profile::push("start getting suggestions: " + TokenUtil::toString(tokens));
-        std::vector<Suggestion> result;
-        collectSuggestions(index, result);
+        std::vector<Suggestion> input, output;
+        collectSuggestions(index, input);
         Profile::pop();
-        return result;
+        for (const auto &item: input) {
+            bool flag = true;
+            for (const auto &item2: output) {
+                if (item2.start == item.start &&
+                    item2.end == item.end &&
+                    item2.content->name == item.content->name &&
+                    item2.content->description == item.content->description) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                output.push_back(item);
+            }
+        }
+        return output;
     }
 
     std::string ASTNode::getStructure() const {
-        if (tokens.size() <= 1) {
-            return "CHelper";
-        }
         Profile::push("start getting structure: " + TokenUtil::toString(tokens));
         StructureBuilder structureBuilder;
         collectStructure(structureBuilder, true);

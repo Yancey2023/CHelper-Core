@@ -1,25 +1,26 @@
 {
+  "name": [
+    "deop"
+  ],
+  "description": "撤销玩家的管理员权限",
+  "start": [
+    "player",
+    "LF"
+  ],
   "node": [
     {
-      "isMustPlayer": true,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "player",
       "description": "从管理员列表中移除的玩家",
-      "id": "0",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": true,
+      "isMustNPC": false
     }
   ],
   "ast": [
     [
-      "0",
+      "player",
       "LF"
     ]
-  ],
-  "name": [
-    "deop"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "撤销玩家的管理员权限"
+  ]
 }

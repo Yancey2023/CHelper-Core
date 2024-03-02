@@ -1,24 +1,24 @@
 {
+  "name": [
+    "me"
+  ],
+  "description": "显示一条关于你自己的信息",
+  "start": [
+    "message"
+  ],
   "node": [
     {
-      "canContainSpace": true,
+      "type": "STRING",
+      "id": "message",
       "description": "要显示的信息",
-      "ignoreLater": false,
-      "id": "0",
-      "type": "STRING"
+      "canContainSpace": true,
+      "ignoreLater": false
     }
   ],
   "ast": [
     [
-      "0",
+      "message",
       "LF"
     ]
-  ],
-  "name": [
-    "me"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "显示一条关于你自己的信息"
+  ]
 }

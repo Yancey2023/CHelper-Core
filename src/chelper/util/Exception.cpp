@@ -56,9 +56,9 @@ namespace CHelper::Exception {
                               .red("unknown node id")
                               .normal(" -> ")
                               .purple(requiredNodeId)
-                              .red(" (in command \"")
+                              .red(" (in command ")
                               .purple(getCommandName(commandName))
-                              .red("\")")
+                              .red(")")
                               .build());
     }
 
@@ -69,9 +69,9 @@ namespace CHelper::Exception {
     RequireParentNodeId::RequireParentNodeId(const std::vector<std::string> &commandName) {
         Profile::push(ColorStringBuilder()
                               .red("dismiss parent node id")
-                              .red(" (in node \"")
+                              .red(" (in command ")
                               .purple(getCommandName(commandName))
-                              .red("\")")
+                              .red(")")
                               .build());
     }
 
@@ -85,9 +85,9 @@ namespace CHelper::Exception {
                               .red("dismiss child node ids, the parent node")
                               .normal(" -> ")
                               .purple(parentNodeId)
-                              .red(" (in node \"")
+                              .red(" (in command ")
                               .purple(getCommandName(commandName))
-                              .red("\")")
+                              .red(")")
                               .build());
     }
 

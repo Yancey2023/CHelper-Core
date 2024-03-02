@@ -1,92 +1,76 @@
 {
+  "name": [
+    "playsound"
+  ],
+  "description": "播放一段声音",
+  "start": [
+    "sound"
+  ],
   "node": [
     {
-      "contentMode": true,
-      "description": "要播放的声音",
-      "id": "0",
       "type": "NORMAL_ID",
+      "id": "sound",
+      "description": "要播放的声音",
       "key": "sound"
     },
     {
-      "isMustPlayer": true,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "player",
       "description": "目标",
-      "id": "1",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": true,
+      "isMustNPC": false
     },
     {
-      "description": "声音发出的方位",
-      "id": "2",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "position",
+      "description": "声音发出的方位"
     },
     {
-      "description": "声音能被听见的距离",
-      "id": "3",
-      "type": "FLOAT"
+      "type": "FLOAT",
+      "id": "volume",
+      "description": "声音能被听见的距离"
     },
     {
-      "description": "声音的音调",
-      "id": "4",
-      "type": "FLOAT"
+      "type": "FLOAT",
+      "id": "pitch",
+      "description": "声音的音调"
     },
     {
-      "description": "在声音可闻范围外的目标能听到的音量",
-      "id": "5",
-      "type": "FLOAT"
+      "type": "FLOAT",
+      "id": "minimumVolume",
+      "description": "在声音可闻范围外的目标能听到的音量"
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
-    ],
-    [
-      "0",
+      "sound",
+      "player",
       "LF"
     ],
     [
-      "1",
-      "2"
-    ],
-    [
-      "1",
+      "player",
+      "position",
       "LF"
     ],
     [
-      "2",
-      "3"
-    ],
-    [
-      "2",
+      "position",
+      "volume",
       "LF"
     ],
     [
-      "3",
-      "4"
-    ],
-    [
-      "3",
+      "volume",
+      "pitch",
       "LF"
     ],
     [
-      "4",
-      "5"
-    ],
-    [
-      "4",
+      "pitch",
+      "minimumVolume",
       "LF"
     ],
     [
-      "5",
+      "minimumVolume",
       "LF"
     ]
-  ],
-  "name": [
-    "playsound"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "播放一段声音"
+  ]
 }

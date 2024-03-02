@@ -80,17 +80,17 @@ namespace CHelper::Node {
         //value
         std::string key = TokenUtil::toString(astNodeKey.tokens);
         if (key == "item") {
-            childNodes.push_back(nodeItem->getASTNode(tokenReader, cpack));
+            childNodes.push_back(nodeItem->getASTNodeWithNextNode(tokenReader, cpack));
         } else if (key == "data") {
-            childNodes.push_back(nodeData->getASTNode(tokenReader, cpack));
+            childNodes.push_back(nodeData->getASTNodeWithNextNode(tokenReader, cpack));
         } else if (key == "quantity") {
-            childNodes.push_back(nodeQuantity->getASTNode(tokenReader, cpack));
+            childNodes.push_back(nodeQuantity->getASTNodeWithNextNode(tokenReader, cpack));
         } else if (key == "location") {
-            childNodes.push_back(nodeSlot->getASTNode(tokenReader, cpack));
+            childNodes.push_back(nodeSlot->getASTNodeWithNextNode(tokenReader, cpack));
         } else if (key == "slot") {
-            childNodes.push_back(nodeSlotRange->getASTNode(tokenReader, cpack));
+            childNodes.push_back(nodeSlotRange->getASTNodeWithNextNode(tokenReader, cpack));
         } else {
-            childNodes.push_back(nodeValue->getASTNode(tokenReader, cpack));
+            childNodes.push_back(nodeValue->getASTNodeWithNextNode(tokenReader, cpack));
         }
         return ASTNode::andNode(this, childNodes, tokenReader.collect());
     }

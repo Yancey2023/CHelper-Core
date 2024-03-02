@@ -1,22 +1,32 @@
 {
+  "name": [
+    "fill"
+  ],
+  "description": "用特定方块填充一个区域的全部或部分",
+  "start": [
+    "from"
+  ],
   "node": [
     {
-      "description": "定义填充区域的两组对角方块坐标",
-      "id": "0",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "from",
+      "description": "定义填充区域的两组对角方块坐标"
     },
     {
-      "description": "定义填充区域的两组对角方块坐标",
-      "id": "1",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "to",
+      "description": "定义填充区域的两组对角方块坐标"
     },
     {
+      "type": "BLOCK",
+      "id": "block",
       "nodeBlockType": 0,
-      "description": "用于填充该区域的方块",
-      "id": "2",
-      "type": "BLOCK"
+      "description": "用于填充该区域的方块"
     },
     {
+      "type": "NORMAL_ID",
+      "id": "oldBlockHandling",
+      "description": "填充模式",
       "contents": [
         {
           "name": "destroy",
@@ -34,88 +44,50 @@
           "name": "outline",
           "description": " 仅用指定方块替换填充区域外层的方块。内部方块不受影响。若被填充的区域没有内部（长、宽、高至少一个不足3方格）时，与replace效果相似"
         }
-      ],
-      "contentMode": false,
-      "description": "填充模式",
-      "id": "3",
-      "type": "NORMAL_ID"
+      ]
     },
     {
-      "description": "定义填充区域的两组对角方块坐标",
-      "id": "4",
-      "type": "POSITION"
-    },
-    {
-      "description": "定义填充区域的两组对角方块坐标",
-      "id": "5",
-      "type": "POSITION"
-    },
-    {
-      "nodeBlockType": 0,
-      "description": "用于填充该区域的方块",
-      "id": "6",
-      "type": "BLOCK"
-    },
-    {
+      "type": "TEXT",
+      "id": "replace",
+      "description": "用指定方块替换填充区域内所有方块（包括空气），而不以实体形式掉落被替换的方块和方块内容物",
       "data": {
         "name": "replace",
         "description": "用指定方块替换填充区域内所有方块（包括空气），而不以实体形式掉落被替换的方块和方块内容物"
-      },
-      "description": "用指定方块替换填充区域内所有方块（包括空气），而不以实体形式掉落被替换的方块和方块内容物",
-      "id": "7",
-      "type": "TEXT"
+      }
     },
     {
+      "type": "BLOCK",
+      "id": "replaceBlock",
       "nodeBlockType": 0,
-      "description": "被替换的方块类型",
-      "id": "8",
-      "type": "BLOCK"
+      "description": "被替换的方块类型"
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "from",
+      "to"
     ],
     [
-      "1",
-      "2"
+      "to",
+      "block"
     ],
     [
-      "2",
-      "3"
-    ],
-    [
-      "3",
+      "block",
+      "oldBlockHandling",
+      "replace",
       "LF"
     ],
     [
-      "4",
-      "5"
+      "oldBlockHandling",
+      "LF"
     ],
     [
-      "5",
-      "6"
+      "replace",
+      "replaceBlock"
     ],
     [
-      "6",
-      "7"
-    ],
-    [
-      "7",
-      "8"
-    ],
-    [
-      "8",
+      "replaceBlock",
       "LF"
     ]
-  ],
-  "name": [
-    "fill"
-  ],
-  "start": [
-    "0",
-    "4"
-  ],
-  "description": "用特定方块填充一个区域的全部或部分"
+  ]
 }

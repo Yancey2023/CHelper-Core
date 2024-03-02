@@ -2,8 +2,8 @@
   "name": [
     "reload"
   ],
+  "description": "重新加载行为包中的函数和脚本",
   "start": [
     "LF"
-  ],
-  "description": "重新加载行为包中的函数"
+  ]
 }

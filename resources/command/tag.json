@@ -1,82 +1,77 @@
 {
+  "name": [
+    "tag"
+  ],
+  "description": "管理实体的记分板标签",
+  "start": [
+    "entity"
+  ],
   "node": [
     {
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "entity",
       "description": "要操作的实体目标",
-      "id": "0",
-      "type": "TARGET_SELECTOR"
-    },
-    {
-      "contents": [
-        {
-          "name": "add",
-          "description": " 为目标添加一个标签"
-        },
-        {
-          "name": "remove",
-          "description": " 移除目标的一个标签"
-        }
-      ],
-      "contentMode": false,
-      "description": "为目标添加一个标签或移除目标的一个标签",
-      "id": "1",
-      "type": "NORMAL_ID"
-    },
-    {
-      "canContainSpace": true,
-      "description": "要被添加或被移除的标签名称",
-      "ignoreLater": false,
-      "id": "2",
-      "type": "STRING"
-    },
-    {
-      "isMustPlayer": false,
       "isOnlyOne": false,
-      "isMustNPC": false,
-      "description": "要操作的实体目标",
-      "id": "3",
-      "type": "TARGET_SELECTOR"
+      "isMustPlayer": false,
+      "isMustNPC": false
     },
     {
+      "type": "TEXT",
+      "id": "add",
+      "description": "为目标添加一个标签",
+      "data": {
+        "name": "add",
+        "description": "为目标添加一个标签"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "remove",
+      "description": "移除目标的一个标签",
+      "data": {
+        "name": "remove",
+        "description": "移除目标的一个标签"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "list",
+      "description": "列出目标所拥有的所有标签",
       "data": {
         "name": "list",
         "description": "列出目标所拥有的所有标签"
-      },
-      "description": "列出目标所拥有的所有标签",
-      "id": "4",
-      "type": "TEXT"
+      }
+    },
+    {
+      "type": "STRING",
+      "id": "name",
+      "description": "要被添加或被移除的标签名称",
+      "canContainSpace": true,
+      "ignoreLater": false
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "entity",
+      "add",
+      "remove",
+      "list"
     ],
     [
-      "1",
-      "2"
+      "add",
+      "name"
     ],
     [
-      "2",
+      "name",
       "LF"
     ],
     [
-      "3",
-      "4"
+      "remove",
+      "name"
     ],
     [
-      "4",
+      "list",
       "LF"
     ]
-  ],
-  "name": [
-    "tag"
-  ],
-  "start": [
-    "0",
-    "3"
-  ],
-  "description": "管理实体的记分板标签"
+  ]
 }

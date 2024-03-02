@@ -7,11 +7,18 @@
 #include "../util/NodeSingleSymbol.h"
 #include "../param/NodeText.h"
 #include "../util/NodeEntry.h"
+#include "NodeJsonString.h"
+#include "NodeJsonElement.h"
 
 namespace CHelper::Node {
 
     static std::shared_ptr<NodeBase> nodeSeparator = std::make_shared<NodeSingleSymbol>(
             "JSON_LIST_ELEMENT_SEPARATOR", "冒号", ':');
+    static std::shared_ptr<NodeBase> jsonString = std::make_shared<NodeJsonString>(
+            "JSON_STRING", "JSON字符串", nullptr);
+    static std::shared_ptr<NodeBase> nodeAllEntry = std::make_shared<NodeEntry>(
+            "JSON_OBJECT_ENTRY", "JSON对象键值对", jsonString, nodeSeparator,
+            NodeJsonElement::getNodeJsonElement());
 
     NodeJsonEntry::NodeJsonEntry(const std::optional<std::string> &id,
                                  const std::optional<std::string> &description,
@@ -49,7 +56,26 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeJsonEntry::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
-        return getByChildNode(tokenReader, cpack, nodeEntry);
+        if (nodeEntry == nullptr) {
+            return getByChildNode(tokenReader, cpack, nodeAllEntry, "node json all entry");
+        }
+        tokenReader.push();
+        ASTNode result1 = nodeEntry->getASTNode(tokenReader, cpack);
+        size_t index1 = tokenReader.index;
+        tokenReader.restore();
+        tokenReader.push();
+        ASTNode result2 = getByChildNode(tokenReader, cpack, nodeEntry, "node json all entry");
+        size_t index2 = tokenReader.index;
+        tokenReader.restore();
+        tokenReader.push();
+        tokenReader.index = result1.isError() ? index2 : index1;
+        return ASTNode::orNode(this, {result1, result2}, tokenReader.collect());
+    }
+
+    bool NodeJsonEntry::collectSuggestions(const ASTNode *astNode,
+                                           size_t index,
+                                           std::vector<Suggestion> &suggestions) const {
+        return astNode->id == "node json all entry";
     }
 
 } // CHelper::Node

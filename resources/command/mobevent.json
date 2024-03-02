@@ -1,6 +1,16 @@
 {
+  "name": [
+    "mobevent"
+  ],
+  "description": "控制或查询允许运行的生物事件",
+  "start": [
+    "event"
+  ],
   "node": [
     {
+      "type": "NORMAL_ID",
+      "id": "event",
+      "description": "要控制或查询的事件",
       "contents": [
         {
           "name": "minecraft:ender_dragon_event",
@@ -18,39 +28,25 @@
           "name": "events_enabled",
           "description": "禁用此选项时，不会发生任何事件；启用此选项时，只会发生启用的事件"
         }
-      ],
-      "contentMode": false,
-      "description": "要控制或查询的事件",
-      "id": "0",
-      "type": "NORMAL_ID"
+      ]
     },
     {
-      "descriptionFalse": "禁用事件",
+      "type": "BOOLEAN",
+      "id": "value",
       "description": "是否启用事件（如果忽略，则显示当前启用状态）",
-      "descriptionTrue": "启用事件",
-      "id": "1",
-      "type": "BOOLEAN"
+      "descriptionFalse": "禁用事件",
+      "descriptionTrue": "启用事件"
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
-    ],
-    [
-      "0",
+      "event",
+      "value",
       "LF"
     ],
     [
-      "1",
+      "value",
       "LF"
     ]
-  ],
-  "name": [
-    "mobevent"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "控制或查询允许运行的生物事件"
+  ]
 }

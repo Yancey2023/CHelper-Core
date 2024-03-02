@@ -1,36 +1,38 @@
 {
+  "name": [
+    "msg",
+    "tell",
+    "w"
+  ],
+  "start": [
+    "target"
+  ],
+  "description": "将一条私聊信息发送给一个或多个玩家",
   "node": [
     {
-      "isMustPlayer": true,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "target",
       "description": "私聊消息的接收玩家",
-      "id": "0",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": true,
+      "isMustNPC": false
     },
     {
       "canContainSpace": true,
       "description": "要发送的消息",
       "ignoreLater": false,
-      "id": "1",
+      "id": "message",
       "type": "STRING"
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "target",
+      "message"
     ],
     [
-      "1",
+      "message",
       "LF"
     ]
-  ],
-  "name": [
-    "tell"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "将一条私聊信息发送给一个或多个玩家，同/msg和/w"
+  ]
 }

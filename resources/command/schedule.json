@@ -1,208 +1,125 @@
 {
+  "name": [
+    "schedule"
+  ],
+  "description": "在指定的区域全部被加载时执行函数",
+  "start": [
+    "on_area_loaded"
+  ],
   "node": [
     {
+      "type": "TEXT",
+      "id": "on_area_loaded",
+      "description": "在指定的区域加载加载后运行",
       "data": {
         "name": "on_area_loaded",
         "description": "在指定的区域加载加载后运行"
-      },
-      "description": "在指定的区域加载加载后运行",
-      "id": "0",
-      "type": "TEXT"
+      }
     },
     {
+      "type": "TEXT",
+      "id": "add",
+      "description": "增加",
       "data": {
         "name": "add",
         "description": "增加"
-      },
-      "description": "增加",
-      "id": "1",
-      "type": "TEXT"
+      }
     },
     {
-      "description": "用于定义矩形加载区域的两个对角坐标的第一个",
-      "id": "2",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "from",
+      "description": "用于定义矩形加载区域的两个对角坐标的第一个"
     },
     {
-      "description": "用于定义矩形加载区域的两个对角坐标的第二个",
-      "id": "3",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "to",
+      "description": "用于定义矩形加载区域的两个对角坐标的第二个"
     },
     {
-      "canContainSpace": false,
+      "type": "STRING",
+      "id": "function",
       "description": "要执行的函数或函数标签",
-      "ignoreLater": false,
-      "id": "4",
-      "type": "STRING"
+      "canContainSpace": true,
+      "ignoreLater": true
     },
     {
-      "data": {
-        "name": "on_area_loaded",
-        "description": "在指定的区域加载加载后运行"
-      },
-      "description": "在指定的区域加载加载后运行",
-      "id": "5",
-      "type": "TEXT"
-    },
-    {
-      "data": {
-        "name": "add",
-        "description": "增加"
-      },
-      "description": "增加",
-      "id": "6",
-      "type": "TEXT"
-    },
-    {
+      "type": "TEXT",
+      "id": "circle",
+      "description": "在与圆形区域有重叠部分的区域全部被加载时执行函数",
       "data": {
         "name": "circle",
         "description": "在与圆形区域有重叠部分的区域全部被加载时执行函数"
-      },
-      "description": "在与圆形区域有重叠部分的区域全部被加载时执行函数",
-      "id": "7",
-      "type": "TEXT"
+      }
     },
     {
-      "description": "用于定义圆形加载区域的圆心的坐标",
-      "id": "8",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "center",
+      "description": "用于定义圆形加载区域的圆心的坐标"
     },
     {
-      "description": "圆形常加载区域的半径作为从中心到圆周的区块数",
-      "id": "9",
-      "type": "INTEGER"
+      "type": "INTEGER",
+      "id": "radius",
+      "description": "圆形常加载区域的半径作为从中心到圆周的区块数"
     },
     {
-      "canContainSpace": false,
-      "description": "要执行的函数或函数标签",
-      "ignoreLater": false,
-      "id": "10",
-      "type": "STRING"
-    },
-    {
-      "data": {
-        "name": "on_area_loaded",
-        "description": "在指定的区域加载加载后运行"
-      },
-      "description": "在指定的区域加载加载后运行",
-      "id": "11",
-      "type": "TEXT"
-    },
-    {
-      "data": {
-        "name": "add",
-        "description": "增加"
-      },
-      "description": "增加",
-      "id": "12",
-      "type": "TEXT"
-    },
-    {
+      "type": "TEXT",
+      "id": "tickingarea",
+      "description": "在常加载区域被添加时运行函数",
       "data": {
         "name": "tickingarea",
         "description": "在常加载区域被添加时运行函数"
-      },
-      "description": "在常加载区域被添加时运行函数",
-      "id": "13",
-      "type": "TEXT"
+      }
     },
     {
-      "description": "用于定义圆形加载区域的圆心的坐标",
-      "id": "14",
-      "type": "POSITION"
-    },
-    {
-      "canContainSpace": true,
+      "type": "STRING",
+      "id": "name",
       "description": "常加载区域的名称",
-      "ignoreLater": false,
-      "id": "15",
-      "type": "STRING"
-    },
-    {
-      "canContainSpace": false,
-      "description": "要执行的函数或函数标签",
-      "ignoreLater": false,
-      "id": "16",
-      "type": "STRING"
+      "canContainSpace": true,
+      "ignoreLater": false
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "on_area_loaded",
+      "add"
     ],
     [
-      "1",
-      "2"
+      "add",
+      "from",
+      "circle",
+      "tickingarea"
     ],
     [
-      "2",
-      "3"
+      "from",
+      "to"
     ],
     [
-      "3",
-      "4"
+      "to",
+      "function"
     ],
     [
-      "4",
+      "function",
       "LF"
     ],
     [
-      "5",
-      "6"
+      "circle",
+      "center"
     ],
     [
-      "6",
-      "7"
+      "center",
+      "radius"
     ],
     [
-      "7",
-      "8"
+      "radius",
+      "function"
     ],
     [
-      "8",
-      "9"
+      "tickingarea",
+      "name"
     ],
     [
-      "9",
-      "10"
-    ],
-    [
-      "10",
-      "LF"
-    ],
-    [
-      "11",
-      "12"
-    ],
-    [
-      "12",
-      "13"
-    ],
-    [
-      "13",
-      "14"
-    ],
-    [
-      "14",
-      "15"
-    ],
-    [
-      "15",
-      "16"
-    ],
-    [
-      "16",
-      "LF"
+      "name",
+      "function"
     ]
-  ],
-  "name": [
-    "schedule"
-  ],
-  "start": [
-    "0",
-    "5",
-    "11"
-  ],
-  "description": "在指定的区域全部被加载时执行函数"
+  ]
 }

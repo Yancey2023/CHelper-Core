@@ -10,6 +10,13 @@
 
 namespace CHelper {
 
+    namespace Node {
+
+        class NodeBase;
+
+    } // Node
+
+
     namespace BlockStateType {
         enum BlockStateType : std::uint8_t {
             STRING,
@@ -23,6 +30,7 @@ namespace CHelper {
         BlockStateType::BlockStateType type;
         std::variant<std::string, int, bool> value;
         std::optional<std::string> description;
+        std::shared_ptr<Node::NodeBase> node;
 
         BlockStateValue(BlockStateType::BlockStateType type,
                         const std::variant<std::string, int, bool> &value,
@@ -40,6 +48,7 @@ namespace CHelper {
         std::optional<std::string> description;
         std::vector<BlockStateValue> values;
         int defaultValue;
+        std::shared_ptr<Node::NodeBase> node;
 
         BlockState(std::string key,
                    const std::optional<std::string> &description,
@@ -54,6 +63,7 @@ namespace CHelper {
     class BlockId : public ItemId {
     public:
         std::optional<std::vector<BlockState>> blockStates;
+        std::shared_ptr<Node::NodeBase> nodeBlockState;
 
         BlockId(const std::optional<std::string> &nameSpace,
                 const std::string &name,

@@ -1,39 +1,37 @@
 {
+  "name": [
+    "clear"
+  ],
+  "description": "清除玩家物品栏的物品",
+  "start": [
+    "player",
+    "LF"
+  ],
   "node": [
     {
-      "isMustPlayer": true,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "player",
       "description": "要被清除物品的玩家(默认为命令执行者)",
-      "id": "0",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": true,
+      "isMustNPC": false
     },
     {
-      "nodeItemType": 1,
+      "type": "ITEM",
+      "id": "item",
       "description": "要被清除的物品",
-      "id": "1",
-      "type": "ITEM"
+      "nodeItemType": 1
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
-    ],
-    [
-      "0",
+      "player",
+      "item",
       "LF"
     ],
     [
-      "1",
+      "item",
       "LF"
     ]
-  ],
-  "name": [
-    "clear"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "清除玩家物品栏的物品"
+  ]
 }

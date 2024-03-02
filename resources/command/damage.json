@@ -1,107 +1,71 @@
 {
+  "name": [
+    "damage"
+  ],
+  "description": "对指定实体造成伤害",
+  "start": [
+    "target"
+  ],
   "node": [
     {
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "target",
       "description": "要被伤害的目标实体",
-      "id": "0",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
     },
     {
-      "description": "要造成的伤害值",
-      "id": "1",
-      "type": "INTEGER"
+      "type": "INTEGER",
+      "id": "amount",
+      "description": "要造成的伤害值"
     },
     {
-      "contentMode": true,
-      "description": "伤害的成因",
-      "id": "2",
       "type": "NORMAL_ID",
+      "id": "cause",
+      "description": "伤害的成因",
       "key": "damageCause"
     },
     {
+      "type": "TEXT",
+      "id": "entity",
+      "description": "攻击实体",
       "data": {
         "name": "entity",
         "description": "攻击实体"
-      },
-      "description": "攻击实体",
-      "id": "3",
-      "type": "TEXT"
+      }
     },
     {
-      "isMustPlayer": false,
-      "isOnlyOne": true,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "damager",
       "description": "伤害的施加者",
-      "id": "4",
-      "type": "TARGET_SELECTOR"
-    },
-    {
+      "isOnlyOne": true,
       "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
-      "description": "要被伤害的目标实体",
-      "id": "5",
-      "type": "TARGET_SELECTOR"
-    },
-    {
-      "description": "要造成的伤害值",
-      "id": "6",
-      "type": "INTEGER"
-    },
-    {
-      "contentMode": true,
-      "description": "伤害的成因",
-      "id": "7",
-      "type": "NORMAL_ID",
-      "key": "damageCause"
+      "isMustNPC": false
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "target",
+      "amount"
     ],
     [
-      "1",
-      "2"
-    ],
-    [
-      "1",
+      "amount",
+      "cause",
       "LF"
     ],
     [
-      "2",
-      "3"
-    ],
-    [
-      "3",
-      "4"
-    ],
-    [
-      "4",
+      "cause",
+      "entity",
       "LF"
     ],
     [
-      "5",
-      "6"
+      "entity",
+      "damager"
     ],
     [
-      "6",
-      "7"
-    ],
-    [
-      "7",
+      "damager",
       "LF"
     ]
-  ],
-  "name": [
-    "damage"
-  ],
-  "start": [
-    "0",
-    "5"
-  ],
-  "description": "对指定实体造成伤害"
+  ]
 }

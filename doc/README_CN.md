@@ -50,6 +50,13 @@ CHelper是我的世界基岩版的命令助手。
 
 ```json
 {
+  "name": [
+    "ability"
+  ],
+  "description": "赋予或剥夺玩家的能力",
+  "start": [
+    "playerSelector"
+  ],
   "node": [
     {
       "type": "TARGET_SELECTOR",
@@ -80,10 +87,10 @@ CHelper是我的世界基岩版的命令助手。
     },
     {
       "type": "BOOLEAN",
-      "descriptionTrue": "此能力对玩家可用",
+      "id": "canUseToPlayer",
       "description": "此能力是否对玩家可用",
-      "descriptionFalse": "此能力对玩家不可用",
-      "id": "canUseToPlayer"
+      "descriptionTrue": "此能力对玩家可用",
+      "descriptionFalse": "此能力对玩家不可用"
     }
   ],
   "ast": [
@@ -101,24 +108,17 @@ CHelper是我的世界基岩版的命令助手。
       "canUseToPlayer",
       "LF"
     ]
-  ],
-  "name": [
-    "ability"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "赋予或剥夺玩家的能力"
+  ]
 }
 ```
 
 |     名字      |  类型   |   含义    |                  备注                  | 必需 |
 |:-----------:|:-----:|:-------:|:------------------------------------:|:--:|
-|    name     | 字符串列表 |  命令的名字  |                不建议忽略                 | 是  |
+|    name     | 字符串列表 |  命令的名字  |                  -                   | 是  |
 | description |  字符串  |  命令的介绍  |                  -                   | 否  |
 |    node     | 节点列表  |  节点列表   |               列举所有命令参数               | 是  |
 |    start    | 字符串列表 | 命令的起始节点 |           由于节点类型太多，会在后面单独讲           | 是  |
-|     ast     | 关系列表  |  关系绑定   | 存储着多个数组，其中的每个数组第一个ID代表父节点，后面的元素当作子节点 | 是  |
+|     ast     | 关系列表  |  关系绑定   | 存储着多个数组，其中的每个数组第一个ID代表父节点，后面的元素当作子节点 | 否  |
 
 解释：在node节点列表中，每个节点有个ID，在加载好节点列表后，程序再根据后面的start和ast用这个ID来绑定节点的位置。
 

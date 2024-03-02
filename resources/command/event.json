@@ -1,49 +1,48 @@
 {
+  "name": [
+    "event"
+  ],
+  "description": "触发实体事件",
+  "start": [
+    "entity"
+  ],
   "node": [
     {
+      "type": "TEXT",
+      "id": "entity",
+      "description": "触发实体事件",
       "data": {
         "name": "entity",
         "description": "触发实体事件"
-      },
-      "description": "触发实体事件",
-      "id": "0",
-      "type": "TEXT"
+      }
     },
     {
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "target",
       "description": "实体事件的作用对象",
-      "id": "1",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
     },
     {
-      "contentMode": true,
-      "description": "命令触发的实体事件",
-      "id": "2",
       "type": "NORMAL_ID",
+      "id": "eventName",
+      "description": "命令触发的实体事件",
       "key": "entityEvent"
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "entity",
+      "target"
     ],
     [
-      "1",
-      "2"
+      "target",
+      "eventName"
     ],
     [
-      "2",
+      "eventName",
       "LF"
     ]
-  ],
-  "name": [
-    "event"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "触发实体事件"
+  ]
 }

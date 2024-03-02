@@ -17,7 +17,11 @@ namespace CHelper::Node {
         std::vector<ASTNode> childASTNodes;
         childASTNodes.reserve(childNodes->size());
         for (const auto &item: *childNodes) {
-            childASTNodes.push_back(item->getASTNode(tokenReader, cpack));
+            auto node = item->getASTNodeWithNextNode(tokenReader, cpack);
+            childASTNodes.push_back(node);
+            if (node.isError()) {
+                break;
+            }
         }
         return ASTNode::andNode(this, childASTNodes, tokenReader.collect());
     }

@@ -8,6 +8,8 @@
 
 namespace CHelper::Node {
 
+    static std::shared_ptr<NormalId> doubleQuoteMask = std::make_shared<NormalId>("\"", "双引号");
+
     NodeString::NodeString(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
                            bool allowMissingString,
@@ -58,6 +60,19 @@ namespace CHelper::Node {
                     result.tokens, "字符串参数内容不可以包含空格"));
         }
         return result;
+    }
+
+    bool NodeString::collectSuggestions(const ASTNode *astNode,
+                                        size_t index,
+                                        std::vector<Suggestion> &suggestions) const {
+        if (ignoreLater || !canContainSpace) {
+            return true;
+        }
+        std::string str = TokenUtil::toString(astNode->tokens);
+        if (str.empty() || (str[0] == '"' && (str.length() == 1 || str[str.length() - 1] != '"'))) {
+            suggestions.emplace_back(index, index, doubleQuoteMask);
+        }
+        return true;
     }
 
     void NodeString::collectStructure(const ASTNode *astNode,

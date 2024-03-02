@@ -35,13 +35,20 @@ namespace CHelper::Node {
         if (!result.isError()) {
             int type = 0;
             for (int i: types) {
+                if (i == type) {
+                    continue;
+                }
+                if (type == 0) {
+                    type = i;
+                }
+
                 if (i == 0 || i == type) {
                     continue;
                 } else if (type == 0) {
                     type = i;
                 } else {
-                    return ASTNode::andNode(this, threeChildNodes, tokenReader.collect(),
-                                            ErrorReason::logicError(tokens, "坐标参数不能同时使用相对坐标和局部坐标"),
+                    return ASTNode::andNode(this, threeChildNodes, tokens,
+                                            ErrorReason::logicError(tokens, "绝对坐标和相对坐标不能于局部坐标混用"),
                                             "position");
                 }
             }
@@ -53,7 +60,7 @@ namespace CHelper::Node {
                                         StructureBuilder &structure,
                                         bool isMustHave) const {
         if (astNode == nullptr || astNode->id == "position") {
-            structure.append(isMustHave, description.value_or("位置"));
+            structure.append(isMustHave, "位置");
         }
     }
 

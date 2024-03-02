@@ -1,94 +1,79 @@
 {
+  "name": [
+    "playanimation"
+  ],
+  "description": "用于使一个或多个实体运行一次性动画",
+  "start": [
+    "entity"
+  ],
   "node": [
     {
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "entity",
       "description": "目标",
-      "id": "0",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
     },
     {
-      "contentMode": true,
-      "description": "当前要播放的动画",
-      "id": "1",
       "type": "NORMAL_ID",
+      "id": "animation",
+      "description": "当前要播放的动画",
       "key": "animation"
     },
     {
-      "contentMode": true,
-      "description": "动画播放完毕后的状态",
-      "id": "2",
       "type": "NORMAL_ID",
+      "id": "nextState",
+      "description": "动画播放完毕后的状态",
       "key": "animationController"
     },
     {
-      "description": "动画渐变的持续时间",
-      "id": "3",
-      "type": "FLOAT"
+      "type": "FLOAT",
+      "id": "blendOutTime",
+      "description": "动画渐变的持续时间"
     },
     {
-      "canContainSpace": true,
+      "type": "STRING",
+      "id": "stopExpression",
       "description": "动画播放终止的条件，应为Molang表达式",
-      "ignoreLater": false,
-      "id": "4",
-      "type": "STRING"
+      "canContainSpace": true,
+      "ignoreLater": false
     },
     {
-      "canContainSpace": true,
+      "type": "STRING",
+      "id": "controller",
       "description": "动画控制器",
-      "ignoreLater": false,
-      "id": "5",
-      "type": "STRING"
+      "canContainSpace": true,
+      "ignoreLater": false
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "entity",
+      "animation"
     ],
     [
-      "1",
-      "2"
+      "animation",
+      "nextState"
     ],
     [
-      "1",
+      "nextState",
+      "blendOutTime",
       "LF"
     ],
     [
-      "2",
-      "3"
-    ],
-    [
-      "2",
+      "blendOutTime",
+      "stopExpression",
       "LF"
     ],
     [
-      "3",
-      "4"
-    ],
-    [
-      "3",
+      "stopExpression",
+      "controller",
       "LF"
     ],
     [
-      "4",
-      "5"
-    ],
-    [
-      "4",
-      "LF"
-    ],
-    [
-      "5",
+      "controller",
       "LF"
     ]
-  ],
-  "name": [
-    "playanimation"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "用于使一个或多个实体运行一次性动画"
+  ]
 }

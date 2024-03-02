@@ -57,7 +57,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
             nullptr, nullptr,
             hInstance, nullptr
     );
-    if (!hWnd) {
+    if (hWnd == nullptr) {
         MessageBox(nullptr, "Call to CreateWindow failed!", "CHelper", 0);
         return 1;
     }
@@ -179,7 +179,8 @@ void onTextChanged(const std::string &command) {
                              .green(", command is ")
                              .purple(command.size() <= 100 ? command : command.substr(0, 100) + "...")
                              .build());
-        std::cout << core->getAstNode().toOptimizedJson() << std::endl;
+//        std::cout << core->getAstNode().toOptimizedJson() << std::endl;
+//        std::cout << core->getAstNode().toBestJson() << std::endl;
         CHELPER_INFO("structure: " + structure);
         CHELPER_INFO("description: " + description);
         if (errorReasons.empty()) {
@@ -194,7 +195,9 @@ void onTextChanged(const std::string &command) {
                                  .build());
             CHELPER_INFO(CHelper::ColorStringBuilder()
                                  .normal(command.substr(0, errorReason->start))
-                                 .red(command.substr(errorReason->start, errorReason->end - errorReason->start))
+                                 .red(errorReason->start == errorReason->end ? "~" :
+                                      command.substr(errorReason->start,
+                                                     errorReason->end - errorReason->start))
                                  .normal(command.substr(errorReason->end))
                                  .build());
         } else {
@@ -209,25 +212,35 @@ void onTextChanged(const std::string &command) {
                                      .build());
                 CHELPER_INFO(CHelper::ColorStringBuilder()
                                      .normal(command.substr(0, errorReason->start))
-                                     .red(command.substr(errorReason->start, errorReason->end - errorReason->start))
+                                     .red(errorReason->start == errorReason->end ? "~" :
+                                          command.substr(errorReason->start,
+                                                         errorReason->end - errorReason->start))
                                      .normal(command.substr(errorReason->end))
                                      .build());
             }
         }
         CHELPER_INFO("suggestions: ");
-        int j = 0;
-        for (const auto &item: suggestions) {
-            if (j == 30) {
-                CHELPER_INFO("...");
-                break;
+        if (suggestions.empty()) {
+            CHELPER_INFO("no suggestion");
+        } else {
+            CHELPER_INFO("suggestions: ");
+            int j = 0;
+            for (const auto &item: suggestions) {
+                if (j == 30) {
+                    CHELPER_INFO("...");
+                    break;
+                }
+                CHELPER_INFO(CHelper::ColorStringBuilder()
+                                     .normal(std::to_string(++j) + ". ")
+                                     .green(item.content->name + " ")
+                                     .blue(item.content->description.value_or(""))
+                                     .build());
+                CHELPER_INFO(CHelper::ColorStringBuilder()
+                                     .normal(command.substr(0, item.start))
+                                     .green(item.content->name)
+                                     .normal(command.substr(item.end))
+                                     .build());
             }
-            CHELPER_INFO(CHelper::ColorStringBuilder()
-                                 .normal(std::to_string(++j) + ". ")
-                                 .blue(command.substr(item.start, item.end - item.start))
-                                 .normal(" -> ")
-                                 .yellow(item.content->name + " ")
-                                 .normal(item.content->description.value_or(""))
-                                 .build());
         }
         std::cout << std::endl;
     } catch (const std::exception &e) {

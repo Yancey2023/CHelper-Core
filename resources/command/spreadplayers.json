@@ -1,65 +1,65 @@
 {
+  "name": [
+    "spreadplayers"
+  ],
+  "description": "把实体随机传送到区域内地表的某个位置",
+  "start": [
+    "x"
+  ],
   "node": [
     {
+      "type": "RELATIVE_FLOAT",
+      "id": "x",
       "description": "传送目的地区域的中心的x坐标",
-      "canUseCaretNotation": true,
-      "id": "0",
-      "type": "RELATIVE_FLOAT"
+      "canUseCaretNotation": true
     },
     {
+      "type": "RELATIVE_FLOAT",
+      "id": "z",
       "description": "传送目的地区域的中心的z坐标",
-      "canUseCaretNotation": true,
-      "id": "1",
-      "type": "RELATIVE_FLOAT"
+      "canUseCaretNotation": true
     },
     {
-      "min": 0,
+      "type": "FLOAT",
+      "id": "spreadDistance",
       "description": "传送目标之间的最小间距。最小值为0.0",
-      "id": "2",
-      "type": "FLOAT"
+      "min": 0
     },
     {
-      "min": 1,
+      "type": "FLOAT",
+      "id": "maxRange",
       "description": "目标区域边界与区域中心在x和z轴上的距离（因此区域是正方形而不是圆形）。必须比传送目标之间的最小间距大，且最小值为1.0",
-      "id": "3",
-      "type": "FLOAT"
+      "min": 1
     },
     {
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "victim",
       "description": "需要随机传送的目标",
-      "id": "4",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "x",
+      "z"
     ],
     [
-      "1",
-      "2"
+      "z",
+      "spreadDistance"
     ],
     [
-      "2",
-      "3"
+      "spreadDistance",
+      "maxRange"
     ],
     [
-      "3",
-      "4"
+      "maxRange",
+      "victim"
     ],
     [
-      "4",
+      "victim",
       "LF"
     ]
-  ],
-  "name": [
-    "spreadplayers"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "把实体随机传送到区域内地表的某个位置"
+  ]
 }

@@ -1,40 +1,37 @@
 {
+  "name": [
+    "kick"
+  ],
+  "description": "将一位玩家踢出服务器",
+  "start": [
+    "name"
+  ],
   "node": [
     {
-      "isMustPlayer": true,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "name",
       "description": "要踢出的玩家",
-      "id": "0",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": true,
+      "isMustNPC": false
     },
     {
-      "canContainSpace": false,
+      "type": "STRING",
+      "id": "reason",
       "description": "踢出原因",
-      "ignoreLater": false,
-      "id": "1",
-      "type": "STRING"
+      "canContainSpace": true,
+      "ignoreLater": false
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
-    ],
-    [
-      "0",
+      "name",
+      "reason",
       "LF"
     ],
     [
-      "1",
+      "reason",
       "LF"
     ]
-  ],
-  "name": [
-    "kick"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "将一位玩家踢出服务器"
+  ]
 }

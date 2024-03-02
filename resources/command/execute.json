@@ -8,9 +8,10 @@
   ],
   "node": [
     {
-      "type": "EXECUTE",
+      "type": "REPEAT",
       "id": "executeParam",
-      "description": "子命令"
+      "description": "子命令",
+      "key": "execute"
     },
     {
       "type": "COMMAND",

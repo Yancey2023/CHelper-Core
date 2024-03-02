@@ -1,0 +1,184 @@
+{
+  "name": [
+    "gametest"
+  ],
+  "description": "基于测试代码与测试结构配对的服务端测试自动化工具",
+  "start": [
+    "runthis",
+    "run",
+    "runset",
+    "clearall",
+    "pos",
+    "create",
+    "runthese"
+  ],
+  "node": [
+    {
+      "type": "TEXT",
+      "id": "runthis",
+      "description": "执行或重新执行15格半径内的GameTest结构方块",
+      "data": {
+        "name": "runthis",
+        "description": "执行或重新执行15格半径内的GameTest结构方块"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "run",
+      "description": "执行一个特定的GameTest",
+      "data": {
+        "name": "run",
+        "description": "执行一个特定的GameTest"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "runset",
+      "description": "创建和执行所有GameTest",
+      "data": {
+        "name": "runset",
+        "description": "创建和执行所有GameTest"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "clearall",
+      "description": "清除所有的GameTest",
+      "data": {
+        "name": "clearall",
+        "description": "清除所有的GameTest"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "pos",
+      "description": "在200格半径范围内寻找最近的GameTest结构方块",
+      "data": {
+        "name": "pos",
+        "description": "在200格半径范围内寻找最近的GameTest结构方块"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "create",
+      "description": "创建GameTest",
+      "data": {
+        "name": "create",
+        "description": "创建GameTest"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "runthese",
+      "description": "在200格半径范围内执行GameTest",
+      "data": {
+        "name": "runthese",
+        "description": "在200格半径范围内执行GameTest"
+      }
+    },
+    {
+      "type": "STRING",
+      "id": "runTestName",
+      "description": "GameTest的名称",
+      "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "STRING",
+      "id": "tagTag",
+      "description": "GameTest的标签",
+      "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "STRING",
+      "id": "createTestName",
+      "description": "GameTest的名称",
+      "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "INTEGER",
+      "id": "width",
+      "description": "宽度"
+    },
+    {
+      "type": "INTEGER",
+      "id": "height",
+      "description": "高度"
+    },
+    {
+      "type": "INTEGER",
+      "id": "depth",
+      "description": "深度"
+    },
+    {
+      "type": "INTEGER",
+      "id": "rotationSteps",
+      "description": "旋转"
+    }
+  ],
+  "ast": [
+    [
+      "runthis",
+      "LF"
+    ],
+    [
+      "run",
+      "runTestName"
+    ],
+    [
+      "runTestName",
+      "rotationSteps",
+      "LF"
+    ],
+    [
+      "rotationSteps",
+      "LF"
+    ],
+    [
+      "runset",
+      "tagTag"
+    ],
+    [
+      "tagTag",
+      "rotationSteps",
+      "LF"
+    ],
+    [
+      "clearall",
+      "LF"
+    ],
+    [
+      "pos",
+      "LF"
+    ],
+    [
+      "create",
+      "createTestName"
+    ],
+    [
+      "createTestName",
+      "width",
+      "LF"
+    ],
+    [
+      "width",
+      "height",
+      "LF"
+    ],
+    [
+      "height",
+      "depth",
+      "LF"
+    ],
+    [
+      "depth",
+      "LF"
+    ],
+    [
+      "runthese",
+      "LF"
+    ]
+  ]
+}

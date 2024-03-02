@@ -12,9 +12,18 @@ D:\CLion\project\CHelper\resources
 -give @p iron_shovel 1 0 {"minecraft:can_destroy":{"blocks":["grass"]},"minecraft:item_lock":{"mode":"lock_in_slot"}}
 -give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":[
 -give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["
-give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["s
+-give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["s
 -give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["st
 -give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["sto
 -give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["ston
 -give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["stone
 -give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["stone"
+-tellraw @a {"rawtext":[{"text":"aaa","selector":"@a[type=\"
+-execute if block 12~23~
+-give @s stone 12 21 {"minecraft:item_lock":{"mode":" "lock_in_inventory"
+-give @s stone 12 21 {"minecraft:item_lock":{"mode":"l
+-execute if block ~~~ anvil["aaa"=90.5] run
+setblock ~~~ stone[
+-give @s stone 12 12 {
+-give @s stone 12 12 {"minecraft:can_place_on":
+-give @s stone 12 12 {"minecraft:can_place_on":{"blocks":["bamboo",{}]

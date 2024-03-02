@@ -1,108 +1,92 @@
 {
+  "name": [
+    "scoreboard"
+  ],
+  "description": "管理记分板的目标、玩家和队伍",
+  "start": [
+    "objectives",
+    "players"
+  ],
   "node": [
     {
+      "type": "TEXT",
+      "id": "objectives",
+      "description": "创建、列出、删除、显示记分项",
       "data": {
         "name": "objectives",
         "description": "创建、列出、删除、显示记分项"
-      },
-      "description": "创建、列出、删除、显示记分项",
-      "id": "0",
-      "type": "TEXT"
+      }
     },
     {
-      "data": {
-        "name": "add",
-        "description": "创建一个具有给定的名称、准则、可选的显示名称的记分项"
-      },
-      "description": "创建一个具有给定的名称、准则、可选的显示名称的记分项",
-      "id": "1",
-      "type": "TEXT"
-    },
-    {
-      "canContainSpace": true,
-      "description": "记分项的名字",
-      "ignoreLater": false,
-      "id": "2",
-      "type": "STRING"
-    },
-    {
-      "data": {
-        "name": "dummy",
-        "description": "虚拟型"
-      },
-      "description": "虚拟型",
-      "id": "3",
-      "type": "TEXT"
-    },
-    {
-      "canContainSpace": true,
-      "description": "记分项显示的名字",
-      "ignoreLater": false,
-      "id": "4",
-      "type": "STRING"
-    },
-    {
-      "data": {
-        "name": "objectives",
-        "description": "创建、列出、删除、显示记分项"
-      },
-      "description": "创建、列出、删除、显示记分项",
-      "id": "5",
-      "type": "TEXT"
-    },
-    {
+      "type": "TEXT",
+      "id": "objectivesList",
+      "description": "列出所有存在的记分项、显示名称与准则",
       "data": {
         "name": "list",
         "description": "列出所有存在的记分项、显示名称与准则"
-      },
-      "description": "列出所有存在的记分项、显示名称与准则",
-      "id": "6",
-      "type": "TEXT"
+      }
     },
     {
+      "type": "TEXT",
+      "id": "objectivesAdd",
+      "description": "创建记分项",
       "data": {
-        "name": "objectives",
-        "description": "创建、列出、删除、显示记分项"
-      },
-      "description": "创建、列出、删除、显示记分项",
-      "id": "7",
-      "type": "TEXT"
+        "name": "add",
+        "description": "创建记分项"
+      }
     },
     {
-      "data": {
-        "name": "remove",
-        "description": "删除记分板系统中该记分项的所有有关内容"
-      },
-      "description": "删除记分板系统中该记分项的所有有关内容",
-      "id": "8",
-      "type": "TEXT"
-    },
-    {
-      "canContainSpace": true,
+      "type": "STRING",
+      "id": "addObjective",
       "description": "记分项的名字",
-      "ignoreLater": false,
-      "id": "9",
-      "type": "STRING"
+      "canContainSpace": true,
+      "ignoreLater": false
     },
     {
+      "type": "TEXT",
+      "id": "dummy",
+      "description": "虚拟型",
       "data": {
-        "name": "objectives",
-        "description": "创建、列出、删除、显示记分项"
-      },
-      "description": "创建、列出、删除、显示记分项",
-      "id": "10",
-      "type": "TEXT"
+        "name": "dummy",
+        "description": "虚拟型"
+      }
     },
     {
+      "type": "STRING",
+      "id": "displayName",
+      "description": "记分项显示的名字",
+      "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "TEXT",
+      "id": "objectivesRemove",
+      "description": "删除记分项",
       "data": {
         "name": "remove",
-        "description": "删除记分板系统中该记分项的所有有关内容"
-      },
-      "description": "删除记分板系统中该记分项的所有有关内容",
-      "id": "11",
-      "type": "TEXT"
+        "description": "删除记分项"
+      }
     },
     {
+      "type": "STRING",
+      "id": "removeObjective",
+      "description": "记分项的名字",
+      "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "TEXT",
+      "id": "setdisplay",
+      "description": "显示分数项",
+      "data": {
+        "name": "setdisplay",
+        "description": "显示分数项"
+      }
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "displayMode",
+      "description": "位置",
       "contents": [
         {
           "name": "list",
@@ -113,19 +97,26 @@
           "description": "侧边栏"
         }
       ],
-      "contentMode": false,
-      "description": "位置",
-      "id": "12",
-      "type": "NORMAL_ID"
+      "contentMode": false
     },
     {
-      "canContainSpace": true,
+      "type": "STRING",
+      "id": "displayObjective1",
       "description": "记分项的名字",
-      "ignoreLater": false,
-      "id": "13",
-      "type": "STRING"
+      "canContainSpace": true,
+      "ignoreLater": false
     },
     {
+      "type": "STRING",
+      "id": "displayObjective2",
+      "description": "记分项的名字",
+      "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "order",
+      "description": "排序顺序",
       "contents": [
         {
           "name": "ascending",
@@ -135,155 +126,159 @@
           "name": "descending",
           "description": "降序"
         }
-      ],
-      "contentMode": false,
-      "description": "排序顺序",
-      "id": "14",
-      "type": "NORMAL_ID"
+      ]
     },
     {
-      "data": {
-        "name": "objectives",
-        "description": "创建、列出、删除、显示记分项"
-      },
-      "description": "创建、列出、删除、显示记分项",
-      "id": "15",
-      "type": "TEXT"
-    },
-    {
-      "data": {
-        "name": "setdisplay",
-        "description": "显示记分项"
-      },
-      "description": "显示记分项",
-      "id": "16",
-      "type": "TEXT"
-    },
-    {
-      "data": {
-        "name": "belowname",
-        "description": "名称下方"
-      },
+      "type": "TEXT",
+      "id": "belowName",
       "description": "名称下方",
-      "id": "17",
-      "type": "TEXT"
+      "data": {
+        "name": "below_name",
+        "description": "名称下方"
+      }
     },
     {
-      "canContainSpace": true,
-      "description": "记分项的名字",
-      "ignoreLater": false,
-      "id": "18",
-      "type": "STRING"
-    },
-    {
+      "type": "TEXT",
+      "id": "players",
+      "description": "设置、增加、扣除、列出、运算、清空、检测实体分数",
       "data": {
         "name": "players",
         "description": "设置、增加、扣除、列出、运算、清空、检测实体分数"
-      },
-      "description": "设置、增加、扣除、列出、运算、清空、检测实体分数",
-      "id": "19",
-      "type": "TEXT"
+      }
     },
     {
-      "contents": [
-        {
-          "name": "set",
-          "description": "设置实体目标在记分项记分项上的分数为分数（并在已有分数存在时覆盖之）"
-        },
-        {
-          "name": "add",
-          "description": "往实体目标在记分项记分项上的分数增加数量分（如果没有分数则当作0分修改）"
-        },
-        {
-          "name": "remove",
-          "description": "从实体目标在记分项记分项上的分数扣除数量分（如果没有分数则当作0分修改）"
-        }
-      ],
-      "contentMode": false,
-      "description": "功能",
-      "id": "20",
-      "type": "NORMAL_ID"
-    },
-    {
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
-      "description": "目标实体",
-      "id": "21",
-      "type": "TARGET_SELECTOR"
-    },
-    {
-      "canContainSpace": true,
-      "description": "记分项的名字",
-      "ignoreLater": false,
-      "id": "22",
-      "type": "STRING"
-    },
-    {
-      "description": "要设置、增加、扣除的实体分数数值",
-      "id": "23",
-      "type": "INTEGER"
-    },
-    {
-      "data": {
-        "name": "players",
-        "description": "设置、增加、扣除、列出、运算、清空、检测实体分数"
-      },
-      "description": "设置、增加、扣除、列出、运算、清空、检测实体分数",
-      "id": "24",
-      "type": "TEXT"
-    },
-    {
+      "type": "TEXT",
+      "id": "playersList",
+      "description": "显示所有被记分板系统追踪的实体",
       "data": {
         "name": "list",
         "description": "显示所有被记分板系统追踪的实体"
-      },
-      "description": "显示所有被记分板系统追踪的实体",
-      "id": "25",
-      "type": "TEXT"
+      }
     },
     {
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
-      "description": "目标实体",
-      "id": "26",
-      "type": "TARGET_SELECTOR"
-    },
-    {
+      "type": "TEXT",
+      "id": "set",
+      "description": "设置分数（并在已有分数存在时覆盖之）",
       "data": {
-        "name": "players",
-        "description": "设置、增加、扣除、列出、运算、清空、检测实体分数"
-      },
-      "description": "设置、增加、扣除、列出、运算、清空、检测实体分数",
-      "id": "27",
-      "type": "TEXT"
+        "name": "set",
+        "description": "设置分数（并在已有分数存在时覆盖之）"
+      }
     },
     {
+      "type": "TEXT",
+      "id": "playersAdd",
+      "description": "增加分数（如果没有分数则当作0分修改）",
+      "data": {
+        "name": "add",
+        "description": "数量分数（如果没有分数则当作0分修改）"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "playersRemove",
+      "description": "扣除分数（如果没有分数则当作0分修改）",
+      "data": {
+        "name": "remove",
+        "description": "扣除分数（如果没有分数则当作0分修改）"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "random",
+      "description": "随机生成分数（包含最小值和最大值）",
+      "data": {
+        "name": "random",
+        "description": "随机生成分数（包含最小值和最大值）"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "reset",
+      "description": "重置分数",
+      "data": {
+        "name": "reset",
+        "description": "重置分数"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "test",
+      "description": "检测目标分数是否在区间内",
+      "data": {
+        "name": "test",
+        "description": "删检测目标分数是否在区间内"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "operation",
+      "description": "分数运算",
       "data": {
         "name": "operation",
-        "description": "使用选择器在记分项记分项上的分数作为输入，进行运算操作后把结果作为记分项实体目标在记分项名为目标记分项上的分数"
-      },
-      "description": "使用选择器在记分项记分项上的分数作为输入，进行运算操作后把结果作为记分项实体目标在记分项名为目标记分项上的分数",
-      "id": "28",
-      "type": "TEXT"
+        "description": "分数运算"
+      }
     },
     {
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
-      "description": "目标实体",
-      "id": "29",
-      "type": "TARGET_SELECTOR"
-    },
-    {
-      "canContainSpace": true,
+      "type": "STRING",
+      "id": "listPlayerName",
       "description": "记分项的名字",
-      "ignoreLater": false,
-      "id": "30",
-      "type": "STRING"
+      "canContainSpace": true,
+      "ignoreLater": false
     },
     {
+      "type": "TARGET_SELECTOR",
+      "id": "setPlayer",
+      "description": "目标实体",
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
+    },
+    {
+      "type": "STRING",
+      "id": "setObjective",
+      "description": "记分项的名字",
+      "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "INTEGER",
+      "id": "count",
+      "description": "要设置、增加、扣除的实体分数数值"
+    },
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "randomPlayer",
+      "description": "目标实体",
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
+    },
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "resetPlayer",
+      "description": "目标实体",
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
+    },
+    {
+      "type": "STRING",
+      "id": "randomObjective",
+      "description": "记分项的名字",
+      "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "STRING",
+      "id": "resetObjective",
+      "description": "记分项的名字",
+      "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "operationId",
+      "description": "运算操作",
       "contents": [
         {
           "name": "+=",
@@ -321,368 +316,214 @@
           "name": "><",
           "description": "交换分数"
         }
-      ],
-      "contentMode": false,
-      "description": "运算操作",
-      "id": "31",
-      "type": "NORMAL_ID"
+      ]
     },
     {
+      "type": "TARGET_SELECTOR",
+      "id": "operationPlayer",
+      "description": "目标实体",
       "isMustPlayer": false,
       "isOnlyOne": false,
-      "isMustNPC": false,
+      "isMustNPC": false
+    },
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "operationSelector",
       "description": "目标实体",
-      "id": "32",
-      "type": "TARGET_SELECTOR"
-    },
-    {
-      "canContainSpace": true,
-      "description": "记分项的名字",
-      "ignoreLater": false,
-      "id": "33",
-      "type": "STRING"
-    },
-    {
-      "data": {
-        "name": "players",
-        "description": "设置、增加、扣除、列出、运算、清空、检测实体分数"
-      },
-      "description": "设置、增加、扣除、列出、运算、清空、检测实体分数",
-      "id": "34",
-      "type": "TEXT"
-    },
-    {
-      "data": {
-        "name": "random",
-        "description": "把实体目标在记分项上的分数设为一个从最小值到最大值的随机数，包含最大最小值"
-      },
-      "description": "把实体目标在记分项上的分数设为一个从最小值到最大值的随机数，包含最大最小值",
-      "id": "35",
-      "type": "TEXT"
-    },
-    {
       "isMustPlayer": false,
       "isOnlyOne": false,
-      "isMustNPC": false,
-      "description": "目标实体",
-      "id": "36",
-      "type": "TARGET_SELECTOR"
+      "isMustNPC": false
     },
     {
-      "canContainSpace": true,
+      "type": "STRING",
+      "id": "operationObjective1",
       "description": "记分项的名字",
-      "ignoreLater": false,
-      "id": "37",
-      "type": "STRING"
-    },
-    {
-      "description": "最小值",
-      "id": "38",
-      "type": "INTEGER"
-    },
-    {
-      "description": "最大值",
-      "id": "39",
-      "type": "INTEGER"
-    },
-    {
-      "data": {
-        "name": "players",
-        "description": "设置、增加、扣除、列出、运算、清空、检测实体分数"
-      },
-      "description": "设置、增加、扣除、列出、运算、清空、检测实体分数",
-      "id": "40",
-      "type": "TEXT"
-    },
-    {
-      "data": {
-        "name": "reset",
-        "description": "清空实体目标的一项或所有分数"
-      },
-      "description": "清空实体目标的一项或所有分数",
-      "id": "41",
-      "type": "TEXT"
-    },
-    {
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
-      "description": "目标实体",
-      "id": "42",
-      "type": "TARGET_SELECTOR"
-    },
-    {
       "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "STRING",
+      "id": "operationObjective2",
       "description": "记分项的名字",
-      "ignoreLater": false,
-      "id": "43",
-      "type": "STRING"
-    },
-    {
-      "data": {
-        "name": "players",
-        "description": "设置、增加、扣除、列出、运算、清空、检测实体分数"
-      },
-      "description": "设置、增加、扣除、列出、运算、清空、检测实体分数",
-      "id": "44",
-      "type": "TEXT"
-    },
-    {
-      "data": {
-        "name": "test",
-        "description": "检测记分项是否在最小值和最大值范围内"
-      },
-      "description": "检测记分项是否在最小值和最大值范围内",
-      "id": "45",
-      "type": "TEXT"
-    },
-    {
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
-      "description": "目标实体",
-      "id": "46",
-      "type": "TARGET_SELECTOR"
-    },
-    {
       "canContainSpace": true,
-      "description": "记分项的名字",
-      "ignoreLater": false,
-      "id": "47",
-      "type": "STRING"
+      "ignoreLater": false
     },
     {
-      "description": "最小值",
-      "id": "48",
-      "type": "INTEGER"
+      "type": "INTEGER",
+      "id": "min",
+      "description": "最小值"
     },
     {
-      "description": "最大值",
-      "id": "49",
-      "type": "INTEGER"
+      "type": "INTEGER",
+      "id": "max",
+      "description": "最大值"
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "objectives",
+      "objectivesList",
+      "objectivesAdd",
+      "objectivesRemove",
+      "setdisplay"
     ],
     [
-      "1",
-      "2"
-    ],
-    [
-      "2",
-      "3"
-    ],
-    [
-      "3",
-      "4"
-    ],
-    [
-      "3",
+      "objectivesList",
       "LF"
     ],
     [
-      "4",
+      "objectivesAdd",
+      "addObjective"
+    ],
+    [
+      "addObjective",
+      "dummy"
+    ],
+    [
+      "dummy",
+      "displayName"
+    ],
+    [
+      "displayName",
       "LF"
     ],
     [
-      "5",
-      "6"
+      "objectivesRemove",
+      "removeObjective"
     ],
     [
-      "6",
+      "removeObjective",
       "LF"
     ],
     [
-      "7",
-      "8"
+      "setdisplay",
+      "displayMode",
+      "belowName"
     ],
     [
-      "8",
-      "9"
+      "displayMode",
+      "displayObjective1"
     ],
     [
-      "9",
+      "displayObjective1",
+      "order",
       "LF"
     ],
     [
-      "10",
-      "11"
-    ],
-    [
-      "11",
-      "12"
-    ],
-    [
-      "12",
-      "13"
-    ],
-    [
-      "13",
-      "14"
-    ],
-    [
-      "14",
+      "order",
       "LF"
     ],
     [
-      "15",
-      "16"
+      "belowName",
+      "displayObjective2"
     ],
     [
-      "16",
-      "17"
-    ],
-    [
-      "17",
-      "18"
-    ],
-    [
-      "18",
+      "displayObjective2",
       "LF"
     ],
     [
-      "19",
-      "20"
+      "players",
+      "playersList",
+      "set",
+      "playersAdd",
+      "playersRemove",
+      "random",
+      "reset",
+      "test",
+      "operation"
     ],
     [
-      "20",
-      "21"
-    ],
-    [
-      "21",
-      "22"
-    ],
-    [
-      "22",
-      "23"
-    ],
-    [
-      "23",
+      "playersList",
+      "listPlayerName",
       "LF"
     ],
     [
-      "24",
-      "25"
-    ],
-    [
-      "25",
-      "26"
-    ],
-    [
-      "26",
+      "listPlayerName",
       "LF"
     ],
     [
-      "27",
-      "28"
+      "set",
+      "setPlayer"
     ],
     [
-      "28",
-      "29"
+      "setPlayer",
+      "setObjective"
     ],
     [
-      "29",
-      "30"
+      "setObjective",
+      "count"
     ],
     [
-      "30",
-      "31"
-    ],
-    [
-      "31",
-      "32"
-    ],
-    [
-      "32",
-      "33"
-    ],
-    [
-      "33",
+      "count",
       "LF"
     ],
     [
-      "34",
-      "35"
+      "playersAdd",
+      "setPlayer"
     ],
     [
-      "35",
-      "36"
+      "playersRemove",
+      "setPlayer"
     ],
     [
-      "36",
-      "37"
+      "random",
+      "randomPlayer"
     ],
     [
-      "37",
-      "38"
+      "randomPlayer",
+      "randomObjective"
     ],
     [
-      "38",
-      "39"
+      "randomObjective",
+      "min"
     ],
     [
-      "39",
+      "min",
+      "max"
+    ],
+    [
+      "max",
       "LF"
     ],
     [
-      "40",
-      "41"
+      "reset",
+      "resetPlayer"
     ],
     [
-      "41",
-      "42"
+      "resetPlayer",
+      "resetObjective"
     ],
     [
-      "42",
-      "43"
-    ],
-    [
-      "43",
+      "resetObjective",
       "LF"
     ],
     [
-      "44",
-      "45"
+      "test",
+      "randomPlayer"
     ],
     [
-      "45",
-      "46"
+      "operation",
+      "operationPlayer"
     ],
     [
-      "46",
-      "47"
+      "operationPlayer",
+      "operationObjective1"
     ],
     [
-      "47",
-      "48"
+      "operationObjective1",
+      "operationId"
     ],
     [
-      "48",
-      "49"
+      "operationId",
+      "operationSelector"
     ],
     [
-      "49",
+      "operationSelector",
+      "operationObjective2"
+    ],
+    [
+      "operationObjective2",
       "LF"
     ]
-  ],
-  "name": [
-    "scoreboard"
-  ],
-  "start": [
-    "0",
-    "5",
-    "7",
-    "10",
-    "15",
-    "19",
-    "24",
-    "27",
-    "34",
-    "40",
-    "44"
-  ],
-  "description": "管理记分板的目标、玩家和队伍"
+  ]
 }

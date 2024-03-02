@@ -1,99 +1,81 @@
 {
+  "name": [
+    "effect"
+  ],
+  "description": "管理玩家及其他实体上的状态效果",
+  "start": [
+    "player"
+  ],
   "node": [
     {
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "player",
       "description": "目标实体",
-      "id": "0",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
     },
     {
+      "type": "TEXT",
+      "id": "clear",
+      "description": "移除所有效果",
       "data": {
         "name": "clear",
         "description": "移除所有效果"
-      },
-      "description": "移除所有效果",
-      "id": "1",
-      "type": "TEXT"
+      }
     },
     {
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
-      "description": "目标实体",
-      "id": "2",
-      "type": "TARGET_SELECTOR"
-    },
-    {
-      "contentMode": true,
-      "description": "给予或者需要移除的效果",
-      "id": "3",
       "type": "NORMAL_ID",
+      "id": "effect",
+      "description": "给予或者需要移除的效果",
       "key": "effects"
     },
     {
-      "description": "以秒为单位指定效果时长",
-      "id": "4",
-      "type": "INTEGER"
+      "type": "INTEGER",
+      "id": "seconds",
+      "description": "以秒为单位指定效果时长"
     },
     {
-      "description": "效果的额外等级",
-      "id": "5",
-      "type": "INTEGER"
+      "type": "INTEGER",
+      "id": "amplifier",
+      "description": "效果的额外等级"
     },
     {
-      "descriptionFalse": "显示药水粒子",
+      "type": "BOOLEAN",
+      "id": "hideParticles",
       "description": "是否隐藏药水粒子",
       "descriptionTrue": "隐藏药水粒子",
-      "id": "6",
-      "type": "BOOLEAN"
+      "descriptionFalse": "显示药水粒子"
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "player",
+      "clear",
+      "effect"
     ],
     [
-      "1",
+      "clear",
       "LF"
     ],
     [
-      "2",
-      "3"
-    ],
-    [
-      "2",
+      "effect",
+      "seconds",
       "LF"
     ],
     [
-      "3",
-      "4"
-    ],
-    [
-      "3",
+      "seconds",
+      "amplifier",
       "LF"
     ],
     [
-      "4",
-      "5"
+      "amplifier",
+      "hideParticles",
+      "LF"
     ],
     [
-      "5",
-      "6"
-    ],
-    [
-      "6",
+      "hideParticles",
       "LF"
     ]
-  ],
-  "name": [
-    "effect"
-  ],
-  "start": [
-    "0",
-    "2"
-  ],
-  "description": "管理玩家及其他实体上的状态效果"
+  ]
 }

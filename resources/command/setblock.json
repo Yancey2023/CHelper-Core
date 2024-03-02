@@ -1,17 +1,27 @@
 {
+  "name": [
+    "setblock"
+  ],
+  "description": "将指定位置的方块更改为另一个方块",
+  "start": [
+    "position"
+  ],
   "node": [
     {
-      "description": "要被更改方块的位置",
-      "id": "0",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "position",
+      "description": "要被更改方块的位置"
     },
     {
+      "type": "BLOCK",
+      "id": "block",
       "nodeBlockType": 0,
-      "description": "更改后的新方块",
-      "id": "1",
-      "type": "BLOCK"
+      "description": "更改后的新方块"
     },
     {
+      "type": "NORMAL_ID",
+      "id": "mode",
+      "description": "方块更改的处理方式",
       "contents": [
         {
           "name": "destroy",
@@ -25,36 +35,22 @@
           "name": "replace",
           "description": "原方块不掉落物品，且不播放方块被破坏的音效"
         }
-      ],
-      "contentMode": false,
-      "description": "方块更改的处理方式",
-      "id": "2",
-      "type": "NORMAL_ID"
+      ]
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "position",
+      "block"
     ],
     [
-      "1",
-      "2"
-    ],
-    [
-      "1",
+      "block",
+      "mode",
       "LF"
     ],
     [
-      "2",
+      "mode",
       "LF"
     ]
-  ],
-  "name": [
-    "setblock"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "将指定位置的方块更改为另一个方块"
+  ]
 }

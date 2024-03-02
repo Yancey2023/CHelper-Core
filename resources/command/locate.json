@@ -1,6 +1,35 @@
 {
+  "name": [
+    "locate"
+  ],
+  "description": "在聊天框中为命令执行者显示给定类型结构或生物群系的最近坐标和距离",
+  "start": [
+    "biome",
+    "structure"
+  ],
   "node": [
     {
+      "type": "TEXT",
+      "id": "biome",
+      "description": "定位生物群系",
+      "data": {
+        "name": "biome",
+        "description": "定位生物群系"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "structure",
+      "description": "定位结构",
+      "data": {
+        "name": "structure",
+        "description": "定位结构"
+      }
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "structureId",
+      "description": "要定位的生物群系的命名空间ID",
       "contents": [
         {
           "name": "ancientcity",
@@ -86,51 +115,43 @@
           "name": "ruined_portal",
           "description": "废弃传送门"
         }
-      ],
-      "contentMode": false,
-      "description": "要定位的生物群系的命名空间ID",
-      "id": "0",
-      "type": "NORMAL_ID"
+      ]
     },
     {
-      "descriptionFalse": "定位最近结构",
+      "type": "BOOLEAN",
+      "id": "useNewChunksOnly",
       "description": "是否仅定位在尚未生成的区块中的结构",
-      "descriptionTrue": "仅定位在尚未生成的区块中的最近结构",
-      "id": "1",
-      "type": "BOOLEAN"
+      "descriptionFalse": "定位最近结构",
+      "descriptionTrue": "仅定位在尚未生成的区块中的最近结构"
     },
     {
-      "contentMode": true,
-      "description": "要定位的生物群系的命名空间ID",
-      "id": "2",
       "type": "NORMAL_ID",
+      "id": "biomeId",
+      "description": "要定位的生物群系的命名空间ID",
       "key": "biome"
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "biome",
+      "biomeId"
     ],
     [
-      "0",
+      "biomeId",
       "LF"
     ],
     [
-      "1",
+      "structure",
+      "structureId"
+    ],
+    [
+      "structureId",
+      "useNewChunksOnly",
       "LF"
     ],
     [
-      "2",
+      "useNewChunksOnly",
       "LF"
     ]
-  ],
-  "name": [
-    "locate"
-  ],
-  "start": [
-    "0",
-    "2"
-  ],
-  "description": "在聊天框中为命令执行者显示给定类型结构或生物群系的最近坐标和距离"
+  ]
 }

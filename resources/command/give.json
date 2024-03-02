@@ -4,15 +4,15 @@
   ],
   "description": "给予实体一种指定数量的物品",
   "start": [
-    "playerSelector"
+    "player"
   ],
   "node": [
     {
       "type": "TARGET_SELECTOR",
-      "id": "playerSelector",
+      "id": "player",
       "description": "被给予物品的玩家",
-      "isMustPlayer": true,
       "isOnlyOne": false,
+      "isMustPlayer": true,
       "isMustNPC": false
     },
     {
@@ -24,7 +24,7 @@
   ],
   "ast": [
     [
-      "playerSelector",
+      "player",
       "item"
     ],
     [

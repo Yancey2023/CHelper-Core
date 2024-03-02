@@ -1,36 +1,49 @@
 {
+  "name": [
+    "music"
+  ],
+  "description": "控制音乐",
+  "start": [
+    "play",
+    "queue",
+    "stop",
+    "volume"
+  ],
   "node": [
     {
+      "type": "TEXT",
+      "id": "play",
+      "description": "播放音乐",
       "data": {
         "name": "play",
         "description": "播放音乐"
-      },
-      "description": "播放音乐",
-      "id": "0",
-      "type": "TEXT"
+      }
     },
     {
-      "canContainSpace": false,
+      "type": "STRING",
+      "id": "trackName",
       "description": "播放音乐名",
-      "ignoreLater": false,
-      "id": "1",
-      "type": "STRING"
+      "canContainSpace": true,
+      "ignoreLater": false
     },
     {
-      "min": 0,
-      "max": 1,
+      "type": "FLOAT",
+      "id": "volumeValue1",
       "description": "音乐音量",
-      "id": "2",
-      "type": "FLOAT"
-    },
-    {
       "min": 0,
-      "max": 10,
-      "description": "音乐淡入/淡出时间",
-      "id": "3",
-      "type": "FLOAT"
+      "max": 1
     },
     {
+      "type": "FLOAT",
+      "id": "fadeSeconds",
+      "description": "音乐淡入/淡出时间",
+      "min": 0,
+      "max": 10
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "repeatMode",
+      "description": "是否循环播放音乐",
       "contents": [
         {
           "name": "loop",
@@ -40,169 +53,93 @@
           "name": "play_once",
           "description": "不循环播放音乐"
         }
-      ],
-      "contentMode": false,
-      "description": "是否循环播放音乐",
-      "id": "4",
-      "type": "NORMAL_ID"
+      ]
     },
     {
+      "type": "TEXT",
+      "id": "queue",
+      "description": "将音乐添加到队列中",
       "data": {
         "name": "queue",
         "description": "将音乐添加到队列中"
-      },
-      "description": "将音乐添加到队列中",
-      "id": "5",
-      "type": "TEXT"
+      }
     },
     {
-      "canContainSpace": false,
-      "description": "播放音乐名",
-      "ignoreLater": false,
-      "id": "6",
-      "type": "STRING"
-    },
-    {
-      "min": 0,
-      "max": 1,
-      "description": "音乐音量",
-      "id": "7",
-      "type": "FLOAT"
-    },
-    {
-      "min": 0,
-      "max": 10,
-      "description": "音乐淡入/淡出时间",
-      "id": "8",
-      "type": "FLOAT"
-    },
-    {
-      "contents": [
-        {
-          "name": "loop",
-          "description": "循环播放音乐"
-        },
-        {
-          "name": "play_once",
-          "description": "不循环播放音乐"
-        }
-      ],
-      "contentMode": false,
-      "description": "是否循环播放音乐",
-      "id": "9",
-      "type": "NORMAL_ID"
-    },
-    {
+      "type": "TEXT",
+      "id": "stop",
+      "description": "停止播放音乐",
       "data": {
         "name": "stop",
         "description": "停止播放音乐"
-      },
-      "description": "停止播放音乐",
-      "id": "10",
-      "type": "TEXT"
+      }
     },
     {
-      "min": 0,
-      "max": 10,
+      "type": "FLOAT",
+      "id": "stopFadeSeconds",
       "description": "音乐淡入/淡出时间",
-      "id": "11",
-      "type": "FLOAT"
+      "min": 0,
+      "max": 10
     },
     {
+      "type": "TEXT",
+      "id": "volume",
+      "description": "调整音乐音量",
       "data": {
         "name": "volume",
         "description": "调整音乐音量"
-      },
-      "description": "调整音乐音量",
-      "id": "12",
-      "type": "TEXT"
+      }
     },
     {
-      "min": 0,
-      "max": 1,
+      "type": "FLOAT",
+      "id": "volumeValue2",
       "description": "音乐音量",
-      "id": "13",
-      "type": "FLOAT"
+      "min": 0,
+      "max": 1
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "play",
+      "trackName"
     ],
     [
-      "1",
-      "2"
+      "trackName",
+      "volumeValue1"
     ],
     [
-      "1",
+      "volumeValue1",
+      "fadeSeconds",
       "LF"
     ],
     [
-      "2",
-      "3"
-    ],
-    [
-      "2",
+      "fadeSeconds",
+      "repeatMode",
       "LF"
     ],
     [
-      "3",
-      "4"
-    ],
-    [
-      "3",
+      "repeatMode",
       "LF"
     ],
     [
-      "4",
+      "queue",
+      "trackName"
+    ],
+    [
+      "stop",
+      "stopFadeSeconds",
       "LF"
     ],
     [
-      "5",
-      "6"
-    ],
-    [
-      "6",
-      "7"
-    ],
-    [
-      "7",
-      "8"
-    ],
-    [
-      "8",
-      "9"
-    ],
-    [
-      "9",
+      "stopFadeSeconds",
       "LF"
     ],
     [
-      "10",
-      "11"
+      "volume",
+      "volumeValue2"
     ],
     [
-      "11",
-      "LF"
-    ],
-    [
-      "12",
-      "13"
-    ],
-    [
-      "13",
+      "volumeValue2",
       "LF"
     ]
-  ],
-  "name": [
-    "music"
-  ],
-  "start": [
-    "0",
-    "5",
-    "10",
-    "12"
-  ],
-  "description": "控制音乐，同/tell和/w"
+  ]
 }

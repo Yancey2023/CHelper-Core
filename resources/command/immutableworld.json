@@ -1,24 +1,25 @@
 {
+  "name": [
+    "immutableworld"
+  ],
+  "description": "设置世界是否可发生变化",
+  "start": [
+    "LF",
+    "value"
+  ],
   "node": [
     {
-      "descriptionFalse": "世界不可以发生变化",
+      "type": "BOOLEAN",
+      "id": "value",
       "description": "世界是否可以发生变化",
-      "descriptionTrue": "世界可以发生变化",
-      "id": "0",
-      "type": "BOOLEAN"
+      "descriptionFalse": "世界不可以发生变化",
+      "descriptionTrue": "世界可以发生变化"
     }
   ],
   "ast": [
     [
-      "0",
+      "value",
       "LF"
     ]
-  ],
-  "name": [
-    "immutableworld"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "设置世界是否可发生变化"
+  ]
 }

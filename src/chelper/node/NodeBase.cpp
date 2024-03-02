@@ -60,7 +60,6 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack &cpack) const {
-        //TODO 把所有定位的getASTNode()改为getASTNodeWithNextNode()
         //空格检测
         tokenReader.push();
         if (isMustAfterWhiteSpace && tokenReader.skipWhitespace() == 0) {
@@ -95,7 +94,7 @@ namespace CHelper::Node {
                                      const CPack &cpack,
                                      const std::shared_ptr<NodeBase> &childNode,
                                      const std::string &astNodeId) const {
-        ASTNode node = childNode->getASTNode(tokenReader, cpack);
+        ASTNode node = childNode->getASTNodeWithNextNode(tokenReader, cpack);
         return ASTNode::andNode(this, {node}, node.tokens, nullptr, astNodeId);
     }
 
@@ -115,7 +114,7 @@ namespace CHelper::Node {
         for (const auto &item: childNodes) {
             tokenReader.push();
             tokenReader.push();
-            ASTNode astNode = item->getASTNode(tokenReader, cpack);
+            ASTNode astNode = item->getASTNodeWithNextNode(tokenReader, cpack);
             const VectorView <Token> tokens = tokenReader.collect();
             if (astNode.isError() && !childASTNodes.empty() && (isIgnoreChildNodesError || tokens.isEmpty())) {
                 tokenReader.restore();

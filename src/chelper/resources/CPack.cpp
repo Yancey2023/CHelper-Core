@@ -10,6 +10,7 @@
 #include "../node/json/NodeJsonList.h"
 #include "../node/json/NodeJsonObject.h"
 #include "../node/json/NodeJsonElement.h"
+#include "../node/util/NodeAnd.h"
 
 namespace CHelper {
 
@@ -70,6 +71,29 @@ namespace CHelper {
                                   .red("\"")
                                   .build());
             jsonNodes.push_back(std::make_shared<Node::NodeJsonElement>(JsonUtil::getJsonFromPath(file), *this));
+        }
+        Profile::next(ColorStringBuilder().red("loading repeat data").build());
+        for (const auto &file: std::filesystem::recursive_directory_iterator(path / "repeat")) {
+            Profile::next(ColorStringBuilder()
+                                  .red("loading repeat data in path \"")
+                                  .purple(file.path().string())
+                                  .red("\"")
+                                  .build());
+            nlohmann::json j = JsonUtil::getJsonFromPath(file);
+            Profile::push(ColorStringBuilder().red("loading repeat data id").build());
+            auto id = JsonUtil::fromJson<std::string>(j, "id");
+            Profile::next(ColorStringBuilder().red("loading contents").build());
+            auto content = std::make_shared<std::vector<std::shared_ptr<Node::NodeBase>>>();
+            for (const auto &item: j.at("contents")) {
+                auto perContent = std::make_shared<std::vector<std::shared_ptr<Node::NodeBase>>>();
+                for (const auto &item2: item) {
+                    perContent->push_back(Node::NodeBase::getNodeFromJson(item2, *this));
+                }
+                content->push_back(std::make_shared<Node::NodeAnd>(id, std::nullopt, perContent));
+            }
+            auto breakNode = Node::NodeBase::getNodeFromJson(j.at("break"), *this);
+            repeatNodes.emplace_back(std::make_shared<Node::NodeOr>(id, std::nullopt, content, false), breakNode);
+            Profile::pop();
         }
         Node::NodeType::canLoadNodeJson = false;
         Profile::next(ColorStringBuilder().red("loading commands").build());

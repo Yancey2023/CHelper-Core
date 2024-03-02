@@ -21,6 +21,7 @@ namespace CHelper {
         std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> blockIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
         std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
         std::vector<std::shared_ptr<Node::NodeBase>> jsonNodes;
+        std::vector<std::pair<std::shared_ptr<Node::NodeBase>, std::shared_ptr<Node::NodeBase>>> repeatNodes;
         std::shared_ptr<std::vector<std::shared_ptr<Node::NodeBase>>> commands = std::make_shared<std::vector<std::shared_ptr<Node::NodeBase>>>();
         //从这个节点开始检测
         std::shared_ptr<Node::NodeBase> mainNode;

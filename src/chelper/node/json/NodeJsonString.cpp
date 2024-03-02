@@ -9,6 +9,8 @@
 
 namespace CHelper::Node {
 
+    static std::shared_ptr<NormalId> doubleQuoteMask = std::make_shared<NormalId>("\"", "双引号");
+
     NodeJsonString::NodeJsonString(const std::optional<std::string> &id,
                                    const std::optional<std::string> &description,
                                    const std::shared_ptr<NodeBase> &data)
@@ -46,6 +48,7 @@ namespace CHelper::Node {
         std::string result;
         std::shared_ptr<ErrorReason> errorReason;
         std::vector<size_t> indexConvertList;
+        bool isComplete = false;
 
         size_t convert(size_t index) {
             return indexConvertList[index];
@@ -82,28 +85,28 @@ namespace CHelper::Node {
     }
 
     static ConvertResult jsonString2String(const std::string &input) {
-        std::string input0;
-        if (input.size() > 1 && input[input.size() - 1] == '"') {
-            input0 = input.substr(1, input.length() - 2);
-        } else {
-            input0 = input.substr(1, input.length() - 1);
-        }
         ConvertResult result;
-        result.indexConvertList.push_back(0);
-        StringReader stringReader(input0, "unknown");
+        if (input.empty()) {
+            result.errorReason = ErrorReason::incomplete(0, 0, "json字符串必须在双引号内");
+            return result;
+        }
+        StringReader stringReader(input, "unknown");
+        result.indexConvertList.push_back(stringReader.pos.index);
         int unicodeValue;
         std::string escapeSequence;
         while (true) {
-            if (result.errorReason != nullptr) {
-                break;
-            }
-            char ch = stringReader.peek();
+            char ch = stringReader.next();
+            //结束字符
             if (ch == EOF) {
+                result.isComplete = false;
+                break;
+            } else if (ch == '\"') {
+                result.isComplete = true;
                 break;
             }
+            //正常字符
             if (ch != '\\') {
                 result.result.push_back(ch);
-                stringReader.skip();
                 result.indexConvertList.push_back(stringReader.pos.index);
                 continue;
             }
@@ -123,7 +126,6 @@ namespace CHelper::Node {
                 case '\r':
                 case '\t':
                     result.result.push_back(ch);
-                    stringReader.skip();
                     result.indexConvertList.push_back(stringReader.pos.index);
                     break;
                 case 'u':
@@ -186,13 +188,15 @@ namespace CHelper::Node {
                         result.result.push_back(
                                 static_cast<char>(0x80u | (static_cast<unsigned int>(unicodeValue) & 0x3Fu)));
                     }
-                    stringReader.skip();
                     result.indexConvertList.push_back(stringReader.pos.index);
                     break;
                 default:
                     result.errorReason = ErrorReason::contentError(input.length(), input.length() + 1,
                                                                    FormatUtil::format("未知的转义字符 -> \\{0}", ch));
                     break;
+            }
+            if (result.errorReason != nullptr) {
+                break;
             }
         }
         return result;
@@ -230,12 +234,12 @@ namespace CHelper::Node {
             return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(
                     result.tokens, "字符串参数内容应该在双引号内 -> " + str));
         }
-        if (data == nullptr) {
-            return result;
-        }
         std::shared_ptr<ErrorReason> errorReason;
         if (str.size() <= 1 || str[str.size() - 1] != '"') {
             errorReason = ErrorReason::contentError(result.tokens, "字符串参数内容应该在双引号内 -> " + str);
+        }
+        if (data == nullptr) {
+            return ASTNode::andNode(this, {result}, result.tokens, errorReason);
         }
         size_t offset = TokenUtil::getStartIndex(result.tokens) + 1;
         auto innerNode = getInnerASTNode(this, result.tokens, str, cpack, data);
@@ -270,18 +274,39 @@ namespace CHelper::Node {
     bool NodeJsonString::collectSuggestions(const ASTNode *astNode,
                                             size_t index,
                                             std::vector<Suggestion> &suggestions) const {
-        if (astNode->id != "inner") {
+        std::string str = TokenUtil::toString(astNode->tokens);
+        if (str.empty()) {
+            suggestions.emplace_back(index, index, doubleQuoteMask);
             return true;
         }
-        auto convertResult = jsonString2String(TokenUtil::toString(astNode->tokens));
-        size_t offset = TokenUtil::getStartIndex(astNode->tokens) + 1;
-        for (auto &item: astNode->childNodes[0].getSuggestions(index - offset)) {
-            item.start = convertResult.convert(item.start) + offset;
-            item.end = convertResult.convert(item.end) + offset;
-            item.content = std::make_shared<NormalId>(string2jsonString(item.content->name), item.content->description);
-            suggestions.push_back(item);
+        if (astNode->id == "inner") {
+            auto convertResult = jsonString2String(str);
+            size_t offset = TokenUtil::getStartIndex(astNode->tokens) + 1;
+            for (auto &item: astNode->childNodes[0].getSuggestions(index - offset)) {
+                item.start = convertResult.convert(item.start) + offset;
+                item.end = convertResult.convert(item.end) + offset;
+                item.content = std::make_shared<NormalId>(
+                        string2jsonString(item.content->name), item.content->description);
+                suggestions.push_back(item);
+            }
+            if (astNode->hasChildNode() && !astNode->childNodes[0].isError()) {
+                if (str.length() == 1 || str[str.length() - 1] != '"' ||
+                    (convertResult.errorReason == nullptr && !convertResult.isComplete)) {
+                    suggestions.emplace_back(index, index, doubleQuoteMask);
+                }
+            }
+            return true;
+        } else {
+            if (str.length() == 1 || str[str.length() - 1] != '"') {
+                suggestions.emplace_back(index, index, doubleQuoteMask);
+                return true;
+            }
+            auto convertResult = jsonString2String(str);
+            if (convertResult.errorReason == nullptr && !convertResult.isComplete) {
+                suggestions.emplace_back(index, index, doubleQuoteMask);
+            }
+            return true;
         }
-        return true;
     }
 
 } // CHelper::Node

@@ -5,6 +5,7 @@
 #include "NodeJsonList.h"
 #include "../util/NodeSingleSymbol.h"
 #include "../util/NodeList.h"
+#include "NodeJsonElement.h"
 
 namespace CHelper::Node {
 
@@ -14,6 +15,9 @@ namespace CHelper::Node {
             "JSON_LIST_RIGHT", "JSON列表右括号", ']');
     static std::shared_ptr<NodeBase> nodeSeparator = std::make_shared<NodeSingleSymbol>(
             "JSON_LIST_SEPARATOR", "JSON列表分隔符", ',');
+    static std::shared_ptr<NodeBase> nodeAllList = std::make_shared<NodeList>(
+            "JSON_OBJECT", "JSON对象",
+            nodLeft, NodeJsonElement::getNodeJsonElement(), nodeSeparator, nodeRight);
 
     NodeJsonList::NodeJsonList(const std::optional<std::string> &id,
                                const std::optional<std::string> &description,
@@ -51,7 +55,26 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
-        return getByChildNode(tokenReader, cpack, nodeList);
+        if (nodeList == nullptr) {
+            return getByChildNode(tokenReader, cpack, nodeAllList, "node json all list");
+        }
+        tokenReader.push();
+        ASTNode result1 = nodeList->getASTNode(tokenReader, cpack);
+        size_t index1 = tokenReader.index;
+        tokenReader.restore();
+        tokenReader.push();
+        ASTNode result2 = getByChildNode(tokenReader, cpack, nodeAllList, "node json all list");
+        size_t index2 = tokenReader.index;
+        tokenReader.restore();
+        tokenReader.push();
+        tokenReader.index = result1.isError() ? index2 : index1;
+        return ASTNode::orNode(this, {result1, result2}, tokenReader.collect());
+    }
+
+    bool NodeJsonList::collectSuggestions(const ASTNode *astNode,
+                                          size_t index,
+                                          std::vector<Suggestion> &suggestions) const {
+        return astNode->id == "node json all list";
     }
 
 } // CHelper::Node

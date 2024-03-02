@@ -1,6 +1,16 @@
 {
+  "name": [
+    "listd"
+  ],
+  "description": "列出在服务器上的玩家（隐藏命令）",
+  "start": [
+    "details"
+  ],
   "node": [
     {
+      "type": "NORMAL_ID",
+      "id": "details",
+      "description": "要列出的内容",
       "contents": [
         {
           "name": "ids",
@@ -14,24 +24,13 @@
           "name": "uuids",
           "description": "玩家的UUID"
         }
-      ],
-      "contentMode": false,
-      "description": "要列出的内容",
-      "id": "0",
-      "type": "NORMAL_ID"
+      ]
     }
   ],
   "ast": [
     [
-      "0",
+      "details",
       "LF"
     ]
-  ],
-  "name": [
-    "listd"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "列出在服务器上的玩家（隐藏命令）"
+  ]
 }

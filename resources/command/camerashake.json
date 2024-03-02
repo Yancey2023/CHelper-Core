@@ -1,35 +1,46 @@
 {
+  "name": [
+    "camerashake"
+  ],
+  "description": "对玩家视野施以一定强度和时间的摇晃效果",
+  "start": [
+    "add",
+    "stop"
+  ],
   "node": [
     {
+      "type": "TEXT",
+      "id": "add",
+      "description": "给玩家添加视野摇晃效果",
       "data": {
         "name": "add",
         "description": "给玩家添加视野摇晃效果"
-      },
-      "description": "给玩家添加视野摇晃效果",
-      "id": "0",
-      "type": "TEXT"
+      }
     },
     {
-      "isMustPlayer": true,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "addSelector",
       "description": "要施以视野摇晃效果的玩家(默认为命令执行者)",
-      "id": "1",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": true,
+      "isMustNPC": false
     },
     {
-      "min": 0,
-      "max": 4,
+      "type": "FLOAT",
+      "id": "intensity",
       "description": "视野摇晃的强度",
-      "id": "2",
-      "type": "FLOAT"
+      "min": 0,
+      "max": 4
     },
     {
-      "description": "视野摇晃的时长",
-      "id": "3",
-      "type": "FLOAT"
+      "type": "FLOAT",
+      "id": "seconds",
+      "description": "视野摇晃的时长"
     },
     {
+      "type": "NORMAL_ID",
+      "id": "shakeType",
+      "description": "视野摇晃方向的种类",
       "contents": [
         {
           "name": "positional",
@@ -39,66 +50,58 @@
           "name": "rotational",
           "description": "角度摇晃"
         }
-      ],
-      "contentMode": false,
-      "description": "视野摇晃方向的种类",
-      "id": "4",
-      "type": "NORMAL_ID"
+      ]
     },
     {
+      "type": "TEXT",
+      "id": "stop",
+      "description": "停止视野摇晃",
       "data": {
         "name": "stop",
         "description": "停止视野摇晃"
-      },
-      "description": "停止视野摇晃",
-      "id": "5",
-      "type": "TEXT"
+      }
     },
     {
-      "isMustPlayer": true,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "stopSelector",
       "description": "要停止视野摇晃的玩家(默认为命令执行者)",
-      "id": "6",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": true,
+      "isMustNPC": false
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "add",
+      "addSelector"
     ],
     [
-      "1",
-      "2"
-    ],
-    [
-      "2",
-      "3"
-    ],
-    [
-      "3",
-      "4"
-    ],
-    [
-      "4",
+      "addSelector",
+      "intensity",
       "LF"
     ],
     [
-      "5",
-      "6"
+      "intensity",
+      "seconds",
+      "LF"
     ],
     [
-      "6",
+      "seconds",
+      "shakeType",
+      "LF"
+    ],
+    [
+      "shakeType",
+      "LF"
+    ],
+    [
+      "stop",
+      "stopSelector",
+      "LF"
+    ],
+    [
+      "stopSelector",
       "LF"
     ]
-  ],
-  "name": [
-    "camerashake"
-  ],
-  "start": [
-    "0",
-    "5"
-  ],
-  "description": "对玩家视野施以一定强度和时间的摇晃效果"
+  ]
 }

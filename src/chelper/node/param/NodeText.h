@@ -24,8 +24,8 @@ namespace CHelper::Node {
                      return tokenReader.readStringASTNode(node);
                  });
 
-        explicit NodeText(const nlohmann::json &j,
-                          [[maybe_unused]] const CPack &cpack);
+        NodeText(const nlohmann::json &j,
+                 [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
 

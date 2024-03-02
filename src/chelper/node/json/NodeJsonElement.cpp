@@ -6,6 +6,12 @@
 #include "../param/NodeLF.h"
 #include "NodeJsonObject.h"
 #include "NodeJsonList.h"
+#include "NodeJsonString.h"
+#include "NodeJsonInteger.h"
+#include "NodeJsonFloat.h"
+#include "NodeJsonNull.h"
+#include "NodeJsonBoolean.h"
+#include "../util/NodeOr.h"
 
 namespace CHelper::Node {
 
@@ -80,6 +86,29 @@ namespace CHelper::Node {
 
     ASTNode NodeJsonElement::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         return getByChildNode(tokenReader, cpack, start);
+    }
+
+    std::shared_ptr<NodeBase> NodeJsonElement::getNodeJsonElement() {
+        static std::shared_ptr<NodeBase> jsonString = std::make_shared<NodeJsonString>(
+                "JSON_STRING", "JSON字符串", nullptr);
+        static std::shared_ptr<NodeBase> jsonInteger = std::make_shared<NodeJsonInteger>(
+                "JSON_INTEGER", "JSON整数", std::nullopt, std::nullopt);
+        static std::shared_ptr<NodeBase> jsonFloat = std::make_shared<NodeJsonFloat>(
+                "JSON_FLOAT", "JSON小数", std::nullopt, std::nullopt);
+        static std::shared_ptr<NodeBase> jsonNull = std::make_shared<NodeJsonNull>(
+                "JSON_NULL", "JSON空值");
+        static std::shared_ptr<NodeBase> jsonBoolean = std::make_shared<NodeJsonBoolean>(
+                "JSON_BOOLEAN", "JSON布尔值", std::nullopt, std::nullopt);
+        static std::shared_ptr<NodeBase> jsonList = std::make_shared<NodeJsonList>(
+                "JSON_LIST", "JSON列表", "");
+        static std::shared_ptr<NodeBase> jsonObject = std::make_shared<NodeJsonObject>(
+                "JSON_OBJECT", "JSON对象", std::make_shared<std::vector<std::shared_ptr<NodeBase>>>());
+        static std::shared_ptr<NodeBase> jsonElement = std::make_shared<NodeOr>(
+                "JSON_ELEMENT", "JSON元素", std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
+                        std::vector<std::shared_ptr<NodeBase>>{
+                                jsonBoolean, jsonFloat, jsonInteger, jsonNull, jsonString, jsonList, jsonObject
+                        }), false);
+        return jsonElement;
     }
 
 } // CHelper::Node

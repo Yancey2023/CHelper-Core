@@ -97,7 +97,7 @@ namespace CHelper::Node {
         tokenReader.skipWhitespace();
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(nodeAt)
-        ASTNode at = nodeAt->getASTNode(tokenReader, cpack);
+        ASTNode at = nodeAt->getASTNodeWithNextNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeAt)
         tokenReader.restore();
         if (at.isError()) {
@@ -111,11 +111,11 @@ namespace CHelper::Node {
         //目标选择器变量
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(nodeTargetSelectorVariable)
-        ASTNode targetSelectorVariable = nodeTargetSelectorVariable->getASTNode(tokenReader, cpack);
+        ASTNode targetSelectorVariable = nodeTargetSelectorVariable->getASTNodeWithNextNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeTargetSelectorVariable)
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(nodeLeft)
-        ASTNode leftBracket = nodeLeft->getASTNode(tokenReader, cpack);
+        ASTNode leftBracket = nodeLeft->getASTNodeWithNextNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeLeft)
         tokenReader.restore();
         if (leftBracket.isError()) {
@@ -124,7 +124,7 @@ namespace CHelper::Node {
                                     nullptr, "target selector no arguments");
         }
         DEBUG_GET_NODE_BEGIN(nodeArguments)
-        ASTNode arguments = nodeArguments->getASTNode(tokenReader, cpack);
+        ASTNode arguments = nodeArguments->getASTNodeWithNextNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeArguments)
         return ASTNode::andNode(this, {targetSelectorVariable, arguments}, tokenReader.collect(),
                                 nullptr, "target selector with arguments");

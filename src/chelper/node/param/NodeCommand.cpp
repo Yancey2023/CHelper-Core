@@ -25,9 +25,9 @@ namespace CHelper::Node {
 
     ASTNode NodeCommand::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         DEBUG_GET_NODE_BEGIN(nodeCommand)
-        auto result = getByChildNode(tokenReader, cpack, {nodeCommand}, "command");
+        ASTNode node = nodeCommand->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeCommand)
-        return result;
+        return ASTNode::andNode(this, {node}, node.tokens, nullptr, "command");
     }
 
     std::optional<std::string> NodeCommand::collectDescription(const ASTNode *astNode, size_t index) const {

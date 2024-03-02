@@ -27,6 +27,8 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
 
+        static std::shared_ptr<NodeBase> getNodeJsonElement();
+
     };
 
 } // CHelper::Node

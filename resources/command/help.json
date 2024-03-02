@@ -5,24 +5,25 @@
   ],
   "description": "列出所有可用命令",
   "start": [
-    "commandName",
+    "LF",
+    "command",
     "page"
   ],
   "node": [
     {
-      "description": "要提供帮助的命令名称",
-      "id": "commandName",
-      "type": "COMMAND_NAME"
+      "type": "COMMAND_NAME",
+      "id": "command",
+      "description": "要提供帮助的命令名称"
     },
     {
-      "description": "要展示的命令列表的页码（小于1的数字会被视为1，大于总页数会被默认为展示最后一页）",
+      "type": "INTEGER",
       "id": "page",
-      "type": "INTEGER"
+      "description": "要展示的命令列表的页码（小于1的数字会被视为1，大于总页数会被默认为展示最后一页）"
     }
   ],
   "ast": [
     [
-      "commandName",
+      "command",
       "LF"
     ],
     [

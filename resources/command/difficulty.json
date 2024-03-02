@@ -1,6 +1,16 @@
 {
+  "name": [
+    "difficulty"
+  ],
+  "description": "设定难度等级",
+  "start": [
+    "difficulty"
+  ],
   "node": [
     {
+      "type": "NORMAL_ID",
+      "id": "difficulty",
+      "description": "难度等级",
       "contents": [
         {
           "name": "peaceful",
@@ -46,24 +56,13 @@
           "name": "3",
           "description": "困难难度"
         }
-      ],
-      "contentMode": false,
-      "description": "难度等级",
-      "id": "0",
-      "type": "NORMAL_ID"
+      ]
     }
   ],
   "ast": [
     [
-      "0",
+      "difficulty",
       "LF"
     ]
-  ],
-  "name": [
-    "difficulty"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "设定难度等级"
+  ]
 }

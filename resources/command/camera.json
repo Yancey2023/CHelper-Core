@@ -1,0 +1,439 @@
+{
+  "name": [
+    "camera"
+  ],
+  "description": "修改玩家的相机视角",
+  "start": [
+    "players"
+  ],
+  "node": [
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "players",
+      "description": "将被修改相机视角的玩家",
+      "isOnlyOne": false,
+      "isMustPlayer": true,
+      "isMustNPC": false
+    },
+    {
+      "type": "TEXT",
+      "id": "clear",
+      "description": "清除玩家的相机视角效果",
+      "data": {
+        "name": "clear",
+        "description": "清除玩家的相机视角效果"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "fade",
+      "description": "相机视角的RGB颜色和淡入、保持和淡出持续时间",
+      "data": {
+        "name": "fade",
+        "description": "相机视角的RGB颜色和淡入、保持和淡出持续时间"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "set",
+      "description": "给玩家添加视野摇晃效果",
+      "data": {
+        "name": "set",
+        "description": "给玩家添加视野摇晃效果"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "color",
+      "description": "相机视角的RGB颜色",
+      "data": {
+        "name": "color",
+        "description": "相机视角的RGB颜色"
+      }
+    },
+    {
+      "type": "INTEGER",
+      "id": "red",
+      "description": "相机视角RGB颜色的红色强度",
+      "min": 0,
+      "max": 255
+    },
+    {
+      "type": "INTEGER",
+      "id": "green",
+      "description": "相机视角RGB颜色的绿色强度",
+      "min": 0,
+      "max": 255
+    },
+    {
+      "type": "INTEGER",
+      "id": "blue",
+      "description": "相机视角RGB颜色的蓝色强度",
+      "min": 0,
+      "max": 255
+    },
+    {
+      "type": "TEXT",
+      "id": "time",
+      "description": "相机视角的淡入、保持和淡出持续时间",
+      "data": {
+        "name": "time",
+        "description": "相机视角的淡入、保持和淡出持续时间"
+      }
+    },
+    {
+      "type": "FLOAT",
+      "id": "fadeInSeconds",
+      "description": "相机视角的淡入时间",
+      "min": 0,
+      "max": 10
+    },
+    {
+      "type": "FLOAT",
+      "id": "holdSeconds",
+      "description": "相机视角的保持持续时间",
+      "min": 0,
+      "max": 10
+    },
+    {
+      "type": "FLOAT",
+      "id": "fadeOutSeconds",
+      "description": "相机视角的淡出持续时间",
+      "min": 0,
+      "max": 10
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "preset",
+      "description": "相机视角/预设",
+      "contents": [
+        {
+          "name": "minecraft:free",
+          "description": "自由视角"
+        },
+        {
+          "name": "minecraft:first_person",
+          "description": "第一人称视角"
+        },
+        {
+          "name": "minecraft:third_person",
+          "description": "第三人称视角背面"
+        },
+        {
+          "name": "minecraft:third_person_front",
+          "description": "第三人称视角正面"
+        },
+        {
+          "name": "example:example_free",
+          "description": "继承自由视角，在Y=50处绕X轴旋转10度并绕Y轴旋转40度"
+        },
+        {
+          "name": "example:example_player_effects",
+          "description": "继承自由视角，渲染状态效果对相机视角造成的影响"
+        },
+        {
+          "name": "example:example_player_listener",
+          "description": "继承自由视角，使用玩家位置作为声音来源"
+        }
+      ]
+    },
+    {
+      "type": "STRING",
+      "id": "default",
+      "description": "未知参数，需要更多信息",
+      "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "TEXT",
+      "id": "facing",
+      "description": "相机视角朝向实体或坐标",
+      "data": {
+        "name": "facing",
+        "description": "相机视角朝向实体或坐标"
+      }
+    },
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "lookAtEntity",
+      "description": "相机视角朝向的实体",
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
+    },
+    {
+      "type": "POSITION",
+      "id": "lookAtPosition",
+      "description": "相机视角朝向的坐标"
+    },
+    {
+      "type": "TEXT",
+      "id": "pos",
+      "description": "相机视角的位置",
+      "data": {
+        "name": "pos",
+        "description": "相机视角的位置"
+      }
+    },
+    {
+      "type": "POSITION",
+      "id": "position",
+      "description": "相机视角的位置"
+    },
+    {
+      "type": "TEXT",
+      "id": "rot",
+      "description": "相机视角的旋转角度",
+      "data": {
+        "name": "rot",
+        "description": "相机视角的旋转角度"
+      }
+    },
+    {
+      "type": "RELATIVE_FLOAT",
+      "id": "xRot",
+      "description": "相机视角绕Y轴旋转的旋转角度(-180.0表示北，-90.0表示东，0.0表示南，90.0表示西)",
+      "canUseCaretNotation": false
+    },
+    {
+      "type": "RELATIVE_FLOAT",
+      "id": "yRot",
+      "description": "相机视角绕X轴旋转的旋转角度(竖直上方为-90.0，至竖直下方90.0)",
+      "canUseCaretNotation": false
+    },
+    {
+      "type": "TEXT",
+      "id": "ease",
+      "description": "相机视角平滑过渡",
+      "data": {
+        "name": "ease",
+        "description": "相机视角平滑过渡"
+      }
+    },
+    {
+      "type": "FLOAT",
+      "id": "easeTime",
+      "description": "相机视角平滑过渡的持续时间"
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "easeType",
+      "description": "相机视角运镜的移动函数/类型",
+      "contents": [
+        {
+          "name": "minecraft:free",
+          "description": "自由视角"
+        },
+        {
+          "name": "linear"
+        },
+        {
+          "name": "spring"
+        },
+        {
+          "name": "in_quad"
+        },
+        {
+          "name": "out_quad"
+        },
+        {
+          "name": "in_out_quad"
+        },
+        {
+          "name": "in_cubic"
+        },
+        {
+          "name": "out_cubic"
+        },
+        {
+          "name": "in_out_cubic"
+        },
+        {
+          "name": "in_quart"
+        },
+        {
+          "name": "out_quart"
+        },
+        {
+          "name": "in_out_quart"
+        },
+        {
+          "name": "in_quint"
+        },
+        {
+          "name": "out_quint"
+        },
+        {
+          "name": "in_out_quint"
+        },
+        {
+          "name": "in_sine"
+        },
+        {
+          "name": "out_sine"
+        },
+        {
+          "name": "in_out_sine"
+        },
+        {
+          "name": "in_expo"
+        },
+        {
+          "name": "out_expo"
+        },
+        {
+          "name": "in_out_expo"
+        },
+        {
+          "name": "in_circ"
+        },
+        {
+          "name": "out_circ"
+        },
+        {
+          "name": "in_out_circ"
+        },
+        {
+          "name": "in_bounce"
+        },
+        {
+          "name": "out_bounce"
+        },
+        {
+          "name": "in_out_bounce"
+        },
+        {
+          "name": "in_back"
+        },
+        {
+          "name": "out_back"
+        },
+        {
+          "name": "in_out_back"
+        },
+        {
+          "name": "in_elastic"
+        },
+        {
+          "name": "out_elastic"
+        },
+        {
+          "name": "in_out_elastic"
+        }
+      ]
+    }
+  ],
+  "ast": [
+    [
+      "players",
+      "clear",
+      "fade",
+      "set"
+    ],
+    [
+      "clear",
+      "LF"
+    ],
+    [
+      "fade",
+      "color",
+      "time"
+    ],
+    [
+      "color",
+      "red"
+    ],
+    [
+      "red",
+      "green"
+    ],
+    [
+      "green",
+      "blue"
+    ],
+    [
+      "blue",
+      "LF"
+    ],
+    [
+      "time",
+      "fadeInSeconds"
+    ],
+    [
+      "fadeInSeconds",
+      "holdSeconds"
+    ],
+    [
+      "holdSeconds",
+      "fadeOutSeconds"
+    ],
+    [
+      "fadeOutSeconds",
+      "color"
+    ],
+    [
+      "set",
+      "preset"
+    ],
+    [
+      "preset",
+      "default",
+      "facing",
+      "rot",
+      "ease"
+    ],
+    [
+      "default",
+      "LF"
+    ],
+    [
+      "facing",
+      "lookAtEntity",
+      "lookAtPosition"
+    ],
+    [
+      "lookAtEntity",
+      "LF"
+    ],
+    [
+      "lookAtPosition",
+      "LF"
+    ],
+    [
+      "pos",
+      "position"
+    ],
+    [
+      "position",
+      "facing",
+      "rot"
+    ],
+    [
+      "rot",
+      "xRot"
+    ],
+    [
+      "xRot",
+      "yRot"
+    ],
+    [
+      "yRot",
+      "LF"
+    ],
+    [
+      "ease",
+      "easeTime"
+    ],
+    [
+      "easeTime",
+      "easeType"
+    ],
+    [
+      "easeType",
+      "default",
+      "facing",
+      "pos",
+      "rot"
+    ]
+  ]
+}

@@ -11,7 +11,7 @@
 
 int main() {
     CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)");
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)", {"give @s "});
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)", {"execute if block ~~~ anvil[\"aaa\"=90.5] run "});
     return 0;
 }
 
@@ -60,8 +60,8 @@ namespace CHelper::Test {
                                      .normal(" : ")
                                      .purple(command)
                                      .build());
-                std::cout << core->getAstNode().toOptimizedJson() << std::endl;
-                std::cout << core->getAstNode().toBestJson() << std::endl;
+//                std::cout << core->getAstNode().toOptimizedJson() << std::endl;
+//                std::cout << core->getAstNode().toBestJson() << std::endl;
                 CHELPER_INFO("structure: " + structure);
                 CHELPER_INFO("description: " + description);
                 if (errorReasons.empty()) {
@@ -76,7 +76,9 @@ namespace CHelper::Test {
                                          .build());
                     CHELPER_INFO(ColorStringBuilder()
                                          .normal(command.substr(0, errorReason->start))
-                                         .red(command.substr(errorReason->start, errorReason->end - errorReason->start))
+                                         .red(errorReason->start == errorReason->end ? "~" :
+                                              command.substr(errorReason->start,
+                                                             errorReason->end - errorReason->start))
                                          .normal(command.substr(errorReason->end))
                                          .build());
                 } else {

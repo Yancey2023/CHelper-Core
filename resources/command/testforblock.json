@@ -1,32 +1,32 @@
 {
+  "name": [
+    "testforblock"
+  ],
+  "description": "探测某个方块是否在特定位置",
+  "start": [
+    "position"
+  ],
   "node": [
     {
-      "description": "待探测的方块的坐标",
-      "id": "0",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "position",
+      "description": "待探测的方块的坐标"
     },
     {
-      "nodeBlockType": 0,
+      "type": "BLOCK",
+      "id": "block",
       "description": "要探测的方块类型",
-      "id": "1",
-      "type": "BLOCK"
+      "nodeBlockType": 0
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "position",
+      "block"
     ],
     [
-      "1",
+      "block",
       "LF"
     ]
-  ],
-  "name": [
-    "testforblock"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "探测某个方块是否在特定位置"
+  ]
 }

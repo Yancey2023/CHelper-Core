@@ -6,12 +6,33 @@
 #include "../../util/TokenUtil.h"
 #include "../util/NodeSingleSymbol.h"
 #include "NodeFloat.h"
+#include "../util/NodeAnd.h"
+#include "../util/NodeOr.h"
 
 namespace CHelper::Node {
 
-    static NodeSingleSymbol nodeRelativeNotation("RELATIVE_FLOAT_CARET_NOTATION", "相对坐标（~x ~y ~z）", '~');
-    static NodeSingleSymbol nodeCaretNotation("RELATIVE_FLOAT_CARET_NOTATION", "局部坐标（^左 ^上 ^右）", '^');
-    static NodeFloat nodeValue("RELATIVE_FLOAT_FLOAT", "坐标参数的数值", std::nullopt, std::nullopt);
+    static std::shared_ptr<NodeBase> nodeRelativeNotation = std::make_shared<NodeSingleSymbol>(
+            "RELATIVE_FLOAT_RELATIVE_NOTATION", "相对坐标（~x ~y ~z）", '~');
+    static std::shared_ptr<NodeBase> nodeCaretNotation = std::make_shared<NodeSingleSymbol>(
+            "RELATIVE_FLOAT_CARET_NOTATION", "局部坐标（^左 ^上 ^右）", '^');
+    static std::shared_ptr<NodeBase> nodeValue = std::make_shared<NodeFloat>(
+            "RELATIVE_FLOAT_FLOAT", "坐标参数的数值", std::nullopt, std::nullopt);
+    static std::shared_ptr<NodeBase> nodeRelative = std::make_shared<NodeAnd>(
+            "RELATIVE_FLOAT_RELATIVE", "相对坐标（~x ~y ~z）",
+            std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
+                    std::vector<std::shared_ptr<NodeBase>>{nodeRelativeNotation, nodeValue}
+            ));
+    static std::shared_ptr<NodeBase> nodeCaret = std::make_shared<NodeAnd>(
+            "RELATIVE_FLOAT_CARET", "局部坐标（^左 ^上 ^右）",
+            std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
+                    std::vector<std::shared_ptr<NodeBase>>{nodeCaretNotation, nodeValue}
+            ));
+    static std::shared_ptr<NodeBase> nodeRelativeFloat = std::make_shared<NodeOr>(
+            "RELATIVE_FLOAT", "坐标",
+            std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
+                    std::vector<std::shared_ptr<NodeBase>>{
+                            nodeRelative, nodeCaret, nodeRelativeNotation, nodeCaretNotation, nodeValue}
+            ), false);
 
     NodeRelativeFloat::NodeRelativeFloat(const std::optional<std::string> &id,
                                          const std::optional<std::string> &description,
@@ -41,58 +62,45 @@ namespace CHelper::Node {
                                                           const CPack &cpack,
                                                           TokenReader &tokenReader,
                                                           bool canUseCaretNotation) {
-        tokenReader.push();
-        tokenReader.push();
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
         int type;
-        std::vector<ASTNode> childNodes;
-        ASTNode relativeNotation = nodeRelativeNotation.getASTNode(tokenReader, cpack);
-        bool isUseCaretNotation = false;
+        tokenReader.push();
+        ASTNode relativeNotation = nodeRelativeNotation->getASTNodeWithNextNode(tokenReader, cpack);
+        tokenReader.restore();
         if (!relativeNotation.isError()) {
             //相对坐标
             type = 1;
-            tokenReader.pop();
-            childNodes.push_back(relativeNotation);
         } else {
-            tokenReader.restore();
             tokenReader.push();
-            ASTNode caretNotation = nodeCaretNotation.getASTNode(tokenReader, cpack);
+            ASTNode caretNotation = nodeCaretNotation->getASTNodeWithNextNode(tokenReader, cpack);
+            tokenReader.restore();
             if (!caretNotation.isError()) {
                 //局部坐标
                 type = 2;
-                isUseCaretNotation = true;
-                tokenReader.pop();
-                childNodes.push_back(caretNotation);
             } else {
                 //绝对坐标
                 type = 0;
-                tokenReader.restore();
             }
         }
         //数值部分
-        childNodes.push_back(nodeValue.getASTNode(tokenReader, cpack));
+        ASTNode result = nodeRelativeFloat->getASTNodeWithNextNode(tokenReader, cpack);
         //判断有没有错误
-        VectorView <Token> tokens = tokenReader.collect();
-        if (isUseCaretNotation && !canUseCaretNotation) {
-            return {type, ASTNode::andNode(node, childNodes, tokens,
-                                           ErrorReason::logicError(tokens, "不能使用局部坐标"),
-                                           "relativeFloat")};
+        if (type == 2 && !canUseCaretNotation) {
+            result = ASTNode::andNode(node, {result}, result.tokens, ErrorReason::logicError(
+                    result.tokens, "不能使用局部坐标"), "relativeFloat");
+        } else if (result.isError()) {
+            result = ASTNode::andNode(node, {result}, result.tokens,
+                                      ErrorReason::typeError(result.tokens, FormatUtil::format(
+                                              "类型不匹配，{0}不是有效的坐标参数", TokenUtil::toString(result.tokens))),
+                                      "relativeFloat");
         }
-        ASTNode result = ASTNode::andNode(node, childNodes, tokens, nullptr, "relativeFloat");
-        if (result.isError()) {
-            return {type, ASTNode::andNode(node, childNodes, tokens, ErrorReason::typeError(tokens, FormatUtil::format(
-                    "类型不匹配，{0}不是有效的坐标参数", TokenUtil::toString(tokens))), "relativeFloat")};
-        } else {
-            return {type, result};
-        }
+        return {type, result};
     }
 
     void NodeRelativeFloat::collectStructure(const ASTNode *astNode,
                                              StructureBuilder &structure,
                                              bool isMustHave) const {
-        if (astNode == nullptr || astNode->id == "relativeFloat") {
-            NodeBase::collectStructure(astNode, structure, isMustHave);
-        }
+        structure.append(isMustHave, description.value_or("坐标"));
     }
 
 } // CHelper::Node

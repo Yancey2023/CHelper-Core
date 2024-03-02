@@ -1,60 +1,56 @@
 {
+  "name": [
+    "gamerule"
+  ],
+  "description": "设置或查询游戏规则",
+  "start": [
+    "gameRulesForBoolean",
+    "gameRulesForInteger"
+  ],
   "node": [
     {
-      "contentMode": true,
-      "description": "要设置或查询的游戏规则",
-      "id": "0",
       "type": "NORMAL_ID",
+      "id": "gameRulesForBoolean",
+      "description": "要设置或查询的游戏规则",
       "key": "gameRulesForBoolean"
     },
     {
+      "type": "BOOLEAN",
+      "id": "valueBoolean",
+      "description": "将游戏规则设置的值",
       "descriptionFalse": "设置为false",
-      "description": "将游戏规则设置的值",
-      "descriptionTrue": "设置为true",
-      "id": "1",
-      "type": "BOOLEAN"
+      "descriptionTrue": "设置为true"
     },
     {
-      "contentMode": true,
-      "description": "要设置或查询的游戏规则",
-      "id": "2",
       "type": "NORMAL_ID",
-      "key": "gameRulesForBoolean"
+      "id": "gameRulesForInteger",
+      "description": "要设置或查询的游戏规则",
+      "key": "gameRulesForInteger"
     },
     {
-      "description": "将游戏规则设置的值",
-      "id": "3",
-      "type": "INTEGER"
+      "type": "INTEGER",
+      "id": "valueInteger",
+      "description": "将游戏规则设置的值"
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
-    ],
-    [
-      "0",
+      "gameRulesForBoolean",
+      "valueBoolean",
       "LF"
     ],
     [
-      "1",
+      "valueBoolean",
       "LF"
     ],
     [
-      "2",
-      "3"
+      "gameRulesForInteger",
+      "valueInteger",
+      "LF"
     ],
     [
-      "3",
+      "valueInteger",
       "LF"
     ]
-  ],
-  "name": [
-    "gamerule"
-  ],
-  "start": [
-    "0",
-    "2"
-  ],
-  "description": "设置或查询游戏规则"
+  ]
 }

@@ -1,21 +1,31 @@
 {
+  "name": [
+    "testforblocks"
+  ],
+  "start": [
+    "begin"
+  ],
+  "description": "测试两个区域中的方块是否相同",
   "node": [
     {
-      "description": "作为样式基准的区域（源区域）的两个对角方块的第一个",
-      "id": "0",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "begin",
+      "description": "作为样式基准的区域（源区域）的两个对角方块的第一个"
     },
     {
-      "description": "作为样式基准的区域（源区域）的两个对角方块的第二个",
-      "id": "1",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "end",
+      "description": "作为样式基准的区域（源区域）的两个对角方块的第二个"
     },
     {
-      "description": "待检查区域（目标区域）的下西北角（具有最小坐标值的边角）",
-      "id": "2",
-      "type": "POSITION"
+      "type": "POSITION",
+      "id": "destination",
+      "description": "待检查区域（目标区域）的下西北角（具有最小坐标值的边角）"
     },
     {
+      "type": "NORMAL_ID",
+      "id": "mode",
+      "description": "测试模式",
       "contents": [
         {
           "name": "masked",
@@ -25,40 +35,26 @@
           "name": "all",
           "description": " 两个区域的所有方块必须完全相同"
         }
-      ],
-      "contentMode": false,
-      "description": "测试模式",
-      "id": "3",
-      "type": "NORMAL_ID"
+      ]
     }
   ],
   "ast": [
     [
-      "0",
-      "1"
+      "begin",
+      "end"
     ],
     [
-      "1",
-      "2"
+      "end",
+      "destination"
     ],
     [
-      "2",
-      "3"
-    ],
-    [
-      "2",
+      "destination",
+      "mode",
       "LF"
     ],
     [
-      "3",
+      "mode",
       "LF"
     ]
-  ],
-  "name": [
-    "testforblocks"
-  ],
-  "start": [
-    "0"
-  ],
-  "description": "测试两个区域中的方块是否相同"
+  ]
 }

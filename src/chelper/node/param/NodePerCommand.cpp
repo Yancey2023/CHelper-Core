@@ -21,7 +21,7 @@ namespace CHelper::Node {
 
     NodePerCommand::NodePerCommand(const nlohmann::json &j,
                                    const CPack &cpack)
-            : NodeBase(j, true) {
+            : NodeBase(j, false) {
         Profile::push(ColorStringBuilder().red("loading node name").build());
         name = FROM_JSON(j, name, std::vector<std::string>);
         if (j.contains("node")) {
@@ -31,7 +31,7 @@ namespace CHelper::Node {
             }
         }
         Profile::next(ColorStringBuilder().red("loading start nodes").build());
-        auto startNodeIds = FROM_JSON(j, start, std::vector<std::string>);
+        auto startNodeIds = JsonUtil::fromJson<std::vector<std::string>>(j, "start");
         for (const auto &startNodeId: startNodeIds) {
             Profile::next(ColorStringBuilder()
                                   .red("linking startNode \"")
@@ -42,11 +42,16 @@ namespace CHelper::Node {
                 startNodes.push_back(NodeLF::getInstance());
                 continue;
             }
+            bool flag = true;
             for (auto &node: nodes) {
                 if (node->id == startNodeId) {
                     startNodes.push_back(node);
+                    flag = false;
                     break;
                 }
+            }
+            if (flag) {
+                throw Exception::UnknownNodeId(name, startNodeId);
             }
         }
         if (j.contains("ast")) {
@@ -103,6 +108,11 @@ namespace CHelper::Node {
             }
         }
         Profile::pop();
+        for (const auto &item: nodes) {
+            if (item->nextNodes.empty()) {
+                throw Exception::RequireChildNodeIds(name, item->id.value_or("UNKNOWN"));
+            }
+        }
     }
 
     //因为节点可能之间互相绑定，所以要在析构的时候解除绑定

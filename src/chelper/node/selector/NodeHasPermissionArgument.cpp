@@ -49,7 +49,7 @@ namespace CHelper::Node {
             return ASTNode::andNode(this, childNodes, tokenReader.collect());
         }
         //value
-        childNodes.push_back(nodeValue->getASTNode(tokenReader, cpack));
+        childNodes.push_back(nodeValue->getASTNodeWithNextNode(tokenReader, cpack));
         return ASTNode::andNode(this, childNodes, tokenReader.collect());
     }
 

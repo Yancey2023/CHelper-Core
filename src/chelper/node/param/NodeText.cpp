@@ -7,7 +7,7 @@
 
 namespace CHelper::Node {
 
-    CHelper::Node::NodeText::NodeText(const std::optional<std::string> &id,
+    NodeText::NodeText(const std::optional<std::string> &id,
                                       const std::optional<std::string> &description,
                                       const std::shared_ptr<NormalId> &data,
                                       ASTNode(*getTextASTNode)(const NodeBase *node, TokenReader &tokenReader))
@@ -15,7 +15,7 @@ namespace CHelper::Node {
               data(data),
               getTextASTNode(getTextASTNode) {}
 
-    CHelper::Node::NodeText::NodeText(const nlohmann::json &j,
+    NodeText::NodeText(const nlohmann::json &j,
                                       [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true),
               data(std::make_shared<NormalId>(j.at("data"))),
@@ -27,7 +27,7 @@ namespace CHelper::Node {
         return NodeType::TEXT;
     }
 
-    void CHelper::Node::NodeText::toJson(nlohmann::json &j) const {
+    void NodeText::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
         nlohmann::json dataJson;
         data->toJson(dataJson);
