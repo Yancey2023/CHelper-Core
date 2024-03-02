@@ -19,8 +19,8 @@ I want to make an Android command IDE for minecraft bedrock version , so here is
 - [x] **Structure Retriever**: constructs a command structure string
 - [x] **Target Selector**: target selector command param
 - [x] **json support**: json command param
-- [ ] **`execute` command support**: support a command named `execute`
-- [ ] **block state support**: block states command param
+- [x] **`execute` command support**: support a command named `execute`
+- [x] **block state support**: block states command param
 - [ ] **highlight command**: obtains the highlight color for displayed commands
 
 ## Why choosing c++
