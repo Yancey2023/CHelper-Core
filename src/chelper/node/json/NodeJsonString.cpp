@@ -43,175 +43,18 @@ namespace CHelper::Node {
         j["data"] = data;
     }
 
-    class ConvertResult {
-    public:
-        std::string result;
-        std::shared_ptr<ErrorReason> errorReason;
-        std::vector<size_t> indexConvertList;
-        bool isComplete = false;
-
-        size_t convert(size_t index) {
-            return indexConvertList[index];
+    static std::pair<ASTNode, JsonUtil::ConvertResult> getInnerASTNode(const NodeJsonString *node,
+                                                                       const VectorView <Token> &tokens,
+                                                                       const std::string &content,
+                                                                       const CPack &cpack,
+                                                                       const std::shared_ptr<NodeBase> &mainNode) {
+        auto convertResult = JsonUtil::jsonString2String(content);
+        if (convertResult.errorReason != nullptr) {
+            convertResult.errorReason->start--;
+            convertResult.errorReason->end--;
+            return {ASTNode::simpleNode(node, tokens, convertResult.errorReason), convertResult};
         }
-
-    };
-
-    static std::string string2jsonString(const std::string &input) {
-        std::string result;
-        StringReader stringReader(input, "unknown");
-        while (true) {
-            char ch = stringReader.peek();
-            switch (ch) {
-                case EOF:
-                    return result;
-                case '\"':
-                case '\\':
-                case '/':
-                case '\b':
-                case '\f':
-                case '\n':
-                case '\r':
-                case '\t':
-                    result.push_back('\\');
-                    result.push_back(ch);
-                    stringReader.skip();
-                    break;
-                default:
-                    result.push_back(ch);
-                    break;
-            }
-            stringReader.skip();
-        }
-    }
-
-    static ConvertResult jsonString2String(const std::string &input) {
-        ConvertResult result;
-        if (input.empty()) {
-            result.errorReason = ErrorReason::incomplete(0, 0, "json字符串必须在双引号内");
-            return result;
-        }
-        StringReader stringReader(input, "unknown");
-        result.indexConvertList.push_back(stringReader.pos.index);
-        int unicodeValue;
-        std::string escapeSequence;
-        while (true) {
-            char ch = stringReader.next();
-            //结束字符
-            if (ch == EOF) {
-                result.isComplete = false;
-                break;
-            } else if (ch == '\"') {
-                result.isComplete = true;
-                break;
-            }
-            //正常字符
-            if (ch != '\\') {
-                result.result.push_back(ch);
-                result.indexConvertList.push_back(stringReader.pos.index);
-                continue;
-            }
-            //转义字符
-            ch = stringReader.next();
-            switch (ch) {
-                case EOF:
-                    result.errorReason = ErrorReason::incomplete(input.length(), input.length() + 1,
-                                                                 "转义字符缺失后半部分");
-                    break;
-                case '\"':
-                case '\\':
-                case '/':
-                case '\b':
-                case '\f':
-                case '\n':
-                case '\r':
-                case '\t':
-                    result.result.push_back(ch);
-                    result.indexConvertList.push_back(stringReader.pos.index);
-                    break;
-                case 'u':
-                    for (int i = 0; i < 4; ++i) {
-                        ch = stringReader.next();
-                        if (ch == EOF) {
-                            result.errorReason = ErrorReason::contentError(input.length(), input.length() + 1,
-                                                                           "字符串转义缺失后半部分 -> \\u" +
-                                                                           escapeSequence);
-                            break;
-                        }
-                        escapeSequence.push_back(ch);
-                    }
-                    if (escapeSequence.length() < 4) {
-                        break;
-                    }
-                    if (std::any_of(escapeSequence.begin(), escapeSequence.end(),
-                                    [&result, &input, &escapeSequence](const auto &item) {
-                                        bool notHex = std::isxdigit(item) != 0;
-                                        if (notHex) {
-                                            result.errorReason = ErrorReason::incomplete(
-                                                    input.length(), input.length() + escapeSequence.length() + 2,
-                                                    FormatUtil::format(
-                                                            "字符串转义出现非法字符{0} -> \\u{1}",
-                                                            item, escapeSequence));
-                                        }
-                                        return notHex;
-                                    })) {
-                        break;
-                    }
-                    unicodeValue = std::stoi(escapeSequence, nullptr, 16);
-                    if (unicodeValue <= 0 || unicodeValue > 0x10FFFF) {
-                        result.errorReason = ErrorReason::contentError(input.length(), input.length() + 1,
-                                                                       "字符串转义的Unicode值无效 -> \\u" +
-                                                                       escapeSequence);
-                        break;
-                    }
-                    escapeSequence.clear();
-                    if (unicodeValue <= 0x7F) {
-                        result.result.push_back(static_cast<char>(unicodeValue));
-                    } else if (unicodeValue <= 0x7FF) {
-                        result.result.push_back(
-                                static_cast<char>(0xC0u | (static_cast<unsigned int>(unicodeValue) >> 6u)));
-                        result.result.push_back(
-                                static_cast<char>(0x80u | (static_cast<unsigned int>(unicodeValue) & 0x3Fu)));
-                    } else if (unicodeValue <= 0xFFFF) {
-                        result.result.push_back(
-                                static_cast<char>(0xE0u | (static_cast<unsigned int>(unicodeValue) >> 12u)));
-                        result.result.push_back(
-                                static_cast<char>(0x80u | ((static_cast<unsigned int>(unicodeValue) >> 6u) & 0x3Fu)));
-                        result.result.push_back(
-                                static_cast<char>(0x80u | (static_cast<unsigned int>(unicodeValue) & 0x3Fu)));
-                    } else {
-                        result.result.push_back(
-                                static_cast<char>(0xF0u | (static_cast<unsigned int>(unicodeValue) >> 18u)));
-                        result.result.push_back(
-                                static_cast<char>(0x80u | ((static_cast<unsigned int>(unicodeValue) >> 12u) & 0x3Fu)));
-                        result.result.push_back(
-                                static_cast<char>(0x80u | ((static_cast<unsigned int>(unicodeValue) >> 6u) & 0x3Fu)));
-                        result.result.push_back(
-                                static_cast<char>(0x80u | (static_cast<unsigned int>(unicodeValue) & 0x3Fu)));
-                    }
-                    result.indexConvertList.push_back(stringReader.pos.index);
-                    break;
-                default:
-                    result.errorReason = ErrorReason::contentError(input.length(), input.length() + 1,
-                                                                   FormatUtil::format("未知的转义字符 -> \\{0}", ch));
-                    break;
-            }
-            if (result.errorReason != nullptr) {
-                break;
-            }
-        }
-        return result;
-    }
-
-    static std::pair<ASTNode, ConvertResult> getInnerASTNode(const NodeJsonString *node,
-                                                             const VectorView <Token> &tokens,
-                                                             const std::string &content,
-                                                             const CPack &cpack,
-                                                             const std::shared_ptr<NodeBase> &mainNode) {
-        auto contentResult = jsonString2String(content);
-        if (contentResult.errorReason != nullptr) {
-            return {ASTNode::simpleNode(node, tokens, contentResult.errorReason), contentResult};
-        }
-        auto newStringReader = StringReader(contentResult.result, "unknown");
+        auto newStringReader = StringReader(convertResult.result, "unknown");
         auto newTokens = std::make_shared<std::vector<Token>>(Lexer::lex(newStringReader));
         auto tokenReader = TokenReader(newTokens);
         Profile::push("start parsing: " + content);
@@ -219,7 +62,7 @@ namespace CHelper::Node {
         auto result = mainNode->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(mainNode)
         Profile::pop();
-        return {result, contentResult};
+        return {result, convertResult};
     }
 
     ASTNode NodeJsonString::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
@@ -261,7 +104,7 @@ namespace CHelper::Node {
         if (astNode->id != "inner") {
             return true;
         }
-        auto convertResult = jsonString2String(TokenUtil::toString(astNode->tokens));
+        auto convertResult = JsonUtil::jsonString2String(TokenUtil::toString(astNode->tokens));
         size_t offset = TokenUtil::getStartIndex(astNode->tokens) + 1;
         for (const auto &item: astNode->childNodes[0].getIdErrors()) {
             item->start = convertResult.convert(item->start) + offset;
@@ -274,19 +117,20 @@ namespace CHelper::Node {
     bool NodeJsonString::collectSuggestions(const ASTNode *astNode,
                                             size_t index,
                                             std::vector<Suggestion> &suggestions) const {
-        std::string str = TokenUtil::toString(astNode->tokens);
+        std::string str = TokenUtil::toString(astNode->tokens)
+                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         if (str.empty()) {
             suggestions.emplace_back(index, index, doubleQuoteMask);
             return true;
         }
         if (astNode->id == "inner") {
-            auto convertResult = jsonString2String(str);
+            auto convertResult = JsonUtil::jsonString2String(str);
             size_t offset = TokenUtil::getStartIndex(astNode->tokens) + 1;
             for (auto &item: astNode->childNodes[0].getSuggestions(index - offset)) {
                 item.start = convertResult.convert(item.start) + offset;
                 item.end = convertResult.convert(item.end) + offset;
                 item.content = std::make_shared<NormalId>(
-                        string2jsonString(item.content->name), item.content->description);
+                        JsonUtil::string2jsonString(item.content->name), item.content->description);
                 suggestions.push_back(item);
             }
             if (astNode->hasChildNode() && !astNode->childNodes[0].isError()) {
@@ -301,8 +145,8 @@ namespace CHelper::Node {
                 suggestions.emplace_back(index, index, doubleQuoteMask);
                 return true;
             }
-            auto convertResult = jsonString2String(str);
-            if (convertResult.errorReason == nullptr && !convertResult.isComplete) {
+            auto convertResult = JsonUtil::jsonString2String(str);
+            if (!convertResult.isComplete) {
                 suggestions.emplace_back(index, index, doubleQuoteMask);
             }
             return true;

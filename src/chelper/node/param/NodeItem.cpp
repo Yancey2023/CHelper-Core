@@ -46,7 +46,9 @@ namespace CHelper::Node {
 
     ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         tokenReader.push();
+        DEBUG_GET_NODE_BEGIN(nodeItemId)
         ASTNode itemId = nodeItemId->getASTNode(tokenReader, cpack);
+        DEBUG_GET_NODE_END(nodeItemId)
         //查找物品ID
         std::string blockIdStr = TokenUtil::toString(itemId.tokens);
         std::string_view nameSpace = "minecraft";

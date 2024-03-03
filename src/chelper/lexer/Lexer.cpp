@@ -86,22 +86,17 @@ namespace CHelper::Lexer {
             if (ch == '\\') {
                 //转义字符
                 ch = stringReader.next();
-                if (ch == 'u') {
-                    for (int i = 0; i < 4; ++i) {
-                        if (!stringReader.skip()) {
-                            break;
-                        }
-                    }
-                } else if (ch == EOF) {
+                if (ch == EOF) {
                     break;
                 }
             } else if (isDoubleQuotation) {
-                //如果是双引号开头，只能使用双引号结尾，否则检测到字符串结束字符进行结尾
+                //如果是双引号开头，只能使用双引号结尾
                 if (ch == '"') {
                     stringReader.skip();
                     break;
                 }
             } else if (isEndChar(ch)) {
+                //在检测到字符串结束字符时进行结尾
                 break;
             }
             ch = stringReader.next();

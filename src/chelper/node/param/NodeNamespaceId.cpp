@@ -76,7 +76,6 @@ namespace CHelper::Node {
         DEBUG_GET_NODE_BEGIN(this)
         auto result = tokenReader.readStringASTNode(this);
         DEBUG_GET_NODE_END(this)
-        tokenReader.pop();
         if (result.tokens.isEmpty()) {
             return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
                     result.tokens, "命令不完整"));

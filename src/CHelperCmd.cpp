@@ -85,29 +85,14 @@ namespace CHelper::Test {
                             std::to_string(endStructure - startStructure) + "ms").build());
 
                 }
-                std::cout << core->getAstNode().toOptimizedJson().dump(
-                        -1, ' ', true, nlohmann::detail::error_handler_t::replace) << std::endl;
-                std::cout << core->getAstNode().toBestJson().dump(
-                        -1, ' ', true, nlohmann::detail::error_handler_t::replace) << std::endl;
+//                std::cout << core->getAstNode().toOptimizedJson().dump(
+//                        -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
+//                std::cout << core->getAstNode().toBestJson().dump(
+//                        -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
                 CHELPER_INFO("structure: " + structure);
                 CHELPER_INFO("description: " + description);
                 if (errorReasons.empty()) {
                     CHELPER_INFO("no error");
-                } else if (errorReasons.size() == 1) {
-                    const auto &errorReason = errorReasons[0];
-                    CHELPER_INFO(ColorStringBuilder()
-                                         .normal("error reason: ")
-                                         .red(command.substr(errorReason->start,
-                                                             errorReason->end - errorReason->start) + " ")
-                                         .blue(errorReason->errorReason)
-                                         .build());
-                    CHELPER_INFO(ColorStringBuilder()
-                                         .normal(command.substr(0, errorReason->start))
-                                         .red(errorReason->start == errorReason->end ? "~" :
-                                              command.substr(errorReason->start,
-                                                             errorReason->end - errorReason->start))
-                                         .normal(command.substr(errorReason->end))
-                                         .build());
                 } else {
                     CHELPER_INFO("error reasons:");
                     int i = 0;

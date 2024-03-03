@@ -125,22 +125,32 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 void onTextChanged(const std::string &command) {
     try {
-        clock_t start1, end1, start2, end2;
+        clock_t startParse, endParse,
+                startDescription, endDescription,
+                startErrorReasons, endErrorReasons,
+                startSuggestions, endSuggestions,
+                startStructure, endStructure;
         CHelper::Profile::push(CHelper::ColorStringBuilder()
                                        .red("parsing command: ")
                                        .purple(command)
                                        .build());
-        start1 = clock();
+        startParse = clock();
         core->onTextChanged(command, command.length());
+        endParse = clock();
+        startDescription = clock();
         auto description = core->getDescription();
+        endDescription = clock();
+        startErrorReasons = clock();
         auto errorReasons = core->getErrorReasons();
+        endErrorReasons = clock();
+        startSuggestions = clock();
         auto suggestions = core->getSuggestions();
+        endSuggestions = clock();
+        startStructure = clock();
         auto structure = core->getStructure();
-        end1 = clock();
-        start2 = clock();
-        CHelper::Profile::next("get description text view content");
+        endStructure = clock();
+        CHelper::Profile::push("update description text view");
         {
-            CHelper::Profile::next("update description text view");
             int len = MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, nullptr, 0);
             auto *wstr = new wchar_t[len + 1];
             MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, wstr, len);
@@ -164,38 +174,31 @@ void onTextChanged(const std::string &command) {
             delete[] wstr;
         }
         CHelper::Profile::pop();
-        end2 = clock();
         CHELPER_INFO(CHelper::ColorStringBuilder()
-                             .green("update successfully in ")
-                             .purple(std::to_string(end2 - start1) + "ms")
-                             .green(" : parse in ")
-                             .purple(std::to_string(end1 - start1) + "ms")
-                             .green(", show in ")
-                             .purple(std::to_string(end2 - start2) + "ms")
-                             .green(", command is ")
-                             .purple(command.size() <= 100 ? command : command.substr(0, 100) + "...")
-                             .build());
-//        std::cout << core->getAstNode().toOptimizedJson() << std::endl;
-//        std::cout << core->getAstNode().toBestJson() << std::endl;
+                              .green("parse successfully(")
+                              .purple(std::to_string(endStructure - startParse) + "ms")
+                              .green(")")
+                              .normal(" : ")
+                              .purple(command)
+                              .build());
+        CHELPER_INFO(CHelper::ColorStringBuilder().blue("parse in ").purple(
+                std::to_string(endParse - startParse) + "ms").build());
+        CHELPER_INFO(CHelper::ColorStringBuilder().blue("get description in ").purple(
+                std::to_string(endDescription - startDescription) + "ms").build());
+        CHELPER_INFO(CHelper::ColorStringBuilder().blue("get error reasons in ").purple(
+                std::to_string(endErrorReasons - startErrorReasons) + "ms").build());
+        CHELPER_INFO(CHelper::ColorStringBuilder().blue("get suggestions in ").purple(
+                std::to_string(endSuggestions - startSuggestions) + "ms").build());
+        CHELPER_INFO(CHelper::ColorStringBuilder().blue("get structure in ").purple(
+                std::to_string(endStructure - startStructure) + "ms").build());
+//        std::cout << core->getAstNode().toOptimizedJson().dump(
+//                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
+//        std::cout << core->getAstNode().toBestJson().dump(
+//                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
         CHELPER_INFO("structure: " + structure);
         CHELPER_INFO("description: " + description);
         if (errorReasons.empty()) {
             CHELPER_INFO("no error");
-        } else if (errorReasons.size() == 1) {
-            const auto &errorReason = errorReasons[0];
-            CHELPER_INFO(CHelper::ColorStringBuilder()
-                                 .normal("error reason: ")
-                                 .red(command.substr(errorReason->start,
-                                                     errorReason->end - errorReason->start) + " ")
-                                 .blue(errorReason->errorReason)
-                                 .build());
-            CHELPER_INFO(CHelper::ColorStringBuilder()
-                                 .normal(command.substr(0, errorReason->start))
-                                 .red(errorReason->start == errorReason->end ? "~" :
-                                      command.substr(errorReason->start,
-                                                     errorReason->end - errorReason->start))
-                                 .normal(command.substr(errorReason->end))
-                                 .build());
         } else {
             CHELPER_INFO("error reasons:");
             int i2 = 0;

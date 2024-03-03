@@ -2,6 +2,7 @@
 // Created by Yancey on 2023/11/11.
 //
 
+#include <cfloat>
 #include "NodeFloat.h"
 #include "../../util/TokenUtil.h"
 
@@ -36,12 +37,14 @@ namespace CHelper::Node {
     }
 
     static std::optional<float> str2float(const std::string &string) {
-        //TODO 需要更好的字符串转小数
         double result;
         std::stringstream stringStream;
         stringStream << string;
         stringStream >> std::setprecision(16) >> result;
         stringStream.clear();
+        if (result < FLT_MIN || result > FLT_MAX) {
+            return std::nullopt;
+        }
         return static_cast<float>(result);
     }
 
@@ -54,8 +57,8 @@ namespace CHelper::Node {
         std::optional<float> num = str2float(str);
         if (!num.has_value() || (min.has_value() && num.value() < min) || (max.has_value() && num.value() > max)) {
             idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("数值不在范围")
-                    .append("[").append(min.has_value() ? std::to_string(min.value()) : "-3.4028235E38")
-                    .append(", ").append(max.has_value() ? std::to_string(max.value()) : "3.4028235E38")
+                    .append("[").append(std::to_string(min.value_or(FLT_MIN)))
+                    .append(", ").append(std::to_string(max.value_or(FLT_MAX)))
                     .append("]").append("内 -> ").append(str)));
         }
         return true;

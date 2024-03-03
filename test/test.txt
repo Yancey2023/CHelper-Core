@@ -28,4 +28,6 @@ D:\CLion\project\CHelper\resources
 -give @s stone 12 12 {"minecraft:can_place_on":
 -give @s stone 12 12 {"minecraft:can_place_on":{"blocks":["bamboo",{}]
 -setblock ~~~ s
-execute @s
+-give @s command_block 12 2112
+-give @s command_block 12 12 {"minecraft:can_place_on":{"blocks":
+tag @s add "\\\"\u1110\/\b\f\n\r\t\p\"

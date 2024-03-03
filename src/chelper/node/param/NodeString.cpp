@@ -53,11 +53,26 @@ namespace CHelper::Node {
         }
         tokenReader.pop();
         if (!allowMissingString && result.tokens.isEmpty()) {
-            result = ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(
+            return ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(
                     result.tokens, "字符串参数内容为空"));
-        } else if (!canContainSpace && TokenUtil::toString(result.tokens).find(' ') != std::string::npos) {
-            result = ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(
-                    result.tokens, "字符串参数内容不可以包含空格"));
+        }
+        if (!canContainSpace) {
+            if (TokenUtil::toString(result.tokens).find(' ') != std::string::npos) {
+                return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(
+                        result.tokens, "字符串参数内容不可以包含空格"));
+            }
+            return result;
+        }
+        std::string str = TokenUtil::toString(result.tokens);
+        if (str.empty() || str[0] != '"') {
+            return result;
+        }
+        auto convertResult = JsonUtil::jsonString2String(str);
+        size_t offset = TokenUtil::getStartIndex(result.tokens);
+        if (convertResult.errorReason != nullptr) {
+            convertResult.errorReason->start += offset;
+            convertResult.errorReason->end += offset;
+            return ASTNode::andNode(this, {result}, result.tokens, convertResult.errorReason);
         }
         return result;
     }
@@ -68,8 +83,17 @@ namespace CHelper::Node {
         if (ignoreLater || !canContainSpace) {
             return true;
         }
-        std::string str = TokenUtil::toString(astNode->tokens);
-        if (str.empty() || (str[0] == '"' && (str.length() == 1 || str[str.length() - 1] != '"'))) {
+        std::string str = TokenUtil::toString(astNode->tokens)
+                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+        if (str.empty()) {
+            suggestions.emplace_back(index, index, doubleQuoteMask);
+            return true;
+        }
+        if (str[0] != '"') {
+            return true;
+        }
+        auto convertResult = JsonUtil::jsonString2String(str);
+        if (!convertResult.isComplete) {
             suggestions.emplace_back(index, index, doubleQuoteMask);
         }
         return true;

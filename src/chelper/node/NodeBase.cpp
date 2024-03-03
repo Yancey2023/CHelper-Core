@@ -114,7 +114,9 @@ namespace CHelper::Node {
         for (const auto &item: childNodes) {
             tokenReader.push();
             tokenReader.push();
+            DEBUG_GET_NODE_BEGIN(item)
             ASTNode astNode = item->getASTNodeWithNextNode(tokenReader, cpack);
+            DEBUG_GET_NODE_END(item)
             const VectorView <Token> tokens = tokenReader.collect();
             if (astNode.isError() && !childASTNodes.empty() && (isIgnoreChildNodesError || tokens.isEmpty())) {
                 tokenReader.restore();

@@ -44,7 +44,7 @@ namespace CHelper::Node {
         stringStream << string;
         stringStream >> result;
         stringStream.clear();
-        if (result < -2147483648 || result > 2147483647) {
+        if (result < INT_MIN || result > INT_MAX) {
             return std::nullopt;
         }
         return static_cast<int>(result);
@@ -59,8 +59,8 @@ namespace CHelper::Node {
         std::optional<int> num = str2int(str);
         if (!num.has_value() || (min.has_value() && num.value() < min) || (max.has_value() && num.value() > max)) {
             idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("数值不在范围")
-                    .append("[").append(std::to_string(min.value_or(-2147483648)))
-                    .append(", ").append(std::to_string(min.value_or(2147483647)))
+                    .append("[").append(std::to_string(min.value_or(INT_MIN)))
+                    .append(", ").append(std::to_string(min.value_or(INT_MAX)))
                     .append("]").append("内 -> ").append(str)));
         }
         return true;
