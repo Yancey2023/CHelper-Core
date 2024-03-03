@@ -19,6 +19,7 @@
       "type": "NORMAL_ID",
       "id": "visible",
       "description": "对HUD可见性做出的修改",
+      "ignoreError": true,
       "contents": [
         {
           "name": "hide",
@@ -34,6 +35,7 @@
       "type": "NORMAL_ID",
       "id": "hud_element",
       "description": "指定将被修改的HUD元素",
+      "ignoreError": true,
       "contents": [
         {
           "name": "air_bubbles",

@@ -43,6 +43,7 @@
           "type": "NORMAL_ID",
           "id": "ITEM_LOCK",
           "description": "锁定模式",
+          "ignoreError": true,
           "contents": [
             {
               "name": "lock_in_inventory",

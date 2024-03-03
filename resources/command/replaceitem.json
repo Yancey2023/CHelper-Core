@@ -46,6 +46,7 @@
       "type": "NORMAL_ID",
       "id": "oldItemHandling",
       "description": "替换模式",
+      "ignoreError": true,
       "contents": [
         {
           "name": "destroy",
@@ -78,6 +79,7 @@
       "type": "NORMAL_ID",
       "id": "slotType",
       "description": "要改变的物品栏",
+      "ignoreError": true,
       "key": "slot"
     }
   ],

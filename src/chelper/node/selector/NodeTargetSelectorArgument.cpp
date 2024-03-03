@@ -22,7 +22,7 @@
 namespace CHelper::Node {
 
     static std::shared_ptr<NodeBase> nodeKey = std::make_shared<NodeNormalId>(
-            "TARGET_SELECTOR_ARGUMENT_KEY", "目标选择器参数名", std::nullopt,
+            "TARGET_SELECTOR_ARGUMENT_KEY", "目标选择器参数名", std::nullopt, true,
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     std::make_shared<NormalId>("x", "x坐标"),
                     std::make_shared<NormalId>("y", "y坐标"),

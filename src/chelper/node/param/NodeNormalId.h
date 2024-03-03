@@ -17,12 +17,14 @@ namespace CHelper::Node {
         const std::optional<std::string> key;
         const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> contents;
         const bool allowsMissingID;
+        const bool ignoreError;
 
         ASTNode (*getNormalIdASTNode)(const NodeBase *tokenReader, TokenReader &reader);
 
         NodeNormalId(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
                      const std::optional<std::string> &key,
+                     bool ignoreError,
                      const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
                      bool allowsMissingID = false,
                      ASTNode(*getNormalIdASTNode)(const NodeBase *node, TokenReader &tokenReader) =

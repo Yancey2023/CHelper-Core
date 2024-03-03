@@ -14,7 +14,7 @@
 namespace CHelper::Node {
 
     static std::shared_ptr<NodeBase> nodeKey = std::make_shared<NodeNormalId>(
-            "TARGET_SELECTOR_ARGUMENT_HASITEM_KEY", "目标选择器hasitem参数名", std::nullopt,
+            "TARGET_SELECTOR_ARGUMENT_HASITEM_KEY", "目标选择器hasitem参数名", std::nullopt, true,
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     std::make_shared<NormalId>("item", "要检测的物品"),
                     std::make_shared<NormalId>("data", "要检测的物品的数据值"),

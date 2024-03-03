@@ -72,6 +72,7 @@
       "type": "NORMAL_ID",
       "id": "teleportRules",
       "description": "将被传送的实体",
+      "ignoreError": true,
       "contents": [
         {
           "name": "teleport_ride",
@@ -87,6 +88,7 @@
       "type": "NORMAL_ID",
       "id": "howToFill",
       "description": "骑乘模式",
+      "ignoreError": true,
       "contents": [
         {
           "name": "if_group_fits",
@@ -102,18 +104,21 @@
       "type": "NAMESPACE_ID",
       "id": "entityType1",
       "description": "召唤的实体",
+      "ignoreError": true,
       "key": "entities"
     },
     {
       "type": "NAMESPACE_ID",
       "id": "entityType2",
       "description": "召唤的实体",
+      "ignoreError": true,
       "key": "entities"
     },
     {
       "type": "NORMAL_ID",
       "id": "spawnEvent",
       "description": "实体生成时自带的事件",
+      "ignoreError": true,
       "key": "entityEvent"
     },
     {
@@ -127,6 +132,7 @@
       "type": "NORMAL_ID",
       "id": "rideRules",
       "description": "召唤实体模式",
+      "ignoreError": true,
       "contents": [
         {
           "name": "skip_riders",

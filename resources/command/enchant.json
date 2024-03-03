@@ -19,6 +19,7 @@
       "type": "NORMAL_ID",
       "id": "enchantment",
       "description": "添加至实体手持物品的魔咒",
+      "ignoreError": true,
       "key": "enchant"
     },
     {

@@ -41,6 +41,7 @@
       "type": "NORMAL_ID",
       "id": "shakeType",
       "description": "视野摇晃方向的种类",
+      "ignoreError": true,
       "contents": [
         {
           "name": "positional",

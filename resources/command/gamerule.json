@@ -12,6 +12,7 @@
       "type": "NORMAL_ID",
       "id": "gameRulesForBoolean",
       "description": "要设置或查询的游戏规则",
+      "ignoreError": true,
       "key": "gameRulesForBoolean"
     },
     {
@@ -25,6 +26,7 @@
       "type": "NORMAL_ID",
       "id": "gameRulesForInteger",
       "description": "要设置或查询的游戏规则",
+      "ignoreError": true,
       "key": "gameRulesForInteger"
     },
     {

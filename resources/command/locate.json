@@ -30,6 +30,7 @@
       "type": "NORMAL_ID",
       "id": "structureId",
       "description": "要定位的生物群系的命名空间ID",
+      "ignoreError": true,
       "contents": [
         {
           "name": "ancientcity",
@@ -128,6 +129,7 @@
       "type": "NORMAL_ID",
       "id": "biomeId",
       "description": "要定位的生物群系的命名空间ID",
+      "ignoreError": true,
       "key": "biome"
     }
   ],

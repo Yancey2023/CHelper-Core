@@ -106,6 +106,7 @@
       "type": "NORMAL_ID",
       "id": "preset",
       "description": "相机视角/预设",
+      "ignoreError": true,
       "contents": [
         {
           "name": "minecraft:free",
@@ -219,11 +220,8 @@
       "type": "NORMAL_ID",
       "id": "easeType",
       "description": "相机视角运镜的移动函数/类型",
+      "ignoreError": true,
       "contents": [
-        {
-          "name": "minecraft:free",
-          "description": "自由视角"
-        },
         {
           "name": "linear"
         },

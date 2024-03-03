@@ -28,6 +28,7 @@
       "type": "NORMAL_ID",
       "id": "fogId",
       "description": "修改的迷雾ID",
+      "ignoreError": true,
       "key": "fogs"
     },
     {
@@ -41,6 +42,7 @@
       "type": "NORMAL_ID",
       "id": "mode",
       "description": "删除的模式",
+      "ignoreError": true,
       "contents": [
         {
           "name": "pop",

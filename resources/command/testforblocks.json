@@ -26,6 +26,7 @@
       "type": "NORMAL_ID",
       "id": "mode",
       "description": "测试模式",
+      "ignoreError": true,
       "contents": [
         {
           "name": "masked",

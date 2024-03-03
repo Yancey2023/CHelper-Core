@@ -21,6 +21,7 @@
       {
         "type": "NORMAL_ID",
         "description": "需要转换的坐标轴",
+        "ignoreError": true,
         "contents": [
           {
             "name": "x",
@@ -97,6 +98,7 @@
       {
         "type": "NORMAL_ID",
         "description": "需要朝向实体的哪个位置",
+        "ignoreError": true,
         "contents": [
           {
             "name": "eyes",
@@ -185,6 +187,7 @@
       {
         "type": "NORMAL_ID",
         "description": "需要朝向实体的哪个位置",
+        "ignoreError": true,
         "contents": [
           {
             "name": "eyes",
@@ -209,6 +212,7 @@
       {
         "type": "NORMAL_ID",
         "description": "维度",
+        "ignoreError": true,
         "contents": [
           {
             "name": "minecraft:overworld",
@@ -311,6 +315,7 @@
       {
         "type": "NORMAL_ID",
         "description": "if|unless",
+        "ignoreError": false,
         "contents": [
           {
             "name": "if",
@@ -344,6 +349,7 @@
       {
         "type": "NORMAL_ID",
         "description": "if|unless",
+        "ignoreError": false,
         "contents": [
           {
             "name": "if",
@@ -378,6 +384,7 @@
       {
         "type": "NORMAL_ID",
         "description": "探测区域内的全部方块或忽略源区域内空气方块所在的位置",
+        "ignoreError": true,
         "contents": [
           {
             "name": "all",
@@ -394,6 +401,7 @@
       {
         "type": "NORMAL_ID",
         "description": "if|unless",
+        "ignoreError": false,
         "contents": [
           {
             "name": "if",
@@ -425,6 +433,7 @@
       {
         "type": "NORMAL_ID",
         "description": "if|unless",
+        "ignoreError": false,
         "contents": [
           {
             "name": "if",
@@ -460,6 +469,7 @@
       {
         "type": "NORMAL_ID",
         "description": "运算符",
+        "ignoreError": true,
         "contents": [
           {
             "name": "<",
@@ -501,6 +511,7 @@
       {
         "type": "NORMAL_ID",
         "description": "if|unless",
+        "ignoreError": false,
         "contents": [
           {
             "name": "if",

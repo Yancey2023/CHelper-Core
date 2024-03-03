@@ -44,6 +44,7 @@
       "type": "NORMAL_ID",
       "id": "repeatMode",
       "description": "是否循环播放音乐",
+      "ignoreError": true,
       "contents": [
         {
           "name": "loop",

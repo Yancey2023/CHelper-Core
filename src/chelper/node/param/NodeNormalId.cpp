@@ -10,11 +10,13 @@ namespace CHelper::Node {
     NodeNormalId::NodeNormalId(const std::optional<std::string> &id,
                                const std::optional<std::string> &description,
                                const std::optional<std::string> &key,
+                               bool ignoreError,
                                const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
                                bool allowsMissingID,
                                ASTNode(*getNormalIdASTNode)(const NodeBase *node, TokenReader &tokenReader))
             : NodeBase(id, description, false),
               key(key),
+              ignoreError(ignoreError),
               contents(contents),
               allowsMissingID(allowsMissingID),
               getNormalIdASTNode(getNormalIdASTNode) {}
@@ -52,6 +54,7 @@ namespace CHelper::Node {
                                const CPack &cpack)
             : NodeBase(j, true),
               key(FROM_JSON_OPTIONAL(j, key, std::string)),
+              ignoreError(FROM_JSON(j, ignoreError, bool)),
               contents(getIdContentFromCPack(j, cpack, key)),
               allowsMissingID(false),
               getNormalIdASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
@@ -85,12 +88,23 @@ namespace CHelper::Node {
                 tokenReader.push();
                 return ASTNode::simpleNode(this, tokenReader.collect());
             }
-        } else if (result.tokens.isEmpty()) {
             tokenReader.pop();
-            return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
-                    result.tokens, "ID为空"));
+            return result;
         }
         tokenReader.pop();
+        if (result.tokens.isEmpty()) {
+            return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
+                    result.tokens, "命令不完整"));
+        }
+        if (!ignoreError) {
+            std::string str = TokenUtil::toString(result.tokens);
+            if (std::all_of(contents->begin(), contents->end(), [&str](const auto &item) {
+                return str != item->name;
+            })) {
+                return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
+                        result.tokens, "找不到含义 -> " + TokenUtil::toString(result.tokens)));
+            }
+        }
         return result;
     }
 

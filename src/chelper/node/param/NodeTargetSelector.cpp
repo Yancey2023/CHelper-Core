@@ -20,7 +20,7 @@ namespace CHelper::Node {
     static std::shared_ptr<NodeBase> nodeAt = std::make_shared<NodeSingleSymbol>(
             "TARGET_SELECTOR_AT", "@符号", '@');
     static std::shared_ptr<NodeBase> nodeTargetSelectorVariable = std::make_shared<NodeNormalId>(
-            "TARGET_SELECTOR_VARIABLE", "目标选择器变量", std::nullopt,
+            "TARGET_SELECTOR_VARIABLE", "目标选择器变量", std::nullopt, true,
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     std::make_shared<NormalId>("@e", "选择所有实体(只选择活着的实体)"),
                     std::make_shared<NormalId>("@a", "选择所有玩家(无论死活)"),

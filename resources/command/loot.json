@@ -126,6 +126,7 @@
       "type": "NORMAL_ID",
       "id": "slotType",
       "description": "要修改的物品栏",
+      "ignoreError": true,
       "key": "slot"
     },
     {

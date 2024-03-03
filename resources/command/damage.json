@@ -24,6 +24,7 @@
       "type": "NORMAL_ID",
       "id": "cause",
       "description": "伤害的成因",
+      "ignoreError": true,
       "key": "damageCause"
     },
     {

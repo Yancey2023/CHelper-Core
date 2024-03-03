@@ -17,10 +17,12 @@ namespace CHelper::Node {
     public:
         const std::optional<std::string> key;
         const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> contents;
+        const bool ignoreError;
 
         NodeNamespaceId(const std::optional<std::string> &id,
                         const std::optional<std::string> &description,
                         const std::optional<std::string> &key,
+                        bool ignoreError,
                         const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
 
         NodeNamespaceId(const nlohmann::json &j,

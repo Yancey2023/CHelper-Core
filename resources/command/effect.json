@@ -28,6 +28,7 @@
       "type": "NORMAL_ID",
       "id": "effect",
       "description": "给予或者需要移除的效果",
+      "ignoreError": true,
       "key": "effects"
     },
     {

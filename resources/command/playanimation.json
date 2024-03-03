@@ -19,12 +19,14 @@
       "type": "NORMAL_ID",
       "id": "animation",
       "description": "当前要播放的动画",
+      "ignoreError": true,
       "key": "animation"
     },
     {
       "type": "NORMAL_ID",
       "id": "nextState",
       "description": "动画播放完毕后的状态",
+      "ignoreError": true,
       "key": "animationController"
     },
     {

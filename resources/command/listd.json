@@ -11,6 +11,7 @@
       "type": "NORMAL_ID",
       "id": "details",
       "description": "要列出的内容",
+      "ignoreError": true,
       "contents": [
         {
           "name": "ids",

@@ -21,6 +21,7 @@
       ],
       "contentMode": false,
       "description": "清除指定玩家屏幕标题或副标题",
+      "ignoreError": true,
       "id": "1",
       "type": "NORMAL_ID"
     },
@@ -49,6 +50,7 @@
       ],
       "contentMode": false,
       "description": "标文字的位置",
+      "ignoreError": true,
       "id": "3",
       "type": "NORMAL_ID"
     },

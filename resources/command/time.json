@@ -40,6 +40,7 @@
       ],
       "contentMode": false,
       "description": "查询的内容",
+      "ignoreError": true,
       "id": "3",
       "type": "NORMAL_ID"
     },
@@ -77,6 +78,7 @@
       ],
       "contentMode": false,
       "description": " 时间",
+      "ignoreError": true,
       "id": "5",
       "type": "NORMAL_ID"
     },

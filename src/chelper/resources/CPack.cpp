@@ -128,7 +128,7 @@ namespace CHelper {
         if (it == normalIds.end()) {
             return nullptr;
         }
-        return std::make_shared<Node::NodeNormalId>(id, description, key, it->second);
+        return std::make_shared<Node::NodeNormalId>(id, description, key, true, it->second);
     }
 
     std::shared_ptr<Node::NodeBase> CPack::getNamespaceId(const std::optional<std::string> &id,
@@ -138,7 +138,7 @@ namespace CHelper {
         if (it == namespaceIds.end()) {
             return nullptr;
         }
-        return std::make_shared<Node::NodeNamespaceId>(id, description, key, it->second);
+        return std::make_shared<Node::NodeNamespaceId>(id, description, key, true, it->second);
     }
 
 } // CHelper

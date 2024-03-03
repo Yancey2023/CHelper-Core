@@ -11,6 +11,7 @@
       "type": "NORMAL_ID",
       "id": "event",
       "description": "要控制或查询的事件",
+      "ignoreError": true,
       "contents": [
         {
           "name": "minecraft:ender_dragon_event",

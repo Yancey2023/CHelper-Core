@@ -22,6 +22,7 @@
       "type": "NORMAL_ID",
       "id": "mode",
       "description": "方块更改的处理方式",
+      "ignoreError": true,
       "contents": [
         {
           "name": "destroy",

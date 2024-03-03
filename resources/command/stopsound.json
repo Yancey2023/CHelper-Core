@@ -19,6 +19,7 @@
       "type": "NORMAL_ID",
       "id": "sound",
       "description": "要停止的声音",
+      "ignoreError": true,
       "key": "sound"
     }
   ],

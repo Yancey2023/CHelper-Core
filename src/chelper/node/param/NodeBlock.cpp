@@ -61,14 +61,14 @@ namespace CHelper::Node {
             : NodeBase(id, description, false),
               nodeBlockType(nodeBlockType),
               blockIds(contents),
-              nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", contents)) {}
+              nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", true, contents)) {}
 
     NodeBlock::NodeBlock(const nlohmann::json &j,
                          const CPack &cpack) :
             NodeBase(j, true),
             nodeBlockType(FROM_JSON(j, nodeBlockType, NodeBlockType::NodeBlockType)),
             blockIds(cpack.blockIds),
-            nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", cpack.blockIds)) {}
+            nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", true, cpack.blockIds)) {}
 
     std::shared_ptr<NodeType> NodeBlock::getNodeType() const {
         return NodeType::BLOCK;

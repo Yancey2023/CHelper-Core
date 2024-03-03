@@ -19,6 +19,7 @@
       "type": "NORMAL_ID",
       "id": "ability",
       "description": "要操作的能力",
+      "ignoreError": true,
       "contents": [
         {
           "name": "worldbuilder",

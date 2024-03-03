@@ -12,6 +12,7 @@
       "type": "NORMAL_ID",
       "id": "weather",
       "description": "天气",
+      "ignoreError": true,
       "contents": [
         {
           "name": "clear",

@@ -11,9 +11,11 @@ namespace CHelper::Node {
     NodeNamespaceId::NodeNamespaceId(const std::optional<std::string> &id,
                                      const std::optional<std::string> &description,
                                      const std::optional<std::string> &key,
+                                     bool ignoreError,
                                      const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
             : NodeBase(id, description, false),
               key(key),
+              ignoreError(ignoreError),
               contents(contents) {}
 
     static std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> getIdContentFromCPack(const nlohmann::json &j,
@@ -49,6 +51,7 @@ namespace CHelper::Node {
                                      const CPack &cpack)
             : NodeBase(j, true),
               key(FROM_JSON_OPTIONAL(j, key, std::string)),
+              ignoreError(FROM_JSON(j, ignoreError, bool)),
               contents(getIdContentFromCPack(j, cpack, key)) {}
 
     std::shared_ptr<NodeType> NodeNamespaceId::getNodeType() const {
@@ -70,7 +73,31 @@ namespace CHelper::Node {
     ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
         // namespace:id
         // 字符串中已经包含冒号，因为冒号不是结束字符
-        return tokenReader.readStringASTNode(this);
+        DEBUG_GET_NODE_BEGIN(this)
+        auto result = tokenReader.readStringASTNode(this);
+        DEBUG_GET_NODE_END(this)
+        tokenReader.pop();
+        if (result.tokens.isEmpty()) {
+            return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
+                    result.tokens, "命令不完整"));
+        }
+        if (!ignoreError) {
+            std::string str = TokenUtil::toString(result.tokens);
+            std::string_view nameSpace = "minecraft";
+            std::string_view value = str;
+            size_t index = str.find(':');
+            if (index != std::string::npos) {
+                nameSpace = value.substr(0, index);
+                value = value.substr(index + 1);
+            }
+            if (std::all_of(contents->begin(), contents->end(), [&nameSpace, &value](const auto &item) {
+                return value != item->name || nameSpace != item->nameSpace.value_or("minecraft");
+            })) {
+                return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
+                        result.tokens, "找不到含义 -> " + TokenUtil::toString(result.tokens)));
+            }
+        }
+        return result;
     }
 
     bool NodeNamespaceId::collectIdError(const ASTNode *astNode,

@@ -11,6 +11,7 @@
       "type": "NORMAL_ID",
       "id": "sound",
       "description": "要播放的声音",
+      "ignoreError": true,
       "key": "sound"
     },
     {

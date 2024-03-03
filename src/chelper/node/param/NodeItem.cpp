@@ -108,7 +108,7 @@ namespace CHelper::Node {
 
     std::shared_ptr<NodeBase>
     NodeItem::getNodeItemId(const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents) {
-        return std::make_shared<NodeNamespaceId>("ITEM_ID", "物品ID", "items", contents);
+        return std::make_shared<NodeNamespaceId>("ITEM_ID", "物品ID", "items", true, contents);
     }
 
 } // CHelper::Node

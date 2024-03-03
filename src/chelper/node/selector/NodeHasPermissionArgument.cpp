@@ -9,7 +9,7 @@
 namespace CHelper::Node {
 
     static std::shared_ptr<NodeBase> nodeKey = std::make_shared<NodeNormalId>(
-            "PERMISSION", "权限", std::nullopt,
+            "PERMISSION", "权限", std::nullopt, false,
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     std::make_shared<NormalId>("camera", "玩家能否转动相机视角"),
                     std::make_shared<NormalId>("movement", "玩家能否移动")
@@ -22,7 +22,7 @@ namespace CHelper::Node {
                 return tokenReader.readSymbolASTNode(node);
             });
     static std::shared_ptr<NodeBase> nodeValue = std::make_shared<NodeNormalId>(
-            "PERMISSION_STATUS", "权限状态", std::nullopt,
+            "PERMISSION_STATUS", "权限状态", std::nullopt, false,
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     std::make_shared<NormalId>("enabled", "启用"),
                     std::make_shared<NormalId>("disabled", "禁用")
