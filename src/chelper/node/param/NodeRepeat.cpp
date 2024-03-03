@@ -63,7 +63,7 @@ namespace CHelper::Node {
             childNodes.push_back(orNode);
             if (!breakAstNode.isError()) {
                 return ASTNode::andNode(this, childNodes, tokenReader.collect());
-            } else if (!tokenReader.ready()) {
+            } else if (orNode.isError() && !tokenReader.ready() || orNode.tokens.isEmpty()) {
                 VectorView <Token> tokens = tokenReader.collect();
                 return ASTNode::andNode(this, childNodes, tokens, astNode.isError() ? nullptr : ErrorReason::incomplete(
                                                 tokens, "命令重复部分缺少结束语句"),
@@ -80,7 +80,7 @@ namespace CHelper::Node {
         }
         if (astNode->id == "repeat no complete1") {
             structure.appendWhiteSpace().append("...");
-        } else if(astNode->id == "repeat no complete2")  {
+        } else if (astNode->id == "repeat no complete2") {
             node.second->collectStructure(nullptr, structure, isMustHave);
             structure.appendWhiteSpace().append("...");
         }

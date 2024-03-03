@@ -100,18 +100,50 @@ namespace CHelper::Node {
                                              std::vector<Suggestion> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
-        //省略minecraft命名空间
+        std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain;
+        std::vector<std::shared_ptr<NamespaceId>> descriptionContain;
+
         for (const auto &item: *contents) {
-            if ((!item->nameSpace.has_value() || item->nameSpace.value() == "minecraft") &&
-                StringUtil::isStartOf(item->name, str)) {
-                suggestions.emplace_back(astNode->tokens, item);
+            //通过名字进行搜索
+            //省略minecraft命名空间
+            if ((!item->nameSpace.has_value() || item->nameSpace.value() == "minecraft")) {
+                size_t index1 = item->name.find(str);
+                if (index1 == 0) {
+                    nameStartOf.push_back(item);
+                } else if (index1 != std::string::npos) {
+                    nameContain.push_back(item);
+                }
             }
+            //带有命名空间
+            size_t index1 = item->idWithNamespace->name.find(str);
+            if (index1 != std::string::npos) {
+                if (index1 == 0) {
+                    nameStartOf.push_back(item->idWithNamespace);
+                } else {
+                    nameContain.push_back(item->idWithNamespace);
+                }
+                continue;
+            }
+            //通过介绍进行搜索
+            if (item->description.has_value()) {
+                size_t index2 = item->description.value().find(str);
+                if (index2 != std::string::npos) {
+                    descriptionContain.push_back(item);
+                }
+            }
+
         }
-        //带有命名空间
-        for (const auto &item: *contents) {
-            if (StringUtil::isStartOf(item->idWithNamespace->name, str)) {
-                suggestions.emplace_back(astNode->tokens, item->idWithNamespace);
-            }
+        for (const auto &item: nameStartOf) {
+            suggestions.emplace_back(astNode->tokens, item);
+        }
+        for (const auto &item: nameContain) {
+            suggestions.emplace_back(astNode->tokens, item);
+        }
+        for (const auto &item: descriptionContain) {
+            suggestions.emplace_back(astNode->tokens, item);
+        }
+        for (const auto &item: descriptionContain) {
+            suggestions.emplace_back(astNode->tokens, item->idWithNamespace);
         }
         return true;
     }

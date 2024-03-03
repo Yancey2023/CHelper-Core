@@ -114,10 +114,34 @@ namespace CHelper::Node {
                                           std::vector<Suggestion> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+        std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *contents) {
-            if (StringUtil::isStartOf(item->name, str)) {
-                suggestions.emplace_back(astNode->tokens, item);
+            //通过名字进行搜索
+            size_t index1 = item->name.find(str);
+            if (index1 != std::string::npos) {
+                if (index1 == 0) {
+                    nameStartOf.push_back(item);
+                } else {
+                    nameContain.push_back(item);
+                }
+                continue;
             }
+            //通过介绍进行搜索
+            if (item->description.has_value()) {
+                size_t index2 = item->description.value().find(str);
+                if (index2 != std::string::npos) {
+                    descriptionContain.push_back(item);
+                }
+            }
+        }
+        for (const auto &item: nameStartOf) {
+            suggestions.emplace_back(astNode->tokens, item);
+        }
+        for (const auto &item: nameContain) {
+            suggestions.emplace_back(astNode->tokens, item);
+        }
+        for (const auto &item: descriptionContain) {
+            suggestions.emplace_back(astNode->tokens, item);
         }
         return true;
     }

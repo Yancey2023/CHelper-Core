@@ -10,8 +10,8 @@
 #include "chelper/Core.h"
 
 int main() {
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)", true);
-    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)", {"give @s "}, true);
+    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)", true);
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)", {"give @s "}, true);
     return 0;
 }
 

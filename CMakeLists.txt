@@ -3,9 +3,9 @@ project(CHelper)
 
 set(CMAKE_CXX_STANDARD 17)
 
-if(MSVC)
+if (MSVC)
     add_compile_options("/utf-8")
-endif()
+endif ()
 
 file(GLOB_RECURSE SOURCE_H src/chelper/*.h)
 file(GLOB_RECURSE SOURCE_CPP src/chelper/*.cpp)
@@ -19,7 +19,9 @@ target_precompile_headers(CHelperCmd PRIVATE include/pch.h)
 add_executable(CHelperWindows src/CHelperWindows.h src/CHelperWindows.cpp ${SOURCE_H} ${SOURCE_CPP})
 target_include_directories(CHelperWindows PUBLIC include)
 target_precompile_headers(CHelperWindows PRIVATE include/pch.h)
-set_target_properties(CHelperWindows PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
+if (MSVC)
+    set_target_properties(CHelperWindows PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
+endif ()
 
 # 这只是为了在写代码的时候获取代码提示，实际上并不是编译成静态链接库再放到安卓的工程中
 add_library(CHelperAndroid STATIC

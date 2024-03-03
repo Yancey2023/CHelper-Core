@@ -90,11 +90,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
             if (LOWORD(wParam) == ID_INPUT && HIWORD(wParam) == EN_CHANGE) {
                 CHelper::Profile::push("get command from input");
                 int length = GetWindowTextLength(hWndInput);
-                auto* buffer = new char[length + 1];
+                auto *buffer = new char[length + 1];
                 GetWindowText(hWndInput, buffer, length + 1);
+                UINT codePage = GetACP();
+                int wideCharLength = MultiByteToWideChar(codePage, 0, buffer, -1, nullptr, 0);
+                auto *wideCharBuffer = new wchar_t[wideCharLength + 1];
+                MultiByteToWideChar(codePage, 0, buffer, -1, wideCharBuffer, wideCharLength + 1);
+                int utf8Length = WideCharToMultiByte(CP_UTF8, 0, wideCharBuffer, -1, nullptr, 0, nullptr, nullptr);
+                char *utf8Buffer = new char[utf8Length + 1];
+                WideCharToMultiByte(CP_UTF8, 0, wideCharBuffer, -1, utf8Buffer, utf8Length + 1, nullptr, nullptr);
                 CHelper::Profile::pop();
-                onTextChanged(buffer);
+                onTextChanged(utf8Buffer);
                 delete[] buffer;
+                delete[] wideCharBuffer;
+                delete[] utf8Buffer;
             }
             break;
         case WM_SIZE:
@@ -130,27 +139,11 @@ void onTextChanged(const std::string &command) {
         end1 = clock();
         start2 = clock();
         CHelper::Profile::next("get description text view content");
-        std::string descriptionShow;
-        if (errorReasons.empty()) {
-            descriptionShow = core->getDescription();
-        } else {
-            if (errorReasons.size() == 1) {
-                const auto &errorReason = errorReasons[0];
-                descriptionShow = errorReason->errorReason;
-            } else {
-                descriptionShow.append("错误原因：");
-                int i = 0;
-                for (const auto &item: errorReasons) {
-                    descriptionShow.append("\n").append(std::to_string(i))
-                            .append(". ").append(item->errorReason);
-                }
-            }
-        }
         {
             CHelper::Profile::next("update description text view");
-            int len = MultiByteToWideChar(CP_UTF8, 0, descriptionShow.c_str(), -1, nullptr, 0);
-            auto* wstr = new wchar_t[len + 1];
-            MultiByteToWideChar(CP_UTF8, 0, descriptionShow.c_str(), -1, wstr, len);
+            int len = MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, nullptr, 0);
+            auto *wstr = new wchar_t[len + 1];
+            MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, wstr, len);
             SetWindowTextW(hWndDescription, wstr);
             delete[] wstr;
         }
@@ -165,7 +158,7 @@ void onTextChanged(const std::string &command) {
             auto content = std::string(suggestion.content->name).append(" - ")
                     .append(suggestion.content->description.value_or(""));
             int len = MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, nullptr, 0);
-            auto* wstr = new wchar_t[len];
+            auto *wstr = new wchar_t[len];
             MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, wstr, len);
             SendMessageW(hWndListBox, LB_ADDSTRING, 0, (LPARAM) wstr);
             delete[] wstr;
@@ -222,7 +215,6 @@ void onTextChanged(const std::string &command) {
                                      .build());
             }
         }
-        CHELPER_INFO("suggestions: ");
         if (suggestions.empty()) {
             CHELPER_INFO("no suggestion");
         } else {

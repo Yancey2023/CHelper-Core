@@ -8,15 +8,15 @@
 namespace CHelper::Node {
 
     NodeText::NodeText(const std::optional<std::string> &id,
-                                      const std::optional<std::string> &description,
-                                      const std::shared_ptr<NormalId> &data,
-                                      ASTNode(*getTextASTNode)(const NodeBase *node, TokenReader &tokenReader))
+                       const std::optional<std::string> &description,
+                       const std::shared_ptr<NormalId> &data,
+                       ASTNode(*getTextASTNode)(const NodeBase *node, TokenReader &tokenReader))
             : NodeBase(id, description, false),
               data(data),
               getTextASTNode(getTextASTNode) {}
 
     NodeText::NodeText(const nlohmann::json &j,
-                                      [[maybe_unused]] const CPack &cpack)
+                       [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true),
               data(std::make_shared<NormalId>(j.at("data"))),
               getTextASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
@@ -42,7 +42,7 @@ namespace CHelper::Node {
         if (str != data->name) {
             if (str.empty()) {
                 return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::contentError(
-                        result.tokens, "找不到内容 -> " + data->name));
+                        result.tokens, "指令不完整"));
             } else {
                 return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::contentError(
                         result.tokens, "找不到含义 -> " + str));
@@ -56,8 +56,18 @@ namespace CHelper::Node {
                                       std::vector<Suggestion> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
-        if (StringUtil::isStartOf(data->name, str)) {
+        //通过名字进行搜索
+        size_t index1 = data->name.find(str);
+        if (index1 != std::string::npos) {
             suggestions.emplace_back(astNode->tokens, data);
+            return true;
+        }
+        //通过介绍进行搜索
+        if (data->description.has_value()) {
+            size_t index2 = data->description.value().find(str);
+            if (index2 != std::string::npos) {
+                suggestions.emplace_back(astNode->tokens, data);
+            }
         }
         return true;
     }

@@ -27,5 +27,5 @@ D:\CLion\project\CHelper\resources
 -give @s stone 12 12 {
 -give @s stone 12 12 {"minecraft:can_place_on":
 -give @s stone 12 12 {"minecraft:can_place_on":{"blocks":["bamboo",{}]
-setblock ~~~ s
-give @s s
+-setblock ~~~ s
+execute @s
