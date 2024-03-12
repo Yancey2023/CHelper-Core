@@ -12,7 +12,7 @@ namespace CHelper::Node {
     class NodeJsonList : public NodeBase {
     public:
         const std::string data;
-        std::shared_ptr<NodeBase> nodeList;
+        std::unique_ptr<NodeBase> nodeList;
 
         NodeJsonList(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
@@ -21,11 +21,11 @@ namespace CHelper::Node {
         NodeJsonList(const nlohmann::json &j,
                      [[maybe_unused]] const CPack &cpack);
 
-        void init(const std::vector<std::shared_ptr<NodeBase>> &dataList);
+        void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
 
-        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
+        [[nodiscard]] NodeType* getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,

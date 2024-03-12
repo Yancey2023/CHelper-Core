@@ -18,9 +18,9 @@ namespace CHelper {
 
     class ItemId : public NamespaceId {
     public:
-        std::optional<int> max;
-        std::optional<std::vector<std::string>> descriptions;
-        std::shared_ptr<Node::NodeBase> nodeData;
+        const std::optional<int> max;
+        const std::optional<std::vector<std::string>> descriptions;
+        const Node::NodeBase* nodeData;
 
         ItemId(const std::optional<std::string> &nameSpace,
                const std::string &name,
@@ -29,6 +29,12 @@ namespace CHelper {
                const std::optional<std::vector<std::string>> &descriptions);
 
         explicit ItemId(const nlohmann::json &j);
+
+        ~ItemId() override;
+
+        ItemId(const ItemId &) = delete;
+
+        ItemId &operator=(const ItemId &) = delete;
 
         void toJson(nlohmann::json &j) const override;
     };

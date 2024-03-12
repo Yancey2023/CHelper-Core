@@ -12,7 +12,6 @@ namespace CHelper {
     template<class T>
     class VectorView {
     public:
-        //vector如果使用引用就不可以复制了，所以这里使用指针
         std::shared_ptr<std::vector<T>> vector;
         size_t start, end;
 

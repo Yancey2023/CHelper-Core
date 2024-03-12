@@ -70,7 +70,7 @@ namespace CHelper {
                                   .purple(file.path().string())
                                   .red("\"")
                                   .build());
-            jsonNodes.push_back(std::make_shared<Node::NodeJsonElement>(JsonUtil::getJsonFromPath(file), *this));
+            jsonNodes.push_back(std::make_unique<Node::NodeJsonElement>(JsonUtil::getJsonFromPath(file), *this));
         }
         Profile::next(ColorStringBuilder().red("loading repeat data").build());
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "repeat")) {
@@ -83,16 +83,25 @@ namespace CHelper {
             Profile::push(ColorStringBuilder().red("loading repeat data id").build());
             auto id = JsonUtil::fromJson<std::string>(j, "id");
             Profile::next(ColorStringBuilder().red("loading contents").build());
-            auto content = std::make_shared<std::vector<std::shared_ptr<Node::NodeBase>>>();
+            std::vector<const Node::NodeBase *> content;
             for (const auto &item: j.at("contents")) {
-                auto perContent = std::make_shared<std::vector<std::shared_ptr<Node::NodeBase>>>();
+                std::vector<std::unique_ptr<Node::NodeBase>> perContentData;
+                std::vector<const Node::NodeBase *> perContent;
                 for (const auto &item2: item) {
-                    perContent->push_back(Node::NodeBase::getNodeFromJson(item2, *this));
+                    auto node = Node::NodeBase::getNodeFromJson(item2, *this);
+                    perContent.push_back(node.get());
+                    repeatNodeDatas.push_back(std::move(node));
                 }
-                content->push_back(std::make_shared<Node::NodeAnd>(id, std::nullopt, perContent));
+                auto node = std::make_unique<Node::NodeAnd>(id, std::nullopt, perContent);
+                content.push_back(node.get());
+                repeatNodeDatas.push_back(std::move(node));
             }
-            auto breakNode = Node::NodeBase::getNodeFromJson(j.at("break"), *this);
-            repeatNodes.emplace_back(std::make_shared<Node::NodeOr>(id, std::nullopt, content, false), breakNode);
+            std::unique_ptr<Node::NodeBase> unBreakNode = std::make_unique<Node::NodeOr>(
+                    id, std::nullopt, content, false);
+            std::unique_ptr<Node::NodeBase> breakNode = Node::NodeBase::getNodeFromJson(j.at("break"), *this);
+            repeatNodes.emplace_back(unBreakNode.get(), breakNode.get());
+            repeatNodeDatas.push_back(std::move(unBreakNode));
+            repeatNodeDatas.push_back(std::move(breakNode));
             Profile::pop();
         }
         Node::NodeType::canLoadNodeJson = false;
@@ -103,10 +112,14 @@ namespace CHelper {
                                   .purple(file.path().string())
                                   .red("\"")
                                   .build());
-            commands->push_back(std::make_shared<Node::NodePerCommand>(JsonUtil::getJsonFromPath(file), *this));
+            commands->push_back(std::make_unique<Node::NodePerCommand>(JsonUtil::getJsonFromPath(file), *this));
         }
         Profile::pop();
-        mainNode = std::make_shared<Node::NodeCommand>("MAIN_NODE", "欢迎使用命令助手(作者：Yancey)", commands);
+        std::vector<const Node::NodeBase *> commands1;
+        for (const auto &item: *commands) {
+            commands1.push_back(item.get());
+        }
+        mainNode = new Node::NodeCommand("MAIN_NODE", "欢迎使用命令助手(作者：Yancey)", commands1);
 #if CHelperDebug == true
         if (Profile::stack.size() != stackSize) {
             CHELPER_WARN("error profile stack after loading cpack");
@@ -114,31 +127,34 @@ namespace CHelper {
 #endif
     }
 
-    CPack CPack::create(const std::filesystem::path &path) {
+    CPack::~CPack() {
+        delete mainNode;
+    }
+
+    std::unique_ptr<CPack> CPack::create(const std::filesystem::path &path) {
+        //因为去除了CPack的复制，所以这里Profile的pop写在了构造函数里面
         Profile::push(ColorStringBuilder().red("start load CPack by JSON: ").purple(path.string()).build());
-        CPack cpack = CPack(std::filesystem::path(path));
+        std::unique_ptr<CPack> cpack = std::make_unique<CPack>(std::filesystem::path(path));
         Profile::pop();
         return cpack;
     }
 
-    std::shared_ptr<Node::NodeBase> CPack::getNormalId(const std::optional<std::string> &id,
-                                                       const std::optional<std::string> &description,
-                                                       const std::string &key) const {
+    std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
+    CPack::getNormalId(const std::string &key) const {
         auto it = normalIds.find(key);
         if (it == normalIds.end()) {
             return nullptr;
         }
-        return std::make_shared<Node::NodeNormalId>(id, description, key, true, it->second);
+        return it->second;
     }
 
-    std::shared_ptr<Node::NodeBase> CPack::getNamespaceId(const std::optional<std::string> &id,
-                                                          const std::optional<std::string> &description,
-                                                          const std::string &key) const {
+    std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
+    CPack::getNamespaceId(const std::string &key) const {
         auto it = namespaceIds.find(key);
         if (it == namespaceIds.end()) {
             return nullptr;
         }
-        return std::make_shared<Node::NodeNamespaceId>(id, description, key, true, it->second);
+        return it->second;
     }
 
 } // CHelper

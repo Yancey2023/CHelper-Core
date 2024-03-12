@@ -24,7 +24,7 @@ extern "C" JNIEXPORT jboolean JNICALL
 Java_yancey_chelper_core_CHelperCore_init(
         JNIEnv *env, jobject thiz, jstring cpack_path) {
     core = CHelper::Core::create(jstring2string(env, cpack_path));
-    return core != nullptr;
+    return static_cast<jboolean>(core != nullptr);
 }
 
 extern "C" JNIEXPORT void JNICALL
@@ -77,24 +77,37 @@ Java_yancey_chelper_core_CHelperCore_getErrorReasons(
     }
 }
 
-extern "C" JNIEXPORT jstring JNICALL
+extern "C" JNIEXPORT jobject JNICALL
 Java_yancey_chelper_core_CHelperCore_getSuggestions(
         JNIEnv *env, jobject thiz) {
     if (core == nullptr) {
         return nullptr;
     }
     auto suggestions = core->getSuggestions();
-    std::string result;
-    bool isFirst = true;
-    for (const auto &item: suggestions) {
-        if (isFirst) {
-            isFirst = false;
-        } else {
-            result.append("\n");
-        }
-        result.append(item.content->name).append("\n").append(item.content->description.value_or(""));
+    if (suggestions.empty()) {
+        return nullptr;
     }
-    return env->NewStringUTF(result.c_str());
+    jclass arrayListClass = env->FindClass("java/util/ArrayList");
+    jmethodID arrayListConstructor = env->GetMethodID(arrayListClass, "<init>", "()V");
+    jmethodID arrayListAdd = env->GetMethodID(arrayListClass, "add", "(Ljava/lang/Object;)Z");
+    jclass dataCompleteClass = env->FindClass("yancey/chelper/util/DataComplete");
+    jobject javaList = env->NewObject(arrayListClass, arrayListConstructor);
+    for (const auto &item: suggestions) {
+        jobject javaDataComplete = env->AllocObject(dataCompleteClass);
+        env->SetObjectField(javaDataComplete,
+                            env->GetFieldID(env->GetObjectClass(javaDataComplete), "name", "Ljava/lang/String;"),
+                            env->NewStringUTF(item.content->name.c_str()));
+        if (item.content->description.has_value()) {
+            jstring javaDescription = env->NewStringUTF(item.content->description.value().c_str());
+            env->SetObjectField(javaDataComplete, env->GetFieldID(env->GetObjectClass(javaDataComplete), "description",
+                                                                  "Ljava/lang/String;"), javaDescription);
+        } else {
+            env->SetObjectField(javaDataComplete, env->GetFieldID(env->GetObjectClass(javaDataComplete), "description",
+                                                                  "Ljava/lang/String;"), nullptr);
+        }
+        env->CallBooleanMethod(javaList, arrayListAdd, javaDataComplete);
+    }
+    return javaList;
 }
 
 extern "C" JNIEXPORT jstring JNICALL

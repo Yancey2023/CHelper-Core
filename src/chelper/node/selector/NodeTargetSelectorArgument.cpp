@@ -21,7 +21,7 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NodeBase> nodeKey = std::make_shared<NodeNormalId>(
+    static std::unique_ptr<NodeBase> nodeKey = std::make_unique<NodeNormalId>(
             "TARGET_SELECTOR_ARGUMENT_KEY", "目标选择器参数名", std::nullopt, true,
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     std::make_shared<NormalId>("x", "x坐标"),
@@ -50,13 +50,13 @@ namespace CHelper::Node {
                     std::make_shared<NormalId>("c", "目标数量(按照距离排序)"),
             })
     );
-    static std::shared_ptr<NodeBase> nodeEqual = std::make_shared<NodeText>(
+    static std::unique_ptr<NodeBase> nodeEqual = std::make_unique<NodeText>(
             "TARGET_SELECTOR_ARGUMENT_EQUAL", "等于",
             std::make_shared<NormalId>("=", "等于"),
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 return tokenReader.readSymbolASTNode(node);
             });
-    static std::shared_ptr<NodeBase> nodeNotEqual = std::make_shared<NodeText>(
+    static std::unique_ptr<NodeBase> nodeNotEqual = std::make_unique<NodeText>(
             "TARGET_SELECTOR_ARGUMENT_NOT_EQUAL", "不等于",
             std::make_shared<NormalId>("=!", "不等于"),
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
@@ -64,121 +64,124 @@ namespace CHelper::Node {
                 auto childNodes = {tokenReader.readSymbolASTNode(node), tokenReader.readSymbolASTNode(node)};
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
             });
-    static std::shared_ptr<NodeBase> nodeSeparator = std::make_shared<NodeOr>(
+    static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeOr>(
             "TARGET_SELECTOR_ARGUMENT_SEPARATOR", "目标选择器参数分隔符",
-            std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(std::vector<std::shared_ptr<NodeBase>>{
-                    nodeEqual, nodeNotEqual
-            }), false);
-    static std::shared_ptr<NodeBase> nodeRelativeFloat = std::make_shared<NodeRelativeFloat>(
+            std::vector<const NodeBase *>{
+                    nodeEqual.get(), nodeNotEqual.get()
+            }, false);
+    static std::unique_ptr<NodeBase> nodeRelativeFloat = std::make_unique<NodeRelativeFloat>(
             "TARGET_SELECTOR_ARGUMENT_RELATIVE_FLOAT", "目标选择器参数(小数)", true);
-    static std::shared_ptr<NodeBase> nodeInteger = std::make_shared<NodeInteger>(
+    static std::unique_ptr<NodeBase> nodeInteger = std::make_unique<NodeInteger>(
             "TARGET_SELECTOR_ARGUMENT_FLOAT", "目标选择器参数(小数)", std::nullopt, std::nullopt);
-    static std::shared_ptr<NodeBase> nodeFloat = std::make_shared<NodeInteger>(
+    static std::unique_ptr<NodeBase> nodeFloat = std::make_unique<NodeInteger>(
             "TARGET_SELECTOR_ARGUMENT_INTEGER", "目标选择器参数(整数)", std::nullopt, std::nullopt);
-    static std::shared_ptr<NodeBase> nodeString = std::make_shared<NodeString>(
+    static std::unique_ptr<NodeBase> nodeString = std::make_unique<NodeString>(
             "TARGET_SELECTOR_ARGUMENT_STRING", "目标选择器参数(字符串)", true, true, false);
-    static std::shared_ptr<NodeBase> nodeScoreValueLeft = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeScoreValueLeft = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_SCORES_LEFT", "目标选择器scores参数左括号", '{');
-    static std::shared_ptr<NodeBase> nodeScoreValueRight = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeScoreValueRight = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_SCORES_RIGHT", "目标选择器scores参数右括号", '}');
-    static std::shared_ptr<NodeBase> nodeScoreValueSeparator = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeScoreValueSeparator = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_SCORES_SEPARATOR", "目标选择器scores参数分隔符", ',');
-    static std::shared_ptr<NodeBase> nodeScoreRange = std::make_shared<NodeRange>(
+    static std::unique_ptr<NodeBase> nodeScoreRange = std::make_unique<NodeRange>(
             "TARGET_SELECTOR_ARGUMENT_SCORES_RANGE", "目标选择器scores参数值的分数范围)");
-    static std::shared_ptr<NodeBase> nodeScoreValueElement = std::make_shared<NodeEntry>(
+    static std::unique_ptr<NodeBase> nodeScoreValueElement = std::make_unique<NodeEntry>(
             "TARGET_SELECTOR_ARGUMENT_SCORES_ELEMENT", "目标选择器scores参数内容",
-            nodeString, nodeSeparator, nodeScoreRange);
-    static std::shared_ptr<NodeBase> nodeScore = std::make_shared<NodeList>(
+            nodeString.get(), nodeSeparator.get(), nodeScoreRange.get());
+    static std::unique_ptr<NodeBase> nodeScore = std::make_unique<NodeList>(
             "TARGET_SELECTOR_ARGUMENT_SCORES", "目标选择器scores参数",
-            nodeScoreValueLeft, nodeScoreValueElement, nodeScoreValueSeparator, nodeScoreValueRight);
-    static std::shared_ptr<NodeBase> nodeHasItemValueLeft1 = std::make_shared<NodeSingleSymbol>(
+            nodeScoreValueLeft.get(), nodeScoreValueElement.get(),
+            nodeScoreValueSeparator.get(), nodeScoreValueRight.get());
+    static std::unique_ptr<NodeBase> nodeHasItemValueLeft1 = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_HASITEM_LEFT1", "目标选择器hasitem参数左括号", '{');
-    static std::shared_ptr<NodeBase> nodeHasItemValueRight1 = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeHasItemValueRight1 = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_HASITEM_RIGHT1", "目标选择器hasitem参数右括号", '}');
-    static std::shared_ptr<NodeBase> nodeHasItemValueSeparator = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeHasItemValueSeparator = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_HASITEM_SEPARATOR", "目标选择器hasitem参数分隔符", ',');
-    static std::shared_ptr<NodeBase> nodeHasItemValueLeft2 = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeHasItemValueLeft2 = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_HASITEM_LEFT2", "目标选择器hasitem参数左括号", '[');
-    static std::shared_ptr<NodeBase> nodeHasItemValueRight2 = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeHasItemValueRight2 = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_HASITEM_RIGHT2", "目标选择器haspermission参数右括号", ']');
-    static std::shared_ptr<NodeBase> nodeHasPermissionValueLeft = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeHasPermissionValueLeft = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_HASPERMISSION_LEFT", "目标选择器haspermission参数左括号", '{');
-    static std::shared_ptr<NodeBase> nodeHasPermissionValueRight = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeHasPermissionValueRight = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_HASPERMISSION_RIGHT", "目标选择器haspermission参数右括号", '}');
-    static std::shared_ptr<NodeBase> nodeHasPermissionValueSeparator = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeHasPermissionValueSeparator = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_HASPERMISSION_SEPARATOR", "目标选择器haspermission参数分隔符", ',');
-    static std::shared_ptr<NodeBase> nodeHasPermissionEntry = std::make_shared<NodeHasPermissionArgument>(
+    static std::unique_ptr<NodeBase> nodeHasPermissionEntry = std::make_unique<NodeHasPermissionArgument>(
             "TARGET_SELECTOR_ARGUMENT_HASPERMISSION_ENTRY", "目标选择器haspermission参数内容");
-    static std::shared_ptr<NodeBase> nodeHasPermission = std::make_shared<NodeList>(
+    static std::unique_ptr<NodeBase> nodeHasPermission = std::make_unique<NodeList>(
             "TARGET_SELECTOR_ARGUMENT_HASPERMISSION", "目标选择器haspermission参数",
-            nodeHasPermissionValueLeft, nodeHasPermissionEntry,
-            nodeHasPermissionValueSeparator, nodeHasPermissionValueRight);
-    static std::shared_ptr<NodeBase> nodeHasPropertyValueLeft = std::make_shared<NodeSingleSymbol>(
+            nodeHasPermissionValueLeft.get(), nodeHasPermissionEntry.get(),
+            nodeHasPermissionValueSeparator.get(), nodeHasPermissionValueRight.get());
+    static std::unique_ptr<NodeBase> nodeHasPropertyValueLeft = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_LEFT", "目标选择器haspermission参数左括号", '{');
-    static std::shared_ptr<NodeBase> nodeHasPropertyValueRight = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeHasPropertyValueRight = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_RIGHT", "目标选择器haspermission参数右括号", '}');
-    static std::shared_ptr<NodeBase> nodeHasPropertyValueSeparator = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeHasPropertyValueSeparator = std::make_unique<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_SEPARATOR", "目标选择器haspermission参数分隔符", ',');
-    static std::shared_ptr<NodeBase> nodeBoolean = std::make_shared<NodeBoolean>(
+    static std::unique_ptr<NodeBase> nodeBoolean = std::make_unique<NodeBoolean>(
             "BOOLEAN", "布尔值", std::nullopt, std::nullopt);
-    static std::shared_ptr<NodeBase> nodeAny = std::make_shared<NodeOr>(
+    static std::unique_ptr<NodeBase> nodeAny = std::make_unique<NodeOr>(
             "ANY", "任何值",
-            std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(std::vector<std::shared_ptr<NodeBase>>{
-                    nodeBoolean, nodeScoreRange, nodeString, nodeFloat
-            }), false);
-    static std::shared_ptr<NodeBase> nodeHasPropertyEntry = std::make_shared<NodeEntry>(
+            std::vector<const NodeBase *>{
+                    nodeBoolean.get(), nodeScoreRange.get(), nodeString.get(), nodeFloat.get()
+            }, false);
+    static std::unique_ptr<NodeBase> nodeHasPropertyEntry = std::make_unique<NodeEntry>(
             "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_ENTRY", "目标选择器haspermission参数内容",
-            nodeString, nodeSeparator, nodeAny);
-    static std::shared_ptr<NodeBase> nodeHasProperty = std::make_shared<NodeList>(
+            nodeString.get(), nodeSeparator.get(), nodeAny.get());
+    static std::unique_ptr<NodeBase> nodeHasProperty = std::make_unique<NodeList>(
             "TARGET_SELECTOR_ARGUMENT_HASPERMISSION", "目标选择器hasproperty参数",
-            nodeHasPropertyValueLeft, nodeHasPropertyEntry,
-            nodeHasPropertyValueSeparator, nodeHasPropertyValueRight);
-    static std::shared_ptr<NodeBase> nodeValue = std::make_shared<NodeOr>(
+            nodeHasPropertyValueLeft.get(), nodeHasPropertyEntry.get(),
+            nodeHasPropertyValueSeparator.get(), nodeHasPropertyValueRight.get());
+    static std::unique_ptr<NodeBase> nodeValue = std::make_unique<NodeOr>(
             "TARGET_SELECTOR_ARGUMENT_VALUE", "目标选择器参数值",
-            std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(std::vector<std::shared_ptr<NodeBase>>{
-                    nodeRelativeFloat, nodeInteger, nodeInteger, nodeString, nodeScore
-            }), false);
+            std::vector<const NodeBase *>{
+                    nodeRelativeFloat.get(), nodeInteger.get(), nodeInteger.get(), nodeString.get(), nodeScore.get()
+            }, false);
 
     NodeTargetSelectorArgument::NodeTargetSelectorArgument(const std::optional<std::string> &id,
                                                            const std::optional<std::string> &description,
-                                                           const std::shared_ptr<NodeBase> &nodeItem,
-                                                           const std::shared_ptr<NodeBase> &nodeFamily,
-                                                           const std::shared_ptr<NodeBase> &nodeGameMode,
-                                                           const std::shared_ptr<NodeBase> &nodeSlot,
-                                                           const std::shared_ptr<NodeBase> &nodeEntities)
+                                                           const NodeBase *nodeItem,
+                                                           const NodeBase *nodeFamily,
+                                                           const NodeBase *nodeGameMode,
+                                                           const NodeBase *nodeSlot,
+                                                           const NodeBase *nodeEntities)
             : NodeBase(id, description, false),
-              nodeHasItemElement(std::make_shared<NodeHasItemArgument>(
+              nodeHasItemElement(
                       "TARGET_SELECTOR_ARGUMENT_HASITEM_ELEMENT", "目标选择器参数值(物品检测)的内容",
-                      nodeItem, nodeSlot)),
-              nodeHasItemList1(std::make_shared<NodeList>(
+                      nodeItem, nodeSlot),
+              nodeHasItemList1(
                       "TARGET_SELECTOR_ARGUMENT_HASITEM", "目标选择器参数值(物品检测)",
-                      nodeHasItemValueLeft1, nodeHasItemElement, nodeHasItemValueSeparator, nodeHasItemValueRight1)),
-              nodeHasItemList2(std::make_shared<NodeList>(
+                      nodeHasItemValueLeft1.get(), &nodeHasItemElement,
+                      nodeHasItemValueSeparator.get(), nodeHasItemValueRight1.get()),
+              nodeHasItemList2(
                       "TARGET_SELECTOR_ARGUMENT_HASITEM", "目标选择器参数值(物品检测)",
-                      nodeHasItemValueLeft2, nodeHasItemList1, nodeHasItemValueSeparator, nodeHasItemValueRight2)),
-              nodeHasItem(std::make_shared<NodeOr>(
+                      nodeHasItemValueLeft2.get(), &nodeHasItemList1,
+                      nodeHasItemValueSeparator.get(), nodeHasItemValueRight2.get()),
+              nodeHasItem(
                       "TARGET_SELECTOR_ARGUMENT_VALUE", "目标选择器参数值(物品检测)",
-                      std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(std::vector<std::shared_ptr<NodeBase>>{
-                              nodeHasItemList1, nodeHasItemList2
-                      }), false)),
+                      std::vector<const NodeBase *>{
+                              &nodeHasItemList1, &nodeHasItemList2
+                      }, false),
               nodeFamily(nodeFamily),
               nodeGameMode(nodeGameMode),
               nodeEntities(nodeEntities) {}
 
-    ASTNode NodeTargetSelectorArgument::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeTargetSelectorArgument::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         // key
-        ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey, "key");
+        ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey.get(), "key");
         childNodes.push_back(astNodeKey);
         if (astNodeKey.isError()) {
-            return ASTNode::andNode(this, childNodes, tokenReader.collect());
+            return ASTNode::andNode((NodeBase *) this, childNodes, tokenReader.collect());
         }
         // = or !=
-        ASTNode astNodeSeparator = getByChildNode(tokenReader, cpack, nodeSeparator, "separator");
+        ASTNode astNodeSeparator = getByChildNode(tokenReader, cpack, nodeSeparator.get(), "separator");
         childNodes.push_back(astNodeSeparator);
         if (astNodeSeparator.isError()) {
-            return ASTNode::andNode(this, childNodes, tokenReader.collect());
+            return ASTNode::andNode((NodeBase *) this, childNodes, tokenReader.collect());
         }
         //value
         std::string key = TokenUtil::toString(astNodeKey.tokens);
@@ -197,7 +200,7 @@ namespace CHelper::Node {
         } else if (key == "family") {
             childNodes.push_back(nodeFamily->getASTNodeWithNextNode(tokenReader, cpack));
         } else if (key == "hasitem") {
-            childNodes.push_back(nodeHasItem->getASTNodeWithNextNode(tokenReader, cpack));
+            childNodes.push_back(nodeHasItem.getASTNodeWithNextNode(tokenReader, cpack));
         } else if (key == "has_property") {
             childNodes.push_back(nodeHasProperty->getASTNodeWithNextNode(tokenReader, cpack));
         } else if (key == "haspermission") {
@@ -209,7 +212,7 @@ namespace CHelper::Node {
         } else {
             childNodes.push_back(nodeValue->getASTNodeWithNextNode(tokenReader, cpack));
         }
-        return ASTNode::andNode(this, childNodes, tokenReader.collect());
+        return ASTNode::andNode((NodeBase *) this, childNodes, tokenReader.collect());
     }
 
 } // CHelper::Node

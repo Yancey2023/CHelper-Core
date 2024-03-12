@@ -9,15 +9,15 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NodeBase> nodLeft = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodLeft = std::make_unique<NodeSingleSymbol>(
             "JSON_LIST_LEFT", "JSON列表左括号", '[');
-    static std::shared_ptr<NodeBase> nodeRight = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeRight = std::make_unique<NodeSingleSymbol>(
             "JSON_LIST_RIGHT", "JSON列表右括号", ']');
-    static std::shared_ptr<NodeBase> nodeSeparator = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(
             "JSON_LIST_SEPARATOR", "JSON列表分隔符", ',');
-    static std::shared_ptr<NodeBase> nodeAllList = std::make_shared<NodeList>(
+    static std::unique_ptr<NodeBase> nodeAllList = std::make_unique<NodeList>(
             "JSON_OBJECT", "JSON对象",
-            nodLeft, NodeJsonElement::getNodeJsonElement(), nodeSeparator, nodeRight);
+            nodLeft.get(), NodeJsonElement::getNodeJsonElement(), nodeSeparator.get(), nodeRight.get());
 
     NodeJsonList::NodeJsonList(const std::optional<std::string> &id,
                                const std::optional<std::string> &description,
@@ -30,11 +30,12 @@ namespace CHelper::Node {
             : NodeBase(j, false),
               data(FROM_JSON(j, data, std::string)) {}
 
-    void NodeJsonList::init(const std::vector<std::shared_ptr<NodeBase>> &dataList) {
+    void NodeJsonList::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
             if (item->id == data) {
-                nodeList = std::make_shared<NodeList>("JSON_LIST", "JSON列表",
-                                                      nodLeft, item, nodeSeparator, nodeRight);
+                nodeList = std::make_unique<NodeList>("JSON_LIST", "JSON列表",
+                                                      nodLeft.get(), item.get(),
+                                                      nodeSeparator.get(), nodeRight.get());
                 return;
             }
         }
@@ -50,20 +51,20 @@ namespace CHelper::Node {
         throw Exception::UnknownNodeId(data, id.value_or("UNKNOWN"));
     }
 
-    std::shared_ptr<NodeType> NodeJsonList::getNodeType() const {
-        return NodeType::JSON_LIST;
+    NodeType *NodeJsonList::getNodeType() const {
+        return NodeType::JSON_LIST.get();
     }
 
-    ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         if (nodeList == nullptr) {
-            return getByChildNode(tokenReader, cpack, nodeAllList, "node json all list");
+            return getByChildNode(tokenReader, cpack, nodeAllList.get(), "node json all list");
         }
         tokenReader.push();
         ASTNode result1 = nodeList->getASTNode(tokenReader, cpack);
         size_t index1 = tokenReader.index;
         tokenReader.restore();
         tokenReader.push();
-        ASTNode result2 = getByChildNode(tokenReader, cpack, nodeAllList, "node json all list");
+        ASTNode result2 = getByChildNode(tokenReader, cpack, nodeAllList.get(), "node json all list");
         size_t index2 = tokenReader.index;
         tokenReader.restore();
         tokenReader.push();

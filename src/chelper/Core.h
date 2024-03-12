@@ -15,12 +15,12 @@ namespace CHelper {
     private:
         std::string input;
         size_t index = 0;
-        CPack cpack;
+        std::unique_ptr<CPack> cpack;
         ASTNode astNode;
         std::shared_ptr<std::vector<Suggestion>> suggestions;
 
     public:
-        Core(CPack cpack, ASTNode astNode);
+        Core(std::unique_ptr<CPack> cpack, ASTNode astNode);
 
         static std::shared_ptr<Core> create(const std::string &cpackPath);
 
@@ -28,19 +28,19 @@ namespace CHelper {
 
         void onSelectionChanged(size_t index0);
 
-        const ASTNode &getAstNode() const;
+        [[nodiscard]] const ASTNode &getAstNode() const;
 
-        std::string getDescription() const;
+        [[nodiscard]] std::string getDescription() const;
 
-        std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
+        [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
 
         std::vector<Suggestion> getSuggestions();
 
-        std::string getStructure() const;
+        [[nodiscard]] std::string getStructure() const;
 
-        std::string getColors() const;
+        [[nodiscard]] std::string getColors() const;
 
-        std::optional<std::string> onSuggestionClick(size_t which) const;
+        [[nodiscard]] std::optional<std::string> onSuggestionClick(size_t which) const;
     };
 
 } // CHelper

@@ -13,7 +13,7 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NodeBase> nodeKey = std::make_shared<NodeNormalId>(
+    static std::unique_ptr<NodeBase> nodeKey = std::make_unique<NodeNormalId>(
             "TARGET_SELECTOR_ARGUMENT_HASITEM_KEY", "目标选择器hasitem参数名", std::nullopt, true,
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     std::make_shared<NormalId>("item", "要检测的物品"),
@@ -23,13 +23,13 @@ namespace CHelper::Node {
                     std::make_shared<NormalId>("slot", "用于指定要检测的槽位范围")
             })
     );
-    static std::shared_ptr<NodeBase> nodeEqual = std::make_shared<NodeText>(
+    static std::unique_ptr<NodeBase> nodeEqual = std::make_unique<NodeText>(
             "TARGET_SELECTOR_ARGUMENT_EQUAL", "等于",
             std::make_shared<NormalId>("=", "等于"),
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 return tokenReader.readSymbolASTNode(node);
             });
-    static std::shared_ptr<NodeBase> nodeNotEqual = std::make_shared<NodeText>(
+    static std::unique_ptr<NodeBase> nodeNotEqual = std::make_unique<NodeText>(
             "TARGET_SELECTOR_ARGUMENT_NOT_EQUAL", "不等于",
             std::make_shared<NormalId>("=!", "不等于"),
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
@@ -37,42 +37,42 @@ namespace CHelper::Node {
                 auto childNodes = {tokenReader.readSymbolASTNode(node), tokenReader.readSymbolASTNode(node)};
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
             });
-    static std::shared_ptr<NodeBase> nodeSeparator = std::make_shared<NodeOr>(
+    static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeOr>(
             "TARGET_SELECTOR_ARGUMENT_SEPARATOR", "目标选择器参数分隔符",
-            std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(std::vector<std::shared_ptr<NodeBase>>{
-                    nodeEqual, nodeNotEqual
-            }), false);
-    static std::shared_ptr<NodeBase> nodeData = std::make_shared<NodeInteger>(
+            std::vector<const NodeBase *>{
+                    nodeEqual.get(), nodeNotEqual.get()
+            }, false);
+    static std::unique_ptr<NodeBase> nodeData = std::make_unique<NodeInteger>(
             "ITEM_DATA", "物品数据值", 0, 32767);
-    static std::shared_ptr<NodeBase> nodeQuantity = std::make_shared<NodeRange>(
+    static std::unique_ptr<NodeBase> nodeQuantity = std::make_unique<NodeRange>(
             "ITEM_QUANTITY", "限制范围内的所有槽位中符合条件的物品的总和数量");
-    static std::shared_ptr<NodeBase> nodeSlotRange = std::make_shared<NodeRange>(
+    static std::unique_ptr<NodeBase> nodeSlotRange = std::make_unique<NodeRange>(
             "SLOT_SLOT_RANGE", "要检测的槽位范围");
-    static std::shared_ptr<NodeBase> nodeValue = std::make_shared<NodeOr>(
+    static std::unique_ptr<NodeBase> nodeValue = std::make_unique<NodeOr>(
             "TARGET_SELECTOR_ARGUMENT_VALUE", "目标选择器参数值",
-            std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(std::vector<std::shared_ptr<NodeBase>>{
-                    nodeData, nodeQuantity, nodeSlotRange
-            }), false);
+            std::vector<const NodeBase *>{
+                    nodeData.get(), nodeQuantity.get(), nodeSlotRange.get()
+            }, false);
 
     NodeHasItemArgument::NodeHasItemArgument(const std::optional<std::string> &id,
                                              const std::optional<std::string> &description,
-                                             const std::shared_ptr<NodeBase> &nodeItem,
-                                             const std::shared_ptr<NodeBase> &nodeSlot)
+                                             const NodeBase *nodeItem,
+                                             const NodeBase *nodeSlot)
             : NodeBase(id, description, false),
               nodeItem(nodeItem),
               nodeSlot(nodeSlot) {}
 
-    ASTNode NodeHasItemArgument::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeHasItemArgument::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         // key
-        ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey, "key");
+        ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey.get(), "key");
         childNodes.push_back(astNodeKey);
         if (astNodeKey.isError()) {
             return ASTNode::andNode(this, childNodes, tokenReader.collect());
         }
         // = or !=
-        ASTNode astNodeSeparator = getByChildNode(tokenReader, cpack, nodeSeparator, "separator");
+        ASTNode astNodeSeparator = getByChildNode(tokenReader, cpack, nodeSeparator.get(), "separator");
         childNodes.push_back(astNodeSeparator);
         if (astNodeSeparator.isError()) {
             return ASTNode::andNode(this, childNodes, tokenReader.collect());

@@ -17,9 +17,9 @@ namespace CHelper::Node {
         NodeXpInteger(const nlohmann::json &j,
                       [[maybe_unused]] const CPack &cpack);
 
-        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
+        [[nodiscard]] NodeType* getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

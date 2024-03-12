@@ -15,11 +15,11 @@ namespace CHelper::Node {
                                [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true) {}
 
-    std::shared_ptr<NodeType> NodePosition::getNodeType() const {
-        return NodeType::POSITION;
+    NodeType* NodePosition::getNodeType() const {
+        return NodeType::POSITION.get();
     }
 
-    ASTNode NodePosition::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodePosition::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
         std::vector<ASTNode> threeChildNodes;

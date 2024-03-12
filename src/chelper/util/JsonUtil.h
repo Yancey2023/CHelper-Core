@@ -28,11 +28,6 @@ namespace CHelper {
 
         ConvertResult jsonString2String(const std::string &input);
 
-        class ToJson {
-        public:
-            virtual void toJson(nlohmann::json &j) const = 0;
-        };
-
         nlohmann::json getJsonFromPath(const std::filesystem::path &path);
 
         template<class T>
@@ -51,7 +46,7 @@ namespace CHelper {
         }
 
         template<class T>
-        inline void toJson(nlohmann::json json, const std::string &name, const ToJson *data) {
+        inline void toJson(nlohmann::json json, const std::string &name, const T *data) {
             nlohmann::json child;
             data->toJson(child);
             json[name] = child;

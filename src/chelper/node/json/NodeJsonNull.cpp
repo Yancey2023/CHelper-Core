@@ -15,11 +15,11 @@ namespace CHelper::Node {
                                [[maybe_unused]]const CPack &cpack)
             : NodeBase(j, false) {}
 
-    std::shared_ptr<NodeType> NodeJsonNull::getNodeType() const {
-        return NodeType::JSON_NULL;
+    NodeType* NodeJsonNull::getNodeType() const {
+        return NodeType::JSON_NULL.get();
     }
 
-    ASTNode NodeJsonNull::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeJsonNull::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         auto result = tokenReader.readStringASTNode(this);
         tokenReader.pop();

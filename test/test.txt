@@ -1,4 +1,3 @@
-D:\CLion\project\CHelper\resources
 -setblock ~1~2~.3 minecraft:stone
 -give @s mi
 -give @s minecraft:st
@@ -31,3 +30,4 @@ D:\CLion\project\CHelper\resources
 -give @s command_block 12 2112
 -give @s command_block 12 12 {"minecraft:can_place_on":{"blocks":
 tag @s add "\\\"\u1110\/\b\f\n\r\t\p\"
+-give @s command_block 12 12 {"minecraft:can_destroy":{"blocks":["minecraft:acacia_door"]}}

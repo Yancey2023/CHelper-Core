@@ -16,54 +16,57 @@
 
 namespace CHelper {
 
-    static std::shared_ptr<Node::NodeBase> nodeBlockStateLeftBracket = std::make_shared<Node::NodeSingleSymbol>(
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateLeftBracket = std::make_unique<Node::NodeSingleSymbol>(
             "BLOCK_STATE_LEFT_BRACKET", "方块状态左括号", '[');
-    static std::shared_ptr<Node::NodeBase> nodeBlockStateEntryKey = std::make_shared<Node::NodeString>(
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryKey = std::make_unique<Node::NodeString>(
             "BLOCK_STATE_ENTRY_KEY", "方块状态键值对的键", false, false, false);
-    static std::shared_ptr<Node::NodeBase> nodeBlockStateEntrySeparator = std::make_shared<Node::NodeSingleSymbol>(
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntrySeparator = std::make_unique<Node::NodeSingleSymbol>(
             "BLOCK_STATE_ENTRY_SEPARATOR", "方块状态键值对分隔符", '=');
-    static std::shared_ptr<Node::NodeBase> nodeBlockStateEntryAllValue = std::make_shared<Node::NodeOr>(
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueBoolean = std::make_unique<Node::NodeBoolean>(
+            "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", "方块状态键值对的值（布尔值）",
+            std::nullopt, std::nullopt);
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueInteger = std::make_unique<Node::NodeInteger>(
+            "BLOCK_STATE_ENTRY_VALUE_INTEGER", "方块状态键值对的值（整数）",
+            std::nullopt, std::nullopt);
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueFloat = std::make_unique<Node::NodeFloat>(
+            "BLOCK_STATE_ENTRY_VALUE_FLOAT", "方块状态键值对的值（小数）",
+            std::nullopt, std::nullopt);
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueString = std::make_unique<Node::NodeString>(
+            "BLOCK_STATE_ENTRY_VALUE_STRING", "方块状态键值对的值（字符串）",
+            false, true, false);
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryAllValue = std::make_unique<Node::NodeOr>(
             "BLOCK_STATE_ENTRY_VALUE", "方块状态键值对的值",
-            std::make_shared<std::vector<std::shared_ptr<Node::NodeBase>>>(
-                    std::vector<std::shared_ptr<Node::NodeBase>>{
-                            std::make_shared<Node::NodeBoolean>(
-                                    "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", "方块状态键值对的值（布尔值）",
-                                    std::nullopt, std::nullopt),
-                            std::make_shared<Node::NodeInteger>(
-                                    "BLOCK_STATE_ENTRY_VALUE_INTEGER", "方块状态键值对的值（整数）",
-                                    std::nullopt, std::nullopt),
-                            std::make_shared<Node::NodeFloat>(
-                                    "BLOCK_STATE_ENTRY_VALUE_FLOAT", "方块状态键值对的值（小数）",
-                                    std::nullopt, std::nullopt),
-                            std::make_shared<Node::NodeString>(
-                                    "BLOCK_STATE_ENTRY_VALUE_STRING", "方块状态键值对的值（字符串）",
-                                    false, true, false)
-                    }
-            ),
-            false
+            std::vector<const Node::NodeBase *>{
+                    nodeBlockStateEntryValueBoolean.get(), nodeBlockStateEntryValueInteger.get(),
+                    nodeBlockStateEntryValueFloat.get(), nodeBlockStateEntryValueString.get()
+            }, false
     );
-    static std::shared_ptr<Node::NodeBase> nodeBlockStateAllEntry = std::make_shared<Node::NodeEntry>(
-            "BLOCK_STATE_ENTRY", "方块状态键值对", nodeBlockStateEntryKey,
-            nodeBlockStateEntrySeparator, nodeBlockStateEntryAllValue);
-    static std::shared_ptr<Node::NodeBase> nodeBlockStateSeparator = std::make_shared<Node::NodeSingleSymbol>(
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateAllEntry = std::make_unique<Node::NodeEntry>(
+            "BLOCK_STATE_ENTRY", "方块状态键值对", nodeBlockStateEntryKey.get(),
+            nodeBlockStateEntrySeparator.get(), nodeBlockStateEntryAllValue.get());
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateSeparator = std::make_unique<Node::NodeSingleSymbol>(
             "BLOCK_STATE_SEPARATOR", "方块状态分隔符", ',');
-    static std::shared_ptr<Node::NodeBase> nodeBlockStateRightBracket = std::make_shared<Node::NodeSingleSymbol>(
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateRightBracket = std::make_unique<Node::NodeSingleSymbol>(
             "BLOCK_STATE_RIGHT_BRACKET", "方块状态右括号", ']');
+    static std::unique_ptr<Node::NodeBase> nodeAllBlockState = std::make_unique<Node::NodeList>(
+            "BLOCK_STATE", "方块状态",
+            nodeBlockStateLeftBracket.get(), nodeBlockStateAllEntry.get(),
+            nodeBlockStateSeparator.get(), nodeBlockStateRightBracket.get());
 
-    static std::shared_ptr<Node::NodeBase> getNodeValue(BlockStateType::BlockStateType type,
-                                                        const std::variant<std::string, int, bool> &value,
-                                                        const std::optional<std::string> &description) {
+    static Node::NodeBase *getNodeValue(BlockStateType::BlockStateType type,
+                                        const std::variant<std::string, int, bool> &value,
+                                        const std::optional<std::string> &description) {
         switch (type) {
             case BlockStateType::STRING:
-                return std::make_shared<Node::NodeText>(
+                return new Node::NodeText(
                         "BLOCK_STATE_ENTRY_VALUE_STRING", "方块状态键值对的键（字符串）",
                         std::make_shared<NormalId>(std::get<std::string>(value), description));
             case BlockStateType::INTEGER:
-                return std::make_shared<Node::NodeText>(
+                return new Node::NodeText(
                         "BLOCK_STATE_ENTRY_VALUE_INTEGER", "方块状态键值对的键（整数）",
                         std::make_shared<NormalId>(std::to_string(std::get<int>(value)), description));
             case BlockStateType::BOOLEAN:
-                return std::make_shared<Node::NodeText>(
+                return new Node::NodeText(
                         "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", "方块状态键值对的键（布尔值）",
                         std::make_shared<NormalId>(std::get<bool>(value) ? "true" : "false", description));
             default:
@@ -95,6 +98,28 @@ namespace CHelper {
         node = getNodeValue(type, value, description);
     }
 
+    BlockStateValue::BlockStateValue(const BlockStateValue &blockStateValue)
+            : type(blockStateValue.type),
+              value(blockStateValue.value),
+              description(blockStateValue.description),
+              node(getNodeValue(type, value, description)) {}
+
+    BlockStateValue::~BlockStateValue() {
+        delete node;
+    }
+
+    BlockStateValue &BlockStateValue::operator=(const BlockStateValue &blockStateValue) {
+        if (this == &blockStateValue) {
+            return *this;
+        }
+        delete node;
+        type = blockStateValue.type;
+        value = blockStateValue.value;
+        description = blockStateValue.description;
+        node = getNodeValue(type, value, description);
+        return *this;
+    }
+
     void BlockStateValue::toJson(nlohmann::json &j) const {
         switch (type) {
             case CHelper::BlockStateType::STRING:
@@ -110,30 +135,32 @@ namespace CHelper {
         TO_JSON_OPTIONAL(j, description)
     }
 
-    static std::shared_ptr<Node::NodeBase> getNodePerBlockState(const std::string &key,
-                                                                const std::optional<std::string> &description,
-                                                                const std::vector<BlockStateValue> &values) {
-        auto valueNodes = std::make_shared<std::vector<std::shared_ptr<Node::NodeBase>>>();
+    static Node::NodeBase *
+    getNodePerBlockState(const std::string &key,
+                         const std::optional<std::string> &description,
+                         const std::vector<BlockStateValue> &values) {
+        std::vector<const Node::NodeBase *> valueNodes;
+        valueNodes.reserve(values.size());
         for (const auto &item: values) {
-            valueNodes->push_back(item.node);
+            valueNodes.push_back(item.node);
         }
         //key=value
-        return std::make_shared<Node::NodeEntry>(
+        return new Node::NodeEntry(
                 "BLOCK_STATE_PER_ENTRY", "方块状态单个键值对",
-                std::make_shared<Node::NodeText>("BLOCK_STATE_ENTRY_KEY", "方块状态键值对的键",
-                                                 std::make_shared<NormalId>(key, description)),
-                nodeBlockStateEntrySeparator,
-                std::make_shared<Node::NodeOr>("BLOCK_STATE_ENTRY_VALUE", "方块状态键值对的值",
-                                               valueNodes, false));
+                new Node::NodeText("BLOCK_STATE_ENTRY_KEY", "方块状态键值对的键",
+                                   std::make_shared<NormalId>(key, description)),
+                nodeBlockStateEntrySeparator.get(),
+                new Node::NodeOr("BLOCK_STATE_ENTRY_VALUE", "方块状态键值对的值",
+                                 valueNodes, false));
     }
 
     BlockState::BlockState(std::string key,
                            const std::optional<std::string> &description,
-                           const std::vector<BlockStateValue> &values,
+                           std::vector<BlockStateValue> values,
                            int defaultValue)
             : key(std::move(key)),
               description(description),
-              values(values),
+              values(std::move(values)),
               defaultValue(defaultValue),
               node(getNodePerBlockState(key, description, values)) {}
 
@@ -144,6 +171,34 @@ namespace CHelper {
               defaultValue(FROM_JSON(j, defaultValue, int)),
               node(getNodePerBlockState(key, description, values)) {}
 
+    BlockState::BlockState(const BlockState &blockState)
+            : key(blockState.key),
+              description(blockState.description),
+              values(blockState.values),
+              defaultValue(blockState.defaultValue),
+              node(getNodePerBlockState(key, description, values)) {}
+
+    BlockState::~BlockState() {
+        delete ((Node::NodeEntry *) node)->nodeKey;
+        delete ((Node::NodeEntry *) node)->nodeValue;
+        delete node;
+    }
+
+    BlockState &BlockState::operator=(const BlockState &blockState) {
+        if (this == &blockState) {
+            return *this;
+        }
+        delete ((Node::NodeEntry *) node)->nodeKey;
+        delete ((Node::NodeEntry *) node)->nodeValue;
+        delete node;
+        key = blockState.key;
+        description = blockState.description;
+        values = blockState.values;
+        defaultValue = blockState.defaultValue;
+        node = getNodePerBlockState(key, description, values);
+        return *this;
+    }
+
     void BlockState::toJson(nlohmann::json &j) const {
         TO_JSON(j, key);
         TO_JSON_OPTIONAL(j, description)
@@ -151,28 +206,26 @@ namespace CHelper {
         TO_JSON(j, defaultValue);
     }
 
-    static std::shared_ptr<Node::NodeBase>
+    static Node::NodeBase *
     getNodeBlockState(const std::optional<std::vector<BlockState>> &blockStates) {
-        auto blockStateEntryChildNode = std::make_shared<std::vector<std::shared_ptr<Node::NodeBase>>>();
+        std::vector<const Node::NodeBase *> blockStateEntryChildNode;
         //已知的方块状态
         if (blockStates.has_value()) {
             for (const auto &item: blockStates.value()) {
-                blockStateEntryChildNode->push_back(item.node);
+                blockStateEntryChildNode.push_back(item.node);
             }
         }
         //其他未知的方块状态
-        blockStateEntryChildNode->push_back(std::make_shared<Node::NodeEntry>(
-                "BLOCK_STATE_PER_ENTRY", "方块状态单个键值对", nodeBlockStateEntryKey,
-                nodeBlockStateEntrySeparator, nodeBlockStateEntryAllValue));
+        blockStateEntryChildNode.push_back(nodeBlockStateAllEntry.get());
         //把所有方块状态拼在一起
-        return std::make_shared<Node::NodeList>(
+        return new Node::NodeList(
                 "BLOCK_STATE", "方块状态",
-                nodeBlockStateLeftBracket,
-                std::make_shared<Node::NodeOr>(
+                nodeBlockStateLeftBracket.get(),
+                new Node::NodeOr(
                         "BLOCK_STATE_ENTRY", "方块状态键值对",
                         blockStateEntryChildNode, false),
-                nodeBlockStateSeparator,
-                nodeBlockStateRightBracket);
+                nodeBlockStateSeparator.get(),
+                nodeBlockStateRightBracket.get());
     }
 
     BlockId::BlockId(const std::optional<std::string> &nameSpace,
@@ -190,6 +243,16 @@ namespace CHelper {
               blockStates(FROM_JSON_OPTIONAL(j, blockStates, std::vector<CHelper::BlockState>)),
               nodeBlockState(getNodeBlockState(blockStates)) {}
 
+    BlockId::BlockId(const BlockId &blockId)
+            : ItemId(blockId.nameSpace, blockId.name, blockId.description, blockId.max, blockId.descriptions),
+              blockStates(blockId.blockStates),
+              nodeBlockState(getNodeBlockState(blockStates)) {}
+
+    BlockId::~BlockId() {
+        delete ((Node::NodeList *) nodeBlockState)->nodeElement;
+        delete nodeBlockState;
+    }
+
     void BlockId::toJson(nlohmann::json &j) const {
         TO_JSON_OPTIONAL(j, nameSpace)
         TO_JSON(j, name);
@@ -197,6 +260,10 @@ namespace CHelper {
         TO_JSON_OPTIONAL(j, blockStates)
         TO_JSON_OPTIONAL(j, max)
         TO_JSON_OPTIONAL(j, descriptions)
+    }
+
+    Node::NodeBase *BlockId::getNodeAllBlockState() {
+        return nodeAllBlockState.get();
     }
 
 } // CHelper

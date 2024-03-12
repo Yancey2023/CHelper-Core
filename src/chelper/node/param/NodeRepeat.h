@@ -12,19 +12,19 @@ namespace CHelper::Node {
     class NodeRepeat : public NodeBase {
     public:
         std::string key;
-        std::pair<std::shared_ptr<Node::NodeBase>, std::shared_ptr<Node::NodeBase>> node;
+        std::pair<NodeBase*, NodeBase*> node;
 
         NodeRepeat(const std::optional<std::string> &id,
                    const std::optional<std::string> &description,
                    std::string key,
-                   const std::pair<std::shared_ptr<Node::NodeBase>, std::shared_ptr<Node::NodeBase>> &node);
+                   const std::pair<NodeBase*, NodeBase*> &node);
 
         NodeRepeat(const nlohmann::json &j,
                    const CPack &cpack);
 
-        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
+        [[nodiscard]] NodeType* getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

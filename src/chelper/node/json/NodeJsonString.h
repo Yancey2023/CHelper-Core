@@ -11,20 +11,21 @@ namespace CHelper::Node {
 
     class NodeJsonString : public NodeBase {
     public:
-        const std::shared_ptr<NodeBase> data;
+        const std::vector<std::unique_ptr<NodeBase>> data;
+        const std::unique_ptr<NodeBase> nodeData;
 
         NodeJsonString(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
-                       const std::shared_ptr<NodeBase> &data);
+                       std::vector<std::unique_ptr<NodeBase>> data);
 
         NodeJsonString(const nlohmann::json &j,
                        const CPack &cpack);
 
-        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
+        [[nodiscard]] NodeType* getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         bool collectIdError(const ASTNode *astNode,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;

@@ -467,10 +467,7 @@ namespace CHelper {
         for (const auto &item: input) {
             bool flag = true;
             for (const auto &item2: output) {
-                if (item2.start == item.start &&
-                    item2.end == item.end &&
-                    item2.content->name == item.content->name &&
-                    item2.content->description == item.content->description) {
+                if (item2.equal(item)) {
                     flag = false;
                     break;
                 }

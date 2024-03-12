@@ -11,12 +11,12 @@ namespace CHelper::Node {
     NodeRepeat::NodeRepeat(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
                            std::string key,
-                           const std::pair<std::shared_ptr<Node::NodeBase>, std::shared_ptr<Node::NodeBase>> &node)
+                           const std::pair<NodeBase*, NodeBase*> &node)
             : NodeBase(id, description, false),
               key(std::move(key)),
               node(node) {}
 
-    std::pair<std::shared_ptr<Node::NodeBase>, std::shared_ptr<Node::NodeBase>> getNodeFromCPack(const std::string &key,
+    std::pair<Node::NodeBase*, Node::NodeBase*> getNodeFromCPack(const std::string &key,
                                                                                                  [[maybe_unused]] const CPack &cpack) {
         for (const auto &item: cpack.repeatNodes) {
             if (item.first->id == key) {
@@ -41,11 +41,11 @@ namespace CHelper::Node {
               key(FROM_JSON(j, key, std::string)),
               node(getNodeFromCPack(key, cpack)) {}
 
-    std::shared_ptr<NodeType> NodeRepeat::getNodeType() const {
-        return NodeType::REPEAT;
+    NodeType* NodeRepeat::getNodeType() const {
+        return NodeType::REPEAT.get();
     }
 
-    ASTNode NodeRepeat::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeRepeat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         while (true) {

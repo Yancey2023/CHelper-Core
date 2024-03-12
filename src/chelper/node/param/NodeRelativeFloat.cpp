@@ -11,28 +11,22 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NodeBase> nodeRelativeNotation = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeRelativeNotation = std::make_unique<NodeSingleSymbol>(
             "RELATIVE_FLOAT_RELATIVE_NOTATION", "相对坐标（~x ~y ~z）", '~');
-    static std::shared_ptr<NodeBase> nodeCaretNotation = std::make_shared<NodeSingleSymbol>(
+    static std::unique_ptr<NodeBase> nodeCaretNotation = std::make_unique<NodeSingleSymbol>(
             "RELATIVE_FLOAT_CARET_NOTATION", "局部坐标（^左 ^上 ^右）", '^');
-    static std::shared_ptr<NodeBase> nodeValue = std::make_shared<NodeFloat>(
+    static std::unique_ptr<NodeBase> nodeValue = std::make_unique<NodeFloat>(
             "RELATIVE_FLOAT_FLOAT", "坐标参数的数值", std::nullopt, std::nullopt);
-    static std::shared_ptr<NodeBase> nodeRelative = std::make_shared<NodeAnd>(
+    static std::unique_ptr<NodeBase> nodeRelative = std::make_unique<NodeAnd>(
             "RELATIVE_FLOAT_RELATIVE", "相对坐标（~x ~y ~z）",
-            std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
-                    std::vector<std::shared_ptr<NodeBase>>{nodeRelativeNotation, nodeValue}
-            ));
-    static std::shared_ptr<NodeBase> nodeCaret = std::make_shared<NodeAnd>(
+            std::vector<const NodeBase *>{nodeRelativeNotation.get(), nodeValue.get()});
+    static std::unique_ptr<NodeBase> nodeCaret = std::make_unique<NodeAnd>(
             "RELATIVE_FLOAT_CARET", "局部坐标（^左 ^上 ^右）",
-            std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
-                    std::vector<std::shared_ptr<NodeBase>>{nodeCaretNotation, nodeValue}
-            ));
-    static std::shared_ptr<NodeBase> nodeRelativeFloat = std::make_shared<NodeOr>(
-            "RELATIVE_FLOAT", "坐标",
-            std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
-                    std::vector<std::shared_ptr<NodeBase>>{
-                            nodeRelative, nodeCaret, nodeRelativeNotation, nodeCaretNotation, nodeValue}
-            ), false);
+            std::vector<const NodeBase *>{nodeCaretNotation.get(), nodeValue.get()});
+    static std::unique_ptr<NodeBase> nodeRelativeFloat = std::make_unique<NodeOr>(
+            "RELATIVE_FLOAT", "坐标", std::vector<const NodeBase *>{
+                    nodeRelative.get(), nodeCaret.get(), nodeRelativeNotation.get(),
+                    nodeCaretNotation.get(), nodeValue.get()}, false);
 
     NodeRelativeFloat::NodeRelativeFloat(const std::optional<std::string> &id,
                                          const std::optional<std::string> &description,
@@ -45,8 +39,8 @@ namespace CHelper::Node {
             : NodeBase(j, true),
               canUseCaretNotation(FROM_JSON(j, canUseCaretNotation, bool)) {}
 
-    std::shared_ptr<NodeType> NodeRelativeFloat::getNodeType() const {
-        return NodeType::RELATIVE_FLOAT;
+    NodeType *NodeRelativeFloat::getNodeType() const {
+        return NodeType::RELATIVE_FLOAT.get();
     }
 
     void NodeRelativeFloat::toJson(nlohmann::json &j) const {
@@ -54,12 +48,12 @@ namespace CHelper::Node {
         TO_JSON(j, canUseCaretNotation);
     }
 
-    ASTNode NodeRelativeFloat::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeRelativeFloat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         return getASTNode(this, cpack, tokenReader, canUseCaretNotation).second;
     }
 
     std::pair<int, ASTNode> NodeRelativeFloat::getASTNode(const NodeBase *node,
-                                                          const CPack &cpack,
+                                                          const CPack *cpack,
                                                           TokenReader &tokenReader,
                                                           bool canUseCaretNotation) {
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标

@@ -12,17 +12,17 @@ namespace CHelper::Node {
 
     class NodeEntry : public NodeBase {
     public:
-        const std::shared_ptr<NodeBase> nodeKey;
-        const std::shared_ptr<NodeBase> nodeSeparator;
-        const std::shared_ptr<NodeBase> nodeValue;
+        const NodeBase *nodeKey;
+        const NodeBase *nodeSeparator;
+        const NodeBase *nodeValue;
 
         NodeEntry(const std::optional<std::string> &id,
                   const std::optional<std::string> &description,
-                  const std::shared_ptr<NodeBase> &nodeKey,
-                  const std::shared_ptr<NodeBase> &nodeSeparator,
-                  const std::shared_ptr<NodeBase> &nodeValue);
+                  const NodeBase *nodeKey,
+                  const NodeBase *nodeSeparator,
+                  const NodeBase *nodeValue);
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
 

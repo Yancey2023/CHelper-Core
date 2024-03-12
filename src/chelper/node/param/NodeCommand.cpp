@@ -10,23 +10,29 @@ namespace CHelper::Node {
 
     NodeCommand::NodeCommand(const std::optional<std::string> &id,
                              const std::optional<std::string> &description,
-                             const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes)
+                             const std::vector<const NodeBase *> &childNodes)
             : NodeBase(id, description, false),
-              nodeCommand(std::make_shared<NodeOr>("COMMAND", "命令", childNodes, true, "command_or")) {}
+              nodeCommand("COMMAND", "命令", childNodes, true, "command_or") {}
+
+    static std::vector<const NodeBase *> getCommands(const CPack &cpack) {
+        std::vector<const NodeBase *> result;
+        for (const auto &item: *cpack.commands) {
+            result.push_back(item.get());
+        }
+        return result;
+    }
 
     NodeCommand::NodeCommand(const nlohmann::json &j,
                              const CPack &cpack)
             : NodeBase(j, true),
-              nodeCommand(std::make_shared<NodeOr>("COMMAND", "命令", cpack.commands, true, "command_or")) {}
+              nodeCommand("COMMAND", "命令", getCommands(cpack), true, "command_or") {}
 
-    std::shared_ptr<NodeType> NodeCommand::getNodeType() const {
-        return NodeType::COMMAND;
+    NodeType *NodeCommand::getNodeType() const {
+        return NodeType::COMMAND.get();
     }
 
-    ASTNode NodeCommand::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
-        DEBUG_GET_NODE_BEGIN(nodeCommand)
-        ASTNode node = nodeCommand->getASTNode(tokenReader, cpack);
-        DEBUG_GET_NODE_END(nodeCommand)
+    ASTNode NodeCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+        ASTNode node = nodeCommand.getASTNode(tokenReader, cpack);
         return ASTNode::andNode(this, {node}, node.tokens, nullptr, "command");
     }
 

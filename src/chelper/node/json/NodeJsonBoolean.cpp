@@ -20,8 +20,8 @@ namespace CHelper::Node {
               descriptionTrue(FROM_JSON_OPTIONAL(j, descriptionTrue, std::string)),
               descriptionFalse(FROM_JSON_OPTIONAL(j, descriptionFalse, std::string)) {}
 
-    std::shared_ptr<NodeType> NodeJsonBoolean::getNodeType() const {
-        return NodeType::JSON_BOOLEAN;
+    NodeType* NodeJsonBoolean::getNodeType() const {
+        return NodeType::JSON_BOOLEAN.get();
     }
 
     void NodeJsonBoolean::toJson(nlohmann::json &j) const {
@@ -30,7 +30,7 @@ namespace CHelper::Node {
         TO_JSON_OPTIONAL(j, descriptionFalse)
     }
 
-    ASTNode NodeJsonBoolean::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeJsonBoolean::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         return tokenReader.readStringASTNode(this);
     }
 

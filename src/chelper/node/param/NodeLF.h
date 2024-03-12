@@ -13,11 +13,11 @@ namespace CHelper::Node {
     public:
         NodeLF(const std::optional<std::string> &id, const std::optional<std::string> &description);
 
-        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
+        [[nodiscard]] NodeType* getNodeType() const override;
 
-        static std::shared_ptr<NodeLF> getInstance();
+        static NodeLF* getInstance();
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

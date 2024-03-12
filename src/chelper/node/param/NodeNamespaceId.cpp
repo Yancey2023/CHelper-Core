@@ -54,8 +54,8 @@ namespace CHelper::Node {
               ignoreError(FROM_JSON(j, ignoreError, bool)),
               contents(getIdContentFromCPack(j, cpack, key)) {}
 
-    std::shared_ptr<NodeType> NodeNamespaceId::getNodeType() const {
-        return NodeType::NAMESPACE_ID;
+    NodeType* NodeNamespaceId::getNodeType() const {
+        return NodeType::NAMESPACE_ID.get();
     }
 
     void NodeNamespaceId::toJson(nlohmann::json &j) const {
@@ -70,7 +70,7 @@ namespace CHelper::Node {
         }
     }
 
-    ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         // namespace:id
         // 字符串中已经包含冒号，因为冒号不是结束字符
         DEBUG_GET_NODE_BEGIN(this)
@@ -82,15 +82,9 @@ namespace CHelper::Node {
         }
         if (!ignoreError) {
             std::string str = TokenUtil::toString(result.tokens);
-            std::string_view nameSpace = "minecraft";
-            std::string_view value = str;
-            size_t index = str.find(':');
-            if (index != std::string::npos) {
-                nameSpace = value.substr(0, index);
-                value = value.substr(index + 1);
-            }
-            if (std::all_of(contents->begin(), contents->end(), [&nameSpace, &value](const auto &item) {
-                return value != item->name || nameSpace != item->nameSpace.value_or("minecraft");
+            size_t strHash = std::hash<std::string>{}(str);
+            if (std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
+                return !item->fastMatch(strHash) && !item->idWithNamespace->fastMatch(strHash);
             })) {
                 return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
                         result.tokens, "找不到含义 -> " + TokenUtil::toString(result.tokens)));
@@ -105,19 +99,12 @@ namespace CHelper::Node {
             return true;
         }
         std::string str = TokenUtil::toString(astNode->tokens);
-        std::string_view nameSpace = "minecraft";
-        std::string_view value = str;
-        size_t index = str.find(':');
-        if (index != std::string::npos) {
-            nameSpace = value.substr(0, index);
-            value = value.substr(index + 1);
+        size_t strHash = std::hash<std::string>{}(str);
+        if (std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
+            return !item->fastMatch(strHash) && !item->idWithNamespace->fastMatch(strHash);
+        })) {
+            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("找不到ID -> ").append(str)));
         }
-        for (const auto &item: *contents) {
-            if (value == item->name && nameSpace == item->nameSpace.value_or("minecraft")) {
-                return true;
-            }
-        }
-        idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("找不到ID -> ").append(str)));
         return true;
     }
 
@@ -127,6 +114,7 @@ namespace CHelper::Node {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain;
+        std::vector<std::shared_ptr<NormalId>> namespaceStartOf, namespaceContain;
         std::vector<std::shared_ptr<NamespaceId>> descriptionContain;
 
         for (const auto &item: *contents) {
@@ -144,9 +132,9 @@ namespace CHelper::Node {
             size_t index1 = item->idWithNamespace->name.find(str);
             if (index1 != std::string::npos) {
                 if (index1 == 0) {
-                    nameStartOf.push_back(item->idWithNamespace);
+                    namespaceStartOf.push_back(item->idWithNamespace);
                 } else {
-                    nameContain.push_back(item->idWithNamespace);
+                    namespaceContain.push_back(item->idWithNamespace);
                 }
                 continue;
             }
@@ -163,6 +151,12 @@ namespace CHelper::Node {
             suggestions.emplace_back(astNode->tokens, item);
         }
         for (const auto &item: nameContain) {
+            suggestions.emplace_back(astNode->tokens, item);
+        }
+        for (const auto &item: namespaceStartOf) {
+            suggestions.emplace_back(astNode->tokens, item);
+        }
+        for (const auto &item: namespaceContain) {
             suggestions.emplace_back(astNode->tokens, item);
         }
         for (const auto &item: descriptionContain) {

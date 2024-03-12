@@ -15,11 +15,9 @@ namespace CHelper::Node {
     static std::shared_ptr<NodeBase> nodeLevel = std::make_shared<NodeText>(
             "L", "等级", std::make_shared<NormalId>("L", "等级"));
     static std::shared_ptr<NodeBase> levelXp = std::make_shared<NodeAnd>(
-            "LEVEL_XP", "等级经验", std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
-                    std::vector<std::shared_ptr<NodeBase>>{nodeInteger, nodeLevel}));
+            "LEVEL_XP", "等级经验", std::vector<const NodeBase *>{nodeInteger.get(), nodeLevel.get()});
     static std::shared_ptr<NodeBase> Xp = std::make_shared<NodeOr>(
-            "XP", "经验", std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
-                    std::vector<std::shared_ptr<NodeBase>>{nodeInteger, levelXp}), false);
+            "XP", "经验", std::vector<const NodeBase *>{nodeInteger.get(), levelXp.get()}, false);
 
     NodeXpInteger::NodeXpInteger(const std::optional<std::string> &id,
                                  const std::optional<std::string> &description)
@@ -29,12 +27,12 @@ namespace CHelper::Node {
                                  [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true) {}
 
-    std::shared_ptr<NodeType> NodeXpInteger::getNodeType() const {
-        return NodeType::XP_INTEGER;
+    NodeType *NodeXpInteger::getNodeType() const {
+        return NodeType::XP_INTEGER.get();
     }
 
-    ASTNode NodeXpInteger::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
-        return getByChildNode(tokenReader, cpack, Xp);
+    ASTNode NodeXpInteger::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+        return getByChildNode(tokenReader, cpack, Xp.get());
     }
 
     void NodeXpInteger::collectStructure(const ASTNode *astNode,

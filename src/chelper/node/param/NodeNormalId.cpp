@@ -61,8 +61,8 @@ namespace CHelper::Node {
                   return tokenReader.readStringASTNode(node);
               }) {}
 
-    std::shared_ptr<NodeType> NodeNormalId::getNodeType() const {
-        return NodeType::NORMAL_ID;
+    NodeType* NodeNormalId::getNodeType() const {
+        return NodeType::NORMAL_ID.get();
     }
 
     void NodeNormalId::toJson(nlohmann::json &j) const {
@@ -77,7 +77,7 @@ namespace CHelper::Node {
         }
     }
 
-    ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(this)
         auto result = getNormalIdASTNode(this, tokenReader);
@@ -98,8 +98,9 @@ namespace CHelper::Node {
         }
         if (!ignoreError) {
             std::string str = TokenUtil::toString(result.tokens);
-            if (std::all_of(contents->begin(), contents->end(), [&str](const auto &item) {
-                return str != item->name;
+            size_t strHash = std::hash<std::string>{}(str);
+            if (std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
+                return !item->fastMatch(strHash);
             })) {
                 return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
                         result.tokens, "找不到含义 -> " + TokenUtil::toString(result.tokens)));
@@ -114,12 +115,12 @@ namespace CHelper::Node {
             return true;
         }
         std::string str = TokenUtil::toString(astNode->tokens);
-        for (const auto &item: *contents) {
-            if (str == item->name) {
-                return true;
-            }
+        size_t strHash = std::hash<std::string>{}(str);
+        if (std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
+            return !item->fastMatch(strHash);
+        })) {
+            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("找不到ID -> ").append(str)));
         }
-        idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("找不到ID -> ").append(str)));
         return true;
     }
 

@@ -12,12 +12,12 @@ namespace CHelper::Node {
     NodePerCommand::NodePerCommand(const std::optional<std::string> &id,
                                    std::vector<std::string> name,
                                    const std::optional<std::string> &description,
-                                   std::vector<std::shared_ptr<Node::NodeBase>> nodes,
-                                   std::vector<std::shared_ptr<Node::NodeBase>> startNodes)
+                                   std::vector<std::unique_ptr<Node::NodeBase>> nodes,
+                                   std::vector<Node::NodeBase*>& startNodes)
             : NodeBase(id, description, false),
               name(std::move(name)),
               nodes(std::move(nodes)),
-              startNodes(std::move(startNodes)) {}
+              startNodes(startNodes) {}
 
     NodePerCommand::NodePerCommand(const nlohmann::json &j,
                                    const CPack &cpack)
@@ -45,7 +45,7 @@ namespace CHelper::Node {
             bool flag = true;
             for (auto &node: nodes) {
                 if (node->id == startNodeId) {
-                    startNodes.push_back(node);
+                    startNodes.push_back(node.get());
                     flag = false;
                     break;
                 }
@@ -71,10 +71,10 @@ namespace CHelper::Node {
                 if (childNodes.size() == 1) {
                     throw Exception::RequireChildNodeIds(name, parentNodeId);
                 }
-                std::shared_ptr<Node::NodeBase> parentNode = nullptr;
+                Node::NodeBase* parentNode = nullptr;
                 for (auto &node: nodes) {
                     if (node->id == parentNodeId) {
-                        parentNode = node;
+                        parentNode = node.get();
                         break;
                     }
                 }
@@ -93,10 +93,10 @@ namespace CHelper::Node {
                         parentNode->nextNodes.push_back(Node::NodeLF::getInstance());
                         return;
                     }
-                    std::shared_ptr<Node::NodeBase> childNode = nullptr;
+                    Node::NodeBase* childNode = nullptr;
                     for (auto &node: nodes) {
                         if (node->id == childNodeId) {
-                            childNode = node;
+                            childNode = node.get();
                             break;
                         }
                     }
@@ -115,15 +115,8 @@ namespace CHelper::Node {
         }
     }
 
-    //因为节点可能之间互相绑定，所以要在析构的时候解除绑定
-    NodePerCommand::~NodePerCommand() {
-        for (const auto &item: nodes) {
-            item->nextNodes.clear();
-        }
-    }
-
-    std::shared_ptr<NodeType> NodePerCommand::getNodeType() const {
-        return NodeType::PER_COMMAND;
+    NodeType* NodePerCommand::getNodeType() const {
+        return NodeType::PER_COMMAND.get();
     }
 
     void NodePerCommand::toJson(nlohmann::json &j) const {
@@ -150,7 +143,7 @@ namespace CHelper::Node {
         }
     }
 
-    ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         //命令名字的检查
         ASTNode commandName = tokenReader.readStringASTNode(this, "commandName");

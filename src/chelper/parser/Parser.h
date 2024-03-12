@@ -12,16 +12,23 @@
 #include "TokenReader.h"
 #include "../node/param/NodeCommand.h"
 #include "../lexer/StringReader.h"
+#include "../lexer/Lexer.h"
 
 namespace CHelper::Parser {
 
-    ASTNode parse(const std::string &content, const CPack &cpack);
+    ASTNode parse(TokenReader &&tokenReader, const CPack *cpack);
 
-    ASTNode parse(StringReader &&stringReader, const CPack &cpack);
+    inline ASTNode parse(const std::shared_ptr<std::vector<Token>> &tokens, const CPack *cpack) {
+        return parse(TokenReader(tokens), cpack);
+    }
 
-    ASTNode parse(const std::shared_ptr<std::vector<Token>> &tokens, const CPack &cpack);
+    inline ASTNode parse(StringReader &&stringReader, const CPack *cpack) {
+        return parse(std::make_shared<std::vector<Token>>(Lexer::lex(stringReader)), cpack);
+    }
 
-    ASTNode parse(TokenReader &&tokenReader, const CPack &cpack);
+    inline ASTNode parse(const std::string &content, const CPack *cpack) {
+        return parse(StringReader(content, "unknown"), cpack);
+    }
 
 } // CHelper::Parser
 

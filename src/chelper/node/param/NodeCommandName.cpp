@@ -10,20 +10,20 @@ namespace CHelper::Node {
 
     NodeCommandName::NodeCommandName(const std::optional<std::string> &id,
                                      const std::optional<std::string> &description,
-                                     const std::shared_ptr<std::vector<std::shared_ptr<Node::NodeBase>>> &commands)
+                                     const std::vector<std::unique_ptr<Node::NodeBase>> *commands)
             : NodeBase(id, description, false),
               commands(commands) {}
 
     NodeCommandName::NodeCommandName(const nlohmann::json &j,
                                      const CPack &cpack)
             : NodeBase(j, true),
-              commands(cpack.commands) {}
+              commands(cpack.commands.get()) {}
 
-    std::shared_ptr<NodeType> NodeCommandName::getNodeType() const {
-        return NodeType::COMMAND_NAME;
+    NodeType *NodeCommandName::getNodeType() const {
+        return NodeType::COMMAND_NAME.get();
     }
 
-    ASTNode NodeCommandName::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeCommandName::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         return tokenReader.readStringASTNode(this);
     }
 
@@ -34,7 +34,7 @@ namespace CHelper::Node {
         }
         std::string str = TokenUtil::toString(astNode->tokens);
         for (const auto &command: *commands) {
-            for (const auto &name: std::static_pointer_cast<Node::NodePerCommand>(command)->name) {
+            for (const auto &name: ((NodePerCommand *) command.get())->name) {
                 if (str == name) {
                     return true;
                 }
@@ -50,7 +50,7 @@ namespace CHelper::Node {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         for (const auto &command: *commands) {
-            for (const auto &name: std::static_pointer_cast<Node::NodePerCommand>(command)->name) {
+            for (const auto &name: ((NodePerCommand *) command.get())->name) {
                 if (StringUtil::isStartOf(name, str)) {
                     suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(name, command->description));
                 }

@@ -12,18 +12,18 @@ namespace CHelper::Node {
 
     class NodeCommand : public NodeBase {
     public:
-        std::shared_ptr<NodeOr> nodeCommand;
+        NodeOr nodeCommand;
 
         NodeCommand(const std::optional<std::string> &id,
                     const std::optional<std::string> &description,
-                    const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes);
+                    const std::vector<const NodeBase*> &childNodes);
 
         NodeCommand(const nlohmann::json &j,
                     const CPack &cpack);
 
-        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
+        [[nodiscard]] NodeType* getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
 

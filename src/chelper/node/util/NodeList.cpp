@@ -9,29 +9,27 @@ namespace CHelper::Node {
 
     NodeList::NodeList(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
-                       const std::shared_ptr<NodeBase> &nodeLeft,
-                       const std::shared_ptr<NodeBase> &nodeElement,
-                       const std::shared_ptr<NodeBase> &nodeSeparator,
-                       const std::shared_ptr<NodeBase> &nodeRight)
+                       const NodeBase *nodeLeft,
+                       const NodeBase *nodeElement,
+                       const NodeBase *nodeSeparator,
+                       const NodeBase *nodeRight)
             : NodeBase(id, description, false),
               nodeLeft(nodeLeft),
               nodeElement(nodeElement),
               nodeSeparator(nodeSeparator),
               nodeRight(nodeRight),
-              nodeElementOrRight(std::make_shared<NodeOr>(
+              nodeElementOrRight(
                       "ELEMENT_OR_RIGHT", "element or right",
-                      std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
-                              std::vector<std::shared_ptr<NodeBase>>{
+                              std::vector<const NodeBase*>{
                                       nodeElement, nodeRight
-                              }), false)),
-              nodeSeparatorOrRight(std::make_shared<NodeOr>(
+                              }, false),
+              nodeSeparatorOrRight(
                       "SEPARATOR_OR_RIGHT", "separator or right",
-                      std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
-                              std::vector<std::shared_ptr<NodeBase>>{
+                              std::vector<const NodeBase*>{
                                       nodeSeparator, nodeRight
-                              }), false)) {}
+                              }, false) {}
 
-    ASTNode NodeList::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         //标记整个[...]，在最后进行收集
         tokenReader.push();
         auto left = nodeLeft->getASTNodeWithNextNode(tokenReader, cpack);
@@ -46,9 +44,7 @@ namespace CHelper::Node {
             auto rightBracket1 = nodeRight->getASTNodeWithNextNode(tokenReader, cpack);
             DEBUG_GET_NODE_END(nodeRight)
             tokenReader.restore();
-            DEBUG_GET_NODE_BEGIN(nodeElementOrRight)
-            auto elementOrRight = nodeElementOrRight->getASTNodeWithNextNode(tokenReader, cpack);
-            DEBUG_GET_NODE_END(nodeElementOrRight)
+            auto elementOrRight = nodeElementOrRight.getASTNodeWithNextNode(tokenReader, cpack);
             childNodes.push_back(elementOrRight);
             if (!rightBracket1.isError() || elementOrRight.isError()) {
                 return ASTNode::andNode(this, childNodes, tokenReader.collect());
@@ -62,7 +58,7 @@ namespace CHelper::Node {
             DEBUG_GET_NODE_END(nodeRight)
             tokenReader.restore();
             DEBUG_GET_NODE_BEGIN(nodeSeparator)
-            auto separatorOrRight = nodeSeparatorOrRight->getASTNodeWithNextNode(tokenReader, cpack);
+            auto separatorOrRight = nodeSeparatorOrRight.getASTNodeWithNextNode(tokenReader, cpack);
             DEBUG_GET_NODE_END(nodeSeparator)
             childNodes.push_back(separatorOrRight);
             if (!rightBracket.isError() || separatorOrRight.isError()) {

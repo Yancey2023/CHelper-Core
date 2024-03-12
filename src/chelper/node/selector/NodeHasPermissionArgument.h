@@ -14,7 +14,7 @@ namespace CHelper::Node {
         NodeHasPermissionArgument(const std::optional<std::string> &id,
                                   const std::optional<std::string> &description);
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
     };
 
 } // CHelper::Node

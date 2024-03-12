@@ -10,19 +10,24 @@
 #include "chelper/Core.h"
 
 int main() {
-    CHelper::Test::test(R"(D:\CLion\project\CHelper\test\test.txt)", true);
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)", {"give @s "}, true);
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)",
+//                        R"(D:\CLion\project\CHelper\test\test.txt)",
+//                        false);
+    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
+                        R"(/home/yancey/CLionProjects/CHelper/test/test.txt)",
+                        false);
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)", {"give @s "}, false);
+//    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)", {"give @s "}, false);
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)", {""}, false);
     return 0;
 }
 
 namespace CHelper::Test {
 
-    void test(const std::string &testFilePath, bool isTestTime) {
+    void test(const std::string &cpackPath, const std::string &testFilePath, bool isTestTime) {
         std::vector<std::string> commands;
         std::ifstream fin;
         fin.open(testFilePath, std::ios::in);
-        std::string cpackPath;
-        getline(fin, cpackPath);
         while (fin.is_open()) {
             std::string str;
             getline(fin, str);
@@ -34,6 +39,13 @@ namespace CHelper::Test {
             }
         }
         fin.close();
+//        std::vector<std::string> commands1;
+//        for (const auto &item: commands) {
+//            for (size_t i = 0; i < item.size(); i++) {
+//                commands1.push_back(item.substr(0, i + 1));
+//            }
+//        }
+//        CHelper::Test::test(cpackPath, commands1, isTestTime);
         CHelper::Test::test(cpackPath, commands, isTestTime);
     }
 
@@ -45,44 +57,50 @@ namespace CHelper::Test {
                 return;
             }
             for (const auto &command: commands) {
-                clock_t startParse, endParse,
+                std::chrono::high_resolution_clock::time_point startParse, endParse,
                         startDescription, endDescription,
                         startErrorReasons, endErrorReasons,
                         startSuggestions, endSuggestions,
                         startStructure, endStructure;
-                startParse = clock();
+                startParse = std::chrono::high_resolution_clock::now();
                 core->onTextChanged(command, command.length());
-                endParse = clock();
-                startDescription = clock();
+                endParse = std::chrono::high_resolution_clock::now();
+                startDescription = std::chrono::high_resolution_clock::now();
                 auto description = core->getDescription();
-                endDescription = clock();
-                startErrorReasons = clock();
+                endDescription = std::chrono::high_resolution_clock::now();
+                startErrorReasons = std::chrono::high_resolution_clock::now();
                 auto errorReasons = core->getErrorReasons();
-                endErrorReasons = clock();
-                startSuggestions = clock();
+                endErrorReasons = std::chrono::high_resolution_clock::now();
+                startSuggestions = std::chrono::high_resolution_clock::now();
                 auto suggestions = core->getSuggestions();
-                endSuggestions = clock();
-                startStructure = clock();
+                endSuggestions = std::chrono::high_resolution_clock::now();
+                startStructure = std::chrono::high_resolution_clock::now();
                 auto structure = core->getStructure();
-                endStructure = clock();
+                endStructure = std::chrono::high_resolution_clock::now();
                 CHELPER_INFO(ColorStringBuilder()
                                      .green("parse successfully(")
-                                     .purple(std::to_string(endStructure - startParse) + "ms")
+                                     .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                                             endStructure - startParse).count()) + "ms")
                                      .green(")")
                                      .normal(" : ")
                                      .purple(command)
                                      .build());
                 if (isTestTime) {
                     CHELPER_INFO(ColorStringBuilder().blue("parse in ").purple(
-                            std::to_string(endParse - startParse) + "ms").build());
+                            std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                                    endParse - startParse).count()) + "ms" + "ms").build());
                     CHELPER_INFO(ColorStringBuilder().blue("get description in ").purple(
-                            std::to_string(endDescription - startDescription) + "ms").build());
+                            std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                                    endDescription - startDescription).count()) + "ms" + "ms").build());
                     CHELPER_INFO(ColorStringBuilder().blue("get error reasons in ").purple(
-                            std::to_string(endErrorReasons - startErrorReasons) + "ms").build());
+                            std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                                    endErrorReasons - startErrorReasons).count()) + "ms" + "ms").build());
                     CHELPER_INFO(ColorStringBuilder().blue("get suggestions in ").purple(
-                            std::to_string(endSuggestions - startSuggestions) + "ms").build());
+                            std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                                    endSuggestions - startSuggestions).count()) + "ms" + "ms").build());
                     CHELPER_INFO(ColorStringBuilder().blue("get structure in ").purple(
-                            std::to_string(endStructure - startStructure) + "ms").build());
+                            std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                                    endStructure - startStructure).count()) + "ms" + "ms").build());
 
                 }
 //                std::cout << core->getAstNode().toOptimizedJson().dump(
@@ -141,10 +159,6 @@ namespace CHelper::Test {
             Profile::clear();
             exit(-1);
         }
-    }
-
-    void testTime(const std::string &cpackPath, const std::vector<std::string> &commands) {
-
     }
 
 } // CHelper::Test

@@ -18,12 +18,12 @@ namespace CHelper {
         };
     }
 
-    class BlockStateValue : public JsonUtil::ToJson {
+    class BlockStateValue {
     public:
         BlockStateType::BlockStateType type;
         std::variant<std::string, int, bool> value;
         std::optional<std::string> description;
-        std::shared_ptr<Node::NodeBase> node;
+        Node::NodeBase *node;
 
         BlockStateValue(BlockStateType::BlockStateType type,
                         const std::variant<std::string, int, bool> &value,
@@ -31,32 +31,44 @@ namespace CHelper {
 
         explicit BlockStateValue(const nlohmann::json &j);
 
-        void toJson(nlohmann::json &j) const override;
+        BlockStateValue(const BlockStateValue &blockStateValue);
+
+        ~BlockStateValue();
+
+        BlockStateValue &operator=(const BlockStateValue &blockStateValue);
+
+        void toJson(nlohmann::json &j) const;
 
     };
 
-    class BlockState : public JsonUtil::ToJson {
+    class BlockState {
     public:
         std::string key;
         std::optional<std::string> description;
         std::vector<BlockStateValue> values;
         int defaultValue;
-        std::shared_ptr<Node::NodeBase> node;
+        Node::NodeBase *node;
 
         BlockState(std::string key,
                    const std::optional<std::string> &description,
-                   const std::vector<BlockStateValue> &values,
+                   std::vector<BlockStateValue> values,
                    int defaultValue);
 
         explicit BlockState(const nlohmann::json &j);
 
-        void toJson(nlohmann::json &j) const override;
+        BlockState(const BlockState &blockState);
+
+        ~BlockState();
+
+        BlockState &operator=(const BlockState &blockState);
+
+        void toJson(nlohmann::json &j) const;
     };
 
     class BlockId : public ItemId {
     public:
         std::optional<std::vector<BlockState>> blockStates;
-        std::shared_ptr<Node::NodeBase> nodeBlockState;
+        Node::NodeBase *nodeBlockState;
 
         BlockId(const std::optional<std::string> &nameSpace,
                 const std::string &name,
@@ -67,7 +79,15 @@ namespace CHelper {
 
         explicit BlockId(const nlohmann::json &j);
 
+        ~BlockId() override;
+
+        BlockId(const BlockId &);
+
+        BlockId &operator=(const BlockId &blockId) = delete;
+
         void toJson(nlohmann::json &j) const override;
+
+        static Node::NodeBase *getNodeAllBlockState();
     };
 
 } // CHelper

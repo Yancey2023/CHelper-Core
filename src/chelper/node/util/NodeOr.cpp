@@ -10,20 +10,20 @@ namespace CHelper::Node {
 
     NodeOr::NodeOr(const std::optional<std::string> &id,
                    const std::optional<std::string> &description,
-                   const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes,
+                   std::vector<const NodeBase*> childNodes,
                    const bool isAttachToEnd,
                    std::string nodeId)
             : NodeBase(id, description, false),
               isAttachToEnd(isAttachToEnd),
-              childNodes(childNodes),
+              childNodes(std::move(childNodes)),
               nodeId(std::move(nodeId)) {}
 
-    ASTNode NodeOr::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
-        size_t size = childNodes->size();
+    ASTNode NodeOr::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+        size_t size = childNodes.size();
         std::vector<ASTNode> childASTNodes;
         childASTNodes.reserve(size);
         std::vector<size_t> indexes;
-        for (const auto &item: *childNodes) {
+        for (const auto &item: childNodes) {
             tokenReader.push();
             childASTNodes.push_back(item->getASTNode(tokenReader, cpack));
             indexes.push_back(tokenReader.index);

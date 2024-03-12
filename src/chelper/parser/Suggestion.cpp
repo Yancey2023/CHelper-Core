@@ -12,15 +12,17 @@ namespace CHelper {
                            const std::shared_ptr<NormalId> &content)
             : start(start),
               end(end),
-              content(content) {}
+              content(content),
+              mHashCode(HashUtil::combineHash(content->hashCode(), HashUtil::combineHash(start, end))) {}
 
     Suggestion::Suggestion(const VectorView <Token> &tokens,
                            const std::shared_ptr<NormalId> &content)
             : start(TokenUtil::getStartIndex(tokens)),
               end(TokenUtil::getEndIndex(tokens)),
-              content(content) {}
+              content(content),
+              mHashCode(HashUtil::combineHash(content->hashCode(), HashUtil::combineHash(start, end))) {}
 
-    std::string Suggestion::onClick(const std::string &before) {
+    std::string Suggestion::onClick(const std::string &before) const {
         return before.substr(0, start)
                 .append(content->name)
                 .append(before.substr(end));

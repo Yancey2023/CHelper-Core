@@ -21,6 +21,10 @@ namespace CHelper {
 
         explicit NamespaceId(const nlohmann::json &j);
 
+        NamespaceId(const NamespaceId &) = delete;
+
+        NamespaceId &operator=(const NamespaceId &) = delete;
+
         void toJson(nlohmann::json &j) const override;
 
     };

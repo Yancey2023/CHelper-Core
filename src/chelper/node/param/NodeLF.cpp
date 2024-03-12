@@ -10,16 +10,16 @@ namespace CHelper::Node {
                    const std::optional<std::string> &description)
             : NodeBase(id, description, false) {}
 
-    std::shared_ptr<NodeType> NodeLF::getNodeType() const {
-        return NodeType::LF;
+    NodeType* NodeLF::getNodeType() const {
+        return NodeType::LF.get();
     }
 
-    std::shared_ptr<NodeLF> NodeLF::getInstance() {
-        static std::shared_ptr<NodeLF> INSTANCE = std::make_shared<NodeLF>("LF", "命令终止");
-        return INSTANCE;
+    NodeLF* NodeLF::getInstance() {
+        static std::unique_ptr<NodeLF> INSTANCE = std::make_unique<NodeLF>("LF", "命令终止");
+        return INSTANCE.get();
     }
 
-    ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         tokenReader.skipToLF();
         VectorView <Token> tokens = tokenReader.collect();

@@ -35,8 +35,8 @@ namespace CHelper::Node {
             nodeItemId(getNodeItemId(cpack.itemIds)),
             nodeComponent(std::make_shared<NodeJson>("ITEM_COMPONENT", "物品组件", cpack, "components")) {}
 
-    std::shared_ptr<NodeType> NodeItem::getNodeType() const {
-        return NodeType::ITEM;
+    NodeType *NodeItem::getNodeType() const {
+        return NodeType::ITEM.get();
     }
 
     void NodeItem::toJson(nlohmann::json &j) const {
@@ -44,40 +44,35 @@ namespace CHelper::Node {
         TO_JSON(j, nodeItemType);
     }
 
-    ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
-        DEBUG_GET_NODE_BEGIN(nodeItemId)
-        ASTNode itemId = nodeItemId->getASTNode(tokenReader, cpack);
-        DEBUG_GET_NODE_END(nodeItemId)
+        ASTNode itemId = nodeItemId.getASTNode(tokenReader, cpack);
         //查找物品ID
-        std::string blockIdStr = TokenUtil::toString(itemId.tokens);
-        std::string_view nameSpace = "minecraft";
-        std::string_view value = blockIdStr;
-        size_t index = blockIdStr.find(':');
-        if (index != std::string::npos) {
-            nameSpace = value.substr(0, index);
-            value = value.substr(index + 1);
-        }
+        std::string itemIdStr = TokenUtil::toString(itemId.tokens);
+        size_t strHash = std::hash<std::string>{}(itemIdStr);
         std::shared_ptr<NamespaceId> currentItem = nullptr;
         for (const auto &item: *itemIds) {
-            if (value == item->name && nameSpace == item->nameSpace.value_or("minecraft")) {
+            if (item->fastMatch(strHash) || item->idWithNamespace->fastMatch(strHash)) {
                 currentItem = item;
                 break;
             }
         }
         std::vector<ASTNode> childNodes = {itemId};
-        std::shared_ptr<NodeBase> nodeData = currentItem == nullptr ? nodeAllData :
-                                             std::static_pointer_cast<ItemId>(currentItem)->nodeData;
+        const NodeBase *nodeData = currentItem == nullptr ? nodeAllData.get() :
+                                   std::static_pointer_cast<ItemId>(currentItem)->nodeData;
         switch (nodeItemType) {
             case NodeItemType::ITEM_GIVE:
                 childNodes.push_back(getOptionalASTNode(tokenReader, cpack, false,
-                                                        {nodeCount, nodeAllData, nodeComponent}));
+                                                        {nodeCount.get(), nodeData, nodeComponent.get()}));
+                break;
             case NodeItemType::ITEM_CLEAR:
                 childNodes.push_back(getOptionalASTNode(tokenReader, cpack, false,
-                                                        {nodeAllData, nodeCount}));
+                                                        {nodeData, nodeCount.get()}));
+                break;
             default:
                 childNodes.push_back(getOptionalASTNode(tokenReader, cpack, false,
-                                                        {nodeCount, nodeAllData, nodeComponent}));
+                                                        {nodeCount.get(), nodeData, nodeComponent.get()}));
+                break;
         }
         return ASTNode::andNode(this, childNodes, tokenReader.collect());
     }
@@ -89,18 +84,18 @@ namespace CHelper::Node {
     void NodeItem::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {
         switch (nodeItemType) {
             case NodeItemType::ITEM_GIVE:
-                nodeItemId->collectStructure(nullptr, structure, isMustHave);
+                nodeItemId.collectStructure(nullptr, structure, isMustHave);
                 nodeCount->collectStructure(nullptr, structure, false);
                 nodeAllData->collectStructure(nullptr, structure, false);
                 nodeComponent->collectStructure(nullptr, structure, false);
                 break;
             case NodeItemType::ITEM_CLEAR:
-                nodeItemId->collectStructure(nullptr, structure, isMustHave);
+                nodeItemId.collectStructure(nullptr, structure, isMustHave);
                 nodeAllData->collectStructure(nullptr, structure, false);
                 nodeCount->collectStructure(nullptr, structure, false);
                 break;
             default:
-                nodeItemId->collectStructure(nullptr, structure, isMustHave);
+                nodeItemId.collectStructure(nullptr, structure, isMustHave);
                 nodeCount->collectStructure(nullptr, structure, false);
                 nodeAllData->collectStructure(nullptr, structure, false);
                 nodeComponent->collectStructure(nullptr, structure, false);
@@ -108,9 +103,9 @@ namespace CHelper::Node {
         }
     }
 
-    std::shared_ptr<NodeBase>
+    NodeNamespaceId
     NodeItem::getNodeItemId(const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents) {
-        return std::make_shared<NodeNamespaceId>("ITEM_ID", "物品ID", "items", true, contents);
+        return {"ITEM_ID", "物品ID", "items", true, contents};
     }
 
 } // CHelper::Node

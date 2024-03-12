@@ -20,25 +20,30 @@ namespace CHelper {
         std::unordered_map<std::string, std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> namespaceIds;
         std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> blockIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
         std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
-        std::vector<std::shared_ptr<Node::NodeBase>> jsonNodes;
-        std::vector<std::pair<std::shared_ptr<Node::NodeBase>, std::shared_ptr<Node::NodeBase>>> repeatNodes;
-        std::shared_ptr<std::vector<std::shared_ptr<Node::NodeBase>>> commands = std::make_shared<std::vector<std::shared_ptr<Node::NodeBase>>>();
+        std::vector<std::unique_ptr<Node::NodeBase>> jsonNodes;
+        std::vector<std::pair<Node::NodeBase*, Node::NodeBase*>> repeatNodes;
+        std::shared_ptr<std::vector<std::unique_ptr<Node::NodeBase>>> commands = std::make_shared<std::vector<std::unique_ptr<Node::NodeBase>>>();
         //从这个节点开始检测
-        std::shared_ptr<Node::NodeBase> mainNode;
-
+        Node::NodeBase* mainNode;
     private:
-        explicit CPack(const std::filesystem::path &path);
+        std::vector<std::unique_ptr<Node::NodeBase>> repeatNodeDatas;
 
     public:
-        static CPack create(const std::filesystem::path &path);
+        explicit CPack(const std::filesystem::path &path);
 
-        std::shared_ptr<Node::NodeBase> getNormalId(const std::optional<std::string> &id,
-                                                    const std::optional<std::string> &description,
-                                                    const std::string &key) const;
+        ~CPack();
 
-        std::shared_ptr<Node::NodeBase> getNamespaceId(const std::optional<std::string> &id,
-                                                       const std::optional<std::string> &description,
-                                                       const std::string &key) const;
+        CPack(const CPack &) = delete;
+
+        CPack &operator=(const CPack &) = delete;
+
+        static std::unique_ptr<CPack> create(const std::filesystem::path &path);
+
+        std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
+        getNormalId(const std::string &key) const;
+
+        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
+        getNamespaceId(const std::string &key) const;
 
     };
 

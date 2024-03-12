@@ -25,11 +25,11 @@ namespace CHelper::Node {
         NodeString(const nlohmann::json &j,
                    [[maybe_unused]] const CPack &cpack);
 
-        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
+        [[nodiscard]] NodeType* getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,

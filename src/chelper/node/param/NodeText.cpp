@@ -23,8 +23,8 @@ namespace CHelper::Node {
                   return tokenReader.readStringASTNode(node);
               }) {}
 
-    std::shared_ptr<NodeType> NodeText::getNodeType() const {
-        return NodeType::TEXT;
+    NodeType* NodeText::getNodeType() const {
+        return NodeType::TEXT.get();
     }
 
     void NodeText::toJson(nlohmann::json &j) const {
@@ -34,7 +34,7 @@ namespace CHelper::Node {
         j.push_back(dataJson);
     }
 
-    ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         DEBUG_GET_NODE_BEGIN(this)
         auto result = getTextASTNode(this, tokenReader);
         DEBUG_GET_NODE_END(this)

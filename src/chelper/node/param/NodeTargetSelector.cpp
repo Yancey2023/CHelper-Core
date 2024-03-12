@@ -48,21 +48,24 @@ namespace CHelper::Node {
                                            const bool isMustPlayer,
                                            const bool isMustNPC,
                                            const bool isOnlyOne,
-                                           const std::shared_ptr<NodeBase> &nodeItem,
-                                           const std::shared_ptr<NodeBase> &nodeFamily,
-                                           const std::shared_ptr<NodeBase> &nodeGameMode,
-                                           const std::shared_ptr<NodeBase> &nodeItemLocation,
-                                           const std::shared_ptr<NodeBase> &nodeEntities)
+                                           const NodeNamespaceId &nodeItem,
+                                           const NodeNormalId &nodeFamily,
+                                           const NodeNormalId &nodeGameMode,
+                                           const NodeNormalId &nodeItemLocation,
+                                           const NodeNormalId &nodeEntities)
             : NodeBase(id, description, false),
               isMustPlayer(isMustPlayer),
               isMustNPC(isMustNPC),
               isOnlyOne(isOnlyOne),
-              nodeArgument(std::make_shared<NodeTargetSelectorArgument>(
-                      "TARGET_SELECTOR_ARGUMENT", "目标选择器单个参数",
-                      nodeItem, nodeFamily, nodeGameMode, nodeItemLocation, nodeEntities)),
-              nodeArguments(std::make_shared<NodeList>(
-                      "TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
-                      nodeLeft, nodeArgument, nodeSeparator, nodeRight)) {}
+              nodeItem(nodeItem),
+              nodeFamily(nodeFamily),
+              nodeGameMode(nodeGameMode),
+              nodeItemLocation(nodeItemLocation),
+              nodeEntities(nodeEntities),
+              nodeArgument("TARGET_SELECTOR_ARGUMENT", "目标选择器单个参数",
+                           &nodeItem, &nodeFamily, &nodeGameMode, &nodeItemLocation, &nodeEntities),
+              nodeArguments("TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
+                            nodeLeft.get(), &nodeArgument, nodeSeparator.get(), nodeRight.get()) {}
 
     NodeTargetSelector::NodeTargetSelector(const nlohmann::json &j,
                                            [[maybe_unused]] const CPack &cpack)
@@ -70,20 +73,18 @@ namespace CHelper::Node {
               isMustPlayer(FROM_JSON(j, isMustPlayer, bool)),
               isMustNPC(FROM_JSON(j, isMustNPC, bool)),
               isOnlyOne(FROM_JSON(j, isOnlyOne, bool)),
-              nodeArgument(std::make_shared<NodeTargetSelectorArgument>(
-                      "TARGET_SELECTOR_ARGUMENT", "目标选择器单个参数",
-                      NodeItem::getNodeItemId(cpack.itemIds),
-                      cpack.getNormalId("FAMILIES", "族", "families"),
-                      cpack.getNormalId("GAME_MODES", "游戏模式", "gameModes"),
-                      cpack.getNormalId("SLOT", "物品栏", "slot"),
-                      cpack.getNamespaceId("ENTITIES", "实体", "entities")
-              )),
-              nodeArguments(std::make_shared<NodeList>(
-                      "TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
-                      nodeLeft, nodeArgument, nodeSeparator, nodeRight)) {}
+              nodeItem("ITEM_ID", "物品ID", "items", true, cpack.itemIds),
+              nodeFamily("FAMILIES", "族", "families", true, cpack.getNormalId("families")),
+              nodeGameMode("GAME_MODES", "游戏模式", "gameModes", true, cpack.getNormalId("gameModes")),
+              nodeItemLocation("SLOT", "物品栏", "slot", true, cpack.getNormalId("slot")),
+              nodeEntities("ENTITIES", "实体", "entities", true, cpack.getNormalId("entities")),
+              nodeArgument("TARGET_SELECTOR_ARGUMENT", "目标选择器单个参数",
+                           &nodeItem, &nodeFamily, &nodeGameMode, &nodeItemLocation, &nodeEntities),
+              nodeArguments("TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
+                            nodeLeft.get(), &nodeArgument, nodeSeparator.get(), nodeRight.get()) {}
 
-    std::shared_ptr<NodeType> NodeTargetSelector::getNodeType() const {
-        return NodeType::TARGET_SELECTOR;
+    NodeType *NodeTargetSelector::getNodeType() const {
+        return NodeType::TARGET_SELECTOR.get();
     }
 
     void NodeTargetSelector::toJson(nlohmann::json &j) const {
@@ -93,7 +94,7 @@ namespace CHelper::Node {
         TO_JSON(j, isOnlyOne);
     }
 
-    ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.skipWhitespace();
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(nodeAt)
@@ -103,7 +104,7 @@ namespace CHelper::Node {
         if (at.isError()) {
             //不是@符号开头，当作玩家名处理
             DEBUG_GET_NODE_BEGIN(nodePlayerName)
-            ASTNode result = getByChildNode(tokenReader, cpack, nodePlayerName, "target selector player name");
+            ASTNode result = getByChildNode(tokenReader, cpack, nodePlayerName.get(), "target selector player name");
             DEBUG_GET_NODE_END(nodePlayerName)
             return result;
         }
@@ -123,9 +124,7 @@ namespace CHelper::Node {
             return ASTNode::andNode(this, {targetSelectorVariable}, tokenReader.collect(),
                                     nullptr, "target selector no arguments");
         }
-        DEBUG_GET_NODE_BEGIN(nodeArguments)
-        ASTNode arguments = nodeArguments->getASTNodeWithNextNode(tokenReader, cpack);
-        DEBUG_GET_NODE_END(nodeArguments)
+        ASTNode arguments = nodeArguments.getASTNodeWithNextNode(tokenReader, cpack);
         return ASTNode::andNode(this, {targetSelectorVariable, arguments}, tokenReader.collect(),
                                 nullptr, "target selector with arguments");
     }

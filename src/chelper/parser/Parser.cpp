@@ -8,22 +8,10 @@
 
 namespace CHelper::Parser {
 
-    ASTNode parse(const std::string &content, const CPack &cpack) {
-        return parse(StringReader(content, "unknown"), cpack);
-    }
-
-    ASTNode parse(StringReader &&stringReader, const CPack &cpack) {
-        return parse(std::make_shared<std::vector<Token>>(Lexer::lex(stringReader)), cpack);
-    }
-
-    ASTNode parse(const std::shared_ptr<std::vector<Token>> &tokens, const CPack &cpack) {
-        return parse(TokenReader(tokens), cpack);
-    }
-
-    ASTNode parse(TokenReader &&tokenReader, const CPack &cpack) {
+    ASTNode parse(TokenReader &&tokenReader, const CPack *cpack) {
         VectorView <Token> tokens = {tokenReader.tokenList, 0, tokenReader.tokenList->size()};
         Profile::push("start parsing: " + TokenUtil::toString(tokens));
-        auto mainNode = cpack.mainNode;
+        auto mainNode = cpack->mainNode;
         DEBUG_GET_NODE_BEGIN(mainNode)
         auto result = mainNode->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(mainNode)

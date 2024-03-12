@@ -27,8 +27,8 @@ namespace CHelper::Node {
               canContainSpace(FROM_JSON(j, canContainSpace, bool)),
               ignoreLater(FROM_JSON(j, ignoreLater, bool)) {}
 
-    std::shared_ptr<NodeType> NodeString::getNodeType() const {
-        return NodeType::STRING;
+    NodeType *NodeString::getNodeType() const {
+        return NodeType::STRING.get();
     }
 
     void NodeString::toJson(nlohmann::json &j) const {
@@ -37,7 +37,7 @@ namespace CHelper::Node {
         TO_JSON(j, ignoreLater);
     }
 
-    ASTNode NodeString::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeString::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         if (ignoreLater) {
             //后面的所有内容都算作这个字符串
             tokenReader.push();
@@ -102,9 +102,7 @@ namespace CHelper::Node {
     void NodeString::collectStructure(const ASTNode *astNode,
                                       StructureBuilder &structure,
                                       bool isMustHave) const {
-        if (astNode == nullptr || astNode->id == "string") {
-            structure.append(isMustHave, description.value_or("字符串"));
-        }
+        structure.append(isMustHave, description.value_or("字符串"));
     }
 
 } // CHelper::Node

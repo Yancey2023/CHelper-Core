@@ -11,13 +11,13 @@ namespace CHelper::Node {
 
     class NodeAnd : public NodeBase {
     public:
-        std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> childNodes;
+        std::vector<const NodeBase*> childNodes;
 
         NodeAnd(const std::optional<std::string> &id,
                 const std::optional<std::string> &description,
-                const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes);
+                const std::vector<const NodeBase*> &childNodes);
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
 

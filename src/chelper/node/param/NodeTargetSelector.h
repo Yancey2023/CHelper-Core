@@ -17,27 +17,30 @@ namespace CHelper::Node {
     class NodeTargetSelector : public NodeBase {
     public:
         const bool isMustPlayer, isMustNPC, isOnlyOne;
-        std::shared_ptr<NodeBase> nodeArgument, nodeArguments;
+        const NodeNamespaceId nodeItem;
+        const NodeNormalId nodeFamily, nodeGameMode, nodeItemLocation, nodeEntities;
+        const NodeTargetSelectorArgument nodeArgument;
+        const NodeList nodeArguments;
 
         NodeTargetSelector(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
                            bool isMustPlayer,
                            bool isMustNPC,
                            bool isOnlyOne,
-                           const std::shared_ptr<NodeBase> &nodeItem,
-                           const std::shared_ptr<NodeBase> &nodeFamily,
-                           const std::shared_ptr<NodeBase> &nodeGameMode,
-                           const std::shared_ptr<NodeBase> &nodeItemLocation,
-                           const std::shared_ptr<NodeBase> &nodeEntities);
+                           const NodeNamespaceId &nodeItem,
+                           const NodeNormalId &nodeFamily,
+                           const NodeNormalId &nodeGameMode,
+                           const NodeNormalId &nodeItemLocation,
+                           const NodeNormalId &nodeEntities);
 
         NodeTargetSelector(const nlohmann::json &j,
                            [[maybe_unused]] const CPack &cpack);
 
-        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
+        [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,

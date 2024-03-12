@@ -88,9 +88,10 @@ namespace CHelper::JsonUtil {
                     for (int i = 0; i < 4; ++i) {
                         ch = stringReader.next();
                         if (ch == EOF) {
-                            result.errorReason = ErrorReason::contentError(stringReader.pos.index - 2 - i, stringReader.pos.index,
-                                                                           "字符串转义缺失后半部分 -> \\u" +
-                                                                           escapeSequence);
+                            result.errorReason = ErrorReason::contentError(
+                                    stringReader.pos.index - 2 - i,
+                                    stringReader.pos.index,
+                                    "字符串转义缺失后半部分 -> \\u" + escapeSequence);
                             break;
                         }
                         escapeSequence.push_back(ch);
@@ -103,7 +104,8 @@ namespace CHelper::JsonUtil {
                                         bool notHex = !std::isxdigit(item);
                                         if (notHex) {
                                             result.errorReason = ErrorReason::incomplete(
-                                                    stringReader.pos.index - escapeSequence.length() - 1, stringReader.pos.index + 1,
+                                                    stringReader.pos.index - escapeSequence.length() - 1,
+                                                    stringReader.pos.index + 1,
                                                     FormatUtil::format(
                                                             "字符串转义出现非法字符{0} -> \\u{1}",
                                                             item, escapeSequence));

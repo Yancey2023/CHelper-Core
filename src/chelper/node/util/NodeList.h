@@ -6,26 +6,27 @@
 #define CHELPER_NODELIST_H
 
 #include "../NodeBase.h"
+#include "NodeOr.h"
 
 namespace CHelper::Node {
 
     class NodeList : public NodeBase {
     public:
-        const std::shared_ptr<NodeBase> nodeLeft;
-        const std::shared_ptr<NodeBase> nodeElement;
-        const std::shared_ptr<NodeBase> nodeSeparator;
-        const std::shared_ptr<NodeBase> nodeRight;
-        const std::shared_ptr<NodeBase> nodeElementOrRight;
-        const std::shared_ptr<NodeBase> nodeSeparatorOrRight;
+        const NodeBase *nodeLeft;
+        const NodeBase *nodeElement;
+        const NodeBase *nodeSeparator;
+        const NodeBase *nodeRight;
+        const NodeOr nodeElementOrRight;
+        const NodeOr nodeSeparatorOrRight;
 
         NodeList(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
-                 const std::shared_ptr<NodeBase> &nodeLeft,
-                 const std::shared_ptr<NodeBase> &nodeElement,
-                 const std::shared_ptr<NodeBase> &nodeSeparator,
-                 const std::shared_ptr<NodeBase> &nodeRight);
+                 const NodeBase *nodeLeft,
+                 const NodeBase *nodeElement,
+                 const NodeBase *nodeSeparator,
+                 const NodeBase *nodeRight);
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
 

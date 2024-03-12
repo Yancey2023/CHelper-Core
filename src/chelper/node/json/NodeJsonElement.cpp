@@ -3,6 +3,8 @@
 //
 
 #include "NodeJsonElement.h"
+
+#include <utility>
 #include "../param/NodeLF.h"
 #include "NodeJsonObject.h"
 #include "NodeJsonList.h"
@@ -17,9 +19,11 @@ namespace CHelper::Node {
 
     NodeJsonElement::NodeJsonElement(const std::optional<std::string> &id,
                                      const std::optional<std::string> &description,
-                                     const std::vector<std::shared_ptr<NodeBase>> &nodes)
+                                     std::vector<std::unique_ptr<NodeBase>> nodes,
+                                     NodeBase *start)
             : NodeBase(id, description, false),
-              nodes(nodes) {}
+              nodes(std::move(nodes)),
+              start(start) {}
 
     NodeJsonElement::NodeJsonElement(const nlohmann::json &j,
                                      [[maybe_unused]] const CPack &cpack)
@@ -44,7 +48,7 @@ namespace CHelper::Node {
         } else {
             for (auto &node: nodes) {
                 if (node->id == startNodeId) {
-                    start = node;
+                    start = node.get();
                     break;
                 }
             }
@@ -53,31 +57,13 @@ namespace CHelper::Node {
             throw Exception::UnknownNodeId(startNodeId, id.value());
         }
         for (const auto &item: nodes) {
-            if (item->getNodeType() == NodeType::JSON_LIST) {
-                std::static_pointer_cast<NodeJsonList>(item)->init(nodes);
-            } else if (item->getNodeType() == NodeType::JSON_OBJECT) {
-                std::static_pointer_cast<NodeJsonObject>(item)->init(nodes);
+            if (item->getNodeType() == NodeType::JSON_LIST.get()) {
+                ((NodeJsonList *) item.get())->init(nodes);
+            } else if (item->getNodeType() == NodeType::JSON_OBJECT.get()) {
+                ((NodeJsonObject *)item.get())->init(nodes);
             }
         }
         Profile::pop();
-    }
-
-    NodeJsonElement::~NodeJsonElement() {
-        for (const auto &item: nodes) {
-            if (item == nullptr) {
-                continue;
-            } else if (item->getNodeType() == NodeType::JSON_LIST) {
-                if (item != nullptr) {
-                    std::static_pointer_cast<NodeJsonList>(item) = nullptr;
-                }
-            } else if (item->getNodeType() == NodeType::JSON_OBJECT) {
-                for (const auto &item2: *std::static_pointer_cast<NodeJsonObject>(item)->data) {
-                    if (item2 != nullptr) {
-                        std::static_pointer_cast<NodeJsonEntry>(item2)->nodeEntry = nullptr;
-                    }
-                }
-            }
-        }
     }
 
     void NodeJsonElement::toJson(nlohmann::json &j) const {
@@ -86,31 +72,30 @@ namespace CHelper::Node {
         j["start"] = start->id.value();
     }
 
-    ASTNode NodeJsonElement::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeJsonElement::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         return getByChildNode(tokenReader, cpack, start);
     }
 
-    std::shared_ptr<NodeBase> NodeJsonElement::getNodeJsonElement() {
-        static std::shared_ptr<NodeBase> jsonString = std::make_shared<NodeJsonString>(
-                "JSON_STRING", "JSON字符串", nullptr);
-        static std::shared_ptr<NodeBase> jsonInteger = std::make_shared<NodeJsonInteger>(
+    NodeBase *NodeJsonElement::getNodeJsonElement() {
+        static std::unique_ptr<NodeBase> jsonString = std::make_unique<NodeJsonString>(
+                "JSON_STRING", "JSON字符串", std::vector<std::unique_ptr<NodeBase>>{});
+        static std::unique_ptr<NodeBase> jsonInteger = std::make_unique<NodeJsonInteger>(
                 "JSON_INTEGER", "JSON整数", std::nullopt, std::nullopt);
-        static std::shared_ptr<NodeBase> jsonFloat = std::make_shared<NodeJsonFloat>(
+        static std::unique_ptr<NodeBase> jsonFloat = std::make_unique<NodeJsonFloat>(
                 "JSON_FLOAT", "JSON小数", std::nullopt, std::nullopt);
-        static std::shared_ptr<NodeBase> jsonNull = std::make_shared<NodeJsonNull>(
+        static std::unique_ptr<NodeBase> jsonNull = std::make_unique<NodeJsonNull>(
                 "JSON_NULL", "JSON空值");
-        static std::shared_ptr<NodeBase> jsonBoolean = std::make_shared<NodeJsonBoolean>(
+        static std::unique_ptr<NodeBase> jsonBoolean = std::make_unique<NodeJsonBoolean>(
                 "JSON_BOOLEAN", "JSON布尔值", std::nullopt, std::nullopt);
-        static std::shared_ptr<NodeBase> jsonList = std::make_shared<NodeJsonList>(
+        static std::unique_ptr<NodeBase> jsonList = std::make_unique<NodeJsonList>(
                 "JSON_LIST", "JSON列表", "");
-        static std::shared_ptr<NodeBase> jsonObject = std::make_shared<NodeJsonObject>(
-                "JSON_OBJECT", "JSON对象", std::make_shared<std::vector<std::shared_ptr<NodeBase>>>());
-        static std::shared_ptr<NodeBase> jsonElement = std::make_shared<NodeOr>(
-                "JSON_ELEMENT", "JSON元素", std::make_shared<std::vector<std::shared_ptr<NodeBase>>>(
-                        std::vector<std::shared_ptr<NodeBase>>{
-                                jsonBoolean, jsonFloat, jsonInteger, jsonNull, jsonString, jsonList, jsonObject
-                        }), false);
-        return jsonElement;
+        static std::unique_ptr<NodeBase> jsonObject = std::make_unique<NodeJsonObject>(
+                "JSON_OBJECT", "JSON对象", std::vector<std::unique_ptr<NodeBase>>{});
+        static std::unique_ptr<NodeBase> jsonElement = std::make_unique<NodeOr>(
+                "JSON_ELEMENT", "JSON元素", std::vector<const NodeBase *>{
+                        jsonBoolean.get(), jsonFloat.get(), jsonInteger.get(), jsonNull.get(),
+                        jsonString.get(), jsonList.get(), jsonObject.get()}, false);
+        return jsonElement.get();
     }
 
 } // CHelper::Node

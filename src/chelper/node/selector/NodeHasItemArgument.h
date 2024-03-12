@@ -12,15 +12,15 @@ namespace CHelper::Node {
 
     class NodeHasItemArgument : public NodeBase {
     private:
-        std::shared_ptr<NodeBase> nodeItem, nodeSlot;
+        const NodeBase *nodeSlot, *nodeItem;
 
     public:
         NodeHasItemArgument(const std::optional<std::string> &id,
                             const std::optional<std::string> &description,
-                            const std::shared_ptr<NodeBase> &nodeItem,
-                            const std::shared_ptr<NodeBase> &nodeSlot);
+                            const NodeBase *nodeItem,
+                            const NodeBase *nodeSlot);
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
     };
 
 } // CHelper::Node

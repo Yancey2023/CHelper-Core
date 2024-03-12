@@ -18,14 +18,14 @@ namespace CHelper {
 
         class NodeType;
 
-        class NodeBase : public JsonUtil::ToJson {
+        class NodeBase {
         public:
             const std::optional<std::string> id;
             const std::optional<std::string> description;
             //true-一定要在空格后 false-不一定在空格后
             const bool isMustAfterWhiteSpace;
             //存储下一个节点，需要调用构造函数之后再进行添加
-            std::vector<std::shared_ptr<NodeBase>> nextNodes;
+            std::vector<NodeBase *> nextNodes;
 
         protected:
             NodeBase(const std::optional<std::string> &id,
@@ -36,28 +36,30 @@ namespace CHelper {
                      bool isMustAfterWhiteSpace);
 
         public:
-            static std::shared_ptr<NodeBase> getNodeFromJson(const nlohmann::json &j,
+            virtual ~NodeBase() = default;
+
+            static std::unique_ptr<NodeBase> getNodeFromJson(const nlohmann::json &j,
                                                              const CPack &cpack);
 
-            [[nodiscard]] virtual std::shared_ptr<NodeType> getNodeType() const;
+            [[nodiscard]] virtual NodeType *getNodeType() const;
 
-            void toJson(nlohmann::json &j) const override;
+            virtual void toJson(nlohmann::json &j) const;
 
-            [[nodiscard]] virtual ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const = 0;
+            [[nodiscard]] virtual ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const = 0;
 
-            [[nodiscard]] ASTNode getASTNodeWithNextNode(TokenReader &tokenReader, const CPack &cpack) const;
+            [[nodiscard]] ASTNode getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const;
 
         protected:
             ASTNode getByChildNode(TokenReader &tokenReader,
-                                   const CPack &cpack,
-                                   const std::shared_ptr<NodeBase> &childNode,
+                                   const CPack *cpack,
+                                   const NodeBase *childNode,
                                    const std::string &astNodeId = "") const;
 
             //当childNodes只需要有第一个node并且其他node不一定需要的时侯使用
             ASTNode getOptionalASTNode(TokenReader &tokenReader,
-                                       const CPack &cpack,
+                                       const CPack *cpack,
                                        bool isIgnoreChildNodesError,
-                                       const std::vector<std::shared_ptr<NodeBase>> &childNodes,
+                                       const std::vector<const NodeBase *> &childNodes,
                                        const std::string &astNodeId = "") const;
 
         public:
@@ -84,8 +86,8 @@ namespace CHelper {
 } // CHelper
 
 template<>
-struct nlohmann::adl_serializer<std::shared_ptr<CHelper::Node::NodeBase>> {
-    static void to_json(nlohmann::json &j, const std::shared_ptr<CHelper::Node::NodeBase> &t) {
+struct nlohmann::adl_serializer<std::unique_ptr<CHelper::Node::NodeBase>> {
+    static void to_json(nlohmann::json &j, const std::unique_ptr<CHelper::Node::NodeBase> &t) {
         t->toJson(j);
     };
 };

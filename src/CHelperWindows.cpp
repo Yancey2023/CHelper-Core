@@ -125,7 +125,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 void onTextChanged(const std::string &command) {
     try {
-        clock_t startParse, endParse,
+        std::chrono::high_resolution_clock::time_point startParse, endParse,
                 startDescription, endDescription,
                 startErrorReasons, endErrorReasons,
                 startSuggestions, endSuggestions,
@@ -134,21 +134,21 @@ void onTextChanged(const std::string &command) {
                                        .red("parsing command: ")
                                        .purple(command)
                                        .build());
-        startParse = clock();
+        startParse = std::chrono::high_resolution_clock::now();
         core->onTextChanged(command, command.length());
-        endParse = clock();
-        startDescription = clock();
+        endParse = std::chrono::high_resolution_clock::now();
+        startDescription = std::chrono::high_resolution_clock::now();
         auto description = core->getDescription();
-        endDescription = clock();
-        startErrorReasons = clock();
+        endDescription = std::chrono::high_resolution_clock::now();
+        startErrorReasons = std::chrono::high_resolution_clock::now();
         auto errorReasons = core->getErrorReasons();
-        endErrorReasons = clock();
-        startSuggestions = clock();
+        endErrorReasons = std::chrono::high_resolution_clock::now();
+        startSuggestions = std::chrono::high_resolution_clock::now();
         auto suggestions = core->getSuggestions();
-        endSuggestions = clock();
-        startStructure = clock();
+        endSuggestions = std::chrono::high_resolution_clock::now();
+        startStructure = std::chrono::high_resolution_clock::now();
         auto structure = core->getStructure();
-        endStructure = clock();
+        endStructure = std::chrono::high_resolution_clock::now();
         CHelper::Profile::push("update description text view");
         {
             int len = MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, nullptr, 0);
@@ -175,22 +175,28 @@ void onTextChanged(const std::string &command) {
         }
         CHelper::Profile::pop();
         CHELPER_INFO(CHelper::ColorStringBuilder()
-                              .green("parse successfully(")
-                              .purple(std::to_string(endStructure - startParse) + "ms")
-                              .green(")")
-                              .normal(" : ")
-                              .purple(command)
-                              .build());
+                             .green("parse successfully(")
+                             .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                                     endStructure - startParse).count()) + "ms")
+                             .green(")")
+                             .normal(" : ")
+                             .purple(command)
+                             .build());
         CHELPER_INFO(CHelper::ColorStringBuilder().blue("parse in ").purple(
-                std::to_string(endParse - startParse) + "ms").build());
+                std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                        endParse - startParse).count()) + "ms" + "ms").build());
         CHELPER_INFO(CHelper::ColorStringBuilder().blue("get description in ").purple(
-                std::to_string(endDescription - startDescription) + "ms").build());
+                std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                        endDescription - startDescription).count()) + "ms" + "ms").build());
         CHELPER_INFO(CHelper::ColorStringBuilder().blue("get error reasons in ").purple(
-                std::to_string(endErrorReasons - startErrorReasons) + "ms").build());
+                std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                        endErrorReasons - startErrorReasons).count()) + "ms" + "ms").build());
         CHELPER_INFO(CHelper::ColorStringBuilder().blue("get suggestions in ").purple(
-                std::to_string(endSuggestions - startSuggestions) + "ms").build());
+                std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                        endSuggestions - startSuggestions).count()) + "ms" + "ms").build());
         CHELPER_INFO(CHelper::ColorStringBuilder().blue("get structure in ").purple(
-                std::to_string(endStructure - startStructure) + "ms").build());
+                std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                        endStructure - startStructure).count()) + "ms" + "ms").build());
 //        std::cout << core->getAstNode().toOptimizedJson().dump(
 //                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
 //        std::cout << core->getAstNode().toBestJson().dump(

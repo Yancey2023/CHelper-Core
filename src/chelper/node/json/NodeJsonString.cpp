@@ -11,31 +11,43 @@ namespace CHelper::Node {
 
     static std::shared_ptr<NormalId> doubleQuoteMask = std::make_shared<NormalId>("\"", "双引号");
 
+    static std::vector<std::unique_ptr<NodeBase>> getDataFromCpack(const nlohmann::json &j,
+                                                                   const CPack &cpack) {
+        std::vector<std::unique_ptr<NodeBase>> result;
+        if (j.contains("data")) {
+            for (const auto &item: j.at("data")) {
+                result.push_back(NodeJsonString::getNodeFromJson(item, cpack));
+            }
+        }
+        return result;
+    }
+
+    static std::unique_ptr<NodeBase>
+    getNodeDataFromData(const std::vector<std::unique_ptr<NodeBase>> &data) {
+        std::vector<const NodeBase *> nodeDataElement;
+        nodeDataElement.reserve(data.size());
+        for (const auto &item: data) {
+            nodeDataElement.push_back(item.get());
+        }
+        return std::make_unique<NodeOr>("JSON_STRING_DATA", "JSON字符串内容",
+                                        nodeDataElement, false);
+    }
+
     NodeJsonString::NodeJsonString(const std::optional<std::string> &id,
                                    const std::optional<std::string> &description,
-                                   const std::shared_ptr<NodeBase> &data)
+                                   std::vector<std::unique_ptr<NodeBase>> data)
             : NodeBase(id, description, false),
-              data(data) {}
-
-    static std::shared_ptr<NodeBase> getDataFromCpack(const nlohmann::json &j,
-                                                      const CPack &cpack) {
-        if (!j.contains("data")) {
-            return nullptr;
-        }
-        auto childNodes = std::make_shared<std::vector<std::shared_ptr<NodeBase>>>();
-        for (const auto &item: j.at("data")) {
-            childNodes->push_back(NodeJsonString::getNodeFromJson(item, cpack));
-        }
-        return std::make_shared<NodeOr>("JSON_STRING_DATA", "JSON字符串内容", childNodes, false);
-    }
+              data(std::move(data)),
+              nodeData(getNodeDataFromData(data)) {}
 
     NodeJsonString::NodeJsonString(const nlohmann::json &j,
                                    const CPack &cpack)
             : NodeBase(j, false),
-              data(getDataFromCpack(j, cpack)) {}
+              data(getDataFromCpack(j, cpack)),
+              nodeData(getNodeDataFromData(data)) {}
 
-    std::shared_ptr<NodeType> NodeJsonString::getNodeType() const {
-        return NodeType::JSON_STRING;
+    NodeType *NodeJsonString::getNodeType() const {
+        return NodeType::JSON_STRING.get();
     }
 
     void NodeJsonString::toJson(nlohmann::json &j) const {
@@ -46,8 +58,8 @@ namespace CHelper::Node {
     static std::pair<ASTNode, JsonUtil::ConvertResult> getInnerASTNode(const NodeJsonString *node,
                                                                        const VectorView <Token> &tokens,
                                                                        const std::string &content,
-                                                                       const CPack &cpack,
-                                                                       const std::shared_ptr<NodeBase> &mainNode) {
+                                                                       const CPack *cpack,
+                                                                       const NodeBase *mainNode) {
         auto convertResult = JsonUtil::jsonString2String(content);
         if (convertResult.errorReason != nullptr) {
             convertResult.errorReason->start--;
@@ -65,7 +77,7 @@ namespace CHelper::Node {
         return {result, convertResult};
     }
 
-    ASTNode NodeJsonString::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeJsonString::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         ASTNode result = tokenReader.readStringASTNode(this);
         tokenReader.pop();
@@ -81,11 +93,11 @@ namespace CHelper::Node {
         if (str.size() <= 1 || str[str.size() - 1] != '"') {
             errorReason = ErrorReason::contentError(result.tokens, "字符串参数内容应该在双引号内 -> " + str);
         }
-        if (data == nullptr) {
+        if (data.empty()) {
             return ASTNode::andNode(this, {result}, result.tokens, errorReason);
         }
         size_t offset = TokenUtil::getStartIndex(result.tokens) + 1;
-        auto innerNode = getInnerASTNode(this, result.tokens, str, cpack, data);
+        auto innerNode = getInnerASTNode(this, result.tokens, str, cpack, nodeData.get());
         ASTNode newResult = ASTNode::andNode(this, {innerNode.first}, result.tokens, errorReason, "inner");
         if (errorReason == nullptr) {
             size_t size = newResult.errorReasons.size();

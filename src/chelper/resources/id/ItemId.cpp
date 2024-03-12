@@ -9,21 +9,27 @@
 
 namespace CHelper {
 
-    static std::shared_ptr<Node::NodeBase> getNodeData(const std::optional<int> &max,
-                                                       const std::optional<std::vector<std::string>> &descriptions) {
+    static std::vector<const Node::NodeBase *>
+    getNodeDataChildren(const std::optional<std::vector<std::string>> &descriptions) {
+        std::vector<const Node::NodeBase *> result;
+
+        return result;
+    }
+
+    static Node::NodeBase *
+    getNodeData(const std::optional<int> &max,
+                const std::optional<std::vector<std::string>> &descriptions) {
         if (descriptions.has_value()) {
-            auto childNodes = std::make_shared<std::vector<std::shared_ptr<Node::NodeBase>>>();
+            std::vector<const Node::NodeBase *> nodeDataChildren;
             size_t i = 0;
             for (const auto &item: descriptions.value()) {
-                childNodes->push_back(std::make_shared<Node::NodeText>(
+                nodeDataChildren.push_back(new Node::NodeText(
                         "ITEM_PER_DATA", item,
                         std::make_shared<NormalId>(std::to_string(i++), item)));
             }
-            return std::make_shared<Node::NodeOr>("ITEM_DATA", "物品附加值",
-                                                  childNodes, false);
+            return new Node::NodeOr("ITEM_DATA", "物品附加值", nodeDataChildren, false);
         } else {
-            return std::make_shared<Node::NodeInteger>
-                    ("ITEM_DATA", "物品附加值", -1, max);
+            return new Node::NodeInteger("ITEM_DATA", "物品附加值", -1, max);
         }
     }
 
@@ -42,6 +48,15 @@ namespace CHelper {
               max(FROM_JSON_OPTIONAL(j, max, int)),
               descriptions(FROM_JSON_OPTIONAL(j, descriptions, std::vector<std::string>)),
               nodeData(getNodeData(max, descriptions)) {}
+
+    ItemId::~ItemId() {
+        if (descriptions.has_value()) {
+            for (const auto &item: ((Node::NodeOr *) nodeData)->childNodes) {
+                delete item;
+            }
+        }
+        delete nodeData;
+    }
 
     void ItemId::toJson(nlohmann::json &j) const {
         NamespaceId::toJson(j);

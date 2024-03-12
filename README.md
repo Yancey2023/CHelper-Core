@@ -35,6 +35,8 @@ Because I am leaning c++ now. I want to improve myself through this project.
 
 ## CPack Document
 
+Cpack(Command Pack) is the resource pack of CHelper(Command Helper).
+
 [English](doc/README.md)
 
 [Chinese](doc/README_CN.md)

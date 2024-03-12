@@ -23,7 +23,7 @@ namespace CHelper::Node {
     public:
         const NodeItemType::NodeItemType nodeItemType;
         const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds;
-        const std::shared_ptr<NodeBase> nodeItemId;
+        const NodeNamespaceId nodeItemId;
         const std::shared_ptr<NodeBase> nodeComponent;
 
         NodeItem(const std::optional<std::string> &id,
@@ -35,11 +35,11 @@ namespace CHelper::Node {
         NodeItem(const nlohmann::json &j,
                  const CPack &cpack);
 
-        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
+        [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
 
@@ -47,8 +47,7 @@ namespace CHelper::Node {
                               StructureBuilder &structure,
                               bool isMustHave) const override;
 
-        static std::shared_ptr<NodeBase>
-        getNodeItemId(const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
+        NodeNamespaceId getNodeItemId(const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
 
     };
 

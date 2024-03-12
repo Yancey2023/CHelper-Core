@@ -8,15 +8,15 @@ namespace CHelper::Node {
 
     NodeEntry::NodeEntry(const std::optional<std::string> &id,
                          const std::optional<std::string> &description,
-                         const std::shared_ptr<NodeBase> &nodeKey,
-                         const std::shared_ptr<NodeBase> &nodeSeparator,
-                         const std::shared_ptr<NodeBase> &nodeValue)
+                         const NodeBase *nodeKey,
+                         const NodeBase *nodeSeparator,
+                         const NodeBase *nodeValue)
             : NodeBase(id, description, false),
               nodeKey(nodeKey),
               nodeSeparator(nodeSeparator),
               nodeValue(nodeValue) {}
 
-    ASTNode NodeEntry::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         auto key = nodeKey->getASTNodeWithNextNode(tokenReader, cpack);

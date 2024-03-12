@@ -13,7 +13,7 @@ namespace CHelper::Node {
             : NodeBase(id, description, false),
               symbol(symbol) {}
 
-    ASTNode NodeSingleSymbol::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeSingleSymbol::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         ASTNode symbolNode = tokenReader.readSymbolASTNode(this);
         std::shared_ptr<ErrorReason> errorReason;
         if (symbolNode.isError()) {

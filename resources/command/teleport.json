@@ -3,7 +3,7 @@
     "teleport",
     "tp"
   ],
-  "description": "传送实体到指定地点，并修改其旋转角度，同/tp",
+  "description": "传送实体到指定地点，并修改其旋转角度",
   "start": [
     "victim",
     "destinationTarget",

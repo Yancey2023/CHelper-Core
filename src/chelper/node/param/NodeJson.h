@@ -14,12 +14,12 @@ namespace CHelper::Node {
     class NodeJson : public NodeBase {
     public:
         const std::string key;
-        const std::shared_ptr<NodeBase> nodeJson;
+        const NodeBase* nodeJson;
 
         NodeJson(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
                  std::string key,
-                 std::shared_ptr<NodeBase> &nodeJson);
+                 NodeBase *nodeJson);
 
         NodeJson(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
@@ -29,11 +29,11 @@ namespace CHelper::Node {
         NodeJson(const nlohmann::json &j,
                  const CPack &cpack);
 
-        [[nodiscard]] std::shared_ptr<NodeType> getNodeType() const override;
+        [[nodiscard]] NodeType* getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

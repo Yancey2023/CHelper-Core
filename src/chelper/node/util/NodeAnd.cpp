@@ -8,15 +8,15 @@ namespace CHelper::Node {
 
     NodeAnd::NodeAnd(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
-                     const std::shared_ptr<std::vector<std::shared_ptr<NodeBase>>> &childNodes)
+                     const std::vector<const NodeBase*> &childNodes)
             : NodeBase(id, description, false),
               childNodes(childNodes) {}
 
-    ASTNode NodeAnd::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeAnd::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childASTNodes;
-        childASTNodes.reserve(childNodes->size());
-        for (const auto &item: *childNodes) {
+        childASTNodes.reserve(childNodes.size());
+        for (const auto &item: childNodes) {
             auto node = item->getASTNodeWithNextNode(tokenReader, cpack);
             childASTNodes.push_back(node);
             if (node.isError()) {

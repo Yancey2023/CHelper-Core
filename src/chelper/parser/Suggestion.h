@@ -18,12 +18,24 @@ namespace CHelper {
         size_t start, end;
         //内容
         std::shared_ptr<NormalId> content;
+    private:
+        const size_t mHashCode;
 
+    public:
         Suggestion(size_t start, size_t end, const std::shared_ptr<NormalId> &content);
 
-        Suggestion(const VectorView <Token> &tokens, const std::shared_ptr<NormalId> &content);
+        Suggestion(const VectorView<Token> &tokens, const std::shared_ptr<NormalId> &content);
 
-        std::string onClick(const std::string &before);
+        [[nodiscard]] std::string onClick(const std::string &before) const;
+
+        [[nodiscard]] inline size_t hashCode() const {
+            return mHashCode;
+        }
+
+        [[nodiscard]] inline bool equal(const Suggestion &suggestion) const {
+            return mHashCode == suggestion.mHashCode;
+        }
+
     };
 
 } // CHelper

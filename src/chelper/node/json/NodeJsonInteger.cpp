@@ -2,6 +2,7 @@
 // Created by Yancey on 2024/2/28.
 //
 
+#include <climits>
 #include "NodeJsonInteger.h"
 #include "../../util/TokenUtil.h"
 
@@ -21,8 +22,8 @@ namespace CHelper::Node {
               min(FROM_JSON_OPTIONAL(j, min, int)),
               max(FROM_JSON_OPTIONAL(j, max, int)) {}
 
-    std::shared_ptr<NodeType> NodeJsonInteger::getNodeType() const {
-        return NodeType::JSON_INTEGER;
+    NodeType* NodeJsonInteger::getNodeType() const {
+        return NodeType::JSON_INTEGER.get();
     }
 
     void NodeJsonInteger::toJson(nlohmann::json &j) const {
@@ -31,7 +32,7 @@ namespace CHelper::Node {
         TO_JSON_OPTIONAL(j, max)
     }
 
-    ASTNode NodeJsonInteger::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeJsonInteger::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         return tokenReader.readIntegerASTNode(this);
     }
 

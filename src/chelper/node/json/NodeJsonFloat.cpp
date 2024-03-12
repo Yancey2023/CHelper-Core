@@ -22,8 +22,8 @@ namespace CHelper::Node {
               min(FROM_JSON_OPTIONAL(j, min, float)),
               max(FROM_JSON_OPTIONAL(j, max, float)) {}
 
-    std::shared_ptr<NodeType> NodeJsonFloat::getNodeType() const {
-        return NodeType::JSON_FLOAT;
+    NodeType* NodeJsonFloat::getNodeType() const {
+        return NodeType::JSON_FLOAT.get();
     }
 
     void NodeJsonFloat::toJson(nlohmann::json &j) const {
@@ -32,7 +32,7 @@ namespace CHelper::Node {
         TO_JSON_OPTIONAL(j, max)
     }
 
-    ASTNode NodeJsonFloat::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeJsonFloat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         return tokenReader.readFloatASTNode(this);
     }
 

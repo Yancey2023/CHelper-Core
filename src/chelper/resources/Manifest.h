@@ -10,7 +10,7 @@
 
 namespace CHelper {
 
-    class Manifest : public JsonUtil::ToJson {
+    class Manifest {
     public:
         std::optional<std::string> name, description, minecraftVersion, author, updateDate;
         std::string packId;
@@ -29,7 +29,11 @@ namespace CHelper {
 
         explicit Manifest(const nlohmann::json &j);
 
-        void toJson(nlohmann::json &j) const override;
+        Manifest(const Manifest &) = delete;
+
+        Manifest &operator=(const Manifest &) = delete;
+
+        void toJson(nlohmann::json &j) const;
 
     };
 }

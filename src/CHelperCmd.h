@@ -14,7 +14,7 @@ int main();
 
 namespace CHelper::Test {
 
-    void test(const std::string &testFilePath, bool isTestTime);
+    void test(const std::string &cpackPath, const std::string &testFilePath, bool isTestTime);
 
     void test(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime);
 

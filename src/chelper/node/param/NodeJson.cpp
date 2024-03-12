@@ -10,16 +10,16 @@ namespace CHelper::Node {
     NodeJson::NodeJson(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
                        std::string key,
-                       std::shared_ptr<NodeBase> &nodeJson)
+                       NodeBase *nodeJson)
             : NodeBase(id, description, false),
               key(std::move(key)),
               nodeJson(nodeJson) {}
 
-    static std::shared_ptr<NodeBase> getNodeJsonFromCPack(const CPack &cpack,
-                                                          const std::string &key) {
+    static NodeBase *getNodeJsonFromCPack(const CPack &cpack,
+                                          const std::string &key) {
         for (const auto &item: cpack.jsonNodes) {
             if (item->id == key) {
-                return item;
+                return item.get();
             }
         }
         Profile::push(ColorStringBuilder()
@@ -48,8 +48,8 @@ namespace CHelper::Node {
               key(FROM_JSON(j, key, std::string)),
               nodeJson(getNodeJsonFromCPack(cpack, key)) {}
 
-    std::shared_ptr<NodeType> NodeJson::getNodeType() const {
-        return NodeType::JSON;
+    NodeType *NodeJson::getNodeType() const {
+        return NodeType::JSON.get();
     }
 
     void NodeJson::toJson(nlohmann::json &j) const {
@@ -57,7 +57,7 @@ namespace CHelper::Node {
         TO_JSON(j, key);
     }
 
-    ASTNode NodeJson::getASTNode(TokenReader &tokenReader, const CPack &cpack) const {
+    ASTNode NodeJson::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         return getByChildNode(tokenReader, cpack, nodeJson);
     }
 

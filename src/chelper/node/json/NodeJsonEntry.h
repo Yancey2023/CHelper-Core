@@ -6,6 +6,7 @@
 #define CHELPER_NODEJSONENTRY_H
 
 #include "../NodeBase.h"
+#include "../param/NodeText.h"
 
 namespace CHelper::Node {
 
@@ -14,7 +15,7 @@ namespace CHelper::Node {
     public:
         const std::string key;
         const std::string value;
-        std::shared_ptr<NodeBase> nodeEntry;
+        std::unique_ptr<NodeBase> nodeKey, nodeEntry;
 
         NodeJsonEntry(const std::optional<std::string> &id,
                       const std::optional<std::string> &description,
@@ -23,9 +24,9 @@ namespace CHelper::Node {
 
         explicit NodeJsonEntry(const nlohmann::json &j);
 
-        void init(const std::vector<std::shared_ptr<NodeBase>> &dataList);
+        void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack &cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,

@@ -9,23 +9,24 @@
 
 namespace CHelper {
 
-    Core::Core(CPack cpack, ASTNode astNode)
+    Core::Core(std::unique_ptr<CPack> cpack, ASTNode astNode)
             : cpack(std::move(cpack)),
               astNode(std::move(astNode)) {}
 
     std::shared_ptr<Core> Core::create(const std::string &cpackPath) {
         Node::NodeType::init();
         try {
-            clock_t start, end;
-            start = clock();
-            CPack cPack = CPack::create(cpackPath);
-            end = clock();
+            std::chrono::high_resolution_clock::time_point start, end;
+            start = std::chrono::high_resolution_clock::now();
+            std::unique_ptr<CPack> cPack = CPack::create(cpackPath);
+            end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO(ColorStringBuilder()
                                  .green("CPack load successfully (")
-                                 .purple(std::to_string(end - start) + "ms")
+                                 .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                                         end - start).count()) + "ms")
                                  .green(")")
                                  .build());
-            return std::make_shared<Core>(cPack, Parser::parse("", cPack));
+            return std::make_shared<Core>(std::move(cPack), Parser::parse("", cPack.get()));
         } catch (const std::exception &e) {
             CHELPER_ERROR("parse failed");
             CHelper::Exception::printStackTrace(e);
@@ -35,7 +36,7 @@ namespace CHelper {
     }
 
     void Core::onTextChanged(const std::string &content, size_t index0) {
-        astNode = Parser::parse(content, cpack);
+        astNode = Parser::parse(content, cpack.get());
         index = index0;
     }
 
