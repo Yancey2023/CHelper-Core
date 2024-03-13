@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/12/20.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODERELATIVEFLOAT_H
 #define CHELPER_NODERELATIVEFLOAT_H
 

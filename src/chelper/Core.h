@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/2/24.
 //
 
+#pragma once
+
 #ifndef CHELPER_CORE_H
 #define CHELPER_CORE_H
 

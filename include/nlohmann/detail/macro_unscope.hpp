@@ -27,6 +27,8 @@
 #undef JSON_DISABLE_ENUM_SERIALIZATION
 #undef JSON_USE_GLOBAL_UDLS
 
+#pragma once
+
 #ifndef JSON_TEST_KEEP_MACROS
     #undef JSON_CATCH
     #undef JSON_TRY

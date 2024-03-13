@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/2/22.
 //
 
+#pragma once
+
 #ifndef CHELPER_PROFILE_H
 #define CHELPER_PROFILE_H
 

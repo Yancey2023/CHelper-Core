@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/2/20.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODETARGETSELECTORARGUMENT_H
 #define CHELPER_NODETARGETSELECTORARGUMENT_H
 

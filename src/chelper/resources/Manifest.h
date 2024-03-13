@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/11/7.
 //
 
+#pragma once
+
 #ifndef CHELPER_MANIFEST_H
 #define CHELPER_MANIFEST_H
 
@@ -36,9 +38,17 @@ namespace CHelper {
         void toJson(nlohmann::json &j) const;
 
     };
+
 }
 
-CREATE_ADL_SERIALIZER(CHelper::Manifest);
+template<>
+struct nlohmann::adl_serializer<CHelper::Manifest> {
+
+    static CHelper::Manifest from_json(const nlohmann::json &j) { return CHelper::Manifest(j); }
+
+    static void to_json(nlohmann::json &j, const CHelper::Manifest &t) { t.toJson(j); }
+
+};
 
 std::ostream &operator<<(std::ostream &os, const CHelper::Manifest &manifest);
 

@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/12/2.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODETEXT_H
 #define CHELPER_NODETEXT_H
 

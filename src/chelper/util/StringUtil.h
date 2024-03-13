@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/2/13.
 //
 
+#pragma once
+
 #ifndef CHELPER_STRINGUTIL_H
 #define CHELPER_STRINGUTIL_H
 

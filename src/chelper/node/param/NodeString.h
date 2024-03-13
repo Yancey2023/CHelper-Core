@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/12/10.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODESTRING_H
 #define CHELPER_NODESTRING_H
 

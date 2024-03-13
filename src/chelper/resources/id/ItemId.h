@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/11/8.
 //
 
+#pragma once
+
 #ifndef CHELPER_ITEMID_H
 #define CHELPER_ITEMID_H
 
@@ -41,6 +43,13 @@ namespace CHelper {
 
 } // CHelper
 
-CREATE_ADL_SERIALIZER(CHelper::ItemId);
+template<>
+struct nlohmann::adl_serializer<CHelper::ItemId> {
+
+    static CHelper::ItemId from_json(const nlohmann::json &j) { return CHelper::ItemId(j); }
+
+    static void to_json(nlohmann::json &j, const CHelper::ItemId &t) { t.toJson(j); }
+
+};
 
 #endif //CHELPER_ITEMID_H

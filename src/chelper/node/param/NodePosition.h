@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/12/2.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODEPOSITION_H
 #define CHELPER_NODEPOSITION_H
 

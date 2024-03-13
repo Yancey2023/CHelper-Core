@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/11/7.
 //
 
+#pragma once
+
 #ifndef CHELPER_NORMALID_H
 #define CHELPER_NORMALID_H
 
@@ -45,6 +47,14 @@ namespace CHelper {
 
 } // CHelper
 
-CREATE_ADL_SERIALIZER(CHelper::NormalId);
+template<>
+struct nlohmann::adl_serializer<CHelper::NormalId> {
+
+    static CHelper::NormalId from_json(const nlohmann::json &j) { return CHelper::NormalId(j); }
+
+    static void to_json(nlohmann::json &j, const CHelper::NormalId &t) { t.toJson(j); }
+
+};
+
 
 #endif //CHELPER_NORMALID_H

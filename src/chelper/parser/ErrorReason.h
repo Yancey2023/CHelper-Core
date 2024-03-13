@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/2/12.
 //
 
+#pragma once
+
 #ifndef CHELPER_ERRORREASON_H
 #define CHELPER_ERRORREASON_H
 

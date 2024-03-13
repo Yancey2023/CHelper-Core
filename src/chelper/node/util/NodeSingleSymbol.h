@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/12/19.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODESINGLESYMBOL_H
 #define CHELPER_NODESINGLESYMBOL_H
 

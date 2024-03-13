@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/2/28.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODEJSONNULL_H
 #define CHELPER_NODEJSONNULL_H
 

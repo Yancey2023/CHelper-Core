@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/2/27.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODEHASPERMISSIONARGUMENT_H
 #define CHELPER_NODEHASPERMISSIONARGUMENT_H
 

@@ -12,6 +12,8 @@
 #include <cctype> // isdigit
 #include <cerrno> // errno, ERANGE
 #include <cstdlib> // strtoull
+#pragma once
+
 #ifndef JSON_NO_IO
     #include <iosfwd> // ostream
 #endif  // JSON_NO_IO
@@ -82,6 +84,8 @@ class json_pointer
     {
         return to_string();
     }
+
+#pragma once
 
 #ifndef JSON_NO_IO
     /// @brief write string representation of the JSON pointer to stream

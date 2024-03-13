@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/11/11.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODEBLOCK_H
 #define CHELPER_NODEBLOCK_H
 
@@ -12,7 +14,7 @@ namespace CHelper::Node {
 
     namespace NodeBlockType {
         enum NodeBlockType : std::uint8_t {
-            // <方块ID> <方块状态>
+            // <方块ID> [方块状态]
             BLOCK_WITH_BLOCK_STATE = 0,
             // <方块ID>
             BLOCK = 1

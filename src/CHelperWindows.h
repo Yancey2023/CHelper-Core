@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/2/26.
 //
 
+#pragma once
+
 #ifndef CHELPER_CHELPERWINDOWS_H
 #define CHELPER_CHELPERWINDOWS_H
 

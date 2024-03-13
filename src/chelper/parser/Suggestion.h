@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/2/21.
 //
 
+#pragma once
+
 #ifndef CHELPER_SUGGESTION_H
 #define CHELPER_SUGGESTION_H
 

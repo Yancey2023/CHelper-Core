@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/11/12.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODENAMESPACEID_H
 #define CHELPER_NODENAMESPACEID_H
 

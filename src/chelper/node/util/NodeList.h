@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/12/23.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODELIST_H
 #define CHELPER_NODELIST_H
 

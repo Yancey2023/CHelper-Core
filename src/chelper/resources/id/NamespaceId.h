@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/11/11.
 //
 
+#pragma once
+
 #ifndef CHELPER_NAMESPACEID_H
 #define CHELPER_NAMESPACEID_H
 
@@ -31,6 +33,13 @@ namespace CHelper {
 
 } // CHelper
 
-CREATE_ADL_SERIALIZER(CHelper::NamespaceId);
+template<>
+struct nlohmann::adl_serializer<CHelper::NamespaceId> {
+
+    static CHelper::NamespaceId from_json(const nlohmann::json &j) { return CHelper::NamespaceId(j); }
+
+    static void to_json(nlohmann::json &j, const CHelper::NamespaceId &t) { t.toJson(j); }
+
+};
 
 #endif //CHELPER_NAMESPACEID_H

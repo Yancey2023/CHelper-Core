@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/11/7.
 //
 
+#pragma once
+
 #ifndef CHELPER_BLOCKID_H
 #define CHELPER_BLOCKID_H
 
@@ -92,10 +94,31 @@ namespace CHelper {
 
 } // CHelper
 
-CREATE_ADL_SERIALIZER(CHelper::BlockStateValue);
+template<>
+struct nlohmann::adl_serializer<CHelper::BlockStateValue> {
 
-CREATE_ADL_SERIALIZER(CHelper::BlockState);
+    static CHelper::BlockStateValue from_json(const nlohmann::json &j) { return CHelper::BlockStateValue(j); }
 
-CREATE_ADL_SERIALIZER(CHelper::BlockId);
+    static void to_json(nlohmann::json &j, const CHelper::BlockStateValue &t) { t.toJson(j); }
+
+};
+
+template<>
+struct nlohmann::adl_serializer<CHelper::BlockState> {
+
+    static CHelper::BlockState from_json(const nlohmann::json &j) { return CHelper::BlockState(j); }
+
+    static void to_json(nlohmann::json &j, const CHelper::BlockState &t) { t.toJson(j); }
+
+};
+
+template<>
+struct nlohmann::adl_serializer<CHelper::BlockId> {
+
+    static CHelper::BlockId from_json(const nlohmann::json &j) { return CHelper::BlockId(j); }
+
+    static void to_json(nlohmann::json &j, const CHelper::BlockId &t) { t.toJson(j); }
+
+};
 
 #endif //CHELPER_BLOCKID_H

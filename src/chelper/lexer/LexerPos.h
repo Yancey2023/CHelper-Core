@@ -4,6 +4,8 @@
 
 #include "pch.h"
 
+#pragma once
+
 #ifndef CHELPER_POS_H
 #define CHELPER_POS_H
 

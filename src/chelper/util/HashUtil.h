@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/3/10.
 //
 
+#pragma once
+
 #ifndef CHELPER_HASHUTIL_H
 #define CHELPER_HASHUTIL_H
 

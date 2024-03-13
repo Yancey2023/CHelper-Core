@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/11/7.
 //
 
+#pragma once
+
 #ifndef CHELPER_CPACK_H
 #define CHELPER_CPACK_H
 
@@ -39,10 +41,10 @@ namespace CHelper {
 
         static std::unique_ptr<CPack> create(const std::filesystem::path &path);
 
-        std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
+        [[nodiscard]] std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
         getNormalId(const std::string &key) const;
 
-        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
+        [[nodiscard]] std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
         getNamespaceId(const std::string &key) const;
 
     };

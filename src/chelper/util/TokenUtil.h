@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/2/22.
 //
 
+#pragma once
+
 #ifndef CHELPER_TOKENUTIL_H
 #define CHELPER_TOKENUTIL_H
 

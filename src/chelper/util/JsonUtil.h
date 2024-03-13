@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/11/7.
 //
 
+#pragma once
+
 #ifndef CHELPER_JSONUTIL_H
 #define CHELPER_JSONUTIL_H
 
@@ -55,19 +57,5 @@ namespace CHelper {
     } // JsonUtil
 
 } // CHelper
-
-// 让这个类支持json序列化（还需要在这个类中创建构造方法用于把json文本转为对象，创建一个to_json方法用于把对象转json文本）
-#define CREATE_ADL_SERIALIZER(type)                                               \
-template<>                                                                        \
-struct [[maybe_unused]] nlohmann::adl_serializer<type> {                          \
-                                                                                  \
-    static type from_json(const nlohmann::json &j) {                              \
-        return type(j);                                                           \
-    }                                                                             \
-                                                                                  \
-    static void to_json(nlohmann::json &j, const type &t) {                       \
-        t.toJson(j);                                                              \
-    }                                                                             \
-}
 
 #endif //CHELPER_JSONUTIL_H

@@ -15,6 +15,8 @@
  * file docs/README.md.                                                     *
 \****************************************************************************/
 
+#pragma once
+
 #ifndef INCLUDE_NLOHMANN_JSON_HPP_
 #define INCLUDE_NLOHMANN_JSON_HPP_
 
@@ -22,6 +24,8 @@
 #include <cstddef> // nullptr_t, ptrdiff_t, size_t
 #include <functional> // hash, less
 #include <initializer_list> // initializer_list
+#pragma once
+
 #ifndef JSON_NO_IO
     #include <iosfwd> // istream, ostream
 #endif  // JSON_NO_IO
@@ -3969,6 +3973,8 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
 
     /// @name serialization
     /// @{
+#pragma once
+
 #ifndef JSON_NO_IO
     /// @brief serialize to stream
     /// @sa https://json.nlohmann.me/api/basic_json/operator_ltlt/
@@ -4125,6 +4131,8 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
                // NOLINTNEXTLINE(hicpp-move-const-arg,performance-move-const-arg)
                : detail::binary_reader<basic_json, decltype(ia), SAX>(std::move(ia), format).sax_parse(format, sax, strict);
     }
+#pragma once
+
 #ifndef JSON_NO_IO
     /// @brief deserialize from stream
     /// @sa https://json.nlohmann.me/api/basic_json/operator_gtgt/
@@ -5227,6 +5235,8 @@ struct less< ::nlohmann::detail::value_t> // do not remove the space after '<', 
 };
 
 // C++20 prohibit function specialization in the std namespace.
+#pragma once
+
 #ifndef JSON_HAS_CPP_20
 
 /// @brief exchanges the values of two JSON objects

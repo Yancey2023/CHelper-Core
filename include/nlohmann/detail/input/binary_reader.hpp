@@ -3000,6 +3000,8 @@ class binary_reader
 #undef JSON_BINARY_READER_MAKE_BJD_TYPES_MAP_
 };
 
+#pragma once
+
 #ifndef JSON_HAS_CPP_17
     template<typename BasicJsonType, typename InputAdapterType, typename SAX>
     constexpr std::size_t binary_reader<BasicJsonType, InputAdapterType, SAX>::npos;

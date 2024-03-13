@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/12/15.
 //
 
+#pragma once
+
 #ifndef CHELPER_ASTNODE_H
 #define CHELPER_ASTNODE_H
 

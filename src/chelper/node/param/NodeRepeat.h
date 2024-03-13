@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/3/1.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODEREPEAT_H
 #define CHELPER_NODEREPEAT_H
 

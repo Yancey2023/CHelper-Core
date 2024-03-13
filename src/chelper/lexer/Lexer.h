@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/11/6.
 //
 
+#pragma once
+
 #ifndef CHELPER_LEXER_H
 #define CHELPER_LEXER_H
 

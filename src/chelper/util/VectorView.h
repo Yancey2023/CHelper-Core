@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/12/18.
 //
 
+#pragma once
+
 #ifndef CHELPER_VECTORVIEW_H
 #define CHELPER_VECTORVIEW_H
 

@@ -2,6 +2,8 @@
 // Created by Yancey on 2024/3/1.
 //
 
+#pragma once
+
 #ifndef CHELPER_NODEXPINTEGER_H
 #define CHELPER_NODEXPINTEGER_H
 
