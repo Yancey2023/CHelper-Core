@@ -15,7 +15,7 @@ namespace CHelper::Node {
                                [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true) {}
 
-    NodeType* NodePosition::getNodeType() const {
+    NodeType *NodePosition::getNodeType() const {
         return NodeType::POSITION.get();
     }
 

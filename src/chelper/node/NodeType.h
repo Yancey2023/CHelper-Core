@@ -24,7 +24,7 @@ namespace CHelper {
                      std::function<std::unique_ptr<NodeBase>(const nlohmann::json &j,
                                                              const CPack &cpack)> createNodeByJson);
 
-            static std::vector<NodeType*> NODE_TYPES;
+            static std::vector<NodeType *> NODE_TYPES;
 
             static bool canLoadNodeJson;
 

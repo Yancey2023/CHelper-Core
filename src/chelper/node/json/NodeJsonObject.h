@@ -16,7 +16,7 @@ namespace CHelper::Node {
     public:
         const std::vector<std::unique_ptr<NodeJsonEntry>> data;
         const std::unique_ptr<NodeOr> nodeElement1;
-        const NodeOr  nodeElement2;
+        const NodeOr nodeElement2;
         const NodeList nodeList;
 
         NodeJsonObject(const std::optional<std::string> &id,

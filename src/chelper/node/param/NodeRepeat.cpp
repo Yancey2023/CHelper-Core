@@ -11,13 +11,13 @@ namespace CHelper::Node {
     NodeRepeat::NodeRepeat(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
                            std::string key,
-                           const std::pair<NodeBase*, NodeBase*> &node)
+                           const std::pair<NodeBase *, NodeBase *> &node)
             : NodeBase(id, description, false),
               key(std::move(key)),
               node(node) {}
 
-    std::pair<Node::NodeBase*, Node::NodeBase*> getNodeFromCPack(const std::string &key,
-                                                                                                 [[maybe_unused]] const CPack &cpack) {
+    std::pair<Node::NodeBase *, Node::NodeBase *> getNodeFromCPack(const std::string &key,
+                                                                   [[maybe_unused]] const CPack &cpack) {
         for (const auto &item: cpack.repeatNodes) {
             if (item.first->id == key) {
                 return item;
@@ -41,7 +41,7 @@ namespace CHelper::Node {
               key(JsonUtil::fromJson<std::string>(j, "key")),
               node(getNodeFromCPack(key, cpack)) {}
 
-    NodeType* NodeRepeat::getNodeType() const {
+    NodeType *NodeRepeat::getNodeType() const {
         return NodeType::REPEAT.get();
     }
 
@@ -70,7 +70,8 @@ namespace CHelper::Node {
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             } else if (orNode.isError() || !tokenReader.ready() || orNode.tokens.isEmpty()) {
                 VectorView <Token> tokens = tokenReader.collect();
-                return ASTNode::andNode(this, std::move(childNodes), tokens, astNode.isError() ? nullptr : ErrorReason::incomplete(
+                return ASTNode::andNode(this, std::move(childNodes), tokens,
+                                        astNode.isError() ? nullptr : ErrorReason::incomplete(
                                                 tokens, "命令重复部分缺少结束语句"),
                                         orNode.whichBest == 0 ? "repeat no complete1" : "repeat no complete2");
             }

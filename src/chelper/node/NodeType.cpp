@@ -58,7 +58,7 @@ namespace CHelper::Node {
                 });
     }
 
-    std::vector<NodeType*> NodeType::NODE_TYPES;
+    std::vector<NodeType *> NodeType::NODE_TYPES;
 
     bool NodeType::canLoadNodeJson = false;
 

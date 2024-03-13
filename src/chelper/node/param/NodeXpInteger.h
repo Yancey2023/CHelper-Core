@@ -17,7 +17,7 @@ namespace CHelper::Node {
         NodeXpInteger(const nlohmann::json &j,
                       [[maybe_unused]] const CPack &cpack);
 
-        [[nodiscard]] NodeType* getNodeType() const override;
+        [[nodiscard]] NodeType *getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 

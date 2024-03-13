@@ -45,7 +45,7 @@ namespace CHelper::Node {
 
     void NodeRelativeFloat::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJson(j,"canUseCaretNotation", canUseCaretNotation);
+        JsonUtil::toJson(j, "canUseCaretNotation", canUseCaretNotation);
     }
 
     ASTNode NodeRelativeFloat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

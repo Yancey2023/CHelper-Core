@@ -23,7 +23,7 @@ namespace CHelper::Node {
 
         void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
 
-        [[nodiscard]] NodeType* getNodeType() const override;
+        [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 

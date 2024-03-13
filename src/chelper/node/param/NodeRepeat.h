@@ -12,17 +12,17 @@ namespace CHelper::Node {
     class NodeRepeat : public NodeBase {
     public:
         std::string key;
-        std::pair<NodeBase*, NodeBase*> node;
+        std::pair<NodeBase *, NodeBase *> node;
 
         NodeRepeat(const std::optional<std::string> &id,
                    const std::optional<std::string> &description,
                    std::string key,
-                   const std::pair<NodeBase*, NodeBase*> &node);
+                   const std::pair<NodeBase *, NodeBase *> &node);
 
         NodeRepeat(const nlohmann::json &j,
                    const CPack &cpack);
 
-        [[nodiscard]] NodeType* getNodeType() const override;
+        [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 

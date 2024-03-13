@@ -1,11 +1,5 @@
 # CHelper
 
-**This project is unfinished, so it can't work.**
-
----
-
-## Description
-
 I want to make an Android command IDE for minecraft bedrock version , so here is CHelper, which means Command Helper.
 
 ## Plan
@@ -19,7 +13,6 @@ I want to make an Android command IDE for minecraft bedrock version , so here is
 - [x] **Structure Retriever**: constructs a command structure string
 - [x] **Target Selector**: target selector command param
 - [x] **json support**: json command param
-- [x] **`execute` command support**: support a command named `execute`
 - [x] **block state support**: block states command param
 - [ ] **highlight command**: obtains the highlight color for displayed commands
 

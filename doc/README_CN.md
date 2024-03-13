@@ -55,12 +55,12 @@ CHelper是我的世界基岩版的命令助手。
   ],
   "description": "赋予或剥夺玩家的能力",
   "start": [
-    "playerSelector"
+    "player"
   ],
   "node": [
     {
       "type": "TARGET_SELECTOR",
-      "id": "playerSelector",
+      "id": "player",
       "description": "要赋予或剥夺能力的玩家",
       "isOnlyOne": false,
       "isMustPlayer": true,
@@ -70,6 +70,7 @@ CHelper是我的世界基岩版的命令助手。
       "type": "NORMAL_ID",
       "id": "ability",
       "description": "要操作的能力",
+      "ignoreError": true,
       "contents": [
         {
           "name": "worldbuilder",
@@ -87,7 +88,7 @@ CHelper是我的世界基岩版的命令助手。
     },
     {
       "type": "BOOLEAN",
-      "id": "canUseToPlayer",
+      "id": "value",
       "description": "此能力是否对玩家可用",
       "descriptionTrue": "此能力对玩家可用",
       "descriptionFalse": "此能力对玩家不可用"
@@ -95,17 +96,16 @@ CHelper是我的世界基岩版的命令助手。
   ],
   "ast": [
     [
-      "playerSelector",
+      "player",
       "ability",
       "LF"
     ],
     [
       "ability",
-      "canUseToPlayer",
-      "LF"
+      "value"
     ],
     [
-      "canUseToPlayer",
+      "value",
       "LF"
     ]
   ]

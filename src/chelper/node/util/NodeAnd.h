@@ -11,11 +11,11 @@ namespace CHelper::Node {
 
     class NodeAnd : public NodeBase {
     public:
-        std::vector<const NodeBase*> childNodes;
+        std::vector<const NodeBase *> childNodes;
 
         NodeAnd(const std::optional<std::string> &id,
                 const std::optional<std::string> &description,
-                const std::vector<const NodeBase*> &childNodes);
+                const std::vector<const NodeBase *> &childNodes);
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 

@@ -4,7 +4,6 @@
 
 #include "CHelperWindows.h"
 #include "chelper/Core.h"
-#include "chelper/util/TokenUtil.h"
 #include <commctrl.h>
 
 static size_t ID_INPUT = 1;
@@ -23,7 +22,7 @@ static std::shared_ptr<CHelper::Core> core;
  * @param nCmdShow 控制窗口的显示方式
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
-    core = CHelper::Core::create(R"(D:\CLion\project\CHelper\resources)");
+    core = CHelper::Core::create(R"(D:\CLion\project\CHelper-Core\resources)");
     if (core == nullptr) {
         exit(-1);
     }
@@ -161,7 +160,7 @@ void onTextChanged(const std::string &command) {
         SendMessage(hWndListBox, LB_RESETCONTENT, 0, 0);
         //由于添加全部结果非常耗时，这里只保留前30个
         int i = 0;
-        for (const auto &suggestion: suggestions) {
+        for (const auto &suggestion: *suggestions) {
             if (++i > 30) {
                 break;
             }
@@ -175,13 +174,13 @@ void onTextChanged(const std::string &command) {
         }
         CHelper::Profile::pop();
         std::cout << CHelper::ColorStringBuilder()
-                             .green("parse successfully(")
-                             .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
-                                     endStructure - startParse).count()) + "ms")
-                             .green(")")
-                             .normal(" : ")
-                             .purple(command)
-                             .build() << std::endl;
+                .green("parse successfully(")
+                .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                        endStructure - startParse).count()) + "ms")
+                .green(")")
+                .normal(" : ")
+                .purple(command)
+                .build() << std::endl;
         std::cout << CHelper::ColorStringBuilder().blue("parse in ").purple(
                 std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
                         endParse - startParse).count()) + "ms").build() << std::endl;
@@ -210,18 +209,18 @@ void onTextChanged(const std::string &command) {
             int i2 = 0;
             for (const auto &errorReason: errorReasons) {
                 std::cout << CHelper::ColorStringBuilder()
-                                     .normal(std::to_string(++i2) + ". ")
-                                     .red(command.substr(errorReason->start,
-                                                         errorReason->end - errorReason->start) + " ")
-                                     .blue(errorReason->errorReason)
-                                     .build() << std::endl;
+                        .normal(std::to_string(++i2) + ". ")
+                        .red(command.substr(errorReason->start,
+                                            errorReason->end - errorReason->start) + " ")
+                        .blue(errorReason->errorReason)
+                        .build() << std::endl;
                 std::cout << CHelper::ColorStringBuilder()
-                                     .normal(command.substr(0, errorReason->start))
-                                     .red(errorReason->start == errorReason->end ? "~" :
-                                          command.substr(errorReason->start,
-                                                         errorReason->end - errorReason->start))
-                                     .normal(command.substr(errorReason->end))
-                                     .build() << std::endl;
+                        .normal(command.substr(0, errorReason->start))
+                        .red(errorReason->start == errorReason->end ? "~" :
+                             command.substr(errorReason->start,
+                                            errorReason->end - errorReason->start))
+                        .normal(command.substr(errorReason->end))
+                        .build() << std::endl;
             }
         }
         if (suggestions->empty()) {
@@ -235,15 +234,15 @@ void onTextChanged(const std::string &command) {
                     break;
                 }
                 std::cout << CHelper::ColorStringBuilder()
-                                     .normal(std::to_string(++j) + ". ")
-                                     .green(item.content->name + " ")
-                                     .blue(item.content->description.value_or(""))
-                                     .build() << std::endl;
+                        .normal(std::to_string(++j) + ". ")
+                        .green(item.content->name + " ")
+                        .blue(item.content->description.value_or(""))
+                        .build() << std::endl;
                 std::cout << CHelper::ColorStringBuilder()
-                                     .normal(command.substr(0, item.start))
-                                     .green(item.content->name)
-                                     .normal(command.substr(item.end))
-                                     .build() << std::endl;
+                        .normal(command.substr(0, item.start))
+                        .green(item.content->name)
+                        .normal(command.substr(item.end))
+                        .build() << std::endl;
             }
         }
         std::cout << std::endl;

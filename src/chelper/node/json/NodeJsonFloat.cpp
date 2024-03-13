@@ -22,7 +22,7 @@ namespace CHelper::Node {
               min(JsonUtil::fromJsonOptional<float>(j, "min")),
               max(JsonUtil::fromJsonOptional<float>(j, "max")) {}
 
-    NodeType* NodeJsonFloat::getNodeType() const {
+    NodeType *NodeJsonFloat::getNodeType() const {
         return NodeType::JSON_FLOAT.get();
     }
 

@@ -24,7 +24,7 @@ namespace CHelper {
     public:
         Suggestion(size_t start, size_t end, const std::shared_ptr<NormalId> &content);
 
-        Suggestion(const VectorView<Token> &tokens, const std::shared_ptr<NormalId> &content);
+        Suggestion(const VectorView <Token> &tokens, const std::shared_ptr<NormalId> &content);
 
         [[nodiscard]] std::string onClick(const std::string &before) const;
 

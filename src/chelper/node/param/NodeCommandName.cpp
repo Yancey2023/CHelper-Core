@@ -53,7 +53,8 @@ namespace CHelper::Node {
         for (const auto &command: *commands) {
             for (const auto &name: ((NodePerCommand *) command.get())->name) {
                 if (StringUtil::isStartOf(name, str)) {
-                    suggestions1.suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(name, command->description));
+                    suggestions1.suggestions.emplace_back(astNode->tokens,
+                                                          std::make_shared<NormalId>(name, command->description));
                 }
             }
         }

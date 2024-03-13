@@ -11,13 +11,13 @@ namespace CHelper::Node {
 
     class NodeOr : public NodeBase {
     public:
-        const std::vector<const NodeBase*> childNodes;
+        const std::vector<const NodeBase *> childNodes;
         const bool isAttachToEnd, isUseFirst;
         const std::string nodeId;
 
         NodeOr(const std::optional<std::string> &id,
                const std::optional<std::string> &description,
-               std::vector<const NodeBase*> childNodes,
+               std::vector<const NodeBase *> childNodes,
                bool isAttachToEnd,
                bool isUseFirst = false,
                std::string nodeId = std::string());

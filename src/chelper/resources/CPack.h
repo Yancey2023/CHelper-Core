@@ -21,10 +21,10 @@ namespace CHelper {
         std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> blockIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
         std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
         std::vector<std::unique_ptr<Node::NodeBase>> jsonNodes;
-        std::vector<std::pair<Node::NodeBase*, Node::NodeBase*>> repeatNodes;
+        std::vector<std::pair<Node::NodeBase *, Node::NodeBase *>> repeatNodes;
         std::shared_ptr<std::vector<std::unique_ptr<Node::NodeBase>>> commands = std::make_shared<std::vector<std::unique_ptr<Node::NodeBase>>>();
         //从这个节点开始检测
-        Node::NodeBase* mainNode;
+        Node::NodeBase *mainNode;
     private:
         std::vector<std::unique_ptr<Node::NodeBase>> repeatNodeDatas;
 

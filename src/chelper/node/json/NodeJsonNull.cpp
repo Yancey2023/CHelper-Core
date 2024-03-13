@@ -25,11 +25,11 @@ namespace CHelper::Node {
         tokenReader.pop();
         std::string str = TokenUtil::toString(result.tokens);
         if (str.empty()) {
-            VectorView<Token> tokens = result.tokens;
+            VectorView <Token> tokens = result.tokens;
             return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
                     tokens, "null参数为空"));
         } else if (str != "null") {
-            VectorView<Token> tokens = result.tokens;
+            VectorView <Token> tokens = result.tokens;
             return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
                     tokens, "内容不是null -> " + str));
         }

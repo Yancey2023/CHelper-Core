@@ -17,7 +17,7 @@ namespace CHelper {
         const size_t nameHash, mHashCode;
 
     public:
-        NormalId(const std::string& name, const std::optional<std::string> &description);
+        NormalId(const std::string &name, const std::optional<std::string> &description);
 
         explicit NormalId(const nlohmann::json &j);
 

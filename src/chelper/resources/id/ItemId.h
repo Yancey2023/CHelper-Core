@@ -20,7 +20,7 @@ namespace CHelper {
     public:
         const std::optional<int> max;
         const std::optional<std::vector<std::string>> descriptions;
-        const Node::NodeBase* nodeData;
+        const Node::NodeBase *nodeData;
 
         ItemId(const std::optional<std::string> &nameSpace,
                const std::string &name,

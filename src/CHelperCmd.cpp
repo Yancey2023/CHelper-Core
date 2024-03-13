@@ -5,22 +5,20 @@
 #include "CHelperCmd.h"
 #include "chelper/util/StringUtil.h"
 #include "chelper/lexer/Lexer.h"
-#include "chelper/parser/ASTNode.h"
-#include "chelper/util/TokenUtil.h"
 #include "chelper/Core.h"
 
 int main() {
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)",
-//                        R"(D:\CLion\project\CHelper\test\test.txt)",
-//                        false);
-    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
-                        R"(/home/yancey/CLionProjects/CHelper/test/test.txt)",
-                        true);
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)",
+    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
+                        R"(D:\CLion\project\CHelper-Core\test\test.txt)",
+                        false);
+//    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
+//                        R"(/home/yancey/CLionProjects/CHelper/test/test.txt)",
+//                        true);
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
 //                        std::vector<std::string>{"give @s "}, false);
 //    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
 //                        std::vector<std::string>{"give @s "}, true);
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper\resources)", {""}, false);
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)", {""}, false);
     return 0;
 }
 
@@ -190,11 +188,11 @@ namespace CHelper::Test {
             }
             end = std::chrono::high_resolution_clock::now();
             std::cout << ColorStringBuilder()
-                                 .green("parse successfully(")
-                                 .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                                         end - start).count()) + "ms")
-                                 .green(")")
-                                 .build() << std::endl;
+                    .green("parse successfully(")
+                    .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
+                            end - start).count()) + "ms")
+                    .green(")")
+                    .build() << std::endl;
         } catch (const std::exception &e) {
             Exception::printStackTrace(e);
             Profile::clear();

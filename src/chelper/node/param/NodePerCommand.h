@@ -15,19 +15,19 @@ namespace CHelper::Node {
     public:
         std::vector<std::string> name;
         std::vector<std::unique_ptr<Node::NodeBase>> nodes;
-        std::vector<Node::NodeBase*> startNodes;
+        std::vector<Node::NodeBase *> startNodes;
 
     public:
         NodePerCommand(const std::optional<std::string> &id,
                        std::vector<std::string> name,
                        const std::optional<std::string> &description,
                        std::vector<std::unique_ptr<Node::NodeBase>> nodes,
-                       std::vector<Node::NodeBase*>& startNodes);
+                       std::vector<Node::NodeBase *> &startNodes);
 
         NodePerCommand(const nlohmann::json &j,
                        const CPack &cpack);
 
-        [[nodiscard]] NodeType* getNodeType() const override;
+        [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 

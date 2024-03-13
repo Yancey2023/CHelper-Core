@@ -12,12 +12,12 @@ namespace CHelper::Node {
     class NodeJsonElement : public NodeBase {
     public:
         std::vector<std::unique_ptr<NodeBase>> nodes;
-        NodeBase* start;
+        NodeBase *start;
 
         NodeJsonElement(const std::optional<std::string> &id,
                         const std::optional<std::string> &description,
                         std::vector<std::unique_ptr<NodeBase>> nodes,
-                        NodeBase* start);
+                        NodeBase *start);
 
         NodeJsonElement(const nlohmann::json &j,
                         [[maybe_unused]] const CPack &cpack);
@@ -26,7 +26,7 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
-        static NodeBase* getNodeJsonElement();
+        static NodeBase *getNodeJsonElement();
 
     };
 

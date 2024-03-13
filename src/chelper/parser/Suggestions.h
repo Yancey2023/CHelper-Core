@@ -33,7 +33,7 @@ namespace CHelper {
 
         static Suggestions singleSuggestion(Suggestion suggestion);
 
-        static std::vector<Suggestion> filter(std::vector<Suggestions>& suggestions);
+        static std::vector<Suggestion> filter(std::vector<Suggestions> &suggestions);
 
     };
 

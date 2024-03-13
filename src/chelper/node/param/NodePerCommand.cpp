@@ -84,7 +84,8 @@ namespace CHelper::Node {
                 if (parentNode == nullptr) {
                     throw Exception::UnknownNodeId(name, parentNodeId);
                 }
-                parentNode->nextNodes.reserve(childNodes.size() - 1);                for_each(childNodes.begin() + 1, childNodes.end(), [&](const auto &childNodeId) {
+                parentNode->nextNodes.reserve(childNodes.size() - 1);
+                for_each(childNodes.begin() + 1, childNodes.end(), [&](const auto &childNodeId) {
                     Profile::next(ColorStringBuilder()
                                           .red("linking child nodes \"")
                                           .purple(childNodeId)

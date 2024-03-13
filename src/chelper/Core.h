@@ -34,7 +34,7 @@ namespace CHelper {
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
 
-        std::vector<Suggestion>* getSuggestions();
+        std::vector<Suggestion> *getSuggestions();
 
         [[nodiscard]] std::string getStructure() const;
 

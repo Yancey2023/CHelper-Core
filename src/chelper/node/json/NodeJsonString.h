@@ -21,7 +21,7 @@ namespace CHelper::Node {
         NodeJsonString(const nlohmann::json &j,
                        const CPack &cpack);
 
-        [[nodiscard]] NodeType* getNodeType() const override;
+        [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 

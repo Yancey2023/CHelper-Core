@@ -74,14 +74,48 @@
     }
   ],
   "ast": [
-    ["destinationTarget","checkForBlocks", "LF"],
-    ["checkForBlocks", "LF"],
-    ["victim","destinationTarget", "destinationPosition"],
-    ["destinationPosition","checkForBlocks","yRot","facing", "LF"],
-    ["yRot","xRot"],
-    ["xRot","checkForBlocks", "LF"],
-    ["facing","lookAtPosition", "lookAtEntity"],
-    ["lookAtPosition","checkForBlocks"],
-    ["lookAtEntity","checkForBlocks"]
+    [
+      "destinationTarget",
+      "checkForBlocks",
+      "LF"
+    ],
+    [
+      "checkForBlocks",
+      "LF"
+    ],
+    [
+      "victim",
+      "destinationTarget",
+      "destinationPosition"
+    ],
+    [
+      "destinationPosition",
+      "checkForBlocks",
+      "yRot",
+      "facing",
+      "LF"
+    ],
+    [
+      "yRot",
+      "xRot"
+    ],
+    [
+      "xRot",
+      "checkForBlocks",
+      "LF"
+    ],
+    [
+      "facing",
+      "lookAtPosition",
+      "lookAtEntity"
+    ],
+    [
+      "lookAtPosition",
+      "checkForBlocks"
+    ],
+    [
+      "lookAtEntity",
+      "checkForBlocks"
+    ]
   ]
 }

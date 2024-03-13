@@ -10,11 +10,11 @@ namespace CHelper::Node {
                    const std::optional<std::string> &description)
             : NodeBase(id, description, false) {}
 
-    NodeType* NodeLF::getNodeType() const {
+    NodeType *NodeLF::getNodeType() const {
         return NodeType::LF.get();
     }
 
-    NodeLF* NodeLF::getInstance() {
+    NodeLF *NodeLF::getInstance() {
         static std::unique_ptr<NodeLF> INSTANCE = std::make_unique<NodeLF>("LF", "命令终止");
         return INSTANCE.get();
     }

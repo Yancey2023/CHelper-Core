@@ -14,7 +14,7 @@ namespace CHelper::Node {
     class NodeJson : public NodeBase {
     public:
         const std::string key;
-        const NodeBase* nodeJson;
+        const NodeBase *nodeJson;
 
         NodeJson(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
@@ -29,7 +29,7 @@ namespace CHelper::Node {
         NodeJson(const nlohmann::json &j,
                  const CPack &cpack);
 
-        [[nodiscard]] NodeType* getNodeType() const override;
+        [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 

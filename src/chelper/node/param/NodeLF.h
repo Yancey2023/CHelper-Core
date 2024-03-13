@@ -13,9 +13,9 @@ namespace CHelper::Node {
     public:
         NodeLF(const std::optional<std::string> &id, const std::optional<std::string> &description);
 
-        [[nodiscard]] NodeType* getNodeType() const override;
+        [[nodiscard]] NodeType *getNodeType() const override;
 
-        static NodeLF* getInstance();
+        static NodeLF *getInstance();
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
