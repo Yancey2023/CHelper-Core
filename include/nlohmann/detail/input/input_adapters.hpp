@@ -18,8 +18,6 @@
 #include <type_traits> // enable_if, is_base_of, is_pointer, is_integral, remove_pointer
 #include <utility> // pair, declval
 
-#pragma once
-
 #ifndef JSON_NO_IO
     #include <cstdio>   // FILE *
     #include <istream>  // istream
@@ -39,8 +37,6 @@ enum class input_format_t { json, cbor, msgpack, ubjson, bson, bjdata };
 ////////////////////
 // input adapters //
 ////////////////////
-
-#pragma once
 
 #ifndef JSON_NO_IO
 /*!
@@ -419,8 +415,6 @@ typename container_input_adapter_factory_impl::container_input_adapter_factory<C
 {
     return container_input_adapter_factory_impl::container_input_adapter_factory<ContainerType>::create(container);
 }
-
-#pragma once
 
 #ifndef JSON_NO_IO
 // Special cases with fast paths

@@ -105,19 +105,13 @@
     #endif
 #endif
 
-#pragma once
-
 #ifndef JSON_HAS_EXPERIMENTAL_FILESYSTEM
     #define JSON_HAS_EXPERIMENTAL_FILESYSTEM 0
 #endif
 
-#pragma once
-
 #ifndef JSON_HAS_FILESYSTEM
     #define JSON_HAS_FILESYSTEM 0
 #endif
-
-#pragma once
 
 #ifndef JSON_HAS_THREE_WAY_COMPARISON
     #if defined(__cpp_impl_three_way_comparison) && __cpp_impl_three_way_comparison >= 201907L \
@@ -127,8 +121,6 @@
         #define JSON_HAS_THREE_WAY_COMPARISON 0
     #endif
 #endif
-
-#pragma once
 
 #ifndef JSON_HAS_RANGES
     // ranges header shipping in GCC 11.1.0 (released 2021-04-27) has syntax error
@@ -140,8 +132,6 @@
         #define JSON_HAS_RANGES 0
     #endif
 #endif
-
-#pragma once
 
 #ifndef JSON_HAS_STATIC_RTTI
     #if !defined(_HAS_STATIC_RTTI) || _HAS_STATIC_RTTI != 0
@@ -473,8 +463,6 @@
     {                                                                             \
     }
 
-#pragma once
-
 #ifndef JSON_USE_IMPLICIT_CONVERSIONS
     #define JSON_USE_IMPLICIT_CONVERSIONS 1
 #endif
@@ -485,13 +473,9 @@
     #define JSON_EXPLICIT explicit
 #endif
 
-#pragma once
-
 #ifndef JSON_DISABLE_ENUM_SERIALIZATION
     #define JSON_DISABLE_ENUM_SERIALIZATION 0
 #endif
-
-#pragma once
 
 #ifndef JSON_USE_GLOBAL_UDLS
     #define JSON_USE_GLOBAL_UDLS 1

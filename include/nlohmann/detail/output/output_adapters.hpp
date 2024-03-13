@@ -15,8 +15,6 @@
 #include <string> // basic_string
 #include <vector> // vector
 
-#pragma once
-
 #ifndef JSON_NO_IO
     #include <ios>      // streamsize
     #include <ostream>  // basic_ostream
@@ -69,8 +67,6 @@ class output_vector_adapter : public output_adapter_protocol<CharType>
   private:
     std::vector<CharType, AllocatorType>& v;
 };
-
-#pragma once
 
 #ifndef JSON_NO_IO
 /// output adapter for output streams
@@ -129,8 +125,6 @@ class output_adapter
     template<typename AllocatorType = std::allocator<CharType>>
     output_adapter(std::vector<CharType, AllocatorType>& vec)
         : oa(std::make_shared<output_vector_adapter<CharType, AllocatorType>>(vec)) {}
-
-#pragma once
 
 #ifndef JSON_NO_IO
     output_adapter(std::basic_ostream<CharType>& s)

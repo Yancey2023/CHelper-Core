@@ -481,8 +481,6 @@ struct from_json_fn
 
 }  // namespace detail
 
-#pragma once
-
 #ifndef JSON_HAS_CPP_17
 /// namespace to hold default `from_json` function
 /// to see why this is required:
@@ -492,8 +490,6 @@ namespace // NOLINT(cert-dcl59-cpp,fuchsia-header-anon-namespaces,google-build-n
 #endif
 JSON_INLINE_VARIABLE constexpr const auto& from_json = // NOLINT(misc-definitions-in-headers)
     detail::static_const<detail::from_json_fn>::value;
-#pragma once
-
 #ifndef JSON_HAS_CPP_17
 }  // namespace
 #endif

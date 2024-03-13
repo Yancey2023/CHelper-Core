@@ -156,8 +156,6 @@ struct static_const
     static JSON_INLINE_VARIABLE constexpr T value{};
 };
 
-#pragma once
-
 #ifndef JSON_HAS_CPP_17
     template<typename T>
     constexpr T static_const<T>::value;
