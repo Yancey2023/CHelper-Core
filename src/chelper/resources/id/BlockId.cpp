@@ -83,7 +83,7 @@ namespace CHelper {
               node(getNodeValue(type, value, description)) {}
 
     BlockStateValue::BlockStateValue(const nlohmann::json &j)
-            : description(FROM_JSON_OPTIONAL(j, description, std::string)) {
+            : description(JsonUtil::fromJsonOptional<std::string>(j, "description")) {
         const nlohmann::json &jsonValue = j.at("value");
         if (jsonValue.is_number_integer()) {
             type = CHelper::BlockStateType::INTEGER;
@@ -132,7 +132,7 @@ namespace CHelper {
                 j["value"] = std::get<int>(value);
                 break;
         }
-        TO_JSON_OPTIONAL(j, description)
+        JsonUtil::toJsonOptional(j, "description", description);
     }
 
     static Node::NodeBase *
@@ -151,7 +151,7 @@ namespace CHelper {
                                    std::make_shared<NormalId>(key, description)),
                 nodeBlockStateEntrySeparator.get(),
                 new Node::NodeOr("BLOCK_STATE_ENTRY_VALUE", "方块状态键值对的值",
-                                 valueNodes, false));
+                                 std::move(valueNodes), false));
     }
 
     BlockState::BlockState(std::string key,
@@ -165,10 +165,10 @@ namespace CHelper {
               node(getNodePerBlockState(key, description, values)) {}
 
     BlockState::BlockState(const nlohmann::json &j)
-            : key(FROM_JSON(j, key, std::string)),
-              description(FROM_JSON_OPTIONAL(j, description, std::string)),
-              values(FROM_JSON(j, values, std::vector<CHelper::BlockStateValue>)),
-              defaultValue(FROM_JSON(j, defaultValue, int)),
+            : key(JsonUtil::fromJson<std::string>(j, "key")),
+              description(JsonUtil::fromJsonOptional<std::string>(j, "description")),
+              values(JsonUtil::fromJson<std::vector<CHelper::BlockStateValue>>(j, "values")),
+              defaultValue(JsonUtil::fromJson<int>(j, "defaultValue")),
               node(getNodePerBlockState(key, description, values)) {}
 
     BlockState::BlockState(const BlockState &blockState)
@@ -200,30 +200,35 @@ namespace CHelper {
     }
 
     void BlockState::toJson(nlohmann::json &j) const {
-        TO_JSON(j, key);
-        TO_JSON_OPTIONAL(j, description)
-        TO_JSON(j, values);
-        TO_JSON(j, defaultValue);
+        JsonUtil::toJson(j, "key", key);
+        JsonUtil::toJsonOptional(j, "description", description);
+        JsonUtil::toJson(j, "values", values);
+        JsonUtil::toJson(j, "defaultValue", defaultValue);
     }
 
     static Node::NodeBase *
     getNodeBlockState(const std::optional<std::vector<BlockState>> &blockStates) {
-        std::vector<const Node::NodeBase *> blockStateEntryChildNode;
+        std::vector<const Node::NodeBase *> blockStateEntryChildNode2;
         //已知的方块状态
         if (blockStates.has_value()) {
+            blockStateEntryChildNode2.reserve(2);
+            std::vector<const Node::NodeBase *> blockStateEntryChildNode1;
             for (const auto &item: blockStates.value()) {
-                blockStateEntryChildNode.push_back(item.node);
+                blockStateEntryChildNode1.push_back(item.node);
             }
+            blockStateEntryChildNode2.push_back(new Node::NodeOr(
+                    "BLOCK_STATE_ENTRY", "方块状态键值对",
+                    std::move(blockStateEntryChildNode1), false));
         }
         //其他未知的方块状态
-        blockStateEntryChildNode.push_back(nodeBlockStateAllEntry.get());
+        blockStateEntryChildNode2.push_back(nodeBlockStateAllEntry.get());
         //把所有方块状态拼在一起
         return new Node::NodeList(
                 "BLOCK_STATE", "方块状态",
                 nodeBlockStateLeftBracket.get(),
                 new Node::NodeOr(
                         "BLOCK_STATE_ENTRY", "方块状态键值对",
-                        blockStateEntryChildNode, false),
+                        std::move(blockStateEntryChildNode2), false, true),
                 nodeBlockStateSeparator.get(),
                 nodeBlockStateRightBracket.get());
     }
@@ -240,7 +245,7 @@ namespace CHelper {
 
     BlockId::BlockId(const nlohmann::json &j)
             : ItemId(j),
-              blockStates(FROM_JSON_OPTIONAL(j, blockStates, std::vector<CHelper::BlockState>)),
+              blockStates(JsonUtil::fromJsonOptional<std::vector<CHelper::BlockState>>(j, "blockStates")),
               nodeBlockState(getNodeBlockState(blockStates)) {}
 
     BlockId::BlockId(const BlockId &blockId)
@@ -249,17 +254,20 @@ namespace CHelper {
               nodeBlockState(getNodeBlockState(blockStates)) {}
 
     BlockId::~BlockId() {
+        if (blockStates.has_value()) {
+            delete ((Node::NodeOr *) ((Node::NodeList *) nodeBlockState)->nodeElement)->childNodes[0];
+        }
         delete ((Node::NodeList *) nodeBlockState)->nodeElement;
         delete nodeBlockState;
     }
 
     void BlockId::toJson(nlohmann::json &j) const {
-        TO_JSON_OPTIONAL(j, nameSpace)
-        TO_JSON(j, name);
-        TO_JSON_OPTIONAL(j, description)
-        TO_JSON_OPTIONAL(j, blockStates)
-        TO_JSON_OPTIONAL(j, max)
-        TO_JSON_OPTIONAL(j, descriptions)
+        JsonUtil::toJsonOptional(j, "nameSpace", nameSpace);
+        JsonUtil::toJson(j, "name", name);
+        JsonUtil::toJsonOptional(j, "description", description);
+        JsonUtil::toJsonOptional(j, "blockStates", blockStates);
+        JsonUtil::toJsonOptional(j, "max", max);
+        JsonUtil::toJsonOptional(j, "descriptions", descriptions);
     }
 
     Node::NodeBase *BlockId::getNodeAllBlockState() {

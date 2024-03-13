@@ -23,7 +23,7 @@ namespace CHelper::Node {
                   return tokenReader.readStringASTNode(node);
               }) {}
 
-    NodeType* NodeText::getNodeType() const {
+    NodeType *NodeText::getNodeType() const {
         return NodeType::TEXT.get();
     }
 
@@ -40,12 +40,13 @@ namespace CHelper::Node {
         DEBUG_GET_NODE_END(this)
         std::string str = TokenUtil::toString(result.tokens);
         if (str != data->name) {
+            VectorView <Token> tokens = result.tokens;
             if (str.empty()) {
-                return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::contentError(
-                        result.tokens, "指令不完整"));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
+                        tokens, "指令不完整"));
             } else {
-                return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::contentError(
-                        result.tokens, "找不到含义 -> " + str));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
+                        tokens, "找不到含义 -> " + std::move(str)));
             }
         }
         return result;
@@ -53,20 +54,20 @@ namespace CHelper::Node {
 
     bool NodeText::collectSuggestions(const ASTNode *astNode,
                                       size_t index,
-                                      std::vector<Suggestion> &suggestions) const {
+                                      std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         //通过名字进行搜索
         size_t index1 = data->name.find(str);
         if (index1 != std::string::npos) {
-            suggestions.emplace_back(astNode->tokens, data);
+            suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, data}));
             return true;
         }
         //通过介绍进行搜索
         if (data->description.has_value()) {
             size_t index2 = data->description.value().find(str);
             if (index2 != std::string::npos) {
-                suggestions.emplace_back(astNode->tokens, data);
+                suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, data}));
             }
         }
         return true;

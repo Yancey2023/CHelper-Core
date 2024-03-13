@@ -24,8 +24,8 @@ namespace CHelper::Node {
                            [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true),
               allowMissingString(false),
-              canContainSpace(FROM_JSON(j, canContainSpace, bool)),
-              ignoreLater(FROM_JSON(j, ignoreLater, bool)) {}
+              canContainSpace(JsonUtil::fromJson<bool>(j, "canContainSpace")),
+              ignoreLater(JsonUtil::fromJson<bool>(j, "ignoreLater")) {}
 
     NodeType *NodeString::getNodeType() const {
         return NodeType::STRING.get();
@@ -33,8 +33,8 @@ namespace CHelper::Node {
 
     void NodeString::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        TO_JSON(j, canContainSpace);
-        TO_JSON(j, ignoreLater);
+        JsonUtil::toJson(j, "canContainSpace", canContainSpace);
+        JsonUtil::toJson(j, "ignoreLater", ignoreLater);
     }
 
     ASTNode NodeString::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -72,21 +72,21 @@ namespace CHelper::Node {
         if (convertResult.errorReason != nullptr) {
             convertResult.errorReason->start += offset;
             convertResult.errorReason->end += offset;
-            return ASTNode::andNode(this, {result}, result.tokens, convertResult.errorReason);
+            return ASTNode::simpleNode(this, result.tokens, convertResult.errorReason);
         }
         return result;
     }
 
     bool NodeString::collectSuggestions(const ASTNode *astNode,
                                         size_t index,
-                                        std::vector<Suggestion> &suggestions) const {
+                                        std::vector<Suggestions> &suggestions) const {
         if (ignoreLater || !canContainSpace) {
             return true;
         }
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         if (str.empty()) {
-            suggestions.emplace_back(index, index, doubleQuoteMask);
+            suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
             return true;
         }
         if (str[0] != '"') {
@@ -94,7 +94,7 @@ namespace CHelper::Node {
         }
         auto convertResult = JsonUtil::jsonString2String(str);
         if (!convertResult.isComplete) {
-            suggestions.emplace_back(index, index, doubleQuoteMask);
+            suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
         }
         return true;
     }

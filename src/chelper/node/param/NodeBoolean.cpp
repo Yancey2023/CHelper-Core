@@ -3,6 +3,7 @@
 //
 
 #include "NodeBoolean.h"
+#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -17,21 +18,27 @@ namespace CHelper::Node {
     NodeBoolean::NodeBoolean(const nlohmann::json &j,
                              [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true),
-              descriptionTrue(FROM_JSON_OPTIONAL(j, descriptionTrue, std::string)),
-              descriptionFalse(FROM_JSON_OPTIONAL(j, descriptionFalse, std::string)) {}
+              descriptionTrue(JsonUtil::fromJsonOptional<std::string>(j, "descriptionTrue")),
+              descriptionFalse(JsonUtil::fromJsonOptional<std::string>(j, "descriptionFalse")) {}
 
-    NodeType* NodeBoolean::getNodeType() const {
+    NodeType *NodeBoolean::getNodeType() const {
         return NodeType::BOOLEAN.get();
     }
 
     void NodeBoolean::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        TO_JSON_OPTIONAL(j, descriptionTrue)
-        TO_JSON_OPTIONAL(j, descriptionFalse)
+        JsonUtil::toJsonOptional(j, "descriptionTrue", descriptionTrue);
+        JsonUtil::toJsonOptional(j, "descriptionFalse", descriptionFalse);
     }
 
     ASTNode NodeBoolean::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        return tokenReader.readStringASTNode(this);
+        ASTNode astNode = tokenReader.readStringASTNode(this);
+        std::string str = TokenUtil::toString(astNode.tokens);
+        if (str == "true" || str == "false") {
+            return astNode;
+        }
+        VectorView <Token> tokens = astNode.tokens;
+        return ASTNode::andNode(this, {std::move(astNode)}, tokens);
     }
 
     void NodeBoolean::collectStructure(const ASTNode *astNode,

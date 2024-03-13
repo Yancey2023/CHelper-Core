@@ -19,17 +19,17 @@ namespace CHelper::Node {
     NodeFloat::NodeFloat(const nlohmann::json &j,
                          [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true),
-              min(FROM_JSON_OPTIONAL(j, min, float)),
-              max(FROM_JSON_OPTIONAL(j, max, float)) {}
+              min(JsonUtil::fromJsonOptional<float>(j, "min")),
+              max(JsonUtil::fromJsonOptional<float>(j, "max")) {}
 
-    NodeType* NodeFloat::getNodeType() const {
+    NodeType *NodeFloat::getNodeType() const {
         return NodeType::FLOAT.get();
     }
 
     void NodeFloat::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        TO_JSON_OPTIONAL(j, min)
-        TO_JSON_OPTIONAL(j, max)
+        JsonUtil::toJsonOptional(j, "min", min);
+        JsonUtil::toJsonOptional(j, "max", max);
     }
 
     ASTNode NodeFloat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

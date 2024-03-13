@@ -47,7 +47,8 @@ namespace CHelper::Node {
                               StructureBuilder &structure,
                               bool isMustHave) const override;
 
-        NodeNamespaceId getNodeItemId(const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
+        static NodeNamespaceId
+        getNodeItemId(const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
 
     };
 

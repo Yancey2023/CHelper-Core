@@ -11,6 +11,8 @@
 
 namespace CHelper::Node {
 
+    static std::shared_ptr<NormalId> rangeSymbol = std::make_shared<NormalId>("..", "范围");
+
     NodeRange::NodeRange(const std::optional<std::string> &id,
                          const std::optional<std::string> &description)
             : NodeBase(id, description, false) {}
@@ -19,7 +21,7 @@ namespace CHelper::Node {
                          [[maybe_unused]] const CPack &cpack) :
             NodeBase(j, true) {}
 
-    NodeType* NodeRange::getNodeType() const {
+    NodeType *NodeRange::getNodeType() const {
         return NodeType::RANGE.get();
     }
 
@@ -55,28 +57,27 @@ namespace CHelper::Node {
 
     bool NodeRange::collectSuggestions(const ASTNode *astNode,
                                        size_t index,
-                                       std::vector<Suggestion> &suggestions) const {
+                                       std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens);
         size_t index0 = str.find("..");
         if (index0 != std::string::npos) {
+            index0 += TokenUtil::getStartIndex(astNode->tokens);
             if (index != index0 && index != index0 + 1 && index != index0 + 2) {
                 return true;
             }
-            suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(str, "范围"));
+            suggestions.push_back(Suggestions::singleSuggestion({index0, index0 + 2, rangeSymbol}));
             return true;
         }
         size_t index1 = str.find('.');
         if (index1 != std::string::npos) {
+            index1 += TokenUtil::getStartIndex(astNode->tokens);
             if (index != index1 && index != index1 + 1) {
                 return true;
             }
-            std::string text = str.substr(0, index1).append(".").append(str.substr(index1));
-            suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(text, "范围"));
+            suggestions.push_back(Suggestions::singleSuggestion({index0, index0 + 1, rangeSymbol}));
             return true;
         }
-        size_t index2 = index - TokenUtil::getStartIndex(astNode->tokens);
-        std::string text = str.substr(0, index2).append("..").append(str.substr(index2));
-        suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(text, "范围"));
+        suggestions.push_back(Suggestions::singleSuggestion({index, index, rangeSymbol}));
         return true;
     }
 

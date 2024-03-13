@@ -31,7 +31,7 @@ namespace CHelper::Node {
         }
         //判断有没有错误
         VectorView <Token> tokens = tokenReader.collect();
-        ASTNode result = ASTNode::andNode(this, threeChildNodes, tokens, nullptr, "position");
+        ASTNode result = ASTNode::andNode(this, std::move(threeChildNodes), tokens, nullptr, "position");
         if (!result.isError()) {
             int type = 0;
             for (int i: types) {
@@ -47,7 +47,7 @@ namespace CHelper::Node {
                 } else if (type == 0) {
                     type = i;
                 } else {
-                    return ASTNode::andNode(this, threeChildNodes, tokens,
+                    return ASTNode::andNode(this, {std::move(result)}, tokens,
                                             ErrorReason::logicError(tokens, "绝对坐标和相对坐标不能于局部坐标混用"),
                                             "position");
                 }

@@ -20,24 +20,34 @@ namespace CHelper::Node {
               nodeRight(nodeRight),
               nodeElementOrRight(
                       "ELEMENT_OR_RIGHT", "element or right",
-                              std::vector<const NodeBase*>{
-                                      nodeElement, nodeRight
-                              }, false),
+                      std::vector<const NodeBase *>{
+                              nodeElement, nodeRight
+                      }, false),
               nodeSeparatorOrRight(
                       "SEPARATOR_OR_RIGHT", "separator or right",
-                              std::vector<const NodeBase*>{
-                                      nodeSeparator, nodeRight
-                              }, false) {}
+                      std::vector<const NodeBase *>{
+                              nodeSeparator, nodeRight
+                      }, false) {
+#if CHelperDebug == true
+        if (nodeLeft == nullptr || nodeElement == nullptr || nodeSeparator == nullptr || nodeRight == nullptr) {
+            Profile::push("NodeOr has a null child node");
+            throw Exception::NodeLoadFailed();
+        }
+#endif
+    }
 
     ASTNode NodeList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         //标记整个[...]，在最后进行收集
         tokenReader.push();
-        auto left = nodeLeft->getASTNodeWithNextNode(tokenReader, cpack);
-        std::vector<ASTNode> childNodes = {left};
+        ASTNode left = nodeLeft->getASTNodeWithNextNode(tokenReader, cpack);
         if (left.isError()) {
-            return ASTNode::andNode(this, childNodes, tokenReader.collect());
+            return ASTNode::andNode(this, {std::move(left)}, tokenReader.collect());
         }
+        std::vector<ASTNode> childNodes = {std::move(left)};
         {
+#if CHelperDebug == true
+            size_t startIndex = tokenReader.index;
+#endif
             //检测[]中间有没有内容
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(nodeRight)
@@ -45,12 +55,22 @@ namespace CHelper::Node {
             DEBUG_GET_NODE_END(nodeRight)
             tokenReader.restore();
             auto elementOrRight = nodeElementOrRight.getASTNodeWithNextNode(tokenReader, cpack);
-            childNodes.push_back(elementOrRight);
-            if (!rightBracket1.isError() || elementOrRight.isError()) {
-                return ASTNode::andNode(this, childNodes, tokenReader.collect());
+            bool flag = !rightBracket1.isError() || elementOrRight.isError();
+            childNodes.push_back(std::move(elementOrRight));
+            if (flag) {
+                return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
+#if CHelperDebug == true
+            if (startIndex == tokenReader.index) {
+                CHELPER_WARN("NodeList has some error");
+                return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
+            }
+#endif
         }
         while (true) {
+#if CHelperDebug == true
+            size_t startIndex = tokenReader.index;
+#endif
             //检测是分隔符还是右括号
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(nodeRight)
@@ -58,20 +78,28 @@ namespace CHelper::Node {
             DEBUG_GET_NODE_END(nodeRight)
             tokenReader.restore();
             DEBUG_GET_NODE_BEGIN(nodeSeparator)
-            auto separatorOrRight = nodeSeparatorOrRight.getASTNodeWithNextNode(tokenReader, cpack);
+            ASTNode separatorOrRight = nodeSeparatorOrRight.getASTNodeWithNextNode(tokenReader, cpack);
             DEBUG_GET_NODE_END(nodeSeparator)
-            childNodes.push_back(separatorOrRight);
-            if (!rightBracket.isError() || separatorOrRight.isError()) {
-                return ASTNode::andNode(this, childNodes, tokenReader.collect());
+            bool flag = !rightBracket.isError() || separatorOrRight.isError();
+            childNodes.push_back(std::move(separatorOrRight));
+            if (flag) {
+                return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
             //检测是不是元素
             DEBUG_GET_NODE_BEGIN(nodeElement)
-            auto element = nodeElement->getASTNodeWithNextNode(tokenReader, cpack);
+            ASTNode element = nodeElement->getASTNodeWithNextNode(tokenReader, cpack);
             DEBUG_GET_NODE_END(nodeElement)
-            childNodes.push_back(element);
-            if (element.isError()) {
-                return ASTNode::andNode(this, childNodes, tokenReader.collect());
+            flag = element.isError();
+            childNodes.push_back(std::move(element));
+            if (flag) {
+                return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
+#if CHelperDebug == true
+            if (startIndex == tokenReader.index) {
+                CHELPER_WARN("NodeList has some error");
+                return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
+            }
+#endif
         }
     }
 

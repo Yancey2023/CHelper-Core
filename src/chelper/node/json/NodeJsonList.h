@@ -16,7 +16,7 @@ namespace CHelper::Node {
 
         NodeJsonList(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
-                     std::string data);
+                     std::string data = std::string());
 
         NodeJsonList(const nlohmann::json &j,
                      [[maybe_unused]] const CPack &cpack);
@@ -25,11 +25,13 @@ namespace CHelper::Node {
 
         [[nodiscard]] NodeType* getNodeType() const override;
 
+        void toJson(nlohmann::json &j) const override;
+
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
-                                std::vector<Suggestion> &suggestions) const override;
+                                std::vector<Suggestions> &suggestions) const override;
 
     };
 

@@ -22,7 +22,7 @@ namespace CHelper::Parser {
         return parse(TokenReader(tokens), cpack);
     }
 
-    inline ASTNode parse(StringReader &&stringReader, const CPack *cpack) {
+    inline ASTNode parse(StringReader stringReader, const CPack *cpack) {
         return parse(std::make_shared<std::vector<Token>>(Lexer::lex(stringReader)), cpack);
     }
 

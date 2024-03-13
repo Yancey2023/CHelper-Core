@@ -19,8 +19,8 @@ namespace CHelper::Node {
 
         NodeJsonEntry(const std::optional<std::string> &id,
                       const std::optional<std::string> &description,
-                      std::string key,
-                      std::string value);
+                      std::string key = std::string(),
+                      std::string value = std::string());
 
         explicit NodeJsonEntry(const nlohmann::json &j);
 
@@ -30,7 +30,9 @@ namespace CHelper::Node {
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
-                                std::vector<Suggestion> &suggestions) const override;
+                                std::vector<Suggestions> &suggestions) const override;
+
+        static NodeBase *getNodeJsonAllEntry();
 
     };
 

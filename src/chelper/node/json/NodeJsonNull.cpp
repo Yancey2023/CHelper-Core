@@ -15,7 +15,7 @@ namespace CHelper::Node {
                                [[maybe_unused]]const CPack &cpack)
             : NodeBase(j, false) {}
 
-    NodeType* NodeJsonNull::getNodeType() const {
+    NodeType *NodeJsonNull::getNodeType() const {
         return NodeType::JSON_NULL.get();
     }
 
@@ -25,22 +25,25 @@ namespace CHelper::Node {
         tokenReader.pop();
         std::string str = TokenUtil::toString(result.tokens);
         if (str.empty()) {
-            return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::contentError(
-                    result.tokens, "null参数为空"));
+            VectorView<Token> tokens = result.tokens;
+            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
+                    tokens, "null参数为空"));
         } else if (str != "null") {
-            return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::contentError(
-                    result.tokens, "内容不是null -> " + str));
+            VectorView<Token> tokens = result.tokens;
+            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
+                    tokens, "内容不是null -> " + str));
         }
         return result;
     }
 
     bool NodeJsonNull::collectSuggestions(const ASTNode *astNode,
                                           size_t index,
-                                          std::vector<Suggestion> &suggestions) const {
+                                          std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         if (StringUtil::isStartOf("null", str)) {
-            suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>("null", "null参数"));
+            suggestions.push_back(Suggestions::singleSuggestion(
+                    {astNode->tokens, std::make_shared<NormalId>("null", "null参数")}));
         }
         return true;
     }

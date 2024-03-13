@@ -45,7 +45,7 @@ namespace CHelper::Node {
     NodeJson::NodeJson(const nlohmann::json &j,
                        [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true),
-              key(FROM_JSON(j, key, std::string)),
+              key(JsonUtil::fromJson<std::string>(j, "key")),
               nodeJson(getNodeJsonFromCPack(cpack, key)) {}
 
     NodeType *NodeJson::getNodeType() const {
@@ -54,7 +54,7 @@ namespace CHelper::Node {
 
     void NodeJson::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        TO_JSON(j, key);
+        JsonUtil::toJson(j, "key", key);
     }
 
     ASTNode NodeJson::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

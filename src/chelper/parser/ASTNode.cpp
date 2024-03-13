@@ -6,19 +6,20 @@
 #include "../node/NodeBase.h"
 #include "../node/param/NodeLF.h"
 #include "../util/TokenUtil.h"
+#include "Suggestions.h"
 
 namespace CHelper {
 
     ASTNode::ASTNode(ASTNodeMode::ASTNodeMode mode,
                      const Node::NodeBase *node,
-                     const std::vector<ASTNode> &childNodes,
+                     std::vector<ASTNode> &&childNodes,
                      const VectorView <Token> &tokens,
                      const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
                      std::string id,
                      size_t whichBest)
             : mode(mode),
               node(node),
-              childNodes(childNodes),
+              childNodes(std::move(childNodes)),
               tokens(tokens),
               errorReasons(errorReasons),
               id(std::move(id)),
@@ -194,23 +195,23 @@ namespace CHelper {
     }
 
     ASTNode ASTNode::andNode(const Node::NodeBase *node,
-                             const std::vector<ASTNode> &childNodes,
+                             std::vector<ASTNode> &&childNodes,
                              const VectorView <Token> &tokens,
                              const std::shared_ptr<ErrorReason> &errorReason,
                              const std::string &id) {
         if (errorReason != nullptr) {
-            return {ASTNodeMode::AND, node, childNodes, tokens, {errorReason}, id};
+            return {ASTNodeMode::AND, node, std::move(childNodes), tokens, {errorReason}, id};
         }
         for (const auto &item: childNodes) {
             if (item.isError()) {
-                return {ASTNodeMode::AND, node, childNodes, tokens, item.errorReasons, id};
+                return {ASTNodeMode::AND, node, std::move(childNodes), tokens, item.errorReasons, id};
             }
         }
-        return {ASTNodeMode::AND, node, childNodes, tokens, {}, id};
+        return {ASTNodeMode::AND, node, std::move(childNodes), tokens, {}, id};
     }
 
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
-                            const std::vector<ASTNode> &childNodes,
+                            std::vector<ASTNode> &&childNodes,
                             const VectorView <Token> *tokens,
                             const std::shared_ptr<ErrorReason> &errorReason,
                             const std::string &id) {
@@ -228,20 +229,25 @@ namespace CHelper {
                 if (start > item2->start) {
                     continue;
                 }
-                bool isAdd = true;
-                if (start < item2->start) {
+                bool isBetter = start < item2->start;
+                if (isBetter) {
                     start = item2->start;
                     whichBest = i;
-                    errorReasons.clear();
-                } else {
-                    for (const auto &item3: errorReasons) {
-                        if (*item2 == *item3) {
-                            isAdd = false;
+                }
+                if (errorReason == nullptr) {
+                    bool isAdd = true;
+                    if (isBetter) {
+                        errorReasons.clear();
+                    } else {
+                        for (const auto &item3: errorReasons) {
+                            if (*item2 == *item3) {
+                                isAdd = false;
+                            }
                         }
                     }
-                }
-                if (isAdd) {
-                    errorReasons.push_back(item2);
+                    if (isAdd) {
+                        errorReasons.push_back(item2);
+                    }
                 }
             }
         }
@@ -262,25 +268,17 @@ namespace CHelper {
         if (errorReason != nullptr) {
             errorReasons = {errorReason};
         }
-        return {ASTNodeMode::OR, node, childNodes,
-                tokens == nullptr ? childNodes[whichBest].tokens : *tokens,
-                errorReasons, id, whichBest};
+        VectorView <Token> tokens1 = tokens == nullptr ? childNodes[whichBest].tokens : *tokens;
+        return {ASTNodeMode::OR, node, std::move(childNodes), tokens1, errorReasons, id, whichBest};
+
     }
 
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
-                            const std::vector<ASTNode> &childNodes,
+                            std::vector<ASTNode> &&childNodes,
                             const VectorView <Token> &tokens,
                             const std::shared_ptr<ErrorReason> &errorReason,
                             const std::string &id) {
-        return orNode(node, childNodes, &tokens, errorReason, id);
-    }
-
-    bool ASTNode::isError() const {
-        return !errorReasons.empty();
-    }
-
-    bool ASTNode::hasChildNode() const {
-        return !childNodes.empty();
+        return orNode(node, std::move(childNodes), &tokens, errorReason, id);
     }
 
     bool ASTNode::isAllWhitespaceError() const {
@@ -297,7 +295,7 @@ namespace CHelper {
         if (id != "compound" && id != "nextNode" && !isAllWhitespaceError()) {
             auto description = node->collectDescription(this, index);
             if (description.has_value()) {
-                return description;
+                return std::move(description);
             }
         }
         switch (mode) {
@@ -307,7 +305,7 @@ namespace CHelper {
                 for (const ASTNode &astNode: childNodes) {
                     auto description = astNode.collectDescription(index);
                     if (description.has_value()) {
-                        return description;
+                        return std::move(description);
                     }
                 }
                 return std::nullopt;
@@ -348,7 +346,7 @@ namespace CHelper {
         }
     }
 
-    void ASTNode::collectSuggestions(size_t index, std::vector<Suggestion> &suggestions) const {
+    void ASTNode::collectSuggestions(size_t index, std::vector<Suggestions> &suggestions) const {
         if (index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens)) {
             return;
         }
@@ -426,7 +424,7 @@ namespace CHelper {
         Profile::push("start getting description: " + TokenUtil::toString(tokens));
         auto result = collectDescription(index).value_or("未知");
         Profile::pop();
-        return result;
+        return std::move(result);
     }
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getIdErrors() const {
@@ -441,7 +439,7 @@ namespace CHelper {
                 }
             }
         }
-        return output;
+        return std::move(output);
     }
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
@@ -456,27 +454,15 @@ namespace CHelper {
                 }
             }
         }
-        return output;
+        return std::move(output);
     }
 
     std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
         Profile::push("start getting suggestions: " + TokenUtil::toString(tokens));
-        std::vector<Suggestion> input, output;
-        collectSuggestions(index, input);
+        std::vector<Suggestions> suggestions;
+        collectSuggestions(index, suggestions);
         Profile::pop();
-        for (const auto &item: input) {
-            bool flag = true;
-            for (const auto &item2: output) {
-                if (item2.equal(item)) {
-                    flag = false;
-                    break;
-                }
-            }
-            if (flag) {
-                output.push_back(item);
-            }
-        }
-        return output;
+        return Suggestions::filter(suggestions);
     }
 
     std::string ASTNode::getStructure() const {
@@ -488,7 +474,7 @@ namespace CHelper {
         if (!result.empty() && result[result.size() - 1] == '\n') {
             result.pop_back();
         }
-        return result;
+        return std::move(result);
     }
 
     std::string ASTNode::getColors() const {

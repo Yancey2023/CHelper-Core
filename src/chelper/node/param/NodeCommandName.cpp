@@ -46,16 +46,19 @@ namespace CHelper::Node {
 
     bool NodeCommandName::collectSuggestions(const ASTNode *astNode,
                                              size_t index,
-                                             std::vector<Suggestion> &suggestions) const {
+                                             std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+        Suggestions suggestions1;
         for (const auto &command: *commands) {
             for (const auto &name: ((NodePerCommand *) command.get())->name) {
                 if (StringUtil::isStartOf(name, str)) {
-                    suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(name, command->description));
+                    suggestions1.suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(name, command->description));
                 }
             }
         }
+        suggestions1.markFiltered();
+        suggestions.push_back(std::move(suggestions1));
         return true;
     }
 

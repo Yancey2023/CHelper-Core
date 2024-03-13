@@ -31,29 +31,22 @@ namespace CHelper {
         nlohmann::json getJsonFromPath(const std::filesystem::path &path);
 
         template<class T>
-        inline T fromJson(nlohmann::json json, const std::string &name) {
+        inline T fromJson(const nlohmann::json &json, const std::string &name) {
             return json.at(name).get<T>();
         }
 
         template<class T>
-        inline std::optional<T> fromJsonOptional(nlohmann::json json, const std::string &name) {
+        std::optional<T> fromJsonOptional(const nlohmann::json &json, const std::string &name) {
             return json.contains(name) ? std::optional<T>(json.at(name).get<T>()) : std::nullopt;
         }
 
         template<class T>
-        inline void toJson(nlohmann::json json, const std::string &name, T data) {
-            json.push_back(name, data);
+        inline void toJson(nlohmann::json &json, const std::string &name, const T &data) {
+            json[name] = data;
         }
 
         template<class T>
-        inline void toJson(nlohmann::json json, const std::string &name, const T *data) {
-            nlohmann::json child;
-            data->toJson(child);
-            json[name] = child;
-        }
-
-        template<class T>
-        inline void toJsonOptional(nlohmann::json json, const std::string &name, std::optional<T> data) {
+        void toJsonOptional(nlohmann::json json, const std::string &name, std::optional<T> data) {
             if (data.has_value()) {
                 json[name] = data.value();
             }
@@ -62,21 +55,6 @@ namespace CHelper {
     } // JsonUtil
 
 } // CHelper
-
-// 把json文本转为对象
-#define FROM_JSON(json, name, type) json.at(#name).get<type>()
-
-// 把json文本转为对象，数据不一定存在
-#define FROM_JSON_OPTIONAL(json, name, type) json.contains(#name) ? std::optional<type>(json.at(#name).get<type>()) : std::nullopt
-
-// 把对象转json文本
-#define TO_JSON(json, name) json[#name] = name
-
-// 把象转json文本，数据不一定存在
-#define TO_JSON_OPTIONAL(json, name)                                              \
-if (name.has_value()) {                                                           \
-    json[#name] = name.value();                                                   \
-}
 
 // 让这个类支持json序列化（还需要在这个类中创建构造方法用于把json文本转为对象，创建一个to_json方法用于把对象转json文本）
 #define CREATE_ADL_SERIALIZER(type)                                               \

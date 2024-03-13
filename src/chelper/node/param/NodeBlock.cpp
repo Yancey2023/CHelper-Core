@@ -28,7 +28,7 @@ namespace CHelper::Node {
     NodeBlock::NodeBlock(const nlohmann::json &j,
                          const CPack &cpack) :
             NodeBase(j, true),
-            nodeBlockType(FROM_JSON(j, nodeBlockType, NodeBlockType::NodeBlockType)),
+            nodeBlockType(JsonUtil::fromJson<NodeBlockType::NodeBlockType>(j, "nodeBlockType")),
             blockIds(cpack.blockIds),
             nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", true, cpack.blockIds)) {}
 
@@ -38,7 +38,7 @@ namespace CHelper::Node {
 
     void NodeBlock::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        TO_JSON(j, nodeBlockType);
+        JsonUtil::toJson(j, "nodeBlockType", nodeBlockType);
     }
 
     ASTNode NodeBlock::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

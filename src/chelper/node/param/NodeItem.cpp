@@ -30,7 +30,7 @@ namespace CHelper::Node {
     NodeItem::NodeItem(const nlohmann::json &j,
                        const CPack &cpack) :
             NodeBase(j, true),
-            nodeItemType(FROM_JSON(j, nodeItemType, CHelper::Node::NodeItemType::NodeItemType)),
+            nodeItemType(JsonUtil::fromJson<CHelper::Node::NodeItemType::NodeItemType>(j, "nodeItemType")),
             itemIds(cpack.itemIds),
             nodeItemId(getNodeItemId(cpack.itemIds)),
             nodeComponent(std::make_shared<NodeJson>("ITEM_COMPONENT", "物品组件", cpack, "components")) {}
@@ -41,15 +41,13 @@ namespace CHelper::Node {
 
     void NodeItem::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        TO_JSON(j, nodeItemType);
+        JsonUtil::toJson(j, "nodeItemType", nodeItemType);
     }
 
     ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         ASTNode itemId = nodeItemId.getASTNode(tokenReader, cpack);
-        //查找物品ID
-        std::string itemIdStr = TokenUtil::toString(itemId.tokens);
-        size_t strHash = std::hash<std::string>{}(itemIdStr);
+        size_t strHash = std::hash<std::string>{}(TokenUtil::toString(itemId.tokens));
         std::shared_ptr<NamespaceId> currentItem = nullptr;
         for (const auto &item: *itemIds) {
             if (item->fastMatch(strHash) || item->idWithNamespace->fastMatch(strHash)) {
@@ -57,7 +55,7 @@ namespace CHelper::Node {
                 break;
             }
         }
-        std::vector<ASTNode> childNodes = {itemId};
+        std::vector<ASTNode> childNodes = {std::move(itemId)};
         const NodeBase *nodeData = currentItem == nullptr ? nodeAllData.get() :
                                    std::static_pointer_cast<ItemId>(currentItem)->nodeData;
         switch (nodeItemType) {
@@ -74,7 +72,7 @@ namespace CHelper::Node {
                                                         {nodeCount.get(), nodeData, nodeComponent.get()}));
                 break;
         }
-        return ASTNode::andNode(this, childNodes, tokenReader.collect());
+        return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
     }
 
     std::optional<std::string> NodeItem::collectDescription(const ASTNode *node, size_t index) const {

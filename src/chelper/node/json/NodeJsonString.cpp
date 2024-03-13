@@ -52,7 +52,7 @@ namespace CHelper::Node {
 
     void NodeJsonString::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        j["data"] = data;
+        JsonUtil::toJson(j, "data", data);
     }
 
     static std::pair<ASTNode, JsonUtil::ConvertResult> getInnerASTNode(const NodeJsonString *node,
@@ -64,17 +64,16 @@ namespace CHelper::Node {
         if (convertResult.errorReason != nullptr) {
             convertResult.errorReason->start--;
             convertResult.errorReason->end--;
-            return {ASTNode::simpleNode(node, tokens, convertResult.errorReason), convertResult};
+            return {ASTNode::simpleNode(node, tokens, convertResult.errorReason), std::move(convertResult)};
         }
-        auto newStringReader = StringReader(convertResult.result, "unknown");
-        auto newTokens = std::make_shared<std::vector<Token>>(Lexer::lex(newStringReader));
-        auto tokenReader = TokenReader(newTokens);
+        auto tokenReader = TokenReader(std::make_shared<std::vector<Token>>(
+                Lexer::lex(StringReader(convertResult.result, "unknown"))));
         Profile::push("start parsing: " + content);
         DEBUG_GET_NODE_BEGIN(mainNode)
         auto result = mainNode->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(mainNode)
         Profile::pop();
-        return {result, convertResult};
+        return {std::move(result), std::move(convertResult)};
     }
 
     ASTNode NodeJsonString::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -89,23 +88,27 @@ namespace CHelper::Node {
             return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(
                     result.tokens, "字符串参数内容应该在双引号内 -> " + str));
         }
+        VectorView <Token> tokens = result.tokens;
         std::shared_ptr<ErrorReason> errorReason;
         if (str.size() <= 1 || str[str.size() - 1] != '"') {
-            errorReason = ErrorReason::contentError(result.tokens, "字符串参数内容应该在双引号内 -> " + str);
+            errorReason = ErrorReason::contentError(tokens, "字符串参数内容应该在双引号内 -> " + str);
         }
         if (data.empty()) {
-            return ASTNode::andNode(this, {result}, result.tokens, errorReason);
+            return ASTNode::andNode(this, {std::move(result)}, tokens, errorReason);
         }
-        size_t offset = TokenUtil::getStartIndex(result.tokens) + 1;
-        auto innerNode = getInnerASTNode(this, result.tokens, str, cpack, nodeData.get());
-        ASTNode newResult = ASTNode::andNode(this, {innerNode.first}, result.tokens, errorReason, "inner");
+        size_t offset = TokenUtil::getStartIndex(tokens) + 1;
+        auto innerNode = getInnerASTNode(this, tokens, str, cpack, nodeData.get());
+        ASTNode newResult = ASTNode::andNode(this, {std::move(innerNode.first)}, tokens, errorReason, "inner");
         if (errorReason == nullptr) {
             size_t size = newResult.errorReasons.size();
             for (int i = 0; i < size; ++i) {
-                ErrorReason newErrorReason = ErrorReason(*newResult.errorReasons[i]);
-                newErrorReason.start = innerNode.second.convert(newErrorReason.start) + offset;
-                newErrorReason.end = innerNode.second.convert(newErrorReason.end) + offset;
-                newResult.errorReasons[i] = std::make_shared<ErrorReason>(newErrorReason);
+                auto item = newResult.errorReasons[i];
+                newResult.errorReasons[i] = std::make_shared<ErrorReason>(
+                        item->level,
+                        innerNode.second.convert(item->start) + offset,
+                        innerNode.second.convert(item->end) + offset,
+                        item->errorReason
+                );
             }
         }
         return newResult;
@@ -128,14 +131,15 @@ namespace CHelper::Node {
 
     bool NodeJsonString::collectSuggestions(const ASTNode *astNode,
                                             size_t index,
-                                            std::vector<Suggestion> &suggestions) const {
+                                            std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         if (str.empty()) {
-            suggestions.emplace_back(index, index, doubleQuoteMask);
+            suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
             return true;
         }
         if (astNode->id == "inner") {
+            Suggestions suggestions1;
             auto convertResult = JsonUtil::jsonString2String(str);
             size_t offset = TokenUtil::getStartIndex(astNode->tokens) + 1;
             for (auto &item: astNode->childNodes[0].getSuggestions(index - offset)) {
@@ -143,23 +147,25 @@ namespace CHelper::Node {
                 item.end = convertResult.convert(item.end) + offset;
                 item.content = std::make_shared<NormalId>(
                         JsonUtil::string2jsonString(item.content->name), item.content->description);
-                suggestions.push_back(item);
+                suggestions1.suggestions.push_back(item);
             }
             if (astNode->hasChildNode() && !astNode->childNodes[0].isError()) {
                 if (str.length() == 1 || str[str.length() - 1] != '"' ||
                     (convertResult.errorReason == nullptr && !convertResult.isComplete)) {
-                    suggestions.emplace_back(index, index, doubleQuoteMask);
+                    suggestions1.suggestions.emplace_back(index, index, doubleQuoteMask);
                 }
             }
+            suggestions1.markFiltered();
+            suggestions.push_back(std::move(suggestions1));
             return true;
         } else {
             if (str.length() == 1 || str[str.length() - 1] != '"') {
-                suggestions.emplace_back(index, index, doubleQuoteMask);
+                suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
                 return true;
             }
             auto convertResult = JsonUtil::jsonString2String(str);
             if (!convertResult.isComplete) {
-                suggestions.emplace_back(index, index, doubleQuoteMask);
+                suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
             }
             return true;
         }

@@ -35,7 +35,7 @@ namespace CHelper::Node {
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
-                                std::vector<Suggestion> &suggestions) const override;
+                                std::vector<Suggestions> &suggestions) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

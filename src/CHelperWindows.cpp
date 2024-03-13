@@ -174,81 +174,81 @@ void onTextChanged(const std::string &command) {
             delete[] wstr;
         }
         CHelper::Profile::pop();
-        CHELPER_INFO(CHelper::ColorStringBuilder()
+        std::cout << CHelper::ColorStringBuilder()
                              .green("parse successfully(")
                              .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
                                      endStructure - startParse).count()) + "ms")
                              .green(")")
                              .normal(" : ")
                              .purple(command)
-                             .build());
-        CHELPER_INFO(CHelper::ColorStringBuilder().blue("parse in ").purple(
+                             .build() << std::endl;
+        std::cout << CHelper::ColorStringBuilder().blue("parse in ").purple(
                 std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
-                        endParse - startParse).count()) + "ms" + "ms").build());
-        CHELPER_INFO(CHelper::ColorStringBuilder().blue("get description in ").purple(
+                        endParse - startParse).count()) + "ms").build() << std::endl;
+        std::cout << CHelper::ColorStringBuilder().blue("get description in ").purple(
                 std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
-                        endDescription - startDescription).count()) + "ms" + "ms").build());
-        CHELPER_INFO(CHelper::ColorStringBuilder().blue("get error reasons in ").purple(
+                        endDescription - startDescription).count()) + "ms").build() << std::endl;
+        std::cout << CHelper::ColorStringBuilder().blue("get error reasons in ").purple(
                 std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
-                        endErrorReasons - startErrorReasons).count()) + "ms" + "ms").build());
-        CHELPER_INFO(CHelper::ColorStringBuilder().blue("get suggestions in ").purple(
+                        endErrorReasons - startErrorReasons).count()) + "ms").build() << std::endl;
+        std::cout << CHelper::ColorStringBuilder().blue("get suggestions in ").purple(
                 std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
-                        endSuggestions - startSuggestions).count()) + "ms" + "ms").build());
-        CHELPER_INFO(CHelper::ColorStringBuilder().blue("get structure in ").purple(
+                        endSuggestions - startSuggestions).count()) + "ms").build() << std::endl;
+        std::cout << CHelper::ColorStringBuilder().blue("get structure in ").purple(
                 std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
-                        endStructure - startStructure).count()) + "ms" + "ms").build());
+                        endStructure - startStructure).count()) + "ms").build() << std::endl;
 //        std::cout << core->getAstNode().toOptimizedJson().dump(
 //                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
 //        std::cout << core->getAstNode().toBestJson().dump(
 //                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
-        CHELPER_INFO("structure: " + structure);
-        CHELPER_INFO("description: " + description);
+        std::cout << "structure: " + structure << std::endl;
+        std::cout << "description: " + description << std::endl;
         if (errorReasons.empty()) {
-            CHELPER_INFO("no error");
+            std::cout << "no error" << std::endl;
         } else {
-            CHELPER_INFO("error reasons:");
+            std::cout << "error reasons:" << std::endl;
             int i2 = 0;
             for (const auto &errorReason: errorReasons) {
-                CHELPER_INFO(CHelper::ColorStringBuilder()
+                std::cout << CHelper::ColorStringBuilder()
                                      .normal(std::to_string(++i2) + ". ")
                                      .red(command.substr(errorReason->start,
                                                          errorReason->end - errorReason->start) + " ")
                                      .blue(errorReason->errorReason)
-                                     .build());
-                CHELPER_INFO(CHelper::ColorStringBuilder()
+                                     .build() << std::endl;
+                std::cout << CHelper::ColorStringBuilder()
                                      .normal(command.substr(0, errorReason->start))
                                      .red(errorReason->start == errorReason->end ? "~" :
                                           command.substr(errorReason->start,
                                                          errorReason->end - errorReason->start))
                                      .normal(command.substr(errorReason->end))
-                                     .build());
+                                     .build() << std::endl;
             }
         }
-        if (suggestions.empty()) {
-            CHELPER_INFO("no suggestion");
+        if (suggestions->empty()) {
+            std::cout << "no suggestion" << std::endl;
         } else {
-            CHELPER_INFO("suggestions: ");
+            std::cout << "suggestions: " << std::endl;
             int j = 0;
-            for (const auto &item: suggestions) {
+            for (const auto &item: *suggestions) {
                 if (j == 30) {
-                    CHELPER_INFO("...");
+                    std::cout << "..." << std::endl;
                     break;
                 }
-                CHELPER_INFO(CHelper::ColorStringBuilder()
+                std::cout << CHelper::ColorStringBuilder()
                                      .normal(std::to_string(++j) + ". ")
                                      .green(item.content->name + " ")
                                      .blue(item.content->description.value_or(""))
-                                     .build());
-                CHELPER_INFO(CHelper::ColorStringBuilder()
+                                     .build() << std::endl;
+                std::cout << CHelper::ColorStringBuilder()
                                      .normal(command.substr(0, item.start))
                                      .green(item.content->name)
                                      .normal(command.substr(item.end))
-                                     .build());
+                                     .build() << std::endl;
             }
         }
         std::cout << std::endl;
     } catch (const std::exception &e) {
-        CHELPER_INFO(CHelper::ColorStringBuilder().red("parse failed").build());
+        std::cout << CHelper::ColorStringBuilder().red("parse failed").build() << std::endl;
         CHelper::Exception::printStackTrace(e);
         CHelper::Profile::clear();
     }

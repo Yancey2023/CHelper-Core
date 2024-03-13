@@ -40,17 +40,17 @@ namespace CHelper::Node {
         ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey.get(), "key");
         childNodes.push_back(astNodeKey);
         if (astNodeKey.isError()) {
-            return ASTNode::andNode(this, childNodes, tokenReader.collect());
+            return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
         // = or !=
         ASTNode astNodeSeparator = getByChildNode(tokenReader, cpack, nodeEqual.get(), "separator");
         childNodes.push_back(astNodeSeparator);
         if (astNodeSeparator.isError()) {
-            return ASTNode::andNode(this, childNodes, tokenReader.collect());
+            return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
         //value
         childNodes.push_back(nodeValue->getASTNodeWithNextNode(tokenReader, cpack));
-        return ASTNode::andNode(this, childNodes, tokenReader.collect());
+        return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
     }
 
 } // CHelper::Node

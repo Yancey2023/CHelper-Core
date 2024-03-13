@@ -9,18 +9,12 @@
 
 namespace CHelper {
 
-    static std::vector<const Node::NodeBase *>
-    getNodeDataChildren(const std::optional<std::vector<std::string>> &descriptions) {
-        std::vector<const Node::NodeBase *> result;
-
-        return result;
-    }
-
     static Node::NodeBase *
     getNodeData(const std::optional<int> &max,
                 const std::optional<std::vector<std::string>> &descriptions) {
         if (descriptions.has_value()) {
             std::vector<const Node::NodeBase *> nodeDataChildren;
+            nodeDataChildren.reserve(descriptions.value().size());
             size_t i = 0;
             for (const auto &item: descriptions.value()) {
                 nodeDataChildren.push_back(new Node::NodeText(
@@ -45,8 +39,8 @@ namespace CHelper {
 
     ItemId::ItemId(const nlohmann::json &j)
             : NamespaceId(j),
-              max(FROM_JSON_OPTIONAL(j, max, int)),
-              descriptions(FROM_JSON_OPTIONAL(j, descriptions, std::vector<std::string>)),
+              max(JsonUtil::fromJsonOptional<int>(j, "max")),
+              descriptions(JsonUtil::fromJsonOptional<std::vector<std::string>>(j, "descriptions")),
               nodeData(getNodeData(max, descriptions)) {}
 
     ItemId::~ItemId() {
@@ -60,8 +54,8 @@ namespace CHelper {
 
     void ItemId::toJson(nlohmann::json &j) const {
         NamespaceId::toJson(j);
-        FROM_JSON_OPTIONAL(j, max, int);
-        FROM_JSON_OPTIONAL(j, descriptions, std::vector<std::string>);
+        JsonUtil::toJsonOptional(j, "max", max);
+        JsonUtil::toJsonOptional(j, "descriptions", descriptions);
     }
 
 } // CHelper

@@ -11,7 +11,7 @@
 
 namespace CHelper::Lexer {
 
-    std::vector<Token> lex(StringReader &stringReader);
+    std::vector<Token> lex(StringReader stringReader);
 
 } // CHelper::Lexer
 

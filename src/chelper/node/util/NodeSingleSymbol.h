@@ -13,6 +13,7 @@ namespace CHelper::Node {
     class NodeSingleSymbol : public NodeBase {
     public:
         char symbol;
+        std::shared_ptr<NormalId> normalId;
 
         NodeSingleSymbol(const std::optional<std::string> &id,
                          const std::optional<std::string> &description,
@@ -22,7 +23,7 @@ namespace CHelper::Node {
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
-                                std::vector<Suggestion> &suggestions) const override;
+                                std::vector<Suggestions> &suggestions) const override;
 
     };
 

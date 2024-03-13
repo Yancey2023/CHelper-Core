@@ -43,12 +43,11 @@ namespace CHelper {
     }
 
     size_t TokenReader::skipWhitespace() {
-        size_t result = 0;
+        size_t start = index;
         while (ready() && peek()->type == TokenType::WHITE_SPACE) {
             skip();
-            result++;
         }
-        return result;
+        return index - start;
     }
 
     void TokenReader::skipToLF() {

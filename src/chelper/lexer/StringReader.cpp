@@ -59,7 +59,7 @@ namespace CHelper {
     }
 
     std::string CHelper::StringReader::collect() const {
-        return {content, (size_t) posBackup.index, (size_t) (pos.index - posBackup.index)};
+        return {content, posBackup.index, pos.index - posBackup.index};
     }
 
 }

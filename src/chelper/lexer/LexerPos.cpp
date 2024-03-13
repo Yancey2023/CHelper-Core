@@ -24,9 +24,5 @@ void CHelper::LexerPos::next(char ch) {
 }
 
 std::ostream &CHelper::operator<<(std::ostream &os, const CHelper::LexerPos &pos) {
-    return os << '('
-              << pos.line
-              << ','
-              << pos.col
-              << ')';
+    return os << '(' << pos.line << ',' << pos.col << ')';
 }

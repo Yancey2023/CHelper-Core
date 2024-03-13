@@ -16,14 +16,14 @@ namespace CHelper::Node {
 
     NodeBase::NodeBase(const nlohmann::json &j,
                        bool isMustAfterWhiteSpace)
-            : id(FROM_JSON_OPTIONAL(j, id, std::string)),
-              description(FROM_JSON_OPTIONAL(j, description, std::string)),
+            : id(JsonUtil::fromJsonOptional<std::string>(j, "id")),
+              description(JsonUtil::fromJsonOptional<std::string>(j, "description")),
               isMustAfterWhiteSpace(isMustAfterWhiteSpace) {
 //#if CHelperDebug
 //        if (!description.has_value()) {
 //            return;
 //        }
-//        auto type = FROM_JSON_OPTIONAL(j, type, std::string);
+//        auto type = fromJsonOptional<>(j, type, std::string);
 //        if (!type.has_value() || type.value() == "PER_COMMAND" || type.value() == "TARGET_SELECTOR") {
 //            return;
 //        }
@@ -37,7 +37,7 @@ namespace CHelper::Node {
     std::unique_ptr<NodeBase> NodeBase::getNodeFromJson(const nlohmann::json &j,
                                                         const CPack &cpack) {
         Profile::push(ColorStringBuilder().red("loading type").build());
-        std::string type = FROM_JSON(j, type, std::string);
+        auto type = JsonUtil::fromJson<std::string>(j, "type");
         Profile::next(ColorStringBuilder().red("loading node ").purple(type).build());
         for (const auto &item: NodeType::NODE_TYPES) {
             if (item->nodeName == type) {
@@ -54,9 +54,9 @@ namespace CHelper::Node {
     }
 
     void NodeBase::toJson(nlohmann::json &j) const {
-        TO_JSON_OPTIONAL(j, id)
-        TO_JSON_OPTIONAL(j, description)
-        j["type"] = getNodeType()->nodeName;
+        JsonUtil::toJsonOptional(j, "id", id);
+        JsonUtil::toJsonOptional(j, "description", description);
+        JsonUtil::toJson(j, "type", getNodeType()->nodeName);
     }
 
     ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -73,8 +73,7 @@ namespace CHelper::Node {
         ASTNode currentASTNode = getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(this)
         if (currentASTNode.isError() || nextNodes.empty()) {
-            tokenReader.pop();
-            return ASTNode::andNode(this, {currentASTNode}, currentASTNode.tokens, nullptr, "compound");
+            return ASTNode::andNode(this, {std::move(currentASTNode)}, tokenReader.collect(), nullptr, "compound");
         }
         //子节点
         std::vector<ASTNode> childASTNodes;
@@ -86,16 +85,19 @@ namespace CHelper::Node {
         }
         tokenReader.push();
         tokenReader.skipToLF();
-        ASTNode nextASTNode = ASTNode::orNode(this, childASTNodes, tokenReader.collect(), nullptr, "nextNode");
-        return ASTNode::andNode(this, {currentASTNode, std::move(nextASTNode)}, tokenReader.collect(), nullptr, "compound");
+        ASTNode nextASTNode = ASTNode::orNode(this, std::move(childASTNodes), tokenReader.collect(), nullptr,
+                                              "nextNode");
+        return ASTNode::andNode(this, {std::move(currentASTNode), std::move(nextASTNode)}, tokenReader.collect(),
+                                nullptr, "compound");
     }
 
     ASTNode NodeBase::getByChildNode(TokenReader &tokenReader,
                                      const CPack *cpack,
                                      const NodeBase *childNode,
                                      const std::string &astNodeId) const {
-        ASTNode node = childNode->getASTNodeWithNextNode(tokenReader, cpack);
-        return ASTNode::andNode(this, {node}, node.tokens, nullptr, astNodeId);
+        ASTNode node = childNode->getASTNode(tokenReader, cpack);
+        VectorView <Token> tokens = node.tokens;
+        return ASTNode::andNode(this, {std::move(node)}, tokens, nullptr, astNodeId);
     }
 
     /**
@@ -117,18 +119,19 @@ namespace CHelper::Node {
             DEBUG_GET_NODE_BEGIN(item)
             ASTNode astNode = item->getASTNodeWithNextNode(tokenReader, cpack);
             DEBUG_GET_NODE_END(item)
+            bool isError = astNode.isError();
             const VectorView <Token> tokens = tokenReader.collect();
-            if (astNode.isError() && !childASTNodes.empty() && (isIgnoreChildNodesError || tokens.isEmpty())) {
+            if (isError && (isIgnoreChildNodesError || tokens.isEmpty())) {
                 tokenReader.restore();
                 break;
             }
-            childASTNodes.push_back(astNode);
+            childASTNodes.push_back(std::move(astNode));
             tokenReader.pop();
-            if (astNode.isError()) {
+            if (isError) {
                 break;
             }
         }
-        return ASTNode::andNode(this, childASTNodes, tokenReader.collect(), nullptr, astNodeId);
+        return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect(), nullptr, astNodeId);
     }
 
     std::optional<std::string> NodeBase::collectDescription(const ASTNode *node, size_t index) const {
@@ -143,7 +146,7 @@ namespace CHelper::Node {
 
     bool NodeBase::collectSuggestions(const ASTNode *astNode,
                                       size_t index,
-                                      std::vector<Suggestion> &suggestions) const {
+                                      std::vector<Suggestions> &suggestions) const {
         return false;
     }
 

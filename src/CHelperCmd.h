@@ -18,6 +18,8 @@ namespace CHelper::Test {
 
     void test(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime);
 
+    void test2(const std::string &cpackPath, const std::vector<std::string> &commands, int times);
+
 } // CHelper::Test
 
 #endif //CHELPER_CHELPERCMD_H

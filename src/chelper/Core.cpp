@@ -38,10 +38,12 @@ namespace CHelper {
     void Core::onTextChanged(const std::string &content, size_t index0) {
         astNode = Parser::parse(content, cpack.get());
         index = index0;
+        suggestions = nullptr;
     }
 
     void Core::onSelectionChanged(size_t index0) {
         index = index0;
+        suggestions = nullptr;
     }
 
     const ASTNode &Core::getAstNode() const {
@@ -56,10 +58,11 @@ namespace CHelper {
         return astNode.getErrorReasons();
     }
 
-    std::vector<Suggestion> Core::getSuggestions() {
-        auto result = astNode.getSuggestions(index);
-        suggestions = std::make_shared<std::vector<Suggestion>>(result);
-        return result;
+    std::vector<Suggestion> *Core::getSuggestions() {
+        if (suggestions == nullptr) {
+            suggestions = std::make_shared<std::vector<Suggestion>>(astNode.getSuggestions(index));
+        }
+        return suggestions.get();
     }
 
     std::string Core::getStructure() const {

@@ -16,7 +16,7 @@ namespace CHelper::Node {
             "L", "等级", std::make_shared<NormalId>("L", "等级"));
     static std::shared_ptr<NodeBase> levelXp = std::make_shared<NodeAnd>(
             "LEVEL_XP", "等级经验", std::vector<const NodeBase *>{nodeInteger.get(), nodeLevel.get()});
-    static std::shared_ptr<NodeBase> Xp = std::make_shared<NodeOr>(
+    static std::shared_ptr<NodeBase> xp = std::make_shared<NodeOr>(
             "XP", "经验", std::vector<const NodeBase *>{nodeInteger.get(), levelXp.get()}, false);
 
     NodeXpInteger::NodeXpInteger(const std::optional<std::string> &id,
@@ -32,7 +32,7 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeXpInteger::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        return getByChildNode(tokenReader, cpack, Xp.get());
+        return getByChildNode(tokenReader, cpack, xp.get());
     }
 
     void NodeXpInteger::collectStructure(const ASTNode *astNode,

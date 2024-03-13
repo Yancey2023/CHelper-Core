@@ -14,14 +14,14 @@ namespace CHelper {
               mHashCode(HashUtil::combineHash(nameHash, description)) {}
 
     NormalId::NormalId(const nlohmann::json &j)
-            : name(FROM_JSON(j, name, std::string)),
-              description(FROM_JSON_OPTIONAL(j, description, std::string)),
+            : name(JsonUtil::fromJson<std::string>(j, "name")),
+              description(JsonUtil::fromJsonOptional<std::string>(j, "description")),
               nameHash(std::hash<std::string>{}(name)),
               mHashCode(HashUtil::combineHash(nameHash, description)) {}
 
     void NormalId::toJson(nlohmann::json &j) const {
-        TO_JSON(j, name);
-        TO_JSON_OPTIONAL(j, description)
+        JsonUtil::toJson(j, "name", name);
+        JsonUtil::toJsonOptional(j, "description", description);
     }
 
 } // CHelper

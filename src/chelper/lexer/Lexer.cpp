@@ -64,12 +64,11 @@ namespace CHelper::Lexer {
     }
 
     Token nextTokenSymbol(StringReader &stringReader) {
-        char ch = stringReader.peek();
         std::string str = std::string();
-        str.push_back(ch);
-        Token result = {TokenType::SYMBOL, stringReader.pos, str};
+        str.push_back(stringReader.peek());
+        Token result = {TokenType::SYMBOL, stringReader.pos, std::move(str)};
         stringReader.skip();
-        return result;
+        return std::move(result);
     }
 
     Token nextTokenString(StringReader &stringReader) {
@@ -105,24 +104,22 @@ namespace CHelper::Lexer {
     }
 
     Token nextTokenWhiteSpace(StringReader &stringReader) {
-        char ch = stringReader.peek();
         std::string str = std::string();
-        str.push_back(ch);
-        Token result = {TokenType::WHITE_SPACE, stringReader.pos, str};
+        str.push_back(stringReader.peek());
+        Token result = {TokenType::WHITE_SPACE, stringReader.pos, std::move(str)};
         stringReader.skip();
-        return result;
+        return std::move(result);
     }
 
     Token nextTokenLF(StringReader &stringReader) {
-        char ch = stringReader.peek();
         std::string str = std::string();
-        str.push_back(ch);
-        Token result = {TokenType::LF, stringReader.pos, str};
+        str.push_back(stringReader.peek());
+        Token result = {TokenType::LF, stringReader.pos, std::move(str)};
         stringReader.skip();
-        return result;
+        return std::move(result);
     }
 
-    std::vector<Token> lex(StringReader &stringReader) {
+    std::vector<Token> lex(StringReader stringReader) {
         Profile::push("start lex: " + stringReader.content);
         std::vector<Token> tokenList = std::vector<Token>();
         while (true) {

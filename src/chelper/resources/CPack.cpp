@@ -27,7 +27,7 @@ namespace CHelper {
                                   .red("\"")
                                   .build());
             nlohmann::json j = JsonUtil::getJsonFromPath(file);
-            std::string type = FROM_JSON(j, type, std::string);
+            auto type = JsonUtil::fromJson<std::string>(j, "type");
             Profile::next(ColorStringBuilder()
                                   .red("loading ")
                                   .purple(type)
@@ -37,24 +37,30 @@ namespace CHelper {
             if (type == "normal") {
                 auto id = j.at("id").get<std::string>();
                 auto content = std::make_shared<std::vector<std::shared_ptr<NormalId>>>();
-                for (const auto &item: j.at("content")) {
+                auto contentJson = j.at("content");
+                content->reserve(contentJson.size());
+                for (const auto &item: contentJson) {
                     content->push_back(std::make_shared<NormalId>(item));
                 }
                 normalIds.emplace(std::move(id), std::move(content));
             } else if (type == "block") {
-                for (const auto &item: j.at("blocks")) {
-                    std::shared_ptr<BlockId> ptr = std::make_shared<BlockId>(item);
-                    blockIds->push_back(ptr);
+                auto blocksJson = j.at("blocks");
+                blockIds->reserve(blockIds->size() + blocksJson.size());
+                for (const auto &item: blocksJson) {
+                    blockIds->push_back(std::make_shared<BlockId>(item));
                 }
             } else if (type == "item") {
-                for (const auto &item: j.at("items")) {
-                    std::shared_ptr<NamespaceId> ptr = std::make_shared<ItemId>(item);
-                    itemIds->push_back(ptr);
+                auto itemsJson = j.at("items");
+                itemIds->reserve(itemIds->size() + itemsJson.size());
+                for (const auto &item: itemsJson) {
+                    itemIds->push_back(std::make_shared<ItemId>(item));
                 }
             } else if (type == "namespace") {
                 auto id = j.at("id").get<std::string>();
                 auto content = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
-                for (const auto &item: j.at("content")) {
+                auto contentJson = j.at("content");
+                content->reserve(contentJson.size());
+                for (const auto &item: contentJson) {
                     content->push_back(std::make_shared<NamespaceId>(item));
                 }
                 namespaceIds.emplace(std::move(id), std::move(content));

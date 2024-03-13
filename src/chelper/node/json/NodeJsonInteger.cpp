@@ -19,17 +19,17 @@ namespace CHelper::Node {
     NodeJsonInteger::NodeJsonInteger(const nlohmann::json &j,
                                      [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, false),
-              min(FROM_JSON_OPTIONAL(j, min, int)),
-              max(FROM_JSON_OPTIONAL(j, max, int)) {}
+              min(JsonUtil::fromJsonOptional<int>(j, "min")),
+              max(JsonUtil::fromJsonOptional<int>(j, "max")) {}
 
-    NodeType* NodeJsonInteger::getNodeType() const {
+    NodeType *NodeJsonInteger::getNodeType() const {
         return NodeType::JSON_INTEGER.get();
     }
 
     void NodeJsonInteger::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        TO_JSON_OPTIONAL(j, min)
-        TO_JSON_OPTIONAL(j, max)
+        JsonUtil::toJsonOptional(j, "min", min);
+        JsonUtil::toJsonOptional(j, "max", max);
     }
 
     ASTNode NodeJsonInteger::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

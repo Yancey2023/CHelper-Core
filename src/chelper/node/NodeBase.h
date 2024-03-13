@@ -70,7 +70,7 @@ namespace CHelper {
 
             virtual bool collectSuggestions(const ASTNode *astNode,
                                             size_t index,
-                                            std::vector<Suggestion> &suggestions) const;
+                                            std::vector<Suggestions> &suggestions) const;
 
             virtual void collectStructure(const ASTNode *astNode,
                                           StructureBuilder &structure,

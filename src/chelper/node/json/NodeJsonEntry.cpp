@@ -31,8 +31,8 @@ namespace CHelper::Node {
 
     NodeJsonEntry::NodeJsonEntry(const nlohmann::json &j)
             : NodeBase(j, false),
-              key(FROM_JSON(j, key, std::string)),
-              value(FROM_JSON(j, value, std::string)) {}
+              key(JsonUtil::fromJson<std::string>(j, "key")),
+              value(JsonUtil::fromJson<std::string>(j, "value")) {}
 
     void NodeJsonEntry::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
@@ -66,8 +66,13 @@ namespace CHelper::Node {
 
     bool NodeJsonEntry::collectSuggestions(const ASTNode *astNode,
                                            size_t index,
-                                           std::vector<Suggestion> &suggestions) const {
+                                           std::vector<Suggestions> &suggestions) const {
         return astNode->id == "node json all entry";
+    }
+
+    NodeBase *NodeJsonEntry::getNodeJsonAllEntry() {
+        static NodeJsonEntry nodeJsonAllEntry("NODE_JSON_ENTRY", "JSON对象键值对");
+        return &nodeJsonAllEntry;
     }
 
 } // CHelper::Node

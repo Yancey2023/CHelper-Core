@@ -13,7 +13,7 @@ namespace CHelper::Node {
                                    std::vector<std::string> name,
                                    const std::optional<std::string> &description,
                                    std::vector<std::unique_ptr<Node::NodeBase>> nodes,
-                                   std::vector<Node::NodeBase*>& startNodes)
+                                   std::vector<Node::NodeBase *> &startNodes)
             : NodeBase(id, description, false),
               name(std::move(name)),
               nodes(std::move(nodes)),
@@ -23,15 +23,18 @@ namespace CHelper::Node {
                                    const CPack &cpack)
             : NodeBase(j, false) {
         Profile::push(ColorStringBuilder().red("loading node name").build());
-        name = FROM_JSON(j, name, std::vector<std::string>);
+        name = JsonUtil::fromJson<std::vector<std::string>>(j, "name");
         if (j.contains("node")) {
             Profile::next(ColorStringBuilder().red("loading nodes").build());
-            for (const auto &item: j.at("node")) {
+            auto nodeJson = j.at("node");
+            nodes.reserve(nodeJson.size());
+            for (const auto &item: nodeJson) {
                 nodes.push_back(getNodeFromJson(item, cpack));
             }
         }
         Profile::next(ColorStringBuilder().red("loading start nodes").build());
         auto startNodeIds = JsonUtil::fromJson<std::vector<std::string>>(j, "start");
+        startNodes.reserve(startNodeIds.size());
         for (const auto &startNodeId: startNodeIds) {
             Profile::next(ColorStringBuilder()
                                   .red("linking startNode \"")
@@ -56,7 +59,7 @@ namespace CHelper::Node {
         }
         if (j.contains("ast")) {
             Profile::next(ColorStringBuilder().red("loading ast").build());
-            auto ast = FROM_JSON(j, ast, std::vector<std::vector<std::string>>);
+            auto ast = JsonUtil::fromJson<std::vector<std::vector<std::string>>>(j, "ast");
             for (const auto &childNodes: ast) {
                 Profile::next(ColorStringBuilder().red("linking child nodes to parent node").build());
                 if (childNodes.empty()) {
@@ -71,7 +74,7 @@ namespace CHelper::Node {
                 if (childNodes.size() == 1) {
                     throw Exception::RequireChildNodeIds(name, parentNodeId);
                 }
-                Node::NodeBase* parentNode = nullptr;
+                Node::NodeBase *parentNode = nullptr;
                 for (auto &node: nodes) {
                     if (node->id == parentNodeId) {
                         parentNode = node.get();
@@ -81,7 +84,7 @@ namespace CHelper::Node {
                 if (parentNode == nullptr) {
                     throw Exception::UnknownNodeId(name, parentNodeId);
                 }
-                for_each(childNodes.begin() + 1, childNodes.end(), [&](const auto &childNodeId) {
+                parentNode->nextNodes.reserve(childNodes.size() - 1);                for_each(childNodes.begin() + 1, childNodes.end(), [&](const auto &childNodeId) {
                     Profile::next(ColorStringBuilder()
                                           .red("linking child nodes \"")
                                           .purple(childNodeId)
@@ -93,7 +96,7 @@ namespace CHelper::Node {
                         parentNode->nextNodes.push_back(Node::NodeLF::getInstance());
                         return;
                     }
-                    Node::NodeBase* childNode = nullptr;
+                    Node::NodeBase *childNode = nullptr;
                     for (auto &node: nodes) {
                         if (node->id == childNodeId) {
                             childNode = node.get();
@@ -115,20 +118,20 @@ namespace CHelper::Node {
         }
     }
 
-    NodeType* NodePerCommand::getNodeType() const {
+    NodeType *NodePerCommand::getNodeType() const {
         return NodeType::PER_COMMAND.get();
     }
 
     void NodePerCommand::toJson(nlohmann::json &j) const {
-        TO_JSON(j, name);
-        TO_JSON_OPTIONAL(j, description)
-        j["node"] = nodes;
+        JsonUtil::toJson(j, "name", name);
+        JsonUtil::toJsonOptional(j, "description", description);
+        JsonUtil::toJson(j, "node", nodes);
         std::vector<std::string> startIds;
         startIds.reserve(startNodes.size());
         for (const auto &item: startNodes) {
             startIds.push_back(item->id.value());
         }
-        j["start"] = startIds;
+        JsonUtil::toJson(j, "start", startIds);
         std::vector<std::vector<std::string>> ast;
         for (const auto &item: nodes) {
             if (item->nextNodes.empty()) {
@@ -148,9 +151,9 @@ namespace CHelper::Node {
         //命令名字的检查
         ASTNode commandName = tokenReader.readStringASTNode(this, "commandName");
         if (commandName.tokens.size() == 0) {
-            tokenReader.pop();
-            return ASTNode::andNode(this, {commandName}, commandName.tokens,
-                                    ErrorReason::contentError(commandName.tokens, "指令名字为空"));
+            VectorView <Token> tokens = tokenReader.collect();
+            return ASTNode::andNode(this, {std::move(commandName)}, tokens,
+                                    ErrorReason::contentError(tokens, "指令名字为空"));
         }
         std::string str = TokenUtil::toString(commandName.tokens);
         bool isError = commandName.isError();
@@ -164,11 +167,9 @@ namespace CHelper::Node {
             }
         }
         if (isError) {
-            tokenReader.pop();
-            return ASTNode::andNode(this, {commandName}, commandName.tokens,
-                                    ErrorReason::contentError(commandName.tokens, FormatUtil::format(
-                                            "指令名字不匹配，找不到名为{0}的指令", str)),
-                                    "perCommand");
+            VectorView <Token> tokens = tokenReader.collect();
+            return ASTNode::andNode(this, {std::move(commandName)}, tokens, ErrorReason::contentError(
+                    tokens, FormatUtil::format("指令名字不匹配，找不到名为{0}的指令", str)), "perCommand");
         }
         //命令检测
         std::vector<ASTNode> childASTNodes;
@@ -182,9 +183,9 @@ namespace CHelper::Node {
         }
         tokenReader.push();
         tokenReader.skipToLF();
-        ASTNode astNodePerCommand = ASTNode::orNode(this, childASTNodes, tokenReader.collect());
+        ASTNode astNodePerCommand = ASTNode::orNode(this, std::move(childASTNodes), tokenReader.collect());
         //返回结果
-        return ASTNode::andNode(this, {commandName, astNodePerCommand}, tokenReader.collect(),
+        return ASTNode::andNode(this, {std::move(commandName), std::move(astNodePerCommand)}, tokenReader.collect(),
                                 nullptr, "perCommand");
     }
 
@@ -196,17 +197,20 @@ namespace CHelper::Node {
     }
 
     bool NodePerCommand::collectSuggestions(const ASTNode *astNode, size_t index,
-                                            std::vector<Suggestion> &suggestions) const {
+                                            std::vector<Suggestions> &suggestions) const {
         if (astNode->id != "commandName") {
             return false;
         }
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+        Suggestions suggestions1;
         for (const auto &item: name) {
             if (StringUtil::isStartOf(item, str)) {
-                suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(item, description));
+                suggestions1.suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(item, description));
             }
         }
+        suggestions1.markFiltered();
+        suggestions.push_back(std::move(suggestions1));
         return true;
     }
 

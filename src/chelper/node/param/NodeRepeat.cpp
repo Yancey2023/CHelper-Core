@@ -38,11 +38,16 @@ namespace CHelper::Node {
     NodeRepeat::NodeRepeat(const nlohmann::json &j,
                            const CPack &cpack)
             : NodeBase(j, false),
-              key(FROM_JSON(j, key, std::string)),
+              key(JsonUtil::fromJson<std::string>(j, "key")),
               node(getNodeFromCPack(key, cpack)) {}
 
     NodeType* NodeRepeat::getNodeType() const {
         return NodeType::REPEAT.get();
+    }
+
+    void NodeRepeat::toJson(nlohmann::json &j) const {
+        NodeBase::toJson(j);
+        JsonUtil::toJson(j, "key", key);
     }
 
     ASTNode NodeRepeat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -62,10 +67,10 @@ namespace CHelper::Node {
             ASTNode orNode = ASTNode::orNode(this, {astNode, breakAstNode}, tokenReader.collect());
             childNodes.push_back(orNode);
             if (!breakAstNode.isError()) {
-                return ASTNode::andNode(this, childNodes, tokenReader.collect());
+                return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             } else if (orNode.isError() || !tokenReader.ready() || orNode.tokens.isEmpty()) {
                 VectorView <Token> tokens = tokenReader.collect();
-                return ASTNode::andNode(this, childNodes, tokens, astNode.isError() ? nullptr : ErrorReason::incomplete(
+                return ASTNode::andNode(this, std::move(childNodes), tokens, astNode.isError() ? nullptr : ErrorReason::incomplete(
                                                 tokens, "命令重复部分缺少结束语句"),
                                         orNode.whichBest == 0 ? "repeat no complete1" : "repeat no complete2");
             }

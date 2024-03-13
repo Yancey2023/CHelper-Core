@@ -50,23 +50,23 @@ namespace CHelper::Node {
     NodeNamespaceId::NodeNamespaceId(const nlohmann::json &j,
                                      const CPack &cpack)
             : NodeBase(j, true),
-              key(FROM_JSON_OPTIONAL(j, key, std::string)),
-              ignoreError(FROM_JSON(j, ignoreError, bool)),
+              key(JsonUtil::fromJsonOptional<std::string>(j, "key")),
+              ignoreError(JsonUtil::fromJson<bool>(j, "ignoreError")),
               contents(getIdContentFromCPack(j, cpack, key)) {}
 
-    NodeType* NodeNamespaceId::getNodeType() const {
+    NodeType *NodeNamespaceId::getNodeType() const {
         return NodeType::NAMESPACE_ID.get();
     }
 
     void NodeNamespaceId::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        TO_JSON_OPTIONAL(j, key)
+        JsonUtil::toJsonOptional(j, "key", key);
         if (!key.has_value()) {
             nlohmann::json content;
             for (const auto &item: *contents) {
                 content.push_back(*item);
             }
-            j["contents"] = content;
+            JsonUtil::toJson(j, "contents", content);
         }
     }
 
@@ -77,17 +77,19 @@ namespace CHelper::Node {
         auto result = tokenReader.readStringASTNode(this);
         DEBUG_GET_NODE_END(this)
         if (result.tokens.isEmpty()) {
-            return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
-                    result.tokens, "命令不完整"));
+            VectorView <Token> tokens = result.tokens;
+            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(
+                    tokens, "命令不完整"));
         }
         if (!ignoreError) {
-            std::string str = TokenUtil::toString(result.tokens);
+            VectorView <Token> tokens = result.tokens;
+            std::string str = TokenUtil::toString(tokens);
             size_t strHash = std::hash<std::string>{}(str);
             if (std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
                 return !item->fastMatch(strHash) && !item->idWithNamespace->fastMatch(strHash);
             })) {
-                return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
-                        result.tokens, "找不到含义 -> " + TokenUtil::toString(result.tokens)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(
+                        tokens, "找不到含义 -> " + std::move(str)));
             }
         }
         return result;
@@ -110,13 +112,12 @@ namespace CHelper::Node {
 
     bool NodeNamespaceId::collectSuggestions(const ASTNode *astNode,
                                              size_t index,
-                                             std::vector<Suggestion> &suggestions) const {
+                                             std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain;
         std::vector<std::shared_ptr<NormalId>> namespaceStartOf, namespaceContain;
         std::vector<std::shared_ptr<NamespaceId>> descriptionContain;
-
         for (const auto &item: *contents) {
             //通过名字进行搜索
             //省略minecraft命名空间
@@ -145,26 +146,28 @@ namespace CHelper::Node {
                     descriptionContain.push_back(item);
                 }
             }
-
         }
+        Suggestions suggestions1;
         for (const auto &item: nameStartOf) {
-            suggestions.emplace_back(astNode->tokens, item);
+            suggestions1.suggestions.emplace_back(astNode->tokens, item);
         }
         for (const auto &item: nameContain) {
-            suggestions.emplace_back(astNode->tokens, item);
+            suggestions1.suggestions.emplace_back(astNode->tokens, item);
         }
         for (const auto &item: namespaceStartOf) {
-            suggestions.emplace_back(astNode->tokens, item);
+            suggestions1.suggestions.emplace_back(astNode->tokens, item);
         }
         for (const auto &item: namespaceContain) {
-            suggestions.emplace_back(astNode->tokens, item);
+            suggestions1.suggestions.emplace_back(astNode->tokens, item);
         }
         for (const auto &item: descriptionContain) {
-            suggestions.emplace_back(astNode->tokens, item);
+            suggestions1.suggestions.emplace_back(astNode->tokens, item);
         }
         for (const auto &item: descriptionContain) {
-            suggestions.emplace_back(astNode->tokens, item->idWithNamespace);
+            suggestions1.suggestions.emplace_back(astNode->tokens, item->idWithNamespace);
         }
+        suggestions1.markFiltered();
+        suggestions.push_back(std::move(suggestions1));
         return true;
     }
 

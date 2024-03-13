@@ -70,9 +70,9 @@ namespace CHelper::Node {
     NodeTargetSelector::NodeTargetSelector(const nlohmann::json &j,
                                            [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true),
-              isMustPlayer(FROM_JSON(j, isMustPlayer, bool)),
-              isMustNPC(FROM_JSON(j, isMustNPC, bool)),
-              isOnlyOne(FROM_JSON(j, isOnlyOne, bool)),
+              isMustPlayer(JsonUtil::fromJson<bool>(j, "isMustPlayer")),
+              isMustNPC(JsonUtil::fromJson<bool>(j, "isMustNPC")),
+              isOnlyOne(JsonUtil::fromJson<bool>(j, "isOnlyOne")),
               nodeItem("ITEM_ID", "物品ID", "items", true, cpack.itemIds),
               nodeFamily("FAMILIES", "族", "families", true, cpack.getNormalId("families")),
               nodeGameMode("GAME_MODES", "游戏模式", "gameModes", true, cpack.getNormalId("gameModes")),
@@ -89,9 +89,9 @@ namespace CHelper::Node {
 
     void NodeTargetSelector::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        TO_JSON(j, isMustPlayer);
-        TO_JSON(j, isMustNPC);
-        TO_JSON(j, isOnlyOne);
+        JsonUtil::toJson(j, "isMustPlayer", isMustPlayer);
+        JsonUtil::toJson(j, "isMustNPC", isMustNPC);
+        JsonUtil::toJson(j, "isOnlyOne", isOnlyOne);
     }
 
     ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -131,7 +131,7 @@ namespace CHelper::Node {
 
     bool NodeTargetSelector::collectSuggestions(const ASTNode *astNode,
                                                 size_t index,
-                                                std::vector<Suggestion> &suggestions) const {
+                                                std::vector<Suggestions> &suggestions) const {
         if (astNode->tokens.isEmpty()) {
             VectorView <Token> tokens = {astNode->tokens.vector, astNode->tokens.end, astNode->tokens.end};
             ASTNode newAstNode = ASTNode::simpleNode(this, tokens);

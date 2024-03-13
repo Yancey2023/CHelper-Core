@@ -84,7 +84,7 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions(
         return nullptr;
     }
     auto suggestions = core->getSuggestions();
-    if (suggestions.empty()) {
+    if (suggestions->empty()) {
         return nullptr;
     }
     jclass arrayListClass = env->FindClass("java/util/ArrayList");
@@ -92,22 +92,49 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions(
     jmethodID arrayListAdd = env->GetMethodID(arrayListClass, "add", "(Ljava/lang/Object;)Z");
     jclass dataCompleteClass = env->FindClass("yancey/chelper/util/DataComplete");
     jobject javaList = env->NewObject(arrayListClass, arrayListConstructor);
-    for (const auto &item: suggestions) {
+    for (const auto &item: *suggestions) {
         jobject javaDataComplete = env->AllocObject(dataCompleteClass);
         env->SetObjectField(javaDataComplete,
                             env->GetFieldID(env->GetObjectClass(javaDataComplete), "name", "Ljava/lang/String;"),
                             env->NewStringUTF(item.content->name.c_str()));
-        if (item.content->description.has_value()) {
-            jstring javaDescription = env->NewStringUTF(item.content->description.value().c_str());
-            env->SetObjectField(javaDataComplete, env->GetFieldID(env->GetObjectClass(javaDataComplete), "description",
-                                                                  "Ljava/lang/String;"), javaDescription);
-        } else {
-            env->SetObjectField(javaDataComplete, env->GetFieldID(env->GetObjectClass(javaDataComplete), "description",
-                                                                  "Ljava/lang/String;"), nullptr);
-        }
+        env->SetObjectField(javaDataComplete,
+                            env->GetFieldID(env->GetObjectClass(javaDataComplete), "description", "Ljava/lang/String;"),
+                            item.content->description.has_value() ? env->NewStringUTF(
+                                    item.content->description.value().c_str()) : nullptr);
         env->CallBooleanMethod(javaList, arrayListAdd, javaDataComplete);
     }
     return javaList;
+}
+
+extern "C" JNIEXPORT jobject JNICALL
+Java_yancey_chelper_core_CHelperCore_getSuggestion(
+        JNIEnv *env, jobject thiz, jint which) {
+    if (core == nullptr || which < 0) {
+        return nullptr;
+    }
+    auto suggestions = core->getSuggestions();
+    if (suggestions->size() >= which) {
+        return nullptr;
+    }
+    CHelper::Suggestion suggestion = suggestions->at(which);
+    jobject javaDataComplete = env->AllocObject(env->FindClass("yancey/chelper/util/DataComplete"));
+    env->SetObjectField(javaDataComplete,
+                        env->GetFieldID(env->GetObjectClass(javaDataComplete), "name", "Ljava/lang/String;"),
+                        env->NewStringUTF(suggestion.content->name.c_str()));
+    env->SetObjectField(javaDataComplete,
+                        env->GetFieldID(env->GetObjectClass(javaDataComplete), "description", "Ljava/lang/String;"),
+                        suggestion.content->description.has_value() ? env->NewStringUTF(
+                                suggestion.content->description.value().c_str()) : nullptr);
+    return javaDataComplete;
+}
+
+extern "C" JNIEXPORT jlong JNICALL
+Java_yancey_chelper_core_CHelperCore_getSuggestionsSize(
+        JNIEnv *env, jint thiz) {
+    if (core == nullptr) {
+        return 0;
+    }
+    return static_cast<jint>(core->getSuggestions()->size());
 }
 
 extern "C" JNIEXPORT jstring JNICALL

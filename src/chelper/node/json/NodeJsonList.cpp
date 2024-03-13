@@ -28,7 +28,7 @@ namespace CHelper::Node {
     NodeJsonList::NodeJsonList(const nlohmann::json &j,
                                [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, false),
-              data(FROM_JSON(j, data, std::string)) {}
+              data(JsonUtil::fromJson<std::string>(j, "data")) {}
 
     void NodeJsonList::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
@@ -55,12 +55,20 @@ namespace CHelper::Node {
         return NodeType::JSON_LIST.get();
     }
 
+    void NodeJsonList::toJson(nlohmann::json &j) const {
+        NodeBase::toJson(j);
+        JsonUtil::toJson(j, "data", data);
+    }
+
     ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         if (nodeList == nullptr) {
             return getByChildNode(tokenReader, cpack, nodeAllList.get(), "node json all list");
         }
         tokenReader.push();
         ASTNode result1 = nodeList->getASTNode(tokenReader, cpack);
+        if (!result1.isError()) {
+            return ASTNode::andNode(this, {std::move(result1)}, tokenReader.collect());
+        }
         size_t index1 = tokenReader.index;
         tokenReader.restore();
         tokenReader.push();
@@ -69,12 +77,12 @@ namespace CHelper::Node {
         tokenReader.restore();
         tokenReader.push();
         tokenReader.index = result1.isError() ? index2 : index1;
-        return ASTNode::orNode(this, {result1, result2}, tokenReader.collect());
+        return ASTNode::orNode(this, {std::move(result1), std::move(result2)}, tokenReader.collect());
     }
 
     bool NodeJsonList::collectSuggestions(const ASTNode *astNode,
                                           size_t index,
-                                          std::vector<Suggestion> &suggestions) const {
+                                          std::vector<Suggestions> &suggestions) const {
         return astNode->id == "node json all list";
     }
 

@@ -26,26 +26,26 @@ namespace CHelper {
               isDefault(isDefault) {}
 
     Manifest::Manifest(const nlohmann::json &j)
-            : name(FROM_JSON_OPTIONAL(j, name, std::string)),
-              description(FROM_JSON_OPTIONAL(j, description, std::string)),
-              minecraftVersion(FROM_JSON_OPTIONAL(j, minecraftVersion, std::string)),
-              author(FROM_JSON_OPTIONAL(j, author, std::string)),
-              updateDate(FROM_JSON_OPTIONAL(j, updateDate, std::string)),
-              packId(FROM_JSON(j, packId, std::string)),
-              version(FROM_JSON(j, version, int)),
-              isBasicPack(FROM_JSON_OPTIONAL(j, isBasicPack, bool)),
-              isDefault(FROM_JSON_OPTIONAL(j, isDefault, bool)) {}
+            : name(JsonUtil::fromJsonOptional<std::string>(j, "name")),
+              description(JsonUtil::fromJsonOptional<std::string>(j, "description")),
+              minecraftVersion(JsonUtil::fromJsonOptional<std::string>(j, "minecraftVersion")),
+              author(JsonUtil::fromJsonOptional<std::string>(j, "author")),
+              updateDate(JsonUtil::fromJsonOptional<std::string>(j, "updateDate")),
+              packId(JsonUtil::fromJson<std::string>(j, "packId")),
+              version(JsonUtil::fromJson<int>(j, "version")),
+              isBasicPack(JsonUtil::fromJsonOptional<bool>(j, "isBasicPack")),
+              isDefault(JsonUtil::fromJsonOptional<bool>(j, "isDefault")) {}
 
     void Manifest::toJson(nlohmann::json &j) const {
-        TO_JSON_OPTIONAL(j, name)
-        TO_JSON_OPTIONAL(j, description)
-        TO_JSON_OPTIONAL(j, minecraftVersion)
-        TO_JSON_OPTIONAL(j, author)
-        TO_JSON_OPTIONAL(j, updateDate)
-        TO_JSON(j, packId);
-        TO_JSON(j, version);
-        TO_JSON_OPTIONAL(j, isBasicPack)
-        TO_JSON_OPTIONAL(j, isDefault)
+        JsonUtil::toJsonOptional(j, "name", name);
+        JsonUtil::toJsonOptional(j, "description", description);
+        JsonUtil::toJsonOptional(j, "minecraftVersion", minecraftVersion);
+        JsonUtil::toJsonOptional(j, "author", author);
+        JsonUtil::toJsonOptional(j, "updateDate", updateDate);
+        JsonUtil::toJson(j, "packId", packId);
+        JsonUtil::toJson(j, "version", version);
+        JsonUtil::toJsonOptional(j, "isBasicPack", isBasicPack);
+        JsonUtil::toJsonOptional(j, "isDefault", isDefault);
     }
 
 }

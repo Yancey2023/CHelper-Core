@@ -53,34 +53,34 @@ namespace CHelper::Node {
     NodeNormalId::NodeNormalId(const nlohmann::json &j,
                                const CPack &cpack)
             : NodeBase(j, true),
-              key(FROM_JSON_OPTIONAL(j, key, std::string)),
-              ignoreError(FROM_JSON(j, ignoreError, bool)),
+              key(JsonUtil::fromJsonOptional<std::string>(j, "key")),
+              ignoreError(JsonUtil::fromJson<bool>(j, "ignoreError")),
               contents(getIdContentFromCPack(j, cpack, key)),
               allowsMissingID(false),
               getNormalIdASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                   return tokenReader.readStringASTNode(node);
               }) {}
 
-    NodeType* NodeNormalId::getNodeType() const {
+    NodeType *NodeNormalId::getNodeType() const {
         return NodeType::NORMAL_ID.get();
     }
 
     void NodeNormalId::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        TO_JSON_OPTIONAL(j, key)
+        JsonUtil::toJsonOptional(j, "key", key);
         if (!key.has_value()) {
             nlohmann::json content;
             for (const auto &item: *contents) {
                 content.push_back(*item);
             }
-            j["contents"] = content;
+            JsonUtil::toJson(j, "contents", content);
         }
     }
 
     ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(this)
-        auto result = getNormalIdASTNode(this, tokenReader);
+        ASTNode result = getNormalIdASTNode(this, tokenReader);
         DEBUG_GET_NODE_END(this)
         if (allowsMissingID) {
             if (result.isError()) {
@@ -93,17 +93,19 @@ namespace CHelper::Node {
         }
         tokenReader.pop();
         if (result.tokens.isEmpty()) {
-            return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
-                    result.tokens, "命令不完整"));
+            VectorView <Token> tokens = result.tokens;
+            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(
+                    tokens, "命令不完整"));
         }
         if (!ignoreError) {
-            std::string str = TokenUtil::toString(result.tokens);
+            VectorView <Token> tokens = result.tokens;
+            std::string str = TokenUtil::toString(tokens);
             size_t strHash = std::hash<std::string>{}(str);
             if (std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
                 return !item->fastMatch(strHash);
             })) {
-                return ASTNode::andNode(this, {result}, result.tokens, ErrorReason::incomplete(
-                        result.tokens, "找不到含义 -> " + TokenUtil::toString(result.tokens)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(
+                        tokens, "找不到含义 -> " + std::move(str)));
             }
         }
         return result;
@@ -126,7 +128,7 @@ namespace CHelper::Node {
 
     bool NodeNormalId::collectSuggestions(const ASTNode *astNode,
                                           size_t index,
-                                          std::vector<Suggestion> &suggestions) const {
+                                          std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
@@ -149,15 +151,18 @@ namespace CHelper::Node {
                 }
             }
         }
+        Suggestions suggestions1;
         for (const auto &item: nameStartOf) {
-            suggestions.emplace_back(astNode->tokens, item);
+            suggestions1.suggestions.emplace_back(astNode->tokens, item);
         }
         for (const auto &item: nameContain) {
-            suggestions.emplace_back(astNode->tokens, item);
+            suggestions1.suggestions.emplace_back(astNode->tokens, item);
         }
         for (const auto &item: descriptionContain) {
-            suggestions.emplace_back(astNode->tokens, item);
+            suggestions1.suggestions.emplace_back(astNode->tokens, item);
         }
+        suggestions1.markFiltered();
+        suggestions.push_back(std::move(suggestions1));
         return true;
     }
 

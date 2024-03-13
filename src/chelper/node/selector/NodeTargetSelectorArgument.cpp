@@ -175,13 +175,13 @@ namespace CHelper::Node {
         ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey.get(), "key");
         childNodes.push_back(astNodeKey);
         if (astNodeKey.isError()) {
-            return ASTNode::andNode((NodeBase *) this, childNodes, tokenReader.collect());
+            return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
         // = or !=
         ASTNode astNodeSeparator = getByChildNode(tokenReader, cpack, nodeSeparator.get(), "separator");
         childNodes.push_back(astNodeSeparator);
         if (astNodeSeparator.isError()) {
-            return ASTNode::andNode((NodeBase *) this, childNodes, tokenReader.collect());
+            return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
         //value
         std::string key = TokenUtil::toString(astNodeKey.tokens);
@@ -212,7 +212,7 @@ namespace CHelper::Node {
         } else {
             childNodes.push_back(nodeValue->getASTNodeWithNextNode(tokenReader, cpack));
         }
-        return ASTNode::andNode((NodeBase *) this, childNodes, tokenReader.collect());
+        return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
     }
 
 } // CHelper::Node

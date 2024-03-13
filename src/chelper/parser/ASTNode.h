@@ -11,6 +11,7 @@
 #include "ErrorReason.h"
 #include "Suggestion.h"
 #include "StructureBuilder.h"
+#include "Suggestions.h"
 
 namespace CHelper {
 
@@ -49,7 +50,7 @@ namespace CHelper {
 
         ASTNode(ASTNodeMode::ASTNodeMode mode,
                 const Node::NodeBase *node,
-                const std::vector<ASTNode> &childNodes,
+                std::vector<ASTNode> &&childNodes,
                 const VectorView <Token> &tokens,
                 const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
                 std::string id,
@@ -68,27 +69,31 @@ namespace CHelper {
                                   const std::string &id = "");
 
         static ASTNode andNode(const Node::NodeBase *node,
-                               const std::vector<ASTNode> &childNodes,
+                               std::vector<ASTNode> &&childNodes,
                                const VectorView <Token> &tokens,
                                const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                                const std::string &id = "");
 
         static ASTNode orNode(const Node::NodeBase *node,
-                              const std::vector<ASTNode> &childNodes,
+                              std::vector<ASTNode> &&childNodes,
                               const VectorView <Token> *tokens,
                               const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                               const std::string &id = "");
 
         static ASTNode orNode(const Node::NodeBase *node,
-                              const std::vector<ASTNode> &childNodes,
+                              std::vector<ASTNode> &&childNodes,
                               const VectorView <Token> &tokens,
                               const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                               const std::string &id = "");
 
         //是否有结构错误（不包括ID错误）
-        [[nodiscard]] bool isError() const;
+        [[nodiscard]] inline bool isError() const {
+            return !errorReasons.empty();
+        }
 
-        [[nodiscard]] bool hasChildNode() const;
+        [[nodiscard]] inline bool hasChildNode() const {
+            return !childNodes.empty();
+        }
 
         [[nodiscard]] bool isAllWhitespaceError() const;
 
@@ -98,7 +103,7 @@ namespace CHelper {
 
         void collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
 
-        void collectSuggestions(size_t index, std::vector<Suggestion> &suggestions) const;
+        void collectSuggestions(size_t index, std::vector<Suggestions> &suggestions) const;
 
         void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 

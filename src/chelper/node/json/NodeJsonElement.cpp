@@ -37,7 +37,7 @@ namespace CHelper::Node {
             nodes.push_back(getNodeFromJson(item, cpack));
         }
         Profile::next(ColorStringBuilder().red("loading start nodes").build());
-        auto startNodeId = FROM_JSON(j, start, std::string);
+        auto startNodeId = JsonUtil::fromJson<std::string>(j, "start");
         Profile::next(ColorStringBuilder()
                               .red("linking startNode \"")
                               .purple(startNodeId)
@@ -60,7 +60,9 @@ namespace CHelper::Node {
             if (item->getNodeType() == NodeType::JSON_LIST.get()) {
                 ((NodeJsonList *) item.get())->init(nodes);
             } else if (item->getNodeType() == NodeType::JSON_OBJECT.get()) {
-                ((NodeJsonObject *)item.get())->init(nodes);
+                for (const auto &item2: ((NodeJsonObject *) item.get())->data) {
+                    item2->init(nodes);
+                }
             }
         }
         Profile::pop();
@@ -68,8 +70,8 @@ namespace CHelper::Node {
 
     void NodeJsonElement::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        j["node"] = nodes;
-        j["start"] = start->id.value();
+        JsonUtil::toJson(j, "node", nodes);
+        JsonUtil::toJson(j, "start", start->id.value());
     }
 
     ASTNode NodeJsonElement::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -88,9 +90,9 @@ namespace CHelper::Node {
         static std::unique_ptr<NodeBase> jsonBoolean = std::make_unique<NodeJsonBoolean>(
                 "JSON_BOOLEAN", "JSON布尔值", std::nullopt, std::nullopt);
         static std::unique_ptr<NodeBase> jsonList = std::make_unique<NodeJsonList>(
-                "JSON_LIST", "JSON列表", "");
+                "JSON_LIST", "JSON列表");
         static std::unique_ptr<NodeBase> jsonObject = std::make_unique<NodeJsonObject>(
-                "JSON_OBJECT", "JSON对象", std::vector<std::unique_ptr<NodeBase>>{});
+                "JSON_OBJECT", "JSON对象");
         static std::unique_ptr<NodeBase> jsonElement = std::make_unique<NodeOr>(
                 "JSON_ELEMENT", "JSON元素", std::vector<const NodeBase *>{
                         jsonBoolean.get(), jsonFloat.get(), jsonInteger.get(), jsonNull.get(),

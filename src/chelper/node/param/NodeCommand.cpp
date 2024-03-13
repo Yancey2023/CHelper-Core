@@ -33,7 +33,8 @@ namespace CHelper::Node {
 
     ASTNode NodeCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         ASTNode node = nodeCommand.getASTNode(tokenReader, cpack);
-        return ASTNode::andNode(this, {node}, node.tokens, nullptr, "command");
+        VectorView <Token> tokens = node.tokens;
+        return ASTNode::andNode(this, {std::move(node)}, tokens, nullptr, "command");
     }
 
     std::optional<std::string> NodeCommand::collectDescription(const ASTNode *astNode, size_t index) const {
