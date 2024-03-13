@@ -135,6 +135,11 @@ namespace CHelper::Node {
     }
 
     std::optional<std::string> NodeBase::collectDescription(const ASTNode *node, size_t index) const {
+#if CHelperDebug == true
+        if (!description.has_value()) {
+            CHELPER_WARN("description is null");
+        }
+#endif
         return description;
     }
 

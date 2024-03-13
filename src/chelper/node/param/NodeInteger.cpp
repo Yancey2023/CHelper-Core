@@ -61,7 +61,7 @@ namespace CHelper::Node {
         if (!num.has_value() || (min.has_value() && num.value() < min) || (max.has_value() && num.value() > max)) {
             idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("数值不在范围")
                     .append("[").append(std::to_string(min.value_or(INT_MIN)))
-                    .append(", ").append(std::to_string(min.value_or(INT_MAX)))
+                    .append(", ").append(std::to_string(max.value_or(INT_MAX)))
                     .append("]").append("内 -> ").append(str)));
         }
         return true;

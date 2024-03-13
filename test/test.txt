@@ -10,3 +10,4 @@ give @s stone 12 1
 tag @s add "\\\"\u1110\/\b\f\n\r\t\p\"
 give @s command_block 12 12 {"minecraft:can_destroy":{"blocks":["minecraft:acacia_door"]}}
 give @s s
+give @s stone 1 1 {
