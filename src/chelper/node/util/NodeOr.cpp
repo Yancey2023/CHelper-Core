@@ -30,15 +30,13 @@ namespace CHelper::Node {
         for (const auto &item: childNodes) {
             tokenReader.push();
             ASTNode node = item->getASTNode(tokenReader, cpack);
-            if (isUseFirst && !node.isError()) {
-                if (isAttachToEnd) {
-                    tokenReader.skipToLF();
-                }
-                return ASTNode::andNode(this, {std::move(node)}, tokenReader.collect());
-            }
+            bool isError = node.isError();
             childASTNodes.push_back(std::move(node));
             indexes.push_back(tokenReader.index);
             tokenReader.restore();
+            if (isUseFirst && !isError) {
+                break;
+            }
         }
         if (isAttachToEnd) {
             tokenReader.push();

@@ -111,7 +111,7 @@ namespace CHelper {
         std::shared_ptr<ErrorReason> errorReason;
         if (token == nullptr) {
             errorReason = ErrorReason::incomplete(tokens, FormatUtil::format(
-                    "指令不完整，需要的参数类型为{0}", requireType));
+                    "命令不完整，需要的参数类型为{0}", requireType));
         } else if (token->type != type) {
             errorReason = ErrorReason::typeError(tokens, FormatUtil::format(
                     "类型不匹配，正确的参数类型为{0}，但当前参数类型为{1}",

@@ -13,6 +13,9 @@
 namespace CHelper::Node {
 
     static std::unique_ptr<NodeOr> getNodeElement1(const std::vector<std::unique_ptr<NodeJsonEntry>> &data) {
+        if (data.empty()) {
+            return nullptr;
+        }
         std::vector<const NodeBase *> nodeElementData;
         nodeElementData.reserve(data.size());
         for (const auto &item: data) {
@@ -23,7 +26,7 @@ namespace CHelper::Node {
 
     static NodeOr getNodeElement2(const std::unique_ptr<NodeOr> &nodeElement1) {
         std::vector<const NodeBase *> nodeElementData;
-        if (nodeElement1->isUseFirst) {
+        if (nodeElement1 != nullptr) {
             nodeElementData.reserve(2);
             nodeElementData.push_back(nodeElement1.get());
         }

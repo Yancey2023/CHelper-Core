@@ -16,7 +16,7 @@ namespace CHelper::JsonUtil {
         std::string result;
         StringReader stringReader(input, "unknown");
         while (true) {
-            char ch = stringReader.peek();
+            signed char ch = stringReader.peek();
             switch (ch) {
                 case EOF:
                     return result;
@@ -51,7 +51,7 @@ namespace CHelper::JsonUtil {
         int unicodeValue;
         std::string escapeSequence;
         while (true) {
-            char ch = stringReader.next();
+            signed char ch = stringReader.next();
             //结束字符
             if (ch == EOF) {
                 result.isComplete = false;

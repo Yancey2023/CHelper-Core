@@ -8,14 +8,14 @@
 #include "chelper/Core.h"
 
 int main() {
-    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
-                        R"(D:\CLion\project\CHelper-Core\test\test.txt)",
-                        false);
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
+//                        R"(D:\CLion\project\CHelper-Core\test\test.txt)",
+//                        false);
 //    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
 //                        R"(/home/yancey/CLionProjects/CHelper/test/test.txt)",
 //                        true);
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
-//                        std::vector<std::string>{"give @s "}, false);
+    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
+                        std::vector<std::string>{"execute run "}, false);
 //    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
 //                        std::vector<std::string>{"give @s "}, true);
 //    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)", {""}, false);
@@ -110,9 +110,9 @@ namespace CHelper::Test {
                                     endStructure - startStructure).count()) + "ms").build() << std::endl;
 
                 }
-//                std::cout << core->getAstNode().toOptimizedJson().dump(
+//                std::cout << core->getAstNode()->toOptimizedJson().dump(
 //                        -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
-//                std::cout << core->getAstNode().toBestJson().dump(
+//                std::cout << core->getAstNode()->toBestJson().dump(
 //                        -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
                 std::cout << "structure: " + structure << std::endl;
                 std::cout << "description: " + description << std::endl;
@@ -152,9 +152,19 @@ namespace CHelper::Test {
                                 .green(item.content->name + " ")
                                 .blue(item.content->description.value_or(""))
                                 .build() << std::endl;
+                        std::string result = command.substr(0, item.start)
+                                .append(item.content->name)
+                                .append(command.substr(item.end));
+                        std::string greenPart = item.content->name;
+                        if (item.end == command.length()) {
+                            ASTNode astNode = Parser::parse(result, core->getCPack());
+                            if (astNode.canAddWhitespace && astNode.isAllWhitespaceError()) {
+                                greenPart.push_back(' ');
+                            }
+                        }
                         std::cout << ColorStringBuilder()
                                 .normal(command.substr(0, item.start))
-                                .green(item.content->name)
+                                .green(greenPart)
                                 .normal(command.substr(item.end))
                                 .build() << std::endl;
                     }

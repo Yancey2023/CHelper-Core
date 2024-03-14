@@ -115,11 +115,11 @@ namespace CHelper::Node {
             nodeHasPermissionValueLeft.get(), nodeHasPermissionEntry.get(),
             nodeHasPermissionValueSeparator.get(), nodeHasPermissionValueRight.get());
     static std::unique_ptr<NodeBase> nodeHasPropertyValueLeft = std::make_unique<NodeSingleSymbol>(
-            "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_LEFT", "目标选择器haspermission参数左括号", '{');
+            "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_LEFT", "目标选择器has_property参数左括号", '{');
     static std::unique_ptr<NodeBase> nodeHasPropertyValueRight = std::make_unique<NodeSingleSymbol>(
-            "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_RIGHT", "目标选择器haspermission参数右括号", '}');
+            "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_RIGHT", "目标选择器has_property参数右括号", '}');
     static std::unique_ptr<NodeBase> nodeHasPropertyValueSeparator = std::make_unique<NodeSingleSymbol>(
-            "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_SEPARATOR", "目标选择器haspermission参数分隔符", ',');
+            "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_SEPARATOR", "目标选择器has_property参数分隔符", ',');
     static std::unique_ptr<NodeBase> nodeBoolean = std::make_unique<NodeBoolean>(
             "BOOLEAN", "布尔值", std::nullopt, std::nullopt);
     static std::unique_ptr<NodeBase> nodeAny = std::make_unique<NodeOr>(
@@ -128,10 +128,10 @@ namespace CHelper::Node {
                     nodeBoolean.get(), nodeScoreRange.get(), nodeString.get(), nodeFloat.get()
             }, false);
     static std::unique_ptr<NodeBase> nodeHasPropertyEntry = std::make_unique<NodeEntry>(
-            "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_ENTRY", "目标选择器haspermission参数内容",
+            "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_ENTRY", "目标选择器has_property参数内容",
             nodeString.get(), nodeSeparator.get(), nodeAny.get());
     static std::unique_ptr<NodeBase> nodeHasProperty = std::make_unique<NodeList>(
-            "TARGET_SELECTOR_ARGUMENT_HASPERMISSION", "目标选择器hasproperty参数",
+            "TARGET_SELECTOR_ARGUMENT_HASPERMISSION", "目标选择器has_property参数",
             nodeHasPropertyValueLeft.get(), nodeHasPropertyEntry.get(),
             nodeHasPropertyValueSeparator.get(), nodeHasPropertyValueRight.get());
     static std::unique_ptr<NodeBase> nodeValue = std::make_unique<NodeOr>(

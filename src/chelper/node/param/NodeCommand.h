@@ -9,25 +9,34 @@
 
 #include "../NodeBase.h"
 #include "../util/NodeOr.h"
+#include "NodePerCommand.h"
 
 namespace CHelper::Node {
 
     class NodeCommand : public NodeBase {
     public:
-        NodeOr nodeCommand;
+        std::vector<const NodePerCommand *> commands;
 
         NodeCommand(const std::optional<std::string> &id,
                     const std::optional<std::string> &description,
-                    const std::vector<const NodeBase *> &childNodes);
+                    const std::vector<const NodePerCommand *> &commands);
+
+        NodeCommand(const std::optional<std::string> &id,
+                    const std::optional<std::string> &description,
+                    [[maybe_unused]] const CPack &cpack);
 
         NodeCommand(const nlohmann::json &j,
-                    const CPack &cpack);
+                    [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
+
+        bool collectSuggestions(const ASTNode *astNode,
+                                size_t index,
+                                std::vector<Suggestions> &suggestions) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

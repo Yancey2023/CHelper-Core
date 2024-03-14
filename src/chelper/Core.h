@@ -30,19 +30,33 @@ namespace CHelper {
 
         void onSelectionChanged(size_t index0);
 
-        [[nodiscard]] const ASTNode &getAstNode() const;
+        [[nodiscard]] inline const CPack *getCPack() const {
+            return cpack.get();
+        }
 
-        [[nodiscard]] std::string getDescription() const;
+        [[nodiscard]] inline const ASTNode *getAstNode() const {
+            return &astNode;
+        }
 
-        [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
+        [[nodiscard]] inline std::string getDescription() const {
+            return astNode.getDescription(index);
+        }
+
+        [[nodiscard]] inline std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const {
+            return astNode.getErrorReasons();
+        }
 
         std::vector<Suggestion> *getSuggestions();
 
-        [[nodiscard]] std::string getStructure() const;
+        [[nodiscard]] inline std::string getStructure() const{
+            return astNode.getStructure();
+        }
 
-        [[nodiscard]] std::string getColors() const;
+        [[nodiscard]] inline std::string getColors() const {
+            return astNode.getColors();
+        }
 
-        [[nodiscard]] std::optional<std::string> onSuggestionClick(size_t which) const;
+        [[nodiscard]] std::optional<std::string> onSuggestionClick(size_t which);
     };
 
 } // CHelper

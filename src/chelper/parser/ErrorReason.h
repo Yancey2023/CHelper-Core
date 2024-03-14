@@ -21,7 +21,7 @@ namespace CHelper {
             EXCESS = 0,
             //缺少空格
             REQUIRE_WHITE_SPACE = 1,
-            //指令不完整
+            //命令不完整
             INCOMPLETE = 2,
             //类型不匹配
             TYPE_ERROR = 3,

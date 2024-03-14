@@ -49,6 +49,8 @@ namespace CHelper {
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
         //哪个节点最好，OR类型特有，获取颜色和生成命令格式文本的时候使用
         size_t whichBest;
+        //是否需要加后面加空格
+        bool canAddWhitespace;
 
         ASTNode(ASTNodeMode::ASTNodeMode mode,
                 const Node::NodeBase *node,
@@ -56,6 +58,7 @@ namespace CHelper {
                 const VectorView <Token> &tokens,
                 const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
                 std::string id,
+                bool canAddWhitespace,
                 size_t whichBest = -1);
 
     public:
@@ -68,25 +71,29 @@ namespace CHelper {
         static ASTNode simpleNode(const Node::NodeBase *node,
                                   const VectorView <Token> &tokens,
                                   const std::shared_ptr<ErrorReason> &errorReason = nullptr,
-                                  const std::string &id = "");
+                                  const std::string &id = std::string(),
+                                  bool canAddWhitespace = true);
 
         static ASTNode andNode(const Node::NodeBase *node,
                                std::vector<ASTNode> &&childNodes,
                                const VectorView <Token> &tokens,
                                const std::shared_ptr<ErrorReason> &errorReason = nullptr,
-                               const std::string &id = "");
+                               const std::string &id = std::string(),
+                               bool canAddWhitespace = true);
 
         static ASTNode orNode(const Node::NodeBase *node,
                               std::vector<ASTNode> &&childNodes,
                               const VectorView <Token> *tokens,
                               const std::shared_ptr<ErrorReason> &errorReason = nullptr,
-                              const std::string &id = "");
+                              const std::string &id = std::string(),
+                              bool canAddWhitespace = true);
 
         static ASTNode orNode(const Node::NodeBase *node,
                               std::vector<ASTNode> &&childNodes,
                               const VectorView <Token> &tokens,
                               const std::shared_ptr<ErrorReason> &errorReason = nullptr,
-                              const std::string &id = "");
+                              const std::string &id = std::string(),
+                              bool canAddWhitespace = true);
 
         //是否有结构错误（不包括ID错误）
         [[nodiscard]] inline bool isError() const {

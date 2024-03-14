@@ -25,43 +25,43 @@
         "contents": [
           {
             "name": "x",
-            "content": "x轴"
+            "description": "x轴"
           },
           {
             "name": "y",
-            "content": "y轴"
+            "description": "y轴"
           },
           {
             "name": "z",
-            "content": "z轴"
+            "description": "z轴"
           },
           {
             "name": "xy",
-            "content": "x轴 y轴"
+            "description": "x轴 y轴"
           },
           {
             "name": "xz",
-            "content": "y轴 z轴"
+            "description": "y轴 z轴"
           },
           {
             "name": "yz",
-            "content": "y轴 z轴"
+            "description": "y轴 z轴"
           },
           {
             "name": "xyz",
-            "content": "x轴 y轴 z 轴"
+            "description": "x轴 y轴 z 轴"
           },
           {
             "name": "yx",
-            "content": "x轴 u轴"
+            "description": "x轴 u轴"
           },
           {
             "name": "zx",
-            "content": "x轴 z轴"
+            "description": "x轴 z轴"
           },
           {
             "name": "zy",
-            "content": "y轴 z轴"
+            "description": "y轴 z轴"
           },
           {
             "name": "xzy",

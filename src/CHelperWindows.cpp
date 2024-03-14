@@ -4,6 +4,7 @@
 
 #include "CHelperWindows.h"
 #include "chelper/Core.h"
+#include "chelper/parser/Parser.h"
 #include <commctrl.h>
 
 static size_t ID_INPUT = 1;
@@ -196,9 +197,9 @@ void onTextChanged(const std::string &command) {
         std::cout << CHelper::ColorStringBuilder().blue("get structure in ").purple(
                 std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
                         endStructure - startStructure).count()) + "ms").build() << std::endl;
-//        std::cout << core->getAstNode().toOptimizedJson().dump(
+//        std::cout << core->getAstNode()->toOptimizedJson().dump(
 //                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
-//        std::cout << core->getAstNode().toBestJson().dump(
+//        std::cout << core->getAstNode()->toBestJson().dump(
 //                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
         std::cout << "structure: " + structure << std::endl;
         std::cout << "description: " + description << std::endl;
@@ -238,9 +239,19 @@ void onTextChanged(const std::string &command) {
                         .green(item.content->name + " ")
                         .blue(item.content->description.value_or(""))
                         .build() << std::endl;
+                std::string result = command.substr(0, item.start)
+                        .append(item.content->name)
+                        .append(command.substr(item.end));
+                std::string greenPart = item.content->name;
+                if (item.end == command.length()) {
+                    CHelper::ASTNode astNode = CHelper::Parser::parse(result, core->getCPack());
+                    if (astNode.canAddWhitespace && astNode.isAllWhitespaceError()) {
+                        greenPart.push_back(' ');
+                    }
+                }
                 std::cout << CHelper::ColorStringBuilder()
                         .normal(command.substr(0, item.start))
-                        .green(item.content->name)
+                        .green(greenPart)
                         .normal(command.substr(item.end))
                         .build() << std::endl;
             }

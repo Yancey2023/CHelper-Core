@@ -37,8 +37,8 @@ namespace CHelper::Node {
     void NodeJsonEntry::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
             if (item->id == value) {
-                auto keyId = std::make_shared<NormalId>('\"' + key + '\"', description);
-                nodeKey = std::make_unique<NodeText>("JSON_OBJECT_ENTRY_KEY", "JSON对象键", keyId);
+                nodeKey = std::make_unique<NodeText>("JSON_OBJECT_ENTRY_KEY", "JSON对象键",
+                                                     std::make_shared<NormalId>('\"' + key + '\"', description));
                 nodeEntry = std::make_unique<NodeEntry>("JSON_OBJECT_ENTRY", "JSON对象键值对", nodeKey.get(),
                                                         nodeSeparator.get(), item.get());
                 return;

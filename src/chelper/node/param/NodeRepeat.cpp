@@ -56,24 +56,30 @@ namespace CHelper::Node {
         while (true) {
             tokenReader.push();
             ASTNode astNode = node.first->getASTNodeWithNextNode(tokenReader, cpack);
+            bool isAstNodeErrorError = astNode.isError();
             size_t astNodeIndex = tokenReader.index;
             tokenReader.restore();
             tokenReader.push();
             ASTNode breakAstNode = node.second->getASTNodeWithNextNode(tokenReader, cpack);
+            bool isBreakAstNodeError = breakAstNode.isError();
             size_t breakAstNodeIndex = tokenReader.index;
             tokenReader.restore();
             tokenReader.push();
-            tokenReader.index = breakAstNode.isError() ? astNodeIndex : breakAstNodeIndex;
-            ASTNode orNode = ASTNode::orNode(this, {astNode, breakAstNode}, tokenReader.collect());
-            childNodes.push_back(orNode);
-            if (!breakAstNode.isError()) {
+            tokenReader.index = isBreakAstNodeError ? astNodeIndex : breakAstNodeIndex;
+            ASTNode orNode = ASTNode::orNode(this, {
+                    std::move(astNode), std::move(breakAstNode)}, tokenReader.collect());
+            bool isOrNodeError = orNode.isError();
+            bool isOrNodeTokenEmpty = orNode.tokens.isEmpty();
+            size_t whichBest = orNode.whichBest;
+            childNodes.push_back(std::move(orNode));
+            if (!isBreakAstNodeError) {
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
-            } else if (orNode.isError() || !tokenReader.ready() || orNode.tokens.isEmpty()) {
+            } else if (isOrNodeError || !tokenReader.ready() || isOrNodeTokenEmpty) {
                 VectorView <Token> tokens = tokenReader.collect();
                 return ASTNode::andNode(this, std::move(childNodes), tokens,
-                                        astNode.isError() ? nullptr : ErrorReason::incomplete(
+                                        isAstNodeErrorError ? nullptr : ErrorReason::incomplete(
                                                 tokens, "命令重复部分缺少结束语句"),
-                                        orNode.whichBest == 0 ? "repeat no complete1" : "repeat no complete2");
+                                        whichBest == 0 ? "repeat no complete1" : "repeat no complete2");
             }
         }
     }

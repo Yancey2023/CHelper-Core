@@ -43,7 +43,7 @@ namespace CHelper::Node {
             VectorView <Token> tokens = result.tokens;
             if (str.empty()) {
                 return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
-                        tokens, "指令不完整"));
+                        tokens, "命令不完整"));
             } else {
                 return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
                         tokens, "找不到含义 -> " + std::move(str)));

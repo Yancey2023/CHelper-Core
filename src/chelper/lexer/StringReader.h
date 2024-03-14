@@ -22,13 +22,13 @@ namespace CHelper {
 
         [[nodiscard]] bool ready() const;
 
-        [[nodiscard]] char read();
+        [[nodiscard]] signed char read();
 
         bool skip();
 
-        [[nodiscard]] char next();
+        [[nodiscard]] signed char next();
 
-        [[nodiscard]] char peek() const;
+        [[nodiscard]] signed char peek() const;
 
         void mark();
 

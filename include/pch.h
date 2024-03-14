@@ -9,7 +9,6 @@
 
 #define CHelperLogger INFO
 #define CHelperDebug true
-#define CHelperAndroid false
 
 #if CHelperAndroid == true
 

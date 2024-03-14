@@ -74,6 +74,10 @@ namespace CHelper::Node {
             convertResult.errorReason->end += offset;
             return ASTNode::simpleNode(this, result.tokens, convertResult.errorReason);
         }
+        if(!convertResult.isComplete){
+            return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(
+                    result.tokens, "字符串参数内容双引号不封闭 -> " + str));
+        }
         return result;
     }
 

@@ -4,6 +4,8 @@
 
 #include "Suggestion.h"
 #include "../util/TokenUtil.h"
+#include "Parser.h"
+#include "../Core.h"
 
 namespace CHelper {
 
@@ -22,10 +24,19 @@ namespace CHelper {
               content(content),
               mHashCode(HashUtil::combineHash(content->hashCode(), HashUtil::combineHash(start, end))) {}
 
-    std::string Suggestion::onClick(const std::string &before) const {
-        return before.substr(0, start)
+    std::string Suggestion::onClick(Core *core, const std::string &before) const {
+        std::string result = before.substr(0, start)
                 .append(content->name)
                 .append(before.substr(end));
+        if (end != before.length()) {
+            return std::move(result);
+        }
+        core->onTextChanged(result, result.size());
+        const ASTNode *astNode = core->getAstNode();
+        if (astNode->canAddWhitespace && astNode->isAllWhitespaceError()) {
+            result.push_back(' ');
+        }
+        return std::move(result);
     }
 
 } // CHelper

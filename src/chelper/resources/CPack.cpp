@@ -120,12 +120,13 @@ namespace CHelper {
                                   .build());
             commands->push_back(std::make_unique<Node::NodePerCommand>(JsonUtil::getJsonFromPath(file), *this));
         }
+        std::sort(commands->begin(), commands->end(),
+                  [](const auto &item1, const auto &item2) {
+                      return ((Node::NodePerCommand *) item1.get())->name[0] <
+                             ((Node::NodePerCommand *) item2.get())->name[0];
+                  });
         Profile::pop();
-        std::vector<const Node::NodeBase *> commands1;
-        for (const auto &item: *commands) {
-            commands1.push_back(item.get());
-        }
-        mainNode = new Node::NodeCommand("MAIN_NODE", "欢迎使用命令助手(作者：Yancey)", commands1);
+        mainNode = new Node::NodeCommand("MAIN_NODE", "欢迎使用命令助手(作者：Yancey)", *this);
 #if CHelperDebug == true
         if (Profile::stack.size() != stackSize) {
             CHELPER_WARN("error profile stack after loading cpack");

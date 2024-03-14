@@ -17,7 +17,7 @@ namespace CHelper {
         return pos.index < content.length();
     }
 
-    char CHelper::StringReader::read() {
+    signed char CHelper::StringReader::read() {
         if (!ready()) {
             return EOF;
         }
@@ -34,12 +34,12 @@ namespace CHelper {
         return true;
     }
 
-    char CHelper::StringReader::next() {
+    signed char CHelper::StringReader::next() {
         skip();
         return peek();
     }
 
-    char CHelper::StringReader::peek() const {
+    signed char CHelper::StringReader::peek() const {
         if (!ready()) {
             return EOF;
         }

@@ -44,15 +44,15 @@ namespace CHelper {
 
     //缺少空格
     std::shared_ptr<ErrorReason> ErrorReason::requireWhiteSpace(const VectorView <Token> &tokens) {
-        return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, tokens, "指令不完整，缺少空格");
+        return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, tokens, "命令不完整，缺少空格");
     }
 
     std::shared_ptr<ErrorReason> ErrorReason::requireWhiteSpace(size_t start,
                                                                 size_t end) {
-        return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, start, end, "指令不完整，缺少空格");
+        return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, start, end, "命令不完整，缺少空格");
     }
 
-    //指令不完整
+    //命令不完整
     std::shared_ptr<ErrorReason> ErrorReason::incomplete(size_t start,
                                                          size_t end,
                                                          const std::string &errorReason) {

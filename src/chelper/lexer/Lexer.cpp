@@ -11,17 +11,17 @@ namespace CHelper::Lexer {
     //可以被识别成符号的字符，这些字符不一定是字符串的结束字符
     const std::string symbols = ",@~^/$&'!#%+*=[{]}\\|<>`+-=:";
 
-    bool isNum(char ch) {
+    bool isNum(signed char ch) {
         return (ch >= '0' && ch <= '9') || ch == '.';
     }
 
-    bool isEndChar(char ch) {
+    bool isEndChar(signed char ch) {
         return std::any_of(endChars.begin(), endChars.end(), [&ch](const char &endChar) {
             return ch == endChar;
         });
     }
 
-    bool isSymbol(char ch) {
+    bool isSymbol(signed char ch) {
         return std::any_of(symbols.begin(), symbols.end(), [&ch](const char &endChar) {
             return ch == endChar;
         });
@@ -53,7 +53,7 @@ namespace CHelper::Lexer {
 
     Token nextTokenNumber(StringReader &stringReader) {
         stringReader.mark();
-        char ch = stringReader.peek();
+        signed char ch = stringReader.peek();
         if (ch == '+' || ch == '-') {
             ch = stringReader.next();
         }
@@ -73,7 +73,7 @@ namespace CHelper::Lexer {
 
     Token nextTokenString(StringReader &stringReader) {
         stringReader.mark();
-        char ch = stringReader.peek();
+        signed char ch = stringReader.peek();
         bool isDoubleQuotation = ch == '"';
         if (isDoubleQuotation) {
             ch = stringReader.next();

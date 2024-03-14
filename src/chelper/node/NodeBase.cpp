@@ -18,8 +18,9 @@ namespace CHelper::Node {
                        bool isMustAfterWhiteSpace)
             : id(JsonUtil::fromJsonOptional<std::string>(j, "id")),
               description(JsonUtil::fromJsonOptional<std::string>(j, "description")),
-              isMustAfterWhiteSpace(isMustAfterWhiteSpace) {
-//#if CHelperDebug
+              isMustAfterWhiteSpace(JsonUtil::fromJsonOptional<bool>(
+                      j, "isMustAfterWhiteSpace").value_or(isMustAfterWhiteSpace)) {
+//#if CHelperDebug1w
 //        if (!description.has_value()) {
 //            return;
 //        }

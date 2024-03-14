@@ -1,13 +1,20 @@
-give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m
-titleraw a
-give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["
-tellraw @a {"rawtext":[{"text":"aaa","selector":"@a[type=\"
-execute if block 12~23~
-give @s stone 12 21 {"minecraft:item_lock":{"mode":"l
-execute if block ~~~ anvil["aaa"=90.5] run g
-setblock ~~~ stone[
-give @s stone 12 1
-tag @s add "\\\"\u1110\/\b\f\n\r\t\p\"
-give @s command_block 12 12 {"minecraft:can_destroy":{"blocks":["minecraft:acacia_door"]}}
-give @s s
-give @s stone 1 1 {
+-give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m
+-titleraw a
+-give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":["
+-tellraw @a {"rawtext":[{"text":"aaa","selector":"@a[type=\"
+-execute if block 12~23~
+-give @s stone 12 21 {"minecraft:item_lock":{"mode":"l
+-execute if block ~~~ anvil["aaa"=90.5] run g
+-setblock ~~~ stone[
+-give @s stone 12 1
+-tag @s add "\\\"\u1110\/\b\f\n\r\t\p\"
+-give @s command_block 12 12 {"minecraft:can_destroy":{"blocks":["minecraft:acacia_door"]}}
+-give @s s
+-give @s stone 1 1 {
+-give @s 石头
+-give @s command_block 12 12 {"minecraft:can_destroy":{"blocks":["
+-give
+-give @
+-give @a[x=^,has_property={""=!..12,="..}}}}}}}}}}}}}}}}}}}}}}}}}}}}}},,,,,
+-execute as @a run
+execute run

@@ -26,9 +26,10 @@ namespace CHelper {
                                          end - start).count()) + "ms")
                                  .green(")")
                                  .build());
-            return std::make_shared<Core>(std::move(cPack), Parser::parse("", cPack.get()));
+            ASTNode astNode = Parser::parse("", cPack.get());
+            return std::make_shared<Core>(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
-            CHELPER_ERROR("parse failed");
+            CHELPER_ERROR("CPack load failed");
             CHelper::Exception::printStackTrace(e);
             CHelper::Profile::clear();
             return nullptr;
@@ -36,26 +37,18 @@ namespace CHelper {
     }
 
     void Core::onTextChanged(const std::string &content, size_t index0) {
-        astNode = Parser::parse(content, cpack.get());
-        index = index0;
-        suggestions = nullptr;
+        if (input != content) {
+            input = content;
+            astNode = Parser::parse(input, cpack.get());
+        }
+        onSelectionChanged(index0);
     }
 
     void Core::onSelectionChanged(size_t index0) {
-        index = index0;
-        suggestions = nullptr;
-    }
-
-    const ASTNode &Core::getAstNode() const {
-        return astNode;
-    }
-
-    std::string Core::getDescription() const {
-        return astNode.getDescription(index);
-    }
-
-    std::vector<std::shared_ptr<ErrorReason>> Core::getErrorReasons() const {
-        return astNode.getErrorReasons();
+        if (index != index0) {
+            index = index0;
+            suggestions = nullptr;
+        }
     }
 
     std::vector<Suggestion> *Core::getSuggestions() {
@@ -65,19 +58,11 @@ namespace CHelper {
         return suggestions.get();
     }
 
-    std::string Core::getStructure() const {
-        return astNode.getStructure();
-    }
-
-    std::string Core::getColors() const {
-        return astNode.getColors();
-    }
-
-    std::optional<std::string> Core::onSuggestionClick(size_t which) const {
+    std::optional<std::string> Core::onSuggestionClick(size_t which) {
         if (suggestions == nullptr || which >= suggestions->size()) {
             return std::nullopt;
         }
-        return suggestions->at(which).onClick(TokenUtil::toString(astNode.tokens));
+        return suggestions->at(which).onClick(this, TokenUtil::toString(astNode.tokens));
     }
 
 } // CHelper

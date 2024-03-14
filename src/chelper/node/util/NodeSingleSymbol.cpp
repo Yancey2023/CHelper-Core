@@ -27,7 +27,7 @@ namespace CHelper::Node {
             if (symbolNode.tokens.isEmpty()) {
                 return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::incomplete(
                         symbolNode.tokens, FormatUtil::format(
-                                "指令不完整，需要符号{0}", symbol)));
+                                "命令不完整，需要符号{0}", symbol)));
             } else {
                 return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::typeError(
                         symbolNode.tokens, FormatUtil::format(

@@ -37,25 +37,25 @@ namespace CHelper::Logger {
 
 } // CHelper::Logger
 
-#if CHelperLogger == DEBUG || CHelperLogger == INFO || CHelperLogger == WARN || CHelperLogger == ERROR
+#if CHelperLogger == DEBUG
 #define CHELPER_DEBUG(message) CHelper::Logger::debug(message)
 #else
 #define CHELPER_DEBUG(message)
 #endif
 
-#if CHelperLogger == INFO || CHelperLogger == WARN || CHelperLogger == ERROR
+#if CHelperLogger == DEBUG || CHelperLogger == INFO
 #define CHELPER_INFO(message) CHelper::Logger::info(message)
 #else
 #define CHELPER_LOG(message)
 #endif
 
-#if CHelperLogger == WARN || CHelperLogger == ERROR
+#if CHelperLogger == DEBUG || CHelperLogger == INFO || CHelperLogger == WARN
 #define CHELPER_WARN(message) CHelper::Logger::warn(message)
 #else
 #define CHELPER_WARN(message)
 #endif
 
-#if CHelperLogger == ERROR
+#if CHelperLogger == DEBUG || CHelperLogger == INFO || CHelperLogger == WARN || CHelperLogger == ERROR
 #define CHELPER_ERROR(message) CHelper::Logger::error(message)
 #else
 #define CHELPER_ERROR(message)

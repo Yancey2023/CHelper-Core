@@ -122,7 +122,7 @@ namespace CHelper::Node {
         if (leftBracket.isError()) {
             //没有后面的[...]
             return ASTNode::andNode(this, {targetSelectorVariable}, tokenReader.collect(),
-                                    nullptr, "target selector no arguments");
+                                    nullptr, "target selector no arguments", false);
         }
         ASTNode arguments = nodeArguments.getASTNodeWithNextNode(tokenReader, cpack);
         return ASTNode::andNode(this, {targetSelectorVariable, arguments}, tokenReader.collect(),

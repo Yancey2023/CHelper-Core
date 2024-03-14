@@ -38,7 +38,8 @@ namespace CHelper::Node {
             return astNode;
         }
         VectorView <Token> tokens = astNode.tokens;
-        return ASTNode::andNode(this, {std::move(astNode)}, tokens);
+        return ASTNode::andNode(this, {std::move(astNode)}, tokens, ErrorReason::contentError(
+                tokens, "内容不匹配，应该为布尔值，但当前内容为" + str));
     }
 
     void NodeBoolean::collectStructure(const ASTNode *astNode,
