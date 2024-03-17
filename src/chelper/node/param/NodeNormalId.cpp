@@ -151,7 +151,7 @@ namespace CHelper::Node {
         Suggestions suggestions1;
         suggestions1.suggestions.reserve(nameStartOf.size() + nameContain.size() + descriptionContain.size());
         size_t start = TokenUtil::getStartIndex(astNode->tokens);
-        size_t end = TokenUtil::getStartIndex(astNode->tokens);
+        size_t end = TokenUtil::getEndIndex(astNode->tokens);
         std::transform(nameStartOf.begin(), nameStartOf.end(),
                        std::back_inserter(suggestions1.suggestions),
                        [&start, &end](const auto &item) {
