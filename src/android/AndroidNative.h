@@ -23,9 +23,23 @@ std::shared_ptr<CHelper::Core> core;
 
 extern "C" JNIEXPORT jboolean JNICALL
 Java_yancey_chelper_core_CHelperCore_init(
-        JNIEnv *env, jobject thiz, jstring cpack_path) {
+        JNIEnv *env, jobject thiz, jobject assetManager, jstring cpack_path) {
+    AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
     std::string cpackPath = jstring2string(env, cpack_path);
-    core = CHelper::Core::create(cpackPath);
+    AAsset *asset = AAssetManager_open(mgr, cpackPath.c_str(), AASSET_MODE_BUFFER);
+    if (asset == nullptr) {
+        return false;
+    }
+    size_t dataFileSize = AAsset_getLength(asset);
+    char *buffer = new char[dataFileSize];
+    int numBytesRead = AAsset_read(asset, buffer, dataFileSize);
+    AAsset_close(asset);
+    std::istringstream iss(std::string(buffer, numBytesRead));
+    nlohmann::json j = nlohmann::json::from_bjdata(iss);
+    delete[] buffer;
+    core = CHelper::Core::create([&j]() {
+        return CHelper::CPack::createByJson(j);
+    });
     return static_cast<jboolean>(core != nullptr);
 }
 

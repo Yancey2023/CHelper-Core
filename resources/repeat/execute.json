@@ -382,11 +382,13 @@
       },
       {
         "type": "POSITION",
-        "description": "的源区域的对角坐标"
+        "description": "的源区域的对角坐标",
+        "isMustAfterWhiteSpace": false
       },
       {
         "type": "POSITION",
-        "description": "目标区域的西北方向较低点的坐标"
+        "description": "目标区域的西北方向较低点的坐标",
+        "isMustAfterWhiteSpace": false
       },
       {
         "type": "NORMAL_ID",
