@@ -6,13 +6,10 @@
 
 #include <utility>
 #include "../util/NodeSingleSymbol.h"
-#include "../util/NodeList.h"
-#include "../util/NodeOr.h"
-#include "NodeJsonElement.h"
 
 namespace CHelper::Node {
 
-    static std::unique_ptr<NodeOr> getNodeElement1(const std::vector<std::unique_ptr<NodeJsonEntry>> &data) {
+    static std::unique_ptr<NodeOr> getNodeElement1(const std::vector<std::unique_ptr<NodeBase>> &data) {
         if (data.empty()) {
             return nullptr;
         }
@@ -48,21 +45,21 @@ namespace CHelper::Node {
 
     NodeJsonObject::NodeJsonObject(const std::optional<std::string> &id,
                                    const std::optional<std::string> &description,
-                                   std::vector<std::unique_ptr<NodeJsonEntry>> data)
+                                   std::vector<std::unique_ptr<NodeBase>> data)
             : NodeBase(id, description, false),
               data(std::move(data)),
               nodeElement1(getNodeElement1(data)),
               nodeElement2(getNodeElement2(nodeElement1)),
               nodeList(getNodeList(nodeElement2)) {}
 
-    inline std::vector<std::unique_ptr<NodeJsonEntry>> getDataFromJson(const nlohmann::json &j) {
+    inline std::vector<std::unique_ptr<NodeBase>> getDataFromJson(const nlohmann::json &j) {
         const auto &jsonData = j.at("data");
-        std::vector<std::unique_ptr<NodeJsonEntry>> data;
+        std::vector<std::unique_ptr<NodeBase>> data;
         data.reserve(jsonData.size());
         for (const auto &item: jsonData) {
             data.push_back(std::make_unique<NodeJsonEntry>(item));
         }
-        return data;
+        return std::move(data);
     }
 
     NodeJsonObject::NodeJsonObject(const nlohmann::json &j,
@@ -75,6 +72,11 @@ namespace CHelper::Node {
 
     NodeType *NodeJsonObject::getNodeType() const {
         return NodeType::JSON_OBJECT.get();
+    }
+
+    void NodeJsonObject::toJson(nlohmann::json &j) const {
+        NodeBase::toJson(j);
+        JsonUtil::toJson(j, "data", data);
     }
 
     ASTNode NodeJsonObject::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

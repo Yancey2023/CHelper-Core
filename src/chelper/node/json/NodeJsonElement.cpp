@@ -13,7 +13,6 @@
 #include "NodeJsonFloat.h"
 #include "NodeJsonNull.h"
 #include "NodeJsonBoolean.h"
-#include "../util/NodeOr.h"
 
 namespace CHelper::Node {
 
@@ -61,7 +60,7 @@ namespace CHelper::Node {
                 ((NodeJsonList *) item.get())->init(nodes);
             } else if (item->getNodeType() == NodeType::JSON_OBJECT.get()) {
                 for (const auto &item2: ((NodeJsonObject *) item.get())->data) {
-                    item2->init(nodes);
+                    ((NodeJsonEntry *) item2.get())->init(nodes);
                 }
             }
         }
@@ -69,7 +68,7 @@ namespace CHelper::Node {
     }
 
     void NodeJsonElement::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
+        JsonUtil::toJson(j, "id", id.value());
         JsonUtil::toJson(j, "node", nodes);
         JsonUtil::toJson(j, "start", start->id.value());
     }

@@ -26,12 +26,14 @@ namespace CHelper {
         std::vector<std::pair<Node::NodeBase *, Node::NodeBase *>> repeatNodes;
         std::shared_ptr<std::vector<std::unique_ptr<Node::NodeBase>>> commands = std::make_shared<std::vector<std::unique_ptr<Node::NodeBase>>>();
         //从这个节点开始检测
-        Node::NodeBase *mainNode;
+        Node::NodeBase *mainNode = nullptr;
     private:
-        std::vector<std::unique_ptr<Node::NodeBase>> repeatNodeDatas;
+        std::vector<std::unique_ptr<Node::NodeBase>> repeatNodeData;
 
     public:
         explicit CPack(const std::filesystem::path &path);
+
+        explicit CPack(const nlohmann::json &j);
 
         ~CPack();
 
@@ -39,7 +41,29 @@ namespace CHelper {
 
         CPack &operator=(const CPack &) = delete;
 
-        static std::unique_ptr<CPack> create(const std::filesystem::path &path);
+    private:
+        void applyId(const nlohmann::json &j);
+
+        void applyJson(const nlohmann::json &j);
+
+        void applyRepeat(const nlohmann::json &j);
+
+        void applyCommand(const nlohmann::json &j);
+
+        void afterApply();
+
+    public:
+        static std::unique_ptr<CPack> createByDirectory(const std::filesystem::path &path);
+
+        static std::unique_ptr<CPack> createByJson(const nlohmann::json &j);
+
+        void writeJsonToDirectory(const std::filesystem::path &path) const;
+
+        [[nodiscard]] nlohmann::json toJson() const;
+
+        void writeJsonToFile(const std::filesystem::path &path) const;
+
+        void writeBsonToFile(const std::filesystem::path &path) const;
 
         [[nodiscard]] std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
         getNormalId(const std::string &key) const;

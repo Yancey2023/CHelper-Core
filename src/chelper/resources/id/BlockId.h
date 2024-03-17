@@ -95,29 +95,54 @@ namespace CHelper {
 } // CHelper
 
 template<>
-struct nlohmann::adl_serializer<CHelper::BlockStateValue> {
+struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::BlockStateValue> {
 
-    static CHelper::BlockStateValue from_json(const nlohmann::json &j) { return CHelper::BlockStateValue(j); }
+    static CHelper::BlockStateValue from_json(const nlohmann::json &j) {
+        return CHelper::BlockStateValue(j);
+    }
 
-    static void to_json(nlohmann::json &j, const CHelper::BlockStateValue &t) { t.toJson(j); }
-
-};
-
-template<>
-struct nlohmann::adl_serializer<CHelper::BlockState> {
-
-    static CHelper::BlockState from_json(const nlohmann::json &j) { return CHelper::BlockState(j); }
-
-    static void to_json(nlohmann::json &j, const CHelper::BlockState &t) { t.toJson(j); }
+    static void to_json(nlohmann::json &j, const CHelper::BlockStateValue &t) {
+        t.toJson(j);
+    }
 
 };
 
 template<>
-struct nlohmann::adl_serializer<CHelper::BlockId> {
+struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::BlockState> {
 
-    static CHelper::BlockId from_json(const nlohmann::json &j) { return CHelper::BlockId(j); }
+    static CHelper::BlockState from_json(const nlohmann::json &j) {
+        return CHelper::BlockState(j);
+    }
 
-    static void to_json(nlohmann::json &j, const CHelper::BlockId &t) { t.toJson(j); }
+    static void to_json(nlohmann::json &j, const CHelper::BlockState &t) {
+        t.toJson(j);
+    }
+
+};
+
+template<>
+struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::BlockId> {
+
+    static CHelper::BlockId from_json(const nlohmann::json &j) {
+        return CHelper::BlockId(j);
+    }
+
+    static void to_json(nlohmann::json &j, const CHelper::BlockId &t) {
+        t.toJson(j);
+    }
+
+};
+
+template<>
+struct [[maybe_unused]] nlohmann::adl_serializer<std::shared_ptr<CHelper::BlockId>> {
+
+    static std::shared_ptr<CHelper::BlockId> from_json(const nlohmann::json &j) {
+        return std::make_shared<CHelper::BlockId>(j);
+    }
+
+    static void to_json(nlohmann::json &j, const std::shared_ptr<CHelper::BlockId> &t) {
+        t->toJson(j);
+    }
 
 };
 

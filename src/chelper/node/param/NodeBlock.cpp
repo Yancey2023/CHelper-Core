@@ -49,7 +49,7 @@ namespace CHelper::Node {
         tokenReader.restore();
         if (blockStateLeftBracket.isError()) {
             return ASTNode::andNode(this, {blockId}, tokenReader.collect(),
-                                    nullptr, "blockAndBlockState");;
+                                    nullptr, "blockAndBlockState");
         }
         std::string blockIdStr = TokenUtil::toString(blockId.tokens);
         size_t strHash = std::hash<std::string>{}(blockIdStr);
@@ -78,8 +78,8 @@ namespace CHelper::Node {
     }
 
     bool NodeBlock::collectSuggestions(const ASTNode *astNode,
-                                         size_t index,
-                                         std::vector<Suggestions> &suggestions) const {
+                                       size_t index,
+                                       std::vector<Suggestions> &suggestions) const {
         if (astNode->id == "blockAndBlockState" && !astNode->isError() &&
             astNode->childNodes.size() == 1 && index == TokenUtil::getStartIndex(astNode->tokens)) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, nodeBlockStateLeftBracket->normalId}));

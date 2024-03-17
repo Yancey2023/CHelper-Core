@@ -23,7 +23,7 @@ namespace CHelper::Node {
     ASTNode NodeOr::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         std::vector<ASTNode> childASTNodes;
         std::vector<size_t> indexes;
-        if (!isUseFirst) {
+        if (HEDLEY_LIKELY(!isUseFirst)) {
             childASTNodes.reserve(childNodes.size());
             indexes.reserve(childNodes.size());
         }
@@ -34,11 +34,11 @@ namespace CHelper::Node {
             childASTNodes.push_back(std::move(node));
             indexes.push_back(tokenReader.index);
             tokenReader.restore();
-            if (isUseFirst && !isError) {
+            if (HEDLEY_UNLIKELY(isUseFirst && !isError)) {
                 break;
             }
         }
-        if (isAttachToEnd) {
+        if (HEDLEY_UNLIKELY(isAttachToEnd)) {
             tokenReader.push();
             tokenReader.skipToLF();
             return ASTNode::orNode(this, std::move(childASTNodes), tokenReader.collect(), nullptr, nodeId);

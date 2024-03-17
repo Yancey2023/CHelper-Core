@@ -148,7 +148,7 @@ namespace CHelper::Node {
 
     void NodePerCommand::toJson(nlohmann::json &j) const {
         JsonUtil::toJson(j, "name", name);
-        JsonUtil::toJsonOptional(j, "description", description);
+        JsonUtil::toJsonOptionalLikely(j, "description", description);
         JsonUtil::toJson(j, "node", nodes);
         std::vector<std::string> startIds;
         startIds.reserve(startNodes.size());

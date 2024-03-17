@@ -3,7 +3,6 @@
 //
 
 #include "NodeString.h"
-#include "../util/NodeSingleSymbol.h"
 #include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
@@ -74,7 +73,7 @@ namespace CHelper::Node {
             convertResult.errorReason->end += offset;
             return ASTNode::simpleNode(this, result.tokens, convertResult.errorReason);
         }
-        if(!convertResult.isComplete){
+        if (!convertResult.isComplete) {
             return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(
                     result.tokens, "字符串参数内容双引号不封闭 -> " + str));
         }

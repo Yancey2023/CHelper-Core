@@ -13,7 +13,7 @@ namespace CHelper {
 
     class LexerPos {
     public:
-        const std::string &filePath; //文件相对于functions文件夹的相对路径
+        [[maybe_unused]] const std::string &filePath; //文件相对于functions文件夹的相对路径
         size_t index; //这个文件的第几个字符
         size_t line; //这个文件的第几行
         size_t col; //这一行的第几个字符

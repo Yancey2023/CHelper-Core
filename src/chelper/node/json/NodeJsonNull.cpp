@@ -24,11 +24,11 @@ namespace CHelper::Node {
         auto result = tokenReader.readStringASTNode(this);
         tokenReader.pop();
         std::string str = TokenUtil::toString(result.tokens);
-        if (str.empty()) {
+        if (HEDLEY_LIKELY(str.empty())) {
             VectorView <Token> tokens = result.tokens;
             return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
                     tokens, "null参数为空"));
-        } else if (str != "null") {
+        } else if (HEDLEY_LIKELY(str != "null")) {
             VectorView <Token> tokens = result.tokens;
             return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
                     tokens, "内容不是null -> " + str));
@@ -41,7 +41,7 @@ namespace CHelper::Node {
                                           std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
-        if (StringUtil::isStartOf("null", str)) {
+        if (HEDLEY_UNLIKELY(StringUtil::isStartOf("null", str))) {
             suggestions.push_back(Suggestions::singleSuggestion(
                     {astNode->tokens, std::make_shared<NormalId>("null", "null参数")}));
         }

@@ -23,25 +23,25 @@ namespace CHelper::Node {
         tokenReader.push();
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
         std::vector<ASTNode> threeChildNodes;
-        int types[3];
-        for (int &type: types) {
-            auto node = NodeRelativeFloat::getASTNode(this, cpack, tokenReader, true);
+        threeChildNodes.reserve(3);
+        std::uint8_t types[3];
+        for (std::uint8_t &type: types) {
+            std::pair<std::uint8_t, ASTNode> node = NodeRelativeFloat::getASTNode(this, cpack, tokenReader, true);
             type = node.first;
-            threeChildNodes.push_back(node.second);
+            threeChildNodes.push_back(std::move(node.second));
         }
         //判断有没有错误
         VectorView <Token> tokens = tokenReader.collect();
         ASTNode result = ASTNode::andNode(this, std::move(threeChildNodes), tokens, nullptr, "position");
         if (!result.isError()) {
-            int type = 0;
-            for (int i: types) {
+            std::uint8_t type = 0;
+            for (std::uint8_t i: types) {
                 if (i == type) {
                     continue;
                 }
                 if (type == 0) {
                     type = i;
                 }
-
                 if (i == 0 || i == type) {
                     continue;
                 } else if (type == 0) {
@@ -53,7 +53,7 @@ namespace CHelper::Node {
                 }
             }
         }
-        return result;
+        return std::move(result);
     }
 
     void NodePosition::collectStructure(const ASTNode *astNode,

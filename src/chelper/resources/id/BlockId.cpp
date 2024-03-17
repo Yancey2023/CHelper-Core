@@ -70,7 +70,7 @@ namespace CHelper {
                         "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", "方块状态键值对的键（布尔值）",
                         std::make_shared<NormalId>(std::get<bool>(value) ? "true" : "false", description));
             default:
-                return nullptr;
+                HEDLEY_UNREACHABLE();
         }
     }
 
@@ -83,7 +83,7 @@ namespace CHelper {
               node(getNodeValue(type, value, description)) {}
 
     BlockStateValue::BlockStateValue(const nlohmann::json &j)
-            : description(JsonUtil::fromJsonOptional<std::string>(j, "description")) {
+            : description(JsonUtil::fromJsonOptionalLikely<std::string>(j, "description")) {
         const nlohmann::json &jsonValue = j.at("value");
         if (jsonValue.is_number_integer()) {
             type = CHelper::BlockStateType::INTEGER;
@@ -123,16 +123,16 @@ namespace CHelper {
     void BlockStateValue::toJson(nlohmann::json &j) const {
         switch (type) {
             case CHelper::BlockStateType::STRING:
-                j["value"] = std::get<std::string>(value);
+                JsonUtil::toJson(j, "value", std::get<std::string>(value));
                 break;
             case CHelper::BlockStateType::BOOLEAN:
-                j["value"] = std::get<bool>(value);
+                JsonUtil::toJson(j, "value", std::get<bool>(value));
                 break;
             case CHelper::BlockStateType::INTEGER:
-                j["value"] = std::get<int>(value);
+                JsonUtil::toJson(j, "value", std::get<int>(value));
                 break;
         }
-        JsonUtil::toJsonOptional(j, "description", description);
+        JsonUtil::toJsonOptionalLikely(j, "description", description);
     }
 
     static Node::NodeBase *
@@ -166,7 +166,7 @@ namespace CHelper {
 
     BlockState::BlockState(const nlohmann::json &j)
             : key(JsonUtil::fromJson<std::string>(j, "key")),
-              description(JsonUtil::fromJsonOptional<std::string>(j, "description")),
+              description(JsonUtil::fromJsonOptionalLikely<std::string>(j, "description")),
               values(JsonUtil::fromJson<std::vector<CHelper::BlockStateValue>>(j, "values")),
               defaultValue(JsonUtil::fromJson<int>(j, "defaultValue")),
               node(getNodePerBlockState(key, description, values)) {}
@@ -201,7 +201,7 @@ namespace CHelper {
 
     void BlockState::toJson(nlohmann::json &j) const {
         JsonUtil::toJson(j, "key", key);
-        JsonUtil::toJsonOptional(j, "description", description);
+        JsonUtil::toJsonOptionalLikely(j, "description", description);
         JsonUtil::toJson(j, "values", values);
         JsonUtil::toJson(j, "defaultValue", defaultValue);
     }
@@ -245,7 +245,7 @@ namespace CHelper {
 
     BlockId::BlockId(const nlohmann::json &j)
             : ItemId(j),
-              blockStates(JsonUtil::fromJsonOptional<std::vector<CHelper::BlockState>>(j, "blockStates")),
+              blockStates(JsonUtil::fromJsonOptionalLikely<std::vector<CHelper::BlockState>>(j, "blockStates")),
               nodeBlockState(getNodeBlockState(blockStates)) {}
 
     BlockId::BlockId(const BlockId &blockId)
@@ -254,7 +254,7 @@ namespace CHelper {
               nodeBlockState(getNodeBlockState(blockStates)) {}
 
     BlockId::~BlockId() {
-        if (blockStates.has_value()) {
+        if (HEDLEY_LIKELY(blockStates.has_value())) {
             delete ((Node::NodeOr *) ((Node::NodeList *) nodeBlockState)->nodeElement)->childNodes[0];
         }
         delete ((Node::NodeList *) nodeBlockState)->nodeElement;
@@ -262,12 +262,8 @@ namespace CHelper {
     }
 
     void BlockId::toJson(nlohmann::json &j) const {
-        JsonUtil::toJsonOptional(j, "nameSpace", nameSpace);
-        JsonUtil::toJson(j, "name", name);
-        JsonUtil::toJsonOptional(j, "description", description);
-        JsonUtil::toJsonOptional(j, "blockStates", blockStates);
-        JsonUtil::toJsonOptional(j, "max", max);
-        JsonUtil::toJsonOptional(j, "descriptions", descriptions);
+        ItemId::toJson(j);
+        JsonUtil::toJsonOptionalLikely(j, "blockStates", blockStates);
     }
 
     Node::NodeBase *BlockId::getNodeAllBlockState() {

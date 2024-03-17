@@ -30,7 +30,7 @@ namespace CHelper {
 
         Suggestion(const VectorView <Token> &tokens, const std::shared_ptr<NormalId> &content);
 
-        [[nodiscard]] std::string onClick(Core* core, const std::string &before) const;
+        [[nodiscard]] std::string onClick(Core *core, const std::string &before) const;
 
         [[nodiscard]] inline size_t hashCode() const {
             return mHashCode;

@@ -39,20 +39,33 @@ namespace CHelper {
             return mHashCode;
         }
 
-        [[nodiscard]] bool equal(const std::shared_ptr<NormalId> &id) const {
-            return id.get() == this || mHashCode == id->mHashCode;
-        }
-
     };
 
 } // CHelper
 
 template<>
-struct nlohmann::adl_serializer<CHelper::NormalId> {
+struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::NormalId> {
 
-    static CHelper::NormalId from_json(const nlohmann::json &j) { return CHelper::NormalId(j); }
+    static CHelper::NormalId from_json(const nlohmann::json &j) {
+        return CHelper::NormalId(j);
+    }
 
-    static void to_json(nlohmann::json &j, const CHelper::NormalId &t) { t.toJson(j); }
+    static void to_json(nlohmann::json &j, const CHelper::NormalId &t) {
+        t.toJson(j);
+    }
+
+};
+
+template<>
+struct [[maybe_unused]] nlohmann::adl_serializer<std::shared_ptr<CHelper::NormalId>> {
+
+    static std::shared_ptr<CHelper::NormalId> from_json(const nlohmann::json &j) {
+        return std::make_shared<CHelper::NormalId>(j);
+    }
+
+    static void to_json(nlohmann::json &j, const std::shared_ptr<CHelper::NormalId> &t) {
+        t->toJson(j);
+    }
 
 };
 

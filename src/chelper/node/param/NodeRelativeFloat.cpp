@@ -52,12 +52,12 @@ namespace CHelper::Node {
         return getASTNode(this, cpack, tokenReader, canUseCaretNotation).second;
     }
 
-    std::pair<int, ASTNode> NodeRelativeFloat::getASTNode(const NodeBase *node,
-                                                          const CPack *cpack,
-                                                          TokenReader &tokenReader,
-                                                          bool canUseCaretNotation) {
+    std::pair<std::uint8_t, ASTNode> NodeRelativeFloat::getASTNode(const NodeBase *node,
+                                                                   const CPack *cpack,
+                                                                   TokenReader &tokenReader,
+                                                                   bool canUseCaretNotation) {
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
-        int type;
+        std::uint8_t type;
         tokenReader.push();
         ASTNode relativeNotation = nodeRelativeNotation->getASTNodeWithNextNode(tokenReader, cpack);
         tokenReader.restore();

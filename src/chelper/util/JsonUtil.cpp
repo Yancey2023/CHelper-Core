@@ -48,7 +48,7 @@ namespace CHelper::JsonUtil {
         }
         StringReader stringReader(input, "unknown");
         result.indexConvertList.push_back(stringReader.pos.index);
-        int unicodeValue;
+        std::int32_t unicodeValue;
         std::string escapeSequence;
         while (true) {
             signed char ch = stringReader.next();
@@ -161,13 +161,52 @@ namespace CHelper::JsonUtil {
         return result;
     }
 
-    nlohmann::json getJsonFromPath(const std::filesystem::path &path) {
-        Profile::push("reading and parsing json data in path: " + path.string());
+    nlohmann::json getJsonFromFile(const std::filesystem::path &path) {
+        Profile::push(ColorStringBuilder()
+                              .red("reading and parsing json in file: ")
+                              .purple(path.string())
+                              .build());
         std::ifstream f(path);
         nlohmann::json j = nlohmann::json::parse(f);
         f.close();
         Profile::pop();
-        return j;
+        return std::move(j);
+    }
+
+    nlohmann::json getBsonFromFile(const std::filesystem::path &path) {
+        Profile::push(ColorStringBuilder()
+                              .red("reading and parsing bjdata in file: ")
+                              .purple(path.string())
+                              .build());
+        std::ifstream f(path, std::ios::binary);
+        nlohmann::json j = nlohmann::json::from_bjdata(f);
+        f.close();
+        Profile::pop();
+        return std::move(j);
+    }
+
+    void writeJsonToFile(const std::filesystem::path &path, const nlohmann::json &j) {
+        std::filesystem::create_directories(path.parent_path());
+        Profile::push(ColorStringBuilder()
+                              .red("writing json to file: ")
+                              .purple(path.string())
+                              .build());
+        std::ofstream f(path);
+        f << j;
+        f.close();
+        Profile::pop();
+    }
+
+    void writeBsonToFile(const std::filesystem::path &path, const nlohmann::json &j) {
+        std::filesystem::create_directories(path.parent_path());
+        Profile::push(ColorStringBuilder()
+                              .red("writing bjdata to file: ")
+                              .purple(path.string())
+                              .build());
+        std::ofstream f(path, std::ios::binary);
+        nlohmann::json::to_bjdata(j, f);
+        f.close();
+        Profile::pop();
     }
 
 } // CHelper::JsonUtil

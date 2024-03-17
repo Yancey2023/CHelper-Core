@@ -20,7 +20,7 @@ namespace CHelper {
         VectorView(const std::shared_ptr<std::vector<T>> vector, size_t start, size_t end)
                 : vector(vector),
                   start(start),
-                  end(end) {
+                  end(end)  {
 #if CHelperDebug == true
             if (start > end) {
                 throw Exception::WrongRange(start, end);

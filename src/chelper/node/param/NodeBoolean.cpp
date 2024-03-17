@@ -18,8 +18,8 @@ namespace CHelper::Node {
     NodeBoolean::NodeBoolean(const nlohmann::json &j,
                              [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true),
-              descriptionTrue(JsonUtil::fromJsonOptional<std::string>(j, "descriptionTrue")),
-              descriptionFalse(JsonUtil::fromJsonOptional<std::string>(j, "descriptionFalse")) {}
+              descriptionTrue(JsonUtil::fromJsonOptionalLikely<std::string>(j, "descriptionTrue")),
+              descriptionFalse(JsonUtil::fromJsonOptionalLikely<std::string>(j, "descriptionFalse")) {}
 
     NodeType *NodeBoolean::getNodeType() const {
         return NodeType::BOOLEAN.get();
@@ -27,8 +27,8 @@ namespace CHelper::Node {
 
     void NodeBoolean::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJsonOptional(j, "descriptionTrue", descriptionTrue);
-        JsonUtil::toJsonOptional(j, "descriptionFalse", descriptionFalse);
+        JsonUtil::toJsonOptionalLikely(j, "descriptionTrue", descriptionTrue);
+        JsonUtil::toJsonOptionalLikely(j, "descriptionFalse", descriptionFalse);
     }
 
     ASTNode NodeBoolean::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

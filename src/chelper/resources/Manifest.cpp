@@ -26,26 +26,26 @@ namespace CHelper {
               isDefault(isDefault) {}
 
     Manifest::Manifest(const nlohmann::json &j)
-            : name(JsonUtil::fromJsonOptional<std::string>(j, "name")),
-              description(JsonUtil::fromJsonOptional<std::string>(j, "description")),
-              minecraftVersion(JsonUtil::fromJsonOptional<std::string>(j, "minecraftVersion")),
-              author(JsonUtil::fromJsonOptional<std::string>(j, "author")),
-              updateDate(JsonUtil::fromJsonOptional<std::string>(j, "updateDate")),
+            : name(JsonUtil::fromJsonOptionalLikely<std::string>(j, "name")),
+              description(JsonUtil::fromJsonOptionalLikely<std::string>(j, "description")),
+              minecraftVersion(JsonUtil::fromJsonOptionalLikely<std::string>(j, "minecraftVersion")),
+              author(JsonUtil::fromJsonOptionalLikely<std::string>(j, "author")),
+              updateDate(JsonUtil::fromJsonOptionalLikely<std::string>(j, "updateDate")),
               packId(JsonUtil::fromJson<std::string>(j, "packId")),
               versionCode(JsonUtil::fromJson<int>(j, "versionCode")),
-              isBasicPack(JsonUtil::fromJsonOptional<bool>(j, "isBasicPack")),
-              isDefault(JsonUtil::fromJsonOptional<bool>(j, "isDefault")) {}
+              isBasicPack(JsonUtil::fromJsonOptionalLikely<bool>(j, "isBasicPack")),
+              isDefault(JsonUtil::fromJsonOptionalLikely<bool>(j, "isDefault")) {}
 
     void Manifest::toJson(nlohmann::json &j) const {
-        JsonUtil::toJsonOptional(j, "name", name);
-        JsonUtil::toJsonOptional(j, "description", description);
-        JsonUtil::toJsonOptional(j, "minecraftVersion", minecraftVersion);
-        JsonUtil::toJsonOptional(j, "author", author);
-        JsonUtil::toJsonOptional(j, "updateDate", updateDate);
+        JsonUtil::toJsonOptionalLikely(j, "name", name);
+        JsonUtil::toJsonOptionalLikely(j, "description", description);
+        JsonUtil::toJsonOptionalLikely(j, "minecraftVersion", minecraftVersion);
+        JsonUtil::toJsonOptionalLikely(j, "author", author);
+        JsonUtil::toJsonOptionalLikely(j, "updateDate", updateDate);
         JsonUtil::toJson(j, "packId", packId);
         JsonUtil::toJson(j, "versionCode", versionCode);
-        JsonUtil::toJsonOptional(j, "isBasicPack", isBasicPack);
-        JsonUtil::toJsonOptional(j, "isDefault", isDefault);
+        JsonUtil::toJsonOptionalLikely(j, "isBasicPack", isBasicPack);
+        JsonUtil::toJsonOptionalLikely(j, "isDefault", isDefault);
     }
 
 }

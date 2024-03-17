@@ -42,7 +42,7 @@ namespace CHelper {
 }
 
 template<>
-struct nlohmann::adl_serializer<CHelper::Manifest> {
+struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::Manifest> {
 
     static CHelper::Manifest from_json(const nlohmann::json &j) { return CHelper::Manifest(j); }
 

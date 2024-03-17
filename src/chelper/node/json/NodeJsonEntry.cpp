@@ -5,7 +5,6 @@
 #include "NodeJsonEntry.h"
 
 #include "../util/NodeSingleSymbol.h"
-#include "../param/NodeText.h"
 #include "../util/NodeEntry.h"
 #include "NodeJsonString.h"
 #include "NodeJsonElement.h"
@@ -54,6 +53,12 @@ namespace CHelper::Node {
                               .purple(value)
                               .build());
         throw Exception::UnknownNodeId(value, id.value_or("UNKNOWN"));
+    }
+
+    void NodeJsonEntry::toJson(nlohmann::json &j) const {
+        JsonUtil::toJson(j, "key", key);
+        JsonUtil::toJsonOptionalLikely(j, "description", description);
+        JsonUtil::toJson(j, "value", value);
     }
 
     ASTNode NodeJsonEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

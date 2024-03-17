@@ -5,13 +5,8 @@
 #include "NodeTargetSelector.h"
 #include "NodeString.h"
 #include "../util/NodeSingleSymbol.h"
-#include "../util/NodeList.h"
-#include "../selector/NodeTargetSelectorArgument.h"
-#include "../util/NodeOr.h"
-#include "../util/NodeAnd.h"
 #include "NodeNormalId.h"
 #include "NodeItem.h"
-#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 

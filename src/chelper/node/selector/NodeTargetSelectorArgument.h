@@ -23,13 +23,13 @@ namespace CHelper::Node {
         const NodeOr nodeHasItem;
 
     public:
-        NodeTargetSelectorArgument(const std::optional<std::string> &id,
-                                   const std::optional<std::string> &description,
-                                   const NodeBase *nodeItem,
-                                   const NodeBase *nodeFamily,
-                                   const NodeBase *nodeGameMode,
-                                   const NodeBase *nodeSlot,
-                                   const NodeBase *nodeEntities);
+        [[maybe_unused]] NodeTargetSelectorArgument(const std::optional<std::string> &id,
+                                                    const std::optional<std::string> &description,
+                                                    const NodeBase *nodeItem,
+                                                    const NodeBase *nodeFamily,
+                                                    const NodeBase *nodeGameMode,
+                                                    const NodeBase *nodeSlot,
+                                                    const NodeBase *nodeEntities);
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
     };

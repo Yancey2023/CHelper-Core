@@ -13,7 +13,7 @@ namespace CHelper {
     getNodeData(const std::optional<int> &max,
                 const std::optional<std::vector<std::string>> &descriptions) {
         auto *nodeAllData = new Node::NodeInteger("ITEM_DATA", "物品附加值", -1, max);
-        if (!descriptions.has_value()) {
+        if (HEDLEY_LIKELY(!descriptions.has_value())) {
             return nodeAllData;
         }
         std::vector<const Node::NodeBase *> nodeDataChildren;
@@ -43,12 +43,12 @@ namespace CHelper {
 
     ItemId::ItemId(const nlohmann::json &j)
             : NamespaceId(j),
-              max(JsonUtil::fromJsonOptional<int>(j, "max")),
-              descriptions(JsonUtil::fromJsonOptional<std::vector<std::string>>(j, "descriptions")),
+              max(JsonUtil::fromJsonOptionalUnlikely<int>(j, "max")),
+              descriptions(JsonUtil::fromJsonOptionalUnlikely<std::vector<std::string>>(j, "descriptions")),
               nodeData(getNodeData(max, descriptions)) {}
 
     ItemId::~ItemId() {
-        if (descriptions.has_value()) {
+        if (HEDLEY_UNLIKELY(descriptions.has_value())) {
             auto nodeOr = ((Node::NodeOr *) ((Node::NodeOr *) nodeData)->childNodes[0]);
             for (const auto &item: nodeOr->childNodes) {
                 delete item;
@@ -60,8 +60,8 @@ namespace CHelper {
 
     void ItemId::toJson(nlohmann::json &j) const {
         NamespaceId::toJson(j);
-        JsonUtil::toJsonOptional(j, "max", max);
-        JsonUtil::toJsonOptional(j, "descriptions", descriptions);
+        JsonUtil::toJsonOptionalUnlikely(j, "max", max);
+        JsonUtil::toJsonOptionalUnlikely(j, "descriptions", descriptions);
     }
 
 } // CHelper

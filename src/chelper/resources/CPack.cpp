@@ -18,45 +18,42 @@ namespace CHelper {
 #endif
         Profile::push(ColorStringBuilder().red("loading id data").build());
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "id")) {
-            Profile::push(ColorStringBuilder()
-                                  .red("loading id type in path \"")
+            Profile::next(ColorStringBuilder()
+                                  .red("loading id data in path \"")
                                   .purple(file.path().string())
                                   .red("\"")
                                   .build());
             applyId(JsonUtil::getJsonFromFile(file));
-            Profile::pop();
         }
         Profile::next(ColorStringBuilder().red("loading json data").build());
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "json")) {
-            Profile::push(ColorStringBuilder()
+            Profile::next(ColorStringBuilder()
                                   .red("loading json data in path \"")
                                   .purple(file.path().string())
                                   .red("\"")
                                   .build());
             applyJson(JsonUtil::getJsonFromFile(file));
-            Profile::pop();
         }
         Profile::next(ColorStringBuilder().red("loading repeat data").build());
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "repeat")) {
-            Profile::push(ColorStringBuilder()
+            Profile::next(ColorStringBuilder()
                                   .red("loading repeat data in path \"")
                                   .purple(file.path().string())
                                   .red("\"")
                                   .build());
             applyRepeat(JsonUtil::getJsonFromFile(file));
-            Profile::pop();
         }
         Profile::next(ColorStringBuilder().red("loading commands").build());
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "command")) {
-            Profile::push(ColorStringBuilder()
+            Profile::next(ColorStringBuilder()
                                   .red("loading command in path \"")
                                   .purple(file.path().string())
                                   .red("\"")
                                   .build());
             applyCommand(JsonUtil::getJsonFromFile(file));
-            Profile::pop();
         }
         afterApply();
+        Profile::pop();
 #if CHelperDebug == true
         if (Profile::stack.size() != stackSize) {
             CHELPER_WARN("error profile stack after loading cpack");
@@ -73,16 +70,21 @@ namespace CHelper {
         for (const auto &item: j.at("id")) {
             applyId(item);
         }
+        Profile::next(ColorStringBuilder().red("loading json data").build());
         for (const auto &item: j.at("json")) {
             applyJson(item);
         }
+        Profile::next(ColorStringBuilder().red("loading repeat data").build());
         for (const auto &item: j.at("repeat")) {
             applyRepeat(item);
         }
+        Profile::next(ColorStringBuilder().red("loading command data").build());
         for (const auto &item: j.at("command")) {
             applyCommand(item);
         }
+        Profile::next(ColorStringBuilder().red("init cpack").build());
         afterApply();
+        Profile::pop();
 #if CHelperDebug == true
         if (Profile::stack.size() != stackSize) {
             CHELPER_WARN("error profile stack after loading cpack");
@@ -96,7 +98,7 @@ namespace CHelper {
 
     void CPack::applyId(const nlohmann::json &j) {
         auto type = JsonUtil::fromJson<std::string>(j, "type");
-        if (type == "normal") {
+        if (HEDLEY_LIKELY(type == "normal")) {
             auto id = j.at("id").get<std::string>();
             auto content = std::make_shared<std::vector<std::shared_ptr<NormalId>>>();
             auto contentJson = j.at("content");
@@ -105,19 +107,7 @@ namespace CHelper {
                 content->push_back(std::make_shared<NormalId>(item));
             }
             normalIds.emplace(std::move(id), std::move(content));
-        } else if (type == "block") {
-            auto blocksJson = j.at("blocks");
-            blockIds->reserve(blockIds->size() + blocksJson.size());
-            for (const auto &item: blocksJson) {
-                blockIds->push_back(std::make_shared<BlockId>(item));
-            }
-        } else if (type == "item") {
-            auto itemsJson = j.at("items");
-            itemIds->reserve(itemIds->size() + itemsJson.size());
-            for (const auto &item: itemsJson) {
-                itemIds->push_back(std::make_shared<ItemId>(item));
-            }
-        } else if (type == "namespace") {
+        } else if (HEDLEY_LIKELY(type == "namespace")) {
             auto id = j.at("id").get<std::string>();
             auto content = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
             auto contentJson = j.at("content");
@@ -126,6 +116,18 @@ namespace CHelper {
                 content->push_back(std::make_shared<NamespaceId>(item));
             }
             namespaceIds.emplace(std::move(id), std::move(content));
+        } else if (HEDLEY_LIKELY(type == "block")) {
+            auto blocksJson = j.at("blocks");
+            blockIds->reserve(blockIds->size() + blocksJson.size());
+            for (const auto &item: blocksJson) {
+                blockIds->push_back(std::make_shared<BlockId>(item));
+            }
+        } else if (HEDLEY_LIKELY(type == "item")) {
+            auto itemsJson = j.at("items");
+            itemIds->reserve(itemIds->size() + itemsJson.size());
+            for (const auto &item: itemsJson) {
+                itemIds->push_back(std::make_shared<ItemId>(item));
+            }
         } else {
             throw Exception::UnknownIdType(type);
         }
@@ -180,7 +182,6 @@ namespace CHelper {
                       return ((Node::NodePerCommand *) item1.get())->name[0] <
                              ((Node::NodePerCommand *) item2.get())->name[0];
                   });
-        Profile::pop();
         mainNode = new Node::NodeCommand("MAIN_NODE", "欢迎使用命令助手(作者：Yancey)", *this);
     }
 
@@ -332,7 +333,7 @@ namespace CHelper {
     std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
     CPack::getNormalId(const std::string &key) const {
         auto it = normalIds.find(key);
-        if (it == normalIds.end()) {
+        if (HEDLEY_UNLIKELY(it == normalIds.end())) {
 #if CHelperDebug == true
             CHELPER_WARN("fail to find normal ids by key: \"" + key + '\"');
 #endif
@@ -344,7 +345,7 @@ namespace CHelper {
     std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
     CPack::getNamespaceId(const std::string &key) const {
         auto it = namespaceIds.find(key);
-        if (it == namespaceIds.end()) {
+        if (HEDLEY_UNLIKELY(it == namespaceIds.end())) {
 #if CHelperDebug == true
             CHELPER_WARN("fail to find namespace ids by key: \"" + key + '\"');
 #endif

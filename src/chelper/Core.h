@@ -24,7 +24,13 @@ namespace CHelper {
     public:
         Core(std::unique_ptr<CPack> cpack, ASTNode astNode);
 
-        static std::shared_ptr<Core> create(const std::string &cpackPath);
+        static std::shared_ptr<Core> create(const std::function<std::unique_ptr<CPack>()> &getCPack);
+
+        static std::shared_ptr<Core> createByDirectory(const std::string &cpackPath);
+
+        static std::shared_ptr<Core> createByJson(const std::string &cpackPath);
+
+        static std::shared_ptr<Core> createByBson(const std::string &cpackPath);
 
         void onTextChanged(const std::string &content, size_t index);
 
@@ -48,11 +54,11 @@ namespace CHelper {
 
         std::vector<Suggestion> *getSuggestions();
 
-        [[nodiscard]] inline std::string getStructure() const{
+        [[nodiscard]] inline std::string getStructure() const {
             return astNode.getStructure();
         }
 
-        [[nodiscard]] inline std::string getColors() const {
+        [[nodiscard]] [[maybe_unused]] inline std::string getColors() const {
             return astNode.getColors();
         }
 

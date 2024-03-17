@@ -50,7 +50,7 @@ namespace CHelper::Node {
     NodeNamespaceId::NodeNamespaceId(const nlohmann::json &j,
                                      const CPack &cpack)
             : NodeBase(j, true),
-              key(JsonUtil::fromJsonOptional<std::string>(j, "key")),
+              key(JsonUtil::fromJsonOptionalLikely<std::string>(j, "key")),
               ignoreError(JsonUtil::fromJson<bool>(j, "ignoreError")),
               contents(getIdContentFromCPack(j, cpack, key)) {}
 
@@ -60,13 +60,10 @@ namespace CHelper::Node {
 
     void NodeNamespaceId::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJsonOptional(j, "key", key);
-        if (!key.has_value()) {
-            nlohmann::json content;
-            for (const auto &item: *contents) {
-                content.push_back(*item);
-            }
-            JsonUtil::toJson(j, "contents", content);
+        JsonUtil::toJsonOptionalLikely(j, "key", key);
+        JsonUtil::toJson(j, "ignoreError", ignoreError);
+        if (key.has_value()) {
+            JsonUtil::toJson(j, "contents", *contents);
         }
     }
 

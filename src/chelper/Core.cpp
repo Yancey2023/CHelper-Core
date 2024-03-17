@@ -13,12 +13,12 @@ namespace CHelper {
             : cpack(std::move(cpack)),
               astNode(std::move(astNode)) {}
 
-    std::shared_ptr<Core> Core::create(const std::string &cpackPath) {
+    std::shared_ptr<Core> Core::create(const std::function<std::unique_ptr<CPack>()> &getCPack) {
         Node::NodeType::init();
         try {
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
-            std::unique_ptr<CPack> cPack = CPack::create(cpackPath);
+            std::unique_ptr<CPack> cPack = getCPack();
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO(ColorStringBuilder()
                                  .green("CPack load successfully (")
@@ -34,6 +34,24 @@ namespace CHelper {
             CHelper::Profile::clear();
             return nullptr;
         }
+    }
+
+    std::shared_ptr<Core> Core::createByDirectory(const std::string &cpackPath) {
+        return create([&cpackPath]() {
+            return CPack::createByDirectory(cpackPath);
+        });
+    }
+
+    std::shared_ptr<Core> Core::createByJson(const std::string &cpackPath) {
+        return create([&cpackPath]() {
+            return CPack::createByJson(JsonUtil::getJsonFromFile(cpackPath));
+        });
+    }
+
+    std::shared_ptr<Core> Core::createByBson(const std::string &cpackPath) {
+        return create([&cpackPath]() {
+            return CPack::createByJson(JsonUtil::getBsonFromFile(cpackPath));
+        });
     }
 
     void Core::onTextChanged(const std::string &content, size_t index0) {

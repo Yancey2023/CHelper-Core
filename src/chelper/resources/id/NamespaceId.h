@@ -34,11 +34,28 @@ namespace CHelper {
 } // CHelper
 
 template<>
-struct nlohmann::adl_serializer<CHelper::NamespaceId> {
+struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::NamespaceId> {
 
-    static CHelper::NamespaceId from_json(const nlohmann::json &j) { return CHelper::NamespaceId(j); }
+    static CHelper::NamespaceId from_json(const nlohmann::json &j) {
+        return CHelper::NamespaceId(j);
+    }
 
-    static void to_json(nlohmann::json &j, const CHelper::NamespaceId &t) { t.toJson(j); }
+    static void to_json(nlohmann::json &j, const CHelper::NamespaceId &t) {
+        t.toJson(j);
+    }
+
+};
+
+template<>
+struct [[maybe_unused]] nlohmann::adl_serializer<std::shared_ptr<CHelper::NamespaceId>> {
+
+    static std::shared_ptr<CHelper::NamespaceId> from_json(const nlohmann::json &j) {
+        return std::make_shared<CHelper::NamespaceId>(j);
+    }
+
+    static void to_json(nlohmann::json &j, const std::shared_ptr<CHelper::NamespaceId> &t) {
+        t->toJson(j);
+    }
 
 };
 

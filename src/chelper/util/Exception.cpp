@@ -13,14 +13,11 @@ namespace CHelper::Exception {
         CHELPER_ERROR(std::string(e.what()) + "\nstack trace:\n" + Profile::getStackTrace());
     }
 
-    UnknownIdType::UnknownIdType(const std::string &fileName, const std::string &idType) {
+    UnknownIdType::UnknownIdType(const std::string &idType) {
         Profile::push(ColorStringBuilder()
                               .red("unknown id type")
                               .normal(" -> ")
                               .purple(idType)
-                              .red(" (in file \"")
-                              .purple(fileName)
-                              .red("\")")
                               .build());
     }
 

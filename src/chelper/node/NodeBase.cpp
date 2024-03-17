@@ -16,11 +16,10 @@ namespace CHelper::Node {
 
     NodeBase::NodeBase(const nlohmann::json &j,
                        bool isMustAfterWhiteSpace)
-            : id(JsonUtil::fromJsonOptional<std::string>(j, "id")),
-              description(JsonUtil::fromJsonOptional<std::string>(j, "description")),
-              isMustAfterWhiteSpace(JsonUtil::fromJsonOptional<bool>(
-                      j, "isMustAfterWhiteSpace").value_or(isMustAfterWhiteSpace)) {
-//#if CHelperDebug1w
+            : id(JsonUtil::fromJsonOptionalLikely<std::string>(j, "id")),
+              description(JsonUtil::fromJsonOptionalLikely<std::string>(j, "description")),
+              isMustAfterWhiteSpace(j.value("isMustAfterWhiteSpace", isMustAfterWhiteSpace)) {
+//#if CHelperDebug
 //        if (!description.has_value()) {
 //            return;
 //        }
@@ -39,12 +38,27 @@ namespace CHelper::Node {
                                                         const CPack &cpack) {
         Profile::push(ColorStringBuilder().red("loading type").build());
         auto type = JsonUtil::fromJson<std::string>(j, "type");
+        auto id = JsonUtil::fromJsonOptionalLikely<std::string>(j, "id");
         Profile::next(ColorStringBuilder().red("loading node ").purple(type).build());
+        if (HEDLEY_LIKELY(id.has_value())) {
+            Profile::next(ColorStringBuilder()
+                                  .red("loading node ")
+                                  .purple(type)
+                                  .red(" with id \"")
+                                  .purple(id.value())
+                                  .red("\"")
+                                  .build());
+        } else {
+            Profile::next(ColorStringBuilder()
+                                  .red("loading node ")
+                                  .purple(type)
+                                  .red(" without id")
+                                  .build());
+        }
         for (const auto &item: NodeType::NODE_TYPES) {
             if (item->nodeName == type) {
-                auto result = item->createNodeByJson(j, cpack);
                 Profile::pop();
-                return result;
+                return item->createNodeByJson(j, cpack);
             }
         }
         throw Exception::UnknownNodeType(type);
@@ -55,9 +69,11 @@ namespace CHelper::Node {
     }
 
     void NodeBase::toJson(nlohmann::json &j) const {
-        JsonUtil::toJsonOptional(j, "id", id);
-        JsonUtil::toJsonOptional(j, "description", description);
+        JsonUtil::toJsonOptionalLikely(j, "id", id);
+        JsonUtil::toJsonOptionalLikely(j, "description", description);
         JsonUtil::toJson(j, "type", getNodeType()->nodeName);
+        //TODO 需要更好的判断isMustAfterWhiteSpace是否输出的逻辑
+        JsonUtil::toJson(j, "isMustAfterWhiteSpace", isMustAfterWhiteSpace);
     }
 
     ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const {

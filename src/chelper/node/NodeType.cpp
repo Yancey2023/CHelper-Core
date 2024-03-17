@@ -10,7 +10,6 @@
 #include "param/NodeCommandName.h"
 #include "param/NodeInteger.h"
 #include "param/NodeItem.h"
-#include "param/NodeLF.h"
 #include "param/NodeNormalId.h"
 #include "param/NodePosition.h"
 #include "param/NodeRelativeFloat.h"

@@ -43,36 +43,44 @@ namespace CHelper {
             static std::unique_ptr<NodeBase> getNodeFromJson(const nlohmann::json &j,
                                                              const CPack &cpack);
 
-            [[nodiscard]] virtual NodeType *getNodeType() const;
+            [[nodiscard]] HEDLEY_RETURNS_NON_NULL virtual NodeType
+            *getNodeType() const;
 
             virtual void toJson(nlohmann::json &j) const;
 
-            [[nodiscard]] virtual ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const = 0;
+            [[nodiscard]] HEDLEY_NON_NULL(3) virtual ASTNode
+            getASTNode(TokenReader &tokenReader, const CPack *cpack) const = 0;
 
-            [[nodiscard]] ASTNode getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const;
+            [[nodiscard]] HEDLEY_NON_NULL(3)  ASTNode
+            getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const;
 
         protected:
-            ASTNode getByChildNode(TokenReader &tokenReader,
-                                   const CPack *cpack,
-                                   const NodeBase *childNode,
-                                   const std::string &astNodeId = "") const;
+            HEDLEY_NON_NULL(3, 4) ASTNode
+            getByChildNode(TokenReader &tokenReader,
+                           const CPack *cpack,
+                           const NodeBase *childNode,
+                           const std::string &astNodeId = std::string()) const;
 
             //node不一定需要的时侯使用
-            ASTNode getOptionalASTNode(TokenReader &tokenReader,
-                                       const CPack *cpack,
-                                       bool isIgnoreChildNodesError,
-                                       const std::vector<const NodeBase *> &childNodes,
-                                       const std::string &astNodeId = "") const;
+            HEDLEY_NON_NULL(3) ASTNode
+            getOptionalASTNode(TokenReader &tokenReader,
+                               const CPack *cpack,
+                               bool isIgnoreChildNodesError,
+                               const std::vector<const NodeBase *> &childNodes,
+                               const std::string &astNodeId = std::string()) const;
 
         public:
-            virtual std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const;
+            HEDLEY_NON_NULL(2) virtual std::optional<std::string>
+            collectDescription(const ASTNode *node, size_t index) const;
 
-            virtual bool collectIdError(const ASTNode *astNode,
-                                        std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
+            HEDLEY_NON_NULL(2) virtual bool
+            collectIdError(const ASTNode *astNode,
+                           std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
 
-            virtual bool collectSuggestions(const ASTNode *astNode,
-                                            size_t index,
-                                            std::vector<Suggestions> &suggestions) const;
+            HEDLEY_NON_NULL(2) virtual bool
+            collectSuggestions(const ASTNode *astNode,
+                               size_t index,
+                               std::vector<Suggestions> &suggestions) const;
 
             virtual void collectStructure(const ASTNode *astNode,
                                           StructureBuilder &structure,

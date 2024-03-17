@@ -16,7 +16,7 @@ namespace CHelper::Exception {
 
     class UnknownIdType : public std::exception {
     public:
-        UnknownIdType(const std::string &fileName, const std::string &idType);
+        explicit UnknownIdType(const std::string &idType);
 
         [[nodiscard]] const char *what() const noexcept override;
     };

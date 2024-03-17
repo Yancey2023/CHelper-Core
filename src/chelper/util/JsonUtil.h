@@ -30,29 +30,49 @@ namespace CHelper {
 
         ConvertResult jsonString2String(const std::string &input);
 
-        nlohmann::json getJsonFromPath(const std::filesystem::path &path);
-
         template<class T>
-        inline T fromJson(const nlohmann::json &json, const std::string &name) {
-            return json.at(name).get<T>();
+        inline T fromJson(const nlohmann::json &json, const std::string &key) {
+            return json.at(key).get<T>();
         }
 
         template<class T>
-        std::optional<T> fromJsonOptional(const nlohmann::json &json, const std::string &name) {
-            return json.contains(name) ? std::optional<T>(json.at(name).get<T>()) : std::nullopt;
+        std::optional<T> fromJsonOptionalLikely(const nlohmann::json &json, const std::string &key) {
+            const auto &it = json.find(key);
+            return HEDLEY_UNLIKELY(it == json.end()) ? std::nullopt : std::optional(it->get<T>());
         }
 
         template<class T>
-        inline void toJson(nlohmann::json &json, const std::string &name, const T &data) {
-            json[name] = data;
+        std::optional<T> fromJsonOptionalUnlikely(const nlohmann::json &json, const std::string &key) {
+            const auto &it = json.find(key);
+            return HEDLEY_LIKELY(it == json.end()) ? std::nullopt : std::optional(it->get<T>());
         }
 
         template<class T>
-        void toJsonOptional(nlohmann::json json, const std::string &name, std::optional<T> data) {
-            if (data.has_value()) {
-                json[name] = data.value();
+        inline void toJson(nlohmann::json &json, const std::string &key, const T &data) {
+            json[key] = data;
+        }
+
+        template<class T>
+        void toJsonOptionalLikely(nlohmann::json &json, const std::string &key, const std::optional<T> &data) {
+            if (HEDLEY_LIKELY(data.has_value())) {
+                json[key] = data.value();
             }
         }
+
+        template<class T>
+        void toJsonOptionalUnlikely(nlohmann::json &json, const std::string &key, const std::optional<T> &data) {
+            if (HEDLEY_UNLIKELY(data.has_value())) {
+                json[key] = data.value();
+            }
+        }
+
+        nlohmann::json getJsonFromFile(const std::filesystem::path &path);
+
+        nlohmann::json getBsonFromFile(const std::filesystem::path &path);
+
+        void writeJsonToFile(const std::filesystem::path &path, const nlohmann::json &j);
+
+        void writeBsonToFile(const std::filesystem::path &path, const nlohmann::json &j);
 
     } // JsonUtil
 

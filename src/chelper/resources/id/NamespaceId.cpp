@@ -16,13 +16,13 @@ namespace CHelper {
 
     NamespaceId::NamespaceId(const nlohmann::json &j)
             : NormalId(j),
-              nameSpace(JsonUtil::fromJsonOptional<std::string>(j, "nameSpace")),
+              nameSpace(JsonUtil::fromJsonOptionalUnlikely<std::string>(j, "nameSpace")),
               idWithNamespace(std::make_shared<NormalId>(std::string(nameSpace.value_or("minecraft")).
                       append(":").append(name), description)) {}
 
     void NamespaceId::toJson(nlohmann::json &j) const {
         NormalId::toJson(j);
-        JsonUtil::toJsonOptional(j, "namespace", nameSpace);
+        JsonUtil::toJsonOptionalUnlikely(j, "namespace", nameSpace);
     }
 
 } // CHelper

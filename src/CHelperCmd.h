@@ -22,6 +22,12 @@ namespace CHelper::Test {
 
     void test2(const std::string &cpackPath, const std::vector<std::string> &commands, int times);
 
+    void test3(const std::string &input, const std::string &output);
+
+    void test4(const std::string &input, const std::string &output);
+
+    void test5(const std::string &input, const std::string &output);
+
 } // CHelper::Test
 
 #endif //CHELPER_CHELPERCMD_H

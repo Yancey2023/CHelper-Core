@@ -28,6 +28,8 @@ namespace CHelper::Node {
 
         void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
 
+        void toJson(nlohmann::json &j) const override;
+
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         bool collectSuggestions(const ASTNode *astNode,

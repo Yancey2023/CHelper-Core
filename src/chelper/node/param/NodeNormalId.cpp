@@ -53,7 +53,7 @@ namespace CHelper::Node {
     NodeNormalId::NodeNormalId(const nlohmann::json &j,
                                const CPack &cpack)
             : NodeBase(j, true),
-              key(JsonUtil::fromJsonOptional<std::string>(j, "key")),
+              key(JsonUtil::fromJsonOptionalLikely<std::string>(j, "key")),
               ignoreError(JsonUtil::fromJson<bool>(j, "ignoreError")),
               contents(getIdContentFromCPack(j, cpack, key)),
               allowsMissingID(false),
@@ -67,13 +67,10 @@ namespace CHelper::Node {
 
     void NodeNormalId::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJsonOptional(j, "key", key);
+        JsonUtil::toJsonOptionalLikely(j, "key", key);
+        JsonUtil::toJson(j, "ignoreError", ignoreError);
         if (!key.has_value()) {
-            nlohmann::json content;
-            for (const auto &item: *contents) {
-                content.push_back(*item);
-            }
-            JsonUtil::toJson(j, "contents", content);
+            JsonUtil::toJson(j, "contents", *contents);
         }
     }
 

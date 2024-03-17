@@ -29,9 +29,7 @@ namespace CHelper::Node {
 
     void NodeText::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        nlohmann::json dataJson;
-        data->toJson(dataJson);
-        j.push_back(dataJson);
+        JsonUtil::toJson(j, "data", data);
     }
 
     ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

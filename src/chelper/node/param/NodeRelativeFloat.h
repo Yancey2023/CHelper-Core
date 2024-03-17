@@ -28,10 +28,10 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
-        static std::pair<int, ASTNode> getASTNode(const NodeBase *node,
-                                                  const CPack *cpack,
-                                                  TokenReader &tokenReader,
-                                                  bool canUseCaretNotation);
+        static std::pair<std::uint8_t, ASTNode> getASTNode(const NodeBase *node,
+                                                           const CPack *cpack,
+                                                           TokenReader &tokenReader,
+                                                           bool canUseCaretNotation);
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
