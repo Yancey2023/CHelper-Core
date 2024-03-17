@@ -23,14 +23,7 @@
     }
   ],
   "ast": [
-    [
-      "player",
-      "spawnPos",
-      "LF"
-    ],
-    [
-      "spawnPos",
-      "LF"
-    ]
+    ["player", "spawnPos", "LF"],
+    ["spawnPos", "LF"]
   ]
 }

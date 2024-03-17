@@ -5,7 +5,6 @@
 #include "NodePerCommand.h"
 #include "NodeLF.h"
 #include "../../resources/CPack.h"
-#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -117,6 +116,30 @@ namespace CHelper::Node {
                 throw Exception::RequireChildNodeIds(name, item->id.value_or("UNKNOWN"));
             }
         }
+#if CHelperDebug == true
+        for (const auto &item: nodes) {
+            bool flag1 = item->getNodeType() == NodeType::POSITION.get() ||
+                         item->getNodeType() == NodeType::RELATIVE_FLOAT.get();
+            for (const auto &item2: item->nextNodes) {
+                if (item2 == NodeLF::getInstance()) {
+                    continue;
+                }
+                bool flag2 = item2->getNodeType() == NodeType::POSITION.get() ||
+                             item2->getNodeType() == NodeType::RELATIVE_FLOAT.get();
+                if (flag1 && flag2 == item2->isMustAfterWhiteSpace) {
+                    Profile::push(ColorStringBuilder()
+                                          .purple("isMustAfterWhiteSpace")
+                                          .red(" should be ")
+                                          .purple(item2->isMustAfterWhiteSpace ? "false" : "true")
+                                          .red(" in node \"")
+                                          .purple(item2->id.value_or("unknown"))
+                                          .red("\"")
+                                          .build());
+                    throw Exception::NodeLoadFailed();
+                }
+            }
+        }
+#endif
     }
 
     NodeType *NodePerCommand::getNodeType() const {
@@ -143,8 +166,9 @@ namespace CHelper::Node {
             for (const auto &item2: item->nextNodes) {
                 ast1.push_back(item2->id.value());
             }
-            ast.push_back(ast1);
+            ast.push_back(std::move(ast1));
         }
+        JsonUtil::toJson(j, "ast", ast);
     }
 
     ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -160,6 +184,10 @@ namespace CHelper::Node {
         tokenReader.push();
         tokenReader.skipToLF();
         return ASTNode::orNode(this, std::move(childASTNodes), tokenReader.collect());
+    }
+
+    std::optional<std::string> NodePerCommand::collectDescription(const ASTNode *node, size_t index) const {
+        return std::nullopt;
     }
 
 } // CHelper::Node

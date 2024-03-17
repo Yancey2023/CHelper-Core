@@ -17,6 +17,7 @@
       "type": "RELATIVE_FLOAT",
       "id": "z",
       "description": "传送目的地区域的中心的z坐标",
+      "isMustAfterWhiteSpace": false,
       "canUseCaretNotation": true
     },
     {
@@ -41,25 +42,10 @@
     }
   ],
   "ast": [
-    [
-      "x",
-      "z"
-    ],
-    [
-      "z",
-      "spreadDistance"
-    ],
-    [
-      "spreadDistance",
-      "maxRange"
-    ],
-    [
-      "maxRange",
-      "victim"
-    ],
-    [
-      "victim",
-      "LF"
-    ]
+    ["x", "z"],
+    ["z", "spreadDistance"],
+    ["spreadDistance", "maxRange"],
+    ["maxRange", "victim"],
+    ["victim", "LF"]
   ]
 }

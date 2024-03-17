@@ -84,42 +84,13 @@
     }
   ],
   "ast": [
-    [
-      "block",
-      "position"
-    ],
-    [
-      "position",
-      "slot.container"
-    ],
-    [
-      "slot.container",
-      "slotId"
-    ],
-    [
-      "slotId",
-      "item",
-      "oldItemHandling"
-    ],
-    [
-      "oldItemHandling",
-      "item"
-    ],
-    [
-      "item",
-      "LF"
-    ],
-    [
-      "entity",
-      "target"
-    ],
-    [
-      "target",
-      "slotType"
-    ],
-    [
-      "slotType",
-      "slotId"
-    ]
+    ["block", "position"],
+    ["position", "slot.container"],
+    ["slot.container", "slotId"],
+    ["slotId", "item", "oldItemHandling"],
+    ["oldItemHandling", "item"],
+    ["item", "LF"],
+    ["entity", "target"],
+    ["target", "slotType"], ["slotType", "slotId"]
   ]
 }

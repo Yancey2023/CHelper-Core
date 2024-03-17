@@ -15,12 +15,14 @@
     {
       "type": "POSITION",
       "id": "end",
-      "description": "源区域的两组对角方块坐标"
+      "description": "源区域的两组对角方块坐标",
+      "isMustAfterWhiteSpace": false
     },
     {
       "type": "POSITION",
       "id": "destination",
-      "description": "目标区域的西北方向较低（即在各轴上坐标值最小）的点的坐标"
+      "description": "目标区域的西北方向较低（即在各轴上坐标值最小）的点的坐标",
+      "isMustAfterWhiteSpace": false
     },
     {
       "type": "NORMAL_ID",
@@ -95,40 +97,12 @@
     }
   ],
   "ast": [
-    [
-      "begin",
-      "end"
-    ],
-    [
-      "end",
-      "destination"
-    ],
-    [
-      "destination",
-      "maskMode",
-      "filtered",
-      "LF"
-    ],
-    [
-      "maskMode",
-      "cloneMode1",
-      "LF"
-    ],
-    [
-      "cloneMode1",
-      "LF"
-    ],
-    [
-      "filtered",
-      "cloneMode2"
-    ],
-    [
-      "cloneMode2",
-      "block"
-    ],
-    [
-      "block",
-      "LF"
-    ]
+    ["begin", "end"],
+    ["end", "destination"],
+    ["destination", "maskMode", "filtered", "LF"],
+    ["maskMode", "cloneMode1", "LF"],
+    ["cloneMode1", "LF"],
+    ["filtered", "cloneMode2"], ["cloneMode2", "block"],
+    ["block", "LF"]
   ]
 }

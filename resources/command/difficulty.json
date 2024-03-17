@@ -61,9 +61,6 @@
     }
   ],
   "ast": [
-    [
-      "difficulty",
-      "LF"
-    ]
+    ["difficulty", "LF"]
   ]
 }

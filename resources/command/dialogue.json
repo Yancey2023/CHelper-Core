@@ -74,39 +74,11 @@
     }
   ],
   "ast": [
-    [
-      "change",
-      "changeNpc"
-    ],
-    [
-      "changeNpc",
-      "changeSceneName"
-    ],
-    [
-      "changeSceneName",
-      "changePlayers",
-      "LF"
-    ],
-    [
-      "changePlayers",
-      "LF"
-    ],
-    [
-      "open",
-      "openNpc"
-    ],
-    [
-      "openNpc",
-      "openPlayer"
-    ],
-    [
-      "openPlayer",
-      "openSceneName",
-      "LF"
-    ],
-    [
-      "openSceneName",
-      "LF"
-    ]
+    ["change", "changeNpc"],
+    ["changeNpc", "changeSceneName"],
+    ["changeSceneName", "changePlayers", "LF"],
+    ["changePlayers", "LF"],
+    ["open", "openNpc"], ["openNpc", "openPlayer"],
+    ["openPlayer", "openSceneName", "LF"], ["openSceneName", "LF"]
   ]
 }

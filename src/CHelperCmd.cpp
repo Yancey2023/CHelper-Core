@@ -14,11 +14,15 @@ int main() {
 //    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
 //                        R"(/home/yancey/CLionProjects/CHelper/test/test.txt)",
 //                        true);
-    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
-                        std::vector<std::string>{"execute run "}, false);
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
+//                        std::vector<std::string>{"execute run "}, false);
 //    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
 //                        std::vector<std::string>{"give @s "}, true);
 //    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)", {""}, false);
+//    CHelper::Test::test4(R"(D:\CLion\project\CHelper-Core\resources)",
+//                         R"(D:\CLion\project\CHelper-Core\run\cpack.json)");
+    CHelper::Test::test5(R"(D:\CLion\project\CHelper-Core\resources)",
+                         R"(D:\CLion\project\CHelper-Core\run\cpack.dat)");
     return 0;
 }
 
@@ -58,7 +62,7 @@ namespace CHelper::Test {
 
     void test(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime) {
         try {
-            auto core = Core::create(cpackPath);
+            auto core = Core::createByDirectory(cpackPath);
             std::cout << std::endl;
             if (core == nullptr) {
                 return;
@@ -180,7 +184,7 @@ namespace CHelper::Test {
 
     void test2(const std::string &cpackPath, const std::vector<std::string> &commands, int times) {
         try {
-            auto core = Core::create(cpackPath);
+            auto core = Core::createByDirectory(cpackPath);
             std::cout << std::endl;
             if (core == nullptr) {
                 return;
@@ -203,6 +207,81 @@ namespace CHelper::Test {
                             end - start).count()) + "ms")
                     .green(")")
                     .build() << std::endl;
+        } catch (const std::exception &e) {
+            Exception::printStackTrace(e);
+            Profile::clear();
+            exit(-1);
+        }
+    }
+
+    void test3(const std::string &input, const std::string &output) {
+        try {
+            auto core = Core::createByDirectory(input);
+            std::cout << std::endl;
+            if (core == nullptr) {
+                return;
+            }
+            std::chrono::high_resolution_clock::time_point start, end;
+            start = std::chrono::high_resolution_clock::now();
+            core->getCPack()->writeJsonToDirectory(output);
+            end = std::chrono::high_resolution_clock::now();
+            std::cout << ColorStringBuilder()
+                    .green("write successfully(")
+                    .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
+                            end - start).count()) + "ms")
+                    .green(")")
+                    .build() << std::endl;
+            auto core2 = Core::createByDirectory(output);
+        } catch (const std::exception &e) {
+            Exception::printStackTrace(e);
+            Profile::clear();
+            exit(-1);
+        }
+    }
+
+    void test4(const std::string &input, const std::string &output) {
+        try {
+            auto core = Core::createByDirectory(input);
+            std::cout << std::endl;
+            if (core == nullptr) {
+                return;
+            }
+            std::chrono::high_resolution_clock::time_point start, end;
+            start = std::chrono::high_resolution_clock::now();
+            core->getCPack()->writeJsonToFile(output);
+            end = std::chrono::high_resolution_clock::now();
+            std::cout << ColorStringBuilder()
+                    .green("write successfully(")
+                    .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
+                            end - start).count()) + "ms")
+                    .green(")")
+                    .build() << std::endl;
+            auto core2 = Core::createByJson(output);
+        } catch (const std::exception &e) {
+            Exception::printStackTrace(e);
+            Profile::clear();
+            exit(-1);
+        }
+    }
+
+    void test5(const std::string &input, const std::string &output) {
+        try {
+            auto core = Core::createByDirectory(input);
+            std::cout << std::endl;
+            if (core == nullptr) {
+                return;
+            }
+            std::chrono::high_resolution_clock::time_point start, end;
+            start = std::chrono::high_resolution_clock::now();
+            core->getCPack()->writeBsonToFile(output);
+            end = std::chrono::high_resolution_clock::now();
+            std::cout << ColorStringBuilder()
+                    .green("write successfully(")
+                    .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
+                            end - start).count()) + "ms")
+                    .green(")")
+                    .build() << std::endl;
+            auto core2 = Core::createByBson(output);
         } catch (const std::exception &e) {
             Exception::printStackTrace(e);
             Profile::clear();

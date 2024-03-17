@@ -15,11 +15,11 @@ namespace CHelper::Node {
 
     class NodeCommand : public NodeBase {
     public:
-        std::vector<const NodePerCommand *> commands;
+        const std::vector<std::unique_ptr<Node::NodeBase>> *commands;
 
         NodeCommand(const std::optional<std::string> &id,
                     const std::optional<std::string> &description,
-                    const std::vector<const NodePerCommand *> &commands);
+                    const std::vector<std::unique_ptr<Node::NodeBase>> *commands);
 
         NodeCommand(const std::optional<std::string> &id,
                     const std::optional<std::string> &description,

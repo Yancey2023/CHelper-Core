@@ -26,13 +26,7 @@
     }
   ],
   "ast": [
-    [
-      "target",
-      "message"
-    ],
-    [
-      "message",
-      "LF"
-    ]
+    ["target", "message"],
+    ["message", "LF"]
   ]
 }

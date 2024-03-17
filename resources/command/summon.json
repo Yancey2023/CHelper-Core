@@ -79,58 +79,16 @@
     }
   ],
   "ast": [
-    [
-      "entityType",
-      "spawnPos1",
-      "nameTag1",
-      "LF"
-    ],
-    [
-      "spawnPos1",
-      "yRot",
-      "facing",
-      "LF"
-    ],
-    [
-      "yRot",
-      "xRot",
-      "LF"
-    ],
-    [
-      "xRot",
-      "spawnEvent",
-      "LF"
-    ],
-    [
-      "spawnEvent",
-      "nameTag2",
-      "LF"
-    ],
-    [
-      "nameTag2",
-      "LF"
-    ],
-    [
-      "nameTag1",
-      "spawnPos2",
-      "LF"
-    ],
-    [
-      "spawnPos2",
-      "LF"
-    ],
-    [
-      "facing",
-      "lookAtEntity",
-      "position"
-    ],
-    [
-      "lookAtEntity",
-      "spawnEvent"
-    ],
-    [
-      "position",
-      "spawnEvent"
-    ]
+    ["entityType", "spawnPos1", "nameTag1", "LF"],
+    ["spawnPos1", "yRot", "facing", "LF"],
+    ["yRot", "xRot", "LF"],
+    ["xRot", "spawnEvent", "LF"],
+    ["spawnEvent", "nameTag2", "LF"],
+    ["nameTag2", "LF"],
+    ["nameTag1", "spawnPos2", "LF"],
+    ["spawnPos2", "LF"],
+    ["facing", "lookAtEntity", "position"],
+    ["lookAtEntity", "spawnEvent"],
+    ["position", "spawnEvent"]
   ]
 }

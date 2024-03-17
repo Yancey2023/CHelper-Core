@@ -1,14 +1,21 @@
 {
   "id": "execute",
-  "break": {
-    "type": "TEXT",
-    "description": "要被执行的目标命令",
-    "data": {
-      "name": "run",
-      "description": "要被执行的目标命令"
+  "break": [
+    {
+      "type": "TEXT",
+      "description": "要被执行的目标命令",
+      "data": {
+        "name": "run",
+        "description": "要被执行的目标命令"
+      }
+    },
+    {
+      "type": "COMMAND",
+      "id": "command",
+      "description": "执行的另一条命令"
     }
-  },
-  "contents": [
+  ],
+  "content": [
     [
       {
         "data": {

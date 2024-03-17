@@ -134,26 +134,10 @@
     }
   ],
   "ast": [
-    [
-      "biome",
-      "biomeId"
-    ],
-    [
-      "biomeId",
-      "LF"
-    ],
-    [
-      "structure",
-      "structureId"
-    ],
-    [
-      "structureId",
-      "useNewChunksOnly",
-      "LF"
-    ],
-    [
-      "useNewChunksOnly",
-      "LF"
-    ]
+    ["biome", "biomeId"],
+    ["biomeId", "LF"],
+    ["structure", "structureId"],
+    ["structureId", "useNewChunksOnly", "LF"],
+    ["useNewChunksOnly", "LF"]
   ]
 }

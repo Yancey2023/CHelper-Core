@@ -29,9 +29,6 @@
     }
   ],
   "ast": [
-    [
-      "saveMode",
-      "LF"
-    ]
+    ["saveMode", "LF"]
   ]
 }

@@ -29,18 +29,8 @@
     }
   ],
   "ast": [
-    [
-      "player",
-      "enchantment"
-    ],
-    [
-      "enchantment",
-      "level",
-      "LF"
-    ],
-    [
-      "level",
-      "LF"
-    ]
+    ["player", "enchantment"],
+    ["enchantment", "level", "LF"],
+    ["level", "LF"]
   ]
 }

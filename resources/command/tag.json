@@ -51,27 +51,10 @@
     }
   ],
   "ast": [
-    [
-      "entity",
-      "add",
-      "remove",
-      "list"
-    ],
-    [
-      "add",
-      "name"
-    ],
-    [
-      "name",
-      "LF"
-    ],
-    [
-      "remove",
-      "name"
-    ],
-    [
-      "list",
-      "LF"
-    ]
+    ["entity", "add", "remove", "list"],
+    ["add", "name"],
+    ["name", "LF"],
+    ["remove", "name"],
+    ["list", "LF"]
   ]
 }

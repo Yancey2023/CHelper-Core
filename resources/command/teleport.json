@@ -42,12 +42,14 @@
       "type": "RELATIVE_FLOAT",
       "id": "yRot",
       "description": "实体传送后的y轴旋转角度",
+      "isMustAfterWhiteSpace": false,
       "canUseCaretNotation": false
     },
     {
       "type": "RELATIVE_FLOAT",
       "id": "xRot",
       "description": "实体传送后的x轴旋转角度",
+      "isMustAfterWhiteSpace": false,
       "canUseCaretNotation": false
     },
     {
@@ -74,48 +76,14 @@
     }
   ],
   "ast": [
-    [
-      "destinationTarget",
-      "checkForBlocks",
-      "LF"
-    ],
-    [
-      "checkForBlocks",
-      "LF"
-    ],
-    [
-      "victim",
-      "destinationTarget",
-      "destinationPosition"
-    ],
-    [
-      "destinationPosition",
-      "checkForBlocks",
-      "yRot",
-      "facing",
-      "LF"
-    ],
-    [
-      "yRot",
-      "xRot"
-    ],
-    [
-      "xRot",
-      "checkForBlocks",
-      "LF"
-    ],
-    [
-      "facing",
-      "lookAtPosition",
-      "lookAtEntity"
-    ],
-    [
-      "lookAtPosition",
-      "checkForBlocks"
-    ],
-    [
-      "lookAtEntity",
-      "checkForBlocks"
-    ]
+    ["destinationTarget", "checkForBlocks", "LF"],
+    ["checkForBlocks", "LF"],
+    ["victim", "destinationTarget", "destinationPosition"],
+    ["destinationPosition", "checkForBlocks", "yRot", "facing", "LF"],
+    ["yRot", "xRot"],
+    ["xRot", "checkForBlocks", "LF"],
+    ["facing", "lookAtPosition", "lookAtEntity"],
+    ["lookAtPosition", "checkForBlocks"],
+    ["lookAtEntity", "checkForBlocks"]
   ]
 }

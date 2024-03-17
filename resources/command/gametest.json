@@ -119,66 +119,18 @@
     }
   ],
   "ast": [
-    [
-      "runthis",
-      "LF"
-    ],
-    [
-      "run",
-      "runTestName"
-    ],
-    [
-      "runTestName",
-      "rotationSteps",
-      "LF"
-    ],
-    [
-      "rotationSteps",
-      "LF"
-    ],
-    [
-      "runset",
-      "tagTag"
-    ],
-    [
-      "tagTag",
-      "rotationSteps",
-      "LF"
-    ],
-    [
-      "clearall",
-      "LF"
-    ],
-    [
-      "pos",
-      "LF"
-    ],
-    [
-      "create",
-      "createTestName"
-    ],
-    [
-      "createTestName",
-      "width",
-      "LF"
-    ],
-    [
-      "width",
-      "height",
-      "LF"
-    ],
-    [
-      "height",
-      "depth",
-      "LF"
-    ],
-    [
-      "depth",
-      "LF"
-    ],
-    [
-      "runthese",
-      "LF"
-    ]
+    ["runthis", "LF"],
+    ["run", "runTestName"],
+    ["runTestName", "rotationSteps", "LF"],
+    ["rotationSteps", "LF"],
+    ["runset", "tagTag"],
+    ["tagTag", "rotationSteps", "LF"],
+    ["clearall", "LF"],
+    ["pos", "LF"],
+    ["create", "createTestName"],
+    ["createTestName", "width", "LF"],
+    ["width", "height", "LF"],
+    ["height", "depth", "LF"], ["depth", "LF"],
+    ["runthese", "LF"]
   ]
 }

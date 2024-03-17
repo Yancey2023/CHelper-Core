@@ -24,14 +24,7 @@
     }
   ],
   "ast": [
-    [
-      "gameMode",
-      "player",
-      "LF"
-    ],
-    [
-      "player",
-      "LF"
-    ]
+    ["gameMode", "player", "LF"],
+    ["player", "LF"]
   ]
 }

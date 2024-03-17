@@ -36,23 +36,9 @@
     }
   ],
   "ast": [
-    [
-      "gameRulesForBoolean",
-      "valueBoolean",
-      "LF"
-    ],
-    [
-      "valueBoolean",
-      "LF"
-    ],
-    [
-      "gameRulesForInteger",
-      "valueInteger",
-      "LF"
-    ],
-    [
-      "valueInteger",
-      "LF"
-    ]
+    ["gameRulesForBoolean", "valueBoolean", "LF"],
+    ["valueBoolean", "LF"],
+    ["gameRulesForInteger", "valueInteger", "LF"],
+    ["valueInteger", "LF"]
   ]
 }

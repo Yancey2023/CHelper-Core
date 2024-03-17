@@ -150,69 +150,19 @@
     }
   ],
   "ast": [
-    [
-      "riders",
-      "start_riding",
-      "stop_riding",
-      "evict_riders",
-      "summon_rider",
-      "summon_ride"
-    ],
-    [
-      "start_riding",
-      "ride"
-    ],
-    [
-      "ride",
-      "teleportRules",
-      "LF"
-    ],
-    [
-      "teleportRules",
-      "howToFill",
-      "LF"
-    ],
-    [
-      "howToFill",
-      "LF"
-    ],
-    [
-      "stop_riding",
-      "LF"
-    ],
-    [
-      "evict_riders",
-      "LF"
-    ],
-    [
-      "summon_rider",
-      "entityType1"
-    ],
-    [
-      "entityType1",
-      "spawnEvent",
-      "LF"
-    ],
-    [
-      "spawnEvent",
-      "nameTag",
-      "LF"
-    ],
-    [
-      "nameTag",
-      "LF"
-    ],
-    [
-      "summon_ride",
-      "entityType2"
-    ],
-    [
-      "entityType2",
-      "rideRules"
-    ],
-    [
-      "rideRules",
-      "spawnEvent"
-    ]
+    ["riders", "start_riding", "stop_riding", "evict_riders", "summon_rider", "summon_ride"],
+    ["start_riding", "ride"],
+    ["ride", "teleportRules", "LF"],
+    ["teleportRules", "howToFill", "LF"],
+    ["howToFill", "LF"],
+    ["stop_riding", "LF"],
+    ["evict_riders", "LF"],
+    ["summon_rider", "entityType1"],
+    ["entityType1", "spawnEvent", "LF"],
+    ["spawnEvent", "nameTag", "LF"],
+    ["nameTag", "LF"],
+    ["summon_ride", "entityType2"],
+    ["entityType2", "rideRules"],
+    ["rideRules", "spawnEvent"]
   ]
 }

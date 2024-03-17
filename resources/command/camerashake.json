@@ -72,37 +72,12 @@
     }
   ],
   "ast": [
-    [
-      "add",
-      "addSelector"
-    ],
-    [
-      "addSelector",
-      "intensity",
-      "LF"
-    ],
-    [
-      "intensity",
-      "seconds",
-      "LF"
-    ],
-    [
-      "seconds",
-      "shakeType",
-      "LF"
-    ],
-    [
-      "shakeType",
-      "LF"
-    ],
-    [
-      "stop",
-      "stopSelector",
-      "LF"
-    ],
-    [
-      "stopSelector",
-      "LF"
-    ]
+    ["add", "addSelector"],
+    ["addSelector", "intensity", "LF"],
+    ["intensity", "seconds", "LF"],
+    ["seconds", "shakeType", "LF"],
+    ["shakeType", "LF"],
+    ["stop", "stopSelector", "LF"],
+    ["stopSelector", "LF"]
   ]
 }

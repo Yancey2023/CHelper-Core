@@ -24,14 +24,7 @@
     }
   ],
   "ast": [
-    [
-      "player",
-      "item",
-      "LF"
-    ],
-    [
-      "item",
-      "LF"
-    ]
+    ["player", "item", "LF"],
+    ["item", "LF"]
   ]
 }

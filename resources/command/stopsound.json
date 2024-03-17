@@ -24,14 +24,7 @@
     }
   ],
   "ast": [
-    [
-      "player",
-      "sound",
-      "LF"
-    ],
-    [
-      "sound",
-      "LF"
-    ]
+    ["player", "sound", "LF"],
+    ["sound", "LF"]
   ]
 }

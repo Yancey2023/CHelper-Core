@@ -297,7 +297,7 @@ namespace CHelper {
                             const std::shared_ptr<ErrorReason> &errorReason,
                             const std::string &id,
                             bool canAddWhitespace) {
-        return orNode(node, std::move(childNodes), &tokens, errorReason, id);
+        return orNode(node, std::move(childNodes), &tokens, errorReason, id, canAddWhitespace);
     }
 
     bool ASTNode::isAllWhitespaceError() const {

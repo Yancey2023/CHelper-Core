@@ -5,8 +5,13 @@
 #include "NodeRepeat.h"
 
 #include "../../resources/CPack.h"
+#include "../util/NodeAnd.h"
 
 namespace CHelper::Node {
+
+    static NodeOr getNodeElement(const std::pair<NodeBase *, NodeBase *> &node) {
+        return NodeOr("NODE_REPEAT", "命令重复部分", {node.first, node.second}, false);
+    }
 
     NodeRepeat::NodeRepeat(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
@@ -14,7 +19,7 @@ namespace CHelper::Node {
                            const std::pair<NodeBase *, NodeBase *> &node)
             : NodeBase(id, description, false),
               key(std::move(key)),
-              node(node) {}
+              nodeElement(getNodeElement(node)) {}
 
     std::pair<Node::NodeBase *, Node::NodeBase *> getNodeFromCPack(const std::string &key,
                                                                    [[maybe_unused]] const CPack &cpack) {
@@ -39,7 +44,7 @@ namespace CHelper::Node {
                            const CPack &cpack)
             : NodeBase(j, false),
               key(JsonUtil::fromJson<std::string>(j, "key")),
-              node(getNodeFromCPack(key, cpack)) {}
+              nodeElement(getNodeElement(getNodeFromCPack(key, cpack))) {}
 
     NodeType *NodeRepeat::getNodeType() const {
         return NodeType::REPEAT.get();
@@ -54,32 +59,16 @@ namespace CHelper::Node {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         while (true) {
-            tokenReader.push();
-            ASTNode astNode = node.first->getASTNodeWithNextNode(tokenReader, cpack);
-            bool isAstNodeErrorError = astNode.isError();
-            size_t astNodeIndex = tokenReader.index;
-            tokenReader.restore();
-            tokenReader.push();
-            ASTNode breakAstNode = node.second->getASTNodeWithNextNode(tokenReader, cpack);
-            bool isBreakAstNodeError = breakAstNode.isError();
-            size_t breakAstNodeIndex = tokenReader.index;
-            tokenReader.restore();
-            tokenReader.push();
-            tokenReader.index = isBreakAstNodeError ? astNodeIndex : breakAstNodeIndex;
-            ASTNode orNode = ASTNode::orNode(this, {
-                    std::move(astNode), std::move(breakAstNode)}, tokenReader.collect());
+            ASTNode orNode = nodeElement.getASTNode(tokenReader, cpack);
+            bool isAstNodeError = orNode.childNodes[0].isError();
+            bool isBreakAstNodeError = orNode.childNodes[1].isError();
             bool isOrNodeError = orNode.isError();
-            bool isOrNodeTokenEmpty = orNode.tokens.isEmpty();
-            size_t whichBest = orNode.whichBest;
             childNodes.push_back(std::move(orNode));
-            if (!isBreakAstNodeError) {
-                return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
-            } else if (isOrNodeError || !tokenReader.ready() || isOrNodeTokenEmpty) {
+            if (!isBreakAstNodeError || (!isAstNodeError && !tokenReader.ready())) {
+                return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect(), nullptr, "repeat");
+            } else if (isOrNodeError) {
                 VectorView <Token> tokens = tokenReader.collect();
-                return ASTNode::andNode(this, std::move(childNodes), tokens,
-                                        isAstNodeErrorError ? nullptr : ErrorReason::incomplete(
-                                                tokens, "命令重复部分缺少结束语句"),
-                                        whichBest == 0 ? "repeat no complete1" : "repeat no complete2");
+                return ASTNode::andNode(this, std::move(childNodes), tokens, nullptr, "repeat");
             }
         }
     }
@@ -87,14 +76,20 @@ namespace CHelper::Node {
     void NodeRepeat::collectStructure(const ASTNode *astNode,
                                       StructureBuilder &structure,
                                       bool isMustHave) const {
-        for (const auto &item: astNode->childNodes[0].childNodes) {
-            structure.appendWhiteSpace().append(item.getStructure());
-        }
-        if (astNode->id == "repeat no complete1") {
-            structure.appendWhiteSpace().append("...");
-        } else if (astNode->id == "repeat no complete2") {
-            node.second->collectStructure(nullptr, structure, isMustHave);
-            structure.appendWhiteSpace().append("...");
+        if (astNode->id == "repeat") {
+            bool isRepeat = true;
+            for (const auto &item: astNode->childNodes) {
+                structure.appendWhiteSpace().append(item.getStructure());
+                if (item.whichBest == 1) {
+                    isRepeat = false;
+                }
+            }
+            if (isRepeat) {
+                structure.appendWhiteSpace().append("...");
+                for (const auto &item: ((NodeAnd *) nodeElement.childNodes[1])->childNodes) {
+                    item->collectStructure(nullptr, structure, true);
+                }
+            }
         }
     }
 

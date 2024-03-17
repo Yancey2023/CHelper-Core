@@ -14,9 +14,6 @@
     }
   ],
   "ast": [
-    [
-      "maxPlayers",
-      "LF"
-    ]
+    ["maxPlayers", "LF"]
   ]
 }

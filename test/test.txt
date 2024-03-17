@@ -17,4 +17,7 @@
 -give @
 -give @a[x=^,has_property={""=!..12,="..}}}}}}}}}}}}}}}}}}}}}}}}}}}}}},,,,,
 -execute as @a run
-execute run
+-execute run
+-execute if block ~~~ command_block run
+-execute if block ~~~ bamboo
+give @s apple 12 1

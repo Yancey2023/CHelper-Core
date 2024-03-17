@@ -29,9 +29,6 @@
     }
   ],
   "ast": [
-    [
-      "details",
-      "LF"
-    ]
+    ["details", "LF"]
   ]
 }

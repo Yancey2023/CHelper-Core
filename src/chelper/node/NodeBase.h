@@ -57,7 +57,7 @@ namespace CHelper {
                                    const NodeBase *childNode,
                                    const std::string &astNodeId = "") const;
 
-            //当childNodes只需要有第一个node并且其他node不一定需要的时侯使用
+            //node不一定需要的时侯使用
             ASTNode getOptionalASTNode(TokenReader &tokenReader,
                                        const CPack *cpack,
                                        bool isIgnoreChildNodesError,
@@ -88,8 +88,15 @@ namespace CHelper {
 } // CHelper
 
 template<>
-struct nlohmann::adl_serializer<std::unique_ptr<CHelper::Node::NodeBase>> {
+struct [[maybe_unused]] nlohmann::adl_serializer<std::unique_ptr<CHelper::Node::NodeBase>> {
     static void to_json(nlohmann::json &j, const std::unique_ptr<CHelper::Node::NodeBase> &t) {
+        t->toJson(j);
+    };
+};
+
+template<>
+struct [[maybe_unused]] nlohmann::adl_serializer<const CHelper::Node::NodeBase *const> {
+    static void to_json(nlohmann::json &j, const CHelper::Node::NodeBase *const &t) {
         t->toJson(j);
     };
 };

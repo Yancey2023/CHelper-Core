@@ -47,6 +47,7 @@
     {
       "type": "POSITION",
       "id": "saveTo",
+      "isMustAfterWhiteSpace": false,
       "description": "源区域对角坐标2"
     },
     {
@@ -222,107 +223,27 @@
     }
   ],
   "ast": [
-    [
-      "save",
-      "saveName"
-    ],
-    [
-      "saveName",
-      "saveFrom"
-    ],
-    [
-      "saveFrom",
-      "saveTo"
-    ],
-    [
-      "saveTo",
-      "saveMode1",
-      "saveIncludeEntities",
-      "LF"
-    ],
-    [
-      "saveMode1",
-      "LF"
-    ],
-    [
-      "saveIncludeEntities",
-      "saveMode2",
-      "LF"
-    ],
-    [
-      "saveMode2",
-      "saveIncludeBlocks",
-      "LF"
-    ],
-    [
-      "saveIncludeBlocks",
-      "LF"
-    ],
-    [
-      "load",
-      "loadName"
-    ],
-    [
-      "loadName",
-      "loadTo"
-    ],
-    [
-      "loadTo",
-      "loadRotation",
-      "LF"
-    ],
-    [
-      "loadRotation",
-      "loadMirror",
-      "LF"
-    ],
-    [
-      "loadMirror",
-      "loadIncludeEntities",
-      "loadAnimationMode",
-      "LF"
-    ],
-    [
-      "loadIncludeEntities",
-      "loadIncludeBlocks",
-      "LF"
-    ],
-    [
-      "loadIncludeBlocks",
-      "loadWaterlogged",
-      "LF"
-    ],
-    [
-      "loadWaterlogged",
-      "loadIntegrity",
-      "LF"
-    ],
-    [
-      "loadIntegrity",
-      "loadSeed",
-      "LF"
-    ],
-    [
-      "loadSeed",
-      "LF"
-    ],
-    [
-      "loadAnimationMode",
-      "loadAnimationSeconds",
-      "LF"
-    ],
-    [
-      "loadAnimationSeconds",
-      "loadIncludeEntities",
-      "LF"
-    ],
-    [
-      "delete",
-      "deleteName"
-    ],
-    [
-      "deleteName",
-      "LF"
-    ]
+    ["save", "saveName"],
+    ["saveName", "saveFrom"],
+    ["saveFrom", "saveTo"],
+    ["saveTo", "saveMode1", "saveIncludeEntities", "LF"],
+    ["saveMode1", "LF"],
+    ["saveIncludeEntities", "saveMode2", "LF"],
+    ["saveMode2", "saveIncludeBlocks", "LF"],
+    ["saveIncludeBlocks", "LF"],
+    ["load", "loadName"],
+    ["loadName", "loadTo"],
+    ["loadTo", "loadRotation", "LF"],
+    ["loadRotation", "loadMirror", "LF"],
+    ["loadMirror", "loadIncludeEntities", "loadAnimationMode", "LF"],
+    ["loadIncludeEntities", "loadIncludeBlocks", "LF"],
+    ["loadIncludeBlocks", "loadWaterlogged", "LF"],
+    ["loadWaterlogged", "loadIntegrity", "LF"],
+    ["loadIntegrity", "loadSeed", "LF"],
+    ["loadSeed", "LF"],
+    ["loadAnimationMode", "loadAnimationSeconds", "LF"],
+    ["loadAnimationSeconds", "loadIncludeEntities", "LF"],
+    ["delete", "deleteName"],
+    ["deleteName", "LF"]
   ]
 }

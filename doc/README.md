@@ -20,7 +20,7 @@ There should be a file named `manifest.json` in the root directory of the pack:
   "requiredPack": [
     "BasicPack-1.20"
   ],
-  "version": 1,
+  "versionCode": 1,
   "isBasicPack": true
 }
 ```
@@ -34,7 +34,7 @@ There should be a file named `manifest.json` in the root directory of the pack:
 |    updateDate    | string  |  latest update date  |                                Used for display                                |               No               |
 |      packId      | string  |       pack ID        |                           Used for recognizing pack                            |               No               |
 |   requiredPack   |  array  | IDs of required pack |                       Used for recognizing dependencies                        |  No(no default dependencies)   |
-|     version      | integer |     version code     |                          Used for recognizing version                          |              Yes               |
+|   versionCode    | integer |     version code     |                          Used for recognizing version                          |              Yes               |
 |   isBasicPack    | boolean | if it is basic pack  | only one basic pack and multiple extension pack can be loaded at the same time |      No(default is false)      |
 
 > Note: Extension pack is not currently supported. You only can use basic pack now.

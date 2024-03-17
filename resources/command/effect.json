@@ -50,33 +50,10 @@
     }
   ],
   "ast": [
-    [
-      "player",
-      "clear",
-      "effect"
-    ],
-    [
-      "clear",
-      "LF"
-    ],
-    [
-      "effect",
-      "seconds",
-      "LF"
-    ],
-    [
-      "seconds",
-      "amplifier",
-      "LF"
-    ],
-    [
-      "amplifier",
-      "hideParticles",
-      "LF"
-    ],
-    [
-      "hideParticles",
-      "LF"
-    ]
+    ["player", "clear", "effect"],
+    ["clear", "LF"],
+    ["effect", "seconds", "LF"],
+    ["seconds", "amplifier", "LF"],
+    ["amplifier", "hideParticles", "LF"], ["hideParticles", "LF"]
   ]
 }

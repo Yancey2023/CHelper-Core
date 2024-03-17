@@ -40,18 +40,8 @@
     }
   ],
   "ast": [
-    [
-      "position",
-      "block"
-    ],
-    [
-      "block",
-      "mode",
-      "LF"
-    ],
-    [
-      "mode",
-      "LF"
-    ]
+    ["position", "block"],
+    ["block", "mode", "LF"],
+    ["mode", "LF"]
   ]
 }

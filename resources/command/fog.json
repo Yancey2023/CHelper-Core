@@ -56,26 +56,10 @@
     }
   ],
   "ast": [
-    [
-      "victim",
-      "push",
-      "mode"
-    ],
-    [
-      "push",
-      "fogId"
-    ],
-    [
-      "fogId",
-      "userProvidedId"
-    ],
-    [
-      "userProvidedId",
-      "LF"
-    ],
-    [
-      "mode",
-      "userProvidedId"
-    ]
+    ["victim", "push", "mode"],
+    ["push", "fogId"],
+    ["fogId", "userProvidedId"],
+    ["userProvidedId", "LF"],
+    ["mode", "userProvidedId"]
   ]
 }

@@ -12,7 +12,7 @@ namespace CHelper {
                        const std::optional<std::string> &author,
                        const std::optional<std::string> &updateDate,
                        std::string packId,
-                       int version,
+                       int versionCode,
                        const std::optional<bool> &isBasicPack,
                        const std::optional<bool> &isDefault)
             : name(name),
@@ -21,7 +21,7 @@ namespace CHelper {
               author(author),
               updateDate(updateDate),
               packId(std::move(packId)),
-              version(version),
+              versionCode(versionCode),
               isBasicPack(isBasicPack),
               isDefault(isDefault) {}
 
@@ -32,7 +32,7 @@ namespace CHelper {
               author(JsonUtil::fromJsonOptional<std::string>(j, "author")),
               updateDate(JsonUtil::fromJsonOptional<std::string>(j, "updateDate")),
               packId(JsonUtil::fromJson<std::string>(j, "packId")),
-              version(JsonUtil::fromJson<int>(j, "version")),
+              versionCode(JsonUtil::fromJson<int>(j, "versionCode")),
               isBasicPack(JsonUtil::fromJsonOptional<bool>(j, "isBasicPack")),
               isDefault(JsonUtil::fromJsonOptional<bool>(j, "isDefault")) {}
 
@@ -43,7 +43,7 @@ namespace CHelper {
         JsonUtil::toJsonOptional(j, "author", author);
         JsonUtil::toJsonOptional(j, "updateDate", updateDate);
         JsonUtil::toJson(j, "packId", packId);
-        JsonUtil::toJson(j, "version", version);
+        JsonUtil::toJson(j, "versionCode", versionCode);
         JsonUtil::toJsonOptional(j, "isBasicPack", isBasicPack);
         JsonUtil::toJsonOptional(j, "isDefault", isDefault);
     }

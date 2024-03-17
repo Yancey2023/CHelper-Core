@@ -15,6 +15,7 @@
     {
       "type": "POSITION",
       "id": "to",
+      "isMustAfterWhiteSpace": false,
       "description": "定义填充区域的两组对角方块坐标"
     },
     {
@@ -64,31 +65,11 @@
     }
   ],
   "ast": [
-    [
-      "from",
-      "to"
-    ],
-    [
-      "to",
-      "block"
-    ],
-    [
-      "block",
-      "oldBlockHandling",
-      "replace",
-      "LF"
-    ],
-    [
-      "oldBlockHandling",
-      "LF"
-    ],
-    [
-      "replace",
-      "replaceBlock"
-    ],
-    [
-      "replaceBlock",
-      "LF"
-    ]
+    ["from", "to"],
+    ["to", "block"],
+    ["block", "oldBlockHandling", "replace", "LF"],
+    ["oldBlockHandling", "LF"],
+    ["replace", "replaceBlock"],
+    ["replaceBlock", "LF"]
   ]
 }

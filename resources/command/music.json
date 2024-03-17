@@ -99,48 +99,15 @@
     }
   ],
   "ast": [
-    [
-      "play",
-      "trackName"
-    ],
-    [
-      "trackName",
-      "volumeValue1"
-    ],
-    [
-      "volumeValue1",
-      "fadeSeconds",
-      "LF"
-    ],
-    [
-      "fadeSeconds",
-      "repeatMode",
-      "LF"
-    ],
-    [
-      "repeatMode",
-      "LF"
-    ],
-    [
-      "queue",
-      "trackName"
-    ],
-    [
-      "stop",
-      "stopFadeSeconds",
-      "LF"
-    ],
-    [
-      "stopFadeSeconds",
-      "LF"
-    ],
-    [
-      "volume",
-      "volumeValue2"
-    ],
-    [
-      "volumeValue2",
-      "LF"
-    ]
+    ["play", "trackName"],
+    ["trackName", "volumeValue1"],
+    ["volumeValue1", "fadeSeconds", "LF"],
+    ["fadeSeconds", "repeatMode", "LF"],
+    ["repeatMode", "LF"],
+    ["queue", "trackName"],
+    ["stop", "stopFadeSeconds", "LF"],
+    ["stopFadeSeconds", "LF"],
+    ["volume", "volumeValue2"],
+    ["volumeValue2", "LF"]
   ]
 }

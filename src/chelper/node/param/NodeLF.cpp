@@ -3,6 +3,7 @@
 //
 
 #include "NodeLF.h"
+#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -25,7 +26,7 @@ namespace CHelper::Node {
         VectorView <Token> tokens = tokenReader.collect();
         std::shared_ptr<ErrorReason> errorReason;
         if (tokens.hasValue()) {
-            errorReason = ErrorReason::excess(tokens, "命令后面有多余部分");
+            errorReason = ErrorReason::excess(tokens, "命令后面有多余部分 -> " + TokenUtil::toString(tokens));
         }
         return ASTNode::simpleNode(this, tokens, errorReason);
     }

@@ -200,6 +200,7 @@
       "type": "RELATIVE_FLOAT",
       "id": "yRot",
       "description": "相机视角绕X轴旋转的旋转角度(竖直上方为-90.0，至竖直下方90.0)",
+      "isMustAfterWhiteSpace": false,
       "canUseCaretNotation": false
     },
     {
@@ -322,116 +323,30 @@
     }
   ],
   "ast": [
-    [
-      "players",
-      "clear",
-      "fade",
-      "set"
-    ],
-    [
-      "clear",
-      "LF"
-    ],
-    [
-      "fade",
-      "color",
-      "time"
-    ],
-    [
-      "color",
-      "red"
-    ],
-    [
-      "red",
-      "green"
-    ],
-    [
-      "green",
-      "blue"
-    ],
-    [
-      "blue",
-      "LF"
-    ],
-    [
-      "time",
-      "fadeInSeconds"
-    ],
-    [
-      "fadeInSeconds",
-      "holdSeconds"
-    ],
-    [
-      "holdSeconds",
-      "fadeOutSeconds"
-    ],
-    [
-      "fadeOutSeconds",
-      "color"
-    ],
-    [
-      "set",
-      "preset"
-    ],
-    [
-      "preset",
-      "default",
-      "facing",
-      "rot",
-      "ease"
-    ],
-    [
-      "default",
-      "LF"
-    ],
-    [
-      "facing",
-      "lookAtEntity",
-      "lookAtPosition"
-    ],
-    [
-      "lookAtEntity",
-      "LF"
-    ],
-    [
-      "lookAtPosition",
-      "LF"
-    ],
-    [
-      "pos",
-      "position"
-    ],
-    [
-      "position",
-      "facing",
-      "rot"
-    ],
-    [
-      "rot",
-      "xRot"
-    ],
-    [
-      "xRot",
-      "yRot"
-    ],
-    [
-      "yRot",
-      "LF"
-    ],
-    [
-      "ease",
-      "easeTime"
-    ],
-    [
-      "easeTime",
-      "easeType"
-    ],
-    [
-      "easeType",
-      "default",
-      "facing",
-      "pos",
-      "rot"
-    ]
+    ["players", "clear", "fade", "set"],
+    ["clear", "LF"],
+    ["fade", "color", "time"],
+    ["color", "red"],
+    ["red", "green"],
+    ["green", "blue"],
+    ["blue", "LF"],
+    ["time", "fadeInSeconds"],
+    ["fadeInSeconds", "holdSeconds"],
+    ["holdSeconds", "fadeOutSeconds"],
+    ["fadeOutSeconds", "color"],
+    ["set", "preset"],
+    ["preset", "default", "facing", "rot", "ease"],
+    ["default", "LF"],
+    ["facing", "lookAtEntity", "lookAtPosition"],
+    ["lookAtEntity", "LF"],
+    ["lookAtPosition", "LF"],
+    ["pos", "position"],
+    ["position", "facing", "rot"],
+    ["rot", "xRot"],
+    ["xRot", "yRot"],
+    ["yRot", "LF"],
+    ["ease", "easeTime"],
+    ["easeTime", "easeType"],
+    ["easeType", "default", "facing", "pos", "rot"]
   ]
 }

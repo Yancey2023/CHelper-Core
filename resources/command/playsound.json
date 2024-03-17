@@ -44,34 +44,11 @@
     }
   ],
   "ast": [
-    [
-      "sound",
-      "player",
-      "LF"
-    ],
-    [
-      "player",
-      "position",
-      "LF"
-    ],
-    [
-      "position",
-      "volume",
-      "LF"
-    ],
-    [
-      "volume",
-      "pitch",
-      "LF"
-    ],
-    [
-      "pitch",
-      "minimumVolume",
-      "LF"
-    ],
-    [
-      "minimumVolume",
-      "LF"
-    ]
+    ["sound", "player", "LF"],
+    ["player", "position", "LF"],
+    ["position", "volume", "LF"],
+    ["volume", "pitch", "LF"],
+    ["pitch", "minimumVolume", "LF"],
+    ["minimumVolume", "LF"]
   ]
 }

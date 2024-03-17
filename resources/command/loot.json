@@ -181,106 +181,27 @@
     }
   ],
   "ast": [
-    [
-      "give",
-      "givePlayer"
-    ],
-    [
-      "givePlayer",
-      "kill",
-      "loot"
-    ],
-    [
-      "insert",
-      "insertPosition"
-    ],
-    [
-      "insertPosition",
-      "kill",
-      "loot"
-    ],
-    [
-      "spawn",
-      "spawnPosition"
-    ],
-    [
-      "spawnPosition",
-      "kill",
-      "loot"
-    ],
-    [
-      "replace",
-      "block",
-      "entity"
-    ],
-    [
-      "block",
-      "replacePosition"
-    ],
-    [
-      "replacePosition",
-      "slot.container"
-    ],
-    [
-      "slot.container",
-      "slotId"
-    ],
-    [
-      "entity",
-      "replaceEntity"
-    ],
-    [
-      "replaceEntity",
-      "slotType"
-    ],
-    [
-      "slotType",
-      "slotId"
-    ],
-    [
-      "slotId",
-      "kill",
-      "loot",
-      "count"
-    ],
-    [
-      "count",
-      "kill",
-      "loot"
-    ],
-    [
-      "kill",
-      "killEntity"
-    ],
-    [
-      "killEntity",
-      "tool",
-      "mainhand",
-      "offhand",
-      "LF"
-    ],
-    [
-      "loot",
-      "lootTable"
-    ],
-    [
-      "lootTable",
-      "tool",
-      "mainhand",
-      "offhand",
-      "LF"
-    ],
-    [
-      "tool",
-      "LF"
-    ],
-    [
-      "mainhand",
-      "LF"
-    ],
-    [
-      "offhand",
-      "LF"
-    ]
+    ["give", "givePlayer"],
+    ["givePlayer", "kill", "loot"],
+    ["insert", "insertPosition"],
+    ["insertPosition", "kill", "loot"],
+    ["spawn", "spawnPosition"],
+    ["spawnPosition", "kill", "loot"],
+    ["replace", "block", "entity"],
+    ["block", "replacePosition"],
+    ["replacePosition", "slot.container"],
+    ["slot.container", "slotId"],
+    ["entity", "replaceEntity"],
+    ["replaceEntity", "slotType"],
+    ["slotType", "slotId"],
+    ["slotId", "kill", "loot", "count"],
+    ["count", "kill", "loot"],
+    ["kill", "killEntity"],
+    ["killEntity", "tool", "mainhand", "offhand", "LF"],
+    ["loot", "lootTable"],
+    ["lootTable", "tool", "mainhand", "offhand", "LF"],
+    ["tool", "LF"],
+    ["mainhand", "LF"],
+    ["offhand", "LF"]
   ]
 }

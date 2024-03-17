@@ -24,14 +24,7 @@
     }
   ],
   "ast": [
-    [
-      "name",
-      "reason",
-      "LF"
-    ],
-    [
-      "reason",
-      "LF"
-    ]
+    ["name", "reason", "LF"],
+    ["reason", "LF"]
   ]
 }

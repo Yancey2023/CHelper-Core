@@ -43,6 +43,10 @@ namespace CHelper::Node {
 
         std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
 
+        bool collectSuggestions(const ASTNode *astNode,
+                                size_t index,
+                                std::vector<Suggestions> &suggestions) const override;
+
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;

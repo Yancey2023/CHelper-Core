@@ -42,6 +42,25 @@ namespace CHelper::Node {
                 tokens, "内容不匹配，应该为布尔值，但当前内容为" + str));
     }
 
+    bool NodeBoolean::collectSuggestions(const ASTNode *astNode,
+                                         size_t index,
+                                         std::vector<Suggestions> &suggestions) const {
+        std::string str = TokenUtil::toString(astNode->tokens)
+                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+        Suggestions suggestions1;
+        if (str.find("true") != std::string::npos) {
+            suggestions1.suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(
+                    "true", descriptionTrue));
+        }
+        if (str.find("false") != std::string::npos) {
+            suggestions1.suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(
+                    "false", descriptionFalse));
+        }
+        suggestions1.markFiltered();
+        suggestions.push_back(std::move(suggestions1));
+        return true;
+    }
+
     void NodeBoolean::collectStructure(const ASTNode *astNode,
                                        StructureBuilder &structure,
                                        bool isMustHave) const {

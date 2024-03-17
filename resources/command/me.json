@@ -16,9 +16,6 @@
     }
   ],
   "ast": [
-    [
-      "message",
-      "LF"
-    ]
+    ["message", "LF"]
   ]
 }

@@ -52,7 +52,7 @@ namespace CHelper::Node {
                                            const NodeNormalId &nodeFamily,
                                            const NodeNormalId &nodeGameMode,
                                            const NodeNormalId &nodeItemLocation,
-                                           const NodeNormalId &nodeEntities)
+                                           const NodeNamespaceId &nodeEntities)
             : NodeBase(id, description, false),
               isMustPlayer(isMustPlayer),
               isMustNPC(isMustNPC),
@@ -77,7 +77,7 @@ namespace CHelper::Node {
               nodeFamily("FAMILIES", "族", "families", true, cpack.getNormalId("families")),
               nodeGameMode("GAME_MODES", "游戏模式", "gameModes", true, cpack.getNormalId("gameModes")),
               nodeItemLocation("SLOT", "物品栏", "slot", true, cpack.getNormalId("slot")),
-              nodeEntities("ENTITIES", "实体", "entities", true, cpack.getNormalId("entities")),
+              nodeEntities("ENTITIES", "实体", "entities", true, cpack.getNamespaceId("entities")),
               nodeArgument("TARGET_SELECTOR_ARGUMENT", "目标选择器单个参数",
                            &nodeItem, &nodeFamily, &nodeGameMode, &nodeItemLocation, &nodeEntities),
               nodeArguments("TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",

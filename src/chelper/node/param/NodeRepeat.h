@@ -8,13 +8,14 @@
 #define CHELPER_NODEREPEAT_H
 
 #include "../NodeBase.h"
+#include "../util/NodeOr.h"
 
 namespace CHelper::Node {
 
     class NodeRepeat : public NodeBase {
     public:
         std::string key;
-        std::pair<NodeBase *, NodeBase *> node;
+        NodeOr nodeElement;
 
         NodeRepeat(const std::optional<std::string> &id,
                    const std::optional<std::string> &description,

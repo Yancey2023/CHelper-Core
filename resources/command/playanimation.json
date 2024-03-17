@@ -50,32 +50,11 @@
     }
   ],
   "ast": [
-    [
-      "entity",
-      "animation"
-    ],
-    [
-      "animation",
-      "nextState"
-    ],
-    [
-      "nextState",
-      "blendOutTime",
-      "LF"
-    ],
-    [
-      "blendOutTime",
-      "stopExpression",
-      "LF"
-    ],
-    [
-      "stopExpression",
-      "controller",
-      "LF"
-    ],
-    [
-      "controller",
-      "LF"
-    ]
+    ["entity", "animation"],
+    ["animation", "nextState"],
+    ["nextState", "blendOutTime", "LF"],
+    ["blendOutTime", "stopExpression", "LF"],
+    ["stopExpression", "controller", "LF"],
+    ["controller", "LF"]
   ]
 }

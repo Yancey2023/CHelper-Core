@@ -46,27 +46,8 @@
     }
   ],
   "ast": [
-    [
-      "target",
-      "amount"
-    ],
-    [
-      "amount",
-      "cause",
-      "LF"
-    ],
-    [
-      "cause",
-      "entity",
-      "LF"
-    ],
-    [
-      "entity",
-      "damager"
-    ],
-    [
-      "damager",
-      "LF"
-    ]
+    ["target", "amount"],
+    ["amount", "cause", "LF"],
+    ["cause", "entity", "LF"], ["entity", "damager"], ["damager", "LF"]
   ]
 }

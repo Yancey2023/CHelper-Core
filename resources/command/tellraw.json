@@ -23,13 +23,7 @@
     }
   ],
   "ast": [
-    [
-      "target",
-      "raw json message"
-    ],
-    [
-      "raw json message",
-      "LF"
-    ]
+    ["target", "raw json message"],
+    ["raw json message", "LF"]
   ]
 }

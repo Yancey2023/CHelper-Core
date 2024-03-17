@@ -33,6 +33,7 @@
     {
       "type": "POSITION",
       "id": "to",
+      "isMustAfterWhiteSpace": false,
       "description": "用于定义矩形加载区域的两个对角坐标的第二个"
     },
     {
@@ -79,47 +80,15 @@
     }
   ],
   "ast": [
-    [
-      "on_area_loaded",
-      "add"
-    ],
-    [
-      "add",
-      "from",
-      "circle",
-      "tickingarea"
-    ],
-    [
-      "from",
-      "to"
-    ],
-    [
-      "to",
-      "function"
-    ],
-    [
-      "function",
-      "LF"
-    ],
-    [
-      "circle",
-      "center"
-    ],
-    [
-      "center",
-      "radius"
-    ],
-    [
-      "radius",
-      "function"
-    ],
-    [
-      "tickingarea",
-      "name"
-    ],
-    [
-      "name",
-      "function"
-    ]
+    ["on_area_loaded", "add"],
+    ["add", "from", "circle", "tickingarea"],
+    ["from", "to"],
+    ["to", "function"],
+    ["function", "LF"],
+    ["circle", "center"],
+    ["center", "radius"],
+    ["radius", "function"],
+    ["tickingarea", "name"],
+    ["name", "function"]
   ]
 }

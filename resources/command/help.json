@@ -22,13 +22,7 @@
     }
   ],
   "ast": [
-    [
-      "command",
-      "LF"
-    ],
-    [
-      "page",
-      "LF"
-    ]
+    ["command", "LF"],
+    ["page", "LF"]
   ]
 }

@@ -40,14 +40,7 @@
     }
   ],
   "ast": [
-    [
-      "event",
-      "value",
-      "LF"
-    ],
-    [
-      "value",
-      "LF"
-    ]
+    ["event", "value", "LF"],
+    ["value", "LF"]
   ]
 }

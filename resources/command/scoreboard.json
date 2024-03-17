@@ -363,170 +363,43 @@
     }
   ],
   "ast": [
-    [
-      "objectives",
-      "objectivesList",
-      "objectivesAdd",
-      "objectivesRemove",
-      "setdisplay"
-    ],
-    [
-      "objectivesList",
-      "LF"
-    ],
-    [
-      "objectivesAdd",
-      "addObjective"
-    ],
-    [
-      "addObjective",
-      "dummy"
-    ],
-    [
-      "dummy",
-      "displayName"
-    ],
-    [
-      "displayName",
-      "LF"
-    ],
-    [
-      "objectivesRemove",
-      "removeObjective"
-    ],
-    [
-      "removeObjective",
-      "LF"
-    ],
-    [
-      "setdisplay",
-      "displayMode",
-      "belowName"
-    ],
-    [
-      "displayMode",
-      "displayObjective1"
-    ],
-    [
-      "displayObjective1",
-      "order",
-      "LF"
-    ],
-    [
-      "order",
-      "LF"
-    ],
-    [
-      "belowName",
-      "displayObjective2"
-    ],
-    [
-      "displayObjective2",
-      "LF"
-    ],
-    [
-      "players",
-      "playersList",
-      "set",
-      "playersAdd",
-      "playersRemove",
-      "random",
-      "reset",
-      "test",
-      "operation"
-    ],
-    [
-      "playersList",
-      "listPlayerName",
-      "LF"
-    ],
-    [
-      "listPlayerName",
-      "LF"
-    ],
-    [
-      "set",
-      "setPlayer"
-    ],
-    [
-      "setPlayer",
-      "setObjective"
-    ],
-    [
-      "setObjective",
-      "count"
-    ],
-    [
-      "count",
-      "LF"
-    ],
-    [
-      "playersAdd",
-      "setPlayer"
-    ],
-    [
-      "playersRemove",
-      "setPlayer"
-    ],
-    [
-      "random",
-      "randomPlayer"
-    ],
-    [
-      "randomPlayer",
-      "randomObjective"
-    ],
-    [
-      "randomObjective",
-      "min"
-    ],
-    [
-      "min",
-      "max"
-    ],
-    [
-      "max",
-      "LF"
-    ],
-    [
-      "reset",
-      "resetPlayer"
-    ],
-    [
-      "resetPlayer",
-      "resetObjective"
-    ],
-    [
-      "resetObjective",
-      "LF"
-    ],
-    [
-      "test",
-      "randomPlayer"
-    ],
-    [
-      "operation",
-      "operationPlayer"
-    ],
-    [
-      "operationPlayer",
-      "operationObjective1"
-    ],
-    [
-      "operationObjective1",
-      "operationId"
-    ],
-    [
-      "operationId",
-      "operationSelector"
-    ],
-    [
-      "operationSelector",
-      "operationObjective2"
-    ],
-    [
-      "operationObjective2",
-      "LF"
-    ]
+    ["objectives", "objectivesList", "objectivesAdd", "objectivesRemove", "setdisplay"],
+    ["objectivesList", "LF"],
+    ["objectivesAdd", "addObjective"],
+    ["addObjective", "dummy"],
+    ["dummy", "displayName"],
+    ["displayName", "LF"],
+    ["objectivesRemove", "removeObjective"],
+    ["removeObjective", "LF"],
+    ["setdisplay", "displayMode", "belowName"],
+    ["displayMode", "displayObjective1"],
+    ["displayObjective1", "order", "LF"],
+    ["order", "LF"],
+    ["belowName", "displayObjective2"],
+    ["displayObjective2", "LF"],
+    ["players", "playersList", "set", "playersAdd", "playersRemove", "random", "reset", "test", "operation"],
+    ["playersList", "listPlayerName", "LF"],
+    ["listPlayerName", "LF"],
+    ["set", "setPlayer"],
+    ["setPlayer", "setObjective"],
+    ["setObjective", "count"],
+    ["count", "LF"],
+    ["playersAdd", "setPlayer"],
+    ["playersRemove", "setPlayer"],
+    ["random", "randomPlayer"],
+    ["randomPlayer", "randomObjective"],
+    ["randomObjective", "min"],
+    ["min", "max"],
+    ["max", "LF"],
+    ["reset", "resetPlayer"],
+    ["resetPlayer", "resetObjective"],
+    ["resetObjective", "LF"],
+    ["test", "randomPlayer"],
+    ["operation", "operationPlayer"],
+    ["operationPlayer", "operationObjective1"],
+    ["operationObjective1", "operationId"],
+    ["operationId", "operationSelector"],
+    ["operationSelector", "operationObjective2"],
+    ["operationObjective2", "LF"]
   ]
 }

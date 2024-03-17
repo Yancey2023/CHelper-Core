@@ -25,7 +25,7 @@ CHelper是我的世界基岩版的命令助手。
   "requiredPack": [
     "BasicPack-1.20"
   ],
-  "version": 1,
+  "versionCode": 1,
   "isBasicPack": false
 }
 ```
@@ -39,7 +39,7 @@ CHelper是我的世界基岩版的命令助手。
 |    updateDate    | 字符串 |    更新日期     |         用于显示          |      否      |
 |      packId      | 字符串 |   扩展包的ID    |        用于识别扩展包        |      是      |
 |   requiredPack   | 数组  | 需要依赖的扩展包的ID |     用于识别扩展包的依赖关系      |  否（默认没有依赖）  |
-|     version      | 整数  |     版本号     |       用于显示和判断版本       |      是      |
+|   versionCode    | 整数  |     版本号     |       用于显示和判断版本       |      是      |
 |   isBasicPack    | 布尔值 |  是否是命令基础包   | 只能同时加载一个命令基础包和多个命令扩展包 | 否（默认为false） |
 
 > 注意：暂时还不支持命令拓展包，目前只支持命令基础包

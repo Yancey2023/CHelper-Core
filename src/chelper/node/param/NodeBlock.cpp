@@ -5,16 +5,12 @@
 #include "NodeBlock.h"
 #include "../util/NodeSingleSymbol.h"
 #include "NodeString.h"
-#include "NodeBoolean.h"
-#include "NodeInteger.h"
-#include "NodeFloat.h"
-#include "../util/NodeEntry.h"
-#include "../util/NodeList.h"
-#include "NodeText.h"
-#include "../util/NodeAnd.h"
 #include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
+
+    static std::unique_ptr<Node::NodeSingleSymbol> nodeBlockStateLeftBracket = std::make_unique<Node::NodeSingleSymbol>(
+            "BLOCK_STATE_LEFT_BRACKET", "方块状态左括号", '[');
 
     NodeBlock::NodeBlock(const std::optional<std::string> &id,
                          const std::optional<std::string> &description,
@@ -48,6 +44,13 @@ namespace CHelper::Node {
             tokenReader.pop();
             return blockId;
         }
+        tokenReader.push();
+        ASTNode blockStateLeftBracket = nodeBlockStateLeftBracket->getASTNode(tokenReader, cpack);
+        tokenReader.restore();
+        if (blockStateLeftBracket.isError()) {
+            return ASTNode::andNode(this, {blockId}, tokenReader.collect(),
+                                    nullptr, "blockAndBlockState");;
+        }
         std::string blockIdStr = TokenUtil::toString(blockId.tokens);
         size_t strHash = std::hash<std::string>{}(blockIdStr);
         std::shared_ptr<NamespaceId> currentBlock = nullptr;
@@ -60,7 +63,8 @@ namespace CHelper::Node {
         auto nodeBlockState = currentBlock == nullptr ? BlockId::getNodeAllBlockState() :
                               std::static_pointer_cast<BlockId>(currentBlock)->nodeBlockState;
         auto astNodeBlockState = getByChildNode(tokenReader, cpack, nodeBlockState, "blockState");
-        return ASTNode::andNode(this, {blockId, astNodeBlockState}, tokenReader.collect());
+        return ASTNode::andNode(this, {blockId, astNodeBlockState}, tokenReader.collect(),
+                                nullptr, "blockAndBlockState");
     }
 
     std::optional<std::string> NodeBlock::collectDescription(const ASTNode *node, size_t index) const {
@@ -71,6 +75,16 @@ namespace CHelper::Node {
         } else {
             return std::nullopt;
         }
+    }
+
+    bool NodeBlock::collectSuggestions(const ASTNode *astNode,
+                                         size_t index,
+                                         std::vector<Suggestions> &suggestions) const {
+        if (astNode->id == "blockAndBlockState" && !astNode->isError() &&
+            astNode->childNodes.size() == 1 && index == TokenUtil::getStartIndex(astNode->tokens)) {
+            suggestions.push_back(Suggestions::singleSuggestion({index, index, nodeBlockStateLeftBracket->normalId}));
+        }
+        return false;
     }
 
     void NodeBlock::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {

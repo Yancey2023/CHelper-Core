@@ -12,21 +12,9 @@
       "id": "executeParam",
       "description": "子命令",
       "key": "execute"
-    },
-    {
-      "type": "COMMAND",
-      "id": "command",
-      "description": "执行的另一条命令"
     }
   ],
   "ast": [
-    [
-      "executeParam",
-      "command"
-    ],
-    [
-      "command",
-      "LF"
-    ]
+    ["executeParam", "LF"]
   ]
 }

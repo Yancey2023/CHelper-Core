@@ -20,7 +20,8 @@ namespace CHelper::Node {
     public:
         const bool isMustPlayer, isMustNPC, isOnlyOne;
         const NodeNamespaceId nodeItem;
-        const NodeNormalId nodeFamily, nodeGameMode, nodeItemLocation, nodeEntities;
+        const NodeNormalId nodeFamily, nodeGameMode, nodeItemLocation;
+        const NodeNamespaceId nodeEntities;
         const NodeTargetSelectorArgument nodeArgument;
         const NodeList nodeArguments;
 
@@ -33,7 +34,7 @@ namespace CHelper::Node {
                            const NodeNormalId &nodeFamily,
                            const NodeNormalId &nodeGameMode,
                            const NodeNormalId &nodeItemLocation,
-                           const NodeNormalId &nodeEntities);
+                           const NodeNamespaceId &nodeEntities);
 
         NodeTargetSelector(const nlohmann::json &j,
                            [[maybe_unused]] const CPack &cpack);

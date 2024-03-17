@@ -43,21 +43,9 @@
     }
   ],
   "ast": [
-    [
-      "give",
-      "player"
-    ],
-    [
-      "take",
-      "player"
-    ],
-    [
-      "player",
-      "recipe"
-    ],
-    [
-      "recipe",
-      "LF"
-    ]
+    ["give", "player"],
+    ["take", "player"],
+    ["player", "recipe"],
+    ["recipe", "LF"]
   ]
 }

@@ -6,33 +6,29 @@
 
 #include "../../resources/CPack.h"
 #include "../../util/TokenUtil.h"
+#include "../util/NodeSingleSymbol.h"
 
 namespace CHelper::Node {
 
+    static std::unique_ptr<Node::NodeSingleSymbol> nodeCommandStart = std::make_unique<Node::NodeSingleSymbol>(
+            "COMMAND_START", "命令开始字符", '/');
+
     NodeCommand::NodeCommand(const std::optional<std::string> &id,
                              const std::optional<std::string> &description,
-                             const std::vector<const NodePerCommand *> &commands)
+                             const std::vector<std::unique_ptr<Node::NodeBase>> *commands)
             : NodeBase(id, description, false),
               commands(commands) {}
-
-    static std::vector<const NodePerCommand *> getCommands(const CPack &cpack) {
-        std::vector<const NodePerCommand *> result;
-        for (const auto &item: *cpack.commands) {
-            result.push_back((NodePerCommand *) item.get());
-        }
-        return result;
-    }
 
     NodeCommand::NodeCommand(const std::optional<std::string> &id,
                              const std::optional<std::string> &description,
                              [[maybe_unused]] const CPack &cpack)
             : NodeBase(id, description, false),
-              commands(getCommands(cpack)) {}
+              commands(cpack.commands.get()) {}
 
     NodeCommand::NodeCommand(const nlohmann::json &j,
                              [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true),
-              commands(getCommands(cpack)) {}
+              commands(cpack.commands.get()) {}
 
     NodeType *NodeCommand::getNodeType() const {
         return NodeType::COMMAND.get();
@@ -40,6 +36,11 @@ namespace CHelper::Node {
 
     ASTNode NodeCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
+        ASTNode commandStart = nodeCommandStart->getASTNode(tokenReader, cpack);
+        if (commandStart.isError()) {
+            tokenReader.restore();
+            tokenReader.push();
+        }
         ASTNode commandName = tokenReader.readStringASTNode(this, "commandName");
         if (commandName.tokens.size() == 0) {
             VectorView <Token> tokens = tokenReader.collect();
@@ -50,10 +51,10 @@ namespace CHelper::Node {
         const NodePerCommand *currentCommand = nullptr;
         if (!commandName.isError()) {
             bool isBreak = false;
-            for (const auto &item: commands) {
-                for (const auto &item2: item->name) {
+            for (const auto &item: *commands) {
+                currentCommand = (NodePerCommand *) item.get();
+                for (const auto &item2: currentCommand->name) {
                     if (str == item2) {
-                        currentCommand = item;
                         isBreak = true;
                         break;
                     }
@@ -61,6 +62,7 @@ namespace CHelper::Node {
                 if (isBreak) {
                     break;
                 }
+                currentCommand = nullptr;
             }
         }
         if (currentCommand == nullptr) {
@@ -74,10 +76,11 @@ namespace CHelper::Node {
     }
 
     std::optional<std::string> NodeCommand::collectDescription(const ASTNode *astNode, size_t index) const {
-        if (astNode->childNodes.size() > 1) {
+        if (astNode->id == "commandName") {
+            return "命令的名字";
+        } else {
             return std::nullopt;
         }
-        return description;
     }
 
     bool NodeCommand::collectSuggestions(const ASTNode *astNode,
@@ -89,8 +92,8 @@ namespace CHelper::Node {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         std::vector<std::shared_ptr<NormalId>> suggestions1;
-        for (const auto &item: commands) {
-            for (const auto &item2: item->name) {
+        for (const auto &item: *commands) {
+            for (const auto &item2: ((NodePerCommand *) item.get())->name) {
                 if (StringUtil::isStartOf(item2, str)) {
                     suggestions1.push_back(std::make_shared<NormalId>(item2, item->description));
                 }

@@ -33,17 +33,8 @@
     }
   ],
   "ast": [
-    [
-      "entity",
-      "target"
-    ],
-    [
-      "target",
-      "eventName"
-    ],
-    [
-      "eventName",
-      "LF"
-    ]
+    ["entity", "target"],
+    ["target", "eventName"],
+    ["eventName", "LF"]
   ]
 }

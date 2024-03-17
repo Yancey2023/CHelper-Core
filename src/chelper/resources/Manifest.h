@@ -16,7 +16,7 @@ namespace CHelper {
     public:
         std::optional<std::string> name, description, minecraftVersion, author, updateDate;
         std::string packId;
-        int version;
+        int versionCode;
         std::optional<bool> isBasicPack, isDefault;
 
         Manifest(const std::optional<std::string> &name,

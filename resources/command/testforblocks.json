@@ -15,12 +15,14 @@
     {
       "type": "POSITION",
       "id": "end",
-      "description": "作为样式基准的区域（源区域）的两个对角方块的第二个"
+      "description": "作为样式基准的区域（源区域）的两个对角方块的第二个",
+      "isMustAfterWhiteSpace": false
     },
     {
       "type": "POSITION",
       "id": "destination",
-      "description": "待检查区域（目标区域）的下西北角（具有最小坐标值的边角）"
+      "description": "待检查区域（目标区域）的下西北角（具有最小坐标值的边角）",
+      "isMustAfterWhiteSpace": false
     },
     {
       "type": "NORMAL_ID",
@@ -40,22 +42,9 @@
     }
   ],
   "ast": [
-    [
-      "begin",
-      "end"
-    ],
-    [
-      "end",
-      "destination"
-    ],
-    [
-      "destination",
-      "mode",
-      "LF"
-    ],
-    [
-      "mode",
-      "LF"
-    ]
+    ["begin", "end"],
+    ["end", "destination"],
+    ["destination", "mode", "LF"],
+    ["mode", "LF"]
   ]
 }

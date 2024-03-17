@@ -89,18 +89,8 @@
     }
   ],
   "ast": [
-    [
-      "target",
-      "visible"
-    ],
-    [
-      "visible",
-      "hud_element",
-      "LF"
-    ],
-    [
-      "hud_element",
-      "LF"
-    ]
+    ["target", "visible"],
+    ["visible", "hud_element", "LF"],
+    ["hud_element", "LF"]
   ]
 }
