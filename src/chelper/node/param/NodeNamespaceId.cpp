@@ -145,24 +145,41 @@ namespace CHelper::Node {
             }
         }
         Suggestions suggestions1;
-        for (const auto &item: nameStartOf) {
-            suggestions1.suggestions.emplace_back(astNode->tokens, item);
-        }
-        for (const auto &item: nameContain) {
-            suggestions1.suggestions.emplace_back(astNode->tokens, item);
-        }
-        for (const auto &item: namespaceStartOf) {
-            suggestions1.suggestions.emplace_back(astNode->tokens, item);
-        }
-        for (const auto &item: namespaceContain) {
-            suggestions1.suggestions.emplace_back(astNode->tokens, item);
-        }
-        for (const auto &item: descriptionContain) {
-            suggestions1.suggestions.emplace_back(astNode->tokens, item);
-        }
-        for (const auto &item: descriptionContain) {
-            suggestions1.suggestions.emplace_back(astNode->tokens, item->idWithNamespace);
-        }
+        suggestions1.suggestions.reserve(nameStartOf.size() + nameContain.size() +
+                                         namespaceStartOf.size() + namespaceContain.size() +
+                                         2 * descriptionContain.size());
+        size_t start = TokenUtil::getStartIndex(astNode->tokens);
+        size_t end = TokenUtil::getStartIndex(astNode->tokens);
+        std::transform(nameStartOf.begin(), nameStartOf.end(),
+                       std::back_inserter(suggestions1.suggestions),
+                       [&start, &end](const auto &item) {
+                           return Suggestion(start, end, item);
+                       });
+        std::transform(nameContain.begin(), nameContain.end(),
+                       std::back_inserter(suggestions1.suggestions),
+                       [&start, &end](const auto &item) {
+                           return Suggestion(start, end, item);
+                       });
+        std::transform(namespaceStartOf.begin(), namespaceStartOf.end(),
+                       std::back_inserter(suggestions1.suggestions),
+                       [&start, &end](const auto &item) {
+                           return Suggestion(start, end, item);
+                       });
+        std::transform(namespaceContain.begin(), namespaceContain.end(),
+                       std::back_inserter(suggestions1.suggestions),
+                       [&start, &end](const auto &item) {
+                           return Suggestion(start, end, item);
+                       });
+        std::transform(descriptionContain.begin(), descriptionContain.end(),
+                       std::back_inserter(suggestions1.suggestions),
+                       [&start, &end](const auto &item) {
+                           return Suggestion(start, end, item);
+                       });
+        std::transform(descriptionContain.begin(), descriptionContain.end(),
+                       std::back_inserter(suggestions1.suggestions),
+                       [&start, &end](const auto &item) {
+                           return Suggestion(start, end, item);
+                       });
         suggestions1.markFiltered();
         suggestions.push_back(std::move(suggestions1));
         return true;

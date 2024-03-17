@@ -12,12 +12,6 @@ namespace CHelper::Profile {
     }
 
     void pop() {
-#if CHelperDebug
-        if (stack.empty()) {
-            CHELPER_WARN("stack is empty when call pop() in profile");
-            return;
-        }
-#endif
         stack.pop_back();
     }
 

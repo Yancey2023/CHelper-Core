@@ -38,13 +38,13 @@ namespace CHelper {
         template<class T>
         std::optional<T> fromJsonOptionalLikely(const nlohmann::json &json, const std::string &key) {
             const auto &it = json.find(key);
-            return HEDLEY_UNLIKELY(it == json.end()) ? std::nullopt : std::optional(it->get<T>());
+            return HEDLEY_LIKELY(it != json.end()) ? std::optional(it->get<T>()) : std::nullopt;
         }
 
         template<class T>
         std::optional<T> fromJsonOptionalUnlikely(const nlohmann::json &json, const std::string &key) {
             const auto &it = json.find(key);
-            return HEDLEY_LIKELY(it == json.end()) ? std::nullopt : std::optional(it->get<T>());
+            return HEDLEY_UNLIKELY(it != json.end()) ? std::optional(it->get<T>()) : std::nullopt;
         }
 
         template<class T>

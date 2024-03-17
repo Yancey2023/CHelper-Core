@@ -15,14 +15,14 @@ namespace CHelper {
             : start(start),
               end(end),
               content(content),
-              mHashCode(HashUtil::combineHash(content->hashCode(), HashUtil::combineHash(start, end))) {}
+              mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
 
     Suggestion::Suggestion(const VectorView <Token> &tokens,
                            const std::shared_ptr<NormalId> &content)
             : start(TokenUtil::getStartIndex(tokens)),
               end(TokenUtil::getEndIndex(tokens)),
               content(content),
-              mHashCode(HashUtil::combineHash(content->hashCode(), HashUtil::combineHash(start, end))) {}
+              mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
 
     std::string Suggestion::onClick(Core *core, const std::string &before) const {
         std::string result = before.substr(0, start)

@@ -11,13 +11,13 @@ namespace CHelper {
             : name(name),
               description(description),
               nameHash(std::hash<std::string>{}(name)),
-              mHashCode(HashUtil::combineHash(nameHash, description)) {}
+              mHashCode(31 * nameHash + std::hash<std::optional<std::string>>{}(description)) {}
 
     NormalId::NormalId(const nlohmann::json &j)
             : name(JsonUtil::fromJson<std::string>(j, "name")),
               description(JsonUtil::fromJsonOptionalLikely<std::string>(j, "description")),
               nameHash(std::hash<std::string>{}(name)),
-              mHashCode(HashUtil::combineHash(nameHash, description)) {}
+              mHashCode(31 * nameHash + std::hash<std::optional<std::string>>{}(description)) {}
 
     void NormalId::toJson(nlohmann::json &j) const {
         JsonUtil::toJson(j, "name", name);

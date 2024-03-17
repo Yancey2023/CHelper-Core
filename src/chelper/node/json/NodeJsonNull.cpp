@@ -41,7 +41,7 @@ namespace CHelper::Node {
                                           std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
-        if (HEDLEY_UNLIKELY(StringUtil::isStartOf("null", str))) {
+        if (HEDLEY_LIKELY(str.find("null") != std::string::npos)) {
             suggestions.push_back(Suggestions::singleSuggestion(
                     {astNode->tokens, std::make_shared<NormalId>("null", "null参数")}));
         }

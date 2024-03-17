@@ -19,7 +19,7 @@ namespace CHelper::JsonUtil {
             signed char ch = stringReader.peek();
             switch (ch) {
                 case EOF:
-                    return result;
+                    return std::move(result);
                 case '\"':
                 case '\\':
                 case '/':
@@ -44,7 +44,7 @@ namespace CHelper::JsonUtil {
         ConvertResult result;
         if (input.empty()) {
             result.errorReason = ErrorReason::incomplete(0, 0, "json字符串必须在双引号内");
-            return result;
+            return std::move(result);
         }
         StringReader stringReader(input, "unknown");
         result.indexConvertList.push_back(stringReader.pos.index);
@@ -158,7 +158,7 @@ namespace CHelper::JsonUtil {
                 break;
             }
         }
-        return result;
+        return std::move(result);
     }
 
     nlohmann::json getJsonFromFile(const std::filesystem::path &path) {

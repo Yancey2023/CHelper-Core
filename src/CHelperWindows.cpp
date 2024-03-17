@@ -183,19 +183,19 @@ void onTextChanged(const std::string &command) {
                 .purple(command)
                 .build() << std::endl;
         std::cout << CHelper::ColorStringBuilder().blue("parse in ").purple(
-                std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
                         endParse - startParse).count()) + "ms").build() << std::endl;
         std::cout << CHelper::ColorStringBuilder().blue("get description in ").purple(
-                std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
                         endDescription - startDescription).count()) + "ms").build() << std::endl;
         std::cout << CHelper::ColorStringBuilder().blue("get error reasons in ").purple(
-                std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
                         endErrorReasons - startErrorReasons).count()) + "ms").build() << std::endl;
         std::cout << CHelper::ColorStringBuilder().blue("get suggestions in ").purple(
-                std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
                         endSuggestions - startSuggestions).count()) + "ms").build() << std::endl;
         std::cout << CHelper::ColorStringBuilder().blue("get structure in ").purple(
-                std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
                         endStructure - startStructure).count()) + "ms").build() << std::endl;
 //        std::cout << core->getAstNode()->toOptimizedJson().dump(
 //                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;

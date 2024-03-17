@@ -34,7 +34,6 @@
 #include "hedley.h"
 #include "../src/chelper/util/ColorStringBuilder.h"
 #include "../src/chelper/util/Exception.h"
-#include "../src/chelper/util/HashUtil.h"
 #include "../src/chelper/util/JsonUtil.h"
 #include "../src/chelper/util/Profile.h"
 #include "../src/chelper/util/SimpleLogger.h"
