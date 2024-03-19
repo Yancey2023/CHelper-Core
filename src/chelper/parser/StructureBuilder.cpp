@@ -23,7 +23,7 @@ namespace CHelper {
     }
 
     StructureBuilder &StructureBuilder::appendWhiteSpace() {
-        if (structure.empty()) {
+        if (HEDLEY_UNLIKELY(structure.empty())) {
             isDirty = true;
             return *this;
         }

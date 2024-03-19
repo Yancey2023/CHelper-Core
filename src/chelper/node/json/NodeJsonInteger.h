@@ -13,12 +13,12 @@ namespace CHelper::Node {
 
     class NodeJsonInteger : public NodeBase {
     public:
-        std::optional<std::int32_t> min, max;
+        std::optional<int32_t> min, max;
 
         NodeJsonInteger(const std::optional<std::string> &id,
                         const std::optional<std::string> &description,
-                        const std::optional<std::int32_t> &min,
-                        const std::optional<std::int32_t> &max);
+                        const std::optional<int32_t> &min,
+                        const std::optional<int32_t> &max);
 
         NodeJsonInteger(const nlohmann::json &j,
                         [[maybe_unused]] const CPack &cpack);

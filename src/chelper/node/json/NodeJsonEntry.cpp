@@ -35,7 +35,7 @@ namespace CHelper::Node {
 
     void NodeJsonEntry::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
-            if (item->id == value) {
+            if (HEDLEY_UNLIKELY(item->id == value)) {
                 nodeKey = std::make_unique<NodeText>("JSON_OBJECT_ENTRY_KEY", "JSON对象键",
                                                      std::make_shared<NormalId>('\"' + key + '\"', description));
                 nodeEntry = std::make_unique<NodeEntry>("JSON_OBJECT_ENTRY", "JSON对象键值对", nodeKey.get(),
@@ -62,17 +62,8 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeJsonEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        if (nodeEntry == nullptr) {
-            return getByChildNode(tokenReader, cpack, nodeAllEntry.get(), "node json all entry");
-        } else {
-            return getByChildNode(tokenReader, cpack, nodeEntry.get());
-        }
-    }
-
-    bool NodeJsonEntry::collectSuggestions(const ASTNode *astNode,
-                                           size_t index,
-                                           std::vector<Suggestions> &suggestions) const {
-        return astNode->id == "node json all entry";
+        return getByChildNode(tokenReader, cpack, HEDLEY_UNLIKELY(nodeEntry == nullptr) ?
+                                                  nodeAllEntry.get() : nodeEntry.get());
     }
 
     NodeBase *NodeJsonEntry::getNodeJsonAllEntry() {

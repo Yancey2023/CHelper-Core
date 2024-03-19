@@ -10,6 +10,7 @@
     {
       "type": "POSITION",
       "id": "position",
+      "brief": "坐标",
       "description": "待探测的方块的坐标"
     },
     {

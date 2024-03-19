@@ -11,7 +11,6 @@
 #include "../NodeBase.h"
 #include "../../resources/id/NamespaceId.h"
 #include "../../resources/CPack.h"
-#include <vector>
 
 namespace CHelper::Node {
 

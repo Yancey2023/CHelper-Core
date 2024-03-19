@@ -3,9 +3,6 @@
 //
 
 #include "NodeJsonElement.h"
-
-#include <utility>
-#include "../param/NodeLF.h"
 #include "NodeJsonObject.h"
 #include "NodeJsonList.h"
 #include "NodeJsonString.h"
@@ -27,7 +24,7 @@ namespace CHelper::Node {
     NodeJsonElement::NodeJsonElement(const nlohmann::json &j,
                                      [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, false) {
-        if (!id.has_value()) {
+        if (HEDLEY_UNLIKELY(!id.has_value())) {
             Profile::push("dismiss json data id");
             throw Exception::NodeLoadFailed();
         }
@@ -42,23 +39,21 @@ namespace CHelper::Node {
                               .purple(startNodeId)
                               .red("\" to nodes")
                               .build());
-        if (startNodeId == "LF") {
-            start = NodeLF::getInstance();
-        } else {
+        if (HEDLEY_LIKELY(startNodeId != "LF")) {
             for (auto &node: nodes) {
-                if (node->id == startNodeId) {
+                if (HEDLEY_UNLIKELY(node->id == startNodeId)) {
                     start = node.get();
                     break;
                 }
             }
         }
-        if (start == nullptr) {
+        if (HEDLEY_UNLIKELY(start == nullptr)) {
             throw Exception::UnknownNodeId(startNodeId, id.value());
         }
         for (const auto &item: nodes) {
-            if (item->getNodeType() == NodeType::JSON_LIST.get()) {
+            if (HEDLEY_UNLIKELY(item->getNodeType() == NodeType::JSON_LIST.get())) {
                 ((NodeJsonList *) item.get())->init(nodes);
-            } else if (item->getNodeType() == NodeType::JSON_OBJECT.get()) {
+            } else if (HEDLEY_UNLIKELY(item->getNodeType() == NodeType::JSON_OBJECT.get())) {
                 for (const auto &item2: ((NodeJsonObject *) item.get())->data) {
                     ((NodeJsonEntry *) item2.get())->init(nodes);
                 }
@@ -95,7 +90,8 @@ namespace CHelper::Node {
         static std::unique_ptr<NodeBase> jsonElement = std::make_unique<NodeOr>(
                 "JSON_ELEMENT", "JSON元素", std::vector<const NodeBase *>{
                         jsonBoolean.get(), jsonFloat.get(), jsonInteger.get(), jsonNull.get(),
-                        jsonString.get(), jsonList.get(), jsonObject.get()}, false);
+                        jsonString.get(), jsonList.get(), jsonObject.get()}, false, false,
+                true, "类型不匹配，当前内容不是有效的JSON元素");
         return jsonElement.get();
     }
 

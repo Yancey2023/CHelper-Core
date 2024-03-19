@@ -28,17 +28,20 @@
     {
       "type": "POSITION",
       "id": "from",
+      "brief": "坐标1",
       "description": "用于定义矩形加载区域的两个对角坐标的第一个"
     },
     {
       "type": "POSITION",
       "id": "to",
       "isMustAfterWhiteSpace": false,
+      "brief": "坐标2",
       "description": "用于定义矩形加载区域的两个对角坐标的第二个"
     },
     {
       "type": "STRING",
       "id": "function",
+      "brief": "函数",
       "description": "要执行的函数或函数标签",
       "canContainSpace": true,
       "ignoreLater": true
@@ -55,11 +58,13 @@
     {
       "type": "POSITION",
       "id": "center",
+      "brief": "中心坐标",
       "description": "用于定义圆形加载区域的圆心的坐标"
     },
     {
       "type": "INTEGER",
       "id": "radius",
+      "brief": "半径",
       "description": "圆形常加载区域的半径作为从中心到圆周的区块数"
     },
     {
@@ -74,6 +79,7 @@
     {
       "type": "STRING",
       "id": "name",
+      "brief": "常加载区域名称",
       "description": "常加载区域的名称",
       "canContainSpace": true,
       "ignoreLater": false

@@ -19,6 +19,7 @@
     {
       "type": "POSITION",
       "id": "spawnPos",
+      "brief": "出生坐标",
       "description": "玩家新的出生点的坐标"
     }
   ],

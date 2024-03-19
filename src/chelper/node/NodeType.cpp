@@ -49,7 +49,7 @@ namespace CHelper::Node {
     static std::unique_ptr<NodeType> createJson(const std::string &nodeName) {
         return std::make_unique<NodeType>(
                 nodeName, [&nodeName](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
-                    if (!NodeType::canLoadNodeJson) {
+                    if (HEDLEY_UNLIKELY(!NodeType::canLoadNodeJson)) {
                         //这些节点在注册Json数据的时候创建，在命令注册的时候创建就抛出错误
                         throw Exception::UnknownNodeType(nodeName);
                     }
@@ -85,7 +85,7 @@ namespace CHelper::Node {
     std::unique_ptr<NodeType> NodeType::RELATIVE_FLOAT = create<NodeRelativeFloat>("RELATIVE_FLOAT");
     std::unique_ptr<NodeType> NodeType::REPEAT = std::make_unique<NodeType>(
             "REPEAT", [](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
-                if (NodeType::canLoadNodeJson) {
+                if (HEDLEY_UNLIKELY(NodeType::canLoadNodeJson)) {
                     //这个节点只能在命令注册的时候创建，在注册Json数据的时候创建就抛出错误
                     throw Exception::UnknownNodeType(NodeType::REPEAT->nodeName);
                 }
@@ -98,7 +98,7 @@ namespace CHelper::Node {
     std::unique_ptr<NodeType> NodeType::XP_INTEGER = create<NodeXpInteger>("XP_INTEGER");
     std::unique_ptr<NodeType> NodeType::JSON = std::make_unique<NodeType>(
             "JSON", [](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
-                if (NodeType::canLoadNodeJson) {
+                if (HEDLEY_UNLIKELY(NodeType::canLoadNodeJson)) {
                     //这个节点只能在命令注册的时候创建，在注册Json数据的时候创建就抛出错误
                     throw Exception::UnknownNodeType(NodeType::JSON->nodeName);
                 }
@@ -119,7 +119,7 @@ namespace CHelper::Node {
     void NodeType::init() {
         //因为节点是静态创建的，在创建节点的时候添加到列表有时会出问题，所以改为手动添加
         static bool isInit = false;
-        if (isInit) {
+        if (HEDLEY_UNLIKELY(isInit)) {
             return;
         }
         isInit = true;

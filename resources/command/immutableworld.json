@@ -11,6 +11,7 @@
     {
       "type": "BOOLEAN",
       "id": "value",
+      "brief": "世界是否可以发生变化",
       "description": "世界是否可以发生变化",
       "descriptionFalse": "世界不可以发生变化",
       "descriptionTrue": "世界可以发生变化"

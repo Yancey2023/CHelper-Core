@@ -23,12 +23,12 @@ namespace CHelper {
     class BlockStateValue {
     public:
         BlockStateType::BlockStateType type;
-        std::variant<std::string, int, bool> value;
+        std::variant<std::string, int32_t, bool> value;
         std::optional<std::string> description;
         Node::NodeBase *node;
 
         BlockStateValue(BlockStateType::BlockStateType type,
-                        const std::variant<std::string, int, bool> &value,
+                        const std::variant<std::string, int32_t, bool> &value,
                         const std::optional<std::string> &description);
 
         explicit BlockStateValue(const nlohmann::json &j);
@@ -48,13 +48,13 @@ namespace CHelper {
         std::string key;
         std::optional<std::string> description;
         std::vector<BlockStateValue> values;
-        int defaultValue;
+        int32_t defaultValue;
         Node::NodeBase *node;
 
         BlockState(std::string key,
                    const std::optional<std::string> &description,
                    std::vector<BlockStateValue> values,
-                   int defaultValue);
+                   int32_t defaultValue);
 
         explicit BlockState(const nlohmann::json &j);
 
@@ -75,7 +75,7 @@ namespace CHelper {
         BlockId(const std::optional<std::string> &nameSpace,
                 const std::string &name,
                 const std::optional<std::string> &description,
-                const std::optional<int> &max,
+                const std::optional<int32_t> &max,
                 const std::optional<std::vector<std::string>> &descriptions,
                 const std::optional<std::vector<BlockState>> &blockStates);
 

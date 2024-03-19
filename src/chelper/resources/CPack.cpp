@@ -5,7 +5,6 @@
 #include "CPack.h"
 #include "../node/param/NodeCommand.h"
 #include "../node/param/NodeNormalId.h"
-#include "../node/param/NodeNamespaceId.h"
 #include "../node/json/NodeJsonElement.h"
 #include "../node/util/NodeAnd.h"
 
@@ -55,7 +54,7 @@ namespace CHelper {
         afterApply();
         Profile::pop();
 #if CHelperDebug == true
-        if (Profile::stack.size() != stackSize) {
+        if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
             CHELPER_WARN("error profile stack after loading cpack");
         }
 #endif
@@ -86,7 +85,7 @@ namespace CHelper {
         afterApply();
         Profile::pop();
 #if CHelperDebug == true
-        if (Profile::stack.size() != stackSize) {
+        if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
             CHELPER_WARN("error profile stack after loading cpack");
         }
 #endif
@@ -101,7 +100,7 @@ namespace CHelper {
         if (HEDLEY_LIKELY(type == "normal")) {
             auto id = j.at("id").get<std::string>();
             auto content = std::make_shared<std::vector<std::shared_ptr<NormalId>>>();
-            auto contentJson = j.at("content");
+            const auto &contentJson = j.at("content");
             content->reserve(contentJson.size());
             for (const auto &item: contentJson) {
                 content->push_back(std::make_shared<NormalId>(item));
@@ -110,20 +109,20 @@ namespace CHelper {
         } else if (HEDLEY_LIKELY(type == "namespace")) {
             auto id = j.at("id").get<std::string>();
             auto content = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
-            auto contentJson = j.at("content");
+            const auto &contentJson = j.at("content");
             content->reserve(contentJson.size());
             for (const auto &item: contentJson) {
                 content->push_back(std::make_shared<NamespaceId>(item));
             }
             namespaceIds.emplace(std::move(id), std::move(content));
         } else if (HEDLEY_LIKELY(type == "block")) {
-            auto blocksJson = j.at("blocks");
+            const auto &blocksJson = j.at("blocks");
             blockIds->reserve(blockIds->size() + blocksJson.size());
             for (const auto &item: blocksJson) {
                 blockIds->push_back(std::make_shared<BlockId>(item));
             }
         } else if (HEDLEY_LIKELY(type == "item")) {
-            auto itemsJson = j.at("items");
+            const auto &itemsJson = j.at("items");
             itemIds->reserve(itemIds->size() + itemsJson.size());
             for (const auto &item: itemsJson) {
                 itemIds->push_back(std::make_shared<ItemId>(item));

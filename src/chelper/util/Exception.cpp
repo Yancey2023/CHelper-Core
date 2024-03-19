@@ -96,7 +96,7 @@ namespace CHelper::Exception {
         std::string result;
         bool isFirst = true;
         for (const auto &item: commandName) {
-            if (isFirst) {
+            if (HEDLEY_UNLIKELY(isFirst)) {
                 isFirst = false;
             } else {
                 result.push_back(',');

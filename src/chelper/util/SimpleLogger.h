@@ -7,8 +7,6 @@
 #ifndef CHELPER_SIMPLELOGGER_H
 #define CHELPER_SIMPLELOGGER_H
 
-#include "pch.h"
-
 namespace CHelper::Logger {
 
 #if CHelperLogger == INFO || CHelperLogger == DEBUG || CHelperLogger == WARN || CHelperLogger == ERROR

@@ -19,7 +19,7 @@ namespace CHelper::Node {
             auto node = item->getASTNodeWithNextNode(tokenReader, cpack);
             bool isError = node.isError();
             childASTNodes.push_back(std::move(node));
-            if (isError) {
+            if (HEDLEY_UNLIKELY(isError)) {
                 break;
             }
         }

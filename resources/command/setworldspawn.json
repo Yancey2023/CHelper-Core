@@ -11,6 +11,7 @@
     {
       "type": "POSITION",
       "id": "spawnPoint",
+      "brief": "出生坐标",
       "description": "世界出生点坐标"
     }
   ],

@@ -21,13 +21,15 @@
     {
       "type": "STRING",
       "id": "saveName",
-      "description": "加载的结构名称或文件名称",
+      "brief": "结构名",
+      "description": "加载的结构名称",
       "canContainSpace": true,
       "ignoreLater": false
     },
     {
       "type": "STRING",
       "id": "loadName",
+      "brief": "结构名",
       "description": "加载的结构名称或文件名称",
       "canContainSpace": true,
       "ignoreLater": false
@@ -35,6 +37,7 @@
     {
       "type": "STRING",
       "id": "deleteName",
+      "brief": "结构名",
       "description": "加载的结构名称或文件名称",
       "canContainSpace": true,
       "ignoreLater": false
@@ -42,17 +45,20 @@
     {
       "type": "POSITION",
       "id": "saveFrom",
+      "brief": "源坐标1",
       "description": "源区域对角坐标1"
     },
     {
       "type": "POSITION",
       "id": "saveTo",
       "isMustAfterWhiteSpace": false,
+      "brief": "源坐标2",
       "description": "源区域对角坐标2"
     },
     {
       "type": "NORMAL_ID",
       "id": "saveMode1",
+      "brief": "保存模式",
       "description": "结构保存模式",
       "ignoreError": true,
       "contents": [
@@ -69,6 +75,7 @@
     {
       "type": "BOOLEAN",
       "id": "saveIncludeEntities",
+      "brief": "是否保存实体",
       "description": "是否保存结构中的实体",
       "descriptionTrue": "同时保存结构中的实体",
       "descriptionFalse": "不同时保存结构中的实体"
@@ -76,6 +83,7 @@
     {
       "type": "NORMAL_ID",
       "id": "saveMode2",
+      "brief": "保存模式",
       "description": "结构保存模式",
       "ignoreError": true,
       "contents": [
@@ -92,6 +100,7 @@
     {
       "type": "BOOLEAN",
       "id": "saveIncludeBlocks",
+      "brief": "是否包括方块",
       "description": "保存时是否包括方块",
       "descriptionTrue": "保存时包括方块",
       "descriptionFalse": "保存时不包括方块"
@@ -108,11 +117,13 @@
     {
       "type": "POSITION",
       "id": "loadTo",
+      "brief": "目标区域坐标",
       "description": "目标区域的西北方向较低（即在各轴上坐标值最小）的点的坐标"
     },
     {
       "type": "NORMAL_ID",
       "id": "loadRotation",
+      "brief": "旋转角度",
       "description": "结构旋转的角度",
       "ignoreError": true,
       "contents": [
@@ -137,6 +148,7 @@
     {
       "type": "NORMAL_ID",
       "id": "loadMirror",
+      "brief": "镜像模式",
       "description": "结构的镜像模式",
       "ignoreError": true,
       "contents": [
@@ -161,6 +173,7 @@
     {
       "type": "BOOLEAN",
       "id": "loadIncludeEntities",
+      "brief": "是否加载实体",
       "description": "是否加载结构中的实体",
       "descriptionTrue": "同时加载结构中的实体",
       "descriptionFalse": "不同时加载结构中的实体"
@@ -168,6 +181,7 @@
     {
       "type": "BOOLEAN",
       "id": "loadIncludeBlocks",
+      "brief": "是否包括方块",
       "description": "保存时是否包括方块",
       "descriptionTrue": "保存时包括方块",
       "descriptionFalse": "保存时不包括方块"
@@ -175,6 +189,7 @@
     {
       "type": "BOOLEAN",
       "id": "loadWaterlogged",
+      "brief": "是否含水",
       "description": "生成的含水结构是否正确含水",
       "descriptionTrue": "生成的含水结构正确含水",
       "descriptionFalse": "生成的含水结构不正确含水"
@@ -182,11 +197,13 @@
     {
       "type": "FLOAT",
       "id": "loadIntegrity",
+      "brief": "结构完整度",
       "description": "结构的完整度"
     },
     {
       "type": "STRING",
       "id": "loadSeed",
+      "brief": "随机种子",
       "description": "用于随机删除结构中的方块的种子",
       "canContainSpace": false,
       "ignoreLater": false
@@ -194,6 +211,7 @@
     {
       "type": "NORMAL_ID",
       "id": "loadAnimationMode",
+      "brief": "生成动画",
       "description": "生成结构使用的动画",
       "ignoreError": true,
       "contents": [

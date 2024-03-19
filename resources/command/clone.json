@@ -10,23 +10,27 @@
     {
       "type": "POSITION",
       "id": "begin",
+      "brief": "源坐标1",
       "description": "源区域的两组对角方块坐标"
     },
     {
       "type": "POSITION",
       "id": "end",
+      "brief": "源坐标2",
       "description": "源区域的两组对角方块坐标",
       "isMustAfterWhiteSpace": false
     },
     {
       "type": "POSITION",
       "id": "destination",
+      "brief": "目标区域的坐标",
       "description": "目标区域的西北方向较低（即在各轴上坐标值最小）的点的坐标",
       "isMustAfterWhiteSpace": false
     },
     {
       "type": "NORMAL_ID",
       "id": "maskMode",
+      "brief": "标记模式",
       "description": "是否过滤被复制方块",
       "ignoreError": true,
       "contents": [
@@ -43,6 +47,7 @@
     {
       "type": "NORMAL_ID",
       "id": "cloneMode1",
+      "brief": "复制模式",
       "description": "对源区域的操作",
       "ignoreError": true,
       "contents": [
@@ -72,6 +77,7 @@
     {
       "type": "NORMAL_ID",
       "id": "cloneMode2",
+      "brief": "复制模式",
       "description": "对源区域的操作",
       "ignoreError": true,
       "contents": [

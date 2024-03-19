@@ -166,8 +166,8 @@ class binary_reader
     */
     bool parse_bson_internal()
     {
-        std::int32_t document_size{};
-        get_number<std::int32_t, true>(input_format_t::bson, document_size);
+        int32_t document_size{};
+        get_number<int32_t, true>(input_format_t::bson, document_size);
 
         if (JSON_HEDLEY_UNLIKELY(!sax->start_object(static_cast<std::size_t>(-1))))
         {
@@ -281,9 +281,9 @@ class binary_reader
 
             case 0x02: // string
             {
-                std::int32_t len{};
+                int32_t len{};
                 string_t value;
-                return get_number<std::int32_t, true>(input_format_t::bson, len) && get_bson_string(len, value) && sax->string(value);
+                return get_number<int32_t, true>(input_format_t::bson, len) && get_bson_string(len, value) && sax->string(value);
             }
 
             case 0x03: // object
@@ -298,9 +298,9 @@ class binary_reader
 
             case 0x05: // binary
             {
-                std::int32_t len{};
+                int32_t len{};
                 binary_t value;
-                return get_number<std::int32_t, true>(input_format_t::bson, len) && get_bson_binary(len, value) && sax->binary(value);
+                return get_number<int32_t, true>(input_format_t::bson, len) && get_bson_binary(len, value) && sax->binary(value);
             }
 
             case 0x08: // boolean
@@ -315,8 +315,8 @@ class binary_reader
 
             case 0x10: // int32
             {
-                std::int32_t value{};
-                return get_number<std::int32_t, true>(input_format_t::bson, value) && sax->number_integer(value);
+                int32_t value{};
+                return get_number<int32_t, true>(input_format_t::bson, value) && sax->number_integer(value);
             }
 
             case 0x12: // int64
@@ -388,8 +388,8 @@ class binary_reader
     */
     bool parse_bson_array()
     {
-        std::int32_t document_size{};
-        get_number<std::int32_t, true>(input_format_t::bson, document_size);
+        int32_t document_size{};
+        get_number<int32_t, true>(input_format_t::bson, document_size);
 
         if (JSON_HEDLEY_UNLIKELY(!sax->start_array(static_cast<std::size_t>(-1))))
         {
@@ -1485,7 +1485,7 @@ class binary_reader
 
             case 0xD2: // int 32
             {
-                std::int32_t number{};
+                int32_t number{};
                 return get_number(input_format_t::msgpack, number) && sax->number_integer(number);
             }
 
@@ -1879,7 +1879,7 @@ class binary_reader
 
             case 'l':
             {
-                std::int32_t len{};
+                int32_t len{};
                 return get_number(input_format, len) && get_string(input_format, len, result);
             }
 
@@ -2059,7 +2059,7 @@ class binary_reader
 
             case 'l':
             {
-                std::int32_t number{};
+                int32_t number{};
                 if (JSON_HEDLEY_UNLIKELY(!get_number(input_format, number)))
                 {
                     return false;
@@ -2330,7 +2330,7 @@ class binary_reader
 
             case 'l':
             {
-                std::int32_t number{};
+                int32_t number{};
                 return get_number(input_format, number) && sax->number_integer(number);
             }
 

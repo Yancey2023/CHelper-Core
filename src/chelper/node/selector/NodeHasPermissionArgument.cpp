@@ -39,13 +39,13 @@ namespace CHelper::Node {
         // key
         ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey.get(), "key");
         childNodes.push_back(astNodeKey);
-        if (astNodeKey.isError()) {
+        if (HEDLEY_UNLIKELY(astNodeKey.isError())) {
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
         // = or !=
         ASTNode astNodeSeparator = getByChildNode(tokenReader, cpack, nodeEqual.get(), "separator");
         childNodes.push_back(astNodeSeparator);
-        if (astNodeSeparator.isError()) {
+        if (HEDLEY_UNLIKELY(astNodeSeparator.isError())) {
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
         //value

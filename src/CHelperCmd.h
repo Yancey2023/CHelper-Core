@@ -16,17 +16,17 @@ int main();
 
 namespace CHelper::Test {
 
-    void test(const std::string &cpackPath, const std::string &testFilePath, bool isTestTime);
+    [[maybe_unused]] void test(const std::string &cpackPath, const std::string &testFilePath, bool isTestTime);
 
-    void test(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime);
+    [[maybe_unused]] void test(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime);
 
-    void test2(const std::string &cpackPath, const std::vector<std::string> &commands, int times);
+    [[maybe_unused]] void test2(const std::string &cpackPath, const std::vector<std::string> &commands, int times);
 
-    void test3(const std::string &input, const std::string &output);
+    [[maybe_unused]] void test3(const std::string &input, const std::string &output);
 
-    void test4(const std::string &input, const std::string &output);
+    [[maybe_unused]] void test4(const std::string &input, const std::string &output);
 
-    void test5(const std::string &input, const std::string &output);
+    [[maybe_unused]] void test5(const std::string &input, const std::string &output);
 
 } // CHelper::Test
 

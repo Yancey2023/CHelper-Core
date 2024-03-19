@@ -20,6 +20,7 @@
     {
       "type": "POSITION",
       "id": "position",
+      "brief": "方块位置",
       "description": "要改变的方块的位置"
     },
     {
@@ -34,6 +35,7 @@
     {
       "type": "INTEGER",
       "id": "slotId",
+      "brief": "槽位",
       "description": "要改变的物品栏槽位"
     },
     {
@@ -78,6 +80,7 @@
     {
       "type": "NORMAL_ID",
       "id": "slotType",
+      "brief": "物品栏",
       "description": "要改变的物品栏",
       "ignoreError": true,
       "key": "slot"

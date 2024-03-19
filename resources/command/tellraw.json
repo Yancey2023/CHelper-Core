@@ -18,6 +18,7 @@
     {
       "type": "JSON",
       "id": "raw json message",
+      "brief": "JSON文本",
       "description": "要发送的消息",
       "key": "rawtext"
     }

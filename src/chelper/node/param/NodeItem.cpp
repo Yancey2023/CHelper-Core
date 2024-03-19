@@ -50,7 +50,7 @@ namespace CHelper::Node {
         size_t strHash = std::hash<std::string>{}(TokenUtil::toString(itemId.tokens));
         std::shared_ptr<NamespaceId> currentItem = nullptr;
         for (const auto &item: *itemIds) {
-            if (item->fastMatch(strHash) || item->idWithNamespace->fastMatch(strHash)) {
+            if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->idWithNamespace->fastMatch(strHash))) {
                 currentItem = item;
                 break;
             }

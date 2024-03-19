@@ -23,8 +23,8 @@ namespace CHelper::Node {
     ASTNode NodeSingleSymbol::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         ASTNode symbolNode = tokenReader.readSymbolASTNode(this);
         std::shared_ptr<ErrorReason> errorReason;
-        if (symbolNode.isError()) {
-            if (symbolNode.tokens.isEmpty()) {
+        if (HEDLEY_UNLIKELY(symbolNode.isError())) {
+            if (HEDLEY_LIKELY(symbolNode.tokens.isEmpty())) {
                 return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::incomplete(
                         symbolNode.tokens, FormatUtil::format(
                                 "命令不完整，需要符号{0}", symbol)));
@@ -36,7 +36,7 @@ namespace CHelper::Node {
             }
         }
         std::string str = TokenUtil::toString(symbolNode.tokens);
-        if (str.length() == 1 && str[0] == symbol) {
+        if (HEDLEY_LIKELY(str.length() == 1 && str[0] == symbol)) {
             return symbolNode;
         }
         return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::contentError(
@@ -47,7 +47,7 @@ namespace CHelper::Node {
     bool NodeSingleSymbol::collectSuggestions(const ASTNode *astNode,
                                               size_t index,
                                               std::vector<Suggestions> &suggestions) const {
-        if (TokenUtil::getStartIndex(astNode->tokens) != index) {
+        if (HEDLEY_LIKELY(TokenUtil::getStartIndex(astNode->tokens) != index)) {
             return true;
         }
         suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, normalId}));

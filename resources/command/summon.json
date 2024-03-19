@@ -10,6 +10,7 @@
     {
       "type": "NAMESPACE_ID",
       "id": "entityType",
+      "brief": "实体类型",
       "description": "要被召唤的实体类型",
       "ignoreError": true,
       "key": "entities"
@@ -17,26 +18,31 @@
     {
       "type": "POSITION",
       "id": "spawnPos1",
+      "brief": "实体召唤位置",
       "description": "该实体的召唤位置。如果未指定，默认为命令执行位置"
     },
     {
       "type": "POSITION",
       "id": "spawnPos2",
+      "brief": "实体召唤位置",
       "description": "该实体的召唤位置。如果未指定，默认为命令执行位置"
     },
     {
       "type": "FLOAT",
       "id": "yRot",
+      "brief": "ry",
       "description": "该实体的垂直旋转角度"
     },
     {
       "type": "FLOAT",
       "id": "xRot",
+      "brief": "rx",
       "description": "该实体的水平旋转角度"
     },
     {
       "type": "NORMAL_ID",
       "id": "spawnEvent",
+      "brief": "实体生成事件",
       "description": "该实体的召唤时附带的游戏内事件",
       "ignoreError": true,
       "key": "entityEvent"
@@ -44,6 +50,7 @@
     {
       "type": "STRING",
       "id": "nameTag1",
+      "brief": "实体名",
       "description": "该实体的名称",
       "canContainSpace": true,
       "ignoreLater": false
@@ -51,6 +58,7 @@
     {
       "type": "STRING",
       "id": "nameTag2",
+      "brief": "实体名",
       "description": "该实体的名称",
       "canContainSpace": true,
       "ignoreLater": false
@@ -75,6 +83,7 @@
     {
       "type": "POSITION",
       "id": "position",
+      "brief": "朝向的坐标",
       "description": "该实体朝向的坐标"
     }
   ],

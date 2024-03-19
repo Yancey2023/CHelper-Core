@@ -10,25 +10,29 @@
     {
       "type": "RELATIVE_FLOAT",
       "id": "x",
-      "description": "传送目的地区域的中心的x坐标",
+      "brief": "x",
+      "description": "中心x坐标",
       "canUseCaretNotation": true
     },
     {
       "type": "RELATIVE_FLOAT",
       "id": "z",
-      "description": "传送目的地区域的中心的z坐标",
+      "brief": "z",
+      "description": "中心z坐标",
       "isMustAfterWhiteSpace": false,
       "canUseCaretNotation": true
     },
     {
       "type": "FLOAT",
       "id": "spreadDistance",
+      "brief": "最小间距",
       "description": "传送目标之间的最小间距。最小值为0.0",
       "min": 0
     },
     {
       "type": "FLOAT",
       "id": "maxRange",
+      "brief": "范围",
       "description": "目标区域边界与区域中心在x和z轴上的距离（因此区域是正方形而不是圆形）。必须比传送目标之间的最小间距大，且最小值为1.0",
       "min": 1
     },

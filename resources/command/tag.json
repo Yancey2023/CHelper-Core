@@ -45,6 +45,7 @@
     {
       "type": "STRING",
       "id": "name",
+      "brief": "标签名",
       "description": "要被添加或被移除的标签名称",
       "canContainSpace": true,
       "ignoreLater": false

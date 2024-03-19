@@ -29,22 +29,22 @@ namespace CHelper::Lexer {
 
     TokenType::TokenType nextTokenType(StringReader &stringReader) {
         char ch = stringReader.peek();
-        if (ch == '\n') {
+        if (HEDLEY_UNLIKELY(ch == '\n')) {
             return TokenType::LF;
-        } else if (ch == ' ') {
+        } else if (HEDLEY_LIKELY(ch == ' ')) {
             return TokenType::WHITE_SPACE;
-        } else if (isNum(ch)) {
+        } else if (HEDLEY_UNLIKELY(isNum(ch))) {
             return TokenType::NUMBER;
-        } else if (ch == '+' || ch == '-') {
+        } else if (HEDLEY_UNLIKELY(ch == '+' || ch == '-')) {
             stringReader.mark();
             ch = stringReader.next();
             stringReader.reset();
-            if (isNum(ch)) {
+            if (HEDLEY_LIKELY(isNum(ch))) {
                 return TokenType::NUMBER;
             } else {
                 return TokenType::SYMBOL;
             }
-        } else if (isSymbol(ch)) {
+        } else if (HEDLEY_UNLIKELY(isSymbol(ch))) {
             return TokenType::SYMBOL;
         } else {
             return TokenType::STRING;
@@ -54,7 +54,7 @@ namespace CHelper::Lexer {
     Token nextTokenNumber(StringReader &stringReader) {
         stringReader.mark();
         signed char ch = stringReader.peek();
-        if (ch == '+' || ch == '-') {
+        if (HEDLEY_UNLIKELY(ch == '+' || ch == '-')) {
             ch = stringReader.next();
         }
         while (isNum(ch)) {
@@ -75,26 +75,26 @@ namespace CHelper::Lexer {
         stringReader.mark();
         signed char ch = stringReader.peek();
         bool isDoubleQuotation = ch == '"';
-        if (isDoubleQuotation) {
+        if (HEDLEY_UNLIKELY(isDoubleQuotation)) {
             ch = stringReader.next();
         }
         while (true) {
-            if (ch == EOF) {
+            if (HEDLEY_UNLIKELY(ch == EOF)) {
                 break;
             }
-            if (ch == '\\') {
+            if (HEDLEY_UNLIKELY(ch == '\\')) {
                 //转义字符
                 ch = stringReader.next();
-                if (ch == EOF) {
+                if (HEDLEY_UNLIKELY(ch == EOF)) {
                     break;
                 }
-            } else if (isDoubleQuotation) {
+            } else if (HEDLEY_UNLIKELY(isDoubleQuotation)) {
                 //如果是双引号开头，只能使用双引号结尾
-                if (ch == '"') {
+                if (HEDLEY_UNLIKELY(ch == '"')) {
                     stringReader.skip();
                     break;
                 }
-            } else if (isEndChar(ch)) {
+            } else if (HEDLEY_UNLIKELY(isEndChar(ch))) {
                 //在检测到字符串结束字符时进行结尾
                 break;
             }
@@ -123,7 +123,7 @@ namespace CHelper::Lexer {
         Profile::push("start lex: " + stringReader.content);
         std::vector<Token> tokenList = std::vector<Token>();
         while (true) {
-            if (stringReader.peek() == EOF) {
+            if (HEDLEY_UNLIKELY(stringReader.peek() == EOF)) {
                 break;
             }
             switch (nextTokenType(stringReader)) {

@@ -3,14 +3,12 @@
 //
 
 #include "NodeJsonObject.h"
-
-#include <utility>
 #include "../util/NodeSingleSymbol.h"
 
 namespace CHelper::Node {
 
     static std::unique_ptr<NodeOr> getNodeElement1(const std::vector<std::unique_ptr<NodeBase>> &data) {
-        if (data.empty()) {
+        if (HEDLEY_UNLIKELY(data.empty())) {
             return nullptr;
         }
         std::vector<const NodeBase *> nodeElementData;
@@ -23,7 +21,7 @@ namespace CHelper::Node {
 
     static NodeOr getNodeElement2(const std::unique_ptr<NodeOr> &nodeElement1) {
         std::vector<const NodeBase *> nodeElementData;
-        if (nodeElement1 != nullptr) {
+        if (HEDLEY_LIKELY(nodeElement1 != nullptr)) {
             nodeElementData.reserve(2);
             nodeElementData.push_back(nodeElement1.get());
         }
@@ -48,11 +46,11 @@ namespace CHelper::Node {
                                    std::vector<std::unique_ptr<NodeBase>> data)
             : NodeBase(id, description, false),
               data(std::move(data)),
-              nodeElement1(getNodeElement1(data)),
+              nodeElement1(getNodeElement1(this->data)),
               nodeElement2(getNodeElement2(nodeElement1)),
               nodeList(getNodeList(nodeElement2)) {}
 
-    inline std::vector<std::unique_ptr<NodeBase>> getDataFromJson(const nlohmann::json &j) {
+    static std::vector<std::unique_ptr<NodeBase>> getDataFromJson(const nlohmann::json &j) {
         const auto &jsonData = j.at("data");
         std::vector<std::unique_ptr<NodeBase>> data;
         data.reserve(jsonData.size());

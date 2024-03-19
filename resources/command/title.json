@@ -20,6 +20,7 @@
         }
       ],
       "contentMode": false,
+      "brief": "清除模式",
       "description": "清除指定玩家屏幕标题或副标题",
       "ignoreError": true,
       "id": "1",
@@ -49,13 +50,14 @@
         }
       ],
       "contentMode": false,
-      "description": "标文字的位置",
+      "description": "文字的位置",
       "ignoreError": true,
       "id": "3",
       "type": "NORMAL_ID"
     },
     {
       "canContainSpace": false,
+      "brief": "文本",
       "description": "要显示的文本",
       "ignoreLater": false,
       "id": "4",
@@ -79,16 +81,19 @@
       "type": "TEXT"
     },
     {
+      "brief": "淡入时长",
       "description": "幕标题的淡入时间的时长（单位为游戏刻）",
       "id": "7",
       "type": "INTEGER"
     },
     {
+      "brief": "持续时长",
       "description": "幕标题的持续时间的时长（单位为游戏刻）",
       "id": "8",
       "type": "INTEGER"
     },
     {
+      "brief": "淡出时长",
       "description": "幕标题的淡出时间的时长（单位为游戏刻）",
       "id": "9",
       "type": "INTEGER"

@@ -32,7 +32,7 @@ namespace CHelper::Node {
 
     void NodeJsonList::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
-            if (item->id == data) {
+            if (HEDLEY_UNLIKELY(item->id == data)) {
                 nodeList = std::make_unique<NodeList>("JSON_LIST", "JSON列表",
                                                       nodLeft.get(), item.get(),
                                                       nodeSeparator.get(), nodeRight.get());
@@ -61,12 +61,12 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        if (nodeList == nullptr) {
+        if (HEDLEY_UNLIKELY(nodeList == nullptr)) {
             return getByChildNode(tokenReader, cpack, nodeAllList.get(), "node json all list");
         }
         tokenReader.push();
         ASTNode result1 = nodeList->getASTNode(tokenReader, cpack);
-        if (!result1.isError()) {
+        if (HEDLEY_LIKELY(!result1.isError())) {
             return ASTNode::andNode(this, {std::move(result1)}, tokenReader.collect());
         }
         size_t index1 = tokenReader.index;

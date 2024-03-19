@@ -18,7 +18,7 @@ namespace CHelper::Node {
     static NodeBase *getNodeJsonFromCPack(const CPack &cpack,
                                           const std::string &key) {
         for (const auto &item: cpack.jsonNodes) {
-            if (item->id == key) {
+            if (HEDLEY_UNLIKELY(item->id == key)) {
                 return item.get();
             }
         }

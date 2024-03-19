@@ -54,10 +54,10 @@ namespace CHelper::Node {
                     nodeData.get(), nodeQuantity.get(), nodeSlotRange.get()
             }, false);
 
-    NodeHasItemArgument::NodeHasItemArgument(const std::optional<std::string> &id,
-                                             const std::optional<std::string> &description,
-                                             const NodeBase *nodeItem,
-                                             const NodeBase *nodeSlot)
+    [[maybe_unused]] NodeHasItemArgument::NodeHasItemArgument(const std::optional<std::string> &id,
+                                                              const std::optional<std::string> &description,
+                                                              const NodeBase *nodeItem,
+                                                              const NodeBase *nodeSlot)
             : NodeBase(id, description, false),
               nodeItem(nodeItem),
               nodeSlot(nodeSlot) {}
@@ -68,26 +68,26 @@ namespace CHelper::Node {
         // key
         ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey.get(), "key");
         childNodes.push_back(astNodeKey);
-        if (astNodeKey.isError()) {
+        if (HEDLEY_UNLIKELY(astNodeKey.isError())) {
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
         // = or !=
         ASTNode astNodeSeparator = getByChildNode(tokenReader, cpack, nodeSeparator.get(), "separator");
         childNodes.push_back(astNodeSeparator);
-        if (astNodeSeparator.isError()) {
+        if (HEDLEY_UNLIKELY(astNodeSeparator.isError())) {
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
         //value
         std::string key = TokenUtil::toString(astNodeKey.tokens);
-        if (key == "item") {
+        if (HEDLEY_LIKELY(key == "item")) {
             childNodes.push_back(nodeItem->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "data") {
+        } else if (HEDLEY_LIKELY(key == "data")) {
             childNodes.push_back(nodeData->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "quantity") {
+        } else if (HEDLEY_LIKELY(key == "quantity")) {
             childNodes.push_back(nodeQuantity->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "location") {
+        } else if (HEDLEY_LIKELY(key == "location")) {
             childNodes.push_back(nodeSlot->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "slot") {
+        } else if (HEDLEY_LIKELY(key == "slot")) {
             childNodes.push_back(nodeSlotRange->getASTNodeWithNextNode(tokenReader, cpack));
         } else {
             childNodes.push_back(nodeValue->getASTNodeWithNextNode(tokenReader, cpack));

@@ -27,6 +27,7 @@
     {
       "type": "NORMAL_ID",
       "id": "fogId",
+      "brief": "方块",
       "description": "修改的迷雾ID",
       "ignoreError": true,
       "key": "fogs"
@@ -34,6 +35,7 @@
     {
       "type": "STRING",
       "id": "userProvidedId",
+      "brief": "迷雾名称",
       "description": "迷雾设置的名称",
       "canContainSpace": true,
       "ignoreLater": false
@@ -41,7 +43,7 @@
     {
       "type": "NORMAL_ID",
       "id": "mode",
-      "description": "删除的模式",
+      "description": "删除模式",
       "ignoreError": true,
       "contents": [
         {

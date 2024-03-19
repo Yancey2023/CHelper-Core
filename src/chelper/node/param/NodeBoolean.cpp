@@ -34,7 +34,7 @@ namespace CHelper::Node {
     ASTNode NodeBoolean::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         ASTNode astNode = tokenReader.readStringASTNode(this);
         std::string str = TokenUtil::toString(astNode.tokens);
-        if (str == "true" || str == "false") {
+        if (HEDLEY_LIKELY(str == "true" || str == "false")) {
             return astNode;
         }
         VectorView <Token> tokens = astNode.tokens;
@@ -48,11 +48,11 @@ namespace CHelper::Node {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         Suggestions suggestions1;
-        if (str.find("true") != std::string::npos) {
+        if (HEDLEY_LIKELY(std::string("true").find(str) != std::string::npos)) {
             suggestions1.suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(
                     "true", descriptionTrue));
         }
-        if (str.find("false") != std::string::npos) {
+        if (HEDLEY_LIKELY(std::string("false").find(str) != std::string::npos)) {
             suggestions1.suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(
                     "false", descriptionFalse));
         }

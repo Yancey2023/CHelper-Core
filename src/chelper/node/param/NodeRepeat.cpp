@@ -17,14 +17,14 @@ namespace CHelper::Node {
                            const std::optional<std::string> &description,
                            std::string key,
                            const std::pair<NodeBase *, NodeBase *> &node)
-            : NodeBase(id, description, false),
+            : NodeBase(id, description, true),
               key(std::move(key)),
               nodeElement(getNodeElement(node)) {}
 
     std::pair<Node::NodeBase *, Node::NodeBase *> getNodeFromCPack(const std::string &key,
                                                                    [[maybe_unused]] const CPack &cpack) {
         for (const auto &item: cpack.repeatNodes) {
-            if (item.first->id == key) {
+            if (HEDLEY_UNLIKELY(item.first->id == key)) {
                 return item;
             }
         }
@@ -62,13 +62,9 @@ namespace CHelper::Node {
             ASTNode orNode = nodeElement.getASTNode(tokenReader, cpack);
             bool isAstNodeError = orNode.childNodes[0].isError();
             bool isBreakAstNodeError = orNode.childNodes[1].isError();
-            bool isOrNodeError = orNode.isError();
             childNodes.push_back(std::move(orNode));
-            if (!isBreakAstNodeError || (!isAstNodeError && !tokenReader.ready())) {
-                return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect(), nullptr, "repeat");
-            } else if (isOrNodeError) {
-                VectorView <Token> tokens = tokenReader.collect();
-                return ASTNode::andNode(this, std::move(childNodes), tokens, nullptr, "repeat");
+            if (HEDLEY_UNLIKELY(!isBreakAstNodeError || isAstNodeError || !tokenReader.ready())) {
+                return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect(), nullptr);
             }
         }
     }
@@ -76,21 +72,41 @@ namespace CHelper::Node {
     void NodeRepeat::collectStructure(const ASTNode *astNode,
                                       StructureBuilder &structure,
                                       bool isMustHave) const {
-        if (astNode->id == "repeat") {
-            bool isRepeat = true;
-            for (const auto &item: astNode->childNodes) {
-                structure.appendWhiteSpace().append(item.getStructure());
-                if (item.whichBest == 1) {
-                    isRepeat = false;
+        for (const auto &item: astNode->childNodes) {
+            //如果内容为空，就跳过
+            if (HEDLEY_UNLIKELY(item.tokens.isEmpty() ||
+                                std::all_of(item.tokens.beginIterator(), item.tokens.endIterator(),
+                                            [](const auto &item) {
+                                                return item.type == TokenType::WHITE_SPACE;
+                                            }))) {
+                continue;
+            }
+            //获取结构
+            const ASTNode &astNode1 = HEDLEY_LIKELY(item.whichBest == 0)
+                                      ? item.getBestNode().getBestNode() : item.getBestNode();
+            const NodeAnd *node1 = (NodeAnd *) astNode1.node;
+            size_t astNodeSize = astNode1.childNodes.size();
+            size_t nodeSize = node1->childNodes.size();
+            structure.isDirty = false;
+            for (size_t i = 0; i < nodeSize; ++i) {
+                if (HEDLEY_LIKELY(i < astNodeSize)) {
+                    astNode1.childNodes[i].collectStructure(structure, true);
+                } else {
+                    node1->childNodes[i]->collectStructureWithNextNodes(structure, true);
                 }
             }
-            if (isRepeat) {
-                structure.appendWhiteSpace().append("...");
-                for (const auto &item: ((NodeAnd *) nodeElement.childNodes[1])->childNodes) {
-                    item->collectStructure(nullptr, structure, true);
-                }
+            if (HEDLEY_UNLIKELY(item.whichBest == 1)) {
+                //如果是结束语句，就不继续执行了
+                structure.isDirty = true;
+                return;
             }
         }
+        //如果没有遇到结束语句，添加...和结束语句的结构
+        structure.appendWhiteSpace().append("...");
+        for (const auto &item: ((NodeAnd *) nodeElement.childNodes[1])->childNodes) {
+            item->collectStructure(nullptr, structure, true);
+        }
+        structure.isDirty = true;
     }
 
 } // CHelper::Node

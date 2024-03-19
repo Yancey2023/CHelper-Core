@@ -37,7 +37,7 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeString::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        if (ignoreLater) {
+        if (HEDLEY_UNLIKELY(ignoreLater)) {
             //后面的所有内容都算作这个字符串
             tokenReader.push();
             tokenReader.skipToLF();
@@ -45,35 +45,35 @@ namespace CHelper::Node {
         }
         tokenReader.push();
         ASTNode result = tokenReader.readStringASTNode(this);
-        if (result.isError() && allowMissingString) {
+        if (HEDLEY_UNLIKELY(allowMissingString && result.isError())) {
             tokenReader.restore();
             tokenReader.push();
             return ASTNode::simpleNode(this, tokenReader.collect());
         }
         tokenReader.pop();
-        if (!allowMissingString && result.tokens.isEmpty()) {
+        if (HEDLEY_UNLIKELY(!allowMissingString && result.tokens.isEmpty())) {
             return ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(
                     result.tokens, "字符串参数内容为空"));
         }
-        if (!canContainSpace) {
-            if (TokenUtil::toString(result.tokens).find(' ') != std::string::npos) {
+        if (HEDLEY_UNLIKELY(!canContainSpace)) {
+            if (HEDLEY_UNLIKELY(TokenUtil::toString(result.tokens).find(' ') != std::string::npos)) {
                 return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(
                         result.tokens, "字符串参数内容不可以包含空格"));
             }
             return result;
         }
         std::string str = TokenUtil::toString(result.tokens);
-        if (str.empty() || str[0] != '"') {
+        if (HEDLEY_LIKELY((str.empty() || str[0] != '"'))) {
             return result;
         }
         auto convertResult = JsonUtil::jsonString2String(str);
         size_t offset = TokenUtil::getStartIndex(result.tokens);
-        if (convertResult.errorReason != nullptr) {
+        if (HEDLEY_UNLIKELY(convertResult.errorReason != nullptr)) {
             convertResult.errorReason->start += offset;
             convertResult.errorReason->end += offset;
             return ASTNode::simpleNode(this, result.tokens, convertResult.errorReason);
         }
-        if (!convertResult.isComplete) {
+        if (HEDLEY_UNLIKELY(!convertResult.isComplete)) {
             return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(
                     result.tokens, "字符串参数内容双引号不封闭 -> " + str));
         }
@@ -83,20 +83,20 @@ namespace CHelper::Node {
     bool NodeString::collectSuggestions(const ASTNode *astNode,
                                         size_t index,
                                         std::vector<Suggestions> &suggestions) const {
-        if (ignoreLater || !canContainSpace) {
+        if (HEDLEY_UNLIKELY(ignoreLater || !canContainSpace)) {
             return true;
         }
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
-        if (str.empty()) {
+        if (HEDLEY_UNLIKELY(str.empty())) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
             return true;
         }
-        if (str[0] != '"') {
+        if (HEDLEY_LIKELY(str[0] != '"')) {
             return true;
         }
         auto convertResult = JsonUtil::jsonString2String(str);
-        if (!convertResult.isComplete) {
+        if (HEDLEY_LIKELY(!convertResult.isComplete)) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
         }
         return true;

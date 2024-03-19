@@ -20,14 +20,14 @@ namespace CHelper {
 
     class ItemId : public NamespaceId {
     public:
-        const std::optional<int> max;
+        const std::optional<int32_t> max;
         const std::optional<std::vector<std::string>> descriptions;
         const Node::NodeBase *nodeData;
 
         ItemId(const std::optional<std::string> &nameSpace,
                const std::string &name,
                const std::optional<std::string> &description,
-               const std::optional<int> &max,
+               const std::optional<int32_t> &max,
                const std::optional<std::vector<std::string>> &descriptions);
 
         explicit ItemId(const nlohmann::json &j);

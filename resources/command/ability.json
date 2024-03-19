@@ -18,6 +18,7 @@
     {
       "type": "NORMAL_ID",
       "id": "ability",
+      "brief": "能力",
       "description": "要操作的能力",
       "ignoreError": true,
       "contents": [
@@ -38,6 +39,7 @@
     {
       "type": "BOOLEAN",
       "id": "value",
+      "brief": "是否对玩家可用",
       "description": "此能力是否对玩家可用",
       "descriptionTrue": "此能力对玩家可用",
       "descriptionFalse": "此能力对玩家不可用"

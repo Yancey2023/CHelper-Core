@@ -18,6 +18,7 @@
     {
       "type": "NORMAL_ID",
       "id": "sound",
+      "brief": "声音",
       "description": "要停止的声音",
       "ignoreError": true,
       "key": "sound"

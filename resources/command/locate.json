@@ -29,7 +29,8 @@
     {
       "type": "NORMAL_ID",
       "id": "structureId",
-      "description": "要定位的生物群系的命名空间ID",
+      "brief": "结构",
+      "description": "要定位的结构的命名空间ID",
       "ignoreError": true,
       "contents": [
         {
@@ -121,13 +122,15 @@
     {
       "type": "BOOLEAN",
       "id": "useNewChunksOnly",
+      "brief": "是否仅定位在尚未生成的区块中的结构",
       "description": "是否仅定位在尚未生成的区块中的结构",
-      "descriptionFalse": "定位最近结构",
-      "descriptionTrue": "仅定位在尚未生成的区块中的最近结构"
+      "descriptionTrue": "仅定位在尚未生成的区块中的最近结构",
+      "descriptionFalse": "定位最近结构"
     },
     {
       "type": "NORMAL_ID",
       "id": "biomeId",
+      "brief": "生物群系",
       "description": "要定位的生物群系的命名空间ID",
       "ignoreError": true,
       "key": "biome"

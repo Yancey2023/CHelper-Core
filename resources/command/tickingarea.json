@@ -10,6 +10,7 @@
       "type": "TEXT"
     },
     {
+      "brief": "坐标1",
       "description": "用于定义矩形常加载区域的两个对角坐标的第一个",
       "id": "1",
       "type": "POSITION"
@@ -17,18 +18,21 @@
     {
       "type": "POSITION",
       "id": "2",
+      "brief": "坐标2",
       "description": "用于定义矩形常加载区域的两个对角坐标的第二个",
       "isMustAfterWhiteSpace": false
     },
     {
       "type": "STRING",
       "id": "3",
+      "brief": "常加载区域名称",
       "description": "常加载区域的名称",
       "canContainSpace": true,
       "ignoreLater": false
     },
     {
       "descriptionFalse": "不预加载",
+      "brief": "是否预加载",
       "description": "常加载区域是否预加载,若不填则默认为false",
       "descriptionTrue": "预加载",
       "id": "4",
@@ -53,17 +57,20 @@
       "type": "TEXT"
     },
     {
+      "brief": "中心坐标",
       "description": "用于定义圆形常加载区域的圆心的坐标",
       "id": "7",
       "type": "POSITION"
     },
     {
+      "brief": "半径",
       "description": "圆形常加载区域的半径作为从中心到圆周的区块数",
       "id": "8",
       "type": "INTEGER"
     },
     {
       "canContainSpace": true,
+      "brief": "常加载区域名称",
       "description": "常加载区域的名称",
       "ignoreLater": false,
       "id": "9",
@@ -71,6 +78,7 @@
     },
     {
       "descriptionFalse": "不预加载",
+      "brief": "是否预加载",
       "description": "常加载区域是否预加载,若不填则默认为false",
       "descriptionTrue": "预加载",
       "id": "10",
@@ -86,6 +94,7 @@
       "type": "TEXT"
     },
     {
+      "brief": "坐标",
       "description": "要选择的常加载区域所包含的坐标",
       "id": "12",
       "type": "POSITION"
@@ -101,6 +110,7 @@
     },
     {
       "canContainSpace": true,
+      "brief": "常加载区域名称",
       "description": "常加载区域的名称",
       "ignoreLater": false,
       "id": "14",
@@ -126,15 +136,17 @@
     },
     {
       "canContainSpace": true,
+      "brief": "常加载区域名称",
       "description": "常加载区域的名称",
       "ignoreLater": false,
       "id": "17",
       "type": "STRING"
     },
     {
-      "descriptionFalse": "不预加载",
+      "brief": "是否预加载",
       "description": "常加载区域是否预加载,若不填则可以查询指定的常加载区域是否预加载",
       "descriptionTrue": "预加载",
+      "descriptionFalse": "不预加载",
       "id": "18",
       "type": "BOOLEAN"
     },
@@ -148,14 +160,16 @@
       "type": "TEXT"
     },
     {
+      "brief": "坐标",
       "description": "要选择的常加载区域所包含的坐标",
       "id": "20",
       "type": "POSITION"
     },
     {
-      "descriptionFalse": "不预加载",
+      "brief": "是否预加载",
       "description": "常加载区域是否预加载,若不填则可以查询指定的常加载区域是否预加载",
       "descriptionTrue": "预加载",
+      "descriptionFalse": "不预加载",
       "id": "21",
       "type": "BOOLEAN"
     },

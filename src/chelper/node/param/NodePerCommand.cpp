@@ -23,11 +23,11 @@ namespace CHelper::Node {
             : NodeBase(j, false) {
         Profile::push(ColorStringBuilder().red("loading node name").build());
         name = JsonUtil::fromJson<std::vector<std::string>>(j, "name");
-        if (j.contains("node")) {
+        auto nodeJson = j.find("node");
+        if (HEDLEY_LIKELY(nodeJson != j.end())) {
             Profile::next(ColorStringBuilder().red("loading nodes").build());
-            auto nodeJson = j.at("node");
-            nodes.reserve(nodeJson.size());
-            for (const auto &item: nodeJson) {
+            nodes.reserve(nodeJson->size());
+            for (const auto &item: nodeJson.value()) {
                 nodes.push_back(getNodeFromJson(item, cpack));
             }
         }
@@ -40,28 +40,28 @@ namespace CHelper::Node {
                                   .purple(startNodeId)
                                   .red("\" to nodes")
                                   .build());
-            if (startNodeId == "LF") {
+            if (HEDLEY_UNLIKELY(startNodeId == "LF")) {
                 startNodes.push_back(NodeLF::getInstance());
                 continue;
             }
             bool flag = true;
             for (auto &node: nodes) {
-                if (node->id == startNodeId) {
+                if (HEDLEY_UNLIKELY(node->id == startNodeId)) {
                     startNodes.push_back(node.get());
                     flag = false;
                     break;
                 }
             }
-            if (flag) {
+            if (HEDLEY_UNLIKELY(flag)) {
                 throw Exception::UnknownNodeId(name, startNodeId);
             }
         }
-        if (j.contains("ast")) {
+        auto jsonAst = j.find("ast");
+        if (HEDLEY_LIKELY(jsonAst != j.end())) {
             Profile::next(ColorStringBuilder().red("loading ast").build());
-            auto ast = JsonUtil::fromJson<std::vector<std::vector<std::string>>>(j, "ast");
-            for (const auto &childNodes: ast) {
+            for (const auto &childNodes: jsonAst->get<std::vector<std::vector<std::string>>>()) {
                 Profile::next(ColorStringBuilder().red("linking child nodes to parent node").build());
-                if (childNodes.empty()) {
+                if (HEDLEY_UNLIKELY(childNodes.empty())) {
                     throw Exception::RequireParentNodeId(name);
                 }
                 auto parentNodeId = childNodes.at(0);
@@ -70,17 +70,17 @@ namespace CHelper::Node {
                                       .purple(parentNodeId)
                                       .red("\"")
                                       .build());
-                if (childNodes.size() == 1) {
+                if (HEDLEY_UNLIKELY(childNodes.size() == 1)) {
                     throw Exception::RequireChildNodeIds(name, parentNodeId);
                 }
                 Node::NodeBase *parentNode = nullptr;
                 for (auto &node: nodes) {
-                    if (node->id == parentNodeId) {
+                    if (HEDLEY_UNLIKELY(node->id == parentNodeId)) {
                         parentNode = node.get();
                         break;
                     }
                 }
-                if (parentNode == nullptr) {
+                if (HEDLEY_UNLIKELY(parentNode == nullptr)) {
                     throw Exception::UnknownNodeId(name, parentNodeId);
                 }
                 parentNode->nextNodes.reserve(childNodes.size() - 1);
@@ -92,18 +92,18 @@ namespace CHelper::Node {
                                           .purple(parentNodeId)
                                           .red("\"")
                                           .build());
-                    if (childNodeId == "LF") {
+                    if (HEDLEY_UNLIKELY(childNodeId == "LF")) {
                         parentNode->nextNodes.push_back(Node::NodeLF::getInstance());
                         return;
                     }
                     Node::NodeBase *childNode = nullptr;
                     for (auto &node: nodes) {
-                        if (node->id == childNodeId) {
+                        if (HEDLEY_UNLIKELY(node->id == childNodeId)) {
                             childNode = node.get();
                             break;
                         }
                     }
-                    if (childNode == nullptr) {
+                    if (HEDLEY_UNLIKELY(childNode == nullptr)) {
                         throw Exception::UnknownNodeId(name, childNodeId);
                     }
                     parentNode->nextNodes.push_back(childNode);
@@ -112,7 +112,7 @@ namespace CHelper::Node {
         }
         Profile::pop();
         for (const auto &item: nodes) {
-            if (item->nextNodes.empty()) {
+            if (HEDLEY_UNLIKELY(item->nextNodes.empty())) {
                 throw Exception::RequireChildNodeIds(name, item->id.value_or("UNKNOWN"));
             }
         }
@@ -121,12 +121,12 @@ namespace CHelper::Node {
             bool flag1 = item->getNodeType() == NodeType::POSITION.get() ||
                          item->getNodeType() == NodeType::RELATIVE_FLOAT.get();
             for (const auto &item2: item->nextNodes) {
-                if (item2 == NodeLF::getInstance()) {
+                if (HEDLEY_UNLIKELY(item2 == NodeLF::getInstance())) {
                     continue;
                 }
                 bool flag2 = item2->getNodeType() == NodeType::POSITION.get() ||
                              item2->getNodeType() == NodeType::RELATIVE_FLOAT.get();
-                if (flag1 && flag2 == item2->isMustAfterWhiteSpace) {
+                if (HEDLEY_UNLIKELY(flag1 && flag2 == item2->isMustAfterWhiteSpace)) {
                     Profile::push(ColorStringBuilder()
                                           .purple("isMustAfterWhiteSpace")
                                           .red(" should be ")
@@ -158,9 +158,6 @@ namespace CHelper::Node {
         JsonUtil::toJson(j, "start", startIds);
         std::vector<std::vector<std::string>> ast;
         for (const auto &item: nodes) {
-            if (item->nextNodes.empty()) {
-                continue;
-            }
             std::vector<std::string> ast1;
             ast1.push_back(item->id.value());
             for (const auto &item2: item->nextNodes) {

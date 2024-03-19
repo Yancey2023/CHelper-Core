@@ -169,40 +169,40 @@ namespace CHelper::Node {
         // key
         ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey.get(), "key");
         childNodes.push_back(astNodeKey);
-        if (astNodeKey.isError()) {
+        if (HEDLEY_UNLIKELY(astNodeKey.isError())) {
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
         // = or !=
         ASTNode astNodeSeparator = getByChildNode(tokenReader, cpack, nodeSeparator.get(), "separator");
         childNodes.push_back(astNodeSeparator);
-        if (astNodeSeparator.isError()) {
+        if (HEDLEY_UNLIKELY(astNodeSeparator.isError())) {
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
         //value
         std::string key = TokenUtil::toString(astNodeKey.tokens);
-        if (key == "x" || key == "y" || key == "z") {
+        if (HEDLEY_LIKELY(key == "x" || key == "y" || key == "z")) {
             childNodes.push_back(nodeRelativeFloat->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "r" || key == "rm" || key == "dx" || key == "dy" || key == "dz" ||
-                   key == "rx" || key == "rxm" || key == "ry" || key == "rym" ||
-                   key == "l" || key == "lm") {
+        } else if (HEDLEY_LIKELY(key == "r" || key == "rm" || key == "dx" || key == "dy" || key == "dz" ||
+                                 key == "rx" || key == "rxm" || key == "ry" || key == "rym" ||
+                                 key == "l" || key == "lm")) {
             childNodes.push_back(nodeFloat->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "scores") {
+        } else if (HEDLEY_LIKELY(key == "scores")) {
             childNodes.push_back(nodeScore->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "tag" || key == "name") {
+        } else if (HEDLEY_LIKELY(key == "tag" || key == "name")) {
             childNodes.push_back(nodeString->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "type") {
+        } else if (HEDLEY_LIKELY(key == "type")) {
             childNodes.push_back(nodeEntities->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "family") {
+        } else if (HEDLEY_LIKELY(key == "family")) {
             childNodes.push_back(nodeFamily->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "hasitem") {
+        } else if (HEDLEY_LIKELY(key == "hasitem")) {
             childNodes.push_back(nodeHasItem.getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "has_property") {
+        } else if (HEDLEY_LIKELY(key == "has_property")) {
             childNodes.push_back(nodeHasProperty->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "haspermission") {
+        } else if (HEDLEY_LIKELY(key == "haspermission")) {
             childNodes.push_back(nodeHasPermission->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "m") {
+        } else if (HEDLEY_LIKELY(key == "m")) {
             childNodes.push_back(nodeGameMode->getASTNodeWithNextNode(tokenReader, cpack));
-        } else if (key == "c") {
+        } else if (HEDLEY_LIKELY(key == "c")) {
             childNodes.push_back(nodeInteger->getASTNodeWithNextNode(tokenReader, cpack));
         } else {
             childNodes.push_back(nodeValue->getASTNodeWithNextNode(tokenReader, cpack));

@@ -7,21 +7,11 @@
 
 namespace CHelper::Profile {
 
-    void push(const std::string &str) {
-        stack.push_back(str);
-    }
-
-    void pop() {
-        stack.pop_back();
-    }
+    std::vector<std::string> stack;
 
     void next(const std::string &str) {
         pop();
         push(str);
-    }
-
-    void clear() {
-        stack.clear();
     }
 
     std::string getStackTrace() {

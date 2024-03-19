@@ -37,35 +37,35 @@ namespace CHelper::Node {
     ASTNode NodeCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         ASTNode commandStart = nodeCommandStart->getASTNode(tokenReader, cpack);
-        if (commandStart.isError()) {
+        if (HEDLEY_UNLIKELY(commandStart.isError())) {
             tokenReader.restore();
             tokenReader.push();
         }
         ASTNode commandName = tokenReader.readStringASTNode(this, "commandName");
-        if (commandName.tokens.size() == 0) {
+        if (HEDLEY_UNLIKELY(commandName.tokens.size() == 0)) {
             VectorView <Token> tokens = tokenReader.collect();
             return ASTNode::andNode(this, {std::move(commandName)}, tokens,
                                     ErrorReason::contentError(tokens, "命令名字为空"), "command");
         }
         std::string str = TokenUtil::toString(commandName.tokens);
         const NodePerCommand *currentCommand = nullptr;
-        if (!commandName.isError()) {
+        if (HEDLEY_LIKELY(!commandName.isError())) {
             bool isBreak = false;
             for (const auto &item: *commands) {
                 currentCommand = (NodePerCommand *) item.get();
                 for (const auto &item2: currentCommand->name) {
-                    if (str == item2) {
+                    if (HEDLEY_UNLIKELY(str == item2)) {
                         isBreak = true;
                         break;
                     }
                 }
-                if (isBreak) {
+                if (HEDLEY_UNLIKELY(isBreak)) {
                     break;
                 }
                 currentCommand = nullptr;
             }
         }
-        if (currentCommand == nullptr) {
+        if (HEDLEY_UNLIKELY(currentCommand == nullptr)) {
             VectorView <Token> tokens = tokenReader.collect();
             return ASTNode::andNode(this, {std::move(commandName)}, tokens, ErrorReason::contentError(
                     tokens, FormatUtil::format("命令名字不匹配，找不到名为{0}的命令", str)), "command");
@@ -76,7 +76,7 @@ namespace CHelper::Node {
     }
 
     std::optional<std::string> NodeCommand::collectDescription(const ASTNode *astNode, size_t index) const {
-        if (astNode->id == "commandName") {
+        if (HEDLEY_UNLIKELY(astNode->id == "commandName")) {
             return "命令的名字";
         } else {
             return std::nullopt;
@@ -86,7 +86,7 @@ namespace CHelper::Node {
     bool NodeCommand::collectSuggestions(const ASTNode *astNode,
                                          size_t index,
                                          std::vector<Suggestions> &suggestions) const {
-        if (astNode->id != "commandName") {
+        if (HEDLEY_UNLIKELY(astNode->id != "commandName")) {
             return false;
         }
         std::string str = TokenUtil::toString(astNode->tokens)
@@ -97,8 +97,8 @@ namespace CHelper::Node {
             bool flag = false;
             for (const auto &item2: ((NodePerCommand *) item.get())->name) {
                 size_t index1 = item2.find(str);
-                if (index1 != std::string::npos) {
-                    if (index1 == 0) {
+                if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
+                    if (HEDLEY_UNLIKELY(index1 == 0)) {
                         nameStartOf.push_back(std::make_shared<NormalId>(item2, item->description));
                     } else {
                         nameContain.push_back(std::make_shared<NormalId>(item2, item->description));
@@ -106,28 +106,28 @@ namespace CHelper::Node {
                 }
                 flag = true;
             }
-            if (flag) {
+            if (HEDLEY_UNLIKELY(flag)) {
                 continue;
             }
             //通过介绍进行搜索
-            if (item->description.has_value()) {
-                size_t index2 = item->description.value().find(str);
-                if (index2 != std::string::npos) {
-                    for (const auto &item2: ((NodePerCommand *) item.get())->name) {
-                        descriptionContain.push_back(std::make_shared<NormalId>(item2, item->description));
-                    }
+            if (HEDLEY_UNLIKELY(item->description.has_value() &&
+                                item->description.value().find(str) != std::string::npos)) {
+                for (const auto &item2: ((NodePerCommand *) item.get())->name) {
+                    descriptionContain.push_back(std::make_shared<NormalId>(item2, item->description));
                 }
             }
         }
+        auto compare = [](const auto &item1, const auto &item2) {
+            return item1->name < item2->name;
+        };
+        std::sort(nameStartOf.begin(), nameStartOf.end(), compare);
+        std::sort(nameContain.begin(), nameContain.end(), compare);
+        std::sort(descriptionContain.begin(), descriptionContain.end(), compare);
         std::vector<std::shared_ptr<NormalId>> suggestions1;
         suggestions1.reserve(nameStartOf.size() + nameContain.size() + descriptionContain.size());
         suggestions1.insert(suggestions1.end(), nameStartOf.begin(), nameStartOf.end());
         suggestions1.insert(suggestions1.end(), nameContain.begin(), nameContain.end());
         suggestions1.insert(suggestions1.end(), descriptionContain.begin(), descriptionContain.end());
-        std::sort(suggestions1.begin(), suggestions1.end(),
-                  [](const auto &item1, const auto &item2) {
-                      return item1->name < item2->name;
-                  });
         Suggestions suggestions2;
         size_t start = TokenUtil::getStartIndex(astNode->tokens);
         size_t end = TokenUtil::getEndIndex(astNode->tokens);
@@ -144,10 +144,10 @@ namespace CHelper::Node {
     void NodeCommand::collectStructure(const ASTNode *astNode,
                                        StructureBuilder &structure,
                                        bool isMustHave) const {
-        if (astNode == nullptr || (astNode->id == "command" && astNode->tokens.size() < 2)) {
+        if (HEDLEY_UNLIKELY(astNode == nullptr || (astNode->id == "command" && astNode->tokens.size() < 2))) {
             structure.append(isMustHave, "命令");
             return;
-        } else if (astNode->id == "commandName") {
+        } else if (HEDLEY_LIKELY(astNode->id == "commandName")) {
             structure.appendWhiteSpace().append(TokenUtil::toString(astNode->tokens));
         }
     }

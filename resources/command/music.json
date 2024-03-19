@@ -36,6 +36,7 @@
     {
       "type": "FLOAT",
       "id": "fadeSeconds",
+      "brief": "渐变时间",
       "description": "音乐淡入/淡出时间",
       "min": 0,
       "max": 10
@@ -43,6 +44,7 @@
     {
       "type": "NORMAL_ID",
       "id": "repeatMode",
+      "brief": "是否循环播放",
       "description": "是否循环播放音乐",
       "ignoreError": true,
       "contents": [
@@ -77,6 +79,7 @@
     {
       "type": "FLOAT",
       "id": "stopFadeSeconds",
+      "brief": "淡出时间",
       "description": "音乐淡入/淡出时间",
       "min": 0,
       "max": 10

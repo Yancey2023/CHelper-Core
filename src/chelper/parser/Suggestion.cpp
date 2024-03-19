@@ -28,12 +28,12 @@ namespace CHelper {
         std::string result = before.substr(0, start)
                 .append(content->name)
                 .append(before.substr(end));
-        if (end != before.length()) {
+        if (HEDLEY_UNLIKELY(end != before.length())) {
             return std::move(result);
         }
         core->onTextChanged(result, result.size());
         const ASTNode *astNode = core->getAstNode();
-        if (astNode->canAddWhitespace && astNode->isAllWhitespaceError()) {
+        if (HEDLEY_LIKELY(astNode->canAddWhitespace && astNode->isAllWhitespaceError())) {
             result.push_back(' ');
         }
         return std::move(result);

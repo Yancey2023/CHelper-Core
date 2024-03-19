@@ -15,7 +15,7 @@ CHelper::LexerPos::LexerPos(const std::string &filePath,
 
 void CHelper::LexerPos::next(char ch) {
     index++;
-    if (ch == '\n') {
+    if (HEDLEY_UNLIKELY(ch == '\n')) {
         line++;
         col = 1;
     } else {

@@ -96,7 +96,7 @@ namespace CHelper::Node {
         ASTNode at = nodeAt->getASTNodeWithNextNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeAt)
         tokenReader.restore();
-        if (at.isError()) {
+        if (HEDLEY_UNLIKELY(at.isError())) {
             //不是@符号开头，当作玩家名处理
             DEBUG_GET_NODE_BEGIN(nodePlayerName)
             ASTNode result = getByChildNode(tokenReader, cpack, nodePlayerName.get(), "target selector player name");
@@ -114,7 +114,7 @@ namespace CHelper::Node {
         ASTNode leftBracket = nodeLeft->getASTNodeWithNextNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeLeft)
         tokenReader.restore();
-        if (leftBracket.isError()) {
+        if (HEDLEY_LIKELY(leftBracket.isError())) {
             //没有后面的[...]
             return ASTNode::andNode(this, {targetSelectorVariable}, tokenReader.collect(),
                                     nullptr, "target selector no arguments", false);
@@ -127,14 +127,14 @@ namespace CHelper::Node {
     bool NodeTargetSelector::collectSuggestions(const ASTNode *astNode,
                                                 size_t index,
                                                 std::vector<Suggestions> &suggestions) const {
-        if (astNode->tokens.isEmpty()) {
+        if (HEDLEY_UNLIKELY(astNode->tokens.isEmpty())) {
             VectorView <Token> tokens = {astNode->tokens.vector, astNode->tokens.end, astNode->tokens.end};
             ASTNode newAstNode = ASTNode::simpleNode(this, tokens);
             nodeTargetSelectorVariable->collectSuggestions(astNode, index, suggestions);
             nodePlayerName->collectSuggestions(astNode, index, suggestions);
             return true;
         }
-        if (!astNode->isError() && astNode->id == "target selector no arguments") {
+        if (HEDLEY_UNLIKELY(!astNode->isError() && astNode->id == "target selector no arguments")) {
             VectorView <Token> tokens = {astNode->tokens.vector, astNode->tokens.end, astNode->tokens.end};
             ASTNode newAstNode = ASTNode::simpleNode(this, tokens);
             nodeLeft->collectSuggestions(&newAstNode, index, suggestions);
@@ -145,12 +145,7 @@ namespace CHelper::Node {
     void NodeTargetSelector::collectStructure(const ASTNode *astNode,
                                               StructureBuilder &structure,
                                               bool isMustHave) const {
-        if (astNode == nullptr ||
-            astNode->id == "target selector player name" ||
-            astNode->id == "target selector no arguments" ||
-            astNode->id == "target selector with arguments") {
-            structure.append(isMustHave, "目标选择器");
-        }
+        structure.append(isMustHave, "目标选择器");
     }
 
 } // CHelper::Node

@@ -79,6 +79,7 @@
     {
       "type": "STRING",
       "id": "runTestName",
+      "brief": "名称",
       "description": "GameTest的名称",
       "canContainSpace": true,
       "ignoreLater": false
@@ -86,6 +87,7 @@
     {
       "type": "STRING",
       "id": "tagTag",
+      "brief": "标签",
       "description": "GameTest的标签",
       "canContainSpace": true,
       "ignoreLater": false
@@ -93,6 +95,7 @@
     {
       "type": "STRING",
       "id": "createTestName",
+      "brief": "名称",
       "description": "GameTest的名称",
       "canContainSpace": true,
       "ignoreLater": false

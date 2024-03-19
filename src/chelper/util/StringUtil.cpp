@@ -2,13 +2,12 @@
 // Created by Yancey on 2024/2/13.
 //
 
-#include <algorithm>
 #include "StringUtil.h"
 
 namespace CHelper::StringUtil {
 
     std::string join(const std::string &joining, const std::vector<std::string> &strings) {
-        if (strings.empty()) {
+        if (HEDLEY_UNLIKELY(strings.empty())) {
             return {};
         }
         std::string result;

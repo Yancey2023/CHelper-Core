@@ -7,7 +7,7 @@
 namespace CHelper {
 
     void Suggestions::markFiltered() {
-        if (isFiltered()) {
+        if (HEDLEY_UNLIKELY(isFiltered())) {
             return;
         }
         //生成哈希值
@@ -19,7 +19,7 @@ namespace CHelper {
     }
 
     void Suggestions::filter() {
-        if (isFiltered()) {
+        if (HEDLEY_LIKELY(isFiltered())) {
             return;
         }
         //过滤
@@ -27,12 +27,12 @@ namespace CHelper {
         for (const auto &item: suggestions) {
             bool flag = true;
             for (const auto &item2: filteredSuggestions) {
-                if (item2.equal(item)) {
+                if (HEDLEY_UNLIKELY(item2.equal(item))) {
                     flag = false;
                     break;
                 }
             }
-            if (flag) {
+            if (HEDLEY_LIKELY(flag)) {
                 filteredSuggestions.push_back(item);
             }
         }
@@ -53,9 +53,12 @@ namespace CHelper {
         std::vector<Suggestions> filteredSuggestions;
         for (auto &item: suggestions) {
             item.filter();
-            if (std::all_of(filteredSuggestions.begin(), filteredSuggestions.end(), [&item](Suggestions &item2) {
-                return item.hashCode() != item2.hashCode();
-            })) {
+            if (HEDLEY_LIKELY(
+                    std::all_of(filteredSuggestions.begin(), filteredSuggestions.end(),
+                                [&item](Suggestions &item2) {
+                                    return item.hashCode() != item2.hashCode();
+                                }))
+                    ) {
                 filteredSuggestions.push_back(item);
             }
         }

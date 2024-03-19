@@ -12,8 +12,6 @@
 
 #pragma comment(lib, "comctl32.lib")
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow);
-
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 void onTextChanged(const std::string &command);

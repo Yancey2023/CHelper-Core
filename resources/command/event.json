@@ -27,6 +27,7 @@
     {
       "type": "NORMAL_ID",
       "id": "eventName",
+      "brief": "实体事件",
       "description": "命令触发的实体事件",
       "ignoreError": true,
       "key": "entityEvent"

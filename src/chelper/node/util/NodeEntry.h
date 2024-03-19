@@ -17,7 +17,6 @@ namespace CHelper::Node {
         const NodeBase *nodeKey;
         const NodeBase *nodeSeparator;
         const NodeBase *nodeValue;
-        const bool isIgnoreSuggestion = false;
 
         NodeEntry(const std::optional<std::string> &id,
                   const std::optional<std::string> &description,

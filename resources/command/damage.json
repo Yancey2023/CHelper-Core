@@ -18,6 +18,7 @@
     {
       "type": "INTEGER",
       "id": "amount",
+      "brief": "伤害值",
       "description": "要造成的伤害值"
     },
     {

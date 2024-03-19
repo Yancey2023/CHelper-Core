@@ -4,8 +4,6 @@
 
 #include "NodeOr.h"
 
-#include <utility>
-
 namespace CHelper::Node {
 
     NodeOr::NodeOr(const std::optional<std::string> &id,
@@ -13,12 +11,25 @@ namespace CHelper::Node {
                    std::vector<const NodeBase *> childNodes,
                    const bool isAttachToEnd,
                    const bool isUseFirst,
+                   const bool noSuggestion,
+                   const char *defaultErrorReason,
                    std::string nodeId)
             : NodeBase(id, description, false),
               isAttachToEnd(isAttachToEnd),
               isUseFirst(isUseFirst),
+              noSuggestion(noSuggestion),
               childNodes(std::move(childNodes)),
-              nodeId(std::move(nodeId)) {}
+              defaultErrorReason(defaultErrorReason),
+              nodeId(std::move(nodeId)) {
+#if CHelperDebug == true
+        for (const auto &item: this->childNodes) {
+            if (HEDLEY_UNLIKELY(item == nullptr)) {
+                Profile::push("null node in node or");
+                throw Exception::NodeLoadFailed();
+            }
+        }
+#endif
+    }
 
     ASTNode NodeOr::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         std::vector<ASTNode> childASTNodes;
@@ -30,20 +41,21 @@ namespace CHelper::Node {
         for (const auto &item: childNodes) {
             tokenReader.push();
             ASTNode node = item->getASTNode(tokenReader, cpack);
-            bool isError = node.isError();
+            bool isNodeError = node.isError();
             childASTNodes.push_back(std::move(node));
             indexes.push_back(tokenReader.index);
             tokenReader.restore();
-            if (HEDLEY_UNLIKELY(isUseFirst && !isError)) {
+            if (HEDLEY_UNLIKELY(isUseFirst && !isNodeError)) {
                 break;
             }
         }
         if (HEDLEY_UNLIKELY(isAttachToEnd)) {
             tokenReader.push();
             tokenReader.skipToLF();
-            return ASTNode::orNode(this, std::move(childASTNodes), tokenReader.collect(), nullptr, nodeId);
+            const VectorView <Token> tokens = tokenReader.collect();
+            return ASTNode::orNode(this, std::move(childASTNodes), tokens, defaultErrorReason, nodeId);
         } else {
-            ASTNode result = ASTNode::orNode(this, std::move(childASTNodes), nullptr, nullptr, nodeId);
+            ASTNode result = ASTNode::orNode(this, std::move(childASTNodes), nullptr, defaultErrorReason, nodeId);
             tokenReader.index = indexes[result.whichBest];
             return std::move(result);
         }
@@ -51,6 +63,12 @@ namespace CHelper::Node {
 
     std::optional<std::string> NodeOr::collectDescription(const ASTNode *node, size_t index) const {
         return std::nullopt;
+    }
+
+    bool NodeOr::collectSuggestions(const ASTNode *astNode,
+                                    size_t index,
+                                    std::vector<Suggestions> &suggestions) const {
+        return noSuggestion;
     }
 
 } // CHelper::Node

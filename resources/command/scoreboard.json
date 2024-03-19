@@ -38,6 +38,7 @@
     {
       "type": "STRING",
       "id": "addObjective",
+      "brief": "记分项",
       "description": "记分项的名字",
       "canContainSpace": true,
       "ignoreLater": false
@@ -54,6 +55,7 @@
     {
       "type": "STRING",
       "id": "displayName",
+      "brief": "记分项显示的名字",
       "description": "记分项显示的名字",
       "canContainSpace": true,
       "ignoreLater": false
@@ -70,6 +72,7 @@
     {
       "type": "STRING",
       "id": "removeObjective",
+      "brief": "记分项",
       "description": "记分项的名字",
       "canContainSpace": true,
       "ignoreLater": false
@@ -103,6 +106,7 @@
     {
       "type": "STRING",
       "id": "displayObjective1",
+      "brief": "记分项",
       "description": "记分项的名字",
       "canContainSpace": true,
       "ignoreLater": false
@@ -110,6 +114,7 @@
     {
       "type": "STRING",
       "id": "displayObjective2",
+      "brief": "记分项",
       "description": "记分项的名字",
       "canContainSpace": true,
       "ignoreLater": false
@@ -223,6 +228,7 @@
     {
       "type": "STRING",
       "id": "listPlayerName",
+      "brief": "记分项",
       "description": "记分项的名字",
       "canContainSpace": true,
       "ignoreLater": false
@@ -238,6 +244,7 @@
     {
       "type": "STRING",
       "id": "setObjective",
+      "brief": "记分项",
       "description": "记分项的名字",
       "canContainSpace": true,
       "ignoreLater": false
@@ -245,6 +252,7 @@
     {
       "type": "INTEGER",
       "id": "count",
+      "brief": "分数数值",
       "description": "要设置、增加、扣除的实体分数数值"
     },
     {
@@ -266,6 +274,7 @@
     {
       "type": "STRING",
       "id": "randomObjective",
+      "brief": "记分项",
       "description": "记分项的名字",
       "canContainSpace": true,
       "ignoreLater": false
@@ -273,6 +282,7 @@
     {
       "type": "STRING",
       "id": "resetObjective",
+      "brief": "记分项",
       "description": "记分项的名字",
       "canContainSpace": true,
       "ignoreLater": false
@@ -340,6 +350,7 @@
     {
       "type": "STRING",
       "id": "operationObjective1",
+      "brief": "记分项",
       "description": "记分项的名字",
       "canContainSpace": true,
       "ignoreLater": false
@@ -347,6 +358,7 @@
     {
       "type": "STRING",
       "id": "operationObjective2",
+      "brief": "记分项",
       "description": "记分项的名字",
       "canContainSpace": true,
       "ignoreLater": false

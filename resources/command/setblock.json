@@ -10,6 +10,7 @@
     {
       "type": "POSITION",
       "id": "position",
+      "brief": "位置",
       "description": "要被更改方块的位置"
     },
     {
@@ -21,6 +22,7 @@
     {
       "type": "NORMAL_ID",
       "id": "mode",
+      "brief": "更改方式",
       "description": "方块更改的处理方式",
       "ignoreError": true,
       "contents": [

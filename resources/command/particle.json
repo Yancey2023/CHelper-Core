@@ -10,6 +10,7 @@
     {
       "type": "NORMAL_ID",
       "id": "effect",
+      "brief": "粒子类型",
       "description": "要创造的粒子类型",
       "ignoreError": true,
       "key": "particles"
@@ -17,6 +18,7 @@
     {
       "type": "POSITION",
       "id": "position",
+      "brief": "位置",
       "description": "创造粒子的位置"
     }
   ],

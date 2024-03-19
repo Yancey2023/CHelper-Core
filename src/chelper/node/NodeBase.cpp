@@ -17,21 +17,31 @@ namespace CHelper::Node {
     NodeBase::NodeBase(const nlohmann::json &j,
                        bool isMustAfterWhiteSpace)
             : id(JsonUtil::fromJsonOptionalLikely<std::string>(j, "id")),
+              brief(JsonUtil::fromJsonOptionalLikely<std::string>(j, "brief")),
               description(JsonUtil::fromJsonOptionalLikely<std::string>(j, "description")),
               isMustAfterWhiteSpace(j.value("isMustAfterWhiteSpace", isMustAfterWhiteSpace)) {
-//#if CHelperDebug
-//        if (!description.has_value()) {
-//            return;
-//        }
-//        auto type = fromJsonOptional<>(j, type, std::string);
-//        if (!type.has_value() || type.value() == "PER_COMMAND" || type.value() == "TARGET_SELECTOR") {
-//            return;
-//        }
-//        static std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-//        if (converter.from_bytes(description.value()).length() > 5) {
-//            CHELPER_WARN("节点介绍长度过长 " + description.value());
-//        }
-//#endif
+#ifdef HEDLEY_GCC_VERSION
+#if CHelperDebug
+        if (HEDLEY_UNLIKELY(!description.has_value() || brief.has_value())) {
+            return;
+        }
+        auto type = JsonUtil::fromJsonOptionalLikely<std::string>(j, "type");
+        if (HEDLEY_UNLIKELY(!type.has_value() || type.value() == "PER_COMMAND" || type.value() == "TARGET_SELECTOR" ||
+                            type.value() == "JSON_OBJECT" || type.value() == "JSON_INTEGER" ||
+                            type.value() == "JSON_FLOAT" ||
+                            type.value() == "JSON_NULL" || type.value() == "JSON_LIST" ||
+                            type.value() == "JSON_STRING" ||
+                            type.value() == "JSON_BOOLEAN" || type.value() == "TEXT" || type.value() == "BLOCK" ||
+                            type.value() == "ITEM")) {
+            return;
+        }
+
+        static std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+        if (HEDLEY_UNLIKELY(converter.from_bytes(description.value()).length() > 5)) {
+            CHELPER_WARN("节点介绍长度过长 " + type.value_or("") + " " + description.value());
+        }
+#endif
+#endif
     }
 
     std::unique_ptr<NodeBase> NodeBase::getNodeFromJson(const nlohmann::json &j,
@@ -56,7 +66,7 @@ namespace CHelper::Node {
                                   .build());
         }
         for (const auto &item: NodeType::NODE_TYPES) {
-            if (item->nodeName == type) {
+            if (HEDLEY_UNLIKELY(item->nodeName == type)) {
                 Profile::pop();
                 return item->createNodeByJson(j, cpack);
             }
@@ -70,6 +80,7 @@ namespace CHelper::Node {
 
     void NodeBase::toJson(nlohmann::json &j) const {
         JsonUtil::toJsonOptionalLikely(j, "id", id);
+        JsonUtil::toJsonOptionalUnlikely(j, "brief", brief);
         JsonUtil::toJsonOptionalLikely(j, "description", description);
         JsonUtil::toJson(j, "type", getNodeType()->nodeName);
         //TODO 需要更好的判断isMustAfterWhiteSpace是否输出的逻辑
@@ -79,9 +90,9 @@ namespace CHelper::Node {
     ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const {
         //空格检测
         tokenReader.push();
-        if (isMustAfterWhiteSpace && tokenReader.skipWhitespace() == 0) {
+        if (HEDLEY_UNLIKELY(isMustAfterWhiteSpace && tokenReader.skipWhitespace() == 0)) {
             VectorView <Token> tokens = tokenReader.collect();
-            return ASTNode::simpleNode(this, tokens, ErrorReason::requireWhiteSpace(tokens));
+            return ASTNode::simpleNode(this, tokens, ErrorReason::requireWhiteSpace(tokens), "compound");
         }
         tokenReader.pop();
         tokenReader.push();
@@ -89,7 +100,7 @@ namespace CHelper::Node {
         DEBUG_GET_NODE_BEGIN(this)
         ASTNode currentASTNode = getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(this)
-        if (currentASTNode.isError() || nextNodes.empty()) {
+        if (HEDLEY_UNLIKELY(currentASTNode.isError() || nextNodes.empty())) {
             return ASTNode::andNode(this, {std::move(currentASTNode)}, tokenReader.collect(), nullptr, "compound");
         }
         //子节点
@@ -138,13 +149,13 @@ namespace CHelper::Node {
             DEBUG_GET_NODE_END(item)
             bool isError = astNode.isError();
             const VectorView <Token> tokens = tokenReader.collect();
-            if (isError && (isIgnoreChildNodesError || tokens.isEmpty())) {
+            if (HEDLEY_UNLIKELY(isError && (isIgnoreChildNodesError || tokens.isEmpty()))) {
                 tokenReader.restore();
                 break;
             }
             childASTNodes.push_back(std::move(astNode));
             tokenReader.pop();
-            if (isError) {
+            if (HEDLEY_UNLIKELY(isError)) {
                 break;
             }
         }
@@ -153,7 +164,7 @@ namespace CHelper::Node {
 
     std::optional<std::string> NodeBase::collectDescription(const ASTNode *node, size_t index) const {
 #if CHelperDebug == true
-        if (!description.has_value()) {
+        if (HEDLEY_UNLIKELY(!description.has_value())) {
             CHELPER_WARN("description is null");
         }
 #endif
@@ -178,17 +189,30 @@ namespace CHelper::Node {
 
     }
 
-    void NodeBase::collectStructureNormal(StructureBuilder &structure, bool isMustHave) const {
-        collectStructure(nullptr, structure, isMustHave);
-        if (nextNodes.empty()) {
-            return;
-        }
-        for (const auto &item: nextNodes) {
-            if (item == NodeLF::getInstance()) {
-                isMustHave = false;
+    void NodeBase::collectStructureWithNextNodes(StructureBuilder &structure, bool isMustHave) const {
+        if (HEDLEY_UNLIKELY(brief.has_value())) {
+            structure.append(isMustHave, brief.value());
+        } else {
+            structure.isDirty = false;
+            collectStructure(nullptr, structure, isMustHave);
+            if (HEDLEY_UNLIKELY(!structure.isDirty)) {
+                structure.appendUnknown(isMustHave);
+                structure.isDirty = false;
+                return;
             }
         }
-        nextNodes[0]->collectStructureNormal(structure, isMustHave);
+        if (HEDLEY_UNLIKELY(nextNodes.empty())) {
+            return;
+        }
+        if (HEDLEY_LIKELY(isMustHave)) {
+            for (const auto &item: nextNodes) {
+                if (HEDLEY_UNLIKELY(item == NodeLF::getInstance())) {
+                    isMustHave = false;
+                    break;
+                }
+            }
+        }
+        nextNodes[0]->collectStructureWithNextNodes(structure, isMustHave);
     }
 
 } // CHelper::Node

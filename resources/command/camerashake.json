@@ -28,6 +28,7 @@
     {
       "type": "FLOAT",
       "id": "intensity",
+      "brief": "摇晃强度",
       "description": "视野摇晃的强度",
       "min": 0,
       "max": 4
@@ -35,11 +36,13 @@
     {
       "type": "FLOAT",
       "id": "seconds",
+      "brief": "摇晃时长",
       "description": "视野摇晃的时长"
     },
     {
       "type": "NORMAL_ID",
       "id": "shakeType",
+      "brief": "摇晃种类",
       "description": "视野摇晃方向的种类",
       "ignoreError": true,
       "contents": [

@@ -18,6 +18,7 @@
     {
       "type": "NORMAL_ID",
       "id": "animation",
+      "brief": "动画",
       "description": "当前要播放的动画",
       "ignoreError": true,
       "key": "animation"
@@ -25,6 +26,7 @@
     {
       "type": "NORMAL_ID",
       "id": "nextState",
+      "brief": "结束状态",
       "description": "动画播放完毕后的状态",
       "ignoreError": true,
       "key": "animationController"
@@ -32,11 +34,13 @@
     {
       "type": "FLOAT",
       "id": "blendOutTime",
+      "brief": "渐变时间",
       "description": "动画渐变的持续时间"
     },
     {
       "type": "STRING",
       "id": "stopExpression",
+      "brief": "终止条件",
       "description": "动画播放终止的条件，应为Molang表达式",
       "canContainSpace": true,
       "ignoreLater": false

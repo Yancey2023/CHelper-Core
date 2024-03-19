@@ -20,13 +20,13 @@ namespace CHelper::Node {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         auto key = nodeKey->getASTNodeWithNextNode(tokenReader, cpack);
-        if (key.isError()) {
+        if (HEDLEY_UNLIKELY(key.isError())) {
             childNodes.push_back(std::move(key));
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
         childNodes.push_back(std::move(key));
         auto separator = nodeSeparator->getASTNodeWithNextNode(tokenReader, cpack);
-        if (separator.isError()) {
+        if (HEDLEY_UNLIKELY(separator.isError())) {
             childNodes.push_back(std::move(separator));
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }

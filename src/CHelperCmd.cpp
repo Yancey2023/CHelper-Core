@@ -14,21 +14,21 @@ int main() {
 //    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
 //                        R"(/home/yancey/CLionProjects/CHelper/test/test.txt)",
 //                        true);
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
-//                        std::vector<std::string>{"execute run "}, false);
+    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
+                        std::vector<std::string>{"execute run clear "}, false);
 //    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
 //                        std::vector<std::string>{"give @s "}, true);
 //    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)", {""}, false);
 //    CHelper::Test::test4(R"(D:\CLion\project\CHelper-Core\resources)",
 //                         R"(D:\CLion\project\CHelper-Core\run\cpack.json)");
-    CHelper::Test::test5(R"(D:\CLion\project\CHelper-Core\resources)",
-                         R"(D:\CLion\project\CHelper-Core\run\cpack.dat)");
+//    CHelper::Test::test5(R"(D:\CLion\project\CHelper-Core\resources)",
+//                         R"(D:\CLion\project\CHelper-Core\run\cpack.dat)");
     return 0;
 }
 
 namespace CHelper::Test {
 
-    void test(const std::string &cpackPath, const std::string &testFilePath, bool isTestTime) {
+    [[maybe_unused]] void test(const std::string &cpackPath, const std::string &testFilePath, bool isTestTime) {
         std::vector<std::string> commands;
         std::ifstream fin;
         fin.open(testFilePath, std::ios::in);
@@ -60,7 +60,8 @@ namespace CHelper::Test {
 //        CHelper::Test::test2(cpackPath, commands, 100);
     }
 
-    void test(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime) {
+    [[maybe_unused]] void
+    test(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime) {
         try {
             auto core = Core::createByDirectory(cpackPath);
             std::cout << std::endl;
@@ -114,7 +115,7 @@ namespace CHelper::Test {
                                     endStructure - startStructure).count()) + "ms").build() << std::endl;
 
                 }
-//                std::cout << core->getAstNode()->toOptimizedJson().dump(
+//                std::cout << core->getAstNode()->toJson().dump(
 //                        -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
 //                std::cout << core->getAstNode()->toBestJson().dump(
 //                        -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
@@ -182,7 +183,7 @@ namespace CHelper::Test {
         }
     }
 
-    void test2(const std::string &cpackPath, const std::vector<std::string> &commands, int times) {
+    [[maybe_unused]] void test2(const std::string &cpackPath, const std::vector<std::string> &commands, int times) {
         try {
             auto core = Core::createByDirectory(cpackPath);
             std::cout << std::endl;

@@ -28,7 +28,8 @@ namespace CHelper::Node {
                               nodeSeparator, nodeRight
                       }, false) {
 #if CHelperDebug == true
-        if (nodeLeft == nullptr || nodeElement == nullptr || nodeSeparator == nullptr || nodeRight == nullptr) {
+        if (HEDLEY_UNLIKELY(
+                nodeLeft == nullptr || nodeElement == nullptr || nodeSeparator == nullptr || nodeRight == nullptr)) {
             Profile::push("NodeOr has a null child node");
             throw Exception::NodeLoadFailed();
         }
@@ -39,7 +40,7 @@ namespace CHelper::Node {
         //标记整个[...]，在最后进行收集
         tokenReader.push();
         ASTNode left = nodeLeft->getASTNodeWithNextNode(tokenReader, cpack);
-        if (left.isError()) {
+        if (HEDLEY_UNLIKELY(left.isError())) {
             return ASTNode::andNode(this, {std::move(left)}, tokenReader.collect());
         }
         std::vector<ASTNode> childNodes = {std::move(left)};
@@ -56,11 +57,11 @@ namespace CHelper::Node {
             auto elementOrRight = nodeElementOrRight.getASTNodeWithNextNode(tokenReader, cpack);
             bool flag = !rightBracket1.isError() || elementOrRight.isError();
             childNodes.push_back(std::move(elementOrRight));
-            if (flag) {
+            if (HEDLEY_UNLIKELY(flag)) {
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
 #if CHelperDebug == true
-            if (startIndex == tokenReader.index) {
+            if (HEDLEY_UNLIKELY(startIndex == tokenReader.index)) {
                 CHELPER_WARN("NodeList has some error");
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
@@ -81,7 +82,7 @@ namespace CHelper::Node {
             DEBUG_GET_NODE_END(nodeSeparator)
             bool flag = !rightBracket.isError() || separatorOrRight.isError();
             childNodes.push_back(std::move(separatorOrRight));
-            if (flag) {
+            if (HEDLEY_UNLIKELY(flag)) {
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
             //检测是不是元素
@@ -90,11 +91,11 @@ namespace CHelper::Node {
             DEBUG_GET_NODE_END(nodeElement)
             flag = element.isError();
             childNodes.push_back(std::move(element));
-            if (flag) {
+            if (HEDLEY_UNLIKELY(flag)) {
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
 #if CHelperDebug == true
-            if (startIndex == tokenReader.index) {
+            if (HEDLEY_UNLIKELY(startIndex == tokenReader.index)) {
                 CHELPER_WARN("NodeList has some error");
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }

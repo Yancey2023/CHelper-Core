@@ -39,7 +39,7 @@ namespace CHelper {
             std::vector<const Node::NodeBase *>{
                     nodeBlockStateEntryValueBoolean.get(), nodeBlockStateEntryValueInteger.get(),
                     nodeBlockStateEntryValueFloat.get(), nodeBlockStateEntryValueString.get()
-            }, false
+            }, false, false, true, "类型不匹配，当前内容不是有效的方块状态值"
     );
     static std::unique_ptr<Node::NodeBase> nodeBlockStateAllEntry = std::make_unique<Node::NodeEntry>(
             "BLOCK_STATE_ENTRY", "方块状态键值对", nodeBlockStateEntryKey.get(),
@@ -54,7 +54,7 @@ namespace CHelper {
             nodeBlockStateSeparator.get(), nodeBlockStateRightBracket.get());
 
     static Node::NodeBase *getNodeValue(BlockStateType::BlockStateType type,
-                                        const std::variant<std::string, int, bool> &value,
+                                        const std::variant<std::string, int32_t, bool> &value,
                                         const std::optional<std::string> &description) {
         switch (type) {
             case BlockStateType::STRING:
@@ -64,7 +64,7 @@ namespace CHelper {
             case BlockStateType::INTEGER:
                 return new Node::NodeText(
                         "BLOCK_STATE_ENTRY_VALUE_INTEGER", "方块状态键值对的键（整数）",
-                        std::make_shared<NormalId>(std::to_string(std::get<int>(value)), description));
+                        std::make_shared<NormalId>(std::to_string(std::get<int32_t>(value)), description));
             case BlockStateType::BOOLEAN:
                 return new Node::NodeText(
                         "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", "方块状态键值对的键（布尔值）",
@@ -75,7 +75,7 @@ namespace CHelper {
     }
 
     BlockStateValue::BlockStateValue(BlockStateType::BlockStateType type,
-                                     const std::variant<std::string, int, bool> &value,
+                                     const std::variant<std::string, int32_t, bool> &value,
                                      const std::optional<std::string> &description)
             : type(type),
               value(value),
@@ -85,10 +85,10 @@ namespace CHelper {
     BlockStateValue::BlockStateValue(const nlohmann::json &j)
             : description(JsonUtil::fromJsonOptionalLikely<std::string>(j, "description")) {
         const nlohmann::json &jsonValue = j.at("value");
-        if (jsonValue.is_number_integer()) {
+        if (HEDLEY_UNLIKELY(jsonValue.is_number_integer())) {
             type = CHelper::BlockStateType::INTEGER;
-            value = jsonValue.get<int>();
-        } else if (jsonValue.is_boolean()) {
+            value = jsonValue.get<int32_t>();
+        } else if (HEDLEY_UNLIKELY(jsonValue.is_boolean())) {
             type = CHelper::BlockStateType::BOOLEAN;
             value = jsonValue.get<bool>();
         } else {
@@ -109,7 +109,7 @@ namespace CHelper {
     }
 
     BlockStateValue &BlockStateValue::operator=(const BlockStateValue &blockStateValue) {
-        if (this == &blockStateValue) {
+        if (HEDLEY_UNLIKELY(this == &blockStateValue)) {
             return *this;
         }
         delete node;
@@ -129,7 +129,7 @@ namespace CHelper {
                 JsonUtil::toJson(j, "value", std::get<bool>(value));
                 break;
             case CHelper::BlockStateType::INTEGER:
-                JsonUtil::toJson(j, "value", std::get<int>(value));
+                JsonUtil::toJson(j, "value", std::get<int32_t>(value));
                 break;
         }
         JsonUtil::toJsonOptionalLikely(j, "description", description);
@@ -157,18 +157,18 @@ namespace CHelper {
     BlockState::BlockState(std::string key,
                            const std::optional<std::string> &description,
                            std::vector<BlockStateValue> values,
-                           int defaultValue)
+                           int32_t defaultValue)
             : key(std::move(key)),
               description(description),
               values(std::move(values)),
               defaultValue(defaultValue),
-              node(getNodePerBlockState(key, description, values)) {}
+              node(getNodePerBlockState(this->key, description, this->values)) {}
 
     BlockState::BlockState(const nlohmann::json &j)
             : key(JsonUtil::fromJson<std::string>(j, "key")),
               description(JsonUtil::fromJsonOptionalLikely<std::string>(j, "description")),
               values(JsonUtil::fromJson<std::vector<CHelper::BlockStateValue>>(j, "values")),
-              defaultValue(JsonUtil::fromJson<int>(j, "defaultValue")),
+              defaultValue(JsonUtil::fromJson<int32_t>(j, "defaultValue")),
               node(getNodePerBlockState(key, description, values)) {}
 
     BlockState::BlockState(const BlockState &blockState)
@@ -185,7 +185,7 @@ namespace CHelper {
     }
 
     BlockState &BlockState::operator=(const BlockState &blockState) {
-        if (this == &blockState) {
+        if (HEDLEY_UNLIKELY(this == &blockState)) {
             return *this;
         }
         delete ((Node::NodeEntry *) node)->nodeKey;
@@ -210,12 +210,15 @@ namespace CHelper {
     getNodeBlockState(const std::optional<std::vector<BlockState>> &blockStates) {
         std::vector<const Node::NodeBase *> blockStateEntryChildNode2;
         //已知的方块状态
-        if (blockStates.has_value()) {
+        if (HEDLEY_LIKELY(blockStates.has_value())) {
             blockStateEntryChildNode2.reserve(2);
             std::vector<const Node::NodeBase *> blockStateEntryChildNode1;
-            for (const auto &item: blockStates.value()) {
-                blockStateEntryChildNode1.push_back(item.node);
-            }
+            blockStateEntryChildNode1.reserve(blockStates->size());
+            std::transform(blockStates->begin(), blockStates->end(),
+                           std::back_inserter(blockStateEntryChildNode1),
+                           [](const auto &item) -> const Node::NodeBase * {
+                               return item.node;
+                           });
             blockStateEntryChildNode2.push_back(new Node::NodeOr(
                     "BLOCK_STATE_ENTRY", "方块状态键值对",
                     std::move(blockStateEntryChildNode1), false));
@@ -236,7 +239,7 @@ namespace CHelper {
     BlockId::BlockId(const std::optional<std::string> &nameSpace,
                      const std::string &name,
                      const std::optional<std::string> &description,
-                     const std::optional<int> &max,
+                     const std::optional<int32_t> &max,
                      const std::optional<std::vector<std::string>> &descriptions,
                      const std::optional<std::vector<BlockState>> &blockStates)
             : ItemId(nameSpace, name, description, max, descriptions),

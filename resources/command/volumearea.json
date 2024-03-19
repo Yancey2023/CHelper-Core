@@ -11,23 +11,27 @@
     },
     {
       "canContainSpace": false,
+      "brief": "标识符的名称",
       "description": "标识符的名称",
       "ignoreLater": false,
       "id": "1",
       "type": "STRING"
     },
     {
+      "brief": "位置",
       "description": "功能域的位置",
       "id": "2",
       "type": "POSITION"
     },
     {
+      "brief": "位置",
       "type": "POSITION",
       "id": "3",
       "description": "功能域的位置",
       "isMustAfterWhiteSpace": false
     },
     {
+      "brief": "名称",
       "canContainSpace": false,
       "description": "功能域的名称",
       "ignoreLater": false,
@@ -63,6 +67,7 @@
     },
     {
       "canContainSpace": false,
+      "brief": "名称",
       "description": "功能域的名称",
       "ignoreLater": false,
       "id": "8",
@@ -78,6 +83,7 @@
       "type": "TEXT"
     },
     {
+      "brief": "位置",
       "description": "功能域的位置",
       "id": "10",
       "type": "POSITION"

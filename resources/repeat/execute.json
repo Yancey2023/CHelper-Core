@@ -12,7 +12,7 @@
     {
       "type": "COMMAND",
       "id": "command",
-      "description": "执行的另一条命令"
+      "description": "命令"
     }
   ],
   "content": [
@@ -27,6 +27,7 @@
       },
       {
         "type": "NORMAL_ID",
+        "brief": "坐标轴",
         "description": "需要转换的坐标轴",
         "ignoreError": true,
         "contents": [
@@ -104,6 +105,7 @@
       },
       {
         "type": "NORMAL_ID",
+        "brief": "朝向的部位",
         "description": "需要朝向实体的哪个位置",
         "ignoreError": true,
         "contents": [
@@ -164,6 +166,7 @@
       },
       {
         "type": "POSITION",
+        "brief": "朝向的坐标",
         "description": "将命令的执行朝向改为面向该坐标"
       }
     ],
@@ -193,6 +196,7 @@
       },
       {
         "type": "NORMAL_ID",
+        "brief": "朝向的部位",
         "description": "需要朝向实体的哪个位置",
         "ignoreError": true,
         "contents": [
@@ -247,6 +251,7 @@
       },
       {
         "type": "POSITION",
+        "brief": "坐标",
         "description": "执行命令的坐标"
       }
     ],
@@ -286,10 +291,12 @@
       },
       {
         "type": "FLOAT",
+        "brief": "rx",
         "description": "命令执行朝向的绕x轴旋转度数(-180.0表示北，-90.0表示东，0.0表示南，90.0表示西)"
       },
       {
         "type": "FLOAT",
+        "brief": "ry",
         "description": "命令执行朝向的绕y轴旋转度数(-180.0表示北，竖直上方为-90.0,竖直下方为90.0)"
       }
     ],
@@ -321,6 +328,7 @@
     [
       {
         "type": "NORMAL_ID",
+        "brief": "if|unless",
         "description": "if|unless",
         "ignoreError": false,
         "contents": [
@@ -344,6 +352,7 @@
       },
       {
         "type": "POSITION",
+        "brief": "方块坐标",
         "description": "要进行比较的方块坐标"
       },
       {
@@ -355,6 +364,7 @@
     [
       {
         "type": "NORMAL_ID",
+        "brief": "if|unless",
         "description": "if|unless",
         "ignoreError": false,
         "contents": [
@@ -378,20 +388,24 @@
       },
       {
         "type": "POSITION",
+        "brief": "源坐标1",
         "description": "源区域的对角坐标"
       },
       {
         "type": "POSITION",
-        "description": "的源区域的对角坐标",
+        "brief": "源坐标2",
+        "description": "源区域的对角坐标",
         "isMustAfterWhiteSpace": false
       },
       {
         "type": "POSITION",
-        "description": "目标区域的西北方向较低点的坐标",
+        "brief": "探测区域的坐标",
+        "description": "探测区域的西北方向较低点的坐标",
         "isMustAfterWhiteSpace": false
       },
       {
         "type": "NORMAL_ID",
+        "brief": "比较方式",
         "description": "探测区域内的全部方块或忽略源区域内空气方块所在的位置",
         "ignoreError": true,
         "contents": [
@@ -409,6 +423,7 @@
     [
       {
         "type": "NORMAL_ID",
+        "brief": "if|unless",
         "description": "if|unless",
         "ignoreError": false,
         "contents": [
@@ -441,6 +456,7 @@
     [
       {
         "type": "NORMAL_ID",
+        "brief": "if|unless",
         "description": "if|unless",
         "ignoreError": false,
         "contents": [
@@ -471,6 +487,7 @@
       },
       {
         "type": "STRING",
+        "brief": "记分项",
         "description": "记分项的名字",
         "canContainSpace": true,
         "ignoreLater": false
@@ -511,6 +528,7 @@
       },
       {
         "type": "STRING",
+        "brief": "记分项",
         "description": "记分项的名字",
         "canContainSpace": true,
         "ignoreLater": false
@@ -519,6 +537,7 @@
     [
       {
         "type": "NORMAL_ID",
+        "brief": "if|unless",
         "description": "if|unless",
         "ignoreError": false,
         "contents": [
@@ -549,6 +568,7 @@
       },
       {
         "type": "STRING",
+        "brief": "记分项",
         "description": "记分项的名字",
         "canContainSpace": true,
         "ignoreLater": false

@@ -15,7 +15,7 @@ namespace CHelper {
     }
 
     const Token *TokenReader::peek() const {
-        if (!ready()) {
+        if (HEDLEY_UNLIKELY(!ready())) {
             return nullptr;
         }
         return &(*tokenList)[index];
@@ -23,7 +23,7 @@ namespace CHelper {
 
     const Token *TokenReader::read() {
         const Token *result = peek();
-        if (result != nullptr) {
+        if (HEDLEY_LIKELY(result != nullptr)) {
             skip();
         }
         return result;
@@ -35,7 +35,7 @@ namespace CHelper {
     }
 
     bool TokenReader::skip() {
-        if (!ready()) {
+        if (HEDLEY_UNLIKELY(!ready())) {
             return false;
         }
         index++;
@@ -75,7 +75,7 @@ namespace CHelper {
      */
     size_t TokenReader::getAndPopLastIndex() {
         size_t size = indexStack.size();
-        if (size == 0) {
+        if (HEDLEY_UNLIKELY(size == 0)) {
             return 0;
         }
         size_t result = indexStack[size - 1];
@@ -109,10 +109,10 @@ namespace CHelper {
         const Token *token = read();
         VectorView <Token> tokens = collect();
         std::shared_ptr<ErrorReason> errorReason;
-        if (token == nullptr) {
+        if (HEDLEY_UNLIKELY(token == nullptr)) {
             errorReason = ErrorReason::incomplete(tokens, FormatUtil::format(
                     "命令不完整，需要的参数类型为{0}", requireType));
-        } else if (token->type != type) {
+        } else if (HEDLEY_UNLIKELY(token->type != type)) {
             errorReason = ErrorReason::typeError(tokens, FormatUtil::format(
                     "类型不匹配，正确的参数类型为{0}，但当前参数类型为{1}",
                     requireType, TokenType::getName(token->type)));
@@ -137,7 +137,7 @@ namespace CHelper {
                                  [](const std::string &str,
                                     const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
                                      for (const auto &ch: str) {
-                                         if (ch == '.') {
+                                         if (HEDLEY_UNLIKELY(ch == '.')) {
                                              return ErrorReason::contentError(
                                                      tokens, "类型不匹配，正确的参数类型为整数，但当前参数类型为小数");
                                          }
@@ -153,10 +153,10 @@ namespace CHelper {
                                     const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
                                      bool isHavePoint = false;
                                      for (const auto &ch: str) {
-                                         if (ch != '.') {
+                                         if (HEDLEY_LIKELY(ch != '.')) {
                                              continue;
                                          }
-                                         if (isHavePoint) {
+                                         if (HEDLEY_UNLIKELY(isHavePoint)) {
                                              return ErrorReason::contentError(tokens, "数字格式错误");
                                          }
                                          isHavePoint = true;

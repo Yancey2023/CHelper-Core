@@ -31,6 +31,7 @@
 #include <algorithm>
 #include <fstream>
 #include <ctime>
+#include <cinttypes>
 #include "nlohmann/json.hpp"
 #include "format/Format.h"
 #include "hedley.h"

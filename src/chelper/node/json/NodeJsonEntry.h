@@ -32,10 +32,6 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
-        bool collectSuggestions(const ASTNode *astNode,
-                                size_t index,
-                                std::vector<Suggestions> &suggestions) const override;
-
         static NodeBase *getNodeJsonAllEntry();
 
     };

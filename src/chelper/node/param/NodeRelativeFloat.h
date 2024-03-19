@@ -30,8 +30,7 @@ namespace CHelper::Node {
 
         static std::pair<std::uint8_t, ASTNode> getASTNode(const NodeBase *node,
                                                            const CPack *cpack,
-                                                           TokenReader &tokenReader,
-                                                           bool canUseCaretNotation);
+                                                           TokenReader &tokenReader);
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

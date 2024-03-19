@@ -10,6 +10,7 @@
     {
       "type": "XP_INTEGER",
       "id": "0",
+      "brief": "经验值数量",
       "description": "给予玩家的经验值数量"
     },
     {

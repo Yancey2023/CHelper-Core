@@ -10,7 +10,7 @@
 namespace CHelper {
 
     static Node::NodeBase *
-    getNodeData(const std::optional<int> &max,
+    getNodeData(const std::optional<int32_t> &max,
                 const std::optional<std::vector<std::string>> &descriptions) {
         auto *nodeAllData = new Node::NodeInteger("ITEM_DATA", "物品附加值", -1, max);
         if (HEDLEY_LIKELY(!descriptions.has_value())) {
@@ -34,7 +34,7 @@ namespace CHelper {
     ItemId::ItemId(const std::optional<std::string> &nameSpace,
                    const std::string &name,
                    const std::optional<std::string> &description,
-                   const std::optional<int> &max,
+                   const std::optional<int32_t> &max,
                    const std::optional<std::vector<std::string>> &descriptions)
             : NamespaceId(nameSpace, name, description),
               max(max),
@@ -43,7 +43,7 @@ namespace CHelper {
 
     ItemId::ItemId(const nlohmann::json &j)
             : NamespaceId(j),
-              max(JsonUtil::fromJsonOptionalUnlikely<int>(j, "max")),
+              max(JsonUtil::fromJsonOptionalUnlikely<int32_t>(j, "max")),
               descriptions(JsonUtil::fromJsonOptionalUnlikely<std::vector<std::string>>(j, "descriptions")),
               nodeData(getNodeData(max, descriptions)) {}
 

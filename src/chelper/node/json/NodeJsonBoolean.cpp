@@ -34,11 +34,31 @@ namespace CHelper::Node {
     ASTNode NodeJsonBoolean::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         ASTNode astNode = tokenReader.readStringASTNode(this);
         std::string str = TokenUtil::toString(astNode.tokens);
-        if (str == "true" || str == "false") {
+        if (HEDLEY_UNLIKELY(str == "true" || str == "false")) {
             return astNode;
         }
         VectorView <Token> tokens = astNode.tokens;
-        return ASTNode::andNode(this, {std::move(astNode)}, tokens);
+        return ASTNode::andNode(this, {std::move(astNode)}, tokens, ErrorReason::contentError(
+                tokens, "内容不匹配，应该为布尔值，但当前内容为" + str));
+    }
+
+    bool NodeJsonBoolean::collectSuggestions(const ASTNode *astNode,
+                                             size_t index,
+                                             std::vector<Suggestions> &suggestions) const {
+        std::string str = TokenUtil::toString(astNode->tokens)
+                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+        Suggestions suggestions1;
+        if (HEDLEY_UNLIKELY(std::string("true").find(str) != std::string::npos)) {
+            suggestions1.suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(
+                    "true", descriptionTrue));
+        }
+        if (HEDLEY_UNLIKELY(std::string("false").find(str) != std::string::npos)) {
+            suggestions1.suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(
+                    "false", descriptionFalse));
+        }
+        suggestions1.markFiltered();
+        suggestions.push_back(std::move(suggestions1));
+        return true;
     }
 
 } // CHelper::Node

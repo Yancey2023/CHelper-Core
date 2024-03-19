@@ -28,6 +28,7 @@
     {
       "type": "STRING",
       "id": "changeSceneName",
+      "brief": "场景名",
       "description": "从导入的行为包中对话文件显示的场景",
       "canContainSpace": true,
       "ignoreLater": false
@@ -68,6 +69,7 @@
     {
       "type": "STRING",
       "id": "openSceneName",
+      "brief": "场景名",
       "description": "从导入的行为包中对话文件显示的场景",
       "canContainSpace": true,
       "ignoreLater": false

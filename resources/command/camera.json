@@ -54,6 +54,7 @@
     {
       "type": "INTEGER",
       "id": "red",
+      "brief": "红",
       "description": "相机视角RGB颜色的红色强度",
       "min": 0,
       "max": 255
@@ -61,6 +62,7 @@
     {
       "type": "INTEGER",
       "id": "green",
+      "brief": "绿",
       "description": "相机视角RGB颜色的绿色强度",
       "min": 0,
       "max": 255
@@ -68,6 +70,7 @@
     {
       "type": "INTEGER",
       "id": "blue",
+      "brief": "蓝",
       "description": "相机视角RGB颜色的蓝色强度",
       "min": 0,
       "max": 255
@@ -84,6 +87,7 @@
     {
       "type": "FLOAT",
       "id": "fadeInSeconds",
+      "brief": "淡入时间",
       "description": "相机视角的淡入时间",
       "min": 0,
       "max": 10
@@ -91,6 +95,7 @@
     {
       "type": "FLOAT",
       "id": "holdSeconds",
+      "brief": "保持时间",
       "description": "相机视角的保持持续时间",
       "min": 0,
       "max": 10
@@ -98,6 +103,7 @@
     {
       "type": "FLOAT",
       "id": "fadeOutSeconds",
+      "brief": "淡出时间",
       "description": "相机视角的淡出持续时间",
       "min": 0,
       "max": 10
@@ -105,6 +111,7 @@
     {
       "type": "NORMAL_ID",
       "id": "preset",
+      "brief": "相机视角",
       "description": "相机视角/预设",
       "ignoreError": true,
       "contents": [
@@ -141,6 +148,7 @@
     {
       "type": "STRING",
       "id": "default",
+      "brief": "未知",
       "description": "未知参数，需要更多信息",
       "canContainSpace": true,
       "ignoreLater": false
@@ -165,11 +173,13 @@
     {
       "type": "POSITION",
       "id": "lookAtPosition",
+      "brief": "朝向的坐标",
       "description": "相机视角朝向的坐标"
     },
     {
       "type": "TEXT",
       "id": "pos",
+      "brief": "位置",
       "description": "相机视角的位置",
       "data": {
         "name": "pos",
@@ -179,6 +189,7 @@
     {
       "type": "POSITION",
       "id": "position",
+      "brief": "位置",
       "description": "相机视角的位置"
     },
     {
@@ -193,12 +204,14 @@
     {
       "type": "RELATIVE_FLOAT",
       "id": "xRot",
+      "brief": "rx",
       "description": "相机视角绕Y轴旋转的旋转角度(-180.0表示北，-90.0表示东，0.0表示南，90.0表示西)",
       "canUseCaretNotation": false
     },
     {
       "type": "RELATIVE_FLOAT",
       "id": "yRot",
+      "brief": "ry",
       "description": "相机视角绕X轴旋转的旋转角度(竖直上方为-90.0，至竖直下方90.0)",
       "isMustAfterWhiteSpace": false,
       "canUseCaretNotation": false
@@ -215,11 +228,13 @@
     {
       "type": "FLOAT",
       "id": "easeTime",
+      "brief": "过渡时间",
       "description": "相机视角平滑过渡的持续时间"
     },
     {
       "type": "NORMAL_ID",
       "id": "easeType",
+      "brief": "运镜函数",
       "description": "相机视角运镜的移动函数/类型",
       "ignoreError": true,
       "contents": [

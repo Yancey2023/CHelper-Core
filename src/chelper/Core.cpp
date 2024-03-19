@@ -55,7 +55,7 @@ namespace CHelper {
     }
 
     void Core::onTextChanged(const std::string &content, size_t index0) {
-        if (input != content) {
+        if (HEDLEY_LIKELY(input != content)) {
             input = content;
             astNode = Parser::parse(input, cpack.get());
         }
@@ -63,21 +63,21 @@ namespace CHelper {
     }
 
     void Core::onSelectionChanged(size_t index0) {
-        if (index != index0) {
+        if (HEDLEY_LIKELY(index != index0)) {
             index = index0;
             suggestions = nullptr;
         }
     }
 
     std::vector<Suggestion> *Core::getSuggestions() {
-        if (suggestions == nullptr) {
+        if (HEDLEY_LIKELY(suggestions == nullptr)) {
             suggestions = std::make_shared<std::vector<Suggestion>>(astNode.getSuggestions(index));
         }
         return suggestions.get();
     }
 
     std::optional<std::string> Core::onSuggestionClick(size_t which) {
-        if (suggestions == nullptr || which >= suggestions->size()) {
+        if (HEDLEY_UNLIKELY(suggestions == nullptr || which >= suggestions->size())) {
             return std::nullopt;
         }
         return suggestions->at(which).onClick(this, TokenUtil::toString(astNode.tokens));

@@ -30,27 +30,32 @@ namespace CHelper {
     nlohmann::json ASTNode::toJson() const {
         nlohmann::json j;
         j["isError"] = isError();
-        std::string modeStr;
+        if (HEDLEY_LIKELY(id.empty())) {
+            j["astNodeId"] = nullptr;
+        } else {
+            j["astNodeId"] = id;
+        }
+        std::string astNodeModeStr;
         switch (mode) {
             case CHelper::ASTNodeMode::NONE:
-                modeStr = "NONE";
+                astNodeModeStr = "NONE";
                 break;
             case CHelper::ASTNodeMode::AND:
-                modeStr = "AND";
+                astNodeModeStr = "AND";
                 break;
             case CHelper::ASTNodeMode::OR:
-                modeStr = "OR";
+                astNodeModeStr = "OR";
                 break;
             default:
-                modeStr = "UNKNOWN";
+                astNodeModeStr = "UNKNOWN";
                 break;
         }
-        j["mode"] = modeStr;
-        j["type"] = node->getNodeType()->nodeName;
-        j["description"] = node->description.value_or("unknown");
+        j["astNodeMode"] = astNodeModeStr;
+        j["nodeType"] = node->getNodeType()->nodeName;
+        j["nodeDescription"] = node->description.value_or("unknown");
         j["content"] = TokenUtil::toString(tokens);
         std::string content = TokenUtil::toString({tokens.vector, 0, tokens.vector->size()});
-        if (isError()) {
+        if (HEDLEY_LIKELY(isError())) {
             std::vector<nlohmann::json> errorReasonJsonList;
             for (const auto &item: errorReasons) {
                 nlohmann::json errorJson;
@@ -64,7 +69,7 @@ namespace CHelper {
         } else {
             j["errorReasons"] = nullptr;
         }
-        if (hasChildNode()) {
+        if (HEDLEY_LIKELY(hasChildNode())) {
             std::vector<nlohmann::json> childNodeJsonList;
             childNodeJsonList.reserve(childNodes.size());
             for (const auto &item: childNodes) {
@@ -77,88 +82,40 @@ namespace CHelper {
         return j;
     }
 
-    nlohmann::json ASTNode::toOptimizedJson() const {
-        nlohmann::json j;
-        j["isError"] = isError();
-        std::string modeStr;
-        switch (mode) {
-            case CHelper::ASTNodeMode::NONE:
-                modeStr = "NONE";
-                break;
-            case CHelper::ASTNodeMode::AND:
-                modeStr = "AND";
-                break;
-            case CHelper::ASTNodeMode::OR:
-                modeStr = "OR";
-                break;
-            default:
-                modeStr = "UNKNOWN";
-                break;
-        }
-        j["mode"] = modeStr;
-        j["type"] = node->getNodeType()->nodeName;
-        j["description"] = node->description.value_or("unknown");
-        j["content"] = TokenUtil::toString(tokens);
-        std::string content = TokenUtil::toString({tokens.vector, 0, tokens.vector->size()});
-        if (isError()) {
-            std::vector<nlohmann::json> errorReasonJsonList;
-            for (const auto &item: errorReasons) {
-                nlohmann::json errorJson;
-                errorJson["content"] = content.substr(item->start, item->end - item->start);
-                errorJson["reason"] = item->errorReason;
-                errorJson["start"] = item->start;
-                errorJson["end"] = item->end;
-                errorReasonJsonList.push_back(errorJson);
-            }
-            j["errorReasons"] = errorReasonJsonList;
-        } else {
-            j["errorReasons"] = nullptr;
-        }
-        if (hasChildNode()) {
-            std::vector<nlohmann::json> childNodeJsonList;
-            childNodeJsonList.reserve(childNodes.size());
-            for (const auto &item: childNodes) {
-                if (id == "command_or" && item.childNodes.size() < 2) {
-                    continue;
-                }
-                childNodeJsonList.push_back(item.toOptimizedJson());
-            }
-            j["childNodes"] = childNodeJsonList;
-        } else {
-            j["childNodes"] = nullptr;
-        }
-        return j;
-    }
-
     nlohmann::json ASTNode::toBestJson() const {
-        if (mode == ASTNodeMode::OR) {
+        if (HEDLEY_UNLIKELY(mode == ASTNodeMode::OR)) {
             return childNodes[whichBest].toBestJson();
-        } else if (id == "compound" && childNodes.size() == 1) {
+        } else if (HEDLEY_UNLIKELY(id == "compound" && childNodes.size() == 1)) {
             return childNodes[0].toBestJson();
         }
         nlohmann::json j;
         j["isError"] = isError();
-        std::string modeStr;
+        if (HEDLEY_LIKELY(id.empty())) {
+            j["astNodeId"] = nullptr;
+        } else {
+            j["astNodeId"] = id;
+        }
+        std::string astNodeModeStr;
         switch (mode) {
             case CHelper::ASTNodeMode::NONE:
-                modeStr = "NONE";
+                astNodeModeStr = "NONE";
                 break;
             case CHelper::ASTNodeMode::AND:
-                modeStr = "AND";
+                astNodeModeStr = "AND";
                 break;
             case CHelper::ASTNodeMode::OR:
-                modeStr = "OR";
+                astNodeModeStr = "OR";
                 break;
             default:
-                modeStr = "UNKNOWN";
+                astNodeModeStr = "UNKNOWN";
                 break;
         }
-        j["mode"] = modeStr;
-        j["type"] = node->getNodeType()->nodeName;
-        j["description"] = node->description.value_or("unknown");
+        j["astNodeMode"] = astNodeModeStr;
+        j["nodeType"] = node->getNodeType()->nodeName;
+        j["nodeDescription"] = node->description.value_or("unknown");
         j["content"] = TokenUtil::toString(tokens);
         std::string content = TokenUtil::toString({tokens.vector, 0, tokens.vector->size()});
-        if (isError()) {
+        if (HEDLEY_LIKELY(isError())) {
             std::vector<nlohmann::json> errorReasonJsonList;
             for (const auto &item: errorReasons) {
                 nlohmann::json errorJson;
@@ -172,7 +129,7 @@ namespace CHelper {
         } else {
             j["errorReasons"] = nullptr;
         }
-        if (childNodes.empty()) {
+        if (HEDLEY_UNLIKELY(childNodes.empty())) {
             j["childNodes"] = nullptr;
         } else {
             std::vector<nlohmann::json> childNodeJsonList;
@@ -191,7 +148,7 @@ namespace CHelper {
                                 const std::string &id,
                                 bool canAddWhitespace) {
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
-        if (errorReason != nullptr) {
+        if (HEDLEY_LIKELY(errorReason != nullptr)) {
             errorReasons.push_back(errorReason);
         }
         return {ASTNodeMode::NONE, node, {}, tokens, errorReasons, id, canAddWhitespace};
@@ -203,18 +160,18 @@ namespace CHelper {
                              const std::shared_ptr<ErrorReason> &errorReason,
                              const std::string &id,
                              bool canAddWhitespace) {
-        if (canAddWhitespace) {
+        if (HEDLEY_LIKELY(canAddWhitespace)) {
             for (const auto &item: childNodes) {
-                if (item.tokens.size() != 0) {
+                if (HEDLEY_LIKELY(item.tokens.size() != 0)) {
                     canAddWhitespace = item.canAddWhitespace;
                 }
             }
         }
-        if (errorReason != nullptr) {
+        if (HEDLEY_UNLIKELY(errorReason != nullptr)) {
             return {ASTNodeMode::AND, node, std::move(childNodes), tokens, {errorReason}, id, canAddWhitespace};
         }
         for (const auto &item: childNodes) {
-            if (item.isError()) {
+            if (HEDLEY_UNLIKELY(item.isError())) {
                 return {ASTNodeMode::AND, node, std::move(childNodes), tokens, item.errorReasons, id, canAddWhitespace};
             }
         }
@@ -224,69 +181,73 @@ namespace CHelper {
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             std::vector<ASTNode> &&childNodes,
                             const VectorView <Token> *tokens,
-                            const std::shared_ptr<ErrorReason> &errorReason,
+                            const char *errorReason,
                             const std::string &id,
                             bool canAddWhitespace) {
-        bool isError = true;
-        size_t whichBest = 0;
-        size_t start = 0;
-        std::vector<std::shared_ptr<ErrorReason>> errorReasons;
-        for (int i = 0; i < childNodes.size(); ++i) {
-            const ASTNode &item = childNodes[i];
-            if (!item.isError()) {
-                isError = false;
+        // 收集错误的节点数，如果有节点没有错就设为0
+        size_t errorCount = 0;
+        for (const auto &item: childNodes) {
+            if (HEDLEY_LIKELY(item.isError())) {
+                errorCount++;
+            } else {
+                errorCount = 0;
                 break;
             }
-            for (const auto &item2: item.errorReasons) {
-                if (start > item2->start) {
+        }
+        std::vector<std::shared_ptr<ErrorReason>> errorReasons;
+        size_t whichBest = 0;
+        if (HEDLEY_UNLIKELY(errorCount == 0)) {
+            // 从没有错误的内容中找出最好的节点
+            size_t end = 0;
+            errorReasons.clear();
+            for (size_t i = 0; i < childNodes.size(); ++i) {
+                const ASTNode &item = childNodes[i];
+                if (HEDLEY_LIKELY(item.isError())) {
                     continue;
-                }
-                bool isBetter = start < item2->start;
-                if (isBetter) {
-                    start = item2->start;
+                } else if (HEDLEY_LIKELY(end < item.tokens.end)) {
                     whichBest = i;
+                    end = item.tokens.end;
                 }
-                if (errorReason == nullptr) {
+            }
+            errorCount++;
+        } else {
+            // 收集错误原因，尝试找出错误节点中最好的节点
+            size_t start = 0;
+            for (size_t i = 0; i < childNodes.size(); ++i) {
+                const ASTNode &item = childNodes[i];
+                for (const auto &item2: item.errorReasons) {
+                    if (HEDLEY_LIKELY(start > item2->start)) {
+                        continue;
+                    }
                     bool isAdd = true;
-                    if (isBetter) {
+                    if (HEDLEY_LIKELY(start < item2->start)) {
+                        start = item2->start;
+                        whichBest = i;
                         errorReasons.clear();
                     } else {
                         for (const auto &item3: errorReasons) {
-                            if (*item2 == *item3) {
+                            if (HEDLEY_UNLIKELY(*item2 == *item3)) {
                                 isAdd = false;
+                                break;
                             }
                         }
                     }
-                    if (isAdd) {
+                    if (HEDLEY_LIKELY(isAdd)) {
                         errorReasons.push_back(item2);
                     }
                 }
             }
         }
-        if (!isError) {
-            size_t maxEnd = 0;
-            errorReasons.clear();
-            for (int i = 0; i < childNodes.size(); ++i) {
-                const ASTNode &item = childNodes[i];
-                if (item.isError()) {
-                    continue;
-                }
-                if (maxEnd < item.tokens.size()) {
-                    whichBest = i;
-                    maxEnd = item.tokens.size();
-                }
-            }
-        }
-        if (canAddWhitespace) {
+        if (HEDLEY_LIKELY(canAddWhitespace)) {
             canAddWhitespace = std::all_of(childNodes.begin(), childNodes.end(),
                                            [](const auto &item) {
                                                return item.canAddWhitespace;
                                            });
         }
-        if (errorReason != nullptr) {
-            errorReasons = {errorReason};
-        }
         VectorView <Token> tokens1 = tokens == nullptr ? childNodes[whichBest].tokens : *tokens;
+        if (HEDLEY_UNLIKELY(errorCount > 1 && errorReason != nullptr)) {
+            errorReasons = {ErrorReason::contentError(tokens1, errorReason)};
+        }
         return {ASTNodeMode::OR, node, std::move(childNodes), tokens1, errorReasons, id, canAddWhitespace, whichBest};
 
     }
@@ -294,7 +255,7 @@ namespace CHelper {
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             std::vector<ASTNode> &&childNodes,
                             const VectorView <Token> &tokens,
-                            const std::shared_ptr<ErrorReason> &errorReason,
+                            const char *errorReason,
                             const std::string &id,
                             bool canAddWhitespace) {
         return orNode(node, std::move(childNodes), &tokens, errorReason, id, canAddWhitespace);
@@ -308,12 +269,12 @@ namespace CHelper {
     }
 
     std::optional<std::string> ASTNode::collectDescription(size_t index) const {
-        if (index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens)) {
+        if (HEDLEY_UNLIKELY(index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens))) {
             return std::nullopt;
         }
-        if (id != "compound" && id != "nextNode" && !isAllWhitespaceError()) {
+        if (HEDLEY_UNLIKELY(id != "compound" && id != "nextNode" && !isAllWhitespaceError())) {
             auto description = node->collectDescription(this, index);
-            if (description.has_value()) {
+            if (HEDLEY_UNLIKELY(description.has_value())) {
                 return std::move(description);
             }
         }
@@ -323,7 +284,7 @@ namespace CHelper {
             case ASTNodeMode::AND:
                 for (const ASTNode &astNode: childNodes) {
                     auto description = astNode.collectDescription(index);
-                    if (description.has_value()) {
+                    if (HEDLEY_UNLIKELY(description.has_value())) {
                         return std::move(description);
                     }
                 }
@@ -336,7 +297,7 @@ namespace CHelper {
 
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (id != "compound" && id != "nextNode" && !isAllWhitespaceError()) {
+        if (HEDLEY_UNLIKELY(id != "compound" && id != "nextNode" && !isAllWhitespaceError())) {
 #if CHelperDebug == true
             Profile::push(std::string("collect id errors: ")
                                   .append(node->getNodeType()->nodeName)
@@ -347,7 +308,7 @@ namespace CHelper {
 #if CHelperDebug == true
             Profile::pop();
 #endif
-            if (flag) {
+            if (HEDLEY_UNLIKELY(flag)) {
                 return;
             }
         }
@@ -366,10 +327,10 @@ namespace CHelper {
     }
 
     void ASTNode::collectSuggestions(size_t index, std::vector<Suggestions> &suggestions) const {
-        if (index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens)) {
+        if (HEDLEY_LIKELY(index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens))) {
             return;
         }
-        if (id != "compound" && id != "nextNode" && !isAllWhitespaceError()) {
+        if (HEDLEY_UNLIKELY(id != "compound" && id != "nextNode" && !isAllWhitespaceError())) {
 #if CHelperDebug == true
             Profile::push("collect suggestions: " + node->getNodeType()->nodeName
                           + " " + node->description.value_or(""));
@@ -378,7 +339,7 @@ namespace CHelper {
 #if CHelperDebug == true
             Profile::pop();
 #endif
-            if (flag) {
+            if (HEDLEY_UNLIKELY(flag)) {
                 return;
             }
         }
@@ -400,31 +361,39 @@ namespace CHelper {
 
     void ASTNode::collectStructure(StructureBuilder &structure, bool isMustHave) const {
         bool isCompound = id == "compound";
-        if (!isCompound && id != "nextNode") {
-#if CHelperDebug == true
-            Profile::push("collect structure: " + node->getNodeType()->nodeName + " " + node->description.value_or(""));
-#endif
-            node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ?
-                                   nullptr : this, structure, isMustHave);
-#if CHelperDebug == true
-            Profile::pop();
-#endif
-            if (structure.isDirty) {
-                structure.isDirty = false;
+        bool isNext = id == "nextNode";
+        if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
+            if (HEDLEY_UNLIKELY(node->brief.has_value())) {
+                structure.append(isMustHave, node->brief.value());
                 return;
+            } else {
+#if CHelperDebug == true
+                Profile::push(ColorStringBuilder()
+                                      .red("collect structure: ")
+                                      .purple(node->getNodeType()->nodeName + " " + node->description.value_or(""))
+                                      .build());
+#endif
+                node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ?
+                                       nullptr : this, structure, isMustHave);
+#if CHelperDebug == true
+                Profile::pop();
+#endif
+                if (HEDLEY_UNLIKELY(structure.isDirty)) {
+                    structure.isDirty = false;
+                    return;
+                }
             }
         }
         switch (mode) {
             case ASTNodeMode::NONE:
-                structure.appendUnknown(isMustHave);
-                structure.isDirty = false;
-                break;
+                node->collectStructureWithNextNodes(structure, isMustHave);
+                return;
             case ASTNodeMode::AND:
                 for (const ASTNode &astNode: childNodes) {
                     astNode.collectStructure(structure, isMustHave);
-                    if (isMustHave) {
+                    if (HEDLEY_LIKELY(isMustHave)) {
                         for (const auto &item: astNode.node->nextNodes) {
-                            if (item == Node::NodeLF::getInstance()) {
+                            if (HEDLEY_UNLIKELY(item == Node::NodeLF::getInstance())) {
                                 isMustHave = false;
                             }
                         }
@@ -432,11 +401,21 @@ namespace CHelper {
                 }
                 break;
             case ASTNodeMode::OR:
+                if (HEDLEY_UNLIKELY(isNext && node->nextNodes.size() != 1 &&
+                                    childNodes[whichBest].node == Node::NodeLF::getInstance())) {
+                    for (const auto &item: node->nextNodes) {
+                        if (HEDLEY_UNLIKELY(item != Node::NodeLF::getInstance())) {
+                            item->collectStructureWithNextNodes(structure, isMustHave);
+                            break;
+                        }
+                    }
+                    return;
+                }
                 childNodes[whichBest].collectStructure(structure, isMustHave);
                 break;
         }
-        if (isCompound && childNodes.size() <= 1 && !node->nextNodes.empty()) {
-            node->nextNodes[0]->collectStructureNormal(structure, isMustHave);
+        if (HEDLEY_UNLIKELY(isCompound && childNodes.size() <= 1 && !node->nextNodes.empty())) {
+            node->nextNodes[0]->collectStructureWithNextNodes(structure, isMustHave);
         }
     }
 
@@ -452,9 +431,9 @@ namespace CHelper {
         Profile::push("start getting id error: " + TokenUtil::toString(tokens));
         collectIdErrors(input);
         Profile::pop();
-        for (int i = ErrorReasonLevel::maxLevel; i >= 0; --i) {
+        for (size_t i = ErrorReasonLevel::maxLevel; i >= 0; --i) {
             for (const auto &item: input) {
-                if (item->level == i) {
+                if (HEDLEY_UNLIKELY(item->level == i)) {
                     output.push_back(item);
                 }
             }
@@ -467,13 +446,14 @@ namespace CHelper {
         Profile::push("start getting error reasons: " + TokenUtil::toString(tokens));
         collectIdErrors(input);
         Profile::pop();
-        for (int i = ErrorReasonLevel::maxLevel; i >= 0; --i) {
+        std::uint8_t i = ErrorReasonLevel::maxLevel;
+        do {
             for (const auto &item: input) {
-                if (item->level == i) {
+                if (HEDLEY_UNLIKELY(item->level == i)) {
                     output.push_back(item);
                 }
             }
-        }
+        } while (--i != 0);
         return std::move(output);
     }
 
@@ -491,7 +471,7 @@ namespace CHelper {
         collectStructure(structureBuilder, true);
         Profile::pop();
         std::string result = structureBuilder.build();
-        if (!result.empty() && result[result.size() - 1] == '\n') {
+        while (HEDLEY_UNLIKELY(!result.empty() && result[result.size() - 1] == '\n')) {
             result.pop_back();
         }
         return std::move(result);

@@ -13,12 +13,12 @@ namespace CHelper::Node {
 
     class NodeFloat : public NodeBase {
     public:
-        std::optional<std::float_t> min, max;
+        std::optional<float> min, max;
 
         NodeFloat(const std::optional<std::string> &id,
                   const std::optional<std::string> &description,
-                  const std::optional<std::float_t> &min,
-                  const std::optional<std::float_t> &max);
+                  const std::optional<float> &min,
+                  const std::optional<float> &max);
 
         NodeFloat(const nlohmann::json &j,
                   [[maybe_unused]] const CPack &cpack);

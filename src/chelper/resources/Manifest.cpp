@@ -12,7 +12,7 @@ namespace CHelper {
                        const std::optional<std::string> &author,
                        const std::optional<std::string> &updateDate,
                        std::string packId,
-                       int versionCode,
+                       int32_t versionCode,
                        const std::optional<bool> &isBasicPack,
                        const std::optional<bool> &isDefault)
             : name(name),
@@ -32,7 +32,7 @@ namespace CHelper {
               author(JsonUtil::fromJsonOptionalLikely<std::string>(j, "author")),
               updateDate(JsonUtil::fromJsonOptionalLikely<std::string>(j, "updateDate")),
               packId(JsonUtil::fromJson<std::string>(j, "packId")),
-              versionCode(JsonUtil::fromJson<int>(j, "versionCode")),
+              versionCode(JsonUtil::fromJson<int32_t>(j, "versionCode")),
               isBasicPack(JsonUtil::fromJsonOptionalLikely<bool>(j, "isBasicPack")),
               isDefault(JsonUtil::fromJsonOptionalLikely<bool>(j, "isDefault")) {}
 

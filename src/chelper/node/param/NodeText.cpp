@@ -37,9 +37,9 @@ namespace CHelper::Node {
         auto result = getTextASTNode(this, tokenReader);
         DEBUG_GET_NODE_END(this)
         std::string str = TokenUtil::toString(result.tokens);
-        if (str != data->name) {
+        if (HEDLEY_UNLIKELY(str != data->name)) {
             VectorView <Token> tokens = result.tokens;
-            if (str.empty()) {
+            if (HEDLEY_UNLIKELY(str.empty())) {
                 return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
                         tokens, "命令不完整"));
             } else {
@@ -57,14 +57,14 @@ namespace CHelper::Node {
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         //通过名字进行搜索
         size_t index1 = data->name.find(str);
-        if (index1 != std::string::npos) {
+        if (HEDLEY_LIKELY(index1 != std::string::npos)) {
             suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, data}));
             return true;
         }
         //通过介绍进行搜索
-        if (data->description.has_value()) {
+        if (HEDLEY_LIKELY(data->description.has_value())) {
             size_t index2 = data->description.value().find(str);
-            if (index2 != std::string::npos) {
+            if (HEDLEY_LIKELY(index2 != std::string::npos)) {
                 suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, data}));
             }
         }

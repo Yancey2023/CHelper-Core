@@ -64,8 +64,6 @@ namespace CHelper {
     public:
         [[nodiscard]] nlohmann::json toJson() const;
 
-        [[nodiscard]] nlohmann::json toOptimizedJson() const;
-
         [[nodiscard]] nlohmann::json toBestJson() const;
 
         static ASTNode simpleNode(const Node::NodeBase *node,
@@ -84,14 +82,14 @@ namespace CHelper {
         static ASTNode orNode(const Node::NodeBase *node,
                               std::vector<ASTNode> &&childNodes,
                               const VectorView <Token> *tokens,
-                              const std::shared_ptr<ErrorReason> &errorReason = nullptr,
+                              const char *errorReason = nullptr,
                               const std::string &id = std::string(),
                               bool canAddWhitespace = true);
 
         static ASTNode orNode(const Node::NodeBase *node,
                               std::vector<ASTNode> &&childNodes,
                               const VectorView <Token> &tokens,
-                              const std::shared_ptr<ErrorReason> &errorReason = nullptr,
+                              const char *errorReason = nullptr,
                               const std::string &id = std::string(),
                               bool canAddWhitespace = true);
 
@@ -106,7 +104,9 @@ namespace CHelper {
 
         [[nodiscard]] bool isAllWhitespaceError() const;
 
-    private:
+        [[nodiscard]] inline const ASTNode &getBestNode() const {
+            return childNodes[whichBest];
+        }
 
         [[nodiscard]] std::optional<std::string> collectDescription(size_t index) const;
 
@@ -116,7 +116,6 @@ namespace CHelper {
 
         void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 
-    public:
         [[nodiscard]] std::string getDescription(size_t index) const;
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getIdErrors() const;

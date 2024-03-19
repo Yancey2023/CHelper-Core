@@ -23,6 +23,7 @@ namespace CHelper {
         class NodeBase {
         public:
             const std::optional<std::string> id;
+            const std::optional<std::string> brief;
             const std::optional<std::string> description;
             //true-一定要在空格后 false-不一定在空格后
             const bool isMustAfterWhiteSpace;
@@ -86,8 +87,8 @@ namespace CHelper {
                                           StructureBuilder &structure,
                                           bool isMustHave) const;
 
-            void collectStructureNormal(StructureBuilder &structure,
-                                        bool isMustHave) const;
+            void collectStructureWithNextNodes(StructureBuilder &structure,
+                                               bool isMustHave) const;
 
         };
 

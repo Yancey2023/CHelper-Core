@@ -18,12 +18,13 @@ namespace CHelper::Node {
               ignoreError(ignoreError),
               contents(contents) {}
 
-    static std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> getIdContentFromCPack(const nlohmann::json &j,
-                                                                                            const CPack &cpack,
-                                                                                            const std::optional<std::string> &key) {
-        if (key.has_value()) {
+    static std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
+    getIdContentFromCPack(const nlohmann::json &j,
+                          const CPack &cpack,
+                          const std::optional<std::string> &key) {
+        if (HEDLEY_LIKELY(key.has_value())) {
             auto it = cpack.namespaceIds.find(key.value());
-            if (it == cpack.namespaceIds.end()) {
+            if (HEDLEY_UNLIKELY(it == cpack.namespaceIds.end())) {
                 Profile::push(ColorStringBuilder()
                                       .red("linking contents to ")
                                       .purple(key.value())
@@ -62,7 +63,7 @@ namespace CHelper::Node {
         NodeBase::toJson(j);
         JsonUtil::toJsonOptionalLikely(j, "key", key);
         JsonUtil::toJson(j, "ignoreError", ignoreError);
-        if (key.has_value()) {
+        if (HEDLEY_UNLIKELY(!key.has_value())) {
             JsonUtil::toJson(j, "contents", *contents);
         }
     }
@@ -73,18 +74,18 @@ namespace CHelper::Node {
         DEBUG_GET_NODE_BEGIN(this)
         auto result = tokenReader.readStringASTNode(this);
         DEBUG_GET_NODE_END(this)
-        if (result.tokens.isEmpty()) {
+        if (HEDLEY_UNLIKELY(result.tokens.isEmpty())) {
             VectorView <Token> tokens = result.tokens;
             return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(
                     tokens, "命令不完整"));
         }
-        if (!ignoreError) {
+        if (HEDLEY_UNLIKELY(!ignoreError)) {
             VectorView <Token> tokens = result.tokens;
             std::string str = TokenUtil::toString(tokens);
             size_t strHash = std::hash<std::string>{}(str);
-            if (std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
+            if (HEDLEY_UNLIKELY(std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
                 return !item->fastMatch(strHash) && !item->idWithNamespace->fastMatch(strHash);
-            })) {
+            }))) {
                 return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(
                         tokens, "找不到含义 -> " + std::move(str)));
             }
@@ -94,14 +95,14 @@ namespace CHelper::Node {
 
     bool NodeNamespaceId::collectIdError(const ASTNode *astNode,
                                          std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (astNode->isError()) {
+        if (HEDLEY_UNLIKELY(astNode->isError())) {
             return true;
         }
         std::string str = TokenUtil::toString(astNode->tokens);
         size_t strHash = std::hash<std::string>{}(str);
-        if (std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
+        if (HEDLEY_UNLIKELY(std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
             return !item->fastMatch(strHash) && !item->idWithNamespace->fastMatch(strHash);
-        })) {
+        }))) {
             idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("找不到ID -> ").append(str)));
         }
         return true;
@@ -118,18 +119,18 @@ namespace CHelper::Node {
         for (const auto &item: *contents) {
             //通过名字进行搜索
             //省略minecraft命名空间
-            if ((!item->nameSpace.has_value() || item->nameSpace.value() == "minecraft")) {
+            if (HEDLEY_LIKELY((!item->nameSpace.has_value() || item->nameSpace.value() == "minecraft"))) {
                 size_t index1 = item->name.find(str);
-                if (index1 == 0) {
+                if (HEDLEY_UNLIKELY(index1 == 0)) {
                     nameStartOf.push_back(item);
-                } else if (index1 != std::string::npos) {
+                } else if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
                     nameContain.push_back(item);
                 }
             }
             //带有命名空间
             size_t index1 = item->idWithNamespace->name.find(str);
-            if (index1 != std::string::npos) {
-                if (index1 == 0) {
+            if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
+                if (HEDLEY_UNLIKELY(index1 == 0)) {
                     namespaceStartOf.push_back(item->idWithNamespace);
                 } else {
                     namespaceContain.push_back(item->idWithNamespace);
@@ -137,11 +138,9 @@ namespace CHelper::Node {
                 continue;
             }
             //通过介绍进行搜索
-            if (item->description.has_value()) {
-                size_t index2 = item->description.value().find(str);
-                if (index2 != std::string::npos) {
-                    descriptionContain.push_back(item);
-                }
+            if (HEDLEY_UNLIKELY(
+                    item->description.has_value() && item->description.value().find(str) != std::string::npos)) {
+                descriptionContain.push_back(item);
             }
         }
         Suggestions suggestions1;

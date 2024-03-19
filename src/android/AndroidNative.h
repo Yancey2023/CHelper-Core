@@ -21,13 +21,13 @@ std::string jstring2string(JNIEnv *env, jstring jStr) {
 
 std::shared_ptr<CHelper::Core> core;
 
-extern "C" JNIEXPORT jboolean JNICALL
+extern "C" [[maybe_unused]] JNIEXPORT jboolean JNICALL
 Java_yancey_chelper_core_CHelperCore_init(
-        JNIEnv *env, jobject thiz, jobject assetManager, jstring cpack_path) {
+        JNIEnv *env, [[maybe_unused]] jobject thiz, jobject assetManager, jstring cpack_path) {
     AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
     std::string cpackPath = jstring2string(env, cpack_path);
     AAsset *asset = AAssetManager_open(mgr, cpackPath.c_str(), AASSET_MODE_BUFFER);
-    if (asset == nullptr) {
+    if (HEDLEY_UNLIKELY(asset == nullptr)) {
         return false;
     }
     size_t dataFileSize = AAsset_getLength(asset);
@@ -43,44 +43,44 @@ Java_yancey_chelper_core_CHelperCore_init(
     return static_cast<jboolean>(core != nullptr);
 }
 
-extern "C" JNIEXPORT void JNICALL
+extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
 Java_yancey_chelper_core_CHelperCore_onTextChanged(
-        JNIEnv *env, jobject thiz, jstring cpack_path, jint index) {
-    if (core == nullptr) {
+        JNIEnv *env, [[maybe_unused]] jobject thiz, jstring cpack_path, jint index) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
     std::string content = jstring2string(env, cpack_path);
     core->onTextChanged(content, index);
 }
 
-extern "C" JNIEXPORT void JNICALL
+extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
 Java_yancey_chelper_core_CHelperCore_onSelectionChanged(
-        JNIEnv *env, jobject thiz, jint index) {
-    if (core == nullptr) {
+        [[maybe_unused]] JNIEnv *env, [[maybe_unused]] jobject thiz, jint index) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
     core->onSelectionChanged(index);
 }
 
-extern "C" JNIEXPORT jstring JNICALL
+extern "C" [[maybe_unused]] JNIEXPORT jstring JNICALL
 Java_yancey_chelper_core_CHelperCore_getDescription(
-        JNIEnv *env, jobject thiz) {
-    if (core == nullptr) {
+        JNIEnv *env, [[maybe_unused]] jobject thiz) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     return env->NewStringUTF(core->getDescription().c_str());
 }
 
-extern "C" JNIEXPORT jstring JNICALL
+extern "C" [[maybe_unused]] JNIEXPORT jstring JNICALL
 Java_yancey_chelper_core_CHelperCore_getErrorReasons(
-        JNIEnv *env, jobject thiz) {
-    if (core == nullptr) {
+        JNIEnv *env, [[maybe_unused]] jobject thiz) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     auto errorReasons = core->getErrorReasons();
-    if (errorReasons.empty()) {
+    if (HEDLEY_UNLIKELY(errorReasons.empty())) {
         return nullptr;
-    } else if (errorReasons.size() == 1) {
+    } else if (HEDLEY_UNLIKELY(errorReasons.size() == 1)) {
         return env->NewStringUTF(errorReasons[0]->errorReason.c_str());
     } else {
         std::string result = "可能的错误原因：";
@@ -92,23 +92,23 @@ Java_yancey_chelper_core_CHelperCore_getErrorReasons(
     }
 }
 
-extern "C" JNIEXPORT jlong JNICALL
+extern "C" [[maybe_unused]] JNIEXPORT jlong JNICALL
 Java_yancey_chelper_core_CHelperCore_getSuggestionsSize(
-        JNIEnv *env, jint thiz) {
-    if (core == nullptr) {
+        [[maybe_unused]] JNIEnv *env, [[maybe_unused]] jint thiz) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
         return 0;
     }
     return static_cast<jint>(core->getSuggestions()->size());
 }
 
-extern "C" JNIEXPORT jobject JNICALL
+extern "C" [[maybe_unused]] JNIEXPORT jobject JNICALL
 Java_yancey_chelper_core_CHelperCore_getSuggestion(
-        JNIEnv *env, jobject thiz, jint which) {
-    if (core == nullptr || which < 0) {
+        JNIEnv *env, [[maybe_unused]] jobject thiz, jint which) {
+    if (HEDLEY_UNLIKELY(core == nullptr || which < 0)) {
         return nullptr;
     }
     auto suggestions = core->getSuggestions();
-    if (suggestions->size() <= which) {
+    if (HEDLEY_UNLIKELY(suggestions->size() <= which)) {
         return nullptr;
     }
     CHelper::Suggestion suggestion = suggestions->at(which);
@@ -123,14 +123,14 @@ Java_yancey_chelper_core_CHelperCore_getSuggestion(
     return javaDataComplete;
 }
 
-extern "C" JNIEXPORT jobject JNICALL
+extern "C" [[maybe_unused]] JNIEXPORT jobject JNICALL
 Java_yancey_chelper_core_CHelperCore_getSuggestions(
-        JNIEnv *env, jobject thiz) {
-    if (core == nullptr) {
+        JNIEnv *env, [[maybe_unused]] jobject thiz) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     auto suggestions = core->getSuggestions();
-    if (suggestions->empty()) {
+    if (HEDLEY_UNLIKELY(suggestions->empty())) {
         return nullptr;
     }
     jclass arrayListClass = env->FindClass("java/util/ArrayList");
@@ -152,23 +152,23 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions(
     return javaList;
 }
 
-extern "C" JNIEXPORT jstring JNICALL
+extern "C" [[maybe_unused]] JNIEXPORT jstring JNICALL
 Java_yancey_chelper_core_CHelperCore_getStructure(
-        JNIEnv *env, jobject thiz) {
-    if (core == nullptr) {
+        JNIEnv *env, [[maybe_unused]] jobject thiz) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     return env->NewStringUTF(core->getStructure().c_str());
 }
 
-extern "C" JNIEXPORT jstring JNICALL
+extern "C" [[maybe_unused]] JNIEXPORT jstring JNICALL
 Java_yancey_chelper_core_CHelperCore_onSuggestionClick(
-        JNIEnv *env, jobject thiz, jint which) {
-    if (core == nullptr) {
+        JNIEnv *env, [[maybe_unused]] jobject thiz, jint which) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     std::optional<std::string> result = core->onSuggestionClick(which);
-    if (result.has_value()) {
+    if (HEDLEY_LIKELY(result.has_value())) {
         return env->NewStringUTF(result.value().c_str());
     } else {
         return nullptr;

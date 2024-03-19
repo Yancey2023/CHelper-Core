@@ -71,7 +71,8 @@
     {
       "type": "NORMAL_ID",
       "id": "teleportRules",
-      "description": "将被传送的实体",
+      "brief": "传送规则",
+      "description": "传送规则",
       "ignoreError": true,
       "contents": [
         {
@@ -117,6 +118,7 @@
     {
       "type": "NORMAL_ID",
       "id": "spawnEvent",
+      "brief": "事件",
       "description": "实体生成时自带的事件",
       "ignoreError": true,
       "key": "entityEvent"
@@ -124,6 +126,7 @@
     {
       "type": "STRING",
       "id": "nameTag",
+      "brief": "实体名",
       "description": "实体生成时的名字",
       "canContainSpace": true,
       "ignoreLater": false
@@ -131,6 +134,7 @@
     {
       "type": "NORMAL_ID",
       "id": "rideRules",
+      "brief": "召唤模式",
       "description": "召唤实体模式",
       "ignoreError": true,
       "contents": [

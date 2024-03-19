@@ -27,6 +27,7 @@
     {
       "type": "NORMAL_ID",
       "id": "effect",
+      "brief": "效果",
       "description": "给予或者需要移除的效果",
       "ignoreError": true,
       "key": "effects"
@@ -34,16 +35,19 @@
     {
       "type": "INTEGER",
       "id": "seconds",
+      "brief": "时长",
       "description": "以秒为单位指定效果时长"
     },
     {
       "type": "INTEGER",
       "id": "amplifier",
+      "brief": "等级",
       "description": "效果的额外等级"
     },
     {
       "type": "BOOLEAN",
       "id": "hideParticles",
+      "brief": "是否隐藏药水粒子",
       "description": "是否隐藏药水粒子",
       "descriptionTrue": "隐藏药水粒子",
       "descriptionFalse": "显示药水粒子"

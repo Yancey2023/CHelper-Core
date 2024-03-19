@@ -23,11 +23,11 @@ namespace CHelper::Node {
     }
 
     std::shared_ptr<ErrorReason> checkNumber(const VectorView <Token> &tokens, std::string_view str) {
-        if (str.empty()) {
+        if (HEDLEY_UNLIKELY(str.empty())) {
             return ErrorReason::contentError(tokens, "范围的数值为空");
         }
         for (const auto &item: str) {
-            if (item < '0' || item > '9') {
+            if (HEDLEY_UNLIKELY(item < '0' || item > '9')) {
                 return ErrorReason::contentError(tokens, "范围的数值格式不正确，检测非法字符");
             }
         }
@@ -39,13 +39,13 @@ namespace CHelper::Node {
         std::string str = TokenUtil::toString(result.tokens);
         std::shared_ptr<ErrorReason> errorReason;
         size_t index = str.find("..");
-        if (index == std::string::npos) {
+        if (HEDLEY_LIKELY(index == std::string::npos)) {
             errorReason = checkNumber(result.tokens, str);
-        } else if (index == 0) {
+        } else if (HEDLEY_UNLIKELY(index == 0)) {
             errorReason = checkNumber(result.tokens, std::string_view(str).substr(2));
         } else {
             errorReason = checkNumber(result.tokens, std::string_view(str).substr(0, index));
-            if (errorReason == nullptr && index + 2 < str.length()) {
+            if (HEDLEY_UNLIKELY(errorReason == nullptr && index + 2 < str.length())) {
                 errorReason = checkNumber(result.tokens, std::string_view(str).substr(index + 2));
             }
         }
@@ -57,18 +57,18 @@ namespace CHelper::Node {
                                        std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens);
         size_t index0 = str.find("..");
-        if (index0 != std::string::npos) {
+        if (HEDLEY_UNLIKELY(index0 != std::string::npos)) {
             index0 += TokenUtil::getStartIndex(astNode->tokens);
-            if (index != index0 && index != index0 + 1 && index != index0 + 2) {
+            if (HEDLEY_LIKELY(index != index0 && index != index0 + 1 && index != index0 + 2)) {
                 return true;
             }
             suggestions.push_back(Suggestions::singleSuggestion({index0, index0 + 2, rangeSymbol}));
             return true;
         }
         size_t index1 = str.find('.');
-        if (index1 != std::string::npos) {
+        if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
             index1 += TokenUtil::getStartIndex(astNode->tokens);
-            if (index != index1 && index != index1 + 1) {
+            if (HEDLEY_LIKELY(index != index1 && index != index1 + 1)) {
                 return true;
             }
             suggestions.push_back(Suggestions::singleSuggestion({index0, index0 + 1, rangeSymbol}));

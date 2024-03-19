@@ -18,7 +18,7 @@ namespace CHelper {
     }
 
     signed char CHelper::StringReader::read() {
-        if (!ready()) {
+        if (HEDLEY_UNLIKELY(!ready())) {
             return EOF;
         }
         char ch = content[pos.index];
@@ -27,7 +27,7 @@ namespace CHelper {
     }
 
     bool CHelper::StringReader::skip() {
-        if (!ready()) {
+        if (HEDLEY_UNLIKELY(!ready())) {
             return false;
         }
         pos.next(content[pos.index]);
@@ -40,7 +40,7 @@ namespace CHelper {
     }
 
     signed char CHelper::StringReader::peek() const {
-        if (!ready()) {
+        if (HEDLEY_UNLIKELY(!ready())) {
             return EOF;
         }
         return content[pos.index];

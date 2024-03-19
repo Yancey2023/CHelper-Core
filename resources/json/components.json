@@ -36,6 +36,7 @@
     {
       "type": "JSON_STRING",
       "id": "ITEM_LOCK_MODE",
+      "brief": "锁定模式",
       "description": "物品锁定模式",
       "dataType": "normal",
       "data": [
@@ -60,10 +61,12 @@
     {
       "type": "JSON_OBJECT",
       "id": "ITEM_LOCK",
+      "brief": "锁定模式",
       "description": "物品锁定模式",
       "data": [
         {
           "key": "mode",
+          "brief": "锁定模式",
           "description": "物品锁定模式",
           "value": "ITEM_LOCK_MODE"
         }

@@ -17,10 +17,10 @@ namespace CHelper::Node {
         const NodeBase *nodeSlot, *nodeItem;
 
     public:
-        NodeHasItemArgument(const std::optional<std::string> &id,
-                            const std::optional<std::string> &description,
-                            const NodeBase *nodeItem,
-                            const NodeBase *nodeSlot);
+        [[maybe_unused]] NodeHasItemArgument(const std::optional<std::string> &id,
+                                             const std::optional<std::string> &description,
+                                             const NodeBase *nodeItem,
+                                             const NodeBase *nodeSlot);
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
     };

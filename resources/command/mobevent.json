@@ -10,6 +10,7 @@
     {
       "type": "NORMAL_ID",
       "id": "event",
+      "brief": "事件",
       "description": "要控制或查询的事件",
       "ignoreError": true,
       "contents": [
@@ -34,6 +35,7 @@
     {
       "type": "BOOLEAN",
       "id": "value",
+      "brief": "是否启用事件",
       "description": "是否启用事件（如果忽略，则显示当前启用状态）",
       "descriptionFalse": "禁用事件",
       "descriptionTrue": "启用事件"

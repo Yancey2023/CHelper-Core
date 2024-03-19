@@ -10,15 +10,17 @@ namespace CHelper::Node {
 
     static std::shared_ptr<NormalId> doubleQuoteMask = std::make_shared<NormalId>("\"", "双引号");
 
-    static std::vector<std::unique_ptr<NodeBase>> getDataFromCpack(const nlohmann::json &j,
-                                                                   const CPack &cpack) {
+    static std::vector<std::unique_ptr<NodeBase>>
+    getDataFromCpack(const nlohmann::json &j, const CPack &cpack) {
         std::vector<std::unique_ptr<NodeBase>> result;
-        if (j.contains("data")) {
-            for (const auto &item: j.at("data")) {
+        const auto &it = j.find("data");
+        if (HEDLEY_LIKELY(it != j.end())) {
+            result.reserve(it->size());
+            for (const auto &item: it.value()) {
                 result.push_back(NodeJsonString::getNodeFromJson(item, cpack));
             }
         }
-        return result;
+        return std::move(result);
     }
 
     static std::unique_ptr<NodeBase>
@@ -29,7 +31,7 @@ namespace CHelper::Node {
             nodeDataElement.push_back(item.get());
         }
         return std::make_unique<NodeOr>("JSON_STRING_DATA", "JSON字符串内容",
-                                        nodeDataElement, false);
+                                        std::move(nodeDataElement), false);
     }
 
     NodeJsonString::NodeJsonString(const std::optional<std::string> &id,
@@ -37,7 +39,7 @@ namespace CHelper::Node {
                                    std::vector<std::unique_ptr<NodeBase>> data)
             : NodeBase(id, description, false),
               data(std::move(data)),
-              nodeData(getNodeDataFromData(data)) {}
+              nodeData(getNodeDataFromData(this->data)) {}
 
     NodeJsonString::NodeJsonString(const nlohmann::json &j,
                                    const CPack &cpack)
@@ -54,13 +56,14 @@ namespace CHelper::Node {
         JsonUtil::toJson(j, "data", data);
     }
 
-    static std::pair<ASTNode, JsonUtil::ConvertResult> getInnerASTNode(const NodeJsonString *node,
-                                                                       const VectorView <Token> &tokens,
-                                                                       const std::string &content,
-                                                                       const CPack *cpack,
-                                                                       const NodeBase *mainNode) {
+    static std::pair<ASTNode, JsonUtil::ConvertResult>
+    getInnerASTNode(const NodeJsonString *node,
+                    const VectorView <Token> &tokens,
+                    const std::string &content,
+                    const CPack *cpack,
+                    const NodeBase *mainNode) {
         auto convertResult = JsonUtil::jsonString2String(content);
-        if (convertResult.errorReason != nullptr) {
+        if (HEDLEY_UNLIKELY(convertResult.errorReason != nullptr)) {
             convertResult.errorReason->start--;
             convertResult.errorReason->end--;
             return {ASTNode::simpleNode(node, tokens, convertResult.errorReason), std::move(convertResult)};
@@ -98,11 +101,9 @@ namespace CHelper::Node {
         size_t offset = TokenUtil::getStartIndex(tokens) + 1;
         auto innerNode = getInnerASTNode(this, tokens, str, cpack, nodeData.get());
         ASTNode newResult = ASTNode::andNode(this, {std::move(innerNode.first)}, tokens, errorReason, "inner");
-        if (errorReason == nullptr) {
-            size_t size = newResult.errorReasons.size();
-            for (int i = 0; i < size; ++i) {
-                auto item = newResult.errorReasons[i];
-                newResult.errorReasons[i] = std::make_shared<ErrorReason>(
+        if (HEDLEY_UNLIKELY(errorReason == nullptr)) {
+            for (auto &item: newResult.errorReasons) {
+                item = std::make_shared<ErrorReason>(
                         item->level,
                         innerNode.second.convert(item->start) + offset,
                         innerNode.second.convert(item->end) + offset,
@@ -110,12 +111,12 @@ namespace CHelper::Node {
                 );
             }
         }
-        return newResult;
+        return std::move(newResult);
     }
 
     bool NodeJsonString::collectIdError(const ASTNode *astNode,
                                         std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (HEDLEY_LIKELY(astNode->id == "inner")) {
+        if (HEDLEY_UNLIKELY(astNode->id == "inner")) {
             auto convertResult = JsonUtil::jsonString2String(TokenUtil::toString(astNode->tokens));
             size_t offset = TokenUtil::getStartIndex(astNode->tokens) + 1;
             for (const auto &item: astNode->childNodes[0].getIdErrors()) {
@@ -132,41 +133,33 @@ namespace CHelper::Node {
                                             std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                 .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
-        if (str.empty()) {
+        if (HEDLEY_UNLIKELY(str.empty())) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
             return true;
         }
-        if (astNode->id == "inner") {
-            Suggestions suggestions1;
-            auto convertResult = JsonUtil::jsonString2String(str);
+        auto convertResult = JsonUtil::jsonString2String(str);
+        if (HEDLEY_UNLIKELY(astNode->id == "inner")) {
             size_t offset = TokenUtil::getStartIndex(astNode->tokens) + 1;
-            for (auto &item: astNode->childNodes[0].getSuggestions(index - offset)) {
+            Suggestions suggestions1;
+            suggestions1.suggestions = astNode->childNodes[0].getSuggestions(index - offset);
+            for (auto &item: suggestions1.suggestions) {
                 item.start = convertResult.convert(item.start) + offset;
                 item.end = convertResult.convert(item.end) + offset;
-                item.content = std::make_shared<NormalId>(
-                        JsonUtil::string2jsonString(item.content->name), item.content->description);
-                suggestions1.suggestions.push_back(item);
-            }
-            if (astNode->hasChildNode() && !astNode->childNodes[0].isError()) {
-                if (str.length() == 1 || str[str.length() - 1] != '"' ||
-                    (convertResult.errorReason == nullptr && !convertResult.isComplete)) {
-                    suggestions1.suggestions.emplace_back(index, index, doubleQuoteMask);
+                std::string convertStr = JsonUtil::string2jsonString(item.content->name);
+                if (HEDLEY_UNLIKELY(convertStr.size() != str.size())) {
+                    item.content = std::make_shared<NormalId>(std::move(convertStr), item.content->description);
                 }
+            }
+            if (HEDLEY_LIKELY(astNode->hasChildNode() && !astNode->childNodes[0].isError() &&
+                              convertResult.errorReason == nullptr && !convertResult.isComplete)) {
+                suggestions1.suggestions.emplace_back(index, index, doubleQuoteMask);
             }
             suggestions1.markFiltered();
             suggestions.push_back(std::move(suggestions1));
-            return true;
-        } else {
-            if (str.length() == 1 || str[str.length() - 1] != '"') {
-                suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
-                return true;
-            }
-            auto convertResult = JsonUtil::jsonString2String(str);
-            if (!convertResult.isComplete) {
-                suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
-            }
-            return true;
+        } else if (HEDLEY_LIKELY(convertResult.errorReason == nullptr && !convertResult.isComplete)) {
+            suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
         }
+        return true;
     }
 
 } // CHelper::Node

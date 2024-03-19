@@ -151,9 +151,9 @@ void onTextChanged(const std::string &command) {
         endStructure = std::chrono::high_resolution_clock::now();
         CHelper::Profile::push("update description text view");
         {
-            int len = MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, nullptr, 0);
+            int len = MultiByteToWideChar(CP_UTF8, 0, structure.c_str(), -1, nullptr, 0);
             auto *wstr = new wchar_t[len + 1];
-            MultiByteToWideChar(CP_UTF8, 0, description.c_str(), -1, wstr, len);
+            MultiByteToWideChar(CP_UTF8, 0, structure.c_str(), -1, wstr, len);
             SetWindowTextW(hWndDescription, wstr);
             delete[] wstr;
         }
