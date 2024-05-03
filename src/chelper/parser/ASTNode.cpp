@@ -426,35 +426,37 @@ namespace CHelper {
         return std::move(result);
     }
 
-    std::vector<std::shared_ptr<ErrorReason>> ASTNode::getIdErrors() const {
-        std::vector<std::shared_ptr<ErrorReason>> input, output;
-        Profile::push("start getting id error: " + TokenUtil::toString(tokens));
-        collectIdErrors(input);
-        Profile::pop();
-        for (size_t i = ErrorReasonLevel::maxLevel; i >= 0; --i) {
+    static std::vector<std::shared_ptr<ErrorReason>> sortByLevel(std::vector<std::shared_ptr<ErrorReason>> &input) {
+        std::vector<std::shared_ptr<ErrorReason>> output;
+        std::uint8_t i = ErrorReasonLevel::maxLevel;
+        while (true) {
             for (const auto &item: input) {
                 if (HEDLEY_UNLIKELY(item->level == i)) {
                     output.push_back(item);
                 }
             }
-        }
+            if (i == 0) {
+                break;
+            }
+            --i;
+        };
         return std::move(output);
     }
 
+    std::vector<std::shared_ptr<ErrorReason>> ASTNode::getIdErrors() const {
+        std::vector<std::shared_ptr<ErrorReason>> input;
+        Profile::push("start getting id error: " + TokenUtil::toString(tokens));
+        collectIdErrors(input);
+        Profile::pop();
+        return sortByLevel(input);
+    }
+
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
-        std::vector<std::shared_ptr<ErrorReason>> input = errorReasons, output;
+        std::vector<std::shared_ptr<ErrorReason>> input = errorReasons;
         Profile::push("start getting error reasons: " + TokenUtil::toString(tokens));
         collectIdErrors(input);
         Profile::pop();
-        std::uint8_t i = ErrorReasonLevel::maxLevel;
-        do {
-            for (const auto &item: input) {
-                if (HEDLEY_UNLIKELY(item->level == i)) {
-                    output.push_back(item);
-                }
-            }
-        } while (--i != 0);
-        return std::move(output);
+        return sortByLevel(input);
     }
 
     std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {

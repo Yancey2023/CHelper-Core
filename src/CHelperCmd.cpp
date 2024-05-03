@@ -8,14 +8,14 @@
 #include "chelper/Core.h"
 
 int main() {
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
-//                        R"(D:\CLion\project\CHelper-Core\test\test.txt)",
-//                        false);
+    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
+                        R"(D:\CLion\project\CHelper-Core\test\test.txt)",
+                        false);
 //    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
 //                        R"(/home/yancey/CLionProjects/CHelper/test/test.txt)",
 //                        true);
-    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
-                        std::vector<std::string>{"execute run clear "}, false);
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
+//                        std::vector<std::string>{"execute run clear "}, false);
 //    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
 //                        std::vector<std::string>{"give @s "}, true);
 //    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)", {""}, false);

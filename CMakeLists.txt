@@ -15,6 +15,11 @@ add_executable(CHelperCmd src/CHelperCmd.h src/CHelperCmd.cpp ${SOURCE_H} ${SOUR
 target_include_directories(CHelperCmd PUBLIC include)
 target_precompile_headers(CHelperCmd PRIVATE include/pch.h)
 
+# 网页应用
+add_library(CHelperWeb STATIC src/CHelperWeb.h src/CHelperWeb.cpp ${SOURCE_H} ${SOURCE_CPP})
+target_include_directories(CHelperWeb PUBLIC include)
+target_precompile_headers(CHelperWeb PRIVATE include/pch.h)
+
 # 带GUI界面
 add_executable(CHelperWindows src/CHelperWindows.h src/CHelperWindows.cpp ${SOURCE_H} ${SOURCE_CPP})
 target_include_directories(CHelperWindows PUBLIC include)
