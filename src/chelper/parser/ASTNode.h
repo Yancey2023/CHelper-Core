@@ -94,17 +94,17 @@ namespace CHelper {
                               bool canAddWhitespace = true);
 
         //是否有结构错误（不包括ID错误）
-        [[nodiscard]] inline bool isError() const {
+        [[nodiscard]] bool isError() const {
             return !errorReasons.empty();
         }
 
-        [[nodiscard]] inline bool hasChildNode() const {
+        [[nodiscard]] bool hasChildNode() const {
             return !childNodes.empty();
         }
 
         [[nodiscard]] bool isAllWhitespaceError() const;
 
-        [[nodiscard]] inline const ASTNode &getBestNode() const {
+        [[nodiscard]] const ASTNode &getBestNode() const {
             return childNodes[whichBest];
         }
 

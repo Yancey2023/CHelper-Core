@@ -3,10 +3,6 @@
   "type": "normal",
   "content": [
     {
-      "name": "blocks/tallgrass",
-      "description": ""
-    },
-    {
       "name": "chests/abandoned_mineshaft",
       "description": "废弃矿井宝箱"
     },
@@ -107,6 +103,58 @@
       "description": "要塞图书馆宝箱"
     },
     {
+      "name": "chests/trial_chambers/corridor",
+      "description": ""
+    },
+    {
+      "name": "chests/trial_chambers/entrance",
+      "description": ""
+    },
+    {
+      "name": "chests/trial_chambers/intersection",
+      "description": ""
+    },
+    {
+      "name": "chests/trial_chambers/intersection_barrel",
+      "description": ""
+    },
+    {
+      "name": "chests/trial_chambers/reward",
+      "description": ""
+    },
+    {
+      "name": "chests/trial_chambers/reward_common",
+      "description": ""
+    },
+    {
+      "name": "chests/trial_chambers/reward_ominous",
+      "description": ""
+    },
+    {
+      "name": "chests/trial_chambers/reward_ominous_common",
+      "description": ""
+    },
+    {
+      "name": "chests/trial_chambers/reward_ominous_rare",
+      "description": ""
+    },
+    {
+      "name": "chests/trial_chambers/reward_ominous_unique",
+      "description": ""
+    },
+    {
+      "name": "chests/trial_chambers/reward_rare",
+      "description": ""
+    },
+    {
+      "name": "chests/trial_chambers/reward_unique",
+      "description": ""
+    },
+    {
+      "name": "chests/trial_chambers/supply",
+      "description": ""
+    },
+    {
       "name": "chests/underwater_ruin_big",
       "description": "大型海底废墟宝箱"
     },
@@ -187,8 +235,24 @@
       "description": "林地府邸宝箱"
     },
     {
+      "name": "dispensers/trial_chambers/chamber",
+      "description": ""
+    },
+    {
+      "name": "dispensers/trial_chambers/corridor",
+      "description": ""
+    },
+    {
+      "name": "dispensers/trial_chambers/water",
+      "description": ""
+    },
+    {
       "name": "empty",
       "description": "不生成战利品"
+    },
+    {
+      "name": "entities/armadillo_brush",
+      "description": ""
     },
     {
       "name": "entities/armor_set_chain",
@@ -225,6 +289,18 @@
     {
       "name": "entities/boat",
       "description": "船的掉落物"
+    },
+    {
+      "name": "entities/bogged",
+      "description": ""
+    },
+    {
+      "name": "entities/bogged_shear",
+      "description": ""
+    },
+    {
+      "name": "entities/breeze",
+      "description": ""
     },
     {
       "name": "entities/brown_mooshroom_shear",
@@ -413,6 +489,10 @@
     {
       "name": "entities/pillager",
       "description": "掠夺者的掉落物"
+    },
+    {
+      "name": "entities/pillager_captain",
+      "description": ""
     },
     {
       "name": "entities/pillager_captain_equipment",
@@ -615,8 +695,28 @@
       "description": ""
     },
     {
+      "name": "equipment/trial_chamber",
+      "description": ""
+    },
+    {
+      "name": "equipment/trial_chamber_chainmail",
+      "description": ""
+    },
+    {
+      "name": "equipment/trial_chamber_diamond",
+      "description": ""
+    },
+    {
+      "name": "equipment/trial_chamber_iron",
+      "description": ""
+    },
+    {
       "name": "gameplay/entities/mooshroom_milking",
       "description": "对哞菇使用碗所获得的产物"
+    },
+    {
+      "name": "gameplay/entities/sniffer_seeds",
+      "description": ""
     },
     {
       "name": "gameplay/fishing",
@@ -645,6 +745,30 @@
     {
       "name": "gameplay/jungle_fishing",
       "description": "在丛林生物群系中的钓鱼钓到的物品"
+    },
+    {
+      "name": "pots/trial_chambers/corridor",
+      "description": ""
+    },
+    {
+      "name": "spawners/ominous/trial_chamber/consumables",
+      "description": ""
+    },
+    {
+      "name": "spawners/ominous/trial_chamber/key",
+      "description": ""
+    },
+    {
+      "name": "spawners/trial_chamber/consumables",
+      "description": ""
+    },
+    {
+      "name": "spawners/trial_chamber/items_to_drop_when_ominous",
+      "description": ""
+    },
+    {
+      "name": "spawners/trial_chamber/key",
+      "description": ""
     }
   ]
 }

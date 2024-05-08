@@ -2,10 +2,10 @@
   "name": [
     "testforblocks"
   ],
+  "description": "测试两个区域中的方块是否相同",
   "start": [
     "begin"
   ],
-  "description": "测试两个区域中的方块是否相同",
   "node": [
     {
       "type": "POSITION",

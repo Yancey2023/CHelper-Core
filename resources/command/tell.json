@@ -4,10 +4,10 @@
     "tell",
     "w"
   ],
+  "description": "将一条私聊信息发送给一个或多个玩家",
   "start": [
     "target"
   ],
-  "description": "将一条私聊信息发送给一个或多个玩家",
   "node": [
     {
       "type": "TARGET_SELECTOR",

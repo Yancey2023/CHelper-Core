@@ -59,6 +59,14 @@
       "description": ""
     },
     {
+      "name": "minecraft:breeze_ground_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:breeze_wind_explosion_emitter",
+      "description": ""
+    },
+    {
       "name": "minecraft:bubble_column_bubble",
       "description": ""
     },
@@ -164,6 +172,10 @@
     },
     {
       "name": "minecraft:dragon_dying_explosion",
+      "description": ""
+    },
+    {
+      "name": "minecraft:dust_plume",
       "description": ""
     },
     {
@@ -291,6 +303,14 @@
       "description": ""
     },
     {
+      "name": "minecraft:infested_ambient",
+      "description": ""
+    },
+    {
+      "name": "minecraft:infested_emitter",
+      "description": ""
+    },
+    {
       "name": "minecraft:ink_emitter",
       "description": ""
     },
@@ -375,6 +395,18 @@
       "description": ""
     },
     {
+      "name": "minecraft:ominous_spawning_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:oozing_ambient",
+      "description": ""
+    },
+    {
+      "name": "minecraft:oozing_emitter",
+      "description": ""
+    },
+    {
       "name": "minecraft:phantom_trail_particle",
       "description": ""
     },
@@ -392,6 +424,14 @@
     },
     {
       "name": "minecraft:portal_reverse_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:raid_omen_ambient",
+      "description": ""
+    },
+    {
+      "name": "minecraft:raid_omen_emitter",
       "description": ""
     },
     {
@@ -444,6 +484,22 @@
     },
     {
       "name": "minecraft:silverfish_grief_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:small_flame_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:small_soul_fire_flame",
+      "description": ""
+    },
+    {
+      "name": "minecraft:smash_ground_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:smash_ground_particle_center",
       "description": ""
     },
     {
@@ -511,7 +567,31 @@
       "description": ""
     },
     {
+      "name": "minecraft:trial_omen_ambient",
+      "description": ""
+    },
+    {
+      "name": "minecraft:trial_omen_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:trial_omen_single",
+      "description": ""
+    },
+    {
+      "name": "minecraft:trial_spawner_detection",
+      "description": ""
+    },
+    {
+      "name": "minecraft:trial_spawner_detection_ominous",
+      "description": ""
+    },
+    {
       "name": "minecraft:underwater_torch_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:vault_connection_particle",
       "description": ""
     },
     {
@@ -560,6 +640,30 @@
     },
     {
       "name": "minecraft:wax_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:weaving_ambient",
+      "description": ""
+    },
+    {
+      "name": "minecraft:weaving_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:white_smoke_particle",
+      "description": ""
+    },
+    {
+      "name": "minecraft:wind_charged_ambient",
+      "description": ""
+    },
+    {
+      "name": "minecraft:wind_charged_emitter",
+      "description": ""
+    },
+    {
+      "name": "minecraft:wind_explosion_emitter",
       "description": ""
     },
     {

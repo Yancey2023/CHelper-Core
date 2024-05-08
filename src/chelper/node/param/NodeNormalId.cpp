@@ -3,17 +3,20 @@
 //
 
 #include "NodeNormalId.h"
+
+#include <utility>
 #include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
-    NodeNormalId::NodeNormalId(const std::optional<std::string> &id,
-                               const std::optional<std::string> &description,
-                               const std::optional<std::string> &key,
-                               bool ignoreError,
-                               const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
-                               bool allowsMissingID,
-                               ASTNode(*getNormalIdASTNode)(const NodeBase *node, TokenReader &tokenReader))
+    NodeNormalId::NodeNormalId(
+            const std::optional<std::string> &id,
+            const std::optional<std::string> &description,
+            const std::optional<std::string> &key,
+            bool ignoreError,
+            const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
+            bool allowsMissingID,
+            const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)>& getNormalIdASTNode)
             : NodeBase(id, description, false),
               key(key),
               ignoreError(ignoreError),
@@ -51,6 +54,12 @@ namespace CHelper::Node {
         }
     }
 
+    static std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)>
+    readNormalIdASTNode(const nlohmann::json &j) {
+        return TokenReader::getReadTokenMethod(
+                JsonUtil::fromJsonOptionalUnlikely<std::vector<std::string>>(j, "tokenTypes"));
+    }
+
     NodeNormalId::NodeNormalId(const nlohmann::json &j,
                                const CPack &cpack)
             : NodeBase(j, true),
@@ -58,9 +67,7 @@ namespace CHelper::Node {
               ignoreError(JsonUtil::fromJson<bool>(j, "ignoreError")),
               contents(getIdContentFromCPack(j, cpack, key)),
               allowsMissingID(false),
-              getNormalIdASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-                  return tokenReader.readStringASTNode(node);
-              }) {}
+              getNormalIdASTNode(readNormalIdASTNode(j)) {}
 
     NodeType *NodeNormalId::getNodeType() const {
         return NodeType::NORMAL_ID.get();

@@ -11,6 +11,10 @@
       "description": "区域效果云（不可召唤）"
     },
     {
+      "name": "armadillo",
+      "description": "犰狳"
+    },
+    {
       "name": "armor_stand",
       "description": "盔甲架"
     },
@@ -37,6 +41,18 @@
     {
       "name": "boat",
       "description": "船"
+    },
+    {
+      "name": "bogged",
+      "description": "沼骸"
+    },
+    {
+      "name": "breeze",
+      "description": "旋风人"
+    },
+    {
+      "name": "breeze_wind_charge_projectile",
+      "description": "风弹（不可召唤）"
     },
     {
       "name": "camel",
@@ -231,6 +247,502 @@
       "description": "矿车"
     },
     {
+      "name": "minecraft:allay",
+      "description": "悦灵"
+    },
+    {
+      "name": "minecraft:area_effect_cloud",
+      "description": "区域效果云（不可召唤）"
+    },
+    {
+      "name": "minecraft:armadillo",
+      "description": "犰狳"
+    },
+    {
+      "name": "minecraft:armor_stand",
+      "description": "盔甲架"
+    },
+    {
+      "name": "minecraft:arrow",
+      "description": "箭"
+    },
+    {
+      "name": "minecraft:axolotl",
+      "description": "美西螈"
+    },
+    {
+      "name": "minecraft:bat",
+      "description": "蝙蝠"
+    },
+    {
+      "name": "minecraft:bee",
+      "description": "蜜蜂"
+    },
+    {
+      "name": "minecraft:blaze",
+      "description": "烈焰人"
+    },
+    {
+      "name": "minecraft:boat",
+      "description": "船"
+    },
+    {
+      "name": "minecraft:bogged",
+      "description": "沼骸"
+    },
+    {
+      "name": "minecraft:breeze",
+      "description": "旋风人"
+    },
+    {
+      "name": "minecraft:breeze_wind_charge_projectile",
+      "description": "风弹（不可召唤）"
+    },
+    {
+      "name": "minecraft:camel",
+      "description": "骆驼"
+    },
+    {
+      "name": "minecraft:cat",
+      "description": "猫"
+    },
+    {
+      "name": "minecraft:cave_spider",
+      "description": "洞穴蜘蛛"
+    },
+    {
+      "name": "minecraft:chest_boat",
+      "description": "运输船"
+    },
+    {
+      "name": "minecraft:chest_minecart",
+      "description": "运输矿车"
+    },
+    {
+      "name": "minecraft:chicken",
+      "description": "鸡"
+    },
+    {
+      "name": "minecraft:cod",
+      "description": "鳕鱼"
+    },
+    {
+      "name": "minecraft:command_block_minecart",
+      "description": "命令方块矿车"
+    },
+    {
+      "name": "minecraft:cow",
+      "description": "牛"
+    },
+    {
+      "name": "minecraft:creeper",
+      "description": "苦力怕"
+    },
+    {
+      "name": "minecraft:dolphin",
+      "description": "海豚"
+    },
+    {
+      "name": "minecraft:donkey",
+      "description": "驴"
+    },
+    {
+      "name": "minecraft:dragon_fireball",
+      "description": "末影龙火球（不可召唤）"
+    },
+    {
+      "name": "minecraft:drowned",
+      "description": "溺尸"
+    },
+    {
+      "name": "minecraft:egg",
+      "description": "鸡蛋"
+    },
+    {
+      "name": "minecraft:elder_guardian",
+      "description": "远古守卫者"
+    },
+    {
+      "name": "minecraft:elder_guardian_ghost",
+      "description": "远古守卫者幽灵"
+    },
+    {
+      "name": "minecraft:ender_crystal",
+      "description": "末地水晶"
+    },
+    {
+      "name": "minecraft:ender_dragon",
+      "description": "末影龙"
+    },
+    {
+      "name": "minecraft:ender_pearl",
+      "description": "末影珍珠（不可召唤）"
+    },
+    {
+      "name": "minecraft:enderman",
+      "description": "末影人"
+    },
+    {
+      "name": "minecraft:endermite",
+      "description": "末影螨"
+    },
+    {
+      "name": "minecraft:evocation_fang",
+      "description": "唤魔者尖牙"
+    },
+    {
+      "name": "minecraft:evocation_illager",
+      "description": "唤魔者"
+    },
+    {
+      "name": "minecraft:eye_of_ender_signal",
+      "description": "末影之眼（不可召唤）"
+    },
+    {
+      "name": "minecraft:falling_block",
+      "description": "下落的方块（不可召唤）"
+    },
+    {
+      "name": "minecraft:fireball",
+      "description": "火球（不可召唤）"
+    },
+    {
+      "name": "minecraft:fireworks_rocket",
+      "description": "烟花火箭"
+    },
+    {
+      "name": "minecraft:fishing_hook",
+      "description": "浮漂（不可召唤）"
+    },
+    {
+      "name": "minecraft:fox",
+      "description": "狐狸"
+    },
+    {
+      "name": "minecraft:frog",
+      "description": "青蛙"
+    },
+    {
+      "name": "minecraft:ghast",
+      "description": "恶魂"
+    },
+    {
+      "name": "minecraft:glow_squid",
+      "description": "发光鱿鱼"
+    },
+    {
+      "name": "minecraft:goat",
+      "description": "山羊"
+    },
+    {
+      "name": "minecraft:guardian",
+      "description": "守卫者"
+    },
+    {
+      "name": "minecraft:hoglin",
+      "description": "疣猪兽"
+    },
+    {
+      "name": "minecraft:hopper_minecart",
+      "description": "漏斗矿车"
+    },
+    {
+      "name": "minecraft:horse",
+      "description": "马"
+    },
+    {
+      "name": "minecraft:husk",
+      "description": "尸壳"
+    },
+    {
+      "name": "minecraft:iron_golem",
+      "description": "铁傀儡"
+    },
+    {
+      "name": "minecraft:item",
+      "description": "物品（不可召唤）"
+    },
+    {
+      "name": "minecraft:leash_knot",
+      "description": "拴绳结"
+    },
+    {
+      "name": "minecraft:lightning_bolt",
+      "description": "闪电束"
+    },
+    {
+      "name": "minecraft:lingering_potion",
+      "description": "滞留药水（不可召唤）"
+    },
+    {
+      "name": "minecraft:llama",
+      "description": "羊驼"
+    },
+    {
+      "name": "minecraft:llama_spit",
+      "description": "羊驼唾沫（不可召唤）"
+    },
+    {
+      "name": "minecraft:magma_cube",
+      "description": "岩浆怪"
+    },
+    {
+      "name": "minecraft:minecart",
+      "description": "矿车"
+    },
+    {
+      "name": "minecraft:mooshroom",
+      "description": "哞菇"
+    },
+    {
+      "name": "minecraft:mule",
+      "description": "骡"
+    },
+    {
+      "name": "minecraft:npc",
+      "description": "NPC"
+    },
+    {
+      "name": "minecraft:ocelot",
+      "description": "豹猫"
+    },
+    {
+      "name": "minecraft:ominous_item_spawner",
+      "description": "不祥之物生成器（不可召唤）"
+    },
+    {
+      "name": "minecraft:painting",
+      "description": "画（不可召唤）"
+    },
+    {
+      "name": "minecraft:panda",
+      "description": "熊猫"
+    },
+    {
+      "name": "minecraft:parrot",
+      "description": "鹦鹉"
+    },
+    {
+      "name": "minecraft:phantom",
+      "description": "幻翼"
+    },
+    {
+      "name": "minecraft:pig",
+      "description": "猪"
+    },
+    {
+      "name": "minecraft:piglin",
+      "description": "猪灵"
+    },
+    {
+      "name": "minecraft:piglin_brute",
+      "description": "猪灵蛮兵"
+    },
+    {
+      "name": "minecraft:pillager",
+      "description": "掠夺者"
+    },
+    {
+      "name": "minecraft:player",
+      "description": "玩家（不可召唤）"
+    },
+    {
+      "name": "minecraft:polar_bear",
+      "description": "北极熊"
+    },
+    {
+      "name": "minecraft:pufferfish",
+      "description": "河豚"
+    },
+    {
+      "name": "minecraft:rabbit",
+      "description": "兔子"
+    },
+    {
+      "name": "minecraft:ravager",
+      "description": "劫掠兽"
+    },
+    {
+      "name": "minecraft:salmon",
+      "description": "鲑鱼"
+    },
+    {
+      "name": "minecraft:sheep",
+      "description": "绵羊"
+    },
+    {
+      "name": "minecraft:shulker",
+      "description": "潜影贝"
+    },
+    {
+      "name": "minecraft:shulker_bullet",
+      "description": "潜影弹（不可召唤）"
+    },
+    {
+      "name": "minecraft:silverfish",
+      "description": "蠹虫"
+    },
+    {
+      "name": "minecraft:skeleton",
+      "description": "骷髅"
+    },
+    {
+      "name": "minecraft:skeleton_horse",
+      "description": "骷髅马"
+    },
+    {
+      "name": "minecraft:slime",
+      "description": "史莱姆"
+    },
+    {
+      "name": "minecraft:small_fireball",
+      "description": "小火球（不可召唤）"
+    },
+    {
+      "name": "minecraft:sniffer",
+      "description": "嗅探兽"
+    },
+    {
+      "name": "minecraft:snow_golem",
+      "description": "雪傀儡"
+    },
+    {
+      "name": "minecraft:snowball",
+      "description": "雪球"
+    },
+    {
+      "name": "minecraft:spider",
+      "description": "蜘蛛"
+    },
+    {
+      "name": "minecraft:splash_potion",
+      "description": "喷溅药水"
+    },
+    {
+      "name": "minecraft:squid",
+      "description": "鱿鱼"
+    },
+    {
+      "name": "minecraft:stray",
+      "description": "流浪者"
+    },
+    {
+      "name": "minecraft:strider",
+      "description": "炽足兽"
+    },
+    {
+      "name": "minecraft:tadpole",
+      "description": "蝌蚪"
+    },
+    {
+      "name": "minecraft:thrown_trident",
+      "description": "三叉戟（不可召唤）"
+    },
+    {
+      "name": "minecraft:tnt",
+      "description": "被激活的TNT"
+    },
+    {
+      "name": "minecraft:tnt_minecart",
+      "description": "TNT矿车"
+    },
+    {
+      "name": "minecraft:trader_llama",
+      "description": "行商羊驼"
+    },
+    {
+      "name": "minecraft:tropicalfish",
+      "description": "热带鱼"
+    },
+    {
+      "name": "minecraft:turtle",
+      "description": "海龟"
+    },
+    {
+      "name": "minecraft:vex",
+      "description": "恼鬼"
+    },
+    {
+      "name": "minecraft:villager",
+      "description": "村民"
+    },
+    {
+      "name": "minecraft:villager_v2",
+      "description": "村民（不可召唤）"
+    },
+    {
+      "name": "minecraft:vindicator",
+      "description": "卫道士"
+    },
+    {
+      "name": "minecraft:wandering_trader",
+      "description": "流浪商人"
+    },
+    {
+      "name": "minecraft:warden",
+      "description": "监守者"
+    },
+    {
+      "name": "minecraft:wind_charge_projectile",
+      "description": "风弹（不可召唤）"
+    },
+    {
+      "name": "minecraft:witch",
+      "description": "女巫"
+    },
+    {
+      "name": "minecraft:wither",
+      "description": "凋灵"
+    },
+    {
+      "name": "minecraft:wither_skeleton",
+      "description": "凋灵骷髅"
+    },
+    {
+      "name": "minecraft:wither_skull",
+      "description": "凋灵之首（不可召唤）"
+    },
+    {
+      "name": "minecraft:wither_skull_dangerous",
+      "description": "蓝色凋灵之首（不可召唤）"
+    },
+    {
+      "name": "minecraft:wolf",
+      "description": "狼"
+    },
+    {
+      "name": "minecraft:xp_bottle",
+      "description": "附魔之瓶"
+    },
+    {
+      "name": "minecraft:xp_orb",
+      "description": "经验球"
+    },
+    {
+      "name": "minecraft:zoglin",
+      "description": "僵尸疣猪兽"
+    },
+    {
+      "name": "minecraft:zombie",
+      "description": "僵尸"
+    },
+    {
+      "name": "minecraft:zombie_horse",
+      "description": "僵尸马"
+    },
+    {
+      "name": "minecraft:zombie_pigman",
+      "description": "僵尸猪灵"
+    },
+    {
+      "name": "minecraft:zombie_villager",
+      "description": "僵尸村民"
+    },
+    {
+      "name": "minecraft:zombie_villager_v2",
+      "description": "僵尸村民（不可召唤）"
+    },
+    {
       "name": "mooshroom",
       "description": "哞菇"
     },
@@ -245,6 +757,10 @@
     {
       "name": "ocelot",
       "description": "豹猫"
+    },
+    {
+      "name": "ominous_item_spawner",
+      "description": "不祥之物生成器（不可召唤）"
     },
     {
       "name": "painting",
@@ -417,6 +933,10 @@
     {
       "name": "warden",
       "description": "监守者"
+    },
+    {
+      "name": "wind_charge_projectile",
+      "description": "风弹（不可召唤）"
     },
     {
       "name": "witch",

@@ -16,6 +16,14 @@ namespace CHelper::TokenUtil {
         }
     }
 
+    size_t getStartIndex(const VectorView <Token> &tokens) {
+        return getIndex(tokens, tokens.start);
+    }
+
+    size_t getEndIndex(const VectorView <Token> &tokens) {
+        return getIndex(tokens, tokens.end);
+    }
+
     std::string toString(const VectorView <Token> &tokens) {
         std::string result;
         tokens.forEach([&result](const CHelper::Token &token) {

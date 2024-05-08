@@ -1,237 +1,157 @@
 {
+  "name": [
+    "tickingarea"
+  ],
+  "description": "添加、删除或列出常加载区域",
+  "start": [
+    "add",
+    "remove",
+    "remove_all",
+    "preload",
+    "list"
+  ],
   "node": [
     {
+      "type": "TEXT",
+      "id": "add",
+      "description": "添加常加载区域",
       "data": {
         "name": "add",
         "description": "添加常加载区域"
-      },
-      "description": "添加常加载区域",
-      "id": "0",
-      "type": "TEXT"
-    },
-    {
-      "brief": "坐标1",
-      "description": "用于定义矩形常加载区域的两个对角坐标的第一个",
-      "id": "1",
-      "type": "POSITION"
+      }
     },
     {
       "type": "POSITION",
-      "id": "2",
+      "id": "from",
+      "brief": "坐标1",
+      "description": "用于定义矩形常加载区域的两个对角坐标的第一个"
+    },
+    {
+      "type": "POSITION",
+      "id": "to",
       "brief": "坐标2",
       "description": "用于定义矩形常加载区域的两个对角坐标的第二个",
       "isMustAfterWhiteSpace": false
     },
     {
       "type": "STRING",
-      "id": "3",
+      "id": "addName",
       "brief": "常加载区域名称",
       "description": "常加载区域的名称",
       "canContainSpace": true,
       "ignoreLater": false
     },
     {
-      "descriptionFalse": "不预加载",
+      "type": "BOOLEAN",
+      "id": "preload",
       "brief": "是否预加载",
       "description": "常加载区域是否预加载,若不填则默认为false",
       "descriptionTrue": "预加载",
-      "id": "4",
-      "type": "BOOLEAN"
+      "descriptionFalse": "不预加载"
     },
     {
-      "data": {
-        "name": "add",
-        "description": "添加常加载区域"
-      },
-      "description": "添加常加载区域",
-      "id": "5",
-      "type": "TEXT"
-    },
-    {
+      "type": "TEXT",
+      "id": "circle",
+      "description": "添加与圆形区域有重叠部分的所有区块组成的常加载区域",
       "data": {
         "name": "circle",
         "description": "添加与圆形区域有重叠部分的所有区块组成的常加载区域"
-      },
-      "description": "添加与圆形区域有重叠部分的所有区块组成的常加载区域",
-      "id": "6",
-      "type": "TEXT"
+      }
     },
     {
+      "id": "center",
+      "type": "POSITION",
       "brief": "中心坐标",
-      "description": "用于定义圆形常加载区域的圆心的坐标",
-      "id": "7",
-      "type": "POSITION"
+      "description": "用于定义圆形常加载区域的圆心的坐标"
     },
     {
+      "id": "radius",
+      "type": "INTEGER",
       "brief": "半径",
-      "description": "圆形常加载区域的半径作为从中心到圆周的区块数",
-      "id": "8",
-      "type": "INTEGER"
+      "description": "圆形常加载区域的半径作为从中心到圆周的区块数"
     },
     {
-      "canContainSpace": true,
-      "brief": "常加载区域名称",
-      "description": "常加载区域的名称",
-      "ignoreLater": false,
-      "id": "9",
-      "type": "STRING"
-    },
-    {
-      "descriptionFalse": "不预加载",
-      "brief": "是否预加载",
-      "description": "常加载区域是否预加载,若不填则默认为false",
-      "descriptionTrue": "预加载",
-      "id": "10",
-      "type": "BOOLEAN"
-    },
-    {
+      "type": "TEXT",
+      "id": "remove",
+      "description": "删除常加载区域",
       "data": {
         "name": "remove",
         "description": "删除常加载区域"
-      },
-      "description": "删除常加载区域",
-      "id": "11",
-      "type": "TEXT"
+      }
     },
     {
+      "type": "POSITION",
+      "id": "position",
       "brief": "坐标",
-      "description": "要选择的常加载区域所包含的坐标",
-      "id": "12",
-      "type": "POSITION"
+      "description": "要选择的常加载区域所包含的坐标"
     },
     {
-      "data": {
-        "name": "remove",
-        "description": "删除常加载区域"
-      },
-      "description": "删除常加载区域",
-      "id": "13",
-      "type": "TEXT"
-    },
-    {
-      "canContainSpace": true,
+      "type": "STRING",
+      "id": "removeName",
       "brief": "常加载区域名称",
       "description": "常加载区域的名称",
-      "ignoreLater": false,
-      "id": "14",
-      "type": "STRING"
+      "canContainSpace": true,
+      "ignoreLater": false
     },
     {
+      "type": "TEXT",
+      "id": "remove_all",
+      "description": " 删除本维度中所有已定义的常加载区域",
       "data": {
         "name": "remove_all",
         "description": " 删除本维度中所有已定义的常加载区域"
-      },
-      "description": " 删除本维度中所有已定义的常加载区域",
-      "id": "15",
-      "type": "TEXT"
+      }
     },
     {
+      "type": "TEXT",
+      "id": "preloadText",
+      "description": "设置或显示常加载区域是否预加载",
       "data": {
         "name": "preload",
         "description": "设置或显示常加载区域是否预加载"
-      },
-      "description": "设置或显示常加载区域是否预加载",
-      "id": "16",
-      "type": "TEXT"
+      }
     },
     {
-      "canContainSpace": true,
-      "brief": "常加载区域名称",
-      "description": "常加载区域的名称",
-      "ignoreLater": false,
-      "id": "17",
-      "type": "STRING"
-    },
-    {
-      "brief": "是否预加载",
-      "description": "常加载区域是否预加载,若不填则可以查询指定的常加载区域是否预加载",
-      "descriptionTrue": "预加载",
-      "descriptionFalse": "不预加载",
-      "id": "18",
-      "type": "BOOLEAN"
-    },
-    {
-      "data": {
-        "name": "preload",
-        "description": "设置或显示常加载区域是否预加载"
-      },
-      "description": "设置或显示常加载区域是否预加载",
-      "id": "19",
-      "type": "TEXT"
-    },
-    {
+      "type": "POSITION",
+      "id": "preloadPosition",
       "brief": "坐标",
-      "description": "要选择的常加载区域所包含的坐标",
-      "id": "20",
-      "type": "POSITION"
+      "description": "要选择的常加载区域所包含的坐标"
     },
     {
-      "brief": "是否预加载",
-      "description": "常加载区域是否预加载,若不填则可以查询指定的常加载区域是否预加载",
-      "descriptionTrue": "预加载",
-      "descriptionFalse": "不预加载",
-      "id": "21",
-      "type": "BOOLEAN"
-    },
-    {
+      "type": "TEXT",
+      "id": "list",
+      "description": "显示当前维度或所有维度的常加载区域",
       "data": {
         "name": "list",
         "description": "显示当前维度或所有维度的常加载区域"
-      },
-      "description": "显示当前维度或所有维度的常加载区域",
-      "id": "22",
-      "type": "TEXT"
+      }
     },
     {
+      "type": "TEXT",
+      "id": "all-dimensions",
+      "description": "列出所有维度中的常加载区域(如不填则默认为仅显示本维度常加载区域)",
       "data": {
         "name": "all-dimensions",
         "description": "列出所有维度中的常加载区域(如不填则默认为仅显示本维度常加载区域)"
-      },
-      "description": "列出所有维度中的常加载区域(如不填则默认为仅显示本维度常加载区域)",
-      "id": "23",
-      "type": "TEXT"
+      }
     }
   ],
   "ast": [
-    ["0", "1"],
-    ["1", "2"],
-    ["2", "3"],
-    ["2", "LF"],
-    ["3", "4"],
-    ["3", "LF"],
-    ["4", "LF"],
-    ["5", "6"],
-    ["6", "7"],
-    ["7", "8"],
-    ["8", "9"],
-    ["9", "10"],
-    ["10", "LF"],
-    ["11", "12"],
-    ["12", "LF"],
-    ["13", "14"],
-    ["14", "LF"],
-    ["15", "LF"],
-    ["16", "17"],
-    ["17", "18"],
-    ["18", "LF"],
-    ["19", "20"],
-    ["20", "21"],
-    ["21", "LF"],
-    ["22", "23"],
-    ["23", "LF"]
-  ],
-  "name": [
-    "tickingarea"
-  ],
-  "start": [
-    "0",
-    "5",
-    "11",
-    "13",
-    "15",
-    "16",
-    "19",
-    "22"
-  ],
-  "description": "添加、删除或列出常加载区域"
+    ["add", "from", "circle"],
+    ["from", "to"],
+    ["to", "addName", "LF"],
+    ["addName", "preload", "LF"],
+    ["preload", "LF"],
+    ["circle", "center"],
+    ["center", "radius"],
+    ["radius", "addName"],
+    ["remove", "position", "removeName"],
+    ["position", "LF"],
+    ["removeName", "LF"],
+    ["remove_all", "LF"],
+    ["preloadText", "addName", "preloadPosition"],
+    ["preloadPosition", "preload"],
+    ["list", "all-dimensions", "LF"],
+    ["all-dimensions", "LF"]
+  ]
 }

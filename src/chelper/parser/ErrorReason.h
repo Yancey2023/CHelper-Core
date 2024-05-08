@@ -54,80 +54,80 @@ namespace CHelper {
                     std::string errorReason);
 
         //命令后面有多余部分
-        [[maybe_unused]] inline static std::shared_ptr<ErrorReason> excess(size_t start,
-                                                                           size_t end,
-                                                                           const std::string &errorReason) {
+        [[maybe_unused]] static std::shared_ptr<ErrorReason> excess(size_t start,
+                                                                    size_t end,
+                                                                    const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::EXCESS, start, end, errorReason);
         }
 
-        [[maybe_unused]] inline static std::shared_ptr<ErrorReason> excess(const VectorView <Token> &tokens,
-                                                                           const std::string &errorReason) {
+        [[maybe_unused]] static std::shared_ptr<ErrorReason> excess(const VectorView <Token> &tokens,
+                                                                    const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::EXCESS, tokens, errorReason);
         }
 
         //缺少空格
-        [[maybe_unused]] inline static std::shared_ptr<ErrorReason>
+        [[maybe_unused]] static std::shared_ptr<ErrorReason>
         requireWhiteSpace(const VectorView <Token> &tokens) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, tokens, "命令不完整，缺少空格");
         }
 
-        [[maybe_unused]]  inline static std::shared_ptr<ErrorReason>
+        [[maybe_unused]]  static std::shared_ptr<ErrorReason>
         requireWhiteSpace(size_t start, size_t end) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, start, end,
                                                  "命令不完整，缺少空格");
         }
 
         //命令不完整
-        [[maybe_unused]] inline static std::shared_ptr<ErrorReason>
+        [[maybe_unused]] static std::shared_ptr<ErrorReason>
         incomplete(size_t start, size_t end, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::INCOMPLETE, start, end, errorReason);
         }
 
-        [[maybe_unused]]  inline static std::shared_ptr<ErrorReason>
+        [[maybe_unused]]  static std::shared_ptr<ErrorReason>
         incomplete(const VectorView <Token> &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::INCOMPLETE, tokens, errorReason);
         }
 
         //类型不匹配
-        [[maybe_unused]] inline static std::shared_ptr<ErrorReason>
+        [[maybe_unused]] static std::shared_ptr<ErrorReason>
         typeError(size_t start, size_t end, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::TYPE_ERROR, start, end, errorReason);
         }
 
-        [[maybe_unused]] inline static std::shared_ptr<ErrorReason>
+        [[maybe_unused]] static std::shared_ptr<ErrorReason>
         typeError(const VectorView <Token> &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::TYPE_ERROR, tokens, errorReason);
         }
 
         //内容不匹配
-        [[maybe_unused]] inline static std::shared_ptr<ErrorReason>
+        [[maybe_unused]] static std::shared_ptr<ErrorReason>
         contentError(size_t start, size_t end, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::CONTENT_ERROR, start, end, errorReason);
         }
 
-        [[maybe_unused]] inline static std::shared_ptr<ErrorReason>
+        [[maybe_unused]] static std::shared_ptr<ErrorReason>
         contentError(const VectorView <Token> &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::CONTENT_ERROR, tokens, errorReason);
         }
 
         //逻辑错误
-        [[maybe_unused]] inline static std::shared_ptr<ErrorReason>
+        [[maybe_unused]] static std::shared_ptr<ErrorReason>
         logicError(size_t start, size_t end, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::LOGIC_ERROR, start, end, errorReason);
         }
 
-        [[maybe_unused]] inline static std::shared_ptr<ErrorReason>
+        [[maybe_unused]] static std::shared_ptr<ErrorReason>
         logicError(const VectorView <Token> &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::LOGIC_ERROR, tokens, errorReason);
         }
 
         //ID错误
-        [[maybe_unused]] inline static std::shared_ptr<ErrorReason>
+        [[maybe_unused]] static std::shared_ptr<ErrorReason>
         idError(size_t start, size_t end, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::ID_ERROR, start, end, errorReason);
         }
 
-        [[maybe_unused]] inline static std::shared_ptr<ErrorReason>
+        [[maybe_unused]] static std::shared_ptr<ErrorReason>
         idError(const VectorView <Token> &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::ID_ERROR, tokens, errorReason);
         }

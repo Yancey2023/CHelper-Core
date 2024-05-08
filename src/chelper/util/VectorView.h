@@ -28,32 +28,32 @@ namespace CHelper {
 #endif
         }
 
-        [[nodiscard]] inline bool isEmpty() const {
+        [[nodiscard]] bool isEmpty() const {
             return start >= end;
         };
 
-        [[nodiscard]] inline bool hasValue() const {
+        [[nodiscard]] bool hasValue() const {
             return start < end;
         };
 
-        inline const T &operator[](size_t which) const {
+        const T &operator[](size_t which) const {
             return vector->at(start + which);
         }
 
-        [[nodiscard]] inline size_t size() const {
+        [[nodiscard]] size_t size() const {
             return end - start;
         }
 
-        [[nodiscard]] inline auto beginIterator() const {
+        [[nodiscard]] auto beginIterator() const {
             return vector->begin() + start;
         }
 
-        [[nodiscard]] inline auto endIterator() const {
+        [[nodiscard]] auto endIterator() const {
             return vector->begin() + end;
         }
 
         template<typename Function>
-        inline Function forEach(Function function) const {
+        Function forEach(Function function) const {
             return std::for_each(vector->begin() + start, vector->begin() + end, function);
         }
     };

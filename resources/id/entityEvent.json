@@ -27,6 +27,10 @@
       "description": "（由蜜蜂使用）"
     },
     {
+      "name": "be_sheared",
+      "description": "（由沼骸使用）"
+    },
+    {
       "name": "become_angry",
       "description": "（由海豚使用）"
     },
@@ -168,7 +172,7 @@
     },
     {
       "name": "minecraft:ageable_grow_up",
-      "description": "（由僵尸马、北极熊、哞菇、嗅探兽、山羊、村民、海豚、海龟、炽足兽、熊猫、牛、狐狸、狼、猪、猫、疣猪兽、绵羊、羊驼、美西螈、蜜蜂、行商羊驼、豹猫、马、驴、骆驼、骡、鸡使用）"
+      "description": "（由僵尸马、北极熊、哞菇、嗅探兽、山羊、村民、海豚、海龟、炽足兽、熊猫、牛、犰狳、狐狸、狼、猪、猫、疣猪兽、绵羊、羊驼、美西螈、蜜蜂、行商羊驼、豹猫、马、驴、骆驼、骡、鸡使用）"
     },
     {
       "name": "minecraft:ageable_set_baby",
@@ -257,6 +261,10 @@
     {
       "name": "minecraft:become_angry",
       "description": "（由僵尸猪灵、末影人、洞穴蜘蛛、海豚、熊猫、狼、羊驼、蜘蛛、蠹虫、行商羊驼使用）"
+    },
+    {
+      "name": "minecraft:become_armorable",
+      "description": "（由狼使用）"
     },
     {
       "name": "minecraft:become_armorer",
@@ -471,6 +479,10 @@
       "description": "（由玩家使用）"
     },
     {
+      "name": "minecraft:clear_add_raid_omen",
+      "description": "（由玩家使用）"
+    },
+    {
       "name": "minecraft:command_block_activate",
       "description": "（由命令方块矿车使用）"
     },
@@ -524,7 +536,7 @@
     },
     {
       "name": "minecraft:entity_born",
-      "description": "（由兔子、北极熊、哞菇、嗅探兽、山羊、村民、海龟、炽足兽、熊猫、牛、狐狸、狼、猪、猪灵、猫、疣猪兽、绵羊、羊驼、美西螈、蜜蜂、行商羊驼、豹猫、马、驴、骆驼、骡、鸡使用）"
+      "description": "（由兔子、北极熊、哞菇、嗅探兽、山羊、村民、海龟、炽足兽、熊猫、牛、犰狳、狐狸、狼、猪、猪灵、猫、疣猪兽、绵羊、羊驼、美西螈、蜜蜂、行商羊驼、豹猫、马、驴、骆驼、骡、鸡使用）"
     },
     {
       "name": "minecraft:entity_born_wild",
@@ -532,7 +544,7 @@
     },
     {
       "name": "minecraft:entity_spawned",
-      "description": "（由TNT矿车、僵尸、僵尸村民、僵尸猪灵、僵尸疣猪兽、僵尸马、兔子、凋灵、凋灵骷髅、劫掠兽、北极熊、卫道士、发光鱿鱼、史莱姆、命令方块矿车、哞菇、嗅探兽、尸壳、山羊、岩浆怪、悦灵、掠夺者、末影人、末影珍珠、末影龙、村民、河豚、洞穴蜘蛛、流浪者、浮漂、海豚、海龟、溺尸、漏斗矿车、潜影贝、炽足兽、烈焰人、热带鱼、熊猫、牛、狐狸、狼、猪、猪灵、猪灵蛮兵、猫、疣猪兽、监守者、箭、绵羊、羊驼、美西螈、船、蜘蛛、蜜蜂、蠹虫、行商羊驼、豹猫、运输船、青蛙、马、驴、骆驼、骡、骷髅、骷髅马、鱿鱼、鲑鱼、鸡、鹦鹉使用）"
+      "description": "（由TNT矿车、僵尸、僵尸村民、僵尸猪灵、僵尸疣猪兽、僵尸马、兔子、凋灵、凋灵骷髅、劫掠兽、北极熊、卫道士、发光鱿鱼、史莱姆、命令方块矿车、哞菇、嗅探兽、尸壳、山羊、岩浆怪、悦灵、掠夺者、末影人、末影珍珠、末影龙、村民、河豚、沼骸、洞穴蜘蛛、流浪者、浮漂、海豚、海龟、溺尸、漏斗矿车、潜影贝、炽足兽、烈焰人、热带鱼、熊猫、牛、犰狳、狐狸、狼、猪、猪灵、猪灵蛮兵、猫、疣猪兽、监守者、箭、绵羊、羊驼、美西螈、船、蜘蛛、蜜蜂、蠹虫、行商羊驼、豹猫、运输船、青蛙、马、驴、骆驼、骡、骷髅、骷髅马、鱿鱼、鲑鱼、鸡、鹦鹉使用）"
     },
     {
       "name": "minecraft:entity_transformed",
@@ -607,6 +619,10 @@
       "description": "（由玩家使用）"
     },
     {
+      "name": "minecraft:gain_raid_omen",
+      "description": "（由玩家使用）"
+    },
+    {
       "name": "minecraft:go_lay_egg",
       "description": "（由海龟使用）"
     },
@@ -633,6 +649,10 @@
     {
       "name": "minecraft:horse_unsaddled",
       "description": "（由马使用）"
+    },
+    {
+      "name": "minecraft:increase_max_health",
+      "description": "（由狼使用）"
     },
     {
       "name": "minecraft:join_caravan",
@@ -684,7 +704,7 @@
     },
     {
       "name": "minecraft:melee_mode",
-      "description": "（由掠夺者、流浪者、骷髅使用）"
+      "description": "（由掠夺者、沼骸、流浪者、骷髅使用）"
     },
     {
       "name": "minecraft:mule_saddled",
@@ -701,6 +721,10 @@
     {
       "name": "minecraft:navigation_on_land",
       "description": "（由海豚使用）"
+    },
+    {
+      "name": "minecraft:no_threat_detected",
+      "description": "（由犰狳使用）"
     },
     {
       "name": "minecraft:on_anger",
@@ -824,7 +848,7 @@
     },
     {
       "name": "minecraft:ranged_mode",
-      "description": "（由掠夺者、流浪者、骷髅使用）"
+      "description": "（由掠夺者、沼骸、流浪者、骷髅使用）"
     },
     {
       "name": "minecraft:remove_persistence",
@@ -837,6 +861,10 @@
     {
       "name": "minecraft:resupply_trades",
       "description": "（由村民使用）"
+    },
+    {
+      "name": "minecraft:roll_up",
+      "description": "（由犰狳使用）"
     },
     {
       "name": "minecraft:schedule_bed_villager",
@@ -888,7 +916,7 @@
     },
     {
       "name": "minecraft:spawn_adult",
-      "description": "（由嗅探兽、牛、猪、羊驼、行商羊驼、马、骆驼、鸡使用）"
+      "description": "（由嗅探兽、牛、犰狳、猪、羊驼、蜜蜂、行商羊驼、马、骆驼、鸡使用）"
     },
     {
       "name": "minecraft:spawn_armorer",
@@ -908,7 +936,7 @@
     },
     {
       "name": "minecraft:spawn_baby",
-      "description": "（由羊驼、行商羊驼使用）"
+      "description": "（由犰狳、羊驼、行商羊驼使用）"
     },
     {
       "name": "minecraft:spawn_baby_strider_jockey",
@@ -957,6 +985,62 @@
     {
       "name": "minecraft:spawn_skilled_adult",
       "description": "（由僵尸村民使用）"
+    },
+    {
+      "name": "minecraft:spawn_tame_adult",
+      "description": "（由狼、羊驼、马使用）"
+    },
+    {
+      "name": "minecraft:spawn_tame_baby",
+      "description": "（由狼使用）"
+    },
+    {
+      "name": "minecraft:spawn_wild_adult",
+      "description": "（由狼使用）"
+    },
+    {
+      "name": "minecraft:spawn_wild_ashen",
+      "description": "（由狼使用）"
+    },
+    {
+      "name": "minecraft:spawn_wild_baby",
+      "description": "（由狼使用）"
+    },
+    {
+      "name": "minecraft:spawn_wild_baby_or_adult",
+      "description": "（由狼使用）"
+    },
+    {
+      "name": "minecraft:spawn_wild_black",
+      "description": "（由狼使用）"
+    },
+    {
+      "name": "minecraft:spawn_wild_chestnut",
+      "description": "（由狼使用）"
+    },
+    {
+      "name": "minecraft:spawn_wild_pale",
+      "description": "（由狼使用）"
+    },
+    {
+      "name": "minecraft:spawn_wild_rusty",
+      "description": "（由狼使用）"
+    },
+    {
+      "name": "minecraft:spawn_wild_snowy",
+      "description": "（由狼使用）"
+    },
+    {
+      "name": "minecraft:spawn_wild_spotted",
+      "description": "（由狼使用）"
+    },
+    {
+      "name": "minecraft:spawn_wild_striped",
+      "description": "（由狼使用）"
+    },
+    {
+      "name": "minecraft:spawn_wild_woods",
+      "description": "（由狼使用）"
     },
     {
       "name": "minecraft:spawn_with_pillager_captain_rider",
@@ -1023,6 +1107,14 @@
       "description": "（由末影龙使用）"
     },
     {
+      "name": "minecraft:start_peeking",
+      "description": "（由犰狳使用）"
+    },
+    {
+      "name": "minecraft:start_playing_idle_ground_sound",
+      "description": "（由旋风人使用）"
+    },
+    {
       "name": "minecraft:start_roar",
       "description": "（由劫掠兽使用）"
     },
@@ -1033,6 +1125,10 @@
     {
       "name": "minecraft:start_transforming",
       "description": "（由僵尸、尸壳使用）"
+    },
+    {
+      "name": "minecraft:start_unrolling",
+      "description": "（由犰狳使用）"
     },
     {
       "name": "minecraft:stop_aggro",
@@ -1053,6 +1149,14 @@
     {
       "name": "minecraft:stop_johnny",
       "description": "（由卫道士使用）"
+    },
+    {
+      "name": "minecraft:stop_peeking",
+      "description": "（由犰狳使用）"
+    },
+    {
+      "name": "minecraft:stop_playing_idle_ground_sound",
+      "description": "（由旋风人使用）"
     },
     {
       "name": "minecraft:stop_sitting",
@@ -1077,6 +1181,10 @@
     {
       "name": "minecraft:target_too_close",
       "description": "（由守卫者使用）"
+    },
+    {
+      "name": "minecraft:threat_detected",
+      "description": "（由犰狳使用）"
     },
     {
       "name": "minecraft:to_full_puff",
@@ -1149,6 +1257,10 @@
     {
       "name": "minecraft:turn_yellow",
       "description": "（由潜影贝使用）"
+    },
+    {
+      "name": "minecraft:unroll",
+      "description": "（由犰狳使用）"
     },
     {
       "name": "navigation_off_land",

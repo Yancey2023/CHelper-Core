@@ -83,6 +83,14 @@ namespace CHelper::Node {
                 if (HEDLEY_UNLIKELY(parentNode == nullptr)) {
                     throw Exception::UnknownNodeId(name, parentNodeId);
                 }
+                if (!HEDLEY_UNLIKELY(parentNode->nextNodes.empty())) {
+                    Profile::next(ColorStringBuilder()
+                                          .red("repeating parent node \"")
+                                          .purple(parentNode->id.value())
+                                          .red("\"")
+                                          .build());
+                    throw Exception::NodeLoadFailed();
+                }
                 parentNode->nextNodes.reserve(childNodes.size() - 1);
                 for_each(childNodes.begin() + 1, childNodes.end(), [&](const auto &childNodeId) {
                     Profile::next(ColorStringBuilder()

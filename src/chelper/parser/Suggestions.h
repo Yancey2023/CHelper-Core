@@ -21,11 +21,11 @@ namespace CHelper {
     public:
         Suggestions() = default;
 
-        inline bool isFiltered() {
+        bool isFiltered() {
             return mHashCode.has_value();
         }
 
-        inline size_t hashCode() {
+        size_t hashCode() {
             return mHashCode.value_or(0);
         }
 

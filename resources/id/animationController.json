@@ -23,6 +23,18 @@
       "description": ""
     },
     {
+      "name": "controller.animation.armadillo.look_at_target",
+      "description": ""
+    },
+    {
+      "name": "controller.animation.armadillo.roll_up",
+      "description": ""
+    },
+    {
+      "name": "controller.animation.armadillo.walk",
+      "description": ""
+    },
+    {
       "name": "controller.animation.armor_stand.pose",
       "description": ""
     },
@@ -60,6 +72,34 @@
     },
     {
       "name": "controller.animation.blaze.move",
+      "description": ""
+    },
+    {
+      "name": "controller.animation.breeze.ground_particles",
+      "description": ""
+    },
+    {
+      "name": "controller.animation.breeze.idle",
+      "description": ""
+    },
+    {
+      "name": "controller.animation.breeze.idle_ground_sound",
+      "description": ""
+    },
+    {
+      "name": "controller.animation.breeze.jump",
+      "description": ""
+    },
+    {
+      "name": "controller.animation.breeze.look_at",
+      "description": ""
+    },
+    {
+      "name": "controller.animation.breeze.move",
+      "description": ""
+    },
+    {
+      "name": "controller.animation.breeze.shoot",
       "description": ""
     },
     {

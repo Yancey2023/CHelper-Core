@@ -35,17 +35,28 @@
       "isMustNPC": false
     },
     {
-      "type": "STRING",
+      "type": "TEXT",
+      "id": "allRecipe",
+      "description": "配方",
+      "tokenTypes": ["SYMBOL"],
+      "data": {
+        "name": "*",
+        "description": "全部配方"
+      }
+    },
+    {
+      "type": "NORMAL_ID",
       "id": "recipe",
       "description": "配方",
-      "canContainSpace": true,
-      "ignoreLater": false
+      "ignoreError": true,
+      "key": "recipe"
     }
   ],
   "ast": [
     ["give", "player"],
     ["take", "player"],
-    ["player", "recipe"],
+    ["player", "allRecipe", "recipe"],
+    ["allRecipe", "LF"],
     ["recipe", "LF"]
   ]
 }

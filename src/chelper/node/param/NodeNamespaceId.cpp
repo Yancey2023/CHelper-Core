@@ -177,7 +177,7 @@ namespace CHelper::Node {
         std::transform(descriptionContain.begin(), descriptionContain.end(),
                        std::back_inserter(suggestions1.suggestions),
                        [&start, &end](const auto &item) {
-                           return Suggestion(start, end, item);
+                           return Suggestion(start, end, item->idWithNamespace);
                        });
         suggestions1.markFiltered();
         suggestions.push_back(std::move(suggestions1));

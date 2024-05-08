@@ -43,6 +43,34 @@
       "description": ""
     },
     {
+      "name": "animation.armadillo.look_at_target",
+      "description": ""
+    },
+    {
+      "name": "animation.armadillo.peek",
+      "description": ""
+    },
+    {
+      "name": "animation.armadillo.roll_up",
+      "description": ""
+    },
+    {
+      "name": "animation.armadillo.rolled_up",
+      "description": ""
+    },
+    {
+      "name": "animation.armadillo.unroll",
+      "description": ""
+    },
+    {
+      "name": "animation.armadillo.unroll_fast",
+      "description": ""
+    },
+    {
+      "name": "animation.armadillo.walk",
+      "description": ""
+    },
+    {
       "name": "animation.armor.boots.offset",
       "description": ""
     },
@@ -184,6 +212,38 @@
     },
     {
       "name": "animation.bow.wield_first_person_pull",
+      "description": ""
+    },
+    {
+      "name": "animation.breeze.idle",
+      "description": ""
+    },
+    {
+      "name": "animation.breeze.idle_ground_particles",
+      "description": ""
+    },
+    {
+      "name": "animation.breeze.idle_ground_sound",
+      "description": ""
+    },
+    {
+      "name": "animation.breeze.jump",
+      "description": ""
+    },
+    {
+      "name": "animation.breeze.shoot",
+      "description": ""
+    },
+    {
+      "name": "animation.breeze.slide",
+      "description": ""
+    },
+    {
+      "name": "animation.breeze.slide_ground_particles",
+      "description": ""
+    },
+    {
+      "name": "animation.breeze.whirl_sound",
       "description": ""
     },
     {
@@ -1744,6 +1804,10 @@
     },
     {
       "name": "animation.warden.sonic_boom",
+      "description": ""
+    },
+    {
+      "name": "animation.wind_charge.rotate",
       "description": ""
     },
     {

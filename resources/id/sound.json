@@ -59,6 +59,14 @@
       "description": "灵魂沙峡谷：怪异的噪声"
     },
     {
+      "name": "ambient.underwater.enter",
+      "description": ""
+    },
+    {
+      "name": "ambient.underwater.exit",
+      "description": ""
+    },
+    {
       "name": "ambient.warped_forest.additions",
       "description": "诡异森林：环境附加音效"
     },
@@ -81,6 +89,30 @@
     {
       "name": "ambient.weather.thunder",
       "description": "雷鸣"
+    },
+    {
+      "name": "apply_effect.bad_omen",
+      "description": ""
+    },
+    {
+      "name": "apply_effect.raid_omen",
+      "description": ""
+    },
+    {
+      "name": "apply_effect.trial_omen",
+      "description": ""
+    },
+    {
+      "name": "armor.break_wolf",
+      "description": ""
+    },
+    {
+      "name": "armor.crack_wolf",
+      "description": ""
+    },
+    {
+      "name": "armor.damage_wolf",
+      "description": ""
     },
     {
       "name": "armor.equip_chain",
@@ -109,6 +141,18 @@
     {
       "name": "armor.equip_netherite",
       "description": "下界合金盔甲：铿锵"
+    },
+    {
+      "name": "armor.equip_wolf",
+      "description": ""
+    },
+    {
+      "name": "armor.repair_wolf",
+      "description": ""
+    },
+    {
+      "name": "armor.unequip_wolf",
+      "description": ""
     },
     {
       "name": "beacon.activate",
@@ -229,6 +273,22 @@
     {
       "name": "block.composter.ready",
       "description": "堆肥桶：堆肥"
+    },
+    {
+      "name": "block.copper_bulb.turn_off",
+      "description": ""
+    },
+    {
+      "name": "block.copper_bulb.turn_on",
+      "description": ""
+    },
+    {
+      "name": "block.decorated_pot.insert",
+      "description": ""
+    },
+    {
+      "name": "block.decorated_pot.insert_fail",
+      "description": ""
     },
     {
       "name": "block.enchanting_table.use",
@@ -479,6 +539,14 @@
       "description": "龙息：被装起"
     },
     {
+      "name": "bottle.empty",
+      "description": ""
+    },
+    {
+      "name": "bottle.fill",
+      "description": ""
+    },
+    {
       "name": "break.amethyst_block",
       "description": "紫水晶块：被破坏"
     },
@@ -523,6 +591,14 @@
       "description": ""
     },
     {
+      "name": "break.copper_bulb",
+      "description": ""
+    },
+    {
+      "name": "break.copper_grate",
+      "description": ""
+    },
+    {
       "name": "break.decorated_pot",
       "description": ""
     },
@@ -548,6 +624,10 @@
     },
     {
       "name": "break.hanging_sign",
+      "description": ""
+    },
+    {
+      "name": "break.heavy_core",
       "description": ""
     },
     {
@@ -613,6 +693,14 @@
     {
       "name": "break.tuff",
       "description": "凝灰岩：被破坏"
+    },
+    {
+      "name": "break.web",
+      "description": ""
+    },
+    {
+      "name": "breeze_wind_charge.burst",
+      "description": ""
     },
     {
       "name": "brush.generic",
@@ -875,6 +963,10 @@
       "description": ""
     },
     {
+      "name": "close_door.copper",
+      "description": ""
+    },
+    {
       "name": "component.jump_to_block",
       "description": "实体：跳跃"
     },
@@ -905,6 +997,18 @@
     {
       "name": "copper.wax.on",
       "description": "涂蜡"
+    },
+    {
+      "name": "crafter.craft",
+      "description": ""
+    },
+    {
+      "name": "crafter.disable_slot",
+      "description": ""
+    },
+    {
+      "name": "crafter.fail",
+      "description": ""
     },
     {
       "name": "crossbow.loading.end",
@@ -1103,6 +1207,26 @@
       "description": "鞘翅：飞行"
     },
     {
+      "name": "entity.generic.splash",
+      "description": ""
+    },
+    {
+      "name": "entity.wither_skeleton.ambient",
+      "description": ""
+    },
+    {
+      "name": "entity.wither_skeleton.death",
+      "description": ""
+    },
+    {
+      "name": "entity.wither_skeleton.hurt",
+      "description": ""
+    },
+    {
+      "name": "entity.wither_skeleton.step",
+      "description": ""
+    },
+    {
       "name": "entity.zombie.converted_to_drowned",
       "description": "僵尸：转化为溺尸"
     },
@@ -1173,6 +1297,10 @@
     {
       "name": "fall.copper",
       "description": "铜块：某物摔落"
+    },
+    {
+      "name": "fall.copper_bulb",
+      "description": ""
     },
     {
       "name": "fall.coral",
@@ -1332,7 +1460,7 @@
     },
     {
       "name": "fire.ignite",
-      "description": "打火石：生火"
+      "description": "打火石：点火"
     },
     {
       "name": "firework.blast",
@@ -1449,6 +1577,10 @@
     {
       "name": "hit.copper",
       "description": "铜块：损坏中"
+    },
+    {
+      "name": "hit.copper_bulb",
+      "description": ""
     },
     {
       "name": "hit.coral",
@@ -2047,6 +2179,18 @@
       "description": "磁石指针：绑定磁石"
     },
     {
+      "name": "mace.heavy_smash_ground",
+      "description": ""
+    },
+    {
+      "name": "mace.smash_air",
+      "description": ""
+    },
+    {
+      "name": "mace.smash_ground",
+      "description": ""
+    },
+    {
       "name": "minecart.base",
       "description": "矿车：行进"
     },
@@ -2085,6 +2229,58 @@
     {
       "name": "mob.allay.item_thrown",
       "description": "悦灵：投掷"
+    },
+    {
+      "name": "mob.armadillo.ambient",
+      "description": ""
+    },
+    {
+      "name": "mob.armadillo.brush",
+      "description": ""
+    },
+    {
+      "name": "mob.armadillo.death",
+      "description": ""
+    },
+    {
+      "name": "mob.armadillo.eat",
+      "description": ""
+    },
+    {
+      "name": "mob.armadillo.hurt",
+      "description": ""
+    },
+    {
+      "name": "mob.armadillo.hurt_reduced",
+      "description": ""
+    },
+    {
+      "name": "mob.armadillo.land",
+      "description": ""
+    },
+    {
+      "name": "mob.armadillo.peek",
+      "description": ""
+    },
+    {
+      "name": "mob.armadillo.roll",
+      "description": ""
+    },
+    {
+      "name": "mob.armadillo.scute_drop",
+      "description": ""
+    },
+    {
+      "name": "mob.armadillo.step",
+      "description": ""
+    },
+    {
+      "name": "mob.armadillo.unroll_finish",
+      "description": ""
+    },
+    {
+      "name": "mob.armadillo.unroll_start",
+      "description": ""
     },
     {
       "name": "mob.armor_stand.break",
@@ -2187,6 +2383,70 @@
       "description": "烈焰人：射击"
     },
     {
+      "name": "mob.bogged.ambient",
+      "description": ""
+    },
+    {
+      "name": "mob.bogged.death",
+      "description": ""
+    },
+    {
+      "name": "mob.bogged.hurt",
+      "description": ""
+    },
+    {
+      "name": "mob.bogged.step",
+      "description": ""
+    },
+    {
+      "name": "mob.breeze.charge",
+      "description": ""
+    },
+    {
+      "name": "mob.breeze.death",
+      "description": ""
+    },
+    {
+      "name": "mob.breeze.deflect",
+      "description": ""
+    },
+    {
+      "name": "mob.breeze.hurt",
+      "description": ""
+    },
+    {
+      "name": "mob.breeze.idle_air",
+      "description": ""
+    },
+    {
+      "name": "mob.breeze.idle_ground",
+      "description": ""
+    },
+    {
+      "name": "mob.breeze.inhale",
+      "description": ""
+    },
+    {
+      "name": "mob.breeze.jump",
+      "description": ""
+    },
+    {
+      "name": "mob.breeze.land",
+      "description": ""
+    },
+    {
+      "name": "mob.breeze.shoot",
+      "description": ""
+    },
+    {
+      "name": "mob.breeze.slide",
+      "description": ""
+    },
+    {
+      "name": "mob.breeze.whirl",
+      "description": ""
+    },
+    {
       "name": "mob.camel.ambient",
       "description": "骆驼：呼噜"
     },
@@ -2229,6 +2489,10 @@
     {
       "name": "mob.cat.beg",
       "description": "猫：求食"
+    },
+    {
+      "name": "mob.cat.beg_for_food",
+      "description": ""
     },
     {
       "name": "mob.cat.eat",
@@ -2711,6 +2975,10 @@
       "description": "疣猪兽：攻击"
     },
     {
+      "name": "mob.hoglin.converted_to_zombified",
+      "description": ""
+    },
+    {
       "name": "mob.hoglin.death",
       "description": "疣猪兽：死亡"
     },
@@ -2825,6 +3093,10 @@
     {
       "name": "mob.husk.ambient",
       "description": "尸壳：低吼"
+    },
+    {
+      "name": "mob.husk.convert_to_zombie",
+      "description": ""
     },
     {
       "name": "mob.husk.death",
@@ -4067,6 +4339,22 @@
       "description": ""
     },
     {
+      "name": "ominous_bottle.end_use",
+      "description": ""
+    },
+    {
+      "name": "ominous_item_spawner.about_to_spawn_item",
+      "description": ""
+    },
+    {
+      "name": "ominous_item_spawner.spawn_item",
+      "description": ""
+    },
+    {
+      "name": "ominous_item_spawner.spawn_item_begin",
+      "description": ""
+    },
+    {
       "name": "open.bamboo_wood_door",
       "description": ""
     },
@@ -4120,6 +4408,14 @@
     },
     {
       "name": "open.wooden_trapdoor",
+      "description": ""
+    },
+    {
+      "name": "open_door.copper",
+      "description": ""
+    },
+    {
+      "name": "open_trapdoor.copper",
       "description": ""
     },
     {
@@ -4181,6 +4477,10 @@
     {
       "name": "place.copper",
       "description": "铜块：被放置"
+    },
+    {
+      "name": "place.copper_bulb",
+      "description": ""
     },
     {
       "name": "place.deepslate",
@@ -4267,6 +4567,10 @@
       "description": "凝灰岩：被放置"
     },
     {
+      "name": "place.tuff_bricks",
+      "description": ""
+    },
+    {
       "name": "portal.portal",
       "description": "传送门：呼啸"
     },
@@ -4287,6 +4591,10 @@
       "description": "幽匿感测体：惊动"
     },
     {
+      "name": "pumpkin.carve",
+      "description": ""
+    },
+    {
       "name": "raid.horn",
       "description": "不祥号角：鸣响"
     },
@@ -4296,7 +4604,7 @@
     },
     {
       "name": "random.anvil_land",
-      "description": "铁砧：着地"
+      "description": "铁砧：着陆"
     },
     {
       "name": "random.anvil_use",
@@ -4516,7 +4824,7 @@
     },
     {
       "name": "respawn_anchor.ambient",
-      "description": "传送门：呼啸"
+      "description": "重生锚：呼啸"
     },
     {
       "name": "respawn_anchor.charge",
@@ -4639,6 +4947,14 @@
       "description": "铜块：踩上"
     },
     {
+      "name": "step.copper_bulb",
+      "description": ""
+    },
+    {
+      "name": "step.copper_grate",
+      "description": ""
+    },
+    {
       "name": "step.coral",
       "description": "珊瑚：踩上"
     },
@@ -4684,6 +5000,10 @@
     },
     {
       "name": "step.hanging_sign",
+      "description": ""
+    },
+    {
+      "name": "step.heavy_core",
       "description": ""
     },
     {
@@ -4819,8 +5139,16 @@
       "description": "凝灰岩：踩上"
     },
     {
+      "name": "step.tuff_bricks",
+      "description": ""
+    },
+    {
       "name": "step.vines",
       "description": "藤蔓：踩上"
+    },
+    {
+      "name": "step.web",
+      "description": ""
     },
     {
       "name": "step.wood",
@@ -4843,8 +5171,64 @@
       "description": "垂滴叶：升起"
     },
     {
+      "name": "trial_spawner.ambient",
+      "description": ""
+    },
+    {
+      "name": "trial_spawner.ambient_ominous",
+      "description": ""
+    },
+    {
+      "name": "trial_spawner.break",
+      "description": ""
+    },
+    {
+      "name": "trial_spawner.charge_activate",
+      "description": ""
+    },
+    {
+      "name": "trial_spawner.close_shutter",
+      "description": ""
+    },
+    {
+      "name": "trial_spawner.detect_player",
+      "description": ""
+    },
+    {
+      "name": "trial_spawner.eject_item",
+      "description": ""
+    },
+    {
+      "name": "trial_spawner.hit",
+      "description": ""
+    },
+    {
+      "name": "trial_spawner.open_shutter",
+      "description": ""
+    },
+    {
+      "name": "trial_spawner.place",
+      "description": ""
+    },
+    {
+      "name": "trial_spawner.spawn_mob",
+      "description": ""
+    },
+    {
+      "name": "trial_spawner.step",
+      "description": ""
+    },
+    {
       "name": "ui.cartography_table.take_result",
       "description": "地图：绘制"
+    },
+    {
+      "name": "ui.drawer_close",
+      "description": ""
+    },
+    {
+      "name": "ui.drawer_open",
+      "description": ""
     },
     {
       "name": "ui.loom.select_pattern",
@@ -5019,7 +5403,59 @@
       "description": "木头：使用"
     },
     {
+      "name": "vault.activate",
+      "description": ""
+    },
+    {
+      "name": "vault.ambient",
+      "description": ""
+    },
+    {
+      "name": "vault.break",
+      "description": ""
+    },
+    {
+      "name": "vault.close_shutter",
+      "description": ""
+    },
+    {
+      "name": "vault.deactivate",
+      "description": ""
+    },
+    {
+      "name": "vault.eject_item",
+      "description": ""
+    },
+    {
+      "name": "vault.hit",
+      "description": ""
+    },
+    {
+      "name": "vault.insert_item",
+      "description": ""
+    },
+    {
+      "name": "vault.insert_item_fail",
+      "description": ""
+    },
+    {
+      "name": "vault.open_shutter",
+      "description": ""
+    },
+    {
+      "name": "vault.place",
+      "description": ""
+    },
+    {
+      "name": "vault.step",
+      "description": ""
+    },
+    {
       "name": "vr.stutterturn",
+      "description": ""
+    },
+    {
+      "name": "wind_charge.burst",
       "description": ""
     }
   ]

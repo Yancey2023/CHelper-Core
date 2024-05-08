@@ -103,7 +103,13 @@ namespace CHelper {
             const auto &contentJson = j.at("content");
             content->reserve(contentJson.size());
             for (const auto &item: contentJson) {
+//#if CHelperDebug == true
+//                Profile::push(ColorStringBuilder().red("loading id: ").purple(item.at("name")).build());
+//#endif
                 content->push_back(std::make_shared<NormalId>(item));
+//#if CHelperDebug == true
+//                Profile::pop();
+//#endif
             }
             normalIds.emplace(std::move(id), std::move(content));
         } else if (HEDLEY_LIKELY(type == "namespace")) {
@@ -112,20 +118,38 @@ namespace CHelper {
             const auto &contentJson = j.at("content");
             content->reserve(contentJson.size());
             for (const auto &item: contentJson) {
+//#if CHelperDebug == true
+//                Profile::push(ColorStringBuilder().red("loading id: ").purple(item.at("name")).build());
+//#endif
                 content->push_back(std::make_shared<NamespaceId>(item));
+//#if CHelperDebug == true
+//                Profile::pop();
+//#endif
             }
             namespaceIds.emplace(std::move(id), std::move(content));
         } else if (HEDLEY_LIKELY(type == "block")) {
             const auto &blocksJson = j.at("blocks");
             blockIds->reserve(blockIds->size() + blocksJson.size());
             for (const auto &item: blocksJson) {
+//#if CHelperDebug == true
+//                Profile::push(ColorStringBuilder().red("loading id: ").purple(item.at("name")).build());
+//#endif
                 blockIds->push_back(std::make_shared<BlockId>(item));
+//#if CHelperDebug == true
+//                Profile::pop();
+//#endif
             }
         } else if (HEDLEY_LIKELY(type == "item")) {
             const auto &itemsJson = j.at("items");
             itemIds->reserve(itemIds->size() + itemsJson.size());
             for (const auto &item: itemsJson) {
+//#if CHelperDebug == true
+//                Profile::push(ColorStringBuilder().red("loading id: ").purple(item.at("name")).build());
+//#endif
                 itemIds->push_back(std::make_shared<ItemId>(item));
+//#if CHelperDebug == true
+//                Profile::pop();
+//#endif
             }
         } else {
             throw Exception::UnknownIdType(type);

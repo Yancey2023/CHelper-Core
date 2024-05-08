@@ -10,18 +10,22 @@ namespace CHelper::Node {
     NodeText::NodeText(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
                        const std::shared_ptr<NormalId> &data,
-                       ASTNode(*getTextASTNode)(const NodeBase *node, TokenReader &tokenReader))
+                       const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getTextASTNode)
             : NodeBase(id, description, false),
               data(data),
               getTextASTNode(getTextASTNode) {}
+
+    static std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)>
+    readTextASTNode(const nlohmann::json &j) {
+        return TokenReader::getReadTokenMethod(
+                JsonUtil::fromJsonOptionalUnlikely<std::vector<std::string>>(j, "tokenTypes"));
+    }
 
     NodeText::NodeText(const nlohmann::json &j,
                        [[maybe_unused]] const CPack &cpack)
             : NodeBase(j, true),
               data(std::make_shared<NormalId>(j.at("data"))),
-              getTextASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-                  return tokenReader.readStringASTNode(node);
-              }) {}
+              getTextASTNode(readTextASTNode(j)) {}
 
     NodeType *NodeText::getNodeType() const {
         return NodeType::TEXT.get();

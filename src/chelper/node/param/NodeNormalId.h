@@ -20,8 +20,7 @@ namespace CHelper::Node {
         const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> contents;
         const bool allowsMissingID;
         const bool ignoreError;
-
-        ASTNode (*getNormalIdASTNode)(const NodeBase *tokenReader, TokenReader &reader);
+        const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> getNormalIdASTNode;
 
         NodeNormalId(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
@@ -29,7 +28,7 @@ namespace CHelper::Node {
                      bool ignoreError,
                      const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
                      bool allowsMissingID = false,
-                     ASTNode(*getNormalIdASTNode)(const NodeBase *node, TokenReader &tokenReader) =
+                     const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)>& getNormalIdASTNode =
                      [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                          return tokenReader.readStringASTNode(node);
                      });

@@ -18,4 +18,16 @@ namespace CHelper::Parser {
         return result;
     }
 
+    ASTNode parse(const std::shared_ptr<std::vector<Token>> &tokens, const CPack *cpack) {
+        return parse(TokenReader(tokens), cpack);
+    }
+
+    ASTNode parse(StringReader stringReader, const CPack *cpack) {
+        return parse(std::make_shared<std::vector<Token>>(Lexer::lex(stringReader)), cpack);
+    }
+
+    ASTNode parse(const std::string &content, const CPack *cpack) {
+        return parse(StringReader(content, "unknown"), cpack);
+    }
+
 } // CHelper::Parser

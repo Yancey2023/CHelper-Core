@@ -14,19 +14,13 @@ namespace CHelper::Profile {
 
     extern std::vector<std::string> stack;
 
-    inline void push(const std::string &str) {
-        stack.push_back(str);
-    }
+    void push(const std::string &str);
 
-    inline void pop() {
-        stack.pop_back();
-    }
+    void pop();
 
     void next(const std::string &str);
 
-    inline void clear() {
-        stack.clear();
-    }
+    void clear();
 
     std::string getStackTrace();
 

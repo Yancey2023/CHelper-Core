@@ -71,15 +71,13 @@ namespace CHelper {
 
         [[nodiscard]] VectorView <Token> collect();
 
-    private:
         ASTNode readSimpleASTNode(const Node::NodeBase *node,
                                   TokenType::TokenType type,
                                   const std::string &requireType,
-                                  const std::string &astNodeId,
+                                  const std::string &astNodeId = "",
                                   std::shared_ptr<ErrorReason>(*check)(const std::string &str,
-                                                                       const VectorView <Token> &tokens));
+                                                                       const VectorView <Token> &tokens) = nullptr);
 
-    public:
         ASTNode readStringASTNode(const Node::NodeBase *node,
                                   const std::string &astNodeId = "");
 
@@ -91,6 +89,9 @@ namespace CHelper {
 
         ASTNode readSymbolASTNode(const Node::NodeBase *node,
                                   const std::string &astNodeId = "");
+
+        static std::function<ASTNode(const Node::NodeBase *node, TokenReader &tokenReader)>
+        getReadTokenMethod(const std::optional<std::vector<std::string>>& tokenTypes);
 
     };
 

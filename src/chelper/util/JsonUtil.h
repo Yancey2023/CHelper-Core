@@ -31,7 +31,7 @@ namespace CHelper {
         ConvertResult jsonString2String(const std::string &input);
 
         template<class T>
-        inline T fromJson(const nlohmann::json &json, const std::string &key) {
+        T fromJson(const nlohmann::json &json, const std::string &key) {
             return json.at(key).get<T>();
         }
 
@@ -48,7 +48,7 @@ namespace CHelper {
         }
 
         template<class T>
-        inline void toJson(nlohmann::json &json, const std::string &key, const T &data) {
+        void toJson(nlohmann::json &json, const std::string &key, const T &data) {
             json[key] = data;
         }
 

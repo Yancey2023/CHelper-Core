@@ -8,9 +8,9 @@
 #include "chelper/Core.h"
 
 int main() {
-    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
-                        R"(D:\CLion\project\CHelper-Core\test\test.txt)",
-                        false);
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
+//                        R"(D:\CLion\project\CHelper-Core\test\test.txt)",
+//                        false);
 //    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
 //                        R"(/home/yancey/CLionProjects/CHelper/test/test.txt)",
 //                        true);
@@ -21,8 +21,8 @@ int main() {
 //    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)", {""}, false);
 //    CHelper::Test::test4(R"(D:\CLion\project\CHelper-Core\resources)",
 //                         R"(D:\CLion\project\CHelper-Core\run\cpack.json)");
-//    CHelper::Test::test5(R"(D:\CLion\project\CHelper-Core\resources)",
-//                         R"(D:\CLion\project\CHelper-Core\run\cpack.dat)");
+    CHelper::Test::test5(R"(D:\CLion\project\CHelper-Core\resources)",
+                         R"(D:\CLion\project\CHelper-Core\run\cpack.dat)");
     return 0;
 }
 

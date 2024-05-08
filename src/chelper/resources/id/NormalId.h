@@ -31,11 +31,11 @@ namespace CHelper {
 
         virtual void toJson(nlohmann::json &j) const;
 
-        [[nodiscard]] inline bool fastMatch(size_t strHash) const {
+        [[nodiscard]] bool fastMatch(size_t strHash) const {
             return nameHash == strHash;
         }
 
-        [[nodiscard]] inline size_t hashCode() const {
+        [[nodiscard]] size_t hashCode() const {
             return mHashCode;
         }
 

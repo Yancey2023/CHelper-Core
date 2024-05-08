@@ -13,7 +13,7 @@
       "brief": "函数名",
       "description": "要执行的函数或函数标签",
       "canContainSpace": true,
-      "ignoreLater": false
+      "ignoreLater": true
     }
   ],
   "ast": [

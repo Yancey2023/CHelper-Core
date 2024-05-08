@@ -2,10 +2,10 @@
   "name": [
     "clone"
   ],
+  "description": "在指定区域之间复制方块结构",
   "start": [
     "begin"
   ],
-  "description": "在指定区域之间复制方块结构",
   "node": [
     {
       "type": "POSITION",

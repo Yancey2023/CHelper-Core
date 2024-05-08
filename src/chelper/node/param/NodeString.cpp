@@ -41,7 +41,13 @@ namespace CHelper::Node {
             //后面的所有内容都算作这个字符串
             tokenReader.push();
             tokenReader.skipToLF();
-            return ASTNode::simpleNode(this, tokenReader.collect());
+            VectorView <Token> tokens = tokenReader.collect();
+            if (!allowMissingString && TokenUtil::toString(tokens).empty()) {
+                return ASTNode::simpleNode(this, tokens, ErrorReason::incomplete(
+                        tokens, "字符串参数内容为空"));
+            } else {
+                return ASTNode::simpleNode(this, tokens);
+            }
         }
         tokenReader.push();
         ASTNode result = tokenReader.readStringASTNode(this);

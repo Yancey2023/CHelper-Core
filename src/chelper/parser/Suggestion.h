@@ -32,11 +32,11 @@ namespace CHelper {
 
         [[nodiscard]] std::string onClick(Core *core, const std::string &before) const;
 
-        [[nodiscard]] inline size_t hashCode() const {
+        [[nodiscard]] size_t hashCode() const {
             return mHashCode;
         }
 
-        [[nodiscard]] inline bool equal(const Suggestion &suggestion) const {
+        [[nodiscard]] bool equal(const Suggestion &suggestion) const {
             return mHashCode == suggestion.mHashCode;
         }
 

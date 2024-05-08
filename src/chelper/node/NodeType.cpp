@@ -112,7 +112,7 @@ namespace CHelper::Node {
     std::unique_ptr<NodeType> NodeType::JSON_BOOLEAN = createJson<NodeJsonBoolean>("JSON_BOOLEAN");
     std::unique_ptr<NodeType> NodeType::JSON_NULL = createJson<NodeJsonNull>("JSON_NULL");
 
-    inline void registerNodeType(const std::unique_ptr<NodeType> &nodeType) {
+    void registerNodeType(const std::unique_ptr<NodeType> &nodeType) {
         NodeType::NODE_TYPES.push_back(nodeType.get());
     }
 

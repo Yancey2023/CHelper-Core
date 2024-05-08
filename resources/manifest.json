@@ -1,10 +1,10 @@
 {
-  "name": "1.20基础包",
+  "name": "1.21.0.23基础包",
   "description": "CHelper内置基础包",
-  "minecraftVersion": "1.20",
+  "minecraftVersion": "1.21.0.23",
   "author": "Yancey",
-  "updateDate": "2023-11-7",
-  "packId": "BasicPack-1.20",
+  "updateDate": "2024-05-08",
+  "packId": "BasicPack-1.21.0.23",
   "versionCode": 1,
   "isBasicPack": true,
   "isDefault": true

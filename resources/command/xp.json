@@ -4,18 +4,18 @@
   ],
   "description": "给予玩家经验",
   "start": [
-    "0"
+    "amount"
   ],
   "node": [
     {
       "type": "XP_INTEGER",
-      "id": "0",
+      "id": "amount",
       "brief": "经验值数量",
       "description": "给予玩家的经验值数量"
     },
     {
       "type": "TARGET_SELECTOR",
-      "id": "1",
+      "id": "player",
       "description": "命令作用的目标",
       "isOnlyOne": false,
       "isMustPlayer": false,
@@ -23,8 +23,7 @@
     }
   ],
   "ast": [
-    ["0", "1"],
-    ["0", "LF"],
-    ["1", "LF"]
+    ["amount", "player", "LF"],
+    ["player", "LF"]
   ]
 }

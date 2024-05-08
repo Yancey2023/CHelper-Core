@@ -18,7 +18,11 @@
           "description": "和平难度"
         },
         {
-          "name": "str",
+          "name": "easy",
+          "description": "简单难度"
+        },
+        {
+          "name": "normal",
           "description": "普通难度"
         },
         {

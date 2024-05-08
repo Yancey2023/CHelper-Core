@@ -1,14 +1,27 @@
 {
+  "name": [
+    "titleraw"
+  ],
+  "description": "控制屏幕标题(JSON)",
+  "start": [
+    "player"
+  ],
   "node": [
     {
-      "isMustPlayer": true,
-      "isOnlyOne": false,
-      "isMustNPC": false,
+      "type": "TARGET_SELECTOR",
+      "id": "player",
       "description": "要显示或清除屏幕标题的玩家",
-      "id": "0",
-      "type": "TARGET_SELECTOR"
+      "isOnlyOne": false,
+      "isMustPlayer": true,
+      "isMustNPC": false
     },
     {
+      "type": "NORMAL_ID",
+      "id": "clearMode",
+      "brief": "清除模式",
+      "description": "清除指定玩家屏幕标题或副标题",
+      "contentMode": false,
+      "ignoreError": true,
       "contents": [
         {
           "name": "clear",
@@ -18,23 +31,14 @@
           "name": "reset",
           "description": "将指定玩家的副标题清空，同时将淡入、持续、淡出时间设为默认值"
         }
-      ],
+      ]
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "titleLocation",
       "contentMode": false,
-      "brief": "清除模式",
-      "description": "清除指定玩家屏幕标题或副标题",
+      "description": "文字的位置",
       "ignoreError": true,
-      "id": "1",
-      "type": "NORMAL_ID"
-    },
-    {
-      "isMustPlayer": true,
-      "isOnlyOne": false,
-      "isMustNPC": false,
-      "description": "要显示或清除屏幕标题的玩家",
-      "id": "2",
-      "type": "TARGET_SELECTOR"
-    },
-    {
       "contents": [
         {
           "name": "title",
@@ -48,75 +52,51 @@
           "name": "actionbar",
           "description": "在指定玩家的动作栏上方显示指定文本"
         }
-      ],
-      "contentMode": false,
-      "description": "文字的位置",
-      "ignoreError": true,
-      "id": "3",
-      "type": "NORMAL_ID"
+      ]
     },
     {
+      "type": "JSON",
+      "id": "raw_json",
       "brief": "JSON文本",
       "description": "要显示的文本",
-      "key": "rawtext",
-      "id": "4",
-      "type": "JSON"
+      "key": "rawtext"
     },
     {
-      "isMustPlayer": true,
-      "isOnlyOne": false,
-      "isMustNPC": false,
-      "description": "要显示或清除屏幕标题的玩家",
-      "id": "5",
-      "type": "TARGET_SELECTOR"
-    },
-    {
+      "type": "TEXT",
+      "id": "times",
+      "description": "更改指定玩家屏幕标题的淡入、持续、淡出时间",
       "data": {
         "name": "times",
         "description": "更改指定玩家屏幕标题的淡入、持续、淡出时间"
-      },
-      "description": "更改指定玩家屏幕标题的淡入、持续、淡出时间",
-      "id": "6",
-      "type": "TEXT"
+      }
     },
     {
+      "type": "INTEGER",
+      "id": "fadeIn",
       "brief": "淡入时长",
-      "description": "幕标题的淡入时间的时长（单位为游戏刻）",
-      "id": "7",
-      "type": "INTEGER"
+      "description": "幕标题的淡入时间的时长（单位为游戏刻）"
     },
     {
+      "type": "INTEGER",
+      "id": "stay",
       "brief": "持续时长",
-      "description": "幕标题的持续时间的时长（单位为游戏刻）",
-      "id": "8",
-      "type": "INTEGER"
+      "description": "幕标题的持续时间的时长（单位为游戏刻）"
     },
     {
+      "type": "INTEGER",
+      "id": "fadeOut",
       "brief": "淡出时长",
-      "description": "幕标题的淡出时间的时长（单位为游戏刻）",
-      "id": "9",
-      "type": "INTEGER"
+      "description": "幕标题的淡出时间的时长（单位为游戏刻）"
     }
   ],
   "ast": [
-    ["0", "1"],
-    ["1", "LF"],
-    ["2", "3"],
-    ["3", "4"],
-    ["4", "LF"],
-    ["5", "6"],
-    ["6", "7"],
-    ["7", "8"],
-    ["8", "9"],
-    ["9", "LF"]
-  ],
-  "name": [
-    "titleraw"
-  ],
-  "start": [
-    "0",
-    "2",
-    "5"
-  ],
-  "description": "控制屏幕标题(JSON)"
+    ["player", "clearMode", "titleLocation", "times"],
+    ["clearMode", "LF"],
+    ["titleLocation", "raw_json"],
+    ["raw_json", "LF"],
+    ["times", "fadeIn"],
+    ["fadeIn", "stay"],
+    ["stay", "fadeOut"],
+    ["fadeOut", "LF"]
+  ]
 }

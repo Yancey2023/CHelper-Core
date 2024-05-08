@@ -14,14 +14,13 @@ namespace CHelper::Node {
 
     class NodeText : public NodeBase {
         const std::shared_ptr<NormalId> data;
-
-        ASTNode (*getTextASTNode)(const NodeBase *tokenReader, TokenReader &reader);
+        const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> getTextASTNode;
 
     public:
         NodeText(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
                  const std::shared_ptr<NormalId> &data,
-                 ASTNode(*getNormalIdASTNode)(const NodeBase *node, TokenReader &tokenReader) =
+                 const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)>& getTextASTNode =
                  [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                      return tokenReader.readStringASTNode(node);
                  });
