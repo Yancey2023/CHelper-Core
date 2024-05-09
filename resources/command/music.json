@@ -20,12 +20,20 @@
       }
     },
     {
-      "type": "NORMAL_ID",
+      "type": "STRING",
       "id": "trackName",
       "brief": "播放音乐名",
       "description": "必须为音乐名或record.<music_name>或music.game.<music_name>",
+      "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "trackNameWithSuggestion",
+      "brief": "播放音乐名",
+      "description": "必须为音乐名或record.<music_name>或music.game.<music_name>",
       "ignoreError": true,
-      "key": "sound"
+      "key": "music"
     },
     {
       "type": "FLOAT",
@@ -103,8 +111,9 @@
     }
   ],
   "ast": [
-    ["play", "trackName"],
+    ["play", "trackName", "trackNameWithSuggestion"],
     ["trackName", "volumeValue1"],
+    ["trackNameWithSuggestion", "volumeValue1"],
     ["volumeValue1", "fadeSeconds", "LF"],
     ["fadeSeconds", "repeatMode", "LF"],
     ["repeatMode", "LF"],
