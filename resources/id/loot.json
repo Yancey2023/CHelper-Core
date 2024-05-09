@@ -103,56 +103,43 @@
       "description": "要塞图书馆宝箱"
     },
     {
-      "name": "chests/trial_chambers/corridor",
-      "description": ""
+      "name": "chests/trial_chambers/corridor"
     },
     {
-      "name": "chests/trial_chambers/entrance",
-      "description": ""
+      "name": "chests/trial_chambers/entrance"
     },
     {
-      "name": "chests/trial_chambers/intersection",
-      "description": ""
+      "name": "chests/trial_chambers/intersection"
     },
     {
-      "name": "chests/trial_chambers/intersection_barrel",
-      "description": ""
+      "name": "chests/trial_chambers/intersection_barrel"
     },
     {
-      "name": "chests/trial_chambers/reward",
-      "description": ""
+      "name": "chests/trial_chambers/reward"
     },
     {
-      "name": "chests/trial_chambers/reward_common",
-      "description": ""
+      "name": "chests/trial_chambers/reward_common"
     },
     {
-      "name": "chests/trial_chambers/reward_ominous",
-      "description": ""
+      "name": "chests/trial_chambers/reward_ominous"
     },
     {
-      "name": "chests/trial_chambers/reward_ominous_common",
-      "description": ""
+      "name": "chests/trial_chambers/reward_ominous_common"
     },
     {
-      "name": "chests/trial_chambers/reward_ominous_rare",
-      "description": ""
+      "name": "chests/trial_chambers/reward_ominous_rare"
     },
     {
-      "name": "chests/trial_chambers/reward_ominous_unique",
-      "description": ""
+      "name": "chests/trial_chambers/reward_ominous_unique"
     },
     {
-      "name": "chests/trial_chambers/reward_rare",
-      "description": ""
+      "name": "chests/trial_chambers/reward_rare"
     },
     {
-      "name": "chests/trial_chambers/reward_unique",
-      "description": ""
+      "name": "chests/trial_chambers/reward_unique"
     },
     {
-      "name": "chests/trial_chambers/supply",
-      "description": ""
+      "name": "chests/trial_chambers/supply"
     },
     {
       "name": "chests/underwater_ruin_big",
@@ -235,24 +222,20 @@
       "description": "林地府邸宝箱"
     },
     {
-      "name": "dispensers/trial_chambers/chamber",
-      "description": ""
+      "name": "dispensers/trial_chambers/chamber"
     },
     {
-      "name": "dispensers/trial_chambers/corridor",
-      "description": ""
+      "name": "dispensers/trial_chambers/corridor"
     },
     {
-      "name": "dispensers/trial_chambers/water",
-      "description": ""
+      "name": "dispensers/trial_chambers/water"
     },
     {
       "name": "empty",
       "description": "不生成战利品"
     },
     {
-      "name": "entities/armadillo_brush",
-      "description": ""
+      "name": "entities/armadillo_brush"
     },
     {
       "name": "entities/armor_set_chain",
@@ -291,16 +274,13 @@
       "description": "船的掉落物"
     },
     {
-      "name": "entities/bogged",
-      "description": ""
+      "name": "entities/bogged"
     },
     {
-      "name": "entities/bogged_shear",
-      "description": ""
+      "name": "entities/bogged_shear"
     },
     {
-      "name": "entities/breeze",
-      "description": ""
+      "name": "entities/breeze"
     },
     {
       "name": "entities/brown_mooshroom_shear",
@@ -327,8 +307,7 @@
       "description": "小丑鱼的掉落物（不再使用）"
     },
     {
-      "name": "entities/cold_ocean_ruins_brushable_block",
-      "description": ""
+      "name": "entities/cold_ocean_ruins_brushable_block"
     },
     {
       "name": "entities/cow",
@@ -339,12 +318,10 @@
       "description": "苦力怕的掉落物"
     },
     {
-      "name": "entities/desert_pyramid_brushable_block",
-      "description": ""
+      "name": "entities/desert_pyramid_brushable_block"
     },
     {
-      "name": "entities/desert_well_brushable_block",
-      "description": ""
+      "name": "entities/desert_well_brushable_block"
     },
     {
       "name": "entities/dolphin",
@@ -367,8 +344,7 @@
       "description": "远古守卫者的掉落物"
     },
     {
-      "name": "entities/empty_brushable_block",
-      "description": ""
+      "name": "entities/empty_brushable_block"
     },
     {
       "name": "entities/enderman",
@@ -399,8 +375,7 @@
       "description": "恶魂的掉落物"
     },
     {
-      "name": "entities/giant",
-      "description": ""
+      "name": "entities/giant"
     },
     {
       "name": "entities/glow_squid",
@@ -491,8 +466,7 @@
       "description": "掠夺者的掉落物"
     },
     {
-      "name": "entities/pillager_captain",
-      "description": ""
+      "name": "entities/pillager_captain"
     },
     {
       "name": "entities/pillager_captain_equipment",
@@ -603,12 +577,10 @@
       "description": "装备鞍的炽足兽的掉落物"
     },
     {
-      "name": "entities/trail_ruins_brushable_block_common",
-      "description": ""
+      "name": "entities/trail_ruins_brushable_block_common"
     },
     {
-      "name": "entities/trail_ruins_brushable_block_rare",
-      "description": ""
+      "name": "entities/trail_ruins_brushable_block_rare"
     },
     {
       "name": "entities/tropicalfish",
@@ -639,8 +611,7 @@
       "description": "监守者的掉落物"
     },
     {
-      "name": "entities/warm_ocean_ruins_brushable_block",
-      "description": ""
+      "name": "entities/warm_ocean_ruins_brushable_block"
     },
     {
       "name": "entities/witch",
@@ -691,32 +662,26 @@
       "description": "僵尸猪灵炽足兽骑士的装备"
     },
     {
-      "name": "equipment/low_tier_items",
-      "description": ""
+      "name": "equipment/low_tier_items"
     },
     {
-      "name": "equipment/trial_chamber",
-      "description": ""
+      "name": "equipment/trial_chamber"
     },
     {
-      "name": "equipment/trial_chamber_chainmail",
-      "description": ""
+      "name": "equipment/trial_chamber_chainmail"
     },
     {
-      "name": "equipment/trial_chamber_diamond",
-      "description": ""
+      "name": "equipment/trial_chamber_diamond"
     },
     {
-      "name": "equipment/trial_chamber_iron",
-      "description": ""
+      "name": "equipment/trial_chamber_iron"
     },
     {
       "name": "gameplay/entities/mooshroom_milking",
       "description": "对哞菇使用碗所获得的产物"
     },
     {
-      "name": "gameplay/entities/sniffer_seeds",
-      "description": ""
+      "name": "gameplay/entities/sniffer_seeds"
     },
     {
       "name": "gameplay/fishing",
@@ -747,28 +712,22 @@
       "description": "在丛林生物群系中的钓鱼钓到的物品"
     },
     {
-      "name": "pots/trial_chambers/corridor",
-      "description": ""
+      "name": "pots/trial_chambers/corridor"
     },
     {
-      "name": "spawners/ominous/trial_chamber/consumables",
-      "description": ""
+      "name": "spawners/ominous/trial_chamber/consumables"
     },
     {
-      "name": "spawners/ominous/trial_chamber/key",
-      "description": ""
+      "name": "spawners/ominous/trial_chamber/key"
     },
     {
-      "name": "spawners/trial_chamber/consumables",
-      "description": ""
+      "name": "spawners/trial_chamber/consumables"
     },
     {
-      "name": "spawners/trial_chamber/items_to_drop_when_ominous",
-      "description": ""
+      "name": "spawners/trial_chamber/items_to_drop_when_ominous"
     },
     {
-      "name": "spawners/trial_chamber/key",
-      "description": ""
+      "name": "spawners/trial_chamber/key"
     }
   ]
 }

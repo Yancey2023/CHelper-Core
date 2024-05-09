@@ -3,672 +3,576 @@
   "type": "normal",
   "content": [
     {
-      "name": "minecraft:arrow_spell_emitter",
-      "description": ""
+      "name": "minecraft:arrow_spell_emitter"
     },
     {
-      "name": "minecraft:balloon_gas_particle",
-      "description": ""
+      "name": "minecraft:balloon_gas_particle"
     },
     {
-      "name": "minecraft:basic_bubble_particle",
-      "description": ""
+      "name": "minecraft:basic_bubble_particle"
     },
     {
-      "name": "minecraft:basic_bubble_particle_manual",
-      "description": ""
+      "name": "minecraft:basic_bubble_particle_manual"
     },
     {
-      "name": "minecraft:basic_crit_particle",
-      "description": ""
+      "name": "minecraft:basic_crit_particle"
     },
     {
       "name": "minecraft:basic_flame_particle",
-      "description": ""
+      "description": "火把、熔炉、岩浆怪着地和刷怪笼产生的火苗粒子"
     },
     {
-      "name": "minecraft:basic_portal_particle",
-      "description": ""
+      "name": "minecraft:basic_portal_particle"
     },
     {
       "name": "minecraft:basic_smoke_particle",
-      "description": ""
+      "description": "火把、点燃的TNT、漏斗、发射器、末地传送门、酿造台、刷怪笼、熔炉、恶魂火球、凋灵之首、凋灵、雨中的熔岩、营火上的食物、红石火把熄灭、往末地传送门框架上放置末影之眼、驯服生物产生的粒子"
     },
     {
       "name": "minecraft:bleach",
-      "description": ""
+      "description": "村民被玩家攻击、目睹玩家攻击熊猫（仅Java版）、无法进行繁殖、与床、工作站点方块或钟解除绑定（仅基岩版）时产生的愤怒粒子"
     },
     {
-      "name": "minecraft:block_destruct",
-      "description": ""
+      "name": "minecraft:block_destruct"
     },
     {
-      "name": "minecraft:block_slide",
-      "description": ""
+      "name": "minecraft:block_slide"
     },
     {
       "name": "minecraft:blue_flame_particle",
-      "description": ""
+      "description": "灵魂火把产生的火苗粒子"
     },
     {
       "name": "minecraft:breaking_item_icon",
-      "description": ""
+      "description": "玩家进食、物品损坏以及鸡蛋、末影之眼、喷溅药水、滞留药水、附魔之瓶破碎时产生的碎片"
     },
     {
-      "name": "minecraft:breaking_item_terrain",
-      "description": ""
+      "name": "minecraft:breaking_item_terrain"
     },
     {
-      "name": "minecraft:breeze_ground_particle",
-      "description": ""
+      "name": "minecraft:breeze_ground_particle"
     },
     {
-      "name": "minecraft:breeze_wind_explosion_emitter",
-      "description": ""
+      "name": "minecraft:breeze_wind_explosion_emitter"
     },
     {
-      "name": "minecraft:bubble_column_bubble",
-      "description": ""
+      "name": "minecraft:bubble_column_bubble"
     },
     {
       "name": "minecraft:bubble_column_down_particle",
-      "description": ""
+      "description": "水下岩浆块形成的涡流气泡柱"
     },
     {
       "name": "minecraft:bubble_column_up_particle",
-      "description": ""
+      "description": "水下灵魂沙产生的涌流气泡柱"
     },
     {
-      "name": "minecraft:camera_shoot_explosion",
-      "description": ""
+      "name": "minecraft:camera_shoot_explosion"
     },
     {
       "name": "minecraft:campfire_smoke_particle",
-      "description": ""
+      "description": "营火产生的烟雾"
     },
     {
       "name": "minecraft:campfire_tall_smoke_particle",
-      "description": ""
+      "description": "放置在干草捆上的营火产生的烟雾"
     },
     {
-      "name": "minecraft:candle_flame_particle",
-      "description": ""
+      "name": "minecraft:candle_flame_particle"
     },
     {
-      "name": "minecraft:cauldron_bubble_particle",
-      "description": ""
+      "name": "minecraft:cauldron_bubble_particle"
     },
     {
-      "name": "minecraft:cauldron_explosion_emitter",
-      "description": ""
+      "name": "minecraft:cauldron_explosion_emitter"
     },
     {
-      "name": "minecraft:cauldron_spell_emitter",
-      "description": ""
+      "name": "minecraft:cauldron_spell_emitter"
     },
     {
-      "name": "minecraft:cauldron_splash_particle",
-      "description": ""
+      "name": "minecraft:cauldron_splash_particle"
     },
     {
       "name": "minecraft:cherry_leaves_particle",
-      "description": ""
+      "description": "樱花树叶飘落的花瓣粒子"
     },
     {
-      "name": "minecraft:colored_flame_particle",
-      "description": ""
+      "name": "minecraft:colored_flame_particle"
     },
     {
-      "name": "minecraft:conduit_absorb_particle",
-      "description": ""
+      "name": "minecraft:conduit_absorb_particle"
     },
     {
-      "name": "minecraft:conduit_attack_emitter",
-      "description": ""
+      "name": "minecraft:conduit_attack_emitter"
     },
     {
       "name": "minecraft:conduit_particle",
-      "description": ""
+      "description": "激活的潮涌核心产生的粒子"
     },
     {
       "name": "minecraft:critical_hit_emitter",
-      "description": ""
+      "description": "玩家造成暴击、尖牙进行攻击、用蓄力完成的弓或装填完成的弩射出的箭后方产生的粒子"
     },
     {
-      "name": "minecraft:crop_growth_area_emitter",
-      "description": ""
+      "name": "minecraft:crop_growth_area_emitter"
     },
     {
       "name": "minecraft:crop_growth_emitter",
-      "description": ""
+      "description": "堆肥桶被填充时产生的粒子"
     },
     {
-      "name": "minecraft:death_explosion_emitter",
-      "description": ""
+      "name": "minecraft:death_explosion_emitter"
     },
     {
       "name": "minecraft:dolphin_move_particle",
-      "description": ""
+      "description": "海豚游泳时产生的轨迹粒子"
     },
     {
-      "name": "minecraft:dragon_breath_fire",
-      "description": ""
+      "name": "minecraft:dragon_breath_fire"
     },
     {
       "name": "minecraft:dragon_breath_lingering",
-      "description": ""
+      "description": "滞留在地面的龙息粒子"
     },
     {
       "name": "minecraft:dragon_breath_trail",
-      "description": ""
+      "description": "末影龙的龙息、末影龙火球在空中运动时的粒子"
     },
     {
-      "name": "minecraft:dragon_death_explosion_emitter",
-      "description": ""
+      "name": "minecraft:dragon_death_explosion_emitter"
     },
     {
-      "name": "minecraft:dragon_destroy_block",
-      "description": ""
+      "name": "minecraft:dragon_destroy_block"
     },
     {
-      "name": "minecraft:dragon_dying_explosion",
-      "description": ""
+      "name": "minecraft:dragon_dying_explosion"
     },
     {
       "name": "minecraft:dust_plume",
-      "description": ""
+      "description": "向饰纹陶罐中成功放置物品时产生的粒子"
     },
     {
-      "name": "minecraft:egg_destroy_emitter",
-      "description": ""
+      "name": "minecraft:egg_destroy_emitter"
     },
     {
       "name": "minecraft:electric_spark_particle",
-      "description": ""
+      "description": "闪电击中铜块的未涂蜡氧化变种时产生的粒子"
     },
     {
-      "name": "minecraft:elephant_tooth_paste_vapor_particle",
-      "description": ""
+      "name": "minecraft:elephant_tooth_paste_vapor_particle"
     },
     {
       "name": "minecraft:enchanting_table_particle",
-      "description": ""
+      "description": "从书架流入附魔台的符文粒子"
     },
     {
       "name": "minecraft:end_chest",
-      "description": ""
+      "description": "末影箱产生的粒子"
     },
     {
       "name": "minecraft:endrod",
-      "description": ""
+      "description": "末地烛、潜影弹产生的粒子"
     },
     {
-      "name": "minecraft:evocation_fang_particle",
-      "description": ""
+      "name": "minecraft:evocation_fang_particle"
     },
     {
       "name": "minecraft:evoker_spell",
-      "description": ""
+      "description": "带有状态效果的生物、凋灵护甲、区域效果云、药箭产生的粒子"
     },
     {
-      "name": "minecraft:explosion_manual",
-      "description": ""
+      "name": "minecraft:explosion_manual"
     },
     {
-      "name": "minecraft:explosion_particle",
-      "description": ""
+      "name": "minecraft:explosion_particle"
     },
     {
-      "name": "minecraft:eye_of_ender_bubble_particle",
-      "description": ""
+      "name": "minecraft:eye_of_ender_bubble_particle"
     },
     {
-      "name": "minecraft:eyeofender_death_explode_particle",
-      "description": ""
+      "name": "minecraft:eyeofender_death_explode_particle"
     },
     {
-      "name": "minecraft:falling_border_dust_particle",
-      "description": ""
+      "name": "minecraft:falling_border_dust_particle"
     },
     {
       "name": "minecraft:falling_dust",
-      "description": ""
+      "description": "浮空而未下落的沙子、沙砾、脚手架、混凝土粉末、铁砧和雪（仅基岩版）产生的粒子"
     },
     {
-      "name": "minecraft:falling_dust_concrete_powder_particle",
-      "description": ""
+      "name": "minecraft:falling_dust_concrete_powder_particle"
     },
     {
       "name": "minecraft:falling_dust_dragon_egg_particle",
-      "description": ""
+      "description": "浮空而未下落的沙子、沙砾、脚手架、混凝土粉末、铁砧和雪（仅基岩版）产生的粒子"
     },
     {
       "name": "minecraft:falling_dust_gravel_particle",
-      "description": ""
+      "description": "浮空而未下落的沙子、沙砾、脚手架、混凝土粉末、铁砧和雪（仅基岩版）产生的粒子"
     },
     {
       "name": "minecraft:falling_dust_red_sand_particle",
-      "description": ""
+      "description": "浮空而未下落的沙子、沙砾、脚手架、混凝土粉末、铁砧和雪（仅基岩版）产生的粒子"
     },
     {
       "name": "minecraft:falling_dust_sand_particle",
-      "description": ""
+      "description": "浮空而未下落的沙子、沙砾、脚手架、混凝土粉末、铁砧和雪（仅基岩版）产生的粒子"
     },
     {
       "name": "minecraft:falling_dust_scaffolding_particle",
-      "description": ""
+      "description": "浮空而未下落的沙子、沙砾、脚手架、混凝土粉末、铁砧和雪（仅基岩版）产生的粒子"
     },
     {
       "name": "minecraft:falling_dust_top_snow_particle",
-      "description": ""
+      "description": "浮空而未下落的沙子、沙砾、脚手架、混凝土粉末、铁砧和雪（仅基岩版）产生的粒子"
     },
     {
-      "name": "minecraft:fish_hook_particle",
-      "description": ""
+      "name": "minecraft:fish_hook_particle"
     },
     {
-      "name": "minecraft:fish_pos_particle",
-      "description": ""
+      "name": "minecraft:fish_pos_particle"
     },
     {
-      "name": "minecraft:glow_particle",
-      "description": ""
+      "name": "minecraft:glow_particle"
     },
     {
-      "name": "minecraft:guardian_attack_particle",
-      "description": ""
+      "name": "minecraft:guardian_attack_particle"
     },
     {
-      "name": "minecraft:guardian_water_move_particle",
-      "description": ""
+      "name": "minecraft:guardian_water_move_particle"
     },
     {
       "name": "minecraft:heart_particle",
-      "description": ""
+      "description": "生物繁殖或被驯服时出现的爱心粒子"
     },
     {
-      "name": "minecraft:honey_drip_particle",
-      "description": ""
+      "name": "minecraft:honey_drip_particle"
     },
     {
       "name": "minecraft:huge_explosion_emitter",
-      "description": ""
+      "description": "爆炸、末影龙死亡时出现的粒子"
     },
     {
-      "name": "minecraft:huge_explosion_lab_misc_emitter",
-      "description": ""
+      "name": "minecraft:huge_explosion_lab_misc_emitter"
     },
     {
-      "name": "minecraft:ice_evaporation_emitter",
-      "description": ""
+      "name": "minecraft:ice_evaporation_emitter"
     },
     {
-      "name": "minecraft:infested_ambient",
-      "description": ""
+      "name": "minecraft:infested_ambient"
     },
     {
-      "name": "minecraft:infested_emitter",
-      "description": ""
+      "name": "minecraft:infested_emitter"
     },
     {
-      "name": "minecraft:ink_emitter",
-      "description": ""
+      "name": "minecraft:ink_emitter"
     },
     {
-      "name": "minecraft:knockback_roar_particle",
-      "description": ""
+      "name": "minecraft:knockback_roar_particle"
     },
     {
-      "name": "minecraft:lab_table_heatblock_dust_particle",
-      "description": ""
+      "name": "minecraft:lab_table_heatblock_dust_particle"
     },
     {
-      "name": "minecraft:lab_table_misc_mystical_particle",
-      "description": ""
+      "name": "minecraft:lab_table_misc_mystical_particle"
     },
     {
       "name": "minecraft:large_explosion",
-      "description": ""
+      "description": "爆炸、末影龙死亡、哞菇被除菇时出现的粒子"
     },
     {
       "name": "minecraft:lava_drip_particle",
-      "description": ""
+      "description": "渗过方块滴落的熔岩粒子"
     },
     {
       "name": "minecraft:lava_particle",
-      "description": ""
+      "description": "熔岩产生的火花粒子"
     },
     {
       "name": "minecraft:llama_spit_smoke",
-      "description": ""
+      "description": "羊驼啐生物时产生的唾沫粒子"
     },
     {
-      "name": "minecraft:magnesium_salts_emitter",
-      "description": ""
+      "name": "minecraft:magnesium_salts_emitter"
     },
     {
-      "name": "minecraft:misc_fire_vapor_particle",
-      "description": ""
+      "name": "minecraft:misc_fire_vapor_particle"
     },
     {
-      "name": "minecraft:mob_block_spawn_emitter",
-      "description": ""
+      "name": "minecraft:mob_block_spawn_emitter"
     },
     {
       "name": "minecraft:mob_portal",
-      "description": ""
+      "description": "下界传送门、末影人、末影螨、末影珍珠、末影之眼、末影箱（仅Java版）、龙蛋、食用紫颂果后瞬移、末地折跃门产生的粒子"
     },
     {
       "name": "minecraft:mobflame_emitter",
-      "description": ""
+      "description": "实体着火时出现的火焰"
     },
     {
       "name": "minecraft:mobflame_single",
-      "description": ""
+      "description": "实体着火时出现的火焰"
     },
     {
-      "name": "minecraft:mobspell_ambient",
-      "description": ""
+      "name": "minecraft:mobspell_ambient"
     },
     {
       "name": "minecraft:mobspell_emitter",
-      "description": ""
+      "description": "瞬间治疗、瞬间伤害喷溅药水和滞留药水破碎、光灵箭在空中（仅Java版）时产生的粒子"
     },
     {
       "name": "minecraft:mycelium_dust_particle",
-      "description": ""
+      "description": "菌丝体产生的孢子粒子"
     },
     {
       "name": "minecraft:nectar_drip_particle",
-      "description": ""
+      "description": "沾有花粉的蜜蜂掉落的花粉"
     },
     {
       "name": "minecraft:note_particle",
-      "description": ""
+      "description": "激活音符盒或唱片机时出现的音符"
     },
     {
-      "name": "minecraft:obsidian_glow_dust_particle",
-      "description": ""
+      "name": "minecraft:obsidian_glow_dust_particle"
     },
     {
-      "name": "minecraft:obsidian_tear_particle",
-      "description": ""
+      "name": "minecraft:obsidian_tear_particle"
     },
     {
       "name": "minecraft:ominous_spawning_particle",
-      "description": ""
+      "description": "不祥之物生成器生成物品时释放的粒子"
     },
     {
-      "name": "minecraft:oozing_ambient",
-      "description": ""
+      "name": "minecraft:oozing_ambient"
     },
     {
-      "name": "minecraft:oozing_emitter",
-      "description": ""
+      "name": "minecraft:oozing_emitter"
     },
     {
-      "name": "minecraft:phantom_trail_particle",
-      "description": ""
+      "name": "minecraft:phantom_trail_particle"
     },
     {
-      "name": "minecraft:portal_directional",
-      "description": ""
+      "name": "minecraft:portal_directional"
     },
     {
-      "name": "minecraft:portal_east_west",
-      "description": ""
+      "name": "minecraft:portal_east_west"
     },
     {
-      "name": "minecraft:portal_north_south",
-      "description": ""
+      "name": "minecraft:portal_north_south"
     },
     {
-      "name": "minecraft:portal_reverse_particle",
-      "description": ""
+      "name": "minecraft:portal_reverse_particle"
     },
     {
-      "name": "minecraft:raid_omen_ambient",
-      "description": ""
+      "name": "minecraft:raid_omen_ambient"
     },
     {
-      "name": "minecraft:raid_omen_emitter",
-      "description": ""
+      "name": "minecraft:raid_omen_emitter"
     },
     {
-      "name": "minecraft:rain_splash_particle",
-      "description": ""
+      "name": "minecraft:rain_splash_particle"
     },
     {
       "name": "minecraft:redstone_ore_dust_particle",
-      "description": ""
+      "description": "红石矿石、红石火把、充能的红石线、充能的红石中继器、开启的拉杆（仅Java版）产生的粒子"
     },
     {
       "name": "minecraft:redstone_repeater_dust_particle",
-      "description": ""
+      "description": "红石矿石、红石火把、充能的红石线、充能的红石中继器、开启的拉杆（仅Java版）产生的粒子"
     },
     {
       "name": "minecraft:redstone_torch_dust_particle",
-      "description": ""
+      "description": "红石矿石、红石火把、充能的红石线、充能的红石中继器、开启的拉杆（仅Java版）产生的粒子"
     },
     {
       "name": "minecraft:redstone_wire_dust_particle",
-      "description": ""
+      "description": "红石矿石、红石火把、充能的红石线、充能的红石中继器、开启的拉杆（仅Java版）产生的粒子"
     },
     {
-      "name": "minecraft:rising_border_dust_particle",
-      "description": ""
+      "name": "minecraft:rising_border_dust_particle"
     },
     {
       "name": "minecraft:sculk_charge_particle",
-      "description": ""
+      "description": "幽匿信号蔓延过程中产生的气泡粒子"
     },
     {
       "name": "minecraft:sculk_charge_pop_particle",
-      "description": ""
+      "description": "幽匿信号丢失时产生的气泡破裂粒子"
     },
     {
       "name": "minecraft:sculk_sensor_redstone_particle",
-      "description": ""
+      "description": "激活的幽匿感测体产生的粒子"
     },
     {
       "name": "minecraft:sculk_soul_particle",
-      "description": ""
+      "description": "幽匿催发体探测到生物死亡时顶部出现的灵魂粒子"
     },
     {
       "name": "minecraft:shriek_particle",
-      "description": ""
+      "description": "幽匿尖啸体激活时产生的环状粒子"
     },
     {
-      "name": "minecraft:shulker_bullet",
-      "description": ""
+      "name": "minecraft:shulker_bullet"
     },
     {
-      "name": "minecraft:silverfish_grief_emitter",
-      "description": ""
+      "name": "minecraft:silverfish_grief_emitter"
     },
     {
-      "name": "minecraft:small_flame_particle",
-      "description": ""
+      "name": "minecraft:small_flame_particle"
     },
     {
-      "name": "minecraft:small_soul_fire_flame",
-      "description": ""
+      "name": "minecraft:small_soul_fire_flame"
     },
     {
-      "name": "minecraft:smash_ground_particle",
-      "description": ""
+      "name": "minecraft:smash_ground_particle"
     },
     {
-      "name": "minecraft:smash_ground_particle_center",
-      "description": ""
+      "name": "minecraft:smash_ground_particle_center"
     },
     {
       "name": "minecraft:snowflake_particle",
-      "description": ""
+      "description": "玩家在细雪中移动时产生的雪花粒子"
     },
     {
       "name": "minecraft:sonic_explosion",
-      "description": ""
+      "description": "监守者发射的音波粒子"
     },
     {
       "name": "minecraft:soul_particle",
-      "description": ""
+      "description": "穿戴灵魂疾行靴子的生物在灵魂沙或灵魂土上行走时出现的灵魂粒子"
     },
     {
       "name": "minecraft:sparkler_emitter",
-      "description": ""
+      "description": "烟花火箭的尾迹和爆炸（在Java版中，尾迹不会在粒子效果设为“最少”时显示）、海豚被喂食后产生的粒子"
     },
     {
       "name": "minecraft:splash_spell_emitter",
-      "description": ""
+      "description": "唤魔者施法、幻术师施法、钟发生回响（仅Java版）时出现的粒子， 以及喷溅药水、滞留药水、附魔之瓶破碎时产生的粒子"
     },
     {
-      "name": "minecraft:sponge_absorb_water_particle",
-      "description": ""
+      "name": "minecraft:sponge_absorb_water_particle"
     },
     {
       "name": "minecraft:spore_blossom_ambient_particle",
-      "description": ""
+      "description": "在孢子花周围发散的孢子粒子"
     },
     {
       "name": "minecraft:spore_blossom_shower_particle",
-      "description": ""
+      "description": "孢子花掉落的孢子粒子"
     },
     {
-      "name": "minecraft:squid_flee_particle",
-      "description": ""
+      "name": "minecraft:squid_flee_particle"
     },
     {
-      "name": "minecraft:squid_ink_bubble",
-      "description": ""
+      "name": "minecraft:squid_ink_bubble"
     },
     {
-      "name": "minecraft:squid_move_particle",
-      "description": ""
+      "name": "minecraft:squid_move_particle"
     },
     {
-      "name": "minecraft:stalactite_lava_drip_particle",
-      "description": ""
+      "name": "minecraft:stalactite_lava_drip_particle"
     },
     {
-      "name": "minecraft:stalactite_water_drip_particle",
-      "description": ""
+      "name": "minecraft:stalactite_water_drip_particle"
     },
     {
-      "name": "minecraft:stunned_emitter",
-      "description": ""
+      "name": "minecraft:stunned_emitter"
     },
     {
-      "name": "minecraft:totem_manual",
-      "description": ""
+      "name": "minecraft:totem_manual"
     },
     {
       "name": "minecraft:totem_particle",
-      "description": ""
+      "description": "激活不死图腾时出现的粒子"
     },
     {
-      "name": "minecraft:trial_omen_ambient",
-      "description": ""
+      "name": "minecraft:trial_omen_ambient"
     },
     {
-      "name": "minecraft:trial_omen_emitter",
-      "description": ""
+      "name": "minecraft:trial_omen_emitter"
     },
     {
-      "name": "minecraft:trial_omen_single",
-      "description": ""
+      "name": "minecraft:trial_omen_single"
     },
     {
       "name": "minecraft:trial_spawner_detection",
-      "description": ""
+      "description": "试炼刷怪笼激活瞬间产生的火花粒子"
     },
     {
       "name": "minecraft:trial_spawner_detection_ominous",
-      "description": ""
+      "description": "不祥试炼刷怪笼激活瞬间产生的火花粒子"
     },
     {
-      "name": "minecraft:underwater_torch_particle",
-      "description": ""
+      "name": "minecraft:underwater_torch_particle"
     },
     {
-      "name": "minecraft:vault_connection_particle",
-      "description": ""
+      "name": "minecraft:vault_connection_particle"
     },
     {
       "name": "minecraft:vibration_signal",
-      "description": ""
+      "description": "传向幽匿感测体、监守者或悦灵的振动粒子"
     },
     {
       "name": "minecraft:villager_angry",
-      "description": ""
+      "description": "村民被玩家攻击、目睹玩家攻击熊猫（仅Java版）、无法进行繁殖、与床、工作站点方块或钟解除绑定（仅基岩版）时产生的愤怒粒子"
     },
     {
       "name": "minecraft:villager_happy",
-      "description": ""
+      "description": "使用骨粉、与村民进行交易、喂养幼年动物、玩家踩踏海龟蛋（仅相同位置上海龟蛋数量有变化时）（仅Java版）、村民认领床、工作站点方块或钟时出现的粒子"
     },
     {
-      "name": "minecraft:warden_dig",
-      "description": ""
+      "name": "minecraft:warden_dig"
     },
     {
       "name": "minecraft:water_drip_particle",
-      "description": ""
+      "description": "渗过方块的水粒子以及湿海绵、下雨时的树叶产生的水粒子"
     },
     {
       "name": "minecraft:water_evaporation_actor_emitter",
-      "description": ""
+      "description": "烈焰人、火燃烧、动力矿车启动（仅Java版）、水和熔岩接触时出现的烟雾粒子"
     },
     {
       "name": "minecraft:water_evaporation_bucket_emitter",
-      "description": ""
+      "description": "着火的生物进入水中（仅基岩版）、生物死亡（仅Java版）时产生的烟雾粒子"
     },
     {
-      "name": "minecraft:water_evaporation_manual",
-      "description": ""
+      "name": "minecraft:water_evaporation_manual"
     },
     {
       "name": "minecraft:water_splash_particle",
-      "description": ""
+      "description": "渗过方块滴落以及着地的水粒子"
     },
     {
-      "name": "minecraft:water_splash_particle_manual",
-      "description": ""
+      "name": "minecraft:water_splash_particle_manual"
     },
     {
       "name": "minecraft:water_wake_particle",
-      "description": ""
+      "description": "钓鱼时出现的水花粒子"
     },
     {
-      "name": "minecraft:wax_particle",
-      "description": ""
+      "name": "minecraft:wax_particle"
     },
     {
-      "name": "minecraft:weaving_ambient",
-      "description": ""
+      "name": "minecraft:weaving_ambient"
     },
     {
-      "name": "minecraft:weaving_emitter",
-      "description": ""
+      "name": "minecraft:weaving_emitter"
     },
     {
       "name": "minecraft:white_smoke_particle",
-      "description": ""
+      "description": "合成器投掷出物品时出现的粒子"
     },
     {
-      "name": "minecraft:wind_charged_ambient",
-      "description": ""
+      "name": "minecraft:wind_charged_ambient"
     },
     {
-      "name": "minecraft:wind_charged_emitter",
-      "description": ""
+      "name": "minecraft:wind_charged_emitter"
     },
     {
-      "name": "minecraft:wind_explosion_emitter",
-      "description": ""
+      "name": "minecraft:wind_explosion_emitter"
     },
     {
-      "name": "minecraft:wither_boss_invulnerable",
-      "description": ""
+      "name": "minecraft:wither_boss_invulnerable"
     }
   ]
 }

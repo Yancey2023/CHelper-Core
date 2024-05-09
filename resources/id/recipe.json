@@ -3,296 +3,223 @@
   "type": "normal",
   "content": [
     {
-      "name": "ButtonAcacia_recipeId",
-      "description": ""
+      "name": "ButtonAcacia_recipeId"
     },
     {
-      "name": "ButtonBirch_recipeId",
-      "description": ""
+      "name": "ButtonBirch_recipeId"
     },
     {
-      "name": "ButtonDarkOak_recipeId",
-      "description": ""
+      "name": "ButtonDarkOak_recipeId"
     },
     {
-      "name": "ButtonJungle_recipeId",
-      "description": ""
+      "name": "ButtonJungle_recipeId"
     },
     {
-      "name": "ButtonSpruce_recipeId",
-      "description": ""
+      "name": "ButtonSpruce_recipeId"
     },
     {
-      "name": "Painting_Cobblestone_recipeId",
-      "description": ""
+      "name": "Painting_Cobblestone_recipeId"
     },
     {
-      "name": "Painting_NetherBrick_recipeId",
-      "description": ""
+      "name": "Painting_NetherBrick_recipeId"
     },
     {
-      "name": "Painting_VanillaBlocks_recipeId",
-      "description": ""
+      "name": "Painting_VanillaBlocks_recipeId"
     },
     {
-      "name": "PressurePlateAcacia_recipeId",
-      "description": ""
+      "name": "PressurePlateAcacia_recipeId"
     },
     {
-      "name": "PressurePlateBirch_recipeId",
-      "description": ""
+      "name": "PressurePlateBirch_recipeId"
     },
     {
-      "name": "PressurePlateDarkOak_recipeId",
-      "description": ""
+      "name": "PressurePlateDarkOak_recipeId"
     },
     {
-      "name": "PressurePlateJungle_recipeId",
-      "description": ""
+      "name": "PressurePlateJungle_recipeId"
     },
     {
-      "name": "PressurePlateSpruce_recipeId",
-      "description": ""
+      "name": "PressurePlateSpruce_recipeId"
     },
     {
-      "name": "Stick_bamboo_recipeId",
-      "description": ""
+      "name": "Stick_bamboo_recipeId"
     },
     {
-      "name": "StoneSlab4_recipeId",
-      "description": ""
+      "name": "StoneSlab4_recipeId"
     },
     {
-      "name": "StoneSlab4_stoneBrick_recipeId",
-      "description": ""
+      "name": "StoneSlab4_stoneBrick_recipeId"
     },
     {
-      "name": "StoneSlab_Brick_recipeId",
-      "description": ""
+      "name": "StoneSlab_Brick_recipeId"
     },
     {
-      "name": "StoneSlab_StoneBrick_recipeId",
-      "description": ""
+      "name": "StoneSlab_StoneBrick_recipeId"
     },
     {
-      "name": "StoneSlab_recipeId",
-      "description": ""
+      "name": "StoneSlab_recipeId"
     },
     {
-      "name": "TrapdoorAcacia_recipeId",
-      "description": ""
+      "name": "TrapdoorAcacia_recipeId"
     },
     {
-      "name": "TrapdoorBirch_recipeId",
-      "description": ""
+      "name": "TrapdoorBirch_recipeId"
     },
     {
-      "name": "TrapdoorDarkOak_recipeId",
-      "description": ""
+      "name": "TrapdoorDarkOak_recipeId"
     },
     {
-      "name": "TrapdoorJungle_recipeId",
-      "description": ""
+      "name": "TrapdoorJungle_recipeId"
     },
     {
-      "name": "TrapdoorSpruce_recipeId",
-      "description": ""
+      "name": "TrapdoorSpruce_recipeId"
     },
     {
-      "name": "Trapdoor_recipeId",
-      "description": ""
+      "name": "Trapdoor_recipeId"
     },
     {
-      "name": "WoodButton_recipeId",
-      "description": ""
+      "name": "WoodButton_recipeId"
     },
     {
-      "name": "WoodPressurePlate_recipeId",
-      "description": ""
+      "name": "WoodPressurePlate_recipeId"
     },
     {
-      "name": "acacia_stairs_acacia_recipeId",
-      "description": ""
+      "name": "acacia_stairs_acacia_recipeId"
     },
     {
-      "name": "bed_color_0",
-      "description": ""
+      "name": "bed_color_0"
     },
     {
-      "name": "bed_color_1",
-      "description": ""
+      "name": "bed_color_1"
     },
     {
-      "name": "bed_color_10",
-      "description": ""
+      "name": "bed_color_10"
     },
     {
-      "name": "bed_color_11",
-      "description": ""
+      "name": "bed_color_11"
     },
     {
-      "name": "bed_color_12",
-      "description": ""
+      "name": "bed_color_12"
     },
     {
-      "name": "bed_color_13",
-      "description": ""
+      "name": "bed_color_13"
     },
     {
-      "name": "bed_color_14",
-      "description": ""
+      "name": "bed_color_14"
     },
     {
-      "name": "bed_color_15",
-      "description": ""
+      "name": "bed_color_15"
     },
     {
-      "name": "bed_color_16",
-      "description": ""
+      "name": "bed_color_16"
     },
     {
-      "name": "bed_color_17",
-      "description": ""
+      "name": "bed_color_17"
     },
     {
-      "name": "bed_color_18",
-      "description": ""
+      "name": "bed_color_18"
     },
     {
-      "name": "bed_color_19",
-      "description": ""
+      "name": "bed_color_19"
     },
     {
-      "name": "bed_color_2",
-      "description": ""
+      "name": "bed_color_2"
     },
     {
-      "name": "bed_color_3",
-      "description": ""
+      "name": "bed_color_3"
     },
     {
-      "name": "bed_color_4",
-      "description": ""
+      "name": "bed_color_4"
     },
     {
-      "name": "bed_color_5",
-      "description": ""
+      "name": "bed_color_5"
     },
     {
-      "name": "bed_color_6",
-      "description": ""
+      "name": "bed_color_6"
     },
     {
-      "name": "bed_color_7",
-      "description": ""
+      "name": "bed_color_7"
     },
     {
-      "name": "bed_color_8",
-      "description": ""
+      "name": "bed_color_8"
     },
     {
-      "name": "bed_color_9",
-      "description": ""
+      "name": "bed_color_9"
     },
     {
-      "name": "bed_color_bamboo_0",
-      "description": ""
+      "name": "bed_color_bamboo_0"
     },
     {
-      "name": "bed_color_bamboo_1",
-      "description": ""
+      "name": "bed_color_bamboo_1"
     },
     {
-      "name": "bed_color_bamboo_10",
-      "description": ""
+      "name": "bed_color_bamboo_10"
     },
     {
-      "name": "bed_color_bamboo_11",
-      "description": ""
+      "name": "bed_color_bamboo_11"
     },
     {
-      "name": "bed_color_bamboo_12",
-      "description": ""
+      "name": "bed_color_bamboo_12"
     },
     {
-      "name": "bed_color_bamboo_13",
-      "description": ""
+      "name": "bed_color_bamboo_13"
     },
     {
-      "name": "bed_color_bamboo_14",
-      "description": ""
+      "name": "bed_color_bamboo_14"
     },
     {
-      "name": "bed_color_bamboo_15",
-      "description": ""
+      "name": "bed_color_bamboo_15"
     },
     {
-      "name": "bed_color_bamboo_2",
-      "description": ""
+      "name": "bed_color_bamboo_2"
     },
     {
-      "name": "bed_color_bamboo_3",
-      "description": ""
+      "name": "bed_color_bamboo_3"
     },
     {
-      "name": "bed_color_bamboo_4",
-      "description": ""
+      "name": "bed_color_bamboo_4"
     },
     {
-      "name": "bed_color_bamboo_5",
-      "description": ""
+      "name": "bed_color_bamboo_5"
     },
     {
-      "name": "bed_color_bamboo_6",
-      "description": ""
+      "name": "bed_color_bamboo_6"
     },
     {
-      "name": "bed_color_bamboo_7",
-      "description": ""
+      "name": "bed_color_bamboo_7"
     },
     {
-      "name": "bed_color_bamboo_8",
-      "description": ""
+      "name": "bed_color_bamboo_8"
     },
     {
-      "name": "bed_color_bamboo_9",
-      "description": ""
+      "name": "bed_color_bamboo_9"
     },
     {
-      "name": "birch_stairs_birch_recipeId",
-      "description": ""
+      "name": "birch_stairs_birch_recipeId"
     },
     {
-      "name": "chiseled_quartz_recipeId",
-      "description": ""
+      "name": "chiseled_quartz_recipeId"
     },
     {
-      "name": "chiseled_stonebrick_recipeId",
-      "description": ""
+      "name": "chiseled_stonebrick_recipeId"
     },
     {
-      "name": "dark_oak_stairs_dark_oak_recipeId",
-      "description": ""
+      "name": "dark_oak_stairs_dark_oak_recipeId"
     },
     {
-      "name": "decorated_pot_base_recipeId",
-      "description": ""
+      "name": "decorated_pot_base_recipeId"
     },
     {
-      "name": "heiroglyphs_redsandstone_recipeId",
-      "description": ""
+      "name": "heiroglyphs_redsandstone_recipeId"
     },
     {
-      "name": "heiroglyphs_sandstone_recipeId",
-      "description": ""
+      "name": "heiroglyphs_sandstone_recipeId"
     },
     {
-      "name": "jungle_stairs_jungle_recipeId",
-      "description": ""
+      "name": "jungle_stairs_jungle_recipeId"
     },
     {
-      "name": "lines_purpur_recipeId",
-      "description": ""
+      "name": "lines_purpur_recipeId"
     },
     {
       "name": "minecraft:Bookshelf_woodplanks_recipeId",
@@ -4775,2756 +4702,2069 @@
       "description": "\u003c工作台\u003e陶瓦*8+黄色染料-\u003e黄色陶瓦*8"
     },
     {
-      "name": "oak_stairs_oak_recipeId",
-      "description": ""
+      "name": "oak_stairs_oak_recipeId"
     },
     {
-      "name": "paper_sulphur_recipeId",
-      "description": ""
+      "name": "paper_sulphur_recipeId"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_0_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_0_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_10_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_10_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_11_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_11_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_12_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_12_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_13_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_13_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_14_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_14_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_15_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_15_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_16_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_16_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_17_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_17_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_18_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_18_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_19_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_19_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_1_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_1_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_2_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_2_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_3_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_3_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_4_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_4_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_5_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_5_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_6_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_6_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_7_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_7_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_8_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_8_9_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_block_9_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_block_9_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_0_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_0_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_10_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_10_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_11_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_11_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_12_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_12_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_13_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_13_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_14_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_14_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_15_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_15_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_16_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_16_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_17_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_17_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_18_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_18_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_19_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_19_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_1_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_1_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_2_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_2_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_3_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_3_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_4_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_4_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_5_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_5_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_6_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_6_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_7_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_7_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_8_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_8_0"
     },
     {
-      "name": "shulkerBox_shulker_box_color_dye_9_0",
-      "description": ""
+      "name": "shulkerBox_shulker_box_color_dye_9_0"
     },
     {
-      "name": "slab3_endstonebrick_recipeId",
-      "description": ""
+      "name": "slab3_endstonebrick_recipeId"
     },
     {
-      "name": "spruce_stairs_spruce_recipeId",
-      "description": ""
+      "name": "spruce_stairs_spruce_recipeId"
     },
     {
       "name": "stonecutter_stairs_from_polished_blackstone_bricks",
       "description": "\u003c切石机\u003e磨制黑石砖~\u003e磨制黑石砖楼梯"
     },
     {
-      "name": "stoneslab2_RedSandstone_recipeId",
-      "description": ""
+      "name": "stoneslab2_RedSandstone_recipeId"
     },
     {
-      "name": "stoneslab2_prismarine_bricks_recipeId",
-      "description": ""
+      "name": "stoneslab2_prismarine_bricks_recipeId"
     },
     {
-      "name": "stoneslab2_prismarine_recipeId",
-      "description": ""
+      "name": "stoneslab2_prismarine_recipeId"
     },
     {
-      "name": "stoneslab2_purpur_recipeId",
-      "description": ""
+      "name": "stoneslab2_purpur_recipeId"
     },
     {
-      "name": "stoneslab2_recipeId",
-      "description": ""
+      "name": "stoneslab2_recipeId"
     },
     {
-      "name": "stoneslab2_rednetherbrick_recipeId",
-      "description": ""
+      "name": "stoneslab2_rednetherbrick_recipeId"
     },
     {
-      "name": "stoneslab2_redsandstone_heiroglyphs_recipeId",
-      "description": ""
+      "name": "stoneslab2_redsandstone_heiroglyphs_recipeId"
     },
     {
-      "name": "stoneslab2_smoothsandstone_smooth_recipeId",
-      "description": ""
+      "name": "stoneslab2_smoothsandstone_smooth_recipeId"
     },
     {
-      "name": "stoneslab3_andesite_recipeId",
-      "description": ""
+      "name": "stoneslab3_andesite_recipeId"
     },
     {
-      "name": "stoneslab3_diorite_recipeId",
-      "description": ""
+      "name": "stoneslab3_diorite_recipeId"
     },
     {
-      "name": "stoneslab3_granite",
-      "description": ""
+      "name": "stoneslab3_granite"
     },
     {
-      "name": "stoneslab3_polishedGranite_GraniteSmooth_recipeId",
-      "description": ""
+      "name": "stoneslab3_polishedGranite_GraniteSmooth_recipeId"
     },
     {
-      "name": "stoneslab3_polished_andesite_andesitesmooth_recipeId",
-      "description": ""
+      "name": "stoneslab3_polished_andesite_andesitesmooth_recipeId"
     },
     {
-      "name": "stoneslab3_polished_diorite_dioritesmooth_recipeId",
-      "description": ""
+      "name": "stoneslab3_polished_diorite_dioritesmooth_recipeId"
     },
     {
-      "name": "stoneslab3_smooth_recipeId",
-      "description": ""
+      "name": "stoneslab3_smooth_recipeId"
     },
     {
-      "name": "stoneslab4_cut_redsandstone_cut_recipeId",
-      "description": ""
+      "name": "stoneslab4_cut_redsandstone_cut_recipeId"
     },
     {
-      "name": "stoneslab4_cut_sandstone_cut_recipeId",
-      "description": ""
+      "name": "stoneslab4_cut_sandstone_cut_recipeId"
     },
     {
-      "name": "stoneslab4_smoothquartz_smooth_recipeId",
-      "description": ""
+      "name": "stoneslab4_smoothquartz_smooth_recipeId"
     },
     {
-      "name": "stoneslab_quartz_recipeId",
-      "description": ""
+      "name": "stoneslab_quartz_recipeId"
     },
     {
-      "name": "stoneslab_recipeId",
-      "description": ""
+      "name": "stoneslab_recipeId"
     },
     {
-      "name": "stoneslab_sandstone_heiroglyphs_recipeId",
-      "description": ""
+      "name": "stoneslab_sandstone_heiroglyphs_recipeId"
     },
     {
-      "name": "weapon_arrow_recipe_10",
-      "description": ""
+      "name": "weapon_arrow_recipe_10"
     },
     {
-      "name": "weapon_arrow_recipe_11",
-      "description": ""
+      "name": "weapon_arrow_recipe_11"
     },
     {
-      "name": "weapon_arrow_recipe_12",
-      "description": ""
+      "name": "weapon_arrow_recipe_12"
     },
     {
-      "name": "weapon_arrow_recipe_13",
-      "description": ""
+      "name": "weapon_arrow_recipe_13"
     },
     {
-      "name": "weapon_arrow_recipe_14",
-      "description": ""
+      "name": "weapon_arrow_recipe_14"
     },
     {
-      "name": "weapon_arrow_recipe_15",
-      "description": ""
+      "name": "weapon_arrow_recipe_15"
     },
     {
-      "name": "weapon_arrow_recipe_16",
-      "description": ""
+      "name": "weapon_arrow_recipe_16"
     },
     {
-      "name": "weapon_arrow_recipe_17",
-      "description": ""
+      "name": "weapon_arrow_recipe_17"
     },
     {
-      "name": "weapon_arrow_recipe_18",
-      "description": ""
+      "name": "weapon_arrow_recipe_18"
     },
     {
-      "name": "weapon_arrow_recipe_19",
-      "description": ""
+      "name": "weapon_arrow_recipe_19"
     },
     {
-      "name": "weapon_arrow_recipe_20",
-      "description": ""
+      "name": "weapon_arrow_recipe_20"
     },
     {
-      "name": "weapon_arrow_recipe_21",
-      "description": ""
+      "name": "weapon_arrow_recipe_21"
     },
     {
-      "name": "weapon_arrow_recipe_22",
-      "description": ""
+      "name": "weapon_arrow_recipe_22"
     },
     {
-      "name": "weapon_arrow_recipe_23",
-      "description": ""
+      "name": "weapon_arrow_recipe_23"
     },
     {
-      "name": "weapon_arrow_recipe_24",
-      "description": ""
+      "name": "weapon_arrow_recipe_24"
     },
     {
-      "name": "weapon_arrow_recipe_25",
-      "description": ""
+      "name": "weapon_arrow_recipe_25"
     },
     {
-      "name": "weapon_arrow_recipe_26",
-      "description": ""
+      "name": "weapon_arrow_recipe_26"
     },
     {
-      "name": "weapon_arrow_recipe_27",
-      "description": ""
+      "name": "weapon_arrow_recipe_27"
     },
     {
-      "name": "weapon_arrow_recipe_28",
-      "description": ""
+      "name": "weapon_arrow_recipe_28"
     },
     {
-      "name": "weapon_arrow_recipe_29",
-      "description": ""
+      "name": "weapon_arrow_recipe_29"
     },
     {
-      "name": "weapon_arrow_recipe_30",
-      "description": ""
+      "name": "weapon_arrow_recipe_30"
     },
     {
-      "name": "weapon_arrow_recipe_31",
-      "description": ""
+      "name": "weapon_arrow_recipe_31"
     },
     {
-      "name": "weapon_arrow_recipe_32",
-      "description": ""
+      "name": "weapon_arrow_recipe_32"
     },
     {
-      "name": "weapon_arrow_recipe_33",
-      "description": ""
+      "name": "weapon_arrow_recipe_33"
     },
     {
-      "name": "weapon_arrow_recipe_34",
-      "description": ""
+      "name": "weapon_arrow_recipe_34"
     },
     {
-      "name": "weapon_arrow_recipe_35",
-      "description": ""
+      "name": "weapon_arrow_recipe_35"
     },
     {
-      "name": "weapon_arrow_recipe_36",
-      "description": ""
+      "name": "weapon_arrow_recipe_36"
     },
     {
-      "name": "weapon_arrow_recipe_37",
-      "description": ""
+      "name": "weapon_arrow_recipe_37"
     },
     {
-      "name": "weapon_arrow_recipe_38",
-      "description": ""
+      "name": "weapon_arrow_recipe_38"
     },
     {
-      "name": "weapon_arrow_recipe_39",
-      "description": ""
+      "name": "weapon_arrow_recipe_39"
     },
     {
-      "name": "weapon_arrow_recipe_40",
-      "description": ""
+      "name": "weapon_arrow_recipe_40"
     },
     {
-      "name": "weapon_arrow_recipe_41",
-      "description": ""
+      "name": "weapon_arrow_recipe_41"
     },
     {
-      "name": "weapon_arrow_recipe_42",
-      "description": ""
+      "name": "weapon_arrow_recipe_42"
     },
     {
-      "name": "weapon_arrow_recipe_43",
-      "description": ""
+      "name": "weapon_arrow_recipe_43"
     },
     {
-      "name": "weapon_arrow_recipe_44",
-      "description": ""
+      "name": "weapon_arrow_recipe_44"
     },
     {
-      "name": "weapon_arrow_recipe_45",
-      "description": ""
+      "name": "weapon_arrow_recipe_45"
     },
     {
-      "name": "weapon_arrow_recipe_46",
-      "description": ""
+      "name": "weapon_arrow_recipe_46"
     },
     {
-      "name": "weapon_arrow_recipe_5",
-      "description": ""
+      "name": "weapon_arrow_recipe_5"
     },
     {
-      "name": "weapon_arrow_recipe_6",
-      "description": ""
+      "name": "weapon_arrow_recipe_6"
     },
     {
-      "name": "weapon_arrow_recipe_7",
-      "description": ""
+      "name": "weapon_arrow_recipe_7"
     },
     {
-      "name": "weapon_arrow_recipe_8",
-      "description": ""
+      "name": "weapon_arrow_recipe_8"
     },
     {
-      "name": "weapon_arrow_recipe_9",
-      "description": ""
+      "name": "weapon_arrow_recipe_9"
     },
     {
-      "name": "wool_dye_wool_0_1",
-      "description": ""
+      "name": "wool_dye_wool_0_1"
     },
     {
-      "name": "wool_dye_wool_0_10",
-      "description": ""
+      "name": "wool_dye_wool_0_10"
     },
     {
-      "name": "wool_dye_wool_0_11",
-      "description": ""
+      "name": "wool_dye_wool_0_11"
     },
     {
-      "name": "wool_dye_wool_0_12",
-      "description": ""
+      "name": "wool_dye_wool_0_12"
     },
     {
-      "name": "wool_dye_wool_0_13",
-      "description": ""
+      "name": "wool_dye_wool_0_13"
     },
     {
-      "name": "wool_dye_wool_0_14",
-      "description": ""
+      "name": "wool_dye_wool_0_14"
     },
     {
-      "name": "wool_dye_wool_0_15",
-      "description": ""
+      "name": "wool_dye_wool_0_15"
     },
     {
-      "name": "wool_dye_wool_0_2",
-      "description": ""
+      "name": "wool_dye_wool_0_2"
     },
     {
-      "name": "wool_dye_wool_0_3",
-      "description": ""
+      "name": "wool_dye_wool_0_3"
     },
     {
-      "name": "wool_dye_wool_0_4",
-      "description": ""
+      "name": "wool_dye_wool_0_4"
     },
     {
-      "name": "wool_dye_wool_0_5",
-      "description": ""
+      "name": "wool_dye_wool_0_5"
     },
     {
-      "name": "wool_dye_wool_0_6",
-      "description": ""
+      "name": "wool_dye_wool_0_6"
     },
     {
-      "name": "wool_dye_wool_0_7",
-      "description": ""
+      "name": "wool_dye_wool_0_7"
     },
     {
-      "name": "wool_dye_wool_0_8",
-      "description": ""
+      "name": "wool_dye_wool_0_8"
     },
     {
-      "name": "wool_dye_wool_0_9",
-      "description": ""
+      "name": "wool_dye_wool_0_9"
     },
     {
-      "name": "wool_dye_wool_10_0",
-      "description": ""
+      "name": "wool_dye_wool_10_0"
     },
     {
-      "name": "wool_dye_wool_10_1",
-      "description": ""
+      "name": "wool_dye_wool_10_1"
     },
     {
-      "name": "wool_dye_wool_10_11",
-      "description": ""
+      "name": "wool_dye_wool_10_11"
     },
     {
-      "name": "wool_dye_wool_10_12",
-      "description": ""
+      "name": "wool_dye_wool_10_12"
     },
     {
-      "name": "wool_dye_wool_10_13",
-      "description": ""
+      "name": "wool_dye_wool_10_13"
     },
     {
-      "name": "wool_dye_wool_10_14",
-      "description": ""
+      "name": "wool_dye_wool_10_14"
     },
     {
-      "name": "wool_dye_wool_10_15",
-      "description": ""
+      "name": "wool_dye_wool_10_15"
     },
     {
-      "name": "wool_dye_wool_10_2",
-      "description": ""
+      "name": "wool_dye_wool_10_2"
     },
     {
-      "name": "wool_dye_wool_10_3",
-      "description": ""
+      "name": "wool_dye_wool_10_3"
     },
     {
-      "name": "wool_dye_wool_10_4",
-      "description": ""
+      "name": "wool_dye_wool_10_4"
     },
     {
-      "name": "wool_dye_wool_10_5",
-      "description": ""
+      "name": "wool_dye_wool_10_5"
     },
     {
-      "name": "wool_dye_wool_10_6",
-      "description": ""
+      "name": "wool_dye_wool_10_6"
     },
     {
-      "name": "wool_dye_wool_10_7",
-      "description": ""
+      "name": "wool_dye_wool_10_7"
     },
     {
-      "name": "wool_dye_wool_10_8",
-      "description": ""
+      "name": "wool_dye_wool_10_8"
     },
     {
-      "name": "wool_dye_wool_10_9",
-      "description": ""
+      "name": "wool_dye_wool_10_9"
     },
     {
-      "name": "wool_dye_wool_11_0",
-      "description": ""
+      "name": "wool_dye_wool_11_0"
     },
     {
-      "name": "wool_dye_wool_11_1",
-      "description": ""
+      "name": "wool_dye_wool_11_1"
     },
     {
-      "name": "wool_dye_wool_11_10",
-      "description": ""
+      "name": "wool_dye_wool_11_10"
     },
     {
-      "name": "wool_dye_wool_11_12",
-      "description": ""
+      "name": "wool_dye_wool_11_12"
     },
     {
-      "name": "wool_dye_wool_11_13",
-      "description": ""
+      "name": "wool_dye_wool_11_13"
     },
     {
-      "name": "wool_dye_wool_11_14",
-      "description": ""
+      "name": "wool_dye_wool_11_14"
     },
     {
-      "name": "wool_dye_wool_11_15",
-      "description": ""
+      "name": "wool_dye_wool_11_15"
     },
     {
-      "name": "wool_dye_wool_11_2",
-      "description": ""
+      "name": "wool_dye_wool_11_2"
     },
     {
-      "name": "wool_dye_wool_11_3",
-      "description": ""
+      "name": "wool_dye_wool_11_3"
     },
     {
-      "name": "wool_dye_wool_11_4",
-      "description": ""
+      "name": "wool_dye_wool_11_4"
     },
     {
-      "name": "wool_dye_wool_11_5",
-      "description": ""
+      "name": "wool_dye_wool_11_5"
     },
     {
-      "name": "wool_dye_wool_11_6",
-      "description": ""
+      "name": "wool_dye_wool_11_6"
     },
     {
-      "name": "wool_dye_wool_11_7",
-      "description": ""
+      "name": "wool_dye_wool_11_7"
     },
     {
-      "name": "wool_dye_wool_11_8",
-      "description": ""
+      "name": "wool_dye_wool_11_8"
     },
     {
-      "name": "wool_dye_wool_11_9",
-      "description": ""
+      "name": "wool_dye_wool_11_9"
     },
     {
-      "name": "wool_dye_wool_12_0",
-      "description": ""
+      "name": "wool_dye_wool_12_0"
     },
     {
-      "name": "wool_dye_wool_12_1",
-      "description": ""
+      "name": "wool_dye_wool_12_1"
     },
     {
-      "name": "wool_dye_wool_12_10",
-      "description": ""
+      "name": "wool_dye_wool_12_10"
     },
     {
-      "name": "wool_dye_wool_12_11",
-      "description": ""
+      "name": "wool_dye_wool_12_11"
     },
     {
-      "name": "wool_dye_wool_12_13",
-      "description": ""
+      "name": "wool_dye_wool_12_13"
     },
     {
-      "name": "wool_dye_wool_12_14",
-      "description": ""
+      "name": "wool_dye_wool_12_14"
     },
     {
-      "name": "wool_dye_wool_12_15",
-      "description": ""
+      "name": "wool_dye_wool_12_15"
     },
     {
-      "name": "wool_dye_wool_12_2",
-      "description": ""
+      "name": "wool_dye_wool_12_2"
     },
     {
-      "name": "wool_dye_wool_12_3",
-      "description": ""
+      "name": "wool_dye_wool_12_3"
     },
     {
-      "name": "wool_dye_wool_12_4",
-      "description": ""
+      "name": "wool_dye_wool_12_4"
     },
     {
-      "name": "wool_dye_wool_12_5",
-      "description": ""
+      "name": "wool_dye_wool_12_5"
     },
     {
-      "name": "wool_dye_wool_12_6",
-      "description": ""
+      "name": "wool_dye_wool_12_6"
     },
     {
-      "name": "wool_dye_wool_12_7",
-      "description": ""
+      "name": "wool_dye_wool_12_7"
     },
     {
-      "name": "wool_dye_wool_12_8",
-      "description": ""
+      "name": "wool_dye_wool_12_8"
     },
     {
-      "name": "wool_dye_wool_12_9",
-      "description": ""
+      "name": "wool_dye_wool_12_9"
     },
     {
-      "name": "wool_dye_wool_13_0",
-      "description": ""
+      "name": "wool_dye_wool_13_0"
     },
     {
-      "name": "wool_dye_wool_13_1",
-      "description": ""
+      "name": "wool_dye_wool_13_1"
     },
     {
-      "name": "wool_dye_wool_13_10",
-      "description": ""
+      "name": "wool_dye_wool_13_10"
     },
     {
-      "name": "wool_dye_wool_13_11",
-      "description": ""
+      "name": "wool_dye_wool_13_11"
     },
     {
-      "name": "wool_dye_wool_13_12",
-      "description": ""
+      "name": "wool_dye_wool_13_12"
     },
     {
-      "name": "wool_dye_wool_13_14",
-      "description": ""
+      "name": "wool_dye_wool_13_14"
     },
     {
-      "name": "wool_dye_wool_13_15",
-      "description": ""
+      "name": "wool_dye_wool_13_15"
     },
     {
-      "name": "wool_dye_wool_13_2",
-      "description": ""
+      "name": "wool_dye_wool_13_2"
     },
     {
-      "name": "wool_dye_wool_13_3",
-      "description": ""
+      "name": "wool_dye_wool_13_3"
     },
     {
-      "name": "wool_dye_wool_13_4",
-      "description": ""
+      "name": "wool_dye_wool_13_4"
     },
     {
-      "name": "wool_dye_wool_13_5",
-      "description": ""
+      "name": "wool_dye_wool_13_5"
     },
     {
-      "name": "wool_dye_wool_13_6",
-      "description": ""
+      "name": "wool_dye_wool_13_6"
     },
     {
-      "name": "wool_dye_wool_13_7",
-      "description": ""
+      "name": "wool_dye_wool_13_7"
     },
     {
-      "name": "wool_dye_wool_13_8",
-      "description": ""
+      "name": "wool_dye_wool_13_8"
     },
     {
-      "name": "wool_dye_wool_13_9",
-      "description": ""
+      "name": "wool_dye_wool_13_9"
     },
     {
-      "name": "wool_dye_wool_14_0",
-      "description": ""
+      "name": "wool_dye_wool_14_0"
     },
     {
-      "name": "wool_dye_wool_14_1",
-      "description": ""
+      "name": "wool_dye_wool_14_1"
     },
     {
-      "name": "wool_dye_wool_14_10",
-      "description": ""
+      "name": "wool_dye_wool_14_10"
     },
     {
-      "name": "wool_dye_wool_14_11",
-      "description": ""
+      "name": "wool_dye_wool_14_11"
     },
     {
-      "name": "wool_dye_wool_14_12",
-      "description": ""
+      "name": "wool_dye_wool_14_12"
     },
     {
-      "name": "wool_dye_wool_14_13",
-      "description": ""
+      "name": "wool_dye_wool_14_13"
     },
     {
-      "name": "wool_dye_wool_14_15",
-      "description": ""
+      "name": "wool_dye_wool_14_15"
     },
     {
-      "name": "wool_dye_wool_14_2",
-      "description": ""
+      "name": "wool_dye_wool_14_2"
     },
     {
-      "name": "wool_dye_wool_14_3",
-      "description": ""
+      "name": "wool_dye_wool_14_3"
     },
     {
-      "name": "wool_dye_wool_14_4",
-      "description": ""
+      "name": "wool_dye_wool_14_4"
     },
     {
-      "name": "wool_dye_wool_14_5",
-      "description": ""
+      "name": "wool_dye_wool_14_5"
     },
     {
-      "name": "wool_dye_wool_14_6",
-      "description": ""
+      "name": "wool_dye_wool_14_6"
     },
     {
-      "name": "wool_dye_wool_14_7",
-      "description": ""
+      "name": "wool_dye_wool_14_7"
     },
     {
-      "name": "wool_dye_wool_14_8",
-      "description": ""
+      "name": "wool_dye_wool_14_8"
     },
     {
-      "name": "wool_dye_wool_14_9",
-      "description": ""
+      "name": "wool_dye_wool_14_9"
     },
     {
-      "name": "wool_dye_wool_15_0",
-      "description": ""
+      "name": "wool_dye_wool_15_0"
     },
     {
-      "name": "wool_dye_wool_15_1",
-      "description": ""
+      "name": "wool_dye_wool_15_1"
     },
     {
-      "name": "wool_dye_wool_15_10",
-      "description": ""
+      "name": "wool_dye_wool_15_10"
     },
     {
-      "name": "wool_dye_wool_15_11",
-      "description": ""
+      "name": "wool_dye_wool_15_11"
     },
     {
-      "name": "wool_dye_wool_15_12",
-      "description": ""
+      "name": "wool_dye_wool_15_12"
     },
     {
-      "name": "wool_dye_wool_15_13",
-      "description": ""
+      "name": "wool_dye_wool_15_13"
     },
     {
-      "name": "wool_dye_wool_15_14",
-      "description": ""
+      "name": "wool_dye_wool_15_14"
     },
     {
-      "name": "wool_dye_wool_15_2",
-      "description": ""
+      "name": "wool_dye_wool_15_2"
     },
     {
-      "name": "wool_dye_wool_15_3",
-      "description": ""
+      "name": "wool_dye_wool_15_3"
     },
     {
-      "name": "wool_dye_wool_15_4",
-      "description": ""
+      "name": "wool_dye_wool_15_4"
     },
     {
-      "name": "wool_dye_wool_15_5",
-      "description": ""
+      "name": "wool_dye_wool_15_5"
     },
     {
-      "name": "wool_dye_wool_15_6",
-      "description": ""
+      "name": "wool_dye_wool_15_6"
     },
     {
-      "name": "wool_dye_wool_15_7",
-      "description": ""
+      "name": "wool_dye_wool_15_7"
     },
     {
-      "name": "wool_dye_wool_15_8",
-      "description": ""
+      "name": "wool_dye_wool_15_8"
     },
     {
-      "name": "wool_dye_wool_15_9",
-      "description": ""
+      "name": "wool_dye_wool_15_9"
     },
     {
-      "name": "wool_dye_wool_16_1",
-      "description": ""
+      "name": "wool_dye_wool_16_1"
     },
     {
-      "name": "wool_dye_wool_16_10",
-      "description": ""
+      "name": "wool_dye_wool_16_10"
     },
     {
-      "name": "wool_dye_wool_16_11",
-      "description": ""
+      "name": "wool_dye_wool_16_11"
     },
     {
-      "name": "wool_dye_wool_16_12",
-      "description": ""
+      "name": "wool_dye_wool_16_12"
     },
     {
-      "name": "wool_dye_wool_16_13",
-      "description": ""
+      "name": "wool_dye_wool_16_13"
     },
     {
-      "name": "wool_dye_wool_16_14",
-      "description": ""
+      "name": "wool_dye_wool_16_14"
     },
     {
-      "name": "wool_dye_wool_16_15",
-      "description": ""
+      "name": "wool_dye_wool_16_15"
     },
     {
-      "name": "wool_dye_wool_16_2",
-      "description": ""
+      "name": "wool_dye_wool_16_2"
     },
     {
-      "name": "wool_dye_wool_16_3",
-      "description": ""
+      "name": "wool_dye_wool_16_3"
     },
     {
-      "name": "wool_dye_wool_16_4",
-      "description": ""
+      "name": "wool_dye_wool_16_4"
     },
     {
-      "name": "wool_dye_wool_16_5",
-      "description": ""
+      "name": "wool_dye_wool_16_5"
     },
     {
-      "name": "wool_dye_wool_16_6",
-      "description": ""
+      "name": "wool_dye_wool_16_6"
     },
     {
-      "name": "wool_dye_wool_16_7",
-      "description": ""
+      "name": "wool_dye_wool_16_7"
     },
     {
-      "name": "wool_dye_wool_16_8",
-      "description": ""
+      "name": "wool_dye_wool_16_8"
     },
     {
-      "name": "wool_dye_wool_16_9",
-      "description": ""
+      "name": "wool_dye_wool_16_9"
     },
     {
-      "name": "wool_dye_wool_17_0",
-      "description": ""
+      "name": "wool_dye_wool_17_0"
     },
     {
-      "name": "wool_dye_wool_17_1",
-      "description": ""
+      "name": "wool_dye_wool_17_1"
     },
     {
-      "name": "wool_dye_wool_17_10",
-      "description": ""
+      "name": "wool_dye_wool_17_10"
     },
     {
-      "name": "wool_dye_wool_17_11",
-      "description": ""
+      "name": "wool_dye_wool_17_11"
     },
     {
-      "name": "wool_dye_wool_17_12",
-      "description": ""
+      "name": "wool_dye_wool_17_12"
     },
     {
-      "name": "wool_dye_wool_17_13",
-      "description": ""
+      "name": "wool_dye_wool_17_13"
     },
     {
-      "name": "wool_dye_wool_17_14",
-      "description": ""
+      "name": "wool_dye_wool_17_14"
     },
     {
-      "name": "wool_dye_wool_17_15",
-      "description": ""
+      "name": "wool_dye_wool_17_15"
     },
     {
-      "name": "wool_dye_wool_17_2",
-      "description": ""
+      "name": "wool_dye_wool_17_2"
     },
     {
-      "name": "wool_dye_wool_17_4",
-      "description": ""
+      "name": "wool_dye_wool_17_4"
     },
     {
-      "name": "wool_dye_wool_17_5",
-      "description": ""
+      "name": "wool_dye_wool_17_5"
     },
     {
-      "name": "wool_dye_wool_17_6",
-      "description": ""
+      "name": "wool_dye_wool_17_6"
     },
     {
-      "name": "wool_dye_wool_17_7",
-      "description": ""
+      "name": "wool_dye_wool_17_7"
     },
     {
-      "name": "wool_dye_wool_17_8",
-      "description": ""
+      "name": "wool_dye_wool_17_8"
     },
     {
-      "name": "wool_dye_wool_17_9",
-      "description": ""
+      "name": "wool_dye_wool_17_9"
     },
     {
-      "name": "wool_dye_wool_18_0",
-      "description": ""
+      "name": "wool_dye_wool_18_0"
     },
     {
-      "name": "wool_dye_wool_18_1",
-      "description": ""
+      "name": "wool_dye_wool_18_1"
     },
     {
-      "name": "wool_dye_wool_18_10",
-      "description": ""
+      "name": "wool_dye_wool_18_10"
     },
     {
-      "name": "wool_dye_wool_18_11",
-      "description": ""
+      "name": "wool_dye_wool_18_11"
     },
     {
-      "name": "wool_dye_wool_18_12",
-      "description": ""
+      "name": "wool_dye_wool_18_12"
     },
     {
-      "name": "wool_dye_wool_18_13",
-      "description": ""
+      "name": "wool_dye_wool_18_13"
     },
     {
-      "name": "wool_dye_wool_18_14",
-      "description": ""
+      "name": "wool_dye_wool_18_14"
     },
     {
-      "name": "wool_dye_wool_18_15",
-      "description": ""
+      "name": "wool_dye_wool_18_15"
     },
     {
-      "name": "wool_dye_wool_18_2",
-      "description": ""
+      "name": "wool_dye_wool_18_2"
     },
     {
-      "name": "wool_dye_wool_18_3",
-      "description": ""
+      "name": "wool_dye_wool_18_3"
     },
     {
-      "name": "wool_dye_wool_18_5",
-      "description": ""
+      "name": "wool_dye_wool_18_5"
     },
     {
-      "name": "wool_dye_wool_18_6",
-      "description": ""
+      "name": "wool_dye_wool_18_6"
     },
     {
-      "name": "wool_dye_wool_18_7",
-      "description": ""
+      "name": "wool_dye_wool_18_7"
     },
     {
-      "name": "wool_dye_wool_18_8",
-      "description": ""
+      "name": "wool_dye_wool_18_8"
     },
     {
-      "name": "wool_dye_wool_18_9",
-      "description": ""
+      "name": "wool_dye_wool_18_9"
     },
     {
-      "name": "wool_dye_wool_19_0",
-      "description": ""
+      "name": "wool_dye_wool_19_0"
     },
     {
-      "name": "wool_dye_wool_19_1",
-      "description": ""
+      "name": "wool_dye_wool_19_1"
     },
     {
-      "name": "wool_dye_wool_19_10",
-      "description": ""
+      "name": "wool_dye_wool_19_10"
     },
     {
-      "name": "wool_dye_wool_19_11",
-      "description": ""
+      "name": "wool_dye_wool_19_11"
     },
     {
-      "name": "wool_dye_wool_19_12",
-      "description": ""
+      "name": "wool_dye_wool_19_12"
     },
     {
-      "name": "wool_dye_wool_19_13",
-      "description": ""
+      "name": "wool_dye_wool_19_13"
     },
     {
-      "name": "wool_dye_wool_19_14",
-      "description": ""
+      "name": "wool_dye_wool_19_14"
     },
     {
-      "name": "wool_dye_wool_19_2",
-      "description": ""
+      "name": "wool_dye_wool_19_2"
     },
     {
-      "name": "wool_dye_wool_19_3",
-      "description": ""
+      "name": "wool_dye_wool_19_3"
     },
     {
-      "name": "wool_dye_wool_19_4",
-      "description": ""
+      "name": "wool_dye_wool_19_4"
     },
     {
-      "name": "wool_dye_wool_19_5",
-      "description": ""
+      "name": "wool_dye_wool_19_5"
     },
     {
-      "name": "wool_dye_wool_19_6",
-      "description": ""
+      "name": "wool_dye_wool_19_6"
     },
     {
-      "name": "wool_dye_wool_19_7",
-      "description": ""
+      "name": "wool_dye_wool_19_7"
     },
     {
-      "name": "wool_dye_wool_19_8",
-      "description": ""
+      "name": "wool_dye_wool_19_8"
     },
     {
-      "name": "wool_dye_wool_19_9",
-      "description": ""
+      "name": "wool_dye_wool_19_9"
     },
     {
-      "name": "wool_dye_wool_1_0",
-      "description": ""
+      "name": "wool_dye_wool_1_0"
     },
     {
-      "name": "wool_dye_wool_1_10",
-      "description": ""
+      "name": "wool_dye_wool_1_10"
     },
     {
-      "name": "wool_dye_wool_1_11",
-      "description": ""
+      "name": "wool_dye_wool_1_11"
     },
     {
-      "name": "wool_dye_wool_1_12",
-      "description": ""
+      "name": "wool_dye_wool_1_12"
     },
     {
-      "name": "wool_dye_wool_1_13",
-      "description": ""
+      "name": "wool_dye_wool_1_13"
     },
     {
-      "name": "wool_dye_wool_1_14",
-      "description": ""
+      "name": "wool_dye_wool_1_14"
     },
     {
-      "name": "wool_dye_wool_1_15",
-      "description": ""
+      "name": "wool_dye_wool_1_15"
     },
     {
-      "name": "wool_dye_wool_1_2",
-      "description": ""
+      "name": "wool_dye_wool_1_2"
     },
     {
-      "name": "wool_dye_wool_1_3",
-      "description": ""
+      "name": "wool_dye_wool_1_3"
     },
     {
-      "name": "wool_dye_wool_1_4",
-      "description": ""
+      "name": "wool_dye_wool_1_4"
     },
     {
-      "name": "wool_dye_wool_1_5",
-      "description": ""
+      "name": "wool_dye_wool_1_5"
     },
     {
-      "name": "wool_dye_wool_1_6",
-      "description": ""
+      "name": "wool_dye_wool_1_6"
     },
     {
-      "name": "wool_dye_wool_1_7",
-      "description": ""
+      "name": "wool_dye_wool_1_7"
     },
     {
-      "name": "wool_dye_wool_1_8",
-      "description": ""
+      "name": "wool_dye_wool_1_8"
     },
     {
-      "name": "wool_dye_wool_1_9",
-      "description": ""
+      "name": "wool_dye_wool_1_9"
     },
     {
-      "name": "wool_dye_wool_2_0",
-      "description": ""
+      "name": "wool_dye_wool_2_0"
     },
     {
-      "name": "wool_dye_wool_2_1",
-      "description": ""
+      "name": "wool_dye_wool_2_1"
     },
     {
-      "name": "wool_dye_wool_2_10",
-      "description": ""
+      "name": "wool_dye_wool_2_10"
     },
     {
-      "name": "wool_dye_wool_2_11",
-      "description": ""
+      "name": "wool_dye_wool_2_11"
     },
     {
-      "name": "wool_dye_wool_2_12",
-      "description": ""
+      "name": "wool_dye_wool_2_12"
     },
     {
-      "name": "wool_dye_wool_2_13",
-      "description": ""
+      "name": "wool_dye_wool_2_13"
     },
     {
-      "name": "wool_dye_wool_2_14",
-      "description": ""
+      "name": "wool_dye_wool_2_14"
     },
     {
-      "name": "wool_dye_wool_2_15",
-      "description": ""
+      "name": "wool_dye_wool_2_15"
     },
     {
-      "name": "wool_dye_wool_2_3",
-      "description": ""
+      "name": "wool_dye_wool_2_3"
     },
     {
-      "name": "wool_dye_wool_2_4",
-      "description": ""
+      "name": "wool_dye_wool_2_4"
     },
     {
-      "name": "wool_dye_wool_2_5",
-      "description": ""
+      "name": "wool_dye_wool_2_5"
     },
     {
-      "name": "wool_dye_wool_2_6",
-      "description": ""
+      "name": "wool_dye_wool_2_6"
     },
     {
-      "name": "wool_dye_wool_2_7",
-      "description": ""
+      "name": "wool_dye_wool_2_7"
     },
     {
-      "name": "wool_dye_wool_2_8",
-      "description": ""
+      "name": "wool_dye_wool_2_8"
     },
     {
-      "name": "wool_dye_wool_2_9",
-      "description": ""
+      "name": "wool_dye_wool_2_9"
     },
     {
-      "name": "wool_dye_wool_3_0",
-      "description": ""
+      "name": "wool_dye_wool_3_0"
     },
     {
-      "name": "wool_dye_wool_3_1",
-      "description": ""
+      "name": "wool_dye_wool_3_1"
     },
     {
-      "name": "wool_dye_wool_3_10",
-      "description": ""
+      "name": "wool_dye_wool_3_10"
     },
     {
-      "name": "wool_dye_wool_3_11",
-      "description": ""
+      "name": "wool_dye_wool_3_11"
     },
     {
-      "name": "wool_dye_wool_3_12",
-      "description": ""
+      "name": "wool_dye_wool_3_12"
     },
     {
-      "name": "wool_dye_wool_3_13",
-      "description": ""
+      "name": "wool_dye_wool_3_13"
     },
     {
-      "name": "wool_dye_wool_3_14",
-      "description": ""
+      "name": "wool_dye_wool_3_14"
     },
     {
-      "name": "wool_dye_wool_3_15",
-      "description": ""
+      "name": "wool_dye_wool_3_15"
     },
     {
-      "name": "wool_dye_wool_3_2",
-      "description": ""
+      "name": "wool_dye_wool_3_2"
     },
     {
-      "name": "wool_dye_wool_3_4",
-      "description": ""
+      "name": "wool_dye_wool_3_4"
     },
     {
-      "name": "wool_dye_wool_3_5",
-      "description": ""
+      "name": "wool_dye_wool_3_5"
     },
     {
-      "name": "wool_dye_wool_3_6",
-      "description": ""
+      "name": "wool_dye_wool_3_6"
     },
     {
-      "name": "wool_dye_wool_3_7",
-      "description": ""
+      "name": "wool_dye_wool_3_7"
     },
     {
-      "name": "wool_dye_wool_3_8",
-      "description": ""
+      "name": "wool_dye_wool_3_8"
     },
     {
-      "name": "wool_dye_wool_3_9",
-      "description": ""
+      "name": "wool_dye_wool_3_9"
     },
     {
-      "name": "wool_dye_wool_4_0",
-      "description": ""
+      "name": "wool_dye_wool_4_0"
     },
     {
-      "name": "wool_dye_wool_4_1",
-      "description": ""
+      "name": "wool_dye_wool_4_1"
     },
     {
-      "name": "wool_dye_wool_4_10",
-      "description": ""
+      "name": "wool_dye_wool_4_10"
     },
     {
-      "name": "wool_dye_wool_4_11",
-      "description": ""
+      "name": "wool_dye_wool_4_11"
     },
     {
-      "name": "wool_dye_wool_4_12",
-      "description": ""
+      "name": "wool_dye_wool_4_12"
     },
     {
-      "name": "wool_dye_wool_4_13",
-      "description": ""
+      "name": "wool_dye_wool_4_13"
     },
     {
-      "name": "wool_dye_wool_4_14",
-      "description": ""
+      "name": "wool_dye_wool_4_14"
     },
     {
-      "name": "wool_dye_wool_4_15",
-      "description": ""
+      "name": "wool_dye_wool_4_15"
     },
     {
-      "name": "wool_dye_wool_4_2",
-      "description": ""
+      "name": "wool_dye_wool_4_2"
     },
     {
-      "name": "wool_dye_wool_4_3",
-      "description": ""
+      "name": "wool_dye_wool_4_3"
     },
     {
-      "name": "wool_dye_wool_4_5",
-      "description": ""
+      "name": "wool_dye_wool_4_5"
     },
     {
-      "name": "wool_dye_wool_4_6",
-      "description": ""
+      "name": "wool_dye_wool_4_6"
     },
     {
-      "name": "wool_dye_wool_4_7",
-      "description": ""
+      "name": "wool_dye_wool_4_7"
     },
     {
-      "name": "wool_dye_wool_4_8",
-      "description": ""
+      "name": "wool_dye_wool_4_8"
     },
     {
-      "name": "wool_dye_wool_4_9",
-      "description": ""
+      "name": "wool_dye_wool_4_9"
     },
     {
-      "name": "wool_dye_wool_5_0",
-      "description": ""
+      "name": "wool_dye_wool_5_0"
     },
     {
-      "name": "wool_dye_wool_5_1",
-      "description": ""
+      "name": "wool_dye_wool_5_1"
     },
     {
-      "name": "wool_dye_wool_5_10",
-      "description": ""
+      "name": "wool_dye_wool_5_10"
     },
     {
-      "name": "wool_dye_wool_5_11",
-      "description": ""
+      "name": "wool_dye_wool_5_11"
     },
     {
-      "name": "wool_dye_wool_5_12",
-      "description": ""
+      "name": "wool_dye_wool_5_12"
     },
     {
-      "name": "wool_dye_wool_5_13",
-      "description": ""
+      "name": "wool_dye_wool_5_13"
     },
     {
-      "name": "wool_dye_wool_5_14",
-      "description": ""
+      "name": "wool_dye_wool_5_14"
     },
     {
-      "name": "wool_dye_wool_5_15",
-      "description": ""
+      "name": "wool_dye_wool_5_15"
     },
     {
-      "name": "wool_dye_wool_5_2",
-      "description": ""
+      "name": "wool_dye_wool_5_2"
     },
     {
-      "name": "wool_dye_wool_5_3",
-      "description": ""
+      "name": "wool_dye_wool_5_3"
     },
     {
-      "name": "wool_dye_wool_5_4",
-      "description": ""
+      "name": "wool_dye_wool_5_4"
     },
     {
-      "name": "wool_dye_wool_5_6",
-      "description": ""
+      "name": "wool_dye_wool_5_6"
     },
     {
-      "name": "wool_dye_wool_5_7",
-      "description": ""
+      "name": "wool_dye_wool_5_7"
     },
     {
-      "name": "wool_dye_wool_5_8",
-      "description": ""
+      "name": "wool_dye_wool_5_8"
     },
     {
-      "name": "wool_dye_wool_5_9",
-      "description": ""
+      "name": "wool_dye_wool_5_9"
     },
     {
-      "name": "wool_dye_wool_6_0",
-      "description": ""
+      "name": "wool_dye_wool_6_0"
     },
     {
-      "name": "wool_dye_wool_6_1",
-      "description": ""
+      "name": "wool_dye_wool_6_1"
     },
     {
-      "name": "wool_dye_wool_6_10",
-      "description": ""
+      "name": "wool_dye_wool_6_10"
     },
     {
-      "name": "wool_dye_wool_6_11",
-      "description": ""
+      "name": "wool_dye_wool_6_11"
     },
     {
-      "name": "wool_dye_wool_6_12",
-      "description": ""
+      "name": "wool_dye_wool_6_12"
     },
     {
-      "name": "wool_dye_wool_6_13",
-      "description": ""
+      "name": "wool_dye_wool_6_13"
     },
     {
-      "name": "wool_dye_wool_6_14",
-      "description": ""
+      "name": "wool_dye_wool_6_14"
     },
     {
-      "name": "wool_dye_wool_6_15",
-      "description": ""
+      "name": "wool_dye_wool_6_15"
     },
     {
-      "name": "wool_dye_wool_6_2",
-      "description": ""
+      "name": "wool_dye_wool_6_2"
     },
     {
-      "name": "wool_dye_wool_6_3",
-      "description": ""
+      "name": "wool_dye_wool_6_3"
     },
     {
-      "name": "wool_dye_wool_6_4",
-      "description": ""
+      "name": "wool_dye_wool_6_4"
     },
     {
-      "name": "wool_dye_wool_6_5",
-      "description": ""
+      "name": "wool_dye_wool_6_5"
     },
     {
-      "name": "wool_dye_wool_6_7",
-      "description": ""
+      "name": "wool_dye_wool_6_7"
     },
     {
-      "name": "wool_dye_wool_6_8",
-      "description": ""
+      "name": "wool_dye_wool_6_8"
     },
     {
-      "name": "wool_dye_wool_6_9",
-      "description": ""
+      "name": "wool_dye_wool_6_9"
     },
     {
-      "name": "wool_dye_wool_7_0",
-      "description": ""
+      "name": "wool_dye_wool_7_0"
     },
     {
-      "name": "wool_dye_wool_7_1",
-      "description": ""
+      "name": "wool_dye_wool_7_1"
     },
     {
-      "name": "wool_dye_wool_7_10",
-      "description": ""
+      "name": "wool_dye_wool_7_10"
     },
     {
-      "name": "wool_dye_wool_7_11",
-      "description": ""
+      "name": "wool_dye_wool_7_11"
     },
     {
-      "name": "wool_dye_wool_7_12",
-      "description": ""
+      "name": "wool_dye_wool_7_12"
     },
     {
-      "name": "wool_dye_wool_7_13",
-      "description": ""
+      "name": "wool_dye_wool_7_13"
     },
     {
-      "name": "wool_dye_wool_7_14",
-      "description": ""
+      "name": "wool_dye_wool_7_14"
     },
     {
-      "name": "wool_dye_wool_7_15",
-      "description": ""
+      "name": "wool_dye_wool_7_15"
     },
     {
-      "name": "wool_dye_wool_7_2",
-      "description": ""
+      "name": "wool_dye_wool_7_2"
     },
     {
-      "name": "wool_dye_wool_7_3",
-      "description": ""
+      "name": "wool_dye_wool_7_3"
     },
     {
-      "name": "wool_dye_wool_7_4",
-      "description": ""
+      "name": "wool_dye_wool_7_4"
     },
     {
-      "name": "wool_dye_wool_7_5",
-      "description": ""
+      "name": "wool_dye_wool_7_5"
     },
     {
-      "name": "wool_dye_wool_7_6",
-      "description": ""
+      "name": "wool_dye_wool_7_6"
     },
     {
-      "name": "wool_dye_wool_7_8",
-      "description": ""
+      "name": "wool_dye_wool_7_8"
     },
     {
-      "name": "wool_dye_wool_7_9",
-      "description": ""
+      "name": "wool_dye_wool_7_9"
     },
     {
-      "name": "wool_dye_wool_8_0",
-      "description": ""
+      "name": "wool_dye_wool_8_0"
     },
     {
-      "name": "wool_dye_wool_8_1",
-      "description": ""
+      "name": "wool_dye_wool_8_1"
     },
     {
-      "name": "wool_dye_wool_8_10",
-      "description": ""
+      "name": "wool_dye_wool_8_10"
     },
     {
-      "name": "wool_dye_wool_8_11",
-      "description": ""
+      "name": "wool_dye_wool_8_11"
     },
     {
-      "name": "wool_dye_wool_8_12",
-      "description": ""
+      "name": "wool_dye_wool_8_12"
     },
     {
-      "name": "wool_dye_wool_8_13",
-      "description": ""
+      "name": "wool_dye_wool_8_13"
     },
     {
-      "name": "wool_dye_wool_8_14",
-      "description": ""
+      "name": "wool_dye_wool_8_14"
     },
     {
-      "name": "wool_dye_wool_8_15",
-      "description": ""
+      "name": "wool_dye_wool_8_15"
     },
     {
-      "name": "wool_dye_wool_8_2",
-      "description": ""
+      "name": "wool_dye_wool_8_2"
     },
     {
-      "name": "wool_dye_wool_8_3",
-      "description": ""
+      "name": "wool_dye_wool_8_3"
     },
     {
-      "name": "wool_dye_wool_8_4",
-      "description": ""
+      "name": "wool_dye_wool_8_4"
     },
     {
-      "name": "wool_dye_wool_8_5",
-      "description": ""
+      "name": "wool_dye_wool_8_5"
     },
     {
-      "name": "wool_dye_wool_8_6",
-      "description": ""
+      "name": "wool_dye_wool_8_6"
     },
     {
-      "name": "wool_dye_wool_8_7",
-      "description": ""
+      "name": "wool_dye_wool_8_7"
     },
     {
-      "name": "wool_dye_wool_8_9",
-      "description": ""
+      "name": "wool_dye_wool_8_9"
     },
     {
-      "name": "wool_dye_wool_9_0",
-      "description": ""
+      "name": "wool_dye_wool_9_0"
     },
     {
-      "name": "wool_dye_wool_9_1",
-      "description": ""
+      "name": "wool_dye_wool_9_1"
     },
     {
-      "name": "wool_dye_wool_9_10",
-      "description": ""
+      "name": "wool_dye_wool_9_10"
     },
     {
-      "name": "wool_dye_wool_9_11",
-      "description": ""
+      "name": "wool_dye_wool_9_11"
     },
     {
-      "name": "wool_dye_wool_9_12",
-      "description": ""
+      "name": "wool_dye_wool_9_12"
     },
     {
-      "name": "wool_dye_wool_9_13",
-      "description": ""
+      "name": "wool_dye_wool_9_13"
     },
     {
-      "name": "wool_dye_wool_9_14",
-      "description": ""
+      "name": "wool_dye_wool_9_14"
     },
     {
-      "name": "wool_dye_wool_9_15",
-      "description": ""
+      "name": "wool_dye_wool_9_15"
     },
     {
-      "name": "wool_dye_wool_9_2",
-      "description": ""
+      "name": "wool_dye_wool_9_2"
     },
     {
-      "name": "wool_dye_wool_9_3",
-      "description": ""
+      "name": "wool_dye_wool_9_3"
     },
     {
-      "name": "wool_dye_wool_9_4",
-      "description": ""
+      "name": "wool_dye_wool_9_4"
     },
     {
-      "name": "wool_dye_wool_9_5",
-      "description": ""
+      "name": "wool_dye_wool_9_5"
     },
     {
-      "name": "wool_dye_wool_9_6",
-      "description": ""
+      "name": "wool_dye_wool_9_6"
     },
     {
-      "name": "wool_dye_wool_9_7",
-      "description": ""
+      "name": "wool_dye_wool_9_7"
     },
     {
-      "name": "wool_dye_wool_9_8",
-      "description": ""
+      "name": "wool_dye_wool_9_8"
     }
   ]
 }

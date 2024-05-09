@@ -31,8 +31,7 @@
       "description": "末影箱"
     },
     {
-      "name": "slot.equippable",
-      "description": ""
+      "name": "slot.equippable"
     },
     {
       "name": "slot.hotbar",

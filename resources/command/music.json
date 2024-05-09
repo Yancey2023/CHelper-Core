@@ -20,11 +20,12 @@
       }
     },
     {
-      "type": "STRING",
+      "type": "NORMAL_ID",
       "id": "trackName",
-      "description": "播放音乐名",
-      "canContainSpace": true,
-      "ignoreLater": false
+      "brief": "播放音乐名",
+      "description": "必须为音乐名或record.<music_name>或music.game.<music_name>",
+      "ignoreError": true,
+      "key": "sound"
     },
     {
       "type": "FLOAT",
