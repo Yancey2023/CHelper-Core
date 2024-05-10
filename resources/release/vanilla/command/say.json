@@ -1,0 +1,21 @@
+{
+  "name": [
+    "say"
+  ],
+  "description": "通过聊天框向多个玩家发送消息",
+  "start": [
+    "message"
+  ],
+  "node": [
+    {
+      "type": "STRING",
+      "id": "message",
+      "description": "消息",
+      "canContainSpace": true,
+      "ignoreLater": false
+    }
+  ],
+  "ast": [
+    ["message", "LF"]
+  ]
+}

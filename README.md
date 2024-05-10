@@ -24,8 +24,8 @@ Because I am leaning c++ now. I want to improve myself through this project.
 
 |                  project                   |                                    description                                     |                                           license                                            |
 |:------------------------------------------:|:----------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------:|
-| [Hedley](https://github.com/nlohmann/json) | enable compiler-specific features while retaining compatibility with all compilers | [Creative Commons Zero v1.0 Universal](https://github.com/nemequ/hedley/blob/master/COPYING) |
-|  [json](https://github.com/nemequ/hedley)  |                                JSON for Modern C++                                 |           [MIT license](https://github.com/nlohmann/json/blob/develop/LICENSE.MIT)           |
+| [Hedley](https://github.com/nemequ/hedley) | enable compiler-specific features while retaining compatibility with all compilers | [Creative Commons Zero v1.0 Universal](https://github.com/nemequ/hedley/blob/master/COPYING) |
+|  [json](https://github.com/nlohmann/json)  |                                JSON for Modern C++                                 |           [MIT license](https://github.com/nlohmann/json/blob/develop/LICENSE.MIT)           |
 
 ## CPack Document
 

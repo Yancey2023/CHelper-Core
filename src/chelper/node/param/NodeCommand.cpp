@@ -103,8 +103,8 @@ namespace CHelper::Node {
                     } else {
                         nameContain.push_back(std::make_shared<NormalId>(item2, item->description));
                     }
+                    flag = true;
                 }
-                flag = true;
             }
             if (HEDLEY_UNLIKELY(flag)) {
                 continue;

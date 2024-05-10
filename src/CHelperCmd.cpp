@@ -8,21 +8,35 @@
 #include "chelper/Core.h"
 
 int main() {
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
 //                        R"(D:\CLion\project\CHelper-Core\test\test.txt)",
 //                        false);
-//    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
+//    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources/beta/vanilla)",
 //                        R"(/home/yancey/CLionProjects/CHelper/test/test.txt)",
 //                        true);
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)",
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
 //                        std::vector<std::string>{"execute run clear "}, false);
-//    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources)",
+//    CHelper::Test::test(R"(/home/yancey/CLionProjects/CHelper/resources/beta/vanilla)",
 //                        std::vector<std::string>{"give @s "}, true);
-//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources)", {""}, false);
+//    CHelper::Test::test(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)", {""}, false);
 //    CHelper::Test::test4(R"(D:\CLion\project\CHelper-Core\resources)",
 //                         R"(D:\CLion\project\CHelper-Core\run\cpack.json)");
-    CHelper::Test::test5(R"(D:\CLion\project\CHelper-Core\resources)",
-                         R"(D:\CLion\project\CHelper-Core\run\cpack.dat)");
+    // 这些代码用于生成安卓应用使用的资源包
+    // release
+    CHelper::Test::test5(R"(D:\CLion\project\CHelper-Core\resources\release\vanilla)",
+                         R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.20.80.05.cpack)");
+    CHelper::Test::test5(R"(D:\CLion\project\CHelper-Core\resources\release\experiment)",
+                         R"(D:\CLion\project\CHelper-Core\run\release-experiment-1.20.80.05.cpack)");
+    // beta
+    CHelper::Test::test5(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
+                         R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.0.23.cpack)");
+    CHelper::Test::test5(R"(D:\CLion\project\CHelper-Core\resources\beta\experiment)",
+                         R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.0.23.cpack)");
+    // netease
+//    CHelper::Test::test5(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
+//                         R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
+//    CHelper::Test::test5(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
+//                         R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
     return 0;
 }
 

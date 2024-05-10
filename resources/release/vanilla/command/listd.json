@@ -1,0 +1,35 @@
+{
+  "name": [
+    "listd"
+  ],
+  "description": "列出在服务器上的玩家（隐藏命令）",
+  "start": [
+    "details"
+  ],
+  "node": [
+    {
+      "type": "NORMAL_ID",
+      "id": "details",
+      "brief": "内容",
+      "description": "要列出的内容",
+      "ignoreError": true,
+      "contents": [
+        {
+          "name": "ids",
+          "description": "玩家的ID"
+        },
+        {
+          "name": "stats",
+          "description": "玩家的统计"
+        },
+        {
+          "name": "uuids",
+          "description": "玩家的UUID"
+        }
+      ]
+    }
+  ],
+  "ast": [
+    ["details", "LF"]
+  ]
+}

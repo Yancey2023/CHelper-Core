@@ -65,6 +65,8 @@ namespace CHelper {
 
         void writeBsonToFile(const std::filesystem::path &path) const;
 
+//        void writeBinToFile(const std::ostream &ostream) const;
+
         [[nodiscard]] std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
         getNormalId(const std::string &key) const;
 

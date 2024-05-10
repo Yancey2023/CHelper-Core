@@ -1,0 +1,134 @@
+{
+  "id": "gameRulesForBoolean",
+  "type": "normal",
+  "content": [
+    {
+      "name": "commandblockoutput",
+      "description": "命令执行时是否在控制台进行文本提示"
+    },
+    {
+      "name": "commandblocksenabled",
+      "description": "是否启用命令方块"
+    },
+    {
+      "name": "dodaylightcycle",
+      "description": "是否启用日夜交替"
+    },
+    {
+      "name": "doentitydrops",
+      "description": "非生物实体是否有掉落物"
+    },
+    {
+      "name": "dofiretick",
+      "description": "火是否传播及自然熄灭"
+    },
+    {
+      "name": "doimmediaterespawn",
+      "description": "玩家死亡后是否立即重生"
+    },
+    {
+      "name": "doinsomnia",
+      "description": "幻翼是否在夜晚生成"
+    },
+    {
+      "name": "dolimitedcrafting",
+      "description": "是否仅能通过已解锁的配方进行合成"
+    },
+    {
+      "name": "domobloot",
+      "description": "生物是否掉落物品"
+    },
+    {
+      "name": "domobspawning",
+      "description": "生物是否自然生成"
+    },
+    {
+      "name": "dotiledrops",
+      "description": "方块被破坏时是否有掉落物"
+    },
+    {
+      "name": "doweathercycle",
+      "description": "天气是否自然变化"
+    },
+    {
+      "name": "drowningdamage",
+      "description": "玩家是否承受窒息或溺水伤害"
+    },
+    {
+      "name": "falldamage",
+      "description": "玩家是否承受跌落伤害"
+    },
+    {
+      "name": "firedamage",
+      "description": "玩家是否承受火焰伤害"
+    },
+    {
+      "name": "freezedamage",
+      "description": "玩家是否承受冰冻伤害"
+    },
+    {
+      "name": "keepinventory",
+      "description": "玩家死亡后是否保留物品和经验"
+    },
+    {
+      "name": "mobgriefing",
+      "description": "生物是否能改变、破坏方块及捡起物品"
+    },
+    {
+      "name": "naturalregeneration",
+      "description": "玩家是否能在饥饿值足够时自然恢复生命值"
+    },
+    {
+      "name": "projectilescanbreakblocks",
+      "description": "弹射物是否能够破坏射中的特定类型方块"
+    },
+    {
+      "name": "pvp",
+      "description": "是否允许玩家互相攻击"
+    },
+    {
+      "name": "recipesunlock",
+      "description": "是否启用配方解锁机制"
+    },
+    {
+      "name": "respawnblocksexplode",
+      "description": "重生点方块是否爆炸"
+    },
+    {
+      "name": "sendcommandfeedback",
+      "description": "聊天栏是否显示玩家执行命令的返回信息"
+    },
+    {
+      "name": "showbordereffect",
+      "description": "是否显示边界的粒子效果"
+    },
+    {
+      "name": "showcoordinates",
+      "description": "是否显示坐标"
+    },
+    {
+      "name": "showdaysplayed",
+      "description": "是否显示游玩天数"
+    },
+    {
+      "name": "showdeathmessages",
+      "description": "是否在聊天框中显示玩家以及驯养宠物的死亡信息"
+    },
+    {
+      "name": "showrecipemessages",
+      "description": "是否显示配方解锁消息"
+    },
+    {
+      "name": "showtags",
+      "description": "是否显示物品组件标记"
+    },
+    {
+      "name": "tntexplodes",
+      "description": "TNT激活后是否爆炸"
+    },
+    {
+      "name": "tntexplosiondropdecay",
+      "description": "TNT爆炸是否会使一部分方块不掉落"
+    }
+  ]
+}

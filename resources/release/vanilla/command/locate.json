@@ -1,0 +1,146 @@
+{
+  "name": [
+    "locate"
+  ],
+  "description": "在聊天框中为命令执行者显示给定类型结构或生物群系的最近坐标和距离",
+  "start": [
+    "biome",
+    "structure"
+  ],
+  "node": [
+    {
+      "type": "TEXT",
+      "id": "biome",
+      "description": "定位生物群系",
+      "data": {
+        "name": "biome",
+        "description": "定位生物群系"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "structure",
+      "description": "定位结构",
+      "data": {
+        "name": "structure",
+        "description": "定位结构"
+      }
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "structureId",
+      "brief": "结构",
+      "description": "要定位的结构的命名空间ID",
+      "ignoreError": true,
+      "contents": [
+        {
+          "name": "ancientcity",
+          "description": "远古城市"
+        },
+        {
+          "name": "ancient_city",
+          "description": "远古城市"
+        },
+        {
+          "name": "buriedtreasure",
+          "description": "埋藏的宝藏"
+        },
+        {
+          "name": "buried_treasure",
+          "description": "埋藏的宝藏"
+        },
+        {
+          "name": "endcity",
+          "description": "末地城"
+        },
+        {
+          "name": "end_city",
+          "description": "末地城"
+        },
+        {
+          "name": "fortress",
+          "description": "下次要塞"
+        },
+        {
+          "name": "mansion",
+          "description": "林地府邸"
+        },
+        {
+          "name": "mineshaft",
+          "description": "废弃矿井"
+        },
+        {
+          "name": "monument",
+          "description": "海底神殿"
+        },
+        {
+          "name": "ruins",
+          "description": "海底废墟"
+        },
+        {
+          "name": "shipwreck",
+          "description": "沉船"
+        },
+        {
+          "name": "stronghold",
+          "description": "要塞"
+        },
+        {
+          "name": "temple",
+          "description": "沙漠神殿，雪屋，丛林神庙，女巫小屋"
+        },
+        {
+          "name": "village",
+          "description": "村庄"
+        },
+        {
+          "name": "pillageroutpost",
+          "description": "掠夺者前哨站"
+        },
+        {
+          "name": "pillager_outpost",
+          "description": "掠夺者前哨站"
+        },
+        {
+          "name": "bastionremnant",
+          "description": "堡垒遗迹(地狱堡垒)"
+        },
+        {
+          "name": "bastion_remnant",
+          "description": "堡垒遗迹(地狱堡垒)"
+        },
+        {
+          "name": "ruinedportal",
+          "description": "废弃传送门"
+        },
+        {
+          "name": "ruined_portal",
+          "description": "废弃传送门"
+        }
+      ]
+    },
+    {
+      "type": "BOOLEAN",
+      "id": "useNewChunksOnly",
+      "brief": "是否仅定位在尚未生成的区块中的结构",
+      "description": "是否仅定位在尚未生成的区块中的结构",
+      "descriptionTrue": "仅定位在尚未生成的区块中的最近结构",
+      "descriptionFalse": "定位最近结构"
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "biomeId",
+      "brief": "生物群系",
+      "description": "要定位的生物群系的命名空间ID",
+      "ignoreError": true,
+      "key": "biome"
+    }
+  ],
+  "ast": [
+    ["biome", "biomeId"],
+    ["biomeId", "LF"],
+    ["structure", "structureId"],
+    ["structureId", "useNewChunksOnly", "LF"],
+    ["useNewChunksOnly", "LF"]
+  ]
+}

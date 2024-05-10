@@ -1,0 +1,94 @@
+{
+  "name": [
+    "teleport",
+    "tp"
+  ],
+  "description": "传送实体到指定地点，并修改其旋转角度",
+  "start": [
+    "victim",
+    "destinationTarget",
+    "destinationPosition"
+  ],
+  "node": [
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "victim",
+      "description": "要被传送的实体",
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
+    },
+    {
+      "type": "BOOLEAN",
+      "id": "checkForBlocks",
+      "brief": "是否检测目的地方块遮挡情况",
+      "description": "是否检测目的地方块遮挡情况",
+      "descriptionTrue": "只当目的地没有实体无法存在其中的方块遮挡时，传送才会生效",
+      "descriptionFalse": "不进行检查，直接进行传送"
+    },
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "destinationTarget",
+      "description": "要被传送到的实体",
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
+    },
+    {
+      "type": "POSITION",
+      "id": "destinationPosition",
+      "brief": "目的地坐标",
+      "description": "要被传送到的坐标"
+    },
+    {
+      "type": "RELATIVE_FLOAT",
+      "id": "yRot",
+      "brief": "ry",
+      "description": "实体传送后的y轴旋转角度",
+      "isMustAfterWhiteSpace": false,
+      "canUseCaretNotation": false
+    },
+    {
+      "type": "RELATIVE_FLOAT",
+      "id": "xRot",
+      "brief": "rx",
+      "description": "实体传送后的x轴旋转角度",
+      "isMustAfterWhiteSpace": false,
+      "canUseCaretNotation": false
+    },
+    {
+      "type": "TEXT",
+      "id": "facing",
+      "description": "使被传送的实体面向某个坐标或另一个实体",
+      "data": {
+        "name": "facing",
+        "description": "使被传送的实体面向某个坐标或另一个实体"
+      }
+    },
+    {
+      "type": "POSITION",
+      "id": "lookAtPosition",
+      "brief": "朝向的坐标",
+      "description": "实体传送后朝向的坐标"
+    },
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "lookAtEntity",
+      "description": "该实体朝向的实体",
+      "isMustPlayer": false,
+      "isOnlyOne": true,
+      "isMustNPC": false
+    }
+  ],
+  "ast": [
+    ["destinationTarget", "checkForBlocks", "LF"],
+    ["checkForBlocks", "LF"],
+    ["victim", "destinationTarget", "destinationPosition"],
+    ["destinationPosition", "checkForBlocks", "yRot", "facing", "LF"],
+    ["yRot", "xRot"],
+    ["xRot", "checkForBlocks", "LF"],
+    ["facing", "lookAtPosition", "lookAtEntity"],
+    ["lookAtPosition", "checkForBlocks"],
+    ["lookAtEntity", "checkForBlocks"]
+  ]
+}

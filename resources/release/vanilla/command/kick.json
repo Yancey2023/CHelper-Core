@@ -1,0 +1,30 @@
+{
+  "name": [
+    "kick"
+  ],
+  "description": "将一位玩家踢出服务器",
+  "start": [
+    "name"
+  ],
+  "node": [
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "name",
+      "description": "要踢出的玩家",
+      "isOnlyOne": false,
+      "isMustPlayer": true,
+      "isMustNPC": false
+    },
+    {
+      "type": "STRING",
+      "id": "reason",
+      "description": "踢出原因",
+      "canContainSpace": true,
+      "ignoreLater": false
+    }
+  ],
+  "ast": [
+    ["name", "reason", "LF"],
+    ["reason", "LF"]
+  ]
+}

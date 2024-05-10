@@ -1,0 +1,29 @@
+{
+  "name": [
+    "xp"
+  ],
+  "description": "给予玩家经验",
+  "start": [
+    "amount"
+  ],
+  "node": [
+    {
+      "type": "XP_INTEGER",
+      "id": "amount",
+      "brief": "经验值数量",
+      "description": "给予玩家的经验值数量"
+    },
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "player",
+      "description": "命令作用的目标",
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
+    }
+  ],
+  "ast": [
+    ["amount", "player", "LF"],
+    ["player", "LF"]
+  ]
+}

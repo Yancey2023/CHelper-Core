@@ -1,0 +1,26 @@
+{
+  "id": "gameRulesForInteger",
+  "type": "normal",
+  "content": [
+    {
+      "name": "functioncommandlimit",
+      "description": "通过function命令执行命令的最大数量"
+    },
+    {
+      "name": "maxcommandchainlength",
+      "description": "最大连锁命令方块链长度"
+    },
+    {
+      "name": "playerssleepingpercentage",
+      "description": "跳过夜晚所需的入睡玩家的百分比 "
+    },
+    {
+      "name": "randomtickspeed",
+      "description": "每一游戏刻中每一区块发生随机刻的次数"
+    },
+    {
+      "name": "spawnradius",
+      "description": "默认重生点的重生半径"
+    }
+  ]
+}

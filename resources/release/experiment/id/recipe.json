@@ -1,0 +1,6246 @@
+{
+  "id": "recipe",
+  "type": "normal",
+  "content": [
+    {
+      "name": "ButtonAcacia_recipeId"
+    },
+    {
+      "name": "ButtonBirch_recipeId"
+    },
+    {
+      "name": "ButtonDarkOak_recipeId"
+    },
+    {
+      "name": "ButtonJungle_recipeId"
+    },
+    {
+      "name": "ButtonSpruce_recipeId"
+    },
+    {
+      "name": "Painting_Cobblestone_recipeId"
+    },
+    {
+      "name": "Painting_NetherBrick_recipeId"
+    },
+    {
+      "name": "Painting_VanillaBlocks_recipeId"
+    },
+    {
+      "name": "PressurePlateAcacia_recipeId"
+    },
+    {
+      "name": "PressurePlateBirch_recipeId"
+    },
+    {
+      "name": "PressurePlateDarkOak_recipeId"
+    },
+    {
+      "name": "PressurePlateJungle_recipeId"
+    },
+    {
+      "name": "PressurePlateSpruce_recipeId"
+    },
+    {
+      "name": "Stick_bamboo_recipeId"
+    },
+    {
+      "name": "StoneSlab4_recipeId"
+    },
+    {
+      "name": "StoneSlab4_stoneBrick_recipeId"
+    },
+    {
+      "name": "StoneSlab_Brick_recipeId"
+    },
+    {
+      "name": "StoneSlab_StoneBrick_recipeId"
+    },
+    {
+      "name": "StoneSlab_recipeId"
+    },
+    {
+      "name": "TrapdoorAcacia_recipeId"
+    },
+    {
+      "name": "TrapdoorBirch_recipeId"
+    },
+    {
+      "name": "TrapdoorDarkOak_recipeId"
+    },
+    {
+      "name": "TrapdoorJungle_recipeId"
+    },
+    {
+      "name": "TrapdoorSpruce_recipeId"
+    },
+    {
+      "name": "Trapdoor_recipeId"
+    },
+    {
+      "name": "WoodButton_recipeId"
+    },
+    {
+      "name": "WoodPressurePlate_recipeId"
+    },
+    {
+      "name": "acacia_stairs_acacia_recipeId"
+    },
+    {
+      "name": "bed_color_0"
+    },
+    {
+      "name": "bed_color_1"
+    },
+    {
+      "name": "bed_color_10"
+    },
+    {
+      "name": "bed_color_11"
+    },
+    {
+      "name": "bed_color_12"
+    },
+    {
+      "name": "bed_color_13"
+    },
+    {
+      "name": "bed_color_14"
+    },
+    {
+      "name": "bed_color_15"
+    },
+    {
+      "name": "bed_color_16"
+    },
+    {
+      "name": "bed_color_17"
+    },
+    {
+      "name": "bed_color_18"
+    },
+    {
+      "name": "bed_color_19"
+    },
+    {
+      "name": "bed_color_2"
+    },
+    {
+      "name": "bed_color_3"
+    },
+    {
+      "name": "bed_color_4"
+    },
+    {
+      "name": "bed_color_5"
+    },
+    {
+      "name": "bed_color_6"
+    },
+    {
+      "name": "bed_color_7"
+    },
+    {
+      "name": "bed_color_8"
+    },
+    {
+      "name": "bed_color_9"
+    },
+    {
+      "name": "bed_color_bamboo_0"
+    },
+    {
+      "name": "bed_color_bamboo_1"
+    },
+    {
+      "name": "bed_color_bamboo_10"
+    },
+    {
+      "name": "bed_color_bamboo_11"
+    },
+    {
+      "name": "bed_color_bamboo_12"
+    },
+    {
+      "name": "bed_color_bamboo_13"
+    },
+    {
+      "name": "bed_color_bamboo_14"
+    },
+    {
+      "name": "bed_color_bamboo_15"
+    },
+    {
+      "name": "bed_color_bamboo_2"
+    },
+    {
+      "name": "bed_color_bamboo_3"
+    },
+    {
+      "name": "bed_color_bamboo_4"
+    },
+    {
+      "name": "bed_color_bamboo_5"
+    },
+    {
+      "name": "bed_color_bamboo_6"
+    },
+    {
+      "name": "bed_color_bamboo_7"
+    },
+    {
+      "name": "bed_color_bamboo_8"
+    },
+    {
+      "name": "bed_color_bamboo_9"
+    },
+    {
+      "name": "birch_stairs_birch_recipeId"
+    },
+    {
+      "name": "chiseled_quartz_recipeId"
+    },
+    {
+      "name": "chiseled_stonebrick_recipeId"
+    },
+    {
+      "name": "dark_oak_stairs_dark_oak_recipeId"
+    },
+    {
+      "name": "decorated_pot_base_recipeId"
+    },
+    {
+      "name": "heiroglyphs_redsandstone_recipeId"
+    },
+    {
+      "name": "heiroglyphs_sandstone_recipeId"
+    },
+    {
+      "name": "jungle_stairs_jungle_recipeId"
+    },
+    {
+      "name": "lines_purpur_recipeId"
+    },
+    {
+      "name": "minecraft:Bookshelf_woodplanks_recipeId",
+      "description": "\u003c工作台\u003e木板*6+书*3-\u003e书架"
+    },
+    {
+      "name": "minecraft:Bowl_recipeId",
+      "description": "\u003c工作台\u003e木板*3-\u003e碗*4"
+    },
+    {
+      "name": "minecraft:Chest_recipeId",
+      "description": "\u003c工作台\u003e木板*8-\u003e箱子"
+    },
+    {
+      "name": "minecraft:DaylightDetector_recipeId",
+      "description": "\u003c工作台\u003e玻璃*3+下界石英*3+木质台阶*3-\u003e阳光探测器"
+    },
+    {
+      "name": "minecraft:FireCharge_coal_sulphur_recipeId",
+      "description": "\u003c工作台\u003e烈焰粉+煤炭/木炭+火药~\u003e火焰弹*3"
+    },
+    {
+      "name": "minecraft:Jukebox_recipeId",
+      "description": "\u003c工作台\u003e木板*8+钻石-\u003e唱片机"
+    },
+    {
+      "name": "minecraft:WorkBench_recipeId",
+      "description": "\u003c工作台\u003e木板*4-\u003e工作台"
+    },
+    {
+      "name": "minecraft:WorkBench_recipeId_from_oak",
+      "description": "\u003c工作台\u003e橡木木板*4-\u003e工作台"
+    },
+    {
+      "name": "minecraft:acacia_boat",
+      "description": "\u003c工作台\u003e金合欢木板*5-\u003e金合欢木船"
+    },
+    {
+      "name": "minecraft:acacia_chest_boat",
+      "description": "\u003c工作台\u003e箱子+金合欢木船~\u003e金合欢木运输船"
+    },
+    {
+      "name": "minecraft:acacia_door",
+      "description": "\u003c工作台\u003e金合欢木板*6-\u003e金合欢木门*3"
+    },
+    {
+      "name": "minecraft:acacia_fence",
+      "description": "\u003c工作台\u003e木棍*2+金合欢木板*4-\u003e金合欢木栅栏*3"
+    },
+    {
+      "name": "minecraft:acacia_fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+金合欢木板*2-\u003e金合欢木栅栏门"
+    },
+    {
+      "name": "minecraft:acacia_hanging_sign",
+      "description": "\u003c工作台\u003e去皮金合欢原木*6+锁链*2-\u003e悬挂式金合欢木告示牌*6"
+    },
+    {
+      "name": "minecraft:acacia_planks",
+      "description": "\u003c工作台\u003e金合欢原木-\u003e金合欢木板*4"
+    },
+    {
+      "name": "minecraft:acacia_planks_from_stripped",
+      "description": "\u003c工作台\u003e去皮金合欢原木-\u003e金合欢木板*4"
+    },
+    {
+      "name": "minecraft:acacia_planks_from_stripped_wood",
+      "description": "\u003c工作台\u003e去皮金合欢木-\u003e金合欢木板*4"
+    },
+    {
+      "name": "minecraft:acacia_planks_from_wood",
+      "description": "\u003c工作台\u003e金合欢木-\u003e金合欢木板*4"
+    },
+    {
+      "name": "minecraft:acacia_stairs",
+      "description": "\u003c工作台\u003e金合欢木板*6-\u003e金合欢木楼梯*4"
+    },
+    {
+      "name": "minecraft:acacia_wood",
+      "description": "\u003c工作台\u003e金合欢原木*4-\u003e金合欢木*3"
+    },
+    {
+      "name": "minecraft:acacia_wood_stripped",
+      "description": "\u003c工作台\u003e去皮金合欢原木*4-\u003e去皮金合欢木*3"
+    },
+    {
+      "name": "minecraft:acacia_wooden_slab",
+      "description": "\u003c工作台\u003e金合欢木板*3-\u003e金合欢木台阶*6"
+    },
+    {
+      "name": "minecraft:activator_rail",
+      "description": "\u003c工作台\u003e红石火把+木棍*2+铁锭*6-\u003e激活铁轨*6"
+    },
+    {
+      "name": "minecraft:amethyst_block",
+      "description": "\u003c工作台\u003e紫水晶碎片*4-\u003e紫水晶块"
+    },
+    {
+      "name": "minecraft:andesite",
+      "description": "\u003c工作台\u003e闪长岩+圆石~\u003e安山岩*2"
+    },
+    {
+      "name": "minecraft:andesite_stairs",
+      "description": "\u003c工作台\u003e安山岩*6-\u003e安山岩楼梯*4"
+    },
+    {
+      "name": "minecraft:andesite_wall",
+      "description": "\u003c工作台\u003e安山岩*6-\u003e安山岩墙*6"
+    },
+    {
+      "name": "minecraft:anvil",
+      "description": "\u003c工作台\u003e铁块*3+铁锭*4-\u003e铁砧"
+    },
+    {
+      "name": "minecraft:armor_stand",
+      "description": "\u003c工作台\u003e木棍*6+双层平滑石头台阶-\u003e盔甲架"
+    },
+    {
+      "name": "minecraft:arrow",
+      "description": "\u003c工作台\u003e木棍+燧石+羽毛-\u003e箭*4"
+    },
+    {
+      "name": "minecraft:bamboo_block",
+      "description": "\u003c工作台\u003e竹子*9-\u003e竹块"
+    },
+    {
+      "name": "minecraft:bamboo_button",
+      "description": "\u003c工作台\u003e竹板-\u003e竹按钮"
+    },
+    {
+      "name": "minecraft:bamboo_chest_raft",
+      "description": "\u003c工作台\u003e箱子+竹筏~\u003e运输竹筏"
+    },
+    {
+      "name": "minecraft:bamboo_door",
+      "description": "\u003c工作台\u003e竹板*6-\u003e竹门*3"
+    },
+    {
+      "name": "minecraft:bamboo_fence",
+      "description": "\u003c工作台\u003e木棍*2+竹板*4-\u003e竹栅栏*3"
+    },
+    {
+      "name": "minecraft:bamboo_fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+竹板*2-\u003e竹栅栏门"
+    },
+    {
+      "name": "minecraft:bamboo_hanging_sign",
+      "description": "\u003c工作台\u003e去皮竹块*6+锁链*2-\u003e悬挂式竹告示牌*6"
+    },
+    {
+      "name": "minecraft:bamboo_mosaic",
+      "description": "\u003c工作台\u003e竹台阶*2-\u003e竹马赛克"
+    },
+    {
+      "name": "minecraft:bamboo_mosaic_slab",
+      "description": "\u003c工作台\u003e竹马赛克*3-\u003e竹马赛克台阶*6"
+    },
+    {
+      "name": "minecraft:bamboo_mosaic_stairs",
+      "description": "\u003c工作台\u003e竹马赛克*6-\u003e竹马赛克楼梯*4"
+    },
+    {
+      "name": "minecraft:bamboo_planks",
+      "description": "\u003c工作台\u003e竹块-\u003e竹板*2"
+    },
+    {
+      "name": "minecraft:bamboo_planks_from_stripped",
+      "description": "\u003c工作台\u003e去皮竹块-\u003e竹板*2"
+    },
+    {
+      "name": "minecraft:bamboo_pressure_plate",
+      "description": "\u003c工作台\u003e竹板*2-\u003e竹压力板"
+    },
+    {
+      "name": "minecraft:bamboo_raft",
+      "description": "\u003c工作台\u003e竹板*5-\u003e竹筏"
+    },
+    {
+      "name": "minecraft:bamboo_sign",
+      "description": "\u003c工作台\u003e竹板*6+木棍-\u003e竹告示牌*3"
+    },
+    {
+      "name": "minecraft:bamboo_slab",
+      "description": "\u003c工作台\u003e竹板*3-\u003e竹台阶*6"
+    },
+    {
+      "name": "minecraft:bamboo_stairs",
+      "description": "\u003c工作台\u003e竹板*6-\u003e竹楼梯*4"
+    },
+    {
+      "name": "minecraft:bamboo_trapdoor",
+      "description": "\u003c工作台\u003e竹板*6-\u003e竹活板门*2"
+    },
+    {
+      "name": "minecraft:banner_pattern_bricks",
+      "description": "\u003c工作台\u003e纸+红砖块~\u003e砖纹旗帜图案"
+    },
+    {
+      "name": "minecraft:banner_pattern_creeper",
+      "description": "\u003c工作台\u003e纸+苦力怕的头~\u003e苦力怕盾徽旗帜图案"
+    },
+    {
+      "name": "minecraft:banner_pattern_flower",
+      "description": "\u003c工作台\u003e纸+滨菊~\u003e花朵盾徽旗帜图案"
+    },
+    {
+      "name": "minecraft:banner_pattern_skull",
+      "description": "\u003c工作台\u003e纸+凋灵骷髅头颅~\u003e头颅盾徽旗帜图案"
+    },
+    {
+      "name": "minecraft:banner_pattern_thing",
+      "description": "\u003c工作台\u003e纸+附魔金苹果~\u003eMojang徽标旗帜图案"
+    },
+    {
+      "name": "minecraft:banner_pattern_vines",
+      "description": "\u003c工作台\u003e纸+藤蔓~\u003e波纹边旗帜图案"
+    },
+    {
+      "name": "minecraft:barrel_with_planks",
+      "description": "\u003c工作台\u003e木板*6+木质台阶*2-\u003e木桶"
+    },
+    {
+      "name": "minecraft:basic_map_to_enhanced",
+      "description": "\u003c工作台\u003e空地图+指南针~\u003e空定位器地图"
+    },
+    {
+      "name": "minecraft:beacon",
+      "description": "\u003c工作台\u003e下界之星+玻璃*5+黑曜石*3-\u003e信标"
+    },
+    {
+      "name": "minecraft:beehive",
+      "description": "\u003c工作台\u003e木板*6+蜜脾*3-\u003e蜂箱"
+    },
+    {
+      "name": "minecraft:beetroot_soup",
+      "description": "\u003c工作台\u003e碗+甜菜根*6~\u003e甜菜汤"
+    },
+    {
+      "name": "minecraft:birch_boat",
+      "description": "\u003c工作台\u003e白桦木板*5-\u003e白桦木船"
+    },
+    {
+      "name": "minecraft:birch_chest_boat",
+      "description": "\u003c工作台\u003e箱子+白桦木船~\u003e白桦木运输船"
+    },
+    {
+      "name": "minecraft:birch_door",
+      "description": "\u003c工作台\u003e白桦木板*6-\u003e白桦木门*3"
+    },
+    {
+      "name": "minecraft:birch_fence",
+      "description": "\u003c工作台\u003e木棍*2+白桦木板*4-\u003e白桦木栅栏*3"
+    },
+    {
+      "name": "minecraft:birch_fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+白桦木板*2-\u003e白桦木栅栏门"
+    },
+    {
+      "name": "minecraft:birch_hanging_sign",
+      "description": "\u003c工作台\u003e去皮白桦原木*6+锁链*2-\u003e悬挂式白桦木告示牌*6"
+    },
+    {
+      "name": "minecraft:birch_planks",
+      "description": "\u003c工作台\u003e白桦原木-\u003e白桦木板*4"
+    },
+    {
+      "name": "minecraft:birch_planks_from_stripped",
+      "description": "\u003c工作台\u003e去皮白桦原木-\u003e白桦木板*4"
+    },
+    {
+      "name": "minecraft:birch_planks_from_stripped_wood",
+      "description": "\u003c工作台\u003e去皮白桦木-\u003e白桦木板*4"
+    },
+    {
+      "name": "minecraft:birch_planks_from_wood",
+      "description": "\u003c工作台\u003e白桦木-\u003e白桦木板*4"
+    },
+    {
+      "name": "minecraft:birch_stairs",
+      "description": "\u003c工作台\u003e白桦木板*6-\u003e白桦木楼梯*4"
+    },
+    {
+      "name": "minecraft:birch_wood",
+      "description": "\u003c工作台\u003e白桦原木*4-\u003e白桦木*3"
+    },
+    {
+      "name": "minecraft:birch_wood_stripped",
+      "description": "\u003c工作台\u003e去皮白桦原木*4-\u003e去皮白桦木*3"
+    },
+    {
+      "name": "minecraft:birch_wooden_slab",
+      "description": "\u003c工作台\u003e白桦木板*3-\u003e白桦木台阶*6"
+    },
+    {
+      "name": "minecraft:black_banner",
+      "description": "\u003c工作台\u003e黑色羊毛*6+木棍-\u003e黑色旗帜"
+    },
+    {
+      "name": "minecraft:black_candle",
+      "description": "\u003c工作台\u003e蜡烛+黑色染料~\u003e黑色蜡烛"
+    },
+    {
+      "name": "minecraft:black_candle_from_ink_sac",
+      "description": "\u003c工作台\u003e蜡烛+墨囊~\u003e黑色蜡烛"
+    },
+    {
+      "name": "minecraft:black_carpet",
+      "description": "\u003c工作台\u003e黑色羊毛*2-\u003e黑色地毯*3"
+    },
+    {
+      "name": "minecraft:black_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+黑色染料-\u003e黑色地毯*8"
+    },
+    {
+      "name": "minecraft:black_concrete_powder",
+      "description": "\u003c工作台\u003e黑色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e黑色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:black_concrete_powder_from_ink_sac",
+      "description": "\u003c工作台\u003e墨囊+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e黑色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:black_dye_from_ink_sac",
+      "description": "\u003c工作台\u003e墨囊~\u003e黑色染料"
+    },
+    {
+      "name": "minecraft:black_dye_from_wither_rose",
+      "description": "\u003c工作台\u003e凋灵玫瑰~\u003e黑色染料"
+    },
+    {
+      "name": "minecraft:black_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+黑色染料-\u003e黑色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:black_stained_glass_from_ink_sac",
+      "description": "\u003c工作台\u003e玻璃*8+墨囊-\u003e黑色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:black_stained_glass_pane",
+      "description": "\u003c工作台\u003e黑色染色玻璃*6-\u003e黑色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:black_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+黑色染料-\u003e黑色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:black_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+黑色染料-\u003e黑色陶瓦*8"
+    },
+    {
+      "name": "minecraft:black_stained_hardened_clay_from_ink_sac",
+      "description": "\u003c工作台\u003e陶瓦*8+墨囊-\u003e黑色陶瓦*8"
+    },
+    {
+      "name": "minecraft:blackstone_slab",
+      "description": "\u003c工作台\u003e黑石*3-\u003e黑石台阶*6"
+    },
+    {
+      "name": "minecraft:blackstone_stairs",
+      "description": "\u003c工作台\u003e黑石*6-\u003e黑石楼梯*4"
+    },
+    {
+      "name": "minecraft:blackstone_wall",
+      "description": "\u003c工作台\u003e黑石*6-\u003e黑石墙*6"
+    },
+    {
+      "name": "minecraft:blast_furnace",
+      "description": "\u003c工作台\u003e平滑石头*3+铁锭*5+熔炉-\u003e高炉"
+    },
+    {
+      "name": "minecraft:blaze_powder",
+      "description": "\u003c工作台\u003e烈焰棒~\u003e烈焰粉*2"
+    },
+    {
+      "name": "minecraft:blue_banner",
+      "description": "\u003c工作台\u003e蓝色羊毛*6+木棍-\u003e蓝色旗帜"
+    },
+    {
+      "name": "minecraft:blue_candle",
+      "description": "\u003c工作台\u003e蜡烛+蓝色染料~\u003e蓝色蜡烛"
+    },
+    {
+      "name": "minecraft:blue_candle_from_lapis_lazuli",
+      "description": "\u003c工作台\u003e蜡烛+青金石~\u003e蓝色蜡烛"
+    },
+    {
+      "name": "minecraft:blue_carpet",
+      "description": "\u003c工作台\u003e蓝色羊毛*2-\u003e蓝色地毯*3"
+    },
+    {
+      "name": "minecraft:blue_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+蓝色染料-\u003e蓝色地毯*8"
+    },
+    {
+      "name": "minecraft:blue_concrete_powder",
+      "description": "\u003c工作台\u003e蓝色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e蓝色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:blue_concrete_powder_from_lapis_lazuli",
+      "description": "\u003c工作台\u003e青金石+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e蓝色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:blue_dye_from_cornflower",
+      "description": "\u003c工作台\u003e矢车菊~\u003e蓝色染料"
+    },
+    {
+      "name": "minecraft:blue_dye_from_lapis_lazuli",
+      "description": "\u003c工作台\u003e青金石~\u003e蓝色染料"
+    },
+    {
+      "name": "minecraft:blue_ice",
+      "description": "\u003c工作台\u003e浮冰*9-\u003e蓝冰"
+    },
+    {
+      "name": "minecraft:blue_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+蓝色染料-\u003e蓝色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:blue_stained_glass_from_lapis_lazuli",
+      "description": "\u003c工作台\u003e玻璃*8+青金石-\u003e蓝色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:blue_stained_glass_pane",
+      "description": "\u003c工作台\u003e蓝色染色玻璃*6-\u003e蓝色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:blue_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+蓝色染料-\u003e蓝色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:blue_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+蓝色染料-\u003e蓝色陶瓦*8"
+    },
+    {
+      "name": "minecraft:blue_stained_hardened_clay_from_lapis_lazuli",
+      "description": "\u003c工作台\u003e陶瓦*8+青金石-\u003e蓝色陶瓦*8"
+    },
+    {
+      "name": "minecraft:boat",
+      "description": "\u003c工作台\u003e橡木木板*5-\u003e橡木船"
+    },
+    {
+      "name": "minecraft:bone_block",
+      "description": "\u003c工作台\u003e骨粉*9-\u003e骨块"
+    },
+    {
+      "name": "minecraft:bone_meal_from_block",
+      "description": "\u003c工作台\u003e骨块~\u003e骨粉*9"
+    },
+    {
+      "name": "minecraft:bone_meal_from_bone",
+      "description": "\u003c工作台\u003e骨头~\u003e骨粉*3"
+    },
+    {
+      "name": "minecraft:book",
+      "description": "\u003c工作台\u003e纸+纸+纸+皮革~\u003e书"
+    },
+    {
+      "name": "minecraft:bow",
+      "description": "\u003c工作台\u003e木棍*3+线*3-\u003e弓"
+    },
+    {
+      "name": "minecraft:bread",
+      "description": "\u003c工作台\u003e小麦*3-\u003e面包"
+    },
+    {
+      "name": "minecraft:brewing_stand",
+      "description": "\u003c工作台\u003e烈焰棒+类圆石方块*3-\u003e酿造台"
+    },
+    {
+      "name": "minecraft:brick_block",
+      "description": "\u003c工作台\u003e红砖*4-\u003e红砖块"
+    },
+    {
+      "name": "minecraft:brick_stairs",
+      "description": "\u003c工作台\u003e红砖块*6-\u003e红砖楼梯*4"
+    },
+    {
+      "name": "minecraft:brick_wall",
+      "description": "\u003c工作台\u003e红砖块*6-\u003e红砖墙*6"
+    },
+    {
+      "name": "minecraft:brown_banner",
+      "description": "\u003c工作台\u003e棕色羊毛*6+木棍-\u003e棕色旗帜"
+    },
+    {
+      "name": "minecraft:brown_candle",
+      "description": "\u003c工作台\u003e蜡烛+棕色染料~\u003e棕色蜡烛"
+    },
+    {
+      "name": "minecraft:brown_candle_from_cocoa_beans",
+      "description": "\u003c工作台\u003e蜡烛+可可豆~\u003e棕色蜡烛"
+    },
+    {
+      "name": "minecraft:brown_carpet",
+      "description": "\u003c工作台\u003e棕色羊毛*2-\u003e棕色地毯*3"
+    },
+    {
+      "name": "minecraft:brown_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+棕色染料-\u003e棕色地毯*8"
+    },
+    {
+      "name": "minecraft:brown_concrete_powder",
+      "description": "\u003c工作台\u003e棕色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e棕色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:brown_concrete_powder_from_cocoa_beans",
+      "description": "\u003c工作台\u003e可可豆+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e棕色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:brown_dye_from_cocoa_beans",
+      "description": "\u003c工作台\u003e可可豆~\u003e棕色染料"
+    },
+    {
+      "name": "minecraft:brown_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+棕色染料-\u003e棕色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:brown_stained_glass_from_cocoa_beans",
+      "description": "\u003c工作台\u003e玻璃*8+可可豆-\u003e棕色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:brown_stained_glass_pane",
+      "description": "\u003c工作台\u003e棕色染色玻璃*6-\u003e棕色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:brown_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+棕色染料-\u003e棕色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:brown_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+棕色染料-\u003e棕色陶瓦*8"
+    },
+    {
+      "name": "minecraft:brown_stained_hardened_clay_from_cocoa_beans",
+      "description": "\u003c工作台\u003e陶瓦*8+可可豆-\u003e棕色陶瓦*8"
+    },
+    {
+      "name": "minecraft:brush",
+      "description": "\u003c工作台\u003e羽毛+铜锭+木棍-\u003e刷子"
+    },
+    {
+      "name": "minecraft:bucket",
+      "description": "\u003c工作台\u003e铁锭*3-\u003e铁桶"
+    },
+    {
+      "name": "minecraft:cake",
+      "description": "\u003c工作台\u003e奶桶*3+糖*2+小麦*3+鸡蛋-\u003e蛋糕,铁桶*3"
+    },
+    {
+      "name": "minecraft:calibrated_sculk_sensor",
+      "description": "\u003c工作台\u003e紫水晶碎片*3+幽匿感测体-\u003e校频幽匿感测体"
+    },
+    {
+      "name": "minecraft:campfire",
+      "description": "\u003c工作台\u003e木棍*3+原木*3+煤炭/木炭-\u003e营火"
+    },
+    {
+      "name": "minecraft:candle",
+      "description": "\u003c工作台\u003e蜜脾+线-\u003e蜡烛"
+    },
+    {
+      "name": "minecraft:carrot_on_a_stick",
+      "description": "\u003c工作台\u003e钓鱼竿+胡萝卜-\u003e胡萝卜钓竿"
+    },
+    {
+      "name": "minecraft:cartography_table",
+      "description": "\u003c工作台\u003e纸*2+木板*4-\u003e制图台"
+    },
+    {
+      "name": "minecraft:cartography_table_locator_map",
+      "description": "\u003c制图台\u003e纸+指南针~\u003e空定位器地图"
+    },
+    {
+      "name": "minecraft:cartography_table_map",
+      "description": "\u003c制图台\u003e纸~\u003e空地图"
+    },
+    {
+      "name": "minecraft:cauldron",
+      "description": "\u003c工作台\u003e铁锭*7-\u003e炼药锅"
+    },
+    {
+      "name": "minecraft:chain",
+      "description": "\u003c工作台\u003e铁粒*2+铁锭-\u003e锁链"
+    },
+    {
+      "name": "minecraft:cherry_boat",
+      "description": "\u003c工作台\u003e樱花木板*5-\u003e樱花木船"
+    },
+    {
+      "name": "minecraft:cherry_button",
+      "description": "\u003c工作台\u003e樱花木板-\u003e樱花木按钮"
+    },
+    {
+      "name": "minecraft:cherry_chest_boat",
+      "description": "\u003c工作台\u003e箱子+樱花木船~\u003e樱花木运输船"
+    },
+    {
+      "name": "minecraft:cherry_door",
+      "description": "\u003c工作台\u003e樱花木板*6-\u003e樱花木门*3"
+    },
+    {
+      "name": "minecraft:cherry_fence",
+      "description": "\u003c工作台\u003e木棍*2+樱花木板*4-\u003e樱花木栅栏*3"
+    },
+    {
+      "name": "minecraft:cherry_fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+樱花木板*2-\u003e樱花木栅栏门"
+    },
+    {
+      "name": "minecraft:cherry_hanging_sign",
+      "description": "\u003c工作台\u003e去皮樱花原木*6+锁链*2-\u003e悬挂式樱花木告示牌*6"
+    },
+    {
+      "name": "minecraft:cherry_planks_from_log",
+      "description": "\u003c工作台\u003e樱花原木-\u003e樱花木板*4"
+    },
+    {
+      "name": "minecraft:cherry_planks_from_stripped_log",
+      "description": "\u003c工作台\u003e去皮樱花原木-\u003e樱花木板*4"
+    },
+    {
+      "name": "minecraft:cherry_planks_from_stripped_wood",
+      "description": "\u003c工作台\u003e去皮樱花木-\u003e樱花木板*4"
+    },
+    {
+      "name": "minecraft:cherry_planks_from_wood",
+      "description": "\u003c工作台\u003e樱花木-\u003e樱花木板*4"
+    },
+    {
+      "name": "minecraft:cherry_pressure_plate",
+      "description": "\u003c工作台\u003e樱花木板*2-\u003e樱花木压力板"
+    },
+    {
+      "name": "minecraft:cherry_sign",
+      "description": "\u003c工作台\u003e樱花木板*6+木棍-\u003e樱花木告示牌*3"
+    },
+    {
+      "name": "minecraft:cherry_slab",
+      "description": "\u003c工作台\u003e樱花木板*3-\u003e樱花木台阶*6"
+    },
+    {
+      "name": "minecraft:cherry_stairs",
+      "description": "\u003c工作台\u003e樱花木板*6-\u003e樱花木楼梯*4"
+    },
+    {
+      "name": "minecraft:cherry_trapdoor",
+      "description": "\u003c工作台\u003e樱花木板*6-\u003e樱花木活板门*2"
+    },
+    {
+      "name": "minecraft:cherry_wood_from_log",
+      "description": "\u003c工作台\u003e樱花原木*4-\u003e樱花木*3"
+    },
+    {
+      "name": "minecraft:cherry_wood_from_stripped_log",
+      "description": "\u003c工作台\u003e去皮樱花原木*4-\u003e去皮樱花木*3"
+    },
+    {
+      "name": "minecraft:chest_boat",
+      "description": "\u003c工作台\u003e箱子+橡木船~\u003e橡木运输船"
+    },
+    {
+      "name": "minecraft:chest_minecart",
+      "description": "\u003c工作台\u003e箱子+矿车~\u003e运输矿车"
+    },
+    {
+      "name": "minecraft:chiseled_bookshelf",
+      "description": "\u003c工作台\u003e木板*6+木质台阶*3-\u003e雕纹书架"
+    },
+    {
+      "name": "minecraft:chiseled_deepslate",
+      "description": "\u003c工作台\u003e深板岩圆石台阶*2-\u003e雕纹深板岩"
+    },
+    {
+      "name": "minecraft:chiseled_deepslate_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e雕纹深板岩"
+    },
+    {
+      "name": "minecraft:chiseled_nether_bricks",
+      "description": "\u003c工作台\u003e下界砖台阶*2-\u003e雕纹下界砖块"
+    },
+    {
+      "name": "minecraft:chiseled_polished_blackstone",
+      "description": "\u003c工作台\u003e磨制黑石台阶*2-\u003e雕纹磨制黑石"
+    },
+    {
+      "name": "minecraft:clay",
+      "description": "\u003c工作台\u003e黏土球*4-\u003e黏土"
+    },
+    {
+      "name": "minecraft:clock",
+      "description": "\u003c工作台\u003e金锭*4+红石粉-\u003e时钟"
+    },
+    {
+      "name": "minecraft:coal",
+      "description": "\u003c工作台\u003e煤炭块-\u003e煤炭*9"
+    },
+    {
+      "name": "minecraft:coal_block",
+      "description": "\u003c工作台\u003e煤炭*9-\u003e煤炭块"
+    },
+    {
+      "name": "minecraft:coarse_dirt",
+      "description": "\u003c工作台\u003e泥土*2+沙砾*2-\u003e砂土*4"
+    },
+    {
+      "name": "minecraft:coast_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e海岸盔甲纹饰锻造模板+钻石*7+圆石-\u003e海岸盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:cobbled_deepslate_slab",
+      "description": "\u003c工作台\u003e深板岩圆石*3-\u003e深板岩圆石台阶*6"
+    },
+    {
+      "name": "minecraft:cobbled_deepslate_slab_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e深板岩圆石台阶*2"
+    },
+    {
+      "name": "minecraft:cobbled_deepslate_stairs",
+      "description": "\u003c工作台\u003e深板岩圆石*6-\u003e深板岩圆石楼梯*4"
+    },
+    {
+      "name": "minecraft:cobbled_deepslate_stairs_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e深板岩圆石楼梯"
+    },
+    {
+      "name": "minecraft:cobbled_deepslate_wall",
+      "description": "\u003c工作台\u003e深板岩圆石*6-\u003e深板岩圆石墙*6"
+    },
+    {
+      "name": "minecraft:cobbled_deepslate_wall_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e深板岩圆石墙"
+    },
+    {
+      "name": "minecraft:cobblestone_stairs",
+      "description": "\u003c工作台\u003e圆石*6-\u003e石头楼梯*4"
+    },
+    {
+      "name": "minecraft:cobblestone_wall",
+      "description": "\u003c工作台\u003e圆石*6-\u003e圆石墙*6"
+    },
+    {
+      "name": "minecraft:comparator",
+      "description": "\u003c工作台\u003e红石火把*3+下界石英+石头*3-\u003e红石比较器"
+    },
+    {
+      "name": "minecraft:compass",
+      "description": "\u003c工作台\u003e铁锭*4+红石粉-\u003e指南针"
+    },
+    {
+      "name": "minecraft:composter",
+      "description": "\u003c工作台\u003e木质台阶*7-\u003e堆肥桶"
+    },
+    {
+      "name": "minecraft:conduit",
+      "description": "\u003c工作台\u003e鹦鹉螺壳*8+海洋之心-\u003e潮涌核心"
+    },
+    {
+      "name": "minecraft:cookie",
+      "description": "\u003c工作台\u003e小麦*2+可可豆-\u003e曲奇*8"
+    },
+    {
+      "name": "minecraft:copper_block_from_ingots",
+      "description": "\u003c工作台\u003e铜锭*9-\u003e铜块"
+    },
+    {
+      "name": "minecraft:crafting_table_cut_copper",
+      "description": "\u003c工作台\u003e铜块*4-\u003e切制铜块*4"
+    },
+    {
+      "name": "minecraft:crafting_table_cut_copper_slab",
+      "description": "\u003c工作台\u003e切制铜块*3-\u003e切制铜台阶*6"
+    },
+    {
+      "name": "minecraft:crafting_table_cut_copper_stairs",
+      "description": "\u003c工作台\u003e切制铜块*6-\u003e切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:crafting_table_exposed_cut_copper",
+      "description": "\u003c工作台\u003e斑驳的铜块*4-\u003e斑驳的切制铜块*4"
+    },
+    {
+      "name": "minecraft:crafting_table_exposed_cut_copper_slab",
+      "description": "\u003c工作台\u003e斑驳的切制铜块*3-\u003e斑驳的切制铜台阶*6"
+    },
+    {
+      "name": "minecraft:crafting_table_exposed_cut_copper_stairs",
+      "description": "\u003c工作台\u003e斑驳的切制铜块*6-\u003e斑驳的切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:crafting_table_oxidized_cut_copper",
+      "description": "\u003c工作台\u003e氧化的铜块*4-\u003e氧化的切制铜块*4"
+    },
+    {
+      "name": "minecraft:crafting_table_oxidized_cut_copper_slab",
+      "description": "\u003c工作台\u003e氧化的切制铜块*3-\u003e氧化的切制铜台阶*6"
+    },
+    {
+      "name": "minecraft:crafting_table_oxidized_cut_copper_stairs",
+      "description": "\u003c工作台\u003e氧化的切制铜块*6-\u003e氧化的切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_cut_copper",
+      "description": "\u003c工作台\u003e涂蜡的铜块*4-\u003e涂蜡的切制铜块*4"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_cut_copper_slab",
+      "description": "\u003c工作台\u003e涂蜡的切制铜块*3-\u003e涂蜡的切制铜台阶*6"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_cut_copper_stairs",
+      "description": "\u003c工作台\u003e涂蜡的切制铜块*6-\u003e涂蜡的切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_exposed_cut_copper",
+      "description": "\u003c工作台\u003e涂蜡的斑驳铜块*4-\u003e涂蜡的斑驳切制铜块*4"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_exposed_cut_copper_slab",
+      "description": "\u003c工作台\u003e涂蜡的斑驳切制铜块*3-\u003e涂蜡的斑驳切制铜台阶*6"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_exposed_cut_copper_stairs",
+      "description": "\u003c工作台\u003e涂蜡的斑驳切制铜块*6-\u003e涂蜡的斑驳切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_oxidized_cut_copper",
+      "description": "\u003c工作台\u003e涂蜡的氧化铜块*4-\u003e涂蜡的氧化切制铜块*4"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_oxidized_cut_copper_slab",
+      "description": "\u003c工作台\u003e涂蜡的氧化切制铜块*3-\u003e涂蜡的氧化切制铜台阶*6"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_oxidized_cut_copper_stairs",
+      "description": "\u003c工作台\u003e涂蜡的氧化切制铜块*6-\u003e涂蜡的氧化切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_weathered_cut_copper",
+      "description": "\u003c工作台\u003e涂蜡的锈蚀铜块*4-\u003e涂蜡的锈蚀切制铜块*4"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_weathered_cut_copper_slab",
+      "description": "\u003c工作台\u003e涂蜡的锈蚀切制铜块*3-\u003e涂蜡的锈蚀切制铜台阶*6"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_weathered_cut_copper_stairs",
+      "description": "\u003c工作台\u003e涂蜡的锈蚀切制铜块*6-\u003e涂蜡的锈蚀切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:crafting_table_weathered_cut_copper",
+      "description": "\u003c工作台\u003e锈蚀的铜块*4-\u003e锈蚀的切制铜块*4"
+    },
+    {
+      "name": "minecraft:crafting_table_weathered_cut_copper_slab",
+      "description": "\u003c工作台\u003e锈蚀的切制铜块*3-\u003e锈蚀的切制铜台阶*6"
+    },
+    {
+      "name": "minecraft:crafting_table_weathered_cut_copper_stairs",
+      "description": "\u003c工作台\u003e锈蚀的切制铜块*6-\u003e锈蚀的切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:crimson_button",
+      "description": "\u003c工作台\u003e绯红木板-\u003e绯红木按钮"
+    },
+    {
+      "name": "minecraft:crimson_door",
+      "description": "\u003c工作台\u003e绯红木板*6-\u003e绯红木门*3"
+    },
+    {
+      "name": "minecraft:crimson_fence",
+      "description": "\u003c工作台\u003e木棍*2+绯红木板*4-\u003e绯红木栅栏*3"
+    },
+    {
+      "name": "minecraft:crimson_fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+绯红木板*2-\u003e绯红木栅栏门"
+    },
+    {
+      "name": "minecraft:crimson_hanging_sign",
+      "description": "\u003c工作台\u003e去皮绯红菌柄*6+锁链*2-\u003e悬挂式绯红木告示牌*6"
+    },
+    {
+      "name": "minecraft:crimson_hyphae",
+      "description": "\u003c工作台\u003e绯红菌柄*4-\u003e绯红菌核*3"
+    },
+    {
+      "name": "minecraft:crimson_planks",
+      "description": "\u003c工作台\u003e绯红菌柄-\u003e绯红木板*4"
+    },
+    {
+      "name": "minecraft:crimson_planks_from_crimson_hyphae",
+      "description": "\u003c工作台\u003e绯红菌核-\u003e绯红木板*4"
+    },
+    {
+      "name": "minecraft:crimson_planks_from_stripped_crimson_hyphae",
+      "description": "\u003c工作台\u003e去皮绯红菌核-\u003e绯红木板*4"
+    },
+    {
+      "name": "minecraft:crimson_planks_from_stripped_log",
+      "description": "\u003c工作台\u003e去皮绯红菌柄-\u003e绯红木板*4"
+    },
+    {
+      "name": "minecraft:crimson_pressure_plate",
+      "description": "\u003c工作台\u003e绯红木板*2-\u003e绯红木压力板"
+    },
+    {
+      "name": "minecraft:crimson_sign",
+      "description": "\u003c工作台\u003e绯红木板*6+木棍-\u003e绯红木告示牌*3"
+    },
+    {
+      "name": "minecraft:crimson_slab",
+      "description": "\u003c工作台\u003e绯红木板*3-\u003e绯红木台阶*6"
+    },
+    {
+      "name": "minecraft:crimson_stairs",
+      "description": "\u003c工作台\u003e绯红木板*6-\u003e绯红木楼梯*4"
+    },
+    {
+      "name": "minecraft:crimson_trapdoor",
+      "description": "\u003c工作台\u003e绯红木板*6-\u003e绯红木活板门*2"
+    },
+    {
+      "name": "minecraft:crossbow",
+      "description": "\u003c工作台\u003e木棍*3+线*2+铁锭+绊线钩-\u003e弩"
+    },
+    {
+      "name": "minecraft:cyan_banner",
+      "description": "\u003c工作台\u003e青色羊毛*6+木棍-\u003e青色旗帜"
+    },
+    {
+      "name": "minecraft:cyan_candle",
+      "description": "\u003c工作台\u003e蜡烛+青色染料~\u003e青色蜡烛"
+    },
+    {
+      "name": "minecraft:cyan_carpet",
+      "description": "\u003c工作台\u003e青色羊毛*2-\u003e青色地毯*3"
+    },
+    {
+      "name": "minecraft:cyan_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+青色染料-\u003e青色地毯*8"
+    },
+    {
+      "name": "minecraft:cyan_concrete_powder",
+      "description": "\u003c工作台\u003e青色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e青色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:cyan_dye",
+      "description": "\u003c工作台\u003e蓝色染料+绿色染料~\u003e青色染料*2"
+    },
+    {
+      "name": "minecraft:cyan_dye_from_lapis_lazuli",
+      "description": "\u003c工作台\u003e青金石+绿色染料~\u003e青色染料*2"
+    },
+    {
+      "name": "minecraft:cyan_dye_from_pitcher_plant",
+      "description": "\u003c工作台\u003e瓶子草~\u003e青色染料"
+    },
+    {
+      "name": "minecraft:cyan_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+青色染料-\u003e青色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:cyan_stained_glass_pane",
+      "description": "\u003c工作台\u003e青色染色玻璃*6-\u003e青色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:cyan_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+青色染料-\u003e青色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:cyan_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+青色染料-\u003e青色陶瓦*8"
+    },
+    {
+      "name": "minecraft:dark_oak_boat",
+      "description": "\u003c工作台\u003e深色橡木木板*5-\u003e深色橡木船"
+    },
+    {
+      "name": "minecraft:dark_oak_chest_boat",
+      "description": "\u003c工作台\u003e箱子+深色橡木船~\u003e深色橡木运输船"
+    },
+    {
+      "name": "minecraft:dark_oak_door",
+      "description": "\u003c工作台\u003e深色橡木木板*6-\u003e深色橡木门*3"
+    },
+    {
+      "name": "minecraft:dark_oak_fence",
+      "description": "\u003c工作台\u003e木棍*2+深色橡木木板*4-\u003e深色橡木栅栏*3"
+    },
+    {
+      "name": "minecraft:dark_oak_fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+深色橡木木板*2-\u003e深色橡木栅栏门"
+    },
+    {
+      "name": "minecraft:dark_oak_hanging_sign",
+      "description": "\u003c工作台\u003e去皮深色橡木原木*6+锁链*2-\u003e悬挂式深色橡木告示牌*6"
+    },
+    {
+      "name": "minecraft:dark_oak_planks",
+      "description": "\u003c工作台\u003e深色橡木原木-\u003e深色橡木木板*4"
+    },
+    {
+      "name": "minecraft:dark_oak_planks_from_stripped",
+      "description": "\u003c工作台\u003e去皮深色橡木原木-\u003e深色橡木木板*4"
+    },
+    {
+      "name": "minecraft:dark_oak_planks_from_stripped_wood",
+      "description": "\u003c工作台\u003e去皮深色橡木-\u003e深色橡木木板*4"
+    },
+    {
+      "name": "minecraft:dark_oak_planks_from_wood",
+      "description": "\u003c工作台\u003e深色橡木-\u003e深色橡木木板*4"
+    },
+    {
+      "name": "minecraft:dark_oak_stairs",
+      "description": "\u003c工作台\u003e深色橡木木板*6-\u003e深色橡木楼梯*4"
+    },
+    {
+      "name": "minecraft:dark_oak_wood",
+      "description": "\u003c工作台\u003e深色橡木原木*4-\u003e深色橡木*3"
+    },
+    {
+      "name": "minecraft:dark_oak_wood_stripped",
+      "description": "\u003c工作台\u003e去皮深色橡木原木*4-\u003e去皮深色橡木*3"
+    },
+    {
+      "name": "minecraft:dark_oak_wooden_slab",
+      "description": "\u003c工作台\u003e深色橡木木板*3-\u003e深色橡木台阶*6"
+    },
+    {
+      "name": "minecraft:dark_prismarine",
+      "description": "\u003c工作台\u003e海晶碎片*8+黑色染料-\u003e暗海晶石"
+    },
+    {
+      "name": "minecraft:dark_prismarine_from_ink_sac",
+      "description": "\u003c工作台\u003e海晶碎片*8+墨囊-\u003e暗海晶石"
+    },
+    {
+      "name": "minecraft:deepslate_brick_slab",
+      "description": "\u003c工作台\u003e深板岩砖*3-\u003e深板岩砖台阶*6"
+    },
+    {
+      "name": "minecraft:deepslate_brick_slab_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e深板岩砖台阶*2"
+    },
+    {
+      "name": "minecraft:deepslate_brick_slab_from_deepslate_bricks_stonecutting",
+      "description": "\u003c切石机\u003e深板岩砖~\u003e深板岩砖台阶*2"
+    },
+    {
+      "name": "minecraft:deepslate_brick_slab_from_polished_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e磨制深板岩~\u003e深板岩砖台阶*2"
+    },
+    {
+      "name": "minecraft:deepslate_brick_stairs",
+      "description": "\u003c工作台\u003e深板岩砖*6-\u003e深板岩砖楼梯*4"
+    },
+    {
+      "name": "minecraft:deepslate_brick_stairs_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e深板岩砖楼梯"
+    },
+    {
+      "name": "minecraft:deepslate_brick_stairs_from_deepslate_bricks_stonecutting",
+      "description": "\u003c切石机\u003e深板岩砖~\u003e深板岩砖楼梯"
+    },
+    {
+      "name": "minecraft:deepslate_brick_stairs_from_polished_deepslate_stonecut",
+      "description": "\u003c切石机\u003e磨制深板岩~\u003e深板岩砖楼梯"
+    },
+    {
+      "name": "minecraft:deepslate_brick_wall",
+      "description": "\u003c工作台\u003e深板岩砖*6-\u003e深板岩砖墙*6"
+    },
+    {
+      "name": "minecraft:deepslate_brick_wall_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e深板岩砖墙"
+    },
+    {
+      "name": "minecraft:deepslate_brick_wall_from_deepslate_bricks_stonecutting",
+      "description": "\u003c切石机\u003e深板岩砖~\u003e深板岩砖墙"
+    },
+    {
+      "name": "minecraft:deepslate_brick_wall_from_polished_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e磨制深板岩~\u003e深板岩砖墙"
+    },
+    {
+      "name": "minecraft:deepslate_bricks",
+      "description": "\u003c工作台\u003e磨制深板岩*4-\u003e深板岩砖*4"
+    },
+    {
+      "name": "minecraft:deepslate_bricks_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e深板岩砖"
+    },
+    {
+      "name": "minecraft:deepslate_bricks_from_polished_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e磨制深板岩~\u003e深板岩砖"
+    },
+    {
+      "name": "minecraft:deepslate_tile_slab",
+      "description": "\u003c工作台\u003e深板岩瓦*3-\u003e深板岩瓦台阶*6"
+    },
+    {
+      "name": "minecraft:deepslate_tile_slab_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e深板岩瓦台阶*2"
+    },
+    {
+      "name": "minecraft:deepslate_tile_slab_from_deepslate_bricks_stonecutting",
+      "description": "\u003c切石机\u003e深板岩砖~\u003e深板岩瓦台阶*2"
+    },
+    {
+      "name": "minecraft:deepslate_tile_slab_from_deepslate_tiles_stonecutting",
+      "description": "\u003c切石机\u003e深板岩瓦~\u003e深板岩瓦台阶*2"
+    },
+    {
+      "name": "minecraft:deepslate_tile_slab_from_polished_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e磨制深板岩~\u003e深板岩瓦台阶*2"
+    },
+    {
+      "name": "minecraft:deepslate_tile_stairs",
+      "description": "\u003c工作台\u003e深板岩瓦*6-\u003e深板岩瓦楼梯*4"
+    },
+    {
+      "name": "minecraft:deepslate_tile_stairs_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e深板岩瓦楼梯"
+    },
+    {
+      "name": "minecraft:deepslate_tile_stairs_from_deepslate_bricks_stonecutting",
+      "description": "\u003c切石机\u003e深板岩砖~\u003e深板岩瓦楼梯"
+    },
+    {
+      "name": "minecraft:deepslate_tile_stairs_from_deepslate_tiles_stonecutting",
+      "description": "\u003c切石机\u003e深板岩瓦~\u003e深板岩瓦楼梯"
+    },
+    {
+      "name": "minecraft:deepslate_tile_stairs_from_polished_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e磨制深板岩~\u003e深板岩瓦楼梯"
+    },
+    {
+      "name": "minecraft:deepslate_tile_wall",
+      "description": "\u003c工作台\u003e深板岩瓦*6-\u003e深板岩瓦墙*6"
+    },
+    {
+      "name": "minecraft:deepslate_tile_wall_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e深板岩瓦墙"
+    },
+    {
+      "name": "minecraft:deepslate_tile_wall_from_deepslate_bricks_stonecutting",
+      "description": "\u003c切石机\u003e深板岩砖~\u003e深板岩瓦墙"
+    },
+    {
+      "name": "minecraft:deepslate_tile_wall_from_deepslate_tiles_stonecutting",
+      "description": "\u003c切石机\u003e深板岩瓦~\u003e深板岩瓦墙"
+    },
+    {
+      "name": "minecraft:deepslate_tile_wall_from_polished_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e磨制深板岩~\u003e深板岩瓦墙"
+    },
+    {
+      "name": "minecraft:deepslate_tiles",
+      "description": "\u003c工作台\u003e深板岩砖*4-\u003e深板岩瓦*4"
+    },
+    {
+      "name": "minecraft:deepslate_tiles_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e深板岩瓦"
+    },
+    {
+      "name": "minecraft:deepslate_tiles_from_deepslate_bricks_stonecutting",
+      "description": "\u003c切石机\u003e深板岩砖~\u003e深板岩瓦"
+    },
+    {
+      "name": "minecraft:deepslate_tiles_from_polished_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e磨制深板岩~\u003e深板岩瓦"
+    },
+    {
+      "name": "minecraft:detector_rail",
+      "description": "\u003c工作台\u003e红石粉+石头压力板+铁锭*6-\u003e探测铁轨*6"
+    },
+    {
+      "name": "minecraft:diamond",
+      "description": "\u003c工作台\u003e钻石块-\u003e钻石*9"
+    },
+    {
+      "name": "minecraft:diamond_axe",
+      "description": "\u003c工作台\u003e木棍*2+钻石*3-\u003e钻石斧"
+    },
+    {
+      "name": "minecraft:diamond_block",
+      "description": "\u003c工作台\u003e钻石*9-\u003e钻石块"
+    },
+    {
+      "name": "minecraft:diamond_boots",
+      "description": "\u003c工作台\u003e钻石*4-\u003e钻石靴子"
+    },
+    {
+      "name": "minecraft:diamond_chestplate",
+      "description": "\u003c工作台\u003e钻石*8-\u003e钻石胸甲"
+    },
+    {
+      "name": "minecraft:diamond_helmet",
+      "description": "\u003c工作台\u003e钻石*5-\u003e钻石头盔"
+    },
+    {
+      "name": "minecraft:diamond_hoe",
+      "description": "\u003c工作台\u003e木棍*2+钻石*2-\u003e钻石锄"
+    },
+    {
+      "name": "minecraft:diamond_leggings",
+      "description": "\u003c工作台\u003e钻石*7-\u003e钻石护腿"
+    },
+    {
+      "name": "minecraft:diamond_pickaxe",
+      "description": "\u003c工作台\u003e木棍*2+钻石*3-\u003e钻石镐"
+    },
+    {
+      "name": "minecraft:diamond_shovel",
+      "description": "\u003c工作台\u003e木棍*2+钻石-\u003e钻石锹"
+    },
+    {
+      "name": "minecraft:diamond_sword",
+      "description": "\u003c工作台\u003e木棍+钻石*2-\u003e钻石剑"
+    },
+    {
+      "name": "minecraft:diorite",
+      "description": "\u003c工作台\u003e下界石英*2+圆石*2-\u003e闪长岩*2"
+    },
+    {
+      "name": "minecraft:diorite_stairs",
+      "description": "\u003c工作台\u003e闪长岩*6-\u003e闪长岩楼梯*4"
+    },
+    {
+      "name": "minecraft:diorite_wall",
+      "description": "\u003c工作台\u003e闪长岩*6-\u003e闪长岩墙*6"
+    },
+    {
+      "name": "minecraft:dispenser",
+      "description": "\u003c工作台\u003e红石粉+圆石*7+弓-\u003e发射器"
+    },
+    {
+      "name": "minecraft:dried_kelp",
+      "description": "\u003c工作台\u003e干海带块-\u003e干海带*9"
+    },
+    {
+      "name": "minecraft:dried_kelp_block",
+      "description": "\u003c工作台\u003e干海带*9-\u003e干海带块"
+    },
+    {
+      "name": "minecraft:dripstone_block",
+      "description": "\u003c工作台\u003e滴水石锥*4-\u003e滴水石块"
+    },
+    {
+      "name": "minecraft:dropper",
+      "description": "\u003c工作台\u003e红石粉+圆石*7-\u003e投掷器"
+    },
+    {
+      "name": "minecraft:dune_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e沙丘盔甲纹饰锻造模板+钻石*7+砂岩/雕纹砂岩/切制砂岩/平滑砂岩-\u003e沙丘盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:emerald",
+      "description": "\u003c工作台\u003e绿宝石块-\u003e绿宝石*9"
+    },
+    {
+      "name": "minecraft:emerald_block",
+      "description": "\u003c工作台\u003e绿宝石*9-\u003e绿宝石块"
+    },
+    {
+      "name": "minecraft:empty_map_to_enhanced",
+      "description": "\u003c工作台\u003e空地图+指南针~\u003e空定位器地图"
+    },
+    {
+      "name": "minecraft:enchanting_table",
+      "description": "\u003c工作台\u003e书+黑曜石*4+钻石*2-\u003e附魔台"
+    },
+    {
+      "name": "minecraft:end_brick_stairs",
+      "description": "\u003c工作台\u003e末地石砖*6-\u003e末地石砖楼梯*4"
+    },
+    {
+      "name": "minecraft:end_brick_wall",
+      "description": "\u003c工作台\u003e末地石砖*6-\u003e下界砖墙*6"
+    },
+    {
+      "name": "minecraft:end_bricks",
+      "description": "\u003c工作台\u003e末地石*4-\u003e末地石砖*4"
+    },
+    {
+      "name": "minecraft:end_crystal",
+      "description": "\u003c工作台\u003e恶魂之泪+末影之眼+玻璃*7-\u003e末地水晶"
+    },
+    {
+      "name": "minecraft:end_rod",
+      "description": "\u003c工作台\u003e爆裂紫颂果+烈焰棒-\u003e末地烛*4"
+    },
+    {
+      "name": "minecraft:ender_chest",
+      "description": "\u003c工作台\u003e黑曜石*8+末影之眼-\u003e末影箱"
+    },
+    {
+      "name": "minecraft:ender_eye",
+      "description": "\u003c工作台\u003e末影珍珠+烈焰粉~\u003e末影之眼"
+    },
+    {
+      "name": "minecraft:eye_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e眼眸盔甲纹饰锻造模板+钻石*7+末地石-\u003e眼眸盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:fence",
+      "description": "\u003c工作台\u003e木棍*2+橡木木板*4-\u003e橡木栅栏*3"
+    },
+    {
+      "name": "minecraft:fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+橡木木板*2-\u003e橡木栅栏门"
+    },
+    {
+      "name": "minecraft:fermented_spider_eye",
+      "description": "\u003c工作台\u003e蜘蛛眼+棕色蘑菇+糖~\u003e发酵蛛眼"
+    },
+    {
+      "name": "minecraft:fishing_rod",
+      "description": "\u003c工作台\u003e木棍*3+线*2-\u003e钓鱼竿"
+    },
+    {
+      "name": "minecraft:fletching_table",
+      "description": "\u003c工作台\u003e燧石*2+木板*4-\u003e制箭台"
+    },
+    {
+      "name": "minecraft:flint_and_steel",
+      "description": "\u003c工作台\u003e铁锭+燧石~\u003e打火石"
+    },
+    {
+      "name": "minecraft:flower_pot",
+      "description": "\u003c工作台\u003e红砖*3-\u003e花盆"
+    },
+    {
+      "name": "minecraft:furnace",
+      "description": "\u003c工作台\u003e类圆石方块*8-\u003e熔炉"
+    },
+    {
+      "name": "minecraft:furnace_from_blackstone",
+      "description": "\u003c工作台\u003e黑石*8-\u003e熔炉"
+    },
+    {
+      "name": "minecraft:furnace_from_cobbled_deepslate",
+      "description": "\u003c工作台\u003e深板岩圆石*8-\u003e熔炉"
+    },
+    {
+      "name": "minecraft:glass_bottle",
+      "description": "\u003c工作台\u003e玻璃*3-\u003e玻璃瓶*3"
+    },
+    {
+      "name": "minecraft:glass_pane",
+      "description": "\u003c工作台\u003e玻璃*6-\u003e玻璃板*16"
+    },
+    {
+      "name": "minecraft:glow_frame",
+      "description": "\u003c工作台\u003e物品展示框+荧光墨囊~\u003e荧光物品展示框"
+    },
+    {
+      "name": "minecraft:glowstone",
+      "description": "\u003c工作台\u003e荧石粉*4-\u003e荧石"
+    },
+    {
+      "name": "minecraft:gold_block",
+      "description": "\u003c工作台\u003e金锭*9-\u003e金块"
+    },
+    {
+      "name": "minecraft:gold_ingot_from_block",
+      "description": "\u003c工作台\u003e金块-\u003e金锭*9"
+    },
+    {
+      "name": "minecraft:gold_ingot_from_nuggets",
+      "description": "\u003c工作台\u003e金粒*9-\u003e金锭"
+    },
+    {
+      "name": "minecraft:gold_nugget",
+      "description": "\u003c工作台\u003e金锭-\u003e金粒*9"
+    },
+    {
+      "name": "minecraft:golden_apple",
+      "description": "\u003c工作台\u003e金锭*8+苹果-\u003e金苹果"
+    },
+    {
+      "name": "minecraft:golden_axe",
+      "description": "\u003c工作台\u003e木棍*2+金锭*3-\u003e金斧"
+    },
+    {
+      "name": "minecraft:golden_boots",
+      "description": "\u003c工作台\u003e金锭*4-\u003e金靴子"
+    },
+    {
+      "name": "minecraft:golden_carrot",
+      "description": "\u003c工作台\u003e金粒*8+胡萝卜-\u003e金胡萝卜"
+    },
+    {
+      "name": "minecraft:golden_chestplate",
+      "description": "\u003c工作台\u003e金锭*8-\u003e金胸甲"
+    },
+    {
+      "name": "minecraft:golden_helmet",
+      "description": "\u003c工作台\u003e金锭*5-\u003e金头盔"
+    },
+    {
+      "name": "minecraft:golden_hoe",
+      "description": "\u003c工作台\u003e木棍*2+金锭*2-\u003e金锄"
+    },
+    {
+      "name": "minecraft:golden_leggings",
+      "description": "\u003c工作台\u003e金锭*7-\u003e金护腿"
+    },
+    {
+      "name": "minecraft:golden_pickaxe",
+      "description": "\u003c工作台\u003e木棍*2+金锭*3-\u003e金镐"
+    },
+    {
+      "name": "minecraft:golden_rail",
+      "description": "\u003c工作台\u003e红石粉+木棍+金锭*6-\u003e动力铁轨*6"
+    },
+    {
+      "name": "minecraft:golden_shovel",
+      "description": "\u003c工作台\u003e木棍*2+金锭-\u003e金锹"
+    },
+    {
+      "name": "minecraft:golden_sword",
+      "description": "\u003c工作台\u003e木棍+金锭*2-\u003e金剑"
+    },
+    {
+      "name": "minecraft:granite",
+      "description": "\u003c工作台\u003e闪长岩+下界石英~\u003e花岗岩"
+    },
+    {
+      "name": "minecraft:granite_stairs",
+      "description": "\u003c工作台\u003e花岗岩*6-\u003e花岗岩楼梯*4"
+    },
+    {
+      "name": "minecraft:granite_wall",
+      "description": "\u003c工作台\u003e花岗岩*6-\u003e花岗岩墙*6"
+    },
+    {
+      "name": "minecraft:gray_banner",
+      "description": "\u003c工作台\u003e灰色羊毛*6+木棍-\u003e灰色旗帜"
+    },
+    {
+      "name": "minecraft:gray_candle",
+      "description": "\u003c工作台\u003e蜡烛+灰色染料~\u003e灰色蜡烛"
+    },
+    {
+      "name": "minecraft:gray_carpet",
+      "description": "\u003c工作台\u003e灰色羊毛*2-\u003e灰色地毯*3"
+    },
+    {
+      "name": "minecraft:gray_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+灰色染料-\u003e灰色地毯*8"
+    },
+    {
+      "name": "minecraft:gray_concrete_powder",
+      "description": "\u003c工作台\u003e灰色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e灰色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:gray_dye",
+      "description": "\u003c工作台\u003e黑色染料+白色染料~\u003e灰色染料*2"
+    },
+    {
+      "name": "minecraft:gray_dye_from_black_bonemeal",
+      "description": "\u003c工作台\u003e黑色染料+骨粉~\u003e灰色染料*2"
+    },
+    {
+      "name": "minecraft:gray_dye_from_ink_bonemeal",
+      "description": "\u003c工作台\u003e墨囊+骨粉~\u003e灰色染料*2"
+    },
+    {
+      "name": "minecraft:gray_dye_from_ink_white",
+      "description": "\u003c工作台\u003e墨囊+白色染料~\u003e灰色染料*2"
+    },
+    {
+      "name": "minecraft:gray_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+灰色染料-\u003e灰色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:gray_stained_glass_pane",
+      "description": "\u003c工作台\u003e灰色染色玻璃*6-\u003e灰色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:gray_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+灰色染料-\u003e灰色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:gray_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+灰色染料-\u003e灰色陶瓦*8"
+    },
+    {
+      "name": "minecraft:green_banner",
+      "description": "\u003c工作台\u003e绿色羊毛*6+木棍-\u003e绿色旗帜"
+    },
+    {
+      "name": "minecraft:green_candle",
+      "description": "\u003c工作台\u003e蜡烛+绿色染料~\u003e绿色蜡烛"
+    },
+    {
+      "name": "minecraft:green_carpet",
+      "description": "\u003c工作台\u003e绿色羊毛*2-\u003e绿色地毯*3"
+    },
+    {
+      "name": "minecraft:green_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+绿色染料-\u003e绿色地毯*8"
+    },
+    {
+      "name": "minecraft:green_concrete_powder",
+      "description": "\u003c工作台\u003e绿色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e绿色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:green_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+绿色染料-\u003e绿色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:green_stained_glass_pane",
+      "description": "\u003c工作台\u003e绿色染色玻璃*6-\u003e绿色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:green_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+绿色染料-\u003e绿色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:green_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+绿色染料-\u003e绿色陶瓦*8"
+    },
+    {
+      "name": "minecraft:grindstone",
+      "description": "\u003c工作台\u003e木棍*2+木板*2+双层石台阶-\u003e砂轮"
+    },
+    {
+      "name": "minecraft:hay_block",
+      "description": "\u003c工作台\u003e小麦*9-\u003e干草捆"
+    },
+    {
+      "name": "minecraft:heavy_weighted_pressure_plate",
+      "description": "\u003c工作台\u003e铁锭*2-\u003e重质测重压力板"
+    },
+    {
+      "name": "minecraft:honey_block",
+      "description": "\u003c工作台\u003e蜂蜜瓶*4-\u003e蜂蜜块,玻璃瓶*4"
+    },
+    {
+      "name": "minecraft:honey_bottle",
+      "description": "\u003c工作台\u003e蜂蜜块+玻璃瓶+玻璃瓶+玻璃瓶+玻璃瓶~\u003e蜂蜜瓶*4"
+    },
+    {
+      "name": "minecraft:honey_bottle_to_sugar",
+      "description": "\u003c工作台\u003e蜂蜜瓶-\u003e糖*3,玻璃瓶"
+    },
+    {
+      "name": "minecraft:honeycomb_block",
+      "description": "\u003c工作台\u003e蜜脾*4-\u003e蜜脾块"
+    },
+    {
+      "name": "minecraft:hopper",
+      "description": "\u003c工作台\u003e箱子+铁锭*5-\u003e漏斗"
+    },
+    {
+      "name": "minecraft:hopper_minecart",
+      "description": "\u003c工作台\u003e漏斗+矿车~\u003e漏斗矿车"
+    },
+    {
+      "name": "minecraft:host_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e雇主盔甲纹饰锻造模板+钻石*7+陶瓦-\u003e雇主盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:ingots_from_copper",
+      "description": "\u003c工作台\u003e铜块-\u003e铜锭*9"
+    },
+    {
+      "name": "minecraft:ingots_from_waxed_copper",
+      "description": "\u003c工作台\u003e涂蜡的铜块-\u003e铜锭*9"
+    },
+    {
+      "name": "minecraft:iron_axe",
+      "description": "\u003c工作台\u003e木棍*2+铁锭*3-\u003e铁斧"
+    },
+    {
+      "name": "minecraft:iron_bars",
+      "description": "\u003c工作台\u003e铁锭*6-\u003e铁栏杆*16"
+    },
+    {
+      "name": "minecraft:iron_block",
+      "description": "\u003c工作台\u003e铁锭*9-\u003e铁块"
+    },
+    {
+      "name": "minecraft:iron_boots",
+      "description": "\u003c工作台\u003e铁锭*4-\u003e铁靴子"
+    },
+    {
+      "name": "minecraft:iron_chestplate",
+      "description": "\u003c工作台\u003e铁锭*8-\u003e铁胸甲"
+    },
+    {
+      "name": "minecraft:iron_door",
+      "description": "\u003c工作台\u003e铁锭*6-\u003e铁门*3"
+    },
+    {
+      "name": "minecraft:iron_helmet",
+      "description": "\u003c工作台\u003e铁锭*5-\u003e铁头盔"
+    },
+    {
+      "name": "minecraft:iron_hoe",
+      "description": "\u003c工作台\u003e木棍*2+铁锭*2-\u003e铁锄"
+    },
+    {
+      "name": "minecraft:iron_ingot_from_block",
+      "description": "\u003c工作台\u003e铁块-\u003e铁锭*9"
+    },
+    {
+      "name": "minecraft:iron_ingot_from_nuggets",
+      "description": "\u003c工作台\u003e铁粒*9-\u003e铁锭"
+    },
+    {
+      "name": "minecraft:iron_leggings",
+      "description": "\u003c工作台\u003e铁锭*7-\u003e铁护腿"
+    },
+    {
+      "name": "minecraft:iron_nugget",
+      "description": "\u003c工作台\u003e铁锭-\u003e铁粒*9"
+    },
+    {
+      "name": "minecraft:iron_pickaxe",
+      "description": "\u003c工作台\u003e木棍*2+铁锭*3-\u003e铁镐"
+    },
+    {
+      "name": "minecraft:iron_shovel",
+      "description": "\u003c工作台\u003e木棍*2+铁锭-\u003e铁锹"
+    },
+    {
+      "name": "minecraft:iron_sword",
+      "description": "\u003c工作台\u003e木棍+铁锭*2-\u003e铁剑"
+    },
+    {
+      "name": "minecraft:iron_trapdoor",
+      "description": "\u003c工作台\u003e铁锭*4-\u003e铁活板门"
+    },
+    {
+      "name": "minecraft:item_frame",
+      "description": "\u003c工作台\u003e木棍*8+皮革-\u003e物品展示框"
+    },
+    {
+      "name": "minecraft:jungle_boat",
+      "description": "\u003c工作台\u003e丛林木板*5-\u003e丛林木船"
+    },
+    {
+      "name": "minecraft:jungle_chest_boat",
+      "description": "\u003c工作台\u003e箱子+丛林木船~\u003e丛林木运输船"
+    },
+    {
+      "name": "minecraft:jungle_door",
+      "description": "\u003c工作台\u003e丛林木板*6-\u003e丛林木门*3"
+    },
+    {
+      "name": "minecraft:jungle_fence",
+      "description": "\u003c工作台\u003e木棍*2+丛林木板*4-\u003e丛林木栅栏*3"
+    },
+    {
+      "name": "minecraft:jungle_fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+丛林木板*2-\u003e丛林木栅栏门"
+    },
+    {
+      "name": "minecraft:jungle_hanging_sign",
+      "description": "\u003c工作台\u003e去皮丛林原木*6+锁链*2-\u003e悬挂式丛林木告示牌*6"
+    },
+    {
+      "name": "minecraft:jungle_planks",
+      "description": "\u003c工作台\u003e丛林原木-\u003e丛林木板*4"
+    },
+    {
+      "name": "minecraft:jungle_planks_from_stripped",
+      "description": "\u003c工作台\u003e去皮丛林原木-\u003e丛林木板*4"
+    },
+    {
+      "name": "minecraft:jungle_planks_from_stripped_wood",
+      "description": "\u003c工作台\u003e去皮丛林木-\u003e丛林木板*4"
+    },
+    {
+      "name": "minecraft:jungle_planks_from_wood",
+      "description": "\u003c工作台\u003e丛林木-\u003e丛林木板*4"
+    },
+    {
+      "name": "minecraft:jungle_stairs",
+      "description": "\u003c工作台\u003e丛林木板*6-\u003e丛林木楼梯*4"
+    },
+    {
+      "name": "minecraft:jungle_wood",
+      "description": "\u003c工作台\u003e丛林原木*4-\u003e丛林木*3"
+    },
+    {
+      "name": "minecraft:jungle_wood_stripped",
+      "description": "\u003c工作台\u003e去皮丛林原木*4-\u003e去皮丛林木*3"
+    },
+    {
+      "name": "minecraft:jungle_wooden_slab",
+      "description": "\u003c工作台\u003e丛林木板*3-\u003e丛林木台阶*6"
+    },
+    {
+      "name": "minecraft:ladder",
+      "description": "\u003c工作台\u003e木棍*7-\u003e梯子*3"
+    },
+    {
+      "name": "minecraft:lantern",
+      "description": "\u003c工作台\u003e铁粒*8+火把-\u003e灯笼"
+    },
+    {
+      "name": "minecraft:lapis_block",
+      "description": "\u003c工作台\u003e青金石*9-\u003e青金石块"
+    },
+    {
+      "name": "minecraft:lapis_lazuli",
+      "description": "\u003c工作台\u003e青金石块-\u003e青金石*9"
+    },
+    {
+      "name": "minecraft:lead",
+      "description": "\u003c工作台\u003e线*4+黏液球-\u003e拴绳*2"
+    },
+    {
+      "name": "minecraft:leather",
+      "description": "\u003c工作台\u003e兔子皮*4-\u003e皮革"
+    },
+    {
+      "name": "minecraft:leather_boots",
+      "description": "\u003c工作台\u003e皮革*4-\u003e皮革靴子"
+    },
+    {
+      "name": "minecraft:leather_chestplate",
+      "description": "\u003c工作台\u003e皮革*8-\u003e皮革外套"
+    },
+    {
+      "name": "minecraft:leather_helmet",
+      "description": "\u003c工作台\u003e皮革*5-\u003e皮革帽子"
+    },
+    {
+      "name": "minecraft:leather_horse_armor",
+      "description": "\u003c工作台\u003e皮革*7-\u003e皮革马铠"
+    },
+    {
+      "name": "minecraft:leather_leggings",
+      "description": "\u003c工作台\u003e皮革*7-\u003e皮革裤子"
+    },
+    {
+      "name": "minecraft:lectern",
+      "description": "\u003c工作台\u003e木质台阶*4+书架-\u003e讲台"
+    },
+    {
+      "name": "minecraft:lever",
+      "description": "\u003c工作台\u003e圆石+木棍-\u003e拉杆"
+    },
+    {
+      "name": "minecraft:light_blue_banner",
+      "description": "\u003c工作台\u003e淡蓝色羊毛*6+木棍-\u003e淡蓝色旗帜"
+    },
+    {
+      "name": "minecraft:light_blue_candle",
+      "description": "\u003c工作台\u003e蜡烛+淡蓝色染料~\u003e淡蓝色蜡烛"
+    },
+    {
+      "name": "minecraft:light_blue_carpet",
+      "description": "\u003c工作台\u003e淡蓝色羊毛*2-\u003e淡蓝色地毯*3"
+    },
+    {
+      "name": "minecraft:light_blue_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+淡蓝色染料-\u003e淡蓝色地毯*8"
+    },
+    {
+      "name": "minecraft:light_blue_concrete_powder",
+      "description": "\u003c工作台\u003e淡蓝色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e淡蓝色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:light_blue_dye",
+      "description": "\u003c工作台\u003e蓝色染料+白色染料~\u003e淡蓝色染料*2"
+    },
+    {
+      "name": "minecraft:light_blue_dye_from_blue_bonemeal",
+      "description": "\u003c工作台\u003e蓝色染料+骨粉~\u003e淡蓝色染料*2"
+    },
+    {
+      "name": "minecraft:light_blue_dye_from_blue_orchid",
+      "description": "\u003c工作台\u003e兰花~\u003e淡蓝色染料"
+    },
+    {
+      "name": "minecraft:light_blue_dye_from_lapis_bonemeal",
+      "description": "\u003c工作台\u003e青金石+骨粉~\u003e淡蓝色染料*2"
+    },
+    {
+      "name": "minecraft:light_blue_dye_from_lapis_white",
+      "description": "\u003c工作台\u003e青金石+白色染料~\u003e淡蓝色染料*2"
+    },
+    {
+      "name": "minecraft:light_blue_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+淡蓝色染料-\u003e淡蓝色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:light_blue_stained_glass_pane",
+      "description": "\u003c工作台\u003e淡蓝色染色玻璃*6-\u003e淡蓝色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:light_blue_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+淡蓝色染料-\u003e淡蓝色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:light_blue_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+淡蓝色染料-\u003e淡蓝色陶瓦*8"
+    },
+    {
+      "name": "minecraft:light_gray__carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+淡灰色染料-\u003e淡灰色地毯*8"
+    },
+    {
+      "name": "minecraft:light_gray_banner",
+      "description": "\u003c工作台\u003e淡灰色羊毛*6+木棍-\u003e淡灰色旗帜"
+    },
+    {
+      "name": "minecraft:light_gray_candle",
+      "description": "\u003c工作台\u003e蜡烛+淡灰色染料~\u003e淡灰色蜡烛"
+    },
+    {
+      "name": "minecraft:light_gray_carpet",
+      "description": "\u003c工作台\u003e淡灰色羊毛*2-\u003e淡灰色地毯*3"
+    },
+    {
+      "name": "minecraft:light_gray_concrete_powder",
+      "description": "\u003c工作台\u003e淡灰色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e淡灰色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:light_gray_dye",
+      "description": "\u003c工作台\u003e黑色染料+白色染料+白色染料~\u003e淡灰色染料*3"
+    },
+    {
+      "name": "minecraft:light_gray_dye_from_azure_bluet",
+      "description": "\u003c工作台\u003e蓝花美耳草~\u003e淡灰色染料"
+    },
+    {
+      "name": "minecraft:light_gray_dye_from_black_bonemeal",
+      "description": "\u003c工作台\u003e黑色染料+骨粉+骨粉~\u003e淡灰色染料*3"
+    },
+    {
+      "name": "minecraft:light_gray_dye_from_gray_bonemeal",
+      "description": "\u003c工作台\u003e灰色染料+骨粉~\u003e淡灰色染料*2"
+    },
+    {
+      "name": "minecraft:light_gray_dye_from_gray_white",
+      "description": "\u003c工作台\u003e灰色染料+白色染料~\u003e淡灰色染料*2"
+    },
+    {
+      "name": "minecraft:light_gray_dye_from_ink_bonemeal",
+      "description": "\u003c工作台\u003e墨囊+骨粉+骨粉~\u003e淡灰色染料*3"
+    },
+    {
+      "name": "minecraft:light_gray_dye_from_ink_white",
+      "description": "\u003c工作台\u003e墨囊+白色染料+白色染料~\u003e淡灰色染料*3"
+    },
+    {
+      "name": "minecraft:light_gray_dye_from_oxeye_daisy",
+      "description": "\u003c工作台\u003e滨菊~\u003e淡灰色染料"
+    },
+    {
+      "name": "minecraft:light_gray_dye_from_white_tulip",
+      "description": "\u003c工作台\u003e白色郁金香~\u003e淡灰色染料"
+    },
+    {
+      "name": "minecraft:light_gray_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+淡灰色染料-\u003e淡灰色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:light_gray_stained_glass_pane",
+      "description": "\u003c工作台\u003e淡灰色染色玻璃*6-\u003e淡灰色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:light_gray_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+淡灰色染料-\u003e淡灰色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:light_gray_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+淡灰色染料-\u003e淡灰色陶瓦*8"
+    },
+    {
+      "name": "minecraft:light_weighted_pressure_plate",
+      "description": "\u003c工作台\u003e金锭*2-\u003e轻质测重压力板"
+    },
+    {
+      "name": "minecraft:lightning_rod",
+      "description": "\u003c工作台\u003e铜锭*3-\u003e避雷针"
+    },
+    {
+      "name": "minecraft:lime__carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+黄绿色染料-\u003e黄绿色地毯*8"
+    },
+    {
+      "name": "minecraft:lime_banner",
+      "description": "\u003c工作台\u003e黄绿色羊毛*6+木棍-\u003e黄绿色旗帜"
+    },
+    {
+      "name": "minecraft:lime_candle",
+      "description": "\u003c工作台\u003e蜡烛+黄绿色染料~\u003e黄绿色蜡烛"
+    },
+    {
+      "name": "minecraft:lime_carpet",
+      "description": "\u003c工作台\u003e黄绿色羊毛*2-\u003e黄绿色地毯*3"
+    },
+    {
+      "name": "minecraft:lime_concrete_powder",
+      "description": "\u003c工作台\u003e黄绿色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e黄绿色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:lime_dye",
+      "description": "\u003c工作台\u003e绿色染料+白色染料~\u003e黄绿色染料*2"
+    },
+    {
+      "name": "minecraft:lime_dye_from_bonemeal",
+      "description": "\u003c工作台\u003e绿色染料+骨粉~\u003e黄绿色染料*2"
+    },
+    {
+      "name": "minecraft:lime_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+黄绿色染料-\u003e黄绿色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:lime_stained_glass_pane",
+      "description": "\u003c工作台\u003e黄绿色染色玻璃*6-\u003e黄绿色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:lime_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+黄绿色染料-\u003e黄绿色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:lime_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+黄绿色染料-\u003e黄绿色陶瓦*8"
+    },
+    {
+      "name": "minecraft:lit_pumpkin",
+      "description": "\u003c工作台\u003e雕刻南瓜+火把-\u003e南瓜灯"
+    },
+    {
+      "name": "minecraft:locator_map",
+      "description": "\u003c工作台\u003e纸*8+指南针-\u003e空定位器地图"
+    },
+    {
+      "name": "minecraft:lodestone",
+      "description": "\u003c工作台\u003e雕纹石砖*8+下界合金锭-\u003e磁石"
+    },
+    {
+      "name": "minecraft:loom",
+      "description": "\u003c工作台\u003e线*2+木板*2-\u003e织布机"
+    },
+    {
+      "name": "minecraft:magenta_banner",
+      "description": "\u003c工作台\u003e品红色羊毛*6+木棍-\u003e品红色旗帜"
+    },
+    {
+      "name": "minecraft:magenta_candle",
+      "description": "\u003c工作台\u003e蜡烛+品红色染料~\u003e品红色蜡烛"
+    },
+    {
+      "name": "minecraft:magenta_carpet",
+      "description": "\u003c工作台\u003e品红色羊毛*2-\u003e品红色地毯*3"
+    },
+    {
+      "name": "minecraft:magenta_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+品红色染料-\u003e品红色地毯*8"
+    },
+    {
+      "name": "minecraft:magenta_concrete_powder",
+      "description": "\u003c工作台\u003e品红色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e品红色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:magenta_dye",
+      "description": "\u003c工作台\u003e蓝色染料+红色染料+粉红色染料~\u003e品红色染料*3"
+    },
+    {
+      "name": "minecraft:magenta_dye_from_allium",
+      "description": "\u003c工作台\u003e绒球葱~\u003e品红色染料"
+    },
+    {
+      "name": "minecraft:magenta_dye_from_blue_ink_bonemeal",
+      "description": "\u003c工作台\u003e蓝色染料+红色染料+红色染料+骨粉~\u003e品红色染料*4"
+    },
+    {
+      "name": "minecraft:magenta_dye_from_blue_ink_white",
+      "description": "\u003c工作台\u003e蓝色染料+红色染料+红色染料+白色染料~\u003e品红色染料*4"
+    },
+    {
+      "name": "minecraft:magenta_dye_from_lapis_ink_bonemeal",
+      "description": "\u003c工作台\u003e青金石+红色染料+红色染料+骨粉~\u003e品红色染料*4"
+    },
+    {
+      "name": "minecraft:magenta_dye_from_lapis_ink_white",
+      "description": "\u003c工作台\u003e青金石+红色染料+红色染料+白色染料~\u003e品红色染料*4"
+    },
+    {
+      "name": "minecraft:magenta_dye_from_lapis_red_pink",
+      "description": "\u003c工作台\u003e青金石+红色染料+粉红色染料~\u003e品红色染料*3"
+    },
+    {
+      "name": "minecraft:magenta_dye_from_lilac",
+      "description": "\u003c工作台\u003e丁香~\u003e品红色染料*2"
+    },
+    {
+      "name": "minecraft:magenta_dye_from_purple_and_pink",
+      "description": "\u003c工作台\u003e紫色染料+粉红色染料~\u003e品红色染料*2"
+    },
+    {
+      "name": "minecraft:magenta_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+品红色染料-\u003e品红色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:magenta_stained_glass_pane",
+      "description": "\u003c工作台\u003e品红色染色玻璃*6-\u003e品红色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:magenta_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+品红色染料-\u003e品红色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:magenta_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+品红色染料-\u003e品红色陶瓦*8"
+    },
+    {
+      "name": "minecraft:magma",
+      "description": "\u003c工作台\u003e岩浆膏*4-\u003e岩浆块"
+    },
+    {
+      "name": "minecraft:magma_cream",
+      "description": "\u003c工作台\u003e烈焰粉+黏液球~\u003e岩浆膏"
+    },
+    {
+      "name": "minecraft:mangrove_boat",
+      "description": "\u003c工作台\u003e红树木板*5-\u003e红树木船"
+    },
+    {
+      "name": "minecraft:mangrove_button",
+      "description": "\u003c工作台\u003e红树木板-\u003e红树木按钮"
+    },
+    {
+      "name": "minecraft:mangrove_chest_boat",
+      "description": "\u003c工作台\u003e箱子+红树木船~\u003e红树木运输船"
+    },
+    {
+      "name": "minecraft:mangrove_door",
+      "description": "\u003c工作台\u003e红树木板*6-\u003e红树木门*3"
+    },
+    {
+      "name": "minecraft:mangrove_fence",
+      "description": "\u003c工作台\u003e木棍*2+红树木板*4-\u003e红树木栅栏*3"
+    },
+    {
+      "name": "minecraft:mangrove_fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+红树木板*2-\u003e红树木栅栏门"
+    },
+    {
+      "name": "minecraft:mangrove_hanging_sign",
+      "description": "\u003c工作台\u003e去皮红树原木*6+锁链*2-\u003e悬挂式红树木告示牌*6"
+    },
+    {
+      "name": "minecraft:mangrove_planks",
+      "description": "\u003c工作台\u003e红树原木-\u003e红树木板*4"
+    },
+    {
+      "name": "minecraft:mangrove_planks_from_stripped_log",
+      "description": "\u003c工作台\u003e去皮红树原木-\u003e红树木板*4"
+    },
+    {
+      "name": "minecraft:mangrove_planks_from_stripped_wood",
+      "description": "\u003c工作台\u003e去皮红树木-\u003e红树木板*4"
+    },
+    {
+      "name": "minecraft:mangrove_planks_from_wood",
+      "description": "\u003c工作台\u003e红树木-\u003e红树木板*4"
+    },
+    {
+      "name": "minecraft:mangrove_pressure_plate",
+      "description": "\u003c工作台\u003e红树木板*2-\u003e红树木压力板"
+    },
+    {
+      "name": "minecraft:mangrove_sign",
+      "description": "\u003c工作台\u003e红树木板*6+木棍-\u003e红树木告示牌*3"
+    },
+    {
+      "name": "minecraft:mangrove_slab",
+      "description": "\u003c工作台\u003e红树木板*3-\u003e红树木台阶*6"
+    },
+    {
+      "name": "minecraft:mangrove_stairs",
+      "description": "\u003c工作台\u003e红树木板*6-\u003e红树木楼梯*4"
+    },
+    {
+      "name": "minecraft:mangrove_trapdoor",
+      "description": "\u003c工作台\u003e红树木板*6-\u003e红树木活板门*2"
+    },
+    {
+      "name": "minecraft:mangrove_wood",
+      "description": "\u003c工作台\u003e红树原木*4-\u003e红树木*3"
+    },
+    {
+      "name": "minecraft:mangrove_wood_stripped",
+      "description": "\u003c工作台\u003e去皮红树原木*4-\u003e去皮红树木*3"
+    },
+    {
+      "name": "minecraft:map",
+      "description": "\u003c工作台\u003e纸*9-\u003e空地图"
+    },
+    {
+      "name": "minecraft:melon_block",
+      "description": "\u003c工作台\u003e西瓜片*9-\u003e西瓜"
+    },
+    {
+      "name": "minecraft:melon_seeds",
+      "description": "\u003c工作台\u003e西瓜片-\u003e西瓜种子"
+    },
+    {
+      "name": "minecraft:minecart",
+      "description": "\u003c工作台\u003e铁锭*5-\u003e矿车"
+    },
+    {
+      "name": "minecraft:moss_carpet",
+      "description": "\u003c工作台\u003e苔藓块*2-\u003e覆地苔藓*3"
+    },
+    {
+      "name": "minecraft:mossy_cobblestone",
+      "description": "\u003c工作台\u003e圆石+藤蔓~\u003e苔石"
+    },
+    {
+      "name": "minecraft:mossy_cobblestone_from_moss",
+      "description": "\u003c工作台\u003e圆石+苔藓块~\u003e苔石"
+    },
+    {
+      "name": "minecraft:mossy_cobblestone_stairs",
+      "description": "\u003c工作台\u003e苔石*6-\u003e苔石楼梯*4"
+    },
+    {
+      "name": "minecraft:mossy_cobblestone_wall",
+      "description": "\u003c工作台\u003e苔石*6-\u003e苔石墙*6"
+    },
+    {
+      "name": "minecraft:mossy_stone_brick_stairs",
+      "description": "\u003c工作台\u003e苔石砖*6-\u003e苔石砖楼梯*4"
+    },
+    {
+      "name": "minecraft:mossy_stone_brick_wall",
+      "description": "\u003c工作台\u003e苔石砖*6-\u003e苔石砖墙*6"
+    },
+    {
+      "name": "minecraft:mossy_stonebrick",
+      "description": "\u003c工作台\u003e石砖+藤蔓~\u003e苔石砖"
+    },
+    {
+      "name": "minecraft:mossy_stonebrick_from_moss",
+      "description": "\u003c工作台\u003e石砖+苔藓块~\u003e苔石砖"
+    },
+    {
+      "name": "minecraft:mud_brick_slab",
+      "description": "\u003c工作台\u003e泥砖*3-\u003e泥砖台阶*6"
+    },
+    {
+      "name": "minecraft:mud_brick_stairs",
+      "description": "\u003c工作台\u003e泥砖*6-\u003e泥砖楼梯*4"
+    },
+    {
+      "name": "minecraft:mud_brick_wall",
+      "description": "\u003c工作台\u003e泥砖*6-\u003e泥砖墙*6"
+    },
+    {
+      "name": "minecraft:mud_bricks",
+      "description": "\u003c工作台\u003e泥坯*4-\u003e泥砖*4"
+    },
+    {
+      "name": "minecraft:muddy_mangrove_roots",
+      "description": "\u003c工作台\u003e红树根+泥巴~\u003e沾泥的红树根"
+    },
+    {
+      "name": "minecraft:mushroom_stew",
+      "description": "\u003c工作台\u003e棕色蘑菇+红色蘑菇+碗~\u003e蘑菇煲"
+    },
+    {
+      "name": "minecraft:nether_brick",
+      "description": "\u003c工作台\u003e下界砖块*4-\u003e下界砖"
+    },
+    {
+      "name": "minecraft:nether_brick_fence",
+      "description": "\u003c工作台\u003e下界砖块*2+下界砖*4-\u003e下界砖栅栏*6"
+    },
+    {
+      "name": "minecraft:nether_brick_stairs",
+      "description": "\u003c工作台\u003e下界砖*6-\u003e下界砖楼梯*4"
+    },
+    {
+      "name": "minecraft:nether_brick_wall",
+      "description": "\u003c工作台\u003e下界砖*6-\u003e末地石砖墙*6"
+    },
+    {
+      "name": "minecraft:nether_wart_block",
+      "description": "\u003c工作台\u003e下界疣*9-\u003e下界疣块"
+    },
+    {
+      "name": "minecraft:netherite_block",
+      "description": "\u003c工作台\u003e下界合金锭*9-\u003e下界合金块"
+    },
+    {
+      "name": "minecraft:netherite_ingot",
+      "description": "\u003c工作台\u003e下界合金碎片*4+金锭*4~\u003e下界合金锭"
+    },
+    {
+      "name": "minecraft:netherite_ingot_from_block",
+      "description": "\u003c工作台\u003e下界合金块-\u003e下界合金锭*9"
+    },
+    {
+      "name": "minecraft:netherite_upgrade_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e下界合金升级锻造模板+钻石*7+下界岩-\u003e下界合金升级锻造模板*2"
+    },
+    {
+      "name": "minecraft:noteblock",
+      "description": "\u003c工作台\u003e木板*8+红石粉-\u003e音符盒"
+    },
+    {
+      "name": "minecraft:oak_fence",
+      "description": "\u003c工作台\u003e木棍*2+橡木木板*4-\u003e橡木栅栏*3"
+    },
+    {
+      "name": "minecraft:oak_hanging_sign",
+      "description": "\u003c工作台\u003e去皮橡木原木*6+锁链*2-\u003e悬挂式橡木告示牌*6"
+    },
+    {
+      "name": "minecraft:oak_planks",
+      "description": "\u003c工作台\u003e橡木原木-\u003e橡木木板*4"
+    },
+    {
+      "name": "minecraft:oak_planks_from_stripped",
+      "description": "\u003c工作台\u003e去皮橡木原木-\u003e橡木木板*4"
+    },
+    {
+      "name": "minecraft:oak_planks_from_stripped_wood",
+      "description": "\u003c工作台\u003e去皮橡木-\u003e橡木木板*4"
+    },
+    {
+      "name": "minecraft:oak_planks_from_wood",
+      "description": "\u003c工作台\u003e橡木-\u003e橡木木板*4"
+    },
+    {
+      "name": "minecraft:oak_stairs",
+      "description": "\u003c工作台\u003e橡木木板*6-\u003e橡木楼梯*4"
+    },
+    {
+      "name": "minecraft:oak_wood",
+      "description": "\u003c工作台\u003e橡木原木*4-\u003e橡木*3"
+    },
+    {
+      "name": "minecraft:oak_wood_stripped",
+      "description": "\u003c工作台\u003e去皮橡木原木*4-\u003e去皮橡木*3"
+    },
+    {
+      "name": "minecraft:oak_wooden_slab",
+      "description": "\u003c工作台\u003e橡木木板*3-\u003e橡木台阶*6"
+    },
+    {
+      "name": "minecraft:observer",
+      "description": "\u003c工作台\u003e下界石英+红石粉*2+圆石*6-\u003e侦测器"
+    },
+    {
+      "name": "minecraft:orange_banner",
+      "description": "\u003c工作台\u003e橙色羊毛*6+木棍-\u003e橙色旗帜"
+    },
+    {
+      "name": "minecraft:orange_candle",
+      "description": "\u003c工作台\u003e蜡烛+橙色染料~\u003e橙色蜡烛"
+    },
+    {
+      "name": "minecraft:orange_carpet",
+      "description": "\u003c工作台\u003e橙色羊毛*2-\u003e橙色地毯*3"
+    },
+    {
+      "name": "minecraft:orange_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+橙色染料-\u003e橙色地毯*8"
+    },
+    {
+      "name": "minecraft:orange_concrete_powder",
+      "description": "\u003c工作台\u003e橙色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e橙色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:orange_dye_from_orange_tulip",
+      "description": "\u003c工作台\u003e橙色郁金香~\u003e橙色染料"
+    },
+    {
+      "name": "minecraft:orange_dye_from_red_yellow",
+      "description": "\u003c工作台\u003e红色染料+黄色染料~\u003e橙色染料*2"
+    },
+    {
+      "name": "minecraft:orange_dye_from_torchflower",
+      "description": "\u003c工作台\u003e火把花~\u003e橙色染料"
+    },
+    {
+      "name": "minecraft:orange_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+橙色染料-\u003e橙色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:orange_stained_glass_pane",
+      "description": "\u003c工作台\u003e橙色染色玻璃*6-\u003e橙色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:orange_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+橙色染料-\u003e橙色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:orange_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+橙色染料-\u003e橙色陶瓦*8"
+    },
+    {
+      "name": "minecraft:packed_ice",
+      "description": "\u003c工作台\u003e冰*9-\u003e浮冰"
+    },
+    {
+      "name": "minecraft:packed_mud",
+      "description": "\u003c工作台\u003e泥巴+小麦~\u003e泥坯"
+    },
+    {
+      "name": "minecraft:painting",
+      "description": "\u003c工作台\u003e木棍*8+羊毛-\u003e画"
+    },
+    {
+      "name": "minecraft:paper",
+      "description": "\u003c工作台\u003e甘蔗*3-\u003e纸*3"
+    },
+    {
+      "name": "minecraft:pillar_quartz_block",
+      "description": "\u003c工作台\u003e石英块*2-\u003e石英柱*2"
+    },
+    {
+      "name": "minecraft:pink_banner",
+      "description": "\u003c工作台\u003e粉红色羊毛*6+木棍-\u003e粉红色旗帜"
+    },
+    {
+      "name": "minecraft:pink_candle",
+      "description": "\u003c工作台\u003e蜡烛+粉红色染料~\u003e粉红色蜡烛"
+    },
+    {
+      "name": "minecraft:pink_carpet",
+      "description": "\u003c工作台\u003e粉红色羊毛*2-\u003e粉红色地毯*3"
+    },
+    {
+      "name": "minecraft:pink_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+粉红色染料-\u003e粉红色地毯*8"
+    },
+    {
+      "name": "minecraft:pink_concrete_powder",
+      "description": "\u003c工作台\u003e粉红色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e粉红色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:pink_dye",
+      "description": "\u003c工作台\u003e红色染料+白色染料~\u003e粉红色染料*2"
+    },
+    {
+      "name": "minecraft:pink_dye_from_peony",
+      "description": "\u003c工作台\u003e牡丹~\u003e粉红色染料*2"
+    },
+    {
+      "name": "minecraft:pink_dye_from_pink_petals",
+      "description": "\u003c工作台\u003e粉红色花簇~\u003e粉红色染料"
+    },
+    {
+      "name": "minecraft:pink_dye_from_pink_tulip",
+      "description": "\u003c工作台\u003e粉红色郁金香~\u003e粉红色染料"
+    },
+    {
+      "name": "minecraft:pink_dye_from_red_bonemeal",
+      "description": "\u003c工作台\u003e红色染料+骨粉~\u003e粉红色染料*2"
+    },
+    {
+      "name": "minecraft:pink_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+粉红色染料-\u003e粉红色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:pink_stained_glass_pane",
+      "description": "\u003c工作台\u003e粉红色染色玻璃*6-\u003e粉红色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:pink_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+粉红色染料-\u003e粉红色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:pink_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+粉红色染料-\u003e粉红色陶瓦*8"
+    },
+    {
+      "name": "minecraft:piston",
+      "description": "\u003c工作台\u003e木板*3+圆石*4+铁锭+红石粉-\u003e活塞"
+    },
+    {
+      "name": "minecraft:polished_andesite",
+      "description": "\u003c工作台\u003e安山岩*4-\u003e磨制安山岩*4"
+    },
+    {
+      "name": "minecraft:polished_andesite_stairs",
+      "description": "\u003c工作台\u003e磨制安山岩*6-\u003e磨制安山岩楼梯*4"
+    },
+    {
+      "name": "minecraft:polished_basalt",
+      "description": "\u003c工作台\u003e玄武岩*4-\u003e磨制玄武岩*4"
+    },
+    {
+      "name": "minecraft:polished_blackstone",
+      "description": "\u003c工作台\u003e黑石*4-\u003e磨制黑石*4"
+    },
+    {
+      "name": "minecraft:polished_blackstone_brick_slab",
+      "description": "\u003c工作台\u003e磨制黑石砖*3-\u003e磨制黑石砖台阶*6"
+    },
+    {
+      "name": "minecraft:polished_blackstone_brick_stairs",
+      "description": "\u003c工作台\u003e磨制黑石砖*6-\u003e磨制黑石砖楼梯*4"
+    },
+    {
+      "name": "minecraft:polished_blackstone_brick_wall",
+      "description": "\u003c工作台\u003e磨制黑石砖*6-\u003e磨制黑石砖墙*6"
+    },
+    {
+      "name": "minecraft:polished_blackstone_bricks",
+      "description": "\u003c工作台\u003e磨制黑石*4-\u003e磨制黑石砖*4"
+    },
+    {
+      "name": "minecraft:polished_blackstone_button",
+      "description": "\u003c工作台\u003e磨制黑石-\u003e磨制黑石按钮"
+    },
+    {
+      "name": "minecraft:polished_blackstone_pressure_plate",
+      "description": "\u003c工作台\u003e磨制黑石*2-\u003e磨制黑石压力板"
+    },
+    {
+      "name": "minecraft:polished_blackstone_slab",
+      "description": "\u003c工作台\u003e磨制黑石*3-\u003e磨制黑石台阶*6"
+    },
+    {
+      "name": "minecraft:polished_blackstone_stairs",
+      "description": "\u003c工作台\u003e磨制黑石*6-\u003e磨制黑石楼梯*4"
+    },
+    {
+      "name": "minecraft:polished_blackstone_wall",
+      "description": "\u003c工作台\u003e磨制黑石*6-\u003e磨制黑石墙*6"
+    },
+    {
+      "name": "minecraft:polished_deepslate",
+      "description": "\u003c工作台\u003e深板岩圆石*4-\u003e磨制深板岩*4"
+    },
+    {
+      "name": "minecraft:polished_deepslate_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e磨制深板岩"
+    },
+    {
+      "name": "minecraft:polished_deepslate_slab",
+      "description": "\u003c工作台\u003e磨制深板岩*3-\u003e磨制深板岩台阶*6"
+    },
+    {
+      "name": "minecraft:polished_deepslate_slab_from_cobbled_deepslate_stonecut",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e磨制深板岩台阶*2"
+    },
+    {
+      "name": "minecraft:polished_deepslate_slab_from_polished_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e磨制深板岩~\u003e磨制深板岩台阶*2"
+    },
+    {
+      "name": "minecraft:polished_deepslate_stairs",
+      "description": "\u003c工作台\u003e磨制深板岩*6-\u003e磨制深板岩楼梯*4"
+    },
+    {
+      "name": "minecraft:polished_deepslate_stairs_from_cobbled_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e磨制深板岩楼梯"
+    },
+    {
+      "name": "minecraft:polished_deepslate_stairs_from_polished_deepslate_stonecutting",
+      "description": "\u003c切石机\u003e磨制深板岩~\u003e磨制深板岩楼梯"
+    },
+    {
+      "name": "minecraft:polished_deepslate_wall",
+      "description": "\u003c工作台\u003e磨制深板岩*6-\u003e磨制深板岩墙*6"
+    },
+    {
+      "name": "minecraft:polished_deepslate_wall_from_cobbled_deepslate_stonecut",
+      "description": "\u003c切石机\u003e深板岩圆石~\u003e磨制深板岩墙"
+    },
+    {
+      "name": "minecraft:polished_deepslate_wall_from_polished_deepslate_stonecut",
+      "description": "\u003c切石机\u003e磨制深板岩~\u003e磨制深板岩墙"
+    },
+    {
+      "name": "minecraft:polished_diorite",
+      "description": "\u003c工作台\u003e闪长岩*4-\u003e磨制闪长岩*4"
+    },
+    {
+      "name": "minecraft:polished_diorite_stairs",
+      "description": "\u003c工作台\u003e磨制闪长岩*6-\u003e磨制闪长岩楼梯*4"
+    },
+    {
+      "name": "minecraft:polished_granite",
+      "description": "\u003c工作台\u003e花岗岩*4-\u003e磨制花岗岩*4"
+    },
+    {
+      "name": "minecraft:polished_granite_stairs",
+      "description": "\u003c工作台\u003e磨制花岗岩*6-\u003e磨制花岗岩楼梯*4"
+    },
+    {
+      "name": "minecraft:prismarine",
+      "description": "\u003c工作台\u003e海晶碎片*4-\u003e海晶石"
+    },
+    {
+      "name": "minecraft:prismarine_bricks",
+      "description": "\u003c工作台\u003e海晶碎片*9-\u003e海晶石砖"
+    },
+    {
+      "name": "minecraft:prismarine_stairs",
+      "description": "\u003c工作台\u003e海晶石*6-\u003e海晶石楼梯*4"
+    },
+    {
+      "name": "minecraft:prismarine_stairs_bricks",
+      "description": "\u003c工作台\u003e海晶石砖*6-\u003e海晶石砖楼梯*4"
+    },
+    {
+      "name": "minecraft:prismarine_stairs_dark",
+      "description": "\u003c工作台\u003e暗海晶石*6-\u003e暗海晶石楼梯*4"
+    },
+    {
+      "name": "minecraft:prismarine_wall",
+      "description": "\u003c工作台\u003e海晶石*6-\u003e海晶石墙*6"
+    },
+    {
+      "name": "minecraft:pumpkin_pie",
+      "description": "\u003c工作台\u003e南瓜+糖+鸡蛋~\u003e南瓜派"
+    },
+    {
+      "name": "minecraft:pumpkin_seeds",
+      "description": "\u003c工作台\u003e南瓜-\u003e南瓜种子*4"
+    },
+    {
+      "name": "minecraft:purple_banner",
+      "description": "\u003c工作台\u003e紫色羊毛*6+木棍-\u003e紫色旗帜"
+    },
+    {
+      "name": "minecraft:purple_candle",
+      "description": "\u003c工作台\u003e蜡烛+紫色染料~\u003e紫色蜡烛"
+    },
+    {
+      "name": "minecraft:purple_carpet",
+      "description": "\u003c工作台\u003e紫色羊毛*2-\u003e紫色地毯*3"
+    },
+    {
+      "name": "minecraft:purple_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+紫色染料-\u003e紫色地毯*8"
+    },
+    {
+      "name": "minecraft:purple_concrete_powder",
+      "description": "\u003c工作台\u003e紫色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e紫色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:purple_dye",
+      "description": "\u003c工作台\u003e蓝色染料+红色染料~\u003e紫色染料*2"
+    },
+    {
+      "name": "minecraft:purple_dye_from_lapis_lazuli",
+      "description": "\u003c工作台\u003e青金石+红色染料~\u003e紫色染料*2"
+    },
+    {
+      "name": "minecraft:purple_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+紫色染料-\u003e紫色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:purple_stained_glass_pane",
+      "description": "\u003c工作台\u003e紫色染色玻璃*6-\u003e紫色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:purple_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+紫色染料-\u003e紫色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:purple_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+紫色染料-\u003e紫色陶瓦*8"
+    },
+    {
+      "name": "minecraft:purpur_block",
+      "description": "\u003c工作台\u003e爆裂紫颂果*4-\u003e紫珀块/雕纹紫珀块/紫珀柱/平滑紫珀块*4"
+    },
+    {
+      "name": "minecraft:purpur_stairs",
+      "description": "\u003c工作台\u003e紫珀块/雕纹紫珀块/紫珀柱/平滑紫珀块*6-\u003e紫珀楼梯*4"
+    },
+    {
+      "name": "minecraft:quartz_block",
+      "description": "\u003c工作台\u003e下界石英*4-\u003e石英块"
+    },
+    {
+      "name": "minecraft:quartz_bricks",
+      "description": "\u003c工作台\u003e石英块*4-\u003e石英砖"
+    },
+    {
+      "name": "minecraft:quartz_stairs",
+      "description": "\u003c工作台\u003e石英块*6-\u003e石英楼梯*4"
+    },
+    {
+      "name": "minecraft:rabbit_stew_from_brown_mushroom",
+      "description": "\u003c工作台\u003e碗+烤马铃薯+胡萝卜+棕色蘑菇+熟兔肉~\u003e兔肉煲"
+    },
+    {
+      "name": "minecraft:rabbit_stew_from_red_mushroom",
+      "description": "\u003c工作台\u003e碗+烤马铃薯+胡萝卜+红色蘑菇+熟兔肉~\u003e兔肉煲"
+    },
+    {
+      "name": "minecraft:rail",
+      "description": "\u003c工作台\u003e木棍+铁锭*6-\u003e铁轨*16"
+    },
+    {
+      "name": "minecraft:raiser_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e牧民盔甲纹饰锻造模板+钻石*7+陶瓦-\u003e牧民盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:raw_copper",
+      "description": "\u003c工作台\u003e粗铜块-\u003e粗铜*9"
+    },
+    {
+      "name": "minecraft:raw_copper_block",
+      "description": "\u003c工作台\u003e粗铜*9-\u003e粗铜块"
+    },
+    {
+      "name": "minecraft:raw_gold",
+      "description": "\u003c工作台\u003e粗金块-\u003e粗金*9"
+    },
+    {
+      "name": "minecraft:raw_gold_block",
+      "description": "\u003c工作台\u003e粗金*9-\u003e粗金块"
+    },
+    {
+      "name": "minecraft:raw_iron",
+      "description": "\u003c工作台\u003e粗铁块-\u003e粗铁*9"
+    },
+    {
+      "name": "minecraft:raw_iron_block",
+      "description": "\u003c工作台\u003e粗铁*9-\u003e粗铁块"
+    },
+    {
+      "name": "minecraft:record_5",
+      "description": "\u003c工作台\u003e唱片残片 Samuel Åberg - 5*9-\u003e音乐唱片 Samuel Åberg - 5"
+    },
+    {
+      "name": "minecraft:recovery_compass",
+      "description": "\u003c工作台\u003e回响碎片*8+指南针-\u003e追溯指针"
+    },
+    {
+      "name": "minecraft:recovery_compass_from_lodestone_compass",
+      "description": "\u003c工作台\u003e回响碎片*8+磁石指针-\u003e追溯指针"
+    },
+    {
+      "name": "minecraft:red_banner",
+      "description": "\u003c工作台\u003e红色羊毛*6+木棍-\u003e红色旗帜"
+    },
+    {
+      "name": "minecraft:red_candle",
+      "description": "\u003c工作台\u003e蜡烛+红色染料~\u003e红色蜡烛"
+    },
+    {
+      "name": "minecraft:red_carpet",
+      "description": "\u003c工作台\u003e红色羊毛*2-\u003e红色地毯*3"
+    },
+    {
+      "name": "minecraft:red_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+红色染料-\u003e红色地毯*8"
+    },
+    {
+      "name": "minecraft:red_concrete_powder",
+      "description": "\u003c工作台\u003e红色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e红色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:red_dye_from_beetroot",
+      "description": "\u003c工作台\u003e甜菜根~\u003e红色染料"
+    },
+    {
+      "name": "minecraft:red_dye_from_poppy",
+      "description": "\u003c工作台\u003e虞美人~\u003e红色染料"
+    },
+    {
+      "name": "minecraft:red_dye_from_rose_bush",
+      "description": "\u003c工作台\u003e玫瑰丛~\u003e红色染料*2"
+    },
+    {
+      "name": "minecraft:red_dye_from_tulip",
+      "description": "\u003c工作台\u003e红色郁金香~\u003e红色染料"
+    },
+    {
+      "name": "minecraft:red_nether_brick",
+      "description": "\u003c工作台\u003e下界疣*2+下界砖块*2-\u003e红色下界砖块"
+    },
+    {
+      "name": "minecraft:red_nether_brick_stairs",
+      "description": "\u003c工作台\u003e红色下界砖块*6-\u003e红色下界砖楼梯*4"
+    },
+    {
+      "name": "minecraft:red_nether_brick_wall",
+      "description": "\u003c工作台\u003e红色下界砖块*6-\u003e红色下界砖墙*6"
+    },
+    {
+      "name": "minecraft:red_sandstone",
+      "description": "\u003c工作台\u003e红沙*4-\u003e红砂岩"
+    },
+    {
+      "name": "minecraft:red_sandstone_stairs",
+      "description": "\u003c工作台\u003e红砂岩*6-\u003e红砂岩楼梯*4"
+    },
+    {
+      "name": "minecraft:red_sandstone_wall",
+      "description": "\u003c工作台\u003e红砂岩*6-\u003e红砂岩墙*6"
+    },
+    {
+      "name": "minecraft:red_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+红色染料-\u003e红色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:red_stained_glass_pane",
+      "description": "\u003c工作台\u003e红色染色玻璃*6-\u003e红色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:red_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+红色染料-\u003e红色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:red_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+红色染料-\u003e红色陶瓦*8"
+    },
+    {
+      "name": "minecraft:redstone",
+      "description": "\u003c工作台\u003e红石块-\u003e红石粉*9"
+    },
+    {
+      "name": "minecraft:redstone_block",
+      "description": "\u003c工作台\u003e红石粉*9-\u003e红石块"
+    },
+    {
+      "name": "minecraft:redstone_lamp",
+      "description": "\u003c工作台\u003e红石粉*4+荧石-\u003e红石灯"
+    },
+    {
+      "name": "minecraft:redstone_torch",
+      "description": "\u003c工作台\u003e木棍+红石粉-\u003e红石火把"
+    },
+    {
+      "name": "minecraft:repeater",
+      "description": "\u003c工作台\u003e红石火把*2+红石粉+石头*3-\u003e红石中继器"
+    },
+    {
+      "name": "minecraft:respawn_anchor",
+      "description": "\u003c工作台\u003e哭泣的黑曜石*6+荧石*3-\u003e重生锚"
+    },
+    {
+      "name": "minecraft:rib_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e肋骨盔甲纹饰锻造模板+钻石*7+下界岩-\u003e肋骨盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:sandstone",
+      "description": "\u003c工作台\u003e沙子*4-\u003e砂岩"
+    },
+    {
+      "name": "minecraft:sandstone_stairs",
+      "description": "\u003c工作台\u003e砂岩*6-\u003e砂岩楼梯*4"
+    },
+    {
+      "name": "minecraft:sandstone_wall",
+      "description": "\u003c工作台\u003e砂岩*6-\u003e砂岩墙*6"
+    },
+    {
+      "name": "minecraft:scaffolding",
+      "description": "\u003c工作台\u003e竹子*6+线-\u003e脚手架*6"
+    },
+    {
+      "name": "minecraft:sealantern",
+      "description": "\u003c工作台\u003e海晶碎片*4+海晶砂粒*5-\u003e海晶灯"
+    },
+    {
+      "name": "minecraft:sentry_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e哨兵盔甲纹饰锻造模板+钻石*7+圆石-\u003e哨兵盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:shaper_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e塑造盔甲纹饰锻造模板+钻石*7+陶瓦-\u003e塑造盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:shears",
+      "description": "\u003c工作台\u003e铁锭*2-\u003e剪刀"
+    },
+    {
+      "name": "minecraft:shield",
+      "description": "\u003c工作台\u003e木板*6+铁锭-\u003e盾牌"
+    },
+    {
+      "name": "minecraft:shulker_box",
+      "description": "\u003c工作台\u003e箱子+潜影壳*2-\u003e潜影盒"
+    },
+    {
+      "name": "minecraft:sign_acacia",
+      "description": "\u003c工作台\u003e金合欢木板*6+木棍-\u003e金合欢木告示牌*3"
+    },
+    {
+      "name": "minecraft:sign_birch",
+      "description": "\u003c工作台\u003e白桦木板*6+木棍-\u003e白桦木告示牌*3"
+    },
+    {
+      "name": "minecraft:sign_darkoak",
+      "description": "\u003c工作台\u003e深色橡木木板*6+木棍-\u003e深色橡木告示牌*3"
+    },
+    {
+      "name": "minecraft:sign_jungle",
+      "description": "\u003c工作台\u003e丛林木板*6+木棍-\u003e丛林木告示牌*3"
+    },
+    {
+      "name": "minecraft:sign_oak",
+      "description": "\u003c工作台\u003e橡木木板*6+木棍-\u003e告示牌*3"
+    },
+    {
+      "name": "minecraft:sign_spruce",
+      "description": "\u003c工作台\u003e云杉木板*6+木棍-\u003e云杉木告示牌*3"
+    },
+    {
+      "name": "minecraft:silence_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e幽静盔甲纹饰锻造模板+钻石*7+深板岩圆石-\u003e幽静盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:slime",
+      "description": "\u003c工作台\u003e黏液球*9-\u003e黏液块"
+    },
+    {
+      "name": "minecraft:slime_ball",
+      "description": "\u003c工作台\u003e黏液块-\u003e黏液球*9"
+    },
+    {
+      "name": "minecraft:smithing_table",
+      "description": "\u003c工作台\u003e铁锭*2+木板*4-\u003e锻造台"
+    },
+    {
+      "name": "minecraft:smoker",
+      "description": "\u003c工作台\u003e熔炉+原木*4-\u003e烟熏炉"
+    },
+    {
+      "name": "minecraft:smooth_quartz_stairs",
+      "description": "\u003c工作台\u003e平滑石英块*6-\u003e平滑石英楼梯*4"
+    },
+    {
+      "name": "minecraft:smooth_red_sandstone",
+      "description": "\u003c工作台\u003e红砂岩*4-\u003e切制红砂岩*4"
+    },
+    {
+      "name": "minecraft:smooth_red_sandstone_stairs",
+      "description": "\u003c工作台\u003e平滑红砂岩*6-\u003e平滑红砂岩楼梯*4"
+    },
+    {
+      "name": "minecraft:smooth_sandstone",
+      "description": "\u003c工作台\u003e砂岩*4-\u003e切制砂岩*4"
+    },
+    {
+      "name": "minecraft:smooth_sandstone_stairs",
+      "description": "\u003c工作台\u003e平滑砂岩*6-\u003e平滑砂岩楼梯*4"
+    },
+    {
+      "name": "minecraft:snout_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e猪鼻盔甲纹饰锻造模板+钻石*7+黑石-\u003e猪鼻盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:snow",
+      "description": "\u003c工作台\u003e雪球*4-\u003e雪块"
+    },
+    {
+      "name": "minecraft:snow_layer",
+      "description": "\u003c工作台\u003e雪块*3-\u003e顶层雪*6"
+    },
+    {
+      "name": "minecraft:soul_campfire",
+      "description": "\u003c工作台\u003e木棍*3+灵魂沙/灵魂土+原木*3-\u003e灵魂营火"
+    },
+    {
+      "name": "minecraft:soul_lantern",
+      "description": "\u003c工作台\u003e灵魂火把+铁粒*8-\u003e灵魂灯笼"
+    },
+    {
+      "name": "minecraft:soul_torch",
+      "description": "\u003c工作台\u003e煤炭/木炭+木棍+灵魂沙/灵魂土-\u003e灵魂火把*4"
+    },
+    {
+      "name": "minecraft:speckled_melon",
+      "description": "\u003c工作台\u003e金粒*8+西瓜片-\u003e闪烁的西瓜片"
+    },
+    {
+      "name": "minecraft:spire_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e尖塔盔甲纹饰锻造模板+钻石*7+紫珀块/雕纹紫珀块/紫珀柱/平滑紫珀块-\u003e尖塔盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:spruce_boat",
+      "description": "\u003c工作台\u003e云杉木板*5-\u003e云杉木船"
+    },
+    {
+      "name": "minecraft:spruce_chest_boat",
+      "description": "\u003c工作台\u003e箱子+云杉木船~\u003e云杉木运输船"
+    },
+    {
+      "name": "minecraft:spruce_door",
+      "description": "\u003c工作台\u003e云杉木板*6-\u003e云杉木门*3"
+    },
+    {
+      "name": "minecraft:spruce_fence",
+      "description": "\u003c工作台\u003e木棍*2+云杉木板*4-\u003e云杉木栅栏*3"
+    },
+    {
+      "name": "minecraft:spruce_fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+云杉木板*2-\u003e云杉木栅栏门"
+    },
+    {
+      "name": "minecraft:spruce_hanging_sign",
+      "description": "\u003c工作台\u003e去皮云杉原木*6+锁链*2-\u003e悬挂式云杉木告示牌*6"
+    },
+    {
+      "name": "minecraft:spruce_planks",
+      "description": "\u003c工作台\u003e云杉原木-\u003e云杉木板*4"
+    },
+    {
+      "name": "minecraft:spruce_planks_from_stripped",
+      "description": "\u003c工作台\u003e去皮云杉原木-\u003e云杉木板*4"
+    },
+    {
+      "name": "minecraft:spruce_planks_from_stripped_wood",
+      "description": "\u003c工作台\u003e去皮云杉木-\u003e云杉木板*4"
+    },
+    {
+      "name": "minecraft:spruce_planks_from_wood",
+      "description": "\u003c工作台\u003e云杉木-\u003e云杉木板*4"
+    },
+    {
+      "name": "minecraft:spruce_stairs",
+      "description": "\u003c工作台\u003e云杉木板*6-\u003e云杉木楼梯*4"
+    },
+    {
+      "name": "minecraft:spruce_wood",
+      "description": "\u003c工作台\u003e云杉原木*4-\u003e云杉木*3"
+    },
+    {
+      "name": "minecraft:spruce_wood_stripped",
+      "description": "\u003c工作台\u003e去皮云杉原木*4-\u003e去皮云杉木*3"
+    },
+    {
+      "name": "minecraft:spruce_wooden_slab",
+      "description": "\u003c工作台\u003e云杉木板*3-\u003e云杉木台阶*6"
+    },
+    {
+      "name": "minecraft:spyglass",
+      "description": "\u003c工作台\u003e紫水晶碎片+铜锭*2-\u003e望远镜"
+    },
+    {
+      "name": "minecraft:stick",
+      "description": "\u003c工作台\u003e木板*2-\u003e木棍*4"
+    },
+    {
+      "name": "minecraft:sticky_piston",
+      "description": "\u003c工作台\u003e活塞+黏液球-\u003e黏性活塞"
+    },
+    {
+      "name": "minecraft:stone_axe",
+      "description": "\u003c工作台\u003e木棍*2+类圆石方块*3-\u003e石斧"
+    },
+    {
+      "name": "minecraft:stone_brick_stairs",
+      "description": "\u003c工作台\u003e石砖*6-\u003e石砖楼梯*4"
+    },
+    {
+      "name": "minecraft:stone_brick_wall",
+      "description": "\u003c工作台\u003e石砖*6-\u003e石砖墙*6"
+    },
+    {
+      "name": "minecraft:stone_button",
+      "description": "\u003c工作台\u003e石头-\u003e石头按钮"
+    },
+    {
+      "name": "minecraft:stone_hoe",
+      "description": "\u003c工作台\u003e木棍*2+类圆石方块*2-\u003e石锄"
+    },
+    {
+      "name": "minecraft:stone_pickaxe",
+      "description": "\u003c工作台\u003e木棍*2+类圆石方块*3-\u003e石镐"
+    },
+    {
+      "name": "minecraft:stone_pressure_plate",
+      "description": "\u003c工作台\u003e石头*2-\u003e石头压力板"
+    },
+    {
+      "name": "minecraft:stone_shovel",
+      "description": "\u003c工作台\u003e木棍*2+类圆石方块-\u003e石锹"
+    },
+    {
+      "name": "minecraft:stone_stairs",
+      "description": "\u003c工作台\u003e石头*6-\u003e石头楼梯*4"
+    },
+    {
+      "name": "minecraft:stone_sword",
+      "description": "\u003c工作台\u003e木棍+类圆石方块*2-\u003e石剑"
+    },
+    {
+      "name": "minecraft:stonebrick",
+      "description": "\u003c工作台\u003e石头*4-\u003e石砖*4"
+    },
+    {
+      "name": "minecraft:stonecutter",
+      "description": "\u003c工作台\u003e石头*3+铁锭-\u003e切石机"
+    },
+    {
+      "name": "minecraft:stonecutter_andesite_slab",
+      "description": "\u003c切石机\u003e安山岩~\u003e双层安山岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_andesite_stairs",
+      "description": "\u003c切石机\u003e安山岩~\u003e安山岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_andesite_wall",
+      "description": "\u003c切石机\u003e安山岩~\u003e安山岩墙"
+    },
+    {
+      "name": "minecraft:stonecutter_blackstone_slab_from_blackstone",
+      "description": "\u003c切石机\u003e黑石~\u003e黑石台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_blackstone_stairs_from_blackstone",
+      "description": "\u003c切石机\u003e黑石~\u003e黑石楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_blackstone_wall_from_blackstone",
+      "description": "\u003c切石机\u003e黑石~\u003e黑石墙"
+    },
+    {
+      "name": "minecraft:stonecutter_brick_slab",
+      "description": "\u003c切石机\u003e红砖块~\u003e双层砖块台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_brick_slab_from_polished_blackstone",
+      "description": "\u003c切石机\u003e磨制黑石~\u003e磨制黑石砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_brick_stairs",
+      "description": "\u003c切石机\u003e红砖块~\u003e红砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_brick_stairs_from_polished_blackstone",
+      "description": "\u003c切石机\u003e磨制黑石~\u003e磨制黑石砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_brick_wall",
+      "description": "\u003c切石机\u003e红砖块~\u003e红砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_brick_wall_from_polished_blackstone",
+      "description": "\u003c切石机\u003e磨制黑石~\u003e磨制黑石砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_bricks_from_polished_blackstone",
+      "description": "\u003c切石机\u003e磨制黑石~\u003e磨制黑石砖"
+    },
+    {
+      "name": "minecraft:stonecutter_chiseled_from_polished_blackstone",
+      "description": "\u003c切石机\u003e磨制黑石~\u003e雕纹磨制黑石"
+    },
+    {
+      "name": "minecraft:stonecutter_chiseled_nether_bricks_from_nether_brick",
+      "description": "\u003c切石机\u003e下界砖~\u003e雕纹下界砖块"
+    },
+    {
+      "name": "minecraft:stonecutter_chiseled_polished_from_blackstone",
+      "description": "\u003c切石机\u003e黑石~\u003e雕纹磨制黑石"
+    },
+    {
+      "name": "minecraft:stonecutter_cobbledouble_stone_slab",
+      "description": "\u003c切石机\u003e圆石~\u003e双层圆石台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_cobblestone_stairs",
+      "description": "\u003c切石机\u003e圆石~\u003e石头楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_cobblestone_wall",
+      "description": "\u003c切石机\u003e圆石~\u003e圆石墙"
+    },
+    {
+      "name": "minecraft:stonecutter_copper_block_to_cut_copper",
+      "description": "\u003c切石机\u003e铜块~\u003e切制铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_copper_block_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e铜块~\u003e切制铜台阶*8"
+    },
+    {
+      "name": "minecraft:stonecutter_copper_block_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e铜块~\u003e切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:stonecutter_cut_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e切制铜块~\u003e切制铜台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_cut_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e切制铜块~\u003e切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_dark_prismarine_slab",
+      "description": "\u003c切石机\u003e暗海晶石~\u003e双层暗海晶石台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_dark_prismarine_stairs",
+      "description": "\u003c切石机\u003e暗海晶石~\u003e暗海晶石楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_diorite_slab",
+      "description": "\u003c切石机\u003e闪长岩~\u003e双层闪长岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_diorite_stairs",
+      "description": "\u003c切石机\u003e闪长岩~\u003e闪长岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_diorite_wall",
+      "description": "\u003c切石机\u003e闪长岩~\u003e闪长岩墙"
+    },
+    {
+      "name": "minecraft:stonecutter_double_stone_slab",
+      "description": "\u003c切石机\u003e石头~\u003e双层石台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_endbrick_slab",
+      "description": "\u003c切石机\u003e末地石~\u003e双层末地石砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_endbrick_slab2",
+      "description": "\u003c切石机\u003e末地石砖~\u003e双层末地石砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_endbrick_stairs",
+      "description": "\u003c切石机\u003e末地石~\u003e末地石砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_endbrick_stairs2",
+      "description": "\u003c切石机\u003e末地石砖~\u003e末地石砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_endbrick_wall",
+      "description": "\u003c切石机\u003e末地石~\u003e下界砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_endbrick_wall2",
+      "description": "\u003c切石机\u003e末地石砖~\u003e下界砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_endbricks",
+      "description": "\u003c切石机\u003e末地石~\u003e末地石砖"
+    },
+    {
+      "name": "minecraft:stonecutter_exposed_copper_to_cut_copper",
+      "description": "\u003c切石机\u003e斑驳的铜块~\u003e斑驳的切制铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_exposed_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e斑驳的铜块~\u003e斑驳的切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:stonecutter_exposed_copper_to_exposed_cut_copper_slab",
+      "description": "\u003c切石机\u003e斑驳的铜块~\u003e斑驳的切制铜台阶*8"
+    },
+    {
+      "name": "minecraft:stonecutter_exposed_cut_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e斑驳的切制铜块~\u003e斑驳的切制铜台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_exposed_cut_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e斑驳的切制铜块~\u003e斑驳的切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_granite_slab",
+      "description": "\u003c切石机\u003e花岗岩~\u003e双层花岗岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_granite_stairs",
+      "description": "\u003c切石机\u003e花岗岩~\u003e花岗岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_granite_wall",
+      "description": "\u003c切石机\u003e花岗岩~\u003e花岗岩墙"
+    },
+    {
+      "name": "minecraft:stonecutter_mossy_cobbledouble_stone_slab",
+      "description": "\u003c切石机\u003e苔石~\u003e双层苔石台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_mossy_cobblestone_stairs",
+      "description": "\u003c切石机\u003e苔石~\u003e苔石楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_mossy_cobblestone_wall",
+      "description": "\u003c切石机\u003e苔石~\u003e苔石墙"
+    },
+    {
+      "name": "minecraft:stonecutter_mossy_stonebrick_slab",
+      "description": "\u003c切石机\u003e苔石砖~\u003e双层苔石砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_mossy_stonebrick_stairs",
+      "description": "\u003c切石机\u003e苔石砖~\u003e苔石砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_mossy_stonebrick_wall",
+      "description": "\u003c切石机\u003e苔石砖~\u003e苔石砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_mud_brick_slab",
+      "description": "\u003c切石机\u003e泥砖~\u003e泥砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_mud_brick_stairs",
+      "description": "\u003c切石机\u003e泥砖~\u003e泥砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_mud_brick_wall",
+      "description": "\u003c切石机\u003e泥砖~\u003e泥砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_nether_brick_slab",
+      "description": "\u003c切石机\u003e下界砖~\u003e双层下界砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_nether_brick_stairs",
+      "description": "\u003c切石机\u003e下界砖~\u003e下界砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_nether_brick_wall",
+      "description": "\u003c切石机\u003e下界砖~\u003e末地石砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_oxidized_copper_to_cut_copper",
+      "description": "\u003c切石机\u003e氧化的铜块~\u003e氧化的切制铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_oxidized_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e氧化的铜块~\u003e氧化的切制铜台阶*8"
+    },
+    {
+      "name": "minecraft:stonecutter_oxidized_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e氧化的铜块~\u003e氧化的切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:stonecutter_oxidized_cut_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e氧化的切制铜块~\u003e氧化的切制铜台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_oxidized_cut_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e氧化的切制铜块~\u003e氧化的切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_andesite",
+      "description": "\u003c切石机\u003e安山岩~\u003e磨制安山岩"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_andesite_slab",
+      "description": "\u003c切石机\u003e安山岩~\u003e双层磨制安山岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_andesite_slab2",
+      "description": "\u003c切石机\u003e磨制安山岩~\u003e双层磨制安山岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_andesite_stairs",
+      "description": "\u003c切石机\u003e安山岩~\u003e磨制安山岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_andesite_stairs2",
+      "description": "\u003c切石机\u003e磨制安山岩~\u003e磨制安山岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_basalt_from_basalt",
+      "description": "\u003c切石机\u003e玄武岩~\u003e磨制玄武岩"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_brick_slab_from_blackstone",
+      "description": "\u003c切石机\u003e黑石~\u003e磨制黑石砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_brick_stairs_from_blackstone",
+      "description": "\u003c切石机\u003e黑石~\u003e磨制黑石砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_brick_wall_from_blackstone",
+      "description": "\u003c切石机\u003e黑石~\u003e磨制黑石砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_bricks_from_blackstone",
+      "description": "\u003c切石机\u003e黑石~\u003e磨制黑石砖"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_diorite",
+      "description": "\u003c切石机\u003e闪长岩~\u003e磨制闪长岩"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_diorite_slab",
+      "description": "\u003c切石机\u003e闪长岩~\u003e双层磨制闪长岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_diorite_slab2",
+      "description": "\u003c切石机\u003e磨制闪长岩~\u003e双层磨制闪长岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_diorite_stairs",
+      "description": "\u003c切石机\u003e闪长岩~\u003e磨制闪长岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_diorite_stairs2",
+      "description": "\u003c切石机\u003e磨制闪长岩~\u003e磨制闪长岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_from_blackstone",
+      "description": "\u003c切石机\u003e黑石~\u003e磨制黑石"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_granite",
+      "description": "\u003c切石机\u003e花岗岩~\u003e磨制花岗岩"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_granite_slab",
+      "description": "\u003c切石机\u003e花岗岩~\u003e双层磨制花岗岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_granite_slab2",
+      "description": "\u003c切石机\u003e磨制花岗岩~\u003e双层磨制花岗岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_granite_stairs",
+      "description": "\u003c切石机\u003e花岗岩~\u003e磨制花岗岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_granite_stairs2",
+      "description": "\u003c切石机\u003e磨制花岗岩~\u003e磨制花岗岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_slab_from_blackstone",
+      "description": "\u003c切石机\u003e黑石~\u003e磨制黑石台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_stairs_from_blackstone",
+      "description": "\u003c切石机\u003e黑石~\u003e磨制黑石楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_wall_from_blackstone",
+      "description": "\u003c切石机\u003e黑石~\u003e磨制黑石墙"
+    },
+    {
+      "name": "minecraft:stonecutter_prismarine_brick_slab",
+      "description": "\u003c切石机\u003e海晶石砖~\u003e双层海晶石砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_prismarine_brick_stairs",
+      "description": "\u003c切石机\u003e海晶石砖~\u003e海晶石砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_prismarine_slab",
+      "description": "\u003c切石机\u003e海晶石~\u003e双层海晶石台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_prismarine_stairs",
+      "description": "\u003c切石机\u003e海晶石~\u003e海晶石楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_prismarine_wall",
+      "description": "\u003c切石机\u003e海晶石~\u003e海晶石墙"
+    },
+    {
+      "name": "minecraft:stonecutter_purpur_lines",
+      "description": "\u003c切石机\u003e紫珀块~\u003e紫珀柱"
+    },
+    {
+      "name": "minecraft:stonecutter_purpur_slab",
+      "description": "\u003c切石机\u003e紫珀块~\u003e双层紫珀台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_purpur_stairs",
+      "description": "\u003c切石机\u003e紫珀块~\u003e紫珀楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_quartz_bricks_from_quartz_block",
+      "description": "\u003c切石机\u003e石英块~\u003e石英砖"
+    },
+    {
+      "name": "minecraft:stonecutter_quartz_chiseled",
+      "description": "\u003c切石机\u003e石英块~\u003e雕纹石英块"
+    },
+    {
+      "name": "minecraft:stonecutter_quartz_lines",
+      "description": "\u003c切石机\u003e石英块~\u003e石英柱"
+    },
+    {
+      "name": "minecraft:stonecutter_quartz_slab",
+      "description": "\u003c切石机\u003e石英块~\u003e石英台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_quartz_stairs",
+      "description": "\u003c切石机\u003e石英块~\u003e石英楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_red_nether_brick_slab",
+      "description": "\u003c切石机\u003e红色下界砖块~\u003e双层红色下界砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_red_nether_brick_stairs",
+      "description": "\u003c切石机\u003e红色下界砖块~\u003e红色下界砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_red_nether_brick_wall",
+      "description": "\u003c切石机\u003e红色下界砖块~\u003e红色下界砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_red_sanddouble_stone_slab",
+      "description": "\u003c切石机\u003e红砂岩~\u003e双层红砂岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_red_sandstone_cut",
+      "description": "\u003c切石机\u003e红砂岩~\u003e切制红砂岩"
+    },
+    {
+      "name": "minecraft:stonecutter_red_sandstone_heiroglyphs",
+      "description": "\u003c切石机\u003e红砂岩~\u003e雕纹红砂岩"
+    },
+    {
+      "name": "minecraft:stonecutter_red_sandstone_stairs",
+      "description": "\u003c切石机\u003e红砂岩~\u003e红砂岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_red_sandstone_wall",
+      "description": "\u003c切石机\u003e红砂岩~\u003e红砂岩墙"
+    },
+    {
+      "name": "minecraft:stonecutter_sanddouble_stone_slab",
+      "description": "\u003c切石机\u003e砂岩~\u003e双层砂岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_sandstone_cut",
+      "description": "\u003c切石机\u003e砂岩~\u003e切制砂岩"
+    },
+    {
+      "name": "minecraft:stonecutter_sandstone_heiroglyphs",
+      "description": "\u003c切石机\u003e砂岩~\u003e雕纹砂岩"
+    },
+    {
+      "name": "minecraft:stonecutter_sandstone_stairs",
+      "description": "\u003c切石机\u003e砂岩~\u003e砂岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_sandstone_wall",
+      "description": "\u003c切石机\u003e砂岩~\u003e砂岩墙"
+    },
+    {
+      "name": "minecraft:stonecutter_slab_from_polished_blackstone",
+      "description": "\u003c切石机\u003e磨制黑石~\u003e磨制黑石台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_slab_from_polished_blackstone_bricks",
+      "description": "\u003c切石机\u003e磨制黑石砖~\u003e磨制黑石砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_smooth_double_stone_slab",
+      "description": "\u003c切石机\u003e平滑石头~\u003e双层平滑石头台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_smooth_quartz_slab",
+      "description": "\u003c切石机\u003e平滑石英块~\u003e双层平滑石英台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_smooth_quartz_stairs",
+      "description": "\u003c切石机\u003e平滑石英块~\u003e平滑石英楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_smooth_red_sanddouble_stone_slab",
+      "description": "\u003c切石机\u003e平滑红砂岩~\u003e双层平滑红砂岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_smooth_red_sandstone_stairs",
+      "description": "\u003c切石机\u003e平滑红砂岩~\u003e平滑红砂岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_smooth_sanddouble_stone_slab",
+      "description": "\u003c切石机\u003e平滑砂岩~\u003e双层平滑砂岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_smooth_sandstone_stairs",
+      "description": "\u003c切石机\u003e平滑砂岩~\u003e平滑砂岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_stairs_from_polished_blackstone",
+      "description": "\u003c切石机\u003e磨制黑石~\u003e磨制黑石楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_stone_stairs",
+      "description": "\u003c切石机\u003e石头~\u003e石头楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_stonebrick",
+      "description": "\u003c切石机\u003e石头~\u003e石砖"
+    },
+    {
+      "name": "minecraft:stonecutter_stonebrick_chiseled",
+      "description": "\u003c切石机\u003e石头~\u003e雕纹石砖"
+    },
+    {
+      "name": "minecraft:stonecutter_stonebrick_slab",
+      "description": "\u003c切石机\u003e石头~\u003e双层石砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_stonebrick_slab2",
+      "description": "\u003c切石机\u003e石砖~\u003e双层石砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_stonebrick_stairs",
+      "description": "\u003c切石机\u003e石头~\u003e石砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_stonebrick_stairs2",
+      "description": "\u003c切石机\u003e石砖~\u003e石砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_stonebrick_wall",
+      "description": "\u003c切石机\u003e石头~\u003e石砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_stonebrick_wall2",
+      "description": "\u003c切石机\u003e石砖~\u003e石砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_wall_from_polished_blackstone",
+      "description": "\u003c切石机\u003e磨制黑石~\u003e磨制黑石墙"
+    },
+    {
+      "name": "minecraft:stonecutter_wall_from_polished_blackstone_bricks",
+      "description": "\u003c切石机\u003e磨制黑石砖~\u003e磨制黑石砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_copper_to_cut_copper",
+      "description": "\u003c切石机\u003e涂蜡的铜块~\u003e涂蜡的切制铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e涂蜡的铜块~\u003e涂蜡的切制铜台阶*8"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e涂蜡的铜块~\u003e涂蜡的切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_copper_to_exposed_cut_copper_slab",
+      "description": "\u003c切石机\u003e涂蜡的斑驳铜块~\u003e涂蜡的斑驳切制铜台阶*8"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_cut_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e涂蜡的切制铜块~\u003e涂蜡的切制铜台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_cut_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e涂蜡的切制铜块~\u003e涂蜡的切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_exposed_copper_to_cut_copper",
+      "description": "\u003c切石机\u003e涂蜡的斑驳铜块~\u003e涂蜡的斑驳切制铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_exposed_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e涂蜡的斑驳铜块~\u003e涂蜡的斑驳切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_exposed_cut_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e涂蜡的斑驳切制铜块~\u003e涂蜡的斑驳切制铜台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_exposed_cut_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e涂蜡的斑驳切制铜块~\u003e涂蜡的斑驳切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_oxidized_copper_to_cut_copper",
+      "description": "\u003c切石机\u003e涂蜡的氧化铜块~\u003e涂蜡的氧化切制铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_oxidized_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e涂蜡的氧化铜块~\u003e涂蜡的氧化切制铜台阶*8"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_oxidized_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e涂蜡的氧化铜块~\u003e涂蜡的氧化切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_oxidized_cut_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e涂蜡的氧化切制铜块~\u003e涂蜡的氧化切制铜台阶"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_oxidized_cut_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e涂蜡的氧化切制铜块~\u003e涂蜡的氧化切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_weathered_copper_to_cut_copper",
+      "description": "\u003c切石机\u003e涂蜡的锈蚀铜块~\u003e涂蜡的锈蚀切制铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_weathered_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e涂蜡的锈蚀铜块~\u003e涂蜡的锈蚀切制铜台阶*8"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_weathered_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e涂蜡的锈蚀铜块~\u003e涂蜡的锈蚀切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_weathered_cut_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e涂蜡的锈蚀切制铜块~\u003e涂蜡的锈蚀切制铜台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_weathered_cut_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e涂蜡的锈蚀切制铜块~\u003e涂蜡的锈蚀切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_weathered_copper_to_cut_copper",
+      "description": "\u003c切石机\u003e锈蚀的铜块~\u003e锈蚀的切制铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_weathered_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e锈蚀的铜块~\u003e锈蚀的切制铜台阶*8"
+    },
+    {
+      "name": "minecraft:stonecutter_weathered_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e锈蚀的铜块~\u003e锈蚀的切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:stonecutter_weathered_cut_copper_to_cut_copper_slab",
+      "description": "\u003c切石机\u003e锈蚀的切制铜块~\u003e锈蚀的切制铜台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_weathered_cut_copper_to_cut_copper_stairs",
+      "description": "\u003c切石机\u003e锈蚀的切制铜块~\u003e锈蚀的切制铜楼梯"
+    },
+    {
+      "name": "minecraft:string_to_wool",
+      "description": "\u003c工作台\u003e线*4-\u003e白色羊毛"
+    },
+    {
+      "name": "minecraft:stripped_crimson_hyphae",
+      "description": "\u003c工作台\u003e去皮绯红菌柄*4-\u003e去皮绯红菌核*3"
+    },
+    {
+      "name": "minecraft:stripped_mangrove_wood",
+      "description": "\u003c已弃用\u003e去皮红树原木*4-\u003e去皮红树木*3"
+    },
+    {
+      "name": "minecraft:stripped_warped_hyphae",
+      "description": "\u003c工作台\u003e去皮诡异菌柄*4-\u003e去皮诡异菌核*3"
+    },
+    {
+      "name": "minecraft:sugar",
+      "description": "\u003c工作台\u003e甘蔗-\u003e糖"
+    },
+    {
+      "name": "minecraft:target",
+      "description": "\u003c工作台\u003e干草捆+红石粉*4-\u003e标靶"
+    },
+    {
+      "name": "minecraft:tide_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e潮汐盔甲纹饰锻造模板+钻石*7+海晶石/暗海晶石/海晶石砖-\u003e潮汐盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:tinted_glass",
+      "description": "\u003c工作台\u003e紫水晶碎片*4+玻璃-\u003e遮光玻璃*2"
+    },
+    {
+      "name": "minecraft:tnt",
+      "description": "\u003c工作台\u003e沙子/红沙*4+火药*5-\u003eTNT"
+    },
+    {
+      "name": "minecraft:tnt_minecart",
+      "description": "\u003c工作台\u003eTNT+矿车~\u003eTNT矿车"
+    },
+    {
+      "name": "minecraft:torch",
+      "description": "\u003c工作台\u003e木棍+煤炭/木炭-\u003e火把*4"
+    },
+    {
+      "name": "minecraft:trapped_chest",
+      "description": "\u003c工作台\u003e箱子+绊线钩~\u003e陷阱箱"
+    },
+    {
+      "name": "minecraft:tripwire_hook",
+      "description": "\u003c工作台\u003e铁锭+木棍+木板-\u003e绊线钩*2"
+    },
+    {
+      "name": "minecraft:turtle_helmet",
+      "description": "\u003c工作台\u003e海龟鳞甲*5-\u003e海龟壳"
+    },
+    {
+      "name": "minecraft:vex_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e恼鬼盔甲纹饰锻造模板+钻石*7+圆石-\u003e恼鬼盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:ward_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e监守盔甲纹饰锻造模板+钻石*7+深板岩圆石-\u003e监守盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:warped_button",
+      "description": "\u003c工作台\u003e诡异木板-\u003e诡异木按钮"
+    },
+    {
+      "name": "minecraft:warped_door",
+      "description": "\u003c工作台\u003e诡异木板*6-\u003e诡异木门*3"
+    },
+    {
+      "name": "minecraft:warped_fence",
+      "description": "\u003c工作台\u003e木棍*2+诡异木板*4-\u003e诡异木栅栏*3"
+    },
+    {
+      "name": "minecraft:warped_fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+诡异木板*2-\u003e诡异木栅栏门"
+    },
+    {
+      "name": "minecraft:warped_fungus_on_a_stick",
+      "description": "\u003c工作台\u003e钓鱼竿+诡异菌-\u003e诡异菌钓竿"
+    },
+    {
+      "name": "minecraft:warped_hanging_sign",
+      "description": "\u003c工作台\u003e去皮诡异菌柄*6+锁链*2-\u003e悬挂式诡异木告示牌*6"
+    },
+    {
+      "name": "minecraft:warped_hyphae",
+      "description": "\u003c工作台\u003e诡异菌柄*4-\u003e诡异菌核*3"
+    },
+    {
+      "name": "minecraft:warped_planks",
+      "description": "\u003c工作台\u003e诡异菌柄-\u003e诡异木板*4"
+    },
+    {
+      "name": "minecraft:warped_planks_from_stripped_log",
+      "description": "\u003c工作台\u003e去皮诡异菌柄-\u003e诡异木板*4"
+    },
+    {
+      "name": "minecraft:warped_planks_from_stripped_warped_hyphae",
+      "description": "\u003c工作台\u003e去皮诡异菌核-\u003e诡异木板*4"
+    },
+    {
+      "name": "minecraft:warped_planks_from_warped_hyphae",
+      "description": "\u003c工作台\u003e诡异菌核-\u003e诡异木板*4"
+    },
+    {
+      "name": "minecraft:warped_pressure_plate",
+      "description": "\u003c工作台\u003e诡异木板*2-\u003e诡异木压力板"
+    },
+    {
+      "name": "minecraft:warped_sign",
+      "description": "\u003c工作台\u003e诡异木板*6+木棍-\u003e诡异木告示牌*3"
+    },
+    {
+      "name": "minecraft:warped_slab",
+      "description": "\u003c工作台\u003e诡异木板*3-\u003e诡异木台阶*6"
+    },
+    {
+      "name": "minecraft:warped_stairs",
+      "description": "\u003c工作台\u003e诡异木板*6-\u003e诡异木楼梯*4"
+    },
+    {
+      "name": "minecraft:warped_trapdoor",
+      "description": "\u003c工作台\u003e诡异木板*6-\u003e诡异木活板门*2"
+    },
+    {
+      "name": "minecraft:waxing_copper_block",
+      "description": "\u003c工作台\u003e铜块+蜜脾~\u003e涂蜡的铜块"
+    },
+    {
+      "name": "minecraft:waxing_cut_copper",
+      "description": "\u003c工作台\u003e切制铜块+蜜脾~\u003e涂蜡的切制铜块"
+    },
+    {
+      "name": "minecraft:waxing_cut_copper_slab",
+      "description": "\u003c工作台\u003e切制铜台阶+蜜脾~\u003e涂蜡的切制铜台阶"
+    },
+    {
+      "name": "minecraft:waxing_cut_copper_stairs",
+      "description": "\u003c工作台\u003e切制铜楼梯+蜜脾~\u003e涂蜡的切制铜楼梯"
+    },
+    {
+      "name": "minecraft:waxing_exposed_copper",
+      "description": "\u003c工作台\u003e斑驳的铜块+蜜脾~\u003e涂蜡的斑驳铜块"
+    },
+    {
+      "name": "minecraft:waxing_exposed_cut_copper",
+      "description": "\u003c工作台\u003e斑驳的切制铜块+蜜脾~\u003e涂蜡的斑驳切制铜块"
+    },
+    {
+      "name": "minecraft:waxing_exposed_cut_copper_slab",
+      "description": "\u003c工作台\u003e斑驳的切制铜台阶+蜜脾~\u003e涂蜡的斑驳切制铜台阶"
+    },
+    {
+      "name": "minecraft:waxing_exposed_cut_copper_stairs",
+      "description": "\u003c工作台\u003e斑驳的切制铜楼梯+蜜脾~\u003e涂蜡的斑驳切制铜楼梯"
+    },
+    {
+      "name": "minecraft:waxing_oxidized_copper",
+      "description": "\u003c工作台\u003e氧化的铜块+蜜脾~\u003e涂蜡的氧化铜块"
+    },
+    {
+      "name": "minecraft:waxing_oxidized_cut_copper",
+      "description": "\u003c工作台\u003e氧化的切制铜块+蜜脾~\u003e涂蜡的氧化切制铜块"
+    },
+    {
+      "name": "minecraft:waxing_oxidized_cut_copper_slab",
+      "description": "\u003c工作台\u003e氧化的切制铜台阶+蜜脾~\u003e涂蜡的氧化切制铜台阶"
+    },
+    {
+      "name": "minecraft:waxing_oxidized_cut_copper_stairs",
+      "description": "\u003c工作台\u003e氧化的切制铜楼梯+蜜脾~\u003e涂蜡的氧化切制铜楼梯"
+    },
+    {
+      "name": "minecraft:waxing_weathered_copper",
+      "description": "\u003c工作台\u003e锈蚀的铜块+蜜脾~\u003e涂蜡的锈蚀铜块"
+    },
+    {
+      "name": "minecraft:waxing_weathered_cut_copper",
+      "description": "\u003c工作台\u003e锈蚀的切制铜块+蜜脾~\u003e涂蜡的锈蚀切制铜块"
+    },
+    {
+      "name": "minecraft:waxing_weathered_cut_copper_slab",
+      "description": "\u003c工作台\u003e锈蚀的切制铜台阶+蜜脾~\u003e涂蜡的锈蚀切制铜台阶"
+    },
+    {
+      "name": "minecraft:waxing_weathered_cut_copper_stairs",
+      "description": "\u003c工作台\u003e锈蚀的切制铜楼梯+蜜脾~\u003e涂蜡的锈蚀切制铜楼梯"
+    },
+    {
+      "name": "minecraft:wayfinder_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e向导盔甲纹饰锻造模板+钻石*7+陶瓦-\u003e向导盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:wheat",
+      "description": "\u003c工作台\u003e干草捆-\u003e小麦*9"
+    },
+    {
+      "name": "minecraft:white_banner",
+      "description": "\u003c工作台\u003e白色羊毛*6+木棍-\u003e白色旗帜"
+    },
+    {
+      "name": "minecraft:white_candle",
+      "description": "\u003c工作台\u003e蜡烛+白色染料~\u003e白色蜡烛"
+    },
+    {
+      "name": "minecraft:white_candle_from_bonemeal",
+      "description": "\u003c工作台\u003e蜡烛+骨粉~\u003e白色蜡烛"
+    },
+    {
+      "name": "minecraft:white_carpet",
+      "description": "\u003c工作台\u003e白色羊毛*2-\u003e白色地毯*3"
+    },
+    {
+      "name": "minecraft:white_concrete_powder",
+      "description": "\u003c工作台\u003e白色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e白色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:white_concrete_powder_from_bonemeal",
+      "description": "\u003c工作台\u003e骨粉+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e白色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:white_dye_from_bone_meal",
+      "description": "\u003c工作台\u003e骨粉~\u003e白色染料"
+    },
+    {
+      "name": "minecraft:white_dye_from_lily_of_the_valley",
+      "description": "\u003c工作台\u003e铃兰~\u003e白色染料"
+    },
+    {
+      "name": "minecraft:white_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+白色染料-\u003e白色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:white_stained_glass_from_bonemeal",
+      "description": "\u003c工作台\u003e玻璃*8+骨粉-\u003e白色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:white_stained_glass_pane",
+      "description": "\u003c工作台\u003e白色染色玻璃*6-\u003e白色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:white_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+白色染料-\u003e白色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:white_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+白色染料-\u003e白色陶瓦*8"
+    },
+    {
+      "name": "minecraft:white_stained_hardened_clay_from_bonemeal",
+      "description": "\u003c工作台\u003e陶瓦*8+骨粉-\u003e白色陶瓦*8"
+    },
+    {
+      "name": "minecraft:wild_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e荒野盔甲纹饰锻造模板+钻石*7+苔石-\u003e荒野盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:wolf_armor",
+      "description": "\u003c工作台\u003e犰狳鳞甲*6-\u003e狼铠"
+    },
+    {
+      "name": "minecraft:wooden_axe",
+      "description": "\u003c工作台\u003e木棍*2+木板*3-\u003e木斧"
+    },
+    {
+      "name": "minecraft:wooden_door",
+      "description": "\u003c工作台\u003e橡木木板*6-\u003e橡木门*3"
+    },
+    {
+      "name": "minecraft:wooden_hoe",
+      "description": "\u003c工作台\u003e木棍*2+木板*2-\u003e木锄"
+    },
+    {
+      "name": "minecraft:wooden_pickaxe",
+      "description": "\u003c工作台\u003e木棍*2+木板*3-\u003e木镐"
+    },
+    {
+      "name": "minecraft:wooden_shovel",
+      "description": "\u003c工作台\u003e木棍*2+木板-\u003e木锹"
+    },
+    {
+      "name": "minecraft:wooden_sword",
+      "description": "\u003c工作台\u003e木棍+木板*2-\u003e木剑"
+    },
+    {
+      "name": "minecraft:writable_book",
+      "description": "\u003c工作台\u003e书+墨囊+羽毛~\u003e书与笔"
+    },
+    {
+      "name": "minecraft:yellow_banner",
+      "description": "\u003c工作台\u003e黄色羊毛*6+木棍-\u003e黄色旗帜"
+    },
+    {
+      "name": "minecraft:yellow_candle",
+      "description": "\u003c工作台\u003e蜡烛+黄色染料~\u003e黄色蜡烛"
+    },
+    {
+      "name": "minecraft:yellow_carpet",
+      "description": "\u003c工作台\u003e黄色羊毛*2-\u003e黄色地毯*3"
+    },
+    {
+      "name": "minecraft:yellow_carpet_from_white",
+      "description": "\u003c工作台\u003e白色地毯*8+黄色染料-\u003e黄色地毯*8"
+    },
+    {
+      "name": "minecraft:yellow_concrete_powder",
+      "description": "\u003c工作台\u003e黄色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e黄色混凝土粉末*8"
+    },
+    {
+      "name": "minecraft:yellow_dye_from_dandelion",
+      "description": "\u003c工作台\u003e蒲公英~\u003e黄色染料"
+    },
+    {
+      "name": "minecraft:yellow_dye_from_sunflower",
+      "description": "\u003c工作台\u003e向日葵~\u003e黄色染料*2"
+    },
+    {
+      "name": "minecraft:yellow_stained_glass",
+      "description": "\u003c工作台\u003e玻璃*8+黄色染料-\u003e黄色染色玻璃*8"
+    },
+    {
+      "name": "minecraft:yellow_stained_glass_pane",
+      "description": "\u003c工作台\u003e黄色染色玻璃*6-\u003e黄色染色玻璃板*16"
+    },
+    {
+      "name": "minecraft:yellow_stained_glass_pane_from_pane",
+      "description": "\u003c工作台\u003e玻璃板*8+黄色染料-\u003e黄色染色玻璃板*8"
+    },
+    {
+      "name": "minecraft:yellow_stained_hardened_clay",
+      "description": "\u003c工作台\u003e陶瓦*8+黄色染料-\u003e黄色陶瓦*8"
+    },
+    {
+      "name": "oak_stairs_oak_recipeId"
+    },
+    {
+      "name": "paper_sulphur_recipeId"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_0_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_10_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_11_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_12_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_13_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_14_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_15_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_16_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_17_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_18_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_19_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_1_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_2_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_3_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_4_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_5_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_6_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_7_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_8_9_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_block_9_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_0_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_10_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_11_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_12_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_13_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_14_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_15_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_16_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_17_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_18_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_19_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_1_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_2_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_3_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_4_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_5_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_6_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_7_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_8_0"
+    },
+    {
+      "name": "shulkerBox_shulker_box_color_dye_9_0"
+    },
+    {
+      "name": "slab3_endstonebrick_recipeId"
+    },
+    {
+      "name": "spruce_stairs_spruce_recipeId"
+    },
+    {
+      "name": "stonecutter_stairs_from_polished_blackstone_bricks",
+      "description": "\u003c切石机\u003e磨制黑石砖~\u003e磨制黑石砖楼梯"
+    },
+    {
+      "name": "stoneslab2_RedSandstone_recipeId"
+    },
+    {
+      "name": "stoneslab2_prismarine_bricks_recipeId"
+    },
+    {
+      "name": "stoneslab2_prismarine_recipeId"
+    },
+    {
+      "name": "stoneslab2_purpur_recipeId"
+    },
+    {
+      "name": "stoneslab2_recipeId"
+    },
+    {
+      "name": "stoneslab2_rednetherbrick_recipeId"
+    },
+    {
+      "name": "stoneslab2_redsandstone_heiroglyphs_recipeId"
+    },
+    {
+      "name": "stoneslab2_smoothsandstone_smooth_recipeId"
+    },
+    {
+      "name": "stoneslab3_andesite_recipeId"
+    },
+    {
+      "name": "stoneslab3_diorite_recipeId"
+    },
+    {
+      "name": "stoneslab3_granite"
+    },
+    {
+      "name": "stoneslab3_polishedGranite_GraniteSmooth_recipeId"
+    },
+    {
+      "name": "stoneslab3_polished_andesite_andesitesmooth_recipeId"
+    },
+    {
+      "name": "stoneslab3_polished_diorite_dioritesmooth_recipeId"
+    },
+    {
+      "name": "stoneslab3_smooth_recipeId"
+    },
+    {
+      "name": "stoneslab4_cut_redsandstone_cut_recipeId"
+    },
+    {
+      "name": "stoneslab4_cut_sandstone_cut_recipeId"
+    },
+    {
+      "name": "stoneslab4_smoothquartz_smooth_recipeId"
+    },
+    {
+      "name": "stoneslab_quartz_recipeId"
+    },
+    {
+      "name": "stoneslab_recipeId"
+    },
+    {
+      "name": "stoneslab_sandstone_heiroglyphs_recipeId"
+    },
+    {
+      "name": "weapon_arrow_recipe_10"
+    },
+    {
+      "name": "weapon_arrow_recipe_11"
+    },
+    {
+      "name": "weapon_arrow_recipe_12"
+    },
+    {
+      "name": "weapon_arrow_recipe_13"
+    },
+    {
+      "name": "weapon_arrow_recipe_14"
+    },
+    {
+      "name": "weapon_arrow_recipe_15"
+    },
+    {
+      "name": "weapon_arrow_recipe_16"
+    },
+    {
+      "name": "weapon_arrow_recipe_17"
+    },
+    {
+      "name": "weapon_arrow_recipe_18"
+    },
+    {
+      "name": "weapon_arrow_recipe_19"
+    },
+    {
+      "name": "weapon_arrow_recipe_20"
+    },
+    {
+      "name": "weapon_arrow_recipe_21"
+    },
+    {
+      "name": "weapon_arrow_recipe_22"
+    },
+    {
+      "name": "weapon_arrow_recipe_23"
+    },
+    {
+      "name": "weapon_arrow_recipe_24"
+    },
+    {
+      "name": "weapon_arrow_recipe_25"
+    },
+    {
+      "name": "weapon_arrow_recipe_26"
+    },
+    {
+      "name": "weapon_arrow_recipe_27"
+    },
+    {
+      "name": "weapon_arrow_recipe_28"
+    },
+    {
+      "name": "weapon_arrow_recipe_29"
+    },
+    {
+      "name": "weapon_arrow_recipe_30"
+    },
+    {
+      "name": "weapon_arrow_recipe_31"
+    },
+    {
+      "name": "weapon_arrow_recipe_32"
+    },
+    {
+      "name": "weapon_arrow_recipe_33"
+    },
+    {
+      "name": "weapon_arrow_recipe_34"
+    },
+    {
+      "name": "weapon_arrow_recipe_35"
+    },
+    {
+      "name": "weapon_arrow_recipe_36"
+    },
+    {
+      "name": "weapon_arrow_recipe_37"
+    },
+    {
+      "name": "weapon_arrow_recipe_38"
+    },
+    {
+      "name": "weapon_arrow_recipe_39"
+    },
+    {
+      "name": "weapon_arrow_recipe_40"
+    },
+    {
+      "name": "weapon_arrow_recipe_41"
+    },
+    {
+      "name": "weapon_arrow_recipe_42"
+    },
+    {
+      "name": "weapon_arrow_recipe_5"
+    },
+    {
+      "name": "weapon_arrow_recipe_6"
+    },
+    {
+      "name": "weapon_arrow_recipe_7"
+    },
+    {
+      "name": "weapon_arrow_recipe_8"
+    },
+    {
+      "name": "weapon_arrow_recipe_9"
+    },
+    {
+      "name": "wool_dye_wool_0_1"
+    },
+    {
+      "name": "wool_dye_wool_0_10"
+    },
+    {
+      "name": "wool_dye_wool_0_11"
+    },
+    {
+      "name": "wool_dye_wool_0_12"
+    },
+    {
+      "name": "wool_dye_wool_0_13"
+    },
+    {
+      "name": "wool_dye_wool_0_14"
+    },
+    {
+      "name": "wool_dye_wool_0_15"
+    },
+    {
+      "name": "wool_dye_wool_0_2"
+    },
+    {
+      "name": "wool_dye_wool_0_3"
+    },
+    {
+      "name": "wool_dye_wool_0_4"
+    },
+    {
+      "name": "wool_dye_wool_0_5"
+    },
+    {
+      "name": "wool_dye_wool_0_6"
+    },
+    {
+      "name": "wool_dye_wool_0_7"
+    },
+    {
+      "name": "wool_dye_wool_0_8"
+    },
+    {
+      "name": "wool_dye_wool_0_9"
+    },
+    {
+      "name": "wool_dye_wool_10_0"
+    },
+    {
+      "name": "wool_dye_wool_10_1"
+    },
+    {
+      "name": "wool_dye_wool_10_11"
+    },
+    {
+      "name": "wool_dye_wool_10_12"
+    },
+    {
+      "name": "wool_dye_wool_10_13"
+    },
+    {
+      "name": "wool_dye_wool_10_14"
+    },
+    {
+      "name": "wool_dye_wool_10_15"
+    },
+    {
+      "name": "wool_dye_wool_10_2"
+    },
+    {
+      "name": "wool_dye_wool_10_3"
+    },
+    {
+      "name": "wool_dye_wool_10_4"
+    },
+    {
+      "name": "wool_dye_wool_10_5"
+    },
+    {
+      "name": "wool_dye_wool_10_6"
+    },
+    {
+      "name": "wool_dye_wool_10_7"
+    },
+    {
+      "name": "wool_dye_wool_10_8"
+    },
+    {
+      "name": "wool_dye_wool_10_9"
+    },
+    {
+      "name": "wool_dye_wool_11_0"
+    },
+    {
+      "name": "wool_dye_wool_11_1"
+    },
+    {
+      "name": "wool_dye_wool_11_10"
+    },
+    {
+      "name": "wool_dye_wool_11_12"
+    },
+    {
+      "name": "wool_dye_wool_11_13"
+    },
+    {
+      "name": "wool_dye_wool_11_14"
+    },
+    {
+      "name": "wool_dye_wool_11_15"
+    },
+    {
+      "name": "wool_dye_wool_11_2"
+    },
+    {
+      "name": "wool_dye_wool_11_3"
+    },
+    {
+      "name": "wool_dye_wool_11_4"
+    },
+    {
+      "name": "wool_dye_wool_11_5"
+    },
+    {
+      "name": "wool_dye_wool_11_6"
+    },
+    {
+      "name": "wool_dye_wool_11_7"
+    },
+    {
+      "name": "wool_dye_wool_11_8"
+    },
+    {
+      "name": "wool_dye_wool_11_9"
+    },
+    {
+      "name": "wool_dye_wool_12_0"
+    },
+    {
+      "name": "wool_dye_wool_12_1"
+    },
+    {
+      "name": "wool_dye_wool_12_10"
+    },
+    {
+      "name": "wool_dye_wool_12_11"
+    },
+    {
+      "name": "wool_dye_wool_12_13"
+    },
+    {
+      "name": "wool_dye_wool_12_14"
+    },
+    {
+      "name": "wool_dye_wool_12_15"
+    },
+    {
+      "name": "wool_dye_wool_12_2"
+    },
+    {
+      "name": "wool_dye_wool_12_3"
+    },
+    {
+      "name": "wool_dye_wool_12_4"
+    },
+    {
+      "name": "wool_dye_wool_12_5"
+    },
+    {
+      "name": "wool_dye_wool_12_6"
+    },
+    {
+      "name": "wool_dye_wool_12_7"
+    },
+    {
+      "name": "wool_dye_wool_12_8"
+    },
+    {
+      "name": "wool_dye_wool_12_9"
+    },
+    {
+      "name": "wool_dye_wool_13_0"
+    },
+    {
+      "name": "wool_dye_wool_13_1"
+    },
+    {
+      "name": "wool_dye_wool_13_10"
+    },
+    {
+      "name": "wool_dye_wool_13_11"
+    },
+    {
+      "name": "wool_dye_wool_13_12"
+    },
+    {
+      "name": "wool_dye_wool_13_14"
+    },
+    {
+      "name": "wool_dye_wool_13_15"
+    },
+    {
+      "name": "wool_dye_wool_13_2"
+    },
+    {
+      "name": "wool_dye_wool_13_3"
+    },
+    {
+      "name": "wool_dye_wool_13_4"
+    },
+    {
+      "name": "wool_dye_wool_13_5"
+    },
+    {
+      "name": "wool_dye_wool_13_6"
+    },
+    {
+      "name": "wool_dye_wool_13_7"
+    },
+    {
+      "name": "wool_dye_wool_13_8"
+    },
+    {
+      "name": "wool_dye_wool_13_9"
+    },
+    {
+      "name": "wool_dye_wool_14_0"
+    },
+    {
+      "name": "wool_dye_wool_14_1"
+    },
+    {
+      "name": "wool_dye_wool_14_10"
+    },
+    {
+      "name": "wool_dye_wool_14_11"
+    },
+    {
+      "name": "wool_dye_wool_14_12"
+    },
+    {
+      "name": "wool_dye_wool_14_13"
+    },
+    {
+      "name": "wool_dye_wool_14_15"
+    },
+    {
+      "name": "wool_dye_wool_14_2"
+    },
+    {
+      "name": "wool_dye_wool_14_3"
+    },
+    {
+      "name": "wool_dye_wool_14_4"
+    },
+    {
+      "name": "wool_dye_wool_14_5"
+    },
+    {
+      "name": "wool_dye_wool_14_6"
+    },
+    {
+      "name": "wool_dye_wool_14_7"
+    },
+    {
+      "name": "wool_dye_wool_14_8"
+    },
+    {
+      "name": "wool_dye_wool_14_9"
+    },
+    {
+      "name": "wool_dye_wool_15_0"
+    },
+    {
+      "name": "wool_dye_wool_15_1"
+    },
+    {
+      "name": "wool_dye_wool_15_10"
+    },
+    {
+      "name": "wool_dye_wool_15_11"
+    },
+    {
+      "name": "wool_dye_wool_15_12"
+    },
+    {
+      "name": "wool_dye_wool_15_13"
+    },
+    {
+      "name": "wool_dye_wool_15_14"
+    },
+    {
+      "name": "wool_dye_wool_15_2"
+    },
+    {
+      "name": "wool_dye_wool_15_3"
+    },
+    {
+      "name": "wool_dye_wool_15_4"
+    },
+    {
+      "name": "wool_dye_wool_15_5"
+    },
+    {
+      "name": "wool_dye_wool_15_6"
+    },
+    {
+      "name": "wool_dye_wool_15_7"
+    },
+    {
+      "name": "wool_dye_wool_15_8"
+    },
+    {
+      "name": "wool_dye_wool_15_9"
+    },
+    {
+      "name": "wool_dye_wool_16_1"
+    },
+    {
+      "name": "wool_dye_wool_16_10"
+    },
+    {
+      "name": "wool_dye_wool_16_11"
+    },
+    {
+      "name": "wool_dye_wool_16_12"
+    },
+    {
+      "name": "wool_dye_wool_16_13"
+    },
+    {
+      "name": "wool_dye_wool_16_14"
+    },
+    {
+      "name": "wool_dye_wool_16_15"
+    },
+    {
+      "name": "wool_dye_wool_16_2"
+    },
+    {
+      "name": "wool_dye_wool_16_3"
+    },
+    {
+      "name": "wool_dye_wool_16_4"
+    },
+    {
+      "name": "wool_dye_wool_16_5"
+    },
+    {
+      "name": "wool_dye_wool_16_6"
+    },
+    {
+      "name": "wool_dye_wool_16_7"
+    },
+    {
+      "name": "wool_dye_wool_16_8"
+    },
+    {
+      "name": "wool_dye_wool_16_9"
+    },
+    {
+      "name": "wool_dye_wool_17_0"
+    },
+    {
+      "name": "wool_dye_wool_17_1"
+    },
+    {
+      "name": "wool_dye_wool_17_10"
+    },
+    {
+      "name": "wool_dye_wool_17_11"
+    },
+    {
+      "name": "wool_dye_wool_17_12"
+    },
+    {
+      "name": "wool_dye_wool_17_13"
+    },
+    {
+      "name": "wool_dye_wool_17_14"
+    },
+    {
+      "name": "wool_dye_wool_17_15"
+    },
+    {
+      "name": "wool_dye_wool_17_2"
+    },
+    {
+      "name": "wool_dye_wool_17_4"
+    },
+    {
+      "name": "wool_dye_wool_17_5"
+    },
+    {
+      "name": "wool_dye_wool_17_6"
+    },
+    {
+      "name": "wool_dye_wool_17_7"
+    },
+    {
+      "name": "wool_dye_wool_17_8"
+    },
+    {
+      "name": "wool_dye_wool_17_9"
+    },
+    {
+      "name": "wool_dye_wool_18_0"
+    },
+    {
+      "name": "wool_dye_wool_18_1"
+    },
+    {
+      "name": "wool_dye_wool_18_10"
+    },
+    {
+      "name": "wool_dye_wool_18_11"
+    },
+    {
+      "name": "wool_dye_wool_18_12"
+    },
+    {
+      "name": "wool_dye_wool_18_13"
+    },
+    {
+      "name": "wool_dye_wool_18_14"
+    },
+    {
+      "name": "wool_dye_wool_18_15"
+    },
+    {
+      "name": "wool_dye_wool_18_2"
+    },
+    {
+      "name": "wool_dye_wool_18_3"
+    },
+    {
+      "name": "wool_dye_wool_18_5"
+    },
+    {
+      "name": "wool_dye_wool_18_6"
+    },
+    {
+      "name": "wool_dye_wool_18_7"
+    },
+    {
+      "name": "wool_dye_wool_18_8"
+    },
+    {
+      "name": "wool_dye_wool_18_9"
+    },
+    {
+      "name": "wool_dye_wool_19_0"
+    },
+    {
+      "name": "wool_dye_wool_19_1"
+    },
+    {
+      "name": "wool_dye_wool_19_10"
+    },
+    {
+      "name": "wool_dye_wool_19_11"
+    },
+    {
+      "name": "wool_dye_wool_19_12"
+    },
+    {
+      "name": "wool_dye_wool_19_13"
+    },
+    {
+      "name": "wool_dye_wool_19_14"
+    },
+    {
+      "name": "wool_dye_wool_19_2"
+    },
+    {
+      "name": "wool_dye_wool_19_3"
+    },
+    {
+      "name": "wool_dye_wool_19_4"
+    },
+    {
+      "name": "wool_dye_wool_19_5"
+    },
+    {
+      "name": "wool_dye_wool_19_6"
+    },
+    {
+      "name": "wool_dye_wool_19_7"
+    },
+    {
+      "name": "wool_dye_wool_19_8"
+    },
+    {
+      "name": "wool_dye_wool_19_9"
+    },
+    {
+      "name": "wool_dye_wool_1_0"
+    },
+    {
+      "name": "wool_dye_wool_1_10"
+    },
+    {
+      "name": "wool_dye_wool_1_11"
+    },
+    {
+      "name": "wool_dye_wool_1_12"
+    },
+    {
+      "name": "wool_dye_wool_1_13"
+    },
+    {
+      "name": "wool_dye_wool_1_14"
+    },
+    {
+      "name": "wool_dye_wool_1_15"
+    },
+    {
+      "name": "wool_dye_wool_1_2"
+    },
+    {
+      "name": "wool_dye_wool_1_3"
+    },
+    {
+      "name": "wool_dye_wool_1_4"
+    },
+    {
+      "name": "wool_dye_wool_1_5"
+    },
+    {
+      "name": "wool_dye_wool_1_6"
+    },
+    {
+      "name": "wool_dye_wool_1_7"
+    },
+    {
+      "name": "wool_dye_wool_1_8"
+    },
+    {
+      "name": "wool_dye_wool_1_9"
+    },
+    {
+      "name": "wool_dye_wool_2_0"
+    },
+    {
+      "name": "wool_dye_wool_2_1"
+    },
+    {
+      "name": "wool_dye_wool_2_10"
+    },
+    {
+      "name": "wool_dye_wool_2_11"
+    },
+    {
+      "name": "wool_dye_wool_2_12"
+    },
+    {
+      "name": "wool_dye_wool_2_13"
+    },
+    {
+      "name": "wool_dye_wool_2_14"
+    },
+    {
+      "name": "wool_dye_wool_2_15"
+    },
+    {
+      "name": "wool_dye_wool_2_3"
+    },
+    {
+      "name": "wool_dye_wool_2_4"
+    },
+    {
+      "name": "wool_dye_wool_2_5"
+    },
+    {
+      "name": "wool_dye_wool_2_6"
+    },
+    {
+      "name": "wool_dye_wool_2_7"
+    },
+    {
+      "name": "wool_dye_wool_2_8"
+    },
+    {
+      "name": "wool_dye_wool_2_9"
+    },
+    {
+      "name": "wool_dye_wool_3_0"
+    },
+    {
+      "name": "wool_dye_wool_3_1"
+    },
+    {
+      "name": "wool_dye_wool_3_10"
+    },
+    {
+      "name": "wool_dye_wool_3_11"
+    },
+    {
+      "name": "wool_dye_wool_3_12"
+    },
+    {
+      "name": "wool_dye_wool_3_13"
+    },
+    {
+      "name": "wool_dye_wool_3_14"
+    },
+    {
+      "name": "wool_dye_wool_3_15"
+    },
+    {
+      "name": "wool_dye_wool_3_2"
+    },
+    {
+      "name": "wool_dye_wool_3_4"
+    },
+    {
+      "name": "wool_dye_wool_3_5"
+    },
+    {
+      "name": "wool_dye_wool_3_6"
+    },
+    {
+      "name": "wool_dye_wool_3_7"
+    },
+    {
+      "name": "wool_dye_wool_3_8"
+    },
+    {
+      "name": "wool_dye_wool_3_9"
+    },
+    {
+      "name": "wool_dye_wool_4_0"
+    },
+    {
+      "name": "wool_dye_wool_4_1"
+    },
+    {
+      "name": "wool_dye_wool_4_10"
+    },
+    {
+      "name": "wool_dye_wool_4_11"
+    },
+    {
+      "name": "wool_dye_wool_4_12"
+    },
+    {
+      "name": "wool_dye_wool_4_13"
+    },
+    {
+      "name": "wool_dye_wool_4_14"
+    },
+    {
+      "name": "wool_dye_wool_4_15"
+    },
+    {
+      "name": "wool_dye_wool_4_2"
+    },
+    {
+      "name": "wool_dye_wool_4_3"
+    },
+    {
+      "name": "wool_dye_wool_4_5"
+    },
+    {
+      "name": "wool_dye_wool_4_6"
+    },
+    {
+      "name": "wool_dye_wool_4_7"
+    },
+    {
+      "name": "wool_dye_wool_4_8"
+    },
+    {
+      "name": "wool_dye_wool_4_9"
+    },
+    {
+      "name": "wool_dye_wool_5_0"
+    },
+    {
+      "name": "wool_dye_wool_5_1"
+    },
+    {
+      "name": "wool_dye_wool_5_10"
+    },
+    {
+      "name": "wool_dye_wool_5_11"
+    },
+    {
+      "name": "wool_dye_wool_5_12"
+    },
+    {
+      "name": "wool_dye_wool_5_13"
+    },
+    {
+      "name": "wool_dye_wool_5_14"
+    },
+    {
+      "name": "wool_dye_wool_5_15"
+    },
+    {
+      "name": "wool_dye_wool_5_2"
+    },
+    {
+      "name": "wool_dye_wool_5_3"
+    },
+    {
+      "name": "wool_dye_wool_5_4"
+    },
+    {
+      "name": "wool_dye_wool_5_6"
+    },
+    {
+      "name": "wool_dye_wool_5_7"
+    },
+    {
+      "name": "wool_dye_wool_5_8"
+    },
+    {
+      "name": "wool_dye_wool_5_9"
+    },
+    {
+      "name": "wool_dye_wool_6_0"
+    },
+    {
+      "name": "wool_dye_wool_6_1"
+    },
+    {
+      "name": "wool_dye_wool_6_10"
+    },
+    {
+      "name": "wool_dye_wool_6_11"
+    },
+    {
+      "name": "wool_dye_wool_6_12"
+    },
+    {
+      "name": "wool_dye_wool_6_13"
+    },
+    {
+      "name": "wool_dye_wool_6_14"
+    },
+    {
+      "name": "wool_dye_wool_6_15"
+    },
+    {
+      "name": "wool_dye_wool_6_2"
+    },
+    {
+      "name": "wool_dye_wool_6_3"
+    },
+    {
+      "name": "wool_dye_wool_6_4"
+    },
+    {
+      "name": "wool_dye_wool_6_5"
+    },
+    {
+      "name": "wool_dye_wool_6_7"
+    },
+    {
+      "name": "wool_dye_wool_6_8"
+    },
+    {
+      "name": "wool_dye_wool_6_9"
+    },
+    {
+      "name": "wool_dye_wool_7_0"
+    },
+    {
+      "name": "wool_dye_wool_7_1"
+    },
+    {
+      "name": "wool_dye_wool_7_10"
+    },
+    {
+      "name": "wool_dye_wool_7_11"
+    },
+    {
+      "name": "wool_dye_wool_7_12"
+    },
+    {
+      "name": "wool_dye_wool_7_13"
+    },
+    {
+      "name": "wool_dye_wool_7_14"
+    },
+    {
+      "name": "wool_dye_wool_7_15"
+    },
+    {
+      "name": "wool_dye_wool_7_2"
+    },
+    {
+      "name": "wool_dye_wool_7_3"
+    },
+    {
+      "name": "wool_dye_wool_7_4"
+    },
+    {
+      "name": "wool_dye_wool_7_5"
+    },
+    {
+      "name": "wool_dye_wool_7_6"
+    },
+    {
+      "name": "wool_dye_wool_7_8"
+    },
+    {
+      "name": "wool_dye_wool_7_9"
+    },
+    {
+      "name": "wool_dye_wool_8_0"
+    },
+    {
+      "name": "wool_dye_wool_8_1"
+    },
+    {
+      "name": "wool_dye_wool_8_10"
+    },
+    {
+      "name": "wool_dye_wool_8_11"
+    },
+    {
+      "name": "wool_dye_wool_8_12"
+    },
+    {
+      "name": "wool_dye_wool_8_13"
+    },
+    {
+      "name": "wool_dye_wool_8_14"
+    },
+    {
+      "name": "wool_dye_wool_8_15"
+    },
+    {
+      "name": "wool_dye_wool_8_2"
+    },
+    {
+      "name": "wool_dye_wool_8_3"
+    },
+    {
+      "name": "wool_dye_wool_8_4"
+    },
+    {
+      "name": "wool_dye_wool_8_5"
+    },
+    {
+      "name": "wool_dye_wool_8_6"
+    },
+    {
+      "name": "wool_dye_wool_8_7"
+    },
+    {
+      "name": "wool_dye_wool_8_9"
+    },
+    {
+      "name": "wool_dye_wool_9_0"
+    },
+    {
+      "name": "wool_dye_wool_9_1"
+    },
+    {
+      "name": "wool_dye_wool_9_10"
+    },
+    {
+      "name": "wool_dye_wool_9_11"
+    },
+    {
+      "name": "wool_dye_wool_9_12"
+    },
+    {
+      "name": "wool_dye_wool_9_13"
+    },
+    {
+      "name": "wool_dye_wool_9_14"
+    },
+    {
+      "name": "wool_dye_wool_9_15"
+    },
+    {
+      "name": "wool_dye_wool_9_2"
+    },
+    {
+      "name": "wool_dye_wool_9_3"
+    },
+    {
+      "name": "wool_dye_wool_9_4"
+    },
+    {
+      "name": "wool_dye_wool_9_5"
+    },
+    {
+      "name": "wool_dye_wool_9_6"
+    },
+    {
+      "name": "wool_dye_wool_9_7"
+    },
+    {
+      "name": "wool_dye_wool_9_8"
+    }
+  ]
+}

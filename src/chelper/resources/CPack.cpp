@@ -353,6 +353,14 @@ namespace CHelper {
         JsonUtil::writeBsonToFile(path, toJson());
     }
 
+//    void CPack::writeBinToFile(const std::ostream &ostream) const {
+//        manifest.writeBinToFile(ostream);
+//        writeBinToFile(ostream)
+//        for (const auto &item: normalIds) {
+//
+//        }
+//    }
+
     std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
     CPack::getNormalId(const std::string &key) const {
         auto it = normalIds.find(key);
