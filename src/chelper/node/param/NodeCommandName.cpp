@@ -11,13 +11,18 @@ namespace CHelper::Node {
     NodeCommandName::NodeCommandName(const std::optional<std::string> &id,
                                      const std::optional<std::string> &description,
                                      const std::vector<std::unique_ptr<Node::NodeBase>> *commands)
-            : NodeBase(id, description, false),
-              commands(commands) {}
+        : NodeBase(id, description, false),
+          commands(commands) {}
 
     NodeCommandName::NodeCommandName(const nlohmann::json &j,
                                      const CPack &cpack)
-            : NodeBase(j, true),
-              commands(cpack.commands.get()) {}
+        : NodeBase(j, true),
+          commands(cpack.commands.get()) {}
+
+    NodeCommandName::NodeCommandName(BinaryReader &binaryReader,
+                                     const CPack &cpack)
+        : NodeBase(binaryReader),
+          commands(cpack.commands.get()) {}
 
     NodeType *NodeCommandName::getNodeType() const {
         return NodeType::COMMAND_NAME.get();
@@ -48,7 +53,7 @@ namespace CHelper::Node {
                                              size_t index,
                                              std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
-                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+                                  .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
 
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *commands) {
@@ -58,9 +63,9 @@ namespace CHelper::Node {
                 size_t index1 = item2.find(str);
                 if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
                     if (HEDLEY_UNLIKELY(index1 == 0)) {
-                        nameStartOf.push_back(std::make_shared<NormalId>(item2, item->description));
+                        nameStartOf.push_back(NormalId::make(item2, item->description));
                     } else {
-                        nameContain.push_back(std::make_shared<NormalId>(item2, item->description));
+                        nameContain.push_back(NormalId::make(item2, item->description));
                     }
                     flag = true;
                 }
@@ -72,7 +77,7 @@ namespace CHelper::Node {
             if (HEDLEY_UNLIKELY(item->description.has_value() &&
                                 item->description.value().find(str) != std::string::npos)) {
                 for (const auto &item2: ((NodePerCommand *) item.get())->name) {
-                    descriptionContain.push_back(std::make_shared<NormalId>(item2, item->description));
+                    descriptionContain.push_back(NormalId::make(item2, item->description));
                 }
             }
         }
@@ -106,4 +111,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, "命令名");
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

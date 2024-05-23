@@ -24,6 +24,6 @@ namespace CHelper::Profile {
 
     std::string getStackTrace();
 
-} // CHelper::Profile
+}// namespace CHelper::Profile
 
-#endif //CHELPER_PROFILE_H
+#endif//CHELPER_PROFILE_H

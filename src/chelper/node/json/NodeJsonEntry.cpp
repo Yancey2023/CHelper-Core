@@ -4,10 +4,10 @@
 
 #include "NodeJsonEntry.h"
 
-#include "../util/NodeSingleSymbol.h"
 #include "../util/NodeEntry.h"
-#include "NodeJsonString.h"
+#include "../util/NodeSingleSymbol.h"
 #include "NodeJsonElement.h"
+#include "NodeJsonString.h"
 
 namespace CHelper::Node {
 
@@ -24,22 +24,30 @@ namespace CHelper::Node {
                                  const std::optional<std::string> &description,
                                  std::string key,
                                  std::string value)
-            : NodeBase(id, description, false),
-              key(std::move(key)),
-              value(std::move(value)) {}
+        : NodeBase(id, description, false),
+          key(std::move(key)),
+          value(std::move(value)) {}
 
     NodeJsonEntry::NodeJsonEntry(const nlohmann::json &j)
-            : NodeBase(j, false),
-              key(JsonUtil::fromJson<std::string>(j, "key")),
-              value(JsonUtil::fromJson<std::string>(j, "value")) {}
+        : NodeBase(j, false),
+          key(JsonUtil::read<std::string>(j, "key")),
+          value(JsonUtil::read<std::string>(j, "value")) {}
+
+    NodeJsonEntry::NodeJsonEntry(BinaryReader &binaryReader)
+        : NodeBase(std::nullopt, binaryReader.read<std::string>(), false) {
+        key = binaryReader.read<std::string>();
+        value = binaryReader.read<std::string>();
+    }
 
     void NodeJsonEntry::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
             if (HEDLEY_UNLIKELY(item->id == value)) {
-                nodeKey = std::make_unique<NodeText>("JSON_OBJECT_ENTRY_KEY", "JSON对象键",
-                                                     std::make_shared<NormalId>('\"' + key + '\"', description));
-                nodeEntry = std::make_unique<NodeEntry>("JSON_OBJECT_ENTRY", "JSON对象键值对", nodeKey.get(),
-                                                        nodeSeparator.get(), item.get());
+                nodeKey = std::make_unique<NodeText>(
+                        "JSON_OBJECT_ENTRY_KEY", "JSON对象键",
+                        NormalId::make('\"' + key + '\"', description));
+                nodeEntry = std::make_unique<NodeEntry>(
+                        "JSON_OBJECT_ENTRY", "JSON对象键值对",
+                        nodeKey.get(), nodeSeparator.get(), item.get());
                 return;
             }
         }
@@ -56,14 +64,19 @@ namespace CHelper::Node {
     }
 
     void NodeJsonEntry::toJson(nlohmann::json &j) const {
-        JsonUtil::toJson(j, "key", key);
-        JsonUtil::toJsonOptionalLikely(j, "description", description);
-        JsonUtil::toJson(j, "value", value);
+        JsonUtil::encode(j, "key", key);
+        JsonUtil::encode(j, "description", description);
+        JsonUtil::encode(j, "value", value);
+    }
+
+    void NodeJsonEntry::writeBinToFile(BinaryWriter &binaryWriter) const {
+        binaryWriter.encode(description.value());
+        binaryWriter.encode(key);
+        binaryWriter.encode(value);
     }
 
     ASTNode NodeJsonEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        return getByChildNode(tokenReader, cpack, HEDLEY_UNLIKELY(nodeEntry == nullptr) ?
-                                                  nodeAllEntry.get() : nodeEntry.get());
+        return getByChildNode(tokenReader, cpack, HEDLEY_UNLIKELY(nodeEntry == nullptr) ? nodeAllEntry.get() : nodeEntry.get());
     }
 
     NodeBase *NodeJsonEntry::getNodeJsonAllEntry() {
@@ -71,4 +84,4 @@ namespace CHelper::Node {
         return &nodeJsonAllEntry;
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

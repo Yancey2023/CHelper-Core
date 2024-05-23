@@ -13,19 +13,19 @@ namespace CHelper {
     ASTNode::ASTNode(ASTNodeMode::ASTNodeMode mode,
                      const Node::NodeBase *node,
                      std::vector<ASTNode> &&childNodes,
-                     const VectorView <Token> &tokens,
+                     const VectorView<Token> &tokens,
                      const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
                      std::string id,
                      bool canAddWhitespace,
                      size_t whichBest)
-            : mode(mode),
-              node(node),
-              childNodes(std::move(childNodes)),
-              tokens(tokens),
-              errorReasons(errorReasons),
-              id(std::move(id)),
-              canAddWhitespace(canAddWhitespace),
-              whichBest(whichBest) {}
+        : mode(mode),
+          node(node),
+          childNodes(std::move(childNodes)),
+          tokens(tokens),
+          errorReasons(errorReasons),
+          id(std::move(id)),
+          canAddWhitespace(canAddWhitespace),
+          whichBest(whichBest) {}
 
     nlohmann::json ASTNode::toJson() const {
         nlohmann::json j;
@@ -143,7 +143,7 @@ namespace CHelper {
     }
 
     ASTNode ASTNode::simpleNode(const Node::NodeBase *node,
-                                const VectorView <Token> &tokens,
+                                const VectorView<Token> &tokens,
                                 const std::shared_ptr<ErrorReason> &errorReason,
                                 const std::string &id,
                                 bool canAddWhitespace) {
@@ -156,7 +156,7 @@ namespace CHelper {
 
     ASTNode ASTNode::andNode(const Node::NodeBase *node,
                              std::vector<ASTNode> &&childNodes,
-                             const VectorView <Token> &tokens,
+                             const VectorView<Token> &tokens,
                              const std::shared_ptr<ErrorReason> &errorReason,
                              const std::string &id,
                              bool canAddWhitespace) {
@@ -180,7 +180,7 @@ namespace CHelper {
 
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             std::vector<ASTNode> &&childNodes,
-                            const VectorView <Token> *tokens,
+                            const VectorView<Token> *tokens,
                             const char *errorReason,
                             const std::string &id,
                             bool canAddWhitespace) {
@@ -244,17 +244,16 @@ namespace CHelper {
                                                return item.canAddWhitespace;
                                            });
         }
-        VectorView <Token> tokens1 = tokens == nullptr ? childNodes[whichBest].tokens : *tokens;
+        VectorView<Token> tokens1 = tokens == nullptr ? childNodes[whichBest].tokens : *tokens;
         if (HEDLEY_UNLIKELY(errorCount > 1 && errorReason != nullptr)) {
             errorReasons = {ErrorReason::contentError(tokens1, errorReason)};
         }
         return {ASTNodeMode::OR, node, std::move(childNodes), tokens1, errorReasons, id, canAddWhitespace, whichBest};
-
     }
 
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             std::vector<ASTNode> &&childNodes,
-                            const VectorView <Token> &tokens,
+                            const VectorView<Token> &tokens,
                             const char *errorReason,
                             const std::string &id,
                             bool canAddWhitespace) {
@@ -332,8 +331,7 @@ namespace CHelper {
         }
         if (HEDLEY_UNLIKELY(id != "compound" && id != "nextNode" && !isAllWhitespaceError())) {
 #if CHelperDebug == true
-            Profile::push("collect suggestions: " + node->getNodeType()->nodeName
-                          + " " + node->description.value_or(""));
+            Profile::push("collect suggestions: " + node->getNodeType()->nodeName + " " + node->description.value_or(""));
 #endif
             auto flag = node->collectSuggestions(this, index, suggestions);
 #if CHelperDebug == true
@@ -373,8 +371,7 @@ namespace CHelper {
                                       .purple(node->getNodeType()->nodeName + " " + node->description.value_or(""))
                                       .build());
 #endif
-                node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ?
-                                       nullptr : this, structure, isMustHave);
+                node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ? nullptr : this, structure, isMustHave);
 #if CHelperDebug == true
                 Profile::pop();
 #endif
@@ -428,7 +425,7 @@ namespace CHelper {
 
     static std::vector<std::shared_ptr<ErrorReason>> sortByLevel(std::vector<std::shared_ptr<ErrorReason>> &input) {
         std::vector<std::shared_ptr<ErrorReason>> output;
-        std::uint8_t i = ErrorReasonLevel::maxLevel;
+        uint8_t i = ErrorReasonLevel::maxLevel;
         while (true) {
             for (const auto &item: input) {
                 if (HEDLEY_UNLIKELY(item->level == i)) {
@@ -487,4 +484,4 @@ namespace CHelper {
         return result;
     }
 
-} // CHelper
+}// namespace CHelper

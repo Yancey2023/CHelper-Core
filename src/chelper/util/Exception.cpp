@@ -3,8 +3,8 @@
 //
 
 #include "Exception.h"
-#include "Profile.h"
 #include "ColorStringBuilder.h"
+#include "Profile.h"
 #include "SimpleLogger.h"
 
 namespace CHelper::Exception {
@@ -140,4 +140,4 @@ namespace CHelper::Exception {
     }
 
 
-} // CHelper::Exception
+}// namespace CHelper::Exception

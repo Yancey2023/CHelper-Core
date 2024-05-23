@@ -13,7 +13,8 @@ namespace CHelper::Node {
 
     class NodeLF : public NodeBase {
     public:
-        NodeLF(const std::optional<std::string> &id, const std::optional<std::string> &description);
+        NodeLF(const std::optional<std::string> &id,
+               const std::optional<std::string> &description);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
@@ -24,9 +25,8 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODELF_H
+#endif//CHELPER_NODELF_H

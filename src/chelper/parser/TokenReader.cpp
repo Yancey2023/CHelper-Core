@@ -8,7 +8,7 @@
 namespace CHelper {
 
     TokenReader::TokenReader(const std::shared_ptr<std::vector<Token>> &tokenList)
-            : tokenList(tokenList) {}
+        : tokenList(tokenList) {}
 
     bool TokenReader::ready() const {
         return index < tokenList->size();
@@ -94,7 +94,7 @@ namespace CHelper {
     /**
      * 收集栈中最后一个指针位置到当前指针的token，从栈中移除指针，不恢复指针
      */
-    VectorView <Token> CHelper::TokenReader::collect() {
+    VectorView<Token> CHelper::TokenReader::collect() {
         return {tokenList, getAndPopLastIndex(), index};
     }
 
@@ -102,20 +102,20 @@ namespace CHelper {
                                            TokenType::TokenType type,
                                            const std::string &requireType,
                                            const std::string &astNodeId,
-                                           std::shared_ptr<ErrorReason>(*check)(const std::string &str,
-                                                                                const VectorView <Token> &tokens)) {
+                                           std::shared_ptr<ErrorReason> (*check)(const std::string &str,
+                                                                                 const VectorView<Token> &tokens)) {
         skipWhitespace();
         push();
         const Token *token = read();
-        VectorView <Token> tokens = collect();
+        VectorView<Token> tokens = collect();
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_UNLIKELY(token == nullptr)) {
             errorReason = ErrorReason::incomplete(tokens, FormatUtil::format(
-                    "命令不完整，需要的参数类型为{0}", requireType));
+                                                                  "命令不完整，需要的参数类型为{0}", requireType));
         } else if (HEDLEY_UNLIKELY(token->type != type)) {
             errorReason = ErrorReason::typeError(tokens, FormatUtil::format(
-                    "类型不匹配，正确的参数类型为{0}，但当前参数类型为{1}",
-                    requireType, TokenType::getName(token->type)));
+                                                                 "类型不匹配，正确的参数类型为{0}，但当前参数类型为{1}",
+                                                                 requireType, TokenType::getName(token->type)));
         } else {
             errorReason = check == nullptr ? nullptr : check(token->content, tokens);
         }
@@ -131,7 +131,7 @@ namespace CHelper {
                                             const std::string &astNodeId) {
         return readSimpleASTNode(
                 node, TokenType::NUMBER, "整数类型", astNodeId,
-                [](const std::string &str, const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
+                [](const std::string &str, const VectorView<Token> &tokens) -> std::shared_ptr<ErrorReason> {
                     for (const auto &ch: str) {
                         if (HEDLEY_UNLIKELY(ch == '.')) {
                             return ErrorReason::contentError(
@@ -146,7 +146,7 @@ namespace CHelper {
                                           const std::string &astNodeId) {
         return readSimpleASTNode(
                 node, TokenType::NUMBER, "数字类型", astNodeId,
-                [](const std::string &str, const VectorView <Token> &tokens) -> std::shared_ptr<ErrorReason> {
+                [](const std::string &str, const VectorView<Token> &tokens) -> std::shared_ptr<ErrorReason> {
                     bool isHavePoint = false;
                     for (const auto &ch: str) {
                         if (HEDLEY_LIKELY(ch != '.')) {
@@ -166,40 +166,17 @@ namespace CHelper {
         return readSimpleASTNode(node, TokenType::SYMBOL, "符号类型", astNodeId);
     }
 
-    std::function<ASTNode(const Node::NodeBase *node, TokenReader &tokenReader)>
-    TokenReader::getReadTokenMethod(const std::optional<std::vector<std::string>> &tokenTypes) {
-        if (HEDLEY_LIKELY(!tokenTypes.has_value())) {
-            return [](const Node::NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-                return tokenReader.readStringASTNode(node);
-            };
-        }
-        std::vector<TokenType::TokenType> tokenTypes0;
-        tokenTypes0.reserve(tokenTypes.value().size());
-        for (const auto &item: tokenTypes.value()) {
-            if (item == "STRING") {
-                tokenTypes0.push_back(TokenType::STRING);
-            } else if (item == "NUMBER") {
-                tokenTypes0.push_back(TokenType::NUMBER);
-            } else if (item == "SYMBOL") {
-                tokenTypes0.push_back(TokenType::SYMBOL);
-            } else if (item == "WHITE_SPACE") {
-                tokenTypes0.push_back(TokenType::WHITE_SPACE);
-            } else if (item == "LF") {
-                tokenTypes0.push_back(TokenType::LF);
-            } else {
-                Profile::push("reading token types");
-                Profile::push("fail to reading token type: " + item);
-                throw Exception::NodeLoadFailed();
+    ASTNode TokenReader::readUntilWhitespace(const Node::NodeBase *node,
+                                             const std::string &astNodeId) {
+        push();
+        while (ready()) {
+            TokenType::TokenType tokenType = peek()->type;
+            if (tokenType == TokenType::WHITE_SPACE || tokenType == TokenType::LF) {
+                break;
             }
+            skip();
         }
-        return [tokenTypes0](const Node::NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-            tokenReader.push();
-            for (const auto &item: tokenTypes0) {
-                tokenReader.readSimpleASTNode(node, item, TokenType::getName(item));
-            }
-            return ASTNode::simpleNode(node, tokenReader.collect());
-        };
+        return ASTNode::simpleNode(node, collect(), nullptr, astNodeId);
     }
 
-
-} // CHelper
+}// namespace CHelper

@@ -3,8 +3,8 @@
 //
 
 #include "NodeJsonList.h"
-#include "../util/NodeSingleSymbol.h"
 #include "../util/NodeList.h"
+#include "../util/NodeSingleSymbol.h"
 #include "NodeJsonElement.h"
 
 namespace CHelper::Node {
@@ -22,13 +22,18 @@ namespace CHelper::Node {
     NodeJsonList::NodeJsonList(const std::optional<std::string> &id,
                                const std::optional<std::string> &description,
                                std::string data)
-            : NodeBase(id, description, false),
-              data(std::move(data)) {}
+        : NodeBase(id, description, false),
+          data(std::move(data)) {}
 
     NodeJsonList::NodeJsonList(const nlohmann::json &j,
                                [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j, false),
-              data(JsonUtil::fromJson<std::string>(j, "data")) {}
+        : NodeBase(j, false),
+          data(JsonUtil::read<std::string>(j, "data")) {}
+
+    NodeJsonList::NodeJsonList(BinaryReader &binaryReader,
+                               [[maybe_unused]] const CPack &cpack)
+        : NodeBase(binaryReader),
+          data(binaryReader.read<std::string>()) {}
 
     void NodeJsonList::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
@@ -57,7 +62,12 @@ namespace CHelper::Node {
 
     void NodeJsonList::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJson(j, "data", data);
+        JsonUtil::encode(j, "data", data);
+    }
+
+    void NodeJsonList::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        binaryWriter.encode(data);
     }
 
     ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -86,4 +96,4 @@ namespace CHelper::Node {
         return astNode->id == "node json all list";
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

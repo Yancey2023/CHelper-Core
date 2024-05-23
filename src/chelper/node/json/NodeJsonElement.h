@@ -24,14 +24,18 @@ namespace CHelper::Node {
         NodeJsonElement(const nlohmann::json &j,
                         [[maybe_unused]] const CPack &cpack);
 
+        NodeJsonElement(BinaryReader &binaryReader,
+                        [[maybe_unused]] const CPack &cpack);
+
         void toJson(nlohmann::json &j) const override;
+
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         static NodeBase *getNodeJsonElement();
-
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEJSONELEMENT_H
+#endif//CHELPER_NODEJSONELEMENT_H

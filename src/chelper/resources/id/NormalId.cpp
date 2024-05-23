@@ -6,22 +6,31 @@
 
 namespace CHelper {
 
-    NormalId::NormalId(const std::string &name,
-                       const std::optional<std::string> &description)
-            : name(name),
-              description(description),
-              nameHash(std::hash<std::string>{}(name)),
-              mHashCode(31 * nameHash + std::hash<std::optional<std::string>>{}(description)) {}
-
-    NormalId::NormalId(const nlohmann::json &j)
-            : name(JsonUtil::fromJson<std::string>(j, "name")),
-              description(JsonUtil::fromJsonOptionalLikely<std::string>(j, "description")),
-              nameHash(std::hash<std::string>{}(name)),
-              mHashCode(31 * nameHash + std::hash<std::optional<std::string>>{}(description)) {}
-
-    void NormalId::toJson(nlohmann::json &j) const {
-        JsonUtil::toJson(j, "name", name);
-        JsonUtil::toJsonOptionalLikely(j, "description", description);
+    void NormalId::buildHash() {
+        if (!isBuildHash) {
+            isBuildHash = true;
+            nameHash = std::hash<std::string>{}(name);
+            mHashCode = std::hash<std::string>{}(name);
+        }
     }
 
-} // CHelper
+    [[nodiscard]] bool NormalId::fastMatch(size_t strHash) {
+        buildHash();
+        return nameHash == strHash;
+    }
+
+    [[nodiscard]] size_t NormalId::hashCode() {
+        buildHash();
+        return mHashCode;
+    }
+
+    std::shared_ptr<NormalId> NormalId::make(const std::string &name, const std::optional<std::string> &description) {
+        auto result = std::make_shared<NormalId>();
+        result->name = name;
+        result->description = description;
+        return result;
+    }
+
+    CODEC(NormalId, name, description);
+
+}// namespace CHelper

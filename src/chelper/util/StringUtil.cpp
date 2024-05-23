@@ -19,4 +19,4 @@ namespace CHelper::StringUtil {
         return std::move(result);
     }
 
-} //CHelper::StringUtil
+}// namespace CHelper::StringUtil

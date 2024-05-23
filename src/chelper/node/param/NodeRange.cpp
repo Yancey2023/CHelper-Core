@@ -3,26 +3,30 @@
 //
 
 #include "NodeRange.h"
-#include "NodeText.h"
 #include "../../util/TokenUtil.h"
+#include "NodeText.h"
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NormalId> rangeSymbol = std::make_shared<NormalId>("..", "范围");
+    static std::shared_ptr<NormalId> rangeSymbol = NormalId::make("..", "范围");
 
     NodeRange::NodeRange(const std::optional<std::string> &id,
                          const std::optional<std::string> &description)
-            : NodeBase(id, description, false) {}
+        : NodeBase(id, description, false) {}
 
     NodeRange::NodeRange(const nlohmann::json &j,
-                         [[maybe_unused]] const CPack &cpack) :
-            NodeBase(j, true) {}
+                         [[maybe_unused]] const CPack &cpack)
+        : NodeBase(j, true) {}
+
+    NodeRange::NodeRange(BinaryReader &binaryReader,
+                         [[maybe_unused]] const CPack &cpack)
+        : NodeBase(binaryReader) {}
 
     NodeType *NodeRange::getNodeType() const {
         return NodeType::RANGE.get();
     }
 
-    std::shared_ptr<ErrorReason> checkNumber(const VectorView <Token> &tokens, std::string_view str) {
+    std::shared_ptr<ErrorReason> checkNumber(const VectorView<Token> &tokens, std::string_view str) {
         if (HEDLEY_UNLIKELY(str.empty())) {
             return ErrorReason::contentError(tokens, "范围的数值为空");
         }
@@ -82,4 +86,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or("范围"));
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

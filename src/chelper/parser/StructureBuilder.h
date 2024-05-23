@@ -33,9 +33,8 @@ namespace CHelper {
         StructureBuilder &append(bool isMustHave, const std::string &str);
 
         std::string build();
-
     };
 
-} // CHelper
+}// namespace CHelper
 
-#endif //CHELPER_STRUCTUREBUILDER_H
+#endif//CHELPER_STRUCTUREBUILDER_H

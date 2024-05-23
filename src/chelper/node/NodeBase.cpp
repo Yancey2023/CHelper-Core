@@ -10,22 +10,22 @@ namespace CHelper::Node {
     NodeBase::NodeBase(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
                        bool isMustAfterWhiteSpace)
-            : id(id),
-              description(description),
-              isMustAfterWhiteSpace(isMustAfterWhiteSpace) {}
+        : id(id),
+          description(description),
+          isMustAfterWhiteSpace(isMustAfterWhiteSpace) {}
 
     NodeBase::NodeBase(const nlohmann::json &j,
                        bool isMustAfterWhiteSpace)
-            : id(JsonUtil::fromJsonOptionalLikely<std::string>(j, "id")),
-              brief(JsonUtil::fromJsonOptionalLikely<std::string>(j, "brief")),
-              description(JsonUtil::fromJsonOptionalLikely<std::string>(j, "description")),
-              isMustAfterWhiteSpace(j.value("isMustAfterWhiteSpace", isMustAfterWhiteSpace)) {
+        : id(JsonUtil::read<std::optional<std::string>>(j, "id")),
+          brief(JsonUtil::read<std::optional<std::string>>(j, "brief")),
+          description(JsonUtil::read<std::optional<std::string>>(j, "description")),
+          isMustAfterWhiteSpace(j.value("isMustAfterWhiteSpace", isMustAfterWhiteSpace)) {
 #ifdef HEDLEY_GCC_VERSION
 #if CHelperDebug
         if (HEDLEY_UNLIKELY(!description.has_value() || brief.has_value())) {
             return;
         }
-        auto type = JsonUtil::fromJsonOptionalLikely<std::string>(j, "type");
+        auto type = JsonUtil::read<std::optional<std::string>>(j, "type");
         if (HEDLEY_UNLIKELY(!type.has_value() || type.value() == "PER_COMMAND" || type.value() == "TARGET_SELECTOR" ||
                             type.value() == "JSON_OBJECT" || type.value() == "JSON_INTEGER" ||
                             type.value() == "JSON_FLOAT" ||
@@ -44,11 +44,18 @@ namespace CHelper::Node {
 #endif
     }
 
+    NodeBase::NodeBase(BinaryReader &binaryReader) {
+        id = binaryReader.read<std::optional<std::string>>();
+        brief = binaryReader.read<std::optional<std::string>>();
+        description = binaryReader.read<std::optional<std::string>>();
+        isMustAfterWhiteSpace = binaryReader.read<bool>();
+    }
+
     std::unique_ptr<NodeBase> NodeBase::getNodeFromJson(const nlohmann::json &j,
                                                         const CPack &cpack) {
         Profile::push(ColorStringBuilder().red("loading type").build());
-        auto type = JsonUtil::fromJson<std::string>(j, "type");
-        auto id = JsonUtil::fromJsonOptionalLikely<std::string>(j, "id");
+        auto type = JsonUtil::read<std::string>(j, "type");
+        auto id = JsonUtil::read<std::optional<std::string>>(j, "id");
         Profile::next(ColorStringBuilder().red("loading node ").purple(type).build());
         if (HEDLEY_LIKELY(id.has_value())) {
             Profile::next(ColorStringBuilder()
@@ -74,24 +81,48 @@ namespace CHelper::Node {
         throw Exception::UnknownNodeType(type);
     }
 
+    std::unique_ptr<NodeBase> NodeBase::getNodeFromBinary(BinaryReader &binaryReader,
+                                                          const CPack &cpack) {
+        auto typeId = binaryReader.read<uint8_t>();
+        if (typeId > NodeType::NODE_TYPES.size()) {
+            throw std::runtime_error("unknown typeId");
+        }
+        const NodeType *type = NodeType::NODE_TYPES[typeId];
+        return type->createNodeByBinary(binaryReader, cpack);
+    }
+
     NodeType *NodeBase::getNodeType() const {
         return NodeType::UNKNOWN.get();
     }
 
     void NodeBase::toJson(nlohmann::json &j) const {
-        JsonUtil::toJsonOptionalLikely(j, "id", id);
-        JsonUtil::toJsonOptionalUnlikely(j, "brief", brief);
-        JsonUtil::toJsonOptionalLikely(j, "description", description);
-        JsonUtil::toJson(j, "type", getNodeType()->nodeName);
+        if (getNodeType() == NodeType::UNKNOWN.get()) {
+            throw std::runtime_error("fail to write node");
+        }
+        JsonUtil::encode(j, "type", getNodeType()->nodeName);
+        JsonUtil::encode(j, "id", id);
+        JsonUtil::encode(j, "brief", brief);
+        JsonUtil::encode(j, "description", description);
         //TODO 需要更好的判断isMustAfterWhiteSpace是否输出的逻辑
-        JsonUtil::toJson(j, "isMustAfterWhiteSpace", isMustAfterWhiteSpace);
+        JsonUtil::encode(j, "isMustAfterWhiteSpace", isMustAfterWhiteSpace);
+    }
+
+    void NodeBase::writeBinToFile(BinaryWriter &binaryWriter) const {
+        if (getNodeType() == NodeType::UNKNOWN.get()) {
+            throw std::runtime_error("fail to write node");
+        }
+        binaryWriter.encode(getNodeType()->id);
+        binaryWriter.encode(id);
+        binaryWriter.encode(brief);
+        binaryWriter.encode(description);
+        binaryWriter.encode(isMustAfterWhiteSpace);
     }
 
     ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const {
         //空格检测
         tokenReader.push();
         if (HEDLEY_UNLIKELY(isMustAfterWhiteSpace && tokenReader.skipWhitespace() == 0)) {
-            VectorView <Token> tokens = tokenReader.collect();
+            VectorView<Token> tokens = tokenReader.collect();
             return ASTNode::simpleNode(this, tokens, ErrorReason::requireWhiteSpace(tokens), "compound");
         }
         tokenReader.pop();
@@ -124,7 +155,7 @@ namespace CHelper::Node {
                                      const NodeBase *childNode,
                                      const std::string &astNodeId) const {
         ASTNode node = childNode->getASTNode(tokenReader, cpack);
-        VectorView <Token> tokens = node.tokens;
+        VectorView<Token> tokens = node.tokens;
         return ASTNode::andNode(this, {std::move(node)}, tokens, nullptr, astNodeId);
     }
 
@@ -148,7 +179,7 @@ namespace CHelper::Node {
             ASTNode astNode = item->getASTNodeWithNextNode(tokenReader, cpack);
             DEBUG_GET_NODE_END(item)
             bool isError = astNode.isError();
-            const VectorView <Token> tokens = tokenReader.collect();
+            const VectorView<Token> tokens = tokenReader.collect();
             if (HEDLEY_UNLIKELY(isError && (isIgnoreChildNodesError || tokens.isEmpty()))) {
                 tokenReader.restore();
                 break;
@@ -186,7 +217,6 @@ namespace CHelper::Node {
     void NodeBase::collectStructure(const ASTNode *astNode,
                                     StructureBuilder &structure,
                                     bool isMustHave) const {
-
     }
 
     void NodeBase::collectStructureWithNextNodes(StructureBuilder &structure, bool isMustHave) const {
@@ -214,5 +244,16 @@ namespace CHelper::Node {
         }
         nextNodes[0]->collectStructureWithNextNodes(structure, isMustHave);
     }
+    void NodeBase::init(const CPack &cpack) {
 
-} // CHelper::Node
+    }
+
+    void to_json(nlohmann::json &j, const Node::NodeBase &t) {
+        t.toJson(j);
+    }
+
+    void to_binary(BinaryWriter &binaryWriter, const Node::NodeBase &t) {
+        t.writeBinToFile(binaryWriter);
+    }
+
+}// namespace CHelper::Node

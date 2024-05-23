@@ -9,8 +9,8 @@ namespace CHelper::Node {
     NodeAnd::NodeAnd(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
                      const std::vector<const NodeBase *> &childNodes)
-            : NodeBase(id, description, false),
-              childNodes(childNodes) {}
+        : NodeBase(id, description, false),
+          childNodes(childNodes) {}
 
     ASTNode NodeAnd::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
@@ -30,4 +30,4 @@ namespace CHelper::Node {
         return std::nullopt;
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

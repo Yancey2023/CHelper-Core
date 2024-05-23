@@ -13,7 +13,7 @@
 namespace CHelper::Node {
 
     namespace NodeBlockType {
-        enum NodeBlockType : std::uint8_t {
+        enum NodeBlockType : uint8_t {
             // <方块ID> [方块状态]
             BLOCK_WITH_BLOCK_STATE = 0,
             // <方块ID>
@@ -35,6 +35,9 @@ namespace CHelper::Node {
         NodeBlock(const nlohmann::json &j,
                   const CPack &cpack);
 
+        NodeBlock(BinaryReader &binaryReader,
+                  [[maybe_unused]] const CPack &cpack);
+
         [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
@@ -50,9 +53,9 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEBLOCK_H
+#endif//CHELPER_NODEBLOCK_H

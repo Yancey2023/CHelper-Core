@@ -38,7 +38,6 @@
       "type": "TEXT",
       "id": "allRecipe",
       "description": "配方",
-      "tokenTypes": ["SYMBOL"],
       "data": {
         "name": "*",
         "description": "全部配方"

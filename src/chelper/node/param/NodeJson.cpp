@@ -11,9 +11,9 @@ namespace CHelper::Node {
                        const std::optional<std::string> &description,
                        std::string key,
                        NodeBase *nodeJson)
-            : NodeBase(id, description, false),
-              key(std::move(key)),
-              nodeJson(nodeJson) {}
+        : NodeBase(id, description, false),
+          key(std::move(key)),
+          nodeJson(nodeJson) {}
 
     static NodeBase *getNodeJsonFromCPack(const CPack &cpack,
                                           const std::string &key) {
@@ -38,15 +38,22 @@ namespace CHelper::Node {
                        const std::optional<std::string> &description,
                        const CPack &cpack,
                        const std::string &key)
-            : NodeBase(id, description, false),
-              key(key),
-              nodeJson(getNodeJsonFromCPack(cpack, key)) {}
+        : NodeBase(id, description, false),
+          key(key),
+          nodeJson(getNodeJsonFromCPack(cpack, key)) {}
 
     NodeJson::NodeJson(const nlohmann::json &j,
                        [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j, true),
-              key(JsonUtil::fromJson<std::string>(j, "key")),
-              nodeJson(getNodeJsonFromCPack(cpack, key)) {}
+        : NodeBase(j, true),
+          key(JsonUtil::read<std::string>(j, "key")),
+          nodeJson(getNodeJsonFromCPack(cpack, key)) {}
+
+    NodeJson::NodeJson(BinaryReader &binaryReader,
+                       [[maybe_unused]] const CPack &cpack)
+        : NodeBase(binaryReader) {
+        key = binaryReader.read<std::string>();
+        nodeJson = getNodeJsonFromCPack(cpack, key);
+    }
 
     NodeType *NodeJson::getNodeType() const {
         return NodeType::JSON.get();
@@ -54,7 +61,12 @@ namespace CHelper::Node {
 
     void NodeJson::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJson(j, "key", key);
+        JsonUtil::encode(j, "key", key);
+    }
+
+    void NodeJson::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        binaryWriter.encode(key);
     }
 
     ASTNode NodeJson::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -67,4 +79,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or("JSON文本"));
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

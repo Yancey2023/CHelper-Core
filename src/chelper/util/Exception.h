@@ -7,8 +7,8 @@
 #ifndef CHELPER_EXCEPTION_H
 #define CHELPER_EXCEPTION_H
 
-#include <vector>
 #include <string>
+#include <vector>
 
 namespace CHelper::Exception {
 
@@ -42,7 +42,6 @@ namespace CHelper::Exception {
         explicit RequireParentNodeId(const std::vector<std::string> &commandName);
 
         [[nodiscard]] const char *what() const noexcept override;
-
     };
 
     class RequireChildNodeIds : public std::exception {
@@ -77,6 +76,6 @@ namespace CHelper::Exception {
         [[nodiscard]] const char *what() const noexcept override;
     };
 
-} // CHelper::Exception
+}// namespace CHelper::Exception
 
-#endif //CHELPER_EXCEPTION_H
+#endif//CHELPER_EXCEPTION_H

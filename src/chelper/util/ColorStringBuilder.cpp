@@ -60,7 +60,7 @@ namespace CHelper {
         const std::string BLUE = "\033[34m";
         const std::string PURPLE = "\033[35m";
         const std::string CYAN = "\033[36m";
-    }
+    }// namespace Color
 
     ColorStringBuilder &ColorStringBuilder::append(const std::string &color, const std::string &str) {
         content.append(color).append(str);
@@ -106,5 +106,4 @@ namespace CHelper {
 
 #endif
 
-} // CHelper
-
+}// namespace CHelper

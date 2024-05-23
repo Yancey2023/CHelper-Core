@@ -19,12 +19,18 @@ namespace CHelper {
 
         class NodeType {
         public:
+            uint8_t id;
             std::string nodeName;
             std::function<std::unique_ptr<NodeBase>(const nlohmann::json &j, const CPack &cpack)> createNodeByJson;
+            std::function<std::unique_ptr<NodeBase>(BinaryReader &binaryReader, const CPack &cpack)> createNodeByBinary;
 
             NodeType(std::string nodeName,
                      std::function<std::unique_ptr<NodeBase>(const nlohmann::json &j,
-                                                             const CPack &cpack)> createNodeByJson);
+                                                             const CPack &cpack)>
+                             createNodeByJson,
+                     std::function<std::unique_ptr<NodeBase>(BinaryReader &binaryReader,
+                                                             const CPack &cpack)>
+                             createNodeByBinary);
 
             static std::vector<NodeType *> NODE_TYPES;
 
@@ -62,8 +68,8 @@ namespace CHelper {
             static void init();
         };
 
-    } // Node
+    }// namespace Node
 
-} // CHelper
+}// namespace CHelper
 
-#endif //CHELPER_NODETYPE_H
+#endif//CHELPER_NODETYPE_H

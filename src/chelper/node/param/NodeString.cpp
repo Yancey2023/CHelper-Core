@@ -7,24 +7,32 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NormalId> doubleQuoteMask = std::make_shared<NormalId>("\"", "双引号");
+    static std::shared_ptr<NormalId> doubleQuoteMask = NormalId::make("\"", "双引号");
 
     NodeString::NodeString(const std::optional<std::string> &id,
                            const std::optional<std::string> &description,
                            bool allowMissingString,
                            const bool canContainSpace,
                            const bool ignoreLater)
-            : NodeBase(id, description, false),
-              allowMissingString(allowMissingString),
-              canContainSpace(canContainSpace),
-              ignoreLater(ignoreLater) {}
+        : NodeBase(id, description, false),
+          allowMissingString(allowMissingString),
+          canContainSpace(canContainSpace),
+          ignoreLater(ignoreLater) {}
 
     NodeString::NodeString(const nlohmann::json &j,
                            [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j, true),
-              allowMissingString(false),
-              canContainSpace(JsonUtil::fromJson<bool>(j, "canContainSpace")),
-              ignoreLater(JsonUtil::fromJson<bool>(j, "ignoreLater")) {}
+        : NodeBase(j, true),
+          allowMissingString(false),
+          canContainSpace(JsonUtil::read<bool>(j, "canContainSpace")),
+          ignoreLater(JsonUtil::read<bool>(j, "ignoreLater")) {}
+
+    NodeString::NodeString(BinaryReader &binaryReader,
+                           [[maybe_unused]] const CPack &cpack)
+        : NodeBase(binaryReader) {
+        allowMissingString = false;
+        canContainSpace = binaryReader.read<bool>();
+        ignoreLater = binaryReader.read<bool>();
+    }
 
     NodeType *NodeString::getNodeType() const {
         return NodeType::STRING.get();
@@ -32,8 +40,14 @@ namespace CHelper::Node {
 
     void NodeString::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJson(j, "canContainSpace", canContainSpace);
-        JsonUtil::toJson(j, "ignoreLater", ignoreLater);
+        JsonUtil::encode(j, "canContainSpace", canContainSpace);
+        JsonUtil::encode(j, "ignoreLater", ignoreLater);
+    }
+
+    void NodeString::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        binaryWriter.encode(canContainSpace);
+        binaryWriter.encode(ignoreLater);
     }
 
     ASTNode NodeString::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -41,10 +55,9 @@ namespace CHelper::Node {
             //后面的所有内容都算作这个字符串
             tokenReader.push();
             tokenReader.skipToLF();
-            VectorView <Token> tokens = tokenReader.collect();
+            VectorView<Token> tokens = tokenReader.collect();
             if (!allowMissingString && TokenUtil::toString(tokens).empty()) {
-                return ASTNode::simpleNode(this, tokens, ErrorReason::incomplete(
-                        tokens, "字符串参数内容为空"));
+                return ASTNode::simpleNode(this, tokens, ErrorReason::incomplete(tokens, "字符串参数内容为空"));
             } else {
                 return ASTNode::simpleNode(this, tokens);
             }
@@ -58,13 +71,11 @@ namespace CHelper::Node {
         }
         tokenReader.pop();
         if (HEDLEY_UNLIKELY(!allowMissingString && result.tokens.isEmpty())) {
-            return ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(
-                    result.tokens, "字符串参数内容为空"));
+            return ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(result.tokens, "字符串参数内容为空"));
         }
         if (HEDLEY_UNLIKELY(!canContainSpace)) {
             if (HEDLEY_UNLIKELY(TokenUtil::toString(result.tokens).find(' ') != std::string::npos)) {
-                return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(
-                        result.tokens, "字符串参数内容不可以包含空格"));
+                return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, "字符串参数内容不可以包含空格"));
             }
             return result;
         }
@@ -80,8 +91,7 @@ namespace CHelper::Node {
             return ASTNode::simpleNode(this, result.tokens, convertResult.errorReason);
         }
         if (HEDLEY_UNLIKELY(!convertResult.isComplete)) {
-            return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(
-                    result.tokens, "字符串参数内容双引号不封闭 -> " + str));
+            return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, "字符串参数内容双引号不封闭 -> " + str));
         }
         return result;
     }
@@ -93,7 +103,7 @@ namespace CHelper::Node {
             return true;
         }
         std::string str = TokenUtil::toString(astNode->tokens)
-                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+                                  .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         if (HEDLEY_UNLIKELY(str.empty())) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
             return true;
@@ -114,4 +124,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or("字符串"));
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

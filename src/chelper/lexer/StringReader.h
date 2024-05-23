@@ -7,8 +7,8 @@
 #ifndef CHELPER_STRINGREADER_H
 #define CHELPER_STRINGREADER_H
 
-#include "pch.h"
 #include "LexerPos.h"
+#include "pch.h"
 
 namespace CHelper {
 
@@ -37,6 +37,6 @@ namespace CHelper {
         [[nodiscard]] std::string collect() const;
     };
 
-}
+}// namespace CHelper
 
-#endif //CHELPER_STRINGREADER_H
+#endif//CHELPER_STRINGREADER_H

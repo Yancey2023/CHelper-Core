@@ -9,7 +9,7 @@ namespace CHelper::Node {
 
     NodeLF::NodeLF(const std::optional<std::string> &id,
                    const std::optional<std::string> &description)
-            : NodeBase(id, description, false) {}
+        : NodeBase(id, description, false) {}
 
     NodeType *NodeLF::getNodeType() const {
         return NodeType::LF.get();
@@ -23,7 +23,7 @@ namespace CHelper::Node {
     ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         tokenReader.skipToLF();
-        VectorView <Token> tokens = tokenReader.collect();
+        VectorView<Token> tokens = tokenReader.collect();
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_UNLIKELY(tokens.hasValue())) {
             errorReason = ErrorReason::excess(tokens, "命令后面有多余部分 -> " + TokenUtil::toString(tokens));
@@ -37,4 +37,4 @@ namespace CHelper::Node {
         structure.append("\n");
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

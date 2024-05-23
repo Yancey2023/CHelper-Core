@@ -3,9 +3,9 @@
 //
 
 #include "NodeBlock.h"
+#include "../../util/TokenUtil.h"
 #include "../util/NodeSingleSymbol.h"
 #include "NodeString.h"
-#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -16,17 +16,24 @@ namespace CHelper::Node {
                          const std::optional<std::string> &description,
                          NodeBlockType::NodeBlockType nodeBlockType,
                          const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
-            : NodeBase(id, description, false),
-              nodeBlockType(nodeBlockType),
-              blockIds(contents),
-              nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", true, contents)) {}
+        : NodeBase(id, description, false),
+          nodeBlockType(nodeBlockType),
+          blockIds(contents),
+          nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", true, contents)) {}
 
     NodeBlock::NodeBlock(const nlohmann::json &j,
-                         const CPack &cpack) :
-            NodeBase(j, true),
-            nodeBlockType(JsonUtil::fromJson<NodeBlockType::NodeBlockType>(j, "nodeBlockType")),
-            blockIds(cpack.blockIds),
-            nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", true, cpack.blockIds)) {}
+                         const CPack &cpack)
+        : NodeBase(j, true),
+          nodeBlockType(JsonUtil::read<NodeBlockType::NodeBlockType>(j, "nodeBlockType")),
+          blockIds(cpack.blockIds),
+          nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", true, cpack.blockIds)) {}
+
+    NodeBlock::NodeBlock(BinaryReader &binaryReader,
+                         const CPack &cpack)
+        : NodeBase(binaryReader),
+          nodeBlockType(static_cast<const NodeBlockType::NodeBlockType>(binaryReader.read<uint8_t>())),
+          blockIds(cpack.blockIds),
+          nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", true, cpack.blockIds)) {}
 
     NodeType *NodeBlock::getNodeType() const {
         return NodeType::BLOCK.get();
@@ -34,7 +41,12 @@ namespace CHelper::Node {
 
     void NodeBlock::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJson(j, "nodeBlockType", nodeBlockType);
+        JsonUtil::encode(j, "nodeBlockType", nodeBlockType);
+    }
+
+    void NodeBlock::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        binaryWriter.encode((uint8_t) nodeBlockType);
     }
 
     ASTNode NodeBlock::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -55,13 +67,12 @@ namespace CHelper::Node {
         size_t strHash = std::hash<std::string>{}(blockIdStr);
         std::shared_ptr<NamespaceId> currentBlock = nullptr;
         for (const auto &item: *blockIds) {
-            if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->idWithNamespace->fastMatch(strHash))) {
+            if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash))) {
                 currentBlock = item;
                 break;
             }
         }
-        auto nodeBlockState = currentBlock == nullptr ? BlockId::getNodeAllBlockState() :
-                              std::static_pointer_cast<BlockId>(currentBlock)->nodeBlockState;
+        auto nodeBlockState = currentBlock == nullptr ? BlockId::getNodeAllBlockState() : std::static_pointer_cast<BlockId>(currentBlock)->getNode().get();
         auto astNodeBlockState = getByChildNode(tokenReader, cpack, nodeBlockState, "blockState");
         return ASTNode::andNode(this, {blockId, astNodeBlockState}, tokenReader.collect(),
                                 nullptr, "blockAndBlockState");
@@ -94,4 +105,4 @@ namespace CHelper::Node {
         }
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

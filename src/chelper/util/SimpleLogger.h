@@ -33,7 +33,7 @@ namespace CHelper::Logger {
 
 #endif
 
-} // CHelper::Logger
+}// namespace CHelper::Logger
 
 #if CHelperLogger == DEBUG
 #define CHELPER_DEBUG(message) CHelper::Logger::debug(message)
@@ -59,4 +59,4 @@ namespace CHelper::Logger {
 #define CHELPER_ERROR(message)
 #endif
 
-#endif //CHELPER_SIMPLELOGGER_H
+#endif//CHELPER_SIMPLELOGGER_H

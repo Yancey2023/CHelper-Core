@@ -148,4 +148,4 @@ namespace CHelper::Lexer {
         return tokenList;
     }
 
-} // CHelper::Lexer
+}// namespace CHelper::Lexer

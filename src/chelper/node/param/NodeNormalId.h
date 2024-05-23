@@ -7,34 +7,28 @@
 #ifndef CHELPER_NODENORMALID_H
 #define CHELPER_NODENORMALID_H
 
-#include "pch.h"
-#include "../NodeBase.h"
-#include "../../resources/id/NormalId.h"
 #include "../../resources/CPack.h"
+#include "../../resources/id/NormalId.h"
+#include "../NodeBase.h"
+#include "pch.h"
 
 namespace CHelper::Node {
 
     class NodeNormalId : public NodeBase {
     public:
-        const std::optional<std::string> key;
-        const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> contents;
-        const bool allowsMissingID;
-        const bool ignoreError;
-        const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> getNormalIdASTNode;
+        std::optional<std::string> key;
+        std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> contents;
+        bool allowsMissingID;
+        bool ignoreError;
+        std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> getNormalIdASTNode;
 
-        NodeNormalId(const std::optional<std::string> &id,
-                     const std::optional<std::string> &description,
-                     const std::optional<std::string> &key,
-                     bool ignoreError,
-                     const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
-                     bool allowsMissingID = false,
-                     const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)>& getNormalIdASTNode =
-                     [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-                         return tokenReader.readStringASTNode(node);
-                     });
+        NodeNormalId(const std::optional<std::string> &id, const std::optional<std::string> &description, const std::optional<std::string> &key, bool ignoreError, const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents, bool allowsMissingID = false, const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode = [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode { return tokenReader.readStringASTNode(node); });
 
         NodeNormalId(const nlohmann::json &j,
                      const CPack &cpack);
+
+        NodeNormalId(BinaryReader &binaryReader,
+                     [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
@@ -52,9 +46,9 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
 
-}
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODENORMALID_H
+#endif//CHELPER_NODENORMALID_H

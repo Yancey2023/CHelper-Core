@@ -17,9 +17,9 @@ namespace CHelper::Node {
                            const std::optional<std::string> &description,
                            std::string key,
                            const std::pair<NodeBase *, NodeBase *> &node)
-            : NodeBase(id, description, true),
-              key(std::move(key)),
-              nodeElement(getNodeElement(node)) {}
+        : NodeBase(id, description, true),
+          key(std::move(key)),
+          nodeElement(getNodeElement(node)) {}
 
     std::pair<Node::NodeBase *, Node::NodeBase *> getNodeFromCPack(const std::string &key,
                                                                    [[maybe_unused]] const CPack &cpack) {
@@ -42,9 +42,15 @@ namespace CHelper::Node {
 
     NodeRepeat::NodeRepeat(const nlohmann::json &j,
                            const CPack &cpack)
-            : NodeBase(j, false),
-              key(JsonUtil::fromJson<std::string>(j, "key")),
-              nodeElement(getNodeElement(getNodeFromCPack(key, cpack))) {}
+        : NodeBase(j, false),
+          key(JsonUtil::read<std::string>(j, "key")),
+          nodeElement(getNodeElement(getNodeFromCPack(key, cpack))) {}
+
+    NodeRepeat::NodeRepeat(BinaryReader &binaryReader,
+                           const CPack &cpack)
+        : NodeBase(binaryReader),
+          key(binaryReader.read<std::string>()),
+          nodeElement(getNodeElement(getNodeFromCPack(key, cpack))) {}
 
     NodeType *NodeRepeat::getNodeType() const {
         return NodeType::REPEAT.get();
@@ -52,7 +58,12 @@ namespace CHelper::Node {
 
     void NodeRepeat::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJson(j, "key", key);
+        JsonUtil::encode(j, "key", key);
+    }
+
+    void NodeRepeat::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        binaryWriter.encode(key);
     }
 
     ASTNode NodeRepeat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -83,7 +94,8 @@ namespace CHelper::Node {
             }
             //获取结构
             const ASTNode &astNode1 = HEDLEY_LIKELY(item.whichBest == 0)
-                                      ? item.getBestNode().getBestNode() : item.getBestNode();
+                                              ? item.getBestNode().getBestNode()
+                                              : item.getBestNode();
             const NodeAnd *node1 = (NodeAnd *) astNode1.node;
             size_t astNodeSize = astNode1.childNodes.size();
             size_t nodeSize = node1->childNodes.size();
@@ -109,4 +121,4 @@ namespace CHelper::Node {
         structure.isDirty = true;
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

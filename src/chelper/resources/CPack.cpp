@@ -3,19 +3,22 @@
 //
 
 #include "CPack.h"
+#include "../node/json/NodeJsonElement.h"
 #include "../node/param/NodeCommand.h"
 #include "../node/param/NodeNormalId.h"
-#include "../node/json/NodeJsonElement.h"
 #include "../node/util/NodeAnd.h"
 
 namespace CHelper {
 
-    CPack::CPack(const std::filesystem::path &path)
-            : manifest(JsonUtil::getJsonFromFile(path / "manifest.json").get<Manifest>()) {
+    CPack::CPack(const std::filesystem::path &path) {
 #if CHelperDebug == true
         size_t stackSize = Profile::stack.size();
 #endif
-        Profile::push(ColorStringBuilder().red("loading id data").build());
+        Profile::push(ColorStringBuilder().red("init codes").build());
+        Node::NodeType::init();
+        Profile::next(ColorStringBuilder().red("loading manifest").build());
+        JsonUtil::getJsonFromFile(path / "manifest.json").get_to<Manifest>(manifest);
+        Profile::next(ColorStringBuilder().red("loading id data").build());
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "id")) {
             Profile::next(ColorStringBuilder()
                                   .red("loading id data in path \"")
@@ -60,12 +63,15 @@ namespace CHelper {
 #endif
     }
 
-    CPack::CPack(const nlohmann::json &j)
-            : manifest(j.at("manifest").get<Manifest>()) {
+    CPack::CPack(const nlohmann::json &j) {
 #if CHelperDebug == true
         size_t stackSize = Profile::stack.size();
 #endif
-        Profile::push(ColorStringBuilder().red("loading id data").build());
+        Profile::push(ColorStringBuilder().red("init codes").build());
+        Node::NodeType::init();
+        Profile::next(ColorStringBuilder().red("loading manifest").build());
+        j.at("manifest").get_to(manifest);
+        Profile::next(ColorStringBuilder().red("loading id data").build());
         for (const auto &item: j.at("id")) {
             applyId(item);
         }
@@ -91,25 +97,101 @@ namespace CHelper {
 #endif
     }
 
+    CPack::CPack(BinaryReader &binaryReader) {
+#if CHelperDebug == true
+        size_t stackSize = Profile::stack.size();
+#endif
+        Profile::push(ColorStringBuilder().red("init codes").build());
+        Node::NodeType::init();
+        Profile::next(ColorStringBuilder().red("loading manifest").build());
+        binaryReader.decode(manifest);
+        Profile::next(ColorStringBuilder().red("loading normal id data").build());
+        binaryReader.decode(normalIds);
+        Profile::next(ColorStringBuilder().red("loading namespace id data").build());
+        binaryReader.decode(namespaceIds);
+        Profile::next(ColorStringBuilder().red("loading item id data").build());
+        binaryReader.decode(itemIds);
+        Profile::next(ColorStringBuilder().red("loading block id data").build());
+        binaryReader.decode(blockIds);
+        Profile::next(ColorStringBuilder().red("loading json data").build());
+        Node::NodeType::canLoadNodeJson = true;
+        size_t jsonNodeSize = binaryReader.readSize();
+        jsonNodes.reserve(jsonNodeSize);
+        for (int i = 0; i < jsonNodeSize; ++i) {
+            jsonNodes.push_back(std::make_unique<Node::NodeJsonElement>(binaryReader, *this));
+        }
+        Node::NodeType::canLoadNodeJson = false;
+        Profile::next(ColorStringBuilder().red("loading repeat data").build());
+        size_t repeatNodeSize = binaryReader.readSize();
+        for (int i = 0; i < repeatNodeSize; ++i) {
+            auto id = binaryReader.read<std::string>();
+            size_t contentSize = binaryReader.readSize();
+            std::vector<const Node::NodeBase *> content;
+            content.reserve(contentSize);
+            for (int j = 0; j < contentSize; ++j) {
+                size_t perContentSize = binaryReader.readSize();
+                std::vector<const Node::NodeBase *> perContent;
+                perContent.reserve(perContentSize);
+                for (int k = 0; k < perContentSize; ++k) {
+                    auto node = Node::NodeBase::getNodeFromBinary(binaryReader, *this);
+                    perContent.push_back(node.get());
+                    repeatNodeData.push_back(std::move(node));
+                }
+                auto node = std::make_unique<Node::NodeAnd>(id, std::nullopt, std::move(perContent));
+                content.push_back(node.get());
+                repeatNodeData.push_back(std::move(node));
+            }
+            size_t breakChildNodeSize = binaryReader.readSize();
+            std::vector<const Node::NodeBase *> breakChildNodes;
+            breakChildNodes.reserve(breakChildNodeSize);
+            for (int j = 0; j < breakChildNodeSize; ++j) {
+                auto node = Node::NodeBase::getNodeFromBinary(binaryReader, *this);
+                breakChildNodes.push_back(node.get());
+                repeatNodeData.push_back(std::move(node));
+            }
+            std::unique_ptr<Node::NodeBase> unBreakNode = std::make_unique<Node::NodeOr>(
+                    id, std::nullopt, std::move(content), false);
+            std::unique_ptr<Node::NodeBase> breakNode = std::make_unique<Node::NodeAnd>(
+                    id, std::nullopt, std::move(breakChildNodes));
+            repeatNodes.emplace_back(unBreakNode.get(), breakNode.get());
+            repeatNodeData.push_back(std::move(unBreakNode));
+            repeatNodeData.push_back(std::move(breakNode));
+        }
+        Profile::next(ColorStringBuilder().red("loading command data").build());
+        size_t commandSize = binaryReader.readSize();
+        commands->reserve(commandSize);
+        for (int i = 0; i < commandSize; ++i) {
+            commands->push_back(std::make_unique<Node::NodePerCommand>(binaryReader, *this));
+        }
+        Profile::next(ColorStringBuilder().red("init cpack").build());
+        afterApply();
+        Profile::pop();
+#if CHelperDebug == true
+        if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
+            CHELPER_WARN("error profile stack after loading cpack");
+        }
+#endif
+    }
+
     CPack::~CPack() {
         delete mainNode;
     }
 
     void CPack::applyId(const nlohmann::json &j) {
-        auto type = JsonUtil::fromJson<std::string>(j, "type");
+        auto type = JsonUtil::read<std::string>(j, "type");
         if (HEDLEY_LIKELY(type == "normal")) {
             auto id = j.at("id").get<std::string>();
             auto content = std::make_shared<std::vector<std::shared_ptr<NormalId>>>();
             const auto &contentJson = j.at("content");
             content->reserve(contentJson.size());
             for (const auto &item: contentJson) {
-//#if CHelperDebug == true
-//                Profile::push(ColorStringBuilder().red("loading id: ").purple(item.at("name")).build());
-//#endif
+                //#if CHelperDebug == true
+                //                Profile::push(ColorStringBuilder().red("loading id: ").purple(item.at("name")).build());
+                //#endif
                 content->push_back(std::make_shared<NormalId>(item));
-//#if CHelperDebug == true
-//                Profile::pop();
-//#endif
+                //#if CHelperDebug == true
+                //                Profile::pop();
+                //#endif
             }
             normalIds.emplace(std::move(id), std::move(content));
         } else if (HEDLEY_LIKELY(type == "namespace")) {
@@ -118,38 +200,38 @@ namespace CHelper {
             const auto &contentJson = j.at("content");
             content->reserve(contentJson.size());
             for (const auto &item: contentJson) {
-//#if CHelperDebug == true
-//                Profile::push(ColorStringBuilder().red("loading id: ").purple(item.at("name")).build());
-//#endif
+                //#if CHelperDebug == true
+                //                Profile::push(ColorStringBuilder().red("loading id: ").purple(item.at("name")).build());
+                //#endif
                 content->push_back(std::make_shared<NamespaceId>(item));
-//#if CHelperDebug == true
-//                Profile::pop();
-//#endif
+                //#if CHelperDebug == true
+                //                Profile::pop();
+                //#endif
             }
             namespaceIds.emplace(std::move(id), std::move(content));
         } else if (HEDLEY_LIKELY(type == "block")) {
             const auto &blocksJson = j.at("blocks");
             blockIds->reserve(blockIds->size() + blocksJson.size());
             for (const auto &item: blocksJson) {
-//#if CHelperDebug == true
-//                Profile::push(ColorStringBuilder().red("loading id: ").purple(item.at("name")).build());
-//#endif
+                //#if CHelperDebug == true
+                //                Profile::push(ColorStringBuilder().red("loading id: ").purple(item.at("name")).build());
+                //#endif
                 blockIds->push_back(std::make_shared<BlockId>(item));
-//#if CHelperDebug == true
-//                Profile::pop();
-//#endif
+                //#if CHelperDebug == true
+                //                Profile::pop();
+                //#endif
             }
         } else if (HEDLEY_LIKELY(type == "item")) {
             const auto &itemsJson = j.at("items");
             itemIds->reserve(itemIds->size() + itemsJson.size());
             for (const auto &item: itemsJson) {
-//#if CHelperDebug == true
-//                Profile::push(ColorStringBuilder().red("loading id: ").purple(item.at("name")).build());
-//#endif
+                //#if CHelperDebug == true
+                //                Profile::push(ColorStringBuilder().red("loading id: ").purple(item.at("name")).build());
+                //#endif
                 itemIds->push_back(std::make_shared<ItemId>(item));
-//#if CHelperDebug == true
-//                Profile::pop();
-//#endif
+                //#if CHelperDebug == true
+                //                Profile::pop();
+                //#endif
             }
         } else {
             throw Exception::UnknownIdType(type);
@@ -164,11 +246,12 @@ namespace CHelper {
 
     void CPack::applyRepeat(const nlohmann::json &j) {
         Profile::push(ColorStringBuilder().red("loading repeat data id").build());
-        auto id = JsonUtil::fromJson<std::string>(j, "id");
+        auto id = JsonUtil::read<std::string>(j, "id");
         Profile::next(ColorStringBuilder().red("loading contents").build());
         std::vector<const Node::NodeBase *> content;
-        for (const auto &item: j.at("content")) {
-            std::vector<std::unique_ptr<Node::NodeBase>> perContentData;
+        const nlohmann::json &jsonContent = j.at("content");
+        content.reserve(jsonContent.size());
+        for (const auto &item: jsonContent) {
             std::vector<const Node::NodeBase *> perContent;
             for (const auto &item2: item) {
                 auto node = Node::NodeBase::getNodeFromJson(item2, *this);
@@ -180,7 +263,9 @@ namespace CHelper {
             repeatNodeData.push_back(std::move(node));
         }
         std::vector<const Node::NodeBase *> breakChildNodes;
-        for (const auto &item: j.at("break")) {
+        const nlohmann::json &jsonBreak = j.at("break");
+        breakChildNodes.reserve(jsonBreak.size());
+        for (const auto &item: jsonBreak) {
             auto node = Node::NodeBase::getNodeFromJson(item, *this);
             breakChildNodes.push_back(node.get());
             repeatNodeData.push_back(std::move(node));
@@ -218,6 +303,13 @@ namespace CHelper {
     std::unique_ptr<CPack> CPack::createByJson(const nlohmann::json &j) {
         Profile::push(ColorStringBuilder().red("start load CPack by JSON").build());
         std::unique_ptr<CPack> cpack = std::make_unique<CPack>(j);
+        Profile::pop();
+        return cpack;
+    }
+
+    std::unique_ptr<CPack> CPack::createByBinary(BinaryReader &binaryReader) {
+        Profile::push(ColorStringBuilder().red("start load CPack by binary").build());
+        std::unique_ptr<CPack> cpack = std::make_unique<CPack>(binaryReader);
         Profile::pop();
         return cpack;
     }
@@ -279,8 +371,7 @@ namespace CHelper {
         for (const auto &item: *commands) {
             JsonUtil::writeJsonToFile(
                     path / "command" / (((Node::NodePerCommand *) item.get())->name[0] + ".json"),
-                    item
-            );
+                    item);
         }
     }
 
@@ -353,13 +444,46 @@ namespace CHelper {
         JsonUtil::writeBsonToFile(path, toJson());
     }
 
-//    void CPack::writeBinToFile(const std::ostream &ostream) const {
-//        manifest.writeBinToFile(ostream);
-//        writeBinToFile(ostream)
-//        for (const auto &item: normalIds) {
-//
-//        }
-//    }
+    void CPack::writeBinToFile(const std::filesystem::path &path) const {
+        std::filesystem::create_directories(path.parent_path());
+        Profile::push(ColorStringBuilder()
+                              .red("writing binary cpack to file: ")
+                              .purple(path.string())
+                              .build());
+        std::ofstream f(path, std::ios::binary);
+        BinaryWriter binaryWriter(true, f);
+
+        //manifest
+        binaryWriter.encode(manifest);
+        //normal id
+        binaryWriter.encode(normalIds);
+        //namespace id
+        binaryWriter.encode(namespaceIds);
+        //item id
+        binaryWriter.encode(itemIds);
+        //block id
+        binaryWriter.encode(blockIds);
+        //json node
+        binaryWriter.encode(jsonNodes);
+        //repeat node
+        binaryWriter.encodeSize(repeatNodes.size());
+        for (const auto &item: repeatNodes) {
+            //id
+            binaryWriter.encode(item.first->id.value());
+            //content
+            binaryWriter.encodeSize(((Node::NodeOr *) item.first)->childNodes.size());
+            for (const auto &item2: ((Node::NodeOr *) item.first)->childNodes) {
+                binaryWriter.encode(((Node::NodeAnd *) item2)->childNodes);
+            }
+            //break
+            binaryWriter.encode(((Node::NodeAnd *) item.second)->childNodes);
+        }
+        //command
+        binaryWriter.encode(*commands);
+
+        f.close();
+        Profile::pop();
+    }
 
     std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
     CPack::getNormalId(const std::string &key) const {
@@ -385,5 +509,4 @@ namespace CHelper {
         return it->second;
     }
 
-} // CHelper
-
+}// namespace CHelper

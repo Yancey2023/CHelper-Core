@@ -7,8 +7,8 @@
 #ifndef CHELPER_NODETEXT_H
 #define CHELPER_NODETEXT_H
 
-#include "../NodeBase.h"
 #include "../../resources/id/NamespaceId.h"
+#include "../NodeBase.h"
 
 namespace CHelper::Node {
 
@@ -17,15 +17,12 @@ namespace CHelper::Node {
         const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> getTextASTNode;
 
     public:
-        NodeText(const std::optional<std::string> &id,
-                 const std::optional<std::string> &description,
-                 const std::shared_ptr<NormalId> &data,
-                 const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)>& getTextASTNode =
-                 [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-                     return tokenReader.readStringASTNode(node);
-                 });
+        NodeText(const std::optional<std::string> &id, const std::optional<std::string> &description, const std::shared_ptr<NormalId> &data, const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getTextASTNode = [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode { return tokenReader.readStringASTNode(node); });
 
         NodeText(const nlohmann::json &j,
+                 [[maybe_unused]] const CPack &cpack);
+
+        NodeText(BinaryReader &binaryReader,
                  [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType *getNodeType() const override;
@@ -41,8 +38,8 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODETEXT_H
+#endif//CHELPER_NODETEXT_H

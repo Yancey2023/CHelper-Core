@@ -26,10 +26,9 @@ namespace CHelper::Node {
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
                                 std::vector<Suggestions> &suggestions) const override;
-
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
 
-#endif //CHELPER_NODESINGLESYMBOL_H
+#endif//CHELPER_NODESINGLESYMBOL_H

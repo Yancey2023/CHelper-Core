@@ -3,13 +3,13 @@
 //
 
 #include "NodeJsonElement.h"
-#include "NodeJsonObject.h"
-#include "NodeJsonList.h"
-#include "NodeJsonString.h"
-#include "NodeJsonInteger.h"
-#include "NodeJsonFloat.h"
-#include "NodeJsonNull.h"
 #include "NodeJsonBoolean.h"
+#include "NodeJsonFloat.h"
+#include "NodeJsonInteger.h"
+#include "NodeJsonList.h"
+#include "NodeJsonNull.h"
+#include "NodeJsonObject.h"
+#include "NodeJsonString.h"
 
 namespace CHelper::Node {
 
@@ -17,23 +17,26 @@ namespace CHelper::Node {
                                      const std::optional<std::string> &description,
                                      std::vector<std::unique_ptr<NodeBase>> nodes,
                                      NodeBase *start)
-            : NodeBase(id, description, false),
-              nodes(std::move(nodes)),
-              start(start) {}
+        : NodeBase(id, description, false),
+          nodes(std::move(nodes)),
+          start(start) {}
 
     NodeJsonElement::NodeJsonElement(const nlohmann::json &j,
                                      [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j, false) {
+        : NodeBase(JsonUtil::read<std::string>(j, "id"),
+                   std::nullopt, false) {
         if (HEDLEY_UNLIKELY(!id.has_value())) {
             Profile::push("dismiss json data id");
             throw Exception::NodeLoadFailed();
         }
         Profile::push(ColorStringBuilder().red("loading nodes").build());
-        for (const auto &item: j.at("node")) {
+        const nlohmann::json &jsonNode = j.at("node");
+        nodes.reserve(jsonNode.size());
+        for (const auto &item: jsonNode) {
             nodes.push_back(getNodeFromJson(item, cpack));
         }
         Profile::next(ColorStringBuilder().red("loading start nodes").build());
-        auto startNodeId = JsonUtil::fromJson<std::string>(j, "start");
+        auto startNodeId = JsonUtil::read<std::string>(j, "start");
         Profile::next(ColorStringBuilder()
                               .red("linking startNode \"")
                               .purple(startNodeId)
@@ -62,10 +65,48 @@ namespace CHelper::Node {
         Profile::pop();
     }
 
+    NodeJsonElement::NodeJsonElement(BinaryReader &binaryReader,
+                                     [[maybe_unused]] const CPack &cpack)
+        : NodeBase(binaryReader.read<std::string>(),
+                   std::nullopt, false) {
+        size_t nodeSize = binaryReader.readSize();
+        nodes.reserve(nodeSize);
+        for (int i = 0; i < nodeSize; ++i) {
+            nodes.push_back(getNodeFromBinary(binaryReader, cpack));
+        }
+        auto startNodeId = binaryReader.read<std::string>();
+        if (HEDLEY_LIKELY(startNodeId != "LF")) {
+            for (auto &node: nodes) {
+                if (HEDLEY_UNLIKELY(node->id == startNodeId)) {
+                    start = node.get();
+                    break;
+                }
+            }
+        }
+        if (HEDLEY_UNLIKELY(start == nullptr)) {
+            throw Exception::UnknownNodeId(startNodeId, id.value());
+        }
+        for (const auto &item: nodes) {
+            if (HEDLEY_UNLIKELY(item->getNodeType() == NodeType::JSON_LIST.get())) {
+                ((NodeJsonList *) item.get())->init(nodes);
+            } else if (HEDLEY_UNLIKELY(item->getNodeType() == NodeType::JSON_OBJECT.get())) {
+                for (const auto &item2: ((NodeJsonObject *) item.get())->data) {
+                    ((NodeJsonEntry *) item2.get())->init(nodes);
+                }
+            }
+        }
+    }
+
     void NodeJsonElement::toJson(nlohmann::json &j) const {
-        JsonUtil::toJson(j, "id", id.value());
-        JsonUtil::toJson(j, "node", nodes);
-        JsonUtil::toJson(j, "start", start->id.value());
+        JsonUtil::encode(j, "id", id.value());
+        JsonUtil::encode(j, "node", nodes);
+        JsonUtil::encode(j, "start", start->id.value());
+    }
+
+    void NodeJsonElement::writeBinToFile(BinaryWriter &binaryWriter) const {
+        binaryWriter.encode(id.value());
+        binaryWriter.encode(nodes);
+        binaryWriter.encode(start->id.value());
     }
 
     ASTNode NodeJsonElement::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -88,11 +129,9 @@ namespace CHelper::Node {
         static std::unique_ptr<NodeBase> jsonObject = std::make_unique<NodeJsonObject>(
                 "JSON_OBJECT", "JSON对象");
         static std::unique_ptr<NodeBase> jsonElement = std::make_unique<NodeOr>(
-                "JSON_ELEMENT", "JSON元素", std::vector<const NodeBase *>{
-                        jsonBoolean.get(), jsonFloat.get(), jsonInteger.get(), jsonNull.get(),
-                        jsonString.get(), jsonList.get(), jsonObject.get()}, false, false,
+                "JSON_ELEMENT", "JSON元素", std::vector<const NodeBase *>{jsonBoolean.get(), jsonFloat.get(), jsonInteger.get(), jsonNull.get(), jsonString.get(), jsonList.get(), jsonObject.get()}, false, false,
                 true, "类型不匹配，当前内容不是有效的JSON元素");
         return jsonElement.get();
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

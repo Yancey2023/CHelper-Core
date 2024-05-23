@@ -11,21 +11,25 @@ namespace CHelper::Node {
                        const std::optional<std::string> &description,
                        const std::shared_ptr<NormalId> &data,
                        const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getTextASTNode)
-            : NodeBase(id, description, false),
-              data(data),
-              getTextASTNode(getTextASTNode) {}
-
-    static std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)>
-    readTextASTNode(const nlohmann::json &j) {
-        return TokenReader::getReadTokenMethod(
-                JsonUtil::fromJsonOptionalUnlikely<std::vector<std::string>>(j, "tokenTypes"));
-    }
+        : NodeBase(id, description, false),
+          data(data),
+          getTextASTNode(getTextASTNode) {}
 
     NodeText::NodeText(const nlohmann::json &j,
                        [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j, true),
-              data(std::make_shared<NormalId>(j.at("data"))),
-              getTextASTNode(readTextASTNode(j)) {}
+        : NodeBase(j, true),
+          data(std::make_shared<NormalId>(j.at("data"))),
+          getTextASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
+              return tokenReader.readUntilWhitespace(node);
+          }) {}
+
+    NodeText::NodeText(BinaryReader &binaryReader,
+                       [[maybe_unused]] const CPack &cpack)
+        : NodeBase(binaryReader),
+          data(binaryReader.read<std::shared_ptr<NormalId>>()),
+          getTextASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
+              return tokenReader.readUntilWhitespace(node);
+          }) {}
 
     NodeType *NodeText::getNodeType() const {
         return NodeType::TEXT.get();
@@ -33,7 +37,12 @@ namespace CHelper::Node {
 
     void NodeText::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJson(j, "data", data);
+        JsonUtil::encode(j, "data", data);
+    }
+
+    void NodeText::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        binaryWriter.encode(data);
     }
 
     ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -42,13 +51,11 @@ namespace CHelper::Node {
         DEBUG_GET_NODE_END(this)
         std::string str = TokenUtil::toString(result.tokens);
         if (HEDLEY_UNLIKELY(str != data->name)) {
-            VectorView <Token> tokens = result.tokens;
+            VectorView<Token> tokens = result.tokens;
             if (HEDLEY_UNLIKELY(str.empty())) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
-                        tokens, "命令不完整"));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, "命令不完整"));
             } else {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(
-                        tokens, "找不到含义 -> " + std::move(str)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, "找不到含义 -> " + std::move(str)));
             }
         }
         return result;
@@ -58,7 +65,7 @@ namespace CHelper::Node {
                                       size_t index,
                                       std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
-                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+                                  .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         //通过名字进行搜索
         size_t index1 = data->name.find(str);
         if (HEDLEY_LIKELY(index1 != std::string::npos)) {
@@ -81,4 +88,4 @@ namespace CHelper::Node {
         structure.appendWhiteSpace().append(data->name);
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

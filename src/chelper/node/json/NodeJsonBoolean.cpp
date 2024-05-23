@@ -11,15 +11,22 @@ namespace CHelper::Node {
                                      const std::optional<std::string> &description,
                                      const std::optional<std::string> &descriptionTrue,
                                      const std::optional<std::string> &descriptionFalse)
-            : NodeBase(id, description, false),
-              descriptionTrue(descriptionTrue),
-              descriptionFalse(descriptionFalse) {}
+        : NodeBase(id, description, false),
+          descriptionTrue(descriptionTrue),
+          descriptionFalse(descriptionFalse) {}
 
     NodeJsonBoolean::NodeJsonBoolean(const nlohmann::json &j,
                                      [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j, false),
-              descriptionTrue(JsonUtil::fromJsonOptionalLikely<std::string>(j, "descriptionTrue")),
-              descriptionFalse(JsonUtil::fromJsonOptionalLikely<std::string>(j, "descriptionFalse")) {}
+        : NodeBase(j, false),
+          descriptionTrue(JsonUtil::read<std::string>(j, "descriptionTrue")),
+          descriptionFalse(JsonUtil::read<std::string>(j, "descriptionFalse")) {}
+
+    NodeJsonBoolean::NodeJsonBoolean(BinaryReader &binaryReader,
+                                     [[maybe_unused]] const CPack &cpack)
+        : NodeBase(binaryReader) {
+        descriptionTrue = binaryReader.read<std::optional<std::string>>();
+        descriptionFalse = binaryReader.read<std::optional<std::string>>();
+    }
 
     NodeType *NodeJsonBoolean::getNodeType() const {
         return NodeType::JSON_BOOLEAN.get();
@@ -27,8 +34,14 @@ namespace CHelper::Node {
 
     void NodeJsonBoolean::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJsonOptionalLikely(j, "descriptionTrue", descriptionTrue);
-        JsonUtil::toJsonOptionalLikely(j, "descriptionFalse", descriptionFalse);
+        JsonUtil::encode(j, "descriptionTrue", descriptionTrue);
+        JsonUtil::encode(j, "descriptionFalse", descriptionFalse);
+    }
+
+    void NodeJsonBoolean::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        binaryWriter.encode(descriptionTrue);
+        binaryWriter.encode(descriptionFalse);
     }
 
     ASTNode NodeJsonBoolean::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -37,28 +50,31 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(str == "true" || str == "false")) {
             return astNode;
         }
-        VectorView <Token> tokens = astNode.tokens;
-        return ASTNode::andNode(this, {std::move(astNode)}, tokens, ErrorReason::contentError(
-                tokens, "内容不匹配，应该为布尔值，但当前内容为" + str));
+        VectorView<Token> tokens = astNode.tokens;
+        return ASTNode::andNode(this, {std::move(astNode)}, tokens, ErrorReason::contentError(tokens, "内容不匹配，应该为布尔值，但当前内容为" + str));
     }
 
     bool NodeJsonBoolean::collectSuggestions(const ASTNode *astNode,
                                              size_t index,
                                              std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
-                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+                                  .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         Suggestions suggestions1;
         if (HEDLEY_UNLIKELY(std::string("true").find(str) != std::string::npos)) {
-            suggestions1.suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(
-                    "true", descriptionTrue));
+            std::shared_ptr<NormalId> id;
+            id->name = "true";
+            id->description = descriptionTrue;
+            suggestions1.suggestions.emplace_back(astNode->tokens, std::move(id));
         }
         if (HEDLEY_UNLIKELY(std::string("false").find(str) != std::string::npos)) {
-            suggestions1.suggestions.emplace_back(astNode->tokens, std::make_shared<NormalId>(
-                    "false", descriptionFalse));
+            std::shared_ptr<NormalId> id;
+            id->name = "false";
+            id->description = descriptionFalse;
+            suggestions1.suggestions.emplace_back(astNode->tokens, std::move(id));
         }
         suggestions1.markFiltered();
         suggestions.push_back(std::move(suggestions1));
         return true;
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

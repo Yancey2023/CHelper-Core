@@ -19,6 +19,6 @@ namespace CHelper::Node {
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEHASPERMISSIONARGUMENT_H
+#endif//CHELPER_NODEHASPERMISSIONARGUMENT_H

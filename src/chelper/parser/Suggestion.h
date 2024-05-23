@@ -7,9 +7,9 @@
 #ifndef CHELPER_SUGGESTION_H
 #define CHELPER_SUGGESTION_H
 
-#include "../util/VectorView.h"
-#include "../resources/id/NormalId.h"
 #include "../lexer/Token.h"
+#include "../resources/id/NormalId.h"
+#include "../util/VectorView.h"
 
 namespace CHelper {
 
@@ -22,13 +22,14 @@ namespace CHelper {
         size_t start, end;
         //内容
         std::shared_ptr<NormalId> content;
+
     private:
         const size_t mHashCode;
 
     public:
         Suggestion(size_t start, size_t end, const std::shared_ptr<NormalId> &content);
 
-        Suggestion(const VectorView <Token> &tokens, const std::shared_ptr<NormalId> &content);
+        Suggestion(const VectorView<Token> &tokens, const std::shared_ptr<NormalId> &content);
 
         [[nodiscard]] std::string onClick(Core *core, const std::string &before) const;
 
@@ -39,9 +40,8 @@ namespace CHelper {
         [[nodiscard]] bool equal(const Suggestion &suggestion) const {
             return mHashCode == suggestion.mHashCode;
         }
-
     };
 
-} // CHelper
+}// namespace CHelper
 
-#endif //CHELPER_SUGGESTION_H
+#endif//CHELPER_SUGGESTION_H

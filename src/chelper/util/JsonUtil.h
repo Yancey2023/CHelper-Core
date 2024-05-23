@@ -23,7 +23,6 @@ namespace CHelper {
             bool isComplete = false;
 
             size_t convert(size_t index);
-
         };
 
         std::string string2jsonString(const std::string &input);
@@ -31,39 +30,36 @@ namespace CHelper {
         ConvertResult jsonString2String(const std::string &input);
 
         template<class T>
-        T fromJson(const nlohmann::json &json, const std::string &key) {
-            return json.at(key).get<T>();
-        }
-
-        template<class T>
-        std::optional<T> fromJsonOptionalLikely(const nlohmann::json &json, const std::string &key) {
-            const auto &it = json.find(key);
-            return HEDLEY_LIKELY(it != json.end()) ? std::optional(it->get<T>()) : std::nullopt;
-        }
-
-        template<class T>
-        std::optional<T> fromJsonOptionalUnlikely(const nlohmann::json &json, const std::string &key) {
-            const auto &it = json.find(key);
-            return HEDLEY_UNLIKELY(it != json.end()) ? std::optional(it->get<T>()) : std::nullopt;
-        }
-
-        template<class T>
-        void toJson(nlohmann::json &json, const std::string &key, const T &data) {
+        void encode(nlohmann::json &json, const std::string &key, const T &data) {
             json[key] = data;
         }
 
         template<class T>
-        void toJsonOptionalLikely(nlohmann::json &json, const std::string &key, const std::optional<T> &data) {
+        void encode(nlohmann::json &json, const std::string &key, const std::optional<T> &data) {
             if (HEDLEY_LIKELY(data.has_value())) {
                 json[key] = data.value();
             }
         }
 
         template<class T>
-        void toJsonOptionalUnlikely(nlohmann::json &json, const std::string &key, const std::optional<T> &data) {
-            if (HEDLEY_UNLIKELY(data.has_value())) {
-                json[key] = data.value();
+        void decode(const nlohmann::json &json, const std::string &key, T &t) {
+            json.at(key).get_to(t);
+        }
+
+        template<class T>
+        void decode(const nlohmann::json &json, const std::string &key, std::optional<T> &t) {
+            const auto &it = json.find(key);
+            if (HEDLEY_LIKELY(it != json.end())) {
+                t = std::make_optional<T>();
+                it->get_to(t.value());
             }
+        }
+
+        template<class T>
+        T read(const nlohmann::json &json, const std::string &key) {
+            T t;
+            decode(json, key, t);
+            return t;
         }
 
         nlohmann::json getJsonFromFile(const std::filesystem::path &path);
@@ -74,8 +70,75 @@ namespace CHelper {
 
         void writeBsonToFile(const std::filesystem::path &path, const nlohmann::json &j);
 
-    } // JsonUtil
+    }// namespace JsonUtil
 
-} // CHelper
+    template<typename T>
+    void from_json(nlohmann::json &j, const std::shared_ptr<T> &t) {
+        t = std::make_shared<T>();
+        from_json(j, *t);
+    }
 
-#endif //CHELPER_JSONUTIL_H
+    template<typename T>
+    void to_json(nlohmann::json &j, const std::shared_ptr<T> &t) {
+        to_json(j, *t);
+    }
+
+    template<typename T>
+    void from_json(nlohmann::json &j, const std::unique_ptr<T> &t) {
+        t = std::make_unique<T>();
+        from_json(j, *t);
+    }
+
+    template<typename T>
+    void to_json(nlohmann::json &j, const std::unique_ptr<T> &t) {
+        to_json(j, *t);
+    }
+
+    template<typename T>
+    void to_json(nlohmann::json &j, const std::weak_ptr<T> &t) {
+        to_json(j, *t);
+    }
+
+    template<typename T>
+    void to_json(nlohmann::json &j, const T *t) {
+        to_json(j, *t);
+    }
+
+    namespace Node {
+
+        template<typename T>
+        void from_json(nlohmann::json &j, const std::shared_ptr<T> &t) {
+            t = std::make_shared<T>();
+            from_json(j, *t);
+        }
+
+        template<typename T>
+        void to_json(nlohmann::json &j, const std::shared_ptr<T> &t) {
+            to_json(j, *t);
+        }
+
+        template<typename T>
+        void from_json(nlohmann::json &j, const std::unique_ptr<T> &t) {
+            t = std::make_unique<T>();
+            from_json(j, *t);
+        }
+
+        template<typename T>
+        void to_json(nlohmann::json &j, const std::unique_ptr<T> &t) {
+            to_json(j, *t);
+        }
+
+        template<typename T>
+        void to_json(nlohmann::json &j, const std::weak_ptr<T> &t) {
+            to_json(j, *t);
+        }
+
+        template<typename T>
+        void to_json(nlohmann::json &j, const T *t) {
+            to_json(j, *t);
+        }
+    }// namespace Node
+
+}// namespace CHelper
+
+#endif//CHELPER_JSONUTIL_H

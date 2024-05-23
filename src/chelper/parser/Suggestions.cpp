@@ -54,11 +54,10 @@ namespace CHelper {
         for (auto &item: suggestions) {
             item.filter();
             if (HEDLEY_LIKELY(
-                    std::all_of(filteredSuggestions.begin(), filteredSuggestions.end(),
-                                [&item](Suggestions &item2) {
-                                    return item.hashCode() != item2.hashCode();
-                                }))
-                    ) {
+                        std::all_of(filteredSuggestions.begin(), filteredSuggestions.end(),
+                                    [&item](Suggestions &item2) {
+                                        return item.hashCode() != item2.hashCode();
+                                    }))) {
                 filteredSuggestions.push_back(item);
             }
         }
@@ -77,4 +76,4 @@ namespace CHelper {
         return result;
     }
 
-} // CHelper
+}// namespace CHelper

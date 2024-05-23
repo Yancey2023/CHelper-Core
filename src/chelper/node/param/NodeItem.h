@@ -13,7 +13,7 @@
 namespace CHelper::Node {
 
     namespace NodeItemType {
-        enum NodeItemType : std::uint8_t {
+        enum NodeItemType : uint8_t {
             // <物品ID> <物品数量> <附加值> [物品组件]
             ITEM_GIVE = 0,
             // <物品ID> <附加值> <物品数量>
@@ -37,6 +37,9 @@ namespace CHelper::Node {
         NodeItem(const nlohmann::json &j,
                  const CPack &cpack);
 
+        NodeItem(BinaryReader &binaryReader,
+                 [[maybe_unused]] const CPack &cpack);
+
         [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
@@ -51,9 +54,9 @@ namespace CHelper::Node {
 
         static NodeNamespaceId
         getNodeItemId(const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
-
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEITEM_H
+#endif//CHELPER_NODEITEM_H

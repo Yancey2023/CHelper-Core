@@ -3,31 +3,31 @@
 //
 
 #include "Suggestion.h"
+#include "../Core.h"
 #include "../util/TokenUtil.h"
 #include "Parser.h"
-#include "../Core.h"
 
 namespace CHelper {
 
     Suggestion::Suggestion(size_t start,
                            size_t end,
                            const std::shared_ptr<NormalId> &content)
-            : start(start),
-              end(end),
-              content(content),
-              mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
+        : start(start),
+          end(end),
+          content(content),
+          mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
 
-    Suggestion::Suggestion(const VectorView <Token> &tokens,
+    Suggestion::Suggestion(const VectorView<Token> &tokens,
                            const std::shared_ptr<NormalId> &content)
-            : start(TokenUtil::getStartIndex(tokens)),
-              end(TokenUtil::getEndIndex(tokens)),
-              content(content),
-              mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
+        : start(TokenUtil::getStartIndex(tokens)),
+          end(TokenUtil::getEndIndex(tokens)),
+          content(content),
+          mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
 
     std::string Suggestion::onClick(Core *core, const std::string &before) const {
         std::string result = before.substr(0, start)
-                .append(content->name)
-                .append(before.substr(end));
+                                     .append(content->name)
+                                     .append(before.substr(end));
         if (HEDLEY_UNLIKELY(end != before.length())) {
             return std::move(result);
         }
@@ -39,4 +39,4 @@ namespace CHelper {
         return std::move(result);
     }
 
-} // CHelper
+}// namespace CHelper

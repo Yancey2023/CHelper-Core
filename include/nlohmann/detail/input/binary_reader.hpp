@@ -2166,7 +2166,7 @@ class binary_reader
                 }
                 if (!dim.empty())  // if ndarray, convert to an object in JData annotated array format
                 {
-                    for (auto i : dim) // test if any dimension in an ndarray is 0, if so, return a 1D empty container
+                    for (auto i : dim) // testDir if any dimension in an ndarray is 0, if so, return a 1D empty container
                     {
                         if ( i == 0 )
                         {

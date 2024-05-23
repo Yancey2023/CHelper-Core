@@ -11,10 +11,10 @@ namespace CHelper::Node {
                          const NodeBase *nodeKey,
                          const NodeBase *nodeSeparator,
                          const NodeBase *nodeValue)
-            : NodeBase(id, description, false),
-              nodeKey(nodeKey),
-              nodeSeparator(nodeSeparator),
-              nodeValue(nodeValue) {}
+        : NodeBase(id, description, false),
+          nodeKey(nodeKey),
+          nodeSeparator(nodeSeparator),
+          nodeValue(nodeValue) {}
 
     ASTNode NodeEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
@@ -39,4 +39,4 @@ namespace CHelper::Node {
         return std::nullopt;
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

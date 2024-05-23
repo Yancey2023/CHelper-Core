@@ -3,37 +3,43 @@
 //
 
 #include "NodeItem.h"
-#include "NodeNamespaceId.h"
-#include "NodeInteger.h"
-#include "NodeString.h"
-#include "NodeJson.h"
 #include "../../util/TokenUtil.h"
+#include "NodeInteger.h"
+#include "NodeJson.h"
+#include "NodeNamespaceId.h"
+#include "NodeString.h"
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NodeBase> nodeCount = std::make_shared<NodeInteger>
-            ("ITEM_COUNT", "物品数量", 0, std::nullopt);
-    static std::shared_ptr<NodeBase> nodeAllData = std::make_shared<NodeInteger>
-            ("ITEM_DATA", "物品附加值", -1, std::nullopt);
+    static std::shared_ptr<NodeBase> nodeCount = std::make_shared<NodeInteger>("ITEM_COUNT", "物品数量", 0, std::nullopt);
+    static std::shared_ptr<NodeBase> nodeAllData = std::make_shared<NodeInteger>("ITEM_DATA", "物品附加值", -1, std::nullopt);
 
     NodeItem::NodeItem(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
                        const CHelper::Node::NodeItemType::NodeItemType nodeItemType,
                        const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents,
                        const std::shared_ptr<NodeBase> &nodeComponent)
-            : NodeBase(id, description, false),
-              nodeItemType(nodeItemType),
-              itemIds(contents),
-              nodeItemId(getNodeItemId(contents)),
-              nodeComponent(nodeComponent) {}
+        : NodeBase(id, description, false),
+          nodeItemType(nodeItemType),
+          itemIds(contents),
+          nodeItemId(getNodeItemId(contents)),
+          nodeComponent(nodeComponent) {}
 
     NodeItem::NodeItem(const nlohmann::json &j,
-                       const CPack &cpack) :
-            NodeBase(j, true),
-            nodeItemType(JsonUtil::fromJson<CHelper::Node::NodeItemType::NodeItemType>(j, "nodeItemType")),
-            itemIds(cpack.itemIds),
-            nodeItemId(getNodeItemId(cpack.itemIds)),
-            nodeComponent(std::make_shared<NodeJson>("ITEM_COMPONENT", "物品组件", cpack, "components")) {}
+                       const CPack &cpack)
+        : NodeBase(j, true),
+          nodeItemType(JsonUtil::read<CHelper::Node::NodeItemType::NodeItemType>(j, "nodeItemType")),
+          itemIds(cpack.itemIds),
+          nodeItemId(getNodeItemId(cpack.itemIds)),
+          nodeComponent(std::make_shared<NodeJson>("ITEM_COMPONENT", "物品组件", cpack, "components")) {}
+
+    NodeItem::NodeItem(BinaryReader &binaryReader,
+                       const CPack &cpack)
+        : NodeBase(binaryReader),
+          nodeItemType(static_cast<const NodeItemType::NodeItemType>(binaryReader.read<uint8_t>())),
+          itemIds(cpack.itemIds),
+          nodeItemId(getNodeItemId(cpack.itemIds)),
+          nodeComponent(std::make_shared<NodeJson>("ITEM_COMPONENT", "物品组件", cpack, "components")) {}
 
     NodeType *NodeItem::getNodeType() const {
         return NodeType::ITEM.get();
@@ -41,7 +47,12 @@ namespace CHelper::Node {
 
     void NodeItem::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJson(j, "nodeItemType", nodeItemType);
+        JsonUtil::encode(j, "nodeItemType", nodeItemType);
+    }
+
+    void NodeItem::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        binaryWriter.encode((uint8_t) nodeItemType);
     }
 
     ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -50,14 +61,13 @@ namespace CHelper::Node {
         size_t strHash = std::hash<std::string>{}(TokenUtil::toString(itemId.tokens));
         std::shared_ptr<NamespaceId> currentItem = nullptr;
         for (const auto &item: *itemIds) {
-            if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->idWithNamespace->fastMatch(strHash))) {
+            if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash))) {
                 currentItem = item;
                 break;
             }
         }
         std::vector<ASTNode> childNodes = {std::move(itemId)};
-        const NodeBase *nodeData = currentItem == nullptr ? nodeAllData.get() :
-                                   std::static_pointer_cast<ItemId>(currentItem)->nodeData;
+        const NodeBase *nodeData = currentItem == nullptr ? nodeAllData.get() : std::static_pointer_cast<ItemId>(currentItem)->getNode().get();
         switch (nodeItemType) {
             case NodeItemType::ITEM_GIVE:
                 childNodes.push_back(getOptionalASTNode(tokenReader, cpack, false,
@@ -106,4 +116,4 @@ namespace CHelper::Node {
         return {"ITEM_ID", "物品ID", "items", true, contents};
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

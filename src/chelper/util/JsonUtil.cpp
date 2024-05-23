@@ -100,20 +100,20 @@ namespace CHelper::JsonUtil {
                         break;
                     }
                     if (HEDLEY_UNLIKELY(std::any_of(
-                            escapeSequence.begin(), escapeSequence.end(),
-                            [&result, &stringReader, &escapeSequence](const auto &item) {
-                                if (HEDLEY_LIKELY(std::isxdigit(item))) {
-                                    return false;
-                                } else {
-                                    result.errorReason = ErrorReason::incomplete(
-                                            stringReader.pos.index - escapeSequence.length() - 1,
-                                            stringReader.pos.index + 1,
-                                            FormatUtil::format(
-                                                    "字符串转义出现非法字符{0} -> \\u{1}",
-                                                    item, escapeSequence));
-                                    return true;
-                                }
-                            }))) {
+                                escapeSequence.begin(), escapeSequence.end(),
+                                [&result, &stringReader, &escapeSequence](const auto &item) {
+                                    if (HEDLEY_LIKELY(std::isxdigit(item))) {
+                                        return false;
+                                    } else {
+                                        result.errorReason = ErrorReason::incomplete(
+                                                stringReader.pos.index - escapeSequence.length() - 1,
+                                                stringReader.pos.index + 1,
+                                                FormatUtil::format(
+                                                        "字符串转义出现非法字符{0} -> \\u{1}",
+                                                        item, escapeSequence));
+                                        return true;
+                                    }
+                                }))) {
                         break;
                     }
                     unicodeValue = std::stoi(escapeSequence, nullptr, 16);
@@ -211,4 +211,4 @@ namespace CHelper::JsonUtil {
         Profile::pop();
     }
 
-} // CHelper::JsonUtil
+}// namespace CHelper::JsonUtil

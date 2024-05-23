@@ -16,19 +16,24 @@ namespace CHelper::Node {
     NodeCommand::NodeCommand(const std::optional<std::string> &id,
                              const std::optional<std::string> &description,
                              const std::vector<std::unique_ptr<Node::NodeBase>> *commands)
-            : NodeBase(id, description, false),
-              commands(commands) {}
+        : NodeBase(id, description, false),
+          commands(commands) {}
 
     NodeCommand::NodeCommand(const std::optional<std::string> &id,
                              const std::optional<std::string> &description,
                              [[maybe_unused]] const CPack &cpack)
-            : NodeBase(id, description, false),
-              commands(cpack.commands.get()) {}
+        : NodeBase(id, description, false),
+          commands(cpack.commands.get()) {}
 
     NodeCommand::NodeCommand(const nlohmann::json &j,
                              [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j, true),
-              commands(cpack.commands.get()) {}
+        : NodeBase(j, true),
+          commands(cpack.commands.get()) {}
+
+    NodeCommand::NodeCommand(BinaryReader &binaryReader,
+                             [[maybe_unused]] const CPack &cpack)
+        : NodeBase(binaryReader),
+          commands(cpack.commands.get()) {}
 
     NodeType *NodeCommand::getNodeType() const {
         return NodeType::COMMAND.get();
@@ -43,7 +48,7 @@ namespace CHelper::Node {
         }
         ASTNode commandName = tokenReader.readStringASTNode(this, "commandName");
         if (HEDLEY_UNLIKELY(commandName.tokens.size() == 0)) {
-            VectorView <Token> tokens = tokenReader.collect();
+            VectorView<Token> tokens = tokenReader.collect();
             return ASTNode::andNode(this, {std::move(commandName)}, tokens,
                                     ErrorReason::contentError(tokens, "命令名字为空"), "command");
         }
@@ -66,9 +71,8 @@ namespace CHelper::Node {
             }
         }
         if (HEDLEY_UNLIKELY(currentCommand == nullptr)) {
-            VectorView <Token> tokens = tokenReader.collect();
-            return ASTNode::andNode(this, {std::move(commandName)}, tokens, ErrorReason::contentError(
-                    tokens, FormatUtil::format("命令名字不匹配，找不到名为{0}的命令", str)), "command");
+            VectorView<Token> tokens = tokenReader.collect();
+            return ASTNode::andNode(this, {std::move(commandName)}, tokens, ErrorReason::contentError(tokens, FormatUtil::format("命令名字不匹配，找不到名为{0}的命令", str)), "command");
         }
         ASTNode usage = currentCommand->getASTNode(tokenReader, cpack);
         return ASTNode::andNode(this, {std::move(commandName), std::move(usage)},
@@ -90,7 +94,7 @@ namespace CHelper::Node {
             return false;
         }
         std::string str = TokenUtil::toString(astNode->tokens)
-                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+                                  .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *commands) {
             //通过名字进行搜索
@@ -99,9 +103,9 @@ namespace CHelper::Node {
                 size_t index1 = item2.find(str);
                 if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
                     if (HEDLEY_UNLIKELY(index1 == 0)) {
-                        nameStartOf.push_back(std::make_shared<NormalId>(item2, item->description));
+                        nameStartOf.push_back(NormalId::make(item2, item->description));
                     } else {
-                        nameContain.push_back(std::make_shared<NormalId>(item2, item->description));
+                        nameContain.push_back(NormalId::make(item2, item->description));
                     }
                     flag = true;
                 }
@@ -113,7 +117,7 @@ namespace CHelper::Node {
             if (HEDLEY_UNLIKELY(item->description.has_value() &&
                                 item->description.value().find(str) != std::string::npos)) {
                 for (const auto &item2: ((NodePerCommand *) item.get())->name) {
-                    descriptionContain.push_back(std::make_shared<NormalId>(item2, item->description));
+                    descriptionContain.push_back(NormalId::make(item2, item->description));
                 }
             }
         }
@@ -152,4 +156,4 @@ namespace CHelper::Node {
         }
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

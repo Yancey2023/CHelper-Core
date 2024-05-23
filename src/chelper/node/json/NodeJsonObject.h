@@ -8,9 +8,9 @@
 #define CHELPER_NODEJSONOBJECT_H
 
 #include "../NodeBase.h"
-#include "NodeJsonEntry.h"
-#include "../util/NodeOr.h"
 #include "../util/NodeList.h"
+#include "../util/NodeOr.h"
+#include "NodeJsonEntry.h"
 
 namespace CHelper::Node {
 
@@ -28,14 +28,17 @@ namespace CHelper::Node {
         NodeJsonObject(const nlohmann::json &j,
                        [[maybe_unused]] const CPack &cpack);
 
+        NodeJsonObject(BinaryReader &binaryReader,
+                       [[maybe_unused]] const CPack &cpack);
+
         [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
-
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEJSONOBJECT_H
+#endif//CHELPER_NODEJSONOBJECT_H

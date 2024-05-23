@@ -10,11 +10,10 @@
 namespace CHelper {
 
     Core::Core(std::unique_ptr<CPack> cpack, ASTNode astNode)
-            : cpack(std::move(cpack)),
-              astNode(std::move(astNode)) {}
+        : cpack(std::move(cpack)),
+          astNode(std::move(astNode)) {}
 
     std::shared_ptr<Core> Core::create(const std::function<std::unique_ptr<CPack>()> &getCPack) {
-        Node::NodeType::init();
         try {
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
@@ -23,7 +22,9 @@ namespace CHelper {
             CHELPER_INFO(ColorStringBuilder()
                                  .green("CPack load successfully (")
                                  .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
-                                         end - start).count()) + "ms")
+                                                                end - start)
+                                                                .count()) +
+                                         "ms")
                                  .green(")")
                                  .build());
             ASTNode astNode = Parser::parse("", cPack.get());
@@ -51,6 +52,26 @@ namespace CHelper {
     std::shared_ptr<Core> Core::createByBson(const std::string &cpackPath) {
         return create([&cpackPath]() {
             return CPack::createByJson(JsonUtil::getBsonFromFile(cpackPath));
+        });
+    }
+
+    std::shared_ptr<Core> Core::createByBinary(const std::string &cpackPath) {
+        return create([&cpackPath]() {
+            std::ifstream is(cpackPath, std::ios::binary);
+            if (!is.is_open()) {
+                throw std::runtime_error("fail to read file: " + cpackPath);
+            }
+            BinaryReader binaryReader(true, is);
+            std::unique_ptr<CPack> result = CPack::createByBinary(binaryReader);
+            if (!is.eof()) {
+                char ch;
+                is.read(&ch, 1);
+                if (is.gcount() > 0) {
+                    throw std::runtime_error("file is not read completed: " + cpackPath);
+                }
+            }
+            is.close();
+            return std::move(result);
         });
     }
 
@@ -83,4 +104,4 @@ namespace CHelper {
         return suggestions->at(which).onClick(this, TokenUtil::toString(astNode.tokens));
     }
 
-} // CHelper
+}// namespace CHelper

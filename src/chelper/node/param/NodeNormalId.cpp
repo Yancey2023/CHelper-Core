@@ -4,7 +4,7 @@
 
 #include "NodeNormalId.h"
 
-#include <utility>
+#include "../../lexer/Lexer.h"
 #include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
@@ -16,13 +16,13 @@ namespace CHelper::Node {
             bool ignoreError,
             const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
             bool allowsMissingID,
-            const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)>& getNormalIdASTNode)
-            : NodeBase(id, description, false),
-              key(key),
-              ignoreError(ignoreError),
-              contents(contents),
-              allowsMissingID(allowsMissingID),
-              getNormalIdASTNode(getNormalIdASTNode) {}
+            const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode)
+        : NodeBase(id, description, false),
+          key(key),
+          ignoreError(ignoreError),
+          contents(contents),
+          allowsMissingID(allowsMissingID),
+          getNormalIdASTNode(getNormalIdASTNode) {}
 
     static std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
     getIdContentFromCPack(const nlohmann::json &j,
@@ -54,20 +54,60 @@ namespace CHelper::Node {
         }
     }
 
-    static std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)>
-    readNormalIdASTNode(const nlohmann::json &j) {
-        return TokenReader::getReadTokenMethod(
-                JsonUtil::fromJsonOptionalUnlikely<std::vector<std::string>>(j, "tokenTypes"));
+    static std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
+    getIdContentFromCPack(BinaryReader &binaryReader,
+                          const CPack &cpack,
+                          const std::optional<std::string> &key) {
+        if (HEDLEY_LIKELY(key.has_value())) {
+            auto it = cpack.normalIds.find(key.value());
+            if (HEDLEY_UNLIKELY(it == cpack.normalIds.end())) {
+                Profile::push(ColorStringBuilder()
+                                      .red("linking contents to ")
+                                      .purple(key.value())
+                                      .build());
+                Profile::push(ColorStringBuilder()
+                                      .red("failed to find normal id in the cpack")
+                                      .normal(" -> ")
+                                      .purple(key.value())
+                                      .build());
+                throw Exception::NodeLoadFailed();
+            }
+            return it->second;
+        } else {
+            return binaryReader.read<std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>>();
+        }
     }
 
     NodeNormalId::NodeNormalId(const nlohmann::json &j,
                                const CPack &cpack)
-            : NodeBase(j, true),
-              key(JsonUtil::fromJsonOptionalLikely<std::string>(j, "key")),
-              ignoreError(JsonUtil::fromJson<bool>(j, "ignoreError")),
-              contents(getIdContentFromCPack(j, cpack, key)),
-              allowsMissingID(false),
-              getNormalIdASTNode(readNormalIdASTNode(j)) {}
+        : NodeBase(j, true),
+          key(JsonUtil::read<std::optional<std::string>>(j, "key")),
+          ignoreError(JsonUtil::read<bool>(j, "ignoreError")),
+          contents(getIdContentFromCPack(j, cpack, key)),
+          allowsMissingID(false),
+          getNormalIdASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
+              return tokenReader.readUntilWhitespace(node);
+          }) {}
+
+    NodeNormalId::NodeNormalId(BinaryReader &binaryReader,
+                               const CPack &cpack)
+        : NodeBase(binaryReader) {
+        key = binaryReader.read<std::optional<std::string>>();
+        ignoreError = binaryReader.read<bool>();
+        contents = getIdContentFromCPack(binaryReader, cpack, key);
+        allowsMissingID = false;
+        getNormalIdASTNode = [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
+            return tokenReader.readUntilWhitespace(node);
+        };
+#if CHelperDebug == true
+        for (const auto &item: *contents) {
+            if (item->name.find('\0') != std::string::npos ||
+                item->description.has_value() && item->description->find('\0') != std::string::npos) {
+                throw std::runtime_error("invalid normal id name");
+            }
+        }
+#endif
+    }
 
     NodeType *NodeNormalId::getNodeType() const {
         return NodeType::NORMAL_ID.get();
@@ -75,10 +115,19 @@ namespace CHelper::Node {
 
     void NodeNormalId::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJsonOptionalLikely(j, "key", key);
-        JsonUtil::toJson(j, "ignoreError", ignoreError);
+        JsonUtil::encode(j, "key", key);
+        JsonUtil::encode(j, "ignoreError", ignoreError);
         if (HEDLEY_UNLIKELY(!key.has_value())) {
-            JsonUtil::toJson(j, "contents", *contents);
+            JsonUtil::encode(j, "contents", *contents);
+        }
+    }
+
+    void NodeNormalId::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        binaryWriter.encode(key);
+        binaryWriter.encode(ignoreError);
+        if (HEDLEY_UNLIKELY(!key.has_value())) {
+            binaryWriter.encode(contents);
         }
     }
 
@@ -98,19 +147,17 @@ namespace CHelper::Node {
         }
         tokenReader.pop();
         if (HEDLEY_UNLIKELY(result.tokens.isEmpty())) {
-            VectorView <Token> tokens = result.tokens;
-            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(
-                    tokens, "命令不完整"));
+            VectorView<Token> tokens = result.tokens;
+            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "命令不完整"));
         }
         if (HEDLEY_UNLIKELY(!ignoreError)) {
-            VectorView <Token> tokens = result.tokens;
+            VectorView<Token> tokens = result.tokens;
             std::string str = TokenUtil::toString(tokens);
             size_t strHash = std::hash<std::string>{}(str);
             if (HEDLEY_UNLIKELY(std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
-                return !item->fastMatch(strHash);
-            }))) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(
-                        tokens, "找不到含义 -> " + std::move(str)));
+                    return !item->fastMatch(strHash);
+                }))) {
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "找不到含义 -> " + std::move(str)));
             }
         }
         return result;
@@ -124,8 +171,8 @@ namespace CHelper::Node {
         std::string str = TokenUtil::toString(astNode->tokens);
         size_t strHash = std::hash<std::string>{}(str);
         if (HEDLEY_UNLIKELY(std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
-            return !item->fastMatch(strHash);
-        }))) {
+                return !item->fastMatch(strHash);
+            }))) {
             idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("找不到ID -> ").append(str)));
         }
         return true;
@@ -135,7 +182,7 @@ namespace CHelper::Node {
                                           size_t index,
                                           std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
-                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+                                  .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *contents) {
             //通过名字进行搜索
@@ -150,7 +197,7 @@ namespace CHelper::Node {
             }
             //通过介绍进行搜索
             if (HEDLEY_UNLIKELY(
-                    item->description.has_value() && item->description.value().find(str) != std::string::npos)) {
+                        item->description.has_value() && item->description.value().find(str) != std::string::npos)) {
                 descriptionContain.push_back(item);
             }
         }
@@ -184,4 +231,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or("ID"));
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

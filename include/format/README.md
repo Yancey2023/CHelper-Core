@@ -8,6 +8,6 @@ Usage:
 
 ```c++
 
-std::string test = FormatUtil::format("This is a nice string with numbers {0} and strings {1} nicely formatted", 123, "hello");
-std::string test = FormatUtil::format("{0, 20}", "Formatting is nice!");
+std::string testDir = FormatUtil::format("This is a nice string with numbers {0} and strings {1} nicely formatted", 123, "hello");
+std::string testDir = FormatUtil::format("{0, 20}", "Formatting is nice!");
 ```

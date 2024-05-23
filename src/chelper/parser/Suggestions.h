@@ -15,6 +15,7 @@ namespace CHelper {
     class Suggestions {
     public:
         std::vector<Suggestion> suggestions;
+
     private:
         std::optional<size_t> mHashCode;
 
@@ -36,9 +37,8 @@ namespace CHelper {
         static Suggestions singleSuggestion(Suggestion suggestion);
 
         static std::vector<Suggestion> filter(std::vector<Suggestions> &suggestions);
-
     };
 
-} // CHelper
+}// namespace CHelper
 
-#endif //CHELPER_SUGGESTIONS_H
+#endif//CHELPER_SUGGESTIONS_H

@@ -19,6 +19,9 @@ namespace CHelper::Node {
         NodeXpInteger(const nlohmann::json &j,
                       [[maybe_unused]] const CPack &cpack);
 
+        NodeXpInteger(BinaryReader &binaryReader,
+                      [[maybe_unused]] const CPack &cpack);
+
         [[nodiscard]] NodeType *getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
@@ -26,9 +29,8 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEXPINTEGER_H
+#endif//CHELPER_NODEXPINTEGER_H

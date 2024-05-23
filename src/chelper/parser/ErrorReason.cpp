@@ -11,24 +11,24 @@ namespace CHelper {
 
         ErrorReasonLevel maxLevel = ID_ERROR;
 
-    } // ErrorReasonLevel
+    }// namespace ErrorReasonLevel
 
     ErrorReason::ErrorReason(ErrorReasonLevel::ErrorReasonLevel level,
                              size_t start,
                              size_t end,
                              std::string errorReason)
-            : level(level),
-              start(start),
-              end(end),
-              errorReason(std::move(errorReason)) {}
+        : level(level),
+          start(start),
+          end(end),
+          errorReason(std::move(errorReason)) {}
 
     ErrorReason::ErrorReason(ErrorReasonLevel::ErrorReasonLevel level,
-                             const VectorView <Token> &tokens,
+                             const VectorView<Token> &tokens,
                              std::string errorReason)
-            : level(level),
-              start(TokenUtil::getStartIndex(tokens)),
-              end(TokenUtil::getEndIndex(tokens)),
-              errorReason(std::move(errorReason)) {}
+        : level(level),
+          start(TokenUtil::getStartIndex(tokens)),
+          end(TokenUtil::getEndIndex(tokens)),
+          errorReason(std::move(errorReason)) {}
 
     bool ErrorReason::operator==(const ErrorReason &reason) const {
         return start == reason.start &&
@@ -36,5 +36,4 @@ namespace CHelper {
                errorReason == reason.errorReason;
     }
 
-} // CHelper
-
+}// namespace CHelper

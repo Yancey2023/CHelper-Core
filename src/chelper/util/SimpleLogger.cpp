@@ -9,7 +9,7 @@
 namespace CHelper::Logger {
 
 #if CHelperAndroid == true
-    const char* KEY = "NativeCHelper";
+    const char *KEY = "NativeCHelper";
 #endif
 
     void debug(const std::string &message) {
@@ -56,6 +56,6 @@ namespace CHelper::Logger {
 
 #endif
 
-} // CHelper::Logger
+}// namespace CHelper::Logger
 
 #endif

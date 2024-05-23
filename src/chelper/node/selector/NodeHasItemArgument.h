@@ -7,8 +7,8 @@
 #ifndef CHELPER_NODEHASITEMARGUMENT_H
 #define CHELPER_NODEHASITEMARGUMENT_H
 
-#include "../NodeBase.h"
 #include "../../resources/id/ItemId.h"
+#include "../NodeBase.h"
 
 namespace CHelper::Node {
 
@@ -25,6 +25,6 @@ namespace CHelper::Node {
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEHASITEMARGUMENT_H
+#endif//CHELPER_NODEHASITEMARGUMENT_H

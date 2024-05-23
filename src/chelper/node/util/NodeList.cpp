@@ -12,24 +12,24 @@ namespace CHelper::Node {
                        const NodeBase *nodeElement,
                        const NodeBase *nodeSeparator,
                        const NodeBase *nodeRight)
-            : NodeBase(id, description, false),
-              nodeLeft(nodeLeft),
-              nodeElement(nodeElement),
-              nodeSeparator(nodeSeparator),
-              nodeRight(nodeRight),
-              nodeElementOrRight(
-                      "ELEMENT_OR_RIGHT", "element or right",
-                      std::vector<const NodeBase *>{
-                              nodeElement, nodeRight
-                      }, false),
-              nodeSeparatorOrRight(
-                      "SEPARATOR_OR_RIGHT", "separator or right",
-                      std::vector<const NodeBase *>{
-                              nodeSeparator, nodeRight
-                      }, false) {
+        : NodeBase(id, description, false),
+          nodeLeft(nodeLeft),
+          nodeElement(nodeElement),
+          nodeSeparator(nodeSeparator),
+          nodeRight(nodeRight),
+          nodeElementOrRight(
+                  "ELEMENT_OR_RIGHT", "element or right",
+                  std::vector<const NodeBase *>{
+                          nodeElement, nodeRight},
+                  false),
+          nodeSeparatorOrRight(
+                  "SEPARATOR_OR_RIGHT", "separator or right",
+                  std::vector<const NodeBase *>{
+                          nodeSeparator, nodeRight},
+                  false) {
 #if CHelperDebug == true
         if (HEDLEY_UNLIKELY(
-                nodeLeft == nullptr || nodeElement == nullptr || nodeSeparator == nullptr || nodeRight == nullptr)) {
+                    nodeLeft == nullptr || nodeElement == nullptr || nodeSeparator == nullptr || nodeRight == nullptr)) {
             Profile::push("NodeOr has a null child node");
             throw Exception::NodeLoadFailed();
         }
@@ -107,4 +107,4 @@ namespace CHelper::Node {
         return std::nullopt;
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

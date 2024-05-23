@@ -47,4 +47,4 @@ namespace CHelper {
         return std::move(structure);
     }
 
-}
+}// namespace CHelper

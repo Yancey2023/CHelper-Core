@@ -14,6 +14,6 @@ namespace CHelper::StringUtil {
 
     std::string join(const std::string &joining, const std::vector<std::string> &strings);
 
-} //CHelper::StringUtil
+}// namespace CHelper::StringUtil
 
-#endif //CHELPER_STRINGUTIL_H
+#endif//CHELPER_STRINGUTIL_H

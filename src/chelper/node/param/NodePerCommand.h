@@ -7,9 +7,9 @@
 #ifndef CHELPER_NODEPERCOMMAND_H
 #define CHELPER_NODEPERCOMMAND_H
 
-#include "pch.h"
 #include "../NodeBase.h"
 #include "../util/NodeOr.h"
+#include "pch.h"
 
 namespace CHelper::Node {
 
@@ -29,6 +29,9 @@ namespace CHelper::Node {
         NodePerCommand(const nlohmann::json &j,
                        const CPack &cpack);
 
+        NodePerCommand(BinaryReader &binaryReader,
+                       [[maybe_unused]] const CPack &cpack);
+
         [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
@@ -36,9 +39,10 @@ namespace CHelper::Node {
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
 
-    }; // NodePerCommand::Node
+    };// NodePerCommand::Node
 
-} // CHelper
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEPERCOMMAND_H
+#endif//CHELPER_NODEPERCOMMAND_H

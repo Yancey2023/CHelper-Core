@@ -43,9 +43,8 @@ namespace CHelper {
         ColorStringBuilder &cyan(const std::string &str);
 
         std::string build();
-
     };
 
-} // CHelper
+}// namespace CHelper
 
-#endif //CHELPER_COLORSTRINGBUILDER_H
+#endif//CHELPER_COLORSTRINGBUILDER_H

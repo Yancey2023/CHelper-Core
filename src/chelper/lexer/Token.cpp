@@ -23,14 +23,14 @@ namespace CHelper {
                     return "未知类型";
             }
         }
-    }
+    }// namespace TokenType
 
     Token::Token(TokenType::TokenType type,
                  CHelper::LexerPos pos,
                  std::string content)
-            : type(type),
-              pos(pos),
-              content(std::move(content)) {}
+        : type(type),
+          pos(pos),
+          content(std::move(content)) {}
 
     size_t Token::getStartIndex() const {
         return pos.index;
@@ -40,7 +40,7 @@ namespace CHelper {
         return pos.index + content.size();
     }
 
-}
+}// namespace CHelper
 
 std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType) {
     switch (tokenType) {

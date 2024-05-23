@@ -19,7 +19,6 @@
 
 #endif
 
-#include <iostream>
 #include <string>
 #include <vector>
 #include <optional>
@@ -35,6 +34,8 @@
 #include "nlohmann/json.hpp"
 #include "format/Format.h"
 #include "hedley.h"
+#include "../src/chelper/util/BinaryUtil.h"
+#include "../src/chelper/util/Codec.h"
 #include "../src/chelper/util/ColorStringBuilder.h"
 #include "../src/chelper/util/Exception.h"
 #include "../src/chelper/util/JsonUtil.h"

@@ -7,16 +7,16 @@
 #ifndef CHELPER_NODESTRING_H
 #define CHELPER_NODESTRING_H
 
-#include "pch.h"
 #include "../NodeBase.h"
+#include "pch.h"
 
 namespace CHelper::Node {
 
     class NodeString : public NodeBase {
     public:
-        const bool allowMissingString;
-        const bool canContainSpace;
-        const bool ignoreLater;
+        bool allowMissingString;
+        bool canContainSpace;
+        bool ignoreLater;
 
         NodeString(const std::optional<std::string> &id,
                    const std::optional<std::string> &description,
@@ -25,6 +25,9 @@ namespace CHelper::Node {
                    bool ignoreLater);
 
         NodeString(const nlohmann::json &j,
+                   [[maybe_unused]] const CPack &cpack);
+
+        NodeString(BinaryReader &binaryReader,
                    [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType *getNodeType() const override;
@@ -40,9 +43,9 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODESTRING_H
+#endif//CHELPER_NODESTRING_H

@@ -3,65 +3,48 @@
 //
 
 #include "ItemId.h"
+#include "../../node/param/NodeInteger.h"
 #include "../../node/param/NodeText.h"
 #include "../../node/util/NodeOr.h"
-#include "../../node/param/NodeInteger.h"
 
 namespace CHelper {
 
-    static Node::NodeBase *
-    getNodeData(const std::optional<int32_t> &max,
-                const std::optional<std::vector<std::string>> &descriptions) {
-        auto *nodeAllData = new Node::NodeInteger("ITEM_DATA", "物品附加值", -1, max);
-        if (HEDLEY_LIKELY(!descriptions.has_value())) {
-            return nodeAllData;
-        }
-        std::vector<const Node::NodeBase *> nodeDataChildren;
-        nodeDataChildren.reserve(descriptions.value().size());
-        size_t i = 0;
-        for (const auto &item: descriptions.value()) {
-            nodeDataChildren.push_back(new Node::NodeText(
-                    "ITEM_PER_DATA", item,
-                    std::make_shared<NormalId>(std::to_string(i++), item),
-                    [](const Node::NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-                        return tokenReader.readIntegerASTNode(node);
-                    }));
-        }
-        auto *nodeOr = new Node::NodeOr("ITEM_DATA", "物品附加值", std::move(nodeDataChildren), false);
-        return new Node::NodeOr("ITEM_DATA", "物品附加值", {nodeOr, nodeAllData}, false, true);
-    }
-
-    ItemId::ItemId(const std::optional<std::string> &nameSpace,
-                   const std::string &name,
-                   const std::optional<std::string> &description,
-                   const std::optional<int32_t> &max,
-                   const std::optional<std::vector<std::string>> &descriptions)
-            : NamespaceId(nameSpace, name, description),
-              max(max),
-              descriptions(descriptions),
-              nodeData(getNodeData(max, descriptions)) {}
-
-    ItemId::ItemId(const nlohmann::json &j)
-            : NamespaceId(j),
-              max(JsonUtil::fromJsonOptionalUnlikely<int32_t>(j, "max")),
-              descriptions(JsonUtil::fromJsonOptionalUnlikely<std::vector<std::string>>(j, "descriptions")),
-              nodeData(getNodeData(max, descriptions)) {}
-
-    ItemId::~ItemId() {
-        if (HEDLEY_UNLIKELY(descriptions.has_value())) {
-            auto nodeOr = ((Node::NodeOr *) ((Node::NodeOr *) nodeData)->childNodes[0]);
-            for (const auto &item: nodeOr->childNodes) {
-                delete item;
+    std::shared_ptr<Node::NodeBase> ItemId::getNode() {
+        if (node == nullptr) {
+            if (HEDLEY_UNLIKELY(max.has_value() && max.value() < 0)) {
+                throw std::runtime_error("item id max data value should be a positive number");
             }
-            delete nodeOr;
+            auto nodeAllData = std::make_shared<Node::NodeInteger>("ITEM_DATA", "物品附加值", -1, max);
+            if (HEDLEY_LIKELY(!descriptions.has_value())) {
+                node = nodeAllData;
+            } else {
+                nodeChildren.push_back(nodeAllData);
+                std::vector<const Node::NodeBase *> nodeDataChildren;
+                nodeDataChildren.reserve(descriptions.value().size());
+                size_t i = 0;
+                for (const auto &item: descriptions.value()) {
+                    auto nodeChild = std::make_shared<Node::NodeText>(
+                            "ITEM_PER_DATA", item,
+                            NormalId::make(std::to_string(i++), item),
+                            [](const Node::NodeBase *node1, TokenReader &tokenReader) -> ASTNode {
+                                return tokenReader.readIntegerASTNode(node1);
+                            });
+                    nodeDataChildren.push_back(nodeChild.get());
+                    nodeChildren.push_back(std::move(nodeChild));
+                }
+                auto nodeOr = std::make_shared<Node::NodeOr>(
+                        "ITEM_DATA", "物品附加值",
+                        std::move(nodeDataChildren), false);
+                node = std::make_shared<Node::NodeOr>(
+                        "ITEM_DATA", "物品附加值",
+                        std::vector<const Node::NodeBase *>{nodeOr.get(), nodeAllData.get()},
+                        false, true);
+                nodeChildren.push_back(std::move(nodeOr));
+            }
         }
-        delete nodeData;
+        return node;
     }
 
-    void ItemId::toJson(nlohmann::json &j) const {
-        NamespaceId::toJson(j);
-        JsonUtil::toJsonOptionalUnlikely(j, "max", max);
-        JsonUtil::toJsonOptionalUnlikely(j, "descriptions", descriptions);
-    }
+    CODEC(ItemId, idNamespace, name, description, max, descriptions);
 
-} // CHelper
+}// namespace CHelper

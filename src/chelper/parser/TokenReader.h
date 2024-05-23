@@ -7,10 +7,10 @@
 #ifndef CHELPER_TOKENREADER_H
 #define CHELPER_TOKENREADER_H
 
-#include "pch.h"
 #include "../lexer/Token.h"
 #include "../util/VectorView.h"
 #include "ASTNode.h"
+#include "pch.h"
 
 #if CHelperDebug == true
 #define DEBUG_GET_NODE_BEGIN(node) size_t node##Index = tokenReader.indexStack.size();
@@ -19,13 +19,13 @@
 #endif
 
 #if CHelperDebug == true
-#define DEBUG_GET_NODE_END(node)                                           \
-    if (HEDLEY_UNLIKELY(node##Index != tokenReader.indexStack.size())) {   \
-        Profile::push("TokenReaderIndexError: " +                          \
-            (node)->getNodeType()->nodeName + " " +                          \
-            (node)->id.value_or("") + " " +                                  \
-            (node)->description.value_or(""));                               \
-        throw Exception::TokenReaderIndexError();                          \
+#define DEBUG_GET_NODE_END(node)                                         \
+    if (HEDLEY_UNLIKELY(node##Index != tokenReader.indexStack.size())) { \
+        Profile::push("TokenReaderIndexError: " +                        \
+                      (node)->getNodeType()->nodeName + " " +            \
+                      (node)->id.value_or("") + " " +                    \
+                      (node)->description.value_or(""));                 \
+        throw Exception::TokenReaderIndexError();                        \
     }
 #else
 #define DEBUG_GET_NODE_END(node)
@@ -37,7 +37,7 @@ namespace CHelper {
 
         class NodeBase;
 
-    } // Node
+    }// namespace Node
 
     class TokenReader {
     public:
@@ -69,14 +69,14 @@ namespace CHelper {
 
         void restore();
 
-        [[nodiscard]] VectorView <Token> collect();
+        [[nodiscard]] VectorView<Token> collect();
 
         ASTNode readSimpleASTNode(const Node::NodeBase *node,
                                   TokenType::TokenType type,
                                   const std::string &requireType,
                                   const std::string &astNodeId = "",
-                                  std::shared_ptr<ErrorReason>(*check)(const std::string &str,
-                                                                       const VectorView <Token> &tokens) = nullptr);
+                                  std::shared_ptr<ErrorReason> (*check)(const std::string &str,
+                                                                        const VectorView<Token> &tokens) = nullptr);
 
         ASTNode readStringASTNode(const Node::NodeBase *node,
                                   const std::string &astNodeId = "");
@@ -90,11 +90,10 @@ namespace CHelper {
         ASTNode readSymbolASTNode(const Node::NodeBase *node,
                                   const std::string &astNodeId = "");
 
-        static std::function<ASTNode(const Node::NodeBase *node, TokenReader &tokenReader)>
-        getReadTokenMethod(const std::optional<std::vector<std::string>>& tokenTypes);
-
+        ASTNode readUntilWhitespace(const Node::NodeBase *node,
+                                    const std::string &astNodeId = "");
     };
 
-} // CHelper
+}// namespace CHelper
 
-#endif //CHELPER_TOKENREADER_H
+#endif//CHELPER_TOKENREADER_H

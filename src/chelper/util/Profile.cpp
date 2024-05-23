@@ -30,4 +30,4 @@ namespace CHelper::Profile {
         return StringUtil::join("\n", stack);
     }
 
-} // CHelper::Profile
+}// namespace CHelper::Profile

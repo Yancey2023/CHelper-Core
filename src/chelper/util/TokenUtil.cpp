@@ -6,7 +6,7 @@
 
 namespace CHelper::TokenUtil {
 
-    size_t getIndex(const VectorView <Token> &tokens, size_t tokenIndex) {
+    size_t getIndex(const VectorView<Token> &tokens, size_t tokenIndex) {
         if (HEDLEY_UNLIKELY(tokenIndex == 0)) {
             return 0;
         } else if (HEDLEY_UNLIKELY(tokenIndex == tokens.vector->size())) {
@@ -16,15 +16,15 @@ namespace CHelper::TokenUtil {
         }
     }
 
-    size_t getStartIndex(const VectorView <Token> &tokens) {
+    size_t getStartIndex(const VectorView<Token> &tokens) {
         return getIndex(tokens, tokens.start);
     }
 
-    size_t getEndIndex(const VectorView <Token> &tokens) {
+    size_t getEndIndex(const VectorView<Token> &tokens) {
         return getIndex(tokens, tokens.end);
     }
 
-    std::string toString(const VectorView <Token> &tokens) {
+    std::string toString(const VectorView<Token> &tokens) {
         std::string result;
         tokens.forEach([&result](const CHelper::Token &token) {
             result.append(token.content);
@@ -32,4 +32,4 @@ namespace CHelper::TokenUtil {
         return std::move(result);
     }
 
-} // CHelper::TokenUtil
+}// namespace CHelper::TokenUtil

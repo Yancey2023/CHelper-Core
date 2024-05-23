@@ -23,6 +23,9 @@ namespace CHelper::Node {
         NodeJsonList(const nlohmann::json &j,
                      [[maybe_unused]] const CPack &cpack);
 
+        NodeJsonList(BinaryReader &binaryReader,
+                     [[maybe_unused]] const CPack &cpack);
+
         void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
 
         [[nodiscard]] NodeType *getNodeType() const override;
@@ -34,9 +37,9 @@ namespace CHelper::Node {
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
                                 std::vector<Suggestions> &suggestions) const override;
-
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEJSONLIST_H
+#endif//CHELPER_NODEJSONLIST_H

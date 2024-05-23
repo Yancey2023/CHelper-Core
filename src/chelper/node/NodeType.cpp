@@ -8,52 +8,69 @@
 #include "param/NodeBoolean.h"
 #include "param/NodeCommand.h"
 #include "param/NodeCommandName.h"
+#include "param/NodeFloat.h"
 #include "param/NodeInteger.h"
 #include "param/NodeItem.h"
+#include "param/NodeJson.h"
 #include "param/NodeNormalId.h"
 #include "param/NodePosition.h"
+#include "param/NodeRange.h"
 #include "param/NodeRelativeFloat.h"
+#include "param/NodeRepeat.h"
 #include "param/NodeString.h"
 #include "param/NodeTargetSelector.h"
 #include "param/NodeText.h"
-#include "param/NodeFloat.h"
-#include "param/NodeRange.h"
-#include "param/NodeJson.h"
-#include "json/NodeJsonObject.h"
-#include "json/NodeJsonList.h"
-#include "json/NodeJsonString.h"
-#include "json/NodeJsonInteger.h"
+#include "param/NodeXpInteger.h"
 #include "json/NodeJsonBoolean.h"
 #include "json/NodeJsonFloat.h"
+#include "json/NodeJsonInteger.h"
+#include "json/NodeJsonList.h"
 #include "json/NodeJsonNull.h"
-#include "param/NodeXpInteger.h"
-#include "param/NodeRepeat.h"
+#include "json/NodeJsonObject.h"
+#include "json/NodeJsonString.h"
 
 namespace CHelper::Node {
 
     NodeType::NodeType(std::string nodeName,
-                       std::function<std::unique_ptr<NodeBase>(const nlohmann::json &j,
-                                                               const CPack &cpack)> createNodeByJson)
-            : nodeName(std::move(nodeName)),
-              createNodeByJson(std::move(createNodeByJson)) {}
+                       std::function<std::unique_ptr<NodeBase>(
+                               const nlohmann::json &j, const CPack &cpack)>
+                               createNodeByJson,
+                       std::function<std::unique_ptr<NodeBase>(
+                               BinaryReader &binaryReader, const CPack &cpack)>
+                               createNodeByBinary)
+        : nodeName(std::move(nodeName)),
+          createNodeByJson(std::move(createNodeByJson)),
+          createNodeByBinary(std::move(createNodeByBinary)) {}
 
     template<class T>
     static std::unique_ptr<NodeType> create(const std::string &nodeName) {
         return std::make_unique<NodeType>(
-                nodeName, [](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
+                nodeName,
+                [](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
                     return std::make_unique<T>(j, cpack);
+                },
+                [](BinaryReader &binaryReader, const CPack &cpack) -> std::unique_ptr<NodeBase> {
+                    return std::make_unique<T>(binaryReader, cpack);
                 });
     }
 
     template<class T>
     static std::unique_ptr<NodeType> createJson(const std::string &nodeName) {
         return std::make_unique<NodeType>(
-                nodeName, [&nodeName](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
+                nodeName,
+                [nodeName](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
                     if (HEDLEY_UNLIKELY(!NodeType::canLoadNodeJson)) {
                         //这些节点在注册Json数据的时候创建，在命令注册的时候创建就抛出错误
                         throw Exception::UnknownNodeType(nodeName);
                     }
                     return std::make_unique<T>(j, cpack);
+                },
+                [nodeName](BinaryReader &binaryReader, const CPack &cpack) -> std::unique_ptr<NodeBase> {
+                    if (HEDLEY_UNLIKELY(!NodeType::canLoadNodeJson)) {
+                        //这些节点在注册Json数据的时候创建，在命令注册的时候创建就抛出错误
+                        throw Exception::UnknownNodeType(nodeName);
+                    }
+                    return std::make_unique<T>(binaryReader, cpack);
                 });
     }
 
@@ -62,9 +79,12 @@ namespace CHelper::Node {
     bool NodeType::canLoadNodeJson = false;
 
     std::unique_ptr<NodeType> NodeType::UNKNOWN = std::make_unique<NodeType>(
-            "UNKNOWN", [](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
-                throw Exception::UnknownNodeType(
-                        NodeType::UNKNOWN->nodeName);
+            "UNKNOWN",
+            [](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
+                throw Exception::UnknownNodeType(NodeType::UNKNOWN->nodeName);
+            },
+            [](BinaryReader &binaryReader, const CPack &cpack) -> std::unique_ptr<NodeBase> {
+                throw Exception::UnknownNodeType(NodeType::UNKNOWN->nodeName);
             });
     std::unique_ptr<NodeType> NodeType::BLOCK = create<NodeBlock>("BLOCK");
     std::unique_ptr<NodeType> NodeType::BOOLEAN = create<NodeBoolean>("BOOLEAN");
@@ -74,9 +94,14 @@ namespace CHelper::Node {
     std::unique_ptr<NodeType> NodeType::INTEGER = create<NodeInteger>("INTEGER");
     std::unique_ptr<NodeType> NodeType::ITEM = create<NodeItem>("ITEM");
     std::unique_ptr<NodeType> NodeType::LF = std::make_unique<NodeType>(
-            "LF", [](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
+            "LF",
+            [](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
                 //这个节点只有一个实例，不可以生成多个实例
-                throw Exception::UnknownNodeType(NodeType::LF->nodeName);
+                throw Exception::UnknownNodeType(NodeType::UNKNOWN->nodeName);
+            },
+            [](BinaryReader &binaryReader, const CPack &cpack) -> std::unique_ptr<NodeBase> {
+                //这个节点只有一个实例，不可以生成多个实例
+                throw Exception::UnknownNodeType(NodeType::UNKNOWN->nodeName);
             });
     std::unique_ptr<NodeType> NodeType::NAMESPACE_ID = create<NodeNamespaceId>("NAMESPACE_ID");
     std::unique_ptr<NodeType> NodeType::NORMAL_ID = create<NodeNormalId>("NORMAL_ID");
@@ -84,12 +109,20 @@ namespace CHelper::Node {
     std::unique_ptr<NodeType> NodeType::POSITION = create<NodePosition>("POSITION");
     std::unique_ptr<NodeType> NodeType::RELATIVE_FLOAT = create<NodeRelativeFloat>("RELATIVE_FLOAT");
     std::unique_ptr<NodeType> NodeType::REPEAT = std::make_unique<NodeType>(
-            "REPEAT", [](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
+            "REPEAT",
+            [](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
                 if (HEDLEY_UNLIKELY(NodeType::canLoadNodeJson)) {
                     //这个节点只能在命令注册的时候创建，在注册Json数据的时候创建就抛出错误
                     throw Exception::UnknownNodeType(NodeType::REPEAT->nodeName);
                 }
                 return std::make_unique<NodeRepeat>(j, cpack);
+            },
+            [](BinaryReader &binaryReader, const CPack &cpack) -> std::unique_ptr<NodeBase> {
+                if (HEDLEY_UNLIKELY(NodeType::canLoadNodeJson)) {
+                    //这个节点只能在命令注册的时候创建，在注册Json数据的时候创建就抛出错误
+                    throw Exception::UnknownNodeType(NodeType::REPEAT->nodeName);
+                }
+                return std::make_unique<NodeRepeat>(binaryReader, cpack);
             });
     std::unique_ptr<NodeType> NodeType::STRING = create<NodeString>("STRING");
     std::unique_ptr<NodeType> NodeType::TARGET_SELECTOR = create<NodeTargetSelector>("TARGET_SELECTOR");
@@ -97,12 +130,20 @@ namespace CHelper::Node {
     std::unique_ptr<NodeType> NodeType::RANGE = create<NodeRange>("RANGE");
     std::unique_ptr<NodeType> NodeType::XP_INTEGER = create<NodeXpInteger>("XP_INTEGER");
     std::unique_ptr<NodeType> NodeType::JSON = std::make_unique<NodeType>(
-            "JSON", [](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
+            "JSON",
+            [](const nlohmann::json &j, const CPack &cpack) -> std::unique_ptr<NodeBase> {
                 if (HEDLEY_UNLIKELY(NodeType::canLoadNodeJson)) {
                     //这个节点只能在命令注册的时候创建，在注册Json数据的时候创建就抛出错误
                     throw Exception::UnknownNodeType(NodeType::JSON->nodeName);
                 }
                 return std::make_unique<NodeJson>(j, cpack);
+            },
+            [](BinaryReader &binaryReader, const CPack &cpack) -> std::unique_ptr<NodeBase> {
+                if (HEDLEY_UNLIKELY(NodeType::canLoadNodeJson)) {
+                    //这个节点只能在命令注册的时候创建，在注册Json数据的时候创建就抛出错误
+                    throw Exception::UnknownNodeType(NodeType::JSON->nodeName);
+                }
+                return std::make_unique<NodeJson>(binaryReader, cpack);
             });
     std::unique_ptr<NodeType> NodeType::JSON_OBJECT = createJson<NodeJsonObject>("JSON_OBJECT");
     std::unique_ptr<NodeType> NodeType::JSON_LIST = createJson<NodeJsonList>("JSON_LIST");
@@ -151,6 +192,10 @@ namespace CHelper::Node {
         registerNodeType(JSON_FLOAT);
         registerNodeType(JSON_BOOLEAN);
         registerNodeType(JSON_NULL);
+        size_t size = NodeType::NODE_TYPES.size();
+        for (int i = 0; i < size; ++i) {
+            NodeType::NODE_TYPES[i]->id = i;
+        }
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

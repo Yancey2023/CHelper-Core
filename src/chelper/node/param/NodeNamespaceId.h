@@ -8,17 +8,17 @@
 #define CHELPER_NODENAMESPACEID_H
 
 
-#include "../NodeBase.h"
-#include "../../resources/id/NamespaceId.h"
 #include "../../resources/CPack.h"
+#include "../../resources/id/NamespaceId.h"
+#include "../NodeBase.h"
 
 namespace CHelper::Node {
 
     class NodeNamespaceId : public NodeBase {
     public:
-        const std::optional<std::string> key;
-        const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> contents;
-        const bool ignoreError;
+        std::optional<std::string> key;
+        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> contents;
+        bool ignoreError;
 
         NodeNamespaceId(const std::optional<std::string> &id,
                         const std::optional<std::string> &description,
@@ -28,6 +28,9 @@ namespace CHelper::Node {
 
         NodeNamespaceId(const nlohmann::json &j,
                         const CPack &cpack);
+
+        NodeNamespaceId(BinaryReader &binaryReader,
+                        [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
@@ -45,10 +48,10 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
 
-}
+}// namespace CHelper::Node
 // CHelper::Node
 
-#endif //CHELPER_NODENAMESPACEID_H
+#endif//CHELPER_NODENAMESPACEID_H

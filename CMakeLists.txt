@@ -7,6 +7,14 @@ if (MSVC)
     add_compile_options("/utf-8")
 endif ()
 
+include(FetchContent)
+FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
 file(GLOB_RECURSE SOURCE_H src/chelper/*.h)
 file(GLOB_RECURSE SOURCE_CPP src/chelper/*.cpp)
 
@@ -28,8 +36,8 @@ if (MSVC)
     set_target_properties(CHelperWindows PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
 endif ()
 
-# 这只是为了在写代码的时候获取代码提示，实际上并不是编译成静态链接库再放到安卓的工程中
-add_library(CHelperAndroid STATIC
+# 这只是为了在写代码的时候获取代码提示，实际上并不是编译成动态链接库再放到安卓的工程中
+add_library(CHelperAndroid SHARED
         src/android/AndroidNative.h
         ${SOURCE_H}
         ${SOURCE_CPP})
@@ -45,3 +53,19 @@ target_precompile_headers(CHelperAndroid PRIVATE include/pch.h)
 #add_library(CHelperShared SHARED ${SOURCE_H} ${SOURCE_CPP})
 #target_include_directories(CHelperShared PUBLIC include)
 #target_precompile_headers(CHelperShared PRIVATE include/pch.h)
+
+# 测试
+
+file(GLOB_RECURSE TEST_H src/test/*.h)
+file(GLOB_RECURSE TEST_CPP src/test/*.cpp)
+
+include(GoogleTest)
+
+enable_testing()
+add_executable(CHelperTest ${TEST_H} ${TEST_CPP} ${SOURCE_H} ${SOURCE_CPP})
+#add_executable(CHelperTest src/testDir/CHelperTest.cpp)
+target_include_directories(CHelperTest PUBLIC include)
+target_precompile_headers(CHelperTest PRIVATE include/pch.h)
+target_link_libraries(CHelperTest PUBLIC GTest::gtest_main)
+
+gtest_discover_tests(CHelperTest)

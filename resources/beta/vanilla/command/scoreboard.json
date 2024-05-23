@@ -292,7 +292,6 @@
       "id": "operationId",
       "description": "运算操作",
       "ignoreError": true,
-      "tokenTypes": ["SYMBOL", "SYMBOL"],
       "contents": [
         {
           "name": "+=",

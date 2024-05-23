@@ -11,15 +11,27 @@ namespace CHelper::Node {
                          const std::optional<std::string> &description,
                          const std::optional<float> &min,
                          const std::optional<float> &max)
-            : NodeBase(id, description, false),
-              min(min),
-              max(max) {}
+        : NodeBase(id, description, false),
+          min(min),
+          max(max) {}
 
     NodeFloat::NodeFloat(const nlohmann::json &j,
                          [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j, true),
-              min(JsonUtil::fromJsonOptionalUnlikely<float>(j, "min")),
-              max(JsonUtil::fromJsonOptionalUnlikely<float>(j, "max")) {}
+        : NodeBase(j, true),
+          min(JsonUtil::read<std::optional<float>>(j, "min")),
+          max(JsonUtil::read<std::optional<float>>(j, "max")) {}
+
+    NodeFloat::NodeFloat(BinaryReader &binaryReader,
+                         [[maybe_unused]] const CPack &cpack)
+        : NodeBase(binaryReader) {
+        auto flag = binaryReader.read<uint8_t>();
+        if ((flag >> 0) & 0x01) {
+            min = binaryReader.read<float>();
+        }
+        if ((flag >> 1) & 0x01) {
+            max = binaryReader.read<float>();
+        }
+    }
 
     NodeType *NodeFloat::getNodeType() const {
         return NodeType::FLOAT.get();
@@ -27,8 +39,26 @@ namespace CHelper::Node {
 
     void NodeFloat::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJsonOptionalUnlikely(j, "min", min);
-        JsonUtil::toJsonOptionalUnlikely(j, "max", max);
+        JsonUtil::encode(j, "min", min);
+        JsonUtil::encode(j, "max", max);
+    }
+
+    void NodeFloat::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        uint8_t flag = 0x00;
+        if (min.has_value()) {
+            flag |= (0x01 << 0);
+        }
+        if (max.has_value()) {
+            flag |= (0x01 << 1);
+        }
+        binaryWriter.encode(flag);
+        if (min.has_value()) {
+            binaryWriter.encode(min.value());
+        }
+        if (max.has_value()) {
+            binaryWriter.encode(max.value());
+        }
     }
 
     ASTNode NodeFloat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -48,9 +78,13 @@ namespace CHelper::Node {
                             (min.has_value() && value < min) ||
                             (max.has_value() && value > max))) {
             idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("数值不在范围")
-                    .append("[").append(std::to_string(min.value_or(std::numeric_limits<float>::lowest())))
-                    .append(", ").append(std::to_string(max.value_or(std::numeric_limits<float>::max())))
-                    .append("]").append("内 -> ").append(str)));
+                                                                                   .append("[")
+                                                                                   .append(std::to_string(min.value_or(std::numeric_limits<float>::lowest())))
+                                                                                   .append(", ")
+                                                                                   .append(std::to_string(max.value_or(std::numeric_limits<float>::max())))
+                                                                                   .append("]")
+                                                                                   .append("内 -> ")
+                                                                                   .append(str)));
         }
         return true;
     }
@@ -61,4 +95,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or("数字"));
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

@@ -22,22 +22,25 @@ namespace CHelper::Node {
         NodeRelativeFloat(const nlohmann::json &j,
                           [[maybe_unused]] const CPack &cpack);
 
+        NodeRelativeFloat(BinaryReader &binaryReader,
+                          [[maybe_unused]] const CPack &cpack);
+
         [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
-        static std::pair<std::uint8_t, ASTNode> getASTNode(const NodeBase *node,
+        static std::pair<uint8_t, ASTNode> getASTNode(const NodeBase *node,
                                                            const CPack *cpack,
                                                            TokenReader &tokenReader);
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODERELATIVEFLOAT_H
+#endif//CHELPER_NODERELATIVEFLOAT_H

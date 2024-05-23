@@ -8,10 +8,10 @@
 #define CHELPER_NODETARGETSELECTORARGUMENT_H
 
 #include "../NodeBase.h"
-#include "../param/NodeNormalId.h"
 #include "../param/NodeNamespaceId.h"
-#include "NodeHasItemArgument.h"
+#include "../param/NodeNormalId.h"
 #include "../util/NodeList.h"
+#include "NodeHasItemArgument.h"
 
 namespace CHelper::Node {
 
@@ -34,6 +34,6 @@ namespace CHelper::Node {
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODETARGETSELECTORARGUMENT_H
+#endif//CHELPER_NODETARGETSELECTORARGUMENT_H

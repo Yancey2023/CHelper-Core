@@ -23,7 +23,8 @@ static std::shared_ptr<CHelper::Core> core;
  * @param nCmdShow 控制窗口的显示方式
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
-    core = CHelper::Core::createByDirectory(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)");
+//    core = CHelper::Core::createByDirectory(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)");
+    core = CHelper::Core::createByBinary(R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.0.23.cpack)");
     if (core == nullptr) {
         exit(-1);
     }

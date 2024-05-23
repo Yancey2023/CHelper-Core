@@ -8,10 +8,10 @@ CHelper::LexerPos::LexerPos(const std::string &filePath,
                             size_t index,
                             size_t line,
                             size_t col)
-        : line(line),
-          col(col),
-          index(index),
-          filePath(filePath) {}
+    : line(line),
+      col(col),
+      index(index),
+      filePath(filePath) {}
 
 void CHelper::LexerPos::next(char ch) {
     index++;

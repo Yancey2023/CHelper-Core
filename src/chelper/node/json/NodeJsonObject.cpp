@@ -44,11 +44,11 @@ namespace CHelper::Node {
     NodeJsonObject::NodeJsonObject(const std::optional<std::string> &id,
                                    const std::optional<std::string> &description,
                                    std::vector<std::unique_ptr<NodeBase>> data)
-            : NodeBase(id, description, false),
-              data(std::move(data)),
-              nodeElement1(getNodeElement1(this->data)),
-              nodeElement2(getNodeElement2(nodeElement1)),
-              nodeList(getNodeList(nodeElement2)) {}
+        : NodeBase(id, description, false),
+          data(std::move(data)),
+          nodeElement1(getNodeElement1(this->data)),
+          nodeElement2(getNodeElement2(nodeElement1)),
+          nodeList(getNodeList(nodeElement2)) {}
 
     static std::vector<std::unique_ptr<NodeBase>> getDataFromJson(const nlohmann::json &j) {
         const auto &jsonData = j.at("data");
@@ -60,13 +60,31 @@ namespace CHelper::Node {
         return std::move(data);
     }
 
+    static std::vector<std::unique_ptr<NodeBase>> readDataFromBinary(BinaryReader &binaryReader) {
+        size_t size = binaryReader.readSize();
+        std::vector<std::unique_ptr<NodeBase>> data;
+        data.reserve(size);
+        for (int i = 0; i < size; ++i) {
+            data.push_back(std::make_unique<NodeJsonEntry>(binaryReader));
+        }
+        return std::move(data);
+    }
+
     NodeJsonObject::NodeJsonObject(const nlohmann::json &j,
                                    [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j, false),
-              data(getDataFromJson(j)),
-              nodeElement1(getNodeElement1(data)),
-              nodeElement2(getNodeElement2(nodeElement1)),
-              nodeList(getNodeList(nodeElement2)) {}
+        : NodeBase(j, false),
+          data(getDataFromJson(j)),
+          nodeElement1(getNodeElement1(data)),
+          nodeElement2(getNodeElement2(nodeElement1)),
+          nodeList(getNodeList(nodeElement2)) {}
+
+    NodeJsonObject::NodeJsonObject(BinaryReader &binaryReader,
+                                   [[maybe_unused]] const CPack &cpack)
+        : NodeBase(binaryReader),
+          data(readDataFromBinary(binaryReader)),
+          nodeElement1(getNodeElement1(data)),
+          nodeElement2(getNodeElement2(nodeElement1)),
+          nodeList(getNodeList(nodeElement2)) {}
 
     NodeType *NodeJsonObject::getNodeType() const {
         return NodeType::JSON_OBJECT.get();
@@ -74,11 +92,16 @@ namespace CHelper::Node {
 
     void NodeJsonObject::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJson(j, "data", data);
+        JsonUtil::encode(j, "data", data);
+    }
+
+    void NodeJsonObject::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        binaryWriter.encode(data);
     }
 
     ASTNode NodeJsonObject::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         return getByChildNode(tokenReader, cpack, &nodeList);
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

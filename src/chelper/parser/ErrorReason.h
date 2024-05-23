@@ -8,15 +8,15 @@
 #define CHELPER_ERRORREASON_H
 
 
-#include "pch.h"
 #include "../lexer/Token.h"
 #include "../util/VectorView.h"
+#include "pch.h"
 
 namespace CHelper {
 
     namespace ErrorReasonLevel {
 
-        enum ErrorReasonLevel : std::uint8_t {
+        enum ErrorReasonLevel : uint8_t {
             //命令后面有多余部分
             EXCESS = 0,
             //缺少空格
@@ -36,7 +36,7 @@ namespace CHelper {
         //最大的错误等级，在ErrorReason.cpp中有定义
         extern ErrorReasonLevel maxLevel;
 
-    }
+    }// namespace ErrorReasonLevel
 
     class ErrorReason {
     public:
@@ -50,7 +50,7 @@ namespace CHelper {
                     std::string errorReason);
 
         ErrorReason(ErrorReasonLevel::ErrorReasonLevel level,
-                    const VectorView <Token> &,
+                    const VectorView<Token> &,
                     std::string errorReason);
 
         //命令后面有多余部分
@@ -60,18 +60,18 @@ namespace CHelper {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::EXCESS, start, end, errorReason);
         }
 
-        [[maybe_unused]] static std::shared_ptr<ErrorReason> excess(const VectorView <Token> &tokens,
+        [[maybe_unused]] static std::shared_ptr<ErrorReason> excess(const VectorView<Token> &tokens,
                                                                     const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::EXCESS, tokens, errorReason);
         }
 
         //缺少空格
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        requireWhiteSpace(const VectorView <Token> &tokens) {
+        requireWhiteSpace(const VectorView<Token> &tokens) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, tokens, "命令不完整，缺少空格");
         }
 
-        [[maybe_unused]]  static std::shared_ptr<ErrorReason>
+        [[maybe_unused]] static std::shared_ptr<ErrorReason>
         requireWhiteSpace(size_t start, size_t end) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, start, end,
                                                  "命令不完整，缺少空格");
@@ -83,8 +83,8 @@ namespace CHelper {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::INCOMPLETE, start, end, errorReason);
         }
 
-        [[maybe_unused]]  static std::shared_ptr<ErrorReason>
-        incomplete(const VectorView <Token> &tokens, const std::string &errorReason) {
+        [[maybe_unused]] static std::shared_ptr<ErrorReason>
+        incomplete(const VectorView<Token> &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::INCOMPLETE, tokens, errorReason);
         }
 
@@ -95,7 +95,7 @@ namespace CHelper {
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        typeError(const VectorView <Token> &tokens, const std::string &errorReason) {
+        typeError(const VectorView<Token> &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::TYPE_ERROR, tokens, errorReason);
         }
 
@@ -106,7 +106,7 @@ namespace CHelper {
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        contentError(const VectorView <Token> &tokens, const std::string &errorReason) {
+        contentError(const VectorView<Token> &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::CONTENT_ERROR, tokens, errorReason);
         }
 
@@ -117,7 +117,7 @@ namespace CHelper {
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        logicError(const VectorView <Token> &tokens, const std::string &errorReason) {
+        logicError(const VectorView<Token> &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::LOGIC_ERROR, tokens, errorReason);
         }
 
@@ -128,14 +128,13 @@ namespace CHelper {
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        idError(const VectorView <Token> &tokens, const std::string &errorReason) {
+        idError(const VectorView<Token> &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::ID_ERROR, tokens, errorReason);
         }
 
         bool operator==(const CHelper::ErrorReason &reason) const;
-
     };
 
-} // CHelper
+}// namespace CHelper
 
-#endif //CHELPER_ERRORREASON_H
+#endif//CHELPER_ERRORREASON_H

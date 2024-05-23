@@ -32,6 +32,8 @@ namespace CHelper {
 
         static std::shared_ptr<Core> createByBson(const std::string &cpackPath);
 
+        static std::shared_ptr<Core> createByBinary(const std::string &cpackPath);
+
         void onTextChanged(const std::string &content, size_t index);
 
         void onSelectionChanged(size_t index0);
@@ -65,6 +67,6 @@ namespace CHelper {
         [[nodiscard]] std::optional<std::string> onSuggestionClick(size_t which);
     };
 
-} // CHelper
+}// namespace CHelper
 
-#endif //CHELPER_CORE_H
+#endif//CHELPER_CORE_H

@@ -7,14 +7,14 @@
 #ifndef CHELPER_TOKEN_H
 #define CHELPER_TOKEN_H
 
-#include "pch.h"
 #include "LexerPos.h"
+#include "pch.h"
 
 namespace CHelper {
 
     namespace TokenType {
 
-        enum TokenType : std::uint8_t {
+        enum TokenType : uint8_t {
             STRING,
             NUMBER,
             SYMBOL,
@@ -23,7 +23,7 @@ namespace CHelper {
         };
 
         std::string getName(TokenType tokenType);
-    }
+    }// namespace TokenType
 
 
     class Token {
@@ -39,10 +39,10 @@ namespace CHelper {
         [[nodiscard]] size_t getEndIndex() const;
     };
 
-}
+}// namespace CHelper
 
 std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType);
 
 std::ostream &operator<<(std::ostream &os, const CHelper::Token &token);
 
-#endif //CHELPER_TOKEN_H
+#endif//CHELPER_TOKEN_H

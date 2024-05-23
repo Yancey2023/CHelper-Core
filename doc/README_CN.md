@@ -172,7 +172,7 @@ ID 有4种类型：
   "id": "entities",
   "content": [
     {
-      "namespace": "minecraft",
+      "idNamespace": "minecraft",
       "name": "allay",
       "description": "悦灵"
     },
@@ -202,7 +202,7 @@ ID 有4种类型：
   "type": "block",
   "blocks": [
     {
-      "namespace": "minecraft",
+      "idNamespace": "minecraft",
       "name": "acacia_button",
       "description": "金合欢木按钮",
       "blockStates": [
@@ -264,7 +264,7 @@ ID 有4种类型：
   "type": "item",
   "items": [
     {
-      "namespace": "minecraft",
+      "idNamespace": "minecraft",
       "name": "acacia_boat",
       "description": "金合欢木船"
     }

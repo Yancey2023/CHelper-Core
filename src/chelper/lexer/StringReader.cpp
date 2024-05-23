@@ -9,9 +9,9 @@ namespace CHelper {
     CHelper::StringReader::StringReader(
             const std::string &content,
             const std::string &filePath)
-            : content(content),
-              pos(filePath),
-              posBackup(pos) {}
+        : content(content),
+          pos(filePath),
+          posBackup(pos) {}
 
     bool CHelper::StringReader::ready() const {
         return pos.index < content.length();
@@ -62,4 +62,4 @@ namespace CHelper {
         return {content, posBackup.index, pos.index - posBackup.index};
     }
 
-}
+}// namespace CHelper

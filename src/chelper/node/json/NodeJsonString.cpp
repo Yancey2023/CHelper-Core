@@ -3,24 +3,35 @@
 //
 
 #include "NodeJsonString.h"
-#include "../../util/TokenUtil.h"
 #include "../../parser/Parser.h"
+#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NormalId> doubleQuoteMask = std::make_shared<NormalId>("\"", "双引号");
+    static std::shared_ptr<NormalId> doubleQuoteMask = NormalId::make("\"", "双引号");
 
     static std::vector<std::unique_ptr<NodeBase>>
-    getDataFromCpack(const nlohmann::json &j, const CPack &cpack) {
+    getDataFromJson(const nlohmann::json &j, const CPack &cpack) {
         std::vector<std::unique_ptr<NodeBase>> result;
         const auto &it = j.find("data");
         if (HEDLEY_LIKELY(it != j.end())) {
             result.reserve(it->size());
             for (const auto &item: it.value()) {
-                result.push_back(NodeJsonString::getNodeFromJson(item, cpack));
+                result.push_back(NodeBase::getNodeFromJson(item, cpack));
             }
         }
         return std::move(result);
+    }
+
+    static std::vector<std::unique_ptr<NodeBase>>
+    readDataFromBinary(BinaryReader &binaryReader, const CPack &cpack) {
+        size_t size = binaryReader.readSize();
+        std::vector<std::unique_ptr<NodeBase>> data;
+        data.reserve(size);
+        for (int i = 0; i < size; ++i) {
+            data.push_back(NodeBase::getNodeFromBinary(binaryReader, cpack));
+        }
+        return std::move(data);
     }
 
     static std::unique_ptr<NodeBase>
@@ -37,15 +48,21 @@ namespace CHelper::Node {
     NodeJsonString::NodeJsonString(const std::optional<std::string> &id,
                                    const std::optional<std::string> &description,
                                    std::vector<std::unique_ptr<NodeBase>> data)
-            : NodeBase(id, description, false),
-              data(std::move(data)),
-              nodeData(getNodeDataFromData(this->data)) {}
+        : NodeBase(id, description, false),
+          data(std::move(data)),
+          nodeData(getNodeDataFromData(this->data)) {}
 
     NodeJsonString::NodeJsonString(const nlohmann::json &j,
                                    const CPack &cpack)
-            : NodeBase(j, false),
-              data(getDataFromCpack(j, cpack)),
-              nodeData(getNodeDataFromData(data)) {}
+        : NodeBase(j, false),
+          data(getDataFromJson(j, cpack)),
+          nodeData(getNodeDataFromData(data)) {}
+
+    NodeJsonString::NodeJsonString(BinaryReader &binaryReader,
+                                   const CPack &cpack)
+        : NodeBase(binaryReader),
+          data(readDataFromBinary(binaryReader, cpack)),
+          nodeData(getNodeDataFromData(data)) {}
 
     NodeType *NodeJsonString::getNodeType() const {
         return NodeType::JSON_STRING.get();
@@ -53,12 +70,17 @@ namespace CHelper::Node {
 
     void NodeJsonString::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJson(j, "data", data);
+        JsonUtil::encode(j, "data", data);
+    }
+
+    void NodeJsonString::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        binaryWriter.encode(data);
     }
 
     static std::pair<ASTNode, JsonUtil::ConvertResult>
     getInnerASTNode(const NodeJsonString *node,
-                    const VectorView <Token> &tokens,
+                    const VectorView<Token> &tokens,
                     const std::string &content,
                     const CPack *cpack,
                     const NodeBase *mainNode) {
@@ -84,13 +106,11 @@ namespace CHelper::Node {
         tokenReader.pop();
         std::string str = TokenUtil::toString(result.tokens);
         if (HEDLEY_UNLIKELY(str.empty())) {
-            return ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(
-                    result.tokens, "字符串参数内容为空"));
+            return ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(result.tokens, "字符串参数内容为空"));
         } else if (HEDLEY_UNLIKELY(str[0] != '"')) {
-            return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(
-                    result.tokens, "字符串参数内容应该在双引号内 -> " + str));
+            return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, "字符串参数内容应该在双引号内 -> " + str));
         }
-        VectorView <Token> tokens = result.tokens;
+        VectorView<Token> tokens = result.tokens;
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_LIKELY(str.size() <= 1 || str[str.size() - 1] != '"')) {
             errorReason = ErrorReason::contentError(tokens, "字符串参数内容应该在双引号内 -> " + str);
@@ -107,8 +127,7 @@ namespace CHelper::Node {
                         item->level,
                         innerNode.second.convert(item->start) + offset,
                         innerNode.second.convert(item->end) + offset,
-                        item->errorReason
-                );
+                        item->errorReason);
             }
         }
         return std::move(newResult);
@@ -132,7 +151,7 @@ namespace CHelper::Node {
                                             size_t index,
                                             std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
-                .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+                                  .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         if (HEDLEY_UNLIKELY(str.empty())) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
             return true;
@@ -147,7 +166,7 @@ namespace CHelper::Node {
                 item.end = convertResult.convert(item.end) + offset;
                 std::string convertStr = JsonUtil::string2jsonString(item.content->name);
                 if (HEDLEY_UNLIKELY(convertStr.size() != str.size())) {
-                    item.content = std::make_shared<NormalId>(std::move(convertStr), item.content->description);
+                    item.content = NormalId::make(convertStr, item.content->description);
                 }
             }
             if (HEDLEY_LIKELY(astNode->hasChildNode() && !astNode->childNodes[0].isError() &&
@@ -162,4 +181,4 @@ namespace CHelper::Node {
         return true;
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

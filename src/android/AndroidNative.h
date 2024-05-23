@@ -9,8 +9,8 @@
 
 #define CHelperAndroid true
 
-#include "pch.h"
 #include "../chelper/Core.h"
+#include "pch.h"
 
 std::string jstring2string(JNIEnv *env, jstring jStr) {
     const char *cstr = env->GetStringUTFChars(jStr, nullptr);
@@ -119,7 +119,8 @@ Java_yancey_chelper_core_CHelperCore_getSuggestion(
     env->SetObjectField(javaDataComplete,
                         env->GetFieldID(env->GetObjectClass(javaDataComplete), "description", "Ljava/lang/String;"),
                         suggestion.content->description.has_value() ? env->NewStringUTF(
-                                suggestion.content->description.value().c_str()) : nullptr);
+                                                                              suggestion.content->description.value().c_str())
+                                                                    : nullptr);
     return javaDataComplete;
 }
 
@@ -146,7 +147,8 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions(
         env->SetObjectField(javaDataComplete,
                             env->GetFieldID(env->GetObjectClass(javaDataComplete), "description", "Ljava/lang/String;"),
                             item.content->description.has_value() ? env->NewStringUTF(
-                                    item.content->description.value().c_str()) : nullptr);
+                                                                            item.content->description.value().c_str())
+                                                                  : nullptr);
         env->CallBooleanMethod(javaList, arrayListAdd, javaDataComplete);
     }
     return javaList;
@@ -175,4 +177,4 @@ Java_yancey_chelper_core_CHelperCore_onSuggestionClick(
     }
 }
 
-#endif //CHELPER_ANDROIDNATIVE_H
+#endif//CHELPER_ANDROIDNATIVE_H

@@ -19,16 +19,21 @@ namespace CHelper::Node {
         NodePosition(const nlohmann::json &j,
                      [[maybe_unused]] const CPack &cpack);
 
+        NodePosition(BinaryReader &binaryReader,
+                     [[maybe_unused]] const CPack &cpack);
+
         [[nodiscard]] NodeType *getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
+        bool collectIdError(const ASTNode *astNode,
+                            std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
+
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEPOSITION_H
+#endif//CHELPER_NODEPOSITION_H

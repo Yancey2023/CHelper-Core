@@ -7,11 +7,11 @@
 #ifndef CHELPER_CPACK_H
 #define CHELPER_CPACK_H
 
-#include "pch.h"
+#include "../node/param/NodePerCommand.h"
 #include "Manifest.h"
 #include "id/BlockId.h"
 #include "id/ItemId.h"
-#include "../node/param/NodePerCommand.h"
+#include "pch.h"
 
 namespace CHelper {
 
@@ -27,6 +27,7 @@ namespace CHelper {
         std::shared_ptr<std::vector<std::unique_ptr<Node::NodeBase>>> commands = std::make_shared<std::vector<std::unique_ptr<Node::NodeBase>>>();
         //从这个节点开始检测
         Node::NodeBase *mainNode = nullptr;
+
     private:
         std::vector<std::unique_ptr<Node::NodeBase>> repeatNodeData;
 
@@ -35,11 +36,9 @@ namespace CHelper {
 
         explicit CPack(const nlohmann::json &j);
 
+        explicit CPack(BinaryReader &binaryReader);
+
         ~CPack();
-
-        CPack(const CPack &) = delete;
-
-        CPack &operator=(const CPack &) = delete;
 
     private:
         void applyId(const nlohmann::json &j);
@@ -57,6 +56,8 @@ namespace CHelper {
 
         static std::unique_ptr<CPack> createByJson(const nlohmann::json &j);
 
+        static std::unique_ptr<CPack> createByBinary(BinaryReader &binaryReader);
+
         void writeJsonToDirectory(const std::filesystem::path &path) const;
 
         [[nodiscard]] nlohmann::json toJson() const;
@@ -65,16 +66,15 @@ namespace CHelper {
 
         void writeBsonToFile(const std::filesystem::path &path) const;
 
-//        void writeBinToFile(const std::ostream &ostream) const;
+        void writeBinToFile(const std::filesystem::path &path) const;
 
         [[nodiscard]] std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
         getNormalId(const std::string &key) const;
 
         [[nodiscard]] std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
         getNamespaceId(const std::string &key) const;
-
     };
 
-}
+}// namespace CHelper
 
-#endif //CHELPER_CPACK_H
+#endif//CHELPER_CPACK_H

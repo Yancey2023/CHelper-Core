@@ -23,6 +23,9 @@ namespace CHelper::Node {
         NodeJsonString(const nlohmann::json &j,
                        const CPack &cpack);
 
+        NodeJsonString(BinaryReader &binaryReader,
+                       [[maybe_unused]] const CPack &cpack);
+
         [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
@@ -35,9 +38,9 @@ namespace CHelper::Node {
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
                                 std::vector<Suggestions> &suggestions) const override;
-
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEJSONSTRING_H
+#endif//CHELPER_NODEJSONSTRING_H

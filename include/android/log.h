@@ -308,8 +308,8 @@ __INTRODUCED_IN(30);
  * minimum priority needed to log.  If only one is set, then that value is used to determine the
  * minimum priority needed.  If none are set, then default_priority is used.
  *
- * @param prio         the priority to test, takes android_LogPriority values.
- * @param tag          the tag to test.
+ * @param prio         the priority to testDir, takes android_LogPriority values.
+ * @param tag          the tag to testDir.
  * @param default_prio the default priority to use if no properties or minimum priority are set.
  * @return an integer where 1 indicates that the message is loggable and 0 indicates that it is not.
  *
@@ -327,8 +327,8 @@ int __android_log_is_loggable(int prio, const char* tag, int default_prio) __INT
  * minimum priority needed to log.  If only one is set, then that value is used to determine the
  * minimum priority needed.  If none are set, then default_priority is used.
  *
- * @param prio         the priority to test, takes android_LogPriority values.
- * @param tag          the tag to test.
+ * @param prio         the priority to testDir, takes android_LogPriority values.
+ * @param tag          the tag to testDir.
  * @param len          the length of the tag.
  * @param default_prio the default priority to use if no properties or minimum priority are set.
  * @return an integer where 1 indicates that the message is loggable and 0 indicates that it is not.

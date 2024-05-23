@@ -8,13 +8,13 @@
 #define CHELPER_PARSER_H
 
 
-#include "pch.h"
-#include "ASTNode.h"
-#include "../resources/CPack.h"
-#include "TokenReader.h"
-#include "../node/param/NodeCommand.h"
-#include "../lexer/StringReader.h"
 #include "../lexer/Lexer.h"
+#include "../lexer/StringReader.h"
+#include "../node/param/NodeCommand.h"
+#include "../resources/CPack.h"
+#include "ASTNode.h"
+#include "TokenReader.h"
+#include "pch.h"
 
 namespace CHelper::Parser {
 
@@ -26,6 +26,6 @@ namespace CHelper::Parser {
 
     ASTNode parse(const std::string &content, const CPack *cpack);
 
-} // CHelper::Parser
+}// namespace CHelper::Parser
 
-#endif //CHELPER_PARSER_H
+#endif//CHELPER_PARSER_H

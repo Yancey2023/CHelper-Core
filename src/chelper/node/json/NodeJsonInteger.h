@@ -23,6 +23,9 @@ namespace CHelper::Node {
         NodeJsonInteger(const nlohmann::json &j,
                         [[maybe_unused]] const CPack &cpack);
 
+        NodeJsonInteger(BinaryReader &binaryReader,
+                        [[maybe_unused]] const CPack &cpack);
+
         [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
@@ -31,9 +34,9 @@ namespace CHelper::Node {
 
         bool collectIdError(const ASTNode *astNode,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
-
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEJSONINTEGER_H
+#endif//CHELPER_NODEJSONINTEGER_H

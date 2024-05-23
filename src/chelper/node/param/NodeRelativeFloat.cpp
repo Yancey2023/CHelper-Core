@@ -4,8 +4,8 @@
 
 #include "NodeRelativeFloat.h"
 #include "../../util/TokenUtil.h"
-#include "../util/NodeSingleSymbol.h"
 #include "../util/NodeOr.h"
+#include "../util/NodeSingleSymbol.h"
 
 namespace CHelper::Node {
 
@@ -20,13 +20,18 @@ namespace CHelper::Node {
     NodeRelativeFloat::NodeRelativeFloat(const std::optional<std::string> &id,
                                          const std::optional<std::string> &description,
                                          bool canUseCaretNotation)
-            : NodeBase(id, description, false),
-              canUseCaretNotation(canUseCaretNotation) {}
+        : NodeBase(id, description, false),
+          canUseCaretNotation(canUseCaretNotation) {}
 
     NodeRelativeFloat::NodeRelativeFloat(const nlohmann::json &j,
                                          [[maybe_unused]] const CPack &cpack)
-            : NodeBase(j, true),
-              canUseCaretNotation(JsonUtil::fromJson<bool>(j, "canUseCaretNotation")) {}
+        : NodeBase(j, true),
+          canUseCaretNotation(JsonUtil::read<bool>(j, "canUseCaretNotation")) {}
+
+    NodeRelativeFloat::NodeRelativeFloat(BinaryReader &binaryReader,
+                                         [[maybe_unused]] const CPack &cpack)
+        : NodeBase(binaryReader),
+          canUseCaretNotation(binaryReader.read<bool>()) {}
 
     NodeType *NodeRelativeFloat::getNodeType() const {
         return NodeType::RELATIVE_FLOAT.get();
@@ -34,29 +39,33 @@ namespace CHelper::Node {
 
     void NodeRelativeFloat::toJson(nlohmann::json &j) const {
         NodeBase::toJson(j);
-        JsonUtil::toJson(j, "canUseCaretNotation", canUseCaretNotation);
+        JsonUtil::encode(j, "canUseCaretNotation", canUseCaretNotation);
+    }
+
+    void NodeRelativeFloat::writeBinToFile(BinaryWriter &binaryWriter) const {
+        NodeBase::writeBinToFile(binaryWriter);
+        binaryWriter.encode(canUseCaretNotation);
     }
 
     ASTNode NodeRelativeFloat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        std::pair<std::uint8_t, ASTNode> result = getASTNode(this, cpack, tokenReader);
+        std::pair<uint8_t, ASTNode> result = getASTNode(this, cpack, tokenReader);
         if (HEDLEY_UNLIKELY(result.second.isError())) {
             return std::move(result.second);
         }
         if (HEDLEY_UNLIKELY(!canUseCaretNotation && result.first == 2)) {
-            VectorView <Token> tokens = result.second.tokens;
-            return ASTNode::andNode(this, {std::move(result.second)}, tokens, ErrorReason::logicError(
-                    tokens, "不能使用局部坐标"), "relativeFloat");
+            VectorView<Token> tokens = result.second.tokens;
+            return ASTNode::andNode(this, {std::move(result.second)}, tokens, ErrorReason::logicError(tokens, "不能使用局部坐标"), "relativeFloat");
         }
         return result.second;
     }
 
-    std::pair<std::uint8_t, ASTNode> NodeRelativeFloat::getASTNode(const NodeBase *node,
+    std::pair<uint8_t, ASTNode> NodeRelativeFloat::getASTNode(const NodeBase *node,
                                                                    const CPack *cpack,
                                                                    TokenReader &tokenReader) {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
-        std::uint8_t type;
+        uint8_t type;
         tokenReader.push();
         ASTNode preSymbol = nodePreSymbol->getASTNode(tokenReader, cpack);
         if (HEDLEY_UNLIKELY(preSymbol.isError())) {
@@ -84,10 +93,10 @@ namespace CHelper::Node {
             tokenReader.pop();
         } else if (HEDLEY_UNLIKELY(childNodes.empty())) {
             tokenReader.pop();
-            VectorView <Token> tokens = number.tokens;
+            VectorView<Token> tokens = number.tokens;
             errorReason = ErrorReason::typeError(tokens, FormatUtil::format(
-                    "类型不匹配，{0}不是有效的坐标参数",
-                    TokenUtil::toString(tokens)));
+                                                                 "类型不匹配，{0}不是有效的坐标参数",
+                                                                 TokenUtil::toString(tokens)));
         } else {
             tokenReader.restore();
         }
@@ -103,4 +112,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or("坐标"));
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

@@ -17,7 +17,10 @@ namespace CHelper::Node {
                      const std::optional<std::string> &description);
 
         NodeJsonNull(const nlohmann::json &j,
-                     [[maybe_unused]]const CPack &cpack);
+                     [[maybe_unused]] const CPack &cpack);
+
+        NodeJsonNull(BinaryReader &binaryReader,
+                     [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
@@ -26,9 +29,8 @@ namespace CHelper::Node {
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
                                 std::vector<Suggestions> &suggestions) const override;
-
     };
 
-}
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEJSONNULL_H
+#endif//CHELPER_NODEJSONNULL_H

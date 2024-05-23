@@ -18,9 +18,9 @@ namespace CHelper {
         size_t start, end;
 
         VectorView(const std::shared_ptr<std::vector<T>> vector, size_t start, size_t end)
-                : vector(vector),
-                  start(start),
-                  end(end) {
+            : vector(vector),
+              start(start),
+              end(end) {
 #if CHelperDebug == true
             if (HEDLEY_UNLIKELY(start > end)) {
                 throw Exception::WrongRange(start, end);
@@ -58,6 +58,6 @@ namespace CHelper {
         }
     };
 
-} // CHelper
+}// namespace CHelper
 
-#endif //CHELPER_VECTORVIEW_H
+#endif//CHELPER_VECTORVIEW_H

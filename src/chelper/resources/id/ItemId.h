@@ -7,8 +7,8 @@
 #ifndef CHELPER_ITEMID_H
 #define CHELPER_ITEMID_H
 
-#include "pch.h"
 #include "NamespaceId.h"
+#include "pch.h"
 
 namespace CHelper {
 
@@ -16,57 +16,19 @@ namespace CHelper {
 
         class NodeBase;
 
-    } // Node
+    }// namespace Node
 
     class ItemId : public NamespaceId {
     public:
-        const std::optional<int32_t> max;
-        const std::optional<std::vector<std::string>> descriptions;
-        const Node::NodeBase *nodeData;
-
-        ItemId(const std::optional<std::string> &nameSpace,
-               const std::string &name,
-               const std::optional<std::string> &description,
-               const std::optional<int32_t> &max,
-               const std::optional<std::vector<std::string>> &descriptions);
-
-        explicit ItemId(const nlohmann::json &j);
-
-        ~ItemId() override;
-
-        ItemId(const ItemId &) = delete;
-
-        ItemId &operator=(const ItemId &) = delete;
-
-        void toJson(nlohmann::json &j) const override;
+        std::optional<int32_t> max;
+        std::optional<std::vector<std::string>> descriptions;
+    private:
+        std::vector<std::shared_ptr<Node::NodeBase>> nodeChildren;
+        std::shared_ptr<Node::NodeBase> node = nullptr;
+    public:
+        std::shared_ptr<Node::NodeBase> getNode();
     };
 
-} // CHelper
+}// namespace CHelper
 
-template<>
-struct [[maybe_unused]] nlohmann::adl_serializer<CHelper::ItemId> {
-
-    static CHelper::ItemId from_json(const nlohmann::json &j) {
-        return CHelper::ItemId(j);
-    }
-
-    static void to_json(nlohmann::json &j, const CHelper::ItemId &t) {
-        t.toJson(j);
-    }
-
-};
-
-template<>
-struct [[maybe_unused]] nlohmann::adl_serializer<std::shared_ptr<CHelper::ItemId>> {
-
-    static std::shared_ptr<CHelper::ItemId> from_json(const nlohmann::json &j) {
-        return std::make_shared<CHelper::ItemId>(j);
-    }
-
-    static void to_json(nlohmann::json &j, const std::shared_ptr<CHelper::ItemId> &t) {
-        t->toJson(j);
-    }
-
-};
-
-#endif //CHELPER_ITEMID_H
+#endif//CHELPER_ITEMID_H

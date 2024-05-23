@@ -3,8 +3,8 @@
 //
 
 #include "NodePerCommand.h"
-#include "NodeLF.h"
 #include "../../resources/CPack.h"
+#include "NodeLF.h"
 
 namespace CHelper::Node {
 
@@ -13,16 +13,18 @@ namespace CHelper::Node {
                                    const std::optional<std::string> &description,
                                    std::vector<std::unique_ptr<Node::NodeBase>> nodes,
                                    std::vector<Node::NodeBase *> &startNodes)
-            : NodeBase(id, description, false),
-              name(std::move(name)),
-              nodes(std::move(nodes)),
-              startNodes(startNodes) {}
+        : NodeBase(id, description, false),
+          name(std::move(name)),
+          nodes(std::move(nodes)),
+          startNodes(startNodes) {}
 
     NodePerCommand::NodePerCommand(const nlohmann::json &j,
                                    const CPack &cpack)
-            : NodeBase(j, false) {
+        : NodeBase(j, false) {
+        //name
         Profile::push(ColorStringBuilder().red("loading node name").build());
-        name = JsonUtil::fromJson<std::vector<std::string>>(j, "name");
+        name = JsonUtil::read<std::vector<std::string>>(j, "name");
+        //node
         auto nodeJson = j.find("node");
         if (HEDLEY_LIKELY(nodeJson != j.end())) {
             Profile::next(ColorStringBuilder().red("loading nodes").build());
@@ -31,8 +33,9 @@ namespace CHelper::Node {
                 nodes.push_back(getNodeFromJson(item, cpack));
             }
         }
+        //start
         Profile::next(ColorStringBuilder().red("loading start nodes").build());
-        auto startNodeIds = JsonUtil::fromJson<std::vector<std::string>>(j, "start");
+        auto startNodeIds = JsonUtil::read<std::vector<std::string>>(j, "start");
         startNodes.reserve(startNodeIds.size());
         for (const auto &startNodeId: startNodeIds) {
             Profile::next(ColorStringBuilder()
@@ -56,6 +59,7 @@ namespace CHelper::Node {
                 throw Exception::UnknownNodeId(name, startNodeId);
             }
         }
+        //ast
         auto jsonAst = j.find("ast");
         if (HEDLEY_LIKELY(jsonAst != j.end())) {
             Profile::next(ColorStringBuilder().red("loading ast").build());
@@ -150,20 +154,87 @@ namespace CHelper::Node {
 #endif
     }
 
+
+    NodePerCommand::NodePerCommand(BinaryReader &binaryReader,
+                                   const CPack &cpack)
+        : NodeBase(std::nullopt, binaryReader.read<std::optional<std::string>>(), false) {
+        //name
+        binaryReader.decode(name);
+        if (name.empty()) {
+            throw std::runtime_error("command size cannot be zero");
+        }
+        //node
+        size_t nodeSize = binaryReader.readSize();
+        nodes.reserve(nodeSize);
+        for (int i = 0; i < nodeSize; ++i) {
+            nodes.push_back(getNodeFromBinary(binaryReader, cpack));
+        }
+        //start
+        size_t startNodeIdSize = binaryReader.readSize();
+        startNodes.reserve(startNodeIdSize);
+        for (int i = 0; i < startNodeIdSize; ++i) {
+            auto startNodeId = binaryReader.read<std::string>();
+            if (HEDLEY_UNLIKELY(startNodeId == "LF")) {
+                startNodes.push_back(NodeLF::getInstance());
+                continue;
+            }
+            bool flag = true;
+            for (auto &node: nodes) {
+                if (HEDLEY_UNLIKELY(node->id == startNodeId)) {
+                    startNodes.push_back(node.get());
+                    flag = false;
+                    break;
+                }
+            }
+            if (HEDLEY_UNLIKELY(flag)) {
+                throw Exception::UnknownNodeId(name, startNodeId);
+            }
+        }
+        //ast
+        for (int i = 0; i < nodeSize; ++i) {
+            Node::NodeBase *parentNode = nodes[i].get();
+            size_t childNodeSize = binaryReader.readSize();
+            parentNode->nextNodes.reserve(childNodeSize);
+            for (int j = 0; j < childNodeSize; ++j) {
+                auto childNodeId = binaryReader.read<std::string>();
+                if (HEDLEY_UNLIKELY(childNodeId == "LF")) {
+                    parentNode->nextNodes.push_back(Node::NodeLF::getInstance());
+                    continue;
+                }
+                Node::NodeBase *childNode = nullptr;
+                for (auto &node: nodes) {
+                    if (HEDLEY_UNLIKELY(node->id == childNodeId)) {
+                        childNode = node.get();
+                        break;
+                    }
+                }
+                if (HEDLEY_UNLIKELY(childNode == nullptr)) {
+                    throw Exception::UnknownNodeId(name, childNodeId);
+                }
+                parentNode->nextNodes.push_back(childNode);
+            }
+        }
+    }
+
     NodeType *NodePerCommand::getNodeType() const {
         return NodeType::PER_COMMAND.get();
     }
 
     void NodePerCommand::toJson(nlohmann::json &j) const {
-        JsonUtil::toJson(j, "name", name);
-        JsonUtil::toJsonOptionalLikely(j, "description", description);
-        JsonUtil::toJson(j, "node", nodes);
+        //name
+        JsonUtil::encode(j, "name", name);
+        //description
+        JsonUtil::encode(j, "description", description);
+        //node
+        JsonUtil::encode(j, "node", nodes);
+        //start
         std::vector<std::string> startIds;
         startIds.reserve(startNodes.size());
         for (const auto &item: startNodes) {
             startIds.push_back(item->id.value());
         }
-        JsonUtil::toJson(j, "start", startIds);
+        JsonUtil::encode(j, "start", startIds);
+        //ast
         std::vector<std::vector<std::string>> ast;
         for (const auto &item: nodes) {
             std::vector<std::string> ast1;
@@ -173,7 +244,28 @@ namespace CHelper::Node {
             }
             ast.push_back(std::move(ast1));
         }
-        JsonUtil::toJson(j, "ast", ast);
+        JsonUtil::encode(j, "ast", ast);
+    }
+
+    void NodePerCommand::writeBinToFile(BinaryWriter &binaryWriter) const {
+        //description
+        binaryWriter.encode(description);
+        //name
+        binaryWriter.encode(name);
+        //node
+        binaryWriter.encode(nodes);
+        //start
+        binaryWriter.encodeSize(startNodes.size());
+        for (const auto &item: startNodes) {
+            binaryWriter.encode(item->id.value());
+        }
+        //ast
+        for (const auto &item: nodes) {
+            binaryWriter.encodeSize(item->nextNodes.size());
+            for (const auto &item2: item->nextNodes) {
+                binaryWriter.encode(item2->id.value());
+            }
+        }
     }
 
     ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -195,4 +287,4 @@ namespace CHelper::Node {
         return std::nullopt;
     }
 
-} // CHelper::Node
+}// namespace CHelper::Node

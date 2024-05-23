@@ -23,6 +23,9 @@ namespace CHelper::Node {
         NodeFloat(const nlohmann::json &j,
                   [[maybe_unused]] const CPack &cpack);
 
+        NodeFloat(BinaryReader &binaryReader,
+                  [[maybe_unused]] const CPack &cpack);
+
         [[nodiscard]] NodeType *getNodeType() const override;
 
         void toJson(nlohmann::json &j) const override;
@@ -35,9 +38,9 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
+        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
 
-} // CHelper::Node
+}// namespace CHelper::Node
 
-#endif //CHELPER_NODEFLOAT_H
+#endif//CHELPER_NODEFLOAT_H
