@@ -70,9 +70,9 @@ namespace CHelper {
         static Node::NodeBase *getNodeAllBlockState();
     };
 
-    CODEC_H(BlockState);
+    CODEC_H(BlockState)
 
-    CODEC_H(BlockId);
+    CODEC_H(BlockId)
 
 }// namespace CHelper
 

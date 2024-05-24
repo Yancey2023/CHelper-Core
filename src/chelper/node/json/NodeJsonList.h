@@ -13,32 +13,30 @@ namespace CHelper::Node {
 
     class NodeJsonList : public NodeBase {
     public:
-        const std::string data;
+        std::string data;
+
+    private:
         std::unique_ptr<NodeBase> nodeList;
+
+    public:
+        NodeJsonList() = default;
 
         NodeJsonList(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
                      std::string data = std::string());
 
-        NodeJsonList(const nlohmann::json &j,
-                     [[maybe_unused]] const CPack &cpack);
-
-        NodeJsonList(BinaryReader &binaryReader,
-                     [[maybe_unused]] const CPack &cpack);
-
         void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
 
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
                                 std::vector<Suggestions> &suggestions) const override;
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
+
+    CODEC_NODE_H(NodeJsonList)
 
 }// namespace CHelper::Node
 

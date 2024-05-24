@@ -15,50 +15,8 @@ namespace CHelper::Node {
           min(min),
           max(max) {}
 
-    NodeJsonInteger::NodeJsonInteger(const nlohmann::json &j,
-                                     [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, false),
-          min(JsonUtil::read<std::optional<int32_t>>(j, "min")),
-          max(JsonUtil::read<std::optional<int32_t>>(j, "max")) {}
-
-    NodeJsonInteger::NodeJsonInteger(BinaryReader &binaryReader,
-                                     [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader) {
-        auto flag = binaryReader.read<uint8_t>();
-        if ((flag >> 0) & 0x01) {
-            min = binaryReader.read<int32_t>();
-        }
-        if ((flag >> 1) & 0x01) {
-            max = binaryReader.read<int32_t>();
-        }
-    }
-
     NodeType *NodeJsonInteger::getNodeType() const {
         return NodeType::JSON_INTEGER.get();
-    }
-
-    void NodeJsonInteger::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "min", min);
-        JsonUtil::encode(j, "max", max);
-    }
-
-    void NodeJsonInteger::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        uint8_t flag = 0x00;
-        if (min.has_value()) {
-            flag |= (0x01 << 0);
-        }
-        if (max.has_value()) {
-            flag |= (0x01 << 1);
-        }
-        binaryWriter.encode(flag);
-        if (min.has_value()) {
-            binaryWriter.encode(min.value());
-        }
-        if (max.has_value()) {
-            binaryWriter.encode(max.value());
-        }
     }
 
     ASTNode NodeJsonInteger::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -88,5 +46,7 @@ namespace CHelper::Node {
         }
         return true;
     }
+
+    CODEC_NODE(NodeJsonInteger, min, max)
 
 }// namespace CHelper::Node

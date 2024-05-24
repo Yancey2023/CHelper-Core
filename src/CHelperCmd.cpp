@@ -108,10 +108,10 @@ void outputBinary() {
 }
 
 int main() {
-    //    testDir();
+        testDir();
     //    testBin();
-    outputBson();
-    outputBinary();
+//    outputBson();
+//    outputBinary();
     return 0;
 }
 

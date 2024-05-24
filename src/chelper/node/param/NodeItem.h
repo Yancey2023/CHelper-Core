@@ -19,30 +19,23 @@ namespace CHelper::Node {
             // <物品ID> <附加值> <物品数量>
             ITEM_CLEAR = 1
         };
-    }
+    }// namespace NodeItemType
 
     class NodeItem : public NodeBase {
     public:
-        const NodeItemType::NodeItemType nodeItemType;
-        const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds;
-        const NodeNamespaceId nodeItemId;
-        const std::shared_ptr<NodeBase> nodeComponent;
+        NodeItemType::NodeItemType nodeItemType = NodeItemType::ITEM_GIVE;
 
-        NodeItem(const std::optional<std::string> &id,
-                 const std::optional<std::string> &description,
-                 NodeItemType::NodeItemType nodeItemType,
-                 const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents,
-                 const std::shared_ptr<NodeBase> &nodeComponent);
+    private:
+        std::unique_ptr<NodeNamespaceId> nodeItemId;
+        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds;
+        std::unique_ptr<NodeBase> nodeComponent;
 
-        NodeItem(const nlohmann::json &j,
-                 const CPack &cpack);
+    public:
+        NodeItem() = default;
 
-        NodeItem(BinaryReader &binaryReader,
-                 [[maybe_unused]] const CPack &cpack);
+        void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -51,11 +44,15 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
-        static NodeNamespaceId
-        getNodeItemId(const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
+
+    namespace NodeItemType {
+
+        CODEC_ENUM_H(NodeItemType)
+
+    }// namespace NodeItemType
+
+    CODEC_NODE_H(NodeItem)
 
 }// namespace CHelper::Node
 

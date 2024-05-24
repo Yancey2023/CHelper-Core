@@ -19,32 +19,18 @@ namespace CHelper::Node {
     class NodeTargetSelector : public NodeBase {
     public:
         bool isMustPlayer, isMustNPC, isOnlyOne;
-        NodeNamespaceId nodeItem;
-        NodeNormalId nodeFamily, nodeGameMode, nodeItemLocation;
-        const NodeNamespaceId nodeEntities;
-        const NodeTargetSelectorArgument nodeArgument;
-        const NodeList nodeArguments;
 
-        NodeTargetSelector(const std::optional<std::string> &id,
-                           const std::optional<std::string> &description,
-                           bool isMustPlayer,
-                           bool isMustNPC,
-                           bool isOnlyOne,
-                           const NodeNamespaceId &nodeItem,
-                           const NodeNormalId &nodeFamily,
-                           const NodeNormalId &nodeGameMode,
-                           const NodeNormalId &nodeItemLocation,
-                           const NodeNamespaceId &nodeEntities);
+    private:
+        std::unique_ptr<NodeNamespaceId> nodeItem;
+        std::unique_ptr<NodeNormalId> nodeFamily, nodeGameMode, nodeItemLocation;
+        std::unique_ptr<NodeNamespaceId> nodeEntities;
+        std::unique_ptr<NodeTargetSelectorArgument> nodeArgument;
+        std::unique_ptr<NodeList> nodeArguments;
 
-        NodeTargetSelector(const nlohmann::json &j,
-                           [[maybe_unused]] const CPack &cpack);
-
-        NodeTargetSelector(BinaryReader &binaryReader,
-                           [[maybe_unused]] const CPack &cpack);
+    public:
+        NodeTargetSelector() = default;
 
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -55,8 +41,10 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
+        void init(const CPack &cpack) override;
     };
+
+    CODEC_NODE_H(NodeTargetSelector)
 
 }// namespace CHelper::Node
 

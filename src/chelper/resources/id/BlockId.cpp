@@ -58,14 +58,20 @@ namespace CHelper {
                     node = std::make_shared<Node::NodeText>(
                             "BLOCK_STATE_ENTRY_VALUE_STRING", "方块状态键值对的键（字符串）",
                             NormalId::make('\"' + std::get<std::string>(value) + '\"', description));
+                    break;
                 case BlockStateType::INTEGER:
                     node = std::make_shared<Node::NodeText>(
                             "BLOCK_STATE_ENTRY_VALUE_INTEGER", "方块状态键值对的键（整数）",
-                            NormalId::make(std::to_string(std::get<int32_t>(value)), description));
+                            NormalId::make(std::to_string(std::get<int32_t>(value)), description),
+                            [](const Node::NodeBase *node1, TokenReader &tokenReader) -> ASTNode {
+                                return tokenReader.readIntegerASTNode(node1);
+                            });
+                    break;
                 case BlockStateType::BOOLEAN:
                     node = std::make_shared<Node::NodeText>(
                             "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", "方块状态键值对的键（布尔值）",
                             NormalId::make(std::get<bool>(value) ? "true" : "false", description));
+                    break;
                 default:
                     HEDLEY_UNREACHABLE();
             }
@@ -74,7 +80,6 @@ namespace CHelper {
     }
 
     void from_json(const nlohmann::json &j, BlockStateValue &t) {
-        JsonUtil::decode<std::string>(j, "description", t.description);
         const nlohmann::json &jsonValue = j.at("value");
         if (HEDLEY_UNLIKELY(jsonValue.is_number_integer())) {
             t.type = CHelper::BlockStateType::INTEGER;
@@ -86,6 +91,7 @@ namespace CHelper {
             t.type = CHelper::BlockStateType::STRING;
             t.value = jsonValue.get<std::string>();
         }
+        JsonUtil::decode<std::string>(j, "description", t.description);
     }
 
     void to_json(nlohmann::json &j, const BlockStateValue &t) {
@@ -107,21 +113,15 @@ namespace CHelper {
         binaryReader.decode(t.description);
         binaryReader.decode((uint8_t &) t.type);
         switch (t.type) {
-            case CHelper::BlockStateType::STRING: {
-                std::string str;
-                binaryReader.decode(str);
-                t.value = str;
-            } break;
-            case CHelper::BlockStateType::BOOLEAN: {
-                bool flag;
-                binaryReader.decode(flag);
-                t.value = flag;
-            } break;
-            case CHelper::BlockStateType::INTEGER: {
-                int32_t int32;
-                binaryReader.decode(int32);
-                t.value = int32;
-            } break;
+            case CHelper::BlockStateType::STRING:
+                t.value = binaryReader.read<std::string>();
+                break;
+            case CHelper::BlockStateType::BOOLEAN:
+                t.value = binaryReader.read<bool>();
+                break;
+            case CHelper::BlockStateType::INTEGER:
+                t.value = binaryReader.read<int32_t>();
+                break;
         }
     }
 
@@ -206,8 +206,8 @@ namespace CHelper {
         return nodeAllBlockState.get();
     }
 
-    CODEC(BlockState, key, description, values, defaultValue);
+    CODEC(BlockState, key, description, values, defaultValue)
 
-    CODEC(BlockId, idNamespace, name, description, blockStates);
+    CODEC(BlockId, idNamespace, name, description, blockStates)
 
 }// namespace CHelper

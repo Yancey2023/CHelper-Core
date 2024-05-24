@@ -15,28 +15,21 @@ namespace CHelper::Node {
     public:
         std::optional<float> min, max;
 
+        NodeJsonFloat() = default;
+
         NodeJsonFloat(const std::optional<std::string> &id,
                       const std::optional<std::string> &description,
                       const std::optional<float> &min,
                       const std::optional<float> &max);
-
-        NodeJsonFloat(const nlohmann::json &j,
-                      [[maybe_unused]] const CPack &cpack);
-
-        NodeJsonFloat(BinaryReader &binaryReader,
-                      [[maybe_unused]] const CPack &cpack);
-
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         bool collectIdError(const ASTNode *astNode,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
 
+    CODEC_NODE_H(NodeJsonFloat)
 
 }// namespace CHelper::Node
 

@@ -17,26 +17,26 @@ namespace CHelper::Node {
     public:
         std::string key;
         std::string value;
+
+    private:
         std::unique_ptr<NodeBase> nodeKey, nodeEntry;
+
+    public:
+        NodeJsonEntry() = default;
 
         NodeJsonEntry(const std::optional<std::string> &id,
                       const std::optional<std::string> &description,
                       std::string key = std::string(),
                       std::string value = std::string());
 
-        explicit NodeJsonEntry(const nlohmann::json &j);
-
-        explicit NodeJsonEntry(BinaryReader &binaryReader);
-
         void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         static NodeBase *getNodeJsonAllEntry();
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
+
+    CODEC_WITH_UNIQUE_PTR_H(NodeJsonEntry)
 
 }// namespace CHelper::Node
 

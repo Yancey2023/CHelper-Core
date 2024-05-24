@@ -19,18 +19,6 @@ namespace CHelper::Node {
     static std::shared_ptr<NodeBase> xp = std::make_shared<NodeOr>(
             "XP", "经验", std::vector<const NodeBase *>{nodeInteger.get(), levelXp.get()}, false);
 
-    NodeXpInteger::NodeXpInteger(const std::optional<std::string> &id,
-                                 const std::optional<std::string> &description)
-        : NodeBase(id, description, false) {}
-
-    NodeXpInteger::NodeXpInteger(const nlohmann::json &j,
-                                 [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, true) {}
-
-    NodeXpInteger::NodeXpInteger(BinaryReader &binaryReader,
-                                 [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader) {}
-
     NodeType *NodeXpInteger::getNodeType() const {
         return NodeType::XP_INTEGER.get();
     }
@@ -44,5 +32,7 @@ namespace CHelper::Node {
                                          bool isMustHave) const {
         structure.append(isMustHave, description.value_or("经验值"));
     }
+
+    CODEC_UNIQUE_PTR(NodeXpInteger)
 
 }// namespace CHelper::Node

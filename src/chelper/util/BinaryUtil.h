@@ -41,31 +41,10 @@ namespace CHelper {
 
         void encodeSize(size_t t);
 
-        void encode(const std::optional<bool> &t);
-
         void encode(const std::string &t);
-
-        void encode(const std::optional<std::string> &t);
-
-        void encode(const std::optional<int32_t> &t);
 
         template<class T>
         void encode(const std::shared_ptr<T> &t) {
-            encode(*t);
-        }
-
-        template<class T>
-        void encode(const std::unique_ptr<T> &t) {
-            encode(*t);
-        }
-
-        template<class T>
-        void encode(const std::weak_ptr<T> &t) {
-            encode(*t);
-        }
-
-        template<class T>
-        void encode(const T *t) {
             encode(*t);
         }
 
@@ -78,11 +57,12 @@ namespace CHelper {
         }
 
         template<class T>
-        void encode(const std::optional<std::vector<T>> &t) {
-            if (HEDLEY_LIKELY(t.has_value() && !t.value().empty())) {
+        void encode(const std::optional<T> &t) {
+            if (HEDLEY_LIKELY(t.has_value())) {
+                encode(true);
                 encode(t.value());
             } else {
-                encodeSize(0);
+                encode(false);
             }
         }
 
@@ -133,13 +113,7 @@ namespace CHelper {
 
         void decode(double &t);
 
-        void decode(std::optional<bool> &t);
-
         void decode(std::string &t);
-
-        void decode(std::optional<std::string> &value);
-
-        void decode(std::optional<int32_t> &t);
 
         template<class T>
         void decode(std::vector<T> &t) {
@@ -151,16 +125,10 @@ namespace CHelper {
         }
 
         template<class T>
-        void decode(std::optional<std::vector<T>> &t) {
-            size_t size = readSize();
-            if (size == 0) {
-                t = std::nullopt;
-                return;
-            }
-            t = std::make_optional<std::vector<T>>();
-            t->reserve(size);
-            for (int i = 0; i < size; ++i) {
-                t->push_back(read<T>());
+        void decode(std::optional<T> &t) {
+            if (read<bool>()) {
+                t = std::make_optional<T>();
+                decode(t.value());
             }
         }
 

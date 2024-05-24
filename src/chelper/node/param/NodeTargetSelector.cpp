@@ -36,79 +36,22 @@ namespace CHelper::Node {
     static std::shared_ptr<NodeBase> nodeSeparator = std::make_shared<NodeSingleSymbol>(
             "TARGET_SELECTOR_ARGUMENTS_SEPARATOR", "目标选择器参数分隔符", ',');
 
-    NodeTargetSelector::NodeTargetSelector(const std::optional<std::string> &id,
-                                           const std::optional<std::string> &description,
-                                           const bool isMustPlayer,
-                                           const bool isMustNPC,
-                                           const bool isOnlyOne,
-                                           const NodeNamespaceId &nodeItem,
-                                           const NodeNormalId &nodeFamily,
-                                           const NodeNormalId &nodeGameMode,
-                                           const NodeNormalId &nodeItemLocation,
-                                           const NodeNamespaceId &nodeEntities)
-        : NodeBase(id, description, false),
-          isMustPlayer(isMustPlayer),
-          isMustNPC(isMustNPC),
-          isOnlyOne(isOnlyOne),
-          nodeItem(nodeItem),
-          nodeFamily(nodeFamily),
-          nodeGameMode(nodeGameMode),
-          nodeItemLocation(nodeItemLocation),
-          nodeEntities(nodeEntities),
-          nodeArgument("TARGET_SELECTOR_ARGUMENT", "目标选择器单个参数",
-                       &nodeItem, &nodeFamily, &nodeGameMode, &nodeItemLocation, &nodeEntities),
-          nodeArguments("TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
-                        nodeLeft.get(), &nodeArgument, nodeSeparator.get(), nodeRight.get()) {}
-
-    NodeTargetSelector::NodeTargetSelector(const nlohmann::json &j,
-                                           [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, true),
-          isMustPlayer(JsonUtil::read<bool>(j, "isMustPlayer")),
-          isMustNPC(JsonUtil::read<bool>(j, "isMustNPC")),
-          isOnlyOne(JsonUtil::read<bool>(j, "isOnlyOne")),
-          nodeItem("ITEM_ID", "物品ID", "items", true, cpack.itemIds),
-          nodeFamily("FAMILIES", "族", "families", true, cpack.getNormalId("families")),
-          nodeGameMode("GAME_MODES", "游戏模式", "gameModes", true, cpack.getNormalId("gameModes")),
-          nodeItemLocation("SLOT", "物品栏", "slot", true, cpack.getNormalId("slot")),
-          nodeEntities("ENTITIES", "实体", "entities", true, cpack.getNamespaceId("entities")),
-          nodeArgument("TARGET_SELECTOR_ARGUMENT", "目标选择器单个参数",
-                       &nodeItem, &nodeFamily, &nodeGameMode, &nodeItemLocation, &nodeEntities),
-          nodeArguments("TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
-                        nodeLeft.get(), &nodeArgument, nodeSeparator.get(), nodeRight.get()) {}
-
-    NodeTargetSelector::NodeTargetSelector(BinaryReader &binaryReader,
-                                           [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader),
-          nodeItem("ITEM_ID", "物品ID", "items", true, cpack.itemIds),
-          nodeFamily("FAMILIES", "族", "families", true, cpack.getNormalId("families")),
-          nodeGameMode("GAME_MODES", "游戏模式", "gameModes", true, cpack.getNormalId("gameModes")),
-          nodeItemLocation("SLOT", "物品栏", "slot", true, cpack.getNormalId("slot")),
-          nodeEntities("ENTITIES", "实体", "entities", true, cpack.getNamespaceId("entities")),
-          nodeArgument("TARGET_SELECTOR_ARGUMENT", "目标选择器单个参数",
-                       &nodeItem, &nodeFamily, &nodeGameMode, &nodeItemLocation, &nodeEntities),
-          nodeArguments("TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
-                        nodeLeft.get(), &nodeArgument, nodeSeparator.get(), nodeRight.get()) {
-        isMustPlayer = binaryReader.read<bool>();
-        isMustNPC = binaryReader.read<bool>();
-        isOnlyOne = binaryReader.read<bool>();
+    void NodeTargetSelector::init(const CPack &cpack) {
+        nodeItem = std::make_unique<NodeNamespaceId>("ITEM_ID", "物品ID", "items", true, cpack.itemIds),
+        nodeFamily = std::make_unique<NodeNormalId>("FAMILIES", "族", "families", true, cpack.getNormalId("families")),
+        nodeGameMode = std::make_unique<NodeNormalId>("GAME_MODES", "游戏模式", "gameModes", true, cpack.getNormalId("gameModes")),
+        nodeItemLocation = std::make_unique<NodeNormalId>("SLOT", "物品栏", "slot", true, cpack.getNormalId("slot")),
+        nodeEntities = std::make_unique<NodeNamespaceId>("ENTITIES", "实体", "entities", true, cpack.getNamespaceId("entities")),
+        nodeArgument = std::make_unique<NodeTargetSelectorArgument>(
+                "TARGET_SELECTOR_ARGUMENT", "目标选择器单个参数",
+                nodeItem.get(), nodeFamily.get(), nodeGameMode.get(), nodeItemLocation.get(), nodeEntities.get()),
+        nodeArguments = std::make_unique<NodeList>(
+                "TARGET_SELECTOR_ARGUMENTS", "目标选择器参数",
+                nodeLeft.get(), nodeArgument.get(), nodeSeparator.get(), nodeRight.get());
     }
 
     NodeType *NodeTargetSelector::getNodeType() const {
         return NodeType::TARGET_SELECTOR.get();
-    }
-
-    void NodeTargetSelector::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "isMustPlayer", isMustPlayer);
-        JsonUtil::encode(j, "isMustNPC", isMustNPC);
-        JsonUtil::encode(j, "isOnlyOne", isOnlyOne);
-    }
-
-    void NodeTargetSelector::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        binaryWriter.encode(isMustPlayer);
-        binaryWriter.encode(isMustNPC);
-        binaryWriter.encode(isOnlyOne);
     }
 
     ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -141,7 +84,7 @@ namespace CHelper::Node {
             return ASTNode::andNode(this, {targetSelectorVariable}, tokenReader.collect(),
                                     nullptr, "target selector no arguments", false);
         }
-        ASTNode arguments = nodeArguments.getASTNodeWithNextNode(tokenReader, cpack);
+        ASTNode arguments = nodeArguments->getASTNodeWithNextNode(tokenReader, cpack);
         return ASTNode::andNode(this, {targetSelectorVariable, arguments}, tokenReader.collect(),
                                 nullptr, "target selector with arguments");
     }
@@ -169,5 +112,7 @@ namespace CHelper::Node {
                                               bool isMustHave) const {
         structure.append(isMustHave, "目标选择器");
     }
+
+    CODEC_NODE(NodeTargetSelector, isMustPlayer, isMustNPC, isOnlyOne)
 
 }// namespace CHelper::Node

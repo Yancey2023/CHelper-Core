@@ -31,6 +31,6 @@ namespace CHelper {
         return result;
     }
 
-    CODEC(NormalId, name, description);
+    CODEC(NormalId, name, description)
 
 }// namespace CHelper

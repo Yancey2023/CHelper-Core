@@ -15,30 +15,29 @@ namespace CHelper::Node {
     class NodeRepeat : public NodeBase {
     public:
         std::string key;
-        NodeOr nodeElement;
+
+    private:
+        std::unique_ptr<NodeOr> nodeElement;
+
+    public:
+        NodeRepeat() = default;
 
         NodeRepeat(const std::optional<std::string> &id,
                    const std::optional<std::string> &description,
                    std::string key,
                    const std::pair<NodeBase *, NodeBase *> &node);
 
-        NodeRepeat(const nlohmann::json &j,
-                   const CPack &cpack);
-
-        NodeRepeat(BinaryReader &binaryReader,
-                   [[maybe_unused]] const CPack &cpack);
-
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
+        void init(const CPack &cpack) override;
     };
+
+    CODEC_NODE_H(NodeRepeat)
 
 }// namespace CHelper::Node
 

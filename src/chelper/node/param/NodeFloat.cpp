@@ -15,50 +15,8 @@ namespace CHelper::Node {
           min(min),
           max(max) {}
 
-    NodeFloat::NodeFloat(const nlohmann::json &j,
-                         [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, true),
-          min(JsonUtil::read<std::optional<float>>(j, "min")),
-          max(JsonUtil::read<std::optional<float>>(j, "max")) {}
-
-    NodeFloat::NodeFloat(BinaryReader &binaryReader,
-                         [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader) {
-        auto flag = binaryReader.read<uint8_t>();
-        if ((flag >> 0) & 0x01) {
-            min = binaryReader.read<float>();
-        }
-        if ((flag >> 1) & 0x01) {
-            max = binaryReader.read<float>();
-        }
-    }
-
     NodeType *NodeFloat::getNodeType() const {
         return NodeType::FLOAT.get();
-    }
-
-    void NodeFloat::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "min", min);
-        JsonUtil::encode(j, "max", max);
-    }
-
-    void NodeFloat::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        uint8_t flag = 0x00;
-        if (min.has_value()) {
-            flag |= (0x01 << 0);
-        }
-        if (max.has_value()) {
-            flag |= (0x01 << 1);
-        }
-        binaryWriter.encode(flag);
-        if (min.has_value()) {
-            binaryWriter.encode(min.value());
-        }
-        if (max.has_value()) {
-            binaryWriter.encode(max.value());
-        }
     }
 
     ASTNode NodeFloat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -94,5 +52,7 @@ namespace CHelper::Node {
                                      bool isMustHave) const {
         structure.append(isMustHave, description.value_or("数字"));
     }
+
+    CODEC_NODE(NodeFloat, min, max)
 
 }// namespace CHelper::Node

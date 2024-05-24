@@ -19,35 +19,8 @@ namespace CHelper::Node {
           canContainSpace(canContainSpace),
           ignoreLater(ignoreLater) {}
 
-    NodeString::NodeString(const nlohmann::json &j,
-                           [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, true),
-          allowMissingString(false),
-          canContainSpace(JsonUtil::read<bool>(j, "canContainSpace")),
-          ignoreLater(JsonUtil::read<bool>(j, "ignoreLater")) {}
-
-    NodeString::NodeString(BinaryReader &binaryReader,
-                           [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader) {
-        allowMissingString = false;
-        canContainSpace = binaryReader.read<bool>();
-        ignoreLater = binaryReader.read<bool>();
-    }
-
     NodeType *NodeString::getNodeType() const {
         return NodeType::STRING.get();
-    }
-
-    void NodeString::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "canContainSpace", canContainSpace);
-        JsonUtil::encode(j, "ignoreLater", ignoreLater);
-    }
-
-    void NodeString::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        binaryWriter.encode(canContainSpace);
-        binaryWriter.encode(ignoreLater);
     }
 
     ASTNode NodeString::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -123,5 +96,7 @@ namespace CHelper::Node {
                                       bool isMustHave) const {
         structure.append(isMustHave, description.value_or("字符串"));
     }
+
+    CODEC_NODE(NodeString, canContainSpace, ignoreLater)
 
 }// namespace CHelper::Node

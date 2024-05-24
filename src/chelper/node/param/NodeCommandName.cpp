@@ -8,21 +8,9 @@
 
 namespace CHelper::Node {
 
-    NodeCommandName::NodeCommandName(const std::optional<std::string> &id,
-                                     const std::optional<std::string> &description,
-                                     const std::vector<std::unique_ptr<Node::NodeBase>> *commands)
-        : NodeBase(id, description, false),
-          commands(commands) {}
-
-    NodeCommandName::NodeCommandName(const nlohmann::json &j,
-                                     const CPack &cpack)
-        : NodeBase(j, true),
-          commands(cpack.commands.get()) {}
-
-    NodeCommandName::NodeCommandName(BinaryReader &binaryReader,
-                                     const CPack &cpack)
-        : NodeBase(binaryReader),
-          commands(cpack.commands.get()) {}
+    void NodeCommandName::init(const CPack &cpack) {
+        commands = cpack.commands.get();
+    }
 
     NodeType *NodeCommandName::getNodeType() const {
         return NodeType::COMMAND_NAME.get();
@@ -110,5 +98,7 @@ namespace CHelper::Node {
                                            bool isMustHave) const {
         structure.append(isMustHave, "命令名");
     }
+
+    CODEC_UNIQUE_PTR(NodeCommandName)
 
 }// namespace CHelper::Node

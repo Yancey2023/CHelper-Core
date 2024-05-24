@@ -72,73 +72,22 @@ namespace CHelper {
 
     }// namespace JsonUtil
 
-    template<typename T>
-    void from_json(nlohmann::json &j, const std::shared_ptr<T> &t) {
-        t = std::make_shared<T>();
-        from_json(j, *t);
-    }
-
-    template<typename T>
-    void to_json(nlohmann::json &j, const std::shared_ptr<T> &t) {
-        to_json(j, *t);
-    }
-
-    template<typename T>
-    void from_json(nlohmann::json &j, const std::unique_ptr<T> &t) {
-        t = std::make_unique<T>();
-        from_json(j, *t);
-    }
-
-    template<typename T>
-    void to_json(nlohmann::json &j, const std::unique_ptr<T> &t) {
-        to_json(j, *t);
-    }
-
-    template<typename T>
-    void to_json(nlohmann::json &j, const std::weak_ptr<T> &t) {
-        to_json(j, *t);
-    }
-
-    template<typename T>
-    void to_json(nlohmann::json &j, const T *t) {
-        to_json(j, *t);
-    }
-
-    namespace Node {
-
-        template<typename T>
-        void from_json(nlohmann::json &j, const std::shared_ptr<T> &t) {
-            t = std::make_shared<T>();
-            from_json(j, *t);
-        }
-
-        template<typename T>
-        void to_json(nlohmann::json &j, const std::shared_ptr<T> &t) {
-            to_json(j, *t);
-        }
-
-        template<typename T>
-        void from_json(nlohmann::json &j, const std::unique_ptr<T> &t) {
-            t = std::make_unique<T>();
-            from_json(j, *t);
-        }
-
-        template<typename T>
-        void to_json(nlohmann::json &j, const std::unique_ptr<T> &t) {
-            to_json(j, *t);
-        }
-
-        template<typename T>
-        void to_json(nlohmann::json &j, const std::weak_ptr<T> &t) {
-            to_json(j, *t);
-        }
-
-        template<typename T>
-        void to_json(nlohmann::json &j, const T *t) {
-            to_json(j, *t);
-        }
-    }// namespace Node
-
 }// namespace CHelper
+
+namespace nlohmann {
+
+    template<typename T>
+    struct adl_serializer<std::shared_ptr<T>> {
+
+        static void from_json(const json &j, std::shared_ptr<T> &t) {
+            t = std::make_shared<T>(j);
+        }
+
+        static void to_json(json &j, const std::shared_ptr<T> &t) {
+            j = t;
+        }
+    };
+
+}// namespace nlohmann
 
 #endif//CHELPER_JSONUTIL_H

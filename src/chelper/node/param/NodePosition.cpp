@@ -11,14 +11,6 @@ namespace CHelper::Node {
                                const std::optional<std::string> &description)
         : NodeBase(id, description, false) {}
 
-    NodePosition::NodePosition(const nlohmann::json &j,
-                               [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, true) {}
-
-    NodePosition::NodePosition(BinaryReader &binaryReader,
-                               [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader) {}
-
     NodeType *NodePosition::getNodeType() const {
         return NodeType::POSITION.get();
     }
@@ -68,5 +60,7 @@ namespace CHelper::Node {
                                         bool isMustHave) const {
         structure.append(isMustHave, "位置");
     }
+
+    CODEC_UNIQUE_PTR(NodePosition)
 
 }// namespace CHelper::Node

@@ -12,6 +12,11 @@
 #include "NodeType.h"
 #include "pch.h"
 
+#define REQUIRE_INIT                              \
+    if (!isInit) {                                \
+        throw std::runtime_error("require init"); \
+    }
+
 namespace CHelper {
 
     class CPack;
@@ -26,37 +31,21 @@ namespace CHelper {
             std::optional<std::string> brief;
             std::optional<std::string> description;
             //true-一定要在空格后 false-不一定在空格后
-            bool isMustAfterWhiteSpace;
+            std::optional<bool> isMustAfterWhiteSpace;
             //存储下一个节点，需要调用构造函数之后再进行添加
             std::vector<NodeBase *> nextNodes;
 
-        protected:
+            NodeBase() = default;
+
             NodeBase(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
                      bool isMustAfterWhiteSpace);
 
-            NodeBase(const nlohmann::json &j,
-                     bool isMustAfterWhiteSpace);
-
-            explicit NodeBase(BinaryReader &binaryReader);
-
-        public:
             virtual ~NodeBase() = default;
-
-            static std::unique_ptr<NodeBase> getNodeFromJson(const nlohmann::json &j,
-                                                             const CPack &cpack);
-
-            static std::unique_ptr<NodeBase> getNodeFromBinary(BinaryReader &binaryReader,
-                                                               const CPack &cpack);
-
 
             virtual void init(const CPack &cpack);
 
             [[nodiscard]] HEDLEY_RETURNS_NON_NULL virtual NodeType *getNodeType() const;
-
-            virtual void toJson(nlohmann::json &j) const;
-
-            virtual void writeBinToFile(BinaryWriter &binaryWriter) const;
 
             [[nodiscard]] HEDLEY_NON_NULL(3) virtual ASTNode
                     getASTNode(TokenReader &tokenReader, const CPack *cpack) const = 0;
@@ -102,9 +91,9 @@ namespace CHelper {
                                                bool isMustHave) const;
         };
 
-        void to_json(nlohmann::json &j, const Node::NodeBase &t);
+        CODEC_NODE_H(NodeBase)
 
-        void to_binary(BinaryWriter &binaryWriter, const Node::NodeBase &t);
+        CODEC_H(std::unique_ptr<NodeBase>)
 
     }// namespace Node
 

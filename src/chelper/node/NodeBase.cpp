@@ -14,114 +14,19 @@ namespace CHelper::Node {
           description(description),
           isMustAfterWhiteSpace(isMustAfterWhiteSpace) {}
 
-    NodeBase::NodeBase(const nlohmann::json &j,
-                       bool isMustAfterWhiteSpace)
-        : id(JsonUtil::read<std::optional<std::string>>(j, "id")),
-          brief(JsonUtil::read<std::optional<std::string>>(j, "brief")),
-          description(JsonUtil::read<std::optional<std::string>>(j, "description")),
-          isMustAfterWhiteSpace(j.value("isMustAfterWhiteSpace", isMustAfterWhiteSpace)) {
-#ifdef HEDLEY_GCC_VERSION
-#if CHelperDebug
-        if (HEDLEY_UNLIKELY(!description.has_value() || brief.has_value())) {
-            return;
-        }
-        auto type = JsonUtil::read<std::optional<std::string>>(j, "type");
-        if (HEDLEY_UNLIKELY(!type.has_value() || type.value() == "PER_COMMAND" || type.value() == "TARGET_SELECTOR" ||
-                            type.value() == "JSON_OBJECT" || type.value() == "JSON_INTEGER" ||
-                            type.value() == "JSON_FLOAT" ||
-                            type.value() == "JSON_NULL" || type.value() == "JSON_LIST" ||
-                            type.value() == "JSON_STRING" ||
-                            type.value() == "JSON_BOOLEAN" || type.value() == "TEXT" || type.value() == "BLOCK" ||
-                            type.value() == "ITEM")) {
-            return;
-        }
+    void NodeBase::init(const CPack &cpack) {
 
-        static std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-        if (HEDLEY_UNLIKELY(converter.from_bytes(description.value()).length() > 5)) {
-            CHELPER_WARN("节点介绍长度过长 " + type.value_or("") + " " + description.value());
-        }
-#endif
-#endif
-    }
-
-    NodeBase::NodeBase(BinaryReader &binaryReader) {
-        id = binaryReader.read<std::optional<std::string>>();
-        brief = binaryReader.read<std::optional<std::string>>();
-        description = binaryReader.read<std::optional<std::string>>();
-        isMustAfterWhiteSpace = binaryReader.read<bool>();
-    }
-
-    std::unique_ptr<NodeBase> NodeBase::getNodeFromJson(const nlohmann::json &j,
-                                                        const CPack &cpack) {
-        Profile::push(ColorStringBuilder().red("loading type").build());
-        auto type = JsonUtil::read<std::string>(j, "type");
-        auto id = JsonUtil::read<std::optional<std::string>>(j, "id");
-        Profile::next(ColorStringBuilder().red("loading node ").purple(type).build());
-        if (HEDLEY_LIKELY(id.has_value())) {
-            Profile::next(ColorStringBuilder()
-                                  .red("loading node ")
-                                  .purple(type)
-                                  .red(" with id \"")
-                                  .purple(id.value())
-                                  .red("\"")
-                                  .build());
-        } else {
-            Profile::next(ColorStringBuilder()
-                                  .red("loading node ")
-                                  .purple(type)
-                                  .red(" without id")
-                                  .build());
-        }
-        for (const auto &item: NodeType::NODE_TYPES) {
-            if (HEDLEY_UNLIKELY(item->nodeName == type)) {
-                Profile::pop();
-                return item->createNodeByJson(j, cpack);
-            }
-        }
-        throw Exception::UnknownNodeType(type);
-    }
-
-    std::unique_ptr<NodeBase> NodeBase::getNodeFromBinary(BinaryReader &binaryReader,
-                                                          const CPack &cpack) {
-        auto typeId = binaryReader.read<uint8_t>();
-        if (typeId > NodeType::NODE_TYPES.size()) {
-            throw std::runtime_error("unknown typeId");
-        }
-        const NodeType *type = NodeType::NODE_TYPES[typeId];
-        return type->createNodeByBinary(binaryReader, cpack);
     }
 
     NodeType *NodeBase::getNodeType() const {
         return NodeType::UNKNOWN.get();
     }
 
-    void NodeBase::toJson(nlohmann::json &j) const {
-        if (getNodeType() == NodeType::UNKNOWN.get()) {
-            throw std::runtime_error("fail to write node");
-        }
-        JsonUtil::encode(j, "type", getNodeType()->nodeName);
-        JsonUtil::encode(j, "id", id);
-        JsonUtil::encode(j, "brief", brief);
-        JsonUtil::encode(j, "description", description);
-        //TODO 需要更好的判断isMustAfterWhiteSpace是否输出的逻辑
-        JsonUtil::encode(j, "isMustAfterWhiteSpace", isMustAfterWhiteSpace);
-    }
-
-    void NodeBase::writeBinToFile(BinaryWriter &binaryWriter) const {
-        if (getNodeType() == NodeType::UNKNOWN.get()) {
-            throw std::runtime_error("fail to write node");
-        }
-        binaryWriter.encode(getNodeType()->id);
-        binaryWriter.encode(id);
-        binaryWriter.encode(brief);
-        binaryWriter.encode(description);
-        binaryWriter.encode(isMustAfterWhiteSpace);
-    }
-
     ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const {
         //空格检测
+        //TODO isMustAfterWhiteSpace.value_or(getDefaultIsMustAfterWhitespace)
         tokenReader.push();
-        if (HEDLEY_UNLIKELY(isMustAfterWhiteSpace && tokenReader.skipWhitespace() == 0)) {
+        if (HEDLEY_UNLIKELY(isMustAfterWhiteSpace.value_or(true) && tokenReader.skipWhitespace() == 0)) {
             VectorView<Token> tokens = tokenReader.collect();
             return ASTNode::simpleNode(this, tokens, ErrorReason::requireWhiteSpace(tokens), "compound");
         }
@@ -244,16 +149,62 @@ namespace CHelper::Node {
         }
         nextNodes[0]->collectStructureWithNextNodes(structure, isMustHave);
     }
-    void NodeBase::init(const CPack &cpack) {
 
+    CODEC(NodeBase, id, brief, description, isMustAfterWhiteSpace)
+
+    void from_json(const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
+        Profile::push(ColorStringBuilder().red("loading type").build());
+        auto type = JsonUtil::read<std::string>(j, "type");
+        auto id = JsonUtil::read<std::optional<std::string>>(j, "id");
+        Profile::next(ColorStringBuilder().red("loading node ").purple(type).build());
+        if (HEDLEY_LIKELY(id.has_value())) {
+            Profile::next(ColorStringBuilder()
+                                  .red("loading node ")
+                                  .purple(type)
+                                  .red(" with id \"")
+                                  .purple(id.value())
+                                  .red("\"")
+                                  .build());
+        } else {
+            Profile::next(ColorStringBuilder()
+                                  .red("loading node ")
+                                  .purple(type)
+                                  .red(" without id")
+                                  .build());
+        }
+        for (const auto &item: NodeType::NODE_TYPES) {
+            if (HEDLEY_UNLIKELY(item->nodeName == type)) {
+                Profile::pop();
+                item->decodeByJson(j, t);
+                return;
+            }
+        }
+        throw Exception::UnknownNodeType(type);
     }
 
-    void to_json(nlohmann::json &j, const Node::NodeBase &t) {
-        t.toJson(j);
+    void to_json(nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {
+        if (t->getNodeType() == NodeType::UNKNOWN.get()) {
+            throw std::runtime_error("fail to write node");
+        }
+        JsonUtil::encode(j, "type", t->getNodeType()->nodeName);
+        t->getNodeType()->encodeByJson(j, t);
     }
 
-    void to_binary(BinaryWriter &binaryWriter, const Node::NodeBase &t) {
-        t.writeBinToFile(binaryWriter);
+    void from_binary(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
+        auto typeId = binaryReader.read<uint8_t>();
+        if (typeId > NodeType::NODE_TYPES.size()) {
+            throw std::runtime_error("unknown typeId");
+        }
+        const NodeType *type = NodeType::NODE_TYPES[typeId];
+        type->decodeByBinary(binaryReader, t);
+    }
+
+    void to_binary(BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t) {
+        if (t->getNodeType() == NodeType::UNKNOWN.get()) {
+            throw std::runtime_error("fail to write node");
+        }
+        binaryWriter.encode(t->getNodeType()->id);
+        t->getNodeType()->encodeByBinary(binaryWriter, t);
     }
 
 }// namespace CHelper::Node

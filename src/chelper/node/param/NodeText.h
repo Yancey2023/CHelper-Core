@@ -13,21 +13,27 @@
 namespace CHelper::Node {
 
     class NodeText : public NodeBase {
-        const std::shared_ptr<NormalId> data;
-        const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> getTextASTNode;
+    public:
+        std::shared_ptr<NormalId> data;
+
+    private:
+        std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> getTextASTNode;
 
     public:
-        NodeText(const std::optional<std::string> &id, const std::optional<std::string> &description, const std::shared_ptr<NormalId> &data, const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getTextASTNode = [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode { return tokenReader.readStringASTNode(node); });
+        NodeText() = default;
 
-        NodeText(const nlohmann::json &j,
-                 [[maybe_unused]] const CPack &cpack);
+        NodeText(
+                const std::optional<std::string> &id,
+                const std::optional<std::string> &description,
+                const std::shared_ptr<NormalId> &data,
+                const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getTextASTNode =
+                        [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
+                    return tokenReader.readStringASTNode(node);
+                });
 
-        NodeText(BinaryReader &binaryReader,
-                 [[maybe_unused]] const CPack &cpack);
+        void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -38,8 +44,10 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
+
+    CODEC_NODE_H(NodeText)
+
 }// namespace CHelper::Node
 
 #endif//CHELPER_NODETEXT_H

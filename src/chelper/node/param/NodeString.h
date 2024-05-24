@@ -18,21 +18,15 @@ namespace CHelper::Node {
         bool canContainSpace;
         bool ignoreLater;
 
+        NodeString() = default;
+
         NodeString(const std::optional<std::string> &id,
                    const std::optional<std::string> &description,
                    bool allowMissingString,
                    bool canContainSpace,
                    bool ignoreLater);
 
-        NodeString(const nlohmann::json &j,
-                   [[maybe_unused]] const CPack &cpack);
-
-        NodeString(BinaryReader &binaryReader,
-                   [[maybe_unused]] const CPack &cpack);
-
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -43,8 +37,9 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
+
+    CODEC_NODE_H(NodeString)
 
 }// namespace CHelper::Node
 

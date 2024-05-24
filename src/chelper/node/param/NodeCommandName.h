@@ -9,22 +9,16 @@
 
 #include "../NodeBase.h"
 #include "../NodeType.h"
+#include "NodePerCommand.h"
 
 namespace CHelper::Node {
 
     class NodeCommandName : public NodeBase {
+    private:
+        std::vector<std::unique_ptr<Node::NodePerCommand>> *commands = nullptr;
+
     public:
-        const std::vector<std::unique_ptr<Node::NodeBase>> *commands;
-
-        NodeCommandName(const std::optional<std::string> &id,
-                        const std::optional<std::string> &description,
-                        const std::vector<std::unique_ptr<Node::NodeBase>> *commands);
-
-        NodeCommandName(const nlohmann::json &j,
-                        const CPack &cpack);
-
-        NodeCommandName(BinaryReader &binaryReader,
-                        [[maybe_unused]] const CPack &cpack);
+        void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
@@ -41,6 +35,8 @@ namespace CHelper::Node {
                               StructureBuilder &structure,
                               bool isMustHave) const override;
     };
+
+    CODEC_UNIQUE_PTR_H(NodeCommandName)
 
 }// namespace CHelper::Node
 

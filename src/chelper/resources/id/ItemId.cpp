@@ -45,6 +45,6 @@ namespace CHelper {
         return node;
     }
 
-    CODEC(ItemId, idNamespace, name, description, max, descriptions);
+    CODEC(ItemId, idNamespace, name, description, max, descriptions)
 
 }// namespace CHelper

@@ -15,37 +15,23 @@ namespace CHelper::Node {
           data(data),
           getTextASTNode(getTextASTNode) {}
 
-    NodeText::NodeText(const nlohmann::json &j,
-                       [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, true),
-          data(std::make_shared<NormalId>(j.at("data"))),
-          getTextASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-              return tokenReader.readUntilWhitespace(node);
-          }) {}
 
-    NodeText::NodeText(BinaryReader &binaryReader,
-                       [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader),
-          data(binaryReader.read<std::shared_ptr<NormalId>>()),
-          getTextASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-              return tokenReader.readUntilWhitespace(node);
-          }) {}
+    void NodeText::init(const CPack &cpack) {
+        getTextASTNode = [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
+            return tokenReader.readUntilWhitespace(node);
+        };
+    }
 
     NodeType *NodeText::getNodeType() const {
         return NodeType::TEXT.get();
     }
 
-    void NodeText::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "data", data);
-    }
-
-    void NodeText::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        binaryWriter.encode(data);
-    }
-
     ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+#if CHelperDebug == true
+        if (getTextASTNode == nullptr) {
+            throw std::runtime_error("getTextASTNode is nullptr because not init");
+        }
+#endif
         DEBUG_GET_NODE_BEGIN(this)
         auto result = getTextASTNode(this, tokenReader);
         DEBUG_GET_NODE_END(this)
@@ -87,5 +73,7 @@ namespace CHelper::Node {
                                     bool isMustHave) const {
         structure.appendWhiteSpace().append(data->name);
     }
+
+    CODEC_NODE(NodeText, data)
 
 }// namespace CHelper::Node

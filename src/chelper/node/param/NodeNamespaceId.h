@@ -17,24 +17,22 @@ namespace CHelper::Node {
     class NodeNamespaceId : public NodeBase {
     public:
         std::optional<std::string> key;
-        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> contents;
-        bool ignoreError;
+        std::optional<std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> contents;
+        std::optional<bool> ignoreError;
+
+    private:
+        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> customContents;
+
+    public:
+        NodeNamespaceId() = default;
 
         NodeNamespaceId(const std::optional<std::string> &id,
                         const std::optional<std::string> &description,
                         const std::optional<std::string> &key,
                         bool ignoreError,
-                        const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
-
-        NodeNamespaceId(const nlohmann::json &j,
-                        const CPack &cpack);
-
-        NodeNamespaceId(BinaryReader &binaryReader,
-                        [[maybe_unused]] const CPack &cpack);
+                        const std::optional<std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> &contents);
 
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -48,10 +46,11 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
+        void init(const CPack &cpack) override;
     };
 
+    CODEC_NODE_H(NodeNamespaceId)
+
 }// namespace CHelper::Node
-// CHelper::Node
 
 #endif//CHELPER_NODENAMESPACEID_H

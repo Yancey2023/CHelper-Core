@@ -16,35 +16,29 @@ namespace CHelper::Node {
     class NodeJson : public NodeBase {
     public:
         std::string key;
-        const NodeBase *nodeJson;
 
+    private:
+        const NodeBase *nodeJson = nullptr;
+
+    public:
         NodeJson(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
-                 std::string key,
-                 NodeBase *nodeJson);
+                 std::string key);
 
-        NodeJson(const std::optional<std::string> &id,
-                 const std::optional<std::string> &description,
-                 const CPack &cpack,
-                 const std::string &key);
+        NodeJson() = default;
 
-        NodeJson(const nlohmann::json &j,
-                 const CPack &cpack);
-
-        NodeJson(BinaryReader &binaryReader,
-                 [[maybe_unused]] const CPack &cpack);
+        void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
+
+    CODEC_NODE_H(NodeJson)
 
 }// namespace CHelper::Node
 

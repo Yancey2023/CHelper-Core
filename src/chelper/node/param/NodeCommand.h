@@ -14,22 +14,17 @@
 namespace CHelper::Node {
 
     class NodeCommand : public NodeBase {
+    private:
+        std::vector<std::unique_ptr<Node::NodePerCommand>> *commands = nullptr;
+
     public:
-        const std::vector<std::unique_ptr<Node::NodeBase>> *commands;
-
         NodeCommand(const std::optional<std::string> &id,
                     const std::optional<std::string> &description,
-                    const std::vector<std::unique_ptr<Node::NodeBase>> *commands);
+                    std::vector<std::unique_ptr<Node::NodePerCommand>> *commands);
 
-        NodeCommand(const std::optional<std::string> &id,
-                    const std::optional<std::string> &description,
-                    [[maybe_unused]] const CPack &cpack);
+        NodeCommand() = default;
 
-        NodeCommand(const nlohmann::json &j,
-                    [[maybe_unused]] const CPack &cpack);
-
-        NodeCommand(BinaryReader &binaryReader,
-                    [[maybe_unused]] const CPack &cpack);
+        void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
@@ -44,6 +39,9 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
+
+        CODEC_UNIQUE_PTR_H(NodeCommand)
+
     };
 
 }// namespace CHelper::Node

@@ -19,28 +19,22 @@ namespace CHelper::Node {
             // <方块ID>
             BLOCK = 1
         };
-    }
+    }// namespace NodeBlockType
 
     class NodeBlock : public NodeBase {
     public:
-        const NodeBlockType::NodeBlockType nodeBlockType;
-        const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> blockIds;
-        const std::shared_ptr<NodeBase> nodeBlockId;
+        NodeBlockType::NodeBlockType nodeBlockType = NodeBlockType::BLOCK_WITH_BLOCK_STATE;
 
-        NodeBlock(const std::optional<std::string> &id,
-                  const std::optional<std::string> &description,
-                  NodeBlockType::NodeBlockType nodeBlockType,
-                  const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents);
+    private:
+        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> blockIds = nullptr;
+        std::shared_ptr<NodeBase> nodeBlockId = nullptr;
 
-        NodeBlock(const nlohmann::json &j,
-                  const CPack &cpack);
+    public:
+        NodeBlock() = default;
 
-        NodeBlock(BinaryReader &binaryReader,
-                  [[maybe_unused]] const CPack &cpack);
+        void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -53,8 +47,15 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
+
+    namespace NodeBlockType {
+
+        CODEC_ENUM_H(NodeBlockType)
+
+    }// namespace NodeBlockType
+
+    CODEC_NODE_H(NodeBlock)
 
 }// namespace CHelper::Node
 

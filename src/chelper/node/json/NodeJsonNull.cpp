@@ -11,14 +11,6 @@ namespace CHelper::Node {
                                const std::optional<std::string> &description)
         : NodeBase(id, description, false) {}
 
-    NodeJsonNull::NodeJsonNull(const nlohmann::json &j,
-                               [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, false) {}
-
-    NodeJsonNull::NodeJsonNull(BinaryReader &binaryReader,
-                               [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader) {}
-
     NodeType *NodeJsonNull::getNodeType() const {
         return NodeType::JSON_NULL.get();
     }
@@ -51,5 +43,7 @@ namespace CHelper::Node {
         }
         return true;
     }
+
+    CODEC_UNIQUE_PTR(NodeJsonNull)
 
 }// namespace CHelper::Node

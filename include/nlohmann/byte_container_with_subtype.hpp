@@ -10,10 +10,7 @@
 
 #include <cstdint> // uint8_t, uint64_t
 #include <tuple> // tie
-#include <utility> // move
-
-#include <nlohmann/detail/abi_macros.hpp>
-
+#include <utility>
 NLOHMANN_JSON_NAMESPACE_BEGIN
 
 /// @brief an internal type for a backed binary type

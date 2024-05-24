@@ -14,50 +14,20 @@ namespace CHelper::Node {
     static std::shared_ptr<NodeBase> nodeCount = std::make_shared<NodeInteger>("ITEM_COUNT", "物品数量", 0, std::nullopt);
     static std::shared_ptr<NodeBase> nodeAllData = std::make_shared<NodeInteger>("ITEM_DATA", "物品附加值", -1, std::nullopt);
 
-    NodeItem::NodeItem(const std::optional<std::string> &id,
-                       const std::optional<std::string> &description,
-                       const CHelper::Node::NodeItemType::NodeItemType nodeItemType,
-                       const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents,
-                       const std::shared_ptr<NodeBase> &nodeComponent)
-        : NodeBase(id, description, false),
-          nodeItemType(nodeItemType),
-          itemIds(contents),
-          nodeItemId(getNodeItemId(contents)),
-          nodeComponent(nodeComponent) {}
-
-    NodeItem::NodeItem(const nlohmann::json &j,
-                       const CPack &cpack)
-        : NodeBase(j, true),
-          nodeItemType(JsonUtil::read<CHelper::Node::NodeItemType::NodeItemType>(j, "nodeItemType")),
-          itemIds(cpack.itemIds),
-          nodeItemId(getNodeItemId(cpack.itemIds)),
-          nodeComponent(std::make_shared<NodeJson>("ITEM_COMPONENT", "物品组件", cpack, "components")) {}
-
-    NodeItem::NodeItem(BinaryReader &binaryReader,
-                       const CPack &cpack)
-        : NodeBase(binaryReader),
-          nodeItemType(static_cast<const NodeItemType::NodeItemType>(binaryReader.read<uint8_t>())),
-          itemIds(cpack.itemIds),
-          nodeItemId(getNodeItemId(cpack.itemIds)),
-          nodeComponent(std::make_shared<NodeJson>("ITEM_COMPONENT", "物品组件", cpack, "components")) {}
+    void NodeItem::init(const CPack &cpack) {
+        itemIds = cpack.itemIds;
+        nodeItemId = std::make_unique<NodeNamespaceId>("ITEM_ID", "物品ID", "items", true, cpack.itemIds);
+        nodeComponent = std::make_unique<NodeJson>("ITEM_COMPONENT", "物品组件", "components");
+        nodeComponent->init(cpack);
+    }
 
     NodeType *NodeItem::getNodeType() const {
         return NodeType::ITEM.get();
     }
 
-    void NodeItem::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "nodeItemType", nodeItemType);
-    }
-
-    void NodeItem::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        binaryWriter.encode((uint8_t) nodeItemType);
-    }
-
     ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
-        ASTNode itemId = nodeItemId.getASTNode(tokenReader, cpack);
+        ASTNode itemId = nodeItemId->getASTNode(tokenReader, cpack);
         size_t strHash = std::hash<std::string>{}(TokenUtil::toString(itemId.tokens));
         std::shared_ptr<NamespaceId> currentItem = nullptr;
         for (const auto &item: *itemIds) {
@@ -92,18 +62,18 @@ namespace CHelper::Node {
     void NodeItem::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {
         switch (nodeItemType) {
             case NodeItemType::ITEM_GIVE:
-                nodeItemId.collectStructure(nullptr, structure, isMustHave);
+                nodeItemId->collectStructure(nullptr, structure, isMustHave);
                 nodeCount->collectStructure(nullptr, structure, false);
                 nodeAllData->collectStructure(nullptr, structure, false);
                 nodeComponent->collectStructure(nullptr, structure, false);
                 break;
             case NodeItemType::ITEM_CLEAR:
-                nodeItemId.collectStructure(nullptr, structure, isMustHave);
+                nodeItemId->collectStructure(nullptr, structure, isMustHave);
                 nodeAllData->collectStructure(nullptr, structure, false);
                 nodeCount->collectStructure(nullptr, structure, false);
                 break;
             default:
-                nodeItemId.collectStructure(nullptr, structure, isMustHave);
+                nodeItemId->collectStructure(nullptr, structure, isMustHave);
                 nodeCount->collectStructure(nullptr, structure, false);
                 nodeAllData->collectStructure(nullptr, structure, false);
                 nodeComponent->collectStructure(nullptr, structure, false);
@@ -111,9 +81,12 @@ namespace CHelper::Node {
         }
     }
 
-    NodeNamespaceId
-    NodeItem::getNodeItemId(const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents) {
-        return {"ITEM_ID", "物品ID", "items", true, contents};
-    }
+    namespace NodeItemType {
+
+        CODEC_ENUM(NodeItemType, uint8_t)
+
+    }// namespace NodeItemType
+
+    CODEC_NODE(NodeItem, nodeItemType)
 
 }// namespace CHelper::Node

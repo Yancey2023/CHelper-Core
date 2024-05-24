@@ -16,11 +16,7 @@ namespace CHelper::Node {
         NodePosition(const std::optional<std::string> &id,
                      const std::optional<std::string> &description);
 
-        NodePosition(const nlohmann::json &j,
-                     [[maybe_unused]] const CPack &cpack);
-
-        NodePosition(BinaryReader &binaryReader,
-                     [[maybe_unused]] const CPack &cpack);
+        NodePosition() = default;
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
@@ -33,6 +29,8 @@ namespace CHelper::Node {
                               StructureBuilder &structure,
                               bool isMustHave) const override;
     };
+
+    CODEC_UNIQUE_PTR_H(NodePosition)
 
 }// namespace CHelper::Node
 

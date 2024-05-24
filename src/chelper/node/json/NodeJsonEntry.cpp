@@ -14,7 +14,7 @@ namespace CHelper::Node {
     static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(
             "JSON_LIST_ELEMENT_SEPARATOR", "冒号", ':');
     static std::unique_ptr<NodeBase> jsonString = std::make_unique<NodeJsonString>(
-            "JSON_STRING", "JSON字符串", std::vector<std::unique_ptr<NodeBase>>{});
+            "JSON_STRING", "JSON字符串");
     static std::unique_ptr<NodeBase> nodeAllEntry = std::make_unique<NodeEntry>(
             "JSON_OBJECT_ENTRY", "JSON对象键值对",
             jsonString.get(), nodeSeparator.get(),
@@ -27,17 +27,6 @@ namespace CHelper::Node {
         : NodeBase(id, description, false),
           key(std::move(key)),
           value(std::move(value)) {}
-
-    NodeJsonEntry::NodeJsonEntry(const nlohmann::json &j)
-        : NodeBase(j, false),
-          key(JsonUtil::read<std::string>(j, "key")),
-          value(JsonUtil::read<std::string>(j, "value")) {}
-
-    NodeJsonEntry::NodeJsonEntry(BinaryReader &binaryReader)
-        : NodeBase(std::nullopt, binaryReader.read<std::string>(), false) {
-        key = binaryReader.read<std::string>();
-        value = binaryReader.read<std::string>();
-    }
 
     void NodeJsonEntry::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
@@ -63,18 +52,6 @@ namespace CHelper::Node {
         throw Exception::UnknownNodeId(value, id.value_or("UNKNOWN"));
     }
 
-    void NodeJsonEntry::toJson(nlohmann::json &j) const {
-        JsonUtil::encode(j, "key", key);
-        JsonUtil::encode(j, "description", description);
-        JsonUtil::encode(j, "value", value);
-    }
-
-    void NodeJsonEntry::writeBinToFile(BinaryWriter &binaryWriter) const {
-        binaryWriter.encode(description.value());
-        binaryWriter.encode(key);
-        binaryWriter.encode(value);
-    }
-
     ASTNode NodeJsonEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         return getByChildNode(tokenReader, cpack, HEDLEY_UNLIKELY(nodeEntry == nullptr) ? nodeAllEntry.get() : nodeEntry.get());
     }
@@ -83,5 +60,7 @@ namespace CHelper::Node {
         static NodeJsonEntry nodeJsonAllEntry("NODE_JSON_ENTRY", "JSON对象键值对");
         return &nodeJsonAllEntry;
     }
+
+    CODEC_WITH_UNIQUE_PTR(NodeJsonEntry, key, description, value)
 
 }// namespace CHelper::Node

@@ -14,14 +14,6 @@ namespace CHelper::Node {
                          const std::optional<std::string> &description)
         : NodeBase(id, description, false) {}
 
-    NodeRange::NodeRange(const nlohmann::json &j,
-                         [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, true) {}
-
-    NodeRange::NodeRange(BinaryReader &binaryReader,
-                         [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader) {}
-
     NodeType *NodeRange::getNodeType() const {
         return NodeType::RANGE.get();
     }
@@ -85,5 +77,7 @@ namespace CHelper::Node {
     void NodeRange::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {
         structure.append(isMustHave, description.value_or("范围"));
     }
+
+    CODEC_UNIQUE_PTR(NodeRange)
 
 }// namespace CHelper::Node

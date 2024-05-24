@@ -15,33 +15,8 @@ namespace CHelper::Node {
           descriptionTrue(descriptionTrue),
           descriptionFalse(descriptionFalse) {}
 
-    NodeJsonBoolean::NodeJsonBoolean(const nlohmann::json &j,
-                                     [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, false),
-          descriptionTrue(JsonUtil::read<std::string>(j, "descriptionTrue")),
-          descriptionFalse(JsonUtil::read<std::string>(j, "descriptionFalse")) {}
-
-    NodeJsonBoolean::NodeJsonBoolean(BinaryReader &binaryReader,
-                                     [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader) {
-        descriptionTrue = binaryReader.read<std::optional<std::string>>();
-        descriptionFalse = binaryReader.read<std::optional<std::string>>();
-    }
-
     NodeType *NodeJsonBoolean::getNodeType() const {
         return NodeType::JSON_BOOLEAN.get();
-    }
-
-    void NodeJsonBoolean::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "descriptionTrue", descriptionTrue);
-        JsonUtil::encode(j, "descriptionFalse", descriptionFalse);
-    }
-
-    void NodeJsonBoolean::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        binaryWriter.encode(descriptionTrue);
-        binaryWriter.encode(descriptionFalse);
     }
 
     ASTNode NodeJsonBoolean::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -76,5 +51,7 @@ namespace CHelper::Node {
         suggestions.push_back(std::move(suggestions1));
         return true;
     }
+
+    CODEC_NODE(NodeJsonBoolean, descriptionTrue, descriptionFalse)
 
 }// namespace CHelper::Node

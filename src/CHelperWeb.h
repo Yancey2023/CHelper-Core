@@ -5,11 +5,11 @@
 #ifndef CHELPER_CHELPERWEB_H
 #define CHELPER_CHELPERWEB_H
 
-#include "pch.h"
-#include "chelper/resources/CPack.h"
 #include "chelper/parser/Parser.h"
 #include "chelper/parser/Suggestion.h"
+#include "chelper/resources/CPack.h"
+#include "pch.h"
 
 int main();
 
-#endif //CHELPER_CHELPERWEB_H
+#endif//CHELPER_CHELPERWEB_H

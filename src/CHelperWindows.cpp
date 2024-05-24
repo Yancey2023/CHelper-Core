@@ -23,7 +23,7 @@ static std::shared_ptr<CHelper::Core> core;
  * @param nCmdShow 控制窗口的显示方式
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
-//    core = CHelper::Core::createByDirectory(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)");
+    //    core = CHelper::Core::createByDirectory(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)");
     core = CHelper::Core::createByBinary(R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.0.23.cpack)");
     if (core == nullptr) {
         exit(-1);
@@ -56,8 +56,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
             CW_USEDEFAULT, CW_USEDEFAULT,
             500, 500,
             nullptr, nullptr,
-            hInstance, nullptr
-    );
+            hInstance, nullptr);
     if (hWnd == nullptr) {
         MessageBox(nullptr, "Call to CreateWindow failed!", "CHelper", 0);
         return 1;
@@ -166,8 +165,7 @@ void onTextChanged(const std::string &command) {
             if (++i > 30) {
                 break;
             }
-            auto content = std::string(suggestion.content->name).append(" - ")
-                    .append(suggestion.content->description.value_or(""));
+            auto content = std::string(suggestion.content->name).append(" - ").append(suggestion.content->description.value_or(""));
             int len = MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, nullptr, 0);
             auto *wstr = new wchar_t[len];
             MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, wstr, len);
@@ -176,32 +174,25 @@ void onTextChanged(const std::string &command) {
         }
         CHelper::Profile::pop();
         std::cout << CHelper::ColorStringBuilder()
-                .green("parse successfully(")
-                .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
-                        endStructure - startParse).count()) + "ms")
-                .green(")")
-                .normal(" : ")
-                .purple(command)
-                .build() << std::endl;
-        std::cout << CHelper::ColorStringBuilder().blue("parse in ").purple(
-                std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                        endParse - startParse).count()) + "ms").build() << std::endl;
-        std::cout << CHelper::ColorStringBuilder().blue("get description in ").purple(
-                std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                        endDescription - startDescription).count()) + "ms").build() << std::endl;
-        std::cout << CHelper::ColorStringBuilder().blue("get error reasons in ").purple(
-                std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                        endErrorReasons - startErrorReasons).count()) + "ms").build() << std::endl;
-        std::cout << CHelper::ColorStringBuilder().blue("get suggestions in ").purple(
-                std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                        endSuggestions - startSuggestions).count()) + "ms").build() << std::endl;
-        std::cout << CHelper::ColorStringBuilder().blue("get structure in ").purple(
-                std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                        endStructure - startStructure).count()) + "ms").build() << std::endl;
-//        std::cout << core->getAstNode()->toOptimizedJson().dump(
-//                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
-//        std::cout << core->getAstNode()->toBestJson().dump(
-//                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
+                             .green("parse successfully(")
+                             .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                                                            endStructure - startParse)
+                                                            .count()) +
+                                     "ms")
+                             .green(")")
+                             .normal(" : ")
+                             .purple(command)
+                             .build()
+                  << std::endl;
+        std::cout << CHelper::ColorStringBuilder().blue("parse in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endParse - startParse).count()) + "ms").build() << std::endl;
+        std::cout << CHelper::ColorStringBuilder().blue("get description in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endDescription - startDescription).count()) + "ms").build() << std::endl;
+        std::cout << CHelper::ColorStringBuilder().blue("get error reasons in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endErrorReasons - startErrorReasons).count()) + "ms").build() << std::endl;
+        std::cout << CHelper::ColorStringBuilder().blue("get suggestions in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms").build() << std::endl;
+        std::cout << CHelper::ColorStringBuilder().blue("get structure in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms").build() << std::endl;
+        //        std::cout << core->getAstNode()->toOptimizedJson().dump(
+        //                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
+        //        std::cout << core->getAstNode()->toBestJson().dump(
+        //                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
         std::cout << "structure: " + structure << std::endl;
         std::cout << "description: " + description << std::endl;
         if (errorReasons.empty()) {
@@ -211,18 +202,19 @@ void onTextChanged(const std::string &command) {
             int i2 = 0;
             for (const auto &errorReason: errorReasons) {
                 std::cout << CHelper::ColorStringBuilder()
-                        .normal(std::to_string(++i2) + ". ")
-                        .red(command.substr(errorReason->start,
-                                            errorReason->end - errorReason->start) + " ")
-                        .blue(errorReason->errorReason)
-                        .build() << std::endl;
+                                     .normal(std::to_string(++i2) + ". ")
+                                     .red(command.substr(errorReason->start,
+                                                         errorReason->end - errorReason->start) +
+                                          " ")
+                                     .blue(errorReason->errorReason)
+                                     .build()
+                          << std::endl;
                 std::cout << CHelper::ColorStringBuilder()
-                        .normal(command.substr(0, errorReason->start))
-                        .red(errorReason->start == errorReason->end ? "~" :
-                             command.substr(errorReason->start,
-                                            errorReason->end - errorReason->start))
-                        .normal(command.substr(errorReason->end))
-                        .build() << std::endl;
+                                     .normal(command.substr(0, errorReason->start))
+                                     .red(errorReason->start == errorReason->end ? "~" : command.substr(errorReason->start, errorReason->end - errorReason->start))
+                                     .normal(command.substr(errorReason->end))
+                                     .build()
+                          << std::endl;
             }
         }
         if (suggestions->empty()) {
@@ -236,13 +228,14 @@ void onTextChanged(const std::string &command) {
                     break;
                 }
                 std::cout << CHelper::ColorStringBuilder()
-                        .normal(std::to_string(++j) + ". ")
-                        .green(item.content->name + " ")
-                        .blue(item.content->description.value_or(""))
-                        .build() << std::endl;
+                                     .normal(std::to_string(++j) + ". ")
+                                     .green(item.content->name + " ")
+                                     .blue(item.content->description.value_or(""))
+                                     .build()
+                          << std::endl;
                 std::string result = command.substr(0, item.start)
-                        .append(item.content->name)
-                        .append(command.substr(item.end));
+                                             .append(item.content->name)
+                                             .append(command.substr(item.end));
                 std::string greenPart = item.content->name;
                 if (item.end == command.length()) {
                     CHelper::ASTNode astNode = CHelper::Parser::parse(result, core->getCPack());
@@ -251,10 +244,11 @@ void onTextChanged(const std::string &command) {
                     }
                 }
                 std::cout << CHelper::ColorStringBuilder()
-                        .normal(command.substr(0, item.start))
-                        .green(greenPart)
-                        .normal(command.substr(item.end))
-                        .build() << std::endl;
+                                     .normal(command.substr(0, item.start))
+                                     .green(greenPart)
+                                     .normal(command.substr(item.end))
+                                     .build()
+                          << std::endl;
             }
         }
         std::cout << std::endl;

@@ -14,121 +14,59 @@ namespace CHelper::Node {
             const std::optional<std::string> &description,
             const std::optional<std::string> &key,
             bool ignoreError,
-            const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
+            const std::optional<std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>> &contents,
             bool allowsMissingID,
             const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode)
         : NodeBase(id, description, false),
           key(key),
           ignoreError(ignoreError),
-          contents(contents),
+          contents(key.has_value() ? std::nullopt : contents),
           allowsMissingID(allowsMissingID),
-          getNormalIdASTNode(getNormalIdASTNode) {}
-
-    static std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
-    getIdContentFromCPack(const nlohmann::json &j,
-                          const CPack &cpack,
-                          const std::optional<std::string> &key) {
-        if (HEDLEY_LIKELY(key.has_value())) {
-            auto it = cpack.normalIds.find(key.value());
-            if (HEDLEY_UNLIKELY(it == cpack.normalIds.end())) {
-                Profile::push(ColorStringBuilder()
-                                      .red("linking contents to ")
-                                      .purple(key.value())
-                                      .build());
-                Profile::push(ColorStringBuilder()
-                                      .red("failed to find normal id in the cpack")
-                                      .normal(" -> ")
-                                      .purple(key.value())
-                                      .build());
-                throw Exception::NodeLoadFailed();
-            }
-            return it->second;
-        } else {
-            nlohmann::json jsonArray = j.at("contents");
-            auto contents = std::make_shared<std::vector<std::shared_ptr<NormalId>>>();
-            contents->reserve(jsonArray.size());
-            for (const auto &item: jsonArray) {
-                contents->push_back(std::make_shared<NormalId>(item));
-            }
-            return contents;
+          getNormalIdASTNode(getNormalIdASTNode) {
+#if CHelperDebug == true
+        if (contents == nullptr) {
+            throw std::runtime_error("contents should not be nullptr");
         }
+#endif
+        customContents = contents.value();
     }
 
-    static std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
-    getIdContentFromCPack(BinaryReader &binaryReader,
-                          const CPack &cpack,
-                          const std::optional<std::string> &key) {
-        if (HEDLEY_LIKELY(key.has_value())) {
-            auto it = cpack.normalIds.find(key.value());
-            if (HEDLEY_UNLIKELY(it == cpack.normalIds.end())) {
-                Profile::push(ColorStringBuilder()
-                                      .red("linking contents to ")
-                                      .purple(key.value())
-                                      .build());
-                Profile::push(ColorStringBuilder()
-                                      .red("failed to find normal id in the cpack")
-                                      .normal(" -> ")
-                                      .purple(key.value())
-                                      .build());
-                throw Exception::NodeLoadFailed();
-            }
-            return it->second;
-        } else {
-            return binaryReader.read<std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>>();
-        }
-    }
-
-    NodeNormalId::NodeNormalId(const nlohmann::json &j,
-                               const CPack &cpack)
-        : NodeBase(j, true),
-          key(JsonUtil::read<std::optional<std::string>>(j, "key")),
-          ignoreError(JsonUtil::read<bool>(j, "ignoreError")),
-          contents(getIdContentFromCPack(j, cpack, key)),
-          allowsMissingID(false),
-          getNormalIdASTNode([](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-              return tokenReader.readUntilWhitespace(node);
-          }) {}
-
-    NodeNormalId::NodeNormalId(BinaryReader &binaryReader,
-                               const CPack &cpack)
-        : NodeBase(binaryReader) {
-        key = binaryReader.read<std::optional<std::string>>();
-        ignoreError = binaryReader.read<bool>();
-        contents = getIdContentFromCPack(binaryReader, cpack, key);
-        allowsMissingID = false;
+    void NodeNormalId::init(const CPack &cpack) {
         getNormalIdASTNode = [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
             return tokenReader.readUntilWhitespace(node);
         };
-#if CHelperDebug == true
-        for (const auto &item: *contents) {
-            if (item->name.find('\0') != std::string::npos ||
-                item->description.has_value() && item->description->find('\0') != std::string::npos) {
-                throw std::runtime_error("invalid normal id name");
+        if (HEDLEY_LIKELY(contents.has_value())) {
+            customContents = contents.value();
+        } else if (HEDLEY_LIKELY(key.has_value())) {
+            auto it = cpack.normalIds.find(key.value());
+            if (HEDLEY_UNLIKELY(it == cpack.normalIds.end())) {
+                Profile::push(ColorStringBuilder()
+                                      .red("linking contents to ")
+                                      .purple(key.value())
+                                      .build());
+                Profile::push(ColorStringBuilder()
+                                      .red("failed to find normal id in the cpack")
+                                      .normal(" -> ")
+                                      .purple(key.value())
+                                      .build());
+                throw Exception::NodeLoadFailed();
             }
+            customContents = it->second;
         }
-#endif
+        if (HEDLEY_UNLIKELY(customContents == nullptr)) {
+            Profile::push(ColorStringBuilder()
+                                  .red("linking contents to ")
+                                  .purple(key.value())
+                                  .build());
+            Profile::push(ColorStringBuilder()
+                                  .red("missing content")
+                                  .build());
+            throw Exception::NodeLoadFailed();
+        }
     }
 
     NodeType *NodeNormalId::getNodeType() const {
         return NodeType::NORMAL_ID.get();
-    }
-
-    void NodeNormalId::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "key", key);
-        JsonUtil::encode(j, "ignoreError", ignoreError);
-        if (HEDLEY_UNLIKELY(!key.has_value())) {
-            JsonUtil::encode(j, "contents", *contents);
-        }
-    }
-
-    void NodeNormalId::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        binaryWriter.encode(key);
-        binaryWriter.encode(ignoreError);
-        if (HEDLEY_UNLIKELY(!key.has_value())) {
-            binaryWriter.encode(contents);
-        }
     }
 
     ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -154,7 +92,7 @@ namespace CHelper::Node {
             VectorView<Token> tokens = result.tokens;
             std::string str = TokenUtil::toString(tokens);
             size_t strHash = std::hash<std::string>{}(str);
-            if (HEDLEY_UNLIKELY(std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
+            if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                     return !item->fastMatch(strHash);
                 }))) {
                 return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "找不到含义 -> " + std::move(str)));
@@ -170,7 +108,7 @@ namespace CHelper::Node {
         }
         std::string str = TokenUtil::toString(astNode->tokens);
         size_t strHash = std::hash<std::string>{}(str);
-        if (HEDLEY_UNLIKELY(std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
+        if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                 return !item->fastMatch(strHash);
             }))) {
             idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("找不到ID -> ").append(str)));
@@ -184,7 +122,7 @@ namespace CHelper::Node {
         std::string str = TokenUtil::toString(astNode->tokens)
                                   .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
-        for (const auto &item: *contents) {
+        for (const auto &item: *customContents) {
             //通过名字进行搜索
             size_t index1 = item->name.find(str);
             if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
@@ -230,5 +168,7 @@ namespace CHelper::Node {
                                         bool isMustHave) const {
         structure.append(isMustHave, description.value_or("ID"));
     }
+
+    CODEC_NODE(NodeNormalId, key, ignoreError, contents)
 
 }// namespace CHelper::Node

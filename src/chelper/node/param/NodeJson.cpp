@@ -3,23 +3,24 @@
 //
 
 #include "NodeJson.h"
+
+#include <utility>
+
 #include "../../resources/CPack.h"
 
 namespace CHelper::Node {
 
     NodeJson::NodeJson(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
-                       std::string key,
-                       NodeBase *nodeJson)
+                       std::string key)
         : NodeBase(id, description, false),
-          key(std::move(key)),
-          nodeJson(nodeJson) {}
+          key(std::move(key)) {}
 
-    static NodeBase *getNodeJsonFromCPack(const CPack &cpack,
-                                          const std::string &key) {
+    void NodeJson::init(const CPack &cpack) {
         for (const auto &item: cpack.jsonNodes) {
             if (HEDLEY_UNLIKELY(item->id == key)) {
-                return item.get();
+                nodeJson = item.get();
+                return;
             }
         }
         Profile::push(ColorStringBuilder()
@@ -34,39 +35,8 @@ namespace CHelper::Node {
         throw Exception::NodeLoadFailed();
     }
 
-    NodeJson::NodeJson(const std::optional<std::string> &id,
-                       const std::optional<std::string> &description,
-                       const CPack &cpack,
-                       const std::string &key)
-        : NodeBase(id, description, false),
-          key(key),
-          nodeJson(getNodeJsonFromCPack(cpack, key)) {}
-
-    NodeJson::NodeJson(const nlohmann::json &j,
-                       [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, true),
-          key(JsonUtil::read<std::string>(j, "key")),
-          nodeJson(getNodeJsonFromCPack(cpack, key)) {}
-
-    NodeJson::NodeJson(BinaryReader &binaryReader,
-                       [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader) {
-        key = binaryReader.read<std::string>();
-        nodeJson = getNodeJsonFromCPack(cpack, key);
-    }
-
     NodeType *NodeJson::getNodeType() const {
         return NodeType::JSON.get();
-    }
-
-    void NodeJson::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "key", key);
-    }
-
-    void NodeJson::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        binaryWriter.encode(key);
     }
 
     ASTNode NodeJson::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -78,5 +48,7 @@ namespace CHelper::Node {
                                     bool isMustHave) const {
         structure.append(isMustHave, description.value_or("JSON文本"));
     }
+
+    CODEC_NODE(NodeJson, key)
 
 }// namespace CHelper::Node

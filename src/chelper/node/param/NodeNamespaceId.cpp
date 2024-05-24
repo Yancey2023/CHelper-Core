@@ -12,116 +12,48 @@ namespace CHelper::Node {
                                      const std::optional<std::string> &description,
                                      const std::optional<std::string> &key,
                                      bool ignoreError,
-                                     const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
+                                     const std::optional<std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> &contents)
         : NodeBase(id, description, false),
           key(key),
           ignoreError(ignoreError),
-          contents(contents) {}
-
-    static std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
-    getIdContentFromCPack(const nlohmann::json &j,
-                          const CPack &cpack,
-                          const std::optional<std::string> &key) {
-        if (HEDLEY_LIKELY(key.has_value())) {
-            auto it = cpack.namespaceIds.find(key.value());
-            if (HEDLEY_UNLIKELY(it == cpack.namespaceIds.end())) {
-                Profile::push(ColorStringBuilder()
-                                      .red("linking contents to ")
-                                      .purple(key.value())
-                                      .build());
-                Profile::push(ColorStringBuilder()
-                                      .red("failed to find namespace id in the cpack")
-                                      .normal(" -> ")
-                                      .purple(key.value())
-                                      .build());
-                throw Exception::NodeLoadFailed();
-            }
-            return it->second;
-        } else {
-            nlohmann::json jsonArray = j.at("contents");
-            auto contents = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
-            contents->reserve(jsonArray.size());
-            for (const auto &item: jsonArray) {
-                contents->push_back(std::make_shared<NamespaceId>(item));
-            }
-            return contents;
-        }
-    }
-
-    static std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
-    getIdContentFromCPack(BinaryReader &binaryReader,
-                          const CPack &cpack,
-                          const std::optional<std::string> &key) {
-        if (HEDLEY_LIKELY(key.has_value())) {
-            auto it = cpack.namespaceIds.find(key.value());
-            if (HEDLEY_UNLIKELY(it == cpack.namespaceIds.end())) {
-                Profile::push(ColorStringBuilder()
-                                      .red("linking contents to ")
-                                      .purple(key.value())
-                                      .build());
-                Profile::push(ColorStringBuilder()
-                                      .red("failed to find namespace id in the cpack")
-                                      .normal(" -> ")
-                                      .purple(key.value())
-                                      .build());
-                throw Exception::NodeLoadFailed();
-            }
-            return it->second;
-        } else {
-            size_t size = binaryReader.readSize();
-            auto contents = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
-            contents->reserve(size);
-            for (int i = 0; i < size; ++i) {
-                contents->push_back(binaryReader.read<std::shared_ptr<NamespaceId>>());
-            }
-            return contents;
-        }
-    }
-
-    NodeNamespaceId::NodeNamespaceId(const nlohmann::json &j,
-                                     const CPack &cpack)
-        : NodeBase(j, true),
-          key(JsonUtil::read<std::string>(j, "key")),
-          ignoreError(JsonUtil::read<bool>(j, "ignoreError")),
-          contents(getIdContentFromCPack(j, cpack, key)) {}
-
-    NodeNamespaceId::NodeNamespaceId(BinaryReader &binaryReader,
-                                     const CPack &cpack)
-        : NodeBase(binaryReader) {
-        key = binaryReader.read<std::optional<std::string>>();
-        ignoreError = binaryReader.read<bool>();
-        contents = getIdContentFromCPack(binaryReader, cpack, key);
+          contents(key.has_value() ? std::nullopt : contents) {
 #if CHelperDebug == true
-        for (const auto &item: *contents) {
-            if (item->name.find('\0') != std::string::npos ||
-                item->description.has_value() && item->description->find('\0') != std::string::npos ||
-                item->idNamespace.has_value() && item->idNamespace->find('\0') != std::string::npos) {
-                throw std::runtime_error("invalid normal id name");
-            }
+        if (contents == nullptr) {
+            throw std::runtime_error("contents should not be nullptr");
         }
 #endif
+        customContents = contents.value();
+    }
+
+    void NodeNamespaceId::init(const CPack &cpack) {
+        if (HEDLEY_LIKELY(contents.has_value())) {
+            customContents = contents.value();
+        } else if (HEDLEY_LIKELY(key.has_value())) {
+            auto it = cpack.namespaceIds.find(key.value());
+            if (HEDLEY_UNLIKELY(it == cpack.namespaceIds.end())) {
+                Profile::push(ColorStringBuilder()
+                                      .red("linking contents to ")
+                                      .purple(key.value())
+                                      .build());
+                Profile::push(ColorStringBuilder()
+                                      .red("failed to find namespace id in the cpack")
+                                      .normal(" -> ")
+                                      .purple(key.value())
+                                      .build());
+                throw Exception::NodeLoadFailed();
+            }
+            customContents = it->second;
+        }
+        if (HEDLEY_UNLIKELY(customContents == nullptr)) {
+            Profile::push(ColorStringBuilder()
+                                  .red("missing content")
+                                  .build());
+            throw Exception::NodeLoadFailed();
+        }
     }
 
     NodeType *NodeNamespaceId::getNodeType() const {
         return NodeType::NAMESPACE_ID.get();
-    }
-
-    void NodeNamespaceId::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "key", key);
-        JsonUtil::encode(j, "ignoreError", ignoreError);
-        if (HEDLEY_UNLIKELY(!key.has_value())) {
-            JsonUtil::encode(j, "contents", *contents);
-        }
-    }
-
-    void NodeNamespaceId::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        binaryWriter.encode(key);
-        binaryWriter.encode(ignoreError);
-        if (HEDLEY_UNLIKELY(!key.has_value())) {
-            binaryWriter.encode(*contents);
-        }
     }
 
     ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -134,11 +66,11 @@ namespace CHelper::Node {
             VectorView<Token> tokens = result.tokens;
             return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "命令不完整"));
         }
-        if (HEDLEY_UNLIKELY(!ignoreError)) {
+        if (HEDLEY_UNLIKELY(!ignoreError.value_or(false))) {
             VectorView<Token> tokens = result.tokens;
             std::string str = TokenUtil::toString(tokens);
             size_t strHash = std::hash<std::string>{}(str);
-            if (HEDLEY_UNLIKELY(std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
+            if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                     return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
                 }))) {
                 return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "找不到含义 -> " + std::move(str)));
@@ -154,7 +86,7 @@ namespace CHelper::Node {
         }
         std::string str = TokenUtil::toString(astNode->tokens);
         size_t strHash = std::hash<std::string>{}(str);
-        if (HEDLEY_UNLIKELY(std::all_of(contents->begin(), contents->end(), [&strHash](const auto &item) {
+        if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                 return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
             }))) {
             idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("找不到ID -> ").append(str)));
@@ -170,7 +102,7 @@ namespace CHelper::Node {
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain;
         std::vector<std::shared_ptr<NormalId>> namespaceStartOf, namespaceContain;
         std::vector<std::shared_ptr<NamespaceId>> descriptionContain;
-        for (const auto &item: *contents) {
+        for (const auto &item: *customContents) {
             //通过名字进行搜索
             //省略minecraft命名空间
             if (HEDLEY_LIKELY((!item->idNamespace.has_value() || item->idNamespace.value() == "minecraft"))) {
@@ -244,5 +176,6 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or("ID"));
     }
 
+    CODEC_NODE(NodeNamespaceId, key, ignoreError, contents)
+
 }// namespace CHelper::Node
-// CHelper::Node

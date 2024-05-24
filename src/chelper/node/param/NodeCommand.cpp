@@ -15,25 +15,13 @@ namespace CHelper::Node {
 
     NodeCommand::NodeCommand(const std::optional<std::string> &id,
                              const std::optional<std::string> &description,
-                             const std::vector<std::unique_ptr<Node::NodeBase>> *commands)
+                             std::vector<std::unique_ptr<Node::NodePerCommand>> *commands)
         : NodeBase(id, description, false),
           commands(commands) {}
 
-    NodeCommand::NodeCommand(const std::optional<std::string> &id,
-                             const std::optional<std::string> &description,
-                             [[maybe_unused]] const CPack &cpack)
-        : NodeBase(id, description, false),
-          commands(cpack.commands.get()) {}
-
-    NodeCommand::NodeCommand(const nlohmann::json &j,
-                             [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, true),
-          commands(cpack.commands.get()) {}
-
-    NodeCommand::NodeCommand(BinaryReader &binaryReader,
-                             [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader),
-          commands(cpack.commands.get()) {}
+    void NodeCommand::init(const CPack &cpack) {
+        commands = cpack.commands.get();
+    }
 
     NodeType *NodeCommand::getNodeType() const {
         return NodeType::COMMAND.get();
@@ -155,5 +143,7 @@ namespace CHelper::Node {
             structure.appendWhiteSpace().append(TokenUtil::toString(astNode->tokens));
         }
     }
+
+    CODEC_UNIQUE_PTR(NodeCommand)
 
 }// namespace CHelper::Node

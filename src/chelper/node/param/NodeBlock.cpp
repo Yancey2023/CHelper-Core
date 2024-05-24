@@ -12,41 +12,13 @@ namespace CHelper::Node {
     static std::unique_ptr<Node::NodeSingleSymbol> nodeBlockStateLeftBracket = std::make_unique<Node::NodeSingleSymbol>(
             "BLOCK_STATE_LEFT_BRACKET", "方块状态左括号", '[');
 
-    NodeBlock::NodeBlock(const std::optional<std::string> &id,
-                         const std::optional<std::string> &description,
-                         NodeBlockType::NodeBlockType nodeBlockType,
-                         const std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> &contents)
-        : NodeBase(id, description, false),
-          nodeBlockType(nodeBlockType),
-          blockIds(contents),
-          nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", true, contents)) {}
-
-    NodeBlock::NodeBlock(const nlohmann::json &j,
-                         const CPack &cpack)
-        : NodeBase(j, true),
-          nodeBlockType(JsonUtil::read<NodeBlockType::NodeBlockType>(j, "nodeBlockType")),
-          blockIds(cpack.blockIds),
-          nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", true, cpack.blockIds)) {}
-
-    NodeBlock::NodeBlock(BinaryReader &binaryReader,
-                         const CPack &cpack)
-        : NodeBase(binaryReader),
-          nodeBlockType(static_cast<const NodeBlockType::NodeBlockType>(binaryReader.read<uint8_t>())),
-          blockIds(cpack.blockIds),
-          nodeBlockId(std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", true, cpack.blockIds)) {}
+    void NodeBlock::init(const CPack &cpack) {
+        blockIds = cpack.blockIds;
+        nodeBlockId = std::make_shared<NodeNamespaceId>("BLOCK_ID", "方块ID", "blocks", true, cpack.blockIds);
+    }
 
     NodeType *NodeBlock::getNodeType() const {
         return NodeType::BLOCK.get();
-    }
-
-    void NodeBlock::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "nodeBlockType", nodeBlockType);
-    }
-
-    void NodeBlock::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        binaryWriter.encode((uint8_t) nodeBlockType);
     }
 
     ASTNode NodeBlock::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -104,5 +76,13 @@ namespace CHelper::Node {
             structure.append(false, "方块状态");
         }
     }
+
+    namespace NodeBlockType {
+
+        CODEC_ENUM(NodeBlockType, uint8_t)
+
+    }// namespace NodeBlockType
+
+    CODEC_NODE(NodeBlock, nodeBlockType)
 
 }// namespace CHelper::Node

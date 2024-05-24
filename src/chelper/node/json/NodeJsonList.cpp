@@ -25,16 +25,6 @@ namespace CHelper::Node {
         : NodeBase(id, description, false),
           data(std::move(data)) {}
 
-    NodeJsonList::NodeJsonList(const nlohmann::json &j,
-                               [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, false),
-          data(JsonUtil::read<std::string>(j, "data")) {}
-
-    NodeJsonList::NodeJsonList(BinaryReader &binaryReader,
-                               [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader),
-          data(binaryReader.read<std::string>()) {}
-
     void NodeJsonList::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
             if (HEDLEY_UNLIKELY(item->id == data)) {
@@ -58,16 +48,6 @@ namespace CHelper::Node {
 
     NodeType *NodeJsonList::getNodeType() const {
         return NodeType::JSON_LIST.get();
-    }
-
-    void NodeJsonList::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "data", data);
-    }
-
-    void NodeJsonList::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        binaryWriter.encode(data);
     }
 
     ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -95,5 +75,7 @@ namespace CHelper::Node {
                                           std::vector<Suggestions> &suggestions) const {
         return astNode->id == "node json all list";
     }
+
+    CODEC_NODE(NodeJsonList, data)
 
 }// namespace CHelper::Node

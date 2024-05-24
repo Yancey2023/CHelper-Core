@@ -14,27 +14,20 @@ namespace CHelper::Node {
     class NodeJsonElement : public NodeBase {
     public:
         std::vector<std::unique_ptr<NodeBase>> nodes;
-        NodeBase *start;
+        std::string startNodeId;
 
-        NodeJsonElement(const std::optional<std::string> &id,
-                        const std::optional<std::string> &description,
-                        std::vector<std::unique_ptr<NodeBase>> nodes,
-                        NodeBase *start);
+    private:
+        NodeBase *start = nullptr;
 
-        NodeJsonElement(const nlohmann::json &j,
-                        [[maybe_unused]] const CPack &cpack);
-
-        NodeJsonElement(BinaryReader &binaryReader,
-                        [[maybe_unused]] const CPack &cpack);
-
-        void toJson(nlohmann::json &j) const override;
-
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
+    public:
+        void init(const CPack &cpack) override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         static NodeBase *getNodeJsonElement();
     };
+
+    CODEC_H(std::unique_ptr<NodeJsonElement>)
 
 }// namespace CHelper::Node
 

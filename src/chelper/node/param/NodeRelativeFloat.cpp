@@ -23,28 +23,8 @@ namespace CHelper::Node {
         : NodeBase(id, description, false),
           canUseCaretNotation(canUseCaretNotation) {}
 
-    NodeRelativeFloat::NodeRelativeFloat(const nlohmann::json &j,
-                                         [[maybe_unused]] const CPack &cpack)
-        : NodeBase(j, true),
-          canUseCaretNotation(JsonUtil::read<bool>(j, "canUseCaretNotation")) {}
-
-    NodeRelativeFloat::NodeRelativeFloat(BinaryReader &binaryReader,
-                                         [[maybe_unused]] const CPack &cpack)
-        : NodeBase(binaryReader),
-          canUseCaretNotation(binaryReader.read<bool>()) {}
-
     NodeType *NodeRelativeFloat::getNodeType() const {
         return NodeType::RELATIVE_FLOAT.get();
-    }
-
-    void NodeRelativeFloat::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "canUseCaretNotation", canUseCaretNotation);
-    }
-
-    void NodeRelativeFloat::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        binaryWriter.encode(canUseCaretNotation);
     }
 
     ASTNode NodeRelativeFloat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -60,8 +40,8 @@ namespace CHelper::Node {
     }
 
     std::pair<uint8_t, ASTNode> NodeRelativeFloat::getASTNode(const NodeBase *node,
-                                                                   const CPack *cpack,
-                                                                   TokenReader &tokenReader) {
+                                                              const CPack *cpack,
+                                                              TokenReader &tokenReader) {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
@@ -111,5 +91,7 @@ namespace CHelper::Node {
                                              bool isMustHave) const {
         structure.append(isMustHave, description.value_or("坐标"));
     }
+
+    CODEC_NODE(NodeRelativeFloat, canUseCaretNotation)
 
 }// namespace CHelper::Node

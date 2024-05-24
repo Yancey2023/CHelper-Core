@@ -15,20 +15,14 @@ namespace CHelper::Node {
     public:
         std::optional<int32_t> min, max;
 
+        NodeInteger() = default;
+
         NodeInteger(const std::optional<std::string> &id,
                     const std::optional<std::string> &description,
                     const std::optional<int32_t> &min,
                     const std::optional<int32_t> &max);
 
-        NodeInteger(const nlohmann::json &j,
-                    [[maybe_unused]] const CPack &cpack);
-
-        NodeInteger(BinaryReader &binaryReader,
-                    [[maybe_unused]] const CPack &cpack);
-
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -38,8 +32,9 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
+
+    CODEC_H(NodeInteger)
 
 }// namespace CHelper::Node
 

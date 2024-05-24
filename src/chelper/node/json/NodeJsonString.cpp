@@ -10,72 +10,34 @@ namespace CHelper::Node {
 
     static std::shared_ptr<NormalId> doubleQuoteMask = NormalId::make("\"", "双引号");
 
-    static std::vector<std::unique_ptr<NodeBase>>
-    getDataFromJson(const nlohmann::json &j, const CPack &cpack) {
-        std::vector<std::unique_ptr<NodeBase>> result;
-        const auto &it = j.find("data");
-        if (HEDLEY_LIKELY(it != j.end())) {
-            result.reserve(it->size());
-            for (const auto &item: it.value()) {
-                result.push_back(NodeBase::getNodeFromJson(item, cpack));
+    NodeJsonString::NodeJsonString(const std::optional<std::string> &id,
+                                   const std::optional<std::string> &description)
+        : NodeBase(id, description, false) {
+        nodeData = std::make_unique<NodeOr>(
+                "JSON_STRING_DATA", "JSON字符串内容",
+                std::vector<const NodeBase *>(), false);
+    }
+
+    void NodeJsonString::init(const CPack &cpack) {
+        if (data.has_value()) {
+            for (const auto &item: data.value()) {
+                item->init(cpack);
             }
         }
-        return std::move(result);
-    }
-
-    static std::vector<std::unique_ptr<NodeBase>>
-    readDataFromBinary(BinaryReader &binaryReader, const CPack &cpack) {
-        size_t size = binaryReader.readSize();
-        std::vector<std::unique_ptr<NodeBase>> data;
-        data.reserve(size);
-        for (int i = 0; i < size; ++i) {
-            data.push_back(NodeBase::getNodeFromBinary(binaryReader, cpack));
-        }
-        return std::move(data);
-    }
-
-    static std::unique_ptr<NodeBase>
-    getNodeDataFromData(const std::vector<std::unique_ptr<NodeBase>> &data) {
         std::vector<const NodeBase *> nodeDataElement;
-        nodeDataElement.reserve(data.size());
-        for (const auto &item: data) {
-            nodeDataElement.push_back(item.get());
+        if (data.has_value()) {
+            nodeDataElement.reserve(data.value().size());
+            for (const auto &item: data.value()) {
+                nodeDataElement.push_back(item.get());
+            }
         }
-        return std::make_unique<NodeOr>("JSON_STRING_DATA", "JSON字符串内容",
-                                        std::move(nodeDataElement), false);
+        nodeData = std::make_unique<NodeOr>(
+                "JSON_STRING_DATA", "JSON字符串内容",
+                std::move(nodeDataElement), false);
     }
-
-    NodeJsonString::NodeJsonString(const std::optional<std::string> &id,
-                                   const std::optional<std::string> &description,
-                                   std::vector<std::unique_ptr<NodeBase>> data)
-        : NodeBase(id, description, false),
-          data(std::move(data)),
-          nodeData(getNodeDataFromData(this->data)) {}
-
-    NodeJsonString::NodeJsonString(const nlohmann::json &j,
-                                   const CPack &cpack)
-        : NodeBase(j, false),
-          data(getDataFromJson(j, cpack)),
-          nodeData(getNodeDataFromData(data)) {}
-
-    NodeJsonString::NodeJsonString(BinaryReader &binaryReader,
-                                   const CPack &cpack)
-        : NodeBase(binaryReader),
-          data(readDataFromBinary(binaryReader, cpack)),
-          nodeData(getNodeDataFromData(data)) {}
 
     NodeType *NodeJsonString::getNodeType() const {
         return NodeType::JSON_STRING.get();
-    }
-
-    void NodeJsonString::toJson(nlohmann::json &j) const {
-        NodeBase::toJson(j);
-        JsonUtil::encode(j, "data", data);
-    }
-
-    void NodeJsonString::writeBinToFile(BinaryWriter &binaryWriter) const {
-        NodeBase::writeBinToFile(binaryWriter);
-        binaryWriter.encode(data);
     }
 
     static std::pair<ASTNode, JsonUtil::ConvertResult>
@@ -115,7 +77,7 @@ namespace CHelper::Node {
         if (HEDLEY_LIKELY(str.size() <= 1 || str[str.size() - 1] != '"')) {
             errorReason = ErrorReason::contentError(tokens, "字符串参数内容应该在双引号内 -> " + str);
         }
-        if (HEDLEY_LIKELY(data.empty())) {
+        if (HEDLEY_LIKELY(!data.has_value() || data->empty())) {
             return ASTNode::andNode(this, {std::move(result)}, tokens, errorReason);
         }
         size_t offset = TokenUtil::getStartIndex(tokens) + 1;
@@ -180,5 +142,7 @@ namespace CHelper::Node {
         }
         return true;
     }
+
+    CODEC_NODE(NodeJsonString, data)
 
 }// namespace CHelper::Node

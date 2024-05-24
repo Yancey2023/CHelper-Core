@@ -13,22 +13,20 @@ namespace CHelper::Node {
 
     class NodeJsonString : public NodeBase {
     public:
-        const std::vector<std::unique_ptr<NodeBase>> data;
-        const std::unique_ptr<NodeBase> nodeData;
+        std::optional<std::vector<std::unique_ptr<NodeBase>>> data;
+
+    private:
+        std::unique_ptr<NodeBase> nodeData;
+
+    public:
+        NodeJsonString() = default;
 
         NodeJsonString(const std::optional<std::string> &id,
-                       const std::optional<std::string> &description,
-                       std::vector<std::unique_ptr<NodeBase>> data);
+                       const std::optional<std::string> &description);
 
-        NodeJsonString(const nlohmann::json &j,
-                       const CPack &cpack);
-
-        NodeJsonString(BinaryReader &binaryReader,
-                       [[maybe_unused]] const CPack &cpack);
+        void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -38,8 +36,9 @@ namespace CHelper::Node {
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
                                 std::vector<Suggestions> &suggestions) const override;
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
+
+    CODEC_NODE_H(NodeJsonString)
 
 }// namespace CHelper::Node
 

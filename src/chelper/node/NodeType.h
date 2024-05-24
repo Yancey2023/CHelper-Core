@@ -19,18 +19,18 @@ namespace CHelper {
 
         class NodeType {
         public:
-            uint8_t id;
+            uint8_t id{};
             std::string nodeName;
-            std::function<std::unique_ptr<NodeBase>(const nlohmann::json &j, const CPack &cpack)> createNodeByJson;
-            std::function<std::unique_ptr<NodeBase>(BinaryReader &binaryReader, const CPack &cpack)> createNodeByBinary;
+            std::function<void(const nlohmann::json &j, std::unique_ptr<NodeBase> &t)> decodeByJson;
+            std::function<void(nlohmann::json &j, const std::unique_ptr<NodeBase> &t)> encodeByJson;
+            std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary;
+            std::function<void(BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t)> encodeByBinary;
 
             NodeType(std::string nodeName,
-                     std::function<std::unique_ptr<NodeBase>(const nlohmann::json &j,
-                                                             const CPack &cpack)>
-                             createNodeByJson,
-                     std::function<std::unique_ptr<NodeBase>(BinaryReader &binaryReader,
-                                                             const CPack &cpack)>
-                             createNodeByBinary);
+                     std::function<void(const nlohmann::json &j, std::unique_ptr<NodeBase> &t)> decodeByJson,
+                     std::function<void(nlohmann::json &j, const std::unique_ptr<NodeBase> &t)> encodeByJson,
+                     std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary,
+                     std::function<void(BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t)> encodeByBinary);
 
             static std::vector<NodeType *> NODE_TYPES;
 

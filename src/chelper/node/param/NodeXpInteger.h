@@ -13,14 +13,7 @@ namespace CHelper::Node {
 
     class NodeXpInteger : public NodeBase {
     public:
-        NodeXpInteger(const std::optional<std::string> &id,
-                      const std::optional<std::string> &description);
-
-        NodeXpInteger(const nlohmann::json &j,
-                      [[maybe_unused]] const CPack &cpack);
-
-        NodeXpInteger(BinaryReader &binaryReader,
-                      [[maybe_unused]] const CPack &cpack);
+        NodeXpInteger() = default;
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
@@ -30,6 +23,8 @@ namespace CHelper::Node {
                               StructureBuilder &structure,
                               bool isMustHave) const override;
     };
+
+    CODEC_UNIQUE_PTR_H(NodeXpInteger)
 
 }// namespace CHelper::Node
 

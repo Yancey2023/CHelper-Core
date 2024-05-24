@@ -176,37 +176,10 @@ namespace CHelper {
         encode(static_cast<uint16_t>(t));
     }
 
-    void BinaryWriter::encode(const std::optional<bool> &t) {
-        if (HEDLEY_LIKELY(t.has_value())) {
-            encode(t.value());
-        } else {
-            encode((uint8_t) 0xFF);
-        }
-    }
-
     void BinaryWriter::encode(const std::string &t) {
         encodeSize(t.length());
         if (!t.empty()) {
             ostream.write(t.data(), t.length());
-        }
-    }
-
-    void BinaryWriter::encode(const std::optional<std::string> &t) {
-        if (HEDLEY_LIKELY(t.has_value() && !t->empty())) {
-            encode(t.value());
-        } else {
-            encodeSize(0);
-        }
-    }
-
-    void BinaryWriter::encode(const std::optional<int32_t> &t) {
-        if (HEDLEY_LIKELY(t.has_value())) {
-            if (HEDLEY_UNLIKELY(t.value() == std::numeric_limits<int32_t>::min())) {
-                throw std::runtime_error("fail to encode std::optional<int32_t>");
-            }
-            encode(t.value());
-        } else {
-            encode(std::numeric_limits<int32_t>::min());
         }
     }
 
@@ -380,20 +353,6 @@ namespace CHelper {
         }
     }
 
-    void BinaryReader::decode(std::optional<bool> &t) {
-        switch (read<uint8_t>()) {
-            case 0:
-                t = false;
-                break;
-            case 1:
-                t = true;
-                break;
-            default:
-                t = std::nullopt;
-                break;
-        }
-    }
-
     void BinaryReader::decode(std::string &t) {
         size_t length = readSize();
         if (HEDLEY_UNLIKELY(length == 0)) {
@@ -402,27 +361,6 @@ namespace CHelper {
         std::vector<char> buffer(length);
         istream.read(buffer.data(), static_cast<std::streamsize>(sizeof(char) * length));
         t = {buffer.begin(), buffer.end()};
-    }
-
-    void BinaryReader::decode(std::optional<std::string> &t) {
-        size_t length = readSize();
-        if (HEDLEY_UNLIKELY(length == 0)) {
-            t = std::nullopt;
-            return;
-        }
-        std::vector<char> buffer(length);
-        istream.read(buffer.data(), static_cast<std::streamsize>(sizeof(char) * length));
-        t = {{buffer.begin(), buffer.end()}};
-    }
-
-    void BinaryReader::decode(std::optional<int32_t> &t) {
-        int32_t value;
-        decode(value);
-        if (value == std::numeric_limits<int32_t>::min()) {
-            t = std::nullopt;
-        } else {
-            t = value;
-        }
     }
 
 }// namespace CHelper

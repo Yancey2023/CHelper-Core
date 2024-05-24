@@ -4,8 +4,8 @@
 
 #include <gtest/gtest.h>
 
-#include "../chelper/lexer/Lexer.h"
 #include "../chelper/Core.h"
+#include "../chelper/lexer/Lexer.h"
 #include "../chelper/parser/Parser.h"
 
 #pragma GCC diagnostic ignored "-Wunused-result"
@@ -37,9 +37,10 @@ namespace CHelper::Test {
                 core->getStructure();
             } catch (const std::exception &e) {
                 std::cout << ColorStringBuilder()
-                        .green("parse command: ")
-                        .purple(command)
-                        .build() << std::endl;
+                                     .green("parse command: ")
+                                     .purple(command)
+                                     .build()
+                          << std::endl;
                 Exception::printStackTrace(e);
                 Profile::clear();
                 flag = true;
@@ -62,11 +63,14 @@ namespace CHelper::Test {
             core->getCPack()->writeBsonToFile(output);
             end = std::chrono::high_resolution_clock::now();
             std::cout << ColorStringBuilder()
-                    .green("write successfully(")
-                    .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                            end - start).count()) + "ms")
-                    .green(")")
-                    .build() << std::endl;
+                                 .green("write successfully(")
+                                 .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
+                                                                end - start)
+                                                                .count()) +
+                                         "ms")
+                                 .green(")")
+                                 .build()
+                      << std::endl;
             std::cout << std::endl;
             auto core2 = Core::createByBson(output);
             std::cout << std::endl;
@@ -77,7 +81,7 @@ namespace CHelper::Test {
         }
     }
 
-} // CHelper::Test
+}// namespace CHelper::Test
 
 TEST(MainTest, ParseCommand) {
     CHelper::Test::test(
@@ -109,8 +113,7 @@ TEST(MainTest, ParseCommand) {
                     R"(spreadplayers ~ ~ 0 1200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)",
                     R"(camerashake add @a 10000000000000000000000000000000000000000000000000000 3402823466385288598117041834845169254401)",
                     R"(setblock ~~~ candle_cake[lit=)",
-            }
-    );
+            });
 }
 
 TEST(MainTest, Bson) {
@@ -125,8 +128,8 @@ TEST(MainTest, Bson) {
     CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\beta\experiment)",
                              R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.0.23.cpack)");
     // netease
-//    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
-//                             R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
-//    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
-//                             R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
+    //    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
+    //                             R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
+    //    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
+    //                             R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
 }

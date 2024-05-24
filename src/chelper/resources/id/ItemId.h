@@ -22,12 +22,16 @@ namespace CHelper {
     public:
         std::optional<int32_t> max;
         std::optional<std::vector<std::string>> descriptions;
+
     private:
         std::vector<std::shared_ptr<Node::NodeBase>> nodeChildren;
         std::shared_ptr<Node::NodeBase> node = nullptr;
+
     public:
         std::shared_ptr<Node::NodeBase> getNode();
     };
+
+    CODEC_H(ItemId)
 
 }// namespace CHelper
 

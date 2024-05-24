@@ -17,6 +17,6 @@ namespace CHelper {
         return idWithNamespace;
     }
 
-    CODEC(NamespaceId, idNamespace, name, description);
+    CODEC(NamespaceId, idNamespace, name, description)
 
 }// namespace CHelper

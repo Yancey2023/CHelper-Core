@@ -15,22 +15,14 @@ namespace CHelper::Node {
     public:
         std::optional<std::string> descriptionTrue, descriptionFalse;
 
+        NodeJsonBoolean() = default;
+
         NodeJsonBoolean(const std::optional<std::string> &id,
                         const std::optional<std::string> &description,
                         const std::optional<std::string> &descriptionTrue,
                         const std::optional<std::string> &descriptionFalse);
 
-        NodeJsonBoolean(const nlohmann::json &j,
-                        [[maybe_unused]] const CPack &cpack);
-
-        NodeJsonBoolean(BinaryReader &binaryReader,
-                        const CPack &cpack);
-
         [[nodiscard]] NodeType *getNodeType() const override;
-
-        void toJson(nlohmann::json &j) const override;
-
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -38,6 +30,8 @@ namespace CHelper::Node {
                                 size_t index,
                                 std::vector<Suggestions> &suggestions) const override;
     };
+
+    CODEC_NODE_H(NodeJsonBoolean)
 
 }// namespace CHelper::Node
 

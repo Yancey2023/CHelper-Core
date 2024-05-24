@@ -13,14 +13,10 @@ namespace CHelper::Node {
 
     class NodeRange : public NodeBase {
     public:
+        NodeRange() = default;
+
         NodeRange(const std::optional<std::string> &id,
                   const std::optional<std::string> &description);
-
-        NodeRange(const nlohmann::json &j,
-                  [[maybe_unused]] const CPack &cpack);
-
-        NodeRange(BinaryReader &binaryReader,
-                  [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
@@ -34,6 +30,8 @@ namespace CHelper::Node {
                               StructureBuilder &structure,
                               bool isMustHave) const override;
     };
+
+    CODEC_UNIQUE_PTR_H(NodeRange)
 
 }// namespace CHelper::Node
 

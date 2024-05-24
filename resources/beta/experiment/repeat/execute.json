@@ -1,6 +1,6 @@
 {
   "id": "execute",
-  "break": [
+  "breakNodes": [
     {
       "type": "TEXT",
       "description": "要被执行的目标命令",
@@ -15,7 +15,7 @@
       "description": "命令"
     }
   ],
-  "content": [
+  "repeatNodes": [
     [
       {
         "data": {

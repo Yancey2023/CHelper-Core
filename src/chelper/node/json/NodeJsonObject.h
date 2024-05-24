@@ -16,28 +16,27 @@ namespace CHelper::Node {
 
     class NodeJsonObject : public NodeBase {
     public:
-        const std::vector<std::unique_ptr<NodeBase>> data;
-        const std::unique_ptr<NodeOr> nodeElement1;
-        const NodeOr nodeElement2;
-        const NodeList nodeList;
+        std::vector<std::unique_ptr<NodeJsonEntry>> data;
+
+    private:
+        std::unique_ptr<NodeOr> nodeElement1;
+        std::unique_ptr<NodeOr> nodeElement2;
+        std::unique_ptr<NodeList> nodeList;
+
+    public:
+        NodeJsonObject() = default;
 
         NodeJsonObject(const std::optional<std::string> &id,
-                       const std::optional<std::string> &description,
-                       std::vector<std::unique_ptr<NodeBase>> data = {});
+                       const std::optional<std::string> &description);
 
-        NodeJsonObject(const nlohmann::json &j,
-                       [[maybe_unused]] const CPack &cpack);
-
-        NodeJsonObject(BinaryReader &binaryReader,
-                       [[maybe_unused]] const CPack &cpack);
+        void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
-        void toJson(nlohmann::json &j) const override;
-
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
-        void writeBinToFile(BinaryWriter &binaryWriter) const override;
     };
+
+    CODEC_NODE_H(NodeJsonObject)
 
 }// namespace CHelper::Node
 

@@ -13,14 +13,10 @@ namespace CHelper::Node {
 
     class NodeJsonNull : public NodeBase {
     public:
+        NodeJsonNull() = default;
+
         NodeJsonNull(const std::optional<std::string> &id,
                      const std::optional<std::string> &description);
-
-        NodeJsonNull(const nlohmann::json &j,
-                     [[maybe_unused]] const CPack &cpack);
-
-        NodeJsonNull(BinaryReader &binaryReader,
-                     [[maybe_unused]] const CPack &cpack);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
@@ -30,6 +26,8 @@ namespace CHelper::Node {
                                 size_t index,
                                 std::vector<Suggestions> &suggestions) const override;
     };
+
+    CODEC_UNIQUE_PTR_H(NodeJsonNull)
 
 }// namespace CHelper::Node
 
