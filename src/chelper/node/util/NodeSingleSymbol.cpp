@@ -15,10 +15,12 @@ namespace CHelper::Node {
 
     NodeSingleSymbol::NodeSingleSymbol(const std::optional<std::string> &id,
                                        const std::optional<std::string> &description,
-                                       char symbol)
+                                       char symbol,
+                                       bool isAddWhitespace)
         : NodeBase(id, description, false),
           symbol(symbol),
-          normalId(getNormalId(symbol, description)) {}
+          normalId(getNormalId(symbol, description)),
+          isAddWhitespace(isAddWhitespace) {}
 
     ASTNode NodeSingleSymbol::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         ASTNode symbolNode = tokenReader.readSymbolASTNode(this);
@@ -43,7 +45,7 @@ namespace CHelper::Node {
         if (HEDLEY_LIKELY(TokenUtil::getStartIndex(astNode->tokens) != index)) {
             return true;
         }
-        suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, normalId}));
+        suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, isAddWhitespace, normalId}));
         return true;
     }
 

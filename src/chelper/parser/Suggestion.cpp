@@ -11,16 +11,20 @@ namespace CHelper {
 
     Suggestion::Suggestion(size_t start,
                            size_t end,
+                           bool isAddWhitespace,
                            const std::shared_ptr<NormalId> &content)
         : start(start),
           end(end),
+          isAddWhitespace(isAddWhitespace),
           content(content),
           mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
 
     Suggestion::Suggestion(const VectorView<Token> &tokens,
+                           bool isAddWhitespace,
                            const std::shared_ptr<NormalId> &content)
         : start(TokenUtil::getStartIndex(tokens)),
           end(TokenUtil::getEndIndex(tokens)),
+          isAddWhitespace(isAddWhitespace),
           content(content),
           mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
 
@@ -33,7 +37,7 @@ namespace CHelper {
         }
         core->onTextChanged(result, result.size());
         const ASTNode *astNode = core->getAstNode();
-        if (HEDLEY_LIKELY(astNode->isMustAddWhitespace && astNode->isAllWhitespaceError())) {
+        if (HEDLEY_LIKELY(isAddWhitespace && astNode->isAllWhitespaceError())) {
             result.push_back(' ');
         }
         return std::move(result);

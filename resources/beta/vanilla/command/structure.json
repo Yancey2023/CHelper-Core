@@ -51,7 +51,6 @@
     {
       "type": "POSITION",
       "id": "saveTo",
-      "isMustAfterWhiteSpace": false,
       "brief": "源坐标2",
       "description": "源区域对角坐标2"
     },

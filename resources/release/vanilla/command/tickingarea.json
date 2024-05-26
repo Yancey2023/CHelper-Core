@@ -30,8 +30,7 @@
       "type": "POSITION",
       "id": "to",
       "brief": "坐标2",
-      "description": "用于定义矩形常加载区域的两个对角坐标的第二个",
-      "isMustAfterWhiteSpace": false
+      "description": "用于定义矩形常加载区域的两个对角坐标的第二个"
     },
     {
       "type": "STRING",

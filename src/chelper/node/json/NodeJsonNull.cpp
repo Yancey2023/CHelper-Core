@@ -39,7 +39,7 @@ namespace CHelper::Node {
             std::shared_ptr<NormalId> id;
             id->name = "null";
             id->description = "null参数";
-            suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, id}));
+            suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, false, id}));
         }
         return true;
     }

@@ -52,7 +52,7 @@ namespace CHelper {
             nodeBlockStateSeparator.get(), nodeBlockStateRightBracket.get());
 
     std::shared_ptr<Node::NodeBase> BlockStateValue::getNode() {
-        if (node == nullptr) {
+        if (HEDLEY_UNLIKELY(node == nullptr)) {
             switch (type) {
                 case BlockStateType::STRING:
                     node = std::make_shared<Node::NodeText>(
@@ -80,7 +80,7 @@ namespace CHelper {
     }
 
     std::shared_ptr<Node::NodeBase> BlockState::getNode() {
-        if (node == nullptr) {
+        if (HEDLEY_UNLIKELY(node == nullptr)) {
             std::vector<const Node::NodeBase *> valueNodes;
             valueNodes.reserve(values.size());
             for (auto &item: values) {
@@ -105,7 +105,7 @@ namespace CHelper {
     }
 
     std::shared_ptr<Node::NodeBase> BlockId::getNode() {
-        if (node == nullptr) {
+        if (HEDLEY_UNLIKELY(node == nullptr)) {
             std::vector<const Node::NodeBase *> blockStateEntryChildNode2;
             //已知的方块状态
             if (HEDLEY_LIKELY(blockStates.has_value())) {

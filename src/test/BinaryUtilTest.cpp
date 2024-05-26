@@ -190,7 +190,7 @@ TEST(BinaryUtilTest, BlockId) {
         EXPECT_EQ(t1.description, t2.description);
         EXPECT_EQ(t1.idNamespace, t2.idNamespace);
         ASSERT_EQ(!t1.blockStates.has_value() || t1.blockStates.value().empty(), !t2.blockStates.has_value());
-        if (t2.blockStates.has_value()) {
+        if (HEDLEY_LIKELY(t2.blockStates.has_value())) {
             ASSERT_EQ(t1.blockStates->size(), t2.blockStates->size());
             for (int i = 0; i < t2.blockStates->size(); ++i) {
                 EXPECT_EQ(t1.blockStates.value()[i].key, t2.blockStates.value()[i].key);

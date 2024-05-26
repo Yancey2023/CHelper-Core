@@ -10,7 +10,7 @@
 namespace CHelper {
 
     std::shared_ptr<Node::NodeBase> ItemId::getNode() {
-        if (node == nullptr) {
+        if (HEDLEY_UNLIKELY(node == nullptr)) {
             if (HEDLEY_UNLIKELY(max.has_value() && max.value() < 0)) {
                 throw std::runtime_error("item id max data value should be a positive number");
             }

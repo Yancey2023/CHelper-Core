@@ -45,7 +45,6 @@
       "id": "yRot",
       "brief": "ry",
       "description": "实体传送后的y轴旋转角度",
-      "isMustAfterWhiteSpace": false,
       "canUseCaretNotation": false
     },
     {
@@ -53,7 +52,6 @@
       "id": "xRot",
       "brief": "rx",
       "description": "实体传送后的x轴旋转角度",
-      "isMustAfterWhiteSpace": false,
       "canUseCaretNotation": false
     },
     {

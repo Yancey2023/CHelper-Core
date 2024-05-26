@@ -392,9 +392,9 @@ namespace CHelper {
 
     std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
     CPack::getNamespaceId(const std::string &key) const {
-        if (key == "blocks") {
+        if (HEDLEY_UNLIKELY(key == "blocks")) {
             return blockIds;
-        } else if (key == "items") {
+        } else if (HEDLEY_UNLIKELY(key == "items")) {
             return itemIds;
         }
         auto it = namespaceIds.find(key);

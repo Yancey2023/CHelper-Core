@@ -35,7 +35,7 @@ namespace CHelper::Node {
           allowsMissingID(allowsMissingID),
           getNormalIdASTNode(getNormalIdASTNode) {
 #if CHelperDebug == true
-        if (contents == nullptr) {
+        if (HEDLEY_UNLIKELY(contents == nullptr)) {
             throw std::runtime_error("contents should not be nullptr");
         }
 #endif
@@ -43,7 +43,7 @@ namespace CHelper::Node {
     }
 
     void NodeNormalId::init(const CPack &cpack) {
-        if (getNormalIdASTNode == nullptr) {
+        if (HEDLEY_UNLIKELY(getNormalIdASTNode == nullptr)) {
             getNormalIdASTNode = [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 return tokenReader.readUntilWhitespace(node);
             };
@@ -54,7 +54,7 @@ namespace CHelper::Node {
             customContents = cpack.getNormalId(key.value());
         }
         if (HEDLEY_UNLIKELY(customContents == nullptr)) {
-            if (key.has_value()) {
+            if (HEDLEY_LIKELY(key.has_value())) {
                 Profile::push(ColorStringBuilder()
                                       .red("linking contents to ")
                                       .purple(key.value())
@@ -153,18 +153,18 @@ namespace CHelper::Node {
         size_t end = TokenUtil::getEndIndex(astNode->tokens);
         std::transform(nameStartOf.begin(), nameStartOf.end(),
                        std::back_inserter(suggestions1.suggestions),
-                       [&start, &end](const auto &item) {
-                           return Suggestion(start, end, item);
+                       [&start, &end, this](const auto &item) {
+                           return Suggestion(start, end, isAfterWhitespace(), item);
                        });
         std::transform(nameContain.begin(), nameContain.end(),
                        std::back_inserter(suggestions1.suggestions),
-                       [&start, &end](const auto &item) {
-                           return Suggestion(start, end, item);
+                       [&start, &end, this](const auto &item) {
+                           return Suggestion(start, end, isAfterWhitespace(), item);
                        });
         std::transform(descriptionContain.begin(), descriptionContain.end(),
                        std::back_inserter(suggestions1.suggestions),
-                       [&start, &end](const auto &item) {
-                           return Suggestion(start, end, item);
+                       [&start, &end, this](const auto &item) {
+                           return Suggestion(start, end, isAfterWhitespace(), item);
                        });
         suggestions1.markFiltered();
         suggestions.push_back(std::move(suggestions1));

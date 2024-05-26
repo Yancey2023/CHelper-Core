@@ -171,7 +171,7 @@ namespace CHelper {
         push();
         while (ready()) {
             TokenType::TokenType tokenType = peek()->type;
-            if (tokenType == TokenType::WHITE_SPACE || tokenType == TokenType::LF) {
+            if (HEDLEY_UNLIKELY(tokenType == TokenType::WHITE_SPACE || tokenType == TokenType::LF)) {
                 break;
             }
             skip();

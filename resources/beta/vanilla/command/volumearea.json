@@ -27,8 +27,7 @@
       "brief": "位置",
       "type": "POSITION",
       "id": "3",
-      "description": "功能域的位置",
-      "isMustAfterWhiteSpace": false
+      "description": "功能域的位置"
     },
     {
       "brief": "名称",

@@ -39,13 +39,13 @@ namespace CHelper::Node {
             std::shared_ptr<NormalId> id;
             id->name = "true";
             id->description = descriptionTrue;
-            suggestions1.suggestions.emplace_back(astNode->tokens, std::move(id));
+            suggestions1.suggestions.emplace_back(astNode->tokens, false, std::move(id));
         }
         if (HEDLEY_UNLIKELY(std::string("false").find(str) != std::string::npos)) {
             std::shared_ptr<NormalId> id;
             id->name = "false";
             id->description = descriptionFalse;
-            suggestions1.suggestions.emplace_back(astNode->tokens, std::move(id));
+            suggestions1.suggestions.emplace_back(astNode->tokens, false, std::move(id));
         }
         suggestions1.markFiltered();
         suggestions.push_back(std::move(suggestions1));

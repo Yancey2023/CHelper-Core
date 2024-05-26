@@ -43,24 +43,24 @@ namespace CHelper::Node {
           encodeByBinary(std::move(encodeByBinary)) {}
 
     template<class T>
-    static std::unique_ptr<NodeType> create(const std::string &nodeName) {
+    static std::unique_ptr<NodeType> create(const std::string &nodeName, bool isMustAfterWhiteSpace = true) {
         return std::make_unique<NodeType>(
                 nodeName,
-                [](const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
+                [isMustAfterWhiteSpace](const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
                     t = std::make_unique<T>();
                     j.get_to((T &) *t);
                     if (HEDLEY_UNLIKELY(!t->isMustAfterWhiteSpace.has_value())) {
-                        t->isMustAfterWhiteSpace = true;
+                        t->isMustAfterWhiteSpace = isMustAfterWhiteSpace;
                     }
                 },
                 [](nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {
                     j = (T &) *t;
                 },
-                [](BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
+                [isMustAfterWhiteSpace](BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
                     t = std::make_unique<T>();
                     binaryReader.decode((T &) *t);
                     if (HEDLEY_UNLIKELY(!t->isMustAfterWhiteSpace.has_value())) {
-                        t->isMustAfterWhiteSpace = true;
+                        t->isMustAfterWhiteSpace = isMustAfterWhiteSpace;
                     }
                 },
                 [](BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t) {
@@ -148,8 +148,8 @@ namespace CHelper::Node {
     std::unique_ptr<NodeType> NodeType::NAMESPACE_ID = create<NodeNamespaceId>("NAMESPACE_ID");
     std::unique_ptr<NodeType> NodeType::NORMAL_ID = create<NodeNormalId>("NORMAL_ID");
     std::unique_ptr<NodeType> NodeType::PER_COMMAND = create<NodePerCommand>("PER_COMMAND");
-    std::unique_ptr<NodeType> NodeType::POSITION = create<NodePosition>("POSITION");
-    std::unique_ptr<NodeType> NodeType::RELATIVE_FLOAT = create<NodeRelativeFloat>("RELATIVE_FLOAT");
+    std::unique_ptr<NodeType> NodeType::POSITION = create<NodePosition>("POSITION", false);
+    std::unique_ptr<NodeType> NodeType::RELATIVE_FLOAT = create<NodeRelativeFloat>("RELATIVE_FLOAT", false);
     std::unique_ptr<NodeType> NodeType::REPEAT = std::make_unique<NodeType>(
             "REPEAT",
             [](const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
@@ -233,11 +233,6 @@ namespace CHelper::Node {
             return;
         }
         isInit = true;
-#if CHelperDebug == true
-        if (!NodeType::NODE_TYPES.empty()) {
-            throw std::runtime_error("node types is not empty");
-        }
-#endif
         registerNodeType(UNKNOWN);
         registerNodeType(BLOCK);
         registerNodeType(BOOLEAN);

@@ -22,9 +22,13 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const {
+        return getASTNodeWithNextNode(tokenReader, cpack, isAfterWhitespace());
+    }
+
+    ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack, bool isTestWhitespace) const {
         //空格检测
         tokenReader.push();
-        if (HEDLEY_UNLIKELY(isMustAfterWhiteSpace.value_or(true) && tokenReader.skipWhitespace() == 0)) {
+        if (HEDLEY_UNLIKELY(isTestWhitespace && getNodeType() != NodeType::LF.get() && tokenReader.skipWhitespace() == 0)) {
             VectorView<Token> tokens = tokenReader.collect();
             return ASTNode::simpleNode(this, tokens, ErrorReason::requireWhiteSpace(tokens), "compound");
         }
@@ -42,15 +46,13 @@ namespace CHelper::Node {
         childASTNodes.reserve(nextNodes.size());
         for (const auto &item: nextNodes) {
             tokenReader.push();
-            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader, cpack));
+            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader, cpack, isAfterWhitespace() || item->isAfterWhitespace()));
             tokenReader.restore();
         }
         tokenReader.push();
         tokenReader.skipToLF();
-        ASTNode nextASTNode = ASTNode::orNode(this, std::move(childASTNodes), tokenReader.collect(), nullptr,
-                                              "nextNode");
-        return ASTNode::andNode(this, {std::move(currentASTNode), std::move(nextASTNode)}, tokenReader.collect(),
-                                nullptr, "compound");
+        ASTNode nextASTNode = ASTNode::orNode(this, std::move(childASTNodes), tokenReader.collect(), nullptr, "nextNode");
+        return ASTNode::andNode(this, {std::move(currentASTNode), std::move(nextASTNode)}, tokenReader.collect(), nullptr, "compound");
     }
 
     ASTNode NodeBase::getByChildNode(TokenReader &tokenReader,
@@ -148,6 +150,10 @@ namespace CHelper::Node {
         nextNodes[0]->collectStructureWithNextNodes(structure, isMustHave);
     }
 
+    bool NodeBase::isAfterWhitespace() const {
+        return isMustAfterWhiteSpace.value_or(false);
+    }
+
     CODEC(NodeBase, id, brief, description, isMustAfterWhiteSpace)
 
     void from_json(const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
@@ -181,16 +187,18 @@ namespace CHelper::Node {
     }
 
     void to_json(nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {
-        if (t->getNodeType() == NodeType::UNKNOWN.get()) {
+#if CHelperDebug == true
+        if (HEDLEY_UNLIKELY(t->getNodeType() == NodeType::UNKNOWN.get())) {
             throw std::runtime_error("fail to write node");
         }
+#endif
         t->getNodeType()->encodeByJson(j, t);
         JsonUtil::encode(j, "type", t->getNodeType()->nodeName);
     }
 
     void from_binary(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
         auto typeId = binaryReader.read<uint8_t>();
-        if (typeId > NodeType::NODE_TYPES.size()) {
+        if (HEDLEY_UNLIKELY(typeId > NodeType::NODE_TYPES.size())) {
             throw std::runtime_error("unknown typeId");
         }
         const NodeType *type = NodeType::NODE_TYPES[typeId];
@@ -198,9 +206,11 @@ namespace CHelper::Node {
     }
 
     void to_binary(BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t) {
-        if (t->getNodeType() == NodeType::UNKNOWN.get()) {
+#if CHelperDebug == true
+        if (HEDLEY_UNLIKELY(t->getNodeType() == NodeType::UNKNOWN.get())) {
             throw std::runtime_error("fail to write node");
         }
+#endif
         binaryWriter.encode(t->getNodeType()->id);
         t->getNodeType()->encodeByBinary(binaryWriter, t);
     }

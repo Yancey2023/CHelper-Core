@@ -85,7 +85,7 @@ namespace CHelper::Node {
         std::transform(suggestions1.begin(), suggestions1.end(),
                        std::back_inserter(suggestions2.suggestions),
                        [&start, &end](const auto &item) {
-                           return Suggestion(start, end, item);
+                           return Suggestion(start, end, true, item);
                        });
         suggestions2.markFiltered();
         suggestions.push_back(std::move(suggestions2));

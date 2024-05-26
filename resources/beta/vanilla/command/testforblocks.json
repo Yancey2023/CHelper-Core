@@ -17,15 +17,13 @@
       "type": "POSITION",
       "id": "end",
       "brief": "源坐标1",
-      "description": "作为样式基准的区域（源区域）的两个对角方块的第二个",
-      "isMustAfterWhiteSpace": false
+      "description": "作为样式基准的区域（源区域）的两个对角方块的第二个"
     },
     {
       "type": "POSITION",
       "id": "destination",
       "brief": "待检查区域坐标",
-      "description": "待检查区域（目标区域）的下西北角（具有最小坐标值的边角）",
-      "isMustAfterWhiteSpace": false
+      "description": "待检查区域（目标区域）的下西北角（具有最小坐标值的边角）"
     },
     {
       "type": "NORMAL_ID",

@@ -68,7 +68,7 @@ namespace CHelper::Node {
         : NodeBase(id, description, false) {}
 
     void NodeAny::init(const CPack &cpack) {
-        if (node == nullptr) {
+        if (HEDLEY_UNLIKELY(node == nullptr)) {
             node = std::make_unique<NodeOr>(
                     "VALUE", "目标选择器参数值",
                     std::vector<const NodeBase *>{
@@ -81,7 +81,7 @@ namespace CHelper::Node {
 
     ASTNode NodeAny::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
 #if CHelperDebug == true
-        if (node == nullptr) {
+        if (HEDLEY_UNLIKELY(node == nullptr)) {
             throw std::runtime_error("not init");
         }
 #endif

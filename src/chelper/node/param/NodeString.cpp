@@ -29,7 +29,7 @@ namespace CHelper::Node {
             tokenReader.push();
             tokenReader.skipToLF();
             VectorView<Token> tokens = tokenReader.collect();
-            if (!allowMissingString && TokenUtil::toString(tokens).empty()) {
+            if (HEDLEY_UNLIKELY(!allowMissingString && TokenUtil::toString(tokens).empty())) {
                 return ASTNode::simpleNode(this, tokens, ErrorReason::incomplete(tokens, "字符串参数内容为空"));
             } else {
                 return ASTNode::simpleNode(this, tokens);
@@ -78,7 +78,7 @@ namespace CHelper::Node {
         std::string str = TokenUtil::toString(astNode->tokens)
                                   .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         if (HEDLEY_UNLIKELY(str.empty())) {
-            suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
+            suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
             return true;
         }
         if (HEDLEY_LIKELY(str[0] != '"')) {
@@ -86,7 +86,7 @@ namespace CHelper::Node {
         }
         auto convertResult = JsonUtil::jsonString2String(str);
         if (HEDLEY_LIKELY(!convertResult.isComplete)) {
-            suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
+            suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
         }
         return true;
     }

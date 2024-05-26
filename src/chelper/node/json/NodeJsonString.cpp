@@ -19,13 +19,13 @@ namespace CHelper::Node {
     }
 
     void NodeJsonString::init(const CPack &cpack) {
-        if (data.has_value()) {
+        if (HEDLEY_UNLIKELY(data.has_value())) {
             for (const auto &item: data.value()) {
                 item->init(cpack);
             }
         }
         std::vector<const NodeBase *> nodeDataElement;
-        if (data.has_value()) {
+        if (HEDLEY_UNLIKELY(data.has_value())) {
             nodeDataElement.reserve(data.value().size());
             for (const auto &item: data.value()) {
                 nodeDataElement.push_back(item.get());
@@ -115,7 +115,7 @@ namespace CHelper::Node {
         std::string str = TokenUtil::toString(astNode->tokens)
                                   .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
         if (HEDLEY_UNLIKELY(str.empty())) {
-            suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
+            suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
             return true;
         }
         auto convertResult = JsonUtil::jsonString2String(str);
@@ -133,12 +133,12 @@ namespace CHelper::Node {
             }
             if (HEDLEY_LIKELY(astNode->hasChildNode() && !astNode->childNodes[0].isError() &&
                               convertResult.errorReason == nullptr && !convertResult.isComplete)) {
-                suggestions1.suggestions.emplace_back(index, index, doubleQuoteMask);
+                suggestions1.suggestions.emplace_back(index, index, false, doubleQuoteMask);
             }
             suggestions1.markFiltered();
             suggestions.push_back(std::move(suggestions1));
         } else if (HEDLEY_LIKELY(convertResult.errorReason == nullptr && !convertResult.isComplete)) {
-            suggestions.push_back(Suggestions::singleSuggestion({index, index, doubleQuoteMask}));
+            suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
         }
         return true;
     }

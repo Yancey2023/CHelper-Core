@@ -156,13 +156,13 @@ namespace CHelper::Test {
         while (fin.is_open()) {
             std::string str;
             getline(fin, str);
-            if (str.empty()) {
+            if (HEDLEY_UNLIKELY(str.empty())) {
                 break;
             }
-            if (str[0] == '-') {
+            if (HEDLEY_LIKELY(str[0] == '-')) {
                 continue;
             }
-            if (str[str.length() - 1] == '\r') {
+            if (HEDLEY_UNLIKELY(str[str.length() - 1] == '\r')) {
                 str = str.substr(0, str.length() - 1);
             }
             commands.push_back(str);
@@ -191,13 +191,13 @@ namespace CHelper::Test {
         while (fin.is_open()) {
             std::string str;
             getline(fin, str);
-            if (str.empty()) {
+            if (HEDLEY_UNLIKELY(str.empty())) {
                 break;
             }
-            if (str[0] == '-') {
+            if (HEDLEY_LIKELY(str[0] == '-')) {
                 continue;
             }
-            if (str[str.length() - 1] == '\r') {
+            if (HEDLEY_UNLIKELY(str[str.length() - 1] == '\r')) {
                 str = str.substr(0, str.length() - 1);
             }
             commands.push_back(str);
@@ -225,7 +225,7 @@ namespace CHelper::Test {
         try {
             core = Core::createByDirectory(cpackPath);
             std::cout << std::endl;
-            if (core == nullptr) {
+            if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
         } catch (const std::exception &e) {
@@ -245,7 +245,7 @@ namespace CHelper::Test {
         try {
             core = Core::createByBinary(cpackPath);
             std::cout << std::endl;
-            if (core == nullptr) {
+            if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
         } catch (const std::exception &e) {
@@ -262,7 +262,7 @@ namespace CHelper::Test {
     [[maybe_unused]] void
     test(const std::shared_ptr<Core> &core, const std::vector<std::string> &commands, bool isTestTime) {
         try {
-            if (core == nullptr) {
+            if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
             for (const auto &command: commands) {
@@ -354,7 +354,7 @@ namespace CHelper::Test {
                         std::string greenPart = item.content->name;
                         if (item.end == command.length()) {
                             ASTNode astNode = Parser::parse(result, core->getCPack());
-                            if (astNode.isMustAddWhitespace && astNode.isAllWhitespaceError()) {
+                            if (item.isAddWhitespace && astNode.isAllWhitespaceError()) {
                                 greenPart.push_back(' ');
                             }
                         }
@@ -382,7 +382,7 @@ namespace CHelper::Test {
         try {
             auto core = Core::createByDirectory(cpackPath);
             std::cout << std::endl;
-            if (core == nullptr) {
+            if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
             std::chrono::high_resolution_clock::time_point start, end;
@@ -417,7 +417,7 @@ namespace CHelper::Test {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;
-            if (core == nullptr) {
+            if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
             std::chrono::high_resolution_clock::time_point start, end;
@@ -445,7 +445,7 @@ namespace CHelper::Test {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;
-            if (core == nullptr) {
+            if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
             std::chrono::high_resolution_clock::time_point start, end;
@@ -475,7 +475,7 @@ namespace CHelper::Test {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;
-            if (core == nullptr) {
+            if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
             std::chrono::high_resolution_clock::time_point start, end;
@@ -505,7 +505,7 @@ namespace CHelper::Test {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;
-            if (core == nullptr) {
+            if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
             std::chrono::high_resolution_clock::time_point start, end;

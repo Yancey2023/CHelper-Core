@@ -16,10 +16,12 @@ namespace CHelper::Node {
     public:
         char symbol;
         std::shared_ptr<NormalId> normalId;
+        bool isAddWhitespace;
 
         NodeSingleSymbol(const std::optional<std::string> &id,
                          const std::optional<std::string> &description,
-                         char symbol);
+                         char symbol,
+                         bool isAddWhitespace = true);
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 

@@ -20,7 +20,7 @@ CHelperApp::CHelperApp(QWidget *parent)
 #else
     core = CHelper::Core::createByBinary(R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.cpack)");
 #endif
-    if (core == nullptr) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
         throw std::runtime_error("fail to load cpack");
     }
     ui->listView->setModel(new QStringListModel(this));
@@ -43,7 +43,7 @@ void CHelperApp::onTextChanged(const QString &string) {
         return;
     }
     core->onTextChanged(string.toStdString(), string.length());
-    if (string == nullptr) {
+    if (HEDLEY_UNLIKELY(string == nullptr)) {
         ui->structureLabel->setText("欢迎使用CHelper");
         ui->descriptionLabel->setText("作者：Yancey");
         ui->errorReasonLabel->setText(nullptr);
@@ -81,7 +81,7 @@ void CHelperApp::onSuggestionClick(const QModelIndex &index) {
         return;
     }
     std::optional<std::string> result = core->onSuggestionClick(index.row());
-    if (result.has_value()) {
+    if (HEDLEY_LIKELY(result.has_value())) {
         ui->lineEdit->setText(QString::fromStdString(result.value()));
         ui->lineEdit->setFocus();
     } else {

@@ -34,7 +34,6 @@
     {
       "type": "POSITION",
       "id": "to",
-      "isMustAfterWhiteSpace": false,
       "brief": "坐标2",
       "description": "用于定义矩形加载区域的两个对角坐标的第二个"
     },

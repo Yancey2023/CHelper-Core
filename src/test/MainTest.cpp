@@ -52,7 +52,7 @@ namespace CHelper::Test {
                 flag = true;
             }
         }
-        if (flag) {
+        if (HEDLEY_UNLIKELY(flag)) {
             FAIL();
         }
     }
@@ -61,7 +61,7 @@ namespace CHelper::Test {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;
-            if (core == nullptr) {
+            if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
             std::chrono::high_resolution_clock::time_point start, end;

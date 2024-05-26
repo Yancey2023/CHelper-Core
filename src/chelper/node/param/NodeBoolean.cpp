@@ -37,12 +37,12 @@ namespace CHelper::Node {
         Suggestions suggestions1;
         if (HEDLEY_UNLIKELY(std::string("true").find(str) != std::string::npos)) {
             suggestions1.suggestions.emplace_back(
-                    astNode->tokens,
+                    astNode->tokens, true,
                     NormalId::make("true", descriptionTrue));
         }
         if (HEDLEY_UNLIKELY(std::string("false").find(str) != std::string::npos)) {
             suggestions1.suggestions.emplace_back(
-                    astNode->tokens,
+                    astNode->tokens, true,
                     NormalId::make("false", descriptionFalse));
         }
         suggestions1.markFiltered();

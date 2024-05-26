@@ -16,7 +16,6 @@
     {
       "type": "POSITION",
       "id": "to",
-      "isMustAfterWhiteSpace": false,
       "brief": "填充坐标2",
       "description": "定义填充区域的两组对角方块坐标"
     },

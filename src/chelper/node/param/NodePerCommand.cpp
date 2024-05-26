@@ -10,7 +10,7 @@ namespace CHelper::Node {
 
     void NodePerCommand::init(const CPack &cpack) {
         for (const auto &item: nodes) {
-            if (item->id.has_value()) {
+            if (HEDLEY_LIKELY(item->id.has_value())) {
                 Profile::push(ColorStringBuilder().red("init node ").purple(item->getNodeType()->nodeName).red(": \"").purple(item->id.value()).red("\"").build());
             } else {
                 Profile::push(ColorStringBuilder().red("init node").build());
@@ -59,7 +59,7 @@ namespace CHelper::Node {
         for (const auto &item: startNodes) {
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(item)
-            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader, cpack));
+            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader, cpack, true));
             DEBUG_GET_NODE_END(item)
             tokenReader.restore();
         }
@@ -138,7 +138,7 @@ namespace CHelper::Node {
                 if (HEDLEY_UNLIKELY(parentNode == nullptr)) {
                     throw Exception::UnknownNodeId(t->name, parentNodeId);
                 }
-                if (!HEDLEY_UNLIKELY(parentNode->nextNodes.empty())) {
+                if (HEDLEY_UNLIKELY(!parentNode->nextNodes.empty())) {
                     Profile::next(ColorStringBuilder()
                                           .red("repeating parent node \"")
                                           .purple(parentNode->id.value())
@@ -207,7 +207,7 @@ namespace CHelper::Node {
         t = std::make_unique<NodePerCommand>();
         //name
         binaryReader.decode(t->name);
-        if (t->name.empty()) {
+        if (HEDLEY_UNLIKELY(t->name.empty())) {
             throw std::runtime_error("command size cannot be zero");
         }
         binaryReader.decode(t->description);

@@ -48,6 +48,9 @@ namespace CHelper {
             [[nodiscard]] HEDLEY_NON_NULL(3) ASTNode
                     getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const;
 
+            [[nodiscard]] HEDLEY_NON_NULL(3) ASTNode
+                    getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack, bool isTestAfterWhitespace) const;
+
         protected:
             HEDLEY_NON_NULL(3, 4)
             ASTNode
@@ -64,6 +67,8 @@ namespace CHelper {
                                bool isIgnoreChildNodesError,
                                const std::vector<const NodeBase *> &childNodes,
                                const std::string &astNodeId = std::string()) const;
+
+            [[nodiscard]] bool isAfterWhitespace() const;
 
         public:
             HEDLEY_NON_NULL(2)

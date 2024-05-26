@@ -19,7 +19,6 @@
       "id": "z",
       "brief": "z",
       "description": "中心z坐标",
-      "isMustAfterWhiteSpace": false,
       "canUseCaretNotation": true
     },
     {

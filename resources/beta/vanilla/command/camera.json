@@ -213,7 +213,6 @@
       "id": "yRot",
       "brief": "ry",
       "description": "相机视角绕X轴旋转的旋转角度(竖直上方为-90.0，至竖直下方90.0)",
-      "isMustAfterWhiteSpace": false,
       "canUseCaretNotation": false
     },
     {

@@ -58,7 +58,7 @@ namespace CHelper::Node {
             if (HEDLEY_LIKELY(index != index0 && index != index0 + 1 && index != index0 + 2)) {
                 return true;
             }
-            suggestions.push_back(Suggestions::singleSuggestion({index0, index0 + 2, rangeSymbol}));
+            suggestions.push_back(Suggestions::singleSuggestion({index0, index0 + 2, false, rangeSymbol}));
             return true;
         }
         size_t index1 = str.find('.');
@@ -67,10 +67,10 @@ namespace CHelper::Node {
             if (HEDLEY_LIKELY(index != index1 && index != index1 + 1)) {
                 return true;
             }
-            suggestions.push_back(Suggestions::singleSuggestion({index0, index0 + 1, rangeSymbol}));
+            suggestions.push_back(Suggestions::singleSuggestion({index0, index0 + 1, false, rangeSymbol}));
             return true;
         }
-        suggestions.push_back(Suggestions::singleSuggestion({index, index, rangeSymbol}));
+        suggestions.push_back(Suggestions::singleSuggestion({index, index, false, rangeSymbol}));
         return true;
     }
 

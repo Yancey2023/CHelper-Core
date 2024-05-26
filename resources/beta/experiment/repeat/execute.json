@@ -394,14 +394,12 @@
       {
         "type": "POSITION",
         "brief": "源坐标2",
-        "description": "源区域的对角坐标",
-        "isMustAfterWhiteSpace": false
+        "description": "源区域的对角坐标"
       },
       {
         "type": "POSITION",
         "brief": "探测区域的坐标",
-        "description": "探测区域的西北方向较低点的坐标",
-        "isMustAfterWhiteSpace": false
+        "description": "探测区域的西北方向较低点的坐标"
       },
       {
         "type": "NORMAL_ID",

@@ -25,7 +25,7 @@ static std::shared_ptr<CHelper::Core> core;
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
     //    core = CHelper::Core::createByDirectory(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)");
     core = CHelper::Core::createByBinary(R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.0.23.cpack)");
-    if (core == nullptr) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
         exit(-1);
     }
     //窗口数据
@@ -43,7 +43,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
     wcex.lpszClassName = szWindowClass;
     wcex.hIconSm = LoadIcon(wcex.hInstance, IDI_APPLICATION);
     //注册窗口
-    if (!RegisterClassEx(&wcex)) {
+    if (HEDLEY_UNLIKELY(!RegisterClassEx(&wcex))) {
         MessageBox(nullptr, "Call to RegisterClassEx failed!", "CHelper", 0);
         return 1;
     }
@@ -57,7 +57,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
             500, 500,
             nullptr, nullptr,
             hInstance, nullptr);
-    if (hWnd == nullptr) {
+    if (HEDLEY_UNLIKELY(hWnd == nullptr)) {
         MessageBox(nullptr, "Call to CreateWindow failed!", "CHelper", 0);
         return 1;
     }
@@ -239,7 +239,7 @@ void onTextChanged(const std::string &command) {
                 std::string greenPart = item.content->name;
                 if (item.end == command.length()) {
                     CHelper::ASTNode astNode = CHelper::Parser::parse(result, core->getCPack());
-                    if (astNode.isMustAddWhitespace && astNode.isAllWhitespaceError()) {
+                    if (astNode.canAddWhitespace && astNode.isAllWhitespaceError()) {
                         greenPart.push_back(' ');
                     }
                 }

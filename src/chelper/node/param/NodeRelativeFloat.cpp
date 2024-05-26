@@ -10,9 +10,9 @@
 namespace CHelper::Node {
 
     static std::unique_ptr<NodeBase> nodeRelativeNotation = std::make_unique<NodeSingleSymbol>(
-            "RELATIVE_FLOAT_RELATIVE_NOTATION", "相对坐标（~x ~y ~z）", '~');
+            "RELATIVE_FLOAT_RELATIVE_NOTATION", "相对坐标（~x ~y ~z）", '~', false);
     static std::unique_ptr<NodeBase> nodeCaretNotation = std::make_unique<NodeSingleSymbol>(
-            "RELATIVE_FLOAT_CARET_NOTATION", "局部坐标（^左 ^上 ^右）", '^');
+            "RELATIVE_FLOAT_CARET_NOTATION", "局部坐标（^左 ^上 ^右）", '^', false);
     static std::unique_ptr<NodeBase> nodePreSymbol = std::make_unique<NodeOr>(
             "RELATIVE_FLOAT_RELATIVE", "相对坐标（~x ~y ~z）",
             std::vector<const NodeBase *>{nodeRelativeNotation.get(), nodeCaretNotation.get()}, false);
@@ -83,7 +83,7 @@ namespace CHelper::Node {
         childNodes.push_back(std::move(number));
         ASTNode result = ASTNode::andNode(node, std::move(childNodes), tokenReader.collect(), errorReason);
         // 为了获取补全提示，再嵌套一层or节点
-        return {type, ASTNode::orNode(node, {std::move(result), std::move(preSymbol)}, nullptr, nullptr, std::string(), false)};
+        return {type, ASTNode::orNode(node, {std::move(result), std::move(preSymbol)}, nullptr)};
     }
 
     void NodeRelativeFloat::collectStructure(const ASTNode *astNode,

@@ -3,6 +3,7 @@
 //
 
 #include "NodePosition.h"
+#include "../../util/TokenUtil.h"
 #include "NodeRelativeFloat.h"
 
 namespace CHelper::Node {
@@ -28,7 +29,7 @@ namespace CHelper::Node {
         }
         //判断有没有错误
         VectorView<Token> tokens = tokenReader.collect();
-        ASTNode result = ASTNode::andNode(this, std::move(threeChildNodes), tokens, nullptr);
+        ASTNode result = ASTNode::andNode(this, std::move(threeChildNodes), tokens, nullptr, "positions");
         if (HEDLEY_UNLIKELY(!result.isError())) {
             uint8_t type = 0;
             for (uint8_t item: types) {
@@ -37,8 +38,7 @@ namespace CHelper::Node {
                 } else if (HEDLEY_LIKELY(type == 0)) {
                     type = item;
                 } else {
-                    return ASTNode::andNode(this, {std::move(result)}, tokens,
-                                            nullptr, "NodePositionMixError");
+                    return ASTNode::andNode(this, {std::move(result)}, tokens, nullptr, "NodePositionMixError");
                 }
             }
         }
@@ -53,6 +53,26 @@ namespace CHelper::Node {
         } else {
             return false;
         }
+    }
+
+    bool NodePosition::collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestions> &suggestions) const {
+        if (TokenUtil::getEndIndex(astNode->tokens) == index && astNode->id == "positions") {
+            int errorCount = 0;
+            for (const auto &item: astNode->childNodes) {
+                if (item.isError()) {
+                    errorCount++;
+                }
+            }
+            if (errorCount > 0) {
+                std::string str = TokenUtil::toString(astNode->tokens);
+                if ((str.empty() && errorCount == 3) || !str.empty() && str[str.length() - 1] == ' ') {
+                    suggestions.push_back(Suggestions::singleSuggestion({index - 1, index, false, whitespaceId}));
+                } else {
+                    suggestions.push_back(Suggestions::singleSuggestion({index, index, false, whitespaceId}));
+                }
+            }
+        }
+        return false;
     }
 
     void NodePosition::collectStructure(const ASTNode *astNode,

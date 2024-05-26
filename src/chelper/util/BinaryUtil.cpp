@@ -7,32 +7,15 @@
 
 namespace CHelper {
 
-    [[maybe_unused]] bool getIsUsingSmallEndian(bool isTargetSmallEndian) {
-        bool isUsingSmallEndian;
-        union {
-            int32_t int32 = 0x01020304;
-            int8_t int8;
-        } data;
-        if (data.int8 == 0x04) {
-            isUsingSmallEndian = true;
-        } else if (data.int8 == 0x01) {
-            isUsingSmallEndian = false;
-        } else {
-            throw std::runtime_error("unknown byte order");
-        }
-        return isUsingSmallEndian != isTargetSmallEndian;
-    }
-
-
     bool getIsNeedConvert(bool isTargetSmallEndian) {
         bool isUsingSmallEndian;
         union {
             int32_t int32 = 0x01020304;
             int8_t int8;
         } data;
-        if (data.int8 == 0x04) {
+        if (HEDLEY_UNLIKELY(data.int8 == 0x04)) {
             isUsingSmallEndian = true;
-        } else if (data.int8 == 0x01) {
+        } else if (HEDLEY_UNLIKELY(data.int8 == 0x01)) {
             isUsingSmallEndian = false;
         } else {
             throw std::runtime_error("unknown byte order");
@@ -191,7 +174,7 @@ namespace CHelper {
     }
 
     void BinaryWriter::encodeSize(size_t t) {
-        if (t > std::numeric_limits<uint16_t>::max()) {
+        if (HEDLEY_UNLIKELY(t > std::numeric_limits<uint16_t>::max())) {
             throw std::runtime_error("fail to write size_t because size is too big");
         }
         encode(static_cast<uint16_t>(t));
@@ -199,7 +182,7 @@ namespace CHelper {
 
     void BinaryWriter::encode(const std::string &t) {
         encodeSize(t.length());
-        if (!t.empty()) {
+        if (HEDLEY_UNLIKELY(!t.empty())) {
             ostream.write(t.data(), static_cast<std::streamsize>(t.length()));
         }
     }

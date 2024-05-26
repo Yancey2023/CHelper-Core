@@ -238,9 +238,8 @@ namespace CHelper::Node {
         tokenReader.restore();
         if (HEDLEY_LIKELY(leftBracket.isError())) {
             //没有后面的[...]
-            //TODO 这个false有问题，如果是true，就会在补全的时候自动加空格。如果是false，就会缺少空格补全提示
             return ASTNode::andNode(this, {targetSelectorVariable}, tokenReader.collect(),
-                                    nullptr, "target selector no arguments", false);
+                                    nullptr, "target selector no arguments");
         }
         ASTNode arguments = nodeArguments->getASTNodeWithNextNode(tokenReader, cpack);
         return ASTNode::andNode(this, {targetSelectorVariable, arguments}, tokenReader.collect(),

@@ -79,7 +79,7 @@ namespace CHelper::Node {
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
         //value
-        if (it == equalDatas.end()) {
+        if (HEDLEY_UNLIKELY(it == equalDatas.end())) {
             NodeAny::getNodeAny()->init(*cpack);
             childNodes.push_back(NodeAny::getNodeAny()->getASTNodeWithNextNode(tokenReader, cpack));
         } else {

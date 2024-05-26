@@ -7,7 +7,7 @@
 namespace CHelper {
 
     void NormalId::buildHash() {
-        if (!isBuildHash) {
+        if (HEDLEY_UNLIKELY(!isBuildHash)) {
             isBuildHash = true;
             nameHash = std::hash<std::string>{}(name);
             mHashCode = std::hash<std::string>{}(name);

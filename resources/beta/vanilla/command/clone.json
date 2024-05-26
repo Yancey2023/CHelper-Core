@@ -17,15 +17,13 @@
       "type": "POSITION",
       "id": "end",
       "brief": "源坐标2",
-      "description": "源区域的两组对角方块坐标",
-      "isMustAfterWhiteSpace": false
+      "description": "源区域的两组对角方块坐标"
     },
     {
       "type": "POSITION",
       "id": "destination",
       "brief": "目标区域的坐标",
-      "description": "目标区域的西北方向较低（即在各轴上坐标值最小）的点的坐标",
-      "isMustAfterWhiteSpace": false
+      "description": "目标区域的西北方向较低（即在各轴上坐标值最小）的点的坐标"
     },
     {
       "type": "NORMAL_ID",

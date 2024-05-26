@@ -58,19 +58,19 @@ namespace CHelper {
     std::shared_ptr<Core> Core::createByBinary(const std::string &cpackPath) {
         return create([&cpackPath]() {
             std::ifstream is(cpackPath, std::ios::binary);
-            if (!is.is_open()) {
+            if (HEDLEY_UNLIKELY(!is.is_open())) {
                 throw std::runtime_error("fail to read file: " + cpackPath);
             }
             std::string fileType = ".cpack";
-            if (cpackPath.size() < fileType.size() || cpackPath.substr(cpackPath.length() - fileType.size()) != fileType) {
+            if (HEDLEY_UNLIKELY(cpackPath.size() < fileType.size() || cpackPath.substr(cpackPath.length() - fileType.size()) != fileType)) {
                 throw std::runtime_error("error file type");
             }
             BinaryReader binaryReader(true, is);
             std::unique_ptr<CPack> result = CPack::createByBinary(binaryReader);
-            if (!is.eof()) {
+            if (HEDLEY_UNLIKELY(!is.eof())) {
                 char ch;
                 is.read(&ch, 1);
-                if (is.gcount() > 0) {
+                if (HEDLEY_UNLIKELY(is.gcount() > 0)) {
                     throw std::runtime_error("file is not read completed: " + cpackPath);
                 }
             }
