@@ -9,21 +9,14 @@
 
 namespace CHelper::Node {
 
-    NodeRepeat::NodeRepeat(const std::optional<std::string> &id,
-                           const std::optional<std::string> &description,
-                           std::string key,
-                           const std::pair<NodeBase *, NodeBase *> &node)
-        : NodeBase(id, description, true),
-          key(std::move(key)) {}
-
     void NodeRepeat::init(const CPack &cpack) {
         for (const auto &item: cpack.repeatNodeData) {
             for (const auto &item2: item.repeatNodes) {
-                for (const auto &item3: item2){
+                for (const auto &item3: item2) {
                     item3->init(cpack);
                 }
             }
-            for (const auto &item2: item.breakNodes){
+            for (const auto &item2: item.breakNodes) {
                 item2->init(cpack);
             }
         }

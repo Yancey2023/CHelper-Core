@@ -45,6 +45,6 @@ namespace CHelper {
         return node;
     }
 
-    CODEC(ItemId, idNamespace, name, description, max, descriptions)
+    CODEC_WITH_PARENT(ItemId, NamespaceId, max, descriptions)
 
 }// namespace CHelper

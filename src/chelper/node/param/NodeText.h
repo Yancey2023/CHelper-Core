@@ -14,6 +14,7 @@ namespace CHelper::Node {
 
     class NodeText : public NodeBase {
     public:
+        std::optional<std::vector<TokenType::TokenType>> tokenTypes;
         std::shared_ptr<NormalId> data;
 
     private:

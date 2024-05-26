@@ -7,17 +7,13 @@
 #ifndef CHELPER_ASTNODE_H
 #define CHELPER_ASTNODE_H
 
+#include "pch.h"
 #include "../lexer/Token.h"
-#include "../util/VectorView.h"
 #include "ErrorReason.h"
 #include "StructureBuilder.h"
-#include "Suggestion.h"
 #include "Suggestions.h"
-#include "pch.h"
 
 namespace CHelper {
-
-    class CPack;
 
     namespace Node {
 
@@ -34,7 +30,7 @@ namespace CHelper {
             //有向下的分支，子节点为or关系
             OR
         };
-    }
+    }// namespace ASTNodeMode
 
     class ASTNode {
     public:
@@ -49,8 +45,8 @@ namespace CHelper {
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
         //哪个节点最好，OR类型特有，获取颜色和生成命令格式文本的时候使用
         size_t whichBest;
-        //是否需要加后面加空格
-        bool canAddWhitespace;
+        //是否必须在最后面加空格
+        bool isMustAddWhitespace;
 
         ASTNode(ASTNodeMode::ASTNodeMode mode,
                 const Node::NodeBase *node,
@@ -58,9 +54,11 @@ namespace CHelper {
                 const VectorView<Token> &tokens,
                 const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
                 std::string id,
-                bool canAddWhitespace,
+                bool isMustAddWhitespace,
                 size_t whichBest = -1);
 
+
+    class CPack;
     public:
         [[nodiscard]] nlohmann::json toJson() const;
 
@@ -70,28 +68,28 @@ namespace CHelper {
                                   const VectorView<Token> &tokens,
                                   const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                                   const std::string &id = std::string(),
-                                  bool canAddWhitespace = true);
+                                  bool isMustAddWhitespace = true);
 
         static ASTNode andNode(const Node::NodeBase *node,
                                std::vector<ASTNode> &&childNodes,
                                const VectorView<Token> &tokens,
                                const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                                const std::string &id = std::string(),
-                               bool canAddWhitespace = true);
+                               bool isMustAddWhitespace = true);
 
         static ASTNode orNode(const Node::NodeBase *node,
                               std::vector<ASTNode> &&childNodes,
                               const VectorView<Token> *tokens,
                               const char *errorReason = nullptr,
                               const std::string &id = std::string(),
-                              bool canAddWhitespace = true);
+                              bool isMustAddWhitespace = true);
 
         static ASTNode orNode(const Node::NodeBase *node,
                               std::vector<ASTNode> &&childNodes,
                               const VectorView<Token> &tokens,
                               const char *errorReason = nullptr,
                               const std::string &id = std::string(),
-                              bool canAddWhitespace = true);
+                              bool isMustAddWhitespace = true);
 
         //是否有结构错误（不包括ID错误）
         [[nodiscard]] bool isError() const {

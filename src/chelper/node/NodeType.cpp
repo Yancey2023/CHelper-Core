@@ -91,6 +91,7 @@ namespace CHelper::Node {
                         //这些节点在注册Json数据的时候创建，在命令注册的时候创建就抛出错误
                         throw Exception::UnknownNodeType(nodeName);
                     }
+                    t = std::make_unique<T>();
                     binaryReader.decode((T &) *t);
                     if (HEDLEY_UNLIKELY(!t->isMustAfterWhiteSpace.has_value())) {
                         t->isMustAfterWhiteSpace = false;
@@ -231,6 +232,12 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(isInit)) {
             return;
         }
+        isInit = true;
+#if CHelperDebug == true
+        if (!NodeType::NODE_TYPES.empty()) {
+            throw std::runtime_error("node types is not empty");
+        }
+#endif
         registerNodeType(UNKNOWN);
         registerNodeType(BLOCK);
         registerNodeType(BOOLEAN);

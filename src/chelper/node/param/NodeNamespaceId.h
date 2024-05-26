@@ -29,8 +29,7 @@ namespace CHelper::Node {
         NodeNamespaceId(const std::optional<std::string> &id,
                         const std::optional<std::string> &description,
                         const std::optional<std::string> &key,
-                        bool ignoreError,
-                        const std::optional<std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> &contents);
+                        bool ignoreError);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 

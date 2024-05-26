@@ -7,6 +7,7 @@
 namespace CHelper {
 
     namespace TokenType {
+
         std::string getName(TokenType tokenType) {
             switch (tokenType) {
                 case STRING:
@@ -23,6 +24,9 @@ namespace CHelper {
                     return "未知类型";
             }
         }
+
+        CODEC_ENUM(TokenType, uint8_t)
+
     }// namespace TokenType
 
     Token::Token(TokenType::TokenType type,

@@ -83,7 +83,7 @@ namespace CHelper::Node {
         childNodes.push_back(std::move(number));
         ASTNode result = ASTNode::andNode(node, std::move(childNodes), tokenReader.collect(), errorReason);
         // 为了获取补全提示，再嵌套一层or节点
-        return {type, ASTNode::orNode(node, {std::move(result), std::move(preSymbol)}, nullptr)};
+        return {type, ASTNode::orNode(node, {std::move(result), std::move(preSymbol)}, nullptr, nullptr, std::string(), false)};
     }
 
     void NodeRelativeFloat::collectStructure(const ASTNode *astNode,

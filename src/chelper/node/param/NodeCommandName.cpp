@@ -42,7 +42,6 @@ namespace CHelper::Node {
                                              std::vector<Suggestions> &suggestions) const {
         std::string str = TokenUtil::toString(astNode->tokens)
                                   .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
-
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *commands) {
             bool flag = false;

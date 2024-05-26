@@ -33,7 +33,7 @@ namespace CHelper {
         }
         core->onTextChanged(result, result.size());
         const ASTNode *astNode = core->getAstNode();
-        if (HEDLEY_LIKELY(astNode->canAddWhitespace && astNode->isAllWhitespaceError())) {
+        if (HEDLEY_LIKELY(astNode->isMustAddWhitespace && astNode->isAllWhitespaceError())) {
             result.push_back(' ');
         }
         return std::move(result);

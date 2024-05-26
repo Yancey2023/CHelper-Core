@@ -14,9 +14,9 @@ namespace CHelper::Node {
 
     class NodeString : public NodeBase {
     public:
-        bool allowMissingString;
-        bool canContainSpace;
-        bool ignoreLater;
+        bool allowMissingString = false;
+        bool canContainSpace = false;
+        bool ignoreLater = false;
 
         NodeString() = default;
 

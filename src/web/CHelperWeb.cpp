@@ -3,9 +3,7 @@
 //
 
 #include "CHelperWeb.h"
-#include "chelper/Core.h"
-#include "chelper/lexer/Lexer.h"
-#include "chelper/util/StringUtil.h"
+#include "../chelper/Core.h"
 
 std::shared_ptr<CHelper::Core> core;
 

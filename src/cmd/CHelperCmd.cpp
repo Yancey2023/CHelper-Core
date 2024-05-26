@@ -3,11 +3,9 @@
 //
 
 #include "CHelperCmd.h"
-#include "chelper/Core.h"
-#include "chelper/lexer/Lexer.h"
-#include "chelper/util/StringUtil.h"
+#include "../chelper/Core.h"
 
-void testDir() {
+[[maybe_unused]] void testDir() {
     //        CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
     //                            R"(D:\CLion\project\CHelper-Core\test\test.txt)",
     //                            false);
@@ -23,23 +21,53 @@ void testDir() {
     //                         R"(D:\CLion\project\CHelper-Core\run\cpack.json)");
 }
 
-void testBin() {
-    //        CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
-    //                            R"(D:\CLion\project\CHelper-Core\test\test.txt)",
-    //                            false);
-    CHelper::Test::testBin(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
+[[maybe_unused]] void testBin() {
+    //            CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\run\beta\beta-experiment-1.21.0.23.cpack)",
+    //                                R"(D:\CLion\project\CHelper-Core\test\test.txt)",
+    //                                false);
+    CHelper::Test::testBin(R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.cpack)",
                            R"(/home/yancey/CLionProjects/CHelper-Core/test/test.txt)",
                            true);
-    //    CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
-    //                        std::vector<std::string>{"execute run clear "}, false);
-    //        CHelper::Test::testDir(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
-    //                            std::vector<std::string>{"give @s "}, true);
-    //    CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)", {""}, false);
-    //    CHelper::Test::test4(R"(D:\CLion\project\CHelper-Core\resources)",
-    //                         R"(D:\CLion\project\CHelper-Core\run\cpack.json)");
+    //    for (int i = 0; i < 100; ++i) {
+    //        CHelper::Core::createByBinary("/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.cpack");
+    //    }
 }
 
-void outputBson() {
+[[maybe_unused]] void outputSingleJson() {
+    // release
+    //    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\release\vanilla)",
+    //                             R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.20.80.05.cpack)");
+    //    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\release\experiment)",
+    //                             R"(D:\CLion\project\CHelper-Core\run\release-experiment-1.20.80.05.cpack)");
+    // beta
+    //    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
+    //                             R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.0.23.cpack)");
+    //    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\beta\experiment)",
+    //                             R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.0.23.cpack)");
+    // netease
+    //    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
+    //                             R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
+    //    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
+    //                             R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
+
+    // release
+    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/vanilla)",
+                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/release-vanilla-1.20.80.05.json)");
+    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/experiment)",
+                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/release-experiment-1.20.80.05.json)");
+    // beta
+    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
+                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-vanilla-1.21.0.23.json)");
+    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/experiment)",
+                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.json)");
+    // netease
+    //    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/vanilla)",
+    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.21.0.23.bson)");
+    //    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/experiment)",
+    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.21.0.23.bson)");
+}
+
+[[maybe_unused]] void outputBson() {
     // release
     //    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\release\vanilla)",
     //                             R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.20.80.05.cpack)");
@@ -73,7 +101,7 @@ void outputBson() {
     //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.21.0.23.bson)");
 }
 
-void outputBinary() {
+[[maybe_unused]] void outputBinary() {
     // release
     // CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\release\vanilla)",
     //                            R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.20.80.05.cpack)");
@@ -108,10 +136,11 @@ void outputBinary() {
 }
 
 int main() {
-        testDir();
-    //    testBin();
-//    outputBson();
-//    outputBinary();
+    //    testDir();
+    testBin();
+    //    outputSingleJson();
+    //    outputBson();
+    //    outputBinary();
     return 0;
 }
 
@@ -275,10 +304,10 @@ namespace CHelper::Test {
                     std::cout << ColorStringBuilder().blue("get suggestions in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms").build() << std::endl;
                     std::cout << ColorStringBuilder().blue("get structure in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms").build() << std::endl;
                 }
-                //                std::cout << core->getAstNode()->toJson().dump(
-                //                        -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
-                //                std::cout << core->getAstNode()->toBestJson().dump(
-                //                        -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
+                std::cout << core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
+                          << std::endl;
+                std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
+                          << std::endl;
                 std::cout << "structure: " + structure << std::endl;
                 std::cout << "description: " + description << std::endl;
                 if (errorReasons.empty()) {
@@ -325,7 +354,7 @@ namespace CHelper::Test {
                         std::string greenPart = item.content->name;
                         if (item.end == command.length()) {
                             ASTNode astNode = Parser::parse(result, core->getCPack());
-                            if (astNode.canAddWhitespace && astNode.isAllWhitespaceError()) {
+                            if (astNode.isMustAddWhitespace && astNode.isAllWhitespaceError()) {
                                 greenPart.push_back(' ');
                             }
                         }
@@ -384,7 +413,7 @@ namespace CHelper::Test {
         }
     }
 
-    void writeDirectory(const std::string &input, const std::string &output) {
+    [[maybe_unused]] void writeDirectory(const std::string &input, const std::string &output) {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;
@@ -412,7 +441,7 @@ namespace CHelper::Test {
         }
     }
 
-    void writeSingleJson(const std::string &input, const std::string &output) {
+    [[maybe_unused]] void writeSingleJson(const std::string &input, const std::string &output) {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;
@@ -442,7 +471,7 @@ namespace CHelper::Test {
         }
     }
 
-    void writeBson(const std::string &input, const std::string &output) {
+    [[maybe_unused]] void writeBson(const std::string &input, const std::string &output) {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;
@@ -472,7 +501,7 @@ namespace CHelper::Test {
         }
     }
 
-    void writeBinary(const std::string &input, const std::string &output) {
+    [[maybe_unused]] void writeBinary(const std::string &input, const std::string &output) {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;

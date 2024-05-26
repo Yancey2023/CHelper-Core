@@ -23,6 +23,9 @@ namespace CHelper {
         };
 
         std::string getName(TokenType tokenType);
+
+        CODEC_ENUM_H(TokenType)
+
     }// namespace TokenType
 
 

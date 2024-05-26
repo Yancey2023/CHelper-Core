@@ -15,7 +15,6 @@ namespace CHelper::Node {
           isMustAfterWhiteSpace(isMustAfterWhiteSpace) {}
 
     void NodeBase::init(const CPack &cpack) {
-
     }
 
     NodeType *NodeBase::getNodeType() const {
@@ -24,7 +23,6 @@ namespace CHelper::Node {
 
     ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const {
         //空格检测
-        //TODO isMustAfterWhiteSpace.value_or(getDefaultIsMustAfterWhitespace)
         tokenReader.push();
         if (HEDLEY_UNLIKELY(isMustAfterWhiteSpace.value_or(true) && tokenReader.skipWhitespace() == 0)) {
             VectorView<Token> tokens = tokenReader.collect();
@@ -186,8 +184,8 @@ namespace CHelper::Node {
         if (t->getNodeType() == NodeType::UNKNOWN.get()) {
             throw std::runtime_error("fail to write node");
         }
-        JsonUtil::encode(j, "type", t->getNodeType()->nodeName);
         t->getNodeType()->encodeByJson(j, t);
+        JsonUtil::encode(j, "type", t->getNodeType()->nodeName);
     }
 
     void from_binary(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {

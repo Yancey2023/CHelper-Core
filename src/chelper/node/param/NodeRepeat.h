@@ -22,11 +22,6 @@ namespace CHelper::Node {
     public:
         NodeRepeat() = default;
 
-        NodeRepeat(const std::optional<std::string> &id,
-                   const std::optional<std::string> &description,
-                   std::string key,
-                   const std::pair<NodeBase *, NodeBase *> &node);
-
         [[nodiscard]] NodeType *getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;

@@ -8,6 +8,12 @@
 #include "../chelper/lexer/Lexer.h"
 #include "../chelper/parser/Parser.h"
 
+#ifdef _WIN32
+const std::string path = R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)";
+#else
+const std::string path = R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)";
+#endif
+
 #pragma GCC diagnostic ignored "-Wunused-result"
 
 namespace CHelper::Test {
@@ -85,7 +91,7 @@ namespace CHelper::Test {
 
 TEST(MainTest, ParseCommand) {
     CHelper::Test::test(
-            R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
+            path,
             std::vector<std::string>{
                     R"(execute run clear )",
                     R"(give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m)",
@@ -113,23 +119,6 @@ TEST(MainTest, ParseCommand) {
                     R"(spreadplayers ~ ~ 0 1200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)",
                     R"(camerashake add @a 10000000000000000000000000000000000000000000000000000 3402823466385288598117041834845169254401)",
                     R"(setblock ~~~ candle_cake[lit=)",
+                    R"(give @s repeating_command_block)",
             });
-}
-
-TEST(MainTest, Bson) {
-    // release
-    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\release\vanilla)",
-                             R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.20.80.05.cpack)");
-    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\release\experiment)",
-                             R"(D:\CLion\project\CHelper-Core\run\release-experiment-1.20.80.05.cpack)");
-    // beta
-    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
-                             R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.0.23.cpack)");
-    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\beta\experiment)",
-                             R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.0.23.cpack)");
-    // netease
-    //    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
-    //                             R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
-    //    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
-    //                             R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
 }

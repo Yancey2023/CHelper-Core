@@ -9,18 +9,6 @@
 #include "../chelper/resources/CPack.h"
 #include <gtest/gtest.h>
 
-void testOptionalStringEqual(const std::optional<std::string> &t1, const std::optional<std::string> &t2) {
-    if (t1.has_value() && !t1.value().empty()) {
-        ASSERT_TRUE(t2.has_value());
-        EXPECT_EQ(t1.value(), t2.value());
-    } else {
-        if (t2.has_value()) {
-            std::cout << "failed: " << t1.value() << std::endl;
-        }
-        EXPECT_FALSE(t2.has_value());
-    }
-}
-
 template<class T>
 void test(std::function<T()> getInstance,
           std::function<void(const T &, const T &)> testEqual,
@@ -51,11 +39,11 @@ void testNode(CHelper::CPack &cpack,
     std::ostringstream oss;
     CHelper::BinaryWriter binaryWriter(isTargetSmallEndian, oss);
     T t1 = getInstance();
-    t1.writeBinToFile(binaryWriter);
+    binaryWriter.encode(t1);
     std::istringstream iss(oss.str());
     CHelper::BinaryReader binaryReader(isTargetSmallEndian, iss);
-    EXPECT_EQ((uint8_t) t1.getNodeType()->id, binaryReader.read<uint8_t>());
-    T t2(binaryReader, cpack);
+    T t2 = binaryReader.read<T>();
+    t2.init(cpack);
     testEqual(t1, t2);
     EXPECT_FALSE(iss.eof());
 }
@@ -98,9 +86,12 @@ TEST(BinaryUtilTest, OptioanlString) {
     auto getInstance1 = []() { return ""; };
     auto getInstance2 = []() { return "Yancey"; };
     auto getInstance3 = []() { return std::nullopt; };
+    auto testEqual = [](const auto &t1, const auto &t2) -> void {
+        EXPECT_EQ(t1, t2);
+    };
     test<std::optional<std::string>>(
             {getInstance1, getInstance2, getInstance3},
-            testOptionalStringEqual);
+            testEqual);
 }
 
 TEST(BinaryUtilTest, Manifest) {
@@ -129,11 +120,11 @@ TEST(BinaryUtilTest, Manifest) {
                 5, std::nullopt, std::nullopt};
     };
     auto testEqual = [](const auto &t1, const auto &t2) -> void {
-        testOptionalStringEqual(t1.name, t2.name);
-        testOptionalStringEqual(t1.description, t2.description);
-        testOptionalStringEqual(t1.minecraftVersion, t2.minecraftVersion);
-        testOptionalStringEqual(t1.author, t2.author);
-        testOptionalStringEqual(t1.updateDate, t2.updateDate);
+        EXPECT_EQ(t1.name, t2.name);
+        EXPECT_EQ(t1.description, t2.description);
+        EXPECT_EQ(t1.minecraftVersion, t2.minecraftVersion);
+        EXPECT_EQ(t1.author, t2.author);
+        EXPECT_EQ(t1.updateDate, t2.updateDate);
         EXPECT_EQ(t1.packId, t2.packId);
         EXPECT_EQ(t1.versionCode, t2.versionCode);
         EXPECT_EQ(t1.isBasicPack, t2.isBasicPack);
@@ -148,7 +139,7 @@ TEST(BinaryUtilTest, NormalId) {
     auto getInstance3 = []() { return CHelper::NormalId::make("name", std::nullopt); };
     auto testEqual = [](const auto &t1, const auto &t2) -> void {
         EXPECT_EQ(t1->name, t2->name);
-        testOptionalStringEqual(t1->description, t2->description);
+        EXPECT_EQ(t1->description, t2->description);
     };
     test<std::shared_ptr<CHelper::NormalId>>({getInstance1, getInstance2, getInstance3}, testEqual);
 }
@@ -156,8 +147,8 @@ TEST(BinaryUtilTest, NormalId) {
 TEST(BinaryUtilTest, NamespaceId) {
     auto testEqual = [](const auto &t1, const auto &t2) -> void {
         EXPECT_EQ(t1.name, t2.name);
-        testOptionalStringEqual(t1.description, t2.description);
-        testOptionalStringEqual(t1.idNamespace, t2.idNamespace);
+        EXPECT_EQ(t1.description, t2.description);
+        EXPECT_EQ(t1.idNamespace, t2.idNamespace);
     };
 #ifdef _WIN32
     nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla\id\entities.json)");
@@ -175,8 +166,8 @@ TEST(BinaryUtilTest, NamespaceId) {
 TEST(BinaryUtilTest, ItemId) {
     auto testEqual = [](const auto &t1, const auto &t2) -> void {
         EXPECT_EQ(t1.name, t2.name);
-        testOptionalStringEqual(t1.description, t2.description);
-        testOptionalStringEqual(t1.idNamespace, t2.idNamespace);
+        EXPECT_EQ(t1.description, t2.description);
+        EXPECT_EQ(t1.idNamespace, t2.idNamespace);
         EXPECT_EQ(t1.max, t2.max);
         EXPECT_EQ(t1.descriptions, t2.descriptions);
     };
@@ -196,17 +187,17 @@ TEST(BinaryUtilTest, ItemId) {
 TEST(BinaryUtilTest, BlockId) {
     auto testEqual = [](const CHelper::BlockId &t1, const CHelper::BlockId &t2) -> void {
         EXPECT_EQ(t1.name, t2.name);
-        testOptionalStringEqual(t1.description, t2.description);
-        testOptionalStringEqual(t1.idNamespace, t2.idNamespace);
+        EXPECT_EQ(t1.description, t2.description);
+        EXPECT_EQ(t1.idNamespace, t2.idNamespace);
         ASSERT_EQ(!t1.blockStates.has_value() || t1.blockStates.value().empty(), !t2.blockStates.has_value());
         if (t2.blockStates.has_value()) {
             ASSERT_EQ(t1.blockStates->size(), t2.blockStates->size());
             for (int i = 0; i < t2.blockStates->size(); ++i) {
                 EXPECT_EQ(t1.blockStates.value()[i].key, t2.blockStates.value()[i].key);
-                testOptionalStringEqual(t1.blockStates.value()[i].description, t2.blockStates.value()[i].description);
+                EXPECT_EQ(t1.blockStates.value()[i].description, t2.blockStates.value()[i].description);
                 ASSERT_EQ(t1.blockStates.value()[i].values.size(), t2.blockStates.value()[i].values.size());
                 for (int j = 0; j < t1.blockStates.value()[i].values.size(); ++j) {
-                    testOptionalStringEqual(t1.blockStates.value()[i].values[j].description, t2.blockStates.value()[i].values[j].description);
+                    EXPECT_EQ(t1.blockStates.value()[i].values[j].description, t2.blockStates.value()[i].values[j].description);
                     EXPECT_EQ((uint8_t) t1.blockStates.value()[i].values[j].type, (uint8_t) t2.blockStates.value()[i].values[j].type);
                     EXPECT_EQ(t1.blockStates.value()[i].values[j].value, t2.blockStates.value()[i].values[j].value);
                 }
@@ -322,7 +313,7 @@ TEST(BinaryUtilTest, CPackNamespaceId) {
             for (int i = 0; i < it1->second->size(); ++i) {
                 EXPECT_EQ(it1->second->at(i)->name, it2->second->at(i)->name);
                 EXPECT_EQ(it1->second->at(i)->description, it2->second->at(i)->description);
-                testOptionalStringEqual(it1->second->at(i)->idNamespace, it2->second->at(i)->idNamespace);
+                EXPECT_EQ(it1->second->at(i)->idNamespace, it2->second->at(i)->idNamespace);
             }
             it1++;
         }
@@ -349,12 +340,12 @@ TEST(BinaryUtilTest, NodeJsonElement) {
     auto testEqual = [](
                              const CHelper::Node::NodeJsonBoolean &t1,
                              const CHelper::Node::NodeJsonBoolean &t2) -> void {
-        testOptionalStringEqual(t1.id, t2.id);
-        testOptionalStringEqual(t1.brief, t2.brief);
-        testOptionalStringEqual(t1.description, t2.description);
+        EXPECT_EQ(t1.id, t2.id);
+        EXPECT_EQ(t1.brief, t2.brief);
+        EXPECT_EQ(t1.description, t2.description);
         EXPECT_EQ(t1.isMustAfterWhiteSpace, t2.isMustAfterWhiteSpace);
-        testOptionalStringEqual(t1.descriptionTrue, t2.descriptionTrue);
-        testOptionalStringEqual(t1.descriptionFalse, t2.descriptionFalse);
+        EXPECT_EQ(t1.descriptionTrue, t2.descriptionTrue);
+        EXPECT_EQ(t1.descriptionFalse, t2.descriptionFalse);
     };
     CHelper::Node::NodeJsonBoolean node(
             "ID", "description",
@@ -383,9 +374,9 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
     auto testEqual = [](
                              const CHelper::Node::NodeJsonInteger &t1,
                              const CHelper::Node::NodeJsonInteger &t2) -> void {
-        testOptionalStringEqual(t1.id, t2.id);
-        testOptionalStringEqual(t1.brief, t2.brief);
-        testOptionalStringEqual(t1.description, t2.description);
+        EXPECT_EQ(t1.id, t2.id);
+        EXPECT_EQ(t1.brief, t2.brief);
+        EXPECT_EQ(t1.description, t2.description);
         EXPECT_EQ(t1.isMustAfterWhiteSpace, t2.isMustAfterWhiteSpace);
         EXPECT_EQ(t1.min, t2.min);
         EXPECT_EQ(t1.max, t2.max);
@@ -427,9 +418,9 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
     auto testEqual = [](
                              const CHelper::Node::NodeJsonFloat &t1,
                              const CHelper::Node::NodeJsonFloat &t2) -> void {
-        testOptionalStringEqual(t1.id, t2.id);
-        testOptionalStringEqual(t1.brief, t2.brief);
-        testOptionalStringEqual(t1.description, t2.description);
+        EXPECT_EQ(t1.id, t2.id);
+        EXPECT_EQ(t1.brief, t2.brief);
+        EXPECT_EQ(t1.description, t2.description);
         EXPECT_EQ(t1.isMustAfterWhiteSpace, t2.isMustAfterWhiteSpace);
         EXPECT_EQ(t1.min, t2.min);
         EXPECT_EQ(t1.max, t2.max);
@@ -471,9 +462,9 @@ TEST(BinaryUtilTest, NodeJsonNull) {
     auto testEqual = [](
                              const CHelper::Node::NodeJsonNull &t1,
                              const CHelper::Node::NodeJsonNull &t2) -> void {
-        testOptionalStringEqual(t1.id, t2.id);
-        testOptionalStringEqual(t1.brief, t2.brief);
-        testOptionalStringEqual(t1.description, t2.description);
+        EXPECT_EQ(t1.id, t2.id);
+        EXPECT_EQ(t1.brief, t2.brief);
+        EXPECT_EQ(t1.description, t2.description);
         EXPECT_EQ(t1.isMustAfterWhiteSpace, t2.isMustAfterWhiteSpace);
     };
     testNode<CHelper::Node::NodeJsonNull>(

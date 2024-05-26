@@ -35,6 +35,15 @@
           "isMustPlayer": false,
           "isOnlyOne": false,
           "isMustNPC": false
+        },
+        {
+          "type": "TEXT",
+          "id": "ALL_TARGET",
+          "description": "目标选择器",
+          "data": {
+            "name": "*",
+            "description": "选择全部实体"
+          }
         }
       ]
     },

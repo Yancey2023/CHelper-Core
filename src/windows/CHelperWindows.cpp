@@ -3,8 +3,8 @@
 //
 
 #include "CHelperWindows.h"
-#include "chelper/Core.h"
-#include "chelper/parser/Parser.h"
+#include "../chelper/Core.h"
+#include "../chelper/parser/Parser.h"
 #include <commctrl.h>
 
 static size_t ID_INPUT = 1;
@@ -239,7 +239,7 @@ void onTextChanged(const std::string &command) {
                 std::string greenPart = item.content->name;
                 if (item.end == command.length()) {
                     CHelper::ASTNode astNode = CHelper::Parser::parse(result, core->getCPack());
-                    if (astNode.canAddWhitespace && astNode.isAllWhitespaceError()) {
+                    if (astNode.isMustAddWhitespace && astNode.isAllWhitespaceError()) {
                         greenPart.push_back(' ');
                     }
                 }

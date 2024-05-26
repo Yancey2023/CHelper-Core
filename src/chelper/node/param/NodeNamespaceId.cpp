@@ -11,26 +11,19 @@ namespace CHelper::Node {
     NodeNamespaceId::NodeNamespaceId(const std::optional<std::string> &id,
                                      const std::optional<std::string> &description,
                                      const std::optional<std::string> &key,
-                                     bool ignoreError,
-                                     const std::optional<std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> &contents)
+                                     bool ignoreError)
         : NodeBase(id, description, false),
           key(key),
-          ignoreError(ignoreError),
-          contents(key.has_value() ? std::nullopt : contents) {
-#if CHelperDebug == true
-        if (contents == nullptr) {
-            throw std::runtime_error("contents should not be nullptr");
-        }
-#endif
-        customContents = contents.value();
-    }
+          ignoreError(ignoreError) {}
 
     void NodeNamespaceId::init(const CPack &cpack) {
         if (HEDLEY_LIKELY(contents.has_value())) {
             customContents = contents.value();
         } else if (HEDLEY_LIKELY(key.has_value())) {
-            auto it = cpack.namespaceIds.find(key.value());
-            if (HEDLEY_UNLIKELY(it == cpack.namespaceIds.end())) {
+            customContents = cpack.getNamespaceId(key.value());
+        }
+        if (HEDLEY_UNLIKELY(customContents == nullptr)) {
+            if (key.has_value()) {
                 Profile::push(ColorStringBuilder()
                                       .red("linking contents to ")
                                       .purple(key.value())
@@ -40,14 +33,11 @@ namespace CHelper::Node {
                                       .normal(" -> ")
                                       .purple(key.value())
                                       .build());
-                throw Exception::NodeLoadFailed();
+            } else {
+                Profile::push(ColorStringBuilder()
+                                      .red("missing content")
+                                      .build());
             }
-            customContents = it->second;
-        }
-        if (HEDLEY_UNLIKELY(customContents == nullptr)) {
-            Profile::push(ColorStringBuilder()
-                                  .red("missing content")
-                                  .build());
             throw Exception::NodeLoadFailed();
         }
     }

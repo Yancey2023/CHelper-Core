@@ -41,7 +41,6 @@ namespace CHelper::Node {
                               bool isMustHave) const override;
 
         CODEC_UNIQUE_PTR_H(NodeCommand)
-
     };
 
 }// namespace CHelper::Node

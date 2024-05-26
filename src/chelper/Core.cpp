@@ -61,6 +61,10 @@ namespace CHelper {
             if (!is.is_open()) {
                 throw std::runtime_error("fail to read file: " + cpackPath);
             }
+            std::string fileType = ".cpack";
+            if (cpackPath.size() < fileType.size() || cpackPath.substr(cpackPath.length() - fileType.size()) != fileType) {
+                throw std::runtime_error("error file type");
+            }
             BinaryReader binaryReader(true, is);
             std::unique_ptr<CPack> result = CPack::createByBinary(binaryReader);
             if (!is.eof()) {
@@ -90,11 +94,35 @@ namespace CHelper {
         }
     }
 
+    [[nodiscard]] const CPack *Core::getCPack() const {
+        return cpack.get();
+    }
+
+    [[nodiscard]] const ASTNode *Core::getAstNode() const {
+        return &astNode;
+    }
+
+    [[nodiscard]] std::string Core::getDescription() const {
+        return astNode.getDescription(index);
+    }
+
+    [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> Core::getErrorReasons() const {
+        return astNode.getErrorReasons();
+    }
+
     std::vector<Suggestion> *Core::getSuggestions() {
         if (HEDLEY_LIKELY(suggestions == nullptr)) {
             suggestions = std::make_shared<std::vector<Suggestion>>(astNode.getSuggestions(index));
         }
         return suggestions.get();
+    }
+
+    [[nodiscard]] std::string Core::getStructure() const {
+        return astNode.getStructure();
+    }
+
+    [[nodiscard]] [[maybe_unused]] std::string Core::getColors() const {
+        return astNode.getColors();
     }
 
     std::optional<std::string> Core::onSuggestionClick(size_t which) {

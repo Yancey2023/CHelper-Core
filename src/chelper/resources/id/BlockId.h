@@ -33,14 +33,6 @@ namespace CHelper {
         std::shared_ptr<Node::NodeBase> getNode();
     };
 
-    void from_json(const nlohmann::json &j, BlockStateValue &t);
-
-    void to_json(nlohmann::json &j, const BlockStateValue &t);
-
-    void from_binary(BinaryReader &binaryReader, BlockStateValue &t);
-
-    void to_binary(BinaryWriter &binaryWriter, const BlockStateValue &t);
-
     class BlockState {
     public:
         std::string key;
@@ -70,9 +62,11 @@ namespace CHelper {
         static Node::NodeBase *getNodeAllBlockState();
     };
 
+    CODEC_H(BlockStateValue)
+
     CODEC_H(BlockState)
 
-    CODEC_H(BlockId)
+    CODEC_WITH_PARENT_H(BlockId)
 
 }// namespace CHelper
 

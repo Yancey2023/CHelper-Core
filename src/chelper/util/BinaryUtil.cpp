@@ -7,9 +7,7 @@
 
 namespace CHelper {
 
-    BinaryWriter::BinaryWriter(bool isTargetSmallEndian,
-                               std::ostream &ostream)
-        : ostream(ostream) {
+    [[maybe_unused]] bool getIsUsingSmallEndian(bool isTargetSmallEndian) {
         bool isUsingSmallEndian;
         union {
             int32_t int32 = 0x01020304;
@@ -22,7 +20,30 @@ namespace CHelper {
         } else {
             throw std::runtime_error("unknown byte order");
         }
-        isNeedConvert = isUsingSmallEndian != isTargetSmallEndian;
+        return isUsingSmallEndian != isTargetSmallEndian;
+    }
+
+
+    bool getIsNeedConvert(bool isTargetSmallEndian) {
+        bool isUsingSmallEndian;
+        union {
+            int32_t int32 = 0x01020304;
+            int8_t int8;
+        } data;
+        if (data.int8 == 0x04) {
+            isUsingSmallEndian = true;
+        } else if (data.int8 == 0x01) {
+            isUsingSmallEndian = false;
+        } else {
+            throw std::runtime_error("unknown byte order");
+        }
+        return isUsingSmallEndian != isTargetSmallEndian;
+    }
+
+    BinaryWriter::BinaryWriter(bool isTargetSmallEndian,
+                               std::ostream &ostream)
+        : ostream(ostream) {
+        isNeedConvert = getIsNeedConvert(isTargetSmallEndian);
     }
 
     void BinaryWriter::encode(bool t) {
@@ -47,8 +68,8 @@ namespace CHelper {
                 int16_t num;
                 uint8_t uint8[2];
             } targetNum = {t};
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), sizeof(uint8_t));
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), 1);
         } else {
             ostream.write(reinterpret_cast<const char *>(&t), sizeof(t));
         }
@@ -60,8 +81,8 @@ namespace CHelper {
                 uint16_t num;
                 uint8_t uint8[2];
             } targetNum = {t};
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), sizeof(uint8_t));
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), 1);
         } else {
             ostream.write(reinterpret_cast<const char *>(&t), sizeof(t));
         }
@@ -73,10 +94,10 @@ namespace CHelper {
                 int32_t num;
                 uint8_t uint8[4];
             } targetNum = {t};
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[3]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[2]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), sizeof(uint8_t));
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[3]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[2]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), 1);
         } else {
             ostream.write(reinterpret_cast<const char *>(&t), sizeof(t));
         }
@@ -88,10 +109,10 @@ namespace CHelper {
                 uint32_t num;
                 uint8_t uint8[4];
             } targetNum = {t};
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[3]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[2]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), sizeof(uint8_t));
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[3]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[2]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), 1);
         } else {
             ostream.write(reinterpret_cast<const char *>(&t), sizeof(t));
         }
@@ -103,14 +124,14 @@ namespace CHelper {
                 int64_t num;
                 uint8_t uint8[8];
             } targetNum = {t};
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[7]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[6]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[5]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[4]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[3]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[2]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), sizeof(uint8_t));
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[7]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[6]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[5]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[4]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[3]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[2]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), 1);
         } else {
             ostream.write(reinterpret_cast<const char *>(&t), sizeof(t));
         }
@@ -122,14 +143,14 @@ namespace CHelper {
                 uint64_t num;
                 uint8_t uint8[8];
             } targetNum = {t};
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[7]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[6]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[5]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[4]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[3]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[2]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), sizeof(uint8_t));
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[7]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[6]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[5]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[4]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[3]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[2]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), 1);
         } else {
             ostream.write(reinterpret_cast<const char *>(&t), sizeof(t));
         }
@@ -141,10 +162,10 @@ namespace CHelper {
                 float num;
                 uint8_t uint8[4];
             } targetNum = {t};
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[3]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[2]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), sizeof(uint8_t));
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[3]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[2]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), 1);
         } else {
             ostream.write(reinterpret_cast<const char *>(&t), sizeof(t));
         }
@@ -156,14 +177,14 @@ namespace CHelper {
                 double num;
                 uint8_t uint8[8];
             } targetNum = {t};
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[7]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[6]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[5]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[4]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[3]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[2]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), sizeof(uint8_t));
-            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), sizeof(uint8_t));
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[7]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[6]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[5]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[4]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[3]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[2]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[1]), 1);
+            ostream.write(reinterpret_cast<const char *>(&targetNum.uint8[0]), 1);
         } else {
             ostream.write(reinterpret_cast<const char *>(&t), sizeof(t));
         }
@@ -179,26 +200,14 @@ namespace CHelper {
     void BinaryWriter::encode(const std::string &t) {
         encodeSize(t.length());
         if (!t.empty()) {
-            ostream.write(t.data(), t.length());
+            ostream.write(t.data(), static_cast<std::streamsize>(t.length()));
         }
     }
 
     BinaryReader::BinaryReader(bool isTargetSmallEndian,
                                std::istream &istream)
         : istream(istream) {
-        bool isUsingSmallEndian;
-        union {
-            int32_t int32 = 0x01020304;
-            int8_t int8;
-        } data;
-        if (data.int8 == 0x04) {
-            isUsingSmallEndian = true;
-        } else if (data.int8 == 0x01) {
-            isUsingSmallEndian = false;
-        } else {
-            throw std::runtime_error("unknown byte order");
-        }
-        isNeedConvert = isUsingSmallEndian != isTargetSmallEndian;
+        isNeedConvert = getIsNeedConvert(isTargetSmallEndian);
     }
 
     size_t BinaryReader::readSize() {
@@ -222,9 +231,9 @@ namespace CHelper {
             union {
                 int16_t num;
                 uint8_t uint8[2];
-            } result;
-            istream.read(reinterpret_cast<char *>(&result.uint8[1]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[0]), sizeof(uint8_t));
+            } result{};
+            istream.read(reinterpret_cast<char *>(&result.uint8[1]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[0]), 1);
             t = result.num;
         } else {
             istream.read(reinterpret_cast<char *>(&t), sizeof(t));
@@ -236,9 +245,9 @@ namespace CHelper {
             union {
                 uint16_t num;
                 uint8_t uint8[2];
-            } result;
-            istream.read(reinterpret_cast<char *>(&result.uint8[1]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[0]), sizeof(uint8_t));
+            } result{};
+            istream.read(reinterpret_cast<char *>(&result.uint8[1]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[0]), 1);
             t = result.num;
         } else {
             istream.read(reinterpret_cast<char *>(&t), sizeof(t));
@@ -250,11 +259,11 @@ namespace CHelper {
             union {
                 int32_t num;
                 uint8_t uint8[4];
-            } result;
-            istream.read(reinterpret_cast<char *>(&result.uint8[3]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[2]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[1]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[0]), sizeof(uint8_t));
+            } result{};
+            istream.read(reinterpret_cast<char *>(&result.uint8[3]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[2]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[1]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[0]), 1);
             t = result.num;
         } else {
             istream.read(reinterpret_cast<char *>(&t), sizeof(t));
@@ -266,11 +275,11 @@ namespace CHelper {
             union {
                 uint32_t num;
                 uint8_t uint8[4];
-            } result;
-            istream.read(reinterpret_cast<char *>(&result.uint8[3]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[2]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[1]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[0]), sizeof(uint8_t));
+            } result{};
+            istream.read(reinterpret_cast<char *>(&result.uint8[3]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[2]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[1]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[0]), 1);
             t = result.num;
         } else {
             istream.read(reinterpret_cast<char *>(&t), sizeof(t));
@@ -282,15 +291,15 @@ namespace CHelper {
             union {
                 int64_t num;
                 uint8_t uint8[4];
-            } result;
-            istream.read(reinterpret_cast<char *>(&result.uint8[7]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[6]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[5]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[4]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[3]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[2]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[1]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[0]), sizeof(uint8_t));
+            } result{};
+            istream.read(reinterpret_cast<char *>(&result.uint8[7]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[6]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[5]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[4]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[3]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[2]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[1]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[0]), 1);
             t = result.num;
         } else {
             istream.read(reinterpret_cast<char *>(&t), sizeof(t));
@@ -302,15 +311,15 @@ namespace CHelper {
             union {
                 uint64_t num;
                 uint8_t uint8[4];
-            } result;
-            istream.read(reinterpret_cast<char *>(&result.uint8[7]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[6]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[5]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[4]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[3]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[2]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[1]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[0]), sizeof(uint8_t));
+            } result{};
+            istream.read(reinterpret_cast<char *>(&result.uint8[7]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[6]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[5]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[4]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[3]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[2]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[1]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[0]), 1);
             t = result.num;
         } else {
             istream.read(reinterpret_cast<char *>(&t), sizeof(t));
@@ -322,11 +331,11 @@ namespace CHelper {
             union {
                 float num;
                 uint8_t uint8[4];
-            } result;
-            istream.read(reinterpret_cast<char *>(&result.uint8[3]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[2]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[1]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[0]), sizeof(uint8_t));
+            } result{};
+            istream.read(reinterpret_cast<char *>(&result.uint8[3]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[2]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[1]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[0]), 1);
             t = result.num;
         } else {
             istream.read(reinterpret_cast<char *>(&t), sizeof(t));
@@ -338,15 +347,15 @@ namespace CHelper {
             union {
                 double num;
                 uint8_t uint8[4];
-            } result;
-            istream.read(reinterpret_cast<char *>(&result.uint8[7]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[6]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[5]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[4]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[3]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[2]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[1]), sizeof(uint8_t));
-            istream.read(reinterpret_cast<char *>(&result.uint8[0]), sizeof(uint8_t));
+            } result{};
+            istream.read(reinterpret_cast<char *>(&result.uint8[7]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[6]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[5]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[4]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[3]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[2]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[1]), 1);
+            istream.read(reinterpret_cast<char *>(&result.uint8[0]), 1);
             t = result.num;
         } else {
             istream.read(reinterpret_cast<char *>(&t), sizeof(t));
@@ -356,11 +365,11 @@ namespace CHelper {
     void BinaryReader::decode(std::string &t) {
         size_t length = readSize();
         if (HEDLEY_UNLIKELY(length == 0)) {
-            t = {};
+            t.clear();
+            return;
         }
-        std::vector<char> buffer(length);
-        istream.read(buffer.data(), static_cast<std::streamsize>(sizeof(char) * length));
-        t = {buffer.begin(), buffer.end()};
+        t.resize(length);
+        istream.read(&t[0], static_cast<std::streamsize>(length));
     }
 
 }// namespace CHelper

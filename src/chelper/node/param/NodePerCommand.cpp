@@ -77,6 +77,9 @@ namespace CHelper::Node {
         //name
         Profile::push(ColorStringBuilder().red("loading node name").build());
         JsonUtil::decode(j, "name", t->name);
+        //description
+        Profile::next(ColorStringBuilder().red("loading node description").build());
+        JsonUtil::decode(j, "description", t->description);
         //node
         if (HEDLEY_LIKELY(j.contains("node"))) {
             JsonUtil::decode(j, "node", t->nodes);
@@ -201,12 +204,13 @@ namespace CHelper::Node {
     }
 
     void from_binary(BinaryReader &binaryReader, std::unique_ptr<NodePerCommand> &t) {
+        t = std::make_unique<NodePerCommand>();
         //name
         binaryReader.decode(t->name);
         if (t->name.empty()) {
             throw std::runtime_error("command size cannot be zero");
         }
-        binaryReader.decode(t->description.value());
+        binaryReader.decode(t->description);
         //node
         binaryReader.decode(t->nodes);
         //start
@@ -242,9 +246,9 @@ namespace CHelper::Node {
                     continue;
                 }
                 Node::NodeBase *childNode = nullptr;
-                for (auto &node: t->nodes) {
-                    if (HEDLEY_UNLIKELY(node->id == childNodeId)) {
-                        childNode = node.get();
+                for (auto &node1: t->nodes) {
+                    if (HEDLEY_UNLIKELY(node1->id == childNodeId)) {
+                        childNode = node1.get();
                         break;
                     }
                 }

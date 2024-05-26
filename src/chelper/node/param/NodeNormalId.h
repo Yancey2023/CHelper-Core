@@ -31,9 +31,19 @@ namespace CHelper::Node {
         NodeNormalId(
                 const std::optional<std::string> &id,
                 const std::optional<std::string> &description,
-                const std::optional<std::string> &key,
+                const std::string &key,
                 bool ignoreError,
-                const std::optional<std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>> &contents,
+                bool allowsMissingID = false,
+                const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode =
+                        [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
+                    return tokenReader.readStringASTNode(node);
+                });
+
+        NodeNormalId(
+                const std::optional<std::string> &id,
+                const std::optional<std::string> &description,
+                bool ignoreError,
+                const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
                 bool allowsMissingID = false,
                 const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode =
                         [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {

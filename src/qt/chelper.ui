@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>CHelperApp</class>
+    <widget class="QMainWindow" name="MainWindow">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>800</width>
+                <height>800</height>
+            </rect>
+        </property>
+        <property name="windowTitle">
+            <string>CHelper</string>
+        </property>
+        <widget class="QWidget" name="centralwidget">
+            <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                    <widget class="QLabel" name="structureLabel">
+                        <property name="text">
+                            <string>欢迎使用CHelper</string>
+                        </property>
+                        <property name="alignment">
+                            <set>Qt::AlignLeft</set>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="descriptionLabel">
+                        <property name="text">
+                            <string>作者：Yancey</string>
+                        </property>
+                        <property name="alignment">
+                            <set>Qt::AlignLeft</set>
+                        </property>
+                        <property name="styleSheet">
+                            <string>color: grey;</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="errorReasonLabel">
+                        <property name="text">
+                            <string>错误原因</string>
+                        </property>
+                        <property name="alignment">
+                            <set>Qt::AlignLeft</set>
+                        </property>
+                        <property name="styleSheet">
+                            <string>color: red;</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QListView" name="listView">
+                        <property name="minimumSize">
+                            <size>
+                                <width>0</width>
+                                <height>0</height>
+                            </size>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <layout class="QHBoxLayout" name="verticalLayout_2">
+                        <item>
+                            <widget class="QPushButton" name="settingsButton">
+                                <property name="text">
+                                    <string>设置</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item>
+                            <widget class="QLineEdit" name="lineEdit"/>
+                        </item>
+                        <item>
+                            <widget class="QPushButton" name="copyButton">
+                                <property name="text">
+                                    <string>复制</string>
+                                </property>
+                            </widget>
+                        </item>
+                    </layout>
+                </item>
+            </layout>
+        </widget>
+    </widget>
+</ui>

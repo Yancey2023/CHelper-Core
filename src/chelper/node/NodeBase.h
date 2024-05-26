@@ -12,11 +12,6 @@
 #include "NodeType.h"
 #include "pch.h"
 
-#define REQUIRE_INIT                              \
-    if (!isInit) {                                \
-        throw std::runtime_error("require init"); \
-    }
-
 namespace CHelper {
 
     class CPack;
@@ -93,7 +88,7 @@ namespace CHelper {
 
         CODEC_NODE_H(NodeBase)
 
-        CODEC_H(std::unique_ptr<NodeBase>)
+        CODEC_UNIQUE_PTR_H(NodeBase)
 
     }// namespace Node
 

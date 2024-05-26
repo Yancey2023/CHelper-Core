@@ -111,9 +111,15 @@ namespace CHelper {
         Profile::next(ColorStringBuilder().red("loading namespace id data").build());
         binaryReader.decode(namespaceIds);
         Profile::next(ColorStringBuilder().red("loading item id data").build());
-        binaryReader.decode(itemIds);
+        size_t itemIdSize = binaryReader.readSize();
+        for (int i = 0; i < itemIdSize; ++i) {
+            itemIds->push_back(binaryReader.read<std::shared_ptr<ItemId>>());
+        }
         Profile::next(ColorStringBuilder().red("loading block id data").build());
-        binaryReader.decode(blockIds);
+        size_t blockIdSize = binaryReader.readSize();
+        for (int i = 0; i < blockIdSize; ++i) {
+            blockIds->push_back(binaryReader.read<std::shared_ptr<BlockId>>());
+        }
         Profile::next(ColorStringBuilder().red("loading json data").build());
         Node::NodeType::canLoadNodeJson = true;
         binaryReader.decode(jsonNodes);
@@ -281,28 +287,8 @@ namespace CHelper {
         for (const auto &item: jsonNodes) {
             JsonUtil::writeJsonToFile(path / "json" / (item->id.value() + ".json"), item);
         }
-        for (const auto &item: repeatNodes) {
-            nlohmann::json j;
-            j["id"] = item.first->id.value();
-            nlohmann::json jsonContent;
-            for (const auto &item2: ((Node::NodeOr *) item.first)->childNodes) {
-                nlohmann::json temp1;
-                for (const auto &item3: ((Node::NodeAnd *) item2)->childNodes) {
-                    nlohmann::json temp2 = *item3;
-                    temp2["type"] = item3->getNodeType()->nodeName;
-                    temp1.push_back(std::move(temp2));
-                }
-                jsonContent.push_back(std::move(temp1));
-            }
-            j["content"] = std::move(jsonContent);
-            nlohmann::json jsonBreak;
-            for (const auto &item2: ((Node::NodeAnd *) item.second)->childNodes) {
-                nlohmann::json temp = *item2;
-                temp["type"] = item2->getNodeType()->nodeName;
-                jsonBreak.push_back(std::move(temp));
-            }
-            j["break"] = std::move(jsonBreak);
-            JsonUtil::writeJsonToFile(path / "repeat" / (item.first->id.value() + ".json"), j);
+        for (const auto &item: repeatNodeData) {
+            JsonUtil::writeJsonToFile(path / "repeat" / (item.id + ".json"), item);
         }
         for (const auto &item: *commands) {
             JsonUtil::writeJsonToFile(
@@ -319,56 +305,32 @@ namespace CHelper {
             nlohmann::json j;
             j["id"] = item.first;
             j["type"] = "normal";
-            j["content"] = *item.second;
+            j["content"] = item.second;
             idJson.push_back(std::move(j));
         }
         for (const auto &item: namespaceIds) {
             nlohmann::json j;
             j["id"] = item.first;
             j["type"] = "namespace";
-            j["content"] = *item.second;
+            j["content"] = item.second;
             idJson.push_back(std::move(j));
         }
         {
             nlohmann::json j;
             j["type"] = "item";
-            j["items"] = *itemIds;
+            j["items"] = itemIds;
             idJson.push_back(std::move(j));
         }
         {
             nlohmann::json j;
             j["type"] = "block";
-            j["blocks"] = *blockIds;
+            j["blocks"] = blockIds;
             idJson.push_back(std::move(j));
         }
         result["id"] = std::move(idJson);
         result["json"] = jsonNodes;
-        nlohmann::json repeatJson;
-        for (const auto &item: repeatNodes) {
-            nlohmann::json j;
-            j["id"] = item.first->id.value();
-            nlohmann::json jsonContent;
-            for (const auto &item2: ((Node::NodeOr *) item.first)->childNodes) {
-                nlohmann::json temp1;
-                for (const auto &item3: ((Node::NodeAnd *) item2)->childNodes) {
-                    nlohmann::json temp2 = *item3;
-                    temp2["type"] = item3->getNodeType()->nodeName;
-                    temp1.push_back(std::move(temp2));
-                }
-                jsonContent.push_back(std::move(temp1));
-            }
-            j["content"] = std::move(jsonContent);
-            nlohmann::json jsonBreak;
-            for (const auto &item2: ((Node::NodeAnd *) item.second)->childNodes) {
-                nlohmann::json temp;
-                temp["type"] = item2->getNodeType()->nodeName;
-                jsonBreak.push_back(std::move(temp));
-            }
-            j["break"] = std::move(jsonBreak);
-            repeatJson.push_back(std::move(j));
-        }
-        result["repeat"] = std::move(repeatJson);
-        result["command"] = *commands;
+        result["repeat"] = repeatNodeData;
+        result["command"] = commands;
         return result;
     }
 
@@ -396,9 +358,15 @@ namespace CHelper {
         //namespace id
         binaryWriter.encode(namespaceIds);
         //item id
-        binaryWriter.encode(itemIds);
+        binaryWriter.encodeSize(itemIds->size());
+        for (const auto &item: *itemIds) {
+            binaryWriter.encode(std::static_pointer_cast<ItemId>(item));
+        }
         //block id
-        binaryWriter.encode(blockIds);
+        binaryWriter.encodeSize(blockIds->size());
+        for (const auto &item: *blockIds) {
+            binaryWriter.encode(std::static_pointer_cast<BlockId>(item));
+        }
         //json node
         binaryWriter.encode(jsonNodes);
         //repeat node
@@ -424,6 +392,11 @@ namespace CHelper {
 
     std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
     CPack::getNamespaceId(const std::string &key) const {
+        if (key == "blocks") {
+            return blockIds;
+        } else if (key == "items") {
+            return itemIds;
+        }
         auto it = namespaceIds.find(key);
         if (HEDLEY_UNLIKELY(it == namespaceIds.end())) {
 #if CHelperDebug == true

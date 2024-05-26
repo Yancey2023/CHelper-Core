@@ -3,6 +3,7 @@
 //
 
 #include "NodeText.h"
+#include "../../lexer/Lexer.h"
 #include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
@@ -17,6 +18,7 @@ namespace CHelper::Node {
 
 
     void NodeText::init(const CPack &cpack) {
+        auto tokens = Lexer::lex(StringReader(data->name, "unknown"));
         getTextASTNode = [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
             return tokenReader.readUntilWhitespace(node);
         };
@@ -27,11 +29,6 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-#if CHelperDebug == true
-        if (getTextASTNode == nullptr) {
-            throw std::runtime_error("getTextASTNode is nullptr because not init");
-        }
-#endif
         DEBUG_GET_NODE_BEGIN(this)
         auto result = getTextASTNode(this, tokenReader);
         DEBUG_GET_NODE_END(this)
@@ -74,6 +71,6 @@ namespace CHelper::Node {
         structure.appendWhiteSpace().append(data->name);
     }
 
-    CODEC_NODE(NodeText, data)
+    CODEC_NODE(NodeText, tokenTypes, data)
 
 }// namespace CHelper::Node
