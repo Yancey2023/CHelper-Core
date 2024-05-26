@@ -166,8 +166,8 @@ class binary_reader
     */
     bool parse_bson_internal()
     {
-        int32_t document_size{};
-        get_number<int32_t, true>(input_format_t::bson, document_size);
+        std::int32_t document_size{};
+        get_number<std::int32_t, true>(input_format_t::bson, document_size);
 
         if (JSON_HEDLEY_UNLIKELY(!sax->start_object(static_cast<std::size_t>(-1))))
         {
@@ -281,9 +281,9 @@ class binary_reader
 
             case 0x02: // string
             {
-                int32_t len{};
+                std::int32_t len{};
                 string_t value;
-                return get_number<int32_t, true>(input_format_t::bson, len) && get_bson_string(len, value) && sax->string(value);
+                return get_number<std::int32_t, true>(input_format_t::bson, len) && get_bson_string(len, value) && sax->string(value);
             }
 
             case 0x03: // object
@@ -298,9 +298,9 @@ class binary_reader
 
             case 0x05: // binary
             {
-                int32_t len{};
+                std::int32_t len{};
                 binary_t value;
-                return get_number<int32_t, true>(input_format_t::bson, len) && get_bson_binary(len, value) && sax->binary(value);
+                return get_number<std::int32_t, true>(input_format_t::bson, len) && get_bson_binary(len, value) && sax->binary(value);
             }
 
             case 0x08: // boolean
@@ -313,10 +313,10 @@ class binary_reader
                 return sax->null();
             }
 
-            case 0x10: // int32
+            case 0x10: // std::int32
             {
-                int32_t value{};
-                return get_number<int32_t, true>(input_format_t::bson, value) && sax->number_integer(value);
+                std::int32_t value{};
+                return get_number<std::int32_t, true>(input_format_t::bson, value) && sax->number_integer(value);
             }
 
             case 0x12: // int64
@@ -388,8 +388,8 @@ class binary_reader
     */
     bool parse_bson_array()
     {
-        int32_t document_size{};
-        get_number<int32_t, true>(input_format_t::bson, document_size);
+        std::int32_t document_size{};
+        get_number<std::int32_t, true>(input_format_t::bson, document_size);
 
         if (JSON_HEDLEY_UNLIKELY(!sax->start_array(static_cast<std::size_t>(-1))))
         {
@@ -464,7 +464,7 @@ class binary_reader
                 return get_number(input_format_t::cbor, number) && sax->number_unsigned(number);
             }
 
-            case 0x1A: // Unsigned integer (four-byte uint32_t follows)
+            case 0x1A: // Unsigned integer (four-byte ustd::int32_t follows)
             {
                 std::uint32_t number{};
                 return get_number(input_format_t::cbor, number) && sax->number_unsigned(number);
@@ -515,7 +515,7 @@ class binary_reader
                 return get_number(input_format_t::cbor, number) && sax->number_integer(static_cast<number_integer_t>(-1) - number);
             }
 
-            case 0x3A: // Negative integer -1-n (four-byte uint32_t follows)
+            case 0x3A: // Negative integer -1-n (four-byte ustd::int32_t follows)
             {
                 std::uint32_t number{};
                 return get_number(input_format_t::cbor, number) && sax->number_integer(static_cast<number_integer_t>(-1) - number);
@@ -555,7 +555,7 @@ class binary_reader
             case 0x57:
             case 0x58: // Binary data (one-byte uint8_t for n follows)
             case 0x59: // Binary data (two-byte uint16_t for n follow)
-            case 0x5A: // Binary data (four-byte uint32_t for n follow)
+            case 0x5A: // Binary data (four-byte ustd::int32_t for n follow)
             case 0x5B: // Binary data (eight-byte uint64_t for n follow)
             case 0x5F: // Binary data (indefinite length)
             {
@@ -590,7 +590,7 @@ class binary_reader
             case 0x77:
             case 0x78: // UTF-8 string (one-byte uint8_t for n follows)
             case 0x79: // UTF-8 string (two-byte uint16_t for n follow)
-            case 0x7A: // UTF-8 string (four-byte uint32_t for n follow)
+            case 0x7A: // UTF-8 string (four-byte ustd::int32_t for n follow)
             case 0x7B: // UTF-8 string (eight-byte uint64_t for n follow)
             case 0x7F: // UTF-8 string (indefinite length)
             {
@@ -638,7 +638,7 @@ class binary_reader
                 return get_number(input_format_t::cbor, len) && get_cbor_array(static_cast<std::size_t>(len), tag_handler);
             }
 
-            case 0x9A: // array (four-byte uint32_t for n follow)
+            case 0x9A: // array (four-byte ustd::int32_t for n follow)
             {
                 std::uint32_t len{};
                 return get_number(input_format_t::cbor, len) && get_cbor_array(conditional_static_cast<std::size_t>(len), tag_handler);
@@ -692,7 +692,7 @@ class binary_reader
                 return get_number(input_format_t::cbor, len) && get_cbor_object(static_cast<std::size_t>(len), tag_handler);
             }
 
-            case 0xBA: // map (four-byte uint32_t for n follow)
+            case 0xBA: // map (four-byte ustd::int32_t for n follow)
             {
                 std::uint32_t len{};
                 return get_number(input_format_t::cbor, len) && get_cbor_object(conditional_static_cast<std::size_t>(len), tag_handler);
@@ -957,7 +957,7 @@ class binary_reader
                 return get_number(input_format_t::cbor, len) && get_string(input_format_t::cbor, len, result);
             }
 
-            case 0x7A: // UTF-8 string (four-byte uint32_t for n follow)
+            case 0x7A: // UTF-8 string (four-byte ustd::int32_t for n follow)
             {
                 std::uint32_t len{};
                 return get_number(input_format_t::cbor, len) && get_string(input_format_t::cbor, len, result);
@@ -1055,7 +1055,7 @@ class binary_reader
                        get_binary(input_format_t::cbor, len, result);
             }
 
-            case 0x5A: // Binary data (four-byte uint32_t for n follow)
+            case 0x5A: // Binary data (four-byte ustd::int32_t for n follow)
             {
                 std::uint32_t len{};
                 return get_number(input_format_t::cbor, len) &&
@@ -1485,7 +1485,7 @@ class binary_reader
 
             case 0xD2: // int 32
             {
-                int32_t number{};
+                std::int32_t number{};
                 return get_number(input_format_t::msgpack, number) && sax->number_integer(number);
             }
 
@@ -1879,7 +1879,7 @@ class binary_reader
 
             case 'l':
             {
-                int32_t len{};
+                std::int32_t len{};
                 return get_number(input_format, len) && get_string(input_format, len, result);
             }
 
@@ -2059,7 +2059,7 @@ class binary_reader
 
             case 'l':
             {
-                int32_t number{};
+                std::int32_t number{};
                 if (JSON_HEDLEY_UNLIKELY(!get_number(input_format, number)))
                 {
                     return false;
@@ -2166,7 +2166,7 @@ class binary_reader
                 }
                 if (!dim.empty())  // if ndarray, convert to an object in JData annotated array format
                 {
-                    for (auto i : dim) // testDir if any dimension in an ndarray is 0, if so, return a 1D empty container
+                    for (auto i : dim) // test if any dimension in an ndarray is 0, if so, return a 1D empty container
                     {
                         if ( i == 0 )
                         {
@@ -2330,7 +2330,7 @@ class binary_reader
 
             case 'l':
             {
-                int32_t number{};
+                std::int32_t number{};
                 return get_number(input_format, number) && sax->number_integer(number);
             }
 
@@ -2981,8 +2981,8 @@ class binary_reader
     bjd_type{'U', "uint8"},                    \
     bjd_type{'d', "single"},                   \
     bjd_type{'i', "int8"},                     \
-    bjd_type{'l', "int32"},                    \
-    bjd_type{'m', "uint32"},                   \
+    bjd_type{'l', "std::int32"},                    \
+    bjd_type{'m', "ustd::int32"},                   \
     bjd_type{'u', "uint16"})
 
   JSON_PRIVATE_UNLESS_TESTED:

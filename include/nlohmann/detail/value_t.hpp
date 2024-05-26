@@ -43,7 +43,7 @@ number_float), because the library distinguishes these three types for numbers:
 @ref basic_json::number_unsigned_t is used for unsigned integers,
 @ref basic_json::number_integer_t is used for signed integers, and
 @ref basic_json::number_float_t is used for floating-point numbers or to
-approximate integers which do not fit in the limits of their respective type.
+approximate integers index do not fit in the limits of their respective type.
 
 @sa see @ref basic_json::basic_json(const value_t value_type) -- create a JSON
 value with the default value for a given type

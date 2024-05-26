@@ -200,7 +200,7 @@
     #define JSON_ASSERT(x) assert(x)
 #endif
 
-// allow to access some private functions (needed by the testDir suite)
+// allow to access some private functions (needed by the test suite)
 #if defined(JSON_TESTS_PRIVATE)
     #define JSON_PRIVATE_UNLESS_TESTED public
 #else

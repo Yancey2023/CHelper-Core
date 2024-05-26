@@ -4724,7 +4724,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
             {
                 return patch_operations::copy;
             }
-            if (op == "testDir")
+            if (op == "test")
             {
                 return patch_operations::test;
             }
@@ -4938,14 +4938,14 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
                     {
                         // check if "value" matches the one at "path"
                         // the "path" location must exist - use at()
-                        success = (result.at(ptr) == get_value("testDir", "value", false));
+                        success = (result.at(ptr) == get_value("test", "value", false));
                     }
                     JSON_INTERNAL_CATCH (out_of_range&)
                     {
                         // ignore out of range errors: success remains false
                     }
 
-                    // throw an exception if testDir fails
+                    // throw an exception if test fails
                     if (JSON_HEDLEY_UNLIKELY(!success))
                     {
                         JSON_THROW(other_error::create(501, detail::concat("unsuccessful: ", val.dump()), &val));
@@ -4958,7 +4958,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
                 default:
                 {
                     // op must be "add", "remove", "replace", "move", "copy", or
-                    // "testDir"
+                    // "test"
                     JSON_THROW(parse_error::create(105, 0, detail::concat("operation value '", op, "' is invalid"), &val));
                 }
             }
