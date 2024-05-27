@@ -354,6 +354,7 @@ ID 有4种类型：
 {
   "type": "POSITION",
   "id": "position",
+  "brief": "方块位置",
   "description": "要被更改方块的位置"
 }
 ```

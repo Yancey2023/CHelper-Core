@@ -45,13 +45,16 @@ namespace CHelper {
 
         template<class T>
         void encode(const std::shared_ptr<T> &t) {
+            if (HEDLEY_UNLIKELY(t == nullptr)) {
+                throw std::runtime_error("fail to encode std::shared_ptr because it is nullptr");
+            }
             encode(*t);
         }
 
         template<class T>
         void encode(const std::vector<T> &t) {
             encodeSize(t.size());
-            for (const auto &item: t) {
+            for (const T &item: t) {
                 encode(item);
             }
         }
