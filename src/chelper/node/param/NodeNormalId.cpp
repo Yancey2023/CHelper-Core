@@ -96,7 +96,7 @@ namespace CHelper::Node {
             VectorView<Token> tokens = result.tokens;
             return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "命令不完整"));
         }
-        if (HEDLEY_UNLIKELY(!ignoreError)) {
+        if (HEDLEY_UNLIKELY(!ignoreError.value_or(true))) {
             VectorView<Token> tokens = result.tokens;
             std::string str = TokenUtil::toString(tokens);
             size_t strHash = std::hash<std::string>{}(str);
@@ -177,41 +177,6 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or("ID"));
     }
 
-    void to_json(nlohmann::json &j, const NodeNormalId &t) {
-        to_json(j, (NodeBase &) t);
-        JsonUtil::encode(j, "key", t.key);
-        JsonUtil::encode(j, "ignoreError", t.ignoreError);
-        JsonUtil::encode(j, "contents", t.contents);
-    }
-    void from_json(const nlohmann::json &j, NodeNormalId &t) {
-        from_json(j, (NodeBase &) t);
-        JsonUtil::decode(j, "key", t.key);
-        JsonUtil::decode(j, "ignoreError", t.ignoreError);
-        JsonUtil::decode(j, "contents", t.contents);
-    }
-    void to_binary(CHelper::BinaryWriter &binaryWriter, const NodeNormalId &t) {
-        to_binary(binaryWriter, (NodeBase &) t);
-        binaryWriter.encode(t.key);
-        binaryWriter.encode(t.ignoreError);
-        binaryWriter.encode(t.contents);
-    }
-    void from_binary(CHelper::BinaryReader &binaryReader, NodeNormalId &t) {
-        from_binary(binaryReader, (NodeBase &) t);
-        binaryReader.decode(t.key);
-        binaryReader.decode(t.ignoreError);
-        binaryReader.decode(t.contents);
-    }
-    void to_json(nlohmann::json &j, const std::unique_ptr<NodeNormalId> &t) { j = *t; }
-    void from_json(const nlohmann::json &j, std::unique_ptr<NodeNormalId> &t) {
-        t = std::make_unique<NodeNormalId>();
-        j.get_to(*t);
-    }
-    void to_binary(CHelper::BinaryWriter &binaryWriter, const std::unique_ptr<NodeNormalId> &t) { binaryWriter.encode(*t); }
-    void from_binary(CHelper::BinaryReader &binaryReader, std::unique_ptr<NodeNormalId> &t) {
-        t = std::make_unique<NodeNormalId>();
-        binaryReader.decode(*t);
-    }
-
-//    CODEC_NODE(NodeNormalId, key, ignoreError, contents)
+    CODEC_NODE(NodeNormalId, key, ignoreError, contents)
 
 }// namespace CHelper::Node

@@ -35,11 +35,11 @@ Java_yancey_chelper_core_CHelperCore_init(
     int numBytesRead = AAsset_read(asset, buffer, dataFileSize);
     AAsset_close(asset);
     std::istringstream iss(std::string(buffer, numBytesRead));
-    nlohmann::json j = nlohmann::json::from_bjdata(iss);
-    delete[] buffer;
-    core = CHelper::Core::create([&j]() {
-        return CHelper::CPack::createByJson(j);
+    core = CHelper::Core::create([&iss]() {
+        CHelper::BinaryReader binaryReader(true, iss);
+        return CHelper::CPack::createByBinary(binaryReader);
     });
+    delete[] buffer;
     return static_cast<jboolean>(core != nullptr);
 }
 
@@ -118,9 +118,9 @@ Java_yancey_chelper_core_CHelperCore_getSuggestion(
                         env->NewStringUTF(suggestion.content->name.c_str()));
     env->SetObjectField(javaDataComplete,
                         env->GetFieldID(env->GetObjectClass(javaDataComplete), "description", "Ljava/lang/String;"),
-                        suggestion.content->description.has_value() ? env->NewStringUTF(
-                                                                              suggestion.content->description.value().c_str())
-                                                                    : nullptr);
+                        suggestion.content->description.has_value()
+                                ? env->NewStringUTF(suggestion.content->description.value().c_str())
+                                : nullptr);
     return javaDataComplete;
 }
 
@@ -146,9 +146,9 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions(
                             env->NewStringUTF(item.content->name.c_str()));
         env->SetObjectField(javaDataComplete,
                             env->GetFieldID(env->GetObjectClass(javaDataComplete), "description", "Ljava/lang/String;"),
-                            item.content->description.has_value() ? env->NewStringUTF(
-                                                                            item.content->description.value().c_str())
-                                                                  : nullptr);
+                            item.content->description.has_value()
+                                    ? env->NewStringUTF(item.content->description.value().c_str())
+                                    : nullptr);
         env->CallBooleanMethod(javaList, arrayListAdd, javaDataComplete);
     }
     return javaList;

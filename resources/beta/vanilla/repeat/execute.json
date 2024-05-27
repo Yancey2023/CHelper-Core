@@ -331,7 +331,6 @@
     [
       {
         "type": "NORMAL_ID",
-        "brief": "if|unless",
         "description": "if|unless",
         "ignoreError": false,
         "contents": [
@@ -367,7 +366,6 @@
     [
       {
         "type": "NORMAL_ID",
-        "brief": "if|unless",
         "description": "if|unless",
         "ignoreError": false,
         "contents": [
@@ -424,7 +422,6 @@
     [
       {
         "type": "NORMAL_ID",
-        "brief": "if|unless",
         "description": "if|unless",
         "ignoreError": false,
         "contents": [
@@ -457,7 +454,6 @@
     [
       {
         "type": "NORMAL_ID",
-        "brief": "if|unless",
         "description": "if|unless",
         "ignoreError": false,
         "contents": [
@@ -538,7 +534,6 @@
     [
       {
         "type": "NORMAL_ID",
-        "brief": "if|unless",
         "description": "if|unless",
         "ignoreError": false,
         "contents": [

@@ -52,7 +52,7 @@ namespace CHelper::Node {
             nodeKeyContent->push_back(NormalId::make(item.name, item.description));
         }
         nodeKey = std::make_unique<NodeNormalId>(
-                "TARGET_SELECTOR_ARGUMENT_HASITEM_KEY", "目标选择器hasitem参数名",
+                "KEY", "参数名",
                 true, nodeKeyContent);
     }
 

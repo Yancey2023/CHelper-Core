@@ -203,6 +203,10 @@ namespace CHelper::Node {
         nodeGameMode->init(cpack);
         nodeSlot->init(cpack);
         nodeEntities->init(cpack);
+        nodeHasItemElement->init(cpack);
+        nodeHasItemList1->init(cpack);
+        nodeHasItemList2->init(cpack);
+        nodeHasItem->init(cpack);
         nodeArgument->init(cpack);
         nodeArguments->init(cpack);
     }
