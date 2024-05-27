@@ -22,6 +22,7 @@ namespace CHelper {
         std::string id;
         std::vector<std::unique_ptr<Node::NodeBase>> breakNodes;
         std::vector<std::vector<std::unique_ptr<Node::NodeBase>>> repeatNodes;
+        std::vector<bool> isEnd;
     };
 
     CODEC_H(RepeatData)
@@ -35,7 +36,7 @@ namespace CHelper {
         std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
         std::vector<std::unique_ptr<Node::NodeJsonElement>> jsonNodes;
         std::vector<RepeatData> repeatNodeData;
-        std::vector<std::pair<Node::NodeBase *, Node::NodeBase *>> repeatNodes;
+        std::unordered_map<std::string, std::pair<const RepeatData *, const Node::NodeBase *>> repeatNodes;
         std::shared_ptr<std::vector<std::unique_ptr<Node::NodePerCommand>>> commands = std::make_shared<std::vector<std::unique_ptr<Node::NodePerCommand>>>();
         std::unique_ptr<Node::NodeCommand> mainNode;
 

@@ -7,6 +7,7 @@
 #ifndef CHELPER_NODEREPEAT_H
 #define CHELPER_NODEREPEAT_H
 
+#include "../../resources/CPack.h"
 #include "../NodeBase.h"
 #include "../util/NodeOr.h"
 
@@ -17,7 +18,8 @@ namespace CHelper::Node {
         std::string key;
 
     private:
-        std::unique_ptr<NodeOr> nodeElement;
+        const RepeatData* repeatData = nullptr;
+        const NodeBase* nodeElement = nullptr;
 
     public:
         NodeRepeat() = default;

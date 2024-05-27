@@ -8,7 +8,7 @@
 
 namespace CHelper {
 
-    CODEC(RepeatData, id, breakNodes, repeatNodes)
+    CODEC(RepeatData, id, breakNodes, repeatNodes, isEnd)
 
     CPack::CPack(const std::filesystem::path &path) {
 #if CHelperDebug == true
@@ -194,6 +194,13 @@ namespace CHelper {
         for (const auto &item: jsonNodes) {
             item->init(*this);
         }
+        Profile::next(ColorStringBuilder().red("init repeat nodes").build());
+        for (const auto &item: repeatNodeData) {
+            if (HEDLEY_UNLIKELY(item.repeatNodes.size() != item.isEnd.size())) {
+                Profile::push(ColorStringBuilder().red("checking repeat node: ").purple(item.id).build());
+                throw std::runtime_error("fail to check repeat id because repeatNodes size not equal isEnd size");
+            }
+        }
         for (const auto &item: repeatNodeData) {
             std::vector<const Node::NodeBase *> content;
             content.reserve(item.repeatNodes.size());
@@ -216,9 +223,24 @@ namespace CHelper {
                     item.id, std::nullopt, std::move(content), false);
             std::unique_ptr<Node::NodeBase> breakNode = std::make_unique<Node::NodeAnd>(
                     item.id, std::nullopt, std::move(breakChildNodes));
-            repeatNodes.emplace_back(unBreakNode.get(), breakNode.get());
+            std::unique_ptr<Node::NodeBase> orNode = std::make_unique<Node::NodeOr>(
+                    "NODE_REPEAT", "命令重复部分",
+                    std::vector<const Node::NodeBase *>{unBreakNode.get(), breakNode.get()},
+                    false);
+            repeatNodes.emplace(item.id, std::make_pair(&item, orNode.get()));
             repeatCacheNodes.push_back(std::move(unBreakNode));
             repeatCacheNodes.push_back(std::move(breakNode));
+            repeatCacheNodes.push_back(std::move(orNode));
+        }
+        for (const auto &item: repeatNodeData) {
+            for (const auto &item2: item.repeatNodes) {
+                for (const auto &item3: item2) {
+                    item3->init(*this);
+                }
+            }
+            for (const auto &item2: item.breakNodes) {
+                item2->init(*this);
+            }
         }
         for (const auto &item: *commands) {
             Profile::next(ColorStringBuilder().red("init command: \"").purple(StringUtil::join(",", item->name)).red("\"").build());

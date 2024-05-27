@@ -30,6 +30,8 @@ private slots:
 
     void onSuggestionClick(const QModelIndex &index);
 
+    void copy();
+
     void about();
 
 private:

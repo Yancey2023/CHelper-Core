@@ -81,7 +81,7 @@ namespace nlohmann {
 
         static void from_json(const json &j, std::shared_ptr<T> &t) {
             t = std::make_shared<T>();
-            j.get_to(t);
+            j.get_to(*t);
         }
 
         static void to_json(json &j, const std::shared_ptr<T> &t) {

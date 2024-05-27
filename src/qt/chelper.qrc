@@ -1,0 +1,6 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource>
+        <file>assets/beta-experiment-1.21.0.23.cpack</file>
+    </qresource>
+</RCC>

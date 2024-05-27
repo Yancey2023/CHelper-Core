@@ -15,8 +15,11 @@ namespace CHelper::Node {
     ASTNode NodeAnd::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childASTNodes;
-        for (const auto &item: childNodes) {
-            auto node = item->getASTNodeWithNextNode(tokenReader, cpack);
+        for (int i = 0; i < childNodes.size(); ++i) {
+            const auto &item = childNodes[i];
+            auto node = item->getASTNodeWithNextNode(
+                    tokenReader, cpack,
+                    i == 0 || childNodes[i - 1]->isAfterWhitespace() || item->isAfterWhitespace());
             bool isError = node.isError();
             childASTNodes.push_back(std::move(node));
             if (HEDLEY_UNLIKELY(isError)) {

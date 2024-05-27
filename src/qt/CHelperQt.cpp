@@ -4,19 +4,26 @@
 
 #include "CHelperQt.h"
 #include "ui_chelper.h"
-#include <QApplication>
 #include <QDebug>
+#include <QFile>
 #include <QListWidget>
 #include <QMessageBox>
-#include <QPainter>
 #include <QStringListModel>
+#include <QClipboard>
 
 CHelperApp::CHelperApp(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::CHelperApp) {
     ui->setupUi(this);
 #ifdef _WIN32
-    core = CHelper::Core::createByBinary(R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.0.23.cpack)");
+    QFile file(":/assets/beta-experiment-1.21.0.23.cpack");
+    if (file.open(QIODevice::ReadOnly) && file.isReadable()) {
+        std::istringstream iss(file.readAll().toStdString());
+        core = CHelper::Core::create([&iss]() {
+            CHelper::BinaryReader binaryReader(true, iss);
+            return CHelper::CPack::createByBinary(binaryReader);
+        });
+    }
 #else
     core = CHelper::Core::createByBinary(R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.cpack)");
 #endif
@@ -32,6 +39,7 @@ CHelperApp::CHelperApp(QWidget *parent)
     ui->lineEdit->setFocus();
     connect(ui->listView, SIGNAL(clicked(QModelIndex)), this, SLOT(onSuggestionClick(QModelIndex)));
     connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(onTextChanged(QString)));
+    connect(ui->copyButton, &QPushButton::clicked, this, &CHelperApp::copy);
 }
 
 CHelperApp::~CHelperApp() {
@@ -87,6 +95,11 @@ void CHelperApp::onSuggestionClick(const QModelIndex &index) {
     } else {
         qDebug() << "suggestion index is out of range: " << index.row();
     }
+}
+
+void CHelperApp::copy() {
+    QClipboard *clip = QApplication::clipboard();
+    clip->setText(ui->lineEdit->text());
 }
 
 

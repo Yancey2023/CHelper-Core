@@ -68,9 +68,9 @@ namespace CHelper {
                                const std::vector<const NodeBase *> &childNodes,
                                const std::string &astNodeId = std::string()) const;
 
+        public:
             [[nodiscard]] bool isAfterWhitespace() const;
 
-        public:
             HEDLEY_NON_NULL(2)
             virtual std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const;
 

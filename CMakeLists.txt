@@ -3,9 +3,6 @@ project(CHelper)
 
 # using c++ 17
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
 
 # Encoding: utf-8
 if (MSVC)
@@ -16,15 +13,12 @@ endif ()
 find_package(Qt5 COMPONENTS
         Core Gui Widgets
         REQUIRED)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
 # ThirdParty: GTest
-include(FetchContent)
-FetchContent_Declare(
-        googletest
-        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-)
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+find_package(GTest COMPONENTS REQUIRED)
 
 # Sources
 file(GLOB_RECURSE SOURCE_H src/chelper/*.h)
@@ -49,9 +43,10 @@ if (MSVC)
 endif ()
 
 # Qt Application
-add_executable(CHelperQt
+add_executable(CHelperQt WIN32
         src/qt/CHelperQt.h
         src/qt/CHelperQt.cpp
+        src/qt/chelper.qrc
         src/qt/chelper.ui
         ${SOURCE_H}
         ${SOURCE_CPP}
@@ -75,8 +70,6 @@ target_precompile_headers(CHelperAndroid PRIVATE include/pch.h)
 # Using GTest to test codes
 file(GLOB_RECURSE TEST_H src/test/*.h)
 file(GLOB_RECURSE TEST_CPP src/test/*.cpp)
-include(GoogleTest)
-enable_testing()
 add_executable(CHelperTest ${TEST_H} ${TEST_CPP} ${SOURCE_H} ${SOURCE_CPP})
 target_include_directories(CHelperTest PUBLIC include)
 target_precompile_headers(CHelperTest PRIVATE include/pch.h)
