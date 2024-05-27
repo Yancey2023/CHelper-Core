@@ -12,7 +12,7 @@
 #include <array> // array
 #include <map> // map
 #include <cmath> // isnan, isinf
-#include <cstdint> // uint8_t, uint16_t, ustd::int32_t, uint64_t
+#include <cstdint> // uint8_t, uint16_t, uint32_t, uint64_t
 #include <cstring> // memcpy
 #include <limits> // numeric_limits
 #include <string> // string
@@ -1376,7 +1376,7 @@ class binary_writer
             }
             write_number(static_cast<std::int32_t>(n), use_bjdata);
         }
-        else if (use_bjdata && n <= static_cast<uint64_t>((std::numeric_limits<std::uint32_t>::max)()))
+        else if (use_bjdata && n <= static_cast<uint64_t>((std::numeric_limits<uint32_t>::max)()))
         {
             if (add_prefix)
             {
@@ -1470,7 +1470,7 @@ class binary_writer
             {
                 oa->write_character(to_char_type('m'));  // uint32 - bjdata only
             }
-            write_number(static_cast<std::uint32_t>(n), use_bjdata);
+            write_number(static_cast<uint32_t>(n), use_bjdata);
         }
         else if ((std::numeric_limits<std::int64_t>::min)() <= n && n <= (std::numeric_limits<std::int64_t>::max)())
         {

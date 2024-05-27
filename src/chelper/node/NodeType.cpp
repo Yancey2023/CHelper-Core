@@ -147,7 +147,20 @@ namespace CHelper::Node {
             });
     std::unique_ptr<NodeType> NodeType::NAMESPACE_ID = create<NodeNamespaceId>("NAMESPACE_ID");
     std::unique_ptr<NodeType> NodeType::NORMAL_ID = create<NodeNormalId>("NORMAL_ID");
-    std::unique_ptr<NodeType> NodeType::PER_COMMAND = create<NodePerCommand>("PER_COMMAND");
+    std::unique_ptr<NodeType> NodeType::PER_COMMAND = std::make_unique<NodeType>(
+            "PER_COMMAND",
+            [](const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
+                throw Exception::UnknownNodeType(NodeType::PER_COMMAND->nodeName);
+            },
+            [](nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {
+                throw Exception::UnknownNodeType(NodeType::PER_COMMAND->nodeName);
+            },
+            [](BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
+                throw Exception::UnknownNodeType(NodeType::PER_COMMAND->nodeName);
+            },
+            [](BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t) {
+                throw Exception::UnknownNodeType(NodeType::PER_COMMAND->nodeName);
+            });
     std::unique_ptr<NodeType> NodeType::POSITION = create<NodePosition>("POSITION", false);
     std::unique_ptr<NodeType> NodeType::RELATIVE_FLOAT = create<NodeRelativeFloat>("RELATIVE_FLOAT", false);
     std::unique_ptr<NodeType> NodeType::REPEAT = std::make_unique<NodeType>(

@@ -24,6 +24,10 @@ namespace CHelper::Node {
         uint8_t types[3];
         for (uint8_t &type: types) {
             std::pair<uint8_t, ASTNode> node = NodeRelativeFloat::getASTNode(this, cpack, tokenReader);
+            if (threeChildNodes.empty() && node.second.isError() && !TokenUtil::toString(node.second.tokens).empty()) {
+                tokenReader.pop();
+                return node.second;
+            }
             type = node.first;
             threeChildNodes.push_back(std::move(node.second));
         }

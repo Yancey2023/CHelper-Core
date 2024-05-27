@@ -148,7 +148,7 @@
     {
       "type": "STRING",
       "id": "default",
-      "brief": "未知",
+      "brief": "default",
       "description": "未知参数，需要更多信息",
       "canContainSpace": true,
       "ignoreLater": false

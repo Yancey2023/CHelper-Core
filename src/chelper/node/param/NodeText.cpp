@@ -52,14 +52,14 @@ namespace CHelper::Node {
         //通过名字进行搜索
         size_t index1 = data->name.find(str);
         if (HEDLEY_LIKELY(index1 != std::string::npos)) {
-            suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, false, data}));
+            suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, isAfterWhitespace(), data}));
             return true;
         }
         //通过介绍进行搜索
         if (HEDLEY_LIKELY(data->description.has_value())) {
             size_t index2 = data->description.value().find(str);
             if (HEDLEY_LIKELY(index2 != std::string::npos)) {
-                suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, false, data}));
+                suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, isAfterWhitespace(), data}));
             }
         }
         return true;

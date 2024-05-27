@@ -95,19 +95,9 @@ CHelper是我的世界基岩版的命令助手。
     }
   ],
   "ast": [
-    [
-      "player",
-      "ability",
-      "LF"
-    ],
-    [
-      "ability",
-      "value"
-    ],
-    [
-      "value",
-      "LF"
-    ]
+    ["player", "ability", "LF"],
+    ["ability", "value"],
+    ["value", "LF"]
   ]
 }
 ```
@@ -191,7 +181,7 @@ ID 有4种类型：
 
 |     名字      | 类型  |  含义  |               备注               | 必需 |
 |:-----------:|:---:|:----:|:------------------------------:|:--:|
-|  namespace  | 字符串 | 命名空间 | 默认为minecraft，如果是minecraft，建议省略 | 否  |
+| idNamespace | 字符串 | 命名空间 | 默认为minecraft，如果是minecraft，建议省略 | 否  |
 |    name     | 字符串 | ID名字 |               -                | 是  |
 | description | 字符串 | ID介绍 |               -                | 否  |
 
@@ -238,7 +228,7 @@ ID 有4种类型：
 
 |     名字      | 类型  |  含义  |               备注               | 必需 |
 |:-----------:|:---:|:----:|:------------------------------:|:--:|
-|  namespace  | 字符串 | 命名空间 | 默认为minecraft，如果是minecraft，建议省略 | 否  |
+| idNamespace | 字符串 | 命名空间 | 默认为minecraft，如果是minecraft，建议省略 | 否  |
 |    name     | 字符串 | ID名字 |               -                | 是  |
 | description | 字符串 | ID介绍 |               -                | 否  |
 | blockStates | 数组  | 方块状态 |               -                | 否  |
@@ -247,15 +237,17 @@ ID 有4种类型：
 
 |      名字      | 类型  |     含义      |  备注   | 必需 |
 |:------------:|:---:|:-----------:|:-----:|:--:|
-|     key      | 字符串 |   方块状态参数名   |   -   | 否  |
-| description  | 字符串 |    ID介绍     |   -   | 是  |
+|     key      | 字符串 |   方块状态参数名   |   -   | 是  |
+| description  | 字符串 |    ID介绍     |   -   | 否  |
 | defaultValue | 正整数 | 默认值是第几个方块状态 | 暂时没用到 | 是  |
 |    values    | 数组  |  方块状态参数值列表  |   -   | 是  |
 
-|     名字      |  类型  |   含义    | 备注 | 必需 |
-|:-----------:|:----:|:-------:|:--:|:--:|
-|    value    | 任何类型 | 方块状态参数值 | -  | 是  |
-| description | 字符串  |   介绍    | -  | 否  |
+每个方块状态的值：
+
+|     名字      |       类型        |   含义    | 备注 | 必需 |
+|:-----------:|:---------------:|:-------:|:--:|:--:|
+|    value    | 布尔值 / 正整数 / 字符串 | 方块状态参数值 | -  | 是  |
+| description |       字符串       |   介绍    | -  | 否  |
 
 - items
 
@@ -264,51 +256,73 @@ ID 有4种类型：
   "type": "item",
   "items": [
     {
-      "idNamespace": "minecraft",
-      "name": "acacia_boat",
-      "description": "金合欢木船"
-    }
+      "name": "stone_block_slab2",
+      "description": "红砂岩台阶/紫珀台阶/海晶石台阶/暗海晶石台阶/海晶石砖台阶/苔石台阶/平滑砂岩台阶/红色下界砖台阶",
+      "descriptions": [
+        "红砂岩台阶",
+        "紫珀台阶",
+        "海晶石台阶",
+        "暗海晶石台阶",
+        "海晶石砖台阶",
+        "苔石台阶",
+        "平滑砂岩台阶",
+        "红色下界砖台阶"
+      ]
+    },
+    ...
   ]
 }
 ```
 
-|   名字   | 类型  |  含义  | 备注 | 必需 |
-|:------:|:---:|:----:|:--:|:--:|
-|  type  | 字符串 | ID类型 | -  | 是  |
-| blocks | 数组  | ID列表 | -  | 是  |
+|  名字   | 类型  |  含义  | 备注 | 必需 |
+|:-----:|:---:|:----:|:--:|:--:|
+| type  | 字符串 | ID类型 | -  | 是  |
+| items | 数组  | ID列表 | -  | 是  |
 
 每个ID：
 
-|     名字      | 类型  |  含义  |        备注         |       必需        |
-|:-----------:|:---:|:----:|:-----------------:|:---------------:|
-|  namespace  | 字符串 | 命名空间 | 如果是minecraft，建议省略 | 否(默认为minecraft) |
-|    name     | 字符串 | ID名字 |         -         |        是        |
-| description | 字符串 | ID介绍 |         -         |        否        |
+|      名字      |  类型   |       含义       |        备注         |       必需        |
+|:------------:|:-----:|:--------------:|:-----------------:|:---------------:|
+|  namespace   |  字符串  |      命名空间      | 如果是minecraft，建议省略 | 否(默认为minecraft) |
+|     name     |  字符串  |      ID名字      |         -         |        是        |
+| description  |  字符串  |      ID介绍      |         -         |        否        |
+|     max      |  正整数  |     数据值最大值     |         -         |        否        |
+| descriptions | 字符串列表 | 每个数据值的介绍（从0开始） |         -         |        否        |
 
 ## 节点的定义
 
 在前面已经讲了命令是如何注册的，其中每个命令需要在nodes里面写出所有用到的的节点，每个节点的json如何写就是接下来要讲的内容
 
-|       类型        |    含义    |                    示例                     |     备注      |
-|:---------------:|:--------:|:-----------------------------------------:|:-----------:|
-|      BLOCK      |    方块    | minecraft:stone\["stone_type"="diorite"\] |      -      |
-|     BOOLEAN     |   布尔值    |                   true                    |      -      |
-|     COMMAND     |    命令    |          give @s minecraft:stone          |      -      |
-|  COMMAND_NAME   |   命令名    |                 setblock                  |      -      |
-|      FLOAT      |    小数    |                    1.5                    |      -      |
-|     INTEGER     |    整数    |                     2                     |      -      |
-|      ITEM       |    物品    |        minecraft:fire_charge 1 12         |      -      |
-|       LF        |   结束节点   |                     -                     | 无需定义，可直接使用  |
-|  NAMESPACE_ID   | 带命名空间的ID |              minecraft:stone              |      -      |
-|    NORMAL_ID    |  平常的ID   |       minecraft:arrow_spell_emitter       |      -      |
-|   PER_COMMAND   |   每条命令   |                     -                     | 命令注册不使用这个节点 |
-|    POSITION     |    位置    |                 ~1~0.2~-5                 |      -      |
-| RELATIVE_FLOAT  |   相对坐标   |                   ~1.5                    |      -      |
-|     STRING      |   字符串    |                   "a a"                   |      -      |
-| TARGET_SELECTOR |  目标选择器   |                 @e\[r=5\]                 |      -      |
-|      TEXT       |    文字    |                   score                   |      -      |
-|      RANGE      |    范围    |                   1..2                    |      -      |
-|      JSON       |   Json   |     {"rawtext":\[{"text":"Hello"}\]}      |      -      |
+|       类型        |    含义    |                 示例                 |        备注         |
+|:---------------:|:--------:|:----------------------------------:|:-----------------:|
+|     UNKNOWN     |    未知    |                 -                  |       不可使用        |
+|      BLOCK      |    方块    | minecraft:lever\["open_bit"=true\] |         -         |
+|     BOOLEAN     |   布尔值    |                true                |         -         |
+|     COMMAND     |    命令    |      give @s minecraft:stone       |         -         |
+|  COMMAND_NAME   |   命令名    |              setblock              |         -         |
+|      FLOAT      |    小数    |                1.5                 |         -         |
+|     INTEGER     |    整数    |                 2                  |         -         |
+|      ITEM       |    物品    |     minecraft:fire_charge 1 12     |         -         |
+|       LF        |   结束节点   |                 -                  | 不可使用，但可以使用LF这个ID  |
+|  NAMESPACE_ID   | 带命名空间的ID |          minecraft:stone           |         -         |
+|    NORMAL_ID    |  普通的ID   |              creative              |         -         |
+|   PER_COMMAND   |   每条命令   |                 -                  |       不可使用        |
+|    POSITION     |    位置    |             ~1~0.2~-5              |         -         |
+| RELATIVE_FLOAT  |   相对坐标   |                ~1.5                |         -         |
+|     REPEAT      |  重复的参数   |                 -                  | 不可在定义JSON数据的时候使用  |
+|     STRING      |   字符串    |               "a a"                |         -         |
+| TARGET_SELECTOR |  目标选择器   |             @e\[r=5\]              |         -         |
+|      TEXT       |    文字    |               score                |         -         |
+|      RANGE      |    范围    |                1..2                |         -         |
+|   XP_INTEGER    |   经验值    |                 3L                 |         -         |
+|      JSON       |  Json文本  |  {"rawtext":\[{"text":"Hello"}\]}  | 不可在定义JSON数据的时候使用  |
+|   JSON_OBJECT   |  Json对象  |      {"...":..., "...", ...}       | 只能在定义JSON数据的时候使用  |
+|    JSON_LIST    |  Json列表  |            \[..., ...]             | 只能在定义JSON数据的时候使用  |
+|   JSON_STRING   | Json字符串  |               "..."                | 只能在定义JSON数据的时候使用  |
+|  JSON_INTEGER   |  Json整数  |                 12                 | 只能在定义JSON数据的时候使用  |
+|   JSON_FLOAT    |  Json小数  |                1.5                 | 只能在定义JSON数据的时候使用  |
+|  JSON_BOOLEAN   | Json布尔值  |                true                | 只能在定义JSON数据的时候使用- |
+|    JSON_NULL    |  Json空值  |                null                | 只能在定义JSON数据的时候使用  |
 
 - BLOCK 方块
 
@@ -326,12 +340,13 @@ ID 有4种类型：
 }
 ```
 
-|      名字       | 类型  |           含义           | 备注 | 必需 |
-|:-------------:|:---:|:----------------------:|:--:|:--:|
-|     type      | 字符串 |          节点类型          | -  | 是  |
-|      id       | 字符串 |          节点ID          | -  | 否  |
-|  description  | 字符串 |          节点介绍          | -  | 否  |
-| nodeBlockType | 正整数 | 0代表方块ID+方块状态，1代表只有方块ID | -  | 是  |
+|      名字       | 类型  |           含义           |            备注             | 必需 |
+|:-------------:|:---:|:----------------------:|:-------------------------:|:--:|
+|     type      | 字符串 |          节点类型          |             -             | 是  |
+|      id       | 字符串 |          节点ID          |             -             | 否  |
+|     brief     | 字符串 |          简要说明          | 如果description太长，推荐填写brief | 否  |
+|  description  | 字符串 |          节点介绍          |             -             | 否  |
+| nodeBlockType | 正整数 | 0代表方块ID+方块状态，1代表只有方块ID |             -             | 是  |
 
 - POSITION 位置
 
@@ -343,10 +358,31 @@ ID 有4种类型：
 }
 ```
 
-|     名字      | 类型  |  含义  | 备注 | 必需 |
-|:-----------:|:---:|:----:|:--:|:--:|
-|    type     | 字符串 | 节点类型 | -  | 是  |
-|     id      | 字符串 | 节点ID | -  | 否  |
-| description | 字符串 | 节点介绍 | -  | 否  |
+|     名字      | 类型  |  含义  |            备注             | 必需 |
+|:-----------:|:---:|:----:|:-------------------------:|:--:|
+|    type     | 字符串 | 节点类型 |             -             | 是  |
+|     id      | 字符串 | 节点ID |             -             | 否  |
+|    brief    | 字符串 | 简要说明 | 如果description太长，推荐填写brief | 否  |
+| description | 字符串 | 节点介绍 |             -             | 否  |
+
+- RELATIVE_FLOAT 相对坐标
+
+```json
+{
+  "type": "RELATIVE_FLOAT",
+  "id": "xRot",
+  "brief": "rx",
+  "description": "相机视角绕Y轴旋转的旋转角度(-180.0表示北，-90.0表示东，0.0表示南，90.0表示西)",
+  "canUseCaretNotation": false
+}
+```
+
+|         名字          | 类型  |      含义       |            备注             | 必需 |
+|:-------------------:|:---:|:-------------:|:-------------------------:|:--:|
+|        type         | 字符串 |     节点类型      |             -             | 是  |
+|         id          | 字符串 |     节点ID      |             -             | 否  |
+|        brief        | 字符串 | 简要说明，用于显示命令结构 | 如果description太长，推荐填写brief | 否  |
+|     description     | 字符串 |     节点介绍      |             -             | 否  |
+| canUseCaretNotation | 布尔值 |  是否可以使用局部坐标   |             -             | 否  |
 
 > 文档还没有写完，敬请期待

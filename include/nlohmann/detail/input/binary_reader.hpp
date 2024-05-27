@@ -313,7 +313,7 @@ class binary_reader
                 return sax->null();
             }
 
-            case 0x10: // std::int32
+            case 0x10: // int32
             {
                 std::int32_t value{};
                 return get_number<std::int32_t, true>(input_format_t::bson, value) && sax->number_integer(value);
@@ -464,7 +464,7 @@ class binary_reader
                 return get_number(input_format_t::cbor, number) && sax->number_unsigned(number);
             }
 
-            case 0x1A: // Unsigned integer (four-byte ustd::int32_t follows)
+            case 0x1A: // Unsigned integer (four-byte uint32_t follows)
             {
                 std::uint32_t number{};
                 return get_number(input_format_t::cbor, number) && sax->number_unsigned(number);
@@ -515,7 +515,7 @@ class binary_reader
                 return get_number(input_format_t::cbor, number) && sax->number_integer(static_cast<number_integer_t>(-1) - number);
             }
 
-            case 0x3A: // Negative integer -1-n (four-byte ustd::int32_t follows)
+            case 0x3A: // Negative integer -1-n (four-byte uint32_t follows)
             {
                 std::uint32_t number{};
                 return get_number(input_format_t::cbor, number) && sax->number_integer(static_cast<number_integer_t>(-1) - number);
@@ -555,7 +555,7 @@ class binary_reader
             case 0x57:
             case 0x58: // Binary data (one-byte uint8_t for n follows)
             case 0x59: // Binary data (two-byte uint16_t for n follow)
-            case 0x5A: // Binary data (four-byte ustd::int32_t for n follow)
+            case 0x5A: // Binary data (four-byte uint32_t for n follow)
             case 0x5B: // Binary data (eight-byte uint64_t for n follow)
             case 0x5F: // Binary data (indefinite length)
             {
@@ -590,7 +590,7 @@ class binary_reader
             case 0x77:
             case 0x78: // UTF-8 string (one-byte uint8_t for n follows)
             case 0x79: // UTF-8 string (two-byte uint16_t for n follow)
-            case 0x7A: // UTF-8 string (four-byte ustd::int32_t for n follow)
+            case 0x7A: // UTF-8 string (four-byte uint32_t for n follow)
             case 0x7B: // UTF-8 string (eight-byte uint64_t for n follow)
             case 0x7F: // UTF-8 string (indefinite length)
             {
@@ -638,7 +638,7 @@ class binary_reader
                 return get_number(input_format_t::cbor, len) && get_cbor_array(static_cast<std::size_t>(len), tag_handler);
             }
 
-            case 0x9A: // array (four-byte ustd::int32_t for n follow)
+            case 0x9A: // array (four-byte uint32_t for n follow)
             {
                 std::uint32_t len{};
                 return get_number(input_format_t::cbor, len) && get_cbor_array(conditional_static_cast<std::size_t>(len), tag_handler);
@@ -692,7 +692,7 @@ class binary_reader
                 return get_number(input_format_t::cbor, len) && get_cbor_object(static_cast<std::size_t>(len), tag_handler);
             }
 
-            case 0xBA: // map (four-byte ustd::int32_t for n follow)
+            case 0xBA: // map (four-byte uint32_t for n follow)
             {
                 std::uint32_t len{};
                 return get_number(input_format_t::cbor, len) && get_cbor_object(conditional_static_cast<std::size_t>(len), tag_handler);
@@ -957,7 +957,7 @@ class binary_reader
                 return get_number(input_format_t::cbor, len) && get_string(input_format_t::cbor, len, result);
             }
 
-            case 0x7A: // UTF-8 string (four-byte ustd::int32_t for n follow)
+            case 0x7A: // UTF-8 string (four-byte uint32_t for n follow)
             {
                 std::uint32_t len{};
                 return get_number(input_format_t::cbor, len) && get_string(input_format_t::cbor, len, result);
@@ -1055,7 +1055,7 @@ class binary_reader
                        get_binary(input_format_t::cbor, len, result);
             }
 
-            case 0x5A: // Binary data (four-byte ustd::int32_t for n follow)
+            case 0x5A: // Binary data (four-byte uint32_t for n follow)
             {
                 std::uint32_t len{};
                 return get_number(input_format_t::cbor, len) &&
@@ -2981,8 +2981,8 @@ class binary_reader
     bjd_type{'U', "uint8"},                    \
     bjd_type{'d', "single"},                   \
     bjd_type{'i', "int8"},                     \
-    bjd_type{'l', "std::int32"},                    \
-    bjd_type{'m', "ustd::int32"},                   \
+    bjd_type{'l', "int32"},                    \
+    bjd_type{'m', "uint32"},                   \
     bjd_type{'u', "uint16"})
 
   JSON_PRIVATE_UNLESS_TESTED:
