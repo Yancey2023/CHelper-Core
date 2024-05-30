@@ -59,7 +59,7 @@ namespace CHelper::Node {
         for (const auto &item: startNodes) {
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(item)
-            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader, cpack));
+            childASTNodes.push_back(item->getASTNodeWithNextNode(tokenReader, cpack, true));
             DEBUG_GET_NODE_END(item)
             tokenReader.restore();
         }

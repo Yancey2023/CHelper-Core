@@ -29,7 +29,7 @@
       "type": "NORMAL_ID",
       "id": "oldBlockHandling",
       "description": "填充模式",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "destroy",

@@ -59,7 +59,7 @@
       "id": "saveMode1",
       "brief": "保存模式",
       "description": "结构保存模式",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "memory",
@@ -84,7 +84,7 @@
       "id": "saveMode2",
       "brief": "保存模式",
       "description": "结构保存模式",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "memory",
@@ -124,7 +124,7 @@
       "id": "loadRotation",
       "brief": "旋转角度",
       "description": "结构旋转的角度",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "0_degrees",
@@ -149,7 +149,7 @@
       "id": "loadMirror",
       "brief": "镜像模式",
       "description": "结构的镜像模式",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "none",
@@ -212,7 +212,7 @@
       "id": "loadAnimationMode",
       "brief": "生成动画",
       "description": "生成结构使用的动画",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "block_by_block",

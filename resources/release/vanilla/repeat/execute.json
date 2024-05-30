@@ -32,7 +32,7 @@
         "type": "NORMAL_ID",
         "brief": "坐标轴",
         "description": "需要转换的坐标轴",
-        "ignoreError": true,
+        "ignoreError": false,
         "contents": [
           {
             "name": "x",
@@ -110,7 +110,7 @@
         "type": "NORMAL_ID",
         "brief": "朝向的部位",
         "description": "需要朝向实体的哪个位置",
-        "ignoreError": true,
+        "ignoreError": false,
         "contents": [
           {
             "name": "eyes",
@@ -120,8 +120,7 @@
             "name": "feet",
             "description": "默认的行为，相对坐标基于脚部位置"
           }
-        ],
-        "contentMode": false
+        ]
       }
     ],
     [
@@ -201,7 +200,7 @@
         "type": "NORMAL_ID",
         "brief": "朝向的部位",
         "description": "需要朝向实体的哪个位置",
-        "ignoreError": true,
+        "ignoreError": false,
         "contents": [
           {
             "name": "eyes",
@@ -406,7 +405,7 @@
         "type": "NORMAL_ID",
         "brief": "比较方式",
         "description": "探测区域内的全部方块或忽略源区域内空气方块所在的位置",
-        "ignoreError": true,
+        "ignoreError": false,
         "contents": [
           {
             "name": "all",
@@ -492,7 +491,7 @@
       {
         "type": "NORMAL_ID",
         "description": "运算符",
-        "ignoreError": true,
+        "ignoreError": false,
         "contents": [
           {
             "name": "<",

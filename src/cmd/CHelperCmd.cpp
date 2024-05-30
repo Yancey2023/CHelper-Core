@@ -6,31 +6,37 @@
 #include "../chelper/Core.h"
 
 [[maybe_unused]] void testDir() {
-    //        CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
-    //                            R"(D:\CLion\project\CHelper-Core\test\test.txt)",
-    //                            false);
-    CHelper::Test::testDir(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
-                           R"(/home/yancey/CLionProjects/CHelper-Core/test/test.txt)",
-                           true);
+#ifdef _WIN32
+    CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
+                           R"(D:\CLion\project\CHelper-Core\test\test.txt)",
+                           false);
     //    CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
     //                        std::vector<std::string>{"execute run clear "}, false);
-    //    CHelper::Test::testDir(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
-    //                        std::vector<std::string>{"give @s "}, true);
     //    CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)", {""}, false);
     //    CHelper::Test::test4(R"(D:\CLion\project\CHelper-Core\resources)",
     //                         R"(D:\CLion\project\CHelper-Core\run\cpack.json)");
+#else
+    CHelper::Test::testDir(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
+                           R"(/home/yancey/CLionProjects/CHelper-Core/test/test.txt)",
+                           true);
+    //    CHelper::Test::testDir(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
+    //                        std::vector<std::string>{"give @s "}, true);
+#endif
 }
 
 [[maybe_unused]] void testBin() {
-    //            CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\run\beta\beta-experiment-1.21.0.23.cpack)",
-    //                                R"(D:\CLion\project\CHelper-Core\test\test.txt)",
-    //                                false);
+#ifdef _WIN32
+    CHelper::Test::testBin(R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.0.23.cpack)",
+                           R"(D:\CLion\project\CHelper-Core\test\test.txt)",
+                           false);
+#else
     CHelper::Test::testBin(R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.cpack)",
                            R"(/home/yancey/CLionProjects/CHelper-Core/test/test.txt)",
                            true);
     //    for (int i = 0; i < 100; ++i) {
     //        CHelper::Core::createByBinary("/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.cpack");
     //    }
+#endif
 }
 
 [[maybe_unused]] void outputSingleJson() {
@@ -143,10 +149,10 @@
 
 int main() {
     //    testDir();
-    //    testBin();
-    outputSingleJson();
-    outputBson();
-    outputBinary();
+    testBin();
+    //    outputSingleJson();
+    //    outputBson();
+    //    outputBinary();
     return 0;
 }
 

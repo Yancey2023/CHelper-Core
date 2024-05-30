@@ -44,7 +44,7 @@
       "type": "NORMAL_ID",
       "id": "mode",
       "description": "删除模式",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "pop",

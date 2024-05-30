@@ -55,7 +55,7 @@
       "id": "repeatMode",
       "brief": "是否循环播放",
       "description": "是否循环播放音乐",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "loop",

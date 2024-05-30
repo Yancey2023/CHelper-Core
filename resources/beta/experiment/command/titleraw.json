@@ -20,8 +20,7 @@
       "id": "clearMode",
       "brief": "清除模式",
       "description": "清除指定玩家屏幕标题或副标题",
-      "contentMode": false,
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "clear",
@@ -36,9 +35,8 @@
     {
       "type": "NORMAL_ID",
       "id": "titleLocation",
-      "contentMode": false,
       "description": "文字的位置",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "title",

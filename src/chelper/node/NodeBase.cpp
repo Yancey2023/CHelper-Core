@@ -25,10 +25,10 @@ namespace CHelper::Node {
         return getASTNodeWithNextNode(tokenReader, cpack, isAfterWhitespace());
     }
 
-    ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack, bool isTestWhitespace) const {
+    ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack, bool isReqireWhitespace) const {
         //空格检测
         tokenReader.push();
-        if (HEDLEY_UNLIKELY(isTestWhitespace && getNodeType() != NodeType::LF.get() && tokenReader.skipWhitespace() == 0)) {
+        if (HEDLEY_UNLIKELY(isReqireWhitespace && getNodeType() != NodeType::LF.get() && tokenReader.skipWhitespace() == 0)) {
             VectorView<Token> tokens = tokenReader.collect();
             return ASTNode::simpleNode(this, tokens, ErrorReason::requireWhiteSpace(tokens), "compound");
         }

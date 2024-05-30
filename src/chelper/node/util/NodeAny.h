@@ -17,10 +17,11 @@ namespace CHelper::Node {
                 const std::optional<std::string> &description);
 
     public:
+        void init(const CPack &cpack) override;
+
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
         static NodeAny *getNodeAny();
-        void init(const CPack &cpack) override;
     };
 
 }// namespace CHelper::Node

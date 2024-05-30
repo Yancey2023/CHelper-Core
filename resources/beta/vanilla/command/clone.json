@@ -30,7 +30,7 @@
       "id": "maskMode",
       "brief": "标记模式",
       "description": "是否过滤被复制方块",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "masked",
@@ -47,7 +47,7 @@
       "id": "cloneMode1",
       "brief": "复制模式",
       "description": "对源区域的操作",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "force",
@@ -77,7 +77,7 @@
       "id": "cloneMode2",
       "brief": "复制模式",
       "description": "对源区域的操作",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "force",

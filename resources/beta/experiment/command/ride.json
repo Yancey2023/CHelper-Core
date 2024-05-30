@@ -73,7 +73,7 @@
       "id": "teleportRules",
       "brief": "传送规则",
       "description": "传送规则",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "teleport_ride",
@@ -89,7 +89,7 @@
       "type": "NORMAL_ID",
       "id": "howToFill",
       "description": "骑乘模式",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "if_group_fits",
@@ -136,7 +136,7 @@
       "id": "rideRules",
       "brief": "召唤模式",
       "description": "召唤实体模式",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "skip_riders",

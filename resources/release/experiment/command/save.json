@@ -11,7 +11,7 @@
       "type": "NORMAL_ID",
       "id": "saveMode",
       "description": "保存模式",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "hold",

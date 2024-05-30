@@ -36,8 +36,7 @@
       "type": "NORMAL_ID",
       "id": "timeQuery",
       "description": "查询的内容",
-      "contentMode": false,
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "daytime",
@@ -66,7 +65,6 @@
       "type": "NORMAL_ID",
       "id": "timeSpec",
       "description": " 时间",
-      "contentMode": false,
       "ignoreError": true,
       "contents": [
         {

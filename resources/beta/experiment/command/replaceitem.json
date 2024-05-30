@@ -48,7 +48,7 @@
       "type": "NORMAL_ID",
       "id": "oldItemHandling",
       "description": "替换模式",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "destroy",

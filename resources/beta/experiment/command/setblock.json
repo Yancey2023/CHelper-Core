@@ -24,7 +24,7 @@
       "id": "mode",
       "brief": "更改方式",
       "description": "方块更改的处理方式",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "destroy",

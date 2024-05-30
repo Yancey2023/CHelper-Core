@@ -70,7 +70,7 @@ CHelper是我的世界基岩版的命令助手。
       "type": "NORMAL_ID",
       "id": "ability",
       "description": "要操作的能力",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "worldbuilder",

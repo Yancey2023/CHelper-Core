@@ -20,7 +20,7 @@
       "id": "visible",
       "brief": "可见性",
       "description": "对HUD可见性做出的修改",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "hide",

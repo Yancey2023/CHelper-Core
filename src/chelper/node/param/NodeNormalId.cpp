@@ -14,12 +14,12 @@ namespace CHelper::Node {
             const std::optional<std::string> &description,
             const std::string &key,
             bool ignoreError,
-            bool allowsMissingID,
+            bool allowMissingID,
             const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode)
         : NodeBase(id, description, false),
           key(key),
           ignoreError(ignoreError),
-          allowsMissingID(allowsMissingID),
+          allowMissingID(allowMissingID),
           getNormalIdASTNode(getNormalIdASTNode) {}
 
     NodeNormalId::NodeNormalId(
@@ -27,12 +27,12 @@ namespace CHelper::Node {
             const std::optional<std::string> &description,
             bool ignoreError,
             const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
-            bool allowsMissingID,
+            bool allowMissingID,
             const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode)
         : NodeBase(id, description, false),
           ignoreError(ignoreError),
           contents(contents),
-          allowsMissingID(allowsMissingID),
+          allowMissingID(allowMissingID),
           getNormalIdASTNode(getNormalIdASTNode) {
 #if CHelperDebug == true
         if (HEDLEY_UNLIKELY(contents == nullptr)) {
@@ -82,7 +82,7 @@ namespace CHelper::Node {
         DEBUG_GET_NODE_BEGIN(this)
         ASTNode result = getNormalIdASTNode(this, tokenReader);
         DEBUG_GET_NODE_END(this)
-        if (HEDLEY_UNLIKELY(allowsMissingID)) {
+        if (HEDLEY_UNLIKELY(allowMissingID)) {
             if (HEDLEY_UNLIKELY(result.isError())) {
                 tokenReader.restore();
                 tokenReader.push();

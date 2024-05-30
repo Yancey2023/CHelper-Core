@@ -12,7 +12,7 @@
       "id": "details",
       "brief": "内容",
       "description": "要列出的内容",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "ids",

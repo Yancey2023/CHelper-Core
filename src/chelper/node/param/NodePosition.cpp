@@ -69,7 +69,7 @@ namespace CHelper::Node {
             }
             if (errorCount > 0) {
                 std::string str = TokenUtil::toString(astNode->tokens);
-                if ((str.empty() && errorCount == 3) || !str.empty() && str[str.length() - 1] == ' ') {
+                if ((str.empty() && errorCount == 3) || str.empty() || str[str.length() - 1] == ' ') {
                     suggestions.push_back(Suggestions::singleSuggestion({index - 1, index, false, whitespaceId}));
                 } else {
                     suggestions.push_back(Suggestions::singleSuggestion({index, index, false, whitespaceId}));

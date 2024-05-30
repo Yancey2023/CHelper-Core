@@ -90,7 +90,7 @@
       "type": "NORMAL_ID",
       "id": "displayMode",
       "description": "位置",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "list",
@@ -100,8 +100,7 @@
           "name": "sidebar",
           "description": "侧边栏"
         }
-      ],
-      "contentMode": false
+      ]
     },
     {
       "type": "STRING",
@@ -123,7 +122,7 @@
       "type": "NORMAL_ID",
       "id": "order",
       "description": "排序顺序",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "ascending",
@@ -291,7 +290,7 @@
       "type": "NORMAL_ID",
       "id": "operationId",
       "description": "运算操作",
-      "ignoreError": true,
+      "ignoreError": false,
       "contents": [
         {
           "name": "+=",
