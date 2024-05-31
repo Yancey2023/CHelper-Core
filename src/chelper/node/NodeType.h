@@ -46,7 +46,7 @@ namespace CHelper {
 
             static std::vector<NodeType *> NODE_TYPES;
 
-            //command param node
+            // command param node
             static std::unique_ptr<NodeType> BLOCK;
             static std::unique_ptr<NodeType> BOOLEAN;
             static std::unique_ptr<NodeType> COMMAND;
@@ -67,7 +67,7 @@ namespace CHelper {
             static std::unique_ptr<NodeType> RANGE;
             static std::unique_ptr<NodeType> XP_INTEGER;
             static std::unique_ptr<NodeType> JSON;
-            //json node
+            // json node
             static std::unique_ptr<NodeType> JSON_BOOLEAN;
             static std::unique_ptr<NodeType> JSON_ELEMENT;
             static std::unique_ptr<NodeType> JSON_ENTRY;
@@ -77,7 +77,7 @@ namespace CHelper {
             static std::unique_ptr<NodeType> JSON_NULL;
             static std::unique_ptr<NodeType> JSON_OBJECT;
             static std::unique_ptr<NodeType> JSON_STRING;
-            //utility node
+            // utility node
             static std::unique_ptr<NodeType> AND;
             static std::unique_ptr<NodeType> ANY;
             static std::unique_ptr<NodeType> ENTRY;

@@ -4,12 +4,12 @@
 
 #include "CHelperQt.h"
 #include "ui_chelper.h"
+#include <QClipboard>
 #include <QDebug>
 #include <QFile>
 #include <QListWidget>
 #include <QMessageBox>
 #include <QStringListModel>
-#include <QClipboard>
 
 CHelperApp::CHelperApp(QWidget *parent)
     : QMainWindow(parent),

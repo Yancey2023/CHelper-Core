@@ -8,10 +8,10 @@ namespace CHelper::Node {
 
     NodeList::NodeList(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
-                       const NodeBase *nodeLeft,
-                       const NodeBase *nodeElement,
-                       const NodeBase *nodeSeparator,
-                       const NodeBase *nodeRight)
+                       NodeBase *nodeLeft,
+                       NodeBase *nodeElement,
+                       NodeBase *nodeSeparator,
+                       NodeBase *nodeRight)
         : NodeBase(id, description, false),
           nodeLeft(nodeLeft),
           nodeElement(nodeElement),

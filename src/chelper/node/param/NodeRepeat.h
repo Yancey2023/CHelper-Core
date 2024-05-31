@@ -18,8 +18,8 @@ namespace CHelper::Node {
         std::string key;
 
     private:
-        const RepeatData* repeatData = nullptr;
-        const NodeBase* nodeElement = nullptr;
+        const RepeatData *repeatData = nullptr;
+        const NodeBase *nodeElement = nullptr;
 
     public:
         NodeRepeat() = default;

@@ -4,7 +4,6 @@
 
 #include "NodeRepeat.h"
 
-#include "../../resources/CPack.h"
 #include "../util/NodeAnd.h"
 
 namespace CHelper::Node {

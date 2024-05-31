@@ -14,21 +14,21 @@ namespace CHelper::Node {
 
     class NodeList : public NodeBase {
     public:
-        const NodeBase *nodeLeft;
-        const NodeBase *nodeElement;
-        const NodeBase *nodeSeparator;
-        const NodeBase *nodeRight;
-        const NodeOr nodeElementOrRight;
-        const NodeOr nodeSeparatorOrRight;
+        NodeBase *nodeLeft = nullptr;
+        NodeBase *nodeElement = nullptr;
+        NodeBase *nodeSeparator = nullptr;
+        NodeBase *nodeRight = nullptr;
+        NodeOr nodeElementOrRight;
+        NodeOr nodeSeparatorOrRight;
 
         NodeList() = default;
 
         NodeList(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
-                 const NodeBase *nodeLeft,
-                 const NodeBase *nodeElement,
-                 const NodeBase *nodeSeparator,
-                 const NodeBase *nodeRight);
+                 NodeBase *nodeLeft,
+                 NodeBase *nodeElement,
+                 NodeBase *nodeSeparator,
+                 NodeBase *nodeRight);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 

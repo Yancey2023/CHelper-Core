@@ -147,13 +147,13 @@ namespace CHelper {
     void from_json(const nlohmann::json &j, BlockStateValue &t) {
         const nlohmann::json &jsonValue = j.at("value");
         if (HEDLEY_UNLIKELY(jsonValue.is_number_integer())) {
-            t.type = CHelper::BlockStateType::INTEGER;
+            t.type = BlockStateType::INTEGER;
             t.value = jsonValue.get<int32_t>();
         } else if (HEDLEY_UNLIKELY(jsonValue.is_boolean())) {
-            t.type = CHelper::BlockStateType::BOOLEAN;
+            t.type = BlockStateType::BOOLEAN;
             t.value = jsonValue.get<bool>();
         } else {
-            t.type = CHelper::BlockStateType::STRING;
+            t.type = BlockStateType::STRING;
             t.value = jsonValue.get<std::string>();
         }
         JsonUtil::decode<std::string>(j, "description", t.description);
@@ -162,13 +162,13 @@ namespace CHelper {
     void to_json(nlohmann::json &j, const BlockStateValue &t) {
         JsonUtil::encode(j, "description", t.description);
         switch (t.type) {
-            case CHelper::BlockStateType::STRING:
+            case BlockStateType::STRING:
                 JsonUtil::encode(j, "value", std::get<std::string>(t.value));
                 break;
-            case CHelper::BlockStateType::BOOLEAN:
+            case BlockStateType::BOOLEAN:
                 JsonUtil::encode(j, "value", std::get<bool>(t.value));
                 break;
-            case CHelper::BlockStateType::INTEGER:
+            case BlockStateType::INTEGER:
                 JsonUtil::encode(j, "value", std::get<int32_t>(t.value));
                 break;
         }
@@ -178,13 +178,13 @@ namespace CHelper {
         binaryReader.decode(t.description);
         binaryReader.decode((uint8_t &) t.type);
         switch (t.type) {
-            case CHelper::BlockStateType::STRING:
+            case BlockStateType::STRING:
                 t.value = binaryReader.read<std::string>();
                 break;
-            case CHelper::BlockStateType::BOOLEAN:
+            case BlockStateType::BOOLEAN:
                 t.value = binaryReader.read<bool>();
                 break;
-            case CHelper::BlockStateType::INTEGER:
+            case BlockStateType::INTEGER:
                 t.value = binaryReader.read<int32_t>();
                 break;
         }
@@ -194,13 +194,13 @@ namespace CHelper {
         binaryWriter.encode(t.description);
         binaryWriter.encode((uint8_t) t.type);
         switch (t.type) {
-            case CHelper::BlockStateType::STRING:
+            case BlockStateType::STRING:
                 binaryWriter.encode(std::get<std::string>(t.value));
                 break;
-            case CHelper::BlockStateType::BOOLEAN:
+            case BlockStateType::BOOLEAN:
                 binaryWriter.encode(std::get<bool>(t.value));
                 break;
-            case CHelper::BlockStateType::INTEGER:
+            case BlockStateType::INTEGER:
                 binaryWriter.encode(std::get<int32_t>(t.value));
                 break;
         }

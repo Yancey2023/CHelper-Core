@@ -242,9 +242,9 @@ namespace CHelper {
         }
         if (HEDLEY_LIKELY(canAddWhitespace)) {
             canAddWhitespace = std::all_of(childNodes.begin(), childNodes.end(),
-                                              [](const auto &item) {
-                                                  return item.canAddWhitespace;
-                                              });
+                                           [](const auto &item) {
+                                               return item.canAddWhitespace;
+                                           });
         }
         VectorView<Token> tokens1 = tokens == nullptr ? childNodes[whichBest].tokens : *tokens;
         if (HEDLEY_UNLIKELY(errorCount > 1 && errorReason != nullptr)) {

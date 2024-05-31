@@ -14,9 +14,9 @@ namespace CHelper::Node {
 
     class NodeSingleSymbol : public NodeBase {
     public:
-        char symbol;
+        char symbol = ' ';
         std::shared_ptr<NormalId> normalId;
-        bool isAddWhitespace;
+        bool isAddWhitespace = false;
 
         NodeSingleSymbol() = default;
 

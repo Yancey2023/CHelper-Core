@@ -129,7 +129,7 @@ namespace CHelper::Node {
     std::unique_ptr<NodeType> NodeType::RANGE = createParam<NodeRange>("RANGE");
     std::unique_ptr<NodeType> NodeType::XP_INTEGER = createParam<NodeXpInteger>("XP_INTEGER");
     std::unique_ptr<NodeType> NodeType::JSON = createParam<NodeJson>("JSON", true,
-                                                                       {NodeCreateStage::REPEAT_NODE, NodeCreateStage::COMMAND_PARAM_NODE});
+                                                                     {NodeCreateStage::REPEAT_NODE, NodeCreateStage::COMMAND_PARAM_NODE});
     std::unique_ptr<NodeType> NodeType::JSON_BOOLEAN = createJson<NodeJsonBoolean>("JSON_BOOLEAN");
     std::unique_ptr<NodeType> NodeType::JSON_ELEMENT = createNone<NodeJsonElement>("JSON_ELEMENT");
     std::unique_ptr<NodeType> NodeType::JSON_ENTRY = createNone<NodeJsonEntry>("JSON_ENTRY");

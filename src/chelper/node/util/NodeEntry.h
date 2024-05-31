@@ -14,17 +14,17 @@ namespace CHelper::Node {
 
     class NodeEntry : public NodeBase {
     public:
-        const NodeBase *nodeKey;
-        const NodeBase *nodeSeparator;
-        const NodeBase *nodeValue;
+        NodeBase *nodeKey = nullptr;
+        NodeBase *nodeSeparator = nullptr;
+        NodeBase *nodeValue = nullptr;
 
         NodeEntry() = default;
 
         NodeEntry(const std::optional<std::string> &id,
                   const std::optional<std::string> &description,
-                  const NodeBase *nodeKey,
-                  const NodeBase *nodeSeparator,
-                  const NodeBase *nodeValue);
+                  NodeBase *nodeKey,
+                  NodeBase *nodeSeparator,
+                  NodeBase *nodeValue);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 

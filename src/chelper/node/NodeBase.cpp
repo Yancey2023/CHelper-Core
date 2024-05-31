@@ -15,7 +15,6 @@ namespace CHelper::Node {
           isMustAfterWhiteSpace(isMustAfterWhiteSpace) {}
 
     void NodeBase::init(const CPack &cpack) {
-
     }
 
     ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const {
