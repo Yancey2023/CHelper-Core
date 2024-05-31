@@ -31,6 +31,10 @@ namespace CHelper::Node {
 #endif
     }
 
+    NodeType *NodeOr::getNodeType() const {
+        return NodeType::OR.get();
+    }
+
     ASTNode NodeOr::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         std::vector<ASTNode> childASTNodes;
         std::vector<size_t> indexes;

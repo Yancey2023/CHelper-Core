@@ -19,6 +19,8 @@ namespace CHelper::Node {
         const char *defaultErrorReason;
         bool noSuggestion;
 
+        NodeOr() = default;
+
         NodeOr(const std::optional<std::string> &id,
                const std::optional<std::string> &description,
                std::vector<const NodeBase *> childNodes,
@@ -27,6 +29,8 @@ namespace CHelper::Node {
                bool noSuggestion = false,
                const char *defaultErrorReason = nullptr,
                std::string nodeId = std::string());
+
+        [[nodiscard]] NodeType *getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 

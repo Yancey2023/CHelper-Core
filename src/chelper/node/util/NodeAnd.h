@@ -15,9 +15,13 @@ namespace CHelper::Node {
     public:
         std::vector<const NodeBase *> childNodes;
 
+        NodeAnd() = default;
+
         NodeAnd(const std::optional<std::string> &id,
                 const std::optional<std::string> &description,
                 const std::vector<const NodeBase *> &childNodes);
+
+        [[nodiscard]] NodeType *getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 

@@ -13,10 +13,16 @@ namespace CHelper::Node {
     private:
         std::unique_ptr<NodeBase> node;
 
+    public:
+        NodeAny() = default;
+
+    private:
         NodeAny(const std::optional<std::string> &id,
                 const std::optional<std::string> &description);
 
     public:
+        [[nodiscard]] NodeType *getNodeType() const override;
+
         void init(const CPack &cpack) override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;

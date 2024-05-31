@@ -40,7 +40,7 @@ namespace CHelper {
 
             virtual void init(const CPack &cpack);
 
-            [[nodiscard]] HEDLEY_RETURNS_NON_NULL virtual NodeType *getNodeType() const;
+            [[nodiscard]] HEDLEY_RETURNS_NON_NULL virtual NodeType *getNodeType() const = 0;
 
             [[nodiscard]] HEDLEY_NON_NULL(3) virtual ASTNode
                     getASTNode(TokenReader &tokenReader, const CPack *cpack) const = 0;

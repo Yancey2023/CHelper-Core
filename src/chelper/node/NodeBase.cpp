@@ -15,10 +15,7 @@ namespace CHelper::Node {
           isMustAfterWhiteSpace(isMustAfterWhiteSpace) {}
 
     void NodeBase::init(const CPack &cpack) {
-    }
 
-    NodeType *NodeBase::getNodeType() const {
-        return NodeType::UNKNOWN.get();
     }
 
     ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -187,11 +184,6 @@ namespace CHelper::Node {
     }
 
     void to_json(nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {
-#if CHelperDebug == true
-        if (HEDLEY_UNLIKELY(t->getNodeType() == NodeType::UNKNOWN.get())) {
-            throw std::runtime_error("fail to write node");
-        }
-#endif
         t->getNodeType()->encodeByJson(j, t);
         JsonUtil::encode(j, "type", t->getNodeType()->nodeName);
     }
@@ -206,11 +198,6 @@ namespace CHelper::Node {
     }
 
     void to_binary(BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t) {
-#if CHelperDebug == true
-        if (HEDLEY_UNLIKELY(t->getNodeType() == NodeType::UNKNOWN.get())) {
-            throw std::runtime_error("fail to write node");
-        }
-#endif
         binaryWriter.encode(t->getNodeType()->id);
         t->getNodeType()->encodeByBinary(binaryWriter, t);
     }

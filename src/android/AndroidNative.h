@@ -45,11 +45,11 @@ Java_yancey_chelper_core_CHelperCore_init(
 
 extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
 Java_yancey_chelper_core_CHelperCore_onTextChanged(
-        JNIEnv *env, [[maybe_unused]] jobject thiz, jstring cpack_path, jint index) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+        JNIEnv *env, [[maybe_unused]] jobject thiz, jstring text, jint index) {
+    if (HEDLEY_UNLIKELY(core == nullptr || text == nullptr)) {
         return;
     }
-    std::string content = jstring2string(env, cpack_path);
+    std::string content = jstring2string(env, text);
     core->onTextChanged(content, index);
 }
 

@@ -28,6 +28,10 @@ namespace CHelper::Node {
           key(std::move(key)),
           value(std::move(value)) {}
 
+    NodeType *NodeJsonEntry::getNodeType() const {
+        return NodeType::JSON_ENTRY.get();
+    }
+
     void NodeJsonEntry::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
             if (HEDLEY_UNLIKELY(item->id == value)) {

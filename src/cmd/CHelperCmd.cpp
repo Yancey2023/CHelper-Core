@@ -5,6 +5,15 @@
 #include "CHelperCmd.h"
 #include "../chelper/Core.h"
 
+int main() {
+    //    testDir();
+    //    testBin();
+    outputSingleJson();
+    outputBson();
+    outputBinary();
+    return 0;
+}
+
 [[maybe_unused]] void testDir() {
 #ifdef _WIN32
     CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
@@ -145,15 +154,6 @@
     //    CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/experiment)",
     //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.21.0.23.cpack)");
 #endif
-}
-
-int main() {
-    //    testDir();
-    testBin();
-    //    outputSingleJson();
-    //    outputBson();
-    //    outputBinary();
-    return 0;
 }
 
 namespace CHelper::Test {

@@ -29,6 +29,8 @@ namespace CHelper::Node {
                       std::string key = std::string(),
                       std::string value = std::string());
 
+        [[nodiscard]] NodeType *getNodeType() const override;
+
         void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;

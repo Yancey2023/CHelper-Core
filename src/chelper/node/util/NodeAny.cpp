@@ -67,6 +67,10 @@ namespace CHelper::Node {
                      const std::optional<std::string> &description)
         : NodeBase(id, description, false) {}
 
+    NodeType *NodeAny::getNodeType() const {
+        return NodeType::ANY.get();
+    }
+
     void NodeAny::init(const CPack &cpack) {
         if (HEDLEY_UNLIKELY(node == nullptr)) {
             node = std::make_unique<NodeOr>(

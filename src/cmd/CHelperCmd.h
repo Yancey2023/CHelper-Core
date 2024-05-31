@@ -14,6 +14,16 @@
 
 int main();
 
+[[maybe_unused]] void testDir();
+
+[[maybe_unused]] void testBin();
+
+[[maybe_unused]] void outputSingleJson();
+
+[[maybe_unused]] void outputBson();
+
+[[maybe_unused]] void outputBinary();
+
 namespace CHelper::Test {
 
     [[maybe_unused]] void testDir(const std::string &cpackPath, const std::string &testFilePath, bool isTestTime);

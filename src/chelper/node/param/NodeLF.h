@@ -13,6 +13,8 @@ namespace CHelper::Node {
 
     class NodeLF : public NodeBase {
     public:
+        NodeLF() = default;
+
         NodeLF(const std::optional<std::string> &id,
                const std::optional<std::string> &description);
 

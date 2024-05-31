@@ -21,10 +21,7 @@ namespace CHelper {
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO(ColorStringBuilder()
                                  .green("CPack load successfully (")
-                                 .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
-                                                                end - start)
-                                                                .count()) +
-                                         "ms")
+                                 .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms")
                                  .green(")")
                                  .build());
             ASTNode astNode = Parser::parse("", cPack.get());
@@ -83,6 +80,7 @@ namespace CHelper {
         if (HEDLEY_LIKELY(input != content)) {
             input = content;
             astNode = Parser::parse(input, cpack.get());
+            suggestions = nullptr;
         }
         onSelectionChanged(index0);
     }

@@ -17,6 +17,16 @@ namespace CHelper {
 
         class NodeBase;
 
+        namespace NodeCreateStage {
+            enum NodeCreateStage : uint8_t {
+                NONE,
+                NODE_TYPE,
+                JSON_NODE,
+                REPEAT_NODE,
+                COMMAND_PARAM_NODE
+            };
+        }// namespace NodeCreateStage
+
         class NodeType {
         public:
             uint8_t id{};
@@ -32,11 +42,11 @@ namespace CHelper {
                      std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary,
                      std::function<void(BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t)> encodeByBinary);
 
+            static NodeCreateStage::NodeCreateStage currentCreateStage;
+
             static std::vector<NodeType *> NODE_TYPES;
 
-            static bool canLoadNodeJson;
-
-            static std::unique_ptr<NodeType> UNKNOWN;
+            //command param node
             static std::unique_ptr<NodeType> BLOCK;
             static std::unique_ptr<NodeType> BOOLEAN;
             static std::unique_ptr<NodeType> COMMAND;
@@ -57,13 +67,24 @@ namespace CHelper {
             static std::unique_ptr<NodeType> RANGE;
             static std::unique_ptr<NodeType> XP_INTEGER;
             static std::unique_ptr<NodeType> JSON;
-            static std::unique_ptr<NodeType> JSON_OBJECT;
-            static std::unique_ptr<NodeType> JSON_LIST;
-            static std::unique_ptr<NodeType> JSON_STRING;
-            static std::unique_ptr<NodeType> JSON_INTEGER;
-            static std::unique_ptr<NodeType> JSON_FLOAT;
+            //json node
             static std::unique_ptr<NodeType> JSON_BOOLEAN;
+            static std::unique_ptr<NodeType> JSON_ELEMENT;
+            static std::unique_ptr<NodeType> JSON_ENTRY;
+            static std::unique_ptr<NodeType> JSON_FLOAT;
+            static std::unique_ptr<NodeType> JSON_INTEGER;
+            static std::unique_ptr<NodeType> JSON_LIST;
             static std::unique_ptr<NodeType> JSON_NULL;
+            static std::unique_ptr<NodeType> JSON_OBJECT;
+            static std::unique_ptr<NodeType> JSON_STRING;
+            //utility node
+            static std::unique_ptr<NodeType> AND;
+            static std::unique_ptr<NodeType> ANY;
+            static std::unique_ptr<NodeType> ENTRY;
+            static std::unique_ptr<NodeType> EQUAL_ENTRY;
+            static std::unique_ptr<NodeType> LIST;
+            static std::unique_ptr<NodeType> OR;
+            static std::unique_ptr<NodeType> SINGLE_SYMBOL;
 
             static void init();
         };

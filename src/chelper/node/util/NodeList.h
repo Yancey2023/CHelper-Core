@@ -21,12 +21,16 @@ namespace CHelper::Node {
         const NodeOr nodeElementOrRight;
         const NodeOr nodeSeparatorOrRight;
 
+        NodeList() = default;
+
         NodeList(const std::optional<std::string> &id,
                  const std::optional<std::string> &description,
                  const NodeBase *nodeLeft,
                  const NodeBase *nodeElement,
                  const NodeBase *nodeSeparator,
                  const NodeBase *nodeRight);
+
+        [[nodiscard]] NodeType *getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 

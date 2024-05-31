@@ -13,6 +13,10 @@
 
 namespace CHelper::Node {
 
+    NodeType *NodeJsonElement::getNodeType() const {
+        return NodeType::JSON_ELEMENT.get();
+    }
+
     void NodeJsonElement::init(const CPack &cpack) {
         Profile::push(ColorStringBuilder()
                               .red("linking startNode \"")

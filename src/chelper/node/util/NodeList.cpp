@@ -36,6 +36,10 @@ namespace CHelper::Node {
 #endif
     }
 
+    NodeType *NodeList::getNodeType() const {
+        return NodeType::LIST.get();
+    }
+
     ASTNode NodeList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         //标记整个[...]，在最后进行收集
         tokenReader.push();

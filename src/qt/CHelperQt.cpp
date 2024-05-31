@@ -15,7 +15,6 @@ CHelperApp::CHelperApp(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::CHelperApp) {
     ui->setupUi(this);
-#ifdef _WIN32
     QFile file(":/assets/beta-experiment-1.21.0.23.cpack");
     if (file.open(QIODevice::ReadOnly) && file.isReadable()) {
         std::istringstream iss(file.readAll().toStdString());
@@ -24,9 +23,6 @@ CHelperApp::CHelperApp(QWidget *parent)
             return CHelper::CPack::createByBinary(binaryReader);
         });
     }
-#else
-    core = CHelper::Core::createByBinary(R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.cpack)");
-#endif
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         throw std::runtime_error("fail to load cpack");
     }

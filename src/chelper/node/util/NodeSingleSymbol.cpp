@@ -22,6 +22,10 @@ namespace CHelper::Node {
           normalId(getNormalId(symbol, description)),
           isAddWhitespace(isAddWhitespace) {}
 
+    NodeType *NodeSingleSymbol::getNodeType() const {
+        return NodeType::SINGLE_SYMBOL.get();
+    }
+
     ASTNode NodeSingleSymbol::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         ASTNode symbolNode = tokenReader.readSymbolASTNode(this);
         std::shared_ptr<ErrorReason> errorReason;

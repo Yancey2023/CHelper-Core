@@ -20,6 +20,10 @@ namespace CHelper::Node {
         NodeBase *start = nullptr;
 
     public:
+        NodeJsonElement() = default;
+
+        [[nodiscard]] NodeType *getNodeType() const override;
+
         void init(const CPack &cpack) override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;

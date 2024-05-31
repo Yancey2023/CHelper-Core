@@ -31,9 +31,13 @@ namespace CHelper::Node {
         std::unique_ptr<NodeBase> nodeKey;
 
     public:
+        NodeEqualEntry() = default;
+
         NodeEqualEntry(const std::optional<std::string> &id,
                        const std::optional<std::string> &description,
                        std::vector<EqualData> equalDatas);
+
+        [[nodiscard]] NodeType *getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
     };

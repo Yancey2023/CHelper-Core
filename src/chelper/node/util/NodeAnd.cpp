@@ -12,6 +12,10 @@ namespace CHelper::Node {
         : NodeBase(id, description, false),
           childNodes(childNodes) {}
 
+    NodeType *NodeAnd::getNodeType() const {
+        return NodeType::AND.get();
+    }
+
     ASTNode NodeAnd::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childASTNodes;
