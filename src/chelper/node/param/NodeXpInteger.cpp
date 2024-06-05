@@ -15,9 +15,12 @@ namespace CHelper::Node {
     static std::shared_ptr<NodeBase> nodeLevel = std::make_shared<NodeText>(
             "L", "等级", NormalId::make("L", "等级"));
     static std::shared_ptr<NodeBase> levelXp = std::make_shared<NodeAnd>(
-            "LEVEL_XP", "等级经验", std::vector<const NodeBase *>{nodeInteger.get(), nodeLevel.get()});
+            "LEVEL_XP", "等级经验", WhitespaceMode::NO_WHITESPACE,
+            std::vector<const NodeBase *>{nodeInteger.get(), nodeLevel.get()});
     static std::shared_ptr<NodeBase> xp = std::make_shared<NodeOr>(
-            "XP", "经验", std::vector<const NodeBase *>{nodeInteger.get(), levelXp.get()}, false);
+            "XP", "经验",
+            std::vector<const NodeBase *>{levelXp.get(), nodeInteger.get()},
+            false, true);
 
     NodeType *NodeXpInteger::getNodeType() const {
         return NodeType::XP_INTEGER.get();

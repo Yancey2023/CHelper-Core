@@ -16,8 +16,8 @@ namespace CHelper::Node {
         std::vector<const NodeBase *> childNodes;
         bool isAttachToEnd = false, isUseFirst = false;
         std::string nodeId;
+        bool noSuggestion = false;
         const char *defaultErrorReason = nullptr;
-        bool noSuggestion;
 
         NodeOr() = default;
 

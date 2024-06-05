@@ -49,7 +49,7 @@ namespace CHelper::Node {
         if (HEDLEY_LIKELY(TokenUtil::getStartIndex(astNode->tokens) != index)) {
             return true;
         }
-        suggestions.push_back(Suggestions::singleSuggestion({astNode->tokens, isAddWhitespace, normalId}));
+        suggestions.push_back(Suggestions::singleSuggestion({index, index, isAddWhitespace, normalId}));
         return true;
     }
 

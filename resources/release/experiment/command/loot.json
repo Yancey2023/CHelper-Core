@@ -180,12 +180,12 @@
       }
     },
     {
-      "type": "STRING",
+      "type": "NORMAL_ID",
       "id": "lootTable",
       "brief": "战利品表",
       "description": "使用的战利品表",
-      "canContainSpace": true,
-      "ignoreLater": false
+      "ignoreError": true,
+      "key": "loot"
     }
   ],
   "ast": [

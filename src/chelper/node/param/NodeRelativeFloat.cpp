@@ -12,7 +12,7 @@ namespace CHelper::Node {
     static std::unique_ptr<NodeBase> nodeRelativeNotation = std::make_unique<NodeSingleSymbol>(
             "RELATIVE_FLOAT_RELATIVE_NOTATION", "相对坐标（~x ~y ~z）", '~', false);
     static std::unique_ptr<NodeBase> nodeCaretNotation = std::make_unique<NodeSingleSymbol>(
-            "RELATIVE_FLOAT_CARET_NOTATION", "局部坐标（^左 ^上 ^右）", '^', false);
+            "RELATIVE_FLOAT_CARET_NOTATION", "局部坐标（^左 ^上 ^前）", '^', false);
     static std::unique_ptr<NodeBase> nodePreSymbol = std::make_unique<NodeOr>(
             "RELATIVE_FLOAT_RELATIVE", "相对坐标（~x ~y ~z）",
             std::vector<const NodeBase *>{nodeRelativeNotation.get(), nodeCaretNotation.get()}, false);

@@ -27,4 +27,5 @@
 -give @s command_block 12 1 {"minecraft:can_place_on":{"blocks":["
 -setblock
 -give @s command_block
-fill ~~~~~~ stone replace
+-fill ~~~~~~ stone replace
+xp 12L @a

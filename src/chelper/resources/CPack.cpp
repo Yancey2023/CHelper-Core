@@ -221,7 +221,7 @@ namespace CHelper {
                 for (const auto &item3: item2) {
                     perContent.push_back(item3.get());
                 }
-                auto node = std::make_unique<Node::NodeAnd>(item.id, std::nullopt, std::move(perContent));
+                auto node = std::make_unique<Node::NodeAnd>(item.id, std::nullopt, Node::WhitespaceMode::NORMAL, std::move(perContent));
                 content.push_back(node.get());
                 repeatCacheNodes.push_back(std::move(node));
             }
@@ -233,7 +233,7 @@ namespace CHelper {
             std::unique_ptr<Node::NodeBase> unBreakNode = std::make_unique<Node::NodeOr>(
                     item.id, std::nullopt, std::move(content), false);
             std::unique_ptr<Node::NodeBase> breakNode = std::make_unique<Node::NodeAnd>(
-                    item.id, std::nullopt, std::move(breakChildNodes));
+                    item.id, std::nullopt, Node::WhitespaceMode::NORMAL, std::move(breakChildNodes));
             std::unique_ptr<Node::NodeBase> orNode = std::make_unique<Node::NodeOr>(
                     "NODE_REPEAT", "命令重复部分",
                     std::vector<const Node::NodeBase *>{unBreakNode.get(), breakNode.get()},

@@ -8,8 +8,10 @@ namespace CHelper::Node {
 
     NodeAnd::NodeAnd(const std::optional<std::string> &id,
                      const std::optional<std::string> &description,
+                     WhitespaceMode::WhitespaceMode whitespaceMode,
                      const std::vector<const NodeBase *> &childNodes)
         : NodeBase(id, description, false),
+          whitespaceMode(whitespaceMode),
           childNodes(childNodes) {}
 
     NodeType *NodeAnd::getNodeType() const {
@@ -23,11 +25,22 @@ namespace CHelper::Node {
             const auto &item = childNodes[i];
             auto node = item->getASTNodeWithNextNode(
                     tokenReader, cpack,
-                    i == 0 || childNodes[i - 1]->isAfterWhitespace() || item->isAfterWhitespace());
+                    whitespaceMode == WhitespaceMode::NORMAL &&
+                            (i == 0 || childNodes[i - 1]->isAfterWhitespace() || item->isAfterWhitespace()));
             bool isError = node.isError();
             childASTNodes.push_back(std::move(node));
             if (HEDLEY_UNLIKELY(isError)) {
                 break;
+            }
+            if (HEDLEY_UNLIKELY(whitespaceMode == WhitespaceMode::NO_WHITESPACE &&
+                                i < childNodes.size() - 1 &&
+                                tokenReader.ready() &&
+                                tokenReader.peek()->type == TokenType::WHITE_SPACE)) {
+                tokenReader.push();
+                tokenReader.skip();
+                VectorView<Token> tokens = tokenReader.collect();
+                return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect(),
+                                        ErrorReason::contentError(tokens, "意外的空格"));
             }
         }
         return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect());
