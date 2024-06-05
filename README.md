@@ -20,12 +20,32 @@ I want to make a command CHelper for Minecraft Bedrock Edition , so here is CHel
 
 Because I am leaning c++ now. I want to improve myself through this project.
 
-## Dependencies
+## Third-party
+
+### CHelper-Core
 
 |                  project                   |                                    description                                     |                                           license                                            |
 |:------------------------------------------:|:----------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------:|
 | [Hedley](https://github.com/nemequ/hedley) | enable compiler-specific features while retaining compatibility with all compilers | [Creative Commons Zero v1.0 Universal](https://github.com/nemequ/hedley/blob/master/COPYING) |
 |  [json](https://github.com/nlohmann/json)  |                                JSON for Modern C++                                 |           [MIT license](https://github.com/nlohmann/json/blob/develop/LICENSE.MIT)           |
+
+### CHelper-Qt
+
+|         project          |          description          |                     license                      |
+|:------------------------:|:-----------------------------:|:------------------------------------------------:|
+| [Qt](https://www.qt.io/) | desktop application framework | [LGPL license](https://doc.qt.io/qt-5/lgpl.html) |
+
+### CHelper-Android
+
+|                 project                  |          description           |                           license                            |
+|:----------------------------------------:|:------------------------------:|:------------------------------------------------------------:|
+| [NDK](https://developer.android.com/ndk) | android native development kit | [Apache License](http://www.apache.org/licenses/LICENSE-2.0) |
+
+### CHelper-Test
+
+|                      project                       |         description         |                                              license                                              |
+|:--------------------------------------------------:|:---------------------------:|:-------------------------------------------------------------------------------------------------:|
+| [GoogleTest](https://github.com/google/googletest) | Google's C++ test framework | [BSD 3-Clause "New" or "Revised" License](https://github.com/google/googletest/blob/main/LICENSE) |
 
 ## CPack Document
 
