@@ -177,4 +177,13 @@ Java_yancey_chelper_core_CHelperCore_onSuggestionClick(
     }
 }
 
+extern "C" [[maybe_unused]] JNIEXPORT jstring JNICALL
+Java_yancey_chelper_core_CHelperCore_old2new(
+        JNIEnv *env, [[maybe_unused]] jobject thiz, jstring old) {
+    if (HEDLEY_UNLIKELY(old == nullptr)) {
+        return old;
+    }
+    return env->NewStringUTF(CHelper::Core::old2new(jstring2string(env, old)).c_str());
+}
+
 #endif//CHELPER_ANDROIDNATIVE_H

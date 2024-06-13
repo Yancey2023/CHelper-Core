@@ -53,6 +53,8 @@ namespace CHelper {
         [[nodiscard]] [[maybe_unused]] std::string getColors() const;
 
         [[nodiscard]] std::optional<std::string> onSuggestionClick(size_t which);
+
+        static std::string old2new(const std::string &old);
     };
 
 }// namespace CHelper

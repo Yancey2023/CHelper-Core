@@ -4,6 +4,7 @@
 
 #include "Core.h"
 
+#include "old2new/Old2New.h"
 #include "parser/Parser.h"
 #include "util/TokenUtil.h"
 
@@ -128,6 +129,10 @@ namespace CHelper {
             return std::nullopt;
         }
         return suggestions->at(which).onClick(this, TokenUtil::toString(astNode.tokens));
+    }
+
+    std::string Core::old2new(const std::string &old){
+        return Old2New::old2new(old);
     }
 
 }// namespace CHelper

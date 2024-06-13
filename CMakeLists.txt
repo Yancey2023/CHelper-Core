@@ -30,7 +30,7 @@ target_include_directories(CHelperCmd PUBLIC include)
 target_precompile_headers(CHelperCmd PRIVATE include/pch.h)
 
 # Web Application
-add_library(CHelperWeb SHARED src/web/CHelperWeb.h src/web/CHelperWeb.cpp ${SOURCE_H} ${SOURCE_CPP})
+add_library(CHelperWeb SHARED src/web/CHelperWeb.h ${SOURCE_H} ${SOURCE_CPP})
 target_include_directories(CHelperWeb PUBLIC include)
 target_precompile_headers(CHelperWeb PRIVATE include/pch.h)
 
