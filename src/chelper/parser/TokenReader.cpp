@@ -179,4 +179,17 @@ namespace CHelper {
         return ASTNode::simpleNode(node, collect(), nullptr, astNodeId);
     }
 
+    ASTNode TokenReader::readStringOrNumberASTNode(const Node::NodeBase *node,
+                                                   const std::string &astNodeId) {
+        push();
+        while (ready()) {
+            TokenType::TokenType tokenType = peek()->type;
+            if (HEDLEY_UNLIKELY(tokenType == TokenType::SYMBOL || tokenType == TokenType::WHITE_SPACE || tokenType == TokenType::LF)) {
+                break;
+            }
+            skip();
+        }
+        return ASTNode::simpleNode(node, collect(), nullptr, astNodeId);
+    }
+
 }// namespace CHelper

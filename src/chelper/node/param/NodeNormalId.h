@@ -36,7 +36,7 @@ namespace CHelper::Node {
                 bool allowMissingID = false,
                 const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode =
                         [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-                    return tokenReader.readStringASTNode(node);
+                    return tokenReader.readStringOrNumberASTNode(node);
                 });
 
         NodeNormalId(
@@ -47,7 +47,7 @@ namespace CHelper::Node {
                 bool allowMissingID = false,
                 const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode =
                         [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-                    return tokenReader.readStringASTNode(node);
+                    return tokenReader.readStringOrNumberASTNode(node);
                 });
 
         [[nodiscard]] NodeType *getNodeType() const override;

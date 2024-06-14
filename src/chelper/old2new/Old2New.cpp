@@ -171,6 +171,10 @@ namespace CHelper::Old2New {
         while ((index = blockState.find(' ', index)) != std::string::npos) {
             blockState.erase(index, 1);
         }
+        size_t index2 = 1;
+        while ((index2 = blockState.find(':', index2)) != std::string::npos) {
+            blockState[index2] = '=';
+        }
         return blockId + blockState;
     }
 
@@ -251,9 +255,13 @@ namespace CHelper::Old2New {
     bool expectCommandExecuteRepeat(TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         size_t depth = 0;
         while (true) {
+            tokenReader.push();
+            expectSymbol(tokenReader, '/');
             if (!expectCommandExecute(tokenReader, dataFixList, depth)) {
+                tokenReader.restore();
                 break;
             }
+            tokenReader.pop();
             depth++;
         }
         if (depth == 0) {
@@ -351,7 +359,7 @@ namespace CHelper::Old2New {
         dataFixList.emplace_back(tokens2, "");
         tokenReader.pop();
         // replace
-        if(!expectString(tokenReader, "replace")){
+        if (!expectString(tokenReader, "replace")) {
             return true;
         }
         // stone
@@ -419,6 +427,7 @@ namespace CHelper::Old2New {
             return false;
         }
         expectCommandExecuteRepeat(tokenReader, dataFixList);
+        expectSymbol(tokenReader, '/');
         expectCommandFill(tokenReader, dataFixList);
         expectCommandSetBlock(tokenReader, dataFixList);
         expectCommandTestForSetBlock(tokenReader, dataFixList);

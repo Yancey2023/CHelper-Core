@@ -92,6 +92,9 @@ namespace CHelper {
 
         ASTNode readUntilWhitespace(const Node::NodeBase *node,
                                     const std::string &astNodeId = "");
+
+        ASTNode readStringOrNumberASTNode(const Node::NodeBase *node,
+                                          const std::string &astNodeId = "");
     };
 
 }// namespace CHelper
