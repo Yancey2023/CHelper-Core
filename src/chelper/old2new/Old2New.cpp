@@ -22,6 +22,12 @@ namespace CHelper::Old2New {
           end(TokenUtil::getEndIndex(tokens)),
           content(std::move(content)) {}
 
+    std::string trip(std::string str) {
+        str.erase(0, str.find_first_not_of(' '));
+        str.erase(str.find_last_not_of(' ') + 1);
+        return str;
+    }
+
     bool expect(TokenReader &tokenReader, const std::function<bool(const Token &token)> &check) {
         tokenReader.push();
         tokenReader.skipWhitespace();
@@ -152,9 +158,7 @@ namespace CHelper::Old2New {
         }
         // get key
         std::string front = "minecraft:";
-        std::string key = blockId;
-        key.erase(0, key.find_first_not_of(' '));
-        key.erase(key.find_last_not_of(' ') + 1);
+        std::string key = trip(blockId);
         if (key.size() < front.size() || key.substr(0, front.size()) != front) {
             key = front + key;
         }
@@ -167,6 +171,9 @@ namespace CHelper::Old2New {
         }
         // get block state
         std::string blockState = iter->get<std::string>();
+        if (blockState == "[]") {
+            return blockId;
+        }
         size_t index = 0;
         while ((index = blockState.find(' ', index)) != std::string::npos) {
             blockState.erase(index, 1);
@@ -179,7 +186,7 @@ namespace CHelper::Old2New {
     }
 
     /**
-     * execute指令转为新语法
+     * execute命令转为新语法
      * 旧语法例子：execute @e ~~~ detect ~~-1~ stone 0 run setblock command_block ~~~
      * 新语法例子：execute as @e at @s positioned ~~~ if block ~~-1~ stone setblock command_block ~~~
      */
@@ -213,8 +220,25 @@ namespace CHelper::Old2New {
         if (depth > 0) {
             dataFixList.emplace_back(tokens1, "");
         }
-        dataFixList.emplace_back(tokens2, " as" + TokenUtil::toString(tokens2) + " at @s");
-        dataFixList.emplace_back(tokens3, " positioned" + TokenUtil::toString(tokens3));
+        std::string targetSelector = TokenUtil::toString(tokens2);
+        if (trip(targetSelector) != "@s") {
+            dataFixList.emplace_back(tokens2, " as" + targetSelector + " at @s");
+        } else {
+            dataFixList.emplace_back(tokens2, "");
+        }
+        bool isHavePosition = false;
+        if (depth > 0) {
+            tokens3.forEach([&isHavePosition](const Token &token) {
+                if (token.type == TokenType::NUMBER) {
+                    isHavePosition = true;
+                }
+            });
+        }
+        if (isHavePosition) {
+            dataFixList.emplace_back(tokens3, " positioned" + TokenUtil::toString(tokens3));
+        } else {
+            dataFixList.emplace_back(tokens3, "");
+        }
         // detect
         tokenReader.push();
         if (!expectString(tokenReader, "detect")) {
@@ -275,7 +299,7 @@ namespace CHelper::Old2New {
     }
 
     /**
-     * setblock指令转为新语法
+     * setblock命令转为新语法
      * 旧语法例子：setblock ~~~ stone 1 replace
      * 新语法例子：setblock ~~~ stone["stone_type":"granite"] replace
      */
@@ -317,7 +341,7 @@ namespace CHelper::Old2New {
     }
 
     /**
-     * fill指令转为新语法
+     * fill命令转为新语法
      * 旧语法例子：fill ~~~~~~ stone 1 replace stone 2
      * 新语法例子：fill ~~~~~~ stone["stone_type":"granite"] replace stone["stone_type":"granite_smooth"]
      */
@@ -383,7 +407,7 @@ namespace CHelper::Old2New {
     }
 
     /**
-     * testforblock指令转为新语法
+     * testforblock命令转为新语法
      * 旧语法例子：testforblock ~~~ stone 1
      * 新语法例子：testforblock ~~~ stone["stone_type":"granite"]
      */

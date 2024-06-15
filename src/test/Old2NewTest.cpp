@@ -29,6 +29,7 @@ namespace CHelper::Test {
                 R"(testforblock ~~~ stone 3)",
                 R"(testforblock ~~~ stone 3 replace)",
                 R"(/execute @e[name="Yancey NB"] ~~2.5 ~ detect ~~-1~ stone 1 /setblock ~ ~-1 ~ command_block 0)",
+                R"(execute @a[tag=!OP] ~~~ detect ~~0.05~0.3 air 0 execute @s ~~~ detect ~-0.3~-0.05~ air 0 execute @s ~~~ detect ~~-0.05~0.3 air 0 execute @s ~~~ detect ~0.3~-0.05~0.3 air 0 execute @s ~~~ detect ~-0.3~-0.05~-0.3 air 0 execute @s ~~~ detect ~0.3~-0.05~-0.3 air 0 execute @s ~~~ detect ~-0.3~-0.05~0.3 air 0 scoreboard players add @s fly 1)",
         };
         for (const auto &item: oldCommands){
             std::cout << ColorStringBuilder().red(item + "\n").green(Old2New::old2new(item)).build() << std::endl;
