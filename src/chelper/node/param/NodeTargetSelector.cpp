@@ -6,6 +6,7 @@
 #include "../util/NodeEntry.h"
 #include "../util/NodeSingleSymbol.h"
 #include "NodeBoolean.h"
+#include "NodeFloat.h"
 #include "NodeInteger.h"
 #include "NodeItem.h"
 #include "NodeNormalId.h"
@@ -61,10 +62,10 @@ namespace CHelper::Node {
                     nodeEqual.get(), nodeNotEqual.get()},
             false);
     static std::unique_ptr<NodeBase> nodeRelativeFloat = std::make_unique<NodeRelativeFloat>(
-            "TARGET_SELECTOR_ARGUMENT_RELATIVE_FLOAT", "目标选择器参数(小数)", true);
+            "TARGET_SELECTOR_ARGUMENT_RELATIVE_FLOAT", "目标选择器参数(小数)", false);
     static std::unique_ptr<NodeBase> nodeInteger = std::make_unique<NodeInteger>(
             "TARGET_SELECTOR_ARGUMENT_INTEGER", "目标选择器参数(整数)", std::nullopt, std::nullopt);
-    static std::unique_ptr<NodeBase> nodeFloat = std::make_unique<NodeInteger>(
+    static std::unique_ptr<NodeBase> nodeFloat = std::make_unique<NodeFloat>(
             "TARGET_SELECTOR_ARGUMENT_FLOAT", "目标选择器参数(小数)", std::nullopt, std::nullopt);
     static std::unique_ptr<NodeBase> nodeString = std::make_unique<NodeString>(
             "TARGET_SELECTOR_ARGUMENT_STRING", "目标选择器参数(字符串)", true, true, false);

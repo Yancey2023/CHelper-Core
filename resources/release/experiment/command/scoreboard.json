@@ -212,7 +212,7 @@
       "description": "检测目标分数是否在区间内",
       "data": {
         "name": "test",
-        "description": "删检测目标分数是否在区间内"
+        "description": "检测目标分数是否在区间内"
       }
     },
     {
@@ -371,6 +371,24 @@
       "type": "INTEGER",
       "id": "max",
       "description": "最大值"
+    },
+    {
+      "type": "TEXT",
+      "id": "min1",
+      "description": "最小值",
+      "data": {
+        "name": "*",
+        "description": "-2147483648作为最小值"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "max1",
+      "description": "最大值",
+      "data": {
+        "name": "*",
+        "description": "2147483647作为最大值"
+      }
     }
   ],
   "ast": [
@@ -399,9 +417,11 @@
     ["playersRemove", "setPlayer"],
     ["random", "randomPlayer"],
     ["randomPlayer", "randomObjective"],
-    ["randomObjective", "min"],
-    ["min", "max"],
+    ["randomObjective", "min", "min1"],
+    ["min", "max", "max1"],
+    ["min1", "max", "max1"],
     ["max", "LF"],
+    ["max1", "LF"],
     ["reset", "resetPlayer"],
     ["resetPlayer", "resetObjective"],
     ["resetObjective", "LF"],

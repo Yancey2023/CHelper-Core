@@ -233,7 +233,7 @@ namespace CHelper::Test {
      */
     [[maybe_unused]] void
     testDir(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime) {
-        std::shared_ptr<Core> core;
+        Core *core;
         try {
             core = Core::createByDirectory(cpackPath);
             std::cout << std::endl;
@@ -253,7 +253,7 @@ namespace CHelper::Test {
      */
     [[maybe_unused]] void
     testBin(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime) {
-        std::shared_ptr<Core> core;
+        Core *core;
         try {
             core = Core::createByBinary(cpackPath);
             std::cout << std::endl;
@@ -272,7 +272,7 @@ namespace CHelper::Test {
      * 测试程序是否可以正常运行
      */
     [[maybe_unused]] void
-    test(const std::shared_ptr<Core> &core, const std::vector<std::string> &commands, bool isTestTime) {
+    test(Core *core, const std::vector<std::string> &commands, bool isTestTime) {
         try {
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;

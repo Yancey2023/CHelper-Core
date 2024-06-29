@@ -24,15 +24,15 @@ namespace CHelper {
     public:
         Core(std::unique_ptr<CPack> cpack, ASTNode astNode);
 
-        static std::shared_ptr<Core> create(const std::function<std::unique_ptr<CPack>()> &getCPack);
+        static Core *create(const std::function<std::unique_ptr<CPack>()> &getCPack);
 
-        static std::shared_ptr<Core> createByDirectory(const std::string &cpackPath);
+        static Core *createByDirectory(const std::string &cpackPath);
 
-        static std::shared_ptr<Core> createByJson(const std::string &cpackPath);
+        static Core *createByJson(const std::string &cpackPath);
 
-        static std::shared_ptr<Core> createByBson(const std::string &cpackPath);
+        static Core *createByBson(const std::string &cpackPath);
 
-        static std::shared_ptr<Core> createByBinary(const std::string &cpackPath);
+        static Core *createByBinary(const std::string &cpackPath);
 
         void onTextChanged(const std::string &content, size_t index);
 

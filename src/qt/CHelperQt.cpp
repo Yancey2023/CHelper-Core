@@ -40,6 +40,7 @@ CHelperApp::CHelperApp(QWidget *parent)
 
 CHelperApp::~CHelperApp() {
     delete ui;
+    delete core;
 }
 
 void CHelperApp::onTextChanged(const QString &string) {

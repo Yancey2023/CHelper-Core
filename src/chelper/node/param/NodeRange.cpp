@@ -22,8 +22,9 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(str.empty())) {
             return ErrorReason::contentError(tokens, "范围的数值为空");
         }
-        for (const auto &item: str) {
-            if (HEDLEY_UNLIKELY(item < '0' || item > '9')) {
+        for (int i = 0; i < str.length(); ++i) {
+            char ch = str[i];
+            if (HEDLEY_UNLIKELY(ch < '0' || ch > '9') && (i != 0 || ch != '-')) {
                 return ErrorReason::contentError(tokens, "范围的数值格式不正确，检测非法字符");
             }
         }

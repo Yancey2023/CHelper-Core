@@ -227,13 +227,11 @@ namespace CHelper::Old2New {
             dataFixList.emplace_back(tokens2, "");
         }
         bool isHavePosition = false;
-        if (depth > 0) {
-            tokens3.forEach([&isHavePosition](const Token &token) {
-                if (token.type == TokenType::NUMBER) {
-                    isHavePosition = true;
-                }
-            });
-        }
+        tokens3.forEach([&isHavePosition](const Token &token) {
+            if (token.type == TokenType::NUMBER) {
+                isHavePosition = true;
+            }
+        });
         if (isHavePosition) {
             dataFixList.emplace_back(tokens3, " positioned" + TokenUtil::toString(tokens3));
         } else {

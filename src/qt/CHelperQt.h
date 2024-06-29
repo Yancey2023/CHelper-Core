@@ -36,7 +36,7 @@ private slots:
 
 private:
     Ui::CHelperApp *ui;
-    std::shared_ptr<CHelper::Core> core;
+    CHelper::Core* core;
 };
 
 int main(int argc, char *argv[]);

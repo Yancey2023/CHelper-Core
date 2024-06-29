@@ -36,10 +36,10 @@
     {
       "type": "TEXT",
       "id": "set",
-      "description": "给玩家添加视野摇晃效果",
+      "description": "给玩家设置相机视角/预设",
       "data": {
         "name": "set",
-        "description": "给玩家添加视野摇晃效果"
+        "description": "给玩家设置相机视角/预设"
       }
     },
     {

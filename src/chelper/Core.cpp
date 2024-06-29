@@ -14,7 +14,7 @@ namespace CHelper {
         : cpack(std::move(cpack)),
           astNode(std::move(astNode)) {}
 
-    std::shared_ptr<Core> Core::create(const std::function<std::unique_ptr<CPack>()> &getCPack) {
+    Core* Core::create(const std::function<std::unique_ptr<CPack>()> &getCPack) {
         try {
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
@@ -26,7 +26,7 @@ namespace CHelper {
                                  .green(")")
                                  .build());
             ASTNode astNode = Parser::parse("", cPack.get());
-            return std::make_shared<Core>(std::move(cPack), std::move(astNode));
+            return new Core(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
             CHELPER_ERROR("CPack load failed");
             CHelper::Exception::printStackTrace(e);
@@ -35,25 +35,25 @@ namespace CHelper {
         }
     }
 
-    std::shared_ptr<Core> Core::createByDirectory(const std::string &cpackPath) {
+    Core* Core::createByDirectory(const std::string &cpackPath) {
         return create([&cpackPath]() {
             return CPack::createByDirectory(cpackPath);
         });
     }
 
-    std::shared_ptr<Core> Core::createByJson(const std::string &cpackPath) {
+    Core* Core::createByJson(const std::string &cpackPath) {
         return create([&cpackPath]() {
             return CPack::createByJson(JsonUtil::getJsonFromFile(cpackPath));
         });
     }
 
-    std::shared_ptr<Core> Core::createByBson(const std::string &cpackPath) {
+    Core* Core::createByBson(const std::string &cpackPath) {
         return create([&cpackPath]() {
             return CPack::createByJson(JsonUtil::getBsonFromFile(cpackPath));
         });
     }
 
-    std::shared_ptr<Core> Core::createByBinary(const std::string &cpackPath) {
+    Core* Core::createByBinary(const std::string &cpackPath) {
         return create([&cpackPath]() {
             std::ifstream is(cpackPath, std::ios::binary);
             if (HEDLEY_UNLIKELY(!is.is_open())) {

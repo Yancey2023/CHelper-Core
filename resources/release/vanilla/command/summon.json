@@ -28,16 +28,18 @@
       "description": "该实体的召唤位置。如果未指定，默认为命令执行位置"
     },
     {
-      "type": "FLOAT",
+      "type": "RELATIVE_FLOAT",
       "id": "yRot",
       "brief": "ry",
-      "description": "该实体的垂直旋转角度"
+      "description": "该实体的垂直旋转角度",
+      "canUseCaretNotation": false
     },
     {
-      "type": "FLOAT",
+      "type": "RELATIVE_FLOAT",
       "id": "xRot",
       "brief": "rx",
-      "description": "该实体的水平旋转角度"
+      "description": "该实体的水平旋转角度",
+      "canUseCaretNotation": false
     },
     {
       "type": "NORMAL_ID",

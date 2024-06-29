@@ -34,7 +34,7 @@ namespace CHelper::Test {
 
     [[maybe_unused]] void testBin(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime);
 
-    [[maybe_unused]] void test(const std::shared_ptr<Core> &core, const std::vector<std::string> &commands, bool isTestTime);
+    [[maybe_unused]] void test(Core *core, const std::vector<std::string> &commands, bool isTestTime);
 
     [[maybe_unused]] void test2(const std::string &cpackPath, const std::vector<std::string> &commands, int times);
 
