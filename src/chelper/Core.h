@@ -54,7 +54,7 @@ namespace CHelper {
 
         [[nodiscard]] std::optional<std::string> onSuggestionClick(size_t which);
 
-        static std::string old2new(const std::string &old);
+        static std::string old2new(const nlohmann::json &blockFixData, const std::string &old);
     };
 
 }// namespace CHelper

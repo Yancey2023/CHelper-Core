@@ -9,6 +9,11 @@
 namespace CHelper::Test {
 
     TEST(Old2NewTest, Old2New) {
+#ifdef WIN32
+        nlohmann::json blockFixData = JsonUtil::getJsonFromFile(R"(D:\CLion\project\CHelper-Core\resources\old2new\blockFixData.json)");
+#else
+        nlohmann::json blockFixData = JsonUtil::getJsonFromFile(R"(/home/yancey/CLionProjects/CHelper-Core/resources/old2new/blockFixData.json)");
+#endif
         std::vector<std::string> oldCommands = {
                 R"(execute @e[x=~5] ~~~ detect ~~-1~ stone 0 setblock ~~1~ command_block 0)",
                 R"(execute @e[type=zombie] ~ ~ ~ summon lightning_bolt)",
@@ -30,9 +35,12 @@ namespace CHelper::Test {
                 R"(testforblock ~~~ stone 3 replace)",
                 R"(/execute @e[name="Yancey NB"] ~~2.5 ~ detect ~~-1~ stone 1 /setblock ~ ~-1 ~ command_block 0)",
                 R"(execute @a[tag=!OP] ~~~ detect ~~0.05~0.3 air 0 execute @s ~~~ detect ~-0.3~-0.05~ air 0 execute @s ~~~ detect ~~-0.05~0.3 air 0 execute @s ~~~ detect ~0.3~-0.05~0.3 air 0 execute @s ~~~ detect ~-0.3~-0.05~-0.3 air 0 execute @s ~~~ detect ~0.3~-0.05~-0.3 air 0 execute @s ~~~ detect ~-0.3~-0.05~0.3 air 0 scoreboard players add @s fly 1)",
+                R"(summon creeper ~ ~ ~ minecraft:become_charged "充能苦力怕")",
+                R"(structure load aaa 0 0 0 0_degrees none true true 0.5 aaa)",
+                R"(setblock ~~~ acacia_door["direction":1])",
         };
-        for (const auto &item: oldCommands){
-            std::cout << ColorStringBuilder().red(item + "\n").green(Old2New::old2new(item)).build() << std::endl;
+        for (const auto &item: oldCommands) {
+            std::cout << ColorStringBuilder().red(item + "\n").green(Old2New::old2new(blockFixData, item)).build() << std::endl;
         }
     }
 }// namespace CHelper::Test

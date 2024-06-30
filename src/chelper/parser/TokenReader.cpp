@@ -67,6 +67,12 @@ namespace CHelper {
      * 从栈中移除指针，不恢复指针
      */
     void TokenReader::pop() {
+#if CHelperDebug == true
+        if (indexStack.empty()) {
+            CHELPER_ERROR("pop when indexStack is null");
+            return;
+        }
+#endif
         indexStack.pop_back();
     }
 

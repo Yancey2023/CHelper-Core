@@ -54,10 +54,7 @@ namespace CHelper::Lexer {
     Token nextTokenNumber(StringReader &stringReader) {
         stringReader.mark();
         signed char ch = stringReader.peek();
-        if (HEDLEY_UNLIKELY(ch == '+' || ch == '-')) {
-            ch = stringReader.next();
-        }
-        while (isNum(ch)) {
+        while (isNum(ch) || ch == '+' || ch == '-') {
             ch = stringReader.next();
         }
         return {TokenType::NUMBER, stringReader.posBackup, stringReader.collect()};

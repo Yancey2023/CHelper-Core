@@ -37,21 +37,25 @@ namespace CHelper::Old2New {
 
     bool expectPosition(TokenReader &tokenReader);
 
-    std::string blockOld2New(const VectorView<Token> &blockIdToken, const VectorView<Token> &dataValueToken);
+    std::string blockOld2New(const nlohmann::json& blockFixData, const VectorView<Token> &blockIdToken, const VectorView<Token> &dataValueToken);
 
-    bool expectCommandExecute(TokenReader &tokenReader, std::vector<DataFix> &dataFixList, size_t depth);
+    bool expectCommandExecute(const nlohmann::json& blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList, size_t depth);
 
-    bool expectCommandExecuteRepeat(TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
+    bool expectCommandExecuteRepeat(const nlohmann::json& blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
-    bool expectCommandSetBlock(TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
+    bool expectCommandSummon(TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
-    bool expectCommandFill(TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
+    bool expectCommandStructure(TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
-    bool expectCommandTestForSetBlock(TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
+    bool expectCommandSetBlock(const nlohmann::json& blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
-    bool expectCommand(TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
+    bool expectCommandFill(const nlohmann::json& blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
-    std::string old2new(const std::string &old);
+    bool expectCommandTestForSetBlock(const nlohmann::json& blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
+
+    bool expectCommand(const nlohmann::json& blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
+
+    std::string old2new(const nlohmann::json& blockFixData, const std::string &old);
 
 }// namespace CHelper::Old2New
 

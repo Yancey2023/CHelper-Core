@@ -5,7 +5,6 @@
 #include "Old2New.h"
 
 #include "../util/TokenUtil.h"
-#include "Old2NewBlockFixData.h"
 
 namespace CHelper::Old2New {
 
@@ -64,6 +63,34 @@ namespace CHelper::Old2New {
         });
     }
 
+    bool expectList(TokenReader &tokenReader, char leftSymbol, char rightSymbol) {
+        tokenReader.push();
+        if (!expectSymbol(tokenReader, leftSymbol)) {
+            tokenReader.restore();
+            return false;
+        }
+        size_t left = 1;
+        size_t right = 0;
+        while (true) {
+            if (left == right) {
+                tokenReader.pop();
+                return true;
+            }
+            if (expectSymbol(tokenReader, leftSymbol)) {
+                left++;
+                continue;
+            }
+            if (expectSymbol(tokenReader, rightSymbol)) {
+                right++;
+                continue;
+            }
+            if (!tokenReader.skip()) {
+                tokenReader.restore();
+                return false;
+            }
+        }
+    }
+
     bool expectTargetSelector(TokenReader &tokenReader) {
         if (expectString(tokenReader)) {
             return true;
@@ -77,30 +104,8 @@ namespace CHelper::Old2New {
             tokenReader.restore();
             return false;
         }
-        if (!expectSymbol(tokenReader, '[')) {
-            tokenReader.pop();
-            return true;
-        }
-        size_t left = 1;
-        size_t right = 0;
-        while (true) {
-            if (left == right) {
-                tokenReader.pop();
-                return true;
-            }
-            if (expectSymbol(tokenReader, '[')) {
-                left++;
-                continue;
-            }
-            if (expectSymbol(tokenReader, ']')) {
-                right++;
-                continue;
-            }
-            if (!tokenReader.skip()) {
-                tokenReader.restore();
-                return false;
-            }
-        }
+        expectList(tokenReader, '[', ']');
+        return true;
     }
 
     bool expectRelativeFloat(TokenReader &tokenReader) {
@@ -143,7 +148,7 @@ namespace CHelper::Old2New {
         return true;
     }
 
-    std::string blockOld2New(const VectorView<Token> &blockIdToken, const VectorView<Token> &dataValueToken) {
+    std::string blockOld2New(const nlohmann::json &blockFixData, const VectorView<Token> &blockIdToken, const VectorView<Token> &dataValueToken) {
         // get block id
         std::string blockId = TokenUtil::toString(blockIdToken);
         // get block data value
@@ -190,7 +195,7 @@ namespace CHelper::Old2New {
      * 旧语法例子：execute @e ~~~ detect ~~-1~ stone 0 run setblock command_block ~~~
      * 新语法例子：execute as @e at @s positioned ~~~ if block ~~-1~ stone setblock command_block ~~~
      */
-    bool expectCommandExecute(TokenReader &tokenReader, std::vector<DataFix> &dataFixList, size_t depth) {
+    bool expectCommandExecute(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList, size_t depth) {
         tokenReader.push();
         // execute
         tokenReader.push();
@@ -217,6 +222,7 @@ namespace CHelper::Old2New {
         }
         VectorView<Token> tokens3 = tokenReader.collect();
         // end?
+        tokenReader.pop();
         if (depth > 0) {
             dataFixList.emplace_back(tokens1, "");
         }
@@ -237,10 +243,10 @@ namespace CHelper::Old2New {
         } else {
             dataFixList.emplace_back(tokens3, "");
         }
+        tokenReader.push();
         // detect
         tokenReader.push();
         if (!expectString(tokenReader, "detect")) {
-            tokenReader.pop();
             tokenReader.pop();
             return true;
         }
@@ -248,7 +254,7 @@ namespace CHelper::Old2New {
         // ~~-1~
         if (!expectPosition(tokenReader)) {
             tokenReader.restore();
-            return false;
+            return true;
         }
         // stone
         tokenReader.push();
@@ -260,26 +266,38 @@ namespace CHelper::Old2New {
         VectorView<Token> tokens5 = tokenReader.collect();
         // 0
         tokenReader.push();
-        if (!expectNumber(tokenReader)) {
+        if (expectNumber(tokenReader)) {
+            VectorView<Token> tokens6 = tokenReader.collect();
+            dataFixList.emplace_back(tokens4, " if block");
+            dataFixList.emplace_back(tokens5, blockOld2New(blockFixData, tokens5, tokens6));
+            dataFixList.emplace_back(tokens6, "");
+        } else if (expectSymbol(tokenReader, '[')) {
+            tokenReader.restore();
+            tokenReader.push();
+            expectList(tokenReader, '[', ']');
+            VectorView<Token> tokens6 = tokenReader.collect();
+            dataFixList.emplace_back(tokens4, " if block");
+            tokens6.forEach([&dataFixList](const Token &token) {
+                if (token.type == TokenType::SYMBOL && token.content == ":") {
+                    dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), "=");
+                }
+            });
+        } else {
             tokenReader.restore();
             tokenReader.restore();
             return true;
         }
-        VectorView<Token> tokens6 = tokenReader.collect();
         // end
-        dataFixList.emplace_back(tokens4, " if block");
-        dataFixList.emplace_back(tokens5, blockOld2New(tokens5, tokens6));
-        dataFixList.emplace_back(tokens6, "");
         tokenReader.pop();
         return true;
     }
 
-    bool expectCommandExecuteRepeat(TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
+    bool expectCommandExecuteRepeat(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         size_t depth = 0;
         while (true) {
             tokenReader.push();
             expectSymbol(tokenReader, '/');
-            if (!expectCommandExecute(tokenReader, dataFixList, depth)) {
+            if (!expectCommandExecute(blockFixData, tokenReader, dataFixList, depth)) {
                 tokenReader.restore();
                 break;
             }
@@ -297,11 +315,112 @@ namespace CHelper::Old2New {
     }
 
     /**
+     * summon命令转为新语法
+     * 旧语法例子：summon creeper ~ ~ ~ minecraft:become_charged "充能苦力怕"
+     * 新语法例子：summon creeper ~ ~ ~ ~ ~ minecraft:become_charged "充能苦力怕"
+     */
+    bool expectCommandSummon(TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
+        tokenReader.push();
+        // summon
+        if (!expectString(tokenReader, "summon")) {
+            tokenReader.restore();
+            return false;
+        }
+        // creeper
+        if (!expectString(tokenReader)) {
+            tokenReader.restore();
+            return false;
+        }
+        // end?
+        tokenReader.pop();
+        // ~~~
+        if (!expectPosition(tokenReader)) {
+            return true;
+        }
+        // end?
+        tokenReader.push();
+        VectorView<Token> tokens1 = tokenReader.collect();
+        dataFixList.emplace_back(tokens1, " 0 0");
+        // minecraft:become_charged
+        if (!expectString(tokenReader)) {
+            return true;
+        }
+        // "充能苦力怕"
+        if (!expectString(tokenReader)) {
+            return true;
+        }
+        // end
+        return true;
+    }
+
+    /**
+     * structure命令转为新语法
+     * 旧语法例子：structure load <name: string> <to:x y z> [rotation: Rotation] [mirror: Mirror] [includeEntities: Boolean] [includeBlocks: Boolean] [integrity: float] [seed: string]
+     * 新语法例子：structure load <name: string> <to:x y z> [rotation: Rotation] [mirror: Mirror] [includeEntities: Boolean] [includeBlocks: Boolean] [waterlogged: Boolean] [integrity: float] [seed: string]
+     */
+    bool expectCommandStructure(TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
+        tokenReader.push();
+        // structure
+        if (!expectString(tokenReader, "structure")) {
+            tokenReader.restore();
+            return false;
+        }
+        // load
+        if (!expectString(tokenReader, "load")) {
+            tokenReader.restore();
+            return false;
+        }
+        // end?
+        tokenReader.pop();
+        // <name: string>
+        if (!expectString(tokenReader)) {
+            return false;
+        }
+        // <to:x y z>
+        if (!expectPosition(tokenReader)) {
+            return false;
+        }
+        // [rotation: Rotation]
+        if (!expectNumber(tokenReader)) {
+            return true;
+        }
+        if (!expectString(tokenReader)) {
+            return true;
+        }
+        // [mirror: Mirror]
+        if (!expectString(tokenReader)) {
+            return true;
+        }
+        // [includeEntities: Boolean]
+        if (!expectString(tokenReader)) {
+            return true;
+        }
+        // [includeBlocks: Boolean]
+        if (!expectString(tokenReader)) {
+            return true;
+        }
+        // end?
+        tokenReader.push();
+        VectorView<Token> tokens1 = tokenReader.collect();
+        dataFixList.emplace_back(tokens1, " true");
+        // [integrity: float]
+        if (!expectNumber(tokenReader)) {
+            return true;
+        }
+        // [seed: string]
+        if (!expectString(tokenReader)) {
+            return true;
+        }
+        // end
+        return true;
+    }
+
+    /**
      * setblock命令转为新语法
      * 旧语法例子：setblock ~~~ stone 1 replace
      * 新语法例子：setblock ~~~ stone["stone_type":"granite"] replace
      */
-    bool expectCommandSetBlock(TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
+    bool expectCommandSetBlock(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         tokenReader.push();
         // setblock
         if (!expectString(tokenReader, "setblock")) {
@@ -323,17 +442,28 @@ namespace CHelper::Old2New {
         VectorView<Token> tokens1 = tokenReader.collect();
         // 0
         tokenReader.push();
-        if (!expectNumber(tokenReader)) {
-            tokenReader.pop();
-            tokenReader.pop();
+        if (expectNumber(tokenReader)) {
+            VectorView<Token> tokens2 = tokenReader.collect();
+            dataFixList.emplace_back(tokens1, blockOld2New(blockFixData, tokens1, tokens2));
+            dataFixList.emplace_back(tokens2, "");
+        } else if (expectSymbol(tokenReader, '[')) {
+            tokenReader.restore();
+            tokenReader.push();
+            expectList(tokenReader, '[', ']');
+            VectorView<Token> tokens2 = tokenReader.collect();
+            tokens2.forEach([&dataFixList](const Token &token) {
+                if (token.type == TokenType::SYMBOL && token.content == ":") {
+                    dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), "=");
+                }
+            });
+        } else {
+            tokenReader.restore();
+            tokenReader.restore();
             return true;
         }
-        VectorView<Token> tokens2 = tokenReader.collect();
         // replace
         tokenReader.skipToLF();
         // end
-        dataFixList.emplace_back(tokens1, blockOld2New(tokens1, tokens2));
-        dataFixList.emplace_back(tokens2, "");
         tokenReader.pop();
         return true;
     }
@@ -343,7 +473,7 @@ namespace CHelper::Old2New {
      * 旧语法例子：fill ~~~~~~ stone 1 replace stone 2
      * 新语法例子：fill ~~~~~~ stone["stone_type":"granite"] replace stone["stone_type":"granite_smooth"]
      */
-    bool expectCommandFill(TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
+    bool expectCommandFill(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         tokenReader.push();
         // fill
         if (!expectString(tokenReader, "fill")) {
@@ -368,18 +498,29 @@ namespace CHelper::Old2New {
             return true;
         }
         VectorView<Token> tokens1 = tokenReader.collect();
+        // end?
+        tokenReader.pop();
         // 0
         tokenReader.push();
-        if (!expectNumber(tokenReader)) {
-            tokenReader.pop();
-            tokenReader.pop();
+        if (expectNumber(tokenReader)) {
+            VectorView<Token> tokens2 = tokenReader.collect();
+            dataFixList.emplace_back(tokens1, blockOld2New(blockFixData, tokens1, tokens2));
+            dataFixList.emplace_back(tokens2, "");
+        } else if (expectSymbol(tokenReader, '[')) {
+            tokenReader.restore();
+            tokenReader.push();
+            expectList(tokenReader, '[', ']');
+            VectorView<Token> tokens2 = tokenReader.collect();
+            tokens2.forEach([&dataFixList](const Token &token) {
+                if (token.type == TokenType::SYMBOL && token.content == ":") {
+                    dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), "=");
+                }
+            });
+        } else {
+            tokenReader.restore();
+            tokenReader.restore();
             return true;
         }
-        VectorView<Token> tokens2 = tokenReader.collect();
-        // end?
-        dataFixList.emplace_back(tokens1, blockOld2New(tokens1, tokens2));
-        dataFixList.emplace_back(tokens2, "");
-        tokenReader.pop();
         // replace
         if (!expectString(tokenReader, "replace")) {
             return true;
@@ -393,14 +534,25 @@ namespace CHelper::Old2New {
         VectorView<Token> tokens3 = tokenReader.collect();
         // 0
         tokenReader.push();
-        if (!expectNumber(tokenReader)) {
-            tokenReader.pop();
+        if (expectNumber(tokenReader)) {
+            VectorView<Token> tokens4 = tokenReader.collect();
+            dataFixList.emplace_back(tokens3, blockOld2New(blockFixData, tokens3, tokens4));
+            dataFixList.emplace_back(tokens4, "");
+        } else if (expectSymbol(tokenReader, '[')) {
+            tokenReader.restore();
+            tokenReader.push();
+            expectList(tokenReader, '[', ']');
+            VectorView<Token> tokens4 = tokenReader.collect();
+            tokens4.forEach([&dataFixList](const Token &token) {
+                if (token.type == TokenType::SYMBOL && token.content == ":") {
+                    dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), "=");
+                }
+            });
+        } else {
+            tokenReader.restore();
+            tokenReader.restore();
             return true;
         }
-        VectorView<Token> tokens4 = tokenReader.collect();
-        // end
-        dataFixList.emplace_back(tokens3, blockOld2New(tokens3, tokens4));
-        dataFixList.emplace_back(tokens4, "");
         return true;
     }
 
@@ -409,7 +561,7 @@ namespace CHelper::Old2New {
      * 旧语法例子：testforblock ~~~ stone 1
      * 新语法例子：testforblock ~~~ stone["stone_type":"granite"]
      */
-    bool expectCommandTestForSetBlock(TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
+    bool expectCommandTestForSetBlock(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         tokenReader.push();
         // testforblock
         if (!expectString(tokenReader, "testforblock")) {
@@ -438,29 +590,31 @@ namespace CHelper::Old2New {
         }
         VectorView<Token> tokens2 = tokenReader.collect();
         // end
-        dataFixList.emplace_back(tokens1, blockOld2New(tokens1, tokens2));
+        dataFixList.emplace_back(tokens1, blockOld2New(blockFixData, tokens1, tokens2));
         dataFixList.emplace_back(tokens2, "");
         tokenReader.pop();
         return true;
     }
 
-    bool expectCommand(TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
+    bool expectCommand(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         if (!tokenReader.ready()) {
             return false;
         }
-        expectCommandExecuteRepeat(tokenReader, dataFixList);
+        expectCommandExecuteRepeat(blockFixData, tokenReader, dataFixList);
         expectSymbol(tokenReader, '/');
-        expectCommandFill(tokenReader, dataFixList);
-        expectCommandSetBlock(tokenReader, dataFixList);
-        expectCommandTestForSetBlock(tokenReader, dataFixList);
+        expectCommandFill(blockFixData, tokenReader, dataFixList);
+        expectCommandSetBlock(blockFixData, tokenReader, dataFixList);
+        expectCommandSummon(tokenReader, dataFixList);
+        expectCommandStructure(tokenReader, dataFixList);
+        expectCommandTestForSetBlock(blockFixData, tokenReader, dataFixList);
         tokenReader.skipToLF();
         return true;
     }
 
-    std::string old2new(const std::string &old) {
+    std::string old2new(const nlohmann::json &blockFixData, const std::string &old) {
         TokenReader tokenReader(std::make_shared<std::vector<Token>>(Lexer::lex(StringReader(old, "unknown"))));
         std::vector<DataFix> dataFixList;
-        expectCommand(tokenReader, dataFixList);
+        expectCommand(blockFixData, tokenReader, dataFixList);
         std::sort(dataFixList.begin(), dataFixList.end(), [](const DataFix &dataFix1, const DataFix &dataFix2) {
             return dataFix1.start < dataFix2.start;
         });

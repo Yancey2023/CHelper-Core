@@ -186,7 +186,7 @@ namespace CHelper::Node {
                         {"family", "族", true, nodeFamily.get()},
                         {"rx", "垂直旋转小于等于rx", false, nodeFloat.get()},
                         {"rxm", "垂直旋转大于等于rxm", false, nodeFloat.get()},
-                        {"ry", "水平旋转大于等于ry", false, nodeFloat.get()},
+                        {"ry", "水平旋转小于等于ry", false, nodeFloat.get()},
                         {"rym", "水平旋转大于等于rym", false, nodeFloat.get()},
                         {"hasitem", "物品栏", false, nodeHasItem.get()},
                         {"haspermission", "权限", false, nodeHasPermission.get()},

@@ -9,11 +9,11 @@
 
 namespace CHelper::Node {
 
-    static std::unique_ptr<NodeBase> nodeRelativeNotation = std::make_unique<NodeSingleSymbol>(
+    static std::unique_ptr<NodeSingleSymbol> nodeRelativeNotation = std::make_unique<NodeSingleSymbol>(
             "RELATIVE_FLOAT_RELATIVE_NOTATION", "相对坐标（~x ~y ~z）", '~', false);
-    static std::unique_ptr<NodeBase> nodeCaretNotation = std::make_unique<NodeSingleSymbol>(
+    static std::unique_ptr<NodeSingleSymbol> nodeCaretNotation = std::make_unique<NodeSingleSymbol>(
             "RELATIVE_FLOAT_CARET_NOTATION", "局部坐标（^左 ^上 ^前）", '^', false);
-    static std::unique_ptr<NodeBase> nodePreSymbol = std::make_unique<NodeOr>(
+    static std::unique_ptr<NodeOr> nodePreSymbol = std::make_unique<NodeOr>(
             "RELATIVE_FLOAT_RELATIVE", "相对坐标（~x ~y ~z）",
             std::vector<const NodeBase *>{nodeRelativeNotation.get(), nodeCaretNotation.get()}, false);
 
@@ -84,6 +84,22 @@ namespace CHelper::Node {
         ASTNode result = ASTNode::andNode(node, std::move(childNodes), tokenReader.collect(), errorReason);
         // 为了获取补全提示，再嵌套一层or节点
         return {type, ASTNode::orNode(node, {std::move(result), std::move(preSymbol)}, nullptr)};
+    }
+
+    bool NodeRelativeFloat::collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestions> &suggestions) const {
+        if (HEDLEY_UNLIKELY(TokenUtil::getStartIndex(astNode->tokens) == index)) {
+            return collectSuggestions(index, suggestions, canUseCaretNotation);
+        }
+        return true;
+    }
+
+    bool NodeRelativeFloat::collectSuggestions(size_t index, std::vector<Suggestions> &suggestions, bool canUseCaretNotation) {
+        suggestions.push_back(Suggestions::singleSuggestion({index, index, false, whitespaceId}));
+        suggestions.push_back(Suggestions::singleSuggestion({index, index, false, nodeRelativeNotation->normalId}));
+        if (HEDLEY_LIKELY(canUseCaretNotation)) {
+            suggestions.push_back(Suggestions::singleSuggestion({index, index, false, nodeCaretNotation->normalId}));
+        }
+        return true;
     }
 
     void NodeRelativeFloat::collectStructure(const ASTNode *astNode,

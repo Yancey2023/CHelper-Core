@@ -33,7 +33,7 @@ namespace CHelper {
 
         Suggestion(const VectorView<Token> &tokens, bool isAddWhitespace, const std::shared_ptr<NormalId> &content);
 
-        [[nodiscard]] std::string onClick(Core *core, const std::string &before) const;
+        [[nodiscard]] std::string apply(Core *core, const std::string &before) const;
 
         [[nodiscard]] size_t hashCode() const {
             return mHashCode;

@@ -28,4 +28,5 @@
 -setblock
 -give @s command_block
 -fill ~~~~~~ stone replace
-xp 12L @a
+-xp 12L @a
+clone ~~~ 

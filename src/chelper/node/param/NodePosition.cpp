@@ -26,7 +26,8 @@ namespace CHelper::Node {
             std::pair<uint8_t, ASTNode> node = NodeRelativeFloat::getASTNode(this, cpack, tokenReader);
             if (threeChildNodes.empty() && node.second.isError() && !TokenUtil::toString(node.second.tokens).empty()) {
                 tokenReader.pop();
-                return node.second;
+                VectorView<Token> tokens = node.second.tokens;
+                return ASTNode::andNode(this, {std::move(node.second)}, tokens, nullptr, "positions");
             }
             type = node.first;
             threeChildNodes.push_back(std::move(node.second));
@@ -60,23 +61,19 @@ namespace CHelper::Node {
     }
 
     bool NodePosition::collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestions> &suggestions) const {
-        if (TokenUtil::getEndIndex(astNode->tokens) == index && astNode->id == "positions") {
-            int errorCount = 0;
-            for (const auto &item: astNode->childNodes) {
-                if (item.isError()) {
-                    errorCount++;
-                }
-            }
-            if (errorCount > 0) {
-                std::string str = TokenUtil::toString(astNode->tokens);
-                if ((str.empty() && errorCount == 3) || str.empty() || str[str.length() - 1] == ' ') {
-                    suggestions.push_back(Suggestions::singleSuggestion({index - 1, index, false, whitespaceId}));
-                } else {
-                    suggestions.push_back(Suggestions::singleSuggestion({index, index, false, whitespaceId}));
-                }
+        if (HEDLEY_LIKELY(astNode->id != "positions")) {
+            return false;
+        }
+        int errorCount = 0;
+        for (const auto &item: astNode->childNodes) {
+            if (item.isError()) {
+                errorCount++;
             }
         }
-        return false;
+        if (errorCount > 0) {
+            return NodeRelativeFloat::collectSuggestions(index, suggestions, true);
+        }
+        return true;
     }
 
     void NodePosition::collectStructure(const ASTNode *astNode,

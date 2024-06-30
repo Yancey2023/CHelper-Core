@@ -29,9 +29,14 @@ namespace CHelper::Node {
                                                       const CPack *cpack,
                                                       TokenReader &tokenReader);
 
+        bool collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestions> &suggestions) const override;
+
+        static bool collectSuggestions(size_t index, std::vector<Suggestions> &suggestions, bool canUseCaretNotation);
+
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
+
     };
 
     CODEC_NODE_H(NodeRelativeFloat)
