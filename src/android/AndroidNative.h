@@ -52,12 +52,8 @@ Java_yancey_chelper_core_CHelperCore_create0(
 
 extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
 Java_yancey_chelper_core_CHelperCore_release0(
-        JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
-    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
-        return;
-    }
-    delete core;
+        [[maybe_unused]] JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
+    delete reinterpret_cast<CHelper::Core *>(pointer);
 }
 
 extern "C" [[maybe_unused]] JNIEXPORT void JNICALL

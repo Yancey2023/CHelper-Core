@@ -87,7 +87,17 @@ namespace CHelper::Node {
     }
 
     bool NodeRelativeFloat::collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestions> &suggestions) const {
-        if (HEDLEY_UNLIKELY(TokenUtil::getStartIndex(astNode->tokens) == index)) {
+        std::string str = TokenUtil::toString(astNode->tokens);
+        size_t startIndex = TokenUtil::getStartIndex(astNode->tokens);
+        for (int i = 0; i < str.length(); ++i) {
+            if (HEDLEY_UNLIKELY(startIndex + i == index)) {
+                return collectSuggestions(index, suggestions, canUseCaretNotation);
+            }
+            if (str[i] != ' ') {
+                return false;
+            }
+        }
+        if (HEDLEY_UNLIKELY(startIndex + str.length() == index)) {
             return collectSuggestions(index, suggestions, canUseCaretNotation);
         }
         return true;

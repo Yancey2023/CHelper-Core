@@ -90,10 +90,11 @@
     ["block", "position"],
     ["position", "slot.container"],
     ["slot.container", "slotId"],
-    ["slotId", "item", "oldItemHandling"],
+    ["slotId", "oldItemHandling", "item"],
     ["oldItemHandling", "item"],
     ["item", "LF"],
     ["entity", "target"],
-    ["target", "slotType"], ["slotType", "slotId"]
+    ["target", "slotType"],
+    ["slotType", "slotId"]
   ]
 }

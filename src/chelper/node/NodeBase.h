@@ -49,7 +49,7 @@ namespace CHelper {
                     getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const;
 
             [[nodiscard]] HEDLEY_NON_NULL(3) ASTNode
-                    getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack, bool isReqireWhitespace) const;
+                    getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack, bool isRequireWhitespace) const;
 
         protected:
             HEDLEY_NON_NULL(3, 4)
