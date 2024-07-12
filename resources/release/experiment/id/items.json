@@ -519,6 +519,14 @@
       "description": "蓝色羊毛"
     },
     {
+      "name": "bogged_spawn_egg",
+      "description": "沼骸刷怪蛋"
+    },
+    {
+      "name": "bolt_armor_trim_smithing_template",
+      "description": "镶铆盔甲纹饰锻造模板"
+    },
+    {
       "name": "bone",
       "description": "骨头"
     },
@@ -559,12 +567,24 @@
       "description": "脑纹珊瑚"
     },
     {
+      "name": "brain_coral_block",
+      "description": "脑纹珊瑚块"
+    },
+    {
       "name": "brain_coral_fan",
       "description": "脑纹珊瑚扇"
     },
     {
       "name": "bread",
       "description": "面包"
+    },
+    {
+      "name": "breeze_rod",
+      "description": "旋风棒"
+    },
+    {
+      "name": "breeze_spawn_egg",
+      "description": "旋风人刷怪蛋"
     },
     {
       "name": "brewer_pottery_sherd",
@@ -581,6 +601,10 @@
     {
       "name": "brick_block",
       "description": "红砖块"
+    },
+    {
+      "name": "brick_slab",
+      "description": "红砖台阶"
     },
     {
       "name": "brick_stairs",
@@ -645,6 +669,10 @@
     {
       "name": "bubble_coral",
       "description": "气泡珊瑚"
+    },
+    {
+      "name": "bubble_coral_block",
+      "description": "气泡珊瑚块"
     },
     {
       "name": "bubble_coral_fan",
@@ -835,6 +863,10 @@
       "description": "雕纹书架"
     },
     {
+      "name": "chiseled_copper",
+      "description": "雕纹铜块"
+    },
+    {
       "name": "chiseled_deepslate",
       "description": "雕纹深板岩"
     },
@@ -845,6 +877,14 @@
     {
       "name": "chiseled_polished_blackstone",
       "description": "雕纹磨制黑石"
+    },
+    {
+      "name": "chiseled_tuff",
+      "description": "雕纹凝灰岩"
+    },
+    {
+      "name": "chiseled_tuff_bricks",
+      "description": "雕纹凝灰岩砖"
     },
     {
       "name": "chorus_flower",
@@ -860,7 +900,7 @@
     },
     {
       "name": "clay",
-      "description": "黏土"
+      "description": "黏土块"
     },
     {
       "name": "clay_ball",
@@ -905,6 +945,10 @@
     {
       "name": "cobblestone",
       "description": "圆石"
+    },
+    {
+      "name": "cobblestone_slab",
+      "description": "圆石台阶"
     },
     {
       "name": "cobblestone_wall",
@@ -1003,6 +1047,18 @@
       "description": "铜块"
     },
     {
+      "name": "copper_bulb",
+      "description": "铜灯"
+    },
+    {
+      "name": "copper_door",
+      "description": "铜门"
+    },
+    {
+      "name": "copper_grate",
+      "description": "铜格栅"
+    },
+    {
       "name": "copper_ingot",
       "description": "铜锭"
     },
@@ -1011,8 +1067,8 @@
       "description": "铜矿石"
     },
     {
-      "name": "coral_block",
-      "description": "珊瑚块"
+      "name": "copper_trapdoor",
+      "description": "铜活板门"
     },
     {
       "name": "cornflower",
@@ -1037,6 +1093,10 @@
     {
       "name": "cracked_polished_blackstone_bricks",
       "description": "裂纹磨制黑石砖"
+    },
+    {
+      "name": "crafter",
+      "description": "合成器"
     },
     {
       "name": "crafting_table",
@@ -1263,12 +1323,20 @@
       "description": "失活的脑纹珊瑚"
     },
     {
+      "name": "dead_brain_coral_block",
+      "description": "失活的脑纹珊瑚块"
+    },
+    {
       "name": "dead_brain_coral_fan",
       "description": "失活的脑纹珊瑚扇"
     },
     {
       "name": "dead_bubble_coral",
       "description": "失活的气泡珊瑚"
+    },
+    {
+      "name": "dead_bubble_coral_block",
+      "description": "失活的气泡珊瑚块"
     },
     {
       "name": "dead_bubble_coral_fan",
@@ -1279,6 +1347,10 @@
       "description": "失活的火珊瑚"
     },
     {
+      "name": "dead_fire_coral_block",
+      "description": "失活的火珊瑚块"
+    },
+    {
       "name": "dead_fire_coral_fan",
       "description": "失活的火珊瑚扇"
     },
@@ -1287,12 +1359,20 @@
       "description": "失活的鹿角珊瑚"
     },
     {
+      "name": "dead_horn_coral_block",
+      "description": "失活的鹿角珊瑚块"
+    },
+    {
       "name": "dead_horn_coral_fan",
       "description": "失活的鹿角珊瑚扇"
     },
     {
       "name": "dead_tube_coral",
       "description": "失活的管珊瑚"
+    },
+    {
+      "name": "dead_tube_coral_block",
+      "description": "失活的管珊瑚块"
     },
     {
       "name": "dead_tube_coral_fan",
@@ -1471,18 +1551,6 @@
       "description": "驴刷怪蛋"
     },
     {
-      "name": "double_plant",
-      "description": "向日葵/丁香/高草丛/大型蕨/玫瑰丛/牡丹",
-      "descriptions": [
-        "向日葵",
-        "丁香",
-        "高草丛",
-        "大型蕨",
-        "玫瑰丛",
-        "牡丹"
-      ]
-    },
-    {
       "name": "dragon_breath",
       "description": "龙息"
     },
@@ -1619,8 +1687,28 @@
       "description": "探险纹样陶片"
     },
     {
+      "name": "exposed_chiseled_copper",
+      "description": "斑驳的雕纹铜块"
+    },
+    {
       "name": "exposed_copper",
       "description": "斑驳的铜块"
+    },
+    {
+      "name": "exposed_copper_bulb",
+      "description": "斑驳的铜灯"
+    },
+    {
+      "name": "exposed_copper_door",
+      "description": "斑驳的铜门"
+    },
+    {
+      "name": "exposed_copper_grate",
+      "description": "斑驳的铜格栅"
+    },
+    {
+      "name": "exposed_copper_trapdoor",
+      "description": "斑驳的铜活板门"
     },
     {
       "name": "exposed_cut_copper",
@@ -1655,6 +1743,10 @@
       "description": "发酵蛛眼"
     },
     {
+      "name": "fern",
+      "description": "蕨"
+    },
+    {
       "name": "field_masoned_banner_pattern",
       "description": "砖纹旗帜图案"
     },
@@ -1669,6 +1761,10 @@
     {
       "name": "fire_coral",
       "description": "火珊瑚"
+    },
+    {
+      "name": "fire_coral_block",
+      "description": "火珊瑚块"
     },
     {
       "name": "fire_coral_fan",
@@ -1697,6 +1793,18 @@
     {
       "name": "flint_and_steel",
       "description": "打火石"
+    },
+    {
+      "name": "flow_armor_trim_smithing_template",
+      "description": "涡流盔甲纹饰锻造模板"
+    },
+    {
+      "name": "flow_banner_pattern",
+      "description": "涡流旗帜图案"
+    },
+    {
+      "name": "flow_pottery_sherd",
+      "description": "涡流纹样陶片"
     },
     {
       "name": "flower_banner_pattern",
@@ -1888,7 +1996,7 @@
     },
     {
       "name": "grass_path",
-      "description": "草径"
+      "description": "土径"
     },
     {
       "name": "gravel",
@@ -1995,6 +2103,14 @@
       "description": "火药"
     },
     {
+      "name": "guster_banner_pattern",
+      "description": "旋风旗帜图案"
+    },
+    {
+      "name": "guster_pottery_sherd",
+      "description": "旋风纹样陶片"
+    },
+    {
       "name": "hanging_roots",
       "description": "垂根"
     },
@@ -2017,6 +2133,10 @@
     {
       "name": "heartbreak_pottery_sherd",
       "description": "心碎纹样陶片"
+    },
+    {
+      "name": "heavy_core",
+      "description": "沉重核心"
     },
     {
       "name": "heavy_weighted_pressure_plate",
@@ -2053,6 +2173,10 @@
     {
       "name": "horn_coral",
       "description": "鹿角珊瑚"
+    },
+    {
+      "name": "horn_coral_block",
+      "description": "鹿角珊瑚块"
     },
     {
       "name": "horn_coral_fan",
@@ -2263,6 +2387,10 @@
       "description": "大型紫晶芽"
     },
     {
+      "name": "large_fern",
+      "description": "大型蕨"
+    },
+    {
       "name": "lava_bucket",
       "description": "熔岩桶"
     },
@@ -2399,6 +2527,10 @@
       "description": "避雷针"
     },
     {
+      "name": "lilac",
+      "description": "丁香"
+    },
+    {
       "name": "lily_of_the_valley",
       "description": "铃兰"
     },
@@ -2469,6 +2601,10 @@
     {
       "name": "loom",
       "description": "织布机"
+    },
+    {
+      "name": "mace",
+      "description": "重锤"
     },
     {
       "name": "magenta_candle",
@@ -2731,6 +2867,14 @@
       "description": "音乐唱片 C418 - chirp"
     },
     {
+      "name": "music_disc_creator",
+      "description": "音乐唱片 Lena Raine - Creator"
+    },
+    {
+      "name": "music_disc_creator_music_box",
+      "description": "音乐唱片 Lena Raine - Creator（八音盒）"
+    },
+    {
       "name": "music_disc_far",
       "description": "音乐唱片 C418 - far"
     },
@@ -2749,6 +2893,10 @@
     {
       "name": "music_disc_pigstep",
       "description": "音乐唱片 Lena Raine - Pigstep"
+    },
+    {
+      "name": "music_disc_precipice",
+      "description": "音乐唱片 Aaron Cherof - Precipice"
     },
     {
       "name": "music_disc_relic",
@@ -2788,11 +2936,15 @@
     },
     {
       "name": "nether_brick",
-      "description": "下界砖"
+      "description": "下界砖块"
     },
     {
       "name": "nether_brick_fence",
       "description": "下界砖栅栏"
+    },
+    {
+      "name": "nether_brick_slab",
+      "description": "下界砖台阶"
     },
     {
       "name": "nether_brick_stairs",
@@ -2820,7 +2972,7 @@
     },
     {
       "name": "netherbrick",
-      "description": "下界砖块"
+      "description": "下界砖"
     },
     {
       "name": "netherite_axe",
@@ -2951,6 +3103,14 @@
       "description": "赭黄蛙明灯"
     },
     {
+      "name": "ominous_bottle",
+      "description": "不祥之瓶"
+    },
+    {
+      "name": "ominous_trial_key",
+      "description": "不祥试炼钥匙"
+    },
+    {
       "name": "orange_candle",
       "description": "橙色蜡烛"
     },
@@ -3003,8 +3163,28 @@
       "description": "滨菊"
     },
     {
+      "name": "oxidized_chiseled_copper",
+      "description": "氧化的雕纹铜块"
+    },
+    {
       "name": "oxidized_copper",
       "description": "氧化的铜块"
+    },
+    {
+      "name": "oxidized_copper_bulb",
+      "description": "氧化的铜灯"
+    },
+    {
+      "name": "oxidized_copper_door",
+      "description": "氧化的铜门"
+    },
+    {
+      "name": "oxidized_copper_grate",
+      "description": "氧化的铜格栅"
+    },
+    {
+      "name": "oxidized_copper_trapdoor",
+      "description": "氧化的铜活板门"
     },
     {
       "name": "oxidized_cut_copper",
@@ -3045,6 +3225,14 @@
     {
       "name": "pearlescent_froglight",
       "description": "珠光蛙明灯"
+    },
+    {
+      "name": "peony",
+      "description": "牡丹"
+    },
+    {
+      "name": "petrified_oak_slab",
+      "description": "石化橡木台阶"
     },
     {
       "name": "phantom_membrane",
@@ -3243,6 +3431,22 @@
       "description": "磨制花岗岩楼梯"
     },
     {
+      "name": "polished_tuff",
+      "description": "磨制凝灰岩"
+    },
+    {
+      "name": "polished_tuff_slab",
+      "description": "磨制凝灰岩台阶"
+    },
+    {
+      "name": "polished_tuff_stairs",
+      "description": "磨制凝灰岩楼梯"
+    },
+    {
+      "name": "polished_tuff_wall",
+      "description": "磨制凝灰岩墙"
+    },
+    {
       "name": "popped_chorus_fruit",
       "description": "爆裂紫颂果"
     },
@@ -3398,6 +3602,10 @@
     {
       "name": "quartz_ore",
       "description": "下界石英矿石"
+    },
+    {
+      "name": "quartz_slab",
+      "description": "石英台阶"
     },
     {
       "name": "quartz_stairs",
@@ -3582,6 +3790,10 @@
       "description": "肋骨盔甲纹饰锻造模板"
     },
     {
+      "name": "rose_bush",
+      "description": "玫瑰丛"
+    },
+    {
       "name": "rotten_flesh",
       "description": "腐肉"
     },
@@ -3620,12 +3832,20 @@
       ]
     },
     {
+      "name": "sandstone_slab",
+      "description": "砂岩台阶"
+    },
+    {
       "name": "sandstone_stairs",
       "description": "砂岩楼梯"
     },
     {
       "name": "scaffolding",
       "description": "脚手架"
+    },
+    {
+      "name": "scrape_pottery_sherd",
+      "description": "刮削纹样陶片"
     },
     {
       "name": "sculk",
@@ -3686,6 +3906,10 @@
     {
       "name": "shield",
       "description": "盾牌"
+    },
+    {
+      "name": "short_grass",
+      "description": "矮草丛"
     },
     {
       "name": "shroomlight",
@@ -3778,6 +4002,10 @@
     {
       "name": "smooth_stone",
       "description": "平滑石头"
+    },
+    {
+      "name": "smooth_stone_slab",
+      "description": "平滑石头台阶"
     },
     {
       "name": "sniffer_egg",
@@ -3945,34 +4173,11 @@
     },
     {
       "name": "stone",
-      "description": "石头/花岗岩/磨制花岗岩/闪长岩/磨制闪长岩/安山岩/磨制安山岩",
-      "descriptions": [
-        "石头",
-        "花岗岩",
-        "磨制花岗岩",
-        "闪长岩",
-        "磨制闪长岩",
-        "安山岩",
-        "磨制安山岩"
-      ]
+      "description": "石头"
     },
     {
       "name": "stone_axe",
       "description": "石斧"
-    },
-    {
-      "name": "stone_block_slab",
-      "description": "平滑石头台阶/砂岩台阶/石化橡木台阶/圆石台阶/红砖台阶/石砖台阶/石英台阶/下界砖台阶",
-      "descriptions": [
-        "平滑石头台阶",
-        "砂岩台阶",
-        "石化橡木台阶",
-        "圆石台阶",
-        "红砖台阶",
-        "石砖台阶",
-        "石英台阶",
-        "下界砖台阶"
-      ]
     },
     {
       "name": "stone_block_slab2",
@@ -4014,6 +4219,10 @@
       ]
     },
     {
+      "name": "stone_brick_slab",
+      "description": "石砖台阶"
+    },
+    {
       "name": "stone_brick_stairs",
       "description": "石砖楼梯"
     },
@@ -4039,7 +4248,7 @@
     },
     {
       "name": "stone_stairs",
-      "description": "石头楼梯"
+      "description": "圆石楼梯"
     },
     {
       "name": "stone_sword",
@@ -4172,6 +4381,10 @@
       "description": "甘蔗"
     },
     {
+      "name": "sunflower",
+      "description": "向日葵"
+    },
+    {
       "name": "suspicious_gravel",
       "description": "可疑的沙砾"
     },
@@ -4196,12 +4409,8 @@
       "description": "蝌蚪刷怪蛋"
     },
     {
-      "name": "tallgrass",
-      "description": "蕨/草",
-      "descriptions": [
-        "蕨",
-        "草"
-      ]
+      "name": "tall_grass",
+      "description": "高草丛"
     },
     {
       "name": "target",
@@ -4252,6 +4461,14 @@
       "description": "陷阱箱"
     },
     {
+      "name": "trial_key",
+      "description": "试炼钥匙"
+    },
+    {
+      "name": "trial_spawner",
+      "description": "试炼刷怪笼"
+    },
+    {
       "name": "trident",
       "description": "三叉戟"
     },
@@ -4276,12 +4493,44 @@
       "description": "管珊瑚"
     },
     {
+      "name": "tube_coral_block",
+      "description": "管珊瑚块"
+    },
+    {
       "name": "tube_coral_fan",
       "description": "管珊瑚扇"
     },
     {
       "name": "tuff",
       "description": "凝灰岩"
+    },
+    {
+      "name": "tuff_brick_slab",
+      "description": "凝灰岩砖台阶"
+    },
+    {
+      "name": "tuff_brick_stairs",
+      "description": "凝灰岩砖楼梯"
+    },
+    {
+      "name": "tuff_brick_wall",
+      "description": "凝灰岩砖墙"
+    },
+    {
+      "name": "tuff_bricks",
+      "description": "凝灰岩砖"
+    },
+    {
+      "name": "tuff_slab",
+      "description": "凝灰岩台阶"
+    },
+    {
+      "name": "tuff_stairs",
+      "description": "凝灰岩楼梯"
+    },
+    {
+      "name": "tuff_wall",
+      "description": "凝灰岩墙"
     },
     {
       "name": "turtle_egg",
@@ -4306,6 +4555,10 @@
     {
       "name": "undyed_shulker_box",
       "description": "潜影盒"
+    },
+    {
+      "name": "vault",
+      "description": "宝库"
     },
     {
       "name": "verdant_froglight",
@@ -4424,8 +4677,28 @@
       "description": "睡莲"
     },
     {
+      "name": "waxed_chiseled_copper",
+      "description": "涂蜡的雕纹铜块"
+    },
+    {
       "name": "waxed_copper",
       "description": "涂蜡的铜块"
+    },
+    {
+      "name": "waxed_copper_bulb",
+      "description": "涂蜡的铜灯"
+    },
+    {
+      "name": "waxed_copper_door",
+      "description": "涂蜡的铜门"
+    },
+    {
+      "name": "waxed_copper_grate",
+      "description": "涂蜡的铜格栅"
+    },
+    {
+      "name": "waxed_copper_trapdoor",
+      "description": "涂蜡的铜活板门"
     },
     {
       "name": "waxed_cut_copper",
@@ -4440,8 +4713,28 @@
       "description": "涂蜡的切制铜楼梯"
     },
     {
+      "name": "waxed_exposed_chiseled_copper",
+      "description": "涂蜡的斑驳雕纹铜块"
+    },
+    {
       "name": "waxed_exposed_copper",
       "description": "涂蜡的斑驳铜块"
+    },
+    {
+      "name": "waxed_exposed_copper_bulb",
+      "description": "涂蜡的斑驳铜灯"
+    },
+    {
+      "name": "waxed_exposed_copper_door",
+      "description": "涂蜡的斑驳铜门"
+    },
+    {
+      "name": "waxed_exposed_copper_grate",
+      "description": "涂蜡的斑驳铜格栅"
+    },
+    {
+      "name": "waxed_exposed_copper_trapdoor",
+      "description": "涂蜡的斑驳铜活板门"
     },
     {
       "name": "waxed_exposed_cut_copper",
@@ -4456,8 +4749,28 @@
       "description": "涂蜡的斑驳切制铜楼梯"
     },
     {
+      "name": "waxed_oxidized_chiseled_copper",
+      "description": "涂蜡的氧化雕纹铜块"
+    },
+    {
       "name": "waxed_oxidized_copper",
       "description": "涂蜡的氧化铜块"
+    },
+    {
+      "name": "waxed_oxidized_copper_bulb",
+      "description": "涂蜡的氧化铜灯"
+    },
+    {
+      "name": "waxed_oxidized_copper_door",
+      "description": "涂蜡的氧化铜门"
+    },
+    {
+      "name": "waxed_oxidized_copper_grate",
+      "description": "涂蜡的氧化铜格栅"
+    },
+    {
+      "name": "waxed_oxidized_copper_trapdoor",
+      "description": "涂蜡的氧化铜活板门"
     },
     {
       "name": "waxed_oxidized_cut_copper",
@@ -4472,8 +4785,28 @@
       "description": "涂蜡的氧化切制铜楼梯"
     },
     {
+      "name": "waxed_weathered_chiseled_copper",
+      "description": "涂蜡的锈蚀雕纹铜块"
+    },
+    {
       "name": "waxed_weathered_copper",
       "description": "涂蜡的锈蚀铜块"
+    },
+    {
+      "name": "waxed_weathered_copper_bulb",
+      "description": "涂蜡的锈蚀铜灯"
+    },
+    {
+      "name": "waxed_weathered_copper_door",
+      "description": "涂蜡的锈蚀铜门"
+    },
+    {
+      "name": "waxed_weathered_copper_grate",
+      "description": "涂蜡的锈蚀铜格栅"
+    },
+    {
+      "name": "waxed_weathered_copper_trapdoor",
+      "description": "涂蜡的锈蚀铜活板门"
     },
     {
       "name": "waxed_weathered_cut_copper",
@@ -4492,8 +4825,28 @@
       "description": "向导盔甲纹饰锻造模板"
     },
     {
+      "name": "weathered_chiseled_copper",
+      "description": "锈蚀的雕纹铜块"
+    },
+    {
       "name": "weathered_copper",
       "description": "锈蚀的铜块"
+    },
+    {
+      "name": "weathered_copper_bulb",
+      "description": "锈蚀的铜灯"
+    },
+    {
+      "name": "weathered_copper_door",
+      "description": "锈蚀的铜门"
+    },
+    {
+      "name": "weathered_copper_grate",
+      "description": "锈蚀的铜格栅"
+    },
+    {
+      "name": "weathered_copper_trapdoor",
+      "description": "锈蚀的铜活板门"
     },
     {
       "name": "weathered_cut_copper",
@@ -4574,6 +4927,10 @@
     {
       "name": "wild_armor_trim_smithing_template",
       "description": "荒野盔甲纹饰锻造模板"
+    },
+    {
+      "name": "wind_charge",
+      "description": "风弹"
     },
     {
       "name": "witch_spawn_egg",

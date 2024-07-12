@@ -127,7 +127,7 @@
     },
     {
       "name": "acacia_double_slab",
-      "description": "双层金合欢台阶",
+      "description": "金合欢木双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -1710,7 +1710,7 @@
     },
     {
       "name": "bamboo_double_slab",
-      "description": "双层竹台阶",
+      "description": "竹双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -1943,7 +1943,7 @@
     },
     {
       "name": "bamboo_mosaic_double_slab",
-      "description": "双层竹马赛克台阶",
+      "description": "竹马赛克双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -2994,7 +2994,7 @@
     },
     {
       "name": "birch_double_slab",
-      "description": "双层桦木台阶",
+      "description": "白桦木双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -4621,7 +4621,7 @@
     },
     {
       "name": "blackstone_double_slab",
-      "description": "双层黑石台阶",
+      "description": "黑石双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -5850,6 +5850,54 @@
       ]
     },
     {
+      "name": "brain_coral_block",
+      "description": "脑纹珊瑚块",
+      "blockStates": [
+        {
+          "key": "coral_color",
+          "description": "已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种",
+          "defaultValue": 1,
+          "values": [
+            {
+              "value": "blue",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "pink",
+              "description": "（默认值）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "purple",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "red",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "yellow",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            }
+          ]
+        },
+        {
+          "key": "dead_bit",
+          "description": "已弃用，为兼容性而保留 方块是否因离开水而失活",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "（无效）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "brain_coral_fan",
       "description": "脑纹珊瑚扇",
       "blockStates": [
@@ -5948,6 +5996,80 @@
     {
       "name": "brick_block",
       "description": "红砖块"
+    },
+    {
+      "name": "brick_slab",
+      "description": "红砖台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        },
+        {
+          "key": "stone_slab_type",
+          "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶",
+          "defaultValue": 4,
+          "values": [
+            {
+              "value": "smooth_stone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "sandstone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "wood",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "cobblestone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "brick",
+              "description": "（默认值）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "stone_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "quartz",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "nether_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            }
+          ]
+        },
+        {
+          "key": "top_slot_bit",
+          "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "brick_stairs",
@@ -6809,6 +6931,54 @@
     {
       "name": "bubble_coral",
       "description": "气泡珊瑚",
+      "blockStates": [
+        {
+          "key": "coral_color",
+          "description": "已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种",
+          "defaultValue": 2,
+          "values": [
+            {
+              "value": "blue",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "pink",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "purple",
+              "description": "（默认值）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "red",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "yellow",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            }
+          ]
+        },
+        {
+          "key": "dead_bit",
+          "description": "已弃用，为兼容性而保留 方块是否因离开水而失活",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "（无效）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bubble_coral_block",
+      "description": "气泡珊瑚块",
       "blockStates": [
         {
           "key": "coral_color",
@@ -7933,7 +8103,7 @@
     },
     {
       "name": "cherry_double_slab",
-      "description": "双层樱花木台阶",
+      "description": "樱花木双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -8953,6 +9123,10 @@
       ]
     },
     {
+      "name": "chiseled_copper",
+      "description": "雕纹铜块"
+    },
+    {
       "name": "chiseled_deepslate",
       "description": "雕纹深板岩"
     },
@@ -8963,6 +9137,14 @@
     {
       "name": "chiseled_polished_blackstone",
       "description": "雕纹磨制黑石"
+    },
+    {
+      "name": "chiseled_tuff",
+      "description": "雕纹凝灰岩"
+    },
+    {
+      "name": "chiseled_tuff_bricks",
+      "description": "雕纹凝灰岩砖"
     },
     {
       "name": "chorus_flower",
@@ -9046,7 +9228,7 @@
     },
     {
       "name": "clay",
-      "description": "黏土"
+      "description": "黏土块"
     },
     {
       "name": "coal_block",
@@ -9062,7 +9244,7 @@
     },
     {
       "name": "cobbled_deepslate_double_slab",
-      "description": "双层深板岩圆石台阶",
+      "description": "深板岩圆石双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -9267,6 +9449,80 @@
     {
       "name": "cobblestone",
       "description": "圆石"
+    },
+    {
+      "name": "cobblestone_slab",
+      "description": "圆石台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        },
+        {
+          "key": "stone_slab_type",
+          "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶",
+          "defaultValue": 3,
+          "values": [
+            {
+              "value": "smooth_stone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "sandstone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "wood",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "cobblestone",
+              "description": "（默认值）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "stone_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "quartz",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "nether_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            }
+          ]
+        },
+        {
+          "key": "top_slot_bit",
+          "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "cobblestone_wall",
@@ -9643,12 +9899,175 @@
       "description": "铜块"
     },
     {
+      "name": "copper_bulb",
+      "description": "铜灯",
+      "blockStates": [
+        {
+          "key": "lit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于熄灭状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于点亮状态"
+            }
+          ]
+        },
+        {
+          "key": "powered_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块被红石信号激活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块未被激活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "copper_door",
+      "description": "铜门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 1,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 2,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 3,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            }
+          ]
+        },
+        {
+          "key": "door_hinge_bit",
+          "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "copper_grate",
+      "description": "铜格栅"
+    },
+    {
       "name": "copper_ore",
       "description": "铜矿石"
     },
     {
-      "name": "coral_block",
-      "description": "珊瑚块"
+      "name": "copper_trapdoor",
+      "description": "铜活板门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）活板门朝向东方，轴在西方"
+            },
+            {
+              "value": 1,
+              "description": "活板门朝向西方，轴在东方"
+            },
+            {
+              "value": 2,
+              "description": "活板门朝向南方，轴在北方"
+            },
+            {
+              "value": 3,
+              "description": "活板门朝向北方，轴在南方"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于打开状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于关闭状态"
+            }
+          ]
+        },
+        {
+          "key": "upside_down_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块主要位于方块网格的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块块主要位于方块网格的下半部分"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "coral_fan_hang",
@@ -9679,15 +10098,16 @@
         },
         {
           "key": "coral_hang_type_bit",
+          "description": "墙上的珊瑚扇的类型",
           "defaultValue": 0,
           "values": [
             {
               "value": true,
-              "description": "脑纹珊瑚扇"
+              "description": "墙上的珊瑚扇的类型"
             },
             {
               "value": false,
-              "description": "（默认值）管珊瑚扇"
+              "description": "（默认值）墙上的珊瑚扇的类型"
             }
           ]
         },
@@ -9736,15 +10156,16 @@
         },
         {
           "key": "coral_hang_type_bit",
+          "description": "墙上的珊瑚扇的类型",
           "defaultValue": 0,
           "values": [
             {
               "value": true,
-              "description": "火珊瑚扇"
+              "description": "墙上的珊瑚扇的类型"
             },
             {
               "value": false,
-              "description": "（默认值）气泡珊瑚扇"
+              "description": "（默认值）墙上的珊瑚扇的类型"
             }
           ]
         },
@@ -9793,15 +10214,16 @@
         },
         {
           "key": "coral_hang_type_bit",
+          "description": "墙上的珊瑚扇的类型",
           "defaultValue": 0,
           "values": [
             {
               "value": true,
-              "description": "未使用"
+              "description": "墙上的珊瑚扇的类型"
             },
             {
               "value": false,
-              "description": "（默认值）鹿角珊瑚扇"
+              "description": "（默认值）墙上的珊瑚扇的类型"
             }
           ]
         },
@@ -9893,6 +10315,94 @@
     {
       "name": "cracked_polished_blackstone_bricks",
       "description": "裂纹磨制黑石砖"
+    },
+    {
+      "name": "crafter",
+      "description": "合成器",
+      "blockStates": [
+        {
+          "key": "crafting",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "合成器正在合成物品"
+            },
+            {
+              "value": false,
+              "description": "（默认值）合成器没有在合成物品"
+            }
+          ]
+        },
+        {
+          "key": "orientation",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "down_east",
+              "description": "（默认值）方块面朝下，顶部朝东"
+            },
+            {
+              "value": "down_north",
+              "description": "方块面朝下，顶部朝北"
+            },
+            {
+              "value": "down_south",
+              "description": "方块面朝下，顶部朝南"
+            },
+            {
+              "value": "down_west",
+              "description": "方块面朝下，顶部朝西"
+            },
+            {
+              "value": "up_east",
+              "description": "方块面朝上，顶部朝东"
+            },
+            {
+              "value": "up_north",
+              "description": "方块面朝上，顶部朝北"
+            },
+            {
+              "value": "up_south",
+              "description": "方块面朝上，顶部朝南"
+            },
+            {
+              "value": "up_west",
+              "description": "方块面朝上，顶部朝西"
+            },
+            {
+              "value": "west_up",
+              "description": "方块面朝西，顶部朝上"
+            },
+            {
+              "value": "east_up",
+              "description": "方块面朝东，顶部朝上"
+            },
+            {
+              "value": "north_up",
+              "description": "方块面朝北，顶部朝上"
+            },
+            {
+              "value": "south_up",
+              "description": "方块面朝南，顶部朝上"
+            }
+          ]
+        },
+        {
+          "key": "triggered_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块被红石信号激活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块未被红石信号激活"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "crafting_table",
@@ -10023,7 +10533,7 @@
     },
     {
       "name": "crimson_double_slab",
-      "description": "双绯红木台阶",
+      "description": "绯红木双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -11561,7 +12071,7 @@
     },
     {
       "name": "dark_oak_double_slab",
-      "description": "双层深色橡木台阶",
+      "description": "深色橡木双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -12696,6 +13206,54 @@
       ]
     },
     {
+      "name": "dead_brain_coral_block",
+      "description": "失活的脑纹珊瑚块",
+      "blockStates": [
+        {
+          "key": "coral_color",
+          "description": "已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种",
+          "defaultValue": 1,
+          "values": [
+            {
+              "value": "blue",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "pink",
+              "description": "（默认值）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "purple",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "red",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "yellow",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            }
+          ]
+        },
+        {
+          "key": "dead_bit",
+          "description": "已弃用，为兼容性而保留 方块是否因离开水而失活",
+          "defaultValue": 1,
+          "values": [
+            {
+              "value": true,
+              "description": "（默认值）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            },
+            {
+              "value": false,
+              "description": "（无效）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "dead_brain_coral_fan",
       "description": "失活的脑纹珊瑚扇",
       "blockStates": [
@@ -12746,6 +13304,54 @@
     {
       "name": "dead_bubble_coral",
       "description": "失活的气泡珊瑚",
+      "blockStates": [
+        {
+          "key": "coral_color",
+          "description": "已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种",
+          "defaultValue": 2,
+          "values": [
+            {
+              "value": "blue",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "pink",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "purple",
+              "description": "（默认值）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "red",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "yellow",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            }
+          ]
+        },
+        {
+          "key": "dead_bit",
+          "description": "已弃用，为兼容性而保留 方块是否因离开水而失活",
+          "defaultValue": 1,
+          "values": [
+            {
+              "value": true,
+              "description": "（默认值）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            },
+            {
+              "value": false,
+              "description": "（无效）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dead_bubble_coral_block",
+      "description": "失活的气泡珊瑚块",
       "blockStates": [
         {
           "key": "coral_color",
@@ -12888,6 +13494,54 @@
       ]
     },
     {
+      "name": "dead_fire_coral_block",
+      "description": "失活的火珊瑚块",
+      "blockStates": [
+        {
+          "key": "coral_color",
+          "description": "已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种",
+          "defaultValue": 3,
+          "values": [
+            {
+              "value": "blue",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "pink",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "purple",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "red",
+              "description": "（默认值）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "yellow",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            }
+          ]
+        },
+        {
+          "key": "dead_bit",
+          "description": "已弃用，为兼容性而保留 方块是否因离开水而失活",
+          "defaultValue": 1,
+          "values": [
+            {
+              "value": true,
+              "description": "（默认值）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            },
+            {
+              "value": false,
+              "description": "（无效）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "dead_fire_coral_fan",
       "description": "失活的火珊瑚扇",
       "blockStates": [
@@ -12984,6 +13638,54 @@
       ]
     },
     {
+      "name": "dead_horn_coral_block",
+      "description": "失活的鹿角珊瑚块",
+      "blockStates": [
+        {
+          "key": "coral_color",
+          "description": "已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种",
+          "defaultValue": 4,
+          "values": [
+            {
+              "value": "blue",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "pink",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "purple",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "red",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "yellow",
+              "description": "（默认值）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            }
+          ]
+        },
+        {
+          "key": "dead_bit",
+          "description": "已弃用，为兼容性而保留 方块是否因离开水而失活",
+          "defaultValue": 1,
+          "values": [
+            {
+              "value": true,
+              "description": "（默认值）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            },
+            {
+              "value": false,
+              "description": "（无效）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "dead_horn_coral_fan",
       "description": "失活的鹿角珊瑚扇",
       "blockStates": [
@@ -13034,6 +13736,54 @@
     {
       "name": "dead_tube_coral",
       "description": "失活的管珊瑚",
+      "blockStates": [
+        {
+          "key": "coral_color",
+          "description": "已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "blue",
+              "description": "（默认值）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "pink",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "purple",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "red",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "yellow",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            }
+          ]
+        },
+        {
+          "key": "dead_bit",
+          "description": "已弃用，为兼容性而保留 方块是否因离开水而失活",
+          "defaultValue": 1,
+          "values": [
+            {
+              "value": true,
+              "description": "（默认值）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            },
+            {
+              "value": false,
+              "description": "（无效）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dead_tube_coral_block",
+      "description": "失活的管珊瑚块",
       "blockStates": [
         {
           "key": "coral_color",
@@ -13185,7 +13935,7 @@
     },
     {
       "name": "deepslate_brick_double_slab",
-      "description": "双层深板岩砖台阶",
+      "description": "深板岩砖双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -13425,7 +14175,7 @@
     },
     {
       "name": "deepslate_tile_double_slab",
-      "description": "双层深板岩瓦台阶",
+      "description": "深板岩瓦双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -13872,7 +14622,7 @@
     },
     {
       "name": "double_cut_copper_slab",
-      "description": "双切制铜台阶",
+      "description": "切制铜双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -13906,29 +14656,17 @@
       ]
     },
     {
-      "name": "double_plant",
-      "description": "向日葵/丁香/高草丛/大型蕨/玫瑰丛/牡丹",
-      "descriptions": [
-        "向日葵",
-        "丁香",
-        "高草丛",
-        "大型蕨",
-        "玫瑰丛",
-        "牡丹"
-      ]
-    },
-    {
       "name": "double_stone_block_slab",
-      "description": "双层平滑石头台阶/双层砂岩台阶/双层石化橡木台阶/双层圆石台阶/双层砖块台阶/双层石砖台阶/双层石英台阶/双层下界砖台阶",
+      "description": "平滑石头双层台阶/砂岩双层台阶/石化橡木双层台阶/圆石双层台阶/红砖双层台阶/石砖双层台阶/石英双层台阶/下界砖双层台阶",
       "descriptions": [
-        "双层平滑石头台阶",
-        "双层砂岩台阶",
-        "双层石化橡木台阶",
-        "双层圆石台阶",
-        "双层砖块台阶",
-        "双层石砖台阶",
-        "双层石英台阶",
-        "双层下界砖台阶"
+        "平滑石头双层台阶",
+        "砂岩双层台阶",
+        "石化橡木双层台阶",
+        "圆石双层台阶",
+        "红砖双层台阶",
+        "石砖双层台阶",
+        "石英双层台阶",
+        "下界砖双层台阶"
       ],
       "blockStates": [
         {
@@ -13947,39 +14685,40 @@
         },
         {
           "key": "stone_slab_type",
+          "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶",
           "defaultValue": 0,
           "values": [
             {
               "value": "smooth_stone",
-              "description": "（默认值）平滑石头台阶"
+              "description": "（默认值）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
             },
             {
               "value": "sandstone",
-              "description": "砂岩台阶"
+              "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
             },
             {
               "value": "wood",
-              "description": "石化橡木台阶"
+              "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
             },
             {
               "value": "cobblestone",
-              "description": "圆石台阶"
+              "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
             },
             {
               "value": "brick",
-              "description": "红砖台阶"
+              "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
             },
             {
               "value": "stone_brick",
-              "description": "石砖台阶"
+              "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
             },
             {
               "value": "quartz",
-              "description": "石英台阶"
+              "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
             },
             {
               "value": "nether_brick",
-              "description": "下界砖台阶"
+              "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
             }
           ]
         },
@@ -14002,16 +14741,16 @@
     },
     {
       "name": "double_stone_block_slab2",
-      "description": "双层红砂岩台阶/双层紫珀台阶/双层海晶石台阶/双层暗海晶石台阶/双层海晶石砖台阶/双层苔石台阶/双层平滑砂岩台阶/双层红色下界砖台阶",
+      "description": "红砂岩双层台阶/紫珀双层台阶/海晶石双层台阶/暗海晶石双层台阶/海晶石砖双层台阶/苔石双层台阶/平滑砂岩双层台阶/红色下界砖双层台阶",
       "descriptions": [
-        "双层红砂岩台阶",
-        "双层紫珀台阶",
-        "双层海晶石台阶",
-        "双层暗海晶石台阶",
-        "双层海晶石砖台阶",
-        "双层苔石台阶",
-        "双层平滑砂岩台阶",
-        "双层红色下界砖台阶"
+        "红砂岩双层台阶",
+        "紫珀双层台阶",
+        "海晶石双层台阶",
+        "暗海晶石双层台阶",
+        "海晶石砖双层台阶",
+        "苔石双层台阶",
+        "平滑砂岩双层台阶",
+        "红色下界砖双层台阶"
       ],
       "blockStates": [
         {
@@ -14030,39 +14769,40 @@
         },
         {
           "key": "stone_slab_type_2",
+          "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶",
           "defaultValue": 0,
           "values": [
             {
               "value": "red_sandstone",
-              "description": "（默认值）红砂岩台阶"
+              "description": "（默认值）已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "purpur",
-              "description": "紫珀台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "prismarine_rough",
-              "description": "海晶石台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "prismarine_dark",
-              "description": "暗海晶石台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "prismarine_brick",
-              "description": "海晶石砖台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "mossy_cobblestone",
-              "description": "苔石台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "smooth_sandstone",
-              "description": "平滑砂岩台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "red_nether_brick",
-              "description": "红色下界砖台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             }
           ]
         },
@@ -14085,16 +14825,16 @@
     },
     {
       "name": "double_stone_block_slab3",
-      "description": "双层末地石砖台阶/双层平滑红砂岩台阶/双层磨制安山岩台阶/双层安山岩台阶/双层闪长岩台阶/双层磨制闪长岩台阶/双层花岗岩台阶/双层磨制花岗岩台阶",
+      "description": "末地石砖双层台阶/平滑红砂岩双层台阶/磨制安山岩双层台阶/安山岩双层台阶/闪长岩双层台阶/磨制闪长岩双层台阶/花岗岩双层台阶/磨制花岗岩双层台阶",
       "descriptions": [
-        "双层末地石砖台阶",
-        "双层平滑红砂岩台阶",
-        "双层磨制安山岩台阶",
-        "双层安山岩台阶",
-        "双层闪长岩台阶",
-        "双层磨制闪长岩台阶",
-        "双层花岗岩台阶",
-        "双层磨制花岗岩台阶"
+        "末地石砖双层台阶",
+        "平滑红砂岩双层台阶",
+        "磨制安山岩双层台阶",
+        "安山岩双层台阶",
+        "闪长岩双层台阶",
+        "磨制闪长岩双层台阶",
+        "花岗岩双层台阶",
+        "磨制花岗岩双层台阶"
       ],
       "blockStates": [
         {
@@ -14113,39 +14853,40 @@
         },
         {
           "key": "stone_slab_type_3",
+          "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶",
           "defaultValue": 0,
           "values": [
             {
               "value": "end_stone_brick",
-              "description": "（默认值）末地石砖台阶"
+              "description": "（默认值）已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "smooth_red_sandstone",
-              "description": "平滑红砂岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "polished_andesite",
-              "description": "磨制安山岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "andesite",
-              "description": "安山岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "diorite",
-              "description": "闪长岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "polished_diorite",
-              "description": "磨制闪长岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "granite",
-              "description": "花岗岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "polished_granite",
-              "description": "磨制花岗岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             }
           ]
         },
@@ -14168,13 +14909,13 @@
     },
     {
       "name": "double_stone_block_slab4",
-      "description": "双层苔石砖台阶/双层平滑石英台阶/双层石台阶/双层切制砂岩台阶/双层切制红砂岩台阶",
+      "description": "苔石砖双层台阶/平滑石英双层台阶/石头双层台阶/切制砂岩双层台阶/切制红砂岩双层台阶",
       "descriptions": [
-        "双层苔石砖台阶",
-        "双层平滑石英台阶",
-        "双层石台阶",
-        "双层切制砂岩台阶",
-        "双层切制红砂岩台阶"
+        "苔石砖双层台阶",
+        "平滑石英双层台阶",
+        "石头双层台阶",
+        "切制砂岩双层台阶",
+        "切制红砂岩双层台阶"
       ],
       "blockStates": [
         {
@@ -14193,27 +14934,28 @@
         },
         {
           "key": "stone_slab_type_4",
+          "description": "已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶",
           "defaultValue": 0,
           "values": [
             {
               "value": "mossy_stone_brick",
-              "description": "（默认值）苔石砖台阶"
+              "description": "（默认值）已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶"
             },
             {
               "value": "smooth_quartz",
-              "description": "平滑石英台阶"
+              "description": "已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶"
             },
             {
               "value": "stone",
-              "description": "石头台阶"
+              "description": "已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶"
             },
             {
               "value": "cut_sandstone",
-              "description": "切制砂岩台阶"
+              "description": "已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶"
             },
             {
               "value": "cut_red_sandstone",
-              "description": "切制红砂岩台阶"
+              "description": "已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶"
             }
           ]
         },
@@ -14522,8 +15264,179 @@
       ]
     },
     {
+      "name": "exposed_chiseled_copper",
+      "description": "斑驳的雕纹铜块"
+    },
+    {
       "name": "exposed_copper",
       "description": "斑驳的铜块"
+    },
+    {
+      "name": "exposed_copper_bulb",
+      "description": "斑驳的铜灯",
+      "blockStates": [
+        {
+          "key": "lit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于熄灭状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于点亮状态"
+            }
+          ]
+        },
+        {
+          "key": "powered_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块被红石信号激活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块未被激活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "exposed_copper_door",
+      "description": "斑驳的铜门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 1,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 2,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 3,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            }
+          ]
+        },
+        {
+          "key": "door_hinge_bit",
+          "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "exposed_copper_grate",
+      "description": "斑驳的铜格栅"
+    },
+    {
+      "name": "exposed_copper_trapdoor",
+      "description": "斑驳的铜活板门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）活板门朝向东方，轴在西方"
+            },
+            {
+              "value": 1,
+              "description": "活板门朝向西方，轴在东方"
+            },
+            {
+              "value": 2,
+              "description": "活板门朝向南方，轴在北方"
+            },
+            {
+              "value": 3,
+              "description": "活板门朝向北方，轴在南方"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于打开状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于关闭状态"
+            }
+          ]
+        },
+        {
+          "key": "upside_down_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块主要位于方块网格的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块块主要位于方块网格的下半部分"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "exposed_cut_copper",
@@ -14608,7 +15521,7 @@
     },
     {
       "name": "exposed_double_cut_copper_slab",
-      "description": "斑驳的双切制铜台阶",
+      "description": "斑驳的切制铜双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -14742,6 +15655,35 @@
       ]
     },
     {
+      "name": "fern",
+      "description": "蕨",
+      "blockStates": [
+        {
+          "key": "tall_grass_type",
+          "description": "已弃用，为兼容性而保留 草丛的类型 default：未使用，草灌木 tall： 草 fern： 蕨 snow：未使用",
+          "defaultValue": 2,
+          "values": [
+            {
+              "value": "default",
+              "description": "（无效）已弃用，为兼容性而保留 草丛的类型 default：未使用，草灌木 tall： 草 fern： 蕨 snow：未使用"
+            },
+            {
+              "value": "tall",
+              "description": "（无效）已弃用，为兼容性而保留 草丛的类型 default：未使用，草灌木 tall： 草 fern： 蕨 snow：未使用"
+            },
+            {
+              "value": "fern",
+              "description": "（默认值）已弃用，为兼容性而保留 草丛的类型 default：未使用，草灌木 tall： 草 fern： 蕨 snow：未使用"
+            },
+            {
+              "value": "snow",
+              "description": "（无效）已弃用，为兼容性而保留 草丛的类型 default：未使用，草灌木 tall： 草 fern： 蕨 snow：未使用"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "fire",
       "description": "火",
       "blockStates": [
@@ -14821,6 +15763,54 @@
     {
       "name": "fire_coral",
       "description": "火珊瑚",
+      "blockStates": [
+        {
+          "key": "coral_color",
+          "description": "已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种",
+          "defaultValue": 3,
+          "values": [
+            {
+              "value": "blue",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "pink",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "purple",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "red",
+              "description": "（默认值）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "yellow",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            }
+          ]
+        },
+        {
+          "key": "dead_bit",
+          "description": "已弃用，为兼容性而保留 方块是否因离开水而失活",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "（无效）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fire_coral_block",
+      "description": "火珊瑚块",
       "blockStates": [
         {
           "key": "coral_color",
@@ -15808,7 +16798,7 @@
     },
     {
       "name": "grass_path",
-      "description": "草径"
+      "description": "土径"
     },
     {
       "name": "gravel",
@@ -17350,6 +18340,10 @@
       ]
     },
     {
+      "name": "heavy_core",
+      "description": "沉重核心"
+    },
+    {
       "name": "heavy_weighted_pressure_plate",
       "description": "重质测重压力板",
       "blockStates": [
@@ -17488,6 +18482,54 @@
     {
       "name": "horn_coral",
       "description": "鹿角珊瑚",
+      "blockStates": [
+        {
+          "key": "coral_color",
+          "description": "已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种",
+          "defaultValue": 4,
+          "values": [
+            {
+              "value": "blue",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "pink",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "purple",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "red",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "yellow",
+              "description": "（默认值）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            }
+          ]
+        },
+        {
+          "key": "dead_bit",
+          "description": "已弃用，为兼容性而保留 方块是否因离开水而失活",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "（无效）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "horn_coral_block",
+      "description": "鹿角珊瑚块",
       "blockStates": [
         {
           "key": "coral_color",
@@ -17879,7 +18921,7 @@
     },
     {
       "name": "jungle_double_slab",
-      "description": "双层丛林台阶",
+      "description": "丛林木双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -19034,6 +20076,57 @@
       ]
     },
     {
+      "name": "large_fern",
+      "description": "大型蕨",
+      "blockStates": [
+        {
+          "key": "double_plant_type",
+          "description": "已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa",
+          "defaultValue": 3,
+          "values": [
+            {
+              "value": "sunflower",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "syringa",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "grass",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "fern",
+              "description": "（默认值）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "rose",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "paeonia",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "lava",
       "description": "熔岩",
       "blockStates": [
@@ -19238,72 +20331,72 @@
       "blockStates": [
         {
           "key": "block_light_level",
-          "description": "光源方块的亮度等级",
+          "description": "已弃用，为兼容性而保留 光源方块的亮度等级",
           "defaultValue": 15,
           "values": [
             {
               "value": 0,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 1,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 2,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 3,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 4,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 5,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 6,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 7,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 8,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 9,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 10,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 11,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 12,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 13,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 14,
-              "description": "光源方块的亮度等级"
+              "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
             },
             {
               "value": 15,
-              "description": "（默认值）光源方块的亮度等级"
+              "description": "（默认值）已弃用，为兼容性而保留 光源方块的亮度等级"
             }
           ]
         }
@@ -20811,6 +21904,57 @@
             {
               "value": 5,
               "description": "方块朝向东方"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "lilac",
+      "description": "丁香",
+      "blockStates": [
+        {
+          "key": "double_plant_type",
+          "description": "已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa",
+          "defaultValue": 1,
+          "values": [
+            {
+              "value": "sunflower",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "syringa",
+              "description": "（默认值）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "grass",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "fern",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "rose",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "paeonia",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
             }
           ]
         }
@@ -22704,7 +23848,7 @@
     },
     {
       "name": "mangrove_double_slab",
-      "description": "双红树木台阶",
+      "description": "红树木双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -23567,31 +24711,32 @@
       "blockStates": [
         {
           "key": "monster_egg_stone_type",
+          "description": "已弃用，为兼容性而保留 chiseled_stone_brick： 虫蚀雕纹石砖 cobblestone： 虫蚀圆石 cracked_stone_brick： 虫蚀裂纹石砖 stone： 虫蚀石头 mossy_stone_brick： 虫蚀苔石砖 stone_brick： 虫蚀石砖",
           "defaultValue": 0,
           "values": [
             {
               "value": "stone",
-              "description": "（默认值）虫蚀石头"
+              "description": "（默认值）已弃用，为兼容性而保留 chiseled_stone_brick： 虫蚀雕纹石砖 cobblestone： 虫蚀圆石 cracked_stone_brick： 虫蚀裂纹石砖 stone： 虫蚀石头 mossy_stone_brick： 虫蚀苔石砖 stone_brick： 虫蚀石砖"
             },
             {
               "value": "cobblestone",
-              "description": "虫蚀圆石"
+              "description": "已弃用，为兼容性而保留 chiseled_stone_brick： 虫蚀雕纹石砖 cobblestone： 虫蚀圆石 cracked_stone_brick： 虫蚀裂纹石砖 stone： 虫蚀石头 mossy_stone_brick： 虫蚀苔石砖 stone_brick： 虫蚀石砖"
             },
             {
               "value": "stone_brick",
-              "description": "虫蚀石砖"
+              "description": "已弃用，为兼容性而保留 chiseled_stone_brick： 虫蚀雕纹石砖 cobblestone： 虫蚀圆石 cracked_stone_brick： 虫蚀裂纹石砖 stone： 虫蚀石头 mossy_stone_brick： 虫蚀苔石砖 stone_brick： 虫蚀石砖"
             },
             {
               "value": "mossy_stone_brick",
-              "description": "虫蚀苔石砖"
+              "description": "已弃用，为兼容性而保留 chiseled_stone_brick： 虫蚀雕纹石砖 cobblestone： 虫蚀圆石 cracked_stone_brick： 虫蚀裂纹石砖 stone： 虫蚀石头 mossy_stone_brick： 虫蚀苔石砖 stone_brick： 虫蚀石砖"
             },
             {
               "value": "cracked_stone_brick",
-              "description": "虫蚀裂纹石砖"
+              "description": "已弃用，为兼容性而保留 chiseled_stone_brick： 虫蚀雕纹石砖 cobblestone： 虫蚀圆石 cracked_stone_brick： 虫蚀裂纹石砖 stone： 虫蚀石头 mossy_stone_brick： 虫蚀苔石砖 stone_brick： 虫蚀石砖"
             },
             {
               "value": "chiseled_stone_brick",
-              "description": "虫蚀雕纹石砖"
+              "description": "已弃用，为兼容性而保留 chiseled_stone_brick： 虫蚀雕纹石砖 cobblestone： 虫蚀圆石 cracked_stone_brick： 虫蚀裂纹石砖 stone： 虫蚀石头 mossy_stone_brick： 虫蚀苔石砖 stone_brick： 虫蚀石砖"
             }
           ]
         }
@@ -23699,7 +24844,7 @@
     },
     {
       "name": "mud_brick_double_slab",
-      "description": "双层泥砖台阶",
+      "description": "泥砖双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -23935,11 +25080,85 @@
     },
     {
       "name": "nether_brick",
-      "description": "下界砖"
+      "description": "下界砖块"
     },
     {
       "name": "nether_brick_fence",
       "description": "下界砖栅栏"
+    },
+    {
+      "name": "nether_brick_slab",
+      "description": "下界砖台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        },
+        {
+          "key": "stone_slab_type",
+          "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶",
+          "defaultValue": 7,
+          "values": [
+            {
+              "value": "smooth_stone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "sandstone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "wood",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "cobblestone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "stone_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "quartz",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "nether_brick",
+              "description": "（默认值）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            }
+          ]
+        },
+        {
+          "key": "top_slot_bit",
+          "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "nether_brick_stairs",
@@ -24127,7 +25346,7 @@
     },
     {
       "name": "oak_double_slab",
-      "description": "双层橡木台阶",
+      "description": "橡木双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -24569,44 +25788,6 @@
             {
               "value": "top",
               "description": "台阶是上半台阶"
-            }
-          ]
-        },
-        {
-          "key": "stone_slab_type",
-          "defaultValue": 2,
-          "values": [
-            {
-              "value": "smooth_stone",
-              "description": "（无效）平滑石头台阶"
-            },
-            {
-              "value": "sandstone",
-              "description": "（无效）砂岩台阶"
-            },
-            {
-              "value": "wood",
-              "description": "（默认值）石化橡木台阶"
-            },
-            {
-              "value": "cobblestone",
-              "description": "（无效）圆石台阶"
-            },
-            {
-              "value": "brick",
-              "description": "（无效）红砖台阶"
-            },
-            {
-              "value": "stone_brick",
-              "description": "（无效）石砖台阶"
-            },
-            {
-              "value": "quartz",
-              "description": "（无效）石英台阶"
-            },
-            {
-              "value": "nether_brick",
-              "description": "（无效）下界砖台阶"
             }
           ]
         },
@@ -25709,8 +26890,179 @@
       ]
     },
     {
+      "name": "oxidized_chiseled_copper",
+      "description": "氧化的雕纹铜块"
+    },
+    {
       "name": "oxidized_copper",
       "description": "氧化的铜块"
+    },
+    {
+      "name": "oxidized_copper_bulb",
+      "description": "氧化的铜灯",
+      "blockStates": [
+        {
+          "key": "lit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于熄灭状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于点亮状态"
+            }
+          ]
+        },
+        {
+          "key": "powered_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块被红石信号激活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块未被激活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "oxidized_copper_door",
+      "description": "氧化的铜门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 1,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 2,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 3,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            }
+          ]
+        },
+        {
+          "key": "door_hinge_bit",
+          "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "oxidized_copper_grate",
+      "description": "氧化的铜格栅"
+    },
+    {
+      "name": "oxidized_copper_trapdoor",
+      "description": "氧化的铜活板门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）活板门朝向东方，轴在西方"
+            },
+            {
+              "value": 1,
+              "description": "活板门朝向西方，轴在东方"
+            },
+            {
+              "value": 2,
+              "description": "活板门朝向南方，轴在北方"
+            },
+            {
+              "value": 3,
+              "description": "活板门朝向北方，轴在南方"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于打开状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于关闭状态"
+            }
+          ]
+        },
+        {
+          "key": "upside_down_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块主要位于方块网格的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块块主要位于方块网格的下半部分"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "oxidized_cut_copper",
@@ -25795,7 +27147,7 @@
     },
     {
       "name": "oxidized_double_cut_copper_slab",
-      "description": "氧化的双切制铜台阶",
+      "description": "氧化的切制铜双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -25855,6 +27207,131 @@
             {
               "value": "z",
               "description": "方块南北朝向"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "peony",
+      "description": "牡丹",
+      "blockStates": [
+        {
+          "key": "double_plant_type",
+          "description": "已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa",
+          "defaultValue": 5,
+          "values": [
+            {
+              "value": "sunflower",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "syringa",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "grass",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "fern",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "rose",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "paeonia",
+              "description": "（默认值）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "petrified_oak_slab",
+      "description": "石化橡木台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        },
+        {
+          "key": "stone_slab_type",
+          "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶",
+          "defaultValue": 2,
+          "values": [
+            {
+              "value": "smooth_stone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "sandstone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "wood",
+              "description": "（默认值）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "cobblestone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "stone_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "quartz",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "nether_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            }
+          ]
+        },
+        {
+          "key": "top_slot_bit",
+          "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
             }
           ]
         }
@@ -27035,7 +28512,7 @@
     },
     {
       "name": "polished_blackstone_brick_double_slab",
-      "description": "双层磨制黑石砖台阶",
+      "description": "磨制黑石砖双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -27293,7 +28770,7 @@
     },
     {
       "name": "polished_blackstone_double_slab",
-      "description": "双层磨制黑石台阶",
+      "description": "磨制黑石双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -27578,7 +29055,7 @@
     },
     {
       "name": "polished_deepslate_double_slab",
-      "description": "双层磨制深板岩台阶",
+      "description": "磨制深板岩双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -27947,6 +29424,184 @@
       ]
     },
     {
+      "name": "polished_tuff",
+      "description": "磨制凝灰岩"
+    },
+    {
+      "name": "polished_tuff_double_slab",
+      "description": "磨制凝灰岩双层台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "polished_tuff_slab",
+      "description": "磨制凝灰岩台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "polished_tuff_stairs",
+      "description": "磨制凝灰岩楼梯",
+      "blockStates": [
+        {
+          "key": "upside_down_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块主要位于方块网格的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块块主要位于方块网格的下半部分"
+            }
+          ]
+        },
+        {
+          "key": "weirdo_direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）楼梯面朝西方"
+            },
+            {
+              "value": 1,
+              "description": "楼梯面朝东方"
+            },
+            {
+              "value": 2,
+              "description": "楼梯面朝北方"
+            },
+            {
+              "value": 3,
+              "description": "楼梯面朝南方"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "polished_tuff_wall",
+      "description": "磨制凝灰岩墙",
+      "blockStates": [
+        {
+          "key": "wall_connection_type_east",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "none",
+              "description": "（默认值）墙不向东方连接"
+            },
+            {
+              "value": "short",
+              "description": "墙向东方连接，且高度较低"
+            },
+            {
+              "value": "tall",
+              "description": "墙向东方连接，且高度较高"
+            }
+          ]
+        },
+        {
+          "key": "wall_connection_type_north",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "none",
+              "description": "（默认值）墙不向北方连接"
+            },
+            {
+              "value": "short",
+              "description": "墙向北方连接，且高度较低"
+            },
+            {
+              "value": "tall",
+              "description": "墙向北方连接，且高度较高"
+            }
+          ]
+        },
+        {
+          "key": "wall_connection_type_south",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "none",
+              "description": "（默认值）墙不向南方连接"
+            },
+            {
+              "value": "short",
+              "description": "墙向南方连接，且高度较低"
+            },
+            {
+              "value": "tall",
+              "description": "墙向南方连接，且高度较高"
+            }
+          ]
+        },
+        {
+          "key": "wall_connection_type_west",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "none",
+              "description": "（默认值）墙不向西方连接"
+            },
+            {
+              "value": "short",
+              "description": "墙向西方连接，且高度较低"
+            },
+            {
+              "value": "tall",
+              "description": "墙向西方连接，且高度较高"
+            }
+          ]
+        },
+        {
+          "key": "wall_post_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "墙有中心柱"
+            },
+            {
+              "value": false,
+              "description": "（默认值）墙没有中心柱"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "poppy",
       "description": "虞美人",
       "blockStates": [
@@ -28239,19 +29894,20 @@
       "blockStates": [
         {
           "key": "prismarine_block_type",
+          "description": "已弃用，为兼容性而保留 default： 海晶石 dark： 暗海晶石 bricks： 海晶石砖",
           "defaultValue": 0,
           "values": [
             {
               "value": "default",
-              "description": "（默认值）海晶石"
+              "description": "（默认值）已弃用，为兼容性而保留 default： 海晶石 dark： 暗海晶石 bricks： 海晶石砖"
             },
             {
               "value": "dark",
-              "description": "暗海晶石"
+              "description": "已弃用，为兼容性而保留 default： 海晶石 dark： 暗海晶石 bricks： 海晶石砖"
             },
             {
               "value": "bricks",
-              "description": "海晶石砖"
+              "description": "已弃用，为兼容性而保留 default： 海晶石 dark： 暗海晶石 bricks： 海晶石砖"
             }
           ]
         }
@@ -29334,6 +30990,80 @@
     {
       "name": "quartz_ore",
       "description": "下界石英矿石"
+    },
+    {
+      "name": "quartz_slab",
+      "description": "石英台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        },
+        {
+          "key": "stone_slab_type",
+          "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶",
+          "defaultValue": 6,
+          "values": [
+            {
+              "value": "smooth_stone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "sandstone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "wood",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "cobblestone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "stone_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "quartz",
+              "description": "（默认值）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "nether_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            }
+          ]
+        },
+        {
+          "key": "top_slot_bit",
+          "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "quartz_stairs",
@@ -30704,6 +32434,57 @@
       ]
     },
     {
+      "name": "rose_bush",
+      "description": "玫瑰丛",
+      "blockStates": [
+        {
+          "key": "double_plant_type",
+          "description": "已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa",
+          "defaultValue": 4,
+          "values": [
+            {
+              "value": "sunflower",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "syringa",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "grass",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "fern",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "rose",
+              "description": "（默认值）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "paeonia",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "sand",
       "description": "沙子/红沙",
       "descriptions": [
@@ -30739,23 +32520,98 @@
       "blockStates": [
         {
           "key": "sand_stone_type",
+          "description": "已弃用，为兼容性而保留 default： 砂岩 heiroglyphs： 雕纹砂岩 cut： 切制砂岩 smooth： 平滑砂岩",
           "defaultValue": 0,
           "values": [
             {
               "value": "default",
-              "description": "（默认值）砂岩"
+              "description": "（默认值）已弃用，为兼容性而保留 default： 砂岩 heiroglyphs： 雕纹砂岩 cut： 切制砂岩 smooth： 平滑砂岩"
             },
             {
               "value": "heiroglyphs",
-              "description": "雕纹砂岩"
+              "description": "已弃用，为兼容性而保留 default： 砂岩 heiroglyphs： 雕纹砂岩 cut： 切制砂岩 smooth： 平滑砂岩"
             },
             {
               "value": "cut",
-              "description": "切制砂岩"
+              "description": "已弃用，为兼容性而保留 default： 砂岩 heiroglyphs： 雕纹砂岩 cut： 切制砂岩 smooth： 平滑砂岩"
             },
             {
               "value": "smooth",
-              "description": "平滑砂岩"
+              "description": "已弃用，为兼容性而保留 default： 砂岩 heiroglyphs： 雕纹砂岩 cut： 切制砂岩 smooth： 平滑砂岩"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sandstone_slab",
+      "description": "砂岩台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        },
+        {
+          "key": "stone_slab_type",
+          "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶",
+          "defaultValue": 1,
+          "values": [
+            {
+              "value": "smooth_stone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "sandstone",
+              "description": "（默认值）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "wood",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "cobblestone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "stone_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "quartz",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "nether_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            }
+          ]
+        },
+        {
+          "key": "top_slot_bit",
+          "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
             }
           ]
         }
@@ -31297,6 +33153,35 @@
       ]
     },
     {
+      "name": "short_grass",
+      "description": "矮草丛",
+      "blockStates": [
+        {
+          "key": "tall_grass_type",
+          "description": "已弃用，为兼容性而保留 草丛的类型 default：未使用，草灌木 tall： 草 fern： 蕨 snow：未使用",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "default",
+              "description": "（默认值）已弃用，为兼容性而保留 草丛的类型 default：未使用，草灌木 tall： 草 fern： 蕨 snow：未使用"
+            },
+            {
+              "value": "tall",
+              "description": "（无效）已弃用，为兼容性而保留 草丛的类型 default：未使用，草灌木 tall： 草 fern： 蕨 snow：未使用"
+            },
+            {
+              "value": "fern",
+              "description": "（无效）已弃用，为兼容性而保留 草丛的类型 default：未使用，草灌木 tall： 草 fern： 蕨 snow：未使用"
+            },
+            {
+              "value": "snow",
+              "description": "（无效）已弃用，为兼容性而保留 草丛的类型 default：未使用，草灌木 tall： 草 fern： 蕨 snow：未使用"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "shroomlight",
       "description": "菌光体"
     },
@@ -31704,6 +33589,80 @@
     {
       "name": "smooth_stone",
       "description": "平滑石头"
+    },
+    {
+      "name": "smooth_stone_slab",
+      "description": "平滑石头台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        },
+        {
+          "key": "stone_slab_type",
+          "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "smooth_stone",
+              "description": "（默认值）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "sandstone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "wood",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "cobblestone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "stone_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "quartz",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "nether_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            }
+          ]
+        },
+        {
+          "key": "top_slot_bit",
+          "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "sniffer_egg",
@@ -32152,7 +34111,7 @@
     },
     {
       "name": "spruce_double_slab",
-      "description": "双层云杉台阶",
+      "description": "云杉木双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -33284,16 +35243,7 @@
     },
     {
       "name": "stone",
-      "description": "石头/花岗岩/磨制花岗岩/闪长岩/磨制闪长岩/安山岩/磨制安山岩",
-      "descriptions": [
-        "石头",
-        "花岗岩",
-        "磨制花岗岩",
-        "闪长岩",
-        "磨制闪长岩",
-        "安山岩",
-        "磨制安山岩"
-      ],
+      "description": "石头",
       "blockStates": [
         {
           "key": "stone_type",
@@ -33333,20 +35283,6 @@
       ]
     },
     {
-      "name": "stone_block_slab",
-      "description": "平滑石头台阶/砂岩台阶/石化橡木台阶/圆石台阶/红砖台阶/石砖台阶/石英台阶/下界砖台阶",
-      "descriptions": [
-        "平滑石头台阶",
-        "砂岩台阶",
-        "石化橡木台阶",
-        "圆石台阶",
-        "红砖台阶",
-        "石砖台阶",
-        "石英台阶",
-        "下界砖台阶"
-      ]
-    },
-    {
       "name": "stone_block_slab2",
       "description": "红砂岩台阶/紫珀台阶/海晶石台阶/暗海晶石台阶/海晶石砖台阶/苔石台阶/平滑砂岩台阶/红色下界砖台阶",
       "descriptions": [
@@ -33376,39 +35312,40 @@
         },
         {
           "key": "stone_slab_type_2",
+          "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶",
           "defaultValue": 0,
           "values": [
             {
               "value": "red_sandstone",
-              "description": "（默认值）红砂岩台阶"
+              "description": "（默认值）已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "purpur",
-              "description": "紫珀台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "prismarine_rough",
-              "description": "海晶石台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "prismarine_dark",
-              "description": "暗海晶石台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "prismarine_brick",
-              "description": "海晶石砖台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "mossy_cobblestone",
-              "description": "苔石台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "smooth_sandstone",
-              "description": "平滑砂岩台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             },
             {
               "value": "red_nether_brick",
-              "description": "红色下界砖台阶"
+              "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
             }
           ]
         },
@@ -33459,39 +35396,40 @@
         },
         {
           "key": "stone_slab_type_3",
+          "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶",
           "defaultValue": 0,
           "values": [
             {
               "value": "end_stone_brick",
-              "description": "（默认值）末地石砖台阶"
+              "description": "（默认值）已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "smooth_red_sandstone",
-              "description": "平滑红砂岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "polished_andesite",
-              "description": "磨制安山岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "andesite",
-              "description": "安山岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "diorite",
-              "description": "闪长岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "polished_diorite",
-              "description": "磨制闪长岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "granite",
-              "description": "花岗岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             },
             {
               "value": "polished_granite",
-              "description": "磨制花岗岩台阶"
+              "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
             }
           ]
         },
@@ -33539,27 +35477,102 @@
         },
         {
           "key": "stone_slab_type_4",
+          "description": "已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶",
           "defaultValue": 0,
           "values": [
             {
               "value": "mossy_stone_brick",
-              "description": "（默认值）苔石砖台阶"
+              "description": "（默认值）已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶"
             },
             {
               "value": "smooth_quartz",
-              "description": "平滑石英台阶"
+              "description": "已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶"
             },
             {
               "value": "stone",
-              "description": "石头台阶"
+              "description": "已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶"
             },
             {
               "value": "cut_sandstone",
-              "description": "切制砂岩台阶"
+              "description": "已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶"
             },
             {
               "value": "cut_red_sandstone",
-              "description": "切制红砂岩台阶"
+              "description": "已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶"
+            }
+          ]
+        },
+        {
+          "key": "top_slot_bit",
+          "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "stone_brick_slab",
+      "description": "石砖台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        },
+        {
+          "key": "stone_slab_type",
+          "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶",
+          "defaultValue": 5,
+          "values": [
+            {
+              "value": "smooth_stone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "sandstone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "wood",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "cobblestone",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "stone_brick",
+              "description": "（默认值）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "quartz",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+            },
+            {
+              "value": "nether_brick",
+              "description": "（无效）已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
             }
           ]
         },
@@ -33751,7 +35764,7 @@
     },
     {
       "name": "stone_stairs",
-      "description": "石头楼梯",
+      "description": "圆石楼梯",
       "blockStates": [
         {
           "key": "upside_down_bit",
@@ -33803,27 +35816,28 @@
       "blockStates": [
         {
           "key": "stone_brick_type",
+          "description": "已弃用，为兼容性而保留 chiseled： 雕纹石砖 cracked： 裂纹石砖 default： 石砖 mossy： 苔石砖 smooth： 平滑石砖（和普通石砖纹理相同）",
           "defaultValue": 0,
           "values": [
             {
               "value": "default",
-              "description": "（默认值）石砖"
+              "description": "（默认值）已弃用，为兼容性而保留 chiseled： 雕纹石砖 cracked： 裂纹石砖 default： 石砖 mossy： 苔石砖 smooth： 平滑石砖（和普通石砖纹理相同）"
             },
             {
               "value": "mossy",
-              "description": "苔石砖"
+              "description": "已弃用，为兼容性而保留 chiseled： 雕纹石砖 cracked： 裂纹石砖 default： 石砖 mossy： 苔石砖 smooth： 平滑石砖（和普通石砖纹理相同）"
             },
             {
               "value": "cracked",
-              "description": "裂纹石砖"
+              "description": "已弃用，为兼容性而保留 chiseled： 雕纹石砖 cracked： 裂纹石砖 default： 石砖 mossy： 苔石砖 smooth： 平滑石砖（和普通石砖纹理相同）"
             },
             {
               "value": "chiseled",
-              "description": "雕纹石砖"
+              "description": "已弃用，为兼容性而保留 chiseled： 雕纹石砖 cracked： 裂纹石砖 default： 石砖 mossy： 苔石砖 smooth： 平滑石砖（和普通石砖纹理相同）"
             },
             {
               "value": "smooth",
-              "description": "平滑石砖（和普通石砖纹理相同）"
+              "description": "已弃用，为兼容性而保留 chiseled： 雕纹石砖 cracked： 裂纹石砖 default： 石砖 mossy： 苔石砖 smooth： 平滑石砖（和普通石砖纹理相同）"
             }
           ]
         }
@@ -34725,6 +36739,57 @@
       ]
     },
     {
+      "name": "sunflower",
+      "description": "向日葵",
+      "blockStates": [
+        {
+          "key": "double_plant_type",
+          "description": "已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "sunflower",
+              "description": "（默认值）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "syringa",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "grass",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "fern",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "rose",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "paeonia",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "suspicious_gravel",
       "description": "可疑的沙砾",
       "blockStates": [
@@ -34857,11 +36922,54 @@
       ]
     },
     {
-      "name": "tallgrass",
-      "description": "蕨/草",
-      "descriptions": [
-        "蕨",
-        "草"
+      "name": "tall_grass",
+      "description": "高草丛",
+      "blockStates": [
+        {
+          "key": "double_plant_type",
+          "description": "已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa",
+          "defaultValue": 2,
+          "values": [
+            {
+              "value": "sunflower",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "syringa",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "grass",
+              "description": "（默认值）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "fern",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "rose",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            },
+            {
+              "value": "paeonia",
+              "description": "（无效）已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
       ]
     },
     {
@@ -35106,6 +37214,56 @@
       ]
     },
     {
+      "name": "trial_spawner",
+      "description": "试炼刷怪笼",
+      "blockStates": [
+        {
+          "key": "ominous",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块为不祥变种"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块为普通变种"
+            }
+          ]
+        },
+        {
+          "key": "trial_spawner_state",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）试炼刷怪笼处于未激活状态"
+            },
+            {
+              "value": 1,
+              "description": "试炼刷怪笼可以被激活，正在等待玩家加入试炼"
+            },
+            {
+              "value": 2,
+              "description": "试炼刷怪笼处于激活状态，可以刷新生物"
+            },
+            {
+              "value": 3,
+              "description": "所有试炼生物已经被清除，等待喷出奖励"
+            },
+            {
+              "value": 4,
+              "description": "试炼刷怪笼喷出奖励"
+            },
+            {
+              "value": 5,
+              "description": "试炼刷怪笼处于冷却阶段，无法被激活"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "trip_wire",
       "description": "绊线",
       "blockStates": [
@@ -35272,6 +37430,54 @@
       ]
     },
     {
+      "name": "tube_coral_block",
+      "description": "管珊瑚块",
+      "blockStates": [
+        {
+          "key": "coral_color",
+          "description": "已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "blue",
+              "description": "（默认值）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "pink",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "purple",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "red",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            },
+            {
+              "value": "yellow",
+              "description": "（无效）已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+            }
+          ]
+        },
+        {
+          "key": "dead_bit",
+          "description": "已弃用，为兼容性而保留 方块是否因离开水而失活",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "（无效）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）已弃用，为兼容性而保留 方块是否因离开水而失活"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "tube_coral_fan",
       "description": "管珊瑚扇",
       "blockStates": [
@@ -35322,6 +37528,358 @@
     {
       "name": "tuff",
       "description": "凝灰岩"
+    },
+    {
+      "name": "tuff_brick_double_slab",
+      "description": "凝灰岩砖双层台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tuff_brick_slab",
+      "description": "凝灰岩砖台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tuff_brick_stairs",
+      "description": "凝灰岩砖楼梯",
+      "blockStates": [
+        {
+          "key": "upside_down_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块主要位于方块网格的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块块主要位于方块网格的下半部分"
+            }
+          ]
+        },
+        {
+          "key": "weirdo_direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）楼梯面朝西方"
+            },
+            {
+              "value": 1,
+              "description": "楼梯面朝东方"
+            },
+            {
+              "value": 2,
+              "description": "楼梯面朝北方"
+            },
+            {
+              "value": 3,
+              "description": "楼梯面朝南方"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tuff_brick_wall",
+      "description": "凝灰岩砖墙",
+      "blockStates": [
+        {
+          "key": "wall_connection_type_east",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "none",
+              "description": "（默认值）墙不向东方连接"
+            },
+            {
+              "value": "short",
+              "description": "墙向东方连接，且高度较低"
+            },
+            {
+              "value": "tall",
+              "description": "墙向东方连接，且高度较高"
+            }
+          ]
+        },
+        {
+          "key": "wall_connection_type_north",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "none",
+              "description": "（默认值）墙不向北方连接"
+            },
+            {
+              "value": "short",
+              "description": "墙向北方连接，且高度较低"
+            },
+            {
+              "value": "tall",
+              "description": "墙向北方连接，且高度较高"
+            }
+          ]
+        },
+        {
+          "key": "wall_connection_type_south",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "none",
+              "description": "（默认值）墙不向南方连接"
+            },
+            {
+              "value": "short",
+              "description": "墙向南方连接，且高度较低"
+            },
+            {
+              "value": "tall",
+              "description": "墙向南方连接，且高度较高"
+            }
+          ]
+        },
+        {
+          "key": "wall_connection_type_west",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "none",
+              "description": "（默认值）墙不向西方连接"
+            },
+            {
+              "value": "short",
+              "description": "墙向西方连接，且高度较低"
+            },
+            {
+              "value": "tall",
+              "description": "墙向西方连接，且高度较高"
+            }
+          ]
+        },
+        {
+          "key": "wall_post_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "墙有中心柱"
+            },
+            {
+              "value": false,
+              "description": "（默认值）墙没有中心柱"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tuff_bricks",
+      "description": "凝灰岩砖"
+    },
+    {
+      "name": "tuff_double_slab",
+      "description": "凝灰岩双层台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tuff_slab",
+      "description": "凝灰岩台阶",
+      "blockStates": [
+        {
+          "key": "minecraft:vertical_half",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "bottom",
+              "description": "（默认值）台阶是下半台阶，双层台阶正常情况下均为此值"
+            },
+            {
+              "value": "top",
+              "description": "台阶是上半台阶"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tuff_stairs",
+      "description": "凝灰岩楼梯",
+      "blockStates": [
+        {
+          "key": "upside_down_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块主要位于方块网格的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块块主要位于方块网格的下半部分"
+            }
+          ]
+        },
+        {
+          "key": "weirdo_direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）楼梯面朝西方"
+            },
+            {
+              "value": 1,
+              "description": "楼梯面朝东方"
+            },
+            {
+              "value": 2,
+              "description": "楼梯面朝北方"
+            },
+            {
+              "value": 3,
+              "description": "楼梯面朝南方"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tuff_wall",
+      "description": "凝灰岩墙",
+      "blockStates": [
+        {
+          "key": "wall_connection_type_east",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "none",
+              "description": "（默认值）墙不向东方连接"
+            },
+            {
+              "value": "short",
+              "description": "墙向东方连接，且高度较低"
+            },
+            {
+              "value": "tall",
+              "description": "墙向东方连接，且高度较高"
+            }
+          ]
+        },
+        {
+          "key": "wall_connection_type_north",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "none",
+              "description": "（默认值）墙不向北方连接"
+            },
+            {
+              "value": "short",
+              "description": "墙向北方连接，且高度较低"
+            },
+            {
+              "value": "tall",
+              "description": "墙向北方连接，且高度较高"
+            }
+          ]
+        },
+        {
+          "key": "wall_connection_type_south",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "none",
+              "description": "（默认值）墙不向南方连接"
+            },
+            {
+              "value": "short",
+              "description": "墙向南方连接，且高度较低"
+            },
+            {
+              "value": "tall",
+              "description": "墙向南方连接，且高度较高"
+            }
+          ]
+        },
+        {
+          "key": "wall_connection_type_west",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "none",
+              "description": "（默认值）墙不向西方连接"
+            },
+            {
+              "value": "short",
+              "description": "墙向西方连接，且高度较低"
+            },
+            {
+              "value": "tall",
+              "description": "墙向西方连接，且高度较高"
+            }
+          ]
+        },
+        {
+          "key": "wall_post_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "墙有中心柱"
+            },
+            {
+              "value": false,
+              "description": "（默认值）墙没有中心柱"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "turtle_egg",
@@ -35530,7 +38088,7 @@
     },
     {
       "name": "unpowered_comparator",
-      "description": "红石比较器",
+      "description": "未激活的红石比较器",
       "blockStates": [
         {
           "key": "direction",
@@ -35609,7 +38167,7 @@
     },
     {
       "name": "unpowered_repeater",
-      "description": "红石中继器",
+      "description": "未激活的红石中继器",
       "blockStates": [
         {
           "key": "direction",
@@ -35676,6 +38234,70 @@
             {
               "value": 3,
               "description": "红石中继器的挡位 每升高一档，延迟时间增加1[[红石刻]]（0.1秒）"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "vault",
+      "description": "宝库",
+      "blockStates": [
+        {
+          "key": "minecraft:cardinal_direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "south",
+              "description": "（默认值）方块朝向南方"
+            },
+            {
+              "value": "west",
+              "description": "方块朝向西方"
+            },
+            {
+              "value": "north",
+              "description": "方块朝向北方"
+            },
+            {
+              "value": "east",
+              "description": "方块朝向东方"
+            }
+          ]
+        },
+        {
+          "key": "ominous",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块为不祥变种"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块为普通变种"
+            }
+          ]
+        },
+        {
+          "key": "vault_state",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": "inactive",
+              "description": "（默认值）宝库周围没有有效的玩家，处于未激活状态"
+            },
+            {
+              "value": "active",
+              "description": "宝库周围有有效的玩家，处于激活状态"
+            },
+            {
+              "value": "unlocking",
+              "description": "宝库被试炼钥匙解锁，在后进入喷出物品状态"
+            },
+            {
+              "value": "ejecting",
+              "description": "宝库喷出物品，物品全部喷出后回到激活或未激活状态"
             }
           ]
         }
@@ -35978,7 +38600,7 @@
     },
     {
       "name": "warped_double_slab",
-      "description": "双诡异木台阶",
+      "description": "诡异木双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -36676,8 +39298,179 @@
       "description": "睡莲"
     },
     {
+      "name": "waxed_chiseled_copper",
+      "description": "涂蜡的雕纹铜块"
+    },
+    {
       "name": "waxed_copper",
       "description": "涂蜡的铜块"
+    },
+    {
+      "name": "waxed_copper_bulb",
+      "description": "涂蜡的铜灯",
+      "blockStates": [
+        {
+          "key": "lit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于熄灭状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于点亮状态"
+            }
+          ]
+        },
+        {
+          "key": "powered_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块被红石信号激活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块未被激活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "waxed_copper_door",
+      "description": "涂蜡的铜门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 1,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 2,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 3,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            }
+          ]
+        },
+        {
+          "key": "door_hinge_bit",
+          "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "waxed_copper_grate",
+      "description": "涂蜡的铜格栅"
+    },
+    {
+      "name": "waxed_copper_trapdoor",
+      "description": "涂蜡的铜活板门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）活板门朝向东方，轴在西方"
+            },
+            {
+              "value": 1,
+              "description": "活板门朝向西方，轴在东方"
+            },
+            {
+              "value": 2,
+              "description": "活板门朝向南方，轴在北方"
+            },
+            {
+              "value": 3,
+              "description": "活板门朝向北方，轴在南方"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于打开状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于关闭状态"
+            }
+          ]
+        },
+        {
+          "key": "upside_down_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块主要位于方块网格的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块块主要位于方块网格的下半部分"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "waxed_cut_copper",
@@ -36762,7 +39555,7 @@
     },
     {
       "name": "waxed_double_cut_copper_slab",
-      "description": "涂蜡双切制铜台阶",
+      "description": "涂蜡的切制铜双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -36796,8 +39589,179 @@
       ]
     },
     {
+      "name": "waxed_exposed_chiseled_copper",
+      "description": "涂蜡的斑驳雕纹铜块"
+    },
+    {
       "name": "waxed_exposed_copper",
       "description": "涂蜡的斑驳铜块"
+    },
+    {
+      "name": "waxed_exposed_copper_bulb",
+      "description": "涂蜡的斑驳铜灯",
+      "blockStates": [
+        {
+          "key": "lit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于熄灭状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于点亮状态"
+            }
+          ]
+        },
+        {
+          "key": "powered_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块被红石信号激活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块未被激活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "waxed_exposed_copper_door",
+      "description": "涂蜡的斑驳铜门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 1,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 2,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 3,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            }
+          ]
+        },
+        {
+          "key": "door_hinge_bit",
+          "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "waxed_exposed_copper_grate",
+      "description": "涂蜡的斑驳铜格栅"
+    },
+    {
+      "name": "waxed_exposed_copper_trapdoor",
+      "description": "涂蜡的斑驳铜活板门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）活板门朝向东方，轴在西方"
+            },
+            {
+              "value": 1,
+              "description": "活板门朝向西方，轴在东方"
+            },
+            {
+              "value": 2,
+              "description": "活板门朝向南方，轴在北方"
+            },
+            {
+              "value": 3,
+              "description": "活板门朝向北方，轴在南方"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于打开状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于关闭状态"
+            }
+          ]
+        },
+        {
+          "key": "upside_down_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块主要位于方块网格的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块块主要位于方块网格的下半部分"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "waxed_exposed_cut_copper",
@@ -36882,7 +39846,7 @@
     },
     {
       "name": "waxed_exposed_double_cut_copper_slab",
-      "description": "斑驳的涂蜡双切制铜台阶",
+      "description": "涂蜡的斑驳切制铜双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -36916,8 +39880,179 @@
       ]
     },
     {
+      "name": "waxed_oxidized_chiseled_copper",
+      "description": "涂蜡的氧化雕纹铜块"
+    },
+    {
       "name": "waxed_oxidized_copper",
       "description": "涂蜡的氧化铜块"
+    },
+    {
+      "name": "waxed_oxidized_copper_bulb",
+      "description": "涂蜡的氧化铜灯",
+      "blockStates": [
+        {
+          "key": "lit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于熄灭状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于点亮状态"
+            }
+          ]
+        },
+        {
+          "key": "powered_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块被红石信号激活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块未被激活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "waxed_oxidized_copper_door",
+      "description": "涂蜡的氧化铜门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 1,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 2,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 3,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            }
+          ]
+        },
+        {
+          "key": "door_hinge_bit",
+          "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "waxed_oxidized_copper_grate",
+      "description": "涂蜡的氧化铜格栅"
+    },
+    {
+      "name": "waxed_oxidized_copper_trapdoor",
+      "description": "涂蜡的氧化铜活板门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）活板门朝向东方，轴在西方"
+            },
+            {
+              "value": 1,
+              "description": "活板门朝向西方，轴在东方"
+            },
+            {
+              "value": 2,
+              "description": "活板门朝向南方，轴在北方"
+            },
+            {
+              "value": 3,
+              "description": "活板门朝向北方，轴在南方"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于打开状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于关闭状态"
+            }
+          ]
+        },
+        {
+          "key": "upside_down_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块主要位于方块网格的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块块主要位于方块网格的下半部分"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "waxed_oxidized_cut_copper",
@@ -37002,7 +40137,7 @@
     },
     {
       "name": "waxed_oxidized_double_cut_copper_slab",
-      "description": "氧化的涂蜡双切制铜台阶",
+      "description": "涂蜡的氧化切制铜双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -37036,8 +40171,179 @@
       ]
     },
     {
+      "name": "waxed_weathered_chiseled_copper",
+      "description": "涂蜡的锈蚀雕纹铜块"
+    },
+    {
       "name": "waxed_weathered_copper",
       "description": "涂蜡的锈蚀铜块"
+    },
+    {
+      "name": "waxed_weathered_copper_bulb",
+      "description": "涂蜡的锈蚀铜灯",
+      "blockStates": [
+        {
+          "key": "lit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于熄灭状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于点亮状态"
+            }
+          ]
+        },
+        {
+          "key": "powered_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块被红石信号激活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块未被激活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "waxed_weathered_copper_door",
+      "description": "涂蜡的锈蚀铜门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 1,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 2,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 3,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            }
+          ]
+        },
+        {
+          "key": "door_hinge_bit",
+          "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "waxed_weathered_copper_grate",
+      "description": "涂蜡的锈蚀铜格栅"
+    },
+    {
+      "name": "waxed_weathered_copper_trapdoor",
+      "description": "涂蜡的锈蚀铜活板门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）活板门朝向东方，轴在西方"
+            },
+            {
+              "value": 1,
+              "description": "活板门朝向西方，轴在东方"
+            },
+            {
+              "value": 2,
+              "description": "活板门朝向南方，轴在北方"
+            },
+            {
+              "value": 3,
+              "description": "活板门朝向北方，轴在南方"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于打开状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于关闭状态"
+            }
+          ]
+        },
+        {
+          "key": "upside_down_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块主要位于方块网格的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块块主要位于方块网格的下半部分"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "waxed_weathered_cut_copper",
@@ -37122,7 +40428,7 @@
     },
     {
       "name": "waxed_weathered_double_cut_copper_slab",
-      "description": "锈蚀的涂蜡双切制铜台阶",
+      "description": "涂蜡的锈蚀切制铜双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -37156,8 +40462,179 @@
       ]
     },
     {
+      "name": "weathered_chiseled_copper",
+      "description": "锈蚀的雕纹铜块"
+    },
+    {
       "name": "weathered_copper",
       "description": "锈蚀的铜块"
+    },
+    {
+      "name": "weathered_copper_bulb",
+      "description": "锈蚀的铜灯",
+      "blockStates": [
+        {
+          "key": "lit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于熄灭状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于点亮状态"
+            }
+          ]
+        },
+        {
+          "key": "powered_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块被红石信号激活"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块未被激活"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "weathered_copper_door",
+      "description": "锈蚀的铜门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 1,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 2,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            },
+            {
+              "value": 3,
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南"
+            }
+          ]
+        },
+        {
+          "key": "door_hinge_bit",
+          "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            },
+            {
+              "value": false,
+              "description": "（默认值）门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false"
+            }
+          ]
+        },
+        {
+          "key": "upper_block_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "此方块是两格高方块组合的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）此方块是两格高方块组合的下半部分"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "weathered_copper_grate",
+      "description": "锈蚀的铜格栅"
+    },
+    {
+      "name": "weathered_copper_trapdoor",
+      "description": "锈蚀的铜活板门",
+      "blockStates": [
+        {
+          "key": "direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）活板门朝向东方，轴在西方"
+            },
+            {
+              "value": 1,
+              "description": "活板门朝向西方，轴在东方"
+            },
+            {
+              "value": 2,
+              "description": "活板门朝向南方，轴在北方"
+            },
+            {
+              "value": 3,
+              "description": "活板门朝向北方，轴在南方"
+            }
+          ]
+        },
+        {
+          "key": "open_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块处于打开状态"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块处于关闭状态"
+            }
+          ]
+        },
+        {
+          "key": "upside_down_bit",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": true,
+              "description": "方块主要位于方块网格的上半部分"
+            },
+            {
+              "value": false,
+              "description": "（默认值）方块块主要位于方块网格的下半部分"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "weathered_cut_copper",
@@ -37242,7 +40719,7 @@
     },
     {
       "name": "weathered_double_cut_copper_slab",
-      "description": "锈蚀的双切制铜台阶",
+      "description": "锈蚀的切制铜双层台阶",
       "blockStates": [
         {
           "key": "minecraft:vertical_half",
@@ -37398,7 +40875,7 @@
     },
     {
       "name": "wheat",
-      "description": "小麦",
+      "description": "小麦植株",
       "blockStates": [
         {
           "key": "growth",

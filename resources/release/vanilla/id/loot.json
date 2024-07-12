@@ -681,6 +681,12 @@
       "name": "\"equipment/trial_chamber_iron\""
     },
     {
+      "name": "\"equipment/trial_chamber_melee\""
+    },
+    {
+      "name": "\"equipment/trial_chamber_ranged\""
+    },
+    {
       "name": "\"gameplay/entities/mooshroom_milking\"",
       "description": "对哞菇使用碗所获得的产物"
     },

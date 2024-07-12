@@ -38,56 +38,7 @@
       "brief": "HUD元素",
       "description": "指定将被修改的HUD元素",
       "ignoreError": true,
-      "contents": [
-        {
-          "name": "air_bubbles",
-          "description": "氧气值"
-        },
-        {
-          "name": "all",
-          "description": "所有的HUD"
-        },
-        {
-          "name": "armor",
-          "description": "护甲值"
-        },
-        {
-          "name": "crosshair",
-          "description": "屏幕上的十字准星"
-        },
-        {
-          "name": "health",
-          "description": "生命值"
-        },
-        {
-          "name": "horse_health",
-          "description": "骑乘坐骑时坐骑的生命值"
-        },
-        {
-          "name": "hotbar",
-          "description": "快捷栏"
-        },
-        {
-          "name": "hunger",
-          "description": "饥饿值"
-        },
-        {
-          "name": "paperdoll",
-          "description": "纸娃娃"
-        },
-        {
-          "name": "progress_bar",
-          "description": "Boss栏"
-        },
-        {
-          "name": "tooltips",
-          "description": "提示框"
-        },
-        {
-          "name": "touch_controls",
-          "description": "触控按键"
-        }
-      ]
+      "key": "hudElement"
     }
   ],
   "ast": [

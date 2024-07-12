@@ -350,14 +350,24 @@ namespace CHelper {
         }
         {
             nlohmann::json j;
+            j["id"] = "items";
             j["type"] = "item";
-            j["items"] = itemIds;
+            nlohmann::json items;
+            for (const auto &item: *itemIds) {
+                items.push_back(std::static_pointer_cast<ItemId>(item));
+            }
+            j["items"] = items;
             idJson.push_back(std::move(j));
         }
         {
             nlohmann::json j;
+            j["id"] = "blocks";
             j["type"] = "block";
-            j["blocks"] = blockIds;
+            nlohmann::json blocks;
+            for (const auto &item: *blockIds) {
+                blocks.push_back(std::static_pointer_cast<BlockId>(item));
+            }
+            j["blocks"] = blocks;
             idJson.push_back(std::move(j));
         }
         result["id"] = std::move(idJson);

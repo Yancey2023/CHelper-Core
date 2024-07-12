@@ -89,6 +89,15 @@
       "description": "雷鸣"
     },
     {
+      "name": "apply_effect.bad_omen"
+    },
+    {
+      "name": "apply_effect.raid_omen"
+    },
+    {
+      "name": "apply_effect.trial_omen"
+    },
+    {
       "name": "armor.break_wolf"
     },
     {
@@ -252,6 +261,12 @@
     {
       "name": "block.composter.ready",
       "description": "堆肥桶：堆肥"
+    },
+    {
+      "name": "block.copper_bulb.turn_off"
+    },
+    {
+      "name": "block.copper_bulb.turn_on"
     },
     {
       "name": "block.decorated_pot.insert"
@@ -549,6 +564,12 @@
       "name": "break.chiseled_bookshelf"
     },
     {
+      "name": "break.copper_bulb"
+    },
+    {
+      "name": "break.copper_grate"
+    },
+    {
       "name": "break.decorated_pot"
     },
     {
@@ -573,6 +594,9 @@
     },
     {
       "name": "break.hanging_sign"
+    },
+    {
+      "name": "break.heavy_core"
     },
     {
       "name": "break.large_amethyst_bud",
@@ -632,6 +656,12 @@
     {
       "name": "break.tuff",
       "description": "凝灰岩：被破坏"
+    },
+    {
+      "name": "break.web"
+    },
+    {
+      "name": "breeze_wind_charge.burst"
     },
     {
       "name": "brush.generic"
@@ -857,6 +887,9 @@
       "name": "close.wooden_trapdoor"
     },
     {
+      "name": "close_door.copper"
+    },
+    {
       "name": "component.jump_to_block",
       "description": "实体：跳跃"
     },
@@ -887,6 +920,15 @@
     {
       "name": "copper.wax.on",
       "description": "涂蜡"
+    },
+    {
+      "name": "crafter.craft"
+    },
+    {
+      "name": "crafter.disable_slot"
+    },
+    {
+      "name": "crafter.fail"
     },
     {
       "name": "crossbow.loading.end",
@@ -1168,6 +1210,9 @@
       "description": "铜块：某物摔落"
     },
     {
+      "name": "fall.copper_bulb"
+    },
+    {
       "name": "fall.coral",
       "description": "珊瑚：某物摔落"
     },
@@ -1438,6 +1483,9 @@
       "description": "铜块：损坏中"
     },
     {
+      "name": "hit.copper_bulb"
+    },
+    {
       "name": "hit.coral",
       "description": "珊瑚：损坏中"
     },
@@ -1620,6 +1668,9 @@
     },
     {
       "name": "horn.call.7"
+    },
+    {
+      "name": "hud.bubble.pop"
     },
     {
       "name": "insert.chiseled_bookshelf"
@@ -2020,6 +2071,15 @@
       "description": "磁石指针：绑定磁石"
     },
     {
+      "name": "mace.heavy_smash_ground"
+    },
+    {
+      "name": "mace.smash_air"
+    },
+    {
+      "name": "mace.smash_ground"
+    },
+    {
       "name": "minecart.base",
       "description": "矿车：行进"
     },
@@ -2197,6 +2257,54 @@
     {
       "name": "mob.blaze.shoot",
       "description": "烈焰人：射击"
+    },
+    {
+      "name": "mob.bogged.ambient"
+    },
+    {
+      "name": "mob.bogged.death"
+    },
+    {
+      "name": "mob.bogged.hurt"
+    },
+    {
+      "name": "mob.bogged.step"
+    },
+    {
+      "name": "mob.breeze.charge"
+    },
+    {
+      "name": "mob.breeze.death"
+    },
+    {
+      "name": "mob.breeze.deflect"
+    },
+    {
+      "name": "mob.breeze.hurt"
+    },
+    {
+      "name": "mob.breeze.idle_air"
+    },
+    {
+      "name": "mob.breeze.idle_ground"
+    },
+    {
+      "name": "mob.breeze.inhale"
+    },
+    {
+      "name": "mob.breeze.jump"
+    },
+    {
+      "name": "mob.breeze.land"
+    },
+    {
+      "name": "mob.breeze.shoot"
+    },
+    {
+      "name": "mob.breeze.slide"
+    },
+    {
+      "name": "mob.breeze.whirl"
     },
     {
       "name": "mob.camel.ambient",
@@ -3958,10 +4066,22 @@
       "name": "music.overworld.cherry_grove"
     },
     {
+      "name": "music.overworld.deep_dark"
+    },
+    {
       "name": "music.overworld.desert"
     },
     {
+      "name": "music.overworld.dripstone_caves"
+    },
+    {
       "name": "music.overworld.flower_forest"
+    },
+    {
+      "name": "music.overworld.grove"
+    },
+    {
+      "name": "music.overworld.jagged_peaks"
     },
     {
       "name": "music.overworld.jungle"
@@ -3970,7 +4090,16 @@
       "name": "music.overworld.jungle_edge"
     },
     {
+      "name": "music.overworld.lush_caves"
+    },
+    {
       "name": "music.overworld.mesa"
+    },
+    {
+      "name": "music.overworld.snowy_slopes"
+    },
+    {
+      "name": "music.overworld.stony_peaks"
     },
     {
       "name": "note.banjo",
@@ -4059,6 +4188,18 @@
       "name": "note.zombie"
     },
     {
+      "name": "ominous_bottle.end_use"
+    },
+    {
+      "name": "ominous_item_spawner.about_to_spawn_item"
+    },
+    {
+      "name": "ominous_item_spawner.spawn_item"
+    },
+    {
+      "name": "ominous_item_spawner.spawn_item_begin"
+    },
+    {
       "name": "open.bamboo_wood_door"
     },
     {
@@ -4099,6 +4240,12 @@
     },
     {
       "name": "open.wooden_trapdoor"
+    },
+    {
+      "name": "open_door.copper"
+    },
+    {
+      "name": "open_trapdoor.copper"
     },
     {
       "name": "particle.soul_escape",
@@ -4153,6 +4300,9 @@
     {
       "name": "place.copper",
       "description": "铜块：被放置"
+    },
+    {
+      "name": "place.copper_bulb"
     },
     {
       "name": "place.deepslate",
@@ -4235,6 +4385,9 @@
       "description": "凝灰岩：被放置"
     },
     {
+      "name": "place.tuff_bricks"
+    },
+    {
       "name": "portal.portal",
       "description": "传送门：呼啸"
     },
@@ -4252,7 +4405,7 @@
     },
     {
       "name": "power.on.sculk_sensor",
-      "description": "幽匿感测体：惊动"
+      "description": "幽匿感测体：颤动"
     },
     {
       "name": "pumpkin.carve"
@@ -4438,6 +4591,12 @@
       "description": "音乐唱片（C418 - chirp）"
     },
     {
+      "name": "record.creator"
+    },
+    {
+      "name": "record.creator_music_box"
+    },
+    {
       "name": "record.far",
       "description": "音乐唱片（C418 - far）"
     },
@@ -4456,6 +4615,9 @@
     {
       "name": "record.pigstep",
       "description": "音乐唱片（Lena Raine - Pigstep）"
+    },
+    {
+      "name": "record.precipice"
     },
     {
       "name": "record.relic"
@@ -4597,6 +4759,12 @@
       "description": "铜块：踩上"
     },
     {
+      "name": "step.copper_bulb"
+    },
+    {
+      "name": "step.copper_grate"
+    },
+    {
       "name": "step.coral",
       "description": "珊瑚：踩上"
     },
@@ -4641,6 +4809,9 @@
     },
     {
       "name": "step.hanging_sign"
+    },
+    {
+      "name": "step.heavy_core"
     },
     {
       "name": "step.honey_block",
@@ -4770,8 +4941,14 @@
       "description": "凝灰岩：踩上"
     },
     {
+      "name": "step.tuff_bricks"
+    },
+    {
       "name": "step.vines",
       "description": "藤蔓：踩上"
+    },
+    {
+      "name": "step.web"
     },
     {
       "name": "step.wood",
@@ -4792,6 +4969,42 @@
     {
       "name": "tilt_up.big_dripleaf",
       "description": "垂滴叶：升起"
+    },
+    {
+      "name": "trial_spawner.ambient"
+    },
+    {
+      "name": "trial_spawner.ambient_ominous"
+    },
+    {
+      "name": "trial_spawner.break"
+    },
+    {
+      "name": "trial_spawner.charge_activate"
+    },
+    {
+      "name": "trial_spawner.close_shutter"
+    },
+    {
+      "name": "trial_spawner.detect_player"
+    },
+    {
+      "name": "trial_spawner.eject_item"
+    },
+    {
+      "name": "trial_spawner.hit"
+    },
+    {
+      "name": "trial_spawner.open_shutter"
+    },
+    {
+      "name": "trial_spawner.place"
+    },
+    {
+      "name": "trial_spawner.spawn_mob"
+    },
+    {
+      "name": "trial_spawner.step"
     },
     {
       "name": "ui.cartography_table.take_result",
@@ -4976,7 +5189,46 @@
       "description": "木头：使用"
     },
     {
+      "name": "vault.activate"
+    },
+    {
+      "name": "vault.ambient"
+    },
+    {
+      "name": "vault.break"
+    },
+    {
+      "name": "vault.close_shutter"
+    },
+    {
+      "name": "vault.deactivate"
+    },
+    {
+      "name": "vault.eject_item"
+    },
+    {
+      "name": "vault.hit"
+    },
+    {
+      "name": "vault.insert_item"
+    },
+    {
+      "name": "vault.insert_item_fail"
+    },
+    {
+      "name": "vault.open_shutter"
+    },
+    {
+      "name": "vault.place"
+    },
+    {
+      "name": "vault.step"
+    },
+    {
       "name": "vr.stutterturn"
+    },
+    {
+      "name": "wind_charge.burst"
     }
   ]
 }

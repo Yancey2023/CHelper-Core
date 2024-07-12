@@ -162,6 +162,30 @@
       "name": "animation.bow.wield_first_person_pull"
     },
     {
+      "name": "animation.breeze.idle"
+    },
+    {
+      "name": "animation.breeze.idle_ground_particles"
+    },
+    {
+      "name": "animation.breeze.idle_ground_sound"
+    },
+    {
+      "name": "animation.breeze.jump"
+    },
+    {
+      "name": "animation.breeze.shoot"
+    },
+    {
+      "name": "animation.breeze.slide"
+    },
+    {
+      "name": "animation.breeze.slide_ground_particles"
+    },
+    {
+      "name": "animation.breeze.whirl_sound"
+    },
+    {
       "name": "animation.camel.dash"
     },
     {
@@ -1330,6 +1354,9 @@
     },
     {
       "name": "animation.warden.sonic_boom"
+    },
+    {
+      "name": "animation.wind_charge.rotate"
     },
     {
       "name": "animation.witch.general"

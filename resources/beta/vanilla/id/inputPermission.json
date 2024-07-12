@@ -1,0 +1,14 @@
+{
+  "id": "inputPermission",
+  "type": "normal",
+  "content": [
+    {
+      "name": "camera",
+      "description": "允许玩家控制摄像机的视角"
+    },
+    {
+      "name": "movement",
+      "description": "允许玩家自主移动"
+    }
+  ]
+}

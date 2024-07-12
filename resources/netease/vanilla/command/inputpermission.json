@@ -1,0 +1,70 @@
+{
+  "name": [
+    "inputpermission"
+  ],
+  "description": "对玩家的权限状态进行指定操作",
+  "start": [
+    "query",
+    "set"
+  ],
+  "node": [
+    {
+      "type": "TEXT",
+      "id": "query",
+      "description": "查询目标的指定权限的状态",
+      "data": {
+        "name": "query",
+        "description": "查询目标的指定权限的状态"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "set",
+      "description": "修改目标的指定权限的状态",
+      "data": {
+        "name": "set",
+        "description": "修改目标的指定权限的状态"
+      }
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "queryPermission",
+      "brief": "指定操作所作用的权限",
+      "description": "指定操作所作用的权限",
+      "ignoreError": true,
+      "key": "inputPermission"
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "setPermission",
+      "brief": "操作所作用的权限",
+      "description": "操作所作用的权限",
+      "ignoreError": true,
+      "key": "inputPermission"
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "state",
+      "brief": "权限的状态",
+      "description": "权限的状态",
+      "ignoreError": true,
+      "contents": [
+        {
+          "name": "enabled",
+          "description": "启用"
+        },
+        {
+          "name": "disabled",
+          "description": "禁用"
+        }
+      ]
+    }
+  ],
+  "ast": [
+    ["query", "queryPermission"],
+    ["queryPermission", "state"],
+    ["state", "LF"],
+    ["set", "setPermission"],
+    ["setPermission", "state", "LF"]
+  ]
+}

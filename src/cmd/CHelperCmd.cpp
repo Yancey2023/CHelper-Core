@@ -35,15 +35,15 @@ int main() {
 
 [[maybe_unused]] void testBin() {
 #ifdef _WIN32
-    CHelper::Test::testBin(R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.0.23.cpack)",
+    CHelper::Test::testBin(R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.20.21.cpack)",
                            R"(D:\CLion\project\CHelper-Core\test\test.txt)",
                            false);
 #else
-    CHelper::Test::testBin(R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.cpack)",
+    CHelper::Test::testBin(R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.20.21.cpack)",
                            R"(/home/yancey/CLionProjects/CHelper-Core/test/test.txt)",
                            true);
     //    for (int i = 0; i < 100; ++i) {
-    //        CHelper::Core::createByBinary("/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.cpack");
+    //        CHelper::Core::createByBinary("/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.20.21.cpack");
     //    }
 #endif
 }
@@ -52,35 +52,35 @@ int main() {
 #ifdef _WIN32
     // release
     CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\release\vanilla)",
-                                   R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.20.80.05.json)");
+                                   R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.21.1.03.json)");
     CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\release\experiment)",
-                                   R"(D:\CLion\project\CHelper-Core\run\release-experiment-1.20.80.05.json)");
+                                   R"(D:\CLion\project\CHelper-Core\run\release-experiment-1.21.1.03.json)");
     // beta
     CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
-                                   R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.0.23.json)");
+                                   R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.20.21.json)");
     CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\beta\experiment)",
-                                   R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.0.23.json)");
+                                   R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.20.21.json)");
     // netease
-    //    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
-    //                             R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
-    //    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
-    //                             R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
+    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
+                                   R"(D:\CLion\project\CHelper-Core\run\netease-vanilla-1.20.10.25.json)");
+    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
+                                   R"(D:\CLion\project\CHelper-Core\run\netease-experiment-1.20.10.25.json)");
 #else
     // release
     CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/vanilla)",
-                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/release-vanilla-1.20.80.05.json)");
+                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/release-vanilla-1.21.1.03.json)");
     CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/experiment)",
-                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/release-experiment-1.20.80.05.json)");
+                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/release-experiment-1.21.1.03.json)");
     // beta
     CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
-                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-vanilla-1.21.0.23.json)");
+                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-vanilla-1.21.20.21.json)");
     CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/experiment)",
-                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.json)");
+                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.20.21.json)");
     // netease
     //    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/vanilla)",
-    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.21.0.23.json)");
+    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.20.10.25.json)");
     //    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/experiment)",
-    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.21.0.23.json)");
+    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.20.10.25.json)");
 #endif
 }
 
@@ -88,35 +88,35 @@ int main() {
 #ifdef _WIN32
     // release
     CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\release\vanilla)",
-                             R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.20.80.05.bson)");
+                             R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.21.1.03.bson)");
     CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\release\experiment)",
-                             R"(D:\CLion\project\CHelper-Core\run\release-experiment-1.20.80.05.bson)");
+                             R"(D:\CLion\project\CHelper-Core\run\release-experiment-1.21.1.03.bson)");
     // beta
     CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
-                             R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.0.23.bson)");
+                             R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.20.21.bson)");
     CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\beta\experiment)",
-                             R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.0.23.bson)");
+                             R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.20.21.bson)");
     // netease
-    //    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
-    //                             R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.bson)");
-    //    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
-    //                             R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.bson)");
+    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
+                             R"(D:\CLion\project\CHelper-Core\run\netease-vanilla-1.20.10.25.bson)");
+    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
+                             R"(D:\CLion\project\CHelper-Core\run\netease-experiment-1.20.10.25.bson)");
 #else
     // release
     CHelper::Test::writeBson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/vanilla)",
-                             R"(/home/yancey/CLionProjects/CHelper-Core/run/release-vanilla-1.20.80.05.bson)");
+                             R"(/home/yancey/CLionProjects/CHelper-Core/run/release-vanilla-1.21.1.03.bson)");
     CHelper::Test::writeBson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/experiment)",
-                             R"(/home/yancey/CLionProjects/CHelper-Core/run/release-experiment-1.20.80.05.bson)");
+                             R"(/home/yancey/CLionProjects/CHelper-Core/run/release-experiment-1.21.1.03.bson)");
     // beta
     CHelper::Test::writeBson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
-                             R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-vanilla-1.21.0.23.bson)");
+                             R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-vanilla-1.21.20.21.bson)");
     CHelper::Test::writeBson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/experiment)",
-                             R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.bson)");
+                             R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.20.21.bson)");
     // netease
     //    CHelper::Test::writeBson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/vanilla)",
-    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.21.0.23.bson)");
+    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.20.10.25.bson)");
     //    CHelper::Test::writeBson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/experiment)",
-    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.21.0.23.bson)");
+    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.20.10.25.bson)");
 #endif
 }
 
@@ -124,35 +124,35 @@ int main() {
 #ifdef _WIN32
     // release
     CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\release\vanilla)",
-                               R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.20.80.05.cpack)");
+                               R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.21.1.03.cpack)");
     CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\release\experiment)",
-                               R"(D:\CLion\project\CHelper-Core\run\release-experiment-1.20.80.05.cpack)");
+                               R"(D:\CLion\project\CHelper-Core\run\release-experiment-1.21.1.03.cpack)");
     // beta
     CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
-                               R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.0.23.cpack)");
+                               R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.20.21.cpack)");
     CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\beta\experiment)",
-                               R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.0.23.cpack)");
+                               R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.20.21.cpack)");
     // netease
-    // CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
-    //                            R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
-    // CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
-    //                            R"(D:\CLion\project\CHelper-Core\run\netease-1.21.0.23.cpack)");
+    CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
+                               R"(D:\CLion\project\CHelper-Core\run\netease-vanilla-1.20.10.25.cpack)");
+    CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
+                               R"(D:\CLion\project\CHelper-Core\run\netease-experiment-1.20.10.25.cpack)");
 #else
     // release
     CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/vanilla)",
-                               R"(/home/yancey/CLionProjects/CHelper-Core/run/release-vanilla-1.20.80.05.cpack)");
+                               R"(/home/yancey/CLionProjects/CHelper-Core/run/release-vanilla-1.21.1.03.cpack)");
     CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/experiment)",
-                               R"(/home/yancey/CLionProjects/CHelper-Core/run/release-experiment-1.20.80.05.cpack)");
+                               R"(/home/yancey/CLionProjects/CHelper-Core/run/release-experiment-1.21.1.03.cpack)");
     // beta
     CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
-                               R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-vanilla-1.21.0.23.cpack)");
+                               R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-vanilla-1.21.20.21.cpack)");
     CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/experiment)",
-                               R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.0.23.cpack)");
+                               R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.20.21.cpack)");
     // netease
     //    CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/vanilla)",
-    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.21.0.23.cpack)");
+    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.20.10.25.cpack)");
     //    CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/experiment)",
-    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.21.0.23.cpack)");
+    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.20.10.25.cpack)");
 #endif
 }
 

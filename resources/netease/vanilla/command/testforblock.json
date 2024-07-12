@@ -1,0 +1,27 @@
+{
+  "name": [
+    "testforblock"
+  ],
+  "description": "探测某个方块是否在特定位置",
+  "start": [
+    "position"
+  ],
+  "node": [
+    {
+      "type": "POSITION",
+      "id": "position",
+      "brief": "坐标",
+      "description": "待探测的方块的坐标"
+    },
+    {
+      "type": "BLOCK",
+      "id": "block",
+      "description": "要探测的方块类型",
+      "nodeBlockType": 0
+    }
+  ],
+  "ast": [
+    ["position", "block"],
+    ["block", "LF"]
+  ]
+}

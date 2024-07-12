@@ -335,7 +335,7 @@
     },
     {
       "name": "minecraft:armor_stand",
-      "description": "\u003c工作台\u003e木棍*6+双层平滑石头台阶-\u003e盔甲架"
+      "description": "\u003c工作台\u003e木棍*6+平滑石头台阶-\u003e盔甲架"
     },
     {
       "name": "minecraft:arrow",
@@ -662,6 +662,14 @@
       "description": "\u003c工作台\u003e橡木木板*5-\u003e橡木船"
     },
     {
+      "name": "minecraft:bolt_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e镶铆盔甲纹饰锻造模板+钻石*7+铜块-\u003e镶铆盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:bolt_armor_trim_smithing_template_duplicate_waxed",
+      "description": "\u003c工作台\u003e镶铆盔甲纹饰锻造模板+钻石*7+涂蜡的铜块-\u003e镶铆盔甲纹饰锻造模板*2"
+    },
+    {
       "name": "minecraft:bone_block",
       "description": "\u003c工作台\u003e骨粉*9-\u003e骨块"
     },
@@ -906,8 +914,16 @@
       "description": "\u003c工作台\u003e磨制黑石台阶*2-\u003e雕纹磨制黑石"
     },
     {
+      "name": "minecraft:chiseled_tuff",
+      "description": "\u003c工作台\u003e凝灰岩台阶*2-\u003e雕纹凝灰岩"
+    },
+    {
+      "name": "minecraft:chiseled_tuff_bricks",
+      "description": "\u003c工作台\u003e凝灰岩砖台阶*2-\u003e雕纹凝灰岩砖"
+    },
+    {
       "name": "minecraft:clay",
-      "description": "\u003c工作台\u003e黏土球*4-\u003e黏土"
+      "description": "\u003c工作台\u003e黏土球*4-\u003e黏土块"
     },
     {
       "name": "minecraft:clock",
@@ -955,7 +971,7 @@
     },
     {
       "name": "minecraft:cobblestone_stairs",
-      "description": "\u003c工作台\u003e圆石*6-\u003e石头楼梯*4"
+      "description": "\u003c工作台\u003e圆石*6-\u003e圆石楼梯*4"
     },
     {
       "name": "minecraft:cobblestone_wall",
@@ -984,6 +1000,30 @@
     {
       "name": "minecraft:copper_block_from_ingots",
       "description": "\u003c工作台\u003e铜锭*9-\u003e铜块"
+    },
+    {
+      "name": "minecraft:copper_bulb",
+      "description": "\u003c工作台\u003e红石粉+铜块*3+烈焰棒-\u003e铜灯*4"
+    },
+    {
+      "name": "minecraft:copper_door",
+      "description": "\u003c工作台\u003e铜锭*6-\u003e铜门*3"
+    },
+    {
+      "name": "minecraft:copper_grate",
+      "description": "\u003c工作台\u003e铜块*4-\u003e铜格栅*4"
+    },
+    {
+      "name": "minecraft:copper_trapdoor",
+      "description": "\u003c工作台\u003e铜锭*6-\u003e铜活板门*2"
+    },
+    {
+      "name": "minecraft:crafter",
+      "description": "\u003c工作台\u003e红石粉*2+铁锭*5+投掷器+工作台-\u003e合成器"
+    },
+    {
+      "name": "minecraft:crafting_table_chiseled_copper",
+      "description": "\u003c工作台\u003e切制铜台阶*2-\u003e雕纹铜块"
     },
     {
       "name": "minecraft:crafting_table_cut_copper",
@@ -1020,6 +1060,10 @@
     {
       "name": "minecraft:crafting_table_oxidized_cut_copper_stairs",
       "description": "\u003c工作台\u003e氧化的切制铜块*6-\u003e氧化的切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:crafting_table_waxed_copper_door",
+      "description": "\u003c工作台\u003e涂蜡的铜块*6-\u003e涂蜡的铜门*3"
     },
     {
       "name": "minecraft:crafting_table_waxed_cut_copper",
@@ -1522,6 +1566,18 @@
       "description": "\u003c工作台\u003e末影珍珠+烈焰粉~\u003e末影之眼"
     },
     {
+      "name": "minecraft:exposed_chiseled_copper",
+      "description": "\u003c工作台\u003e斑驳的切制铜台阶*2-\u003e斑驳的雕纹铜块"
+    },
+    {
+      "name": "minecraft:exposed_copper_bulb",
+      "description": "\u003c工作台\u003e红石粉+斑驳的铜块*3+烈焰棒-\u003e斑驳的铜灯*4"
+    },
+    {
+      "name": "minecraft:exposed_copper_grate",
+      "description": "\u003c工作台\u003e斑驳的铜块*4-\u003e斑驳的铜格栅*4"
+    },
+    {
       "name": "minecraft:eye_armor_trim_smithing_template_duplicate",
       "description": "\u003c工作台\u003e眼眸盔甲纹饰锻造模板+钻石*7+末地石-\u003e眼眸盔甲纹饰锻造模板*2"
     },
@@ -1548,6 +1604,10 @@
     {
       "name": "minecraft:flint_and_steel",
       "description": "\u003c工作台\u003e铁锭+燧石~\u003e打火石"
+    },
+    {
+      "name": "minecraft:flow_armor_trim_smithing_template_duplicate",
+      "description": "\u003c工作台\u003e涡流盔甲纹饰锻造模板+钻石*7+旋风棒-\u003e涡流盔甲纹饰锻造模板*2"
     },
     {
       "name": "minecraft:flower_pot",
@@ -1747,7 +1807,7 @@
     },
     {
       "name": "minecraft:grindstone",
-      "description": "\u003c工作台\u003e木棍*2+木板*2+双层石台阶-\u003e砂轮"
+      "description": "\u003c工作台\u003e木棍*2+木板*2+石头双层台阶-\u003e砂轮"
     },
     {
       "name": "minecraft:hay_block",
@@ -2166,6 +2226,10 @@
       "description": "\u003c工作台\u003e线*2+木板*2-\u003e织布机"
     },
     {
+      "name": "minecraft:mace",
+      "description": "\u003c工作台\u003e旋风棒+沉重核心-\u003e重锤"
+    },
+    {
       "name": "minecraft:magenta_banner",
       "description": "\u003c工作台\u003e品红色羊毛*6+木棍-\u003e品红色旗帜"
     },
@@ -2395,19 +2459,19 @@
     },
     {
       "name": "minecraft:nether_brick",
-      "description": "\u003c工作台\u003e下界砖块*4-\u003e下界砖"
+      "description": "\u003c工作台\u003e下界砖*4-\u003e下界砖块"
     },
     {
       "name": "minecraft:nether_brick_fence",
-      "description": "\u003c工作台\u003e下界砖块*2+下界砖*4-\u003e下界砖栅栏*6"
+      "description": "\u003c工作台\u003e下界砖*2+下界砖块*4-\u003e下界砖栅栏*6"
     },
     {
       "name": "minecraft:nether_brick_stairs",
-      "description": "\u003c工作台\u003e下界砖*6-\u003e下界砖楼梯*4"
+      "description": "\u003c工作台\u003e下界砖块*6-\u003e下界砖楼梯*4"
     },
     {
       "name": "minecraft:nether_brick_wall",
-      "description": "\u003c工作台\u003e下界砖*6-\u003e末地石砖墙*6"
+      "description": "\u003c工作台\u003e下界砖块*6-\u003e末地石砖墙*6"
     },
     {
       "name": "minecraft:nether_wart_block",
@@ -2524,6 +2588,18 @@
     {
       "name": "minecraft:orange_stained_hardened_clay",
       "description": "\u003c工作台\u003e陶瓦*8+橙色染料-\u003e橙色陶瓦*8"
+    },
+    {
+      "name": "minecraft:oxidized_chiseled_copper",
+      "description": "\u003c工作台\u003e氧化的切制铜台阶*2-\u003e氧化的雕纹铜块"
+    },
+    {
+      "name": "minecraft:oxidized_copper_bulb",
+      "description": "\u003c工作台\u003e红石粉+氧化的铜块*3+烈焰棒-\u003e氧化的铜灯*4"
+    },
+    {
+      "name": "minecraft:oxidized_copper_grate",
+      "description": "\u003c工作台\u003e氧化的铜块*4-\u003e氧化的铜格栅*4"
     },
     {
       "name": "minecraft:packed_ice",
@@ -2718,6 +2794,22 @@
       "description": "\u003c工作台\u003e磨制花岗岩*6-\u003e磨制花岗岩楼梯*4"
     },
     {
+      "name": "minecraft:polished_tuff",
+      "description": "\u003c工作台\u003e凝灰岩*4-\u003e磨制凝灰岩*4"
+    },
+    {
+      "name": "minecraft:polished_tuff_slab",
+      "description": "\u003c工作台\u003e磨制凝灰岩*3-\u003e磨制凝灰岩台阶*6"
+    },
+    {
+      "name": "minecraft:polished_tuff_stairs",
+      "description": "\u003c工作台\u003e磨制凝灰岩*6-\u003e磨制凝灰岩楼梯*4"
+    },
+    {
+      "name": "minecraft:polished_tuff_wall",
+      "description": "\u003c工作台\u003e磨制凝灰岩*6-\u003e磨制凝灰岩墙*6"
+    },
+    {
       "name": "minecraft:prismarine",
       "description": "\u003c工作台\u003e海晶碎片*4-\u003e海晶石"
     },
@@ -2903,7 +2995,7 @@
     },
     {
       "name": "minecraft:red_nether_brick",
-      "description": "\u003c工作台\u003e下界疣*2+下界砖块*2-\u003e红色下界砖块"
+      "description": "\u003c工作台\u003e下界疣*2+下界砖*2-\u003e红色下界砖块"
     },
     {
       "name": "minecraft:red_nether_brick_stairs",
@@ -3223,7 +3315,7 @@
     },
     {
       "name": "minecraft:stonecutter_andesite_slab",
-      "description": "\u003c切石机\u003e安山岩~\u003e双层安山岩台阶*2"
+      "description": "\u003c切石机\u003e安山岩~\u003e安山岩双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_andesite_stairs",
@@ -3247,7 +3339,7 @@
     },
     {
       "name": "minecraft:stonecutter_brick_slab",
-      "description": "\u003c切石机\u003e红砖块~\u003e双层砖块台阶*2"
+      "description": "\u003c切石机\u003e红砖块~\u003e红砖台阶*2"
     },
     {
       "name": "minecraft:stonecutter_brick_slab_from_polished_blackstone",
@@ -3279,7 +3371,7 @@
     },
     {
       "name": "minecraft:stonecutter_chiseled_nether_bricks_from_nether_brick",
-      "description": "\u003c切石机\u003e下界砖~\u003e雕纹下界砖块"
+      "description": "\u003c切石机\u003e下界砖块~\u003e雕纹下界砖块"
     },
     {
       "name": "minecraft:stonecutter_chiseled_polished_from_blackstone",
@@ -3287,15 +3379,23 @@
     },
     {
       "name": "minecraft:stonecutter_cobbledouble_stone_slab",
-      "description": "\u003c切石机\u003e圆石~\u003e双层圆石台阶*2"
+      "description": "\u003c切石机\u003e圆石~\u003e圆石台阶*2"
     },
     {
       "name": "minecraft:stonecutter_cobblestone_stairs",
-      "description": "\u003c切石机\u003e圆石~\u003e石头楼梯"
+      "description": "\u003c切石机\u003e圆石~\u003e圆石楼梯"
     },
     {
       "name": "minecraft:stonecutter_cobblestone_wall",
       "description": "\u003c切石机\u003e圆石~\u003e圆石墙"
+    },
+    {
+      "name": "minecraft:stonecutter_copper_block_to_chiseled_copper",
+      "description": "\u003c切石机\u003e铜块~\u003e雕纹铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_copper_block_to_copper_grate",
+      "description": "\u003c切石机\u003e铜块~\u003e铜格栅*4"
     },
     {
       "name": "minecraft:stonecutter_copper_block_to_cut_copper",
@@ -3310,6 +3410,10 @@
       "description": "\u003c切石机\u003e铜块~\u003e切制铜楼梯*4"
     },
     {
+      "name": "minecraft:stonecutter_cut_copper_to_chiseled_copper",
+      "description": "\u003c切石机\u003e切制铜块~\u003e雕纹铜块"
+    },
+    {
       "name": "minecraft:stonecutter_cut_copper_to_cut_copper_slab",
       "description": "\u003c切石机\u003e切制铜块~\u003e切制铜台阶*2"
     },
@@ -3319,7 +3423,7 @@
     },
     {
       "name": "minecraft:stonecutter_dark_prismarine_slab",
-      "description": "\u003c切石机\u003e暗海晶石~\u003e双层暗海晶石台阶*2"
+      "description": "\u003c切石机\u003e暗海晶石~\u003e暗海晶石双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_dark_prismarine_stairs",
@@ -3327,7 +3431,7 @@
     },
     {
       "name": "minecraft:stonecutter_diorite_slab",
-      "description": "\u003c切石机\u003e闪长岩~\u003e双层闪长岩台阶*2"
+      "description": "\u003c切石机\u003e闪长岩~\u003e闪长岩双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_diorite_stairs",
@@ -3339,15 +3443,15 @@
     },
     {
       "name": "minecraft:stonecutter_double_stone_slab",
-      "description": "\u003c切石机\u003e石头~\u003e双层石台阶*2"
+      "description": "\u003c切石机\u003e石头~\u003e石头双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_endbrick_slab",
-      "description": "\u003c切石机\u003e末地石~\u003e双层末地石砖台阶*2"
+      "description": "\u003c切石机\u003e末地石~\u003e末地石砖双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_endbrick_slab2",
-      "description": "\u003c切石机\u003e末地石砖~\u003e双层末地石砖台阶*2"
+      "description": "\u003c切石机\u003e末地石砖~\u003e末地石砖双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_endbrick_stairs",
@@ -3378,6 +3482,14 @@
       "description": "\u003c切石机\u003e斑驳的铜块~\u003e斑驳的切制铜楼梯*4"
     },
     {
+      "name": "minecraft:stonecutter_exposed_copper_to_exposed_chiseled_copper",
+      "description": "\u003c切石机\u003e斑驳的铜块~\u003e斑驳的雕纹铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_exposed_copper_to_exposed_copper_grate",
+      "description": "\u003c切石机\u003e斑驳的铜块~\u003e斑驳的铜格栅*4"
+    },
+    {
       "name": "minecraft:stonecutter_exposed_copper_to_exposed_cut_copper_slab",
       "description": "\u003c切石机\u003e斑驳的铜块~\u003e斑驳的切制铜台阶*8"
     },
@@ -3390,8 +3502,12 @@
       "description": "\u003c切石机\u003e斑驳的切制铜块~\u003e斑驳的切制铜楼梯"
     },
     {
+      "name": "minecraft:stonecutter_exposed_cut_copper_to_exposed_chiseled_copper",
+      "description": "\u003c切石机\u003e斑驳的切制铜块~\u003e斑驳的雕纹铜块"
+    },
+    {
       "name": "minecraft:stonecutter_granite_slab",
-      "description": "\u003c切石机\u003e花岗岩~\u003e双层花岗岩台阶*2"
+      "description": "\u003c切石机\u003e花岗岩~\u003e花岗岩双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_granite_stairs",
@@ -3403,7 +3519,7 @@
     },
     {
       "name": "minecraft:stonecutter_mossy_cobbledouble_stone_slab",
-      "description": "\u003c切石机\u003e苔石~\u003e双层苔石台阶*2"
+      "description": "\u003c切石机\u003e苔石~\u003e苔石双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_mossy_cobblestone_stairs",
@@ -3415,7 +3531,7 @@
     },
     {
       "name": "minecraft:stonecutter_mossy_stonebrick_slab",
-      "description": "\u003c切石机\u003e苔石砖~\u003e双层苔石砖台阶*2"
+      "description": "\u003c切石机\u003e苔石砖~\u003e苔石砖双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_mossy_stonebrick_stairs",
@@ -3439,15 +3555,15 @@
     },
     {
       "name": "minecraft:stonecutter_nether_brick_slab",
-      "description": "\u003c切石机\u003e下界砖~\u003e双层下界砖台阶*2"
+      "description": "\u003c切石机\u003e下界砖块~\u003e下界砖台阶*2"
     },
     {
       "name": "minecraft:stonecutter_nether_brick_stairs",
-      "description": "\u003c切石机\u003e下界砖~\u003e下界砖楼梯"
+      "description": "\u003c切石机\u003e下界砖块~\u003e下界砖楼梯"
     },
     {
       "name": "minecraft:stonecutter_nether_brick_wall",
-      "description": "\u003c切石机\u003e下界砖~\u003e末地石砖墙"
+      "description": "\u003c切石机\u003e下界砖块~\u003e末地石砖墙"
     },
     {
       "name": "minecraft:stonecutter_oxidized_copper_to_cut_copper",
@@ -3462,6 +3578,14 @@
       "description": "\u003c切石机\u003e氧化的铜块~\u003e氧化的切制铜楼梯*4"
     },
     {
+      "name": "minecraft:stonecutter_oxidized_copper_to_oxidized_chiseled_copper",
+      "description": "\u003c切石机\u003e氧化的铜块~\u003e氧化的雕纹铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_oxidized_copper_to_oxidized_copper_grate",
+      "description": "\u003c切石机\u003e氧化的铜块~\u003e氧化的铜格栅*4"
+    },
+    {
       "name": "minecraft:stonecutter_oxidized_cut_copper_to_cut_copper_slab",
       "description": "\u003c切石机\u003e氧化的切制铜块~\u003e氧化的切制铜台阶*2"
     },
@@ -3470,16 +3594,20 @@
       "description": "\u003c切石机\u003e氧化的切制铜块~\u003e氧化的切制铜楼梯"
     },
     {
+      "name": "minecraft:stonecutter_oxidized_cut_copper_to_oxidized_chiseled_copper",
+      "description": "\u003c切石机\u003e氧化的切制铜块~\u003e氧化的雕纹铜块"
+    },
+    {
       "name": "minecraft:stonecutter_polished_andesite",
       "description": "\u003c切石机\u003e安山岩~\u003e磨制安山岩"
     },
     {
       "name": "minecraft:stonecutter_polished_andesite_slab",
-      "description": "\u003c切石机\u003e安山岩~\u003e双层磨制安山岩台阶*2"
+      "description": "\u003c切石机\u003e安山岩~\u003e磨制安山岩双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_polished_andesite_slab2",
-      "description": "\u003c切石机\u003e磨制安山岩~\u003e双层磨制安山岩台阶*2"
+      "description": "\u003c切石机\u003e磨制安山岩~\u003e磨制安山岩双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_polished_andesite_stairs",
@@ -3515,11 +3643,11 @@
     },
     {
       "name": "minecraft:stonecutter_polished_diorite_slab",
-      "description": "\u003c切石机\u003e闪长岩~\u003e双层磨制闪长岩台阶*2"
+      "description": "\u003c切石机\u003e闪长岩~\u003e磨制闪长岩双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_polished_diorite_slab2",
-      "description": "\u003c切石机\u003e磨制闪长岩~\u003e双层磨制闪长岩台阶*2"
+      "description": "\u003c切石机\u003e磨制闪长岩~\u003e磨制闪长岩双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_polished_diorite_stairs",
@@ -3539,11 +3667,11 @@
     },
     {
       "name": "minecraft:stonecutter_polished_granite_slab",
-      "description": "\u003c切石机\u003e花岗岩~\u003e双层磨制花岗岩台阶*2"
+      "description": "\u003c切石机\u003e花岗岩~\u003e磨制花岗岩双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_polished_granite_slab2",
-      "description": "\u003c切石机\u003e磨制花岗岩~\u003e双层磨制花岗岩台阶*2"
+      "description": "\u003c切石机\u003e磨制花岗岩~\u003e磨制花岗岩双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_polished_granite_stairs",
@@ -3562,12 +3690,44 @@
       "description": "\u003c切石机\u003e黑石~\u003e磨制黑石楼梯"
     },
     {
+      "name": "minecraft:stonecutter_polished_tuff_to_chiseled_tuff_bricks",
+      "description": "\u003c切石机\u003e磨制凝灰岩~\u003e雕纹凝灰岩砖"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_tuff_to_polished_tuff_slab",
+      "description": "\u003c切石机\u003e磨制凝灰岩~\u003e磨制凝灰岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_tuff_to_polished_tuff_stairs",
+      "description": "\u003c切石机\u003e磨制凝灰岩~\u003e磨制凝灰岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_tuff_to_polished_tuff_wall",
+      "description": "\u003c切石机\u003e磨制凝灰岩~\u003e磨制凝灰岩墙"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_tuff_to_tuff_brick_slab",
+      "description": "\u003c切石机\u003e磨制凝灰岩~\u003e凝灰岩砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_tuff_to_tuff_brick_stairs",
+      "description": "\u003c切石机\u003e磨制凝灰岩~\u003e凝灰岩砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_tuff_to_tuff_brick_wall",
+      "description": "\u003c切石机\u003e磨制凝灰岩~\u003e凝灰岩砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_polished_tuff_to_tuff_bricks",
+      "description": "\u003c切石机\u003e磨制凝灰岩~\u003e凝灰岩砖"
+    },
+    {
       "name": "minecraft:stonecutter_polished_wall_from_blackstone",
       "description": "\u003c切石机\u003e黑石~\u003e磨制黑石墙"
     },
     {
       "name": "minecraft:stonecutter_prismarine_brick_slab",
-      "description": "\u003c切石机\u003e海晶石砖~\u003e双层海晶石砖台阶*2"
+      "description": "\u003c切石机\u003e海晶石砖~\u003e海晶石砖双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_prismarine_brick_stairs",
@@ -3575,7 +3735,7 @@
     },
     {
       "name": "minecraft:stonecutter_prismarine_slab",
-      "description": "\u003c切石机\u003e海晶石~\u003e双层海晶石台阶*2"
+      "description": "\u003c切石机\u003e海晶石~\u003e海晶石双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_prismarine_stairs",
@@ -3591,7 +3751,7 @@
     },
     {
       "name": "minecraft:stonecutter_purpur_slab",
-      "description": "\u003c切石机\u003e紫珀块~\u003e双层紫珀台阶*2"
+      "description": "\u003c切石机\u003e紫珀块~\u003e紫珀双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_purpur_stairs",
@@ -3619,7 +3779,7 @@
     },
     {
       "name": "minecraft:stonecutter_red_nether_brick_slab",
-      "description": "\u003c切石机\u003e红色下界砖块~\u003e双层红色下界砖台阶*2"
+      "description": "\u003c切石机\u003e红色下界砖块~\u003e红色下界砖双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_red_nether_brick_stairs",
@@ -3631,7 +3791,7 @@
     },
     {
       "name": "minecraft:stonecutter_red_sanddouble_stone_slab",
-      "description": "\u003c切石机\u003e红砂岩~\u003e双层红砂岩台阶*2"
+      "description": "\u003c切石机\u003e红砂岩~\u003e红砂岩双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_red_sandstone_cut",
@@ -3651,7 +3811,7 @@
     },
     {
       "name": "minecraft:stonecutter_sanddouble_stone_slab",
-      "description": "\u003c切石机\u003e砂岩~\u003e双层砂岩台阶*2"
+      "description": "\u003c切石机\u003e砂岩~\u003e砂岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_sandstone_cut",
@@ -3679,11 +3839,11 @@
     },
     {
       "name": "minecraft:stonecutter_smooth_double_stone_slab",
-      "description": "\u003c切石机\u003e平滑石头~\u003e双层平滑石头台阶*2"
+      "description": "\u003c切石机\u003e平滑石头~\u003e平滑石头台阶*2"
     },
     {
       "name": "minecraft:stonecutter_smooth_quartz_slab",
-      "description": "\u003c切石机\u003e平滑石英块~\u003e双层平滑石英台阶*2"
+      "description": "\u003c切石机\u003e平滑石英块~\u003e平滑石英双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_smooth_quartz_stairs",
@@ -3691,7 +3851,7 @@
     },
     {
       "name": "minecraft:stonecutter_smooth_red_sanddouble_stone_slab",
-      "description": "\u003c切石机\u003e平滑红砂岩~\u003e双层平滑红砂岩台阶*2"
+      "description": "\u003c切石机\u003e平滑红砂岩~\u003e平滑红砂岩双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_smooth_red_sandstone_stairs",
@@ -3699,7 +3859,7 @@
     },
     {
       "name": "minecraft:stonecutter_smooth_sanddouble_stone_slab",
-      "description": "\u003c切石机\u003e平滑砂岩~\u003e双层平滑砂岩台阶*2"
+      "description": "\u003c切石机\u003e平滑砂岩~\u003e平滑砂岩双层台阶*2"
     },
     {
       "name": "minecraft:stonecutter_smooth_sandstone_stairs",
@@ -3723,11 +3883,11 @@
     },
     {
       "name": "minecraft:stonecutter_stonebrick_slab",
-      "description": "\u003c切石机\u003e石头~\u003e双层石砖台阶*2"
+      "description": "\u003c切石机\u003e石头~\u003e石砖台阶*2"
     },
     {
       "name": "minecraft:stonecutter_stonebrick_slab2",
-      "description": "\u003c切石机\u003e石砖~\u003e双层石砖台阶*2"
+      "description": "\u003c切石机\u003e石砖~\u003e石砖台阶*2"
     },
     {
       "name": "minecraft:stonecutter_stonebrick_stairs",
@@ -3744,6 +3904,74 @@
     {
       "name": "minecraft:stonecutter_stonebrick_wall2",
       "description": "\u003c切石机\u003e石砖~\u003e石砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_bricks_to_chiseled_tuff_bricks",
+      "description": "\u003c切石机\u003e凝灰岩砖~\u003e雕纹凝灰岩砖"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_bricks_to_tuff_brick_slab",
+      "description": "\u003c切石机\u003e凝灰岩砖~\u003e凝灰岩砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_bricks_to_tuff_brick_stairs",
+      "description": "\u003c切石机\u003e凝灰岩砖~\u003e凝灰岩砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_bricks_to_tuff_brick_wall",
+      "description": "\u003c切石机\u003e凝灰岩砖~\u003e凝灰岩砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_chiseled_tuff",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e雕纹凝灰岩"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_chiseled_tuff_bricks",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e雕纹凝灰岩砖"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_polished_tuff",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e磨制凝灰岩"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_polished_tuff_slab",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e磨制凝灰岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_polished_tuff_stairs",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e磨制凝灰岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_polished_tuff_wall",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e磨制凝灰岩墙"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_tuff_brick_slab",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e凝灰岩砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_tuff_brick_stairs",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e凝灰岩砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_tuff_brick_wall",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e凝灰岩砖墙"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_tuff_bricks",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e凝灰岩砖"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_tuff_slab",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e凝灰岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_tuff_stairs",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e凝灰岩楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_tuff_to_tuff_wall",
+      "description": "\u003c切石机\u003e凝灰岩~\u003e凝灰岩墙"
     },
     {
       "name": "minecraft:stonecutter_wall_from_polished_blackstone",
@@ -3770,12 +3998,24 @@
       "description": "\u003c切石机\u003e涂蜡的斑驳铜块~\u003e涂蜡的斑驳切制铜台阶*8"
     },
     {
+      "name": "minecraft:stonecutter_waxed_copper_to_waxed_chiseled_copper",
+      "description": "\u003c切石机\u003e涂蜡的铜块~\u003e涂蜡的雕纹铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_copper_to_waxed_copper_grate",
+      "description": "\u003c切石机\u003e涂蜡的铜块~\u003e涂蜡的铜格栅*4"
+    },
+    {
       "name": "minecraft:stonecutter_waxed_cut_copper_to_cut_copper_slab",
       "description": "\u003c切石机\u003e涂蜡的切制铜块~\u003e涂蜡的切制铜台阶*2"
     },
     {
       "name": "minecraft:stonecutter_waxed_cut_copper_to_cut_copper_stairs",
       "description": "\u003c切石机\u003e涂蜡的切制铜块~\u003e涂蜡的切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_cut_copper_to_waxed_chiseled_copper",
+      "description": "\u003c切石机\u003e涂蜡的切制铜块~\u003e涂蜡的雕纹铜块"
     },
     {
       "name": "minecraft:stonecutter_waxed_exposed_copper_to_cut_copper",
@@ -3786,12 +4026,24 @@
       "description": "\u003c切石机\u003e涂蜡的斑驳铜块~\u003e涂蜡的斑驳切制铜楼梯*4"
     },
     {
+      "name": "minecraft:stonecutter_waxed_exposed_copper_to_waxed_exposed_chiseled_copper",
+      "description": "\u003c切石机\u003e涂蜡的斑驳铜块~\u003e涂蜡的斑驳雕纹铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_exposed_copper_to_waxed_exposed_copper_grate",
+      "description": "\u003c切石机\u003e涂蜡的斑驳铜块~\u003e涂蜡的斑驳铜格栅*4"
+    },
+    {
       "name": "minecraft:stonecutter_waxed_exposed_cut_copper_to_cut_copper_slab",
       "description": "\u003c切石机\u003e涂蜡的斑驳切制铜块~\u003e涂蜡的斑驳切制铜台阶*2"
     },
     {
       "name": "minecraft:stonecutter_waxed_exposed_cut_copper_to_cut_copper_stairs",
       "description": "\u003c切石机\u003e涂蜡的斑驳切制铜块~\u003e涂蜡的斑驳切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_exposed_cut_copper_to_waxed_exposed_chiseled_copper",
+      "description": "\u003c切石机\u003e涂蜡的斑驳切制铜块~\u003e涂蜡的斑驳雕纹铜块"
     },
     {
       "name": "minecraft:stonecutter_waxed_oxidized_copper_to_cut_copper",
@@ -3806,12 +4058,24 @@
       "description": "\u003c切石机\u003e涂蜡的氧化铜块~\u003e涂蜡的氧化切制铜楼梯*4"
     },
     {
+      "name": "minecraft:stonecutter_waxed_oxidized_copper_to_waxed_oxidized_chiseled_copper",
+      "description": "\u003c切石机\u003e涂蜡的氧化铜块~\u003e涂蜡的氧化雕纹铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_oxidized_copper_to_waxed_oxidized_copper_grate",
+      "description": "\u003c切石机\u003e涂蜡的氧化铜块~\u003e涂蜡的氧化铜格栅*4"
+    },
+    {
       "name": "minecraft:stonecutter_waxed_oxidized_cut_copper_to_cut_copper_slab",
       "description": "\u003c切石机\u003e涂蜡的氧化切制铜块~\u003e涂蜡的氧化切制铜台阶"
     },
     {
       "name": "minecraft:stonecutter_waxed_oxidized_cut_copper_to_cut_copper_stairs",
       "description": "\u003c切石机\u003e涂蜡的氧化切制铜块~\u003e涂蜡的氧化切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_oxidized_cut_copper_to_waxed_oxidized_chiseled_copper",
+      "description": "\u003c切石机\u003e涂蜡的氧化切制铜块~\u003e涂蜡的氧化雕纹铜块"
     },
     {
       "name": "minecraft:stonecutter_waxed_weathered_copper_to_cut_copper",
@@ -3826,12 +4090,24 @@
       "description": "\u003c切石机\u003e涂蜡的锈蚀铜块~\u003e涂蜡的锈蚀切制铜楼梯*4"
     },
     {
+      "name": "minecraft:stonecutter_waxed_weathered_copper_to_waxed_weathered_chiseled_copper",
+      "description": "\u003c切石机\u003e涂蜡的锈蚀铜块~\u003e涂蜡的锈蚀雕纹铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_weathered_copper_to_waxed_weathered_copper_grate",
+      "description": "\u003c切石机\u003e涂蜡的锈蚀铜块~\u003e涂蜡的锈蚀铜格栅*4"
+    },
+    {
       "name": "minecraft:stonecutter_waxed_weathered_cut_copper_to_cut_copper_slab",
       "description": "\u003c切石机\u003e涂蜡的锈蚀切制铜块~\u003e涂蜡的锈蚀切制铜台阶*2"
     },
     {
       "name": "minecraft:stonecutter_waxed_weathered_cut_copper_to_cut_copper_stairs",
       "description": "\u003c切石机\u003e涂蜡的锈蚀切制铜块~\u003e涂蜡的锈蚀切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_waxed_weathered_cut_copper_to_waxed_weathered_chiseled_copper",
+      "description": "\u003c切石机\u003e涂蜡的锈蚀切制铜块~\u003e涂蜡的锈蚀雕纹铜块"
     },
     {
       "name": "minecraft:stonecutter_weathered_copper_to_cut_copper",
@@ -3846,12 +4122,24 @@
       "description": "\u003c切石机\u003e锈蚀的铜块~\u003e锈蚀的切制铜楼梯*4"
     },
     {
+      "name": "minecraft:stonecutter_weathered_copper_to_weathered_chiseled_copper",
+      "description": "\u003c切石机\u003e锈蚀的铜块~\u003e锈蚀的雕纹铜块*4"
+    },
+    {
+      "name": "minecraft:stonecutter_weathered_copper_to_weathered_copper_grate",
+      "description": "\u003c切石机\u003e锈蚀的铜块~\u003e锈蚀的铜格栅*4"
+    },
+    {
       "name": "minecraft:stonecutter_weathered_cut_copper_to_cut_copper_slab",
       "description": "\u003c切石机\u003e锈蚀的切制铜块~\u003e锈蚀的切制铜台阶*2"
     },
     {
       "name": "minecraft:stonecutter_weathered_cut_copper_to_cut_copper_stairs",
       "description": "\u003c切石机\u003e锈蚀的切制铜块~\u003e锈蚀的切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_weathered_cut_copper_to_weathered_chiseled_copper",
+      "description": "\u003c切石机\u003e锈蚀的切制铜块~\u003e锈蚀的雕纹铜块"
     },
     {
       "name": "minecraft:string_to_wool",
@@ -3904,6 +4192,34 @@
     {
       "name": "minecraft:tripwire_hook",
       "description": "\u003c工作台\u003e铁锭+木棍+木板-\u003e绊线钩*2"
+    },
+    {
+      "name": "minecraft:tuff_brick_slab",
+      "description": "\u003c工作台\u003e凝灰岩砖*3-\u003e凝灰岩砖台阶*6"
+    },
+    {
+      "name": "minecraft:tuff_brick_stairs",
+      "description": "\u003c工作台\u003e凝灰岩砖*6-\u003e凝灰岩砖楼梯*4"
+    },
+    {
+      "name": "minecraft:tuff_brick_wall",
+      "description": "\u003c工作台\u003e凝灰岩砖*6-\u003e凝灰岩砖墙*6"
+    },
+    {
+      "name": "minecraft:tuff_bricks",
+      "description": "\u003c工作台\u003e磨制凝灰岩*4-\u003e凝灰岩砖*4"
+    },
+    {
+      "name": "minecraft:tuff_slab",
+      "description": "\u003c工作台\u003e凝灰岩*3-\u003e凝灰岩台阶*6"
+    },
+    {
+      "name": "minecraft:tuff_stairs",
+      "description": "\u003c工作台\u003e凝灰岩*6-\u003e凝灰岩楼梯*4"
+    },
+    {
+      "name": "minecraft:tuff_wall",
+      "description": "\u003c工作台\u003e凝灰岩*6-\u003e凝灰岩墙*6"
     },
     {
       "name": "minecraft:turtle_helmet",
@@ -3982,8 +4298,88 @@
       "description": "\u003c工作台\u003e诡异木板*6-\u003e诡异木活板门*2"
     },
     {
+      "name": "minecraft:waxed_chiseled_copper",
+      "description": "\u003c工作台\u003e涂蜡的切制铜台阶*2-\u003e涂蜡的雕纹铜块"
+    },
+    {
+      "name": "minecraft:waxed_copper_bulb",
+      "description": "\u003c工作台\u003e红石粉+涂蜡的铜块*3+烈焰棒-\u003e涂蜡的铜灯*4"
+    },
+    {
+      "name": "minecraft:waxed_copper_grate",
+      "description": "\u003c工作台\u003e涂蜡的铜块*4-\u003e涂蜡的铜格栅*4"
+    },
+    {
+      "name": "minecraft:waxed_exposed_chiseled_copper",
+      "description": "\u003c工作台\u003e涂蜡的斑驳切制铜台阶*2-\u003e涂蜡的斑驳雕纹铜块"
+    },
+    {
+      "name": "minecraft:waxed_exposed_chiseled_copper_from_honeycomb",
+      "description": "\u003c工作台\u003e斑驳的雕纹铜块+蜜脾~\u003e涂蜡的斑驳雕纹铜块"
+    },
+    {
+      "name": "minecraft:waxed_exposed_copper_bulb",
+      "description": "\u003c工作台\u003e红石粉+涂蜡的斑驳铜块*3+烈焰棒-\u003e涂蜡的斑驳铜灯*4"
+    },
+    {
+      "name": "minecraft:waxed_exposed_copper_grate",
+      "description": "\u003c工作台\u003e涂蜡的斑驳铜块*4-\u003e涂蜡的斑驳铜格栅*4"
+    },
+    {
+      "name": "minecraft:waxed_oxidized_chiseled_copper",
+      "description": "\u003c工作台\u003e涂蜡的氧化切制铜台阶*2-\u003e涂蜡的氧化雕纹铜块"
+    },
+    {
+      "name": "minecraft:waxed_oxidized_chiseled_copper_from_honeycomb",
+      "description": "\u003c工作台\u003e氧化的雕纹铜块+蜜脾~\u003e涂蜡的氧化雕纹铜块"
+    },
+    {
+      "name": "minecraft:waxed_oxidized_copper_bulb",
+      "description": "\u003c工作台\u003e红石粉+涂蜡的氧化铜块*3+烈焰棒-\u003e涂蜡的氧化铜灯*4"
+    },
+    {
+      "name": "minecraft:waxed_oxidized_copper_grate",
+      "description": "\u003c工作台\u003e涂蜡的氧化铜块*4-\u003e涂蜡的氧化铜格栅*4"
+    },
+    {
+      "name": "minecraft:waxed_weathered_chiseled_copper",
+      "description": "\u003c工作台\u003e涂蜡的锈蚀切制铜台阶*2-\u003e涂蜡的锈蚀雕纹铜块"
+    },
+    {
+      "name": "minecraft:waxed_weathered_chiseled_copper_from_honeycomb",
+      "description": "\u003c工作台\u003e锈蚀的雕纹铜块+蜜脾~\u003e涂蜡的锈蚀雕纹铜块"
+    },
+    {
+      "name": "minecraft:waxed_weathered_copper_bulb",
+      "description": "\u003c工作台\u003e红石粉+涂蜡的锈蚀铜块*3+烈焰棒-\u003e涂蜡的锈蚀铜灯*4"
+    },
+    {
+      "name": "minecraft:waxed_weathered_copper_grate",
+      "description": "\u003c工作台\u003e涂蜡的锈蚀铜块*4-\u003e涂蜡的锈蚀铜格栅*4"
+    },
+    {
+      "name": "minecraft:waxing_chiseled_copper",
+      "description": "\u003c工作台\u003e雕纹铜块+蜜脾~\u003e涂蜡的雕纹铜块"
+    },
+    {
       "name": "minecraft:waxing_copper_block",
       "description": "\u003c工作台\u003e铜块+蜜脾~\u003e涂蜡的铜块"
+    },
+    {
+      "name": "minecraft:waxing_copper_bulb",
+      "description": "\u003c工作台\u003e铜灯+蜜脾~\u003e涂蜡的铜灯"
+    },
+    {
+      "name": "minecraft:waxing_copper_door",
+      "description": "\u003c工作台\u003e铜门+蜜脾~\u003e涂蜡的铜门"
+    },
+    {
+      "name": "minecraft:waxing_copper_grate",
+      "description": "\u003c工作台\u003e铜格栅+蜜脾~\u003e涂蜡的铜格栅"
+    },
+    {
+      "name": "minecraft:waxing_copper_trapdoor",
+      "description": "\u003c工作台\u003e铜活板门+蜜脾~\u003e涂蜡的铜活板门"
     },
     {
       "name": "minecraft:waxing_cut_copper",
@@ -4002,6 +4398,22 @@
       "description": "\u003c工作台\u003e斑驳的铜块+蜜脾~\u003e涂蜡的斑驳铜块"
     },
     {
+      "name": "minecraft:waxing_exposed_copper_bulb",
+      "description": "\u003c工作台\u003e斑驳的铜灯+蜜脾~\u003e涂蜡的斑驳铜灯"
+    },
+    {
+      "name": "minecraft:waxing_exposed_copper_door",
+      "description": "\u003c工作台\u003e斑驳的铜门+蜜脾~\u003e涂蜡的斑驳铜门"
+    },
+    {
+      "name": "minecraft:waxing_exposed_copper_grate",
+      "description": "\u003c工作台\u003e斑驳的铜格栅+蜜脾~\u003e涂蜡的斑驳铜格栅"
+    },
+    {
+      "name": "minecraft:waxing_exposed_copper_trapdoor",
+      "description": "\u003c工作台\u003e斑驳的铜活板门+蜜脾~\u003e涂蜡的斑驳铜活板门"
+    },
+    {
       "name": "minecraft:waxing_exposed_cut_copper",
       "description": "\u003c工作台\u003e斑驳的切制铜块+蜜脾~\u003e涂蜡的斑驳切制铜块"
     },
@@ -4016,6 +4428,22 @@
     {
       "name": "minecraft:waxing_oxidized_copper",
       "description": "\u003c工作台\u003e氧化的铜块+蜜脾~\u003e涂蜡的氧化铜块"
+    },
+    {
+      "name": "minecraft:waxing_oxidized_copper_bulb",
+      "description": "\u003c工作台\u003e氧化的铜灯+蜜脾~\u003e涂蜡的氧化铜灯"
+    },
+    {
+      "name": "minecraft:waxing_oxidized_copper_door",
+      "description": "\u003c工作台\u003e氧化的铜门+蜜脾~\u003e涂蜡的氧化铜门"
+    },
+    {
+      "name": "minecraft:waxing_oxidized_copper_grate",
+      "description": "\u003c工作台\u003e氧化的铜格栅+蜜脾~\u003e涂蜡的氧化铜格栅"
+    },
+    {
+      "name": "minecraft:waxing_oxidized_copper_trapdoor",
+      "description": "\u003c工作台\u003e氧化的铜活板门+蜜脾~\u003e涂蜡的氧化铜活板门"
     },
     {
       "name": "minecraft:waxing_oxidized_cut_copper",
@@ -4034,6 +4462,22 @@
       "description": "\u003c工作台\u003e锈蚀的铜块+蜜脾~\u003e涂蜡的锈蚀铜块"
     },
     {
+      "name": "minecraft:waxing_weathered_copper_bulb",
+      "description": "\u003c工作台\u003e锈蚀的铜灯+蜜脾~\u003e涂蜡的锈蚀铜灯"
+    },
+    {
+      "name": "minecraft:waxing_weathered_copper_door",
+      "description": "\u003c工作台\u003e锈蚀的铜门+蜜脾~\u003e涂蜡的锈蚀铜门"
+    },
+    {
+      "name": "minecraft:waxing_weathered_copper_grate",
+      "description": "\u003c工作台\u003e锈蚀的铜格栅+蜜脾~\u003e涂蜡的锈蚀铜格栅"
+    },
+    {
+      "name": "minecraft:waxing_weathered_copper_trapdoor",
+      "description": "\u003c工作台\u003e锈蚀的铜活板门+蜜脾~\u003e涂蜡的锈蚀铜活板门"
+    },
+    {
       "name": "minecraft:waxing_weathered_cut_copper",
       "description": "\u003c工作台\u003e锈蚀的切制铜块+蜜脾~\u003e涂蜡的锈蚀切制铜块"
     },
@@ -4048,6 +4492,18 @@
     {
       "name": "minecraft:wayfinder_armor_trim_smithing_template_duplicate",
       "description": "\u003c工作台\u003e向导盔甲纹饰锻造模板+钻石*7+陶瓦-\u003e向导盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:weathered_chiseled_copper",
+      "description": "\u003c工作台\u003e锈蚀的切制铜台阶*2-\u003e锈蚀的雕纹铜块"
+    },
+    {
+      "name": "minecraft:weathered_copper_bulb",
+      "description": "\u003c工作台\u003e红石粉+锈蚀的铜块*3+烈焰棒-\u003e锈蚀的铜灯*4"
+    },
+    {
+      "name": "minecraft:weathered_copper_grate",
+      "description": "\u003c工作台\u003e锈蚀的铜块*4-\u003e锈蚀的铜格栅*4"
     },
     {
       "name": "minecraft:wheat",
@@ -4112,6 +4568,10 @@
     {
       "name": "minecraft:wild_armor_trim_smithing_template_duplicate",
       "description": "\u003c工作台\u003e荒野盔甲纹饰锻造模板+钻石*7+苔石-\u003e荒野盔甲纹饰锻造模板*2"
+    },
+    {
+      "name": "minecraft:wind_charge",
+      "description": "\u003c工作台\u003e旋风棒~\u003e风弹*4"
     },
     {
       "name": "minecraft:wolf_armor",
@@ -5326,6 +5786,18 @@
     },
     {
       "name": "weapon_arrow_recipe_42"
+    },
+    {
+      "name": "weapon_arrow_recipe_43"
+    },
+    {
+      "name": "weapon_arrow_recipe_44"
+    },
+    {
+      "name": "weapon_arrow_recipe_45"
+    },
+    {
+      "name": "weapon_arrow_recipe_46"
     },
     {
       "name": "weapon_arrow_recipe_5"

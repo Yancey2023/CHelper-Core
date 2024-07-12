@@ -8,7 +8,7 @@
     },
     {
       "name": "area_effect_cloud",
-      "description": "区域效果云（不可召唤）"
+      "description": "区域效果云"
     },
     {
       "name": "armadillo",
@@ -52,7 +52,7 @@
     },
     {
       "name": "breeze_wind_charge_projectile",
-      "description": "风弹（不可召唤）"
+      "description": "风弹"
     },
     {
       "name": "camel",
@@ -104,7 +104,7 @@
     },
     {
       "name": "dragon_fireball",
-      "description": "末影龙火球（不可召唤）"
+      "description": "末影龙火球"
     },
     {
       "name": "drowned",
@@ -132,7 +132,7 @@
     },
     {
       "name": "ender_pearl",
-      "description": "末影珍珠（不可召唤）"
+      "description": "末影珍珠"
     },
     {
       "name": "enderman",
@@ -152,15 +152,15 @@
     },
     {
       "name": "eye_of_ender_signal",
-      "description": "末影之眼（不可召唤）"
+      "description": "末影之眼"
     },
     {
       "name": "falling_block",
-      "description": "下落的方块（不可召唤）"
+      "description": "下落的方块"
     },
     {
       "name": "fireball",
-      "description": "火球（不可召唤）"
+      "description": "火球"
     },
     {
       "name": "fireworks_rocket",
@@ -168,7 +168,7 @@
     },
     {
       "name": "fishing_hook",
-      "description": "浮漂（不可召唤）"
+      "description": "浮漂"
     },
     {
       "name": "fox",
@@ -216,7 +216,7 @@
     },
     {
       "name": "item",
-      "description": "物品（不可召唤）"
+      "description": "物品"
     },
     {
       "name": "leash_knot",
@@ -228,7 +228,7 @@
     },
     {
       "name": "lingering_potion",
-      "description": "滞留药水（不可召唤）"
+      "description": "滞留药水"
     },
     {
       "name": "llama",
@@ -236,7 +236,7 @@
     },
     {
       "name": "llama_spit",
-      "description": "羊驼唾沫（不可召唤）"
+      "description": "羊驼唾沫"
     },
     {
       "name": "magma_cube",
@@ -264,11 +264,11 @@
     },
     {
       "name": "ominous_item_spawner",
-      "description": "不祥之物生成器（不可召唤）"
+      "description": "不祥之物生成器"
     },
     {
       "name": "painting",
-      "description": "画（不可召唤）"
+      "description": "画"
     },
     {
       "name": "panda",
@@ -300,7 +300,7 @@
     },
     {
       "name": "player",
-      "description": "玩家（不可召唤）"
+      "description": "玩家"
     },
     {
       "name": "polar_bear",
@@ -332,7 +332,7 @@
     },
     {
       "name": "shulker_bullet",
-      "description": "潜影弹（不可召唤）"
+      "description": "潜影弹"
     },
     {
       "name": "silverfish",
@@ -352,7 +352,7 @@
     },
     {
       "name": "small_fireball",
-      "description": "小火球（不可召唤）"
+      "description": "小火球"
     },
     {
       "name": "sniffer",
@@ -392,7 +392,7 @@
     },
     {
       "name": "thrown_trident",
-      "description": "三叉戟（不可召唤）"
+      "description": "三叉戟"
     },
     {
       "name": "tnt",
@@ -424,7 +424,7 @@
     },
     {
       "name": "villager_v2",
-      "description": "村民（不可召唤）"
+      "description": "村民"
     },
     {
       "name": "vindicator",
@@ -440,7 +440,7 @@
     },
     {
       "name": "wind_charge_projectile",
-      "description": "风弹（不可召唤）"
+      "description": "风弹"
     },
     {
       "name": "witch",
@@ -456,11 +456,11 @@
     },
     {
       "name": "wither_skull",
-      "description": "凋灵之首（不可召唤）"
+      "description": "凋灵之首"
     },
     {
       "name": "wither_skull_dangerous",
-      "description": "蓝色凋灵之首（不可召唤）"
+      "description": "蓝色凋灵之首"
     },
     {
       "name": "wolf",
@@ -496,7 +496,7 @@
     },
     {
       "name": "zombie_villager_v2",
-      "description": "僵尸村民（不可召唤）"
+      "description": "僵尸村民"
     }
   ]
 }

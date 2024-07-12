@@ -115,6 +115,12 @@
       "description": "音乐唱片（C418 - chirp）"
     },
     {
+      "name": "record.creator"
+    },
+    {
+      "name": "record.creator_music_box"
+    },
+    {
       "name": "record.far",
       "description": "音乐唱片（C418 - far）"
     },
@@ -133,6 +139,9 @@
     {
       "name": "record.pigstep",
       "description": "音乐唱片（Lena Raine - Pigstep）"
+    },
+    {
+      "name": "record.precipice"
     },
     {
       "name": "record.relic"

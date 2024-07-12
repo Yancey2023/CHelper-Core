@@ -14,7 +14,7 @@ static size_t ID_LIST_VIEW = 3;
 static TCHAR szWindowClass[] = "CHelper";
 static TCHAR szTitle[] = "CHelper";
 
-static std::shared_ptr<CHelper::Core> core;
+static CHelper::Core *core = nullptr;
 
 /**
  * @param hInstance 应用程序的当前实例的句柄
@@ -24,7 +24,7 @@ static std::shared_ptr<CHelper::Core> core;
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
     //    core = CHelper::Core::createByDirectory(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)");
-    core = CHelper::Core::createByBinary(R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.0.23.cpack)");
+    core = CHelper::Core::createByBinary(R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.20.21.cpack)");
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         exit(-1);
     }
@@ -70,6 +70,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
+    delete core;
+    core = nullptr;
     return (int) msg.wParam;
 }
 

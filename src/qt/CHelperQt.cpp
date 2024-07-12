@@ -15,7 +15,7 @@ CHelperApp::CHelperApp(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::CHelperApp) {
     ui->setupUi(this);
-    QFile file(":/assets/release-experiment-1.20.80.05.cpack");
+    QFile file(":/assets/release-experiment-1.21.1.03.cpack");
     if (file.open(QIODevice::ReadOnly) && file.isReadable()) {
         std::istringstream iss(file.readAll().toStdString());
         core = CHelper::Core::create([&iss]() {

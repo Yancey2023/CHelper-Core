@@ -114,36 +114,7 @@
       "brief": "相机视角",
       "description": "相机视角/预设",
       "ignoreError": true,
-      "contents": [
-        {
-          "name": "minecraft:free",
-          "description": "自由视角"
-        },
-        {
-          "name": "minecraft:first_person",
-          "description": "第一人称视角"
-        },
-        {
-          "name": "minecraft:third_person",
-          "description": "第三人称视角背面"
-        },
-        {
-          "name": "minecraft:third_person_front",
-          "description": "第三人称视角正面"
-        },
-        {
-          "name": "example:example_free",
-          "description": "继承自由视角，在Y=50处绕X轴旋转10度并绕Y轴旋转40度"
-        },
-        {
-          "name": "example:example_player_effects",
-          "description": "继承自由视角，渲染状态效果对相机视角造成的影响"
-        },
-        {
-          "name": "example:example_player_listener",
-          "description": "继承自由视角，使用玩家位置作为声音来源"
-        }
-      ]
+      "key": "cameraPreset"
     },
     {
       "type": "STRING",

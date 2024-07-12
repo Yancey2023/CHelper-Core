@@ -1,0 +1,74 @@
+{
+  "id": "structure",
+  "type": "normal",
+  "content": [
+    {
+      "name": "ancient_city",
+      "description": "远古城市"
+    },
+    {
+      "name": "bastion_remnant",
+      "description": "堡垒遗迹"
+    },
+    {
+      "name": "buried_treasure",
+      "description": "埋藏的宝藏"
+    },
+    {
+      "name": "end_city",
+      "description": "末地城"
+    },
+    {
+      "name": "fortress",
+      "description": "下界要塞"
+    },
+    {
+      "name": "mansion",
+      "description": "林地府邸"
+    },
+    {
+      "name": "mineshaft",
+      "description": "废弃矿井"
+    },
+    {
+      "name": "monument",
+      "description": "海底神殿"
+    },
+    {
+      "name": "pillager_outpost",
+      "description": "掠夺者前哨站"
+    },
+    {
+      "name": "ruined_portal",
+      "description": "废弃传送门"
+    },
+    {
+      "name": "ruins",
+      "description": "海底废墟"
+    },
+    {
+      "name": "shipwreck",
+      "description": "沉船"
+    },
+    {
+      "name": "stronghold",
+      "description": "要塞"
+    },
+    {
+      "name": "temple",
+      "description": "沙漠神殿/雪屋/丛林神庙/沼泽小屋"
+    },
+    {
+      "name": "trail_ruins",
+      "description": "古迹废墟"
+    },
+    {
+      "name": "trial_chambers",
+      "description": "试炼密室"
+    },
+    {
+      "name": "village",
+      "description": "村庄"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": [
+    "scriptevent"
+  ],
+  "description": "通过ID和消息来触发脚本事件",
+  "start": [
+    "messageId"
+  ],
+  "node": [
+    {
+      "type": "STRING",
+      "id": "messageId",
+      "brief": "消息ID",
+      "description": "触发脚本事件的消息ID",
+      "canContainSpace": true,
+      "ignoreLater": false
+    },
+    {
+      "type": "STRING",
+      "id": "message",
+      "brief": "文本",
+      "description": "要显示的文本",
+      "canContainSpace": false,
+      "ignoreLater": false
+    }
+  ],
+  "ast": [
+    ["messageId", "message"],
+    ["message", "LF"]
+  ]
+}

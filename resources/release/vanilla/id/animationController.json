@@ -57,6 +57,27 @@
       "name": "controller.animation.blaze.move"
     },
     {
+      "name": "controller.animation.breeze.ground_particles"
+    },
+    {
+      "name": "controller.animation.breeze.idle"
+    },
+    {
+      "name": "controller.animation.breeze.idle_ground_sound"
+    },
+    {
+      "name": "controller.animation.breeze.jump"
+    },
+    {
+      "name": "controller.animation.breeze.look_at"
+    },
+    {
+      "name": "controller.animation.breeze.move"
+    },
+    {
+      "name": "controller.animation.breeze.shoot"
+    },
+    {
       "name": "controller.animation.camel.general"
     },
     {

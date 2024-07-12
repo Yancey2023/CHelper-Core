@@ -1,0 +1,22 @@
+{
+  "name": [
+    "testfor"
+  ],
+  "description": "检测并统计符合指定条件的实体",
+  "start": [
+    "victim"
+  ],
+  "node": [
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "victim",
+      "description": "计数的目标",
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
+    }
+  ],
+  "ast": [
+    ["victim", "LF"]
+  ]
+}

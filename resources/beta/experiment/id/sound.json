@@ -363,6 +363,12 @@
       "description": "红树根：踩上"
     },
     {
+      "name": "block.mob_spawner.break"
+    },
+    {
+      "name": "block.mob_spawner.step"
+    },
+    {
       "name": "block.mud.break",
       "description": "泥巴：被破坏"
     },
@@ -1668,6 +1674,9 @@
     },
     {
       "name": "horn.call.7"
+    },
+    {
+      "name": "hud.bubble.pop"
     },
     {
       "name": "insert.chiseled_bookshelf"
@@ -4063,10 +4072,22 @@
       "name": "music.overworld.cherry_grove"
     },
     {
+      "name": "music.overworld.deep_dark"
+    },
+    {
       "name": "music.overworld.desert"
     },
     {
+      "name": "music.overworld.dripstone_caves"
+    },
+    {
       "name": "music.overworld.flower_forest"
+    },
+    {
+      "name": "music.overworld.grove"
+    },
+    {
+      "name": "music.overworld.jagged_peaks"
     },
     {
       "name": "music.overworld.jungle"
@@ -4075,7 +4096,16 @@
       "name": "music.overworld.jungle_edge"
     },
     {
+      "name": "music.overworld.lush_caves"
+    },
+    {
       "name": "music.overworld.mesa"
+    },
+    {
+      "name": "music.overworld.snowy_slopes"
+    },
+    {
+      "name": "music.overworld.stony_peaks"
     },
     {
       "name": "note.banjo",
@@ -4381,7 +4411,7 @@
     },
     {
       "name": "power.on.sculk_sensor",
-      "description": "幽匿感测体：惊动"
+      "description": "幽匿感测体：颤动"
     },
     {
       "name": "pumpkin.carve"
@@ -4567,6 +4597,12 @@
       "description": "音乐唱片（C418 - chirp）"
     },
     {
+      "name": "record.creator"
+    },
+    {
+      "name": "record.creator_music_box"
+    },
+    {
       "name": "record.far",
       "description": "音乐唱片（C418 - far）"
     },
@@ -4585,6 +4621,9 @@
     {
       "name": "record.pigstep",
       "description": "音乐唱片（Lena Raine - Pigstep）"
+    },
+    {
+      "name": "record.precipice"
     },
     {
       "name": "record.relic"
@@ -4984,6 +5023,15 @@
       "name": "ui.drawer_open"
     },
     {
+      "name": "ui.hardcore_disable"
+    },
+    {
+      "name": "ui.hardcore_enable"
+    },
+    {
+      "name": "ui.hardcore_toggle_press"
+    },
+    {
       "name": "ui.loom.select_pattern",
       "description": "织布机：选择图案"
     },
@@ -5187,6 +5235,9 @@
     },
     {
       "name": "vault.place"
+    },
+    {
+      "name": "vault.reject_rewarded_player"
     },
     {
       "name": "vault.step"

@@ -57,11 +57,10 @@ Cpack(Command Pack) is the resource pack of CHelper(Command Helper).
 
 ## Special Thanks
 
-
-|                       project                       |                        description                         |                                      license                                      |
-|:---------------------------------------------------:|:----------------------------------------------------------:|:---------------------------------------------------------------------------------:|
-|  [caidlist](https://github.com/XeroAlpha/caidlist)  | provide IDs and descriptions for Minecraft Bedrock Edition |   [GPL-3.0 license](https://github.com/XeroAlpha/caidlist/blob/master/LICENSE)    |
-| [chinese minecraft wiki](https://zh.minecraft.wiki) |              provide information in Minecraft              | [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh-hans) |
+|                       project                       |                        description                         |                                   license                                    |
+|:---------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------------------------:|
+|  [caidlist](https://github.com/XeroAlpha/caidlist)  | provide IDs and descriptions for Minecraft Bedrock Edition | [GPL-3.0 license](https://github.com/XeroAlpha/caidlist/blob/master/LICENSE) |
+| [chinese minecraft wiki](https://zh.minecraft.wiki) |              provide information in Minecraft              |     [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0)     |
 
 - JetBrains License for Open Source Development
 
