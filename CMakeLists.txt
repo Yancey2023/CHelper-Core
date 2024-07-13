@@ -10,12 +10,12 @@ if (MSVC)
 endif ()
 
 # ThirdParty: Qt5
-find_package(Qt5 COMPONENTS
-        Core Gui Widgets
-        REQUIRED)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
+#find_package(Qt5 COMPONENTS
+#        Core Gui Widgets
+#        REQUIRED)
+#set(CMAKE_AUTOMOC ON)
+#set(CMAKE_AUTORCC ON)
+#set(CMAKE_AUTOUIC ON)
 
 # ThirdParty: GTest
 find_package(GTest COMPONENTS REQUIRED)
@@ -43,21 +43,21 @@ if (MSVC)
 endif ()
 
 # Qt Application
-add_executable(CHelperQt WIN32
-        src/qt/CHelperQt.h
-        src/qt/CHelperQt.cpp
-        src/qt/chelper.qrc
-        src/qt/chelper.ui
-        ${SOURCE_H}
-        ${SOURCE_CPP}
-)
-target_include_directories(CHelperQt PUBLIC include)
-target_precompile_headers(CHelperQt PRIVATE include/pch.h)
-target_link_libraries(CHelperQt
-        Qt5::Core
-        Qt5::Gui
-        Qt5::Widgets
-)
+#add_executable(CHelperQt WIN32
+#        src/qt/CHelperQt.h
+#        src/qt/CHelperQt.cpp
+#        src/qt/chelper.qrc
+#        src/qt/chelper.ui
+#        ${SOURCE_H}
+#        ${SOURCE_CPP}
+#)
+#target_include_directories(CHelperQt PUBLIC include)
+#target_precompile_headers(CHelperQt PRIVATE include/pch.h)
+#target_link_libraries(CHelperQt
+#        Qt5::Core
+#        Qt5::Gui
+#        Qt5::Widgets
+#)
 
 # Android Shared Libary
 add_library(CHelperAndroid SHARED

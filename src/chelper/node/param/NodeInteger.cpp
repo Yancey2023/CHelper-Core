@@ -3,7 +3,6 @@
 //
 
 #include "NodeInteger.h"
-#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -28,7 +27,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->isError())) {
             return true;
         }
-        std::string str = TokenUtil::toString(astNode->tokens);
+        std::string str = astNode->tokens.toString();
         char *end;
         std::intmax_t value = std::strtoimax(str.c_str(), &end, 10);
         if (HEDLEY_UNLIKELY(end == str.c_str() || *end != '\0' ||

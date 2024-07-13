@@ -38,7 +38,7 @@ namespace CHelper::Node {
                                 tokenReader.peek()->type == TokenType::WHITE_SPACE)) {
                 tokenReader.push();
                 tokenReader.skip();
-                VectorView<Token> tokens = tokenReader.collect();
+                TokensView tokens = tokenReader.collect();
                 return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect(),
                                         ErrorReason::contentError(tokens, "意外的空格"));
             }

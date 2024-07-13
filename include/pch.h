@@ -8,7 +8,12 @@
 #define CHELPER_PCH_H
 
 #define CHelperLogger INFO
+
+// 可以在运行时增加一些检测，快速定位错误
 #define CHelperDebug true
+
+// 增加一些用于调试方法
+#define CHelperTest false
 
 #if CHelperAndroid == true
 
@@ -53,7 +58,5 @@
 #include "../src/chelper/util/SimpleLogger.h"
 // 字符串工具类
 #include "../src/chelper/util/StringUtil.h"
-// 对vector部分元素的引用，类似于string_view
-#include "../src/chelper/util/VectorView.h"
 
 #endif //CHELPER_PCH_H

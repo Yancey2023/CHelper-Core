@@ -36,7 +36,6 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
     };
 
     CODEC_NODE_H(NodeRelativeFloat)

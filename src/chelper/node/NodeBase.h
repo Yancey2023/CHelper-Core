@@ -7,8 +7,8 @@
 #ifndef CHELPER_NODEBASE_H
 #define CHELPER_NODEBASE_H
 
+#include "../lexer/TokenReader.h"
 #include "../parser/ASTNode.h"
-#include "../parser/TokenReader.h"
 #include "NodeType.h"
 #include "pch.h"
 

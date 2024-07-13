@@ -4,8 +4,6 @@
 
 #include "NodeJson.h"
 
-#include <utility>
-
 #include "../../resources/CPack.h"
 
 namespace CHelper::Node {

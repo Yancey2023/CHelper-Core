@@ -42,7 +42,6 @@ namespace CHelper {
         return appendWhiteSpace().appendLeftBracket(isMustHave).append(str).appendRightBracket(isMustHave);
     }
 
-    //使用std::move()节省性能，所以这个类不可以继续使用了，也没有必要继续使用
     std::string StructureBuilder::build() {
         return std::move(structure);
     }

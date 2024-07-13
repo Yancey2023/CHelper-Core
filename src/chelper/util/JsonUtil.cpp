@@ -14,7 +14,7 @@ namespace CHelper::JsonUtil {
 
     std::string string2jsonString(const std::string &input) {
         std::string result;
-        StringReader stringReader(input, "unknown");
+        StringReader stringReader(input);
         while (true) {
             signed char ch = stringReader.peek();
             switch (ch) {
@@ -46,7 +46,7 @@ namespace CHelper::JsonUtil {
             result.errorReason = ErrorReason::incomplete(0, 0, "json字符串必须在双引号内");
             return std::move(result);
         }
-        StringReader stringReader(input, "unknown");
+        StringReader stringReader(input);
         result.indexConvertList.push_back(stringReader.pos.index);
         int32_t unicodeValue;
         std::string escapeSequence;

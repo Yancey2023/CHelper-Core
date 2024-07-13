@@ -3,7 +3,6 @@
 //
 
 #include "ErrorReason.h"
-#include "../util/TokenUtil.h"
 
 namespace CHelper {
 
@@ -23,11 +22,11 @@ namespace CHelper {
           errorReason(std::move(errorReason)) {}
 
     ErrorReason::ErrorReason(ErrorReasonLevel::ErrorReasonLevel level,
-                             const VectorView<Token> &tokens,
+                             const TokensView &tokens,
                              std::string errorReason)
         : level(level),
-          start(TokenUtil::getStartIndex(tokens)),
-          end(TokenUtil::getEndIndex(tokens)),
+          start(tokens.getStartIndex()),
+          end(tokens.getEndIndex()),
           errorReason(std::move(errorReason)) {}
 
     bool ErrorReason::operator==(const ErrorReason &reason) const {

@@ -9,7 +9,7 @@
 
 
 #include "../lexer/Token.h"
-#include "../util/VectorView.h"
+#include "TokensView.h"
 #include "pch.h"
 
 namespace CHelper {
@@ -50,7 +50,7 @@ namespace CHelper {
                     std::string errorReason);
 
         ErrorReason(ErrorReasonLevel::ErrorReasonLevel level,
-                    const VectorView<Token> &,
+                    const TokensView &,
                     std::string errorReason);
 
         //命令后面有多余部分
@@ -60,14 +60,14 @@ namespace CHelper {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::EXCESS, start, end, errorReason);
         }
 
-        [[maybe_unused]] static std::shared_ptr<ErrorReason> excess(const VectorView<Token> &tokens,
+        [[maybe_unused]] static std::shared_ptr<ErrorReason> excess(const TokensView &tokens,
                                                                     const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::EXCESS, tokens, errorReason);
         }
 
         //缺少空格
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        requireWhiteSpace(const VectorView<Token> &tokens) {
+        requireWhiteSpace(const TokensView &tokens) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, tokens, "命令不完整，缺少空格");
         }
 
@@ -84,7 +84,7 @@ namespace CHelper {
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        incomplete(const VectorView<Token> &tokens, const std::string &errorReason) {
+        incomplete(const TokensView &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::INCOMPLETE, tokens, errorReason);
         }
 
@@ -95,7 +95,7 @@ namespace CHelper {
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        typeError(const VectorView<Token> &tokens, const std::string &errorReason) {
+        typeError(const TokensView &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::TYPE_ERROR, tokens, errorReason);
         }
 
@@ -106,7 +106,7 @@ namespace CHelper {
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        contentError(const VectorView<Token> &tokens, const std::string &errorReason) {
+        contentError(const TokensView &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::CONTENT_ERROR, tokens, errorReason);
         }
 
@@ -117,7 +117,7 @@ namespace CHelper {
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        logicError(const VectorView<Token> &tokens, const std::string &errorReason) {
+        logicError(const TokensView &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::LOGIC_ERROR, tokens, errorReason);
         }
 
@@ -128,7 +128,7 @@ namespace CHelper {
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        idError(const VectorView<Token> &tokens, const std::string &errorReason) {
+        idError(const TokensView &tokens, const std::string &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::ID_ERROR, tokens, errorReason);
         }
 

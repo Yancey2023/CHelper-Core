@@ -3,7 +3,6 @@
 //
 
 #include "NodeJsonFloat.h"
-#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -28,7 +27,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->isError())) {
             return true;
         }
-        std::string str = TokenUtil::toString(astNode->tokens);
+        std::string str = astNode->tokens.toString();
         char *end;
         float value = std::strtof(str.c_str(), &end);
         if (HEDLEY_UNLIKELY(end == str.c_str() || *end != '\0' ||

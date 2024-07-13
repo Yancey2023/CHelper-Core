@@ -3,9 +3,9 @@
 //
 
 #include "ASTNode.h"
+
 #include "../node/NodeBase.h"
 #include "../node/param/NodeLF.h"
-#include "../util/TokenUtil.h"
 #include "Suggestions.h"
 
 namespace CHelper {
@@ -13,7 +13,7 @@ namespace CHelper {
     ASTNode::ASTNode(ASTNodeMode::ASTNodeMode mode,
                      const Node::NodeBase *node,
                      std::vector<ASTNode> &&childNodes,
-                     const VectorView<Token> &tokens,
+                     TokensView tokens,
                      const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
                      std::string id,
                      bool canAddWhitespace,
@@ -21,12 +21,13 @@ namespace CHelper {
         : mode(mode),
           node(node),
           childNodes(std::move(childNodes)),
-          tokens(tokens),
+          tokens(std::move(tokens)),
           errorReasons(errorReasons),
           id(std::move(id)),
           canAddWhitespace(canAddWhitespace),
           whichBest(whichBest) {}
 
+#if CHelperTest == true
     nlohmann::json ASTNode::toJson() const {
         nlohmann::json j;
         j["isError"] = isError();
@@ -53,9 +54,9 @@ namespace CHelper {
         j["astNodeMode"] = astNodeModeStr;
         j["nodeType"] = node->getNodeType()->nodeName;
         j["nodeDescription"] = node->description.value_or("unknown");
-        j["content"] = TokenUtil::toString(tokens);
+        j["content"] = tokens.toString();
         j["canAddWhitespace"] = canAddWhitespace;
-        std::string content = TokenUtil::toString({tokens.vector, 0, tokens.vector->size()});
+        std::string content = TokensView(tokens.allTokens, 0, tokens.allTokens->size()).toString();
         if (HEDLEY_LIKELY(isError())) {
             std::vector<nlohmann::json> errorReasonJsonList;
             for (const auto &item: errorReasons) {
@@ -114,9 +115,9 @@ namespace CHelper {
         j["astNodeMode"] = astNodeModeStr;
         j["nodeType"] = node->getNodeType()->nodeName;
         j["nodeDescription"] = node->description.value_or("unknown");
-        j["content"] = TokenUtil::toString(tokens);
+        j["content"] = tokens.toString();
         j["canAddWhitespace"] = canAddWhitespace;
-        std::string content = TokenUtil::toString({tokens.vector, 0, tokens.vector->size()});
+        std::string content = TokensView(tokens.allTokens, 0, tokens.allTokens->size()).toString();
         if (HEDLEY_LIKELY(isError())) {
             std::vector<nlohmann::json> errorReasonJsonList;
             for (const auto &item: errorReasons) {
@@ -143,9 +144,10 @@ namespace CHelper {
         }
         return j;
     }
+#endif
 
     ASTNode ASTNode::simpleNode(const Node::NodeBase *node,
-                                const VectorView<Token> &tokens,
+                                const TokensView &tokens,
                                 const std::shared_ptr<ErrorReason> &errorReason,
                                 const std::string &id,
                                 bool canAddWhitespace) {
@@ -158,7 +160,7 @@ namespace CHelper {
 
     ASTNode ASTNode::andNode(const Node::NodeBase *node,
                              std::vector<ASTNode> &&childNodes,
-                             const VectorView<Token> &tokens,
+                             const TokensView &tokens,
                              const std::shared_ptr<ErrorReason> &errorReason,
                              const std::string &id,
                              bool canAddWhitespace) {
@@ -182,7 +184,7 @@ namespace CHelper {
 
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             std::vector<ASTNode> &&childNodes,
-                            const VectorView<Token> *tokens,
+                            const TokensView *tokens,
                             const char *errorReason,
                             const std::string &id,
                             bool canAddWhitespace) {
@@ -246,7 +248,7 @@ namespace CHelper {
                                                return item.canAddWhitespace;
                                            });
         }
-        VectorView<Token> tokens1 = tokens == nullptr ? childNodes[whichBest].tokens : *tokens;
+        TokensView tokens1 = tokens == nullptr ? childNodes[whichBest].tokens : *tokens;
         if (HEDLEY_UNLIKELY(errorCount > 1 && errorReason != nullptr)) {
             errorReasons = {ErrorReason::contentError(tokens1, errorReason)};
         }
@@ -255,7 +257,7 @@ namespace CHelper {
 
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             std::vector<ASTNode> &&childNodes,
-                            const VectorView<Token> &tokens,
+                            const TokensView &tokens,
                             const char *errorReason,
                             const std::string &id,
                             bool canAddWhitespace) {
@@ -270,7 +272,7 @@ namespace CHelper {
     }
 
     std::optional<std::string> ASTNode::collectDescription(size_t index) const {
-        if (HEDLEY_UNLIKELY(index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens))) {
+        if (HEDLEY_UNLIKELY(index < tokens.getStartIndex() || index > tokens.getEndIndex())) {
             return std::nullopt;
         }
         if (HEDLEY_UNLIKELY(id != "compound" && id != "nextNode" && !isAllWhitespaceError())) {
@@ -328,7 +330,7 @@ namespace CHelper {
     }
 
     void ASTNode::collectSuggestions(size_t index, std::vector<Suggestions> &suggestions) const {
-        if (HEDLEY_LIKELY(index < TokenUtil::getStartIndex(tokens) || index > TokenUtil::getEndIndex(tokens))) {
+        if (HEDLEY_LIKELY(index < tokens.getStartIndex() || index > tokens.getEndIndex())) {
             return;
         }
         if (HEDLEY_UNLIKELY(id != "compound" && id != "nextNode" && !isAllWhitespaceError())) {
@@ -419,7 +421,7 @@ namespace CHelper {
     }
 
     std::string ASTNode::getDescription(size_t index) const {
-        Profile::push("start getting description: " + TokenUtil::toString(tokens));
+        Profile::push("start getting description: " + tokens.toString());
         auto result = collectDescription(index).value_or("未知");
         Profile::pop();
         return std::move(result);
@@ -444,7 +446,7 @@ namespace CHelper {
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getIdErrors() const {
         std::vector<std::shared_ptr<ErrorReason>> input;
-        Profile::push("start getting id error: " + TokenUtil::toString(tokens));
+        Profile::push("start getting id error: " + tokens.toString());
         collectIdErrors(input);
         Profile::pop();
         return sortByLevel(input);
@@ -452,7 +454,7 @@ namespace CHelper {
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
         std::vector<std::shared_ptr<ErrorReason>> result = errorReasons;
-        Profile::push("start getting error reasons: " + TokenUtil::toString(tokens));
+        Profile::push("start getting error reasons: " + tokens.toString());
         collectIdErrors(result);
         Profile::pop();
         return sortByLevel(result);
@@ -480,7 +482,7 @@ namespace CHelper {
     }
 
     std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
-        std::string str = TokenUtil::toString(tokens);
+        std::string str = tokens.toString();
         Profile::push("start getting suggestions: " + str);
         std::vector<Suggestions> suggestions;
         if (HEDLEY_UNLIKELY(index == str.length() && (canAddWhitespace && isAllWhitespaceError()) || (!isError() && canAddWhitespace0(*this)))) {
@@ -492,7 +494,7 @@ namespace CHelper {
     }
 
     std::string ASTNode::getStructure() const {
-        Profile::push("start getting structure: " + TokenUtil::toString(tokens));
+        Profile::push("start getting structure: " + tokens.toString());
         StructureBuilder structureBuilder;
         collectStructure(structureBuilder, true);
         Profile::pop();
@@ -505,7 +507,7 @@ namespace CHelper {
 
     std::string ASTNode::getColors() const {
         //TODO 命令语法高亮显示，获取颜色
-        Profile::push("start getting colors: " + TokenUtil::toString(tokens));
+        Profile::push("start getting colors: " + tokens.toString());
         auto result = node->getNodeType()->nodeName;
         Profile::pop();
         return result;

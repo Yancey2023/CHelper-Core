@@ -4,7 +4,6 @@
 
 #include "Suggestion.h"
 #include "../Core.h"
-#include "../util/TokenUtil.h"
 #include "Parser.h"
 
 namespace CHelper {
@@ -19,11 +18,11 @@ namespace CHelper {
           content(content),
           mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
 
-    Suggestion::Suggestion(const VectorView<Token> &tokens,
+    Suggestion::Suggestion(const TokensView &tokens,
                            bool isAddWhitespace,
                            const std::shared_ptr<NormalId> &content)
-        : start(TokenUtil::getStartIndex(tokens)),
-          end(TokenUtil::getEndIndex(tokens)),
+        : start(tokens.getStartIndex()),
+          end(tokens.getEndIndex()),
           isAddWhitespace(isAddWhitespace),
           content(content),
           mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}

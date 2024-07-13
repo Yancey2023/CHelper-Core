@@ -4,7 +4,6 @@
 
 #include "NodeJsonString.h"
 #include "../../parser/Parser.h"
-#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -42,7 +41,7 @@ namespace CHelper::Node {
 
     static std::pair<ASTNode, JsonUtil::ConvertResult>
     getInnerASTNode(const NodeJsonString *node,
-                    const VectorView<Token> &tokens,
+                    const TokensView &tokens,
                     const std::string &content,
                     const CPack *cpack,
                     const NodeBase *mainNode) {
@@ -52,11 +51,10 @@ namespace CHelper::Node {
             convertResult.errorReason->end--;
             return {ASTNode::simpleNode(node, tokens, convertResult.errorReason), std::move(convertResult)};
         }
-        auto tokenReader = TokenReader(std::make_shared<std::vector<Token>>(
-                Lexer::lex(StringReader(convertResult.result, "unknown"))));
+        auto tokenReader = TokenReader(std::make_shared<LexerResult>(Lexer::lex(convertResult.result)));
         Profile::push("start parsing: " + content);
         DEBUG_GET_NODE_BEGIN(mainNode)
-        auto result = mainNode->getASTNode(tokenReader, cpack);
+        ASTNode result = Parser::parse(convertResult.result, cpack, mainNode);
         DEBUG_GET_NODE_END(mainNode)
         Profile::pop();
         return {std::move(result), std::move(convertResult)};
@@ -66,13 +64,13 @@ namespace CHelper::Node {
         tokenReader.push();
         ASTNode result = tokenReader.readStringASTNode(this);
         tokenReader.pop();
-        std::string str = TokenUtil::toString(result.tokens);
+        std::string str = result.tokens.toString();
         if (HEDLEY_UNLIKELY(str.empty())) {
             return ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(result.tokens, "字符串参数内容为空"));
         } else if (HEDLEY_UNLIKELY(str[0] != '"')) {
             return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, "字符串参数内容应该在双引号内 -> " + str));
         }
-        VectorView<Token> tokens = result.tokens;
+        TokensView tokens = result.tokens;
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_LIKELY(str.size() <= 1 || str[str.size() - 1] != '"')) {
             errorReason = ErrorReason::contentError(tokens, "字符串参数内容应该在双引号内 -> " + str);
@@ -80,7 +78,7 @@ namespace CHelper::Node {
         if (HEDLEY_LIKELY(!data.has_value() || data->empty())) {
             return ASTNode::andNode(this, {std::move(result)}, tokens, errorReason);
         }
-        size_t offset = TokenUtil::getStartIndex(tokens) + 1;
+        size_t offset = tokens.getStartIndex() + 1;
         auto innerNode = getInnerASTNode(this, tokens, str, cpack, nodeData.get());
         ASTNode newResult = ASTNode::andNode(this, {std::move(innerNode.first)}, tokens, errorReason, "inner");
         if (HEDLEY_UNLIKELY(errorReason == nullptr)) {
@@ -98,8 +96,8 @@ namespace CHelper::Node {
     bool NodeJsonString::collectIdError(const ASTNode *astNode,
                                         std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (HEDLEY_UNLIKELY(astNode->id == "inner")) {
-            auto convertResult = JsonUtil::jsonString2String(TokenUtil::toString(astNode->tokens));
-            size_t offset = TokenUtil::getStartIndex(astNode->tokens) + 1;
+            auto convertResult = JsonUtil::jsonString2String(astNode->tokens.toString());
+            size_t offset = astNode->tokens.getStartIndex() + 1;
             for (const auto &item: astNode->childNodes[0].getIdErrors()) {
                 item->start = convertResult.convert(item->start) + offset;
                 item->end = convertResult.convert(item->end) + offset;
@@ -112,15 +110,15 @@ namespace CHelper::Node {
     bool NodeJsonString::collectSuggestions(const ASTNode *astNode,
                                             size_t index,
                                             std::vector<Suggestions> &suggestions) const {
-        std::string str = TokenUtil::toString(astNode->tokens)
-                                  .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+        std::string str = astNode->tokens.toString()
+                                  .substr(0, index - astNode->tokens.getStartIndex());
         if (HEDLEY_UNLIKELY(str.empty())) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
             return true;
         }
         auto convertResult = JsonUtil::jsonString2String(str);
         if (HEDLEY_UNLIKELY(astNode->id == "inner")) {
-            size_t offset = TokenUtil::getStartIndex(astNode->tokens) + 1;
+            size_t offset = astNode->tokens.getStartIndex() + 1;
             Suggestions suggestions1;
             suggestions1.suggestions = astNode->childNodes[0].getSuggestions(index - offset);
             for (auto &item: suggestions1.suggestions) {

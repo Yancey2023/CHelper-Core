@@ -4,12 +4,10 @@
 
 #include "NodeEqualEntry.h"
 
-#include "../../util/TokenUtil.h"
 #include "../param/NodeNormalId.h"
 #include "../param/NodeText.h"
 #include "NodeAny.h"
 #include "NodeOr.h"
-#include <utility>
 
 namespace CHelper::Node {
 
@@ -69,7 +67,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNodeKey.isError())) {
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
-        std::string key = TokenUtil::toString(astNodeKey.tokens);
+        std::string key = astNodeKey.tokens.toString();
         auto it = std::find_if(equalDatas.begin(), equalDatas.end(), [&key](const auto &t) {
             return t.name == key;
         });

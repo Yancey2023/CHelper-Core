@@ -4,7 +4,6 @@
 
 #include "NodeCommandName.h"
 #include "../../resources/CPack.h"
-#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -25,7 +24,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->isError())) {
             return true;
         }
-        std::string str = TokenUtil::toString(astNode->tokens);
+        std::string str = astNode->tokens.toString();
         for (const auto &command: *commands) {
             for (const auto &name: ((NodePerCommand *) command.get())->name) {
                 if (HEDLEY_UNLIKELY(str == name)) {
@@ -40,8 +39,8 @@ namespace CHelper::Node {
     bool NodeCommandName::collectSuggestions(const ASTNode *astNode,
                                              size_t index,
                                              std::vector<Suggestions> &suggestions) const {
-        std::string str = TokenUtil::toString(astNode->tokens)
-                                  .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+        std::string str = astNode->tokens.toString()
+                                  .substr(0, index - astNode->tokens.getStartIndex());
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *commands) {
             bool flag = false;
@@ -80,8 +79,8 @@ namespace CHelper::Node {
         suggestions1.insert(suggestions1.end(), nameContain.begin(), nameContain.end());
         suggestions1.insert(suggestions1.end(), descriptionContain.begin(), descriptionContain.end());
         Suggestions suggestions2;
-        size_t start = TokenUtil::getStartIndex(astNode->tokens);
-        size_t end = TokenUtil::getEndIndex(astNode->tokens);
+        size_t start = astNode->tokens.getStartIndex();
+        size_t end = astNode->tokens.getEndIndex();
         std::transform(suggestions1.begin(), suggestions1.end(),
                        std::back_inserter(suggestions2.suggestions),
                        [&start, &end](const auto &item) {

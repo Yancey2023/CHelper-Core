@@ -7,9 +7,10 @@
 #ifndef CHELPER_TOKENREADER_H
 #define CHELPER_TOKENREADER_H
 
-#include "../lexer/Token.h"
-#include "../util/VectorView.h"
-#include "ASTNode.h"
+#include "../parser/ASTNode.h"
+#include "../parser/TokensView.h"
+#include "LexerResult.h"
+#include "Token.h"
 #include "pch.h"
 
 #if CHelperDebug == true
@@ -41,11 +42,11 @@ namespace CHelper {
 
     class TokenReader {
     public:
-        const std::shared_ptr<std::vector<Token>> tokenList;
+        const std::shared_ptr<LexerResult> lexerResult;
         size_t index = 0;
         std::vector<size_t> indexStack;
 
-        explicit TokenReader(const std::shared_ptr<std::vector<Token>> &tokenList);
+        explicit TokenReader(const std::shared_ptr<LexerResult> &lexerResult);
 
         [[nodiscard]] bool ready() const;
 
@@ -69,14 +70,14 @@ namespace CHelper {
 
         void restore();
 
-        [[nodiscard]] VectorView<Token> collect();
+        [[nodiscard]] TokensView collect();
 
         ASTNode readSimpleASTNode(const Node::NodeBase *node,
                                   TokenType::TokenType type,
                                   const std::string &requireType,
                                   const std::string &astNodeId = "",
                                   std::shared_ptr<ErrorReason> (*check)(const std::string &str,
-                                                                        const VectorView<Token> &tokens) = nullptr);
+                                                                        const TokensView &tokens) = nullptr);
 
         ASTNode readStringASTNode(const Node::NodeBase *node,
                                   const std::string &astNodeId = "");

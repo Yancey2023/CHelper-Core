@@ -5,7 +5,6 @@
 #include "NodeNormalId.h"
 
 #include "../../lexer/Lexer.h"
-#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -93,12 +92,12 @@ namespace CHelper::Node {
         }
         tokenReader.pop();
         if (HEDLEY_UNLIKELY(result.tokens.isEmpty())) {
-            VectorView<Token> tokens = result.tokens;
+            TokensView tokens = result.tokens;
             return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "命令不完整"));
         }
         if (HEDLEY_UNLIKELY(!ignoreError.value_or(true))) {
-            VectorView<Token> tokens = result.tokens;
-            std::string str = TokenUtil::toString(tokens);
+            TokensView tokens = result.tokens;
+            std::string str = tokens.toString();
             size_t strHash = std::hash<std::string>{}(str);
             if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                     return !item->fastMatch(strHash);
@@ -114,7 +113,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->isError())) {
             return true;
         }
-        std::string str = TokenUtil::toString(astNode->tokens);
+        std::string str = astNode->tokens.toString();
         size_t strHash = std::hash<std::string>{}(str);
         if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                 return !item->fastMatch(strHash);
@@ -127,8 +126,8 @@ namespace CHelper::Node {
     bool NodeNormalId::collectSuggestions(const ASTNode *astNode,
                                           size_t index,
                                           std::vector<Suggestions> &suggestions) const {
-        std::string str = TokenUtil::toString(astNode->tokens)
-                                  .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+        std::string str = astNode->tokens.toString()
+                                  .substr(0, index - astNode->tokens.getStartIndex());
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *customContents) {
             //通过名字进行搜索
@@ -149,8 +148,8 @@ namespace CHelper::Node {
         }
         Suggestions suggestions1;
         suggestions1.suggestions.reserve(nameStartOf.size() + nameContain.size() + descriptionContain.size());
-        size_t start = TokenUtil::getStartIndex(astNode->tokens);
-        size_t end = TokenUtil::getEndIndex(astNode->tokens);
+        size_t start = astNode->tokens.getStartIndex();
+        size_t end = astNode->tokens.getEndIndex();
         std::transform(nameStartOf.begin(), nameStartOf.end(),
                        std::back_inserter(suggestions1.suggestions),
                        [&start, &end, this](const auto &item) {

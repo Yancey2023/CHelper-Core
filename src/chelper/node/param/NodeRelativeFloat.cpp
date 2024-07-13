@@ -3,7 +3,6 @@
 //
 
 #include "NodeRelativeFloat.h"
-#include "../../util/TokenUtil.h"
 #include "../util/NodeOr.h"
 #include "../util/NodeSingleSymbol.h"
 
@@ -33,7 +32,7 @@ namespace CHelper::Node {
             return std::move(result.second);
         }
         if (HEDLEY_UNLIKELY(!canUseCaretNotation && result.first == 2)) {
-            VectorView<Token> tokens = result.second.tokens;
+            TokensView tokens = result.second.tokens;
             return ASTNode::andNode(this, {std::move(result.second)}, tokens, ErrorReason::logicError(tokens, "不能使用局部坐标"), "relativeFloat");
         }
         return result.second;
@@ -73,10 +72,10 @@ namespace CHelper::Node {
             tokenReader.pop();
         } else if (HEDLEY_UNLIKELY(childNodes.empty())) {
             tokenReader.pop();
-            VectorView<Token> tokens = number.tokens;
+            TokensView tokens = number.tokens;
             errorReason = ErrorReason::typeError(tokens, FormatUtil::format(
                                                                  "类型不匹配，{0}不是有效的坐标参数",
-                                                                 TokenUtil::toString(tokens)));
+                                                                 tokens.toString()));
         } else {
             tokenReader.restore();
         }
@@ -87,8 +86,8 @@ namespace CHelper::Node {
     }
 
     bool NodeRelativeFloat::collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestions> &suggestions) const {
-        std::string str = TokenUtil::toString(astNode->tokens);
-        size_t startIndex = TokenUtil::getStartIndex(astNode->tokens);
+        std::string str = astNode->tokens.toString();
+        size_t startIndex = astNode->tokens.getStartIndex();
         for (int i = 0; i < str.length(); ++i) {
             if (HEDLEY_UNLIKELY(startIndex + i == index)) {
                 return collectSuggestions(index, suggestions, canUseCaretNotation);

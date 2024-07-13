@@ -3,7 +3,6 @@
 //
 
 #include "NodeLF.h"
-#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -23,10 +22,10 @@ namespace CHelper::Node {
     ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         tokenReader.skipToLF();
-        VectorView<Token> tokens = tokenReader.collect();
+        TokensView tokens = tokenReader.collect();
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_UNLIKELY(tokens.hasValue())) {
-            errorReason = ErrorReason::excess(tokens, "命令后面有多余部分 -> " + TokenUtil::toString(tokens));
+            errorReason = ErrorReason::excess(tokens, "命令后面有多余部分 -> " + tokens.toString());
         }
         return ASTNode::simpleNode(this, tokens, errorReason);
     }

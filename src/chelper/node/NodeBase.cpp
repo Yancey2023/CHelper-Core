@@ -25,7 +25,7 @@ namespace CHelper::Node {
         //空格检测
         tokenReader.push();
         if (HEDLEY_UNLIKELY(isRequireWhitespace && getNodeType() != NodeType::LF.get() && tokenReader.skipWhitespace() == 0)) {
-            VectorView<Token> tokens = tokenReader.collect();
+            TokensView tokens = tokenReader.collect();
             return ASTNode::simpleNode(this, tokens, ErrorReason::requireWhiteSpace(tokens), "compound");
         }
         tokenReader.pop();
@@ -56,7 +56,7 @@ namespace CHelper::Node {
                                      const NodeBase *childNode,
                                      const std::string &astNodeId) const {
         ASTNode node = childNode->getASTNode(tokenReader, cpack);
-        VectorView<Token> tokens = node.tokens;
+        TokensView tokens = node.tokens;
         return ASTNode::andNode(this, {std::move(node)}, tokens, nullptr, astNodeId);
     }
 
@@ -80,7 +80,7 @@ namespace CHelper::Node {
             ASTNode astNode = item->getASTNodeWithNextNode(tokenReader, cpack);
             DEBUG_GET_NODE_END(item)
             bool isError = astNode.isError();
-            const VectorView<Token> tokens = tokenReader.collect();
+            const TokensView tokens = tokenReader.collect();
             if (HEDLEY_UNLIKELY(isError && (isIgnoreChildNodesError || tokens.isEmpty()))) {
                 tokenReader.restore();
                 break;

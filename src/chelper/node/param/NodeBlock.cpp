@@ -3,7 +3,6 @@
 //
 
 #include "NodeBlock.h"
-#include "../../util/TokenUtil.h"
 #include "../util/NodeSingleSymbol.h"
 #include "NodeString.h"
 
@@ -36,7 +35,7 @@ namespace CHelper::Node {
             return ASTNode::andNode(this, {blockId}, tokenReader.collect(),
                                     nullptr, "blockAndBlockState");
         }
-        std::string blockIdStr = TokenUtil::toString(blockId.tokens);
+        std::string blockIdStr = blockId.tokens.toString();
         size_t strHash = std::hash<std::string>{}(blockIdStr);
         std::shared_ptr<NamespaceId> currentBlock = nullptr;
         for (const auto &item: *blockIds) {
@@ -65,7 +64,7 @@ namespace CHelper::Node {
                                        size_t index,
                                        std::vector<Suggestions> &suggestions) const {
         if (HEDLEY_LIKELY(astNode->id == "blockAndBlockState" && !astNode->isError() &&
-                          astNode->childNodes.size() == 1 && index == TokenUtil::getEndIndex(astNode->tokens))) {
+                          astNode->childNodes.size() == 1 && index == astNode->tokens.getEndIndex())) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, false, nodeBlockStateLeftBracket->normalId}));
         }
         return false;

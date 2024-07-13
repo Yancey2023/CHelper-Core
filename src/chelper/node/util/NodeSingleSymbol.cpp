@@ -3,7 +3,6 @@
 //
 
 #include "NodeSingleSymbol.h"
-#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -33,10 +32,10 @@ namespace CHelper::Node {
             if (HEDLEY_LIKELY(symbolNode.tokens.isEmpty())) {
                 return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::incomplete(symbolNode.tokens, FormatUtil::format("命令不完整，需要符号{0}", symbol)));
             } else {
-                return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::typeError(symbolNode.tokens, FormatUtil::format("类型不匹配，需要符号{0}，但当前内容为{1}", symbol, TokenUtil::toString(symbolNode.tokens))));
+                return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::typeError(symbolNode.tokens, FormatUtil::format("类型不匹配，需要符号{0}，但当前内容为{1}", symbol, symbolNode.tokens.toString())));
             }
         }
-        std::string str = TokenUtil::toString(symbolNode.tokens);
+        std::string str = symbolNode.tokens.toString();
         if (HEDLEY_LIKELY(str.length() == 1 && str[0] == symbol)) {
             return symbolNode;
         }
@@ -46,7 +45,7 @@ namespace CHelper::Node {
     bool NodeSingleSymbol::collectSuggestions(const ASTNode *astNode,
                                               size_t index,
                                               std::vector<Suggestions> &suggestions) const {
-        if (HEDLEY_LIKELY(TokenUtil::getStartIndex(astNode->tokens) != index)) {
+        if (HEDLEY_LIKELY(astNode->tokens.getStartIndex() != index)) {
             return true;
         }
         suggestions.push_back(Suggestions::singleSuggestion({index, index, isAddWhitespace, normalId}));

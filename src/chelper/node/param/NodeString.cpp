@@ -3,7 +3,6 @@
 //
 
 #include "NodeString.h"
-#include "../../util/TokenUtil.h"
 
 namespace CHelper::Node {
 
@@ -28,8 +27,8 @@ namespace CHelper::Node {
             //后面的所有内容都算作这个字符串
             tokenReader.push();
             tokenReader.skipToLF();
-            VectorView<Token> tokens = tokenReader.collect();
-            if (HEDLEY_UNLIKELY(!allowMissingString && TokenUtil::toString(tokens).empty())) {
+            TokensView tokens = tokenReader.collect();
+            if (HEDLEY_UNLIKELY(!allowMissingString && tokens.isEmpty())) {
                 return ASTNode::simpleNode(this, tokens, ErrorReason::incomplete(tokens, "字符串参数内容为空"));
             } else {
                 return ASTNode::simpleNode(this, tokens);
@@ -47,17 +46,17 @@ namespace CHelper::Node {
             return ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(result.tokens, "字符串参数内容为空"));
         }
         if (HEDLEY_UNLIKELY(!canContainSpace)) {
-            if (HEDLEY_UNLIKELY(TokenUtil::toString(result.tokens).find(' ') != std::string::npos)) {
+            if (HEDLEY_UNLIKELY(result.tokens.toString().find(' ') != std::string::npos)) {
                 return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, "字符串参数内容不可以包含空格"));
             }
             return result;
         }
-        std::string str = TokenUtil::toString(result.tokens);
+        std::string str = result.tokens.toString();
         if (HEDLEY_LIKELY((str.empty() || str[0] != '"'))) {
             return result;
         }
         auto convertResult = JsonUtil::jsonString2String(str);
-        size_t offset = TokenUtil::getStartIndex(result.tokens);
+        size_t offset = result.tokens.getStartIndex();
         if (HEDLEY_UNLIKELY(convertResult.errorReason != nullptr)) {
             convertResult.errorReason->start += offset;
             convertResult.errorReason->end += offset;
@@ -75,8 +74,8 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(ignoreLater || !canContainSpace)) {
             return true;
         }
-        std::string str = TokenUtil::toString(astNode->tokens)
-                                  .substr(0, index - TokenUtil::getStartIndex(astNode->tokens));
+        std::string str = astNode->tokens.toString()
+                                  .substr(0, index - astNode->tokens.getStartIndex());
         if (HEDLEY_UNLIKELY(str.empty())) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
             return true;

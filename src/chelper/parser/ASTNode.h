@@ -39,7 +39,7 @@ namespace CHelper {
         ASTNodeMode::ASTNodeMode mode;
         //子节点为AND类型和OR类型特有
         std::vector<ASTNode> childNodes;
-        VectorView<Token> tokens;
+        TokensView tokens;
         //一个Node可能会生成多个ASTNode，这些ASTNode使用id进行区分
         std::string id;
         const Node::NodeBase *node;
@@ -53,7 +53,7 @@ namespace CHelper {
         ASTNode(ASTNodeMode::ASTNodeMode mode,
                 const Node::NodeBase *node,
                 std::vector<ASTNode> &&childNodes,
-                const VectorView<Token> &tokens,
+                TokensView tokens,
                 const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
                 std::string id,
                 bool canAddWhitespace,
@@ -63,33 +63,35 @@ namespace CHelper {
         class CPack;
 
     public:
+#if CHelperTest == true
         [[nodiscard]] nlohmann::json toJson() const;
 
         [[nodiscard]] nlohmann::json toBestJson() const;
+#endif
 
         static ASTNode simpleNode(const Node::NodeBase *node,
-                                  const VectorView<Token> &tokens,
+                                  const TokensView &tokens,
                                   const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                                   const std::string &id = std::string(),
                                   bool canAddWhitespace = true);
 
         static ASTNode andNode(const Node::NodeBase *node,
                                std::vector<ASTNode> &&childNodes,
-                               const VectorView<Token> &tokens,
+                               const TokensView &tokens,
                                const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                                const std::string &id = std::string(),
                                bool canAddWhitespace = true);
 
         static ASTNode orNode(const Node::NodeBase *node,
                               std::vector<ASTNode> &&childNodes,
-                              const VectorView<Token> *tokens,
+                              const TokensView *tokens,
                               const char *errorReason = nullptr,
                               const std::string &id = std::string(),
                               bool canAddWhitespace = true);
 
         static ASTNode orNode(const Node::NodeBase *node,
                               std::vector<ASTNode> &&childNodes,
-                              const VectorView<Token> &tokens,
+                              const TokensView &tokens,
                               const char *errorReason = nullptr,
                               const std::string &id = std::string(),
                               bool canAddWhitespace = true);

@@ -56,7 +56,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(isAttachToEnd)) {
             tokenReader.push();
             tokenReader.skipToLF();
-            const VectorView<Token> tokens = tokenReader.collect();
+            const TokensView tokens = tokenReader.collect();
             return ASTNode::orNode(this, std::move(childASTNodes), tokens, defaultErrorReason, nodeId);
         } else {
             ASTNode result = ASTNode::orNode(this, std::move(childASTNodes), nullptr, defaultErrorReason, nodeId);

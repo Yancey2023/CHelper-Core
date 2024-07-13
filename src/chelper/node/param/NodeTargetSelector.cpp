@@ -255,14 +255,14 @@ namespace CHelper::Node {
                                                 size_t index,
                                                 std::vector<Suggestions> &suggestions) const {
         if (HEDLEY_UNLIKELY(astNode->tokens.isEmpty())) {
-            VectorView<Token> tokens = {astNode->tokens.vector, astNode->tokens.end, astNode->tokens.end};
+            TokensView tokens = {astNode->tokens.lexerResult, astNode->tokens.end, astNode->tokens.end};
             ASTNode newAstNode = ASTNode::simpleNode(this, tokens);
             nodeTargetSelectorVariable->collectSuggestions(astNode, index, suggestions);
             nodePlayerName->collectSuggestions(astNode, index, suggestions);
             return true;
         }
         if (HEDLEY_UNLIKELY(!astNode->isError() && astNode->id == "target selector no arguments")) {
-            VectorView<Token> tokens = {astNode->tokens.vector, astNode->tokens.end, astNode->tokens.end};
+            TokensView tokens = {astNode->tokens.lexerResult, astNode->tokens.end, astNode->tokens.end};
             ASTNode newAstNode = ASTNode::simpleNode(this, tokens);
             nodeLeft->collectSuggestions(&newAstNode, index, suggestions);
         }

@@ -3,7 +3,6 @@
 //
 
 #include "NodePosition.h"
-#include "../../util/TokenUtil.h"
 #include "NodeRelativeFloat.h"
 
 namespace CHelper::Node {
@@ -24,16 +23,16 @@ namespace CHelper::Node {
         uint8_t types[3];
         for (uint8_t &type: types) {
             std::pair<uint8_t, ASTNode> node = NodeRelativeFloat::getASTNode(this, cpack, tokenReader);
-            if (threeChildNodes.empty() && node.second.isError() && !TokenUtil::toString(node.second.tokens).empty()) {
+            if (threeChildNodes.empty() && node.second.isError() && !node.second.tokens.isEmpty()) {
                 tokenReader.pop();
-                VectorView<Token> tokens = node.second.tokens;
+                TokensView tokens = node.second.tokens;
                 return ASTNode::andNode(this, {std::move(node.second)}, tokens, nullptr, "positions");
             }
             type = node.first;
             threeChildNodes.push_back(std::move(node.second));
         }
         //判断有没有错误
-        VectorView<Token> tokens = tokenReader.collect();
+        TokensView tokens = tokenReader.collect();
         ASTNode result = ASTNode::andNode(this, std::move(threeChildNodes), tokens, nullptr, "positions");
         if (HEDLEY_UNLIKELY(!result.isError())) {
             uint8_t type = 0;

@@ -53,11 +53,7 @@ namespace CHelper::Node {
         if (astNode != nullptr) {
             for (const auto &item: astNode->childNodes) {
                 //如果内容为空，就跳过
-                if (HEDLEY_UNLIKELY(item.tokens.isEmpty() ||
-                                    std::all_of(item.tokens.beginIterator(), item.tokens.endIterator(),
-                                                [](const auto &item) {
-                                                    return item.type == TokenType::WHITE_SPACE;
-                                                }))) {
+                if (HEDLEY_UNLIKELY(item.tokens.isEmpty() || item.tokens.isAllWhitespace())) {
                     continue;
                 }
                 //获取结构

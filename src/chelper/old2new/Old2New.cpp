@@ -1,10 +1,9 @@
 //
-// Created by Yancey on 24-6-12.
+// Created by Yancey on2024-6-12.
 //
 
 #include "Old2New.h"
 
-#include "../util/TokenUtil.h"
 
 namespace CHelper::Old2New {
 
@@ -15,10 +14,10 @@ namespace CHelper::Old2New {
           end(anEnd),
           content(std::move(content)) {}
 
-    DataFix::DataFix(const VectorView<Token> &tokens,
+    DataFix::DataFix(const TokensView &tokens,
                      std::string content)
-        : start(TokenUtil::getStartIndex(tokens)),
-          end(TokenUtil::getEndIndex(tokens)),
+        : start(tokens.getStartIndex()),
+          end(tokens.getEndIndex()),
           content(std::move(content)) {}
 
     std::string trip(std::string str) {
@@ -148,12 +147,12 @@ namespace CHelper::Old2New {
         return true;
     }
 
-    std::string blockOld2New(const nlohmann::json &blockFixData, const VectorView<Token> &blockIdToken, const VectorView<Token> &dataValueToken) {
+    std::string blockOld2New(const nlohmann::json &blockFixData, const TokensView &blockIdToken, const TokensView &dataValueToken) {
         // get block id
-        std::string blockId = TokenUtil::toString(blockIdToken);
+        std::string blockId = blockIdToken.toString();
         // get block data value
         char *end;
-        std::string dataValueStr = TokenUtil::toString(dataValueToken);
+        std::string dataValueStr = dataValueToken.toString();
         std::intmax_t dataValue = std::strtoimax(dataValueStr.c_str(), &end, 10);
         if (HEDLEY_UNLIKELY(end == blockId.c_str() || *end != '\0' ||
                             dataValue == HUGE_VALF || dataValue == -HUGE_VALF ||
@@ -204,7 +203,7 @@ namespace CHelper::Old2New {
             tokenReader.restore();
             return false;
         }
-        VectorView<Token> tokens1 = tokenReader.collect();
+        TokensView tokens1 = tokenReader.collect();
         // @e
         tokenReader.push();
         if (!expectTargetSelector(tokenReader)) {
@@ -212,7 +211,7 @@ namespace CHelper::Old2New {
             tokenReader.restore();
             return false;
         }
-        VectorView<Token> tokens2 = tokenReader.collect();
+        TokensView tokens2 = tokenReader.collect();
         // ~~~
         tokenReader.push();
         if (!expectPosition(tokenReader)) {
@@ -220,13 +219,13 @@ namespace CHelper::Old2New {
             tokenReader.restore();
             return false;
         }
-        VectorView<Token> tokens3 = tokenReader.collect();
+        TokensView tokens3 = tokenReader.collect();
         // end?
         tokenReader.pop();
         if (depth > 0) {
             dataFixList.emplace_back(tokens1, "");
         }
-        std::string targetSelector = TokenUtil::toString(tokens2);
+        std::string targetSelector = tokens2.toString();
         if (trip(targetSelector) != "@s") {
             dataFixList.emplace_back(tokens2, " as" + targetSelector + " at @s");
         } else {
@@ -239,7 +238,7 @@ namespace CHelper::Old2New {
             }
         });
         if (isHavePosition) {
-            dataFixList.emplace_back(tokens3, " positioned" + TokenUtil::toString(tokens3));
+            dataFixList.emplace_back(tokens3, " positioned" + tokens3.toString());
         } else {
             dataFixList.emplace_back(tokens3, "");
         }
@@ -250,7 +249,7 @@ namespace CHelper::Old2New {
             tokenReader.pop();
             return true;
         }
-        VectorView<Token> tokens4 = tokenReader.collect();
+        TokensView tokens4 = tokenReader.collect();
         // ~~-1~
         if (!expectPosition(tokenReader)) {
             tokenReader.restore();
@@ -263,11 +262,11 @@ namespace CHelper::Old2New {
             tokenReader.restore();
             return true;
         }
-        VectorView<Token> tokens5 = tokenReader.collect();
+        TokensView tokens5 = tokenReader.collect();
         // 0
         tokenReader.push();
         if (expectNumber(tokenReader)) {
-            VectorView<Token> tokens6 = tokenReader.collect();
+            TokensView tokens6 = tokenReader.collect();
             dataFixList.emplace_back(tokens4, " if block");
             dataFixList.emplace_back(tokens5, blockOld2New(blockFixData, tokens5, tokens6));
             dataFixList.emplace_back(tokens6, "");
@@ -275,7 +274,7 @@ namespace CHelper::Old2New {
             tokenReader.restore();
             tokenReader.push();
             expectList(tokenReader, '[', ']');
-            VectorView<Token> tokens6 = tokenReader.collect();
+            TokensView tokens6 = tokenReader.collect();
             dataFixList.emplace_back(tokens4, " if block");
             tokens6.forEach([&dataFixList](const Token &token) {
                 if (token.type == TokenType::SYMBOL && token.content == ":") {
@@ -309,7 +308,7 @@ namespace CHelper::Old2New {
         }
         tokenReader.push();
         tokenReader.skipWhitespace();
-        VectorView<Token> tokens = tokenReader.collect();
+        TokensView tokens = tokenReader.collect();
         dataFixList.emplace_back(tokens, " run ");
         return true;
     }
@@ -339,7 +338,7 @@ namespace CHelper::Old2New {
         }
         // end?
         tokenReader.push();
-        VectorView<Token> tokens1 = tokenReader.collect();
+        TokensView tokens1 = tokenReader.collect();
         dataFixList.emplace_back(tokens1, " 0 0");
         // minecraft:become_charged
         if (!expectString(tokenReader)) {
@@ -401,7 +400,7 @@ namespace CHelper::Old2New {
         }
         // end?
         tokenReader.push();
-        VectorView<Token> tokens1 = tokenReader.collect();
+        TokensView tokens1 = tokenReader.collect();
         dataFixList.emplace_back(tokens1, " true");
         // [integrity: float]
         if (!expectNumber(tokenReader)) {
@@ -439,18 +438,18 @@ namespace CHelper::Old2New {
             tokenReader.restore();
             return true;
         }
-        VectorView<Token> tokens1 = tokenReader.collect();
+        TokensView tokens1 = tokenReader.collect();
         // 0
         tokenReader.push();
         if (expectNumber(tokenReader)) {
-            VectorView<Token> tokens2 = tokenReader.collect();
+            TokensView tokens2 = tokenReader.collect();
             dataFixList.emplace_back(tokens1, blockOld2New(blockFixData, tokens1, tokens2));
             dataFixList.emplace_back(tokens2, "");
         } else if (expectSymbol(tokenReader, '[')) {
             tokenReader.restore();
             tokenReader.push();
             expectList(tokenReader, '[', ']');
-            VectorView<Token> tokens2 = tokenReader.collect();
+            TokensView tokens2 = tokenReader.collect();
             tokens2.forEach([&dataFixList](const Token &token) {
                 if (token.type == TokenType::SYMBOL && token.content == ":") {
                     dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), "=");
@@ -497,20 +496,20 @@ namespace CHelper::Old2New {
             tokenReader.restore();
             return true;
         }
-        VectorView<Token> tokens1 = tokenReader.collect();
+        TokensView tokens1 = tokenReader.collect();
         // end?
         tokenReader.pop();
         // 0
         tokenReader.push();
         if (expectNumber(tokenReader)) {
-            VectorView<Token> tokens2 = tokenReader.collect();
+            TokensView tokens2 = tokenReader.collect();
             dataFixList.emplace_back(tokens1, blockOld2New(blockFixData, tokens1, tokens2));
             dataFixList.emplace_back(tokens2, "");
         } else if (expectSymbol(tokenReader, '[')) {
             tokenReader.restore();
             tokenReader.push();
             expectList(tokenReader, '[', ']');
-            VectorView<Token> tokens2 = tokenReader.collect();
+            TokensView tokens2 = tokenReader.collect();
             tokens2.forEach([&dataFixList](const Token &token) {
                 if (token.type == TokenType::SYMBOL && token.content == ":") {
                     dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), "=");
@@ -531,18 +530,18 @@ namespace CHelper::Old2New {
             tokenReader.pop();
             return true;
         }
-        VectorView<Token> tokens3 = tokenReader.collect();
+        TokensView tokens3 = tokenReader.collect();
         // 0
         tokenReader.push();
         if (expectNumber(tokenReader)) {
-            VectorView<Token> tokens4 = tokenReader.collect();
+            TokensView tokens4 = tokenReader.collect();
             dataFixList.emplace_back(tokens3, blockOld2New(blockFixData, tokens3, tokens4));
             dataFixList.emplace_back(tokens4, "");
         } else if (expectSymbol(tokenReader, '[')) {
             tokenReader.restore();
             tokenReader.push();
             expectList(tokenReader, '[', ']');
-            VectorView<Token> tokens4 = tokenReader.collect();
+            TokensView tokens4 = tokenReader.collect();
             tokens4.forEach([&dataFixList](const Token &token) {
                 if (token.type == TokenType::SYMBOL && token.content == ":") {
                     dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), "=");
@@ -580,7 +579,7 @@ namespace CHelper::Old2New {
             tokenReader.restore();
             return true;
         }
-        VectorView<Token> tokens1 = tokenReader.collect();
+        TokensView tokens1 = tokenReader.collect();
         // 0
         tokenReader.push();
         if (!expectNumber(tokenReader)) {
@@ -588,7 +587,7 @@ namespace CHelper::Old2New {
             tokenReader.pop();
             return true;
         }
-        VectorView<Token> tokens2 = tokenReader.collect();
+        TokensView tokens2 = tokenReader.collect();
         // end
         dataFixList.emplace_back(tokens1, blockOld2New(blockFixData, tokens1, tokens2));
         dataFixList.emplace_back(tokens2, "");
@@ -612,7 +611,7 @@ namespace CHelper::Old2New {
     }
 
     std::string old2new(const nlohmann::json &blockFixData, const std::string &old) {
-        TokenReader tokenReader(std::make_shared<std::vector<Token>>(Lexer::lex(StringReader(old, "unknown"))));
+        TokenReader tokenReader(std::make_shared<LexerResult>(Lexer::lex(old)));
         std::vector<DataFix> dataFixList;
         expectCommand(blockFixData, tokenReader, dataFixList);
         std::sort(dataFixList.begin(), dataFixList.end(), [](const DataFix &dataFix1, const DataFix &dataFix2) {

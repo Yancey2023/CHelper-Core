@@ -6,11 +6,8 @@
 
 namespace CHelper {
 
-    CHelper::StringReader::StringReader(
-            const std::string &content,
-            const std::string &filePath)
+    CHelper::StringReader::StringReader(const std::string &content)
         : content(content),
-          pos(filePath),
           posBackup(pos) {}
 
     bool CHelper::StringReader::ready() const {

@@ -3,7 +3,6 @@
 //
 
 #include "NodeRange.h"
-#include "../../util/TokenUtil.h"
 #include "NodeText.h"
 
 namespace CHelper::Node {
@@ -18,7 +17,7 @@ namespace CHelper::Node {
         return NodeType::RANGE.get();
     }
 
-    std::shared_ptr<ErrorReason> checkNumber(const VectorView<Token> &tokens, std::string_view str) {
+    std::shared_ptr<ErrorReason> checkNumber(const TokensView &tokens, std::string_view str) {
         if (HEDLEY_UNLIKELY(str.empty())) {
             return ErrorReason::contentError(tokens, "范围的数值为空");
         }
@@ -33,7 +32,7 @@ namespace CHelper::Node {
 
     ASTNode NodeRange::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         ASTNode result = tokenReader.readStringASTNode(this);
-        std::string str = TokenUtil::toString(result.tokens);
+        std::string str = result.tokens.toString();
         std::shared_ptr<ErrorReason> errorReason;
         size_t index = str.find("..");
         if (HEDLEY_LIKELY(index == std::string::npos)) {
@@ -52,10 +51,10 @@ namespace CHelper::Node {
     bool NodeRange::collectSuggestions(const ASTNode *astNode,
                                        size_t index,
                                        std::vector<Suggestions> &suggestions) const {
-        std::string str = TokenUtil::toString(astNode->tokens);
+        std::string str = astNode->tokens.toString();
         size_t index0 = str.find("..");
         if (HEDLEY_UNLIKELY(index0 != std::string::npos)) {
-            index0 += TokenUtil::getStartIndex(astNode->tokens);
+            index0 += astNode->tokens.getStartIndex();
             if (HEDLEY_LIKELY(index != index0 && index != index0 + 1 && index != index0 + 2)) {
                 return true;
             }
@@ -64,7 +63,7 @@ namespace CHelper::Node {
         }
         size_t index1 = str.find('.');
         if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
-            index1 += TokenUtil::getStartIndex(astNode->tokens);
+            index1 += astNode->tokens.getStartIndex();
             if (HEDLEY_LIKELY(index != index1 && index != index1 + 1)) {
                 return true;
             }

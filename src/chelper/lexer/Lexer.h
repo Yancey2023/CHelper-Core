@@ -7,13 +7,13 @@
 #ifndef CHELPER_LEXER_H
 #define CHELPER_LEXER_H
 
+#include "LexerResult.h"
 #include "StringReader.h"
-#include "Token.h"
 #include "pch.h"
 
 namespace CHelper::Lexer {
 
-    std::vector<Token> lex(StringReader stringReader);
+    LexerResult lex(const std::string &content);
 
 }// namespace CHelper::Lexer
 

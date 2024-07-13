@@ -116,7 +116,8 @@ namespace CHelper::Lexer {
         return std::move(result);
     }
 
-    std::vector<Token> lex(StringReader stringReader) {
+    LexerResult lex(const std::string &content) {
+        StringReader stringReader(content);
         Profile::push("start lex: " + stringReader.content);
         std::vector<Token> tokenList = std::vector<Token>();
         while (true) {
@@ -142,7 +143,7 @@ namespace CHelper::Lexer {
             }
         }
         Profile::pop();
-        return tokenList;
+        return {content, std::move(tokenList)};
     }
 
 }// namespace CHelper::Lexer

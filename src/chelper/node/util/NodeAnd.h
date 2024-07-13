@@ -13,14 +13,15 @@ namespace CHelper::Node {
 
     namespace WhitespaceMode {
         enum WhitespaceMode : uint8_t {
-            NORMAL, NO_WHITESPACE
+            NORMAL,
+            NO_WHITESPACE
         };
     }// namespace WhitespaceMode
 
 
     class NodeAnd : public NodeBase {
     public:
-        WhitespaceMode::WhitespaceMode whitespaceMode;
+        WhitespaceMode::WhitespaceMode whitespaceMode = WhitespaceMode::NO_WHITESPACE;
         std::vector<const NodeBase *> childNodes;
 
         NodeAnd() = default;
