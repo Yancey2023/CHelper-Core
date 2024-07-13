@@ -224,8 +224,7 @@ TEST(BinaryUtilTest, PerCPackNormalIds) {
                 R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)"));
 #endif
     } catch (const std::exception &e) {
-        CHelper::Exception::printStackTrace(e);
-        CHelper::Profile::clear();
+        CHelper::Profile::printAndClear(e);
         exit(-1);
     }
     auto testEqual = [](const auto &t1, const auto &t2) -> void {
@@ -249,8 +248,7 @@ TEST(BinaryUtilTest, CPackNormalIds) {
         std::filesystem::path projectDir(PROJECT_DIR);
         cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     } catch (const std::exception &e) {
-        CHelper::Exception::printStackTrace(e);
-        CHelper::Profile::clear();
+        CHelper::Profile::printAndClear(e);
         exit(-1);
     }
     auto testEqual = [](
@@ -280,8 +278,7 @@ TEST(BinaryUtilTest, CPackNamespaceId) {
         std::filesystem::path projectDir(PROJECT_DIR);
         cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     } catch (const std::exception &e) {
-        CHelper::Exception::printStackTrace(e);
-        CHelper::Profile::clear();
+        CHelper::Profile::printAndClear(e);
         exit(-1);
     }
     auto testEqual = [](
@@ -312,8 +309,7 @@ TEST(BinaryUtilTest, NodeJsonElement) {
     try {
         cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     } catch (const std::exception &e) {
-        CHelper::Exception::printStackTrace(e);
-        CHelper::Profile::clear();
+        CHelper::Profile::printAndClear(e);
         exit(-1);
     }
     auto testEqual = [](
@@ -341,8 +337,7 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
         std::filesystem::path projectDir(PROJECT_DIR);
         cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     } catch (const std::exception &e) {
-        CHelper::Exception::printStackTrace(e);
-        CHelper::Profile::clear();
+        CHelper::Profile::printAndClear(e);
         exit(-1);
     }
     auto testEqual = [](
@@ -380,8 +375,7 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
         std::filesystem::path projectDir(PROJECT_DIR);
         cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     } catch (const std::exception &e) {
-        CHelper::Exception::printStackTrace(e);
-        CHelper::Profile::clear();
+        CHelper::Profile::printAndClear(e);
         exit(-1);
     }
     auto testEqual = [](
@@ -419,8 +413,7 @@ TEST(BinaryUtilTest, NodeJsonNull) {
         std::filesystem::path projectDir(PROJECT_DIR);
         cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     } catch (const std::exception &e) {
-        CHelper::Exception::printStackTrace(e);
-        CHelper::Profile::clear();
+        CHelper::Profile::printAndClear(e);
         exit(-1);
     }
     auto testEqual = [](

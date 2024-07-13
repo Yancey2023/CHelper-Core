@@ -52,11 +52,15 @@ namespace CHelper::Node {
             return {ASTNode::simpleNode(node, tokens, convertResult.errorReason), std::move(convertResult)};
         }
         auto tokenReader = TokenReader(std::make_shared<LexerResult>(Lexer::lex(convertResult.result)));
+#if CHelperTest == true
         Profile::push("start parsing: " + content);
+#endif
         DEBUG_GET_NODE_BEGIN(mainNode)
         ASTNode result = Parser::parse(convertResult.result, cpack, mainNode);
         DEBUG_GET_NODE_END(mainNode)
+#if CHelperTest == true
         Profile::pop();
+#endif
         return {std::move(result), std::move(convertResult)};
     }
 

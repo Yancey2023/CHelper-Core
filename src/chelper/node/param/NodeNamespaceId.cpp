@@ -27,17 +27,10 @@ namespace CHelper::Node {
                                       .red("linking contents to ")
                                       .purple(key.value())
                                       .build());
-                Profile::push(ColorStringBuilder()
-                                      .red("failed to find namespace id in the cpack")
-                                      .normal(" -> ")
-                                      .purple(key.value())
-                                      .build());
+                throw std::runtime_error("failed to find namespace id in the cpack -> " + key.value());
             } else {
-                Profile::push(ColorStringBuilder()
-                                      .red("missing content")
-                                      .build());
+                throw std::runtime_error("missing content");
             }
-            throw Exception::NodeLoadFailed();
         }
     }
 

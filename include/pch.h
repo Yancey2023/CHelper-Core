@@ -48,8 +48,6 @@
 #include "../src/chelper/util/Codec.h"
 // 有颜色的字符串，用于控制台显示
 #include "../src/chelper/util/ColorStringBuilder.h"
-// 自定义抛出的错误类型
-#include "../src/chelper/util/Exception.h"
 // json读写
 #include "../src/chelper/util/JsonUtil.h"
 // 简单的调用栈

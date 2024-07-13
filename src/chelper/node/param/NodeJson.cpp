@@ -25,12 +25,7 @@ namespace CHelper::Node {
                               .red("linking contents to ")
                               .purple(key)
                               .build());
-        Profile::push(ColorStringBuilder()
-                              .red("failed to find json data in the cpack")
-                              .normal(" -> ")
-                              .purple(key)
-                              .build());
-        throw Exception::NodeLoadFailed();
+        throw std::runtime_error("failed to find json data in the cpack -> " + key);
     }
 
     NodeType *NodeJson::getNodeType() const {

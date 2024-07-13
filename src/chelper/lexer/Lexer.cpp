@@ -112,7 +112,9 @@ namespace CHelper::Lexer {
 
     LexerResult lex(const std::string &content) {
         StringReader stringReader(content);
+#if CHelperTest == true
         Profile::push("start lex: " + stringReader.content);
+#endif
         std::vector<Token> tokenList = std::vector<Token>();
         while (true) {
             if (HEDLEY_UNLIKELY(stringReader.peek() == EOF)) {
@@ -136,7 +138,9 @@ namespace CHelper::Lexer {
                     break;
             }
         }
+#if CHelperTest == true
         Profile::pop();
+#endif
         return {content, std::move(tokenList)};
     }
 

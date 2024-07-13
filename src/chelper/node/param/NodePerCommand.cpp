@@ -20,7 +20,14 @@ namespace CHelper::Node {
         }
         for (const auto &item: nodes) {
             if (HEDLEY_UNLIKELY(item->nextNodes.empty())) {
-                throw Exception::RequireChildNodeIds(name, item->id.value_or("UNKNOWN"));
+                throw std::runtime_error(ColorStringBuilder()
+                                                 .red("dismiss child node ids, the parent node")
+                                                 .normal(" -> ")
+                                                 .purple(item->id.value_or("UNKNOWN"))
+                                                 .red(" (in command ")
+                                                 .purple(StringUtil::join(",", name))
+                                                 .red(")")
+                                                 .build());
             }
         }
 #if CHelperDebug == true
@@ -34,15 +41,14 @@ namespace CHelper::Node {
                 bool flag2 = item2->getNodeType() == NodeType::POSITION.get() ||
                              item2->getNodeType() == NodeType::RELATIVE_FLOAT.get();
                 if (HEDLEY_UNLIKELY(flag1 && flag2 == item2->isMustAfterWhiteSpace)) {
-                    Profile::push(ColorStringBuilder()
-                                          .purple("isMustAfterWhiteSpace")
-                                          .red(" should be ")
-                                          .purple(item2->isMustAfterWhiteSpace ? "false" : "true")
-                                          .red(" in node \"")
-                                          .purple(item2->id.value_or("unknown"))
-                                          .red("\"")
-                                          .build());
-                    throw Exception::NodeLoadFailed();
+                    throw std::runtime_error(ColorStringBuilder()
+                                                     .purple("isMustAfterWhiteSpace")
+                                                     .red(" should be ")
+                                                     .purple(item2->isMustAfterWhiteSpace ? "false" : "true")
+                                                     .red(" in node \"")
+                                                     .purple(item2->id.value_or("unknown"))
+                                                     .red("\"")
+                                                     .build());
                 }
             }
         }
@@ -108,7 +114,14 @@ namespace CHelper::Node {
                 }
             }
             if (HEDLEY_UNLIKELY(flag)) {
-                throw Exception::UnknownNodeId(t->name, startNodeId);
+                throw std::runtime_error(ColorStringBuilder()
+                                                 .red("unknown node id")
+                                                 .normal(" -> ")
+                                                 .purple(startNodeId)
+                                                 .red(" (in command \"")
+                                                 .purple(StringUtil::join(",", t->name))
+                                                 .red("\")")
+                                                 .build());
             }
         }
         //ast
@@ -118,7 +131,12 @@ namespace CHelper::Node {
             for (const auto &childNodes: jsonAst->get<std::vector<std::vector<std::string>>>()) {
                 Profile::next(ColorStringBuilder().red("linking child nodes to parent node").build());
                 if (HEDLEY_UNLIKELY(childNodes.empty())) {
-                    throw Exception::RequireParentNodeId(t->name);
+                    throw std::runtime_error(ColorStringBuilder()
+                                                     .red("dismiss parent node id")
+                                                     .red(" (in command ")
+                                                     .purple(StringUtil::join(",", t->name))
+                                                     .red(")")
+                                                     .build());
                 }
                 auto parentNodeId = childNodes.at(0);
                 Profile::next(ColorStringBuilder()
@@ -127,7 +145,14 @@ namespace CHelper::Node {
                                       .red("\"")
                                       .build());
                 if (HEDLEY_UNLIKELY(childNodes.size() == 1)) {
-                    throw Exception::RequireChildNodeIds(t->name, parentNodeId);
+                    throw std::runtime_error(ColorStringBuilder()
+                                                     .red("dismiss child node ids, the parent node")
+                                                     .normal(" -> ")
+                                                     .purple(parentNodeId)
+                                                     .red(" (in command ")
+                                                     .purple(StringUtil::join(",", t->name))
+                                                     .red(")")
+                                                     .build());
                 }
                 Node::NodeBase *parentNode = nullptr;
                 for (auto &node1: t->nodes) {
@@ -137,15 +162,21 @@ namespace CHelper::Node {
                     }
                 }
                 if (HEDLEY_UNLIKELY(parentNode == nullptr)) {
-                    throw Exception::UnknownNodeId(t->name, parentNodeId);
+                    throw std::runtime_error(ColorStringBuilder()
+                                                     .red("unknown node id")
+                                                     .normal(" -> ")
+                                                     .purple(parentNodeId)
+                                                     .red(" (in command \"")
+                                                     .purple(StringUtil::join(",", t->name))
+                                                     .red("\")")
+                                                     .build());
                 }
                 if (HEDLEY_UNLIKELY(!parentNode->nextNodes.empty())) {
-                    Profile::next(ColorStringBuilder()
-                                          .red("repeating parent node \"")
-                                          .purple(parentNode->id.value())
-                                          .red("\"")
-                                          .build());
-                    throw Exception::NodeLoadFailed();
+                    throw std::runtime_error(ColorStringBuilder()
+                                                     .red("repeating parent node \"")
+                                                     .purple(parentNode->id.value())
+                                                     .red("\"")
+                                                     .build());
                 }
                 parentNode->nextNodes.reserve(childNodes.size() - 1);
                 for_each(childNodes.begin() + 1, childNodes.end(), [&](const auto &childNodeId) {
@@ -168,7 +199,14 @@ namespace CHelper::Node {
                         }
                     }
                     if (HEDLEY_UNLIKELY(childNode == nullptr)) {
-                        throw Exception::UnknownNodeId(t->name, childNodeId);
+                        throw std::runtime_error(ColorStringBuilder()
+                                                         .red("unknown node id")
+                                                         .normal(" -> ")
+                                                         .purple(childNodeId)
+                                                         .red(" (in command \"")
+                                                         .purple(StringUtil::join(",", t->name))
+                                                         .red("\")")
+                                                         .build());
                     }
                     parentNode->nextNodes.push_back(childNode);
                 });
@@ -232,7 +270,14 @@ namespace CHelper::Node {
                 }
             }
             if (HEDLEY_UNLIKELY(flag)) {
-                throw Exception::UnknownNodeId(t->name, startNodeId);
+                throw std::runtime_error(ColorStringBuilder()
+                                                 .red("unknown node id")
+                                                 .normal(" -> ")
+                                                 .purple(startNodeId)
+                                                 .red(" (in command \"")
+                                                 .purple(StringUtil::join(",", t->name))
+                                                 .red("\")")
+                                                 .build());
             }
         }
         //ast
@@ -254,7 +299,14 @@ namespace CHelper::Node {
                     }
                 }
                 if (HEDLEY_UNLIKELY(childNode == nullptr)) {
-                    throw Exception::UnknownNodeId(t->name, childNodeId);
+                    throw std::runtime_error(ColorStringBuilder()
+                                                     .red("unknown node id")
+                                                     .normal(" -> ")
+                                                     .purple(childNodeId)
+                                                     .red(" (in command \"")
+                                                     .purple(StringUtil::join(",", t->name))
+                                                     .red("\")")
+                                                     .build());
                 }
                 parentNode->nextNodes.push_back(childNode);
             }

@@ -24,8 +24,7 @@ namespace CHelper::Node {
 #if CHelperDebug == true
         for (const auto &item: this->childNodes) {
             if (HEDLEY_UNLIKELY(item == nullptr)) {
-                Profile::push("null node in node or");
-                throw Exception::NodeLoadFailed();
+                throw std::runtime_error("null node in node or");
             }
         }
 #endif

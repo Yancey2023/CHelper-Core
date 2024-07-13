@@ -35,7 +35,14 @@ namespace CHelper::Node {
             }
         }
         if (HEDLEY_UNLIKELY(start == nullptr)) {
-            throw Exception::UnknownNodeId(startNodeId, id.value());
+            throw std::runtime_error(ColorStringBuilder()
+                                             .red("unknown node id")
+                                             .normal(" -> ")
+                                             .purple(id.value())
+                                             .red(" (in node \"")
+                                             .purple(startNodeId)
+                                             .red("\")")
+                                             .build());
         }
         for (const auto &item: nodes) {
             if (HEDLEY_UNLIKELY(item->getNodeType() == NodeType::JSON_LIST.get())) {
@@ -84,8 +91,7 @@ namespace CHelper::Node {
         t = std::make_unique<NodeJsonElement>();
         JsonUtil::decode(j, "id", t->id);
         if (HEDLEY_UNLIKELY(!t->id.has_value())) {
-            Profile::push("dismiss json data id");
-            throw Exception::NodeLoadFailed();
+            throw std::runtime_error("dismiss json data id");
         }
         Profile::push(ColorStringBuilder().red("loading nodes").build());
         JsonUtil::decode(j, "node", t->nodes);
@@ -106,8 +112,7 @@ namespace CHelper::Node {
         binaryReader.decode(t->id.value());
         binaryReader.decode(t->nodes);
         if (HEDLEY_UNLIKELY(!t->id.has_value())) {
-            Profile::push("dismiss json data id");
-            throw Exception::NodeLoadFailed();
+            throw std::runtime_error("dismiss json data id");
         }
         binaryReader.decode(t->startNodeId);
     }

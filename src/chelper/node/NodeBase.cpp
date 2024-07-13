@@ -179,7 +179,7 @@ namespace CHelper::Node {
                 return;
             }
         }
-        throw Exception::UnknownNodeType(type);
+        throw std::runtime_error("unknown node type -> " + type);
     }
 
     void to_json(nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {

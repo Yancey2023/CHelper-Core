@@ -22,6 +22,8 @@ namespace CHelper::Profile {
 
     void clear();
 
+    void printAndClear(const std::exception &e);
+
     std::string getStackTrace();
 
 }// namespace CHelper::Profile

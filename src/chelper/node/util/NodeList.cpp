@@ -30,8 +30,7 @@ namespace CHelper::Node {
 #if CHelperDebug == true
         if (HEDLEY_UNLIKELY(
                     nodeLeft == nullptr || nodeElement == nullptr || nodeSeparator == nullptr || nodeRight == nullptr)) {
-            Profile::push("NodeOr has a null child node");
-            throw Exception::NodeLoadFailed();
+            throw std::runtime_error("NodeOr has a null child node");
         }
 #endif
     }

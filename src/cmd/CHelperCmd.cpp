@@ -173,8 +173,7 @@ namespace CHelper::Test {
                 return;
             }
         } catch (const std::exception &e) {
-            Exception::printStackTrace(e);
-            Profile::clear();
+            Profile::printAndClear(e);
             exit(-1);
         }
         test(core, commands, isTestTime);
@@ -193,8 +192,7 @@ namespace CHelper::Test {
                 return;
             }
         } catch (const std::exception &e) {
-            Exception::printStackTrace(e);
-            Profile::clear();
+            Profile::printAndClear(e);
             exit(-1);
         }
         test(core, commands, isTestTime);
@@ -313,8 +311,7 @@ namespace CHelper::Test {
                 std::cout << std::endl;
             }
         } catch (const std::exception &e) {
-            Exception::printStackTrace(e);
-            Profile::clear();
+            Profile::printAndClear(e);
             exit(-1);
         }
     }
@@ -351,8 +348,7 @@ namespace CHelper::Test {
                                  .build()
                       << std::endl;
         } catch (const std::exception &e) {
-            Exception::printStackTrace(e);
-            Profile::clear();
+            Profile::printAndClear(e);
             exit(-1);
         }
     }
@@ -379,8 +375,7 @@ namespace CHelper::Test {
                       << std::endl;
             auto core2 = Core::createByDirectory(output);
         } catch (const std::exception &e) {
-            Exception::printStackTrace(e);
-            Profile::clear();
+            Profile::printAndClear(e);
             exit(-1);
         }
     }
@@ -409,8 +404,7 @@ namespace CHelper::Test {
             auto core2 = Core::createByJson(output);
             std::cout << std::endl;
         } catch (const std::exception &e) {
-            Exception::printStackTrace(e);
-            Profile::clear();
+            Profile::printAndClear(e);
             exit(-1);
         }
     }
@@ -439,8 +433,7 @@ namespace CHelper::Test {
             auto core2 = Core::createByBson(output);
             std::cout << std::endl;
         } catch (const std::exception &e) {
-            Exception::printStackTrace(e);
-            Profile::clear();
+            Profile::printAndClear(e);
             exit(-1);
         }
     }
@@ -469,8 +462,7 @@ namespace CHelper::Test {
             auto core2 = Core::createByBinary(output);
             std::cout << std::endl;
         } catch (const std::exception &e) {
-            Exception::printStackTrace(e);
-            Profile::clear();
+            Profile::printAndClear(e);
             exit(-1);
         }
     }

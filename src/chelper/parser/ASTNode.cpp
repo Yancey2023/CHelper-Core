@@ -421,9 +421,13 @@ namespace CHelper {
     }
 
     std::string ASTNode::getDescription(size_t index) const {
+#if CHelperTest == true
         Profile::push("start getting description: " + std::string(tokens.toString()));
+#endif
         auto result = collectDescription(index).value_or("未知");
+#if CHelperTest == true
         Profile::pop();
+#endif
         return std::move(result);
     }
 
@@ -446,17 +450,25 @@ namespace CHelper {
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getIdErrors() const {
         std::vector<std::shared_ptr<ErrorReason>> input;
+#if CHelperTest == true
         Profile::push("start getting id error: " + std::string(tokens.toString()));
+#endif
         collectIdErrors(input);
+#if CHelperTest == true
         Profile::pop();
+#endif
         return sortByLevel(input);
     }
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
         std::vector<std::shared_ptr<ErrorReason>> result = errorReasons;
+#if CHelperTest == true
         Profile::push("start getting error reasons: " + std::string(tokens.toString()));
+#endif
         collectIdErrors(result);
+#if CHelperTest == true
         Profile::pop();
+#endif
         return sortByLevel(result);
     }
 
@@ -483,21 +495,29 @@ namespace CHelper {
 
     std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
         std::string_view str = tokens.toString();
+#if CHelperTest == true
         Profile::push("start getting suggestions: " + std::string(str));
+#endif
         std::vector<Suggestions> suggestions;
         if (HEDLEY_UNLIKELY(index == str.length() && (canAddWhitespace && isAllWhitespaceError()) || (!isError() && canAddWhitespace0(*this)))) {
             suggestions.push_back(Suggestions::singleSuggestion({str.length(), str.length(), false, whitespaceId}));
         }
         collectSuggestions(index, suggestions);
+#if CHelperTest == true
         Profile::pop();
+#endif
         return Suggestions::filter(suggestions);
     }
 
     std::string ASTNode::getStructure() const {
+#if CHelperTest == true
         Profile::push("start getting structure: " + std::string(tokens.toString()));
+#endif
         StructureBuilder structureBuilder;
         collectStructure(structureBuilder, true);
+#if CHelperTest == true
         Profile::pop();
+#endif
         std::string result = structureBuilder.build();
         while (HEDLEY_UNLIKELY(!result.empty() && result[result.size() - 1] == '\n')) {
             result.pop_back();
@@ -507,9 +527,13 @@ namespace CHelper {
 
     std::string ASTNode::getColors() const {
         //TODO 命令语法高亮显示，获取颜色
+#if CHelperTest == true
         Profile::push("start getting colors: " + std::string(tokens.toString()));
+#endif
         auto result = node->getNodeType()->nodeName;
+#if CHelperTest == true
         Profile::pop();
+#endif
         return result;
     }
 

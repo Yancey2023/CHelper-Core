@@ -43,7 +43,14 @@ namespace CHelper::Node {
                               .normal(" -> ")
                               .purple(data)
                               .build());
-        throw Exception::UnknownNodeId(data, id.value_or("UNKNOWN"));
+        throw std::runtime_error(ColorStringBuilder()
+                                         .red("unknown node id")
+                                         .normal(" -> ")
+                                         .purple(id.value_or("UNKNOWN"))
+                                         .red(" (in node \"")
+                                         .purple(data)
+                                         .red("\")")
+                                         .build());
     }
 
     NodeType *NodeJsonList::getNodeType() const {

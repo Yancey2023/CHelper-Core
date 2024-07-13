@@ -257,7 +257,6 @@ void onTextChanged(const std::string &command) {
         std::cout << std::endl;
     } catch (const std::exception &e) {
         std::cout << CHelper::ColorStringBuilder().red("parse failed").build() << std::endl;
-        CHelper::Exception::printStackTrace(e);
-        CHelper::Profile::clear();
+        CHelper::Profile::printAndClear(e);
     }
 }

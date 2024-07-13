@@ -28,8 +28,7 @@ namespace CHelper {
             return new Core(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
             CHELPER_ERROR("CPack load failed");
-            CHelper::Exception::printStackTrace(e);
-            CHelper::Profile::clear();
+            CHelper::Profile::printAndClear(e);
             return nullptr;
         }
     }

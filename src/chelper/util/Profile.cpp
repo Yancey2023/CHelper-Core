@@ -14,6 +14,9 @@ namespace CHelper::Profile {
     }
 
     void pop() {
+        if (stack.empty()) {
+            return;
+        }
         stack.pop_back();
     }
 
@@ -23,6 +26,11 @@ namespace CHelper::Profile {
     }
 
     void clear() {
+        stack.clear();
+    }
+
+    void printAndClear(const std::exception &e) {
+        CHELPER_ERROR(std::string(e.what()) + "\nstack trace:\n" + Profile::getStackTrace());
         stack.clear();
     }
 

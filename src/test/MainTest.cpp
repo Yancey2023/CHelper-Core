@@ -24,8 +24,7 @@ namespace CHelper::Test {
             ASTNode astNode = Parser::parse("", cPack.get());
             core = std::make_shared<Core>(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
-            Exception::printStackTrace(e);
-            Profile::clear();
+            Profile::printAndClear(e);
             FAIL();
         }
         bool flag = false;
@@ -42,8 +41,7 @@ namespace CHelper::Test {
                                      .purple(command)
                                      .build()
                           << std::endl;
-                Exception::printStackTrace(e);
-                Profile::clear();
+                CHelper::Profile::printAndClear(e);
                 flag = true;
             }
         }
@@ -76,8 +74,7 @@ namespace CHelper::Test {
             auto core2 = Core::createByBson(output);
             std::cout << std::endl;
         } catch (const std::exception &e) {
-            Exception::printStackTrace(e);
-            Profile::clear();
+            Profile::printAndClear(e);
             throw e;
         }
     }

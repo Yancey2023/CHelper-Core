@@ -55,7 +55,7 @@ namespace CHelper::Node {
                 nodeName,
                 [nodeName, isMustAfterWhiteSpace, nodeCreateStage](const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
                     if (std::find(nodeCreateStage.begin(), nodeCreateStage.end(), NodeType::currentCreateStage) == nodeCreateStage.end()) {
-                        throw Exception::UnknownNodeType(nodeName);
+                        throw std::runtime_error("unknown node type -> " + nodeName);
                     }
                     t = std::make_unique<T>();
                     j.get_to((T &) *t);
@@ -68,7 +68,7 @@ namespace CHelper::Node {
                 },
                 [nodeName, isMustAfterWhiteSpace, nodeCreateStage](BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
                     if (std::find(nodeCreateStage.begin(), nodeCreateStage.end(), NodeType::currentCreateStage) == nodeCreateStage.end()) {
-                        throw Exception::UnknownNodeType(nodeName);
+                        throw std::runtime_error("unknown node type -> " + nodeName);
                     }
                     t = std::make_unique<T>();
                     binaryReader.decode((T &) *t);
@@ -91,13 +91,13 @@ namespace CHelper::Node {
         return std::make_unique<NodeType>(
                 nodeName,
                 [nodeName](const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
-                    throw Exception::UnknownNodeType(nodeName);
+                    throw std::runtime_error("unknown node type -> " + nodeName);
                 },
                 [](nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {
                     j = (T &) *t;
                 },
                 [nodeName](BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
-                    throw Exception::UnknownNodeType(nodeName);
+                    throw std::runtime_error("unknown node type -> " + nodeName);
                 },
                 [](BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t) {
                     binaryWriter.encode((T &) *t);

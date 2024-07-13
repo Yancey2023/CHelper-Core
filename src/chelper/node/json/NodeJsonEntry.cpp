@@ -53,7 +53,14 @@ namespace CHelper::Node {
                               .normal(" -> ")
                               .purple(value)
                               .build());
-        throw Exception::UnknownNodeId(value, id.value_or("UNKNOWN"));
+        throw std::runtime_error(ColorStringBuilder()
+                                         .red("unknown node id")
+                                         .normal(" -> ")
+                                         .purple(id.value_or("UNKNOWN"))
+                                         .red(" (in node \"")
+                                         .purple(value)
+                                         .red("\")")
+                                         .build());
     }
 
     ASTNode NodeJsonEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

@@ -181,7 +181,7 @@ namespace CHelper {
                 itemIds->push_back(std::make_shared<ItemId>(item));
             }
         } else {
-            throw Exception::UnknownIdType(type);
+            throw std::runtime_error("unknown id type -> " + type);
         }
     }
 

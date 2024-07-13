@@ -20,11 +20,10 @@ namespace CHelper::Node {
                               .purple(key)
                               .red(" to content")
                               .build());
-        Profile::push(ColorStringBuilder()
-                              .red("fail to find repeat data by id ")
-                              .purple(key)
-                              .build());
-        throw Exception::NodeLoadFailed();
+        throw std::runtime_error(ColorStringBuilder()
+                                         .red("fail to find repeat data by id ")
+                                         .purple(key)
+                                         .build());
     }
 
     NodeType *NodeRepeat::getNodeType() const {
