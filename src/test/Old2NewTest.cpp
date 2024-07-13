@@ -5,15 +5,13 @@
 #include <gtest/gtest.h>
 
 #include "../chelper/old2new/Old2New.h"
+#include "param_deliver.h"
 
 namespace CHelper::Test {
 
     TEST(Old2NewTest, Old2New) {
-#ifdef WIN32
-        nlohmann::json blockFixData = JsonUtil::getJsonFromFile(R"(D:\CLion\project\CHelper-Core\resources\old2new\blockFixData.json)");
-#else
-        nlohmann::json blockFixData = JsonUtil::getJsonFromFile(R"(/home/yancey/CLionProjects/CHelper-Core/resources/old2new/blockFixData.json)");
-#endif
+        std::filesystem::path projectDir(PROJECT_DIR);
+        nlohmann::json blockFixData = JsonUtil::getJsonFromFile(projectDir / "resources" / "old2new" / "blockFixData.json");
         std::vector<std::string> oldCommands = {
                 R"(execute @e[x=~5] ~~~ detect ~~-1~ stone 0 setblock ~~1~ command_block 0)",
                 R"(execute @e[type=zombie] ~ ~ ~ summon lightning_bolt)",

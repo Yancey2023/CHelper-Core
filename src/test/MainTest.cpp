@@ -7,12 +7,7 @@
 #include "../chelper/Core.h"
 #include "../chelper/lexer/Lexer.h"
 #include "../chelper/parser/Parser.h"
-
-#ifdef _WIN32
-const std::string path = R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)";
-#else
-const std::string path = R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)";
-#endif
+#include "param_deliver.h"
 
 #pragma GCC diagnostic ignored "-Wunused-result"
 
@@ -22,7 +17,7 @@ namespace CHelper::Test {
      * 测试程序是否可以正常运行
      */
     [[maybe_unused]] void
-    test(const std::string &cpackPath, const std::vector<std::string> &commands) {
+    test(const std::filesystem::path &cpackPath, const std::vector<std::string> &commands) {
         std::shared_ptr<Core> core;
         try {
             std::unique_ptr<CPack> cPack = CPack::createByDirectory(cpackPath);
@@ -57,7 +52,7 @@ namespace CHelper::Test {
         }
     }
 
-    void writeBson(const std::string &input, const std::string &output) {
+    void writeBson(const std::filesystem::path &input, const std::filesystem::path &output) {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;
@@ -90,8 +85,9 @@ namespace CHelper::Test {
 }// namespace CHelper::Test
 
 TEST(MainTest, ParseCommand) {
+    std::filesystem::path projectDir(PROJECT_DIR);
     CHelper::Test::test(
-            path,
+            projectDir / "resources" / "beta" / "vanilla",
             std::vector<std::string>{
                     R"(execute run clear )",
                     R"(give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m)",

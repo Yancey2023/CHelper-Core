@@ -62,7 +62,7 @@ namespace CHelper::Node {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         // key
-        ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey.get(), "key");
+        ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey.get());
         childNodes.push_back(astNodeKey);
         if (HEDLEY_UNLIKELY(astNodeKey.isError())) {
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
@@ -74,8 +74,7 @@ namespace CHelper::Node {
         // = or =!
         ASTNode astNodeSeparator = getByChildNode(
                 tokenReader, cpack,
-                it == equalDatas.end() || it->canUseNotEqual ? nodeEqualOrNotEqual.get() : nodeEqual.get(),
-                "separator");
+                it == equalDatas.end() || it->canUseNotEqual ? nodeEqualOrNotEqual.get() : nodeEqual.get());
         childNodes.push_back(astNodeSeparator);
         if (HEDLEY_UNLIKELY(astNodeSeparator.isError())) {
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());

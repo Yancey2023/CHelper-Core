@@ -57,7 +57,7 @@ namespace CHelper {
             getByChildNode(TokenReader &tokenReader,
                            const CPack *cpack,
                            const NodeBase *childNode,
-                           const std::string &astNodeId = std::string()) const;
+                           const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE) const;
 
             //node不一定需要的时侯使用
             HEDLEY_NON_NULL(3)
@@ -66,7 +66,7 @@ namespace CHelper {
                                const CPack *cpack,
                                bool isIgnoreChildNodesError,
                                const std::vector<const NodeBase *> &childNodes,
-                               const std::string &astNodeId = std::string()) const;
+                               const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE) const;
 
         public:
             [[nodiscard]] bool isAfterWhitespace() const;

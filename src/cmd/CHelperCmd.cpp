@@ -4,6 +4,7 @@
 
 #include "CHelperCmd.h"
 #include "../chelper/Core.h"
+#include "param_deliver.h"
 
 int main() {
     //    testDir();
@@ -15,145 +16,76 @@ int main() {
 }
 
 [[maybe_unused]] void testDir() {
-#ifdef _WIN32
-    CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
-                           R"(D:\CLion\project\CHelper-Core\test\test.txt)",
+    std::filesystem::path projectDir(PROJECT_DIR);
+    CHelper::Test::testDir(projectDir / "resources" / "beta" / "vanilla",
+                           projectDir / "test" / "test.txt",
                            false);
-    //    CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
-    //                        std::vector<std::string>{"execute run clear "}, false);
-    //    CHelper::Test::testDir(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)", {""}, false);
-    //    CHelper::Test::test4(R"(D:\CLion\project\CHelper-Core\resources)",
-    //                         R"(D:\CLion\project\CHelper-Core\run\cpack.json)");
-#else
-    CHelper::Test::testDir(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
-                           R"(/home/yancey/CLionProjects/CHelper-Core/test/test.txt)",
-                           true);
-    //    CHelper::Test::testDir(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
-    //                        std::vector<std::string>{"give @s "}, true);
-#endif
+    //    CHelper::Test::testDir(projectDir / "resources" / "beta" / "vanilla",
+    //                           std::vector<std::string>{"execute run clear "}, false);
 }
 
 [[maybe_unused]] void testBin() {
-#ifdef _WIN32
-    CHelper::Test::testBin(R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.20.21.cpack)",
-                           R"(D:\CLion\project\CHelper-Core\test\test.txt)",
+    std::filesystem::path projectDir(PROJECT_DIR);
+    CHelper::Test::testBin(projectDir / "run" / "beta-experiment-1.21.20.21.cpack",
+                           projectDir / "test" / "test.txt",
                            false);
-#else
-    CHelper::Test::testBin(R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.20.21.cpack)",
-                           R"(/home/yancey/CLionProjects/CHelper-Core/test/test.txt)",
-                           true);
-    //    for (int i = 0; i < 100; ++i) {
-    //        CHelper::Core::createByBinary("/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.20.21.cpack");
-    //    }
-#endif
 }
 
 [[maybe_unused]] void outputSingleJson() {
-#ifdef _WIN32
+    std::filesystem::path projectDir(PROJECT_DIR);
     // release
-    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\release\vanilla)",
-                                   R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.21.1.03.json)");
-    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\release\experiment)",
-                                   R"(D:\CLion\project\CHelper-Core\run\release-experiment-1.21.1.03.json)");
+    CHelper::Test::writeSingleJson(projectDir / "resources" / "release" / "vanilla",
+                                   projectDir / "run" / "release-vanilla-1.21.1.03.json");
+    CHelper::Test::writeSingleJson(projectDir / "resources" / "release" / "experiment",
+                                   projectDir / "run" / "release-experiment-1.21.1.03.json");
     // beta
-    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
-                                   R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.20.21.json)");
-    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\beta\experiment)",
-                                   R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.20.21.json)");
+    CHelper::Test::writeSingleJson(projectDir / "resources" / "beta" / "vanilla",
+                                   projectDir / "run" / "beta-vanilla-1.21.20.21.json");
+    CHelper::Test::writeSingleJson(projectDir / "resources" / "beta" / "experiment",
+                                   projectDir / "run" / "beta-experiment-1.21.20.21.json");
     // netease
-    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
-                                   R"(D:\CLion\project\CHelper-Core\run\netease-vanilla-1.20.10.25.json)");
-    CHelper::Test::writeSingleJson(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
-                                   R"(D:\CLion\project\CHelper-Core\run\netease-experiment-1.20.10.25.json)");
-#else
-    // release
-    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/vanilla)",
-                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/release-vanilla-1.21.1.03.json)");
-    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/experiment)",
-                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/release-experiment-1.21.1.03.json)");
-    // beta
-    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
-                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-vanilla-1.21.20.21.json)");
-    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/experiment)",
-                                   R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.20.21.json)");
-    // netease
-    //    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/vanilla)",
-    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.20.10.25.json)");
-    //    CHelper::Test::writeSingleJson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/experiment)",
-    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.20.10.25.json)");
-#endif
+    CHelper::Test::writeSingleJson(projectDir / "resources" / "netease" / "vanilla",
+                                   projectDir / "run" / "netease-vanilla-1.20.10.25.json");
+    CHelper::Test::writeSingleJson(projectDir / "resources" / "netease" / "experiment",
+                                   projectDir / "run" / "netease-experiment-1.20.10.25.json");
 }
 
 [[maybe_unused]] void outputBson() {
-#ifdef _WIN32
+    std::filesystem::path projectDir(PROJECT_DIR);
     // release
-    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\release\vanilla)",
-                             R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.21.1.03.bson)");
-    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\release\experiment)",
-                             R"(D:\CLion\project\CHelper-Core\run\release-experiment-1.21.1.03.bson)");
+    CHelper::Test::writeBson(projectDir / "resources" / "release" / "vanilla",
+                             projectDir / "run" / "release-vanilla-1.21.1.03.bson");
+    CHelper::Test::writeBson(projectDir / "resources" / "release" / "experiment",
+                             projectDir / "run" / "release-experiment-1.21.1.03.bson");
     // beta
-    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
-                             R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.20.21.bson)");
-    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\beta\experiment)",
-                             R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.20.21.bson)");
+    CHelper::Test::writeBson(projectDir / "resources" / "beta" / "vanilla",
+                             projectDir / "run" / "beta-vanilla-1.21.20.21.bson");
+    CHelper::Test::writeBson(projectDir / "resources" / "beta" / "experiment",
+                             projectDir / "run" / "beta-experiment-1.21.20.21.bson");
     // netease
-    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
-                             R"(D:\CLion\project\CHelper-Core\run\netease-vanilla-1.20.10.25.bson)");
-    CHelper::Test::writeBson(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
-                             R"(D:\CLion\project\CHelper-Core\run\netease-experiment-1.20.10.25.bson)");
-#else
-    // release
-    CHelper::Test::writeBson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/vanilla)",
-                             R"(/home/yancey/CLionProjects/CHelper-Core/run/release-vanilla-1.21.1.03.bson)");
-    CHelper::Test::writeBson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/experiment)",
-                             R"(/home/yancey/CLionProjects/CHelper-Core/run/release-experiment-1.21.1.03.bson)");
-    // beta
-    CHelper::Test::writeBson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
-                             R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-vanilla-1.21.20.21.bson)");
-    CHelper::Test::writeBson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/experiment)",
-                             R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.20.21.bson)");
-    // netease
-    //    CHelper::Test::writeBson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/vanilla)",
-    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.20.10.25.bson)");
-    //    CHelper::Test::writeBson(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/experiment)",
-    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.20.10.25.bson)");
-#endif
+    CHelper::Test::writeBson(projectDir / "resources" / "netease" / "vanilla",
+                             projectDir / "run" / "netease-vanilla-1.20.10.25.bson");
+    CHelper::Test::writeBson(projectDir / "resources" / "netease" / "experiment",
+                             projectDir / "run" / "netease-experiment-1.20.10.25.bson");
 }
 
 [[maybe_unused]] void outputBinary() {
-#ifdef _WIN32
+    std::filesystem::path projectDir(PROJECT_DIR);
     // release
-    CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\release\vanilla)",
-                               R"(D:\CLion\project\CHelper-Core\run\release-vanilla-1.21.1.03.cpack)");
-    CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\release\experiment)",
-                               R"(D:\CLion\project\CHelper-Core\run\release-experiment-1.21.1.03.cpack)");
+    CHelper::Test::writeBinary(projectDir / "resources" / "release" / "vanilla",
+                             projectDir / "run" / "release-vanilla-1.21.1.03.cpack");
+    CHelper::Test::writeBinary(projectDir / "resources" / "release" / "experiment",
+                             projectDir / "run" / "release-experiment-1.21.1.03.cpack");
     // beta
-    CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)",
-                               R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.20.21.cpack)");
-    CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\beta\experiment)",
-                               R"(D:\CLion\project\CHelper-Core\run\beta-experiment-1.21.20.21.cpack)");
+    CHelper::Test::writeBinary(projectDir / "resources" / "beta" / "vanilla",
+                             projectDir / "run" / "beta-vanilla-1.21.20.21.cpack");
+    CHelper::Test::writeBinary(projectDir / "resources" / "beta" / "experiment",
+                             projectDir / "run" / "beta-experiment-1.21.20.21.cpack");
     // netease
-    CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\netease\vanilla)",
-                               R"(D:\CLion\project\CHelper-Core\run\netease-vanilla-1.20.10.25.cpack)");
-    CHelper::Test::writeBinary(R"(D:\CLion\project\CHelper-Core\resources\netease\experiment)",
-                               R"(D:\CLion\project\CHelper-Core\run\netease-experiment-1.20.10.25.cpack)");
-#else
-    // release
-    CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/vanilla)",
-                               R"(/home/yancey/CLionProjects/CHelper-Core/run/release-vanilla-1.21.1.03.cpack)");
-    CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/release/experiment)",
-                               R"(/home/yancey/CLionProjects/CHelper-Core/run/release-experiment-1.21.1.03.cpack)");
-    // beta
-    CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)",
-                               R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-vanilla-1.21.20.21.cpack)");
-    CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/experiment)",
-                               R"(/home/yancey/CLionProjects/CHelper-Core/run/beta-experiment-1.21.20.21.cpack)");
-    // netease
-    //    CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/vanilla)",
-    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.20.10.25.cpack)");
-    //    CHelper::Test::writeBinary(R"(/home/yancey/CLionProjects/CHelper-Core/resources/netease/experiment)",
-    //                               R"(/home/yancey/CLionProjects/CHelper-Core/run/netease-1.20.10.25.cpack)");
-#endif
+    CHelper::Test::writeBinary(projectDir / "resources" / "netease" / "vanilla",
+                             projectDir / "run" / "netease-vanilla-1.20.10.25.cpack");
+    CHelper::Test::writeBinary(projectDir / "resources" / "netease" / "experiment",
+                             projectDir / "run" / "netease-experiment-1.20.10.25.cpack");
 }
 
 namespace CHelper::Test {
@@ -161,7 +93,7 @@ namespace CHelper::Test {
     /**
      * 读取测试文件进行测试
      */
-    [[maybe_unused]] void testDir(const std::string &cpackPath, const std::string &testFilePath, bool isTestTime) {
+    [[maybe_unused]] void testDir(const std::filesystem::path &cpackPath, const std::filesystem::path &testFilePath, bool isTestTime) {
         std::vector<std::string> commands;
         std::ifstream fin;
         fin.open(testFilePath, std::ios::in);
@@ -196,7 +128,7 @@ namespace CHelper::Test {
     /**
      * 读取测试文件进行测试
      */
-    [[maybe_unused]] void testBin(const std::string &cpackPath, const std::string &testFilePath, bool isTestTime) {
+    [[maybe_unused]] void testBin(const std::filesystem::path &cpackPath, const std::filesystem::path &testFilePath, bool isTestTime) {
         std::vector<std::string> commands;
         std::ifstream fin;
         fin.open(testFilePath, std::ios::in);
@@ -232,7 +164,7 @@ namespace CHelper::Test {
      * 测试程序是否可以正常运行
      */
     [[maybe_unused]] void
-    testDir(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime) {
+    testDir(const std::filesystem::path &cpackPath, const std::vector<std::string> &commands, bool isTestTime) {
         Core *core;
         try {
             core = Core::createByDirectory(cpackPath);
@@ -252,7 +184,7 @@ namespace CHelper::Test {
      * 测试程序是否可以正常运行
      */
     [[maybe_unused]] void
-    testBin(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime) {
+    testBin(const std::filesystem::path &cpackPath, const std::vector<std::string> &commands, bool isTestTime) {
         Core *core;
         try {
             core = Core::createByBinary(cpackPath);
@@ -316,10 +248,10 @@ namespace CHelper::Test {
                     std::cout << ColorStringBuilder().blue("get suggestions in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms").build() << std::endl;
                     std::cout << ColorStringBuilder().blue("get structure in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms").build() << std::endl;
                 }
-//                std::cout << core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
-//                          << std::endl;
-//                std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
-//                          << std::endl;
+                //                std::cout << core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
+                //                          << std::endl;
+                //                std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
+                //                          << std::endl;
                 std::cout << "structure: " + structure << std::endl;
                 std::cout << "description: " + description << std::endl;
                 if (errorReasons.empty()) {
@@ -390,7 +322,7 @@ namespace CHelper::Test {
     /**
      * 测试程序性能
      */
-    [[maybe_unused]] void test2(const std::string &cpackPath, const std::vector<std::string> &commands, int times) {
+    [[maybe_unused]] void test2(const std::filesystem::path &cpackPath, const std::vector<std::string> &commands, int times) {
         try {
             auto core = Core::createByDirectory(cpackPath);
             std::cout << std::endl;
@@ -425,7 +357,7 @@ namespace CHelper::Test {
         }
     }
 
-    [[maybe_unused]] void writeDirectory(const std::string &input, const std::string &output) {
+    [[maybe_unused]] void writeDirectory(const std::string &input, const std::filesystem::path &output) {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;
@@ -453,7 +385,7 @@ namespace CHelper::Test {
         }
     }
 
-    [[maybe_unused]] void writeSingleJson(const std::string &input, const std::string &output) {
+    [[maybe_unused]] void writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output) {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;
@@ -483,7 +415,7 @@ namespace CHelper::Test {
         }
     }
 
-    [[maybe_unused]] void writeBson(const std::string &input, const std::string &output) {
+    [[maybe_unused]] void writeBson(const std::filesystem::path &input, const std::filesystem::path &output) {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;
@@ -513,7 +445,7 @@ namespace CHelper::Test {
         }
     }
 
-    [[maybe_unused]] void writeBinary(const std::string &input, const std::string &output) {
+    [[maybe_unused]] void writeBinary(const std::filesystem::path &input, const std::filesystem::path &output) {
         try {
             auto core = Core::createByDirectory(input);
             std::cout << std::endl;

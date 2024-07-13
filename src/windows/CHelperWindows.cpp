@@ -3,9 +3,10 @@
 //
 
 #include "CHelperWindows.h"
+#include <commctrl.h>
 #include "../chelper/Core.h"
 #include "../chelper/parser/Parser.h"
-#include <commctrl.h>
+#include "param_deliver.h"
 
 static size_t ID_INPUT = 1;
 static size_t ID_DESCRIPTION = 2;
@@ -23,8 +24,8 @@ static CHelper::Core *core = nullptr;
  * @param nCmdShow 控制窗口的显示方式
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
-    //    core = CHelper::Core::createByDirectory(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)");
-    core = CHelper::Core::createByBinary(R"(D:\CLion\project\CHelper-Core\run\beta-vanilla-1.21.20.21.cpack)");
+    std::filesystem::path projectDir(PROJECT_DIR);
+    core = CHelper::Core::createByBinary(projectDir / "run" / "beta-experiment-1.21.20.21.cpack");
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         exit(-1);
     }

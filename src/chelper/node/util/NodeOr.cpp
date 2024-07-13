@@ -13,14 +13,14 @@ namespace CHelper::Node {
                    const bool isUseFirst,
                    const bool noSuggestion,
                    const char *defaultErrorReason,
-                   std::string nodeId)
+                   ASTNodeId::ASTNodeId nodeId)
         : NodeBase(id, description, false),
           isAttachToEnd(isAttachToEnd),
           isUseFirst(isUseFirst),
           noSuggestion(noSuggestion),
           childNodes(std::move(childNodes)),
           defaultErrorReason(defaultErrorReason),
-          nodeId(std::move(nodeId)) {
+          nodeId(nodeId) {
 #if CHelperDebug == true
         for (const auto &item: this->childNodes) {
             if (HEDLEY_UNLIKELY(item == nullptr)) {

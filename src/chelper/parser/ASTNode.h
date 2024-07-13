@@ -34,6 +34,26 @@ namespace CHelper {
         };
     }// namespace ASTNodeMode
 
+    namespace ASTNodeId {
+        enum ASTNodeId : uint8_t {
+            NONE,
+            COMPOUND,
+            NEXT_NODE,
+            NODE_JSON_ALL_LIST,
+            NODE_STRING_INNER,
+            NODE_BLOCK_BLOCK_ID,
+            NODE_BLOCK_BLOCK_STATE,
+            NODE_BLOCK_BLOCK_AND_BLOCK_STATE,
+            NODE_COMMAND_COMMAND_NAME,
+            NODE_COMMAND_COMMAND,
+            NODE_POSITION_POSITIONS,
+            NODE_POSITION_POSITIONS_WITH_ERROR,
+            NODE_TARGET_SELECTOR_PLAYER_NAME,
+            NODE_TARGET_SELECTOR_WITH_ARGUMENTS,
+            NODE_TARGET_SELECTOR_NO_ARGUMENTS,
+        };
+    }// namespace ASTNodeId
+
     class ASTNode {
     public:
         ASTNodeMode::ASTNodeMode mode;
@@ -41,7 +61,7 @@ namespace CHelper {
         std::vector<ASTNode> childNodes;
         TokensView tokens;
         //一个Node可能会生成多个ASTNode，这些ASTNode使用id进行区分
-        std::string id;
+        ASTNodeId::ASTNodeId id;
         const Node::NodeBase *node;
         //不要直接用这个，这里不包括ID错误，只有结构错误，应该用getErrorReason()
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
@@ -55,7 +75,7 @@ namespace CHelper {
                 std::vector<ASTNode> &&childNodes,
                 TokensView tokens,
                 const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
-                std::string id,
+                ASTNodeId::ASTNodeId id,
                 bool canAddWhitespace,
                 size_t whichBest = -1);
 
@@ -72,28 +92,28 @@ namespace CHelper {
         static ASTNode simpleNode(const Node::NodeBase *node,
                                   const TokensView &tokens,
                                   const std::shared_ptr<ErrorReason> &errorReason = nullptr,
-                                  const std::string &id = std::string(),
+                                  const ASTNodeId::ASTNodeId &id = ASTNodeId::NONE,
                                   bool canAddWhitespace = true);
 
         static ASTNode andNode(const Node::NodeBase *node,
                                std::vector<ASTNode> &&childNodes,
                                const TokensView &tokens,
                                const std::shared_ptr<ErrorReason> &errorReason = nullptr,
-                               const std::string &id = std::string(),
+                               const ASTNodeId::ASTNodeId &id = ASTNodeId::NONE,
                                bool canAddWhitespace = true);
 
         static ASTNode orNode(const Node::NodeBase *node,
                               std::vector<ASTNode> &&childNodes,
                               const TokensView *tokens,
                               const char *errorReason = nullptr,
-                              const std::string &id = std::string(),
+                              const ASTNodeId::ASTNodeId &id = ASTNodeId::NONE,
                               bool canAddWhitespace = true);
 
         static ASTNode orNode(const Node::NodeBase *node,
                               std::vector<ASTNode> &&childNodes,
                               const TokensView &tokens,
                               const char *errorReason = nullptr,
-                              const std::string &id = std::string(),
+                              const ASTNodeId::ASTNodeId &id = ASTNodeId::NONE,
                               bool canAddWhitespace = true);
 
         //是否有结构错误（不包括ID错误）
@@ -133,6 +153,5 @@ namespace CHelper {
     };
 
 }// namespace CHelper
-
 
 #endif//CHELPER_ASTNODE_H

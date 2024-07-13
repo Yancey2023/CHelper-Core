@@ -80,7 +80,7 @@ namespace CHelper::Node {
         }
         size_t offset = tokens.getStartIndex() + 1;
         auto innerNode = getInnerASTNode(this, tokens, str, cpack, nodeData.get());
-        ASTNode newResult = ASTNode::andNode(this, {std::move(innerNode.first)}, tokens, errorReason, "inner");
+        ASTNode newResult = ASTNode::andNode(this, {std::move(innerNode.first)}, tokens, errorReason, ASTNodeId::NODE_STRING_INNER);
         if (HEDLEY_UNLIKELY(errorReason == nullptr)) {
             for (auto &item: newResult.errorReasons) {
                 item = std::make_shared<ErrorReason>(
@@ -95,7 +95,7 @@ namespace CHelper::Node {
 
     bool NodeJsonString::collectIdError(const ASTNode *astNode,
                                         std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (HEDLEY_UNLIKELY(astNode->id == "inner")) {
+        if (HEDLEY_UNLIKELY(astNode->id == ASTNodeId::NODE_STRING_INNER)) {
             auto convertResult = JsonUtil::jsonString2String(astNode->tokens.toString());
             size_t offset = astNode->tokens.getStartIndex() + 1;
             for (const auto &item: astNode->childNodes[0].getIdErrors()) {
@@ -117,7 +117,7 @@ namespace CHelper::Node {
             return true;
         }
         auto convertResult = JsonUtil::jsonString2String(str);
-        if (HEDLEY_UNLIKELY(astNode->id == "inner")) {
+        if (HEDLEY_UNLIKELY(astNode->id == ASTNodeId::NODE_STRING_INNER)) {
             size_t offset = astNode->tokens.getStartIndex() + 1;
             Suggestions suggestions1;
             suggestions1.suggestions = astNode->childNodes[0].getSuggestions(index - offset);

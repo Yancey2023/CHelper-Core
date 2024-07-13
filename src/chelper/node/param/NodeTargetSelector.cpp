@@ -226,7 +226,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(at.isError())) {
             //不是@符号开头，当作玩家名处理
             DEBUG_GET_NODE_BEGIN(nodePlayerName)
-            ASTNode result = getByChildNode(tokenReader, cpack, nodePlayerName.get(), "target selector player name");
+            ASTNode result = getByChildNode(tokenReader, cpack, nodePlayerName.get(), ASTNodeId::NODE_TARGET_SELECTOR_PLAYER_NAME);
             DEBUG_GET_NODE_END(nodePlayerName)
             return result;
         }
@@ -244,11 +244,11 @@ namespace CHelper::Node {
         if (HEDLEY_LIKELY(leftBracket.isError())) {
             //没有后面的[...]
             return ASTNode::andNode(this, {targetSelectorVariable}, tokenReader.collect(),
-                                    nullptr, "target selector no arguments");
+                                    nullptr, ASTNodeId::NODE_TARGET_SELECTOR_NO_ARGUMENTS);
         }
         ASTNode arguments = nodeArguments->getASTNodeWithNextNode(tokenReader, cpack);
         return ASTNode::andNode(this, {targetSelectorVariable, arguments}, tokenReader.collect(),
-                                nullptr, "target selector with arguments");
+                                nullptr, ASTNodeId::NODE_TARGET_SELECTOR_WITH_ARGUMENTS);
     }
 
     bool NodeTargetSelector::collectSuggestions(const ASTNode *astNode,
@@ -261,7 +261,7 @@ namespace CHelper::Node {
             nodePlayerName->collectSuggestions(astNode, index, suggestions);
             return true;
         }
-        if (HEDLEY_UNLIKELY(!astNode->isError() && astNode->id == "target selector no arguments")) {
+        if (HEDLEY_UNLIKELY(!astNode->isError() && astNode->id == ASTNodeId::NODE_TARGET_SELECTOR_NO_ARGUMENTS)) {
             TokensView tokens = {astNode->tokens.lexerResult, astNode->tokens.end, astNode->tokens.end};
             ASTNode newAstNode = ASTNode::simpleNode(this, tokens);
             nodeLeft->collectSuggestions(&newAstNode, index, suggestions);

@@ -26,13 +26,13 @@ namespace CHelper {
 
         static Core *create(const std::function<std::unique_ptr<CPack>()> &getCPack);
 
-        static Core *createByDirectory(const std::string &cpackPath);
+        static Core *createByDirectory(const std::filesystem::path &cpackPath);
 
-        static Core *createByJson(const std::string &cpackPath);
+        static Core *createByJson(const std::filesystem::path &cpackPath);
 
-        static Core *createByBson(const std::string &cpackPath);
+        static Core *createByBson(const std::filesystem::path &cpackPath);
 
-        static Core *createByBinary(const std::string &cpackPath);
+        static Core *createByBinary(const std::filesystem::path &cpackPath);
 
         void onTextChanged(const std::string &content, size_t index);
 

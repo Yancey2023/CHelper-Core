@@ -7,6 +7,7 @@
 #include "../chelper/node/json/NodeJsonInteger.h"
 #include "../chelper/node/json/NodeJsonNull.h"
 #include "../chelper/resources/CPack.h"
+#include "param_deliver.h"
 #include <gtest/gtest.h>
 
 template<class T>
@@ -150,11 +151,8 @@ TEST(BinaryUtilTest, NamespaceId) {
         EXPECT_EQ(t1.description, t2.description);
         EXPECT_EQ(t1.idNamespace, t2.idNamespace);
     };
-#ifdef _WIN32
-    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla\id\entities.json)");
-#else
-    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla/id/entities.json)");
-#endif
+    std::filesystem::path projectDir(PROJECT_DIR);
+    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(projectDir / "resources" / "beta" / "vanilla" / "id" / "entities.json");
     std::vector<std::function<CHelper::NamespaceId()>> getInstance;
     for (const auto &item: j.at("content")) {
         CHelper::NamespaceId namespaceId = item;
@@ -171,11 +169,8 @@ TEST(BinaryUtilTest, ItemId) {
         EXPECT_EQ(t1.max, t2.max);
         EXPECT_EQ(t1.descriptions, t2.descriptions);
     };
-#ifdef _WIN32
-    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla\id\items.json)");
-#else
-    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla/id/items.json)");
-#endif
+    std::filesystem::path projectDir(PROJECT_DIR);
+    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(projectDir / "resources" / "beta" / "vanilla" / "id" / "items.json");
     std::vector<std::function<CHelper::ItemId()>> getInstance;
     for (const auto &item: j.at("items")) {
         CHelper::ItemId itemId(item);
@@ -205,11 +200,8 @@ TEST(BinaryUtilTest, BlockId) {
             }
         }
     };
-#ifdef _WIN32
-    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla\id\blocks.json)");
-#else
-    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla/id/blocks.json)");
-#endif
+    std::filesystem::path projectDir(PROJECT_DIR);
+    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(projectDir / "resources" / "beta" / "vanilla" / "id" / "blocks.json");
     std::vector<std::function<CHelper::BlockId()>> getInstance;
     for (const auto &item: j.at("blocks")) {
         CHelper::BlockId blockId(item);
@@ -222,9 +214,11 @@ TEST(BinaryUtilTest, PerCPackNormalIds) {
 
     std::unique_ptr<CHelper::CPack> cpack;
     try {
+        std::filesystem::path projectDir(PROJECT_DIR);
+        nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(projectDir / "resources" / "beta" / "vanilla" / "id" / "blocks.json");
 #ifdef _WIN32
         cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)"));
+                projectDir / "resources" / "beta" / "vanilla"));
 #else
         cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
                 R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)"));
@@ -252,13 +246,8 @@ TEST(BinaryUtilTest, PerCPackNormalIds) {
 TEST(BinaryUtilTest, CPackNormalIds) {
     std::unique_ptr<CHelper::CPack> cpack;
     try {
-#ifdef _WIN32
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)"));
-#else
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)"));
-#endif
+        std::filesystem::path projectDir(PROJECT_DIR);
+        cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     } catch (const std::exception &e) {
         CHelper::Exception::printStackTrace(e);
         CHelper::Profile::clear();
@@ -288,13 +277,8 @@ TEST(BinaryUtilTest, CPackNormalIds) {
 TEST(BinaryUtilTest, CPackNamespaceId) {
     std::unique_ptr<CHelper::CPack> cpack;
     try {
-#ifdef _WIN32
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)"));
-#else
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)"));
-#endif
+        std::filesystem::path projectDir(PROJECT_DIR);
+        cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     } catch (const std::exception &e) {
         CHelper::Exception::printStackTrace(e);
         CHelper::Profile::clear();
@@ -324,14 +308,9 @@ TEST(BinaryUtilTest, CPackNamespaceId) {
 
 TEST(BinaryUtilTest, NodeJsonElement) {
     std::unique_ptr<CHelper::CPack> cpack;
+    std::filesystem::path projectDir(PROJECT_DIR);
     try {
-#ifdef _WIN32
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)"));
-#else
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)"));
-#endif
+        cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     } catch (const std::exception &e) {
         CHelper::Exception::printStackTrace(e);
         CHelper::Profile::clear();
@@ -359,13 +338,8 @@ TEST(BinaryUtilTest, NodeJsonElement) {
 TEST(BinaryUtilTest, NodeJsonInteger) {
     std::unique_ptr<CHelper::CPack> cpack;
     try {
-#ifdef _WIN32
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)"));
-#else
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)"));
-#endif
+        std::filesystem::path projectDir(PROJECT_DIR);
+        cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     } catch (const std::exception &e) {
         CHelper::Exception::printStackTrace(e);
         CHelper::Profile::clear();
@@ -403,13 +377,8 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
 TEST(BinaryUtilTest, NodeJsonFloat) {
     std::unique_ptr<CHelper::CPack> cpack;
     try {
-#ifdef _WIN32
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)"));
-#else
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)"));
-#endif
+        std::filesystem::path projectDir(PROJECT_DIR);
+        cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     } catch (const std::exception &e) {
         CHelper::Exception::printStackTrace(e);
         CHelper::Profile::clear();
@@ -447,13 +416,8 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
 TEST(BinaryUtilTest, NodeJsonNull) {
     std::unique_ptr<CHelper::CPack> cpack;
     try {
-#ifdef _WIN32
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(D:\CLion\project\CHelper-Core\resources\beta\vanilla)"));
-#else
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)"));
-#endif
+        std::filesystem::path projectDir(PROJECT_DIR);
+        cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     } catch (const std::exception &e) {
         CHelper::Exception::printStackTrace(e);
         CHelper::Profile::clear();

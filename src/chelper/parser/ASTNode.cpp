@@ -15,7 +15,7 @@ namespace CHelper {
                      std::vector<ASTNode> &&childNodes,
                      TokensView tokens,
                      const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
-                     std::string id,
+                     ASTNodeId::ASTNodeId id,
                      bool canAddWhitespace,
                      size_t whichBest)
         : mode(mode),
@@ -23,7 +23,7 @@ namespace CHelper {
           childNodes(std::move(childNodes)),
           tokens(std::move(tokens)),
           errorReasons(errorReasons),
-          id(std::move(id)),
+          id(id),
           canAddWhitespace(canAddWhitespace),
           whichBest(whichBest) {}
 
@@ -87,7 +87,7 @@ namespace CHelper {
     nlohmann::json ASTNode::toBestJson() const {
         if (HEDLEY_UNLIKELY(mode == ASTNodeMode::OR)) {
             return childNodes[whichBest].toBestJson();
-        } else if (HEDLEY_UNLIKELY(id == "compound" && childNodes.size() == 1)) {
+        } else if (HEDLEY_UNLIKELY(id == ASTNodeId::COMPOUND && childNodes.size() == 1)) {
             return childNodes[0].toBestJson();
         }
         nlohmann::json j;
@@ -149,7 +149,7 @@ namespace CHelper {
     ASTNode ASTNode::simpleNode(const Node::NodeBase *node,
                                 const TokensView &tokens,
                                 const std::shared_ptr<ErrorReason> &errorReason,
-                                const std::string &id,
+                                const ASTNodeId::ASTNodeId &id,
                                 bool canAddWhitespace) {
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
         if (HEDLEY_LIKELY(errorReason != nullptr)) {
@@ -162,7 +162,7 @@ namespace CHelper {
                              std::vector<ASTNode> &&childNodes,
                              const TokensView &tokens,
                              const std::shared_ptr<ErrorReason> &errorReason,
-                             const std::string &id,
+                             const ASTNodeId::ASTNodeId &id,
                              bool canAddWhitespace) {
         if (HEDLEY_LIKELY(canAddWhitespace)) {
             for (const auto &item: childNodes) {
@@ -186,7 +186,7 @@ namespace CHelper {
                             std::vector<ASTNode> &&childNodes,
                             const TokensView *tokens,
                             const char *errorReason,
-                            const std::string &id,
+                            const ASTNodeId::ASTNodeId &id,
                             bool canAddWhitespace) {
         // 收集错误的节点数，如果有节点没有错就设为0
         size_t errorCount = 0;
@@ -259,7 +259,7 @@ namespace CHelper {
                             std::vector<ASTNode> &&childNodes,
                             const TokensView &tokens,
                             const char *errorReason,
-                            const std::string &id,
+                            const ASTNodeId::ASTNodeId &id,
                             bool canAddWhitespace) {
         return orNode(node, std::move(childNodes), &tokens, errorReason, id, canAddWhitespace);
     }
@@ -275,7 +275,7 @@ namespace CHelper {
         if (HEDLEY_UNLIKELY(index < tokens.getStartIndex() || index > tokens.getEndIndex())) {
             return std::nullopt;
         }
-        if (HEDLEY_UNLIKELY(id != "compound" && id != "nextNode" && !isAllWhitespaceError())) {
+        if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
             auto description = node->collectDescription(this, index);
             if (HEDLEY_UNLIKELY(description.has_value())) {
                 return std::move(description);
@@ -300,7 +300,7 @@ namespace CHelper {
 
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (HEDLEY_UNLIKELY(id != "compound" && id != "nextNode" && !isAllWhitespaceError())) {
+        if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
 #if CHelperDebug == true
             Profile::push(std::string("collect id errors: ")
                                   .append(node->getNodeType()->nodeName)
@@ -333,7 +333,7 @@ namespace CHelper {
         if (HEDLEY_LIKELY(index < tokens.getStartIndex() || index > tokens.getEndIndex())) {
             return;
         }
-        if (HEDLEY_UNLIKELY(id != "compound" && id != "nextNode" && !isAllWhitespaceError())) {
+        if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
 #if CHelperDebug == true
             Profile::push("collect suggestions: " + node->getNodeType()->nodeName + " " + node->description.value_or(""));
 #endif
@@ -362,8 +362,8 @@ namespace CHelper {
     }
 
     void ASTNode::collectStructure(StructureBuilder &structure, bool isMustHave) const {
-        bool isCompound = id == "compound";
-        bool isNext = id == "nextNode";
+        bool isCompound = id == ASTNodeId::COMPOUND;
+        bool isNext = id == ASTNodeId::NEXT_NODE;
         if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
             if (HEDLEY_UNLIKELY(node->brief.has_value())) {
                 structure.append(isMustHave, node->brief.value());

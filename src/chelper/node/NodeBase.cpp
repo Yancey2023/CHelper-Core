@@ -26,7 +26,7 @@ namespace CHelper::Node {
         tokenReader.push();
         if (HEDLEY_UNLIKELY(isRequireWhitespace && getNodeType() != NodeType::LF.get() && tokenReader.skipWhitespace() == 0)) {
             TokensView tokens = tokenReader.collect();
-            return ASTNode::simpleNode(this, tokens, ErrorReason::requireWhiteSpace(tokens), "compound");
+            return ASTNode::simpleNode(this, tokens, ErrorReason::requireWhiteSpace(tokens), ASTNodeId::COMPOUND);
         }
         tokenReader.pop();
         tokenReader.push();
@@ -35,7 +35,7 @@ namespace CHelper::Node {
         ASTNode currentASTNode = getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(this)
         if (HEDLEY_UNLIKELY(currentASTNode.isError() || nextNodes.empty())) {
-            return ASTNode::andNode(this, {std::move(currentASTNode)}, tokenReader.collect(), nullptr, "compound");
+            return ASTNode::andNode(this, {std::move(currentASTNode)}, tokenReader.collect(), nullptr, ASTNodeId::COMPOUND);
         }
         //子节点
         std::vector<ASTNode> childASTNodes;
@@ -47,14 +47,14 @@ namespace CHelper::Node {
         }
         tokenReader.push();
         tokenReader.skipToLF();
-        ASTNode nextASTNode = ASTNode::orNode(this, std::move(childASTNodes), tokenReader.collect(), nullptr, "nextNode");
-        return ASTNode::andNode(this, {std::move(currentASTNode), std::move(nextASTNode)}, tokenReader.collect(), nullptr, "compound");
+        ASTNode nextASTNode = ASTNode::orNode(this, std::move(childASTNodes), tokenReader.collect(), nullptr, ASTNodeId::NEXT_NODE);
+        return ASTNode::andNode(this, {std::move(currentASTNode), std::move(nextASTNode)}, tokenReader.collect(), nullptr, ASTNodeId::COMPOUND);
     }
 
     ASTNode NodeBase::getByChildNode(TokenReader &tokenReader,
                                      const CPack *cpack,
                                      const NodeBase *childNode,
-                                     const std::string &astNodeId) const {
+                                     const ASTNodeId::ASTNodeId &astNodeId) const {
         ASTNode node = childNode->getASTNode(tokenReader, cpack);
         TokensView tokens = node.tokens;
         return ASTNode::andNode(this, {std::move(node)}, tokens, nullptr, astNodeId);
@@ -70,7 +70,7 @@ namespace CHelper::Node {
                                          const CPack *cpack,
                                          bool isIgnoreChildNodesError,
                                          const std::vector<const NodeBase *> &childNodes,
-                                         const std::string &astNodeId) const {
+                                         const ASTNodeId::ASTNodeId &astNodeId) const {
         tokenReader.push();
         std::vector<ASTNode> childASTNodes;
         for (const auto &item: childNodes) {

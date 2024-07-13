@@ -107,7 +107,7 @@ namespace CHelper {
     ASTNode TokenReader::readSimpleASTNode(const Node::NodeBase *node,
                                            TokenType::TokenType type,
                                            const std::string &requireType,
-                                           const std::string &astNodeId,
+                                           const ASTNodeId::ASTNodeId &astNodeId,
                                            std::shared_ptr<ErrorReason> (*check)(const std::string &str,
                                                                                  const TokensView &tokens)) {
         skipWhitespace();
@@ -129,12 +129,12 @@ namespace CHelper {
     }
 
     ASTNode TokenReader::readStringASTNode(const Node::NodeBase *node,
-                                           const std::string &astNodeId) {
+                                           const ASTNodeId::ASTNodeId &astNodeId) {
         return readSimpleASTNode(node, TokenType::STRING, "字符串类型", astNodeId);
     }
 
     ASTNode TokenReader::readIntegerASTNode(const Node::NodeBase *node,
-                                            const std::string &astNodeId) {
+                                            const ASTNodeId::ASTNodeId &astNodeId) {
         return readSimpleASTNode(
                 node, TokenType::NUMBER, "整数类型", astNodeId,
                 [](const std::string &str, const TokensView &tokens) -> std::shared_ptr<ErrorReason> {
@@ -149,7 +149,7 @@ namespace CHelper {
     }
 
     ASTNode TokenReader::readFloatASTNode(const Node::NodeBase *node,
-                                          const std::string &astNodeId) {
+                                          const ASTNodeId::ASTNodeId &astNodeId) {
         return readSimpleASTNode(
                 node, TokenType::NUMBER, "数字类型", astNodeId,
                 [](const std::string &str, const TokensView &tokens) -> std::shared_ptr<ErrorReason> {
@@ -168,12 +168,12 @@ namespace CHelper {
     }
 
     ASTNode TokenReader::readSymbolASTNode(const Node::NodeBase *node,
-                                           const std::string &astNodeId) {
+                                           const ASTNodeId::ASTNodeId &astNodeId) {
         return readSimpleASTNode(node, TokenType::SYMBOL, "符号类型", astNodeId);
     }
 
     ASTNode TokenReader::readUntilWhitespace(const Node::NodeBase *node,
-                                             const std::string &astNodeId) {
+                                             const ASTNodeId::ASTNodeId &astNodeId) {
         push();
         while (ready()) {
             TokenType::TokenType tokenType = peek()->type;
@@ -186,7 +186,7 @@ namespace CHelper {
     }
 
     ASTNode TokenReader::readStringOrNumberASTNode(const Node::NodeBase *node,
-                                                   const std::string &astNodeId) {
+                                                   const ASTNodeId::ASTNodeId &astNodeId) {
         push();
         while (ready()) {
             TokenType::TokenType tokenType = peek()->type;

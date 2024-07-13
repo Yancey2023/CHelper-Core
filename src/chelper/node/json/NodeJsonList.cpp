@@ -52,7 +52,7 @@ namespace CHelper::Node {
 
     ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         if (HEDLEY_UNLIKELY(nodeList == nullptr)) {
-            return getByChildNode(tokenReader, cpack, nodeAllList.get(), "node json all list");
+            return getByChildNode(tokenReader, cpack, nodeAllList.get(), ASTNodeId::NODE_JSON_ALL_LIST);
         }
         tokenReader.push();
         ASTNode result1 = nodeList->getASTNode(tokenReader, cpack);
@@ -62,7 +62,7 @@ namespace CHelper::Node {
         size_t index1 = tokenReader.index;
         tokenReader.restore();
         tokenReader.push();
-        ASTNode result2 = getByChildNode(tokenReader, cpack, nodeAllList.get(), "node json all list");
+        ASTNode result2 = getByChildNode(tokenReader, cpack, nodeAllList.get(), ASTNodeId::NODE_JSON_ALL_LIST);
         size_t index2 = tokenReader.index;
         tokenReader.restore();
         tokenReader.push();
@@ -73,7 +73,7 @@ namespace CHelper::Node {
     bool NodeJsonList::collectSuggestions(const ASTNode *astNode,
                                           size_t index,
                                           std::vector<Suggestions> &suggestions) const {
-        return astNode->id == "node json all list";
+        return astNode->id == ASTNodeId::NODE_JSON_ALL_LIST;
     }
 
     CODEC_NODE(NodeJsonList, data)

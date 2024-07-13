@@ -23,7 +23,7 @@ namespace CHelper::Node {
 
     ASTNode NodeBlock::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
-        ASTNode blockId = getByChildNode(tokenReader, cpack, nodeBlockId.get(), "blockId");
+        ASTNode blockId = getByChildNode(tokenReader, cpack, nodeBlockId.get(), ASTNodeId::NODE_BLOCK_BLOCK_ID);
         if (HEDLEY_UNLIKELY(nodeBlockType == NodeBlockType::BLOCK || blockId.isError())) {
             tokenReader.pop();
             return blockId;
@@ -33,7 +33,7 @@ namespace CHelper::Node {
         tokenReader.restore();
         if (HEDLEY_LIKELY(blockStateLeftBracket.isError())) {
             return ASTNode::andNode(this, {blockId}, tokenReader.collect(),
-                                    nullptr, "blockAndBlockState");
+                                    nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
         }
         std::string blockIdStr = blockId.tokens.toString();
         size_t strHash = std::hash<std::string>{}(blockIdStr);
@@ -45,15 +45,15 @@ namespace CHelper::Node {
             }
         }
         auto nodeBlockState = currentBlock == nullptr ? BlockId::getNodeAllBlockState() : std::static_pointer_cast<BlockId>(currentBlock)->getNode().get();
-        auto astNodeBlockState = getByChildNode(tokenReader, cpack, nodeBlockState, "blockState");
+        auto astNodeBlockState = getByChildNode(tokenReader, cpack, nodeBlockState, ASTNodeId::NODE_BLOCK_BLOCK_STATE);
         return ASTNode::andNode(this, {blockId, astNodeBlockState}, tokenReader.collect(),
-                                nullptr, "blockAndBlockState");
+                                nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
     }
 
     std::optional<std::string> NodeBlock::collectDescription(const ASTNode *node, size_t index) const {
-        if (HEDLEY_LIKELY(node->id == "blockId")) {
+        if (HEDLEY_LIKELY(node->id == ASTNodeId::NODE_BLOCK_BLOCK_ID)) {
             return "方块ID";
-        } else if (HEDLEY_LIKELY(node->id == "blockState")) {
+        } else if (HEDLEY_LIKELY(node->id == ASTNodeId::NODE_BLOCK_BLOCK_STATE)) {
             return "方块状态";
         } else {
             return std::nullopt;
@@ -63,7 +63,7 @@ namespace CHelper::Node {
     bool NodeBlock::collectSuggestions(const ASTNode *astNode,
                                        size_t index,
                                        std::vector<Suggestions> &suggestions) const {
-        if (HEDLEY_LIKELY(astNode->id == "blockAndBlockState" && !astNode->isError() &&
+        if (HEDLEY_LIKELY(astNode->id == ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE && !astNode->isError() &&
                           astNode->childNodes.size() == 1 && index == astNode->tokens.getEndIndex())) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, false, nodeBlockStateLeftBracket->normalId}));
         }

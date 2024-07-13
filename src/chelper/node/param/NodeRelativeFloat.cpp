@@ -33,7 +33,7 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(!canUseCaretNotation && result.first == 2)) {
             TokensView tokens = result.second.tokens;
-            return ASTNode::andNode(this, {std::move(result.second)}, tokens, ErrorReason::logicError(tokens, "不能使用局部坐标"), "relativeFloat");
+            return ASTNode::andNode(this, {std::move(result.second)}, tokens, ErrorReason::logicError(tokens, "不能使用局部坐标"));
         }
         return result.second;
     }

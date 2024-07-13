@@ -75,27 +75,27 @@ namespace CHelper {
         ASTNode readSimpleASTNode(const Node::NodeBase *node,
                                   TokenType::TokenType type,
                                   const std::string &requireType,
-                                  const std::string &astNodeId = "",
+                                  const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE,
                                   std::shared_ptr<ErrorReason> (*check)(const std::string &str,
                                                                         const TokensView &tokens) = nullptr);
 
         ASTNode readStringASTNode(const Node::NodeBase *node,
-                                  const std::string &astNodeId = "");
+                                  const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
         ASTNode readIntegerASTNode(const Node::NodeBase *node,
-                                   const std::string &astNodeId = "");
+                                   const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
         ASTNode readFloatASTNode(const Node::NodeBase *node,
-                                 const std::string &astNodeId = "");
+                                 const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
         ASTNode readSymbolASTNode(const Node::NodeBase *node,
-                                  const std::string &astNodeId = "");
+                                  const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
         ASTNode readUntilWhitespace(const Node::NodeBase *node,
-                                    const std::string &astNodeId = "");
+                                    const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
         ASTNode readStringOrNumberASTNode(const Node::NodeBase *node,
-                                          const std::string &astNodeId = "");
+                                          const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
     };
 
 }// namespace CHelper

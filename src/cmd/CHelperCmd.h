@@ -26,25 +26,25 @@ int main();
 
 namespace CHelper::Test {
 
-    [[maybe_unused]] void testDir(const std::string &cpackPath, const std::string &testFilePath, bool isTestTime);
+    [[maybe_unused]] void testDir(const std::filesystem::path &cpackPath, const std::filesystem::path &testFilePath, bool isTestTime);
 
-    [[maybe_unused]] void testBin(const std::string &cpackPath, const std::string &testFilePath, bool isTestTime);
+    [[maybe_unused]] void testBin(const std::filesystem::path &cpackPath, const std::filesystem::path &testFilePath, bool isTestTime);
 
-    [[maybe_unused]] void testDir(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime);
+    [[maybe_unused]] void testDir(const std::filesystem::path &cpackPath, const std::vector<std::string> &commands, bool isTestTime);
 
-    [[maybe_unused]] void testBin(const std::string &cpackPath, const std::vector<std::string> &commands, bool isTestTime);
+    [[maybe_unused]] void testBin(const std::filesystem::path &cpackPath, const std::vector<std::string> &commands, bool isTestTime);
 
     [[maybe_unused]] void test(Core *core, const std::vector<std::string> &commands, bool isTestTime);
 
-    [[maybe_unused]] void test2(const std::string &cpackPath, const std::vector<std::string> &commands, int times);
+    [[maybe_unused]] void test2(const std::filesystem::path &cpackPath, const std::vector<std::string> &commands, int times);
 
-    [[maybe_unused]] void writeDirectory(const std::string &input, const std::string &output);
+    [[maybe_unused]] void writeDirectory(const std::filesystem::path &input, const std::filesystem::path &output);
 
-    [[maybe_unused]] void writeSingleJson(const std::string &input, const std::string &output);
+    [[maybe_unused]] void writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output);
 
-    [[maybe_unused]] void writeBson(const std::string &input, const std::string &output);
+    [[maybe_unused]] void writeBson(const std::filesystem::path &input, const std::filesystem::path &output);
 
-    [[maybe_unused]] void writeBinary(const std::string &input, const std::string &output);
+    [[maybe_unused]] void writeBinary(const std::filesystem::path &input, const std::filesystem::path &output);
 
 }// namespace CHelper::Test
 
