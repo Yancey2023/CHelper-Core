@@ -33,7 +33,7 @@ namespace CHelper {
 
         void reset();
 
-        [[nodiscard]] std::string collect() const;
+        [[nodiscard]] std::string_view collect() const;
     };
 
 }// namespace CHelper

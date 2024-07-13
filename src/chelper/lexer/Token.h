@@ -33,9 +33,9 @@ namespace CHelper {
     public:
         const TokenType::TokenType type;
         const LexerPos pos;
-        const std::string content;
+        const std::string_view content;
 
-        Token(TokenType::TokenType type, LexerPos pos, std::string content);
+        Token(TokenType::TokenType type, LexerPos pos, const std::string_view &content);
 
         [[nodiscard]] size_t getStartIndex() const;
 
@@ -44,8 +44,10 @@ namespace CHelper {
 
 }// namespace CHelper
 
+#if CHelperTest == true
 std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType);
 
 std::ostream &operator<<(std::ostream &os, const CHelper::Token &token);
+#endif
 
 #endif//CHELPER_TOKEN_H

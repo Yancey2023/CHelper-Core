@@ -61,11 +61,9 @@ namespace CHelper::Lexer {
     }
 
     Token nextTokenSymbol(StringReader &stringReader) {
-        std::string str = std::string();
-        str.push_back(stringReader.peek());
-        Token result = {TokenType::SYMBOL, stringReader.pos, std::move(str)};
+        stringReader.mark();
         stringReader.skip();
-        return std::move(result);
+        return {TokenType::SYMBOL, stringReader.posBackup, stringReader.collect()};
     }
 
     Token nextTokenString(StringReader &stringReader) {
@@ -101,19 +99,15 @@ namespace CHelper::Lexer {
     }
 
     Token nextTokenWhiteSpace(StringReader &stringReader) {
-        std::string str = std::string();
-        str.push_back(stringReader.peek());
-        Token result = {TokenType::WHITE_SPACE, stringReader.pos, std::move(str)};
+        stringReader.mark();
         stringReader.skip();
-        return std::move(result);
+        return {TokenType::WHITE_SPACE, stringReader.posBackup, stringReader.collect()};
     }
 
     Token nextTokenLF(StringReader &stringReader) {
-        std::string str = std::string();
-        str.push_back(stringReader.peek());
-        Token result = {TokenType::LF, stringReader.pos, std::move(str)};
+        stringReader.mark();
         stringReader.skip();
-        return std::move(result);
+        return {TokenType::LF, stringReader.posBackup, stringReader.collect()};
     }
 
     LexerResult lex(const std::string &content) {

@@ -28,7 +28,7 @@ namespace CHelper::Node {
     ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         ASTNode itemId = nodeItemId->getASTNode(tokenReader, cpack);
-        size_t strHash = std::hash<std::string>{}(itemId.tokens.toString());
+        size_t strHash = std::hash<std::string_view>{}(itemId.tokens.toString());
         std::shared_ptr<NamespaceId> currentItem = nullptr;
         for (const auto &item: *itemIds) {
             if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash))) {

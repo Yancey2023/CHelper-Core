@@ -25,7 +25,7 @@ namespace CHelper::Node {
         TokensView tokens = tokenReader.collect();
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_UNLIKELY(tokens.hasValue())) {
-            errorReason = ErrorReason::excess(tokens, "命令后面有多余部分 -> " + tokens.toString());
+            errorReason = ErrorReason::excess(tokens, "命令后面有多余部分 -> " + std::string(tokens.toString()));
         }
         return ASTNode::simpleNode(this, tokens, errorReason);
     }

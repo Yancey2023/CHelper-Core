@@ -73,19 +73,19 @@ int main() {
     std::filesystem::path projectDir(PROJECT_DIR);
     // release
     CHelper::Test::writeBinary(projectDir / "resources" / "release" / "vanilla",
-                             projectDir / "run" / "release-vanilla-1.21.1.03.cpack");
+                               projectDir / "run" / "release-vanilla-1.21.1.03.cpack");
     CHelper::Test::writeBinary(projectDir / "resources" / "release" / "experiment",
-                             projectDir / "run" / "release-experiment-1.21.1.03.cpack");
+                               projectDir / "run" / "release-experiment-1.21.1.03.cpack");
     // beta
     CHelper::Test::writeBinary(projectDir / "resources" / "beta" / "vanilla",
-                             projectDir / "run" / "beta-vanilla-1.21.20.21.cpack");
+                               projectDir / "run" / "beta-vanilla-1.21.20.21.cpack");
     CHelper::Test::writeBinary(projectDir / "resources" / "beta" / "experiment",
-                             projectDir / "run" / "beta-experiment-1.21.20.21.cpack");
+                               projectDir / "run" / "beta-experiment-1.21.20.21.cpack");
     // netease
     CHelper::Test::writeBinary(projectDir / "resources" / "netease" / "vanilla",
-                             projectDir / "run" / "netease-vanilla-1.20.10.25.cpack");
+                               projectDir / "run" / "netease-vanilla-1.20.10.25.cpack");
     CHelper::Test::writeBinary(projectDir / "resources" / "netease" / "experiment",
-                             projectDir / "run" / "netease-experiment-1.20.10.25.cpack");
+                               projectDir / "run" / "netease-experiment-1.20.10.25.cpack");
 }
 
 namespace CHelper::Test {

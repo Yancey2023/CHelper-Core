@@ -209,7 +209,7 @@ Java_yancey_chelper_core_CHelperCore_old2newInit0(
     try {
         blockFixData0 = nlohmann::json::parse(jstring2string(env, blockFixData));
         return true;
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         return false;
     }
 }

@@ -3,10 +3,10 @@
 //
 
 #include "CHelperWindows.h"
-#include <commctrl.h>
 #include "../chelper/Core.h"
 #include "../chelper/parser/Parser.h"
 #include "param_deliver.h"
+#include <commctrl.h>
 
 static size_t ID_INPUT = 1;
 static size_t ID_DESCRIPTION = 2;

@@ -39,7 +39,7 @@ namespace CHelper::Node {
             return ASTNode::andNode(this, {std::move(commandName)}, tokens,
                                     ErrorReason::contentError(tokens, "命令名字为空"), ASTNodeId::NODE_COMMAND_COMMAND);
         }
-        std::string str = commandName.tokens.toString();
+        std::string_view str = commandName.tokens.toString();
         const NodePerCommand *currentCommand = nullptr;
         if (HEDLEY_LIKELY(!commandName.isError())) {
             bool isBreak = false;
@@ -80,8 +80,8 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->id != ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
             return false;
         }
-        std::string str = astNode->tokens.toString()
-                                  .substr(0, index - astNode->tokens.getStartIndex());
+        std::string_view str = astNode->tokens.toString()
+                                       .substr(0, index - astNode->tokens.getStartIndex());
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *commands) {
             //通过名字进行搜索
@@ -139,7 +139,7 @@ namespace CHelper::Node {
             structure.append(isMustHave, "命令");
             return;
         } else if (HEDLEY_LIKELY(astNode->id == ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
-            structure.appendWhiteSpace().append(astNode->tokens.toString());
+            structure.appendWhiteSpace().append(std::string(astNode->tokens.toString()));
         }
     }
 

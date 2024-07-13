@@ -31,10 +31,10 @@ namespace CHelper {
 
     Token::Token(TokenType::TokenType type,
                  CHelper::LexerPos pos,
-                 std::string content)
+                 const std::string_view &content)
         : type(type),
           pos(pos),
-          content(std::move(content)) {}
+          content(content) {}
 
     size_t Token::getStartIndex() const {
         return pos.index;
@@ -46,6 +46,7 @@ namespace CHelper {
 
 }// namespace CHelper
 
+#if CHelperTest == true
 std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType) {
     switch (tokenType) {
         case CHelper::TokenType::NUMBER:
@@ -75,3 +76,4 @@ std::ostream &operator<<(std::ostream &os, const CHelper::Token &token) {
               << ' '
               << token.content;
 }
+#endif

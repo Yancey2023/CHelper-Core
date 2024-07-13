@@ -149,12 +149,12 @@ namespace CHelper::Old2New {
 
     std::string blockOld2New(const nlohmann::json &blockFixData, const TokensView &blockIdToken, const TokensView &dataValueToken) {
         // get block id
-        std::string blockId = blockIdToken.toString();
+        std::string blockId = std::string(blockIdToken.toString());
         // get block data value
         char *end;
-        std::string dataValueStr = dataValueToken.toString();
+        std::string dataValueStr = std::string(dataValueToken.toString());
         std::intmax_t dataValue = std::strtoimax(dataValueStr.c_str(), &end, 10);
-        if (HEDLEY_UNLIKELY(end == blockId.c_str() || *end != '\0' ||
+        if (HEDLEY_UNLIKELY(end == dataValueStr.c_str() || *end != '\0' ||
                             dataValue == HUGE_VALF || dataValue == -HUGE_VALF ||
                             dataValue < 0)) {
             // if it is not an integer or in range, return block id directly
@@ -225,7 +225,7 @@ namespace CHelper::Old2New {
         if (depth > 0) {
             dataFixList.emplace_back(tokens1, "");
         }
-        std::string targetSelector = tokens2.toString();
+        std::string targetSelector = std::string(tokens2.toString());
         if (trip(targetSelector) != "@s") {
             dataFixList.emplace_back(tokens2, " as" + targetSelector + " at @s");
         } else {
@@ -238,7 +238,7 @@ namespace CHelper::Old2New {
             }
         });
         if (isHavePosition) {
-            dataFixList.emplace_back(tokens3, " positioned" + tokens3.toString());
+            dataFixList.emplace_back(tokens3, " positioned" + std::string(tokens3.toString()));
         } else {
             dataFixList.emplace_back(tokens3, "");
         }

@@ -35,8 +35,7 @@ namespace CHelper::Node {
             return ASTNode::andNode(this, {blockId}, tokenReader.collect(),
                                     nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
         }
-        std::string blockIdStr = blockId.tokens.toString();
-        size_t strHash = std::hash<std::string>{}(blockIdStr);
+        size_t strHash = std::hash<std::string_view>{}(blockId.tokens.toString());
         std::shared_ptr<NamespaceId> currentBlock = nullptr;
         for (const auto &item: *blockIds) {
             if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash))) {

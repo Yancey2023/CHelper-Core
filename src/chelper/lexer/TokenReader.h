@@ -76,7 +76,7 @@ namespace CHelper {
                                   TokenType::TokenType type,
                                   const std::string &requireType,
                                   const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE,
-                                  std::shared_ptr<ErrorReason> (*check)(const std::string &str,
+                                  std::shared_ptr<ErrorReason> (*check)(const std::string_view &str,
                                                                         const TokensView &tokens) = nullptr);
 
         ASTNode readStringASTNode(const Node::NodeBase *node,

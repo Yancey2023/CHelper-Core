@@ -97,12 +97,12 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(!ignoreError.value_or(true))) {
             TokensView tokens = result.tokens;
-            std::string str = tokens.toString();
-            size_t strHash = std::hash<std::string>{}(str);
+            std::string_view str = tokens.toString();
+            size_t strHash = std::hash<std::string_view>{}(str);
             if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                     return !item->fastMatch(strHash);
                 }))) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "找不到含义 -> " + std::move(str)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "找不到含义 -> " + std::string(str)));
             }
         }
         return result;
@@ -113,8 +113,8 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->isError())) {
             return true;
         }
-        std::string str = astNode->tokens.toString();
-        size_t strHash = std::hash<std::string>{}(str);
+        std::string_view str = astNode->tokens.toString();
+        size_t strHash = std::hash<std::string_view>{}(str);
         if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                 return !item->fastMatch(strHash);
             }))) {
@@ -126,8 +126,8 @@ namespace CHelper::Node {
     bool NodeNormalId::collectSuggestions(const ASTNode *astNode,
                                           size_t index,
                                           std::vector<Suggestions> &suggestions) const {
-        std::string str = astNode->tokens.toString()
-                                  .substr(0, index - astNode->tokens.getStartIndex());
+        std::string_view str = astNode->tokens.toString()
+                                       .substr(0, index - astNode->tokens.getStartIndex());
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *customContents) {
             //通过名字进行搜索

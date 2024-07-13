@@ -30,13 +30,13 @@ namespace CHelper::Node {
         DEBUG_GET_NODE_BEGIN(this)
         auto result = getTextASTNode(this, tokenReader);
         DEBUG_GET_NODE_END(this)
-        std::string str = result.tokens.toString();
+        std::string_view str = result.tokens.toString();
         if (HEDLEY_UNLIKELY(str != data->name)) {
             TokensView tokens = result.tokens;
             if (HEDLEY_UNLIKELY(str.empty())) {
                 return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, "命令不完整"));
             } else {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, "找不到含义 -> " + std::move(str)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, "找不到含义 -> " + std::string(str)));
             }
         }
         return result;
@@ -45,8 +45,8 @@ namespace CHelper::Node {
     bool NodeText::collectSuggestions(const ASTNode *astNode,
                                       size_t index,
                                       std::vector<Suggestions> &suggestions) const {
-        std::string str = astNode->tokens.toString()
-                                  .substr(0, index - astNode->tokens.getStartIndex());
+        std::string_view str = astNode->tokens.toString()
+                                       .substr(0, index - astNode->tokens.getStartIndex());
         //通过名字进行搜索
         size_t index1 = data->name.find(str);
         if (HEDLEY_LIKELY(index1 != std::string::npos)) {

@@ -108,7 +108,7 @@ namespace CHelper {
                                            TokenType::TokenType type,
                                            const std::string &requireType,
                                            const ASTNodeId::ASTNodeId &astNodeId,
-                                           std::shared_ptr<ErrorReason> (*check)(const std::string &str,
+                                           std::shared_ptr<ErrorReason> (*check)(const std::string_view &str,
                                                                                  const TokensView &tokens)) {
         skipWhitespace();
         push();
@@ -137,7 +137,7 @@ namespace CHelper {
                                             const ASTNodeId::ASTNodeId &astNodeId) {
         return readSimpleASTNode(
                 node, TokenType::NUMBER, "整数类型", astNodeId,
-                [](const std::string &str, const TokensView &tokens) -> std::shared_ptr<ErrorReason> {
+                [](const std::string_view &str, const TokensView &tokens) -> std::shared_ptr<ErrorReason> {
                     for (const auto &ch: str) {
                         if (HEDLEY_UNLIKELY(ch == '.')) {
                             return ErrorReason::contentError(
@@ -152,7 +152,7 @@ namespace CHelper {
                                           const ASTNodeId::ASTNodeId &astNodeId) {
         return readSimpleASTNode(
                 node, TokenType::NUMBER, "数字类型", astNodeId,
-                [](const std::string &str, const TokensView &tokens) -> std::shared_ptr<ErrorReason> {
+                [](const std::string_view &str, const TokensView &tokens) -> std::shared_ptr<ErrorReason> {
                     bool isHavePoint = false;
                     for (const auto &ch: str) {
                         if (HEDLEY_LIKELY(ch != '.')) {

@@ -35,7 +35,7 @@ namespace CHelper::Node {
                 return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::typeError(symbolNode.tokens, FormatUtil::format("类型不匹配，需要符号{0}，但当前内容为{1}", symbol, symbolNode.tokens.toString())));
             }
         }
-        std::string str = symbolNode.tokens.toString();
+        std::string_view str = symbolNode.tokens.toString();
         if (HEDLEY_LIKELY(str.length() == 1 && str[0] == symbol)) {
             return symbolNode;
         }

@@ -51,11 +51,11 @@ namespace CHelper::Node {
             }
             return result;
         }
-        std::string str = result.tokens.toString();
+        std::string_view str = result.tokens.toString();
         if (HEDLEY_LIKELY((str.empty() || str[0] != '"'))) {
             return result;
         }
-        auto convertResult = JsonUtil::jsonString2String(str);
+        auto convertResult = JsonUtil::jsonString2String(std::string(str));
         size_t offset = result.tokens.getStartIndex();
         if (HEDLEY_UNLIKELY(convertResult.errorReason != nullptr)) {
             convertResult.errorReason->start += offset;
@@ -63,7 +63,7 @@ namespace CHelper::Node {
             return ASTNode::simpleNode(this, result.tokens, convertResult.errorReason);
         }
         if (HEDLEY_UNLIKELY(!convertResult.isComplete)) {
-            return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, "字符串参数内容双引号不封闭 -> " + str));
+            return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, "字符串参数内容双引号不封闭 -> " + std::string(str)));
         }
         return result;
     }
@@ -74,8 +74,8 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(ignoreLater || !canContainSpace)) {
             return true;
         }
-        std::string str = astNode->tokens.toString()
-                                  .substr(0, index - astNode->tokens.getStartIndex());
+        std::string_view str = astNode->tokens.toString()
+                                       .substr(0, index - astNode->tokens.getStartIndex());
         if (HEDLEY_UNLIKELY(str.empty())) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
             return true;
@@ -83,7 +83,7 @@ namespace CHelper::Node {
         if (HEDLEY_LIKELY(str[0] != '"')) {
             return true;
         }
-        auto convertResult = JsonUtil::jsonString2String(str);
+        auto convertResult = JsonUtil::jsonString2String(std::string(str));
         if (HEDLEY_LIKELY(!convertResult.isComplete)) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
         }

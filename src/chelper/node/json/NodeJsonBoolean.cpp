@@ -20,19 +20,19 @@ namespace CHelper::Node {
 
     ASTNode NodeJsonBoolean::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         ASTNode astNode = tokenReader.readStringASTNode(this);
-        std::string str = astNode.tokens.toString();
+        std::string_view str = astNode.tokens.toString();
         if (HEDLEY_UNLIKELY(str == "true" || str == "false")) {
             return astNode;
         }
         TokensView tokens = astNode.tokens;
-        return ASTNode::andNode(this, {std::move(astNode)}, tokens, ErrorReason::contentError(tokens, "内容不匹配，应该为布尔值，但当前内容为" + str));
+        return ASTNode::andNode(this, {std::move(astNode)}, tokens, ErrorReason::contentError(tokens, "内容不匹配，应该为布尔值，但当前内容为" + std::string(str)));
     }
 
     bool NodeJsonBoolean::collectSuggestions(const ASTNode *astNode,
                                              size_t index,
                                              std::vector<Suggestions> &suggestions) const {
-        std::string str = astNode->tokens.toString()
-                                  .substr(0, index - astNode->tokens.getStartIndex());
+        std::string_view str = astNode->tokens.toString()
+                                       .substr(0, index - astNode->tokens.getStartIndex());
         Suggestions suggestions1;
         if (HEDLEY_UNLIKELY(std::string("true").find(str) != std::string::npos)) {
             std::shared_ptr<NormalId> id;

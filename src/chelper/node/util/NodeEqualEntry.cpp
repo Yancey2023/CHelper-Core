@@ -67,7 +67,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNodeKey.isError())) {
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
-        std::string key = astNodeKey.tokens.toString();
+        std::string_view key = astNodeKey.tokens.toString();
         auto it = std::find_if(equalDatas.begin(), equalDatas.end(), [&key](const auto &t) {
             return t.name == key;
         });

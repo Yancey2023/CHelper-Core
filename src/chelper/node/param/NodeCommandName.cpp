@@ -24,7 +24,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->isError())) {
             return true;
         }
-        std::string str = astNode->tokens.toString();
+        std::string_view str = astNode->tokens.toString();
         for (const auto &command: *commands) {
             for (const auto &name: ((NodePerCommand *) command.get())->name) {
                 if (HEDLEY_UNLIKELY(str == name)) {
@@ -39,8 +39,8 @@ namespace CHelper::Node {
     bool NodeCommandName::collectSuggestions(const ASTNode *astNode,
                                              size_t index,
                                              std::vector<Suggestions> &suggestions) const {
-        std::string str = astNode->tokens.toString()
-                                  .substr(0, index - astNode->tokens.getStartIndex());
+        std::string_view str = astNode->tokens.toString()
+                                       .substr(0, index - astNode->tokens.getStartIndex());
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *commands) {
             bool flag = false;

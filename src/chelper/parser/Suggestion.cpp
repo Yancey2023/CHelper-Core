@@ -27,13 +27,11 @@ namespace CHelper {
           content(content),
           mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
 
-    std::string Suggestion::apply(Core *core, const std::string &before) const {
+    std::string Suggestion::apply(Core *core, const std::string_view &before) const {
         if (content->name == " " && (start == 0 || before[start - 1] == ' ')) {
-            return before;
+            return std::string(before);
         }
-        std::string result = before.substr(0, start)
-                                     .append(content->name)
-                                     .append(before.substr(end));
+        std::string result = std::string().append(before.substr(0, start)).append(content->name).append(before.substr(end));
         if (HEDLEY_UNLIKELY(end != before.length())) {
             return std::move(result);
         }

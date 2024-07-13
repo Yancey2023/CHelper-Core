@@ -57,12 +57,12 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(!ignoreError.value_or(false))) {
             TokensView tokens = result.tokens;
-            std::string str = tokens.toString();
-            size_t strHash = std::hash<std::string>{}(str);
+            std::string_view str = tokens.toString();
+            size_t strHash = std::hash<std::string_view>{}(str);
             if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                     return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
                 }))) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "找不到含义 -> " + std::move(str)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "找不到含义 -> " + std::string(str)));
             }
         }
         return result;
@@ -73,8 +73,8 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->isError())) {
             return true;
         }
-        std::string str = astNode->tokens.toString();
-        size_t strHash = std::hash<std::string>{}(str);
+        std::string_view str = astNode->tokens.toString();
+        size_t strHash = std::hash<std::string_view>{}(str);
         if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                 return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
             }))) {
@@ -86,8 +86,8 @@ namespace CHelper::Node {
     bool NodeNamespaceId::collectSuggestions(const ASTNode *astNode,
                                              size_t index,
                                              std::vector<Suggestions> &suggestions) const {
-        std::string str = astNode->tokens.toString()
-                                  .substr(0, index - astNode->tokens.getStartIndex());
+        std::string_view str = astNode->tokens.toString()
+                                       .substr(0, index - astNode->tokens.getStartIndex());
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain;
         std::vector<std::shared_ptr<NormalId>> namespaceStartOf, namespaceContain;
         std::vector<std::shared_ptr<NamespaceId>> descriptionContain;

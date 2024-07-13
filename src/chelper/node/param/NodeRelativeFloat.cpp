@@ -86,7 +86,7 @@ namespace CHelper::Node {
     }
 
     bool NodeRelativeFloat::collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestions> &suggestions) const {
-        std::string str = astNode->tokens.toString();
+        std::string_view str = astNode->tokens.toString();
         size_t startIndex = astNode->tokens.getStartIndex();
         for (int i = 0; i < str.length(); ++i) {
             if (HEDLEY_UNLIKELY(startIndex + i == index)) {

@@ -32,7 +32,7 @@ namespace CHelper::Node {
 
     ASTNode NodeRange::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         ASTNode result = tokenReader.readStringASTNode(this);
-        std::string str = result.tokens.toString();
+        std::string_view str = result.tokens.toString();
         std::shared_ptr<ErrorReason> errorReason;
         size_t index = str.find("..");
         if (HEDLEY_LIKELY(index == std::string::npos)) {
@@ -51,7 +51,7 @@ namespace CHelper::Node {
     bool NodeRange::collectSuggestions(const ASTNode *astNode,
                                        size_t index,
                                        std::vector<Suggestions> &suggestions) const {
-        std::string str = astNode->tokens.toString();
+        std::string_view str = astNode->tokens.toString();
         size_t index0 = str.find("..");
         if (HEDLEY_UNLIKELY(index0 != std::string::npos)) {
             index0 += astNode->tokens.getStartIndex();

@@ -10,9 +10,9 @@ namespace CHelper {
         : lexerResult(lexerResult),
           start(start),
           end(end) {
-        forEach([this](const CHelper::Token &token) {
-            cacheString.append(token.content);
-        });
+        startIndex = getIndex(start);
+        endIndex = getIndex(end);
+        cacheString = {lexerResult->content.c_str() + startIndex, endIndex - startIndex};
 #if CHelperDebug == true
         if (HEDLEY_UNLIKELY(start > end)) {
             throw Exception::WrongRange(start, end);
@@ -58,14 +58,14 @@ namespace CHelper {
     }
 
     [[nodiscard]] size_t TokensView::getStartIndex() const {
-        return getIndex(start);
+        return startIndex;
     }
 
     [[nodiscard]] size_t TokensView::getEndIndex() const {
-        return getIndex(end);
+        return endIndex;
     }
 
-    [[nodiscard]] std::string TokensView::toString() const {
+    [[nodiscard]] std::string_view TokensView::toString() const {
         return cacheString;
     }
 

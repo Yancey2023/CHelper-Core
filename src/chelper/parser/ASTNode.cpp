@@ -421,7 +421,7 @@ namespace CHelper {
     }
 
     std::string ASTNode::getDescription(size_t index) const {
-        Profile::push("start getting description: " + tokens.toString());
+        Profile::push("start getting description: " + std::string(tokens.toString()));
         auto result = collectDescription(index).value_or("未知");
         Profile::pop();
         return std::move(result);
@@ -446,7 +446,7 @@ namespace CHelper {
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getIdErrors() const {
         std::vector<std::shared_ptr<ErrorReason>> input;
-        Profile::push("start getting id error: " + tokens.toString());
+        Profile::push("start getting id error: " + std::string(tokens.toString()));
         collectIdErrors(input);
         Profile::pop();
         return sortByLevel(input);
@@ -454,7 +454,7 @@ namespace CHelper {
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
         std::vector<std::shared_ptr<ErrorReason>> result = errorReasons;
-        Profile::push("start getting error reasons: " + tokens.toString());
+        Profile::push("start getting error reasons: " + std::string(tokens.toString()));
         collectIdErrors(result);
         Profile::pop();
         return sortByLevel(result);
@@ -482,8 +482,8 @@ namespace CHelper {
     }
 
     std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
-        std::string str = tokens.toString();
-        Profile::push("start getting suggestions: " + str);
+        std::string_view str = tokens.toString();
+        Profile::push("start getting suggestions: " + std::string(str));
         std::vector<Suggestions> suggestions;
         if (HEDLEY_UNLIKELY(index == str.length() && (canAddWhitespace && isAllWhitespaceError()) || (!isError() && canAddWhitespace0(*this)))) {
             suggestions.push_back(Suggestions::singleSuggestion({str.length(), str.length(), false, whitespaceId}));
@@ -494,7 +494,7 @@ namespace CHelper {
     }
 
     std::string ASTNode::getStructure() const {
-        Profile::push("start getting structure: " + tokens.toString());
+        Profile::push("start getting structure: " + std::string(tokens.toString()));
         StructureBuilder structureBuilder;
         collectStructure(structureBuilder, true);
         Profile::pop();
@@ -507,7 +507,7 @@ namespace CHelper {
 
     std::string ASTNode::getColors() const {
         //TODO 命令语法高亮显示，获取颜色
-        Profile::push("start getting colors: " + tokens.toString());
+        Profile::push("start getting colors: " + std::string(tokens.toString()));
         auto result = node->getNodeType()->nodeName;
         Profile::pop();
         return result;

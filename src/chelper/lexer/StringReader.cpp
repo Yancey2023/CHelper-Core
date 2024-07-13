@@ -55,8 +55,8 @@ namespace CHelper {
         pos.index = posBackup.index;
     }
 
-    std::string CHelper::StringReader::collect() const {
-        return {content, posBackup.index, pos.index - posBackup.index};
+    std::string_view CHelper::StringReader::collect() const {
+        return {content.c_str() + posBackup.index, pos.index - posBackup.index};
     }
 
 }// namespace CHelper
