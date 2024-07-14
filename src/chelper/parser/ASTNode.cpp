@@ -16,7 +16,6 @@ namespace CHelper {
                      TokensView tokens,
                      const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
                      ASTNodeId::ASTNodeId id,
-                     bool canAddWhitespace,
                      size_t whichBest)
         : mode(mode),
           node(node),
@@ -24,18 +23,13 @@ namespace CHelper {
           tokens(std::move(tokens)),
           errorReasons(errorReasons),
           id(id),
-          canAddWhitespace(canAddWhitespace),
           whichBest(whichBest) {}
 
 #if CHelperTest == true
     nlohmann::json ASTNode::toJson() const {
         nlohmann::json j;
         j["isError"] = isError();
-        if (HEDLEY_LIKELY(id.empty())) {
-            j["astNodeId"] = nullptr;
-        } else {
-            j["astNodeId"] = id;
-        }
+        j["astNodeId"] = id;
         std::string astNodeModeStr;
         switch (mode) {
             case CHelper::ASTNodeMode::NONE:
@@ -55,8 +49,7 @@ namespace CHelper {
         j["nodeType"] = node->getNodeType()->nodeName;
         j["nodeDescription"] = node->description.value_or("unknown");
         j["content"] = tokens.toString();
-        j["canAddWhitespace"] = canAddWhitespace;
-        std::string content = TokensView(tokens.allTokens, 0, tokens.allTokens->size()).toString();
+        std::string content = tokens.lexerResult->content;
         if (HEDLEY_LIKELY(isError())) {
             std::vector<nlohmann::json> errorReasonJsonList;
             for (const auto &item: errorReasons) {
@@ -92,11 +85,7 @@ namespace CHelper {
         }
         nlohmann::json j;
         j["isError"] = isError();
-        if (HEDLEY_LIKELY(id.empty())) {
-            j["astNodeId"] = nullptr;
-        } else {
-            j["astNodeId"] = id;
-        }
+        j["astNodeId"] = id;
         std::string astNodeModeStr;
         switch (mode) {
             case CHelper::ASTNodeMode::NONE:
@@ -116,8 +105,7 @@ namespace CHelper {
         j["nodeType"] = node->getNodeType()->nodeName;
         j["nodeDescription"] = node->description.value_or("unknown");
         j["content"] = tokens.toString();
-        j["canAddWhitespace"] = canAddWhitespace;
-        std::string content = TokensView(tokens.allTokens, 0, tokens.allTokens->size()).toString();
+        std::string content = tokens.lexerResult->content;
         if (HEDLEY_LIKELY(isError())) {
             std::vector<nlohmann::json> errorReasonJsonList;
             for (const auto &item: errorReasons) {
@@ -149,45 +137,35 @@ namespace CHelper {
     ASTNode ASTNode::simpleNode(const Node::NodeBase *node,
                                 const TokensView &tokens,
                                 const std::shared_ptr<ErrorReason> &errorReason,
-                                const ASTNodeId::ASTNodeId &id,
-                                bool canAddWhitespace) {
+                                const ASTNodeId::ASTNodeId &id) {
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
         if (HEDLEY_LIKELY(errorReason != nullptr)) {
             errorReasons.push_back(errorReason);
         }
-        return {ASTNodeMode::NONE, node, {}, tokens, errorReasons, id, canAddWhitespace};
+        return {ASTNodeMode::NONE, node, {}, tokens, errorReasons, id};
     }
 
     ASTNode ASTNode::andNode(const Node::NodeBase *node,
                              std::vector<ASTNode> &&childNodes,
                              const TokensView &tokens,
                              const std::shared_ptr<ErrorReason> &errorReason,
-                             const ASTNodeId::ASTNodeId &id,
-                             bool canAddWhitespace) {
-        if (HEDLEY_LIKELY(canAddWhitespace)) {
-            for (const auto &item: childNodes) {
-                if (HEDLEY_LIKELY(item.tokens.size() != 0)) {
-                    canAddWhitespace = item.canAddWhitespace;
-                }
-            }
-        }
+                             const ASTNodeId::ASTNodeId &id) {
         if (HEDLEY_UNLIKELY(errorReason != nullptr)) {
-            return {ASTNodeMode::AND, node, std::move(childNodes), tokens, {errorReason}, id, canAddWhitespace};
+            return {ASTNodeMode::AND, node, std::move(childNodes), tokens, {errorReason}, id};
         }
         for (const auto &item: childNodes) {
             if (HEDLEY_UNLIKELY(item.isError())) {
-                return {ASTNodeMode::AND, node, std::move(childNodes), tokens, item.errorReasons, id, canAddWhitespace};
+                return {ASTNodeMode::AND, node, std::move(childNodes), tokens, item.errorReasons, id};
             }
         }
-        return {ASTNodeMode::AND, node, std::move(childNodes), tokens, {}, id, canAddWhitespace};
+        return {ASTNodeMode::AND, node, std::move(childNodes), tokens, {}, id};
     }
 
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             std::vector<ASTNode> &&childNodes,
                             const TokensView *tokens,
                             const char *errorReason,
-                            const ASTNodeId::ASTNodeId &id,
-                            bool canAddWhitespace) {
+                            const ASTNodeId::ASTNodeId &id) {
         // 收集错误的节点数，如果有节点没有错就设为0
         size_t errorCount = 0;
         for (const auto &item: childNodes) {
@@ -242,26 +220,19 @@ namespace CHelper {
                 }
             }
         }
-        if (HEDLEY_LIKELY(canAddWhitespace)) {
-            canAddWhitespace = std::all_of(childNodes.begin(), childNodes.end(),
-                                           [](const auto &item) {
-                                               return item.canAddWhitespace;
-                                           });
-        }
         TokensView tokens1 = tokens == nullptr ? childNodes[whichBest].tokens : *tokens;
         if (HEDLEY_UNLIKELY(errorCount > 1 && errorReason != nullptr)) {
             errorReasons = {ErrorReason::contentError(tokens1, errorReason)};
         }
-        return {ASTNodeMode::OR, node, std::move(childNodes), tokens1, errorReasons, id, canAddWhitespace, whichBest};
+        return {ASTNodeMode::OR, node, std::move(childNodes), tokens1, errorReasons, id, whichBest};
     }
 
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             std::vector<ASTNode> &&childNodes,
                             const TokensView &tokens,
                             const char *errorReason,
-                            const ASTNodeId::ASTNodeId &id,
-                            bool canAddWhitespace) {
-        return orNode(node, std::move(childNodes), &tokens, errorReason, id, canAddWhitespace);
+                            const ASTNodeId::ASTNodeId &id) {
+        return orNode(node, std::move(childNodes), &tokens, errorReason, id);
     }
 
     bool ASTNode::isAllWhitespaceError() const {
@@ -472,18 +443,21 @@ namespace CHelper {
         return sortByLevel(result);
     }
 
-    static bool canAddWhitespace0(const ASTNode &astNode) {
-        if (HEDLEY_UNLIKELY(astNode.canAddWhitespace && astNode.isAllWhitespaceError())) {
+    static bool canAddWhitespace0(const ASTNode &astNode, int index) {
+        if (std::any_of(astNode.errorReasons.begin(), astNode.errorReasons.end(),
+                        [&index](const auto &item) {
+                            return item->level == ErrorReasonLevel::REQUIRE_WHITE_SPACE && item->start >= index && item->end <= index;
+                        })) {
             return true;
         }
         switch (astNode.mode) {
             case ASTNodeMode::NONE:
                 return false;
             case ASTNodeMode::AND:
-                return !astNode.childNodes.empty() && canAddWhitespace0(astNode.childNodes[astNode.childNodes.size() - 1]);
+                return !astNode.childNodes.empty() && canAddWhitespace0(astNode.childNodes[astNode.childNodes.size() - 1], index);
             case ASTNodeMode::OR:
                 for (const auto &item: astNode.childNodes) {
-                    if (HEDLEY_UNLIKELY(canAddWhitespace0(item))) {
+                    if (HEDLEY_UNLIKELY(canAddWhitespace0(item, index))) {
                         return true;
                     }
                 }
@@ -499,7 +473,7 @@ namespace CHelper {
         Profile::push("start getting suggestions: " + std::string(str));
 #endif
         std::vector<Suggestions> suggestions;
-        if (HEDLEY_UNLIKELY(index == str.length() && (canAddWhitespace && isAllWhitespaceError()) || (!isError() && canAddWhitespace0(*this)))) {
+        if (HEDLEY_UNLIKELY(canAddWhitespace0(*this, index))) {
             suggestions.push_back(Suggestions::singleSuggestion({str.length(), str.length(), false, whitespaceId}));
         }
         collectSuggestions(index, suggestions);

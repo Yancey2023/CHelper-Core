@@ -174,8 +174,8 @@ namespace CHelper::Node {
         }
         for (const auto &item: NodeType::NODE_TYPES) {
             if (HEDLEY_UNLIKELY(item->nodeName == type)) {
-                Profile::pop();
                 item->decodeByJson(j, t);
+                Profile::pop();
                 return;
             }
         }

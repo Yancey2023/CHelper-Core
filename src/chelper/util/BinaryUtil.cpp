@@ -3,7 +3,6 @@
 //
 
 #include "BinaryUtil.h"
-#include "hedley.h"
 
 namespace CHelper {
 

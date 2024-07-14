@@ -7,6 +7,14 @@
 #ifndef CHELPER_BINARYUTIL_H
 #define CHELPER_BINARYUTIL_H
 
+#include <vector>
+#include <string>
+#include <memory>
+#include <unordered_map>
+#include <optional>
+#include <fstream>
+#include "hedley.h"
+
 namespace CHelper {
 
     class BinaryWriter {
