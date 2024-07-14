@@ -5,6 +5,7 @@
 #include "NodeJsonEntry.h"
 
 #include "../util/NodeEntry.h"
+#include "../util/NodeOr.h"
 #include "../util/NodeSingleSymbol.h"
 #include "NodeJsonElement.h"
 #include "NodeJsonString.h"
@@ -23,7 +24,7 @@ namespace CHelper::Node {
     NodeJsonEntry::NodeJsonEntry(const std::optional<std::string> &id,
                                  const std::optional<std::string> &description,
                                  std::string key,
-                                 std::string value)
+                                 std::vector<std::string> value)
         : NodeBase(id, description, false),
           key(std::move(key)),
           value(std::move(value)) {}
@@ -33,34 +34,45 @@ namespace CHelper::Node {
     }
 
     void NodeJsonEntry::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
-        for (const auto &item: dataList) {
-            if (HEDLEY_UNLIKELY(item->id == value)) {
-                nodeKey = std::make_unique<NodeText>(
-                        "JSON_OBJECT_ENTRY_KEY", "JSON对象键",
-                        NormalId::make('\"' + key + '\"', description));
-                nodeEntry = std::make_unique<NodeEntry>(
-                        "JSON_OBJECT_ENTRY", "JSON对象键值对",
-                        nodeKey.get(), nodeSeparator.get(), item.get());
-                return;
+        std::vector<const NodeBase *> valueNodes;
+        for (const auto &item: value) {
+            bool notFind = true;
+            for (const auto &item2: dataList) {
+                if (HEDLEY_UNLIKELY(item2->id == item)) {
+                    valueNodes.push_back(item2.get());
+                    notFind = false;
+                    break;
+                }
+            }
+            if (notFind) {
+                Profile::push(ColorStringBuilder()
+                                      .red("linking contents to ")
+                                      .purple(item)
+                                      .build());
+                Profile::push(ColorStringBuilder()
+                                      .red("failed to find node id")
+                                      .normal(" -> ")
+                                      .purple(item)
+                                      .build());
+                throw std::runtime_error(ColorStringBuilder()
+                                                 .red("unknown node id")
+                                                 .normal(" -> ")
+                                                 .purple(id.value_or("UNKNOWN"))
+                                                 .red(" (in node \"")
+                                                 .purple(item)
+                                                 .red("\")")
+                                                 .build());
             }
         }
-        Profile::push(ColorStringBuilder()
-                              .red("linking contents to ")
-                              .purple(value)
-                              .build());
-        Profile::push(ColorStringBuilder()
-                              .red("failed to find node id")
-                              .normal(" -> ")
-                              .purple(value)
-                              .build());
-        throw std::runtime_error(ColorStringBuilder()
-                                         .red("unknown node id")
-                                         .normal(" -> ")
-                                         .purple(id.value_or("UNKNOWN"))
-                                         .red(" (in node \"")
-                                         .purple(value)
-                                         .red("\")")
-                                         .build());
+        nodeKey = std::make_unique<NodeText>(
+                "JSON_OBJECT_ENTRY_KEY", "JSON对象键",
+                NormalId::make('\"' + key + '\"', description));
+        nodeValue = std::make_unique<NodeOr>(
+                "JSON_OBJECT_ENTRY_VALUE", "JSON对象值",
+                std::move(valueNodes), false);
+        nodeEntry = std::make_unique<NodeEntry>(
+                "JSON_OBJECT_ENTRY", "JSON对象键值对",
+                nodeKey.get(), nodeSeparator.get(), nodeValue.get());
     }
 
     ASTNode NodeJsonEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

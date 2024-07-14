@@ -19,7 +19,7 @@ int main() {
     std::filesystem::path projectDir(PROJECT_DIR);
     CHelper::Test::testDir(projectDir / "resources" / "beta" / "vanilla",
                            projectDir / "test" / "test.txt",
-                           false);
+                           true);
     //    CHelper::Test::testDir(projectDir / "resources" / "beta" / "vanilla",
     //                           std::vector<std::string>{"execute run clear "}, false);
 }
@@ -28,7 +28,7 @@ int main() {
     std::filesystem::path projectDir(PROJECT_DIR);
     CHelper::Test::testBin(projectDir / "run" / "beta-experiment-1.21.20.21.cpack",
                            projectDir / "test" / "test.txt",
-                           false);
+                           true);
 }
 
 [[maybe_unused]] void outputSingleJson() {
@@ -112,6 +112,7 @@ namespace CHelper::Test {
             commands.push_back(str);
         }
         fin.close();
+        //        CHelper::Test::testDir(cpackPath, commands, isTestTime);
         //        std::vector<std::string> commands1;
         //        for (const auto &item: commands) {
         //            for (size_t i = 0; i < item.size(); i++) {
@@ -119,10 +120,7 @@ namespace CHelper::Test {
         //            }
         //        }
         //        CHelper::Test::testDir(cpackPath, commands1, isTestTime);
-        CHelper::Test::testDir(cpackPath, commands, isTestTime);
-        //        CHelper::Test::test2(cpackPath, commands, 500);
-        //        CHelper::Test::test2(cpackPath, commands, 1);
-        //        CHelper::Test::test2(cpackPath, commands, 100);
+        //        CHelper::Test::test2(cpackPath, commands1, 10);
     }
 
     /**
@@ -147,17 +145,7 @@ namespace CHelper::Test {
             commands.push_back(str);
         }
         fin.close();
-        //        std::vector<std::string> commands1;
-        //        for (const auto &item: commands) {
-        //            for (size_t i = 0; i < item.size(); i++) {
-        //                commands1.push_back(item.substr(0, i + 1));
-        //            }
-        //        }
-        //        CHelper::Test::testDir(cpackPath, commands1, isTestTime);
         CHelper::Test::testBin(cpackPath, commands, isTestTime);
-        //        CHelper::Test::test2(cpackPath, commands, 500);
-        //        CHelper::Test::test2(cpackPath, commands, 1);
-        //        CHelper::Test::test2(cpackPath, commands, 100);
     }
 
     /**
@@ -338,6 +326,11 @@ namespace CHelper::Test {
                 }
             }
             end = std::chrono::high_resolution_clock::now();
+            std::cout << ColorStringBuilder()
+                                 .purple(std::to_string(commands.size()))
+                                 .green(" commands")
+                                 .build()
+                      << std::endl;
             std::cout << ColorStringBuilder()
                                  .green("parse successfully(")
                                  .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
