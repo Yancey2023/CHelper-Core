@@ -79,6 +79,7 @@ namespace CHelper::Node {
         return std::nullopt;
     }
 
+#if CHelperSupportJson == true
     void from_json(const nlohmann::json &j, std::unique_ptr<NodePerCommand> &t) {
         t = std::make_unique<NodePerCommand>();
         //name
@@ -242,6 +243,7 @@ namespace CHelper::Node {
         JsonUtil::encode(j, "ast", ast);
     }
 
+#endif
     void from_binary(BinaryReader &binaryReader, std::unique_ptr<NodePerCommand> &t) {
         t = std::make_unique<NodePerCommand>();
         //name
@@ -313,6 +315,7 @@ namespace CHelper::Node {
         }
     }
 
+#if CHelperWeb != true
     void to_binary(BinaryWriter &binaryWriter, const std::unique_ptr<NodePerCommand> &t) {
         //name
         binaryWriter.encode(t->name);
@@ -333,5 +336,6 @@ namespace CHelper::Node {
             }
         }
     }
+#endif
 
 }// namespace CHelper::Node

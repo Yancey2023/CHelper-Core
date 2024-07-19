@@ -4,6 +4,7 @@
 
 #include "Old2New.h"
 
+#if CHelperSupportJson == true
 
 namespace CHelper::Old2New {
 
@@ -631,3 +632,5 @@ namespace CHelper::Old2New {
     }
 
 }// namespace CHelper::Old2New
+
+#endif

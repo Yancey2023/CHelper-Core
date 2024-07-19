@@ -15,15 +15,19 @@ namespace CHelper {
 
     Core *Core::create(const std::function<std::unique_ptr<CPack>()> &getCPack) {
         try {
+#if CHelperWeb != true
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
+#endif
             std::unique_ptr<CPack> cPack = getCPack();
+#if CHelperWeb != true
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO(ColorStringBuilder()
                                  .green("CPack load successfully (")
                                  .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms")
                                  .green(")")
                                  .build());
+#endif
             ASTNode astNode = Parser::parse("", cPack.get());
             return new Core(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
@@ -33,6 +37,7 @@ namespace CHelper {
         }
     }
 
+#if CHelperSupportJson == true
     Core *Core::createByDirectory(const std::filesystem::path &cpackPath) {
         return create([&cpackPath]() {
             return CPack::createByDirectory(cpackPath);
@@ -50,7 +55,9 @@ namespace CHelper {
             return CPack::createByJson(JsonUtil::getBsonFromFile(cpackPath));
         });
     }
+#endif
 
+#if CHelperWeb != true
     Core *Core::createByBinary(const std::filesystem::path &cpackPath) {
         return create([&cpackPath]() {
             // 检查文件名后缀
@@ -80,6 +87,7 @@ namespace CHelper {
             return std::move(result);
         });
     }
+#endif
 
     void Core::onTextChanged(const std::string &content, size_t index0) {
         if (HEDLEY_LIKELY(input != content)) {
@@ -135,8 +143,10 @@ namespace CHelper {
         return suggestions->at(which).apply(this, astNode.tokens.toString());
     }
 
+#if CHelperWeb != true
     std::string Core::old2new(const nlohmann::json &blockFixData, const std::string &old) {
         return Old2New::old2new(blockFixData, old);
     }
+#endif
 
 }// namespace CHelper

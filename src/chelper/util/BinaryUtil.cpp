@@ -22,6 +22,7 @@ namespace CHelper {
         return isUsingSmallEndian != isTargetSmallEndian;
     }
 
+#if CHelperWeb != true
     BinaryWriter::BinaryWriter(bool isTargetSmallEndian,
                                std::ostream &ostream)
         : ostream(ostream) {
@@ -185,6 +186,7 @@ namespace CHelper {
             ostream.write(t.data(), static_cast<std::streamsize>(t.length()));
         }
     }
+#endif
 
     BinaryReader::BinaryReader(bool isTargetSmallEndian,
                                std::istream &istream)

@@ -31,16 +31,30 @@ namespace CHelper {
         public:
             uint8_t id{};
             std::string nodeName;
+
+#if CHelperSupportJson == true
             std::function<void(const nlohmann::json &j, std::unique_ptr<NodeBase> &t)> decodeByJson;
             std::function<void(nlohmann::json &j, const std::unique_ptr<NodeBase> &t)> encodeByJson;
+#endif
             std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary;
+#if CHelperWeb != true
             std::function<void(BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t)> encodeByBinary;
+#endif
 
+#if CHelperSupportJson == true
             NodeType(std::string nodeName,
                      std::function<void(const nlohmann::json &j, std::unique_ptr<NodeBase> &t)> decodeByJson,
                      std::function<void(nlohmann::json &j, const std::unique_ptr<NodeBase> &t)> encodeByJson,
                      std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary,
                      std::function<void(BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t)> encodeByBinary);
+#elif CHelperWeb != true
+            NodeType(std::string nodeName,
+                     std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary,
+                     std::function<void(BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t)> encodeByBinary);
+#else
+            NodeType(std::string nodeName,
+                     std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary);
+#endif
 
             static NodeCreateStage::NodeCreateStage currentCreateStage;
 

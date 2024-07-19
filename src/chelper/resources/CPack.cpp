@@ -10,6 +10,7 @@ namespace CHelper {
 
     CODEC(RepeatData, id, breakNodes, repeatNodes, isEnd)
 
+#if CHelperSupportJson == true
     CPack::CPack(const std::filesystem::path &path) {
 #if CHelperDebug == true
         size_t stackSize = Profile::stack.size();
@@ -105,6 +106,7 @@ namespace CHelper {
         }
 #endif
     }
+#endif
 
     CPack::CPack(BinaryReader &binaryReader) {
 #if CHelperDebug == true
@@ -148,6 +150,7 @@ namespace CHelper {
 #endif
     }
 
+#if CHelperSupportJson == true
     void CPack::applyId(const nlohmann::json &j) {
         auto type = JsonUtil::read<std::string>(j, "type");
         if (HEDLEY_LIKELY(type == "normal")) {
@@ -197,6 +200,7 @@ namespace CHelper {
         commands->push_back(j);
     }
 
+#endif
     void CPack::afterApply() {
         // json nodes
         Profile::push(ColorStringBuilder().red("init json nodes").build());
@@ -268,6 +272,7 @@ namespace CHelper {
         Profile::pop();
     }
 
+#if CHelperSupportJson == true
     std::unique_ptr<CPack> CPack::createByDirectory(const std::filesystem::path &path) {
         Profile::push(ColorStringBuilder().red("start load CPack by DIRECTORY: ").purple(path.string()).build());
         std::unique_ptr<CPack> cpack = std::make_unique<CPack>(path);
@@ -281,6 +286,7 @@ namespace CHelper {
         Profile::pop();
         return cpack;
     }
+#endif
 
     std::unique_ptr<CPack> CPack::createByBinary(BinaryReader &binaryReader) {
         Profile::push(ColorStringBuilder().red("start load CPack by binary").build());
@@ -289,6 +295,7 @@ namespace CHelper {
         return cpack;
     }
 
+#if CHelperSupportJson == true
     void CPack::writeJsonToDirectory(const std::filesystem::path &path) const {
         JsonUtil::writeJsonToFile(path / "manifest.json", manifest);
         for (const auto &item: normalIds) {
@@ -384,7 +391,9 @@ namespace CHelper {
     void CPack::writeBsonToFile(const std::filesystem::path &path) const {
         JsonUtil::writeBsonToFile(path, toJson());
     }
+#endif
 
+#if CHelperWeb != true
     void CPack::writeBinToFile(const std::filesystem::path &path) const {
         std::filesystem::create_directories(path.parent_path());
         Profile::push(ColorStringBuilder()
@@ -420,6 +429,7 @@ namespace CHelper {
         f.close();
         Profile::pop();
     }
+#endif
 
     std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
     CPack::getNormalId(const std::string &key) const {

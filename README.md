@@ -41,6 +41,12 @@ Because I am leaning c++ now. I want to improve myself through this project.
 |:----------------------------------------:|:------------------------------:|:------------------------------------------------------------:|
 | [NDK](https://developer.android.com/ndk) | android native development kit | [Apache License](http://www.apache.org/licenses/LICENSE-2.0) |
 
+### CHelper-Web
+
+|               project                |                description                 |                                                                  license                                                                   |
+|:------------------------------------:|:------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------:|
+| [Emscripten](https://emscripten.org) | complete compiler toolchain to WebAssembly | [the MIT license and the University of Illinois/NCSA Open Source License](https://github.com/emscripten-core/emscripten/blob/main/LICENSE) |
+
 ### CHelper-Test
 
 |                      project                       |         description         |                                              license                                              |

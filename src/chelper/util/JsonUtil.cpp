@@ -163,6 +163,7 @@ namespace CHelper::JsonUtil {
         return std::move(result);
     }
 
+#if CHelperSupportJson == true
     nlohmann::json getJsonFromFile(const std::filesystem::path &path) {
         Profile::push(ColorStringBuilder()
                               .red("reading and parsing json in file: ")
@@ -210,5 +211,6 @@ namespace CHelper::JsonUtil {
         f.close();
         Profile::pop();
     }
+#endif
 
 }// namespace CHelper::JsonUtil

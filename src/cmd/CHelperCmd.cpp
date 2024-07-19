@@ -9,11 +9,13 @@
 int main() {
     //    testDir();
     //    testBin();
-    outputSingleJson();
-    outputBson();
-    outputBinary();
+    //    outputSingleJson();
+    //    outputBson();
+    //    outputBinary();
     return 0;
 }
+
+#if CHelperWeb != true
 
 [[maybe_unused]] void testDir() {
     std::filesystem::path projectDir(PROJECT_DIR);
@@ -461,3 +463,5 @@ namespace CHelper::Test {
     }
 
 }// namespace CHelper::Test
+
+#endif

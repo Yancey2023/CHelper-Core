@@ -29,6 +29,8 @@ namespace CHelper {
 
         ConvertResult jsonString2String(const std::string &input);
 
+#if CHelperSupportJson == true
+
         template<class T>
         void encode(nlohmann::json &json, const std::string &key, const T &data) {
             json[key] = data;
@@ -70,9 +72,14 @@ namespace CHelper {
 
         void writeBsonToFile(const std::filesystem::path &path, const nlohmann::json &j);
 
+#endif
+
     }// namespace JsonUtil
 
+
 }// namespace CHelper
+
+#if CHelperSupportJson == true
 
 namespace nlohmann {
 
@@ -90,5 +97,7 @@ namespace nlohmann {
     };
 
 }// namespace nlohmann
+
+#endif
 
 #endif//CHELPER_JSONUTIL_H

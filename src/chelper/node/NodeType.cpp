@@ -35,6 +35,7 @@
 
 namespace CHelper::Node {
 
+#if CHelperSupportJson == true
     NodeType::NodeType(std::string nodeName,
                        std::function<void(const nlohmann::json &j, std::unique_ptr<NodeBase> &t)> decodeByJson,
                        std::function<void(nlohmann::json &j, const std::unique_ptr<NodeBase> &t)> encodeByJson,
@@ -45,6 +46,19 @@ namespace CHelper::Node {
           encodeByJson(std::move(encodeByJson)),
           decodeByBinary(std::move(decodeByBinary)),
           encodeByBinary(std::move(encodeByBinary)) {}
+#elif CHelperWeb != true
+    NodeType::NodeType(std::string nodeName,
+                       std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary,
+                       std::function<void(BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t)> encodeByBinary)
+        : nodeName(std::move(nodeName)),
+          decodeByBinary(std::move(decodeByBinary)),
+          encodeByBinary(std::move(encodeByBinary)) {}
+#else
+    NodeType::NodeType(std::string nodeName,
+                       std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary)
+        : nodeName(std::move(nodeName)),
+          decodeByBinary(std::move(decodeByBinary)) {}
+#endif
 
     template<class T>
     static std::unique_ptr<NodeType> createParam(const std::string &nodeName,
@@ -53,6 +67,7 @@ namespace CHelper::Node {
                                                          {NodeCreateStage::JSON_NODE, NodeCreateStage::REPEAT_NODE, NodeCreateStage::COMMAND_PARAM_NODE}) {
         return std::make_unique<NodeType>(
                 nodeName,
+#if CHelperSupportJson == true
                 [nodeName, isMustAfterWhiteSpace, nodeCreateStage](const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
                     if (std::find(nodeCreateStage.begin(), nodeCreateStage.end(), NodeType::currentCreateStage) == nodeCreateStage.end()) {
                         throw std::runtime_error("unknown node type -> " + nodeName);
@@ -66,6 +81,7 @@ namespace CHelper::Node {
                 [](nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {
                     j = (T &) *t;
                 },
+#endif
                 [nodeName, isMustAfterWhiteSpace, nodeCreateStage](BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
                     if (std::find(nodeCreateStage.begin(), nodeCreateStage.end(), NodeType::currentCreateStage) == nodeCreateStage.end()) {
                         throw std::runtime_error("unknown node type -> " + nodeName);
@@ -75,10 +91,14 @@ namespace CHelper::Node {
                     if (HEDLEY_UNLIKELY(!t->isMustAfterWhiteSpace.has_value())) {
                         t->isMustAfterWhiteSpace = isMustAfterWhiteSpace;
                     }
-                },
+                }
+#if CHelperWeb != true
+                ,
                 [](BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t) {
                     binaryWriter.encode((T &) *t);
-                });
+                }
+#endif
+                );
     }
 
     template<class T>
@@ -90,18 +110,24 @@ namespace CHelper::Node {
     static std::unique_ptr<NodeType> createNone(const std::string &nodeName) {
         return std::make_unique<NodeType>(
                 nodeName,
+#if CHelperSupportJson == true
                 [nodeName](const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
                     throw std::runtime_error("unknown node type -> " + nodeName);
                 },
                 [](nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {
                     j = (T &) *t;
                 },
+#endif
                 [nodeName](BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
                     throw std::runtime_error("unknown node type -> " + nodeName);
-                },
+                }
+#if CHelperWeb != true
+                ,
                 [](BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t) {
                     binaryWriter.encode((T &) *t);
-                });
+                }
+#endif
+                );
     }
 
     std::vector<NodeType *> NodeType::NODE_TYPES;

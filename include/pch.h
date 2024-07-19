@@ -15,29 +15,45 @@
 // 增加一些用于调试方法
 #define CHelperTest false
 
+#define CHelperWeb true
+
+#if CHelperWeb == true
+#define CHelperSupportJson false
+#else
+#define CHelperSupportJson true
+#endif
+
 #if CHelperAndroid == true
 
-#include "android/jni.h"
-#include "android/log.h"
 #include "android/asset_manager.h"
 #include "android/asset_manager_jni.h"
+#include "android/jni.h"
+#include "android/log.h"
 
 #endif
 
 // 数据结构
-#include <string>
-#include <vector>
 #include <optional>
+#include <string>
 #include <unordered_map>
 #include <variant>
+#include <vector>
+#include <functional>
+#include <cmath>
 // 抛出的错误
 #include <exception>
 // 文件读写
+#if CHelperSupportJson == true
 #include <fstream>
+#endif
 // 用于字符串转整数或小数
 #include <cinttypes>
 // json库
+#if CHelperSupportJson == true
 #include "nlohmann/json.hpp"
+#else
+#include "nlohmann/detail/macro_scope.hpp"
+#endif
 // 字符串格式化
 #include "format/Format.h"
 // 开始编译器特性
@@ -57,4 +73,4 @@
 // 字符串工具类
 #include "../src/chelper/util/StringUtil.h"
 
-#endif //CHELPER_PCH_H
+#endif // CHELPER_PCH_H

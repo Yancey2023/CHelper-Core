@@ -16,7 +16,7 @@ namespace CHelper {
         std::string content;
 
     public:
-#if CHelperAndroid == true
+#if CHelperAndroid == true || CHelperWeb == true
 
         ColorStringBuilder &append(const std::string &str);
 

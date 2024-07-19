@@ -144,6 +144,7 @@ namespace CHelper {
         return nodeAllBlockState.get();
     }
 
+#if CHelperSupportJson == true
     void from_json(const nlohmann::json &j, BlockStateValue &t) {
         const nlohmann::json &jsonValue = j.at("value");
         if (HEDLEY_UNLIKELY(jsonValue.is_number_integer())) {
@@ -173,6 +174,7 @@ namespace CHelper {
                 break;
         }
     }
+#endif
 
     void from_binary(BinaryReader &binaryReader, BlockStateValue &t) {
         binaryReader.decode(t.description);
@@ -190,6 +192,7 @@ namespace CHelper {
         }
     }
 
+#if CHelperWeb != true
     void to_binary(BinaryWriter &binaryWriter, const BlockStateValue &t) {
         binaryWriter.encode(t.description);
         binaryWriter.encode((uint8_t) t.type);
@@ -205,6 +208,7 @@ namespace CHelper {
                 break;
         }
     }
+#endif
 
     CODEC(BlockState, key, description, values, defaultValue)
 

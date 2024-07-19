@@ -14,6 +14,8 @@
 
 int main();
 
+#if CHelperWeb != true
+
 [[maybe_unused]] void testDir();
 
 [[maybe_unused]] void testBin();
@@ -47,5 +49,7 @@ namespace CHelper::Test {
     [[maybe_unused]] void writeBinary(const std::filesystem::path &input, const std::filesystem::path &output);
 
 }// namespace CHelper::Test
+
+#endif
 
 #endif//CHELPER_CHELPERCMD_H

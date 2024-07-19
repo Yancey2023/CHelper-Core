@@ -9,6 +9,8 @@
 #include "../lexer/TokenReader.h"
 #include "pch.h"
 
+#if CHelperSupportJson == true
+
 namespace CHelper::Old2New {
 
     class DataFix {
@@ -58,5 +60,7 @@ namespace CHelper::Old2New {
     std::string old2new(const nlohmann::json &blockFixData, const std::string &old);
 
 }// namespace CHelper::Old2New
+
+#endif
 
 #endif//CHELPER_OLD2NEW_H

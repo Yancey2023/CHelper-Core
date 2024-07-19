@@ -17,6 +17,7 @@
 
 namespace CHelper {
 
+#if CHelperWeb != true
     class BinaryWriter {
     public:
         bool isNeedConvert;
@@ -91,6 +92,7 @@ namespace CHelper {
             to_binary(*this, t);
         }
     };
+#endif
 
     class BinaryReader {
     public:
