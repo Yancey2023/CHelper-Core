@@ -225,12 +225,13 @@
       }
     },
     {
-      "type": "STRING",
+      "type": "TARGET_SELECTOR",
       "id": "listPlayerName",
-      "brief": "记分项",
-      "description": "记分项的名字",
-      "canContainSpace": true,
-      "ignoreLater": false
+      "brief": "分数持有者",
+      "description": "分数持有者。指定名称对应的玩家无需在线，且不必是一个真实存在的玩家名。",
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false
     },
     {
       "type": "TARGET_SELECTOR",

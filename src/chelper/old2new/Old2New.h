@@ -9,9 +9,9 @@
 #include "../lexer/TokenReader.h"
 #include "pch.h"
 
-#if CHelperSupportJson == true
-
 namespace CHelper::Old2New {
+
+    typedef std::unordered_map<std::string, std::unordered_map<uint32_t, std::pair<std::optional<std::string>, std::optional<std::string>>>> BlockFixData;
 
     class DataFix {
     public:
@@ -39,28 +39,28 @@ namespace CHelper::Old2New {
 
     bool expectPosition(TokenReader &tokenReader);
 
-    std::string blockOld2New(const nlohmann::json &blockFixData, const TokensView &blockIdToken, const TokensView &dataValueToken);
+    std::string blockOld2New(const BlockFixData &blockFixData, const TokensView &blockIdToken, const TokensView &dataValueToken);
 
-    bool expectCommandExecute(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList, size_t depth);
+    bool expectCommandExecute(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList, size_t depth);
 
-    bool expectCommandExecuteRepeat(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
+    bool expectCommandExecuteRepeat(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
     bool expectCommandSummon(TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
     bool expectCommandStructure(TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
-    bool expectCommandSetBlock(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
+    bool expectCommandSetBlock(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
-    bool expectCommandFill(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
+    bool expectCommandFill(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
-    bool expectCommandTestForSetBlock(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
+    bool expectCommandTestForSetBlock(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
-    bool expectCommand(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
+    bool expectCommand(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
-    std::string old2new(const nlohmann::json &blockFixData, const std::string &old);
+    std::string old2new(const BlockFixData &blockFixData, const std::string &old);
+
+    BlockFixData blockFixDataFromJson(const nlohmann::json &j);
 
 }// namespace CHelper::Old2New
-
-#endif
 
 #endif//CHELPER_OLD2NEW_H

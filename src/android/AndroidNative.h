@@ -198,16 +198,29 @@ Java_yancey_chelper_core_CHelperCore_onSuggestionClick0(
     }
 }
 
-nlohmann::json blockFixData0;
+CHelper::Old2New::BlockFixData blockFixData0;
 
 extern "C" [[maybe_unused]] JNIEXPORT jboolean JNICALL
 Java_yancey_chelper_core_CHelperCore_old2newInit0(
-        JNIEnv *env, [[maybe_unused]] jobject thiz, jstring blockFixData) {
-    if (HEDLEY_UNLIKELY(blockFixData == nullptr)) {
+        JNIEnv *env, [[maybe_unused]] jobject thiz, jobject assetManager, jstring blockFixDataPath) {
+    if (HEDLEY_UNLIKELY(blockFixDataPath == nullptr)) {
         return false;
     }
+    std::string blockFixDataPath0 = jstring2string(env, blockFixDataPath);
     try {
-        blockFixData0 = nlohmann::json::parse(jstring2string(env, blockFixData));
+        AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
+        AAsset *asset = AAssetManager_open(mgr, blockFixDataPath0.c_str(), AASSET_MODE_BUFFER);
+        if (HEDLEY_UNLIKELY(asset == nullptr)) {
+            return false;
+        }
+        size_t dataFileSize = AAsset_getLength(asset);
+        char *buffer = new char[dataFileSize];
+        int numBytesRead = AAsset_read(asset, buffer, dataFileSize);
+        AAsset_close(asset);
+        std::istringstream iss(std::string(buffer, numBytesRead));
+        CHelper::BinaryReader binaryReader(true, iss);
+        blockFixData0 = binaryReader.read<CHelper::Old2New::BlockFixData>();
+        delete[] buffer;
         return true;
     } catch (const std::exception &e) {
         return false;

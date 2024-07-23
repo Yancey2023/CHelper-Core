@@ -5,7 +5,6 @@
 #include "CHelperQt.h"
 #include "ui_chelper.h"
 #include <QClipboard>
-#include <QDebug>
 #include <QFile>
 #include <QListWidget>
 #include <QMessageBox>
@@ -53,6 +52,12 @@ void CHelperApp::onTextChanged(const QString &string) {
         ui->descriptionLabel->setText("作者：Yancey");
         ui->errorReasonLabel->setText(nullptr);
     } else {
+#if CHelperTest == true
+        std::cout << core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
+                  << std::endl;
+        std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
+                  << std::endl;
+#endif
         ui->structureLabel->setText(QString::fromStdString(core->getStructure()));
         ui->descriptionLabel->setText(QString::fromStdString(core->getDescription()));
         std::vector<std::shared_ptr<CHelper::ErrorReason>> errorReasons = core->getErrorReasons();

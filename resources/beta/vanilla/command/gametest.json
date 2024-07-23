@@ -133,7 +133,8 @@
     ["create", "createTestName"],
     ["createTestName", "width", "LF"],
     ["width", "height", "LF"],
-    ["height", "depth", "LF"], ["depth", "LF"],
+    ["height", "depth", "LF"],
+    ["depth", "LF"],
     ["runthese", "LF"]
   ]
 }

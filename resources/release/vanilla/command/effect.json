@@ -58,6 +58,7 @@
     ["clear", "LF"],
     ["effect", "seconds", "LF"],
     ["seconds", "amplifier", "LF"],
-    ["amplifier", "hideParticles", "LF"], ["hideParticles", "LF"]
+    ["amplifier", "hideParticles", "LF"],
+    ["hideParticles", "LF"]
   ]
 }

@@ -24,14 +24,17 @@ namespace CHelper::Node {
     public:
         NodeRepeat() = default;
 
+        void init(const CPack &cpack) override;
+
         [[nodiscard]] NodeType *getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
+        std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
+
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-        void init(const CPack &cpack) override;
     };
 
     CODEC_NODE_H(NodeRepeat)

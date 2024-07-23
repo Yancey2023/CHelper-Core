@@ -49,6 +49,8 @@
   "ast": [
     ["target", "amount"],
     ["amount", "cause", "LF"],
-    ["cause", "entity", "LF"], ["entity", "damager"], ["damager", "LF"]
+    ["cause", "entity", "LF"],
+    ["entity", "damager"],
+    ["damager", "LF"]
   ]
 }

@@ -4,7 +4,6 @@
 
 #include "Core.h"
 
-#include "old2new/Old2New.h"
 #include "parser/Parser.h"
 
 namespace CHelper {
@@ -143,10 +142,8 @@ namespace CHelper {
         return suggestions->at(which).apply(this, astNode.tokens.toString());
     }
 
-#if CHelperWeb != true
-    std::string Core::old2new(const nlohmann::json &blockFixData, const std::string &old) {
+    std::string Core::old2new(const Old2New::BlockFixData &blockFixData, const std::string &old) {
         return Old2New::old2new(blockFixData, old);
     }
-#endif
 
 }// namespace CHelper

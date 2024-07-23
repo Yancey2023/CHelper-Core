@@ -15,7 +15,8 @@
 // 增加一些用于调试方法
 #define CHelperTest false
 
-#define CHelperWeb true
+// 去除一些没有必要的代码，减少体积
+#define CHelperWeb false
 
 #if CHelperWeb == true
 #define CHelperSupportJson false

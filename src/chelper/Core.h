@@ -8,6 +8,7 @@
 #define CHELPER_CORE_H
 
 #include "node/NodeType.h"
+#include "old2new/Old2New.h"
 #include "parser/ASTNode.h"
 #include "resources/CPack.h"
 
@@ -58,9 +59,8 @@ namespace CHelper {
 
         [[nodiscard]] std::optional<std::string> onSuggestionClick(size_t which);
 
-#if CHelperWeb != true
-        static std::string old2new(const nlohmann::json &blockFixData, const std::string &old);
-#endif
+        static std::string old2new(const Old2New::BlockFixData &blockFixData, const std::string &old);
+
     };
 
 }// namespace CHelper

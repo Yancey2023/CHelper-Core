@@ -9,9 +9,9 @@
 int main() {
     //    testDir();
     //    testBin();
-    //    outputSingleJson();
-    //    outputBson();
-    //    outputBinary();
+    outputSingleJson();
+    outputBson();
+    outputBinary();
     return 0;
 }
 
@@ -88,6 +88,15 @@ int main() {
                                projectDir / "run" / "netease-vanilla-1.20.10.25.cpack");
     CHelper::Test::writeBinary(projectDir / "resources" / "netease" / "experiment",
                                projectDir / "run" / "netease-experiment-1.20.10.25.cpack");
+    // old2new
+    std::filesystem::path input = projectDir / "resources" / "old2new" / "blockFixData.json";
+    std::filesystem::path output = projectDir / "run" / "ol2new.dat";
+    CHelper::Old2New::BlockFixData blockFixData = CHelper::Old2New::blockFixDataFromJson(CHelper::JsonUtil::getJsonFromFile(input));
+    std::filesystem::create_directories(output.parent_path());
+    std::ofstream f(output, std::ios::binary);
+    CHelper::BinaryWriter binaryWriter(true, f);
+    binaryWriter.encode(blockFixData);
+    f.close();
 }
 
 namespace CHelper::Test {
@@ -236,10 +245,12 @@ namespace CHelper::Test {
                     std::cout << ColorStringBuilder().blue("get suggestions in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms").build() << std::endl;
                     std::cout << ColorStringBuilder().blue("get structure in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms").build() << std::endl;
                 }
-                //                std::cout << core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
-                //                          << std::endl;
-                //                std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
-                //                          << std::endl;
+#if CHelperTest == true
+                std::cout << core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
+                          << std::endl;
+                std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
+                          << std::endl;
+#endif
                 std::cout << "structure: " + structure << std::endl;
                 std::cout << "description: " + description << std::endl;
                 if (errorReasons.empty()) {

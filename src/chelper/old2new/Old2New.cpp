@@ -4,8 +4,6 @@
 
 #include "Old2New.h"
 
-#if CHelperSupportJson == true
-
 namespace CHelper::Old2New {
 
     DataFix::DataFix(size_t start,
@@ -148,7 +146,7 @@ namespace CHelper::Old2New {
         return true;
     }
 
-    std::string blockOld2New(const nlohmann::json &blockFixData, const TokensView &blockIdToken, const TokensView &dataValueToken) {
+    std::string blockOld2New(const BlockFixData &blockFixData, const TokensView &blockIdToken, const TokensView &dataValueToken) {
         // get block id
         std::string blockId = std::string(blockIdToken.toString());
         // get block data value
@@ -164,30 +162,26 @@ namespace CHelper::Old2New {
         // get key
         std::string front = "minecraft:";
         std::string key = trip(blockId);
-        if (key.size() < front.size() || key.substr(0, front.size()) != front) {
-            key = front + key;
+        bool isStartWithMinecraft = key.size() > front.size() && key.substr(0, front.size()) == front;
+        if (isStartWithMinecraft) {
+            key = key.substr(front.size());
         }
-        key = key + "|" + std::to_string(dataValue);
         // find fixed block state by key
-        auto iter = blockFixData.find(key);
-        // if it doesn't need to fix, return block id directly
-        if (iter == blockFixData.end()) {
+        auto blockIdIter = blockFixData.find(key);
+        if (blockIdIter == blockFixData.end()) {
             return blockId;
         }
-        // get block state
-        std::string blockState = iter->get<std::string>();
-        if (blockState == "[]") {
+        const auto &dataValueToBlockState = blockIdIter->second;
+        auto dataValueIter = dataValueToBlockState.find(dataValue);
+        if (dataValueIter == dataValueToBlockState.end()) {
             return blockId;
         }
-        size_t index = 0;
-        while ((index = blockState.find(' ', index)) != std::string::npos) {
-            blockState.erase(index, 1);
+        const auto &blockIdWithBlockState = dataValueIter->second;
+        if (blockIdWithBlockState.first.has_value()) {
+            return front + blockIdWithBlockState.first.value() + blockIdWithBlockState.second.value_or("");
+        } else {
+            return blockIdWithBlockState.first.value_or(blockId) + blockIdWithBlockState.second.value_or("");
         }
-        size_t index2 = 1;
-        while ((index2 = blockState.find(':', index2)) != std::string::npos) {
-            blockState[index2] = '=';
-        }
-        return blockId + blockState;
     }
 
     /**
@@ -195,7 +189,7 @@ namespace CHelper::Old2New {
      * 旧语法例子：execute @e ~~~ detect ~~-1~ stone 0 run setblock command_block ~~~
      * 新语法例子：execute as @e at @s positioned ~~~ if block ~~-1~ stone setblock command_block ~~~
      */
-    bool expectCommandExecute(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList, size_t depth) {
+    bool expectCommandExecute(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList, size_t depth) {
         tokenReader.push();
         // execute
         tokenReader.push();
@@ -292,7 +286,7 @@ namespace CHelper::Old2New {
         return true;
     }
 
-    bool expectCommandExecuteRepeat(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
+    bool expectCommandExecuteRepeat(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         size_t depth = 0;
         while (true) {
             tokenReader.push();
@@ -420,7 +414,7 @@ namespace CHelper::Old2New {
      * 旧语法例子：setblock ~~~ stone 1 replace
      * 新语法例子：setblock ~~~ stone["stone_type":"granite"] replace
      */
-    bool expectCommandSetBlock(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
+    bool expectCommandSetBlock(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         tokenReader.push();
         // setblock
         if (!expectString(tokenReader, "setblock")) {
@@ -473,7 +467,7 @@ namespace CHelper::Old2New {
      * 旧语法例子：fill ~~~~~~ stone 1 replace stone 2
      * 新语法例子：fill ~~~~~~ stone["stone_type":"granite"] replace stone["stone_type":"granite_smooth"]
      */
-    bool expectCommandFill(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
+    bool expectCommandFill(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         tokenReader.push();
         // fill
         if (!expectString(tokenReader, "fill")) {
@@ -561,7 +555,7 @@ namespace CHelper::Old2New {
      * 旧语法例子：testforblock ~~~ stone 1
      * 新语法例子：testforblock ~~~ stone["stone_type":"granite"]
      */
-    bool expectCommandTestForSetBlock(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
+    bool expectCommandTestForSetBlock(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         tokenReader.push();
         // testforblock
         if (!expectString(tokenReader, "testforblock")) {
@@ -596,7 +590,7 @@ namespace CHelper::Old2New {
         return true;
     }
 
-    bool expectCommand(const nlohmann::json &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
+    bool expectCommand(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         if (!tokenReader.ready()) {
             return false;
         }
@@ -611,7 +605,7 @@ namespace CHelper::Old2New {
         return true;
     }
 
-    std::string old2new(const nlohmann::json &blockFixData, const std::string &old) {
+    std::string old2new(const BlockFixData &blockFixData, const std::string &old) {
         TokenReader tokenReader(std::make_shared<LexerResult>(Lexer::lex(old)));
         std::vector<DataFix> dataFixList;
         expectCommand(blockFixData, tokenReader, dataFixList);
@@ -631,6 +625,27 @@ namespace CHelper::Old2New {
         return result;
     }
 
-}// namespace CHelper::Old2New
+#if CHelperSupportJson == true
+    template<class T, class S>
+    S &getOrCreate(std::unordered_map<T, S> &map, const T &key) {
+        const auto &iter = map.find(key);
+        if (iter != map.end()) {
+            return iter->second;
+        }
+        return map.emplace(key, S()).first->second;
+    }
 
+    BlockFixData blockFixDataFromJson(const nlohmann::json &j) {
+        BlockFixData blockFixData;
+        for (const auto &item: j) {
+            const auto name = JsonUtil::read<std::string>(item, "name");
+            const auto data = JsonUtil::read<uint32_t>(item, "data");
+            const auto newBlockId = JsonUtil::read<std::optional<std::string>>(item, "newBlockId");
+            const auto blockState = JsonUtil::read<std::optional<std::string>>(item, "blockState");
+            getOrCreate(blockFixData, name).insert({data, {newBlockId, blockState}});
+        }
+        return blockFixData;
+    }
 #endif
+
+}// namespace CHelper::Old2New

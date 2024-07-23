@@ -7,13 +7,13 @@
 #ifndef CHELPER_BINARYUTIL_H
 #define CHELPER_BINARYUTIL_H
 
-#include <vector>
-#include <string>
-#include <memory>
-#include <unordered_map>
-#include <optional>
-#include <fstream>
 #include "hedley.h"
+#include <fstream>
+#include <memory>
+#include <optional>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace CHelper {
 
@@ -85,6 +85,12 @@ namespace CHelper {
                 encode(item.first);
                 encode(item.second);
             }
+        }
+
+        template<class T, class S>
+        void encode(const std::pair<T, S> &t) {
+            encode(t.first);
+            encode(t.second);
         }
 
         template<class T>
@@ -160,6 +166,11 @@ namespace CHelper {
                 auto value = read<S>();
                 t.emplace(std::move(key), std::move(value));
             }
+        }
+
+        template<class T, class S>
+        void decode(std::pair<T, S> &t) {
+            t = {read<T>(), read<S>()};
         }
 
         template<class T>
