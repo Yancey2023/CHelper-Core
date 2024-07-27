@@ -123,12 +123,11 @@ namespace CHelper::Node {
     bool NodeNormalId::collectSuggestions(const ASTNode *astNode,
                                           size_t index,
                                           std::vector<Suggestions> &suggestions) const {
-        std::string_view str = astNode->tokens.toString()
-                                       .substr(0, index - astNode->tokens.getStartIndex());
+        KMPMatcher kmpMatcher(astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex()));
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *customContents) {
             //通过名字进行搜索
-            size_t index1 = item->name.find(str);
+            size_t index1 = kmpMatcher.match(item->name);
             if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
                 if (HEDLEY_UNLIKELY(index1 == 0)) {
                     nameStartOf.push_back(item);
@@ -139,7 +138,7 @@ namespace CHelper::Node {
             }
             //通过介绍进行搜索
             if (HEDLEY_UNLIKELY(
-                        item->description.has_value() && item->description.value().find(str) != std::string::npos)) {
+                        item->description.has_value() && kmpMatcher.match(item->description.value()) != std::string::npos)) {
                 descriptionContain.push_back(item);
             }
         }

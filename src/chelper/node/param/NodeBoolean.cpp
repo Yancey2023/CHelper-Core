@@ -31,15 +31,14 @@ namespace CHelper::Node {
     bool NodeBoolean::collectSuggestions(const ASTNode *astNode,
                                          size_t index,
                                          std::vector<Suggestions> &suggestions) const {
-        std::string_view str = astNode->tokens.toString()
-                                       .substr(0, index - astNode->tokens.getStartIndex());
+        KMPMatcher kmpMatcher(astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex()));
         Suggestions suggestions1;
-        if (HEDLEY_UNLIKELY(std::string("true").find(str) != std::string::npos)) {
+        if (HEDLEY_UNLIKELY(kmpMatcher.match("true") != std::string::npos)) {
             suggestions1.suggestions.emplace_back(
                     astNode->tokens, true,
                     NormalId::make("true", descriptionTrue));
         }
-        if (HEDLEY_UNLIKELY(std::string("false").find(str) != std::string::npos)) {
+        if (HEDLEY_UNLIKELY(kmpMatcher.match("false") != std::string::npos)) {
             suggestions1.suggestions.emplace_back(
                     astNode->tokens, true,
                     NormalId::make("false", descriptionFalse));

@@ -139,7 +139,7 @@
       "id": "belowName",
       "description": "名称下方",
       "data": {
-        "name": "below_name",
+        "name": "belowname",
         "description": "名称下方"
       }
     },

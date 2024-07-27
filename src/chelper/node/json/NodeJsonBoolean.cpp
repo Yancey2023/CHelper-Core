@@ -31,16 +31,15 @@ namespace CHelper::Node {
     bool NodeJsonBoolean::collectSuggestions(const ASTNode *astNode,
                                              size_t index,
                                              std::vector<Suggestions> &suggestions) const {
-        std::string_view str = astNode->tokens.toString()
-                                       .substr(0, index - astNode->tokens.getStartIndex());
+        KMPMatcher kmpMatcher(astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex()));
         Suggestions suggestions1;
-        if (HEDLEY_UNLIKELY(std::string("true").find(str) != std::string::npos)) {
+        if (HEDLEY_UNLIKELY(kmpMatcher.match("true") != std::string::npos)) {
             std::shared_ptr<NormalId> id;
             id->name = "true";
             id->description = descriptionTrue;
             suggestions1.suggestions.emplace_back(astNode->tokens, false, std::move(id));
         }
-        if (HEDLEY_UNLIKELY(std::string("false").find(str) != std::string::npos)) {
+        if (HEDLEY_UNLIKELY(kmpMatcher.match("false") != std::string::npos)) {
             std::shared_ptr<NormalId> id;
             id->name = "false";
             id->description = descriptionFalse;

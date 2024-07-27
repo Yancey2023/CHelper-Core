@@ -79,8 +79,7 @@ namespace CHelper::Node {
     bool NodeNamespaceId::collectSuggestions(const ASTNode *astNode,
                                              size_t index,
                                              std::vector<Suggestions> &suggestions) const {
-        std::string_view str = astNode->tokens.toString()
-                                       .substr(0, index - astNode->tokens.getStartIndex());
+        KMPMatcher kmpMatcher(astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex()));
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain;
         std::vector<std::shared_ptr<NormalId>> namespaceStartOf, namespaceContain;
         std::vector<std::shared_ptr<NamespaceId>> descriptionContain;
@@ -88,7 +87,7 @@ namespace CHelper::Node {
             //通过名字进行搜索
             //省略minecraft命名空间
             if (HEDLEY_LIKELY((!item->idNamespace.has_value() || item->idNamespace.value() == "minecraft"))) {
-                size_t index1 = item->name.find(str);
+                size_t index1 = kmpMatcher.match(item->name);
                 if (HEDLEY_UNLIKELY(index1 == 0)) {
                     nameStartOf.push_back(item);
                 } else if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
@@ -96,7 +95,7 @@ namespace CHelper::Node {
                 }
             }
             //带有命名空间
-            size_t index1 = item->getIdWithNamespace()->name.find(str);
+            size_t index1 = kmpMatcher.match(item->getIdWithNamespace()->name);
             if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
                 if (HEDLEY_UNLIKELY(index1 == 0)) {
                     namespaceStartOf.push_back(item->getIdWithNamespace());
@@ -107,7 +106,7 @@ namespace CHelper::Node {
             }
             //通过介绍进行搜索
             if (HEDLEY_UNLIKELY(
-                        item->description.has_value() && item->description.value().find(str) != std::string::npos)) {
+                        item->description.has_value() && kmpMatcher.match(item->description.value()) != std::string::npos)) {
                 descriptionContain.push_back(item);
             }
         }
