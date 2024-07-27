@@ -88,7 +88,8 @@
       "description": "要给予物品的一个或多个玩家",
       "isOnlyOne": false,
       "isMustPlayer": true,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "POSITION",
@@ -123,7 +124,8 @@
       "description": "要修改的一个或多个实体",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "NORMAL_ID",
@@ -152,7 +154,8 @@
       "description": "要模拟杀死的实体",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "STRING",

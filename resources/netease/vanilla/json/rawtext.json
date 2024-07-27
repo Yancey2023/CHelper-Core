@@ -34,7 +34,8 @@
           "description": "目标选择器",
           "isMustPlayer": false,
           "isOnlyOne": false,
-          "isMustNPC": false
+          "isMustNPC": false,
+          "isWildcard": false
         },
         {
           "type": "TEXT",

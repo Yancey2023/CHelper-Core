@@ -13,7 +13,8 @@
       "description": "目标",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "NORMAL_ID",

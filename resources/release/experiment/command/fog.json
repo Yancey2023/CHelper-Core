@@ -13,7 +13,8 @@
       "description": "修改玩家迷雾效果的目标",
       "isOnlyOne": false,
       "isMustPlayer": true,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "TEXT",

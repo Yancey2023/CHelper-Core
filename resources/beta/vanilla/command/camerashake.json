@@ -23,7 +23,8 @@
       "description": "要施以视野摇晃效果的玩家(默认为命令执行者)",
       "isOnlyOne": false,
       "isMustPlayer": true,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "FLOAT",
@@ -71,7 +72,8 @@
       "description": "要停止视野摇晃的玩家(默认为命令执行者)",
       "isOnlyOne": false,
       "isMustPlayer": true,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     }
   ],
   "ast": [

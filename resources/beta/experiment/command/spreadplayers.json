@@ -41,7 +41,8 @@
       "description": "需要随机传送的目标",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     }
   ],
   "ast": [

@@ -14,7 +14,8 @@
       "description": "被删除出生点的玩家",
       "isOnlyOne": false,
       "isMustPlayer": true,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     }
   ],
   "ast": [

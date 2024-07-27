@@ -123,7 +123,7 @@ namespace CHelper::Test {
             commands.push_back(str);
         }
         fin.close();
-        //        CHelper::Test::testDir(cpackPath, commands, isTestTime);
+        CHelper::Test::testDir(cpackPath, commands, isTestTime);
         //        std::vector<std::string> commands1;
         //        for (const auto &item: commands) {
         //            for (size_t i = 0; i < item.size(); i++) {

@@ -16,7 +16,8 @@
       "description": "要被传送的实体",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "BOOLEAN",
@@ -32,7 +33,8 @@
       "description": "要被传送到的实体",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "POSITION",
@@ -75,7 +77,8 @@
       "description": "该实体朝向的实体",
       "isMustPlayer": false,
       "isOnlyOne": true,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     }
   ],
   "ast": [

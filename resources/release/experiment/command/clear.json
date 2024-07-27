@@ -14,7 +14,8 @@
       "description": "要被清除物品的玩家(默认为命令执行者)",
       "isOnlyOne": false,
       "isMustPlayer": true,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "ITEM",

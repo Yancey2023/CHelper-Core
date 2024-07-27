@@ -13,7 +13,8 @@
       "description": "要杀死/清除的目标实体",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     }
   ],
   "ast": [

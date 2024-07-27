@@ -22,7 +22,8 @@
       "description": "实体事件的作用对象",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "NORMAL_ID",

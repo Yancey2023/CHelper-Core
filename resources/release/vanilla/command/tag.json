@@ -13,7 +13,8 @@
       "description": "要操作的实体目标",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": true
     },
     {
       "type": "TEXT",

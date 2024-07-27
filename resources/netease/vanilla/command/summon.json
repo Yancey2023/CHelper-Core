@@ -80,7 +80,8 @@
       "description": "该实体朝向的实体",
       "isOnlyOne": true,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "POSITION",

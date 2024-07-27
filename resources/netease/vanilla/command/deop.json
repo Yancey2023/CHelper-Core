@@ -14,7 +14,8 @@
       "description": "从管理员列表中移除的玩家",
       "isOnlyOne": false,
       "isMustPlayer": true,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     }
   ],
   "ast": [

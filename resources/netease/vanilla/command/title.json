@@ -13,7 +13,8 @@
       "description": "要显示或清除屏幕标题的玩家",
       "isOnlyOne": false,
       "isMustPlayer": true,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "NORMAL_ID",

@@ -15,7 +15,8 @@
       "description": "私聊消息的接收玩家",
       "isOnlyOne": false,
       "isMustPlayer": true,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "canContainSpace": true,

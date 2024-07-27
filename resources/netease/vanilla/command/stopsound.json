@@ -13,7 +13,8 @@
       "description": "声音的接收者",
       "isOnlyOne": false,
       "isMustPlayer": true,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "NORMAL_ID",

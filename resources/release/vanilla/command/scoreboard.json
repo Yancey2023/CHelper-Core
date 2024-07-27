@@ -231,7 +231,8 @@
       "description": "分数持有者。指定名称对应的玩家无需在线，且不必是一个真实存在的玩家名。",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": true
     },
     {
       "type": "TARGET_SELECTOR",
@@ -239,7 +240,8 @@
       "description": "目标实体",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": true
     },
     {
       "type": "STRING",
@@ -261,7 +263,8 @@
       "description": "目标实体",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": true
     },
     {
       "type": "TARGET_SELECTOR",
@@ -269,7 +272,8 @@
       "description": "目标实体",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": true
     },
     {
       "type": "STRING",
@@ -337,7 +341,8 @@
       "description": "目标实体",
       "isMustPlayer": false,
       "isOnlyOne": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": true
     },
     {
       "type": "TARGET_SELECTOR",
@@ -345,7 +350,8 @@
       "description": "目标实体",
       "isMustPlayer": false,
       "isOnlyOne": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": true
     },
     {
       "type": "STRING",

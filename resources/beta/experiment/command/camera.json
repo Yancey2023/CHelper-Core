@@ -13,7 +13,8 @@
       "description": "将被修改相机视角的玩家",
       "isOnlyOne": false,
       "isMustPlayer": true,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "TEXT",
@@ -139,7 +140,8 @@
       "description": "相机视角朝向的实体",
       "isOnlyOne": false,
       "isMustPlayer": false,
-      "isMustNPC": false
+      "isMustNPC": false,
+      "isWildcard": false
     },
     {
       "type": "POSITION",

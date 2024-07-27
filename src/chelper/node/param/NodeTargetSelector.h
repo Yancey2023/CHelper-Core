@@ -20,7 +20,7 @@ namespace CHelper::Node {
 
     class NodeTargetSelector : public NodeBase {
     public:
-        bool isMustPlayer = false, isMustNPC = false, isOnlyOne = false;
+        bool isMustPlayer = false, isMustNPC = false, isOnlyOne = false, isWildcard = false;
 
     private:
         std::unique_ptr<NodeNamespaceId> nodeItem;

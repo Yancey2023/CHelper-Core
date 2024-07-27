@@ -19,8 +19,8 @@ namespace CHelper::Node {
 
     static std::shared_ptr<NodeBase> nodePlayerName = std::make_shared<NodeString>(
             "TARGET_SELECTOR_PLAYER_NAME", "玩家名字", false, true, false);
-    static std::shared_ptr<NodeBase> nodeAllPlayer = std::make_shared<NodeSingleSymbol>(
-            "TARGET_SELECTOR_AT", "所有玩家", '*');
+    static std::shared_ptr<NodeBase> nodeWildcard = std::make_shared<NodeSingleSymbol>(
+            "TARGET_SELECTOR_AT", "所有正被记分板跟踪的实体", '*');
     static std::shared_ptr<NodeBase> nodeAt = std::make_shared<NodeSingleSymbol>(
             "TARGET_SELECTOR_AT", "@符号", '@');
     static std::shared_ptr<NodeBase> nodeTargetSelectorVariable = std::make_shared<NodeNormalId>(
@@ -226,7 +226,21 @@ namespace CHelper::Node {
         DEBUG_GET_NODE_END(nodeAt)
         tokenReader.restore();
         if (HEDLEY_UNLIKELY(at.isError())) {
-            //不是@符号开头，当作玩家名处理
+            //不是@符号开头
+            if (isWildcard) {
+                // 尝试匹配通配符
+                tokenReader.push();
+                DEBUG_GET_NODE_BEGIN(nodeWildcard)
+                ASTNode wildcard = nodeWildcard->getASTNodeWithNextNode(tokenReader, cpack);
+                DEBUG_GET_NODE_END(nodeWildcard)
+                if (wildcard.isError()) {
+                    tokenReader.restore();
+                } else {
+                    tokenReader.pop();
+                    return wildcard;
+                }
+            }
+            // 当作玩家名处理
             DEBUG_GET_NODE_BEGIN(nodePlayerName)
             ASTNode result = getByChildNode(tokenReader, cpack, nodePlayerName.get(), ASTNodeId::NODE_TARGET_SELECTOR_PLAYER_NAME);
             DEBUG_GET_NODE_END(nodePlayerName)
@@ -259,6 +273,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->tokens.isEmpty())) {
             TokensView tokens = {astNode->tokens.lexerResult, astNode->tokens.end, astNode->tokens.end};
             ASTNode newAstNode = ASTNode::simpleNode(this, tokens);
+            nodeWildcard->collectSuggestions(astNode, index, suggestions);
             nodeTargetSelectorVariable->collectSuggestions(astNode, index, suggestions);
             nodePlayerName->collectSuggestions(astNode, index, suggestions);
             return true;
@@ -277,6 +292,6 @@ namespace CHelper::Node {
         structure.append(isMustHave, "目标选择器");
     }
 
-    CODEC_NODE(NodeTargetSelector, isMustPlayer, isMustNPC, isOnlyOne)
+    CODEC_NODE(NodeTargetSelector, isMustPlayer, isMustNPC, isOnlyOne, isWildcard)
 
 }// namespace CHelper::Node
