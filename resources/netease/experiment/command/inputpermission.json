@@ -27,6 +27,24 @@
       }
     },
     {
+      "type": "TARGET_SELECTOR",
+      "id": "queryTargets",
+      "description": "权限的拥有者",
+      "isOnlyOne": false,
+      "isMustPlayer": true,
+      "isMustNPC": false,
+      "isWildcard": false
+    },
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "setTargets",
+      "description": "权限的拥有者",
+      "isOnlyOne": false,
+      "isMustPlayer": true,
+      "isMustNPC": false,
+      "isWildcard": false
+    },
+    {
       "type": "NORMAL_ID",
       "id": "queryPermission",
       "brief": "指定操作所作用的权限",
@@ -61,10 +79,12 @@
     }
   ],
   "ast": [
-    ["query", "queryPermission"],
+    ["query", "queryTargets"],
+    ["queryTargets", "queryPermission"],
     ["queryPermission", "state"],
     ["state", "LF"],
-    ["set", "setPermission"],
+    ["set", "setTargets"],
+    ["setTargets", "setPermission"],
     ["setPermission", "state", "LF"]
   ]
 }

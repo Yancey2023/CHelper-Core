@@ -273,7 +273,9 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->tokens.isEmpty())) {
             TokensView tokens = {astNode->tokens.lexerResult, astNode->tokens.end, astNode->tokens.end};
             ASTNode newAstNode = ASTNode::simpleNode(this, tokens);
-            nodeWildcard->collectSuggestions(astNode, index, suggestions);
+            if (isWildcard) {
+                nodeWildcard->collectSuggestions(astNode, index, suggestions);
+            }
             nodeTargetSelectorVariable->collectSuggestions(astNode, index, suggestions);
             nodePlayerName->collectSuggestions(astNode, index, suggestions);
             return true;
