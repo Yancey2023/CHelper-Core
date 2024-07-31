@@ -2,15 +2,10 @@
 // Created by Yancey on 2024/2/24.
 //
 
-#pragma once
-
-#ifndef CHELPER_ANDROIDNATIVE_H
-#define CHELPER_ANDROIDNATIVE_H
-
 #define CHelperAndroid true
 
-#include "../chelper/Core.h"
 #include "pch.h"
+#include "../chelper/Core.h"
 
 std::string jstring2string(JNIEnv *env, jstring jStr) {
     const char *cstr = env->GetStringUTFChars(jStr, nullptr);
@@ -235,5 +230,3 @@ Java_yancey_chelper_core_CHelperCore_old2new0(
     }
     return env->NewStringUTF(CHelper::Core::old2new(blockFixData0, jstring2string(env, old)).c_str());
 }
-
-#endif//CHELPER_ANDROIDNATIVE_H

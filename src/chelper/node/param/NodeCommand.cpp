@@ -80,6 +80,9 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->id != ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
             return false;
         }
+        if (HEDLEY_LIKELY(index == 0 && astNode->tokens.isEmpty())) {
+            suggestions.push_back(Suggestions::singleSuggestion({0, 0, false, nodeCommandStart->normalId}));
+        }
         std::string_view str = astNode->tokens.toString()
                                        .substr(0, index - astNode->tokens.getStartIndex());
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;

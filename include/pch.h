@@ -15,9 +15,13 @@
 // 增加一些用于调试方法
 #define CHelperTest false
 
-// 去除一些没有必要的代码，减少体积
+// 网页版本标识，去除一些没有必要的代码，减少网页版体积
 #define CHelperWeb false
 
+// 安卓版本表示
+#define CHelperAndroid false
+
+// 是否支持导入或导出JSON格式的资源包
 #if CHelperWeb == true
 #define CHelperSupportJson false
 #else
@@ -51,14 +55,14 @@
 #include <cinttypes>
 // json库
 #if CHelperSupportJson == true
-#include "nlohmann/json.hpp"
+#include <nlohmann/json.hpp>
 #else
-#include "nlohmann/detail/macro_scope.hpp"
+#include <nlohmann/detail/macro_scope.hpp>
 #endif
 // 字符串格式化
-#include "format/Format.h"
+#include <format/Format.h>
 // 开始编译器特性
-#include "hedley.h"
+#include <hedley.h>
 // 二进制读写
 #include "../src/chelper/util/BinaryUtil.h"
 // 一些处理json和二进制序列化的宏

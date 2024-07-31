@@ -83,10 +83,10 @@ target_link_libraries(CHelperQt Qt6::Core Qt6::Gui Qt6::Widgets)
 
 # Android Shared Libary
 add_library(CHelperAndroid SHARED
-        src/android/AndroidNative.h
+        src/android/AndroidNative.cpp
         ${SOURCE_H}
         ${SOURCE_CPP})
-target_include_directories(CHelperAndroid PUBLIC include)
+target_include_directories(CHelperAndroid PUBLIC include include/android)
 target_precompile_headers(CHelperAndroid PRIVATE include/pch.h)
 
 # Using GTest to test codes

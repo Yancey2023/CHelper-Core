@@ -37,60 +37,60 @@ int main() {
     std::filesystem::path projectDir(PROJECT_DIR);
     // release
     CHelper::Test::writeSingleJson(projectDir / "resources" / "release" / "vanilla",
-                                   projectDir / "run" / "release-vanilla-1.21.1.03.json");
+                                   projectDir / "run" / "json" / "release-vanilla-1.21.1.03.json");
     CHelper::Test::writeSingleJson(projectDir / "resources" / "release" / "experiment",
-                                   projectDir / "run" / "release-experiment-1.21.1.03.json");
+                                   projectDir / "run" / "json" / "release-experiment-1.21.1.03.json");
     // beta
     CHelper::Test::writeSingleJson(projectDir / "resources" / "beta" / "vanilla",
-                                   projectDir / "run" / "beta-vanilla-1.21.20.21.json");
+                                   projectDir / "run" / "json" / "beta-vanilla-1.21.20.21.json");
     CHelper::Test::writeSingleJson(projectDir / "resources" / "beta" / "experiment",
-                                   projectDir / "run" / "beta-experiment-1.21.20.21.json");
+                                   projectDir / "run" / "json" / "beta-experiment-1.21.20.21.json");
     // netease
     CHelper::Test::writeSingleJson(projectDir / "resources" / "netease" / "vanilla",
-                                   projectDir / "run" / "netease-vanilla-1.20.10.25.json");
+                                   projectDir / "run" / "json" / "netease-vanilla-1.20.10.25.json");
     CHelper::Test::writeSingleJson(projectDir / "resources" / "netease" / "experiment",
-                                   projectDir / "run" / "netease-experiment-1.20.10.25.json");
+                                   projectDir / "run" / "json" / "netease-experiment-1.20.10.25.json");
 }
 
 [[maybe_unused]] void outputBson() {
     std::filesystem::path projectDir(PROJECT_DIR);
     // release
     CHelper::Test::writeBson(projectDir / "resources" / "release" / "vanilla",
-                             projectDir / "run" / "release-vanilla-1.21.1.03.bson");
+                             projectDir / "run" / "bson" / "release-vanilla-1.21.1.03.bson");
     CHelper::Test::writeBson(projectDir / "resources" / "release" / "experiment",
-                             projectDir / "run" / "release-experiment-1.21.1.03.bson");
+                             projectDir / "run" / "bson" / "release-experiment-1.21.1.03.bson");
     // beta
     CHelper::Test::writeBson(projectDir / "resources" / "beta" / "vanilla",
-                             projectDir / "run" / "beta-vanilla-1.21.20.21.bson");
+                             projectDir / "run" / "bson" / "beta-vanilla-1.21.20.21.bson");
     CHelper::Test::writeBson(projectDir / "resources" / "beta" / "experiment",
-                             projectDir / "run" / "beta-experiment-1.21.20.21.bson");
+                             projectDir / "run" / "bson" / "beta-experiment-1.21.20.21.bson");
     // netease
     CHelper::Test::writeBson(projectDir / "resources" / "netease" / "vanilla",
-                             projectDir / "run" / "netease-vanilla-1.20.10.25.bson");
+                             projectDir / "run" / "bson" / "netease-vanilla-1.20.10.25.bson");
     CHelper::Test::writeBson(projectDir / "resources" / "netease" / "experiment",
-                             projectDir / "run" / "netease-experiment-1.20.10.25.bson");
+                             projectDir / "run" / "bson" / "netease-experiment-1.20.10.25.bson");
 }
 
 [[maybe_unused]] void outputBinary() {
     std::filesystem::path projectDir(PROJECT_DIR);
     // release
     CHelper::Test::writeBinary(projectDir / "resources" / "release" / "vanilla",
-                               projectDir / "run" / "release-vanilla-1.21.1.03.cpack");
+                               projectDir / "run" / "cpack" / "release-vanilla-1.21.1.03.cpack");
     CHelper::Test::writeBinary(projectDir / "resources" / "release" / "experiment",
-                               projectDir / "run" / "release-experiment-1.21.1.03.cpack");
+                               projectDir / "run" / "cpack" / "release-experiment-1.21.1.03.cpack");
     // beta
     CHelper::Test::writeBinary(projectDir / "resources" / "beta" / "vanilla",
-                               projectDir / "run" / "beta-vanilla-1.21.20.21.cpack");
+                               projectDir / "run" / "cpack" / "beta-vanilla-1.21.20.21.cpack");
     CHelper::Test::writeBinary(projectDir / "resources" / "beta" / "experiment",
-                               projectDir / "run" / "beta-experiment-1.21.20.21.cpack");
+                               projectDir / "run" / "cpack" / "beta-experiment-1.21.20.21.cpack");
     // netease
     CHelper::Test::writeBinary(projectDir / "resources" / "netease" / "vanilla",
-                               projectDir / "run" / "netease-vanilla-1.20.10.25.cpack");
+                               projectDir / "run" / "cpack" / "netease-vanilla-1.20.10.25.cpack");
     CHelper::Test::writeBinary(projectDir / "resources" / "netease" / "experiment",
-                               projectDir / "run" / "netease-experiment-1.20.10.25.cpack");
+                               projectDir / "run" / "cpack" / "netease-experiment-1.20.10.25.cpack");
     // old2new
     std::filesystem::path input = projectDir / "resources" / "old2new" / "blockFixData.json";
-    std::filesystem::path output = projectDir / "run" / "ol2new.dat";
+    std::filesystem::path output = projectDir / "run" / "old2new" / "old2new.dat";
     CHelper::Old2New::BlockFixData blockFixData = CHelper::Old2New::blockFixDataFromJson(CHelper::JsonUtil::getJsonFromFile(input));
     std::filesystem::create_directories(output.parent_path());
     std::ofstream f(output, std::ios::binary);
