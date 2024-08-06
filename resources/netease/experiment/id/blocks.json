@@ -8,7 +8,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -82,7 +82,7 @@
         {
           "key": "door_hinge_bit",
           "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -97,7 +97,7 @@
         {
           "key": "open_bit",
           "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -111,7 +111,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -157,7 +157,7 @@
         },
         {
           "key": "in_wall_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -171,7 +171,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -191,7 +191,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -305,7 +305,7 @@
         },
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -426,7 +426,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -434,7 +434,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -566,7 +566,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -580,7 +580,7 @@
         },
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -588,7 +588,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         }
@@ -636,7 +636,7 @@
       "blockStates": [
         {
           "key": "rail_data_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -754,7 +754,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -762,7 +762,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -796,23 +796,24 @@
       "blockStates": [
         {
           "key": "damage",
+          "description": "已弃用，为兼容性而保留 broken： 破碎的铁砧（只能通过命令获得，与完好的铁砧纹理类似，可以正常使用） slightly_damaged： 开裂的铁砧 undamaged： 铁砧 very_damaged： 损坏的铁砧",
           "defaultValue": 0,
           "values": [
             {
               "value": "undamaged",
-              "description": "（默认值）完好的铁砧"
+              "description": "（默认值）已弃用，为兼容性而保留 broken： 破碎的铁砧（只能通过命令获得，与完好的铁砧纹理类似，可以正常使用） slightly_damaged： 开裂的铁砧 undamaged： 铁砧 very_damaged： 损坏的铁砧"
             },
             {
               "value": "slightly_damaged",
-              "description": "轻微受损的铁砧"
+              "description": "已弃用，为兼容性而保留 broken： 破碎的铁砧（只能通过命令获得，与完好的铁砧纹理类似，可以正常使用） slightly_damaged： 开裂的铁砧 undamaged： 铁砧 very_damaged： 损坏的铁砧"
             },
             {
               "value": "very_damaged",
-              "description": "严重受损的铁砧"
+              "description": "已弃用，为兼容性而保留 broken： 破碎的铁砧（只能通过命令获得，与完好的铁砧纹理类似，可以正常使用） slightly_damaged： 开裂的铁砧 undamaged： 铁砧 very_damaged： 损坏的铁砧"
             },
             {
               "value": "broken",
-              "description": "完全破损的铁砧（无法使用，且使用普通纹理）"
+              "description": "已弃用，为兼容性而保留 broken： 破碎的铁砧（只能通过命令获得，与完好的铁砧纹理类似，可以正常使用） slightly_damaged： 开裂的铁砧 undamaged： 铁砧 very_damaged： 损坏的铁砧"
             }
           ]
         },
@@ -850,7 +851,7 @@
       "blockStates": [
         {
           "key": "persistent_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -864,7 +865,7 @@
         },
         {
           "key": "update_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -884,7 +885,7 @@
       "blockStates": [
         {
           "key": "persistent_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -898,7 +899,7 @@
         },
         {
           "key": "update_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -918,7 +919,7 @@
       "blockStates": [
         {
           "key": "age_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -995,7 +996,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1069,7 +1070,7 @@
         {
           "key": "door_hinge_bit",
           "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1084,7 +1085,7 @@
         {
           "key": "open_bit",
           "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1098,7 +1099,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1164,7 +1165,7 @@
         },
         {
           "key": "in_wall_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1178,7 +1179,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1198,7 +1199,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1312,7 +1313,7 @@
         },
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1376,7 +1377,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1384,7 +1385,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -1499,7 +1500,7 @@
       "blockStates": [
         {
           "key": "age_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1570,7 +1571,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1578,7 +1579,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -1710,7 +1711,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1724,7 +1725,7 @@
         },
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1732,7 +1733,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         }
@@ -1810,7 +1811,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1884,7 +1885,7 @@
         },
         {
           "key": "head_piece_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1898,7 +1899,7 @@
         },
         {
           "key": "occupied_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -1918,7 +1919,7 @@
       "blockStates": [
         {
           "key": "infiniburn_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2143,7 +2144,7 @@
         {
           "key": "toggle_bit",
           "description": "未使用，钟每响一次，该值就切换一次",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2163,7 +2164,7 @@
       "blockStates": [
         {
           "key": "big_dripleaf_head",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2227,7 +2228,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2301,7 +2302,7 @@
         {
           "key": "door_hinge_bit",
           "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2316,7 +2317,7 @@
         {
           "key": "open_bit",
           "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2330,7 +2331,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2376,7 +2377,7 @@
         },
         {
           "key": "in_wall_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2390,7 +2391,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2410,7 +2411,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2524,7 +2525,7 @@
         },
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2645,7 +2646,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2653,7 +2654,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -2785,7 +2786,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2799,7 +2800,7 @@
         },
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -2807,7 +2808,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         }
@@ -2878,15 +2879,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -2898,15 +2899,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -3014,7 +3015,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -3022,7 +3023,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -3128,7 +3129,7 @@
         },
         {
           "key": "wall_post_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -3199,15 +3200,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -3219,15 +3220,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -3418,7 +3419,7 @@
         },
         {
           "key": "wall_post_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -3442,7 +3443,7 @@
       "blockStates": [
         {
           "key": "brewing_stand_slot_a_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -3456,7 +3457,7 @@
         },
         {
           "key": "brewing_stand_slot_b_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -3470,7 +3471,7 @@
         },
         {
           "key": "brewing_stand_slot_c_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -3494,7 +3495,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -3502,7 +3503,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -3559,15 +3560,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -3579,15 +3580,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -3731,7 +3732,7 @@
       "blockStates": [
         {
           "key": "drag_down",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -3926,7 +3927,7 @@
       "blockStates": [
         {
           "key": "extinguished",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -3991,15 +3992,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -4011,15 +4012,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -4542,7 +4543,7 @@
       "blockStates": [
         {
           "key": "conditional_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -4592,7 +4593,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -4666,7 +4667,7 @@
         {
           "key": "door_hinge_bit",
           "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -4681,7 +4682,7 @@
         {
           "key": "open_bit",
           "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -4695,7 +4696,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -4761,7 +4762,7 @@
         },
         {
           "key": "in_wall_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -4775,7 +4776,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -4795,7 +4796,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -4909,7 +4910,7 @@
         },
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -4929,7 +4930,7 @@
       "blockStates": [
         {
           "key": "persistent_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -4943,7 +4944,7 @@
         },
         {
           "key": "update_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -5068,7 +5069,7 @@
       "blockStates": [
         {
           "key": "age_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -5108,7 +5109,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -5116,7 +5117,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -5248,7 +5249,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -5262,7 +5263,7 @@
         },
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -5270,7 +5271,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         }
@@ -5337,7 +5338,7 @@
         {
           "key": "stripped_bit",
           "description": "此方块属性本应处于已弃用状态，且应为了兼容性而保留，由于存在漏洞，此属性没有被弃用，且其值没有实际效果 方块为去皮木头还是普通木头",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -5824,7 +5825,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -5832,7 +5833,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -5938,7 +5939,7 @@
         },
         {
           "key": "wall_post_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -5978,63 +5979,64 @@
       "blockStates": [
         {
           "key": "wall_block_type",
+          "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙",
           "defaultValue": 0,
           "values": [
             {
               "value": "cobblestone",
-              "description": "（默认值）圆石墙"
+              "description": "（默认值）已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "mossy_cobblestone",
-              "description": "苔石墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "granite",
-              "description": "花岗岩墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "diorite",
-              "description": "闪长岩墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "andesite",
-              "description": "安山岩墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "sandstone",
-              "description": "砂岩墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "brick",
-              "description": "红砖墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "stone_brick",
-              "description": "石砖墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "mossy_stone_brick",
-              "description": "苔石砖墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "nether_brick",
-              "description": "下界砖墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "end_brick",
-              "description": "末地石砖墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "prismarine",
-              "description": "海晶石墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "red_sandstone",
-              "description": "红砂岩墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             },
             {
               "value": "red_nether_brick",
-              "description": "红色下界砖墙"
+              "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
             }
           ]
         },
@@ -6112,7 +6114,7 @@
         },
         {
           "key": "wall_post_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6230,7 +6232,7 @@
       "blockStates": [
         {
           "key": "conditional_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6444,7 +6446,7 @@
         },
         {
           "key": "dead_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6584,7 +6586,7 @@
         {
           "key": "coral_hang_type_bit",
           "description": "墙上的珊瑚扇的类型",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6598,7 +6600,7 @@
         },
         {
           "key": "dead_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6642,7 +6644,7 @@
         {
           "key": "coral_hang_type_bit",
           "description": "墙上的珊瑚扇的类型",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6656,7 +6658,7 @@
         },
         {
           "key": "dead_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6700,7 +6702,7 @@
         {
           "key": "coral_hang_type_bit",
           "description": "墙上的珊瑚扇的类型",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6714,7 +6716,7 @@
         },
         {
           "key": "dead_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6754,7 +6756,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6828,7 +6830,7 @@
         {
           "key": "door_hinge_bit",
           "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6843,7 +6845,7 @@
         {
           "key": "open_bit",
           "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6857,7 +6859,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6923,7 +6925,7 @@
         },
         {
           "key": "in_wall_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6937,7 +6939,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -6961,7 +6963,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7075,7 +7077,7 @@
         },
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7228,7 +7230,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7236,7 +7238,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -7392,7 +7394,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7406,7 +7408,7 @@
         },
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7414,7 +7416,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         }
@@ -7490,7 +7492,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7498,7 +7500,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -7555,15 +7557,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -7575,15 +7577,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -7647,7 +7649,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7721,7 +7723,7 @@
         {
           "key": "door_hinge_bit",
           "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7736,7 +7738,7 @@
         {
           "key": "open_bit",
           "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7750,7 +7752,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7796,7 +7798,7 @@
         },
         {
           "key": "in_wall_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7810,7 +7812,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7830,7 +7832,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -7944,7 +7946,7 @@
         },
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -8065,7 +8067,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -8073,7 +8075,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -8129,7 +8131,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -8143,7 +8145,7 @@
         },
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -8151,7 +8153,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         }
@@ -8163,7 +8165,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -8171,7 +8173,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -8587,7 +8589,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -8595,7 +8597,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -8701,7 +8703,7 @@
         },
         {
           "key": "wall_post_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -8797,7 +8799,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -8805,7 +8807,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -8911,7 +8913,7 @@
         },
         {
           "key": "wall_post_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -8939,7 +8941,7 @@
       "blockStates": [
         {
           "key": "rail_data_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -9013,7 +9015,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -9021,7 +9023,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -9059,15 +9061,16 @@
       "blockStates": [
         {
           "key": "dirt_type",
+          "description": "已弃用，为兼容性而保留 normal coarse",
           "defaultValue": 0,
           "values": [
             {
               "value": "normal",
-              "description": "（默认值）"
+              "description": "（默认值）已弃用，为兼容性而保留 normal coarse"
             },
             {
               "value": "coarse",
-              "description": ""
+              "description": "已弃用，为兼容性而保留 normal coarse"
             }
           ]
         }
@@ -9113,7 +9116,7 @@
         },
         {
           "key": "triggered_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -9192,7 +9195,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -9482,7 +9485,7 @@
         {
           "key": "top_slot_bit",
           "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -9575,7 +9578,7 @@
         },
         {
           "key": "triggered_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -9607,7 +9610,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -9615,7 +9618,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -9657,7 +9660,7 @@
       "blockStates": [
         {
           "key": "end_portal_eye_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -9795,7 +9798,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -9803,7 +9806,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -9923,7 +9926,7 @@
         },
         {
           "key": "in_wall_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -9937,7 +9940,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -10042,7 +10045,7 @@
       "blockStates": [
         {
           "key": "update_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -10248,7 +10251,7 @@
         },
         {
           "key": "item_frame_map_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -10262,7 +10265,7 @@
         },
         {
           "key": "item_frame_photo_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -10432,7 +10435,7 @@
         },
         {
           "key": "item_frame_map_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -10446,7 +10449,7 @@
         },
         {
           "key": "item_frame_photo_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -10746,7 +10749,7 @@
       "blockStates": [
         {
           "key": "rail_data_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -10812,7 +10815,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -10820,7 +10823,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -10889,15 +10892,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -10909,15 +10912,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -11004,15 +11007,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -11024,15 +11027,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -11317,7 +11320,7 @@
         },
         {
           "key": "toggle_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11401,7 +11404,7 @@
         {
           "key": "door_hinge_bit",
           "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11416,7 +11419,7 @@
         {
           "key": "open_bit",
           "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11430,7 +11433,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11476,7 +11479,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11490,7 +11493,7 @@
         },
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11498,7 +11501,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         }
@@ -11514,7 +11517,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11588,7 +11591,7 @@
         {
           "key": "door_hinge_bit",
           "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11603,7 +11606,7 @@
         {
           "key": "open_bit",
           "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11617,7 +11620,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11663,7 +11666,7 @@
         },
         {
           "key": "in_wall_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11677,7 +11680,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11697,7 +11700,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11811,7 +11814,7 @@
         },
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11932,7 +11935,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -11940,7 +11943,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -12072,7 +12075,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -12086,7 +12089,7 @@
         },
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -12094,7 +12097,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         }
@@ -12295,7 +12298,7 @@
       "blockStates": [
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -12464,7 +12467,7 @@
         },
         {
           "key": "persistent_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -12478,7 +12481,7 @@
         },
         {
           "key": "update_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -12517,7 +12520,7 @@
         },
         {
           "key": "persistent_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -12531,7 +12534,7 @@
         },
         {
           "key": "update_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -12573,7 +12576,7 @@
         },
         {
           "key": "powered_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -12631,7 +12634,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -12751,15 +12754,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -12771,15 +12774,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -12866,15 +12869,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -12886,15 +12889,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -13058,15 +13061,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -13078,15 +13081,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -13329,15 +13332,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -13349,15 +13352,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -13425,7 +13428,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -13499,7 +13502,7 @@
         {
           "key": "door_hinge_bit",
           "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -13514,7 +13517,7 @@
         {
           "key": "open_bit",
           "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -13528,7 +13531,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -13594,7 +13597,7 @@
         },
         {
           "key": "in_wall_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -13608,7 +13611,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -13628,7 +13631,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -13742,7 +13745,7 @@
         },
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -13762,7 +13765,7 @@
       "blockStates": [
         {
           "key": "persistent_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -13776,7 +13779,7 @@
         },
         {
           "key": "update_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -13901,7 +13904,7 @@
       "blockStates": [
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -13971,7 +13974,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -13979,7 +13982,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -14111,7 +14114,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -14125,7 +14128,7 @@
         },
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -14133,7 +14136,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         }
@@ -14200,7 +14203,7 @@
         {
           "key": "stripped_bit",
           "description": "此方块属性本应处于已弃用状态，且应为了兼容性而保留，由于存在漏洞，此属性没有被弃用，且其值没有实际效果 方块为去皮木头还是普通木头",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -14395,7 +14398,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -14403,7 +14406,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -14437,7 +14440,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -14445,7 +14448,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -14523,7 +14526,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -14531,7 +14534,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -14637,7 +14640,7 @@
         },
         {
           "key": "wall_post_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -14697,7 +14700,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -14705,7 +14708,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -14835,7 +14838,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -14843,7 +14846,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -14885,7 +14888,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -14999,7 +15002,7 @@
         },
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -15043,7 +15046,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -15051,7 +15054,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -15115,7 +15118,7 @@
         },
         {
           "key": "powered_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -15186,15 +15189,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -15206,15 +15209,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -15306,7 +15309,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -15314,7 +15317,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -15423,15 +15426,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -15443,15 +15446,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -15692,7 +15695,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -15712,7 +15715,7 @@
       "blockStates": [
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -15807,7 +15810,7 @@
         },
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -15827,7 +15830,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -15835,7 +15838,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -15937,7 +15940,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -15945,7 +15948,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -16051,7 +16054,7 @@
         },
         {
           "key": "wall_post_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -16075,7 +16078,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -16242,7 +16245,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -16250,7 +16253,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -16356,7 +16359,7 @@
         },
         {
           "key": "wall_post_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -16420,7 +16423,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -16428,7 +16431,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -16534,7 +16537,7 @@
         },
         {
           "key": "wall_post_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -16554,7 +16557,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -16562,7 +16565,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -16596,7 +16599,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -16604,7 +16607,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -16732,7 +16735,7 @@
         },
         {
           "key": "output_lit_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -16746,7 +16749,7 @@
         },
         {
           "key": "output_subtract_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -16847,7 +16850,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -16855,7 +16858,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -16889,7 +16892,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -16897,7 +16900,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -17056,15 +17059,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -17076,15 +17079,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -17154,23 +17157,24 @@
       "blockStates": [
         {
           "key": "chisel_type",
+          "description": "已弃用，为兼容性而保留 default：普通变种 chiseled：雕纹变种 lines：柱变种 smooth：平滑变种",
           "defaultValue": 0,
           "values": [
             {
               "value": "default",
-              "description": "（默认值）方块的普通变种"
+              "description": "（默认值）已弃用，为兼容性而保留 default：普通变种 chiseled：雕纹变种 lines：柱变种 smooth：平滑变种"
             },
             {
               "value": "chiseled",
-              "description": "方块的雕纹变种"
+              "description": "已弃用，为兼容性而保留 default：普通变种 chiseled：雕纹变种 lines：柱变种 smooth：平滑变种"
             },
             {
               "value": "lines",
-              "description": "方块的柱变种"
+              "description": "已弃用，为兼容性而保留 default：普通变种 chiseled：雕纹变种 lines：柱变种 smooth：平滑变种"
             },
             {
               "value": "smooth",
-              "description": "方块的平滑变种"
+              "description": "已弃用，为兼容性而保留 default：普通变种 chiseled：雕纹变种 lines：柱变种 smooth：平滑变种"
             }
           ]
         },
@@ -17200,7 +17204,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -17208,7 +17212,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -17248,23 +17252,24 @@
       "blockStates": [
         {
           "key": "chisel_type",
+          "description": "已弃用，为兼容性而保留 default：普通变种 chiseled：雕纹变种 lines：柱变种 smooth：平滑变种",
           "defaultValue": 0,
           "values": [
             {
               "value": "default",
-              "description": "（默认值）方块的普通变种"
+              "description": "（默认值）已弃用，为兼容性而保留 default：普通变种 chiseled：雕纹变种 lines：柱变种 smooth：平滑变种"
             },
             {
               "value": "chiseled",
-              "description": "方块的雕纹变种"
+              "description": "已弃用，为兼容性而保留 default：普通变种 chiseled：雕纹变种 lines：柱变种 smooth：平滑变种"
             },
             {
               "value": "lines",
-              "description": "方块的柱变种"
+              "description": "已弃用，为兼容性而保留 default：普通变种 chiseled：雕纹变种 lines：柱变种 smooth：平滑变种"
             },
             {
               "value": "smooth",
-              "description": "方块的平滑变种"
+              "description": "已弃用，为兼容性而保留 default：普通变种 chiseled：雕纹变种 lines：柱变种 smooth：平滑变种"
             }
           ]
         },
@@ -17302,7 +17307,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -17310,7 +17315,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -17431,15 +17436,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -17451,15 +17456,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -17669,7 +17674,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -17677,7 +17682,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -17717,23 +17722,24 @@
       "blockStates": [
         {
           "key": "sand_stone_type",
+          "description": "已弃用，为兼容性而保留 default： 普通变种 heiroglyphs： 雕纹变种 cut： 切制变种 smooth： 平滑变种",
           "defaultValue": 0,
           "values": [
             {
               "value": "default",
-              "description": "（默认值）红砂岩"
+              "description": "（默认值）已弃用，为兼容性而保留 default： 普通变种 heiroglyphs： 雕纹变种 cut： 切制变种 smooth： 平滑变种"
             },
             {
               "value": "heiroglyphs",
-              "description": "雕纹红砂岩"
+              "description": "已弃用，为兼容性而保留 default： 普通变种 heiroglyphs： 雕纹变种 cut： 切制变种 smooth： 平滑变种"
             },
             {
               "value": "cut",
-              "description": "切制红砂岩"
+              "description": "已弃用，为兼容性而保留 default： 普通变种 heiroglyphs： 雕纹变种 cut： 切制变种 smooth： 平滑变种"
             },
             {
               "value": "smooth",
-              "description": "平滑红砂岩"
+              "description": "已弃用，为兼容性而保留 default： 普通变种 heiroglyphs： 雕纹变种 cut： 切制变种 smooth： 平滑变种"
             }
           ]
         }
@@ -17745,7 +17751,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -17753,7 +17759,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -18001,7 +18007,7 @@
       "blockStates": [
         {
           "key": "conditional_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -18087,15 +18093,16 @@
       "blockStates": [
         {
           "key": "sand_type",
+          "description": "已弃用，为兼容性而保留 normal： red：",
           "defaultValue": 0,
           "values": [
             {
               "value": "normal",
-              "description": "（默认值）"
+              "description": "（默认值）已弃用，为兼容性而保留 normal： red："
             },
             {
               "value": "red",
-              "description": ""
+              "description": "已弃用，为兼容性而保留 normal： red："
             }
           ]
         }
@@ -18113,24 +18120,24 @@
       "blockStates": [
         {
           "key": "sand_stone_type",
-          "description": "已弃用，为兼容性而保留 default： 砂岩 heiroglyphs： 雕纹砂岩 cut： 切制砂岩 smooth： 平滑砂岩",
+          "description": "已弃用，为兼容性而保留 default： 普通变种 heiroglyphs： 雕纹变种 cut： 切制变种 smooth： 平滑变种",
           "defaultValue": 0,
           "values": [
             {
               "value": "default",
-              "description": "（默认值）已弃用，为兼容性而保留 default： 砂岩 heiroglyphs： 雕纹砂岩 cut： 切制砂岩 smooth： 平滑砂岩"
+              "description": "（默认值）已弃用，为兼容性而保留 default： 普通变种 heiroglyphs： 雕纹变种 cut： 切制变种 smooth： 平滑变种"
             },
             {
               "value": "heiroglyphs",
-              "description": "已弃用，为兼容性而保留 default： 砂岩 heiroglyphs： 雕纹砂岩 cut： 切制砂岩 smooth： 平滑砂岩"
+              "description": "已弃用，为兼容性而保留 default： 普通变种 heiroglyphs： 雕纹变种 cut： 切制变种 smooth： 平滑变种"
             },
             {
               "value": "cut",
-              "description": "已弃用，为兼容性而保留 default： 砂岩 heiroglyphs： 雕纹砂岩 cut： 切制砂岩 smooth： 平滑砂岩"
+              "description": "已弃用，为兼容性而保留 default： 普通变种 heiroglyphs： 雕纹变种 cut： 切制变种 smooth： 平滑变种"
             },
             {
               "value": "smooth",
-              "description": "已弃用，为兼容性而保留 default： 砂岩 heiroglyphs： 雕纹砂岩 cut： 切制砂岩 smooth： 平滑砂岩"
+              "description": "已弃用，为兼容性而保留 default： 普通变种 heiroglyphs： 雕纹变种 cut： 切制变种 smooth： 平滑变种"
             }
           ]
         }
@@ -18142,7 +18149,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -18150,7 +18157,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -18192,7 +18199,7 @@
       "blockStates": [
         {
           "key": "age_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -18281,7 +18288,7 @@
         },
         {
           "key": "stability_check",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -18305,7 +18312,7 @@
       "blockStates": [
         {
           "key": "bloom",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -18349,7 +18356,7 @@
       "blockStates": [
         {
           "key": "active",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -18363,7 +18370,7 @@
         },
         {
           "key": "can_summon",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -18678,7 +18685,7 @@
         },
         {
           "key": "dead_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -18860,7 +18867,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -18916,7 +18923,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -18924,7 +18931,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -18958,7 +18965,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -18966,7 +18973,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -19000,7 +19007,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19008,7 +19015,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -19075,7 +19082,7 @@
       "blockStates": [
         {
           "key": "covered_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19134,7 +19141,7 @@
       "blockStates": [
         {
           "key": "extinguished",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19253,7 +19260,7 @@
       "blockStates": [
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19345,7 +19352,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19419,7 +19426,7 @@
         {
           "key": "door_hinge_bit",
           "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19434,7 +19441,7 @@
         {
           "key": "open_bit",
           "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19448,7 +19455,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19494,7 +19501,7 @@
         },
         {
           "key": "in_wall_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19508,7 +19515,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19528,7 +19535,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19642,7 +19649,7 @@
         },
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19763,7 +19770,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19771,7 +19778,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -19903,7 +19910,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19917,7 +19924,7 @@
         },
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -19925,7 +19932,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         }
@@ -20702,7 +20709,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -20710,7 +20717,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -20744,7 +20751,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -20871,7 +20878,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -20879,7 +20886,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -21376,15 +21383,16 @@
       "blockStates": [
         {
           "key": "structure_void_type",
+          "description": "已弃用，为兼容性而保留 air： 结构空气（已移除） void： 结构空位",
           "defaultValue": 0,
           "values": [
             {
               "value": "void",
-              "description": "（默认值）结构空位"
+              "description": "（默认值）已弃用，为兼容性而保留 air： 结构空气（已移除） void： 结构空位"
             },
             {
               "value": "air",
-              "description": "结构空气"
+              "description": "已弃用，为兼容性而保留 air： 结构空气（已移除） void： 结构空位"
             }
           ]
         }
@@ -21420,7 +21428,7 @@
         {
           "key": "hanging",
           "description": "作用未知，为false时不读取其战利品表",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -21464,7 +21472,7 @@
         {
           "key": "hanging",
           "description": "作用未知，为false时不读取其战利品表",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -21569,7 +21577,7 @@
       "blockStates": [
         {
           "key": "allow_underwater_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -21583,7 +21591,7 @@
         },
         {
           "key": "explode_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -21709,7 +21717,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -21723,7 +21731,7 @@
         },
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -21731,7 +21739,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         }
@@ -21771,7 +21779,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -21785,7 +21793,7 @@
         },
         {
           "key": "disarmed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -21799,7 +21807,7 @@
         },
         {
           "key": "powered_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -21813,7 +21821,7 @@
         },
         {
           "key": "suspended_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -21833,7 +21841,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -21869,7 +21877,7 @@
         },
         {
           "key": "powered_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -22128,7 +22136,7 @@
         },
         {
           "key": "output_lit_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -22142,7 +22150,7 @@
         },
         {
           "key": "output_subtract_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -22385,7 +22393,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -22459,7 +22467,7 @@
         {
           "key": "door_hinge_bit",
           "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -22474,7 +22482,7 @@
         {
           "key": "open_bit",
           "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -22488,7 +22496,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -22554,7 +22562,7 @@
         },
         {
           "key": "in_wall_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -22568,7 +22576,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -22592,7 +22600,7 @@
       "blockStates": [
         {
           "key": "attached_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -22706,7 +22714,7 @@
         },
         {
           "key": "hanging",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -22859,7 +22867,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -22867,7 +22875,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -23023,7 +23031,7 @@
         },
         {
           "key": "open_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -23037,7 +23045,7 @@
         },
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -23045,7 +23053,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         }
@@ -23205,7 +23213,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -23213,7 +23221,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -23295,7 +23303,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -23303,7 +23311,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -23385,7 +23393,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -23393,7 +23401,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -23475,7 +23483,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -23483,7 +23491,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -23565,7 +23573,7 @@
       "blockStates": [
         {
           "key": "upside_down_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -23573,7 +23581,7 @@
             },
             {
               "value": false,
-              "description": "（默认值）方块块主要位于方块网格的下半部分"
+              "description": "（默认值）方块主要位于方块网格的下半部分"
             }
           ]
         },
@@ -23815,15 +23823,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -23835,15 +23843,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -23944,7 +23952,7 @@
         {
           "key": "stripped_bit",
           "description": "已弃用，为兼容性而保留 方块为去皮木头还是普通木头",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -23995,7 +24003,7 @@
       "blockStates": [
         {
           "key": "button_pressed_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -24069,7 +24077,7 @@
         {
           "key": "door_hinge_bit",
           "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -24084,7 +24092,7 @@
         {
           "key": "open_bit",
           "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -24098,7 +24106,7 @@
         },
         {
           "key": "upper_block_bit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -24204,7 +24212,7 @@
         {
           "key": "top_slot_bit",
           "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
@@ -24278,15 +24286,15 @@
         },
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }
@@ -24298,15 +24306,15 @@
       "blockStates": [
         {
           "key": "lit",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "values": [
             {
               "value": true,
-              "description": "方块处于熄灭状态"
+              "description": "方块处于点亮状态"
             },
             {
               "value": false,
-              "description": "（默认值）方块处于点亮状态"
+              "description": "（默认值）方块处于熄灭状态"
             }
           ]
         }

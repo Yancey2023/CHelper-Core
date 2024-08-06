@@ -196,7 +196,7 @@ namespace CHelper {
         repeatNodeData.emplace_back(j);
     }
 
-    void CPack::applyCommand(const nlohmann::json &j) {
+    void CPack::applyCommand(const nlohmann::json &j) const {
         commands->push_back(j);
     }
 

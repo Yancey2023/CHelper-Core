@@ -16,7 +16,7 @@ namespace CHelper::JsonUtil {
         std::string result;
         StringReader stringReader(input);
         while (true) {
-            signed char ch = stringReader.peek();
+            signed char ch = stringReader.read();
             switch (ch) {
                 case EOF:
                     return std::move(result);
@@ -29,14 +29,11 @@ namespace CHelper::JsonUtil {
                 case '\r':
                 case '\t':
                     result.push_back('\\');
-                    result.push_back(ch);
-                    stringReader.skip();
                     break;
                 default:
-                    result.push_back(ch);
                     break;
             }
-            stringReader.skip();
+            result.push_back(ch);
         }
     }
 
@@ -70,8 +67,10 @@ namespace CHelper::JsonUtil {
             ch = stringReader.next();
             switch (ch) {
                 case EOF:
-                    result.errorReason = ErrorReason::incomplete(stringReader.pos.index - 1, stringReader.pos.index,
-                                                                 "转义字符缺失后半部分");
+                    result.errorReason = ErrorReason::incomplete(
+                            stringReader.pos.index - 1,
+                            stringReader.pos.index,
+                            "转义字符缺失后半部分");
                     break;
                 case '\"':
                 case '\\':
@@ -108,9 +107,7 @@ namespace CHelper::JsonUtil {
                                         result.errorReason = ErrorReason::incomplete(
                                                 stringReader.pos.index - escapeSequence.length() - 1,
                                                 stringReader.pos.index + 1,
-                                                FormatUtil::format(
-                                                        "字符串转义出现非法字符{0} -> \\u{1}",
-                                                        item, escapeSequence));
+                                                fmt::format("字符串转义出现非法字符{0} -> \\u{1}", item, escapeSequence));
                                         return true;
                                     }
                                 }))) {
@@ -153,7 +150,7 @@ namespace CHelper::JsonUtil {
                 default:
                     result.errorReason = ErrorReason::contentError(
                             stringReader.pos.index - 1, stringReader.pos.index + 1,
-                            FormatUtil::format("未知的转义字符 -> \\{0}", ch));
+                            fmt::format("未知的转义字符 -> \\{0}", ch));
                     break;
             }
             if (HEDLEY_UNLIKELY(result.errorReason != nullptr)) {

@@ -3175,7 +3175,7 @@
     },
     {
       "name": "minecraft:snow_layer",
-      "description": "\u003c工作台\u003e雪块*3-\u003e顶层雪*6"
+      "description": "\u003c工作台\u003e雪块*3-\u003e雪层*6"
     },
     {
       "name": "minecraft:soul_campfire",

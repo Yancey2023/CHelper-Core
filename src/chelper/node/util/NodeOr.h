@@ -15,7 +15,7 @@ namespace CHelper::Node {
     public:
         std::vector<const NodeBase *> childNodes;
         bool isAttachToEnd = false, isUseFirst = false;
-        ASTNodeId::ASTNodeId nodeId;
+        ASTNodeId::ASTNodeId nodeId = ASTNodeId::NONE;
         bool noSuggestion = false;
         const char *defaultErrorReason = nullptr;
 

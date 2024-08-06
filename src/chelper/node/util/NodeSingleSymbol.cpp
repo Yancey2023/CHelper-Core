@@ -30,16 +30,16 @@ namespace CHelper::Node {
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_UNLIKELY(symbolNode.isError())) {
             if (HEDLEY_LIKELY(symbolNode.tokens.isEmpty())) {
-                return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::incomplete(symbolNode.tokens, FormatUtil::format("命令不完整，需要符号{0}", symbol)));
+                return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::incomplete(symbolNode.tokens, fmt::format("命令不完整，需要符号{0}", symbol)));
             } else {
-                return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::typeError(symbolNode.tokens, FormatUtil::format("类型不匹配，需要符号{0}，但当前内容为{1}", symbol, symbolNode.tokens.toString())));
+                return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::typeError(symbolNode.tokens, fmt::format("类型不匹配，需要符号{0}，但当前内容为{1}", symbol, symbolNode.tokens.toString())));
             }
         }
         std::string_view str = symbolNode.tokens.toString();
         if (HEDLEY_LIKELY(str.length() == 1 && str[0] == symbol)) {
             return symbolNode;
         }
-        return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::contentError(symbolNode.tokens, FormatUtil::format("内容不匹配，正确的符号为{0}，但当前内容为{1}", symbol, str)));
+        return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::contentError(symbolNode.tokens, fmt::format("内容不匹配，正确的符号为{0}，但当前内容为{1}", symbol, str)));
     }
 
     bool NodeSingleSymbol::collectSuggestions(const ASTNode *astNode,

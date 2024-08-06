@@ -73,9 +73,7 @@ namespace CHelper::Node {
         } else if (HEDLEY_UNLIKELY(childNodes.empty())) {
             tokenReader.pop();
             TokensView tokens = number.tokens;
-            errorReason = ErrorReason::typeError(tokens, FormatUtil::format(
-                                                                 "类型不匹配，{0}不是有效的坐标参数",
-                                                                 tokens.toString()));
+            errorReason = ErrorReason::typeError(tokens, fmt::format("类型不匹配，{0}不是有效的坐标参数", tokens.toString()));
         } else {
             tokenReader.restore();
         }

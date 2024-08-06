@@ -37,14 +37,17 @@ namespace CHelper {
     }
 
     [[nodiscard]] bool TokensView::isAllWhitespace() const {
-        return std::all_of(lexerResult->allTokens.begin() + start, lexerResult->allTokens.begin() + end,
+        return std::all_of(lexerResult->allTokens.begin() + static_cast<std::string::difference_type>(start),
+                           lexerResult->allTokens.begin() + static_cast<std::string::difference_type>(end),
                            [](const auto &item) {
                                return item.type == TokenType::WHITE_SPACE;
                            });
     }
 
     void TokensView::forEach(std::function<void(const Token &token)> function) const {
-        std::for_each(lexerResult->allTokens.begin() + start, lexerResult->allTokens.begin() + end, std::move(function));
+        std::for_each(lexerResult->allTokens.begin() + static_cast<std::string::difference_type>(start),
+                      lexerResult->allTokens.begin() + static_cast<std::string::difference_type>(end), 
+                      std::move(function));
     }
 
     [[nodiscard]] size_t TokensView::getIndex(size_t tokenIndex) const {

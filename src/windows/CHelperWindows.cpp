@@ -25,7 +25,7 @@ static CHelper::Core *core = nullptr;
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
     std::filesystem::path projectDir(PROJECT_DIR);
-    core = CHelper::Core::createByBinary(projectDir / "run" / "beta-experiment-1.21.20.21.cpack");
+    core = CHelper::Core::createByBinary(projectDir / "run" / (std::string("beta-experiment-") + CPACK_VERSION_BETA + ".cpack"));
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         exit(-1);
     }
@@ -242,7 +242,7 @@ void onTextChanged(const std::string &command) {
                 std::string greenPart = item.content->name;
                 if (item.end == command.length()) {
                     CHelper::ASTNode astNode = CHelper::Parser::parse(result, core->getCPack());
-                    if (astNode.canAddWhitespace && astNode.isAllWhitespaceError()) {
+                    if (item.isAddWhitespace && astNode.isAllWhitespaceError()) {
                         greenPart.push_back(' ');
                     }
                 }

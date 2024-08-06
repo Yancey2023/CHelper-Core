@@ -393,13 +393,13 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
             {
                     []() { return CHelper::Node::NodeJsonFloat{
                                    "ID", "description",
-                                   0, 3}; },
+                                   0.0F, 3.0F}; },
                     []() { return CHelper::Node::NodeJsonFloat{
                                    "ID", "description",
-                                   std::nullopt, 3}; },
+                                   std::nullopt, 3.0F}; },
                     []() { return CHelper::Node::NodeJsonFloat{
                                    "ID", "description",
-                                   1, std::nullopt}; },
+                                   1.0F, std::nullopt}; },
                     []() { return CHelper::Node::NodeJsonFloat{
                                    "ID", "description",
                                    std::nullopt, std::nullopt}; },

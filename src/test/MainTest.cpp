@@ -5,7 +5,6 @@
 #include <gtest/gtest.h>
 
 #include "../chelper/Core.h"
-#include "../chelper/lexer/Lexer.h"
 #include "../chelper/parser/Parser.h"
 #include "param_deliver.h"
 
@@ -71,7 +70,7 @@ namespace CHelper::Test {
                                  .build()
                       << std::endl;
             std::cout << std::endl;
-            auto core2 = Core::createByBson(output);
+            [[maybe_unused]] auto core2 = Core::createByBson(output);
             std::cout << std::endl;
         } catch (const std::exception &e) {
             Profile::printAndClear(e);

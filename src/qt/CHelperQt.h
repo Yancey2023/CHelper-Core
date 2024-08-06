@@ -32,11 +32,9 @@ private slots:
 
     void copy();
 
-    void about();
-
 private:
     Ui::CHelperApp *ui;
-    CHelper::Core *core;
+    CHelper::Core *core = nullptr;
 };
 
 int main(int argc, char *argv[]);

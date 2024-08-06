@@ -1,0 +1,16 @@
+[submodule "include/json"]
+	path = include/json
+	url = https://github.com/nlohmann/json.git
+	branch = master
+[submodule "include/fmt"]
+	path = include/fmt
+	url = https://github.com/fmtlib/fmt.git
+	branch = master
+[submodule "include/emscripten"]
+	path = include/emscripten
+	url = https://github.com/emscripten-core/emscripten.git
+	branch = main
+[submodule "include/googletest"]
+	path = include/googletest
+	url = https://github.com/google/googletest.git
+	branch = main

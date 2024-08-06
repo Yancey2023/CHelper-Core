@@ -79,7 +79,7 @@
       "description": "玩家之间能否造成伤害。"
     },
     {
-      "name": "respawnblocksexplode",
+      "name": "respawnBlocksExplode",
       "description": "玩家在非主世界维度使用床或在非下界维度使用重生锚时是否会爆炸。"
     },
     {
@@ -96,7 +96,7 @@
     },
     {
       "name": "showDeathMessages",
-      "description": "是否在聊天框中显示玩家的死亡信息。同样影响是否在宠物（狼、猫和鹦鹉）死亡时通知它的主人。"
+      "description": "是否在聊天框中显示玩家的死亡信息。同样影响是否在宠物（已驯服的狼、猫、马、驴、骡、羊驼、骷髅马（仅基岩版）和鹦鹉）死亡时通知它的主人（仅Java版）或广播给世界中的每一个玩家（仅基岩版）。"
     },
     {
       "name": "showTags",

@@ -36,8 +36,7 @@ namespace CHelper::Node {
         ASTNode commandName = tokenReader.readStringASTNode(this, ASTNodeId::NODE_COMMAND_COMMAND_NAME);
         if (HEDLEY_UNLIKELY(commandName.tokens.size() == 0)) {
             TokensView tokens = tokenReader.collect();
-            return ASTNode::andNode(this, {std::move(commandName)}, tokens,
-                                    ErrorReason::contentError(tokens, "命令名字为空"), ASTNodeId::NODE_COMMAND_COMMAND);
+            return ASTNode::andNode(this, {std::move(commandName)}, tokens, ErrorReason::contentError(tokens, "命令名字为空"), ASTNodeId::NODE_COMMAND_COMMAND);
         }
         std::string_view str = commandName.tokens.toString();
         const NodePerCommand *currentCommand = nullptr;
@@ -59,7 +58,7 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(currentCommand == nullptr)) {
             TokensView tokens = tokenReader.collect();
-            return ASTNode::andNode(this, {std::move(commandName)}, tokens, ErrorReason::contentError(tokens, FormatUtil::format("命令名字不匹配，找不到名为{0}的命令", str)), ASTNodeId::NODE_COMMAND_COMMAND);
+            return ASTNode::andNode(this, {std::move(commandName)}, tokens, ErrorReason::contentError(tokens, fmt::format("命令名字不匹配，找不到名为{0}的命令", str)), ASTNodeId::NODE_COMMAND_COMMAND);
         }
         ASTNode usage = currentCommand->getASTNode(tokenReader, cpack);
         return ASTNode::andNode(this, {std::move(commandName), std::move(usage)},

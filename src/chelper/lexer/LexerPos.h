@@ -2,12 +2,12 @@
 // Created by Yancey on 2023/11/6.
 //
 
-#include "pch.h"
-
 #pragma once
 
 #ifndef CHELPER_POS_H
 #define CHELPER_POS_H
+
+#include "pch.h"
 
 namespace CHelper {
 

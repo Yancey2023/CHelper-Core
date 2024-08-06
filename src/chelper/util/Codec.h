@@ -5,6 +5,9 @@
 #ifndef CHELPER_CODEC_H
 #define CHELPER_CODEC_H
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "bugprone-macro-parentheses"
+
 #if CHelperSupportJson == true
 #define CHELPER_CODEC_JSON_TO(v1) JsonUtil::encode(j, #v1, t.v1);
 #define CHELPER_CODEC_JSON_FROM(v1) JsonUtil::decode(j, #v1, t.v1);
@@ -181,5 +184,7 @@
         t = static_cast<Type>(binaryReader.read<ValueType>());           \
     }
 #endif
+
+#pragma clang diagnostic pop
 
 #endif//CHELPER_CODEC_H

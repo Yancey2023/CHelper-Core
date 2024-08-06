@@ -60,7 +60,7 @@ namespace CHelper {
 
         void applyRepeat(const nlohmann::json &j);
 
-        void applyCommand(const nlohmann::json &j);
+        void applyCommand(const nlohmann::json &j) const;
 #endif
 
         void afterApply();

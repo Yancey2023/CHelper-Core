@@ -9,12 +9,13 @@
 #include <QListWidget>
 #include <QMessageBox>
 #include <QStringListModel>
+#include <param_deliver.h>
 
 CHelperApp::CHelperApp(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::CHelperApp) {
     ui->setupUi(this);
-    QFile file(":/assets/release-experiment-1.21.1.03.cpack");
+    QFile file(QString(":/assets/release-experiment-") + CPACK_VERSION_RELEASE + ".cpack");
     if (file.open(QIODevice::ReadOnly) && file.isReadable()) {
         std::istringstream iss(file.readAll().toStdString());
         core = CHelper::Core::create([&iss]() {
@@ -102,12 +103,6 @@ void CHelperApp::onSuggestionClick(const QModelIndex &index) {
 void CHelperApp::copy() {
     QClipboard *clip = QApplication::clipboard();
     clip->setText(ui->lineEdit->text());
-}
-
-
-void CHelperApp::about() {
-    QMessageBox::about(this, tr("About"),
-                       tr("Welcome to use <b>CHelper</b>. It is made by Yancey."));
 }
 
 int main(int argc, char *argv[]) {

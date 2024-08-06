@@ -13,57 +13,59 @@ if (MSVC)
 endif ()
 
 # ThirdParty: Qt6
-find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
+find_package(Qt6 COMPONENTS Core Gui Widgets)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 # ThirdParty: GTest
-include(FetchContent)
-FetchContent_Declare(
-        googletest
-        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-)
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
-include(GoogleTest)
+add_subdirectory(include/googletest)
 enable_testing()
 
+# ThirdParty: hedley
+include_directories(include/hedley/include)
+
+# ThirdParty: json
+include_directories(include/json/include)
+
+# ThirdParty: fmt
+add_subdirectory(include/fmt)
+link_libraries(fmt::fmt)
+
 # Param Deliver
+set(CPACK_VERSION_RELEASE "1.21.2.02")
+set(CPACK_VERSION_BETA "1.21.30.21")
+set(CPACK_VERSION_NETEASE "1.20.10.25")
 configure_file(include/param_deliver.h.in include/param_deliver.h @ONLY)
 
 # Sources
-file(GLOB_RECURSE SOURCE_H src/chelper/*.h)
-file(GLOB_RECURSE SOURCE_CPP src/chelper/*.cpp)
+file(GLOB_RECURSE SOURCE_FILE src/chelper/*.h src/chelper/*.cpp)
+include_directories(include/pch ${CMAKE_BINARY_DIR}/include)
 
 # Console Application
 add_executable(CHelperCmd
         src/cmd/CHelperCmd.h
         src/cmd/CHelperCmd.cpp
-        ${SOURCE_H}
-        ${SOURCE_CPP}
+        ${SOURCE_FILE}
 )
-target_include_directories(CHelperCmd PUBLIC include ${CMAKE_BINARY_DIR}/include)
-target_precompile_headers(CHelperCmd PRIVATE include/pch.h)
+target_precompile_headers(CHelperCmd PRIVATE include/pch/pch.h)
 
 # Web Application
 add_library(CHelperWeb
         src/web/CHelperWeb.cpp
-        ${SOURCE_H}
-        ${SOURCE_CPP}
+        ${SOURCE_FILE}
 )
-target_include_directories(CHelperWeb PUBLIC include)
-target_precompile_headers(CHelperWeb PRIVATE include/pch.h)
+target_include_directories(CHelperWeb PUBLIC include/emscripten/system/include)
+target_precompile_headers(CHelperWeb PRIVATE include/pch/pch.h)
 
 # Windows Application
 add_executable(CHelperWindows
         src/windows/CHelperWindows.h
         src/windows/CHelperWindows.cpp
-        ${SOURCE_H}
-        ${SOURCE_CPP}
+        ${SOURCE_FILE}
 )
-target_include_directories(CHelperWindows PUBLIC include ${CMAKE_BINARY_DIR}/include)
-target_precompile_headers(CHelperWindows PRIVATE include/pch.h)
+target_precompile_headers(CHelperWindows PRIVATE include/pch/pch.h)
 if (MSVC)
     set_target_properties(CHelperWindows PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
 endif ()
@@ -74,26 +76,21 @@ add_executable(CHelperQt WIN32
         src/qt/CHelperQt.cpp
         src/qt/chelper.qrc
         src/qt/chelper.ui
-        ${SOURCE_H}
-        ${SOURCE_CPP}
+        ${SOURCE_FILE}
 )
-target_include_directories(CHelperQt PUBLIC include)
-target_precompile_headers(CHelperQt PRIVATE include/pch.h)
+target_precompile_headers(CHelperQt PRIVATE include/pch/pch.h)
 target_link_libraries(CHelperQt Qt6::Core Qt6::Gui Qt6::Widgets)
 
 # Android Shared Libary
 add_library(CHelperAndroid SHARED
         src/android/AndroidNative.cpp
-        ${SOURCE_H}
-        ${SOURCE_CPP})
-target_include_directories(CHelperAndroid PUBLIC include include/android)
-target_precompile_headers(CHelperAndroid PRIVATE include/pch.h)
+        ${SOURCE_FILE}
+)
+target_include_directories(CHelperAndroid PUBLIC include/android)
+target_precompile_headers(CHelperAndroid PRIVATE include/pch/pch.h)
 
 # Using GTest to test codes
-file(GLOB_RECURSE TEST_H src/test/*.h)
-file(GLOB_RECURSE TEST_CPP src/test/*.cpp)
-add_executable(CHelperTest ${TEST_H} ${TEST_CPP} ${SOURCE_H} ${SOURCE_CPP})
-target_include_directories(CHelperTest PUBLIC include ${CMAKE_BINARY_DIR}/include)
-target_precompile_headers(CHelperTest PRIVATE include/pch.h)
+file(GLOB_RECURSE TEST_FILE src/test/*.h src/test/*.cpp)
+add_executable(CHelperTest ${TEST_FILE} ${SOURCE_FILE})
+target_precompile_headers(CHelperTest PRIVATE include/pch/pch.h)
 target_link_libraries(CHelperTest PUBLIC GTest::gtest_main)
-gtest_discover_tests(CHelperTest)
