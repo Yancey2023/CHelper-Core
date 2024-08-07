@@ -29,7 +29,7 @@ namespace CHelper {
 
         ConvertResult jsonString2String(const std::string &input);
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
 
         template<class T>
         void encode(nlohmann::json &json, const std::string &key, const T &data) {
@@ -79,7 +79,7 @@ namespace CHelper {
 
 }// namespace CHelper
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
 
 namespace nlohmann {
 

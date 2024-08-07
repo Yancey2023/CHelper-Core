@@ -625,7 +625,7 @@ namespace CHelper::Old2New {
         return result;
     }
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
     template<class T, class S>
     S &getOrCreate(std::unordered_map<T, S> &map, const T &key) {
         const auto &iter = map.find(key);

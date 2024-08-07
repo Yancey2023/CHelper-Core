@@ -72,7 +72,7 @@ namespace CHelper::Node {
         return std::nullopt;
     }
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
     void from_json(const nlohmann::json &j, std::unique_ptr<NodePerCommand> &t) {
         t = std::make_unique<NodePerCommand>();
         //name
@@ -251,7 +251,7 @@ namespace CHelper::Node {
         }
     }
 
-#if CHelperWeb != true
+#if CHelperOnlyReadBinary != true
     void to_binary(BinaryWriter &binaryWriter, const std::unique_ptr<NodePerCommand> &t) {
         //name
         binaryWriter.encode(t->name);

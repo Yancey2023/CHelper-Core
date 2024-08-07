@@ -13,14 +13,20 @@
 // 可以在运行时增加一些检测，快速定位错误
 #define CHelperDebug true
 // 增加一些用于调试方法
-#define CHelperTest true
+#define CHelperTest false
 #endif
 
 // 是否支持导入或导出JSON格式的资源包
 #if CHelperWeb == true
-#define CHelperSupportJson false
+#define CHelperOnlyReadBinary true
 #else
-#define CHelperSupportJson true
+#define CHelperOnlyReadBinary false
+#endif
+#define CHelperOnlyReadBinary true
+
+// 由于测试过程需要用到JSON相关的东西，所以CHelperTest和CHelperOnlyReadBinary不能同时为true
+#if CHelperTest == true && CHelperOnlyReadBinary == true
+#error CHelperTest and CHelperOnlyReadBinary cannot both be true
 #endif
 
 #if CHelperAndroid == true
@@ -33,33 +39,34 @@
 #endif
 
 // 数据结构
+#include <algorithm>
 #include <cmath>
 #include <functional>
 #include <optional>
 #include <sstream>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <variant>
 #include <vector>
-#include <stack>
 // 抛出的错误
 #include <exception>
 // 文件读写
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
 #include <fstream>
 #endif
 // 用于字符串转整数或小数
 #include <cinttypes>
 // json库
-#if CHelperSupportJson == true
-#include <nlohmann/json.hpp>
-#else
+#if CHelperOnlyReadBinary == true
 #include <nlohmann/detail/macro_scope.hpp>
+#else
+#include <nlohmann/json.hpp>
 #endif
 // 字符串格式化
-#include <fmt/format.h>
 #include <fmt/color.h>
-// 开始编译器特性
+#include <fmt/format.h>
+// 开启编译器特性
 #include <hedley.h>
 // 二进制读写
 #include "../../src/chelper/util/BinaryUtil.h"

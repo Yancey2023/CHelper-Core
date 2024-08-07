@@ -160,7 +160,7 @@ namespace CHelper::JsonUtil {
         return std::move(result);
     }
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
     nlohmann::json getJsonFromFile(const std::filesystem::path &path) {
         Profile::push("reading and parsing json in file: {}", path.string());
         std::ifstream f(path);

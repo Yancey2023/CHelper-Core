@@ -144,7 +144,7 @@ namespace CHelper {
         return nodeAllBlockState.get();
     }
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
     void from_json(const nlohmann::json &j, BlockStateValue &t) {
         const nlohmann::json &jsonValue = j.at("value");
         if (HEDLEY_UNLIKELY(jsonValue.is_number_integer())) {
@@ -192,7 +192,7 @@ namespace CHelper {
         }
     }
 
-#if CHelperWeb != true
+#if CHelperOnlyReadBinary != true
     void to_binary(BinaryWriter &binaryWriter, const BlockStateValue &t) {
         binaryWriter.encode(t.description);
         binaryWriter.encode((uint8_t) t.type);

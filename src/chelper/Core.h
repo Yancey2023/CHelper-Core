@@ -30,15 +30,13 @@ namespace CHelper {
 
         static Core *create(const std::function<std::unique_ptr<CPack>()> &getCPack);
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
         static Core *createByDirectory(const std::filesystem::path &cpackPath);
 
         static Core *createByJson(const std::filesystem::path &cpackPath);
 
         static Core *createByBson(const std::filesystem::path &cpackPath);
-#endif
 
-#if CHelperWeb != true
         static Core *createByBinary(const std::filesystem::path &cpackPath);
 #endif
 

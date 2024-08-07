@@ -14,12 +14,12 @@ namespace CHelper {
 
     Core *Core::create(const std::function<std::unique_ptr<CPack>()> &getCPack) {
         try {
-#if CHelperWeb != true
+#if CHelperOnlyReadBinary != true
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
 #endif
             std::unique_ptr<CPack> cPack = getCPack();
-#if CHelperWeb != true
+#if CHelperOnlyReadBinary != true
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO("CPack load successfully ({})", std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms");
 #endif
@@ -32,7 +32,7 @@ namespace CHelper {
         }
     }
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
     Core *Core::createByDirectory(const std::filesystem::path &cpackPath) {
         return create([&cpackPath]() {
             return CPack::createByDirectory(cpackPath);
@@ -50,9 +50,7 @@ namespace CHelper {
             return CPack::createByJson(JsonUtil::getBsonFromFile(cpackPath));
         });
     }
-#endif
 
-#if CHelperWeb != true
     Core *Core::createByBinary(const std::filesystem::path &cpackPath) {
         return create([&cpackPath]() {
             // 检查文件名后缀

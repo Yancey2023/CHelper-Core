@@ -22,7 +22,7 @@ namespace CHelper {
         return isUsingSmallEndian != isTargetSmallEndian;
     }
 
-#if CHelperWeb != true
+#if CHelperOnlyReadBinary != true
     BinaryWriter::BinaryWriter(bool isTargetSmallEndian,
                                std::ostream &ostream)
         : ostream(ostream) {

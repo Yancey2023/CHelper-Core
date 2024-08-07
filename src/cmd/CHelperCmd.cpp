@@ -9,13 +9,13 @@
 int main() {
     //    testDir();
     //    testBin();
-    outputSingleJson();
-    outputBson();
-    outputBinary();
+    //    outputSingleJson();
+    //    outputBson();
+    //    outputBinary();
     return 0;
 }
 
-#if CHelperWeb != true
+#if CHelperOnlyReadBinary != true
 
 [[maybe_unused]] void testDir() {
     std::filesystem::path projectDir(PROJECT_DIR);

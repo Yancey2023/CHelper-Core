@@ -158,7 +158,7 @@ namespace CHelper::Node {
 
     CODEC(NodeBase, id, brief, description, isMustAfterWhiteSpace)
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
     void from_json(const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
         Profile::push("loading type");
         auto type = JsonUtil::read<std::string>(j, "type");
@@ -194,7 +194,7 @@ namespace CHelper::Node {
         type->decodeByBinary(binaryReader, t);
     }
 
-#if CHelperWeb != true
+#if CHelperOnlyReadBinary != true
     void to_binary(BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t) {
         binaryWriter.encode(t->getNodeType()->id);
         t->getNodeType()->encodeByBinary(binaryWriter, t);

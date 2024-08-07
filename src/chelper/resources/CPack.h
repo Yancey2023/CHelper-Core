@@ -44,7 +44,7 @@ namespace CHelper {
         std::vector<std::unique_ptr<Node::NodeBase>> repeatCacheNodes;
 
     public:
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
         explicit CPack(const std::filesystem::path &path);
 
         explicit CPack(const nlohmann::json &j);
@@ -53,7 +53,7 @@ namespace CHelper {
         explicit CPack(BinaryReader &binaryReader);
 
     private:
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
         void applyId(const nlohmann::json &j);
 
         void applyJson(const nlohmann::json &j);
@@ -66,7 +66,7 @@ namespace CHelper {
         void afterApply();
 
     public:
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
         static std::unique_ptr<CPack> createByDirectory(const std::filesystem::path &path);
 
         static std::unique_ptr<CPack> createByJson(const nlohmann::json &j);
@@ -74,7 +74,7 @@ namespace CHelper {
 
         static std::unique_ptr<CPack> createByBinary(BinaryReader &binaryReader);
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
         void writeJsonToDirectory(const std::filesystem::path &path) const;
 
         [[nodiscard]] nlohmann::json toJson() const;
@@ -82,8 +82,7 @@ namespace CHelper {
         void writeJsonToFile(const std::filesystem::path &path) const;
 
         void writeBsonToFile(const std::filesystem::path &path) const;
-#endif
-#if CHelperWeb != true
+
         void writeBinToFile(const std::filesystem::path &path) const;
 #endif
 

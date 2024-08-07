@@ -34,7 +34,4 @@ namespace CHelper {
         colorLiteral = COLOR_LIGHT_BLUE;
     }
 
-    Settings::Settings(const Theme &theme)
-        : theme(theme) {}
-
 }// namespace CHelper

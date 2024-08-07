@@ -17,7 +17,7 @@
 
 namespace CHelper {
 
-#if CHelperWeb != true
+#if CHelperOnlyReadBinary != true
     class BinaryWriter {
     public:
         bool isNeedConvert;

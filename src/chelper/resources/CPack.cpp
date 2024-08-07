@@ -10,7 +10,7 @@ namespace CHelper {
 
     CODEC(RepeatData, id, breakNodes, repeatNodes, isEnd)
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
     CPack::CPack(const std::filesystem::path &path) {
 #if CHelperDebug == true
         size_t stackSize = Profile::stack.size();
@@ -134,7 +134,7 @@ namespace CHelper {
 #endif
     }
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
     void CPack::applyId(const nlohmann::json &j) {
         auto type = JsonUtil::read<std::string>(j, "type");
         if (HEDLEY_LIKELY(type == "normal")) {
@@ -183,8 +183,8 @@ namespace CHelper {
     void CPack::applyCommand(const nlohmann::json &j) const {
         commands->push_back(j);
     }
-
 #endif
+
     void CPack::afterApply() {
         // json nodes
         Profile::push("init json nodes");
@@ -256,7 +256,7 @@ namespace CHelper {
         Profile::pop();
     }
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
     std::unique_ptr<CPack> CPack::createByDirectory(const std::filesystem::path &path) {
         Profile::push("start load CPack by DIRECTORY: {}", path.string());
         std::unique_ptr<CPack> cpack = std::make_unique<CPack>(path);
@@ -279,7 +279,7 @@ namespace CHelper {
         return cpack;
     }
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
     void CPack::writeJsonToDirectory(const std::filesystem::path &path) const {
         JsonUtil::writeJsonToFile(path / "manifest.json", manifest);
         for (const auto &item: normalIds) {
@@ -375,9 +375,7 @@ namespace CHelper {
     void CPack::writeBsonToFile(const std::filesystem::path &path) const {
         JsonUtil::writeBsonToFile(path, toJson());
     }
-#endif
 
-#if CHelperWeb != true
     void CPack::writeBinToFile(const std::filesystem::path &path) const {
         std::filesystem::create_directories(path.parent_path());
         Profile::push("writing binary cpack to file: {}", path.string());

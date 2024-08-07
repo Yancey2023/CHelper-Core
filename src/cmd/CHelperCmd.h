@@ -14,7 +14,7 @@
 
 int main();
 
-#if CHelperWeb != true
+#if CHelperOnlyReadBinary != true
 
 [[maybe_unused]] void testDir();
 

@@ -76,7 +76,7 @@ namespace CHelper::Node {
         return jsonElement.get();
     }
 
-#if CHelperSupportJson == true
+#if CHelperOnlyReadBinary != true
     void from_json(const nlohmann::json &j, std::unique_ptr<NodeJsonElement> &t) {
         t = std::make_unique<NodeJsonElement>();
         JsonUtil::decode(j, "id", t->id);
@@ -108,7 +108,7 @@ namespace CHelper::Node {
         binaryReader.decode(t->startNodeId);
     }
 
-#if CHelperWeb != true
+#if CHelperOnlyReadBinary != true
     void to_binary(BinaryWriter &binaryWriter, const std::unique_ptr<NodeJsonElement> &t) {
         binaryWriter.encode(t->id.value());
         binaryWriter.encode(t->nodes);

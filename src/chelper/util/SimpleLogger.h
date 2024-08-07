@@ -20,7 +20,7 @@ namespace CHelper::Logger {
     template<typename... T>
     void debug(fmt::format_string<T...> fmt, T &&...args) {
 #if CHelperAndroid == true
-        __android_log_print(ANDROID_LOG_DEBUG, KEY, "%s", format(fmt, args));
+        __android_log_print(ANDROID_LOG_DEBUG, KEY, "%s", fmt::format(fmt, args));
 #else
         fmt::print("{}\t{}\n",
                    fmt::styled("[DEBUG]", fg(fmt::color::lime_green)),
@@ -34,7 +34,7 @@ namespace CHelper::Logger {
     template<typename... T>
     void info(fmt::format_string<T...> fmt, T &&...args) {
 #if CHelperAndroid == true
-        __android_log_print(ANDROID_LOG_INFO, KEY, "%s", format(fmt, args));
+        __android_log_print(ANDROID_LOG_INFO, KEY, "%s", fmt::format(fmt, args));
 #else
         fmt::print("{}\t{}\n",
                    fmt::styled("[INFO]", fg(fmt::color::cornflower_blue)),
@@ -48,7 +48,7 @@ namespace CHelper::Logger {
     template<typename... T>
     void warn(fmt::format_string<T...> fmt, T &&...args) {
 #if CHelperAndroid == true
-        __android_log_print(ANDROID_LOG_WARN, KEY, "%s", format(fmt, args));
+        __android_log_print(ANDROID_LOG_WARN, KEY, "%s", fmt::format(fmt, args));
 #else
         fmt::print("{}\t{}\n",
                    fmt::styled("[WARN]", fg(fmt::color::gold)),
@@ -62,7 +62,7 @@ namespace CHelper::Logger {
     template<typename... T>
     void error(fmt::format_string<T...> fmt, T &&...args) {
 #if CHelperAndroid == true
-        __android_log_print(ANDROID_LOG_ERROR, KEY, "%s", format(fmt, args));
+        __android_log_print(ANDROID_LOG_ERROR, KEY, "%s", fmt::format(fmt, args));
 #else
         fmt::print("{}\t{}\n",
                    fmt::styled("[ERROR]", fg(fmt::color::red)),
