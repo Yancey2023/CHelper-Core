@@ -21,11 +21,7 @@ namespace CHelper {
             std::unique_ptr<CPack> cPack = getCPack();
 #if CHelperWeb != true
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO(ColorStringBuilder()
-                                 .green("CPack load successfully (")
-                                 .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms")
-                                 .green(")")
-                                 .build());
+            CHELPER_INFO("CPack load successfully ({})", std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms");
 #endif
             ASTNode astNode = Parser::parse("", cPack.get());
             return new Core(std::move(cPack), std::move(astNode));
@@ -131,8 +127,8 @@ namespace CHelper {
         return astNode.getStructure();
     }
 
-    [[nodiscard]] [[maybe_unused]] std::string Core::getColors() const {
-        return astNode.getColors();
+    [[nodiscard]] ColoredString Core::getColors() const {
+        return astNode.getColors(settings.theme);
     }
 
     std::optional<std::string> Core::onSuggestionClick(size_t which) {

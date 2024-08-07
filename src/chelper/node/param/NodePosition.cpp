@@ -80,6 +80,17 @@ namespace CHelper::Node {
         structure.append(isMustHave, "位置");
     }
 
+    bool NodePosition::collectColor(const ASTNode *astNode,
+                                    ColoredString &coloredString,
+                                    const Theme &theme) const {
+        if (astNode->id == ASTNodeId::NODE_RELATIVE_FLOAT_NUMBER) {
+            coloredString.setColor(astNode->tokens, theme.colorFloat);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     CODEC_UNIQUE_PTR(NodePosition)
 
 }// namespace CHelper::Node

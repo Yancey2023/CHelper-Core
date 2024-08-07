@@ -97,6 +97,13 @@ namespace CHelper::Node {
         structure.append(isMustHave, "命令名");
     }
 
+    bool NodeCommandName::collectColor(const ASTNode *astNode,
+                                       ColoredString &coloredString,
+                                       const Theme &theme) const {
+        coloredString.setColor(astNode->tokens, theme.colorId);
+        return true;
+    }
+
     CODEC_UNIQUE_PTR(NodeCommandName)
 
 }// namespace CHelper::Node

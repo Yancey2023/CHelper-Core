@@ -54,15 +54,9 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(customContents == nullptr)) {
             if (HEDLEY_LIKELY(key.has_value())) {
-                Profile::push(ColorStringBuilder()
-                                      .red("linking contents to ")
-                                      .purple(key.value())
-                                      .build());
-                Profile::push(ColorStringBuilder()
-                                      .red("linking contents to ")
-                                      .purple(key.value())
-                                      .build());
-                throw std::runtime_error("failed to find normal id in the cpack -> " + key.value());
+                Profile::push("linking contents to {}", key.value());
+                Profile::push("failed to find normal id in the cpack -> ", key.value());
+                throw std::runtime_error("failed to find normal id");
             } else {
                 throw std::runtime_error("missing content");
             }
@@ -170,6 +164,19 @@ namespace CHelper::Node {
                                         StructureBuilder &structure,
                                         bool isMustHave) const {
         structure.append(isMustHave, description.value_or("ID"));
+    }
+
+    bool NodeNormalId::collectColor(const ASTNode *astNode,
+                                    ColoredString &coloredString,
+                                    const Theme &theme) const {
+        if (key.has_value()) {
+            coloredString.setColor(astNode->tokens, theme.colorId);
+        } else if (id != "TARGET_SELECTOR_VARIABLE") {
+            coloredString.setColor(astNode->tokens, theme.colorLiteral);
+        } else {
+            coloredString.setColor(astNode->tokens, theme.colorTargetSelector);
+        }
+        return true;
     }
 
     CODEC_NODE(NodeNormalId, key, ignoreError, contents)

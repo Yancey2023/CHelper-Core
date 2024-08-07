@@ -53,7 +53,7 @@ namespace CHelper::Node {
         }
         auto tokenReader = TokenReader(std::make_shared<LexerResult>(Lexer::lex(convertResult.result)));
 #if CHelperTest == true
-        Profile::push("start parsing: " + content);
+        Profile::push("start parsing: {}", content);
 #endif
         DEBUG_GET_NODE_BEGIN(mainNode)
         ASTNode result = Parser::parse(convertResult.result, cpack, mainNode);
@@ -68,19 +68,19 @@ namespace CHelper::Node {
         tokenReader.push();
         ASTNode result = tokenReader.readStringASTNode(this);
         tokenReader.pop();
-        std::string_view str = result.tokens.toString();
-        if (HEDLEY_UNLIKELY(str.empty())) {
-            return ASTNode::simpleNode(this, result.tokens, ErrorReason::incomplete(result.tokens, "字符串参数内容为空"));
-        } else if (HEDLEY_UNLIKELY(str[0] != '"')) {
-            return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, "字符串参数内容应该在双引号内 -> " + std::string(str)));
-        }
         TokensView tokens = result.tokens;
+        std::string_view str = tokens.toString();
+        if (HEDLEY_UNLIKELY(str.empty())) {
+            return ASTNode::simpleNode(this, tokens, ErrorReason::incomplete(tokens, "字符串参数内容为空"));
+        } else if (HEDLEY_UNLIKELY(str[0] != '"')) {
+            return ASTNode::simpleNode(this, tokens, ErrorReason::contentError(tokens, "字符串参数内容应该在双引号内 -> " + std::string(str)));
+        }
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_LIKELY(str.size() <= 1 || str[str.size() - 1] != '"')) {
             errorReason = ErrorReason::contentError(tokens, "字符串参数内容应该在双引号内 -> " + std::string(str));
         }
         if (HEDLEY_LIKELY(!data.has_value() || data->empty())) {
-            return ASTNode::andNode(this, {std::move(result)}, tokens, errorReason);
+            return ASTNode::simpleNode(this, tokens, errorReason);
         }
         size_t offset = tokens.getStartIndex() + 1;
         auto innerNode = getInnerASTNode(this, tokens, std::string(str), cpack, nodeData.get());
@@ -141,6 +141,31 @@ namespace CHelper::Node {
             suggestions.push_back(std::move(suggestions1));
         } else if (HEDLEY_LIKELY(convertResult.errorReason == nullptr && !convertResult.isComplete)) {
             suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
+        }
+        return true;
+    }
+
+    bool NodeJsonString::collectColor(const ASTNode *astNode,
+                                      ColoredString &coloredString,
+                                      const Theme &theme) const {
+        if (astNode->id != ASTNodeId::NODE_STRING_INNER) {
+            coloredString.setColor(astNode->tokens, theme.colorString);
+            return false;
+        }
+        coloredString.setColor(astNode->tokens.getStartIndex(), theme.colorString);
+        std::string_view str = astNode->tokens.toString();
+        auto convertResult = JsonUtil::jsonString2String(std::string(str));
+        if (convertResult.isComplete) {
+            coloredString.setColor(astNode->tokens.getEndIndex() - 1, theme.colorString);
+        }
+        ColoredString coloredString1 = astNode->childNodes[0].getColors(theme);
+        int index = 0;
+        for (int i = 0; i < convertResult.result.size(); ++i) {
+            size_t end = convertResult.convert(i + 1);
+            while (index < end) {
+                coloredString.setColor(astNode->tokens.getStartIndex() + index + 1, coloredString1.colors[i]);
+                index++;
+            }
         }
         return true;
     }

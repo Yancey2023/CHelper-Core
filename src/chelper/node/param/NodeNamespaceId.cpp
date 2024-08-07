@@ -23,11 +23,9 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(customContents == nullptr)) {
             if (HEDLEY_UNLIKELY(key.has_value())) {
-                Profile::push(ColorStringBuilder()
-                                      .red("linking contents to ")
-                                      .purple(key.value())
-                                      .build());
-                throw std::runtime_error("failed to find namespace id in the cpack -> " + key.value());
+                Profile::push("linking contents to {}", key.value());
+                Profile::push("failed to find namespace id in the cpack -> {}", key.value());
+                throw std::runtime_error("failed to find namespace id");
             } else {
                 throw std::runtime_error("missing content");
             }
@@ -155,6 +153,13 @@ namespace CHelper::Node {
                                            StructureBuilder &structure,
                                            bool isMustHave) const {
         structure.append(isMustHave, description.value_or("ID"));
+    }
+
+    bool NodeNamespaceId::collectColor(const ASTNode *astNode,
+                                       ColoredString &coloredString,
+                                       const Theme &theme) const {
+        coloredString.setColor(astNode->tokens, theme.colorId);
+        return true;
     }
 
     CODEC_NODE(NodeNamespaceId, key, ignoreError, contents)

@@ -52,6 +52,13 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or("整数"));
     }
 
+    bool NodeInteger::collectColor(const ASTNode *astNode,
+                                   ColoredString &coloredString,
+                                   const Theme &theme) const {
+        coloredString.setColor(astNode->tokens, theme.colorInteger);
+        return true;
+    }
+
     CODEC_NODE(NodeInteger, min, max)
 
 }// namespace CHelper::Node

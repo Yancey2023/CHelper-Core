@@ -36,6 +36,13 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or("经验值"));
     }
 
+    bool NodeXpInteger::collectColor(const ASTNode *astNode,
+                                 ColoredString &coloredString,
+                                 const Theme &theme) const {
+        coloredString.setColor(astNode->tokens, theme.colorInteger);
+        return true;
+    }
+
     CODEC_UNIQUE_PTR(NodeXpInteger)
 
 }// namespace CHelper::Node

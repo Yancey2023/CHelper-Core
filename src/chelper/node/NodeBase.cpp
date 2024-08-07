@@ -120,6 +120,12 @@ namespace CHelper::Node {
                                     bool isMustHave) const {
     }
 
+    bool NodeBase::collectColor(const ASTNode *astNode,
+                                ColoredString &coloredString,
+                                const Theme &theme) const {
+        return false;
+    }
+
     void NodeBase::collectStructureWithNextNodes(StructureBuilder &structure, bool isMustHave) const {
         if (HEDLEY_UNLIKELY(brief.has_value())) {
             structure.append(isMustHave, brief.value());
@@ -154,24 +160,14 @@ namespace CHelper::Node {
 
 #if CHelperSupportJson == true
     void from_json(const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
-        Profile::push(ColorStringBuilder().red("loading type").build());
+        Profile::push("loading type");
         auto type = JsonUtil::read<std::string>(j, "type");
         auto id = JsonUtil::read<std::optional<std::string>>(j, "id");
-        Profile::next(ColorStringBuilder().red("loading node ").purple(type).build());
+        Profile::next("loading node {}", type);
         if (HEDLEY_LIKELY(id.has_value())) {
-            Profile::next(ColorStringBuilder()
-                                  .red("loading node ")
-                                  .purple(type)
-                                  .red(" with id \"")
-                                  .purple(id.value())
-                                  .red("\"")
-                                  .build());
+            Profile::next("loading node {} with id \"{}\"", type, id.value());
         } else {
-            Profile::next(ColorStringBuilder()
-                                  .red("loading node ")
-                                  .purple(type)
-                                  .red(" without id")
-                                  .build());
+            Profile::next("loading node {} without id", type);
         }
         for (const auto &item: NodeType::NODE_TYPES) {
             if (HEDLEY_UNLIKELY(item->nodeName == type)) {

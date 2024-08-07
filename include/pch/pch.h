@@ -9,17 +9,12 @@
 
 #define CHelperLogger INFO
 
+#ifndef NDEBUG
 // 可以在运行时增加一些检测，快速定位错误
 #define CHelperDebug true
-
 // 增加一些用于调试方法
-#define CHelperTest false
-
-// 网页版本标识，去除一些没有必要的代码，减少网页版体积
-#define CHelperWeb false
-
-// 安卓版本表示
-#define CHelperAndroid false
+#define CHelperTest true
+#endif
 
 // 是否支持导入或导出JSON格式的资源包
 #if CHelperWeb == true
@@ -30,10 +25,10 @@
 
 #if CHelperAndroid == true
 
-#include "android/asset_manager.h"
-#include "android/asset_manager_jni.h"
-#include "android/jni.h"
-#include "android/log.h"
+#include <android/asset_manager.h>
+#include <android/asset_manager_jni.h>
+#include <android/log.h>
+#include <jni.h>
 
 #endif
 
@@ -46,6 +41,7 @@
 #include <unordered_map>
 #include <variant>
 #include <vector>
+#include <stack>
 // 抛出的错误
 #include <exception>
 // 文件读写
@@ -62,14 +58,13 @@
 #endif
 // 字符串格式化
 #include <fmt/format.h>
+#include <fmt/color.h>
 // 开始编译器特性
 #include <hedley.h>
 // 二进制读写
 #include "../../src/chelper/util/BinaryUtil.h"
 // 一些处理json和二进制序列化的宏
 #include "../../src/chelper/util/Codec.h"
-// 有颜色的字符串，用于控制台显示
-#include "../../src/chelper/util/ColorStringBuilder.h"
 // json读写
 #include "../../src/chelper/util/JsonUtil.h"
 // 简单的调用栈

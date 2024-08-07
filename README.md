@@ -4,17 +4,17 @@ I want to make a command helper for Minecraft Bedrock Edition , so here is CHelp
 
 ## Plan
 
+- [x] **CPack**: makes a resource pack containing IDs and commands
 - [x] **Lexer**: transforms command strings into a token list
-- [x] **CPack**: a resource pack containing IDs and commands
 - [x] **Parser**: builds an Abstract Syntax Tree (AST) and identifies structural errors
-- [x] **Description**: retrieves the description of the currently written node
-- [x] **ID Checker**: finds ID errors based on the AST
-- [x] **Suggestion Getter**: provides completion suggestions for IDs based on the AST
-- [x] **Structure Retriever**: constructs a command structure string
-- [x] **Target Selector**: target selector command param
-- [x] **json support**: json command param
-- [x] **block state support**: block states command param
-- [ ] **highlight command**: obtains the highlight color for displayed commands
+- [x] **ID Error**: finds ID errors based on the AST
+- [x] **Description**: get the description of the currently written command param based on the AST
+- [x] **Suggestion**: provides completion suggestions based on the AST
+- [x] **Structure**: constructs a command structure string based on the AST
+- [x] **Target Selector Support**: target selector command param
+- [x] **Json Support**: json command param
+- [x] **Block State Support**: block states command param
+- [x] **Highlight Command**: obtains the highlight color for displayed commands
 
 ## Why choosing c++
 
@@ -24,17 +24,17 @@ Because I am leaning c++ now. I want to improve myself through this project.
 
 ### CHelper-Core
 
-|                  project                   |                                    description                                     |                                           license                                            |
-|:------------------------------------------:|:----------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------:|
-| [Hedley](https://github.com/nemequ/hedley) | enable compiler-specific features while retaining compatibility with all compilers | [Creative Commons Zero v1.0 Universal](https://github.com/nemequ/hedley/blob/master/COPYING) |
-|  [json](https://github.com/nlohmann/json)  |                                JSON for Modern C++                                 |           [MIT license](https://github.com/nlohmann/json/blob/master/LICENSE.MIT)            |
-|    [fmt](https://github.com/fmtlib/fmt)    |                                 formatting library                                 |               [MIT license](https://github.com/fmtlib/fmt/blob/master/LICENSE)               |
+|                  project                  |                                    description                                     |                                           license                                           |
+|:-----------------------------------------:|:----------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------:|
+| [Hedley](https://github.com/cblck/hedley) | enable compiler-specific features while retaining compatibility with all compilers | [Creative Commons Zero v1.0 Universal](https://github.com/cblck/hedley/blob/master/LICENSE) |
+| [json](https://github.com/nlohmann/json)  |                                JSON for Modern C++                                 |           [MIT license](https://github.com/nlohmann/json/blob/master/LICENSE.MIT)           |
+|   [fmt](https://github.com/fmtlib/fmt)    |                                 formatting library                                 |              [MIT license](https://github.com/fmtlib/fmt/blob/master/LICENSE)               |
 
 ### CHelper-Qt
 
 |         project          |          description          |                     license                      |
 |:------------------------:|:-----------------------------:|:------------------------------------------------:|
-| [Qt](https://www.qt.io/) | desktop application framework | [LGPL license](https://doc.qt.io/qt-5/lgpl.html) |
+| [Qt](https://www.qt.io/) | desktop application framework | [LGPL license](https://doc.qt.io/qt-6/lgpl.html) |
 
 ### CHelper-Android
 

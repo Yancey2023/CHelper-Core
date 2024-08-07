@@ -2,8 +2,6 @@
 // Created by Yancey on 2024/2/24.
 //
 
-#define CHelperAndroid true
-
 #include "pch.h"
 #include "../chelper/Core.h"
 

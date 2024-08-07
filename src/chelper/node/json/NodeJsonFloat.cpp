@@ -46,6 +46,13 @@ namespace CHelper::Node {
         return true;
     }
 
+    bool NodeJsonFloat::collectColor(const ASTNode *astNode,
+                                     ColoredString &coloredString,
+                                     const Theme &theme) const {
+        coloredString.setColor(astNode->tokens, theme.colorFloat);
+        return true;
+    }
+
     CODEC_NODE(NodeJsonFloat, min, max)
 
 }// namespace CHelper::Node

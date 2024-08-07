@@ -50,6 +50,8 @@ namespace CHelper::Node {
                     return tokenReader.readStringOrNumberASTNode(node);
                 });
 
+        void init(const CPack &cpack) override;
+
         [[nodiscard]] NodeType *getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
@@ -64,7 +66,10 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-        void init(const CPack &cpack) override;
+
+        bool collectColor(const ASTNode *astNode,
+                          ColoredString &coloredString,
+                          const Theme &theme) const override;
     };
 
     CODEC_NODE_H(NodeNormalId)

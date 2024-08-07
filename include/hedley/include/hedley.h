@@ -10,11 +10,11 @@
  * SPDX-License-Identifier: CC0-1.0
  */
 
-#if !defined(HEDLEY_VERSION) || (HEDLEY_VERSION < 15)
+#if !defined(HEDLEY_VERSION) || (HEDLEY_VERSION < 17)
 #if defined(HEDLEY_VERSION)
 #  undef HEDLEY_VERSION
 #endif
-#define HEDLEY_VERSION 15
+#define HEDLEY_VERSION 17
 
 #if defined(HEDLEY_STRINGIFY_EX)
 #  undef HEDLEY_STRINGIFY_EX
@@ -782,8 +782,8 @@
 #  define HEDLEY_DIAGNOSTIC_POP
 #endif
 
-/* HEDLEY_DIAGNOSTIC_DISABLE_CPP98_COMPAT_WRAP_ is for
-   HEDLEY INTERNAL USE ONLY.  API subject to change without notice. */
+ /* HEDLEY_DIAGNOSTIC_DISABLE_CPP98_COMPAT_WRAP_ is for
+	HEDLEY INTERNAL USE ONLY.  API subject to change without notice. */
 #if defined(HEDLEY_DIAGNOSTIC_DISABLE_CPP98_COMPAT_WRAP_)
 #  undef HEDLEY_DIAGNOSTIC_DISABLE_CPP98_COMPAT_WRAP_
 #endif
@@ -1346,7 +1346,7 @@ HEDLEY_DIAGNOSTIC_POP
 #  define HEDLEY_UNPREDICTABLE(expr) __builtin_unpredictable((expr))
 #endif
 #if \
-  (HEDLEY_HAS_BUILTIN(__builtin_expect_with_probability) && !defined(HEDLEY_PGI_VERSION)) || \
+  (HEDLEY_HAS_BUILTIN(__builtin_expect_with_probability) && !defined(HEDLEY_PGI_VERSION) && !defined(HEDLEY_INTEL_VERSION)) || \
   HEDLEY_GCC_VERSION_CHECK(9,0,0) || \
   HEDLEY_MCST_LCC_VERSION_CHECK(1,25,10)
 #  define HEDLEY_PREDICT(expr, value, probability) __builtin_expect_with_probability(  (expr), (value), (probability))
@@ -1490,6 +1490,8 @@ HEDLEY_DIAGNOSTIC_POP
   HEDLEY_PGI_VERSION_CHECK(17,10,0) || \
   HEDLEY_MCST_LCC_VERSION_CHECK(1,25,10)
 #  define HEDLEY_CONST __attribute__((__const__))
+#elif defined(_MSC_VER)
+#  define HEDLEY_CONST __declspec(noalias)
 #elif \
   HEDLEY_SUNPRO_VERSION_CHECK(5,10,0)
 #  define HEDLEY_CONST _Pragma("no_side_effect")
@@ -1698,7 +1700,7 @@ HEDLEY_DIAGNOSTIC_POP
 # undef HEDLEY_FALL_THROUGH
 #endif
 #if \
-  HEDLEY_HAS_ATTRIBUTE(fallthrough) || \
+  (HEDLEY_HAS_ATTRIBUTE(fallthrough) && !defined(HEDLEY_INTEL_VERSION)) || \
   HEDLEY_GCC_VERSION_CHECK(7,0,0) || \
   HEDLEY_MCST_LCC_VERSION_CHECK(1,25,10)
 #  define HEDLEY_FALL_THROUGH __attribute__((__fallthrough__))
@@ -1794,7 +1796,7 @@ HEDLEY_DIAGNOSTIC_POP
 #      define HEDLEY_IS_CONSTEXPR_(expr) _Generic((1 ? (void*) ((__INTPTR_TYPE__) ((expr) * 0)) : (int*) 0), int*: 1, void*: 0)
 #    else
 #      include <stdint.h>
-#      define HEDLEY_IS_CONSTEXPR_(expr) _Generic((1 ? (void*) ((intptr_t) * 0) : (int*) 0), int*: 1, void*: 0)
+#      define HEDLEY_IS_CONSTEXPR_(expr) _Generic((1 ? (void*) ((intptr_t) ((expr) * 0)) : (int*) 0), int*: 1, void*: 0)
 #    endif
 #  elif \
        defined(HEDLEY_GCC_VERSION) || \
@@ -1993,7 +1995,61 @@ HEDLEY_DIAGNOSTIC_POP
 #  define HEDLEY_EMPTY_BASES
 #endif
 
-/* Remaining macros are deprecated. */
+#if defined(HEDLEY_FEATURE_TYPEOF)
+#  undef HEDLEY_FEATURE_TYPEOF
+#endif
+#if \
+  HEDLEY_GCC_VERSION_CHECK(2,95,0) || \
+  defined(__clang__) || \
+  HEDLEY_CRAY_VERSION_CHECK(8,1,0) || \
+  HEDLEY_IBM_VERSION_CHECK(11,1,0) || \
+  HEDLEY_SUNPRO_VERSION_CHECK(5,12,0) || \
+  HEDLEY_TINYC_VERSION_CHECK(0,9,24) || \
+  HEDLEY_PGI_VERSION_CHECK(18,10,0) || \
+  HEDLEY_TI_VERSION_CHECK(6,1,0) || \
+  HEDLEY_INTEL_VERSION_CHECK(13,0,0)
+#  define HEDLEY_FEATURE_TYPEOF 1
+#else
+#  define HEDLEY_FEATURE_TYPEOF 0
+#endif
+
+#if defined(HEDLEY_ACCESS)
+#  undef HEDLEY_ACCESS
+#endif
+#if HEDLEY_GCC_VERSION_CHECK(10,0,0)
+#  define HEDLEY_ACCESS(...)   __attribute__((__access__(__VA_ARGS__)))
+#else
+#  define HEDLEY_ACCESS(...)
+#endif
+
+#if defined(HEDLEY_ERROR_ATTR)
+#  undef HEDLEY_ERROR_ATTR
+#endif
+#if HEDLEY_GCC_VERSION_CHECK(2,95,0)
+#  define HEDLEY_ERROR_ATTR(...)  __attribute__((__error__(__VA_ARGS__)))
+#else
+#  define HEDLEY_ERROR_ATTR(...)
+#endif
+
+#if defined(HEDLEY_USE)
+#undef HEDLEY_USE
+#endif
+#define HEDLEY_USE(x)  ((void)(x))
+
+#if defined(HEDLEY_UNUSED)
+#  undef HEDLEY_UNUSED
+#endif
+#if defined(HEDLEY_MSVC_VERSION)
+#  define HEDLEY_UNUSED __pragma(warning(suppress:4100))
+#elif defined(HEDLEY_GNUC_VERSION)
+#  define HEDLEY_UNUSED  __attribute__((__unused__))
+#elif defined(__LCLINT__)
+#  define HEDLEY_UNUSED   /*@unused@*/
+#else
+#  define HEDLEY_UNUSED
+#endif
+
+   /* Remaining macros are deprecated. */
 
 #if defined(HEDLEY_GCC_NOT_CLANG_VERSION_CHECK)
 #  undef HEDLEY_GCC_NOT_CLANG_VERSION_CHECK

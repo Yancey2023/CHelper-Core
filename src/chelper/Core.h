@@ -11,6 +11,7 @@
 #include "old2new/Old2New.h"
 #include "parser/ASTNode.h"
 #include "resources/CPack.h"
+#include "settings/Settings.h"
 
 namespace CHelper {
 
@@ -23,6 +24,8 @@ namespace CHelper {
         std::shared_ptr<std::vector<Suggestion>> suggestions;
 
     public:
+        Settings settings;
+
         Core(std::unique_ptr<CPack> cpack, ASTNode astNode);
 
         static Core *create(const std::function<std::unique_ptr<CPack>()> &getCPack);
@@ -55,7 +58,7 @@ namespace CHelper {
 
         [[nodiscard]] std::string getStructure() const;
 
-        [[nodiscard]] [[maybe_unused]] std::string getColors() const;
+        [[nodiscard]] ColoredString getColors() const;
 
         [[nodiscard]] std::optional<std::string> onSuggestionClick(size_t which);
 

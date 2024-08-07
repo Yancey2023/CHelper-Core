@@ -227,29 +227,17 @@ namespace CHelper::Test {
                 startStructure = std::chrono::high_resolution_clock::now();
                 auto structure = core->getStructure();
                 endStructure = std::chrono::high_resolution_clock::now();
-                std::cout << ColorStringBuilder()
-                                     .green("parse successfully(")
-                                     .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                                                                    endStructure - startParse)
-                                                                    .count()) +
-                                             "ms")
-                                     .green(")")
-                                     .normal(" : ")
-                                     .purple(command)
-                                     .build()
-                          << std::endl;
+                fmt::print("parse successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startParse).count()) + "ms", fg(fmt::color::medium_purple)));
                 if (isTestTime) {
-                    std::cout << ColorStringBuilder().blue("parse in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endParse - startParse).count()) + "ms").build() << std::endl;
-                    std::cout << ColorStringBuilder().blue("get description in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endDescription - startDescription).count()) + "ms").build() << std::endl;
-                    std::cout << ColorStringBuilder().blue("get error reasons in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endErrorReasons - startErrorReasons).count()) + "ms").build() << std::endl;
-                    std::cout << ColorStringBuilder().blue("get suggestions in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms").build() << std::endl;
-                    std::cout << ColorStringBuilder().blue("get structure in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms").build() << std::endl;
+                    fmt::print("parse successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endParse - startParse).count()) + "ms", fg(fmt::color::medium_purple)));
+                    fmt::print("get description successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endDescription - startDescription).count()) + "ms", fg(fmt::color::medium_purple)));
+                    fmt::print("get error successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endErrorReasons - startErrorReasons).count()) + "ms", fg(fmt::color::medium_purple)));
+                    fmt::print("get suggestions successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms", fg(fmt::color::medium_purple)));
+                    fmt::print("get structure successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms", fg(fmt::color::medium_purple)));
                 }
 #if CHelperTest == true
-                std::cout << core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
-                          << std::endl;
-                std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
-                          << std::endl;
+                std::cout << core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
+                std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
 #endif
                 std::cout << "structure: " + structure << std::endl;
                 std::cout << "description: " + description << std::endl;
@@ -259,20 +247,13 @@ namespace CHelper::Test {
                     std::cout << "error reasons:" << std::endl;
                     int i = 0;
                     for (const auto &errorReason: errorReasons) {
-                        std::cout << ColorStringBuilder()
-                                             .normal(std::to_string(++i) + ". ")
-                                             .red(command.substr(errorReason->start,
-                                                                 errorReason->end - errorReason->start) +
-                                                  " ")
-                                             .blue(errorReason->errorReason)
-                                             .build()
-                                  << std::endl;
-                        std::cout << ColorStringBuilder()
-                                             .normal(command.substr(0, errorReason->start))
-                                             .red(errorReason->start == errorReason->end ? "~" : command.substr(errorReason->start, errorReason->end - errorReason->start))
-                                             .normal(command.substr(errorReason->end))
-                                             .build()
-                                  << std::endl;
+                        fmt::print("{}. {} {}\n{}{}{}\n",
+                                   ++i,
+                                   fmt::styled(command.substr(errorReason->start, errorReason->end - errorReason->start), fg(fmt::color::red)),
+                                   fmt::styled(errorReason->errorReason, fg(fmt::color::cornflower_blue)),
+                                   command.substr(0, errorReason->start),
+                                   fmt::styled(errorReason->start == errorReason->end ? "~" : command.substr(errorReason->start, errorReason->end - errorReason->start), fg(fmt::color::red)),
+                                   command.substr((errorReason->end)));
                     }
                 }
                 if (suggestions->empty()) {
@@ -285,12 +266,10 @@ namespace CHelper::Test {
                             std::cout << "..." << std::endl;
                             break;
                         }
-                        std::cout << ColorStringBuilder()
-                                             .normal(std::to_string(++i) + ". ")
-                                             .green(item.content->name + " ")
-                                             .blue(item.content->description.value_or(""))
-                                             .build()
-                                  << std::endl;
+                        fmt::print("{}. {} {}\n",
+                                   ++i,
+                                   fmt::styled(item.content->name, fg(fmt::color::lime_green)),
+                                   fmt::styled(item.content->description.value_or(""), fg(fmt::color::cornflower_blue)));
                         std::string result = command.substr(0, item.start)
                                                      .append(item.content->name)
                                                      .append(command.substr(item.end));
@@ -301,12 +280,10 @@ namespace CHelper::Test {
                                 greenPart.push_back(' ');
                             }
                         }
-                        std::cout << ColorStringBuilder()
-                                             .normal(command.substr(0, item.start))
-                                             .green(greenPart)
-                                             .normal(command.substr(item.end))
-                                             .build()
-                                  << std::endl;
+                        fmt::print("{}{}{}\n",
+                                   command.substr(0, item.start),
+                                   fmt::styled(greenPart, fg(fmt::color::lime_green)),
+                                   command.substr(item.end));
                     }
                 }
                 std::cout << std::endl;
@@ -339,20 +316,8 @@ namespace CHelper::Test {
                 }
             }
             end = std::chrono::high_resolution_clock::now();
-            std::cout << ColorStringBuilder()
-                                 .purple(std::to_string(commands.size()))
-                                 .green(" commands")
-                                 .build()
-                      << std::endl;
-            std::cout << ColorStringBuilder()
-                                 .green("parse successfully(")
-                                 .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                                                                end - start)
-                                                                .count()) +
-                                         "ms")
-                                 .green(")")
-                                 .build()
-                      << std::endl;
+            fmt::print(fg(fmt::color::lime_green), "{} commands\n", fmt::styled(commands.size(), fg(fmt::color::medium_purple)));
+            fmt::print(fg(fmt::color::lime_green), "parse successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms", fg(fmt::color::medium_purple)));
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
@@ -370,15 +335,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeJsonToDirectory(output);
             end = std::chrono::high_resolution_clock::now();
-            std::cout << ColorStringBuilder()
-                                 .green("write successfully(")
-                                 .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                                                                end - start)
-                                                                .count()) +
-                                         "ms")
-                                 .green(")")
-                                 .build()
-                      << std::endl;
+            fmt::print(fg(fmt::color::lime_green), "write successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms", fg(fmt::color::medium_purple)));
             [[maybe_unused]] auto core2 = Core::createByDirectory(output);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
@@ -397,15 +354,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeJsonToFile(output);
             end = std::chrono::high_resolution_clock::now();
-            std::cout << ColorStringBuilder()
-                                 .green("write successfully(")
-                                 .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                                                                end - start)
-                                                                .count()) +
-                                         "ms")
-                                 .green(")")
-                                 .build()
-                      << std::endl;
+            CHELPER_INFO("write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
             std::cout << std::endl;
             [[maybe_unused]] auto core2 = Core::createByJson(output);
             std::cout << std::endl;
@@ -426,15 +375,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeBsonToFile(output);
             end = std::chrono::high_resolution_clock::now();
-            std::cout << ColorStringBuilder()
-                                 .green("write successfully(")
-                                 .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                                                                end - start)
-                                                                .count()) +
-                                         "ms")
-                                 .green(")")
-                                 .build()
-                      << std::endl;
+            CHELPER_INFO("write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
             std::cout << std::endl;
             [[maybe_unused]] auto core2 = Core::createByBson(output);
             std::cout << std::endl;
@@ -455,15 +396,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeBinToFile(output);
             end = std::chrono::high_resolution_clock::now();
-            std::cout << ColorStringBuilder()
-                                 .green("write successfully(")
-                                 .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                                                                end - start)
-                                                                .count()) +
-                                         "ms")
-                                 .green(")")
-                                 .build()
-                      << std::endl;
+            CHELPER_INFO("write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
             std::cout << std::endl;
             [[maybe_unused]] auto core2 = Core::createByBinary(output);
             std::cout << std::endl;

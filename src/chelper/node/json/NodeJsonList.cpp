@@ -34,23 +34,10 @@ namespace CHelper::Node {
                 return;
             }
         }
-        Profile::push(ColorStringBuilder()
-                              .red("linking contents to ")
-                              .purple(data)
-                              .build());
-        Profile::push(ColorStringBuilder()
-                              .red("failed to find node id")
-                              .normal(" -> ")
-                              .purple(data)
-                              .build());
-        throw std::runtime_error(ColorStringBuilder()
-                                         .red("unknown node id")
-                                         .normal(" -> ")
-                                         .purple(id.value_or("UNKNOWN"))
-                                         .red(" (in node \"")
-                                         .purple(data)
-                                         .red("\")")
-                                         .build());
+        Profile::push("linking contents to {}", data);
+        Profile::push("failed to find node id -> {}", data);
+        Profile::push("unknown node id -> {} (in node \"{}\")", id.value_or("UNKNOWN"), data);
+        throw std::runtime_error("unknown node id");
     }
 
     NodeType *NodeJsonList::getNodeType() const {

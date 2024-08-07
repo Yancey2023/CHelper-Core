@@ -14,3 +14,7 @@
 	path = include/googletest
 	url = https://github.com/google/googletest.git
 	branch = main
+[submodule "include/hedley"]
+	path = include/hedley
+	url = https://github.com/cblck/hedley.git
+	branch = master

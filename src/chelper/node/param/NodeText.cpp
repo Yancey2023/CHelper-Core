@@ -69,6 +69,17 @@ namespace CHelper::Node {
         structure.appendWhiteSpace().append(data->name);
     }
 
+    bool NodeText::collectColor(const ASTNode *astNode,
+                                ColoredString &coloredString,
+                                const Theme &theme) const {
+        if (id != "TARGET_SELECTOR_ARGUMENT_EQUAL" && id != "TARGET_SELECTOR_ARGUMENT_NOT_EQUAL") {
+            coloredString.setColor(astNode->tokens, theme.colorLiteral);
+        } else {
+            coloredString.setColor(astNode->tokens, theme.colorSymbol);
+        }
+        return true;
+    }
+
     CODEC_NODE(NodeText, tokenTypes, data)
 
 }// namespace CHelper::Node

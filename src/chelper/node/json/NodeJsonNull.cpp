@@ -42,6 +42,13 @@ namespace CHelper::Node {
         return true;
     }
 
+    bool NodeJsonNull::collectColor(const ASTNode *astNode,
+                                    ColoredString &coloredString,
+                                    const Theme &theme) const {
+        coloredString.setColor(astNode->tokens, theme.colorNull);
+        return true;
+    }
+
     CODEC_UNIQUE_PTR(NodeJsonNull)
 
 }// namespace CHelper::Node

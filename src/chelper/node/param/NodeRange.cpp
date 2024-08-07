@@ -23,7 +23,7 @@ namespace CHelper::Node {
         }
         for (int i = 0; i < str.length(); ++i) {
             char ch = str[i];
-            if (HEDLEY_UNLIKELY(ch < '0' || ch > '9') && (i != 0 || ch != '-')) {
+            if (HEDLEY_UNLIKELY(ch < '0' || ch > '9') && (i != 0 || (ch != '-' && ch != '+'))) {
                 return ErrorReason::contentError(tokens, "范围的数值格式不正确，检测非法字符");
             }
         }
@@ -76,6 +76,19 @@ namespace CHelper::Node {
 
     void NodeRange::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {
         structure.append(isMustHave, description.value_or("范围"));
+    }
+
+    bool NodeRange::collectColor(const ASTNode *astNode,
+                                 ColoredString &coloredString,
+                                 const Theme &theme) const {
+        std::string_view str = astNode->tokens.toString();
+        for (int i = 0; i < str.length(); ++i) {
+            char ch = str[i];
+            coloredString.setColor(
+                    astNode->tokens.startIndex + i,
+                    (ch < '0' || ch > '9') && ch != '-' && ch != '+' ? theme.colorRange : theme.colorInteger);
+        }
+        return true;
     }
 
     CODEC_UNIQUE_PTR(NodeRange)

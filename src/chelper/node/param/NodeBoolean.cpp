@@ -54,6 +54,13 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or("布尔值"));
     }
 
+    bool NodeBoolean::collectColor(const ASTNode *astNode,
+                                   ColoredString &coloredString,
+                                   const Theme &theme) const {
+        coloredString.setColor(astNode->tokens, theme.colorBoolean);
+        return true;
+    }
+
     CODEC_NODE(NodeBoolean, descriptionTrue, descriptionFalse)
 
 }// namespace CHelper::Node

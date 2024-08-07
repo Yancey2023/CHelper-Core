@@ -116,9 +116,9 @@ namespace CHelper {
         TokensView tokens = collect();
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_UNLIKELY(token == nullptr)) {
-            errorReason = ErrorReason::incomplete(tokens, fmt::format("命令不完整，需要的参数类型为{0}", requireType));
+            errorReason = ErrorReason::incomplete(tokens, fmt::format("命令不完整，需要的参数类型为{}", requireType));
         } else if (HEDLEY_UNLIKELY(token->type != type)) {
-            errorReason = ErrorReason::typeError(tokens, fmt::format("类型不匹配，正确的参数类型为{0}，但当前参数类型为{1}", requireType, TokenType::getName(token->type)));
+            errorReason = ErrorReason::typeError(tokens, fmt::format("类型不匹配，正确的参数类型为{}，但当前参数类型为{}", requireType, TokenType::getName(token->type)));
         } else {
             errorReason = check == nullptr ? nullptr : check(token->content, tokens);
         }

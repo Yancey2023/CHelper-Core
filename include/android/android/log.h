@@ -94,6 +94,9 @@ typedef enum android_LogPriority {
 /**
  * Writes the constant string `text` to the log, with priority `prio` and tag
  * `tag`.
+ *
+ * @return 1 if the message was written to the log, or -EPERM if it was not (see
+ * __android_log_is_loggable).
  */
 int __android_log_write(int prio, const char* tag, const char* text);
 
@@ -101,6 +104,9 @@ int __android_log_write(int prio, const char* tag, const char* text);
  * Writes a formatted string to the log, with priority `prio` and tag `tag`.
  * The details of formatting are the same as for
  * [printf(3)](http://man7.org/linux/man-pages/man3/printf.3.html).
+ *
+ * @return 1 if the message was written to the log, or -EPERM if it was not (see
+ * __android_log_is_loggable).
  */
 int __android_log_print(int prio, const char* tag, const char* fmt, ...)
     __attribute__((__format__(printf, 3, 4)));
@@ -108,6 +114,9 @@ int __android_log_print(int prio, const char* tag, const char* fmt, ...)
 /**
  * Equivalent to `__android_log_print`, but taking a `va_list`.
  * (If `__android_log_print` is like `printf`, this is like `vprintf`.)
+ *
+ * @return 1 if the message was written to the log, or -EPERM if it was not (see
+ * __android_log_is_loggable).
  */
 int __android_log_vprint(int prio, const char* tag, const char* fmt, va_list ap)
     __attribute__((__format__(printf, 3, 0)));
@@ -166,6 +175,9 @@ typedef enum log_id {
  * with priority `prio` and tag `tag`.
  *
  * Apps should use __android_log_write() instead.
+ *
+ * @return 1 if the message was written to the log, or -EPERM if it was not (see
+ * __android_log_is_loggable).
  */
 int __android_log_buf_write(int bufID, int prio, const char* tag, const char* text);
 
@@ -176,6 +188,9 @@ int __android_log_buf_write(int bufID, int prio, const char* tag, const char* te
  * [printf(3)](http://man7.org/linux/man-pages/man3/printf.3.html).
  *
  * Apps should use __android_log_print() instead.
+ *
+ * @return 1 if the message was written to the log, or -EPERM if it was not (see
+ * __android_log_is_loggable).
  */
 int __android_log_buf_print(int bufID, int prio, const char* tag, const char* fmt, ...)
     __attribute__((__format__(printf, 4, 5)));

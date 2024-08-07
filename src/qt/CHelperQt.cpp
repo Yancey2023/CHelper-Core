@@ -58,6 +58,17 @@ void CHelperApp::onTextChanged(const QString &string) {
                   << std::endl;
         std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
                   << std::endl;
+        CHelper::ColoredString coloredString = core->getColors();
+        std::string stringBuilder;
+        for (int i = 0; i < coloredString.colors.size(); ++i) {
+            uint32_t color = coloredString.colors[i];
+            if (color == CHelper::NO_COLOR) {
+                color = 0xFFFFFFFF;
+            }
+            stringBuilder.append(fmt::format("{}", fmt::styled(coloredString.str[i], fg(fmt::rgb(color)))));
+        }
+        stringBuilder.append("\n");
+        fmt::print(stringBuilder);
 #endif
         ui->structureLabel->setText(QString::fromStdString(core->getStructure()));
         ui->descriptionLabel->setText(QString::fromStdString(core->getDescription()));

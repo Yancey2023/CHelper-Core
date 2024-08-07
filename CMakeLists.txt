@@ -21,7 +21,6 @@ set(CMAKE_AUTOUIC ON)
 # ThirdParty: GTest
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 add_subdirectory(include/googletest)
-enable_testing()
 
 # ThirdParty: hedley
 include_directories(include/hedley/include)
@@ -58,6 +57,7 @@ add_library(CHelperWeb
 )
 target_include_directories(CHelperWeb PUBLIC include/emscripten/system/include)
 target_precompile_headers(CHelperWeb PRIVATE include/pch/pch.h)
+target_compile_definitions(CHelperWeb PRIVATE CHelperWeb=true)
 
 # Windows Application
 add_executable(CHelperWindows
@@ -81,13 +81,16 @@ add_executable(CHelperQt WIN32
 target_precompile_headers(CHelperQt PRIVATE include/pch/pch.h)
 target_link_libraries(CHelperQt Qt6::Core Qt6::Gui Qt6::Widgets)
 
-# Android Shared Libary
-add_library(CHelperAndroid SHARED
-        src/android/AndroidNative.cpp
-        ${SOURCE_FILE}
-)
-target_include_directories(CHelperAndroid PUBLIC include/android)
-target_precompile_headers(CHelperAndroid PRIVATE include/pch/pch.h)
+# Android Shared Libary (not support MSVC)
+if (NOT MSVC)
+    add_library(CHelperAndroid SHARED
+            src/android/AndroidNative.cpp
+            ${SOURCE_FILE}
+    )
+    target_include_directories(CHelperAndroid PUBLIC include/android)
+    target_precompile_headers(CHelperAndroid PRIVATE include/pch/pch.h)
+    target_compile_definitions(CHelperAndroid PRIVATE CHelperAndroid=true)
+endif ()
 
 # Using GTest to test codes
 file(GLOB_RECURSE TEST_FILE src/test/*.h src/test/*.cpp)

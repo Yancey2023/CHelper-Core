@@ -38,7 +38,9 @@ namespace CHelper::Test {
                 R"(setblock ~~~ acacia_door["direction":1])",
         };
         for (const auto &item: oldCommands) {
-            std::cout << ColorStringBuilder().red(item + "\n").green(Old2New::old2new(blockFixData, item)).build() << std::endl;
+            fmt::print("{}\n{}\n",
+                       styled(item, fg(fmt::color::red)),
+                       styled(Old2New::old2new(blockFixData, item), fg(fmt::color::lime_green)));
         }
     }
 }// namespace CHelper::Test

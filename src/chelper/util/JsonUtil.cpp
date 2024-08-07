@@ -107,7 +107,7 @@ namespace CHelper::JsonUtil {
                                         result.errorReason = ErrorReason::incomplete(
                                                 stringReader.pos.index - escapeSequence.length() - 1,
                                                 stringReader.pos.index + 1,
-                                                fmt::format("字符串转义出现非法字符{0} -> \\u{1}", item, escapeSequence));
+                                                fmt::format("字符串转义出现非法字符{} -> \\u{}", item, escapeSequence));
                                         return true;
                                     }
                                 }))) {
@@ -150,7 +150,7 @@ namespace CHelper::JsonUtil {
                 default:
                     result.errorReason = ErrorReason::contentError(
                             stringReader.pos.index - 1, stringReader.pos.index + 1,
-                            fmt::format("未知的转义字符 -> \\{0}", ch));
+                            fmt::format("未知的转义字符 -> \\{}", ch));
                     break;
             }
             if (HEDLEY_UNLIKELY(result.errorReason != nullptr)) {
@@ -162,10 +162,7 @@ namespace CHelper::JsonUtil {
 
 #if CHelperSupportJson == true
     nlohmann::json getJsonFromFile(const std::filesystem::path &path) {
-        Profile::push(ColorStringBuilder()
-                              .red("reading and parsing json in file: ")
-                              .purple(path.string())
-                              .build());
+        Profile::push("reading and parsing json in file: {}", path.string());
         std::ifstream f(path);
         nlohmann::json j = nlohmann::json::parse(f);
         f.close();
@@ -174,10 +171,7 @@ namespace CHelper::JsonUtil {
     }
 
     nlohmann::json getBsonFromFile(const std::filesystem::path &path) {
-        Profile::push(ColorStringBuilder()
-                              .red("reading and parsing bjdata in file: ")
-                              .purple(path.string())
-                              .build());
+        Profile::push("reading and parsing bjdata in file: {}", path.string());
         std::ifstream f(path, std::ios::binary);
         nlohmann::json j = nlohmann::json::from_bjdata(f);
         f.close();
@@ -187,10 +181,7 @@ namespace CHelper::JsonUtil {
 
     void writeJsonToFile(const std::filesystem::path &path, const nlohmann::json &j) {
         std::filesystem::create_directories(path.parent_path());
-        Profile::push(ColorStringBuilder()
-                              .red("writing json to file: ")
-                              .purple(path.string())
-                              .build());
+        Profile::push("writing json in file: {}", path.string());
         std::ofstream f(path);
         f << j;
         f.close();
@@ -199,10 +190,7 @@ namespace CHelper::JsonUtil {
 
     void writeBsonToFile(const std::filesystem::path &path, const nlohmann::json &j) {
         std::filesystem::create_directories(path.parent_path());
-        Profile::push(ColorStringBuilder()
-                              .red("writing bjdata to file: ")
-                              .purple(path.string())
-                              .build());
+        Profile::push("writing bjdata in file: {}", path.string());
         std::ofstream f(path, std::ios::binary);
         nlohmann::json::to_bjdata(j, f);
         f.close();

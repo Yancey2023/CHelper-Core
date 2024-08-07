@@ -15,50 +15,34 @@ namespace CHelper {
 #if CHelperDebug == true
         size_t stackSize = Profile::stack.size();
 #endif
-        Profile::push(ColorStringBuilder().red("init codes").build());
+        Profile::push("init codes");
         Node::NodeType::init();
-        Profile::next(ColorStringBuilder().red("loading manifest").build());
+        Profile::next("loading manifest");
         JsonUtil::getJsonFromFile(path / "manifest.json").get_to<Manifest>(manifest);
-        Profile::next(ColorStringBuilder().red("loading id data").build());
+        Profile::next("loading id data");
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "id")) {
-            Profile::next(ColorStringBuilder()
-                                  .red("loading id data in path \"")
-                                  .purple(file.path().string())
-                                  .red("\"")
-                                  .build());
+            Profile::next(R"(loading id data in path "{}")", file.path().string());
             applyId(JsonUtil::getJsonFromFile(file));
         }
-        Profile::next(ColorStringBuilder().red("loading json data").build());
+        Profile::next("loading json data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::JSON_NODE;
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "json")) {
-            Profile::next(ColorStringBuilder()
-                                  .red("loading json data in path \"")
-                                  .purple(file.path().string())
-                                  .red("\"")
-                                  .build());
+            Profile::next(R"(loading json data in path "{}")", file.path().string());
             applyJson(JsonUtil::getJsonFromFile(file));
         }
-        Profile::next(ColorStringBuilder().red("loading repeat data").build());
+        Profile::next("loading repeat data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "repeat")) {
-            Profile::next(ColorStringBuilder()
-                                  .red("loading repeat data in path \"")
-                                  .purple(file.path().string())
-                                  .red("\"")
-                                  .build());
+            Profile::next(R"(loading repeat data in path "{}")", file.path().string());
             applyRepeat(JsonUtil::getJsonFromFile(file));
         }
-        Profile::next(ColorStringBuilder().red("loading commands").build());
+        Profile::next("loading commands");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "command")) {
-            Profile::next(ColorStringBuilder()
-                                  .red("loading command in path \"")
-                                  .purple(file.path().string())
-                                  .red("\"")
-                                  .build());
+            Profile::next(R"(loading command in path "{}")", file.path().string());
             applyCommand(JsonUtil::getJsonFromFile(file));
         }
-        Profile::next(ColorStringBuilder().red("init cpack").build());
+        Profile::next("init cpack");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
@@ -73,30 +57,30 @@ namespace CHelper {
 #if CHelperDebug == true
         size_t stackSize = Profile::stack.size();
 #endif
-        Profile::push(ColorStringBuilder().red("init codes").build());
+        Profile::push("init codes");
         Node::NodeType::init();
-        Profile::next(ColorStringBuilder().red("loading manifest").build());
+        Profile::next("loading manifest");
         j.at("manifest").get_to(manifest);
-        Profile::next(ColorStringBuilder().red("loading id data").build());
+        Profile::next("loading id data");
         for (const auto &item: j.at("id")) {
             applyId(item);
         }
-        Profile::next(ColorStringBuilder().red("loading json data").build());
+        Profile::next("loading json data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::JSON_NODE;
         for (const auto &item: j.at("json")) {
             applyJson(item);
         }
-        Profile::next(ColorStringBuilder().red("loading repeat data").build());
+        Profile::next("loading repeat data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
         for (const auto &item: j.at("repeat")) {
             applyRepeat(item);
         }
-        Profile::next(ColorStringBuilder().red("loading command data").build());
+        Profile::next("loading command data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
         for (const auto &item: j.at("command")) {
             applyCommand(item);
         }
-        Profile::next(ColorStringBuilder().red("init cpack").build());
+        Profile::next("init cpack");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
@@ -112,34 +96,34 @@ namespace CHelper {
 #if CHelperDebug == true
         size_t stackSize = Profile::stack.size();
 #endif
-        Profile::push(ColorStringBuilder().red("init node types").build());
+        Profile::push("init node types");
         Node::NodeType::init();
-        Profile::next(ColorStringBuilder().red("loading manifest").build());
+        Profile::next("loading manifest");
         binaryReader.decode(manifest);
-        Profile::next(ColorStringBuilder().red("loading normal id data").build());
+        Profile::next("loading normal id data");
         binaryReader.decode(normalIds);
-        Profile::next(ColorStringBuilder().red("loading namespace id data").build());
+        Profile::next("loading namespace id data");
         binaryReader.decode(namespaceIds);
-        Profile::next(ColorStringBuilder().red("loading item id data").build());
+        Profile::next("loading item id data");
         size_t itemIdSize = binaryReader.readSize();
         for (int i = 0; i < itemIdSize; ++i) {
             itemIds->push_back(binaryReader.read<std::shared_ptr<ItemId>>());
         }
-        Profile::next(ColorStringBuilder().red("loading block id data").build());
+        Profile::next("loading block id data");
         size_t blockIdSize = binaryReader.readSize();
         for (int i = 0; i < blockIdSize; ++i) {
             blockIds->push_back(binaryReader.read<std::shared_ptr<BlockId>>());
         }
-        Profile::next(ColorStringBuilder().red("loading json data").build());
+        Profile::next("loading json data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::JSON_NODE;
         binaryReader.decode(jsonNodes);
-        Profile::next(ColorStringBuilder().red("loading repeat data").build());
+        Profile::next("loading repeat data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
         binaryReader.decode(repeatNodeData);
-        Profile::next(ColorStringBuilder().red("loading command data").build());
+        Profile::next("loading command data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
         binaryReader.decode(commands);
-        Profile::next(ColorStringBuilder().red("init cpack").build());
+        Profile::next("init cpack");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
@@ -203,15 +187,15 @@ namespace CHelper {
 #endif
     void CPack::afterApply() {
         // json nodes
-        Profile::push(ColorStringBuilder().red("init json nodes").build());
+        Profile::push("init json nodes");
         for (const auto &item: jsonNodes) {
             item->init(*this);
         }
         // repeat nodes
-        Profile::next(ColorStringBuilder().red("init repeat nodes").build());
+        Profile::next("init repeat nodes");
         for (const auto &item: repeatNodeData) {
             if (HEDLEY_UNLIKELY(item.repeatNodes.size() != item.isEnd.size())) {
-                Profile::push(ColorStringBuilder().red("checking repeat node: ").purple(item.id).build());
+                Profile::push("checking repeat node: {}", item.id);
                 throw std::runtime_error("fail to check repeat id because repeatNodes size not equal isEnd size");
             }
         }
@@ -258,30 +242,30 @@ namespace CHelper {
             }
         }
         for (const auto &item: *commands) {
-            Profile::next(ColorStringBuilder().red("init command: \"").purple(StringUtil::join(",", item->name)).red("\"").build());
+            Profile::next(R"(init command: "{}")", StringUtil::join(",", item->name));
             item->init(*this);
         }
-        Profile::next(ColorStringBuilder().red("sort command nodes").build());
+        Profile::next("sort command nodes");
         std::sort(commands->begin(), commands->end(),
                   [](const auto &item1, const auto &item2) {
                       return ((Node::NodePerCommand *) item1.get())->name[0] <
                              ((Node::NodePerCommand *) item2.get())->name[0];
                   });
-        Profile::next(ColorStringBuilder().red("create main node").build());
+        Profile::next("create main node");
         mainNode = std::make_unique<Node::NodeCommand>("MAIN_NODE", "欢迎使用命令助手(作者：Yancey)", commands.get());
         Profile::pop();
     }
 
 #if CHelperSupportJson == true
     std::unique_ptr<CPack> CPack::createByDirectory(const std::filesystem::path &path) {
-        Profile::push(ColorStringBuilder().red("start load CPack by DIRECTORY: ").purple(path.string()).build());
+        Profile::push("start load CPack by DIRECTORY: {}", path.string());
         std::unique_ptr<CPack> cpack = std::make_unique<CPack>(path);
         Profile::pop();
         return cpack;
     }
 
     std::unique_ptr<CPack> CPack::createByJson(const nlohmann::json &j) {
-        Profile::push(ColorStringBuilder().red("start load CPack by JSON").build());
+        Profile::push("start load CPack by JSON");
         std::unique_ptr<CPack> cpack = std::make_unique<CPack>(j);
         Profile::pop();
         return cpack;
@@ -289,7 +273,7 @@ namespace CHelper {
 #endif
 
     std::unique_ptr<CPack> CPack::createByBinary(BinaryReader &binaryReader) {
-        Profile::push(ColorStringBuilder().red("start load CPack by binary").build());
+        Profile::push("start load CPack by binary");
         std::unique_ptr<CPack> cpack = std::make_unique<CPack>(binaryReader);
         Profile::pop();
         return cpack;
@@ -396,10 +380,7 @@ namespace CHelper {
 #if CHelperWeb != true
     void CPack::writeBinToFile(const std::filesystem::path &path) const {
         std::filesystem::create_directories(path.parent_path());
-        Profile::push(ColorStringBuilder()
-                              .red("writing binary cpack to file: ")
-                              .purple(path.string())
-                              .build());
+        Profile::push("writing binary cpack to file: {}", path.string());
         std::ofstream f(path, std::ios::binary);
         BinaryWriter binaryWriter(true, f);
 

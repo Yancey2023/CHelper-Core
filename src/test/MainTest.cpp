@@ -35,11 +35,7 @@ namespace CHelper::Test {
                 core->getSuggestions();
                 core->getStructure();
             } catch (const std::exception &e) {
-                std::cout << ColorStringBuilder()
-                                     .green("parse command: ")
-                                     .purple(command)
-                                     .build()
-                          << std::endl;
+                fmt::print(fg(fmt::color::lime_green), "parse command: {}\n", command);
                 CHelper::Profile::printAndClear(e);
                 flag = true;
             }
@@ -60,15 +56,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeBsonToFile(output);
             end = std::chrono::high_resolution_clock::now();
-            std::cout << ColorStringBuilder()
-                                 .green("write successfully(")
-                                 .purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(
-                                                                end - start)
-                                                                .count()) +
-                                         "ms")
-                                 .green(")")
-                                 .build()
-                      << std::endl;
+            CHELPER_INFO("write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
             std::cout << std::endl;
             [[maybe_unused]] auto core2 = Core::createByBson(output);
             std::cout << std::endl;

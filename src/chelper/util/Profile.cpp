@@ -9,20 +9,12 @@ namespace CHelper::Profile {
 
     std::vector<std::string> stack;
 
-    void push(const std::string &str) {
-        stack.push_back(str);
-    }
-
     void pop() {
         if (stack.empty()) {
+            CHELPER_ERROR("pop stack when stack is empty");
             return;
         }
         stack.pop_back();
-    }
-
-    void next(const std::string &str) {
-        pop();
-        push(str);
     }
 
     void clear() {

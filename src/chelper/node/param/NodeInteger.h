@@ -32,6 +32,10 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
+
+        bool collectColor(const ASTNode *astNode,
+                          ColoredString &coloredString,
+                          const Theme &theme) const override;
     };
 
     CODEC_H(NodeInteger)

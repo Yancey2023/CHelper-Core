@@ -33,9 +33,19 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(!canUseCaretNotation && result.first == 2)) {
             TokensView tokens = result.second.tokens;
-            return ASTNode::andNode(this, {std::move(result.second)}, tokens, ErrorReason::logicError(tokens, "不能使用局部坐标"));
+            return ASTNode::andNode(this, {std::move(result.second)}, tokens, nullptr, ASTNodeId::NODE_RELATIVE_FLOAT_WITH_ERROR);
         }
         return result.second;
+    }
+
+    bool NodeRelativeFloat::collectIdError(const ASTNode *astNode,
+                                           std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
+        if (HEDLEY_UNLIKELY(!astNode->isError() && astNode->id == ASTNodeId::NODE_RELATIVE_FLOAT_WITH_ERROR)) {
+            idErrorReasons.push_back(ErrorReason::logicError(astNode->tokens, "不能使用局部坐标"));
+            return true;
+        } else {
+            return false;
+        }
     }
 
     std::pair<uint8_t, ASTNode> NodeRelativeFloat::getASTNode(const NodeBase *node,
@@ -66,14 +76,14 @@ namespace CHelper::Node {
         }
         //数值部分
         tokenReader.push();
-        ASTNode number = tokenReader.readFloatASTNode(node);
+        ASTNode number = tokenReader.readFloatASTNode(node, ASTNodeId::NODE_RELATIVE_FLOAT_NUMBER);
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_LIKELY(!number.isError())) {
             tokenReader.pop();
         } else if (HEDLEY_UNLIKELY(childNodes.empty())) {
             tokenReader.pop();
             TokensView tokens = number.tokens;
-            errorReason = ErrorReason::typeError(tokens, fmt::format("类型不匹配，{0}不是有效的坐标参数", tokens.toString()));
+            errorReason = ErrorReason::typeError(tokens, fmt::format("类型不匹配，{}不是有效的坐标参数", tokens.toString()));
         } else {
             tokenReader.restore();
         }
@@ -113,6 +123,17 @@ namespace CHelper::Node {
                                              StructureBuilder &structure,
                                              bool isMustHave) const {
         structure.append(isMustHave, description.value_or("坐标"));
+    }
+
+    bool NodeRelativeFloat::collectColor(const ASTNode *astNode,
+                                         ColoredString &coloredString,
+                                         const Theme &theme) const {
+        if (astNode->id == ASTNodeId::NODE_RELATIVE_FLOAT_NUMBER) {
+            coloredString.setColor(astNode->tokens, theme.colorFloat);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     CODEC_NODE(NodeRelativeFloat, canUseCaretNotation)

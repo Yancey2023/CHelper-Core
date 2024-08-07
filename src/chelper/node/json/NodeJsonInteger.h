@@ -28,6 +28,10 @@ namespace CHelper::Node {
 
         bool collectIdError(const ASTNode *astNode,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
+
+        bool collectColor(const ASTNode *astNode,
+                          ColoredString &coloredString,
+                          const Theme &theme) const override;
     };
 
     CODEC_NODE_H(NodeJsonInteger)

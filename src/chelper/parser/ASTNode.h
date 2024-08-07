@@ -8,6 +8,8 @@
 #define CHELPER_ASTNODE_H
 
 #include "../lexer/Token.h"
+#include "../settings/Settings.h"
+#include "ColoredString.h"
 #include "ErrorReason.h"
 #include "StructureBuilder.h"
 #include "Suggestions.h"
@@ -51,6 +53,8 @@ namespace CHelper {
             NODE_TARGET_SELECTOR_PLAYER_NAME,
             NODE_TARGET_SELECTOR_WITH_ARGUMENTS,
             NODE_TARGET_SELECTOR_NO_ARGUMENTS,
+            NODE_RELATIVE_FLOAT_NUMBER,
+            NODE_RELATIVE_FLOAT_WITH_ERROR,
         };
     }// namespace ASTNodeId
 
@@ -132,6 +136,8 @@ namespace CHelper {
 
         void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 
+        void collectColor(ColoredString &coloredString, const Theme &theme) const;
+
         [[nodiscard]] std::string getDescription(size_t index) const;
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getIdErrors() const;
@@ -142,7 +148,7 @@ namespace CHelper {
 
         [[nodiscard]] std::string getStructure() const;
 
-        [[nodiscard]] std::string getColors() const;
+        [[nodiscard]] ColoredString getColors(const Theme &theme) const;
     };
 
 }// namespace CHelper

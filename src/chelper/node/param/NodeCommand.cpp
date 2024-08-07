@@ -58,7 +58,7 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(currentCommand == nullptr)) {
             TokensView tokens = tokenReader.collect();
-            return ASTNode::andNode(this, {std::move(commandName)}, tokens, ErrorReason::contentError(tokens, fmt::format("命令名字不匹配，找不到名为{0}的命令", str)), ASTNodeId::NODE_COMMAND_COMMAND);
+            return ASTNode::andNode(this, {std::move(commandName)}, tokens, ErrorReason::contentError(tokens, fmt::format("命令名字不匹配，找不到名为{}的命令", str)), ASTNodeId::NODE_COMMAND_COMMAND);
         }
         ASTNode usage = currentCommand->getASTNode(tokenReader, cpack);
         return ASTNode::andNode(this, {std::move(commandName), std::move(usage)},
@@ -143,6 +143,16 @@ namespace CHelper::Node {
         } else if (HEDLEY_LIKELY(astNode->id == ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
             structure.appendWhiteSpace().append(std::string(astNode->tokens.toString()));
         }
+    }
+
+    bool NodeCommand::collectColor(const ASTNode *astNode,
+                                   ColoredString &coloredString,
+                                   const Theme &theme) const {
+        if (HEDLEY_LIKELY(astNode->id == ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
+            coloredString.setColor(astNode->tokens, theme.colorCommand);
+            return true;
+        }
+        return false;
     }
 
     CODEC_UNIQUE_PTR(NodeCommand)

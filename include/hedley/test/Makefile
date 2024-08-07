@@ -108,6 +108,7 @@ TESTS = \
 	visibility \
 	warn \
 	warn-unused-result \
+	access \
 	$(NULL)
 
 ifneq ($(CXX), none)

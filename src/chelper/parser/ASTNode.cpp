@@ -272,14 +272,14 @@ namespace CHelper {
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
-#if CHelperDebug == true
+#if CHelperTest == true
             Profile::push(std::string("collect id errors: ")
                                   .append(node->getNodeType()->nodeName)
                                   .append(" ")
                                   .append(node->description.value_or("")));
 #endif
             auto flag = node->collectIdError(this, idErrorReasons);
-#if CHelperDebug == true
+#if CHelperTest == true
             Profile::pop();
 #endif
             if (HEDLEY_UNLIKELY(flag)) {
@@ -305,11 +305,11 @@ namespace CHelper {
             return;
         }
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
-#if CHelperDebug == true
+#if CHelperTest == true
             Profile::push("collect suggestions: " + node->getNodeType()->nodeName + " " + node->description.value_or(""));
 #endif
             auto flag = node->collectSuggestions(this, index, suggestions);
-#if CHelperDebug == true
+#if CHelperTest == true
             Profile::pop();
 #endif
             if (HEDLEY_UNLIKELY(flag)) {
@@ -340,14 +340,11 @@ namespace CHelper {
                 structure.append(isMustHave, node->brief.value());
                 return;
             } else {
-#if CHelperDebug == true
-                Profile::push(ColorStringBuilder()
-                                      .red("collect structure: ")
-                                      .purple(node->getNodeType()->nodeName + " " + node->description.value_or(""))
-                                      .build());
+#if CHelperTest == true
+                Profile::push("collect structure: {}", node->getNodeType()->nodeName + " " + node->description.value_or(""));
 #endif
                 node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ? nullptr : this, structure, isMustHave);
-#if CHelperDebug == true
+#if CHelperTest == true
                 Profile::pop();
 #endif
                 if (HEDLEY_UNLIKELY(structure.isDirty)) {
@@ -391,9 +388,38 @@ namespace CHelper {
         }
     }
 
+    void ASTNode::collectColor(ColoredString &coloredString, const Theme &theme) const {
+        bool isCompound = id == ASTNodeId::COMPOUND;
+        bool isNext = id == ASTNodeId::NEXT_NODE;
+        if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
+#if CHelperTest == true
+            Profile::push("collect color: {}", node->getNodeType()->nodeName + " " + node->description.value_or(""));
+#endif
+            bool isDirty = node->collectColor(this, coloredString, theme);
+#if CHelperTest == true
+            Profile::pop();
+#endif
+            if (HEDLEY_UNLIKELY(isDirty)) {
+                return;
+            }
+        }
+        switch (mode) {
+            case ASTNodeMode::NONE:
+                return;
+            case ASTNodeMode::AND:
+                for (const ASTNode &astNode: childNodes) {
+                    astNode.collectColor(coloredString, theme);
+                }
+                break;
+            case ASTNodeMode::OR:
+                childNodes[whichBest].collectColor(coloredString, theme);
+                break;
+        }
+    }
+
     std::string ASTNode::getDescription(size_t index) const {
 #if CHelperTest == true
-        Profile::push("start getting description: " + std::string(tokens.toString()));
+        Profile::push("start getting description: {}", std::string(tokens.toString()));
 #endif
         auto result = collectDescription(index).value_or("未知");
 #if CHelperTest == true
@@ -434,7 +460,7 @@ namespace CHelper {
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
         std::vector<std::shared_ptr<ErrorReason>> result = errorReasons;
 #if CHelperTest == true
-        Profile::push("start getting error reasons: " + std::string(tokens.toString()));
+        Profile::push("start getting error reasons: {}", std::string(tokens.toString()));
 #endif
         collectIdErrors(result);
 #if CHelperTest == true
@@ -470,7 +496,7 @@ namespace CHelper {
     std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
         std::string_view str = tokens.toString();
 #if CHelperTest == true
-        Profile::push("start getting suggestions: " + std::string(str));
+        Profile::push("start getting suggestions: {}", str);
 #endif
         std::vector<Suggestions> suggestions;
         if (HEDLEY_UNLIKELY(canAddWhitespace0(*this, index))) {
@@ -485,7 +511,7 @@ namespace CHelper {
 
     std::string ASTNode::getStructure() const {
 #if CHelperTest == true
-        Profile::push("start getting structure: " + std::string(tokens.toString()));
+        Profile::push("start getting structure: {}", tokens.toString());
 #endif
         StructureBuilder structureBuilder;
         collectStructure(structureBuilder, true);
@@ -499,16 +525,66 @@ namespace CHelper {
         return std::move(result);
     }
 
-    std::string ASTNode::getColors() const {
-        //TODO 命令语法高亮显示，获取颜色
+    ColoredString ASTNode::getColors(const Theme &theme) const {
 #if CHelperTest == true
-        Profile::push("start getting colors: " + std::string(tokens.toString()));
+        Profile::push("start getting colors: {}", std::string(tokens.toString()));
 #endif
-        auto result = node->getNodeType()->nodeName;
+        ColoredString coloredString(tokens.lexerResult->content);
+        collectColor(coloredString, theme);
+        std::stack<char> brackets;
+        tokens.forEach([&brackets, &coloredString, &theme](const Token &token) {
+            if (HEDLEY_LIKELY(token.type != TokenType::SYMBOL || token.content.empty())) {
+                return;
+            }
+            char ch = token.content[0];
+            switch (ch) {
+                case '[':
+                case '{': {
+                    size_t indexOfColor = brackets.size() % 3;
+                    switch (indexOfColor) {
+                        case 0:
+                            coloredString.setColor(token.pos.index, theme.colorBrackets1);
+                            break;
+                        case 1:
+                            coloredString.setColor(token.pos.index, theme.colorBrackets2);
+                            break;
+                        case 2:
+                            coloredString.setColor(token.pos.index, theme.colorBrackets3);
+                            break;
+                        default:
+                            HEDLEY_UNREACHABLE();
+                    }
+                    brackets.push(ch);
+                } break;
+                case ']':
+                case '}': {
+                    if (brackets.empty() || !(brackets.top() == '[' && ch == ']' || brackets.top() == '{' && ch == '}')) {
+                        break;
+                    }
+                    size_t indexOfColor = (brackets.size() - 1) % 3;
+                    switch (indexOfColor) {
+                        case 0:
+                            coloredString.setColor(token.pos.index, theme.colorBrackets1);
+                            break;
+                        case 1:
+                            coloredString.setColor(token.pos.index, theme.colorBrackets2);
+                            break;
+                        case 2:
+                            coloredString.setColor(token.pos.index, theme.colorBrackets3);
+                            break;
+                        default:
+                            HEDLEY_UNREACHABLE();
+                    }
+                    brackets.pop();
+                } break;
+                default:
+                    break;
+            }
+        });
 #if CHelperTest == true
         Profile::pop();
 #endif
-        return result;
+        return coloredString;
     }
 
 }// namespace CHelper

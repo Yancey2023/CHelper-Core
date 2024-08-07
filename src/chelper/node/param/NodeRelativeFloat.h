@@ -25,6 +25,9 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
+        bool collectIdError(const ASTNode *astNode,
+                            std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
+
         static std::pair<uint8_t, ASTNode> getASTNode(const NodeBase *node,
                                                       const CPack *cpack,
                                                       TokenReader &tokenReader);
@@ -36,6 +39,10 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
+
+        bool collectColor(const ASTNode *astNode,
+                          ColoredString &coloredString,
+                          const Theme &theme) const override;
     };
 
     CODEC_NODE_H(NodeRelativeFloat)

@@ -45,23 +45,10 @@ namespace CHelper::Node {
                 }
             }
             if (notFind) {
-                Profile::push(ColorStringBuilder()
-                                      .red("linking contents to ")
-                                      .purple(item)
-                                      .build());
-                Profile::push(ColorStringBuilder()
-                                      .red("failed to find node id")
-                                      .normal(" -> ")
-                                      .purple(item)
-                                      .build());
-                throw std::runtime_error(ColorStringBuilder()
-                                                 .red("unknown node id")
-                                                 .normal(" -> ")
-                                                 .purple(id.value_or("UNKNOWN"))
-                                                 .red(" (in node \"")
-                                                 .purple(item)
-                                                 .red("\")")
-                                                 .build());
+                Profile::push("linking contents to {}", item);
+                Profile::push("failed to find node id -> {}", item);
+                Profile::push("unknown node id -> {} (in node \"{}\")", id.value_or("UNKNOWN"), item);
+                throw std::runtime_error("unknown node id");
             }
         }
         nodeKey = std::make_unique<NodeText>(

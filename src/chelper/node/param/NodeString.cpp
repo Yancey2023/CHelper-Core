@@ -96,6 +96,13 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or("字符串"));
     }
 
+    bool NodeString::collectColor(const ASTNode *astNode,
+                                  ColoredString &coloredString,
+                                  const Theme &theme) const {
+        coloredString.setColor(astNode->tokens, theme.colorString);
+        return true;
+    }
+
     CODEC_NODE(NodeString, canContainSpace, ignoreLater)
 
 }// namespace CHelper::Node

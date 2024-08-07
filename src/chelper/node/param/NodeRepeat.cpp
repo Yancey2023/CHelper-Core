@@ -15,15 +15,9 @@ namespace CHelper::Node {
             nodeElement = it->second.second;
             return;
         }
-        Profile::push(ColorStringBuilder()
-                              .red("link repeat data ")
-                              .purple(key)
-                              .red(" to content")
-                              .build());
-        throw std::runtime_error(ColorStringBuilder()
-                                         .red("fail to find repeat data by id ")
-                                         .purple(key)
-                                         .build());
+        Profile::push("link repeat data {} to content", key);
+        Profile::push("fail to find repeat data by id {}", key);
+        throw std::runtime_error("fail to find repeat data");
     }
 
     NodeType *NodeRepeat::getNodeType() const {
