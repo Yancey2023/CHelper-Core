@@ -22,7 +22,6 @@
 #else
 #define CHelperOnlyReadBinary false
 #endif
-#define CHelperOnlyReadBinary true
 
 // 由于测试过程需要用到JSON相关的东西，所以CHelperTest和CHelperOnlyReadBinary不能同时为true
 #if CHelperTest == true && CHelperOnlyReadBinary == true
