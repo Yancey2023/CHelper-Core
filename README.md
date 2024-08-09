@@ -26,9 +26,9 @@ Because I am leaning c++ now. I want to improve myself through this project.
 
 |                  project                  |                                    description                                     |                                           license                                           |
 |:-----------------------------------------:|:----------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------:|
-| [Hedley](https://github.com/cblck/hedley) | enable compiler-specific features while retaining compatibility with all compilers | [Creative Commons Zero v1.0 Universal](https://github.com/cblck/hedley/blob/master/LICENSE) |
 | [json](https://github.com/nlohmann/json)  |                                JSON for Modern C++                                 |           [MIT license](https://github.com/nlohmann/json/blob/master/LICENSE.MIT)           |
 |   [fmt](https://github.com/fmtlib/fmt)    |                                 formatting library                                 |              [MIT license](https://github.com/fmtlib/fmt/blob/master/LICENSE)               |
+| [Hedley](https://github.com/cblck/hedley) | enable compiler-specific features while retaining compatibility with all compilers | [Creative Commons Zero v1.0 Universal](https://github.com/cblck/hedley/blob/master/LICENSE) |
 
 ### CHelper-Qt
 
