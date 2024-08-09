@@ -133,10 +133,7 @@ void onTextChanged(const std::string &command) {
                 startErrorReasons, endErrorReasons,
                 startSuggestions, endSuggestions,
                 startStructure, endStructure;
-        CHelper::Profile::push(CHelper::ColorStringBuilder()
-                                       .red("parsing command: ")
-                                       .purple(command)
-                                       .build());
+        CHelper::Profile::push("parsing command: {}", command);
         startParse = std::chrono::high_resolution_clock::now();
         core->onTextChanged(command, command.length());
         endParse = std::chrono::high_resolution_clock::now();
@@ -176,48 +173,30 @@ void onTextChanged(const std::string &command) {
             delete[] wstr;
         }
         CHelper::Profile::pop();
-        std::cout << CHelper::ColorStringBuilder()
-                             .green("parse successfully(")
-                             .purple(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
-                                                            endStructure - startParse)
-                                                            .count()) +
-                                     "ms")
-                             .green(")")
-                             .normal(" : ")
-                             .purple(command)
-                             .build()
-                  << std::endl;
-        std::cout << CHelper::ColorStringBuilder().blue("parse in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endParse - startParse).count()) + "ms").build() << std::endl;
-        std::cout << CHelper::ColorStringBuilder().blue("get description in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endDescription - startDescription).count()) + "ms").build() << std::endl;
-        std::cout << CHelper::ColorStringBuilder().blue("get error reasons in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endErrorReasons - startErrorReasons).count()) + "ms").build() << std::endl;
-        std::cout << CHelper::ColorStringBuilder().blue("get suggestions in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms").build() << std::endl;
-        std::cout << CHelper::ColorStringBuilder().blue("get structure in ").purple(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms").build() << std::endl;
-        //        std::cout << core->getAstNode()->toOptimizedJson().dump(
-        //                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
-        //        std::cout << core->getAstNode()->toBestJson().dump(
-        //                -1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
+        fmt::print("parse successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startParse).count()) + "ms", fg(fmt::color::medium_purple)));
+        fmt::print("parse successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endParse - startParse).count()) + "ms", fg(fmt::color::medium_purple)));
+        fmt::print("get description successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endDescription - startDescription).count()) + "ms", fg(fmt::color::medium_purple)));
+        fmt::print("get error successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endErrorReasons - startErrorReasons).count()) + "ms", fg(fmt::color::medium_purple)));
+        fmt::print("get suggestions successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms", fg(fmt::color::medium_purple)));
+        fmt::print("get structure successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms", fg(fmt::color::medium_purple)));
+#if CHelperTest == true
+        std::cout << core->getAstNode()->toOptimizedJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
+        std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
+#endif
         std::cout << "structure: " + structure << std::endl;
         std::cout << "description: " + description << std::endl;
         if (errorReasons.empty()) {
             std::cout << "no error" << std::endl;
         } else {
             std::cout << "error reasons:" << std::endl;
-            int i2 = 0;
             for (const auto &errorReason: errorReasons) {
-                std::cout << CHelper::ColorStringBuilder()
-                                     .normal(std::to_string(++i2) + ". ")
-                                     .red(command.substr(errorReason->start,
-                                                         errorReason->end - errorReason->start) +
-                                          " ")
-                                     .blue(errorReason->errorReason)
-                                     .build()
-                          << std::endl;
-                std::cout << CHelper::ColorStringBuilder()
-                                     .normal(command.substr(0, errorReason->start))
-                                     .red(errorReason->start == errorReason->end ? "~" : command.substr(errorReason->start, errorReason->end - errorReason->start))
-                                     .normal(command.substr(errorReason->end))
-                                     .build()
-                          << std::endl;
+                fmt::print("{}. {} {}\n{}{}{}\n",
+                           ++i,
+                           fmt::styled(command.substr(errorReason->start, errorReason->end - errorReason->start), fg(fmt::color::red)),
+                           fmt::styled(errorReason->errorReason, fg(fmt::color::cornflower_blue)),
+                           command.substr(0, errorReason->start),
+                           fmt::styled(errorReason->start == errorReason->end ? "~" : command.substr(errorReason->start, errorReason->end - errorReason->start), fg(fmt::color::red)),
+                           command.substr((errorReason->end)));
             }
         }
         if (suggestions->empty()) {
@@ -230,12 +209,10 @@ void onTextChanged(const std::string &command) {
                     std::cout << "..." << std::endl;
                     break;
                 }
-                std::cout << CHelper::ColorStringBuilder()
-                                     .normal(std::to_string(++j) + ". ")
-                                     .green(item.content->name + " ")
-                                     .blue(item.content->description.value_or(""))
-                                     .build()
-                          << std::endl;
+                fmt::print("{}. {} {}\n",
+                           ++j,
+                           fmt::styled(item.content->name, fg(fmt::color::lime_green)),
+                           fmt::styled(item.content->description.value_or(""), fg(fmt::color::cornflower_blue)));
                 std::string result = command.substr(0, item.start)
                                              .append(item.content->name)
                                              .append(command.substr(item.end));
@@ -246,17 +223,15 @@ void onTextChanged(const std::string &command) {
                         greenPart.push_back(' ');
                     }
                 }
-                std::cout << CHelper::ColorStringBuilder()
-                                     .normal(command.substr(0, item.start))
-                                     .green(greenPart)
-                                     .normal(command.substr(item.end))
-                                     .build()
-                          << std::endl;
+                fmt::print("{}{}{}\n",
+                           command.substr(0, item.start),
+                           fmt::styled(greenPart, fg(fmt::color::lime_green)),
+                           command.substr(item.end));
             }
         }
         std::cout << std::endl;
     } catch (const std::exception &e) {
-        std::cout << CHelper::ColorStringBuilder().red("parse failed").build() << std::endl;
+        CHELPER_ERROR("parse failed");
         CHelper::Profile::printAndClear(e);
     }
 }
