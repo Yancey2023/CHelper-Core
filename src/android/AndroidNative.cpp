@@ -195,7 +195,7 @@ Java_yancey_chelper_core_CHelperCore_onSuggestionClick0(
 }
 
 extern "C" [[maybe_unused]] JNIEXPORT jintArray JNICALL
-Java_yancey_chelper_core_CHelperCore_getColors(
+Java_yancey_chelper_core_CHelperCore_getColors0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
     auto *core = reinterpret_cast<CHelper::Core *>(pointer);
     if (HEDLEY_UNLIKELY(core == nullptr)) {
@@ -211,6 +211,33 @@ Java_yancey_chelper_core_CHelperCore_getColors(
     env->SetIntArrayRegion(result, 0, static_cast<jsize>(size), colors);
     delete[] colors;
     return result;
+}
+
+extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
+Java_yancey_chelper_core_CHelperCore_setTheme0(
+        JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer, jobject theme) {
+    if (HEDLEY_UNLIKELY(theme == nullptr)) {
+        return;
+    }
+    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
+        return;
+    }
+    jclass jclassTheme = env->GetObjectClass(theme);
+    core->settings.theme.colorBoolean = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorBoolean", "I"));
+    core->settings.theme.colorFloat = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorFloat", "I"));
+    core->settings.theme.colorInteger = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorInteger", "I"));
+    core->settings.theme.colorSymbol = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorSymbol", "I"));
+    core->settings.theme.colorId = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorId", "I"));
+    core->settings.theme.colorTargetSelector = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorTargetSelector", "I"));
+    core->settings.theme.colorCommand = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorCommand", "I"));
+    core->settings.theme.colorBrackets1 = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorBrackets1", "I"));
+    core->settings.theme.colorBrackets2 = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorBrackets2", "I"));
+    core->settings.theme.colorBrackets3 = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorBrackets3", "I"));
+    core->settings.theme.colorString = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorString", "I"));
+    core->settings.theme.colorNull = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorNull", "I"));
+    core->settings.theme.colorRange = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorRange", "I"));
+    core->settings.theme.colorLiteral = env->GetIntField(theme, env->GetFieldID(jclassTheme, "colorLiteral", "I"));
 }
 
 CHelper::Old2New::BlockFixData blockFixData0;
