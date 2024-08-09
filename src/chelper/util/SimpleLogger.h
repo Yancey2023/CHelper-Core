@@ -37,7 +37,7 @@ namespace CHelper::Logger {
     void info(fmt::format_string<T...> fmt, T &&...args) {
 #if CHelperAndroid == true
         std::string content = fmt::format(fmt, args...);
-        __android_log_print(ANDROID_LOG_INFO, KEY, "%s", fmt::format(fmt, content.c_str()));
+        __android_log_print(ANDROID_LOG_INFO, KEY, "%s", content.c_str());
 #else
         fmt::print("{}\t{}\n",
                    fmt::styled("[INFO]", fg(fmt::color::cornflower_blue)),
@@ -52,7 +52,7 @@ namespace CHelper::Logger {
     void warn(fmt::format_string<T...> fmt, T &&...args) {
 #if CHelperAndroid == true
         std::string content = fmt::format(fmt, args...);
-        __android_log_print(ANDROID_LOG_WARN, KEY, "%s", fmt::format(fmt, content.c_str()));
+        __android_log_print(ANDROID_LOG_WARN, KEY, "%s", content.c_str());
 #else
         fmt::print("{}\t{}\n",
                    fmt::styled("[WARN]", fg(fmt::color::gold)),
@@ -67,7 +67,7 @@ namespace CHelper::Logger {
     void error(fmt::format_string<T...> fmt, T &&...args) {
 #if CHelperAndroid == true
         std::string content = fmt::format(fmt, args...);
-        __android_log_print(ANDROID_LOG_ERROR, KEY, "%s", fmt::format(fmt, content.c_str()));
+        __android_log_print(ANDROID_LOG_ERROR, KEY, "%s", content.c_str());
 #else
         fmt::print("{}\t{}\n",
                    fmt::styled("[ERROR]", fg(fmt::color::red)),
