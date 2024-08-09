@@ -215,14 +215,7 @@ TEST(BinaryUtilTest, PerCPackNormalIds) {
     std::unique_ptr<CHelper::CPack> cpack;
     try {
         std::filesystem::path projectDir(PROJECT_DIR);
-        nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(projectDir / "resources" / "beta" / "vanilla" / "id" / "blocks.json");
-#ifdef _WIN32
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                projectDir / "resources" / "beta" / "vanilla"));
-#else
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(
-                R"(/home/yancey/CLionProjects/CHelper-Core/resources/beta/vanilla)"));
-#endif
+        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(projectDir / "resources" / "beta" / "vanilla"));
     } catch (const std::exception &e) {
         CHelper::Profile::printAndClear(e);
         exit(-1);
