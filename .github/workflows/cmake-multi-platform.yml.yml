@@ -77,13 +77,12 @@ jobs:
       - name: Run Test
         if: runner.os == 'Windows'
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
-        run: .\CHelperTest.exe
+        run: .\${{ matrix.build_type }}\CHelperTest.exe
 
       - name: Run Test
         if: runner.os != 'Windows'
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
         run: ./CHelperTest
-        shell: bash
 
       - name: Build CHelperCmd
         # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
@@ -92,13 +91,12 @@ jobs:
       - name: Run CHelperCmd
         if: runner.os == 'Windows'
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
-        run: .\CHelperTest.exe
+        run: .\${{ matrix.build_type }}\CHelperTest.exe
 
       - name: Run CHelperCmd
         if: runner.os != 'Windows'
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
         run: ./CHelperCmd
-        shell: bash
 
       - name: Build CHelperQt
         # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
