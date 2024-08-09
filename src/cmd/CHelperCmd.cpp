@@ -9,9 +9,9 @@
 int main() {
     //    testDir();
     //    testBin();
-    //    outputSingleJson();
-    //    outputBson();
-    //    outputBinary();
+    outputSingleJson();
+    outputBson();
+    outputBinary();
     return 0;
 }
 

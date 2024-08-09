@@ -2,8 +2,8 @@
 // Created by Yancey on 2024/2/24.
 //
 
-#include "pch.h"
 #include "../chelper/Core.h"
+#include "pch.h"
 
 std::string jstring2string(JNIEnv *env, jstring jStr) {
     const char *cstr = env->GetStringUTFChars(jStr, nullptr);
@@ -15,6 +15,9 @@ std::string jstring2string(JNIEnv *env, jstring jStr) {
 extern "C" [[maybe_unused]] JNIEXPORT jlong JNICALL
 Java_yancey_chelper_core_CHelperCore_create0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jobject assetManager, jstring cpack_path) {
+    if (cpack_path == nullptr) {
+        return reinterpret_cast<jlong>(nullptr);
+    }
     try {
         std::string cpackPath = jstring2string(env, cpack_path);
         if (HEDLEY_UNLIKELY(assetManager == nullptr)) {
@@ -189,6 +192,25 @@ Java_yancey_chelper_core_CHelperCore_onSuggestionClick0(
     } else {
         return nullptr;
     }
+}
+
+extern "C" [[maybe_unused]] JNIEXPORT jintArray JNICALL
+Java_yancey_chelper_core_CHelperCore_getColors(
+        JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
+    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
+        return nullptr;
+    }
+    CHelper::ColoredString coloredString = core->getColors();
+    size_t size = coloredString.colors.size();
+    jint *colors = new jint[size];
+    for (int i = 0; i < size; ++i) {
+        colors[i] = static_cast<jint>(coloredString.colors[i]);
+    }
+    jintArray result = env->NewIntArray(static_cast<jsize>(size));
+    env->SetIntArrayRegion(result, 0, static_cast<jsize>(size), colors);
+    delete[] colors;
+    return result;
 }
 
 CHelper::Old2New::BlockFixData blockFixData0;
