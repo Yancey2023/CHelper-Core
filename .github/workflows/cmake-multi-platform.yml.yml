@@ -75,6 +75,12 @@ jobs:
         run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target CHelperTest
 
       - name: Run Test
+        if: runner.os == 'Windows'
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        run: .\CHelperTest.exe
+
+      - name: Run Test
+        if: runner.os != 'Windows'
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
         run: ./CHelperTest
         shell: bash
@@ -84,6 +90,12 @@ jobs:
         run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target CHelperCmd
 
       - name: Run CHelperCmd
+        if: runner.os == 'Windows'
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        run: .\CHelperTest.exe
+
+      - name: Run CHelperCmd
+        if: runner.os != 'Windows'
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
         run: ./CHelperCmd
         shell: bash
