@@ -60,14 +60,16 @@ target_precompile_headers(CHelperWeb PRIVATE include/pch/pch.h)
 target_compile_definitions(CHelperWeb PRIVATE CHelperWeb=true)
 
 # Windows Application
-add_executable(CHelperWindows
-        src/windows/CHelperWindows.h
-        src/windows/CHelperWindows.cpp
-        ${SOURCE_FILE}
-)
-target_precompile_headers(CHelperWindows PRIVATE include/pch/pch.h)
-if (MSVC)
-    set_target_properties(CHelperWindows PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
+if (CMAKE_SYSTEM_NAME MATCHES "Windows")
+    add_executable(CHelperWindows
+            src/windows/CHelperWindows.h
+            src/windows/CHelperWindows.cpp
+            ${SOURCE_FILE}
+    )
+    target_precompile_headers(CHelperWindows PRIVATE include/pch/pch.h)
+    if (MSVC)
+        set_target_properties(CHelperWindows PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
+    endif ()
 endif ()
 
 # Qt Application
