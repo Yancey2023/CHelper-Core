@@ -9230,7 +9230,7 @@
     },
     {
       "name": "clay",
-      "description": "黏土块"
+      "description": "黏土"
     },
     {
       "name": "coal_block",
@@ -33704,7 +33704,7 @@
     },
     {
       "name": "snow_layer",
-      "description": "雪层",
+      "description": "雪",
       "blockStates": [
         {
           "key": "covered_bit",

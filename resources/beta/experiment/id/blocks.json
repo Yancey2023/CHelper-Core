@@ -10092,7 +10092,7 @@
     },
     {
       "name": "clay",
-      "description": "黏土块"
+      "description": "黏土"
     },
     {
       "name": "coal_block",
@@ -41090,7 +41090,7 @@
     },
     {
       "name": "snow_layer",
-      "description": "雪层",
+      "description": "雪",
       "blockStates": [
         {
           "key": "covered_bit",
@@ -41355,11 +41355,7 @@
     },
     {
       "name": "sponge",
-      "description": "海绵/湿海绵",
-      "descriptions": [
-        "海绵",
-        "湿海绵"
-      ],
+      "description": "海绵",
       "blockStates": [
         {
           "key": "sponge_type",
@@ -41371,7 +41367,7 @@
             },
             {
               "value": "wet",
-              "description": ""
+              "description": "（无效）"
             }
           ]
         }
@@ -48309,6 +48305,26 @@
             {
               "value": 25,
               "description": "垂泪藤的生长程度 当此值小于25时可以继续生长出新的植物方块，且使得末端植物方块的该属性增加1当此值达到25时植物不再生长"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "wet_sponge",
+      "description": "湿海绵",
+      "blockStates": [
+        {
+          "key": "sponge_type",
+          "defaultValue": 1,
+          "values": [
+            {
+              "value": "dry",
+              "description": "（无效）"
+            },
+            {
+              "value": "wet",
+              "description": "（默认值）"
             }
           ]
         }

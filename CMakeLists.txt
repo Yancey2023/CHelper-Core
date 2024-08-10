@@ -34,7 +34,7 @@ link_libraries(fmt::fmt)
 
 # Param Deliver
 set(CPACK_VERSION_RELEASE "1.21.2.02")
-set(CPACK_VERSION_BETA "1.21.30.21")
+set(CPACK_VERSION_BETA "1.21.30.22")
 set(CPACK_VERSION_NETEASE "1.20.10.25")
 configure_file(include/param_deliver.h.in include/param_deliver.h @ONLY)
 

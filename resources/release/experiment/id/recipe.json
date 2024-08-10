@@ -923,7 +923,7 @@
     },
     {
       "name": "minecraft:clay",
-      "description": "\u003c工作台\u003e黏土球*4-\u003e黏土块"
+      "description": "\u003c工作台\u003e黏土球*4-\u003e黏土"
     },
     {
       "name": "minecraft:clock",
@@ -3175,7 +3175,7 @@
     },
     {
       "name": "minecraft:snow_layer",
-      "description": "\u003c工作台\u003e雪块*3-\u003e雪层*6"
+      "description": "\u003c工作台\u003e雪块*3-\u003e雪*6"
     },
     {
       "name": "minecraft:soul_campfire",

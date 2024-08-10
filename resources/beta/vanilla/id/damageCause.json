@@ -71,6 +71,10 @@
       "description": "闪电"
     },
     {
+      "name": "mace_smash",
+      "description": "重锤下落攻击"
+    },
+    {
       "name": "magic",
       "description": "药水、龙息、唤魔者尖牙或守卫者激光"
     },

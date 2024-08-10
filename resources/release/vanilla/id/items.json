@@ -900,7 +900,7 @@
     },
     {
       "name": "clay",
-      "description": "黏土块"
+      "description": "黏土"
     },
     {
       "name": "clay_ball",
@@ -4033,7 +4033,7 @@
     },
     {
       "name": "snow_layer",
-      "description": "雪层"
+      "description": "雪"
     },
     {
       "name": "snowball",
