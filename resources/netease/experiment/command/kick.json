@@ -8,13 +8,12 @@
   ],
   "node": [
     {
-      "type": "TARGET_SELECTOR",
+      "type": "STRING",
       "id": "name",
-      "description": "要踢出的玩家",
-      "isOnlyOne": false,
-      "isMustPlayer": true,
-      "isMustNPC": false,
-      "isWildcard": false
+      "brief": "要踢除的玩家",
+      "description": "要踢出的玩家, 必须是玩家名",
+      "canContainSpace": true,
+      "ignoreLater": false
     },
     {
       "type": "STRING",
