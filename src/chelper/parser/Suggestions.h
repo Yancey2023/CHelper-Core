@@ -11,30 +11,45 @@
 
 namespace CHelper {
 
+    namespace SuggestionsType {
+
+        enum SuggestionsType : uint8_t {
+            WHITESPACE = 0,
+            SYMBOL = 1,
+            LITERAL = 2,
+            ID = 3
+        };
+
+        extern SuggestionsType suggestionsTypeMax;
+    }// namespace SuggestionsType
+
     //为了更快地过滤补全建议，要对不同的建议组合进行一些标记
     class Suggestions {
     public:
+        SuggestionsType::SuggestionsType suggestionsType;
         std::vector<Suggestion> suggestions;
 
     private:
         std::optional<size_t> mHashCode;
 
     public:
-        Suggestions() = default;
+        explicit Suggestions(SuggestionsType::SuggestionsType suggestionsType);
 
-        bool isFiltered() {
-            return mHashCode.has_value();
-        }
+        bool isFiltered();
 
-        size_t hashCode() {
-            return mHashCode.value_or(0);
-        }
+        size_t hashCode();
 
         void markFiltered();
 
         void filter();
 
-        static Suggestions singleSuggestion(Suggestion suggestion);
+        static Suggestions singleSuggestion(SuggestionsType::SuggestionsType suggestionsType, Suggestion suggestion);
+
+        static Suggestions singleWhitespaceSuggestion(Suggestion suggestion);
+
+        static Suggestions singleSymbolSuggestion(Suggestion suggestion);
+
+        static Suggestions singleLiteralSuggestion(Suggestion suggestion);
 
         static std::vector<Suggestion> filter(std::vector<Suggestions> &suggestions);
     };

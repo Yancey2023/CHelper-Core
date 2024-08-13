@@ -136,7 +136,7 @@ namespace CHelper::Node {
                 descriptionContain.push_back(item);
             }
         }
-        Suggestions suggestions1;
+        Suggestions suggestions1(SuggestionsType::ID);
         suggestions1.suggestions.reserve(nameStartOf.size() + nameContain.size() + descriptionContain.size());
         size_t start = astNode->tokens.getStartIndex();
         size_t end = astNode->tokens.getEndIndex();

@@ -101,7 +101,7 @@ namespace CHelper::Node {
                 return collectSuggestions(index, suggestions, canUseCaretNotation);
             }
             if (str[i] != ' ') {
-                return false;
+                return true;
             }
         }
         if (HEDLEY_UNLIKELY(startIndex + str.length() == index)) {
@@ -111,10 +111,10 @@ namespace CHelper::Node {
     }
 
     bool NodeRelativeFloat::collectSuggestions(size_t index, std::vector<Suggestions> &suggestions, bool canUseCaretNotation) {
-        suggestions.push_back(Suggestions::singleSuggestion({index, index, false, whitespaceId}));
-        suggestions.push_back(Suggestions::singleSuggestion({index, index, false, nodeRelativeNotation->normalId}));
+        suggestions.push_back(Suggestions::singleWhitespaceSuggestion({index, index, false, whitespaceId}));
+        suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, nodeRelativeNotation->normalId}));
         if (HEDLEY_LIKELY(canUseCaretNotation)) {
-            suggestions.push_back(Suggestions::singleSuggestion({index, index, false, nodeCaretNotation->normalId}));
+            suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, nodeCaretNotation->normalId}));
         }
         return true;
     }

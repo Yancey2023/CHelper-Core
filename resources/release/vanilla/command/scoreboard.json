@@ -403,7 +403,7 @@
     ["objectivesList", "LF"],
     ["objectivesAdd", "addObjective"],
     ["addObjective", "dummy"],
-    ["dummy", "displayName"],
+    ["dummy", "displayName", "LF"],
     ["displayName", "LF"],
     ["objectivesRemove", "removeObjective"],
     ["removeObjective", "LF"],

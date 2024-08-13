@@ -6,6 +6,24 @@
 
 namespace CHelper {
 
+    namespace SuggestionsType {
+
+        SuggestionsType suggestionsTypeMax = SuggestionsType::ID;
+
+    }// namespace SuggestionsType
+
+
+    Suggestions::Suggestions(SuggestionsType::SuggestionsType suggestionsType)
+        : suggestionsType(suggestionsType) {}
+
+    bool Suggestions::isFiltered() {
+        return mHashCode.has_value();
+    }
+
+    size_t Suggestions::hashCode() {
+        return mHashCode.value_or(0);
+    }
+
     void Suggestions::markFiltered() {
         if (HEDLEY_UNLIKELY(isFiltered())) {
             return;
@@ -41,36 +59,50 @@ namespace CHelper {
         markFiltered();
     }
 
-    Suggestions Suggestions::singleSuggestion(Suggestion suggestion) {
-        Suggestions suggestions;
+    Suggestions Suggestions::singleSuggestion(SuggestionsType::SuggestionsType suggestionsType, Suggestion suggestion) {
+        Suggestions suggestions(suggestionsType);
         suggestions.suggestions.push_back(std::move(suggestion));
         suggestions.markFiltered();
         return suggestions;
     }
 
+    Suggestions Suggestions::singleWhitespaceSuggestion(Suggestion suggestion) {
+        return singleSuggestion(SuggestionsType::WHITESPACE, std::move(suggestion));
+    }
+
+    Suggestions Suggestions::singleSymbolSuggestion(Suggestion suggestion) {
+        return singleSuggestion(SuggestionsType::SYMBOL, std::move(suggestion));
+    }
+
+    Suggestions Suggestions::singleLiteralSuggestion(Suggestion suggestion) {
+        return singleSuggestion(SuggestionsType::LITERAL, std::move(suggestion));
+    }
+
     std::vector<Suggestion> Suggestions::filter(std::vector<Suggestions> &suggestions) {
-        //过滤
+        // 过滤
         std::vector<Suggestions> filteredSuggestions;
         for (auto &item: suggestions) {
             item.filter();
-            if (HEDLEY_LIKELY(
-                        std::all_of(filteredSuggestions.begin(), filteredSuggestions.end(),
-                                    [&item](Suggestions &item2) {
-                                        return item.hashCode() != item2.hashCode();
-                                    }))) {
+            if (HEDLEY_LIKELY(std::all_of(
+                        filteredSuggestions.begin(), filteredSuggestions.end(),
+                        [&item](Suggestions &item2) {
+                            return item.hashCode() != item2.hashCode();
+                        }))) {
                 filteredSuggestions.push_back(item);
             }
         }
-        //收集
+        // 根据优先级进行排序
         std::vector<Suggestion> result;
         size_t sum = 0;
         for (const auto &item: filteredSuggestions) {
             sum += item.suggestions.size();
         }
         result.reserve(sum);
-        for (const auto &item: filteredSuggestions) {
-            for (const auto &item2: item.suggestions) {
-                result.push_back(item2);
+        for (int suggestionsType = 0; suggestionsType <= SuggestionsType::suggestionsTypeMax; ++suggestionsType) {
+            for (const auto &item: filteredSuggestions) {
+                if (item.suggestionsType == suggestionsType) {
+                    std::copy(item.suggestions.begin(), item.suggestions.end(), std::back_inserter(result));
+                }
             }
         }
         return result;

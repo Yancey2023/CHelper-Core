@@ -80,7 +80,7 @@ namespace CHelper::Node {
             return false;
         }
         if (HEDLEY_LIKELY(index == 0 && astNode->tokens.isEmpty())) {
-            suggestions.push_back(Suggestions::singleSuggestion({0, 0, false, nodeCommandStart->normalId}));
+            suggestions.push_back(Suggestions::singleSymbolSuggestion({0, 0, false, nodeCommandStart->normalId}));
         }
         std::string_view str = astNode->tokens.toString()
                                        .substr(0, index - astNode->tokens.getStartIndex());
@@ -121,7 +121,7 @@ namespace CHelper::Node {
         suggestions1.insert(suggestions1.end(), nameStartOf.begin(), nameStartOf.end());
         suggestions1.insert(suggestions1.end(), nameContain.begin(), nameContain.end());
         suggestions1.insert(suggestions1.end(), descriptionContain.begin(), descriptionContain.end());
-        Suggestions suggestions2;
+        Suggestions suggestions2(SuggestionsType::ID);
         size_t start = astNode->tokens.getStartIndex();
         size_t end = astNode->tokens.getEndIndex();
         std::transform(suggestions1.begin(), suggestions1.end(),

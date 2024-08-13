@@ -117,13 +117,13 @@ namespace CHelper::Node {
         std::string_view str = astNode->tokens.toString()
                                        .substr(0, index - astNode->tokens.getStartIndex());
         if (HEDLEY_UNLIKELY(str.empty())) {
-            suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
+            suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, doubleQuoteMask}));
             return true;
         }
         auto convertResult = JsonUtil::jsonString2String(std::string(str));
         if (HEDLEY_UNLIKELY(astNode->id == ASTNodeId::NODE_STRING_INNER)) {
             size_t offset = astNode->tokens.getStartIndex() + 1;
-            Suggestions suggestions1;
+            Suggestions suggestions1(SuggestionsType::LITERAL);
             suggestions1.suggestions = astNode->childNodes[0].getSuggestions(index - offset);
             for (auto &item: suggestions1.suggestions) {
                 item.start = convertResult.convert(item.start) + offset;
@@ -140,7 +140,7 @@ namespace CHelper::Node {
             suggestions1.markFiltered();
             suggestions.push_back(std::move(suggestions1));
         } else if (HEDLEY_LIKELY(convertResult.errorReason == nullptr && !convertResult.isComplete)) {
-            suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
+            suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, doubleQuoteMask}));
         }
         return true;
     }

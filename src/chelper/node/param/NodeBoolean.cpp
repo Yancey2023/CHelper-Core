@@ -32,7 +32,7 @@ namespace CHelper::Node {
                                          size_t index,
                                          std::vector<Suggestions> &suggestions) const {
         KMPMatcher kmpMatcher(astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex()));
-        Suggestions suggestions1;
+        Suggestions suggestions1(SuggestionsType::LITERAL);
         if (HEDLEY_UNLIKELY(kmpMatcher.match("true") != std::string::npos)) {
             suggestions1.suggestions.emplace_back(
                     astNode->tokens, true,

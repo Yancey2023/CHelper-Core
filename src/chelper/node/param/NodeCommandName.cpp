@@ -78,7 +78,7 @@ namespace CHelper::Node {
         suggestions1.insert(suggestions1.end(), nameStartOf.begin(), nameStartOf.end());
         suggestions1.insert(suggestions1.end(), nameContain.begin(), nameContain.end());
         suggestions1.insert(suggestions1.end(), descriptionContain.begin(), descriptionContain.end());
-        Suggestions suggestions2;
+        Suggestions suggestions2(SuggestionsType::ID);
         size_t start = astNode->tokens.getStartIndex();
         size_t end = astNode->tokens.getEndIndex();
         std::transform(suggestions1.begin(), suggestions1.end(),

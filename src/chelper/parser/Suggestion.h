@@ -17,7 +17,6 @@ namespace CHelper {
 
     class Suggestion {
     public:
-        //TODO 为代码补全建议添加优先级
         //要被替换的位置
         size_t start, end;
         //如果光标在最后面，是否需要在最后加空格

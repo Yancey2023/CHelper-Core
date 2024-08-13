@@ -64,7 +64,7 @@ namespace CHelper::Node {
                                        std::vector<Suggestions> &suggestions) const {
         if (HEDLEY_LIKELY(astNode->id == ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE && !astNode->isError() &&
                           astNode->childNodes.size() == 1 && index == astNode->tokens.getEndIndex())) {
-            suggestions.push_back(Suggestions::singleSuggestion({index, index, false, nodeBlockStateLeftBracket->normalId}));
+            suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, nodeBlockStateLeftBracket->normalId}));
         }
         return false;
     }

@@ -77,7 +77,7 @@ namespace CHelper::Node {
         std::string_view str = astNode->tokens.toString()
                                        .substr(0, index - astNode->tokens.getStartIndex());
         if (HEDLEY_UNLIKELY(str.empty())) {
-            suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
+            suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, doubleQuoteMask}));
             return true;
         }
         if (HEDLEY_LIKELY(str[0] != '"')) {
@@ -85,7 +85,7 @@ namespace CHelper::Node {
         }
         auto convertResult = JsonUtil::jsonString2String(std::string(str));
         if (HEDLEY_LIKELY(!convertResult.isComplete)) {
-            suggestions.push_back(Suggestions::singleSuggestion({index, index, false, doubleQuoteMask}));
+            suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, doubleQuoteMask}));
         }
         return true;
     }

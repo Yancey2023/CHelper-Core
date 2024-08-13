@@ -500,7 +500,7 @@ namespace CHelper {
 #endif
         std::vector<Suggestions> suggestions;
         if (HEDLEY_UNLIKELY(canAddWhitespace0(*this, index))) {
-            suggestions.push_back(Suggestions::singleSuggestion({str.length(), str.length(), false, whitespaceId}));
+            suggestions.push_back(Suggestions::singleWhitespaceSuggestion({str.length(), str.length(), false, whitespaceId}));
         }
         collectSuggestions(index, suggestions);
 #if CHelperTest == true
