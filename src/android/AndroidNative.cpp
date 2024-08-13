@@ -98,12 +98,12 @@ Java_yancey_chelper_core_CHelperCore_getErrorReasons0(
         env->SetObjectField(javaErrorReason,
                             env->GetFieldID(errorReasonClass, "errorReason", "Ljava/lang/String;"),
                             env->NewStringUTF(item.errorReason.c_str()));
-        env->SetLongField(javaErrorReason,
-                            env->GetFieldID(errorReasonClass, "start", "J"),
-                            static_cast<jlong>(item.start));
-        env->SetLongField(javaErrorReason,
-                         env->GetFieldID(errorReasonClass, "end", "J"),
-                         static_cast<jlong>(item.end));
+        env->SetIntField(javaErrorReason,
+                         env->GetFieldID(errorReasonClass, "start", "I"),
+                         static_cast<jint>(item.start));
+        env->SetIntField(javaErrorReason,
+                         env->GetFieldID(errorReasonClass, "end", "I"),
+                         static_cast<jint>(item.end));
         env->SetObjectArrayElement(result, i, javaErrorReason);
     }
     return result;
