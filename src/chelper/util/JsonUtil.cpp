@@ -90,7 +90,7 @@ namespace CHelper::JsonUtil {
                             result.errorReason = ErrorReason::contentError(
                                     stringReader.pos.index - 2 - i,
                                     stringReader.pos.index,
-                                    "字符串转义缺失后半部分 -> \\u" + escapeSequence);
+                                    fmt::format("字符串转义缺失后半部分 -> \\u{}", escapeSequence));
                             break;
                         }
                         escapeSequence.push_back(ch);
@@ -117,7 +117,7 @@ namespace CHelper::JsonUtil {
                     if (HEDLEY_UNLIKELY(unicodeValue <= 0 || unicodeValue > 0x10FFFF)) {
                         result.errorReason = ErrorReason::contentError(
                                 stringReader.pos.index - escapeSequence.length() - 1, stringReader.pos.index + 1,
-                                "字符串转义的Unicode值无效 -> \\u" + escapeSequence);
+                                fmt::format("字符串转义的Unicode值无效 -> \\u{}", escapeSequence));
                         break;
                     }
                     escapeSequence.clear();
@@ -150,7 +150,7 @@ namespace CHelper::JsonUtil {
                 default:
                     result.errorReason = ErrorReason::contentError(
                             stringReader.pos.index - 1, stringReader.pos.index + 1,
-                            fmt::format("未知的转义字符 -> \\{}", ch));
+                            fmt::format("未知的转义字符 -> \\{:c}", ch));
                     break;
             }
             if (HEDLEY_UNLIKELY(result.errorReason != nullptr)) {
