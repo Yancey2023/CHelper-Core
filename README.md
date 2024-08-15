@@ -4,12 +4,12 @@ I want to make a command helper for Minecraft Bedrock Edition , so here is CHelp
 
 ## Multi-platform
 
-|                             project                              |                                                        description                                                        |
-|:----------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
-|    [CHelper-Core](https://github.com/Yancey2023/CHelper-Core)    |                                    CHelper-Core is the core of CHelper, written in c++                                    |
-| [CHelper-Android](https://github.com/Yancey2023/CHelper-Android) | CHelper-Android is the Android version of the app, depends on [CHelper-Core](https://github.com/Yancey2023/CHelper-Core). |
-|     [CHelper-Web](https://github.com/Yancey2023/chelper_web)     |   CHelper-Android is the web version of the app, depends on [CHelper-Core](https://github.com/Yancey2023/CHelper-Core).   |
-|                            CHelper-Qt                            |       maintain in [CHelper-Core](https://github.com/Yancey2023/CHelper-Core) for development and debugging purpose        |
+|                             project                              |                                                       description                                                        |
+|:----------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------:|
+|    [CHelper-Core](https://github.com/Yancey2023/CHelper-Core)    |                                   CHelper-Core is the core of CHelper, written in c++                                    |
+| [CHelper-Android](https://github.com/Yancey2023/CHelper-Android) | CHelper-Android is the Android version of the app, depends on [CHelper-Core](https://github.com/Yancey2023/CHelper-Core) |
+|     [CHelper-Web](https://github.com/Yancey2023/chelper_web)     |   CHelper-Android is the web version of the app, depends on [CHelper-Core](https://github.com/Yancey2023/CHelper-Core)   |
+|                            CHelper-Qt                            |       maintain in [CHelper-Core](https://github.com/Yancey2023/CHelper-Core) for development and debugging purpose       |
 
 ## Usage
 
@@ -57,18 +57,18 @@ Cpack(Command Pack) is the resource pack of CHelper(Command Helper).
 
 The desired function has been completed, and the new function to be developed is yet to be determined.
 
--[x] **CPack** - makes a resource pack containing IDs and commands
--[x] **Lexer** - transforms command strings into a token list
--[x] **Parser** - builds an Abstract Syntax Tree (AST) and identifies structural errors
--[x] **ID Error** - finds ID errors based on the AST
--[x] **Description** - get the description of the currently written command param based on the AST
--[x] **Suggestion** - get completion suggestions based on the AST
--[x] **Structure** - get command structure string based on the AST
--[x] **Target Selector Support** - support target selector command param
--[x] **Json Support** - support json command param
--[x] **Block State Support** - support block states command param
--[x] **Old 2 New** - convert old command to new command
--[x] **Syntax Highlight** - get the highlight color for displayed commands
+- [x] **CPack** - a resource pack containing IDs and commands
+- [x] **Lexer** - transforms command strings into a token list
+- [x] **Parser** - builds an Abstract Syntax Tree (AST) and find structural errors
+- [x] **ID Error** - finds ID errors based on the AST
+- [x] **Description** - get the description of the currently written command param based on the AST
+- [x] **Suggestion** - get completion suggestions based on the AST
+- [x] **Structure** - get command structure string based on the AST
+- [x] **Target Selector Support** - support target selector command param
+- [x] **Json Support** - support json command param
+- [x] **Block State Support** - support block states command param
+- [x] **Old 2 New** - convert old command to new command
+- [x] **Syntax Highlight** - get the highlight color for displayed commands
 
 ## Third-party
 
