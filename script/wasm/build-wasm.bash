@@ -1,7 +1,7 @@
 # copy CMakeLists.txt
 cd ../..
 rm ./CMakeLists.txt
-cp ./script/wasm/CMakeLists.txt ./CMakeLists.txt
+cp ./script/wasm/CMakeLists.txt .
 
 git clone https://github.com/emscripten-core/emsdk.git
 cd ./emsdk

@@ -24,6 +24,5 @@ add_library(CHelperWeb
         src/web/CHelperWeb.cpp
         ${SOURCE_FILE}
 )
-target_include_directories(CHelperWeb PUBLIC include/emscripten/system/include)
 target_precompile_headers(CHelperWeb PRIVATE include/pch/pch.h)
 target_compile_definitions(CHelperWeb PRIVATE CHelperWeb=true)
