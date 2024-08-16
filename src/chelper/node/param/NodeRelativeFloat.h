@@ -17,8 +17,8 @@ namespace CHelper::Node {
 
         NodeRelativeFloat() = default;
 
-        NodeRelativeFloat(const std::optional<std::string> &id,
-                          const std::optional<std::string> &description,
+        NodeRelativeFloat(const std::optional<std::wstring> &id,
+                          const std::optional<std::wstring> &description,
                           bool canUseCaretNotation);
 
         [[nodiscard]] NodeType *getNodeType() const override;

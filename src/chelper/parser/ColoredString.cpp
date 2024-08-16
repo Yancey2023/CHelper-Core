@@ -7,17 +7,17 @@
 
 namespace CHelper {
 
-    ColoredString::ColoredString(const std::string_view &str)
+    ColoredString::ColoredString(const std::wstring_view &str)
         : str(str),
           colors(str.length(), NO_COLOR) {}
 
     void ColoredString::setColor(size_t index, uint32_t color) {
 #if CHelperDebug == true
         if (colors[index] != NO_COLOR && str[index] != '[' && str[index] != ']' && str[index] != '{' && str[index] != '}') {
-            CHELPER_ERROR("replace color");
+            CHELPER_ERROR(L"replace color");
         }
         if (index > str.length()) {
-            CHELPER_ERROR("index out of range");
+            CHELPER_ERROR(L"index out of range");
             return;
         }
 #endif
@@ -28,20 +28,20 @@ namespace CHelper {
 #if CHelperDebug == true
         for (size_t i = start; i < end; i++) {
             if (colors[i] != NO_COLOR && str[i] != '[' && str[i] != ']' && str[i] != '{' && str[i] != '}') {
-                CHELPER_ERROR("replace color");
+                CHELPER_ERROR(L"replace color");
             }
         }
         if (start > str.length() || end > str.length()) {
-            CHELPER_ERROR("index out of range");
+            CHELPER_ERROR(L"index out of range");
             return;
         }
         if (start > end) {
-            CHELPER_ERROR("start should less than end");
+            CHELPER_ERROR(L"start should less than end");
             return;
         }
 #endif
-        std::fill(colors.begin() + static_cast<std::string::difference_type>(start),
-                  colors.begin() + static_cast<std::string::difference_type>(end),
+        std::fill(colors.begin() + static_cast<std::wstring::difference_type>(start),
+                  colors.begin() + static_cast<std::wstring::difference_type>(end),
                   color);
     }
     void ColoredString::setColor(const TokensView &tokensView, uint32_t color) {

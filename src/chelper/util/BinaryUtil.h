@@ -52,6 +52,8 @@ namespace CHelper {
 
         void encode(const std::string &t);
 
+        void encode(const std::wstring &t);
+
         template<class T>
         void encode(const std::shared_ptr<T> &t) {
             if (HEDLEY_UNLIKELY(t == nullptr)) {
@@ -134,6 +136,8 @@ namespace CHelper {
 
         void decode(std::string &t);
 
+        void decode(std::wstring &t);
+
         template<class T>
         void decode(std::vector<T> &t) {
             size_t size = readSize();
@@ -148,6 +152,8 @@ namespace CHelper {
             if (read<bool>()) {
                 t = std::make_optional<T>();
                 decode(t.value());
+            } else {
+                t = std::nullopt;
             }
         }
 

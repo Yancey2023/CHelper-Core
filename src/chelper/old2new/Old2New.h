@@ -11,25 +11,25 @@
 
 namespace CHelper::Old2New {
 
-    typedef std::unordered_map<std::string, std::unordered_map<uint32_t, std::pair<std::optional<std::string>, std::optional<std::string>>>> BlockFixData;
+    typedef std::unordered_map<std::wstring, std::unordered_map<uint32_t, std::pair<std::optional<std::wstring>, std::optional<std::wstring>>>> BlockFixData;
 
     class DataFix {
     public:
         size_t start, end;
-        std::string content;
+        std::wstring content;
 
-        DataFix(size_t start, size_t anEnd, std::string content);
+        DataFix(size_t start, size_t anEnd, std::wstring content);
 
-        DataFix(const TokensView &tokens, std::string content);
+        DataFix(const TokensView &tokens, std::wstring content);
     };
 
     bool expect(TokenReader &tokenReader, const std::function<bool(const Token &token)> &check);
 
     bool expectString(TokenReader &tokenReader);
 
-    bool expectString(TokenReader &tokenReader, const std::string &str);
+    bool expectString(TokenReader &tokenReader, const std::wstring &str);
 
-    bool expectSymbol(TokenReader &tokenReader, char ch);
+    bool expectSymbol(TokenReader &tokenReader, wchar_t ch);
 
     bool expectNumber(TokenReader &tokenReader);
 
@@ -39,7 +39,7 @@ namespace CHelper::Old2New {
 
     bool expectPosition(TokenReader &tokenReader);
 
-    std::string blockOld2New(const BlockFixData &blockFixData, const TokensView &blockIdToken, const TokensView &dataValueToken);
+    std::wstring blockOld2New(const BlockFixData &blockFixData, const TokensView &blockIdToken, const TokensView &dataValueToken);
 
     bool expectCommandExecute(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList, size_t depth);
 
@@ -57,7 +57,7 @@ namespace CHelper::Old2New {
 
     bool expectCommand(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList);
 
-    std::string old2new(const BlockFixData &blockFixData, const std::string &old);
+    std::wstring old2new(const BlockFixData &blockFixData, const std::wstring &old);
 
 #if CHelperOnlyReadBinary != true
     BlockFixData blockFixDataFromJson(const nlohmann::json &j);

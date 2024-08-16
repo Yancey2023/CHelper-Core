@@ -8,10 +8,10 @@
 class WrappedCHelperCore {
 private:
     CHelper::Core *core;
-    std::string description;
-    std::string structure;
-    std::optional<std::pair<std::string, size_t>> newStr;
-    std::optional<std::string> errorReason;
+    std::wstring description;
+    std::wstring structure;
+    std::optional<std::pair<std::wstring, size_t>> newStr;
+    std::optional<std::wstring> errorReason;
 
 public:
     explicit WrappedCHelperCore(CHelper::Core *core)
@@ -20,7 +20,7 @@ public:
     ~WrappedCHelperCore() {
         delete core;
     }
-    void onTextChanged(const std::string &content, size_t index) {
+    void onTextChanged(const std::wstring &content, size_t index) {
         core->onTextChanged(content, index);
     }
 
@@ -135,7 +135,7 @@ public:
         if (which >= suggestions->size()) {
             return nullptr;
         }
-        const std::optional<std::string> &suggestDescription = suggestions->at(which).content->description;
+        const std::optional<std::wstring> &suggestDescription = suggestions->at(which).content->description;
         if (suggestDescription == std::nullopt) {
             return nullptr;
         } else {
@@ -148,7 +148,7 @@ extern "C" {
 
 EMSCRIPTEN_KEEPALIVE WrappedCHelperCore *init(const char *cpackPtr, size_t cpackLength) {
     return new WrappedCHelperCore(CHelper::Core::create([&cpackPtr, &cpackLength]() {
-        std::string str = std::string(cpackPtr, cpackLength);
+        std::wstring str = std::wstring(cpackPtr, cpackLength);
         std::istringstream iss(str);
         CHelper::BinaryReader binaryReader(true, iss);
         return CHelper::CPack::createByBinary(binaryReader);

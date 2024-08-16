@@ -13,14 +13,14 @@ namespace CHelper::Node {
 
     class NodeJsonBoolean : public NodeBase {
     public:
-        std::optional<std::string> descriptionTrue, descriptionFalse;
+        std::optional<std::wstring> descriptionTrue, descriptionFalse;
 
         NodeJsonBoolean() = default;
 
-        NodeJsonBoolean(const std::optional<std::string> &id,
-                        const std::optional<std::string> &description,
-                        const std::optional<std::string> &descriptionTrue,
-                        const std::optional<std::string> &descriptionFalse);
+        NodeJsonBoolean(const std::optional<std::wstring> &id,
+                        const std::optional<std::wstring> &description,
+                        const std::optional<std::wstring> &descriptionTrue,
+                        const std::optional<std::wstring> &descriptionFalse);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 

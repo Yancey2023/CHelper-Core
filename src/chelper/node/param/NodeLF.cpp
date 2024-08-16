@@ -6,8 +6,8 @@
 
 namespace CHelper::Node {
 
-    NodeLF::NodeLF(const std::optional<std::string> &id,
-                   const std::optional<std::string> &description)
+    NodeLF::NodeLF(const std::optional<std::wstring> &id,
+                   const std::optional<std::wstring> &description)
         : NodeBase(id, description, false) {}
 
     NodeType *NodeLF::getNodeType() const {
@@ -15,7 +15,7 @@ namespace CHelper::Node {
     }
 
     NodeLF *NodeLF::getInstance() {
-        static std::unique_ptr<NodeLF> INSTANCE = std::make_unique<NodeLF>("LF", "命令终止");
+        static std::unique_ptr<NodeLF> INSTANCE = std::make_unique<NodeLF>(L"LF", L"命令终止");
         return INSTANCE.get();
     }
 
@@ -25,7 +25,7 @@ namespace CHelper::Node {
         TokensView tokens = tokenReader.collect();
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_UNLIKELY(tokens.hasValue())) {
-            errorReason = ErrorReason::excess(tokens, "命令后面有多余部分 -> " + std::string(tokens.toString()));
+            errorReason = ErrorReason::excess(tokens, L"命令后面有多余部分 -> " + std::wstring(tokens.toString()));
         }
         return ASTNode::simpleNode(this, tokens, errorReason);
     }
@@ -33,7 +33,7 @@ namespace CHelper::Node {
     void NodeLF::collectStructure(const ASTNode *astNode,
                                   StructureBuilder &structure,
                                   bool isMustHave) const {
-        structure.append("\n");
+        structure.append(L"\n");
     }
 
 }// namespace CHelper::Node

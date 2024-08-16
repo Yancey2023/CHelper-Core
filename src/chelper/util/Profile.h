@@ -14,10 +14,10 @@
  */
 namespace CHelper::Profile {
 
-    extern std::vector<std::string> stack;
+    extern std::vector<std::wstring> stack;
 
     template<typename... T>
-    void push(fmt::format_string<T...> fmt, T &&...args) {
+    void push(fmt::wformat_string<T...> fmt, T &&...args) {
 #ifdef CHelperAndroid
         stack.push_back(fmt::format(fmt, args...));
 #else
@@ -28,7 +28,7 @@ namespace CHelper::Profile {
     void pop();
 
     template<typename... T>
-    void next(fmt::format_string<T...> fmt, T &&...args) {
+    void next(fmt::wformat_string<T...> fmt, T &&...args) {
         pop();
         push(fmt, args...);
     }
@@ -37,7 +37,7 @@ namespace CHelper::Profile {
 
     void printAndClear(const std::exception &e);
 
-    std::string getStackTrace();
+    std::wstring getStackTrace();
 
 }// namespace CHelper::Profile
 

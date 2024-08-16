@@ -6,10 +6,10 @@
 
 namespace CHelper::Parser {
 
-    ASTNode parse(const std::string &content, const CPack *cpack, const Node::NodeBase *mainNode) {
+    ASTNode parse(const std::wstring &content, const CPack *cpack, const Node::NodeBase *mainNode) {
         TokenReader tokenReader = TokenReader(std::make_shared<LexerResult>(Lexer::lex(content)));
 #if CHelperTest == true
-        Profile::push("start parsing: {}", tokenReader.lexerResult->content);
+        Profile::push(L"start parsing: {}", tokenReader.lexerResult->content);
 #endif
         DEBUG_GET_NODE_BEGIN(mainNode)
         auto result = mainNode->getASTNode(tokenReader, cpack);
@@ -20,7 +20,7 @@ namespace CHelper::Parser {
         return result;
     }
 
-    ASTNode parse(const std::string &content, const CPack *cpack) {
+    ASTNode parse(const std::wstring &content, const CPack *cpack) {
         return parse(content, cpack, cpack->mainNode.get());
     }
 

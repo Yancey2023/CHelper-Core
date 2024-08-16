@@ -9,15 +9,15 @@
 namespace CHelper::Node {
 
     static std::unique_ptr<NodeSingleSymbol> nodeRelativeNotation = std::make_unique<NodeSingleSymbol>(
-            "RELATIVE_FLOAT_RELATIVE_NOTATION", "相对坐标（~x ~y ~z）", '~', false);
+            L"RELATIVE_FLOAT_RELATIVE_NOTATION", L"相对坐标（~x ~y ~z）", L'~', false);
     static std::unique_ptr<NodeSingleSymbol> nodeCaretNotation = std::make_unique<NodeSingleSymbol>(
-            "RELATIVE_FLOAT_CARET_NOTATION", "局部坐标（^左 ^上 ^前）", '^', false);
+            L"RELATIVE_FLOAT_CARET_NOTATION", L"局部坐标（^左 ^上 ^前）", L'^', false);
     static std::unique_ptr<NodeOr> nodePreSymbol = std::make_unique<NodeOr>(
-            "RELATIVE_FLOAT_RELATIVE", "相对坐标（~x ~y ~z）",
+            L"RELATIVE_FLOAT_RELATIVE", L"相对坐标（~x ~y ~z）",
             std::vector<const NodeBase *>{nodeRelativeNotation.get(), nodeCaretNotation.get()}, false);
 
-    NodeRelativeFloat::NodeRelativeFloat(const std::optional<std::string> &id,
-                                         const std::optional<std::string> &description,
+    NodeRelativeFloat::NodeRelativeFloat(const std::optional<std::wstring> &id,
+                                         const std::optional<std::wstring> &description,
                                          bool canUseCaretNotation)
         : NodeBase(id, description, false),
           canUseCaretNotation(canUseCaretNotation) {}
@@ -41,7 +41,7 @@ namespace CHelper::Node {
     bool NodeRelativeFloat::collectIdError(const ASTNode *astNode,
                                            std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (HEDLEY_UNLIKELY(!astNode->isError() && astNode->id == ASTNodeId::NODE_RELATIVE_FLOAT_WITH_ERROR)) {
-            idErrorReasons.push_back(ErrorReason::logicError(astNode->tokens, "不能使用局部坐标"));
+            idErrorReasons.push_back(ErrorReason::logicError(astNode->tokens, L"不能使用局部坐标"));
             return true;
         } else {
             return false;
@@ -83,7 +83,7 @@ namespace CHelper::Node {
         } else if (HEDLEY_UNLIKELY(childNodes.empty())) {
             tokenReader.pop();
             TokensView tokens = number.tokens;
-            errorReason = ErrorReason::typeError(tokens, fmt::format("类型不匹配，{}不是有效的坐标参数", tokens.toString()));
+            errorReason = ErrorReason::typeError(tokens, fmt::format(L"类型不匹配，{}不是有效的坐标参数", tokens.toString()));
         } else {
             tokenReader.restore();
         }
@@ -94,7 +94,7 @@ namespace CHelper::Node {
     }
 
     bool NodeRelativeFloat::collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestions> &suggestions) const {
-        std::string_view str = astNode->tokens.toString();
+        std::wstring_view str = astNode->tokens.toString();
         size_t startIndex = astNode->tokens.getStartIndex();
         for (int i = 0; i < str.length(); ++i) {
             if (HEDLEY_UNLIKELY(startIndex + i == index)) {
@@ -122,7 +122,7 @@ namespace CHelper::Node {
     void NodeRelativeFloat::collectStructure(const ASTNode *astNode,
                                              StructureBuilder &structure,
                                              bool isMustHave) const {
-        structure.append(isMustHave, description.value_or("坐标"));
+        structure.append(isMustHave, description.value_or(L"坐标"));
     }
 
     bool NodeRelativeFloat::collectColor(const ASTNode *astNode,

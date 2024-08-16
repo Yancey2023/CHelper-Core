@@ -41,94 +41,93 @@ namespace CHelper {
     class ErrorReason {
     public:
         ErrorReasonLevel::ErrorReasonLevel level;
-        std::string errorReason;
+        std::wstring errorReason;
         size_t start, end;
 
         ErrorReason(ErrorReasonLevel::ErrorReasonLevel level,
                     size_t start,
                     size_t end,
-                    std::string errorReason);
+                    std::wstring errorReason);
 
         ErrorReason(ErrorReasonLevel::ErrorReasonLevel level,
                     const TokensView &,
-                    std::string errorReason);
+                    std::wstring errorReason);
 
         //命令后面有多余部分
         [[maybe_unused]] static std::shared_ptr<ErrorReason> excess(size_t start,
                                                                     size_t end,
-                                                                    const std::string &errorReason) {
+                                                                    const std::wstring &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::EXCESS, start, end, errorReason);
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason> excess(const TokensView &tokens,
-                                                                    const std::string &errorReason) {
+                                                                    const std::wstring &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::EXCESS, tokens, errorReason);
         }
 
         //缺少空格
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
         requireWhiteSpace(const TokensView &tokens) {
-            return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, tokens, "命令不完整，缺少空格");
+            return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, tokens, L"命令不完整，缺少空格");
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
         requireWhiteSpace(size_t start, size_t end) {
-            return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, start, end,
-                                                 "命令不完整，缺少空格");
+            return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, start, end, L"命令不完整，缺少空格");
         }
 
         //命令不完整
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        incomplete(size_t start, size_t end, const std::string &errorReason) {
+        incomplete(size_t start, size_t end, const std::wstring &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::INCOMPLETE, start, end, errorReason);
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        incomplete(const TokensView &tokens, const std::string &errorReason) {
+        incomplete(const TokensView &tokens, const std::wstring &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::INCOMPLETE, tokens, errorReason);
         }
 
         //类型不匹配
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        typeError(size_t start, size_t end, const std::string &errorReason) {
+        typeError(size_t start, size_t end, const std::wstring &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::TYPE_ERROR, start, end, errorReason);
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        typeError(const TokensView &tokens, const std::string &errorReason) {
+        typeError(const TokensView &tokens, const std::wstring &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::TYPE_ERROR, tokens, errorReason);
         }
 
         //内容不匹配
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        contentError(size_t start, size_t end, const std::string &errorReason) {
+        contentError(size_t start, size_t end, const std::wstring &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::CONTENT_ERROR, start, end, errorReason);
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        contentError(const TokensView &tokens, const std::string &errorReason) {
+        contentError(const TokensView &tokens, const std::wstring &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::CONTENT_ERROR, tokens, errorReason);
         }
 
         //逻辑错误
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        logicError(size_t start, size_t end, const std::string &errorReason) {
+        logicError(size_t start, size_t end, const std::wstring &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::LOGIC_ERROR, start, end, errorReason);
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        logicError(const TokensView &tokens, const std::string &errorReason) {
+        logicError(const TokensView &tokens, const std::wstring &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::LOGIC_ERROR, tokens, errorReason);
         }
 
         //ID错误
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        idError(size_t start, size_t end, const std::string &errorReason) {
+        idError(size_t start, size_t end, const std::wstring &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::ID_ERROR, start, end, errorReason);
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        idError(const TokensView &tokens, const std::string &errorReason) {
+        idError(const TokensView &tokens, const std::wstring &errorReason) {
             return std::make_shared<ErrorReason>(ErrorReasonLevel::ID_ERROR, tokens, errorReason);
         }
 

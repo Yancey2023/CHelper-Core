@@ -21,12 +21,12 @@ namespace CHelper {
             std::unique_ptr<CPack> cPack = getCPack();
 #if CHelperOnlyReadBinary != true
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO("CPack load successfully ({})", std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms");
+            CHELPER_INFO(L"CPack load successfully ({})", std::to_wstring(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + L"ms");
 #endif
-            ASTNode astNode = Parser::parse("", cPack.get());
+            ASTNode astNode = Parser::parse(L"", cPack.get());
             return new Core(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
-            CHELPER_ERROR("CPack load failed");
+            CHELPER_ERROR(L"CPack load failed");
             CHelper::Profile::printAndClear(e);
             return nullptr;
         }
@@ -54,15 +54,17 @@ namespace CHelper {
     Core *Core::createByBinary(const std::filesystem::path &cpackPath) {
         return create([&cpackPath]() {
             // 检查文件名后缀
-            std::string fileType = ".cpack";
-            std::string cpackPathStr = cpackPath.string();
+            std::wstring fileType = L".cpack";
+            std::wstring cpackPathStr = cpackPath.wstring();
             if (HEDLEY_UNLIKELY(cpackPathStr.size() < fileType.size() || cpackPathStr.substr(cpackPathStr.length() - fileType.size()) != fileType)) {
+                Profile::push(L"error file type -> {}", cpackPathStr);
                 throw std::runtime_error("error file type");
             }
             // 打开文件
             std::ifstream is(cpackPath, std::ios::binary);
             if (HEDLEY_UNLIKELY(!is.is_open())) {
-                throw std::runtime_error("fail to read file: " + cpackPath.string());
+                Profile::push(L"fail to read file -> {}", cpackPathStr);
+                throw std::runtime_error("fail to read file");
             }
             // 读取文件
             BinaryReader binaryReader(true, is);
@@ -72,7 +74,8 @@ namespace CHelper {
                 char ch;
                 is.read(&ch, 1);
                 if (HEDLEY_UNLIKELY(is.gcount() > 0)) {
-                    throw std::runtime_error("file is not read completed: " + cpackPathStr);
+                    Profile::push(L"file is not read completed -> {}", cpackPathStr);
+                    throw std::runtime_error("file is not read completed");
                 }
             }
             // 关闭文件
@@ -82,7 +85,7 @@ namespace CHelper {
     }
 #endif
 
-    void Core::onTextChanged(const std::string &content, size_t index0) {
+    void Core::onTextChanged(const std::wstring &content, size_t index0) {
         if (HEDLEY_LIKELY(input != content)) {
             input = content;
             astNode = Parser::parse(input, cpack.get());
@@ -106,7 +109,7 @@ namespace CHelper {
         return &astNode;
     }
 
-    [[nodiscard]] std::string Core::getDescription() const {
+    [[nodiscard]] std::wstring Core::getDescription() const {
         return astNode.getDescription(index);
     }
 
@@ -121,7 +124,7 @@ namespace CHelper {
         return suggestions.get();
     }
 
-    [[nodiscard]] std::string Core::getStructure() const {
+    [[nodiscard]] std::wstring Core::getStructure() const {
         return astNode.getStructure();
     }
 
@@ -129,14 +132,14 @@ namespace CHelper {
         return astNode.getColors(settings.theme);
     }
 
-    std::optional<std::pair<std::string, size_t>> Core::onSuggestionClick(size_t which) {
+    std::optional<std::pair<std::wstring, size_t>> Core::onSuggestionClick(size_t which) {
         if (HEDLEY_UNLIKELY(suggestions == nullptr || which >= suggestions->size())) {
             return std::nullopt;
         }
         return suggestions->at(which).apply(this, astNode.tokens.toString());
     }
 
-    std::string Core::old2new(const Old2New::BlockFixData &blockFixData, const std::string &old) {
+    std::wstring Core::old2new(const Old2New::BlockFixData &blockFixData, const std::wstring &old) {
         return Old2New::old2new(blockFixData, old);
     }
 

@@ -22,9 +22,9 @@ namespace CHelper {
 
         class NodeBase {
         public:
-            std::optional<std::string> id;
-            std::optional<std::string> brief;
-            std::optional<std::string> description;
+            std::optional<std::wstring> id;
+            std::optional<std::wstring> brief;
+            std::optional<std::wstring> description;
             //true-一定要在空格后 false-不一定在空格后
             std::optional<bool> isMustAfterWhiteSpace;
             //存储下一个节点，需要调用构造函数之后再进行添加
@@ -32,8 +32,8 @@ namespace CHelper {
 
             NodeBase() = default;
 
-            NodeBase(const std::optional<std::string> &id,
-                     const std::optional<std::string> &description,
+            NodeBase(const std::optional<std::wstring> &id,
+                     const std::optional<std::wstring> &description,
                      bool isMustAfterWhiteSpace);
 
             virtual ~NodeBase() = default;
@@ -72,7 +72,7 @@ namespace CHelper {
             [[nodiscard]] bool isAfterWhitespace() const;
 
             HEDLEY_NON_NULL(2)
-            virtual std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const;
+            virtual std::optional<std::wstring> collectDescription(const ASTNode *node, size_t index) const;
 
             HEDLEY_NON_NULL(2)
             virtual bool collectIdError(const ASTNode *astNode,

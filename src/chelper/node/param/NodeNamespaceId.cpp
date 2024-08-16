@@ -7,9 +7,9 @@
 
 namespace CHelper::Node {
 
-    NodeNamespaceId::NodeNamespaceId(const std::optional<std::string> &id,
-                                     const std::optional<std::string> &description,
-                                     const std::optional<std::string> &key,
+    NodeNamespaceId::NodeNamespaceId(const std::optional<std::wstring> &id,
+                                     const std::optional<std::wstring> &description,
+                                     const std::optional<std::wstring> &key,
                                      bool ignoreError)
         : NodeBase(id, description, false),
           key(key),
@@ -23,8 +23,8 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(customContents == nullptr)) {
             if (HEDLEY_UNLIKELY(key.has_value())) {
-                Profile::push("linking contents to {}", key.value());
-                Profile::push("failed to find namespace id in the cpack -> {}", key.value());
+                Profile::push(L"linking contents to {}", key.value());
+                Profile::push(L"failed to find namespace id in the cpack -> {}", key.value());
                 throw std::runtime_error("failed to find namespace id");
             } else {
                 throw std::runtime_error("missing content");
@@ -44,16 +44,16 @@ namespace CHelper::Node {
         DEBUG_GET_NODE_END(this)
         if (HEDLEY_UNLIKELY(result.tokens.isEmpty())) {
             TokensView tokens = result.tokens;
-            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "命令不完整"));
+            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, L"命令不完整"));
         }
         if (HEDLEY_UNLIKELY(!ignoreError.value_or(false))) {
             TokensView tokens = result.tokens;
-            std::string_view str = tokens.toString();
-            size_t strHash = std::hash<std::string_view>{}(str);
+            std::wstring_view str = tokens.toString();
+            size_t strHash = std::hash<std::wstring_view>{}(str);
             if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                     return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
                 }))) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, "找不到含义 -> " + std::string(str)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, L"找不到含义 -> " + std::wstring(str)));
             }
         }
         return result;
@@ -64,12 +64,12 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->isError())) {
             return true;
         }
-        std::string_view str = astNode->tokens.toString();
-        size_t strHash = std::hash<std::string_view>{}(str);
+        std::wstring_view str = astNode->tokens.toString();
+        size_t strHash = std::hash<std::wstring_view>{}(str);
         if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                 return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
             }))) {
-            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("找不到ID -> ").append(str)));
+            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::wstring(L"找不到ID -> ").append(str)));
         }
         return true;
     }
@@ -84,17 +84,17 @@ namespace CHelper::Node {
         for (const auto &item: *customContents) {
             //通过名字进行搜索
             //省略minecraft命名空间
-            if (HEDLEY_LIKELY((!item->idNamespace.has_value() || item->idNamespace.value() == "minecraft"))) {
+            if (HEDLEY_LIKELY((!item->idNamespace.has_value() || item->idNamespace.value() == L"minecraft"))) {
                 size_t index1 = kmpMatcher.match(item->name);
                 if (HEDLEY_UNLIKELY(index1 == 0)) {
                     nameStartOf.push_back(item);
-                } else if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
+                } else if (HEDLEY_UNLIKELY(index1 != std::wstring::npos)) {
                     nameContain.push_back(item);
                 }
             }
             //带有命名空间
             size_t index1 = kmpMatcher.match(item->getIdWithNamespace()->name);
-            if (HEDLEY_UNLIKELY(index1 != std::string::npos)) {
+            if (HEDLEY_UNLIKELY(index1 != std::wstring::npos)) {
                 if (HEDLEY_UNLIKELY(index1 == 0)) {
                     namespaceStartOf.push_back(item->getIdWithNamespace());
                 } else {
@@ -104,7 +104,7 @@ namespace CHelper::Node {
             }
             //通过介绍进行搜索
             if (HEDLEY_UNLIKELY(
-                        item->description.has_value() && kmpMatcher.match(item->description.value()) != std::string::npos)) {
+                        item->description.has_value() && kmpMatcher.match(item->description.value()) != std::wstring::npos)) {
                 descriptionContain.push_back(item);
             }
         }
@@ -152,7 +152,7 @@ namespace CHelper::Node {
     void NodeNamespaceId::collectStructure(const ASTNode *astNode,
                                            StructureBuilder &structure,
                                            bool isMustHave) const {
-        structure.append(isMustHave, description.value_or("ID"));
+        structure.append(isMustHave, description.value_or(L"ID"));
     }
 
     bool NodeNamespaceId::collectColor(const ASTNode *astNode,

@@ -80,7 +80,7 @@ TEST(BinaryUtilTest, String) {
     auto testEqual = [](const auto &t1, const auto &t2) -> void {
         EXPECT_EQ(t1, t2);
     };
-    test<std::string>({getInstance1, getInstance2}, testEqual);
+    test<std::wstring>({getInstance1, getInstance2}, testEqual);
 }
 
 TEST(BinaryUtilTest, OptioanlString) {
@@ -90,7 +90,7 @@ TEST(BinaryUtilTest, OptioanlString) {
     auto testEqual = [](const auto &t1, const auto &t2) -> void {
         EXPECT_EQ(t1, t2);
     };
-    test<std::optional<std::string>>(
+    test<std::optional<std::wstring>>(
             {getInstance1, getInstance2, getInstance3},
             testEqual);
 }
@@ -152,7 +152,7 @@ TEST(BinaryUtilTest, NamespaceId) {
         EXPECT_EQ(t1.idNamespace, t2.idNamespace);
     };
     std::filesystem::path projectDir(PROJECT_DIR);
-    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(projectDir / "resources" / "beta" / "vanilla" / "id" / "entities.json");
+    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(projectDir / L"resources" / L"beta" / L"vanilla" / L"id" / L"entities.json");
     std::vector<std::function<CHelper::NamespaceId()>> getInstance;
     for (const auto &item: j.at("content")) {
         CHelper::NamespaceId namespaceId = item;
@@ -170,7 +170,7 @@ TEST(BinaryUtilTest, ItemId) {
         EXPECT_EQ(t1.descriptions, t2.descriptions);
     };
     std::filesystem::path projectDir(PROJECT_DIR);
-    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(projectDir / "resources" / "beta" / "vanilla" / "id" / "items.json");
+    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(projectDir / L"resources" / L"beta" / L"vanilla" / L"id" / L"items.json");
     std::vector<std::function<CHelper::ItemId()>> getInstance;
     for (const auto &item: j.at("items")) {
         CHelper::ItemId itemId(item);
@@ -201,7 +201,7 @@ TEST(BinaryUtilTest, BlockId) {
         }
     };
     std::filesystem::path projectDir(PROJECT_DIR);
-    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(projectDir / "resources" / "beta" / "vanilla" / "id" / "blocks.json");
+    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(projectDir / L"resources" / L"beta" / L"vanilla" / L"id" / L"blocks.json");
     std::vector<std::function<CHelper::BlockId()>> getInstance;
     for (const auto &item: j.at("blocks")) {
         CHelper::BlockId blockId(item);
@@ -215,7 +215,7 @@ TEST(BinaryUtilTest, PerCPackNormalIds) {
     std::unique_ptr<CHelper::CPack> cpack;
     try {
         std::filesystem::path projectDir(PROJECT_DIR);
-        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(projectDir / "resources" / "beta" / "vanilla"));
+        cpack = CHelper::CPack::createByDirectory(std::filesystem::path(projectDir / L"resources" / L"beta" / L"vanilla"));
     } catch (const std::exception &e) {
         CHelper::Profile::printAndClear(e);
         exit(-1);
@@ -239,14 +239,14 @@ TEST(BinaryUtilTest, CPackNormalIds) {
     std::unique_ptr<CHelper::CPack> cpack;
     try {
         std::filesystem::path projectDir(PROJECT_DIR);
-        cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
+        cpack = CHelper::CPack::createByDirectory(projectDir / L"resources" / L"beta" / L"vanilla");
     } catch (const std::exception &e) {
         CHelper::Profile::printAndClear(e);
         exit(-1);
     }
     auto testEqual = [](
-                             const std::unordered_map<std::string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>> &t1,
-                             const std::unordered_map<std::string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>> &t2) -> void {
+                             const std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>> &t1,
+                             const std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>> &t2) -> void {
         ASSERT_EQ(t1.size(), t2.size());
         auto it1 = t1.begin();
         while (it1 != t1.end()) {
@@ -261,7 +261,7 @@ TEST(BinaryUtilTest, CPackNormalIds) {
             it1++;
         }
     };
-    test<std::unordered_map<std::string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>>>(
+    test<std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>>>(
             [&cpack]() { return cpack->normalIds; }, testEqual);
 }
 
@@ -269,14 +269,14 @@ TEST(BinaryUtilTest, CPackNamespaceId) {
     std::unique_ptr<CHelper::CPack> cpack;
     try {
         std::filesystem::path projectDir(PROJECT_DIR);
-        cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
+        cpack = CHelper::CPack::createByDirectory(projectDir / L"resources" / L"beta" / L"vanilla");
     } catch (const std::exception &e) {
         CHelper::Profile::printAndClear(e);
         exit(-1);
     }
     auto testEqual = [](
-                             const std::unordered_map<std::string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>> &t1,
-                             const std::unordered_map<std::string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>> &t2) -> void {
+                             const std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>> &t1,
+                             const std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>> &t2) -> void {
         ASSERT_EQ(t1.size(), t2.size());
         auto it1 = t1.begin();
         while (it1 != t1.end()) {
@@ -292,7 +292,7 @@ TEST(BinaryUtilTest, CPackNamespaceId) {
             it1++;
         }
     };
-    test<std::unordered_map<std::string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>>>(
+    test<std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>>>(
             [&cpack]() { return cpack->namespaceIds; }, testEqual);
 }
 
@@ -300,7 +300,7 @@ TEST(BinaryUtilTest, NodeJsonElement) {
     std::unique_ptr<CHelper::CPack> cpack;
     std::filesystem::path projectDir(PROJECT_DIR);
     try {
-        cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
+        cpack = CHelper::CPack::createByDirectory(projectDir / L"resources" / L"beta" / L"vanilla");
     } catch (const std::exception &e) {
         CHelper::Profile::printAndClear(e);
         exit(-1);
@@ -328,7 +328,7 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
     std::unique_ptr<CHelper::CPack> cpack;
     try {
         std::filesystem::path projectDir(PROJECT_DIR);
-        cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
+        cpack = CHelper::CPack::createByDirectory(projectDir / L"resources" / L"beta" / L"vanilla");
     } catch (const std::exception &e) {
         CHelper::Profile::printAndClear(e);
         exit(-1);
@@ -366,7 +366,7 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
     std::unique_ptr<CHelper::CPack> cpack;
     try {
         std::filesystem::path projectDir(PROJECT_DIR);
-        cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
+        cpack = CHelper::CPack::createByDirectory(projectDir / L"resources" / L"beta" / L"vanilla");
     } catch (const std::exception &e) {
         CHelper::Profile::printAndClear(e);
         exit(-1);
@@ -404,7 +404,7 @@ TEST(BinaryUtilTest, NodeJsonNull) {
     std::unique_ptr<CHelper::CPack> cpack;
     try {
         std::filesystem::path projectDir(PROJECT_DIR);
-        cpack = CHelper::CPack::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
+        cpack = CHelper::CPack::createByDirectory(projectDir / L"resources" / L"beta" / L"vanilla");
     } catch (const std::exception &e) {
         CHelper::Profile::printAndClear(e);
         exit(-1);

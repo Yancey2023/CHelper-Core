@@ -14,7 +14,7 @@ namespace CHelper::Node {
     class NodeJsonElement : public NodeBase {
     public:
         std::vector<std::unique_ptr<NodeBase>> nodes;
-        std::string startNodeId;
+        std::wstring startNodeId;
 
     private:
         NodeBase *start = nullptr;

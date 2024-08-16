@@ -8,20 +8,20 @@ namespace CHelper {
 
     namespace TokenType {
 
-        std::string getName(TokenType tokenType) {
+        std::wstring getName(TokenType tokenType) {
             switch (tokenType) {
                 case STRING:
-                    return "字符串类型";
+                    return L"字符串类型";
                 case NUMBER:
-                    return "数字类型";
+                    return L"数字类型";
                 case SYMBOL:
-                    return "符号类型";
+                    return L"符号类型";
                 case WHITE_SPACE:
-                    return "空格";
+                    return L"空格";
                 case LF:
-                    return "换行符类型";
+                    return L"换行符类型";
                 default:
-                    return "未知类型";
+                    return L"未知类型";
             }
         }
 
@@ -31,7 +31,7 @@ namespace CHelper {
 
     Token::Token(TokenType::TokenType type,
                  CHelper::LexerPos pos,
-                 const std::string_view &content)
+                 const std::wstring_view &content)
         : type(type),
           pos(pos),
           content(content) {}

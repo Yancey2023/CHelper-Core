@@ -6,8 +6,8 @@
 
 namespace CHelper::Node {
 
-    NodeInteger::NodeInteger(const std::optional<std::string> &id,
-                             const std::optional<std::string> &description,
+    NodeInteger::NodeInteger(const std::optional<std::wstring> &id,
+                             const std::optional<std::wstring> &description,
                              const std::optional<int32_t> &min,
                              const std::optional<int32_t> &max)
         : NodeBase(id, description, false),
@@ -27,20 +27,20 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNode->isError())) {
             return true;
         }
-        std::string str(astNode->tokens.toString());
-        char *end;
-        std::intmax_t value = std::strtoimax(str.c_str(), &end, 10);
+        std::wstring str(astNode->tokens.toString());
+        wchar_t *end;
+        std::intmax_t value = std::wcstoimax(str.c_str(), &end, 10);
         if (HEDLEY_UNLIKELY(end == str.c_str() || *end != '\0' ||
                             value == HUGE_VALF || value == -HUGE_VALF ||
                             value < min.value_or(std::numeric_limits<int32_t>::lowest()) ||
                             value > max.value_or(std::numeric_limits<int32_t>::max()))) {
-            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::string("数值不在范围")
-                                                                                   .append("[")
-                                                                                   .append(std::to_string(min.value_or(std::numeric_limits<int32_t>::lowest())))
-                                                                                   .append(", ")
-                                                                                   .append(std::to_string(max.value_or(std::numeric_limits<int32_t>::max())))
-                                                                                   .append("]")
-                                                                                   .append("内 -> ")
+            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::wstring(L"数值不在范围")
+                                                                                   .append(L"[")
+                                                                                   .append(std::to_wstring(min.value_or(std::numeric_limits<int32_t>::lowest())))
+                                                                                   .append(L", ")
+                                                                                   .append(std::to_wstring(max.value_or(std::numeric_limits<int32_t>::max())))
+                                                                                   .append(L"]")
+                                                                                   .append(L"内 -> ")
                                                                                    .append(str)));
         }
         return true;
@@ -49,7 +49,7 @@ namespace CHelper::Node {
     void NodeInteger::collectStructure(const ASTNode *astNode,
                                        StructureBuilder &structure,
                                        bool isMustHave) const {
-        structure.append(isMustHave, description.value_or("整数"));
+        structure.append(isMustHave, description.value_or(L"整数"));
     }
 
     bool NodeInteger::collectColor(const ASTNode *astNode,

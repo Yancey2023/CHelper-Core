@@ -6,7 +6,7 @@
 
 namespace CHelper {
 
-    CHelper::StringReader::StringReader(const std::string &content)
+    CHelper::StringReader::StringReader(const std::wstring &content)
         : content(content),
           posBackup(pos) {}
 
@@ -14,11 +14,11 @@ namespace CHelper {
         return pos.index < content.length();
     }
 
-    signed char CHelper::StringReader::read() {
+    std::optional<wchar_t> CHelper::StringReader::read() {
         if (HEDLEY_UNLIKELY(!ready())) {
-            return EOF;
+            return std::nullopt;
         }
-        char ch = content[pos.index];
+        wchar_t ch = content[pos.index];
         pos.next(ch);
         return ch;
     }
@@ -31,14 +31,14 @@ namespace CHelper {
         return true;
     }
 
-    signed char CHelper::StringReader::next() {
+    std::optional<wchar_t> CHelper::StringReader::next() {
         skip();
         return peek();
     }
 
-    signed char CHelper::StringReader::peek() const {
+    std::optional<wchar_t> CHelper::StringReader::peek() const {
         if (HEDLEY_UNLIKELY(!ready())) {
-            return EOF;
+            return std::nullopt;
         }
         return content[pos.index];
     }
@@ -55,7 +55,7 @@ namespace CHelper {
         pos.index = posBackup.index;
     }
 
-    std::string_view CHelper::StringReader::collect() const {
+    std::wstring_view CHelper::StringReader::collect() const {
         return {content.c_str() + posBackup.index, pos.index - posBackup.index};
     }
 

@@ -15,8 +15,8 @@ namespace CHelper::Node {
             nodeElement = it->second.second;
             return;
         }
-        Profile::push("link repeat data {} to content", key);
-        Profile::push("fail to find repeat data by id {}", key);
+        Profile::push(L"link repeat data {} to content", key);
+        Profile::push(L"fail to find repeat data by id {}", key);
         throw std::runtime_error("fail to find repeat data");
     }
 
@@ -40,7 +40,7 @@ namespace CHelper::Node {
         }
     }
 
-    std::optional<std::string> NodeRepeat::collectDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::wstring> NodeRepeat::collectDescription(const ASTNode *node, size_t index) const {
         if (HEDLEY_UNLIKELY(node->tokens.isEmpty())) {
             return description;
         } else {
@@ -80,7 +80,7 @@ namespace CHelper::Node {
             }
         }
         //如果没有遇到结束语句，添加...和结束语句的结构
-        structure.appendWhiteSpace().append("...");
+        structure.appendWhiteSpace().append(L"...");
         for (const auto &item: ((NodeAnd *) ((NodeOr *) nodeElement)->childNodes[1])->childNodes) {
             item->collectStructure(nullptr, structure, true);
         }

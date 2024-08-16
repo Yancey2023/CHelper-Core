@@ -17,6 +17,28 @@ static TCHAR szTitle[] = "CHelper";
 
 static CHelper::Core *core = nullptr;
 
+std::string wstring2string(const std::wstring &wstring) {
+    std::string result;
+    int len = WideCharToMultiByte(CP_ACP, 0, wstring.c_str(), static_cast<int>(wstring.size()), nullptr, 0, nullptr, nullptr);
+    char *buffer = new char[len + 1];
+    WideCharToMultiByte(CP_ACP, 0, wstring.c_str(), static_cast<int>(wstring.size()), buffer, len, nullptr, nullptr);
+    buffer[len] = '\0';
+    result.append(buffer);
+    delete[] buffer;
+    return result;
+}
+
+std::wstring string2wstring(const std::string &string) {
+    std::wstring result;
+    int len = MultiByteToWideChar(CP_ACP, 0, string.c_str(), static_cast<int>(string.size()), nullptr, 0);
+    auto *buffer = new TCHAR[len + 1];
+    MultiByteToWideChar(CP_ACP, 0, string.c_str(), static_cast<int>(string.size()), reinterpret_cast<LPWSTR>(buffer), len);
+    buffer[len] = '\0';
+    result.append(reinterpret_cast<wchar_t *>(buffer));
+    delete[] buffer;
+    return result;
+}
+
 /**
  * @param hInstance 应用程序的当前实例的句柄
  * @param hPrevInstance 应用程序上一个实例的句柄
@@ -25,7 +47,7 @@ static CHelper::Core *core = nullptr;
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
     std::filesystem::path projectDir(PROJECT_DIR);
-    core = CHelper::Core::createByBinary(projectDir / "run" / (std::string("beta-experiment-") + CPACK_VERSION_BETA + ".cpack"));
+    core = CHelper::Core::createByBinary(projectDir / L"run" / (std::wstring(L"beta-experiment-") + CPACK_VERSION_BETA + ".cpack"));
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         exit(-1);
     }
@@ -126,7 +148,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     return 0;
 }
 
-void onTextChanged(const std::string &command) {
+void onTextChanged(const std::wstring &command) {
     try {
         std::chrono::high_resolution_clock::time_point startParse, endParse,
                 startDescription, endDescription,
@@ -165,7 +187,7 @@ void onTextChanged(const std::string &command) {
             if (++i > 30) {
                 break;
             }
-            auto content = std::string(suggestion.content->name).append(" - ").append(suggestion.content->description.value_or(""));
+            auto content = std::wstring(suggestion.content->name).append(" - ").append(suggestion.content->description.value_or(""));
             int len = MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, nullptr, 0);
             auto *wstr = new wchar_t[len];
             MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, wstr, len);
@@ -213,10 +235,10 @@ void onTextChanged(const std::string &command) {
                            ++j,
                            fmt::styled(item.content->name, fg(fmt::color::lime_green)),
                            fmt::styled(item.content->description.value_or(""), fg(fmt::color::cornflower_blue)));
-                std::string result = command.substr(0, item.start)
-                                             .append(item.content->name)
-                                             .append(command.substr(item.end));
-                std::string greenPart = item.content->name;
+                std::wstring result = command.substr(0, item.start)
+                                              .append(item.content->name)
+                                              .append(command.substr(item.end));
+                std::wstring greenPart = item.content->name;
                 if (item.end == command.length()) {
                     CHelper::ASTNode astNode = CHelper::Parser::parse(result, core->getCPack());
                     if (item.isAddWhitespace && astNode.isAllWhitespaceError()) {

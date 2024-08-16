@@ -12,7 +12,7 @@
 
 namespace CHelper::StringUtil {
 
-    std::string join(const std::string &joining, const std::vector<std::string> &strings);
+    std::wstring join(const std::wstring &joining, const std::vector<std::wstring> &strings);
 
 }// namespace CHelper::StringUtil
 

@@ -20,7 +20,7 @@ namespace CHelper {
         size_t startIndex, endIndex;
 
     private:
-        std::string_view cacheString;
+        std::wstring_view cacheString;
 
     public:
         TokensView(const std::shared_ptr<LexerResult> &lexerResult, size_t start, size_t end);
@@ -43,7 +43,7 @@ namespace CHelper {
 
         [[nodiscard]] size_t getEndIndex() const;
 
-        [[nodiscard]] std::string_view toString() const;
+        [[nodiscard]] std::wstring_view toString() const;
     };
 
 }// namespace CHelper

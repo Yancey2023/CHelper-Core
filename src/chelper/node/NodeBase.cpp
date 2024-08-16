@@ -7,8 +7,8 @@
 
 namespace CHelper::Node {
 
-    NodeBase::NodeBase(const std::optional<std::string> &id,
-                       const std::optional<std::string> &description,
+    NodeBase::NodeBase(const std::optional<std::wstring> &id,
+                       const std::optional<std::wstring> &description,
                        bool isMustAfterWhiteSpace)
         : id(id),
           description(description),
@@ -94,10 +94,10 @@ namespace CHelper::Node {
         return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect(), nullptr, astNodeId);
     }
 
-    std::optional<std::string> NodeBase::collectDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::wstring> NodeBase::collectDescription(const ASTNode *node, size_t index) const {
 #if CHelperDebug == true
         if (HEDLEY_UNLIKELY(!description.has_value())) {
-            CHELPER_WARN("description is null");
+            CHELPER_WARN(L"description is null");
         }
 #endif
         return description;
@@ -160,14 +160,14 @@ namespace CHelper::Node {
 
 #if CHelperOnlyReadBinary != true
     void from_json(const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
-        Profile::push("loading type");
-        auto type = JsonUtil::read<std::string>(j, "type");
-        auto id = JsonUtil::read<std::optional<std::string>>(j, "id");
-        Profile::next("loading node {}", type);
+        Profile::push(L"loading type");
+        auto type = JsonUtil::read<std::wstring>(j, "type");
+        auto id = JsonUtil::read<std::optional<std::wstring>>(j, "id");
+        Profile::next(L"loading node {}", type);
         if (HEDLEY_LIKELY(id.has_value())) {
-            Profile::next("loading node {} with id \"{}\"", type, id.value());
+            Profile::next(L"loading node {} with id \"{}\"", type, id.value());
         } else {
-            Profile::next("loading node {} without id", type);
+            Profile::next(L"loading node {} without id", type);
         }
         for (const auto &item: NodeType::NODE_TYPES) {
             if (HEDLEY_UNLIKELY(item->nodeName == type)) {
@@ -176,7 +176,8 @@ namespace CHelper::Node {
                 return;
             }
         }
-        throw std::runtime_error("unknown node type -> " + type);
+        Profile::next(L"unknown node type -> {}", type);
+        throw std::runtime_error("unknown node type");
     }
 
     void to_json(nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {

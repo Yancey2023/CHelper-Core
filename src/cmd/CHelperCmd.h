@@ -20,11 +20,19 @@ int main();
 
 [[maybe_unused]] void testBin();
 
-[[maybe_unused]] void outputSingleJson();
+[[maybe_unused]] void outputFile(
+        const std::filesystem::path &projectDir,
+        void function(const std::filesystem::path &input, const std::filesystem::path &output),
+        const std::wstring &str1,
+        const std::wstring &str2,
+        const std::wstring &str3,
+        const std::wstring &fileType);
 
-[[maybe_unused]] void outputBson();
+[[maybe_unused]] void outputFile(
+        void function(const std::filesystem::path &input, const std::filesystem::path &output),
+        const std::wstring &fileType);
 
-[[maybe_unused]] void outputBinary();
+[[maybe_unused]] void outputOld2New();
 
 namespace CHelper::Test {
 
@@ -32,13 +40,13 @@ namespace CHelper::Test {
 
     [[maybe_unused]] void testBin(const std::filesystem::path &cpackPath, const std::filesystem::path &testFilePath, bool isTestTime);
 
-    [[maybe_unused]] void testDir(const std::filesystem::path &cpackPath, const std::vector<std::string> &commands, bool isTestTime);
+    [[maybe_unused]] void testDir(const std::filesystem::path &cpackPath, const std::vector<std::wstring> &commands, bool isTestTime);
 
-    [[maybe_unused]] void testBin(const std::filesystem::path &cpackPath, const std::vector<std::string> &commands, bool isTestTime);
+    [[maybe_unused]] void testBin(const std::filesystem::path &cpackPath, const std::vector<std::wstring> &commands, bool isTestTime);
 
-    [[maybe_unused]] void test(Core *core, const std::vector<std::string> &commands, bool isTestTime);
+    [[maybe_unused]] void test(Core *core, const std::vector<std::wstring> &commands, bool isTestTime);
 
-    [[maybe_unused]] void test2(const std::filesystem::path &cpackPath, const std::vector<std::string> &commands, int times);
+    [[maybe_unused]] void test2(const std::filesystem::path &cpackPath, const std::vector<std::wstring> &commands, int times);
 
     [[maybe_unused]] void writeDirectory(const std::filesystem::path &input, const std::filesystem::path &output);
 

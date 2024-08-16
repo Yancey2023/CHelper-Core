@@ -17,24 +17,24 @@ namespace CHelper::Node {
         bool isAttachToEnd = false, isUseFirst = false;
         ASTNodeId::ASTNodeId nodeId = ASTNodeId::NONE;
         bool noSuggestion = false;
-        const char *defaultErrorReason = nullptr;
+        const wchar_t *defaultErrorReason = nullptr;
 
         NodeOr() = default;
 
-        NodeOr(const std::optional<std::string> &id,
-               const std::optional<std::string> &description,
+        NodeOr(const std::optional<std::wstring> &id,
+               const std::optional<std::wstring> &description,
                std::vector<const NodeBase *> childNodes,
                bool isAttachToEnd,
                bool isUseFirst = false,
                bool noSuggestion = false,
-               const char *defaultErrorReason = nullptr,
+               const wchar_t *defaultErrorReason = nullptr,
                ASTNodeId::ASTNodeId nodeId = ASTNodeId::NONE);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
-        std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
+        std::optional<std::wstring> collectDescription(const ASTNode *node, size_t index) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,

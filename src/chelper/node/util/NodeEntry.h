@@ -20,8 +20,8 @@ namespace CHelper::Node {
 
         NodeEntry() = default;
 
-        NodeEntry(const std::optional<std::string> &id,
-                  const std::optional<std::string> &description,
+        NodeEntry(const std::optional<std::wstring> &id,
+                  const std::optional<std::wstring> &description,
                   NodeBase *nodeKey,
                   NodeBase *nodeSeparator,
                   NodeBase *nodeValue);
@@ -30,7 +30,7 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
-        std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
+        std::optional<std::wstring> collectDescription(const ASTNode *node, size_t index) const override;
     };
 
 }// namespace CHelper::Node
