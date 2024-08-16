@@ -102,9 +102,10 @@ void CHelperApp::onSuggestionClick(const QModelIndex &index) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
-    std::optional<std::string> result = core->onSuggestionClick(index.row());
+    std::optional<std::pair<std::string, size_t>> result = core->onSuggestionClick(index.row());
     if (HEDLEY_LIKELY(result.has_value())) {
-        ui->lineEdit->setText(QString::fromStdString(result.value()));
+        ui->lineEdit->setText(QString::fromStdString(result.value().first));
+        ui->lineEdit->setSelection(result.value().second, result.value().second);
         ui->lineEdit->setFocus();
     } else {
         qDebug() << "suggestion index is out of range: " << index.row();

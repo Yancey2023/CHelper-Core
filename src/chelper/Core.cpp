@@ -129,7 +129,7 @@ namespace CHelper {
         return astNode.getColors(settings.theme);
     }
 
-    std::optional<std::string> Core::onSuggestionClick(size_t which) {
+    std::optional<std::pair<std::string, size_t>> Core::onSuggestionClick(size_t which) {
         if (HEDLEY_UNLIKELY(suggestions == nullptr || which >= suggestions->size())) {
             return std::nullopt;
         }

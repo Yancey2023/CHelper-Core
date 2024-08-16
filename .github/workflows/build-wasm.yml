@@ -1,0 +1,16 @@
+name: CMake on multiple platforms
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+
+      - name: Install emsdk and build wasm
+        run: bash ./script/build-wasm.bash

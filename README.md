@@ -8,7 +8,7 @@ I want to make a command helper for Minecraft Bedrock Edition , so here is CHelp
 |:----------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------:|
 |    [CHelper-Core](https://github.com/Yancey2023/CHelper-Core)    |                                   CHelper-Core is the core of CHelper, written in c++                                    |
 | [CHelper-Android](https://github.com/Yancey2023/CHelper-Android) | CHelper-Android is the Android version of the app, depends on [CHelper-Core](https://github.com/Yancey2023/CHelper-Core) |
-|     [CHelper-Web](https://github.com/Yancey2023/chelper_web)     |   CHelper-Android is the web version of the app, depends on [CHelper-Core](https://github.com/Yancey2023/CHelper-Core)   |
+|     [CHelper-Web](https://github.com/Yancey2023/chelper_web)     |     CHelper-Web is the web version of the app, depends on [CHelper-Core](https://github.com/Yancey2023/CHelper-Core)     |
 |                            CHelper-Qt                            |       maintain in [CHelper-Core](https://github.com/Yancey2023/CHelper-Core) for development and debugging purpose       |
 
 ## Usage

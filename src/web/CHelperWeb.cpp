@@ -5,19 +5,17 @@
 #include "../chelper/Core.h"
 #include <emscripten/emscripten.h>
 
-extern "C" {
-
 class WrappedCHelperCore {
 private:
     CHelper::Core *core;
     std::string description;
     std::string structure;
-    std::optional<std::string> newStr;
+    std::optional<std::pair<std::string, size_t>> newStr;
     std::optional<std::string> errorReason;
 
 public:
-    explicit WrappedCHelperCore(CHelper::Core *core) : core(core) {
-    }
+    explicit WrappedCHelperCore(CHelper::Core *core)
+        : core(core) {}
 
     ~WrappedCHelperCore() {
         delete core;
@@ -27,42 +25,59 @@ public:
     }
 
     void onSelectionChanged(size_t index0) {
-        if (core == nullptr) {
+        if (HEDLEY_UNLIKELY(core == nullptr)) {
             return;
         }
         core->onSelectionChanged(index0);
     }
 
-    [[nodiscard]] const char *getStructure() {
-        if (core == nullptr) {
+    const char *getStructure() {
+        if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
         structure = core->getStructure();
         return structure.c_str();
     }
 
-    [[nodiscard]] const char *getDescription() {
-        if (core == nullptr) {
+    const char *getDescription() {
+        if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
         description = core->getDescription();
         return description.c_str();
     }
 
-    [[nodiscard]] const char *onSuggestionClick(size_t which) {
-        if (core == nullptr) {
-            return nullptr;
+    void onSuggestionClick(size_t which) {
+        if (HEDLEY_UNLIKELY(core == nullptr)) {
+            return;
         }
         newStr = core->onSuggestionClick(which);
+    }
+
+    const char *getStringAfterSuggestionClick() {
+        if (HEDLEY_UNLIKELY(core == nullptr)) {
+            return nullptr;
+        }
         if (newStr.has_value()) {
-            return newStr->c_str();
+            return newStr.value().first.c_str();
         } else {
             return nullptr;
         }
     }
 
-    [[nodiscard]] const char *getErrorReason() {
-        if (core == nullptr) {
+    size_t getSelectionAfterSuggestionClick() {
+        if (HEDLEY_UNLIKELY(core == nullptr)) {
+            return 0;
+        }
+        if (newStr.has_value()) {
+            return newStr.value().second;
+        } else {
+            return 0;
+        }
+    }
+
+    const char *getErrorReason() {
+        if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
         auto errorReasons = core->getErrorReasons();
@@ -84,8 +99,8 @@ public:
         }
     }
 
-    [[nodiscard]] size_t getSuggestionSize() {
-        if (core == nullptr) {
+    size_t getSuggestionSize() {
+        if (HEDLEY_UNLIKELY(core == nullptr)) {
             return 0;
         }
         auto suggestions = core->getSuggestions();
@@ -95,8 +110,8 @@ public:
         return suggestions->size();
     }
 
-    [[nodiscard]] const char *getSuggestionTitle(size_t which) {
-        if (core == nullptr) {
+    const char *getSuggestionTitle(size_t which) {
+        if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
         auto suggestions = core->getSuggestions();
@@ -109,8 +124,8 @@ public:
         return suggestions->at(which).content->name.c_str();
     }
 
-    [[nodiscard]] const char *getSuggestionDescription(size_t which) {
-        if (core == nullptr) {
+    const char *getSuggestionDescription(size_t which) {
+        if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
         auto suggestions = core->getSuggestions();
@@ -128,6 +143,8 @@ public:
         }
     }
 };
+
+extern "C" {
 
 EMSCRIPTEN_KEEPALIVE WrappedCHelperCore *init(const char *cpackPtr, size_t cpackLength) {
     return new WrappedCHelperCore(CHelper::Core::create([&cpackPtr, &cpackLength]() {
@@ -198,10 +215,24 @@ EMSCRIPTEN_KEEPALIVE const char *getSuggestionDescription(WrappedCHelperCore *co
     return core->getSuggestionDescription(which);
 }
 
-EMSCRIPTEN_KEEPALIVE const char *onSuggestionClick(WrappedCHelperCore *core, size_t which) {
+EMSCRIPTEN_KEEPALIVE void onSuggestionClick(WrappedCHelperCore *core, size_t which) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
+        return;
+    }
+    core->onSuggestionClick(which);
+}
+
+EMSCRIPTEN_KEEPALIVE const char *getStringAfterSuggestionClick(WrappedCHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
-    return core->onSuggestionClick(which);
+    return core->getStringAfterSuggestionClick();
+}
+
+EMSCRIPTEN_KEEPALIVE size_t getSelectionAfterSuggestionClick(WrappedCHelperCore *core) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
+        return 0;
+    }
+    return core->getSelectionAfterSuggestionClick();
 }
 }

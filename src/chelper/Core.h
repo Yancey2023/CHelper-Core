@@ -58,7 +58,7 @@ namespace CHelper {
 
         [[nodiscard]] ColoredString getColors() const;
 
-        [[nodiscard]] std::optional<std::string> onSuggestionClick(size_t which);
+        [[nodiscard]] std::optional<std::pair<std::string, size_t>> onSuggestionClick(size_t which);
 
         static std::string old2new(const Old2New::BlockFixData &blockFixData, const std::string &old);
 

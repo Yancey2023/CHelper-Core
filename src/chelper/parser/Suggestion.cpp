@@ -27,20 +27,23 @@ namespace CHelper {
           content(content),
           mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
 
-    std::string Suggestion::apply(Core *core, const std::string_view &before) const {
+    std::pair<std::string, size_t> Suggestion::apply(Core *core, const std::string_view &before) const {
         if (content->name == " " && (start == 0 || before[start - 1] == ' ')) {
-            return std::string(before);
+            return {std::string(before), start};
         }
-        std::string result = std::string().append(before.substr(0, start)).append(content->name).append(before.substr(end));
+        std::pair<std::string, size_t> result = {
+                std::string().append(before.substr(0, start)).append(content->name).append(before.substr(end)),
+                start + content->name.length()};
         if (HEDLEY_UNLIKELY(end != before.length())) {
-            return std::move(result);
+            return result;
         }
-        core->onTextChanged(result, result.size());
+        core->onTextChanged(result.first, result.second);
         const ASTNode *astNode = core->getAstNode();
         if (HEDLEY_LIKELY(isAddWhitespace && astNode->isAllWhitespaceError())) {
-            result.push_back(' ');
+            result.first.append(" ");
+            result.second++;
         }
-        return std::move(result);
+        return result;
     }
 
 }// namespace CHelper
