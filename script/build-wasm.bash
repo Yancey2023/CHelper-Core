@@ -4,7 +4,7 @@ git clone https://github.com/emscripten-core/emsdk.git
 cd emsdk
 ./emsdk install latest
 ./emsdk activate latest
-source ./emsdk/emsdk_env.sh
+source ./emsdk_env.sh
 cd ..
 
 emcmake cmake -B cmake-build-emscripten-release -DCMAKE_BUILD_TYPE=Release --target CHelperWeb

@@ -6,15 +6,15 @@
 	path = include/fmt
 	url = https://github.com/fmtlib/fmt.git
 	branch = master
-[submodule "include/emscripten"]
-	path = include/emscripten
-	url = https://github.com/emscripten-core/emscripten.git
-	branch = main
-[submodule "include/googletest"]
-	path = include/googletest
-	url = https://github.com/google/googletest.git
-	branch = main
 [submodule "include/hedley"]
 	path = include/hedley
 	url = https://github.com/cblck/hedley.git
 	branch = master
+[submodule "include/googletest"]
+	path = include/googletest
+	url = https://github.com/google/googletest.git
+	branch = main
+[submodule "include/emscripten"]
+	path = include/emscripten
+	url = https://github.com/emscripten-core/emscripten.git
+	branch = main

@@ -2,6 +2,15 @@
 
 I want to make a command helper for Minecraft Bedrock Edition , so here is CHelper, which means Command Helper.
 
+## Clone Project
+
+```bash
+git clone --recursive https://github.com/Yancey2023/CHelper-Core
+# if you clone it without --recursive, you should run the following:
+cd CHelper-Andoird
+git submodule update --init --recursive --progress
+```
+
 ## Multi-platform
 
 |                             project                              |                                                       description                                                        |
