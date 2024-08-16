@@ -13,4 +13,4 @@ jobs:
           submodules: 'recursive'
 
       - name: Install emsdk and build wasm
-        run: bash ./script/build-wasm.bash
+        run: bash ./script/wasm/build-wasm.bash
