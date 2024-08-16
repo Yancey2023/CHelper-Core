@@ -7,7 +7,7 @@ I want to make a command helper for Minecraft Bedrock Edition , so here is CHelp
 ```bash
 git clone --recursive https://github.com/Yancey2023/CHelper-Core
 # if you clone it without --recursive, you should run the following:
-cd CHelper-Andoird
+cd CHelper-Core
 git submodule update --init --recursive --progress
 ```
 
