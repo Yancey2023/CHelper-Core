@@ -1,12 +1,14 @@
-paths = ['cmake-build-emscripten-release', 'cmake-build-emscripten-minsizerel']
+from os import path
+
+buildDirs = ['cmake-build-emscripten-release', 'cmake-build-emscripten-minsizerel']
 
 
 def insert(content, before, end, string):
     return content.replace(before + end, before + string + end)
 
 
-for path in paths:
-    with open(path, 'r') as fp:
+for buildDir in buildDirs:
+    with open(path.join(buildDir, 'libCHelperWeb.js'), 'r') as fp:
         content = fp.read()
     insert(
         content,
@@ -76,5 +78,5 @@ export class CHelperCore {
         return Module.ccall("getSelectionAfterSuggestionClick", "number", ["number"], [this._corePtr])
     }
 }'''
-    with open(path, 'w') as fp:
+    with open(path.join(buildDir, 'libCHelperWeb.js'), 'w') as fp:
         fp.write(content)
