@@ -7,6 +7,9 @@
       "description": "第一人称视角"
     },
     {
+      "name": "minecraft:follow_orbit"
+    },
+    {
       "name": "minecraft:free",
       "description": "自由视角"
     },

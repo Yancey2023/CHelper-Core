@@ -363,6 +363,12 @@
       "description": "红树根：踩上"
     },
     {
+      "name": "block.mob_spawner.break"
+    },
+    {
+      "name": "block.mob_spawner.step"
+    },
+    {
       "name": "block.mud.break",
       "description": "泥巴：被破坏"
     },
@@ -5017,6 +5023,15 @@
       "name": "ui.drawer_open"
     },
     {
+      "name": "ui.hardcore_disable"
+    },
+    {
+      "name": "ui.hardcore_enable"
+    },
+    {
+      "name": "ui.hardcore_toggle_press"
+    },
+    {
       "name": "ui.loom.select_pattern",
       "description": "织布机：选择图案"
     },
@@ -5220,6 +5235,9 @@
     },
     {
       "name": "vault.place"
+    },
+    {
+      "name": "vault.reject_rewarded_player"
     },
     {
       "name": "vault.step"

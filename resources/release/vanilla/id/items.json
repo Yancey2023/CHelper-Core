@@ -111,6 +111,10 @@
       "description": "安山岩"
     },
     {
+      "name": "andesite_slab",
+      "description": "安山岩台阶"
+    },
+    {
       "name": "andesite_stairs",
       "description": "安山岩楼梯"
     },
@@ -859,6 +863,10 @@
       "description": "鸡刷怪蛋"
     },
     {
+      "name": "chipped_anvil",
+      "description": "开裂的铁砧"
+    },
+    {
       "name": "chiseled_bookshelf",
       "description": "雕纹书架"
     },
@@ -877,6 +885,22 @@
     {
       "name": "chiseled_polished_blackstone",
       "description": "雕纹磨制黑石"
+    },
+    {
+      "name": "chiseled_quartz_block",
+      "description": "雕纹石英块"
+    },
+    {
+      "name": "chiseled_red_sandstone",
+      "description": "雕纹红砂岩"
+    },
+    {
+      "name": "chiseled_sandstone",
+      "description": "雕纹砂岩"
+    },
+    {
+      "name": "chiseled_stone_bricks",
+      "description": "雕纹石砖"
     },
     {
       "name": "chiseled_tuff",
@@ -921,6 +945,10 @@
     {
       "name": "coal_ore",
       "description": "煤矿石"
+    },
+    {
+      "name": "coarse_dirt",
+      "description": "砂土"
     },
     {
       "name": "coast_armor_trim_smithing_template",
@@ -1095,6 +1123,10 @@
       "description": "裂纹磨制黑石砖"
     },
     {
+      "name": "cracked_stone_bricks",
+      "description": "裂纹石砖"
+    },
+    {
       "name": "crafter",
       "description": "合成器"
     },
@@ -1195,6 +1227,22 @@
       "description": "切制铜楼梯"
     },
     {
+      "name": "cut_red_sandstone",
+      "description": "切制红砂岩"
+    },
+    {
+      "name": "cut_red_sandstone_slab",
+      "description": "切制红砂岩台阶"
+    },
+    {
+      "name": "cut_sandstone",
+      "description": "切制砂岩"
+    },
+    {
+      "name": "cut_sandstone_slab",
+      "description": "切制砂岩台阶"
+    },
+    {
       "name": "cyan_candle",
       "description": "青色蜡烛"
     },
@@ -1237,6 +1285,14 @@
     {
       "name": "cyan_wool",
       "description": "青色羊毛"
+    },
+    {
+      "name": "damaged_anvil",
+      "description": "损坏的铁砧"
+    },
+    {
+      "name": "dandelion",
+      "description": "蒲公英"
     },
     {
       "name": "danger_pottery_sherd",
@@ -1309,6 +1365,14 @@
     {
       "name": "dark_oak_wood",
       "description": "深色橡木"
+    },
+    {
+      "name": "dark_prismarine",
+      "description": "暗海晶石"
+    },
+    {
+      "name": "dark_prismarine_slab",
+      "description": "暗海晶石台阶"
     },
     {
       "name": "dark_prismarine_stairs",
@@ -1519,16 +1583,16 @@
       "description": "闪长岩"
     },
     {
+      "name": "diorite_slab",
+      "description": "闪长岩台阶"
+    },
+    {
       "name": "diorite_stairs",
       "description": "闪长岩楼梯"
     },
     {
       "name": "dirt",
-      "description": "泥土/砂土",
-      "descriptions": [
-        "泥土",
-        "砂土"
-      ]
+      "description": "泥土"
     },
     {
       "name": "dirt_with_roots",
@@ -1649,6 +1713,10 @@
     {
       "name": "end_stone",
       "description": "末地石"
+    },
+    {
+      "name": "end_stone_brick_slab",
+      "description": "末地石砖台阶"
     },
     {
       "name": "ender_chest",
@@ -1987,6 +2055,10 @@
       "description": "花岗岩"
     },
     {
+      "name": "granite_slab",
+      "description": "花岗岩台阶"
+    },
+    {
       "name": "granite_stairs",
       "description": "花岗岩楼梯"
     },
@@ -2203,8 +2275,32 @@
       "description": "冰"
     },
     {
+      "name": "infested_chiseled_stone_bricks",
+      "description": "虫蚀雕纹石砖"
+    },
+    {
+      "name": "infested_cobblestone",
+      "description": "虫蚀圆石"
+    },
+    {
+      "name": "infested_cracked_stone_bricks",
+      "description": "虫蚀裂纹石砖"
+    },
+    {
       "name": "infested_deepslate",
       "description": "虫蚀深板岩"
+    },
+    {
+      "name": "infested_mossy_stone_bricks",
+      "description": "虫蚀苔石砖"
+    },
+    {
+      "name": "infested_stone",
+      "description": "虫蚀石头"
+    },
+    {
+      "name": "infested_stone_bricks",
+      "description": "虫蚀石砖"
     },
     {
       "name": "ink_sac",
@@ -2433,6 +2529,70 @@
     {
       "name": "light_block",
       "description": "光源方块"
+    },
+    {
+      "name": "light_block_0",
+      "description": "光源方块（0）"
+    },
+    {
+      "name": "light_block_1",
+      "description": "光源方块（1）"
+    },
+    {
+      "name": "light_block_10",
+      "description": "光源方块（10）"
+    },
+    {
+      "name": "light_block_11",
+      "description": "光源方块（11）"
+    },
+    {
+      "name": "light_block_12",
+      "description": "光源方块（12）"
+    },
+    {
+      "name": "light_block_13",
+      "description": "光源方块（13）"
+    },
+    {
+      "name": "light_block_14",
+      "description": "光源方块（14）"
+    },
+    {
+      "name": "light_block_15",
+      "description": "光源方块（15）"
+    },
+    {
+      "name": "light_block_2",
+      "description": "光源方块（2）"
+    },
+    {
+      "name": "light_block_3",
+      "description": "光源方块（3）"
+    },
+    {
+      "name": "light_block_4",
+      "description": "光源方块（4）"
+    },
+    {
+      "name": "light_block_5",
+      "description": "光源方块（5）"
+    },
+    {
+      "name": "light_block_6",
+      "description": "光源方块（6）"
+    },
+    {
+      "name": "light_block_7",
+      "description": "光源方块（7）"
+    },
+    {
+      "name": "light_block_8",
+      "description": "光源方块（8）"
+    },
+    {
+      "name": "light_block_9",
+      "description": "光源方块（9）"
     },
     {
       "name": "light_blue_candle",
@@ -2771,18 +2931,6 @@
       "description": "Mojang徽标旗帜图案"
     },
     {
-      "name": "monster_egg",
-      "description": "虫蚀石头/虫蚀圆石/虫蚀石砖/虫蚀苔石砖/虫蚀裂纹石砖/虫蚀雕纹石砖",
-      "descriptions": [
-        "虫蚀石头",
-        "虫蚀圆石",
-        "虫蚀石砖",
-        "虫蚀苔石砖",
-        "虫蚀裂纹石砖",
-        "虫蚀雕纹石砖"
-      ]
-    },
-    {
       "name": "mooshroom_spawn_egg",
       "description": "哞菇刷怪蛋"
     },
@@ -2799,12 +2947,24 @@
       "description": "苔石"
     },
     {
+      "name": "mossy_cobblestone_slab",
+      "description": "苔石台阶"
+    },
+    {
       "name": "mossy_cobblestone_stairs",
       "description": "苔石楼梯"
     },
     {
+      "name": "mossy_stone_brick_slab",
+      "description": "苔石砖台阶"
+    },
+    {
       "name": "mossy_stone_brick_stairs",
       "description": "苔石砖楼梯"
+    },
+    {
+      "name": "mossy_stone_bricks",
+      "description": "苔石砖"
     },
     {
       "name": "mourner_pottery_sherd",
@@ -3029,6 +3189,10 @@
     {
       "name": "netherrack",
       "description": "下界岩"
+    },
+    {
+      "name": "normal_stone_slab",
+      "description": "石头台阶"
     },
     {
       "name": "normal_stone_stairs",
@@ -3351,6 +3515,10 @@
       "description": "磨制安山岩"
     },
     {
+      "name": "polished_andesite_slab",
+      "description": "磨制安山岩台阶"
+    },
+    {
       "name": "polished_andesite_stairs",
       "description": "磨制安山岩楼梯"
     },
@@ -3419,12 +3587,20 @@
       "description": "磨制闪长岩"
     },
     {
+      "name": "polished_diorite_slab",
+      "description": "磨制闪长岩台阶"
+    },
+    {
       "name": "polished_diorite_stairs",
       "description": "磨制闪长岩楼梯"
     },
     {
       "name": "polished_granite",
       "description": "磨制花岗岩"
+    },
+    {
+      "name": "polished_granite_slab",
+      "description": "磨制花岗岩台阶"
     },
     {
       "name": "polished_granite_stairs",
@@ -3472,12 +3648,15 @@
     },
     {
       "name": "prismarine",
-      "description": "海晶石/暗海晶石/海晶石砖",
-      "descriptions": [
-        "海晶石",
-        "暗海晶石",
-        "海晶石砖"
-      ]
+      "description": "海晶石"
+    },
+    {
+      "name": "prismarine_brick_slab",
+      "description": "海晶石砖台阶"
+    },
+    {
+      "name": "prismarine_bricks",
+      "description": "海晶石砖"
     },
     {
       "name": "prismarine_bricks_stairs",
@@ -3490,6 +3669,10 @@
     {
       "name": "prismarine_shard",
       "description": "海晶碎片"
+    },
+    {
+      "name": "prismarine_slab",
+      "description": "海晶石台阶"
     },
     {
       "name": "prismarine_stairs",
@@ -3578,6 +3761,10 @@
       ]
     },
     {
+      "name": "purpur_slab",
+      "description": "紫珀台阶"
+    },
+    {
       "name": "purpur_stairs",
       "description": "紫珀楼梯"
     },
@@ -3587,13 +3774,7 @@
     },
     {
       "name": "quartz_block",
-      "description": "石英块/雕纹石英块/石英柱/平滑石英块",
-      "descriptions": [
-        "石英块",
-        "雕纹石英块",
-        "石英柱",
-        "平滑石英块"
-      ]
+      "description": "石英块"
     },
     {
       "name": "quartz_bricks",
@@ -3602,6 +3783,10 @@
     {
       "name": "quartz_ore",
       "description": "下界石英矿石"
+    },
+    {
+      "name": "quartz_pillar",
+      "description": "石英柱"
     },
     {
       "name": "quartz_slab",
@@ -3708,18 +3893,24 @@
       "description": "红色下界砖块"
     },
     {
+      "name": "red_nether_brick_slab",
+      "description": "红色下界砖台阶"
+    },
+    {
       "name": "red_nether_brick_stairs",
       "description": "红色下界砖楼梯"
     },
     {
+      "name": "red_sand",
+      "description": "红沙"
+    },
+    {
       "name": "red_sandstone",
-      "description": "红砂岩/雕纹红砂岩/切制红砂岩/平滑红砂岩",
-      "descriptions": [
-        "红砂岩",
-        "雕纹红砂岩",
-        "切制红砂岩",
-        "平滑红砂岩"
-      ]
+      "description": "红砂岩"
+    },
+    {
+      "name": "red_sandstone_slab",
+      "description": "红砂岩台阶"
     },
     {
       "name": "red_sandstone_stairs",
@@ -3815,21 +4006,11 @@
     },
     {
       "name": "sand",
-      "description": "沙子/红沙",
-      "descriptions": [
-        "沙子",
-        "红沙"
-      ]
+      "description": "沙子"
     },
     {
       "name": "sandstone",
-      "description": "砂岩/雕纹砂岩/切制砂岩/平滑砂岩",
-      "descriptions": [
-        "砂岩",
-        "雕纹砂岩",
-        "切制砂岩",
-        "平滑砂岩"
-      ]
+      "description": "砂岩"
     },
     {
       "name": "sandstone_slab",
@@ -3988,12 +4169,36 @@
       "description": "平滑玄武岩"
     },
     {
+      "name": "smooth_quartz",
+      "description": "平滑石英块"
+    },
+    {
+      "name": "smooth_quartz_slab",
+      "description": "平滑石英台阶"
+    },
+    {
       "name": "smooth_quartz_stairs",
       "description": "平滑石英楼梯"
     },
     {
+      "name": "smooth_red_sandstone",
+      "description": "平滑红砂岩"
+    },
+    {
+      "name": "smooth_red_sandstone_slab",
+      "description": "平滑红砂岩台阶"
+    },
+    {
       "name": "smooth_red_sandstone_stairs",
       "description": "平滑红砂岩楼梯"
+    },
+    {
+      "name": "smooth_sandstone",
+      "description": "平滑砂岩"
+    },
+    {
+      "name": "smooth_sandstone_slab",
+      "description": "平滑砂岩台阶"
     },
     {
       "name": "smooth_sandstone_stairs",
@@ -4180,51 +4385,16 @@
       "description": "石斧"
     },
     {
-      "name": "stone_block_slab2",
-      "description": "红砂岩台阶/紫珀台阶/海晶石台阶/暗海晶石台阶/海晶石砖台阶/苔石台阶/平滑砂岩台阶/红色下界砖台阶",
-      "descriptions": [
-        "红砂岩台阶",
-        "紫珀台阶",
-        "海晶石台阶",
-        "暗海晶石台阶",
-        "海晶石砖台阶",
-        "苔石台阶",
-        "平滑砂岩台阶",
-        "红色下界砖台阶"
-      ]
-    },
-    {
-      "name": "stone_block_slab3",
-      "description": "末地石砖台阶/平滑红砂岩台阶/磨制安山岩台阶/安山岩台阶/闪长岩台阶/磨制闪长岩台阶/花岗岩台阶/磨制花岗岩台阶",
-      "descriptions": [
-        "末地石砖台阶",
-        "平滑红砂岩台阶",
-        "磨制安山岩台阶",
-        "安山岩台阶",
-        "闪长岩台阶",
-        "磨制闪长岩台阶",
-        "花岗岩台阶",
-        "磨制花岗岩台阶"
-      ]
-    },
-    {
-      "name": "stone_block_slab4",
-      "description": "苔石砖台阶/平滑石英台阶/石头台阶/切制砂岩台阶/切制红砂岩台阶",
-      "descriptions": [
-        "苔石砖台阶",
-        "平滑石英台阶",
-        "石头台阶",
-        "切制砂岩台阶",
-        "切制红砂岩台阶"
-      ]
-    },
-    {
       "name": "stone_brick_slab",
       "description": "石砖台阶"
     },
     {
       "name": "stone_brick_stairs",
       "description": "石砖楼梯"
+    },
+    {
+      "name": "stone_bricks",
+      "description": "石砖"
     },
     {
       "name": "stone_button",
@@ -4253,16 +4423,6 @@
     {
       "name": "stone_sword",
       "description": "石剑"
-    },
-    {
-      "name": "stonebrick",
-      "description": "石砖/苔石砖/裂纹石砖/雕纹石砖",
-      "descriptions": [
-        "石砖",
-        "苔石砖",
-        "裂纹石砖",
-        "雕纹石砖"
-      ]
     },
     {
       "name": "stonecutter_block",
@@ -5011,10 +5171,6 @@
     {
       "name": "yellow_dye",
       "description": "黄色染料"
-    },
-    {
-      "name": "yellow_flower",
-      "description": "蒲公英"
     },
     {
       "name": "yellow_glazed_terracotta",

@@ -1,4 +1,4 @@
-name: CMake on multiple platforms
+name: Build wasm
 
 on:
   workflow_dispatch:
@@ -13,4 +13,4 @@ jobs:
           submodules: 'recursive'
 
       - name: Install emsdk and build wasm
-        run: sudo bash ./script/wasm/build-wasm.bash
+        run: cd ./script/wasm && sudo bash ./build-wasm.bash

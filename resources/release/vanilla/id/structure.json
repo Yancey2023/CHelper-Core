@@ -3,71 +3,71 @@
   "type": "normal",
   "content": [
     {
-      "name": "ancient_city",
+      "name": "minecraft:ancient_city",
       "description": "远古城市"
     },
     {
-      "name": "bastion_remnant",
+      "name": "minecraft:bastion_remnant",
       "description": "堡垒遗迹"
     },
     {
-      "name": "buried_treasure",
+      "name": "minecraft:buried_treasure",
       "description": "埋藏的宝藏"
     },
     {
-      "name": "end_city",
+      "name": "minecraft:end_city",
       "description": "末地城"
     },
     {
-      "name": "fortress",
+      "name": "minecraft:fortress",
       "description": "下界要塞"
     },
     {
-      "name": "mansion",
+      "name": "minecraft:mansion",
       "description": "林地府邸"
     },
     {
-      "name": "mineshaft",
+      "name": "minecraft:mineshaft",
       "description": "废弃矿井"
     },
     {
-      "name": "monument",
+      "name": "minecraft:monument",
       "description": "海底神殿"
     },
     {
-      "name": "pillager_outpost",
+      "name": "minecraft:pillager_outpost",
       "description": "掠夺者前哨站"
     },
     {
-      "name": "ruined_portal",
+      "name": "minecraft:ruined_portal",
       "description": "废弃传送门"
     },
     {
-      "name": "ruins",
+      "name": "minecraft:ruins",
       "description": "海底废墟"
     },
     {
-      "name": "shipwreck",
+      "name": "minecraft:shipwreck",
       "description": "沉船"
     },
     {
-      "name": "stronghold",
+      "name": "minecraft:stronghold",
       "description": "要塞"
     },
     {
-      "name": "temple",
+      "name": "minecraft:temple",
       "description": "沙漠神殿/雪屋/丛林神庙/沼泽小屋"
     },
     {
-      "name": "trail_ruins",
+      "name": "minecraft:trail_ruins",
       "description": "古迹废墟"
     },
     {
-      "name": "trial_chambers",
+      "name": "minecraft:trial_chambers",
       "description": "试炼密室"
     },
     {
-      "name": "village",
+      "name": "minecraft:village",
       "description": "村庄"
     }
   ]

@@ -183,16 +183,24 @@ Java_yancey_chelper_core_CHelperCore_getStructure0(
     return env->NewStringUTF(core->getStructure().c_str());
 }
 
-extern "C" [[maybe_unused]] JNIEXPORT jstring JNICALL
+extern "C" [[maybe_unused]] JNIEXPORT jobject JNICALL
 Java_yancey_chelper_core_CHelperCore_onSuggestionClick0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer, jint which) {
     auto *core = reinterpret_cast<CHelper::Core *>(pointer);
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
-    std::optional<std::string> result = core->onSuggestionClick(which);
+    std::optional<std::pair<std::string, size_t>> result = core->onSuggestionClick(which);
     if (HEDLEY_LIKELY(result.has_value())) {
-        return env->NewStringUTF(result.value().c_str());
+        jclass resultClass = env->FindClass("yancey/chelper/core/ClickSuggestionResult");
+        jobject javaResult = env->AllocObject(resultClass);
+        env->SetObjectField(javaResult,
+                            env->GetFieldID(resultClass, "text", "Ljava/lang/String;"),
+                            env->NewStringUTF(result.value().first.c_str()));
+        env->SetIntField(javaResult,
+                         env->GetFieldID(resultClass, "selection", "I"),
+                         static_cast<jint>(result.value().second));
+        return resultClass;
     } else {
         return nullptr;
     }

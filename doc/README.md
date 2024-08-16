@@ -2,8 +2,8 @@ English | [简体中文](README_CN.md)
 
 # CPack document
 
-Cpack(Command Pack) is the resource pack of CHelper(Command Helper), which is a command helper for minecraft bedrock
-version.
+Cpack(Command Pack) is the resource pack of CHelper(Command Helper), which is a command helper for Minecraft Bedrock
+Edition.
 
 ## manifest.json
 

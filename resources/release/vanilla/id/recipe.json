@@ -1519,7 +1519,7 @@
     },
     {
       "name": "minecraft:dune_armor_trim_smithing_template_duplicate",
-      "description": "\u003c工作台\u003e沙丘盔甲纹饰锻造模板+钻石*7+砂岩/雕纹砂岩/切制砂岩/平滑砂岩-\u003e沙丘盔甲纹饰锻造模板*2"
+      "description": "\u003c工作台\u003e沙丘盔甲纹饰锻造模板+钻石*7+砂岩-\u003e沙丘盔甲纹饰锻造模板*2"
     },
     {
       "name": "minecraft:emerald",
@@ -1807,7 +1807,7 @@
     },
     {
       "name": "minecraft:grindstone",
-      "description": "\u003c工作台\u003e木棍*2+木板*2+石头双层台阶-\u003e砂轮"
+      "description": "\u003c工作台\u003e木棍*2+木板*2+石头台阶-\u003e砂轮"
     },
     {
       "name": "minecraft:hay_block",
@@ -2899,7 +2899,7 @@
     },
     {
       "name": "minecraft:quartz_bricks",
-      "description": "\u003c工作台\u003e石英块*4-\u003e石英砖"
+      "description": "\u003c工作台\u003e石英块*4-\u003e石英砖*4"
     },
     {
       "name": "minecraft:quartz_stairs",
@@ -3315,7 +3315,7 @@
     },
     {
       "name": "minecraft:stonecutter_andesite_slab",
-      "description": "\u003c切石机\u003e安山岩~\u003e安山岩双层台阶*2"
+      "description": "\u003c切石机\u003e安山岩~\u003e安山岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_andesite_stairs",
@@ -3431,7 +3431,7 @@
     },
     {
       "name": "minecraft:stonecutter_diorite_slab",
-      "description": "\u003c切石机\u003e闪长岩~\u003e闪长岩双层台阶*2"
+      "description": "\u003c切石机\u003e闪长岩~\u003e闪长岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_diorite_stairs",
@@ -3443,15 +3443,15 @@
     },
     {
       "name": "minecraft:stonecutter_double_stone_slab",
-      "description": "\u003c切石机\u003e石头~\u003e石头双层台阶*2"
+      "description": "\u003c切石机\u003e石头~\u003e石头台阶*2"
     },
     {
       "name": "minecraft:stonecutter_endbrick_slab",
-      "description": "\u003c切石机\u003e末地石~\u003e末地石砖双层台阶*2"
+      "description": "\u003c切石机\u003e末地石~\u003e末地石砖台阶*2"
     },
     {
       "name": "minecraft:stonecutter_endbrick_slab2",
-      "description": "\u003c切石机\u003e末地石砖~\u003e末地石砖双层台阶*2"
+      "description": "\u003c切石机\u003e末地石砖~\u003e末地石砖台阶*2"
     },
     {
       "name": "minecraft:stonecutter_endbrick_stairs",
@@ -3507,7 +3507,7 @@
     },
     {
       "name": "minecraft:stonecutter_granite_slab",
-      "description": "\u003c切石机\u003e花岗岩~\u003e花岗岩双层台阶*2"
+      "description": "\u003c切石机\u003e花岗岩~\u003e花岗岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_granite_stairs",
@@ -3531,7 +3531,7 @@
     },
     {
       "name": "minecraft:stonecutter_mossy_stonebrick_slab",
-      "description": "\u003c切石机\u003e苔石砖~\u003e苔石砖双层台阶*2"
+      "description": "\u003c切石机\u003e苔石砖~\u003e苔石砖台阶*2"
     },
     {
       "name": "minecraft:stonecutter_mossy_stonebrick_stairs",
@@ -3603,11 +3603,11 @@
     },
     {
       "name": "minecraft:stonecutter_polished_andesite_slab",
-      "description": "\u003c切石机\u003e安山岩~\u003e磨制安山岩双层台阶*2"
+      "description": "\u003c切石机\u003e安山岩~\u003e磨制安山岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_polished_andesite_slab2",
-      "description": "\u003c切石机\u003e磨制安山岩~\u003e磨制安山岩双层台阶*2"
+      "description": "\u003c切石机\u003e磨制安山岩~\u003e磨制安山岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_polished_andesite_stairs",
@@ -3643,11 +3643,11 @@
     },
     {
       "name": "minecraft:stonecutter_polished_diorite_slab",
-      "description": "\u003c切石机\u003e闪长岩~\u003e磨制闪长岩双层台阶*2"
+      "description": "\u003c切石机\u003e闪长岩~\u003e磨制闪长岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_polished_diorite_slab2",
-      "description": "\u003c切石机\u003e磨制闪长岩~\u003e磨制闪长岩双层台阶*2"
+      "description": "\u003c切石机\u003e磨制闪长岩~\u003e磨制闪长岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_polished_diorite_stairs",
@@ -3667,11 +3667,11 @@
     },
     {
       "name": "minecraft:stonecutter_polished_granite_slab",
-      "description": "\u003c切石机\u003e花岗岩~\u003e磨制花岗岩双层台阶*2"
+      "description": "\u003c切石机\u003e花岗岩~\u003e磨制花岗岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_polished_granite_slab2",
-      "description": "\u003c切石机\u003e磨制花岗岩~\u003e磨制花岗岩双层台阶*2"
+      "description": "\u003c切石机\u003e磨制花岗岩~\u003e磨制花岗岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_polished_granite_stairs",
@@ -3791,7 +3791,7 @@
     },
     {
       "name": "minecraft:stonecutter_red_sanddouble_stone_slab",
-      "description": "\u003c切石机\u003e红砂岩~\u003e红砂岩双层台阶*2"
+      "description": "\u003c切石机\u003e红砂岩~\u003e红砂岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_red_sandstone_cut",
@@ -3843,7 +3843,7 @@
     },
     {
       "name": "minecraft:stonecutter_smooth_quartz_slab",
-      "description": "\u003c切石机\u003e平滑石英块~\u003e平滑石英双层台阶*2"
+      "description": "\u003c切石机\u003e平滑石英块~\u003e平滑石英台阶*2"
     },
     {
       "name": "minecraft:stonecutter_smooth_quartz_stairs",
@@ -3851,7 +3851,7 @@
     },
     {
       "name": "minecraft:stonecutter_smooth_red_sanddouble_stone_slab",
-      "description": "\u003c切石机\u003e平滑红砂岩~\u003e平滑红砂岩双层台阶*2"
+      "description": "\u003c切石机\u003e平滑红砂岩~\u003e平滑红砂岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_smooth_red_sandstone_stairs",
@@ -4067,7 +4067,7 @@
     },
     {
       "name": "minecraft:stonecutter_waxed_oxidized_cut_copper_to_cut_copper_slab",
-      "description": "\u003c切石机\u003e涂蜡的氧化切制铜块~\u003e涂蜡的氧化切制铜台阶"
+      "description": "\u003c切石机\u003e涂蜡的氧化切制铜块~\u003e涂蜡的氧化切制铜台阶*2"
     },
     {
       "name": "minecraft:stonecutter_waxed_oxidized_cut_copper_to_cut_copper_stairs",
@@ -4167,7 +4167,7 @@
     },
     {
       "name": "minecraft:tide_armor_trim_smithing_template_duplicate",
-      "description": "\u003c工作台\u003e潮汐盔甲纹饰锻造模板+钻石*7+海晶石/暗海晶石/海晶石砖-\u003e潮汐盔甲纹饰锻造模板*2"
+      "description": "\u003c工作台\u003e潮汐盔甲纹饰锻造模板+钻石*7+海晶石-\u003e潮汐盔甲纹饰锻造模板*2"
     },
     {
       "name": "minecraft:tinted_glass",
@@ -4175,7 +4175,7 @@
     },
     {
       "name": "minecraft:tnt",
-      "description": "\u003c工作台\u003e沙子/红沙*4+火药*5-\u003eTNT"
+      "description": "\u003c工作台\u003e沙子*4+火药*5-\u003eTNT"
     },
     {
       "name": "minecraft:tnt_minecart",
