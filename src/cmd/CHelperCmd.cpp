@@ -8,7 +8,6 @@
 #include <codecvt>
 #include <locale>
 
-
 int main() {
     std::locale::global(std::locale("zh_cn.UTF-8"));
     //    testDir();
@@ -23,7 +22,7 @@ int main() {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
-// these two method is slow.
+// these two method is slow and codecvt is deprecated in c++17
 // do not use this implementation in your project.
 // you should implement it depend on your platform, such as use Windows API.
 
@@ -37,9 +36,7 @@ std::wstring string2wstring(const std::string &string) {
     return utf8_conv.from_bytes(string);
 }
 
-#ifdef __clang__
 #pragma clang diagnostic pop
-#endif
 
 #if CHelperOnlyReadBinary != true
 
@@ -320,7 +317,7 @@ namespace CHelper::Test {
             fmt::print(L"{}{}",
                        fmt::styled(commands.size(), fg(fmt::color::medium_purple)),
                        fmt::styled(L" commands\n", fg(fmt::color::lime_green)));
-            CHELPER_INFO(L"run successfully({})",std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
+            CHELPER_INFO(L"run successfully({})", std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
@@ -337,7 +334,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeJsonToDirectory(output);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO(L"CPack write successfully({})",std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
+            CHELPER_INFO(L"CPack write successfully({})", std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
             [[maybe_unused]] auto core2 = Core::createByDirectory(output);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
@@ -355,7 +352,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeJsonToFile(output);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO(L"CPack write successfully({})",std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
+            CHELPER_INFO(L"CPack write successfully({})", std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
             [[maybe_unused]] auto core2 = Core::createByJson(output);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
@@ -373,7 +370,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeBsonToFile(output);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO(L"CPack write successfully({})",std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
+            CHELPER_INFO(L"CPack write successfully({})", std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
@@ -390,7 +387,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeBinToFile(output);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO(L"CPack write successfully({})",std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
+            CHELPER_INFO(L"CPack write successfully({})", std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
             [[maybe_unused]] auto core2 = Core::createByBinary(output);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);

@@ -6,13 +6,19 @@
 
 namespace CHelper::Node {
 
+    static std::shared_ptr<NormalId> getNormalId(wchar_t symbol, const std::optional<std::wstring> &description) {
+        std::wstring name;
+        name.push_back(symbol);
+        return NormalId::make(name, description);
+    }
+
     NodeSingleSymbol::NodeSingleSymbol(const std::optional<std::wstring> &id,
                                        const std::optional<std::wstring> &description,
                                        wchar_t symbol,
                                        bool isAddWhitespace)
         : NodeBase(id, description, false),
           symbol(symbol),
-          normalId(NormalId::make(std::to_wstring(symbol), description)),
+          normalId(getNormalId(symbol, description)),
           isAddWhitespace(isAddWhitespace) {}
 
     NodeType *NodeSingleSymbol::getNodeType() const {

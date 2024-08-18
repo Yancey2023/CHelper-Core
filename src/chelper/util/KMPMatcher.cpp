@@ -8,6 +8,7 @@ namespace CHelper {
 
     KMPMatcher::KMPMatcher(const std::wstring_view &pattern) : pattern(pattern) {
         next.reserve(this->pattern.length());
+        next.push_back(0);
         size_t j = 0;
         for (size_t i = 1; i < this->pattern.length(); ++i) {
             while (j > 0 && this->pattern[i] != this->pattern[j]) {
