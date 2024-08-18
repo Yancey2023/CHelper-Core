@@ -6,6 +6,8 @@
 #include "../chelper/Core.h"
 #include "../chelper/parser/Parser.h"
 #include "param_deliver.h"
+#include <AtlBase.h>
+#include <atlconv.h>
 #include <commctrl.h>
 
 static size_t ID_INPUT = 1;
@@ -18,26 +20,14 @@ static TCHAR szTitle[] = "CHelper";
 static CHelper::Core *core = nullptr;
 
 std::string wstring2string(const std::wstring &wstring) {
-    UINT codePage = GetACP();
-    std::string result;
-    int len = WideCharToMultiByte(codePage, 0, wstring.c_str(), static_cast<int>(wstring.size()), nullptr, 0, nullptr, nullptr);
-    char *buffer = new char[len + 1];
-    WideCharToMultiByte(codePage, 0, wstring.c_str(), static_cast<int>(wstring.size()), buffer, len, nullptr, nullptr);
-    buffer[len] = '\0';
-    result.append(buffer);
-    delete[] buffer;
+    CW2A ca2a(wstring.c_str(), CP_UTF8);
+    std::string result = ca2a.m_szBuffer;
     return result;
 }
 
 std::wstring string2wstring(const std::string &string) {
-    UINT codePage = GetACP();
-    std::wstring result;
-    int len = MultiByteToWideChar(codePage, 0, string.c_str(), static_cast<int>(string.size()), nullptr, 0);
-    auto *buffer = new TCHAR[len + 1];
-    MultiByteToWideChar(codePage, 0, string.c_str(), static_cast<int>(string.size()), reinterpret_cast<LPWSTR>(buffer), len);
-    buffer[len] = '\0';
-    result.append(reinterpret_cast<wchar_t *>(buffer));
-    delete[] buffer;
+    CA2W ca2w(string.c_str(), CP_UTF8);
+    std::wstring result = ca2w.m_szBuffer;
     return result;
 }
 
@@ -48,8 +38,9 @@ std::wstring string2wstring(const std::string &string) {
  * @param nCmdShow 控制窗口的显示方式
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
+    std::locale::global(std::locale("zh_cn.UTF-8"));
     std::filesystem::path projectDir(PROJECT_DIR);
-    core = CHelper::Core::createByBinary(projectDir / L"run" / (std::wstring(L"beta-experiment-") + CPACK_VERSION_BETA + L".cpack"));
+    core = CHelper::Core::createByBinary(projectDir / L"run" / L"cpack" / (std::wstring(L"beta-experiment-") + CPACK_VERSION_BETA + L".cpack"));
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         exit(-1);
     }
@@ -181,7 +172,8 @@ void onTextChanged(const std::wstring &command) {
                     break;
                 }
                 auto content = std::wstring(suggestion.content->name).append(L" - ").append(suggestion.content->description.value_or(L""));
-                SendMessageW(hWndListBox, LB_ADDSTRING, 0, (LPARAM) content.c_str());
+                CW2W cw2w(content.c_str(), CP_UTF8);
+                SendMessageW(hWndListBox, LB_ADDSTRING, 0, reinterpret_cast<LPARAM>(cw2w.m_szBuffer));
             }
         }
         CHelper::Profile::pop();

@@ -4,35 +4,6 @@
 
 #include "../chelper/Core.h"
 #include "pch.h"
-#include <codecvt>
-#include <locale>
-#include <unicode/ustring.h>
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-
-// TODO these two method is slow and codecvt is deprecated in c++17
-
-static std::wstring_convert<std::codecvt_utf8<wchar_t>> utf8_conv;
-
-std::string wstring2string(const std::wstring &wstring) {
-    return utf8_conv.to_bytes(wstring);
-}
-
-std::wstring string2wstring(const std::string &string) {
-    //    icu::UnicodeString unicodeString;
-    //    u_strlen(string);
-    //    auto *dest = new UChar[string.size()];
-    //    UErrorCode errorCode;
-    //    int32_t destLength;
-    //    u_strFromUTF8(dest, 100, &destLength, string.c_str(), static_cast<int32_t>(string.length()), &errorCode);
-    //    std::wstring result = std::wstring(reinterpret_cast<wchar_t *>(dest));
-    //    delete[] dest;
-    //    return result;
-    return utf8_conv.from_bytes(string);
-}
-
-#pragma clang diagnostic pop
 
 std::wstring jstring2wstring(JNIEnv *env, jstring jString) {
     if (HEDLEY_UNLIKELY(jString == nullptr)) {
@@ -59,6 +30,20 @@ std::string jstring2string(JNIEnv *env, jstring jString) {
     return str;
 }
 
+jstring string2jstring(JNIEnv *env, const std::string &string) {
+    return env->NewStringUTF(string.c_str());
+}
+
+JNIEnv *envGlobal = nullptr;
+
+std::string wstring2string(const std::wstring &wstring) {
+    return jstring2string(envGlobal, wstring2jstring(envGlobal, wstring));
+}
+
+std::wstring string2wstring(const std::string &string) {
+    return jstring2wstring(envGlobal, string2jstring(envGlobal, string));
+}
+
 extern "C" [[maybe_unused]] JNIEXPORT jlong JNICALL
 Java_yancey_chelper_core_CHelperCore_create0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jobject assetManager, jstring cpack_path) {
@@ -68,7 +53,9 @@ Java_yancey_chelper_core_CHelperCore_create0(
     try {
         std::string cpackPath = jstring2string(env, cpack_path);
         if (HEDLEY_UNLIKELY(assetManager == nullptr)) {
+            envGlobal = env;
             CHelper::Core *core = CHelper::Core::createByBinary(cpackPath);
+            envGlobal = nullptr;
             return reinterpret_cast<jlong>(core);
         } else {
             AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
@@ -81,10 +68,12 @@ Java_yancey_chelper_core_CHelperCore_create0(
             int numBytesRead = AAsset_read(asset, buffer, dataFileSize);
             AAsset_close(asset);
             std::istringstream iss(std::string(buffer, numBytesRead));
+            envGlobal = env;
             CHelper::Core *core = CHelper::Core::create([&iss]() {
                 CHelper::BinaryReader binaryReader(true, iss);
                 return CHelper::CPack::createByBinary(binaryReader);
             });
+            envGlobal = nullptr;
             delete[] buffer;
             return reinterpret_cast<jlong>(core);
         }
@@ -320,7 +309,9 @@ Java_yancey_chelper_core_CHelperCore_old2newInit0(
         AAsset_close(asset);
         std::istringstream iss(std::string(buffer, numBytesRead));
         CHelper::BinaryReader binaryReader(true, iss);
+        envGlobal = env;
         blockFixData0 = binaryReader.read<CHelper::Old2New::BlockFixData>();
+        envGlobal = nullptr;
         delete[] buffer;
         return true;
     } catch (const std::exception &e) {

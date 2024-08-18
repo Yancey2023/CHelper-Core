@@ -4,6 +4,27 @@
 
 #include "../chelper/Core.h"
 #include <emscripten/emscripten.h>
+#include <codecvt>
+#include <locale>
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
+// these two method is slow and codecvt is deprecated in c++17
+// do not use this implementation in your project.
+// you should implement it depend on your platform, such as use Windows API.
+
+static std::wstring_convert<std::codecvt_utf8<wchar_t>> utf8_conv;
+
+std::string wstring2string(const std::wstring &wstring) {
+    return utf8_conv.to_bytes(wstring);
+}
+
+std::wstring string2wstring(const std::string &string) {
+    return utf8_conv.from_bytes(string);
+}
+
+#pragma clang diagnostic pop
 
 class WrappedCHelperCore {
 private:
@@ -20,7 +41,7 @@ public:
     ~WrappedCHelperCore() {
         delete core;
     }
-    void onTextChanged(const std::wstring &content, size_t index) {
+    void onTextChanged(const wchar_t *content, size_t index) {
         core->onTextChanged(content, index);
     }
 
@@ -31,7 +52,7 @@ public:
         core->onSelectionChanged(index0);
     }
 
-    const char *getStructure() {
+    const wchar_t *getStructure() {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
@@ -39,7 +60,7 @@ public:
         return structure.c_str();
     }
 
-    const char *getDescription() {
+    const wchar_t *getDescription() {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
@@ -54,7 +75,7 @@ public:
         newStr = core->onSuggestionClick(which);
     }
 
-    const char *getStringAfterSuggestionClick() {
+    const wchar_t *getStringAfterSuggestionClick() {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
@@ -76,7 +97,7 @@ public:
         }
     }
 
-    const char *getErrorReason() {
+    const wchar_t *getErrorReason() {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
@@ -86,10 +107,10 @@ public:
         } else if (HEDLEY_UNLIKELY(errorReasons.size() == 1)) {
             errorReason = errorReasons[0]->errorReason;
         } else {
-            errorReason = "可能的错误原因：";
+            errorReason = L"可能的错误原因：";
             int i = 0;
             for (const auto &item: errorReasons) {
-                errorReason->append("\n").append(std::to_string(++i)).append(". ").append(item->errorReason);
+                errorReason->append(L"\n").append(std::to_wstring(++i)).append(L". ").append(item->errorReason);
             }
         }
         if (errorReason == std::nullopt) {
@@ -110,7 +131,7 @@ public:
         return suggestions->size();
     }
 
-    const char *getSuggestionTitle(size_t which) {
+    const wchar_t *getSuggestionTitle(size_t which) {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
@@ -124,7 +145,7 @@ public:
         return suggestions->at(which).content->name.c_str();
     }
 
-    const char *getSuggestionDescription(size_t which) {
+    const wchar_t *getSuggestionDescription(size_t which) {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
@@ -148,7 +169,7 @@ extern "C" {
 
 EMSCRIPTEN_KEEPALIVE WrappedCHelperCore *init(const char *cpackPtr, size_t cpackLength) {
     return new WrappedCHelperCore(CHelper::Core::create([&cpackPtr, &cpackLength]() {
-        std::wstring str = std::wstring(cpackPtr, cpackLength);
+        std::string str = std::string(cpackPtr, cpackLength);
         std::istringstream iss(str);
         CHelper::BinaryReader binaryReader(true, iss);
         return CHelper::CPack::createByBinary(binaryReader);
@@ -159,7 +180,7 @@ EMSCRIPTEN_KEEPALIVE void release(const WrappedCHelperCore *core) {
     delete core;
 }
 
-EMSCRIPTEN_KEEPALIVE void onTextChanged(WrappedCHelperCore *core, const char *content, size_t index) {
+EMSCRIPTEN_KEEPALIVE void onTextChanged(WrappedCHelperCore *core, const wchar_t *content, size_t index) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
@@ -173,21 +194,21 @@ EMSCRIPTEN_KEEPALIVE void onSelectionChanged(WrappedCHelperCore *core, size_t in
     core->onSelectionChanged(index);
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getStructure(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const wchar_t *getStructure(WrappedCHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     return core->getStructure();
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getDescription(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const wchar_t *getDescription(WrappedCHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     return core->getDescription();
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getErrorReason(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const wchar_t *getErrorReason(WrappedCHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
@@ -201,14 +222,14 @@ EMSCRIPTEN_KEEPALIVE size_t getSuggestionSize(WrappedCHelperCore *core) {
     return core->getSuggestionSize();
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getSuggestionTitle(WrappedCHelperCore *core, size_t which) {
+EMSCRIPTEN_KEEPALIVE const wchar_t *getSuggestionTitle(WrappedCHelperCore *core, size_t which) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     return core->getSuggestionTitle(which);
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getSuggestionDescription(WrappedCHelperCore *core, size_t which) {
+EMSCRIPTEN_KEEPALIVE const wchar_t *getSuggestionDescription(WrappedCHelperCore *core, size_t which) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
@@ -222,7 +243,7 @@ EMSCRIPTEN_KEEPALIVE void onSuggestionClick(WrappedCHelperCore *core, size_t whi
     core->onSuggestionClick(which);
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getStringAfterSuggestionClick(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const wchar_t *getStringAfterSuggestionClick(WrappedCHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
