@@ -14,7 +14,7 @@ namespace CHelper::Node {
 
     class NodePerCommand : public NodeBase {
     public:
-        std::vector<std::string> name;
+        std::vector<std::wstring> name;
         std::vector<std::unique_ptr<Node::NodeBase>> nodes;
         std::vector<Node::NodeBase *> startNodes;
 
@@ -26,7 +26,7 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
-        std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
+        std::optional<std::wstring> collectDescription(const ASTNode *node, size_t index) const override;
 
     };// NodePerCommand::Node
 

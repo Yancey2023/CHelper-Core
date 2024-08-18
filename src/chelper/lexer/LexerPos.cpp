@@ -11,7 +11,7 @@ CHelper::LexerPos::LexerPos(size_t index,
       col(col),
       index(index) {}
 
-void CHelper::LexerPos::next(char ch) {
+void CHelper::LexerPos::next(wchar_t ch) {
     index++;
     if (HEDLEY_UNLIKELY(ch == '\n')) {
         line++;

@@ -17,9 +17,9 @@
 
 namespace CHelper::Parser {
 
-    ASTNode parse(const std::string &content, const CPack *cpack, const Node::NodeBase *mainNode);
+    ASTNode parse(const std::wstring &content, const CPack *cpack, const Node::NodeBase *mainNode);
 
-    ASTNode parse(const std::string &content, const CPack *cpack);
+    ASTNode parse(const std::wstring &content, const CPack *cpack);
 
 }// namespace CHelper::Parser
 

@@ -14,7 +14,7 @@ namespace CHelper {
 
     class NamespaceId : public NormalId {
     public:
-        std::optional<std::string> idNamespace;
+        std::optional<std::wstring> idNamespace;
 
     private:
         std::shared_ptr<NormalId> idWithNamespace;

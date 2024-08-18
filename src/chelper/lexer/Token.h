@@ -22,7 +22,7 @@ namespace CHelper {
             LF
         };
 
-        std::string getName(TokenType tokenType);
+        std::wstring getName(TokenType tokenType);
 
         CODEC_ENUM_H(TokenType)
 
@@ -33,9 +33,9 @@ namespace CHelper {
     public:
         const TokenType::TokenType type;
         const LexerPos pos;
-        const std::string_view content;
+        const std::wstring_view content;
 
-        Token(TokenType::TokenType type, LexerPos pos, const std::string_view &content);
+        Token(TokenType::TokenType type, LexerPos pos, const std::wstring_view &content);
 
         [[nodiscard]] size_t getStartIndex() const;
 

@@ -16,7 +16,7 @@ namespace CHelper::Node {
 
     class NodeNormalId : public NodeBase {
     public:
-        std::optional<std::string> key;
+        std::optional<std::wstring> key;
         std::optional<std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>> contents;
         bool allowMissingID = false;
         std::optional<bool> ignoreError;
@@ -29,9 +29,9 @@ namespace CHelper::Node {
         NodeNormalId() = default;
 
         NodeNormalId(
-                const std::optional<std::string> &id,
-                const std::optional<std::string> &description,
-                const std::string &key,
+                const std::optional<std::wstring> &id,
+                const std::optional<std::wstring> &description,
+                const std::wstring &key,
                 bool ignoreError,
                 bool allowMissingID = false,
                 const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode =
@@ -40,8 +40,8 @@ namespace CHelper::Node {
                 });
 
         NodeNormalId(
-                const std::optional<std::string> &id,
-                const std::optional<std::string> &description,
+                const std::optional<std::wstring> &id,
+                const std::optional<std::wstring> &description,
                 bool ignoreError,
                 const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
                 bool allowMissingID = false,

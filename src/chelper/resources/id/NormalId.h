@@ -13,8 +13,8 @@ namespace CHelper {
 
     class NormalId {
     public:
-        std::string name;
-        std::optional<std::string> description;
+        std::wstring name;
+        std::optional<std::wstring> description;
 
     private:
         bool isBuildHash = false;
@@ -29,7 +29,7 @@ namespace CHelper {
 
         [[nodiscard]] size_t hashCode();
 
-        static std::shared_ptr<NormalId> make(const std::string &name, const std::optional<std::string> &description);
+        static std::shared_ptr<NormalId> make(const std::wstring &name, const std::optional<std::wstring> &description);
     };
 
     CODEC_H(NormalId)

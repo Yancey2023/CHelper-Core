@@ -6,7 +6,7 @@
 
 namespace CHelper {
 
-    LexerResult::LexerResult(std::string content,
+    LexerResult::LexerResult(std::wstring content,
                              std::vector<Token> allTokens)
         : content(std::move(content)),
           allTokens(std::move(allTokens)) {}

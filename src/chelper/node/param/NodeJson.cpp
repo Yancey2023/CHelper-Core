@@ -8,9 +8,9 @@
 
 namespace CHelper::Node {
 
-    NodeJson::NodeJson(const std::optional<std::string> &id,
-                       const std::optional<std::string> &description,
-                       std::string key)
+    NodeJson::NodeJson(const std::optional<std::wstring> &id,
+                       const std::optional<std::wstring> &description,
+                       std::wstring key)
         : NodeBase(id, description, false),
           key(std::move(key)) {}
 
@@ -21,8 +21,8 @@ namespace CHelper::Node {
                 return;
             }
         }
-        Profile::push("linking contents to {}", key);
-        Profile::push("failed to find json data in the cpack -> {}", key);
+        Profile::push(L"linking contents to {}", key);
+        Profile::push(L"failed to find json data in the cpack -> {}", key);
         throw std::runtime_error("failed to find json data");
     }
 
@@ -37,7 +37,7 @@ namespace CHelper::Node {
     void NodeJson::collectStructure(const ASTNode *astNode,
                                     StructureBuilder &structure,
                                     bool isMustHave) const {
-        structure.append(isMustHave, description.value_or("JSON文本"));
+        structure.append(isMustHave, description.value_or(L"JSON文本"));
     }
 
     CODEC_NODE(NodeJson, key)

@@ -14,8 +14,8 @@ namespace CHelper {
 
     class Manifest {
     public:
-        std::optional<std::string> name, description, minecraftVersion, author, updateDate;
-        std::string packId;
+        std::optional<std::wstring> name, description, minecraftVersion, author, updateDate;
+        std::wstring packId;
         int32_t versionCode;
         std::optional<bool> isBasicPack, isDefault;
     };

@@ -12,27 +12,27 @@
 namespace CHelper::Node {
 
     static std::unique_ptr<NodeBase> nodeEqual = std::make_unique<NodeText>(
-            "TARGET_SELECTOR_ARGUMENT_EQUAL", "等于",
-            NormalId::make("=", "等于"),
+            L"TARGET_SELECTOR_ARGUMENT_EQUAL", L"等于",
+            NormalId::make(L"=", L"等于"),
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 return tokenReader.readSymbolASTNode(node);
             });
     static std::unique_ptr<NodeBase> nodeNotEqual = std::make_unique<NodeText>(
-            "TARGET_SELECTOR_ARGUMENT_NOT_EQUAL", "不等于",
-            NormalId::make("=!", "不等于"),
+            L"TARGET_SELECTOR_ARGUMENT_NOT_EQUAL", L"不等于",
+            NormalId::make(L"=!", L"不等于"),
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 tokenReader.push();
                 auto childNodes = {tokenReader.readSymbolASTNode(node), tokenReader.readSymbolASTNode(node)};
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
             });
     static std::unique_ptr<NodeBase> nodeEqualOrNotEqual = std::make_unique<NodeOr>(
-            "TARGET_SELECTOR_ARGUMENT_SEPARATOR", "等于或不等于",
+            L"TARGET_SELECTOR_ARGUMENT_SEPARATOR", L"等于或不等于",
             std::vector<const NodeBase *>{
                     nodeEqual.get(), nodeNotEqual.get()},
             false);
 
-    EqualData::EqualData(std::string name,
-                         const std::optional<std::string> &description,
+    EqualData::EqualData(std::wstring name,
+                         const std::optional<std::wstring> &description,
                          bool canUseNotEqual,
                          const NodeBase *nodeValue)
         : name(std::move(name)),
@@ -40,8 +40,8 @@ namespace CHelper::Node {
           canUseNotEqual(canUseNotEqual),
           nodeValue(nodeValue) {}
 
-    NodeEqualEntry::NodeEqualEntry(const std::optional<std::string> &id,
-                                   const std::optional<std::string> &description,
+    NodeEqualEntry::NodeEqualEntry(const std::optional<std::wstring> &id,
+                                   const std::optional<std::wstring> &description,
                                    std::vector<EqualData> equalDatas)
         : NodeBase(id, description, false),
           equalDatas(std::move(equalDatas)) {
@@ -50,7 +50,7 @@ namespace CHelper::Node {
             nodeKeyContent->push_back(NormalId::make(item.name, item.description));
         }
         nodeKey = std::make_unique<NodeNormalId>(
-                "KEY", "参数名",
+                L"KEY", L"参数名",
                 true, nodeKeyContent);
     }
 
@@ -67,7 +67,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(astNodeKey.isError())) {
             return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
         }
-        std::string_view key = astNodeKey.tokens.toString();
+        std::wstring_view key = astNodeKey.tokens.toString();
         auto it = std::find_if(equalDatas.begin(), equalDatas.end(), [&key](const auto &t) {
             return t.name == key;
         });

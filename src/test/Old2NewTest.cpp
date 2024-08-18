@@ -11,8 +11,8 @@ namespace CHelper::Test {
 
     TEST(Old2NewTest, Old2New) {
         std::filesystem::path projectDir(PROJECT_DIR);
-        Old2New::BlockFixData blockFixData = Old2New::blockFixDataFromJson(JsonUtil::getJsonFromFile(projectDir / "resources" / "old2new" / "blockFixData.json"));
-        std::vector<std::string> oldCommands = {
+        Old2New::BlockFixData blockFixData = Old2New::blockFixDataFromJson(JsonUtil::getJsonFromFile(projectDir / L"resources" / L"old2new" / L"blockFixData.json"));
+        std::vector<std::wstring> oldCommands = {
                 R"(execute @e[x=~5] ~~~ detect ~~-1~ stone 0 setblock ~~1~ command_block 0)",
                 R"(execute @e[type=zombie] ~ ~ ~ summon lightning_bolt)",
                 R"(execute @e[type=zombie] ~ ~ ~ detect ~ ~-1 ~ minecraft:sand -1 summon lightning_bolt)",

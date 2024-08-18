@@ -13,7 +13,7 @@ namespace CHelper::Node {
 
     class NodeJsonList : public NodeBase {
     public:
-        std::string data;
+        std::wstring data;
 
     private:
         std::unique_ptr<NodeBase> nodeList;
@@ -21,9 +21,9 @@ namespace CHelper::Node {
     public:
         NodeJsonList() = default;
 
-        NodeJsonList(const std::optional<std::string> &id,
-                     const std::optional<std::string> &description,
-                     std::string data = std::string());
+        NodeJsonList(const std::optional<std::wstring> &id,
+                     const std::optional<std::wstring> &description,
+                     std::wstring data = std::wstring());
 
         void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
 

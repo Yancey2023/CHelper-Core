@@ -16,38 +16,39 @@
 namespace CHelper {
 
     static std::unique_ptr<Node::NodeBase> nodeBlockStateLeftBracket = std::make_unique<Node::NodeSingleSymbol>(
-            "BLOCK_STATE_LEFT_BRACKET", "方块状态左括号", '[');
+            L"BLOCK_STATE_LEFT_BRACKET", L"方块状态左括号", '[');
     static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryKey = std::make_unique<Node::NodeString>(
-            "BLOCK_STATE_ENTRY_KEY", "方块状态键值对的键", false, false, false);
+            L"BLOCK_STATE_ENTRY_KEY", L"方块状态键值对的键", false, false, false);
     static std::unique_ptr<Node::NodeBase> nodeBlockStateEntrySeparator = std::make_unique<Node::NodeSingleSymbol>(
-            "BLOCK_STATE_ENTRY_SEPARATOR", "方块状态键值对分隔符", '=');
+            L"BLOCK_STATE_ENTRY_SEPARATOR", L"方块状态键值对分隔符", '=');
     static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueBoolean = std::make_unique<Node::NodeBoolean>(
-            "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", "方块状态键值对的值（布尔值）",
+            L"BLOCK_STATE_ENTRY_VALUE_BOOLEAN", L"方块状态键值对的值（布尔值）",
             std::nullopt, std::nullopt);
     static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueInteger = std::make_unique<Node::NodeInteger>(
-            "BLOCK_STATE_ENTRY_VALUE_INTEGER", "方块状态键值对的值（整数）",
+            L"BLOCK_STATE_ENTRY_VALUE_INTEGER", L"方块状态键值对的值（整数）",
             std::nullopt, std::nullopt);
     static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueFloat = std::make_unique<Node::NodeFloat>(
-            "BLOCK_STATE_ENTRY_VALUE_FLOAT", "方块状态键值对的值（小数）",
+            L"BLOCK_STATE_ENTRY_VALUE_FLOAT", L"方块状态键值对的值（小数）",
             std::nullopt, std::nullopt);
     static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueString = std::make_unique<Node::NodeString>(
-            "BLOCK_STATE_ENTRY_VALUE_STRING", "方块状态键值对的值（字符串）",
+            L"BLOCK_STATE_ENTRY_VALUE_STRING", L"方块状态键值对的值（字符串）",
             false, true, false);
     static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryAllValue = std::make_unique<Node::NodeOr>(
-            "BLOCK_STATE_ENTRY_VALUE", "方块状态键值对的值",
+            L"BLOCK_STATE_ENTRY_VALUE", L"方块状态键值对的值",
             std::vector<const Node::NodeBase *>{
                     nodeBlockStateEntryValueBoolean.get(), nodeBlockStateEntryValueInteger.get(),
                     nodeBlockStateEntryValueFloat.get(), nodeBlockStateEntryValueString.get()},
-            false, false, true, "类型不匹配，当前内容不是有效的方块状态值");
+            false, false, true,
+            L"类型不匹配，当前内容不是有效的方块状态值");
     static std::unique_ptr<Node::NodeBase> nodeBlockStateAllEntry = std::make_unique<Node::NodeEntry>(
-            "BLOCK_STATE_ENTRY", "方块状态键值对", nodeBlockStateEntryKey.get(),
+            L"BLOCK_STATE_ENTRY", L"方块状态键值对", nodeBlockStateEntryKey.get(),
             nodeBlockStateEntrySeparator.get(), nodeBlockStateEntryAllValue.get());
     static std::unique_ptr<Node::NodeBase> nodeBlockStateSeparator = std::make_unique<Node::NodeSingleSymbol>(
-            "BLOCK_STATE_SEPARATOR", "方块状态分隔符", ',');
+            L"BLOCK_STATE_SEPARATOR", L"方块状态分隔符", ',');
     static std::unique_ptr<Node::NodeBase> nodeBlockStateRightBracket = std::make_unique<Node::NodeSingleSymbol>(
-            "BLOCK_STATE_RIGHT_BRACKET", "方块状态右括号", ']');
+            L"BLOCK_STATE_RIGHT_BRACKET", L"方块状态右括号", ']');
     static std::unique_ptr<Node::NodeBase> nodeAllBlockState = std::make_unique<Node::NodeList>(
-            "BLOCK_STATE", "方块状态",
+            L"BLOCK_STATE", L"方块状态",
             nodeBlockStateLeftBracket.get(), nodeBlockStateAllEntry.get(),
             nodeBlockStateSeparator.get(), nodeBlockStateRightBracket.get());
 
@@ -56,21 +57,21 @@ namespace CHelper {
             switch (type) {
                 case BlockStateType::STRING:
                     node = std::make_shared<Node::NodeText>(
-                            "BLOCK_STATE_ENTRY_VALUE_STRING", "方块状态键值对的键（字符串）",
-                            NormalId::make('\"' + std::get<std::string>(value) + '\"', description));
+                            L"BLOCK_STATE_ENTRY_VALUE_STRING", L"方块状态键值对的键（字符串）",
+                            NormalId::make(L'\"' + std::get<std::wstring>(value) + L'\"', description));
                     break;
                 case BlockStateType::INTEGER:
                     node = std::make_shared<Node::NodeText>(
-                            "BLOCK_STATE_ENTRY_VALUE_INTEGER", "方块状态键值对的键（整数）",
-                            NormalId::make(std::to_string(std::get<int32_t>(value)), description),
+                            L"BLOCK_STATE_ENTRY_VALUE_INTEGER", L"方块状态键值对的键（整数）",
+                            NormalId::make(std::to_wstring(std::get<int32_t>(value)), description),
                             [](const Node::NodeBase *node1, TokenReader &tokenReader) -> ASTNode {
                                 return tokenReader.readIntegerASTNode(node1);
                             });
                     break;
                 case BlockStateType::BOOLEAN:
                     node = std::make_shared<Node::NodeText>(
-                            "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", "方块状态键值对的键（布尔值）",
-                            NormalId::make(std::get<bool>(value) ? "true" : "false", description));
+                            L"BLOCK_STATE_ENTRY_VALUE_BOOLEAN", L"方块状态键值对的键（布尔值）",
+                            NormalId::make(std::get<bool>(value) ? L"true" : L"false", description));
                     break;
                 default:
                     HEDLEY_UNREACHABLE();
@@ -88,13 +89,13 @@ namespace CHelper {
             }
             //key = value
             auto nodeKey = std::make_shared<Node::NodeText>(
-                    "BLOCK_STATE_ENTRY_KEY", "方块状态键值对的键",
-                    NormalId::make('\"' + key + '\"', description));
+                    L"BLOCK_STATE_ENTRY_KEY", L"方块状态键值对的键",
+                    NormalId::make(L'\"' + key + L'\"', description));
             auto nodeValue = std::make_shared<Node::NodeOr>(
-                    "BLOCK_STATE_ENTRY_VALUE", "方块状态键值对的值",
+                    L"BLOCK_STATE_ENTRY_VALUE", L"方块状态键值对的值",
                     std::move(valueNodes), false);
             node = std::make_shared<Node::NodeEntry>(
-                    "BLOCK_STATE_PER_ENTRY", "方块状态单个键值对",
+                    L"BLOCK_STATE_PER_ENTRY", L"方块状态单个键值对",
                     nodeKey.get(),
                     nodeBlockStateEntrySeparator.get(),
                     nodeValue.get());
@@ -118,7 +119,7 @@ namespace CHelper {
                                    return item.getNode().get();
                                });
                 auto nodeChild = std::make_shared<Node::NodeOr>(
-                        "BLOCK_STATE_ENTRY", "方块状态键值对",
+                        L"BLOCK_STATE_ENTRY", L"方块状态键值对",
                         std::move(blockStateEntryChildNode1), false);
                 blockStateEntryChildNode2.push_back(nodeChild.get());
                 nodeChildren.push_back(std::move(nodeChild));
@@ -126,11 +127,11 @@ namespace CHelper {
             //其他未知的方块状态
             blockStateEntryChildNode2.push_back(nodeBlockStateAllEntry.get());
             //把所有方块状态拼在一起
-            auto nodeValue = std::make_shared<Node::NodeOr>("BLOCK_STATE_ENTRY", "方块状态键值对",
+            auto nodeValue = std::make_shared<Node::NodeOr>(L"BLOCK_STATE_ENTRY", L"方块状态键值对",
                                                             std::move(blockStateEntryChildNode2), false, true);
             node = std::make_shared<Node::NodeList>(
-                    "BLOCK_STATE",
-                    "方块状态",
+                    L"BLOCK_STATE",
+                    L"方块状态",
                     nodeBlockStateLeftBracket.get(),
                     nodeValue.get(),
                     nodeBlockStateSeparator.get(),
@@ -155,16 +156,16 @@ namespace CHelper {
             t.value = jsonValue.get<bool>();
         } else {
             t.type = BlockStateType::STRING;
-            t.value = jsonValue.get<std::string>();
+            t.value = string2wstring(jsonValue.get<std::string>());
         }
-        JsonUtil::decode<std::string>(j, "description", t.description);
+        JsonUtil::decode<std::wstring>(j, "description", t.description);
     }
 
     void to_json(nlohmann::json &j, const BlockStateValue &t) {
         JsonUtil::encode(j, "description", t.description);
         switch (t.type) {
             case BlockStateType::STRING:
-                JsonUtil::encode(j, "value", std::get<std::string>(t.value));
+                JsonUtil::encode(j, "value", std::get<std::wstring>(t.value));
                 break;
             case BlockStateType::BOOLEAN:
                 JsonUtil::encode(j, "value", std::get<bool>(t.value));
@@ -181,7 +182,7 @@ namespace CHelper {
         binaryReader.decode((uint8_t &) t.type);
         switch (t.type) {
             case BlockStateType::STRING:
-                t.value = binaryReader.read<std::string>();
+                t.value = binaryReader.read<std::wstring>();
                 break;
             case BlockStateType::BOOLEAN:
                 t.value = binaryReader.read<bool>();
@@ -198,7 +199,7 @@ namespace CHelper {
         binaryWriter.encode((uint8_t) t.type);
         switch (t.type) {
             case BlockStateType::STRING:
-                binaryWriter.encode(std::get<std::string>(t.value));
+                binaryWriter.encode(std::get<std::wstring>(t.value));
                 break;
             case BlockStateType::BOOLEAN:
                 binaryWriter.encode(std::get<bool>(t.value));

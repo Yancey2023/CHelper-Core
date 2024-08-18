@@ -36,12 +36,12 @@
 namespace CHelper::Node {
 
 #if CHelperOnlyReadBinary == true
-    NodeType::NodeType(std::string nodeName,
+    NodeType::NodeType(std::wstring nodeName,
                        std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary)
         : nodeName(std::move(nodeName)),
           decodeByBinary(std::move(decodeByBinary)) {}
 #else
-    NodeType::NodeType(std::string nodeName,
+    NodeType::NodeType(std::wstring nodeName,
                        std::function<void(const nlohmann::json &j, std::unique_ptr<NodeBase> &t)> decodeByJson,
                        std::function<void(nlohmann::json &j, const std::unique_ptr<NodeBase> &t)> encodeByJson,
                        std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary,
@@ -54,7 +54,7 @@ namespace CHelper::Node {
 #endif
 
     template<class T>
-    static std::unique_ptr<NodeType> createParam(const std::string &nodeName,
+    static std::unique_ptr<NodeType> createParam(const std::wstring &nodeName,
                                                  bool isMustAfterWhiteSpace = true,
                                                  const std::vector<NodeCreateStage::NodeCreateStage> &nodeCreateStage =
                                                          {NodeCreateStage::JSON_NODE, NodeCreateStage::REPEAT_NODE, NodeCreateStage::COMMAND_PARAM_NODE}) {
@@ -63,7 +63,8 @@ namespace CHelper::Node {
 #if CHelperOnlyReadBinary != true
                 [nodeName, isMustAfterWhiteSpace, nodeCreateStage](const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
                     if (std::find(nodeCreateStage.begin(), nodeCreateStage.end(), NodeType::currentCreateStage) == nodeCreateStage.end()) {
-                        throw std::runtime_error("unknown node type -> " + nodeName);
+                        Profile::push(L"unknown node type -> {}", nodeName);
+                        throw std::runtime_error("unknown node type");
                     }
                     t = std::make_unique<T>();
                     j.get_to((T &) *t);
@@ -77,7 +78,8 @@ namespace CHelper::Node {
 #endif
                 [nodeName, isMustAfterWhiteSpace, nodeCreateStage](BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
                     if (std::find(nodeCreateStage.begin(), nodeCreateStage.end(), NodeType::currentCreateStage) == nodeCreateStage.end()) {
-                        throw std::runtime_error("unknown node type -> " + nodeName);
+                        Profile::push(L"unknown node type -> {}", nodeName);
+                        throw std::runtime_error("unknown node type");
                     }
                     t = std::make_unique<T>();
                     binaryReader.decode((T &) *t);
@@ -95,24 +97,26 @@ namespace CHelper::Node {
     }
 
     template<class T>
-    static std::unique_ptr<NodeType> createJson(const std::string &nodeName) {
+    static std::unique_ptr<NodeType> createJson(const std::wstring &nodeName) {
         return createParam<T>(nodeName, false, {NodeCreateStage::JSON_NODE});
     }
 
     template<class T>
-    static std::unique_ptr<NodeType> createNone(const std::string &nodeName) {
+    static std::unique_ptr<NodeType> createNone(const std::wstring &nodeName) {
         return std::make_unique<NodeType>(
                 nodeName,
 #if CHelperOnlyReadBinary != true
                 [nodeName](const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
-                    throw std::runtime_error("unknown node type -> " + nodeName);
+                    Profile::push(L"unknown node type -> {}", nodeName);
+                    throw std::runtime_error("unknown node type");
                 },
                 [](nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {
                     j = (T &) *t;
                 },
 #endif
                 [nodeName](BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
-                    throw std::runtime_error("unknown node type -> " + nodeName);
+                    Profile::push(L"unknown node type -> {}", nodeName);
+                    throw std::runtime_error("unknown node type");
                 }
 #if CHelperOnlyReadBinary != true
                 ,
@@ -127,44 +131,44 @@ namespace CHelper::Node {
 
     NodeCreateStage::NodeCreateStage NodeType::currentCreateStage = NodeCreateStage::NONE;
 
-    std::unique_ptr<NodeType> NodeType::BLOCK = createParam<NodeBlock>("BLOCK");
-    std::unique_ptr<NodeType> NodeType::BOOLEAN = createParam<NodeBoolean>("BOOLEAN");
-    std::unique_ptr<NodeType> NodeType::COMMAND = createParam<NodeCommand>("COMMAND");
-    std::unique_ptr<NodeType> NodeType::COMMAND_NAME = createParam<NodeCommandName>("COMMAND_NAME");
-    std::unique_ptr<NodeType> NodeType::FLOAT = createParam<NodeFloat>("FLOAT");
-    std::unique_ptr<NodeType> NodeType::INTEGER = createParam<NodeInteger>("INTEGER");
-    std::unique_ptr<NodeType> NodeType::ITEM = createParam<NodeItem>("ITEM");
-    std::unique_ptr<NodeType> NodeType::LF = createNone<NodeLF>("LF");
-    std::unique_ptr<NodeType> NodeType::NAMESPACE_ID = createParam<NodeNamespaceId>("NAMESPACE_ID");
-    std::unique_ptr<NodeType> NodeType::NORMAL_ID = createParam<NodeNormalId>("NORMAL_ID");
-    std::unique_ptr<NodeType> NodeType::PER_COMMAND = createNone<NodePerCommand>("PER_COMMAND");
-    std::unique_ptr<NodeType> NodeType::POSITION = createParam<NodePosition>("POSITION", false);
-    std::unique_ptr<NodeType> NodeType::RELATIVE_FLOAT = createParam<NodeRelativeFloat>("RELATIVE_FLOAT", false);
-    std::unique_ptr<NodeType> NodeType::REPEAT = createParam<NodeRepeat>("REPEAT", false,
+    std::unique_ptr<NodeType> NodeType::BLOCK = createParam<NodeBlock>(L"BLOCK");
+    std::unique_ptr<NodeType> NodeType::BOOLEAN = createParam<NodeBoolean>(L"BOOLEAN");
+    std::unique_ptr<NodeType> NodeType::COMMAND = createParam<NodeCommand>(L"COMMAND");
+    std::unique_ptr<NodeType> NodeType::COMMAND_NAME = createParam<NodeCommandName>(L"COMMAND_NAME");
+    std::unique_ptr<NodeType> NodeType::FLOAT = createParam<NodeFloat>(L"FLOAT");
+    std::unique_ptr<NodeType> NodeType::INTEGER = createParam<NodeInteger>(L"INTEGER");
+    std::unique_ptr<NodeType> NodeType::ITEM = createParam<NodeItem>(L"ITEM");
+    std::unique_ptr<NodeType> NodeType::LF = createNone<NodeLF>(L"LF");
+    std::unique_ptr<NodeType> NodeType::NAMESPACE_ID = createParam<NodeNamespaceId>(L"NAMESPACE_ID");
+    std::unique_ptr<NodeType> NodeType::NORMAL_ID = createParam<NodeNormalId>(L"NORMAL_ID");
+    std::unique_ptr<NodeType> NodeType::PER_COMMAND = createNone<NodePerCommand>(L"PER_COMMAND");
+    std::unique_ptr<NodeType> NodeType::POSITION = createParam<NodePosition>(L"POSITION", false);
+    std::unique_ptr<NodeType> NodeType::RELATIVE_FLOAT = createParam<NodeRelativeFloat>(L"RELATIVE_FLOAT", false);
+    std::unique_ptr<NodeType> NodeType::REPEAT = createParam<NodeRepeat>(L"REPEAT", false,
                                                                          {NodeCreateStage::JSON_NODE, NodeCreateStage::COMMAND_PARAM_NODE});
-    std::unique_ptr<NodeType> NodeType::STRING = createParam<NodeString>("STRING");
-    std::unique_ptr<NodeType> NodeType::TARGET_SELECTOR = createParam<NodeTargetSelector>("TARGET_SELECTOR");
-    std::unique_ptr<NodeType> NodeType::TEXT = createParam<NodeText>("TEXT");
-    std::unique_ptr<NodeType> NodeType::RANGE = createParam<NodeRange>("RANGE");
-    std::unique_ptr<NodeType> NodeType::XP_INTEGER = createParam<NodeXpInteger>("XP_INTEGER");
-    std::unique_ptr<NodeType> NodeType::JSON = createParam<NodeJson>("JSON", true,
+    std::unique_ptr<NodeType> NodeType::STRING = createParam<NodeString>(L"STRING");
+    std::unique_ptr<NodeType> NodeType::TARGET_SELECTOR = createParam<NodeTargetSelector>(L"TARGET_SELECTOR");
+    std::unique_ptr<NodeType> NodeType::TEXT = createParam<NodeText>(L"TEXT");
+    std::unique_ptr<NodeType> NodeType::RANGE = createParam<NodeRange>(L"RANGE");
+    std::unique_ptr<NodeType> NodeType::XP_INTEGER = createParam<NodeXpInteger>(L"XP_INTEGER");
+    std::unique_ptr<NodeType> NodeType::JSON = createParam<NodeJson>(L"JSON", true,
                                                                      {NodeCreateStage::REPEAT_NODE, NodeCreateStage::COMMAND_PARAM_NODE});
-    std::unique_ptr<NodeType> NodeType::JSON_BOOLEAN = createJson<NodeJsonBoolean>("JSON_BOOLEAN");
-    std::unique_ptr<NodeType> NodeType::JSON_ELEMENT = createNone<NodeJsonElement>("JSON_ELEMENT");
-    std::unique_ptr<NodeType> NodeType::JSON_ENTRY = createNone<NodeJsonEntry>("JSON_ENTRY");
-    std::unique_ptr<NodeType> NodeType::JSON_FLOAT = createJson<NodeJsonFloat>("JSON_FLOAT");
-    std::unique_ptr<NodeType> NodeType::JSON_INTEGER = createJson<NodeJsonInteger>("JSON_INTEGER");
-    std::unique_ptr<NodeType> NodeType::JSON_LIST = createJson<NodeJsonList>("JSON_LIST");
-    std::unique_ptr<NodeType> NodeType::JSON_NULL = createJson<NodeJsonNull>("JSON_NULL");
-    std::unique_ptr<NodeType> NodeType::JSON_OBJECT = createJson<NodeJsonObject>("JSON_OBJECT");
-    std::unique_ptr<NodeType> NodeType::JSON_STRING = createJson<NodeJsonString>("JSON_STRING");
-    std::unique_ptr<NodeType> NodeType::AND = createNone<NodeAnd>("AND");
-    std::unique_ptr<NodeType> NodeType::ANY = createNone<NodeAny>("ANY");
-    std::unique_ptr<NodeType> NodeType::ENTRY = createNone<NodeEntry>("ENTRY");
-    std::unique_ptr<NodeType> NodeType::EQUAL_ENTRY = createNone<NodeEqualEntry>("EQUAL_ENTRY");
-    std::unique_ptr<NodeType> NodeType::LIST = createNone<NodeList>("LIST");
-    std::unique_ptr<NodeType> NodeType::OR = createNone<NodeOr>("OR");
-    std::unique_ptr<NodeType> NodeType::SINGLE_SYMBOL = createNone<NodeSingleSymbol>("SINGLE_SYMBOL");
+    std::unique_ptr<NodeType> NodeType::JSON_BOOLEAN = createJson<NodeJsonBoolean>(L"JSON_BOOLEAN");
+    std::unique_ptr<NodeType> NodeType::JSON_ELEMENT = createNone<NodeJsonElement>(L"JSON_ELEMENT");
+    std::unique_ptr<NodeType> NodeType::JSON_ENTRY = createNone<NodeJsonEntry>(L"JSON_ENTRY");
+    std::unique_ptr<NodeType> NodeType::JSON_FLOAT = createJson<NodeJsonFloat>(L"JSON_FLOAT");
+    std::unique_ptr<NodeType> NodeType::JSON_INTEGER = createJson<NodeJsonInteger>(L"JSON_INTEGER");
+    std::unique_ptr<NodeType> NodeType::JSON_LIST = createJson<NodeJsonList>(L"JSON_LIST");
+    std::unique_ptr<NodeType> NodeType::JSON_NULL = createJson<NodeJsonNull>(L"JSON_NULL");
+    std::unique_ptr<NodeType> NodeType::JSON_OBJECT = createJson<NodeJsonObject>(L"JSON_OBJECT");
+    std::unique_ptr<NodeType> NodeType::JSON_STRING = createJson<NodeJsonString>(L"JSON_STRING");
+    std::unique_ptr<NodeType> NodeType::AND = createNone<NodeAnd>(L"AND");
+    std::unique_ptr<NodeType> NodeType::ANY = createNone<NodeAny>(L"ANY");
+    std::unique_ptr<NodeType> NodeType::ENTRY = createNone<NodeEntry>(L"ENTRY");
+    std::unique_ptr<NodeType> NodeType::EQUAL_ENTRY = createNone<NodeEqualEntry>(L"EQUAL_ENTRY");
+    std::unique_ptr<NodeType> NodeType::LIST = createNone<NodeList>(L"LIST");
+    std::unique_ptr<NodeType> NodeType::OR = createNone<NodeOr>(L"OR");
+    std::unique_ptr<NodeType> NodeType::SINGLE_SYMBOL = createNone<NodeSingleSymbol>(L"SINGLE_SYMBOL");
 
     void registerNodeType(const std::unique_ptr<NodeType> &nodeType) {
         NodeType::NODE_TYPES.push_back(nodeType.get());

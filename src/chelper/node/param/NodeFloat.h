@@ -17,8 +17,8 @@ namespace CHelper::Node {
 
         NodeFloat() = default;
 
-        NodeFloat(const std::optional<std::string> &id,
-                  const std::optional<std::string> &description,
+        NodeFloat(const std::optional<std::wstring> &id,
+                  const std::optional<std::wstring> &description,
                   const std::optional<float> &min,
                   const std::optional<float> &max);
 

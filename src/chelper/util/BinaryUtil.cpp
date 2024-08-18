@@ -182,9 +182,13 @@ namespace CHelper {
 
     void BinaryWriter::encode(const std::string &t) {
         encodeSize(t.length());
-        if (HEDLEY_UNLIKELY(!t.empty())) {
-            ostream.write(t.data(), static_cast<std::streamsize>(t.length()));
-        }
+        ostream.write(reinterpret_cast<const char *>(t.data()), static_cast<std::streamsize>(t.length() * sizeof(char)));
+    }
+
+    void BinaryWriter::encode(const std::wstring &t) {
+        encode(wstring2string(t));
+        //        encodeSize(t.length());
+        //        ostream.write(reinterpret_cast<const char *>(t.data()), static_cast<std::streamsize>(t.length() * sizeof(wchar_t)));
     }
 #endif
 
@@ -348,12 +352,15 @@ namespace CHelper {
 
     void BinaryReader::decode(std::string &t) {
         size_t length = readSize();
-        if (HEDLEY_UNLIKELY(length == 0)) {
-            t.clear();
-            return;
-        }
         t.resize(length);
-        istream.read(&t[0], static_cast<std::streamsize>(length));
+        istream.read(reinterpret_cast<char *>(&t[0]), static_cast<std::streamsize>(length * sizeof(char)));
+    }
+
+    void BinaryReader::decode(std::wstring &t) {
+        t = string2wstring(read<std::string>());
+        //        size_t length = readSize();
+        //        t.resize(length);
+        //        istream.read(reinterpret_cast<char *>(&t[0]), static_cast<std::streamsize>(length * sizeof(wchar_t)));
     }
 
 }// namespace CHelper

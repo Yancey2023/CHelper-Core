@@ -18,11 +18,11 @@ namespace CHelper::Node {
     }
 
     void NodeJsonElement::init(const CPack &cpack) {
-        Profile::push("linking startNode \"{}\" to nodes", startNodeId);
+        Profile::push(L"linking startNode \"{}\" to nodes", startNodeId);
         for (const auto &item: nodes) {
             item->init(cpack);
         }
-        if (HEDLEY_LIKELY(startNodeId != "LF")) {
+        if (HEDLEY_LIKELY(startNodeId != L"LF")) {
             for (auto &node: nodes) {
                 if (HEDLEY_UNLIKELY(node->id == startNodeId)) {
                     start = node.get();
@@ -31,7 +31,7 @@ namespace CHelper::Node {
             }
         }
         if (HEDLEY_UNLIKELY(start == nullptr)) {
-            Profile::push("unknown node id -> {} (in node \"{}\")", startNodeId);
+            Profile::push(L"unknown node id -> {} (in node \"{}\")", startNodeId);
         }
         for (const auto &item: nodes) {
             if (HEDLEY_UNLIKELY(item->getNodeType() == NodeType::JSON_LIST.get())) {
@@ -51,28 +51,28 @@ namespace CHelper::Node {
 
     NodeBase *NodeJsonElement::getNodeJsonElement() {
         static std::unique_ptr<NodeBase> jsonString = std::make_unique<NodeJsonString>(
-                "JSON_STRING", "JSON字符串");
+                L"JSON_STRING", L"JSON字符串");
         static std::unique_ptr<NodeBase> jsonInteger = std::make_unique<NodeJsonInteger>(
-                "JSON_INTEGER", "JSON整数", std::nullopt, std::nullopt);
+                L"JSON_INTEGER", L"JSON整数", std::nullopt, std::nullopt);
         static std::unique_ptr<NodeBase> jsonFloat = std::make_unique<NodeJsonFloat>(
-                "JSON_FLOAT", "JSON小数", std::nullopt, std::nullopt);
+                L"JSON_FLOAT", L"JSON小数", std::nullopt, std::nullopt);
         static std::unique_ptr<NodeBase> jsonNull = std::make_unique<NodeJsonNull>(
-                "JSON_NULL", "JSON空值");
+                L"JSON_NULL", L"JSON空值");
         static std::unique_ptr<NodeBase> jsonBoolean = std::make_unique<NodeJsonBoolean>(
-                "JSON_BOOLEAN", "JSON布尔值", std::nullopt, std::nullopt);
+                L"JSON_BOOLEAN", L"JSON布尔值", std::nullopt, std::nullopt);
         static std::unique_ptr<NodeBase> jsonList = std::make_unique<NodeJsonList>(
-                "JSON_LIST", "JSON列表");
+                L"JSON_LIST", L"JSON列表");
         static std::unique_ptr<NodeBase> jsonObject = std::make_unique<NodeJsonObject>(
-                "JSON_OBJECT", "JSON对象");
+                L"JSON_OBJECT", L"JSON对象");
         static std::unique_ptr<NodeBase> jsonElement = std::make_unique<NodeOr>(
-                "JSON_ELEMENT", "JSON元素",
+                L"JSON_ELEMENT", L"JSON元素",
                 std::vector<const NodeBase *>{
                         jsonBoolean.get(), jsonFloat.get(),
                         jsonInteger.get(), jsonNull.get(),
                         jsonString.get(), jsonList.get(),
                         jsonObject.get()},
-                false, false,
-                true, "类型不匹配，当前内容不是有效的JSON元素");
+                false, false,true,
+                L"类型不匹配，当前内容不是有效的JSON元素");
         return jsonElement.get();
     }
 
@@ -83,9 +83,9 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(!t->id.has_value())) {
             throw std::runtime_error("dismiss json data id");
         }
-        Profile::push("loading nodes");
+        Profile::push(L"loading nodes");
         JsonUtil::decode(j, "node", t->nodes);
-        Profile::next("loading start nodes");
+        Profile::next(L"loading start nodes");
         JsonUtil::decode(j, "start", t->startNodeId);
         Profile::pop();
     }
@@ -99,7 +99,7 @@ namespace CHelper::Node {
 
     void from_binary(BinaryReader &binaryReader, std::unique_ptr<NodeJsonElement> &t) {
         t = std::make_unique<NodeJsonElement>();
-        t->id = std::make_optional<std::string>();
+        t->id = std::make_optional<std::wstring>();
         binaryReader.decode(t->id.value());
         binaryReader.decode(t->nodes);
         if (HEDLEY_UNLIKELY(!t->id.has_value())) {

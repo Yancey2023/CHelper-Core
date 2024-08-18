@@ -11,11 +11,20 @@
 #include <QStringListModel>
 #include <param_deliver.h>
 
+std::string wstring2string(const std::wstring &wstring) {
+    return QString::fromStdWString(wstring).toStdString();
+}
+
+std::wstring string2wstring(const std::string &string) {
+    return QString::fromStdString(string).toStdWString();
+}
+
 CHelperApp::CHelperApp(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::CHelperApp) {
     ui->setupUi(this);
-    QFile file(QString(":/assets/release-experiment-") + CPACK_VERSION_RELEASE + ".cpack");
+    setWindowIcon(QIcon(":/img/logo.webp"));
+    QFile file(QString(":/assets/release-experiment-").append(CPACK_VERSION_RELEASE).append(".cpack"));
     if (file.open(QIODevice::ReadOnly) && file.isReadable()) {
         std::istringstream iss(file.readAll().toStdString());
         core = CHelper::Core::create([&iss]() {
@@ -47,7 +56,7 @@ void CHelperApp::onTextChanged(const QString &string) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
-    core->onTextChanged(string.toStdString(), string.length());
+    core->onTextChanged(string.toStdWString(), string.length());
     if (HEDLEY_UNLIKELY(string == nullptr)) {
         ui->structureLabel->setText("欢迎使用CHelper");
         ui->descriptionLabel->setText("作者：Yancey");
@@ -59,7 +68,7 @@ void CHelperApp::onTextChanged(const QString &string) {
         std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
                   << std::endl;
         CHelper::ColoredString coloredString = core->getColors();
-        std::string stringBuilder;
+        std::wstring stringBuilder;
         for (int i = 0; i < coloredString.colors.size(); ++i) {
             uint32_t color = coloredString.colors[i];
             if (color == CHelper::NO_COLOR) {
@@ -70,18 +79,18 @@ void CHelperApp::onTextChanged(const QString &string) {
         stringBuilder.append("\n");
         fmt::print(stringBuilder);
 #endif
-        ui->structureLabel->setText(QString::fromStdString(core->getStructure()));
-        ui->descriptionLabel->setText(QString::fromStdString(core->getDescription()));
+        ui->structureLabel->setText(QString::fromStdWString(core->getStructure()));
+        ui->descriptionLabel->setText(QString::fromStdWString(core->getDescription()));
         std::vector<std::shared_ptr<CHelper::ErrorReason>> errorReasons = core->getErrorReasons();
         if (HEDLEY_UNLIKELY(errorReasons.empty())) {
             ui->errorReasonLabel->setText(nullptr);
         } else if (HEDLEY_UNLIKELY(errorReasons.size() == 1)) {
-            ui->errorReasonLabel->setText(QString::fromStdString(errorReasons[0]->errorReason));
+            ui->errorReasonLabel->setText(QString::fromStdWString(errorReasons[0]->errorReason));
         } else {
             QString result = "可能的错误原因：";
             int i = 0;
             for (const auto &item: errorReasons) {
-                result.append("\n").append(QString().setNum(++i)).append(". ").append(QString::fromStdString(item->errorReason));
+                result.append("\n").append(QString().setNum(++i)).append(". ").append(QString::fromStdWString(item->errorReason));
             }
             ui->errorReasonLabel->setText(result);
         }
@@ -89,9 +98,9 @@ void CHelperApp::onTextChanged(const QString &string) {
     std::vector<CHelper::Suggestion> *suggestions = core->getSuggestions();
     QStringList list;
     for (const CHelper::Suggestion &suggestion: *suggestions) {
-        list.append(QString::fromStdString(
+        list.append(QString::fromStdWString(
                 suggestion.content->description.has_value()
-                        ? suggestion.content->name + " - " + suggestion.content->description.value()
+                        ? suggestion.content->name + L" - " + suggestion.content->description.value()
                         : suggestion.content->name));
     }
     ((QStringListModel *) ui->listView->model())->setStringList(list);
@@ -102,10 +111,10 @@ void CHelperApp::onSuggestionClick(const QModelIndex &index) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
-    std::optional<std::pair<std::string, size_t>> result = core->onSuggestionClick(index.row());
+    std::optional<std::pair<std::wstring, size_t>> result = core->onSuggestionClick(index.row());
     if (HEDLEY_LIKELY(result.has_value())) {
-        ui->lineEdit->setText(QString::fromStdString(result.value().first));
-        ui->lineEdit->setSelection(result.value().second, result.value().second);
+        ui->lineEdit->setText(QString::fromStdWString(result.value().first));
+        ui->lineEdit->setSelection(static_cast<int>(result.value().second), static_cast<int>(result.value().second));
         ui->lineEdit->setFocus();
     } else {
         qDebug() << "suggestion index is out of range: " << index.row();

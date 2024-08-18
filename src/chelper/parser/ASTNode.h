@@ -17,7 +17,7 @@
 
 namespace CHelper {
 
-    static std::shared_ptr<NormalId> whitespaceId = NormalId::make(" ", "空格");
+    static std::shared_ptr<NormalId> whitespaceId = NormalId::make(L" ", L"空格");
 
     namespace Node {
 
@@ -101,16 +101,18 @@ namespace CHelper {
                                const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                                const ASTNodeId::ASTNodeId &id = ASTNodeId::NONE);
 
+        // TODO 为什么当时我用的是char*，而不是std::shared_ptr<ErrorReason>
+
         static ASTNode orNode(const Node::NodeBase *node,
                               std::vector<ASTNode> &&childNodes,
                               const TokensView *tokens,
-                              const char *errorReason = nullptr,
+                              const wchar_t *errorReason = nullptr,
                               const ASTNodeId::ASTNodeId &id = ASTNodeId::NONE);
 
         static ASTNode orNode(const Node::NodeBase *node,
                               std::vector<ASTNode> &&childNodes,
                               const TokensView &tokens,
-                              const char *errorReason = nullptr,
+                              const wchar_t *errorReason = nullptr,
                               const ASTNodeId::ASTNodeId &id = ASTNodeId::NONE);
 
         //是否有结构错误（不包括ID错误）
@@ -128,7 +130,7 @@ namespace CHelper {
             return childNodes[whichBest];
         }
 
-        [[nodiscard]] std::optional<std::string> collectDescription(size_t index) const;
+        [[nodiscard]] std::optional<std::wstring> collectDescription(size_t index) const;
 
         void collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
 
@@ -138,7 +140,7 @@ namespace CHelper {
 
         void collectColor(ColoredString &coloredString, const Theme &theme) const;
 
-        [[nodiscard]] std::string getDescription(size_t index) const;
+        [[nodiscard]] std::wstring getDescription(size_t index) const;
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getIdErrors() const;
 
@@ -146,7 +148,7 @@ namespace CHelper {
 
         [[nodiscard]] std::vector<Suggestion> getSuggestions(size_t index) const;
 
-        [[nodiscard]] std::string getStructure() const;
+        [[nodiscard]] std::wstring getStructure() const;
 
         [[nodiscard]] ColoredString getColors(const Theme &theme) const;
     };

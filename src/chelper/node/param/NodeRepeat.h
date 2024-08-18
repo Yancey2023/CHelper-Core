@@ -15,7 +15,7 @@ namespace CHelper::Node {
 
     class NodeRepeat : public NodeBase {
     public:
-        std::string key;
+        std::wstring key;
 
     private:
         const RepeatData *repeatData = nullptr;
@@ -30,7 +30,7 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
-        std::optional<std::string> collectDescription(const ASTNode *node, size_t index) const override;
+        std::optional<std::wstring> collectDescription(const ASTNode *node, size_t index) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

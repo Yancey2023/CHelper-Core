@@ -65,8 +65,14 @@
 // 字符串格式化
 #include <fmt/color.h>
 #include <fmt/format.h>
+#include <fmt/xchar.h>
 // 开启编译器特性
 #include <hedley.h>
+#if CHelperOnlyReadBinary != true
+// 两个方法需要下游自己实现
+std::string wstring2string(const std::wstring &wstring);
+std::wstring string2wstring(const std::string &string);
+#endif
 // 二进制读写
 #include "../../src/chelper/util/BinaryUtil.h"
 // 一些处理json和二进制序列化的宏

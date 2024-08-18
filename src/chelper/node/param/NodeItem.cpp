@@ -10,13 +10,13 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NodeBase> nodeCount = std::make_shared<NodeInteger>("ITEM_COUNT", "物品数量", 0, std::nullopt);
-    static std::shared_ptr<NodeBase> nodeAllData = std::make_shared<NodeInteger>("ITEM_DATA", "物品附加值", -1, std::nullopt);
+    static std::shared_ptr<NodeBase> nodeCount = std::make_shared<NodeInteger>(L"ITEM_COUNT", L"物品数量", 0, std::nullopt);
+    static std::shared_ptr<NodeBase> nodeAllData = std::make_shared<NodeInteger>(L"ITEM_DATA", L"物品附加值", -1, std::nullopt);
 
     void NodeItem::init(const CPack &cpack) {
         itemIds = cpack.itemIds;
-        nodeItemId = std::make_unique<NodeNamespaceId>("ITEM_ID", "物品ID", "items", true);
-        nodeComponent = std::make_unique<NodeJson>("ITEM_COMPONENT", "物品组件", "components");
+        nodeItemId = std::make_unique<NodeNamespaceId>(L"ITEM_ID", L"物品ID", L"items", true);
+        nodeComponent = std::make_unique<NodeJson>(L"ITEM_COMPONENT", L"物品组件", L"components");
         nodeItemId->init(cpack);
         nodeComponent->init(cpack);
     }
@@ -28,7 +28,7 @@ namespace CHelper::Node {
     ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         ASTNode itemId = nodeItemId->getASTNode(tokenReader, cpack);
-        size_t strHash = std::hash<std::string_view>{}(itemId.tokens.toString());
+        size_t strHash = std::hash<std::wstring_view>{}(itemId.tokens.toString());
         std::shared_ptr<NamespaceId> currentItem = nullptr;
         for (const auto &item: *itemIds) {
             if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash))) {
@@ -55,7 +55,7 @@ namespace CHelper::Node {
         return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
     }
 
-    std::optional<std::string> NodeItem::collectDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::wstring> NodeItem::collectDescription(const ASTNode *node, size_t index) const {
         return std::nullopt;
     }
 

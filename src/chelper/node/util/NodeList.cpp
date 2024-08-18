@@ -6,8 +6,8 @@
 
 namespace CHelper::Node {
 
-    NodeList::NodeList(const std::optional<std::string> &id,
-                       const std::optional<std::string> &description,
+    NodeList::NodeList(const std::optional<std::wstring> &id,
+                       const std::optional<std::wstring> &description,
                        NodeBase *nodeLeft,
                        NodeBase *nodeElement,
                        NodeBase *nodeSeparator,
@@ -18,12 +18,12 @@ namespace CHelper::Node {
           nodeSeparator(nodeSeparator),
           nodeRight(nodeRight),
           nodeElementOrRight(
-                  "ELEMENT_OR_RIGHT", "element or right",
+                  L"ELEMENT_OR_RIGHT", L"element or right",
                   std::vector<const NodeBase *>{
                           nodeElement, nodeRight},
                   false),
           nodeSeparatorOrRight(
-                  "SEPARATOR_OR_RIGHT", "separator or right",
+                  L"SEPARATOR_OR_RIGHT", L"separator or right",
                   std::vector<const NodeBase *>{
                           nodeSeparator, nodeRight},
                   false) {
@@ -65,7 +65,7 @@ namespace CHelper::Node {
             }
 #if CHelperDebug == true
             if (HEDLEY_UNLIKELY(startIndex == tokenReader.index)) {
-                CHELPER_WARN("NodeList has some error");
+                CHELPER_WARN(L"NodeList has some error");
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
 #endif
@@ -99,14 +99,14 @@ namespace CHelper::Node {
             }
 #if CHelperDebug == true
             if (HEDLEY_UNLIKELY(startIndex == tokenReader.index)) {
-                CHELPER_WARN("NodeList has some error");
+                CHELPER_WARN(L"NodeList has some error");
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
 #endif
         }
     }
 
-    std::optional<std::string> NodeList::collectDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::wstring> NodeList::collectDescription(const ASTNode *node, size_t index) const {
         return std::nullopt;
     }
 

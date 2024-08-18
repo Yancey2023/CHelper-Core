@@ -6,8 +6,8 @@
 
 namespace CHelper::Node {
 
-    NodeJsonNull::NodeJsonNull(const std::optional<std::string> &id,
-                               const std::optional<std::string> &description)
+    NodeJsonNull::NodeJsonNull(const std::optional<std::wstring> &id,
+                               const std::optional<std::wstring> &description)
         : NodeBase(id, description, false) {}
 
     NodeType *NodeJsonNull::getNodeType() const {
@@ -18,13 +18,13 @@ namespace CHelper::Node {
         tokenReader.push();
         auto result = tokenReader.readStringASTNode(this);
         tokenReader.pop();
-        std::string_view str = result.tokens.toString();
+        std::wstring_view str = result.tokens.toString();
         if (HEDLEY_LIKELY(str.empty())) {
             TokensView tokens = result.tokens;
-            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, "null参数为空"));
-        } else if (HEDLEY_LIKELY(str != "null")) {
+            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, L"null参数为空"));
+        } else if (HEDLEY_LIKELY(str != L"null")) {
             TokensView tokens = result.tokens;
-            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, "内容不是null -> " + std::string(str)));
+            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, L"内容不是null -> " + std::wstring(str)));
         }
         return result;
     }
@@ -32,11 +32,11 @@ namespace CHelper::Node {
     bool NodeJsonNull::collectSuggestions(const ASTNode *astNode,
                                           size_t index,
                                           std::vector<Suggestions> &suggestions) const {
-        std::string_view str = astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex());
-        if (HEDLEY_LIKELY(str.find("null") != std::string::npos)) {
+        std::wstring_view str = astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex());
+        if (HEDLEY_LIKELY(str.find(L"null") != std::wstring::npos)) {
             std::shared_ptr<NormalId> id;
-            id->name = "null";
-            id->description = "null参数";
+            id->name = L"null";
+            id->description = L"null参数";
             suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, false, id}));
         }
         return true;

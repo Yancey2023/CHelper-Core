@@ -9,8 +9,8 @@ namespace CHelper {
     void NormalId::buildHash() {
         if (HEDLEY_UNLIKELY(!isBuildHash)) {
             isBuildHash = true;
-            nameHash = std::hash<std::string>{}(name);
-            mHashCode = std::hash<std::string>{}(name);
+            nameHash = std::hash<std::wstring>{}(name);
+            mHashCode = std::hash<std::wstring>{}(name);
         }
     }
 
@@ -24,7 +24,7 @@ namespace CHelper {
         return mHashCode;
     }
 
-    std::shared_ptr<NormalId> NormalId::make(const std::string &name, const std::optional<std::string> &description) {
+    std::shared_ptr<NormalId> NormalId::make(const std::wstring &name, const std::optional<std::wstring> &description) {
         auto result = std::make_shared<NormalId>();
         result->name = name;
         result->description = description;

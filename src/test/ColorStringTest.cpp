@@ -6,10 +6,10 @@
 #include "param_deliver.h"
 #include <gtest/gtest.h>
 
-void testCommand(CHelper::Core *core, const std::string &command) {
+void testCommand(CHelper::Core *core, const std::wstring &command) {
     core->onTextChanged(command, command.length());
     CHelper::ColoredString coloredString = core->getColors();
-    std::string stringBuilder;
+    std::wstring stringBuilder;
     for (int i = 0; i < coloredString.colors.size(); ++i) {
         uint32_t color = coloredString.colors[i];
         if (color == CHelper::NO_COLOR) {
@@ -22,8 +22,8 @@ void testCommand(CHelper::Core *core, const std::string &command) {
 
 TEST(ColorStringTest, ColorString) {
     std::filesystem::path projectDir(PROJECT_DIR);
-    CHelper::Core *core = CHelper::Core::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
-    auto commands = std::vector<std::string>{
+    CHelper::Core *core = CHelper::Core::createByDirectory(projectDir / L"resources" / L"beta" / L"vanilla");
+    auto commands = std::vector<std::wstring>{
             R"(execute run clear )",
             R"(give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m)",
             R"(give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":[")",

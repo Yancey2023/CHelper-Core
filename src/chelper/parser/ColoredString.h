@@ -11,10 +11,10 @@ namespace CHelper {
 
     class ColoredString {
     public:
-        std::string_view str;
+        std::wstring_view str;
         std::vector<uint32_t> colors;
 
-        explicit ColoredString(const std::string_view &str);
+        explicit ColoredString(const std::wstring_view &str);
 
         void setColor(size_t index, uint32_t color);
 

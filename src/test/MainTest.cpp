@@ -16,7 +16,7 @@ namespace CHelper::Test {
      * 测试程序是否可以正常运行
      */
     [[maybe_unused]] void
-    test(const std::filesystem::path &cpackPath, const std::vector<std::string> &commands) {
+    test(const std::filesystem::path &cpackPath, const std::vector<std::wstring> &commands) {
         std::shared_ptr<Core> core;
         try {
             std::unique_ptr<CPack> cPack = CPack::createByDirectory(cpackPath);
@@ -71,8 +71,8 @@ namespace CHelper::Test {
 TEST(MainTest, ParseCommand) {
     std::filesystem::path projectDir(PROJECT_DIR);
     CHelper::Test::test(
-            projectDir / "resources" / "beta" / "vanilla",
-            std::vector<std::string>{
+            projectDir / L"resources" / L"beta" / L"vanilla",
+            std::vector<std::wstring>{
                     R"(execute run clear )",
                     R"(give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m)",
                     R"(give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":[")",

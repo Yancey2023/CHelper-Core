@@ -7,8 +7,8 @@
 
 namespace CHelper::Node {
 
-    NodePosition::NodePosition(const std::optional<std::string> &id,
-                               const std::optional<std::string> &description)
+    NodePosition::NodePosition(const std::optional<std::wstring> &id,
+                               const std::optional<std::wstring> &description)
         : NodeBase(id, description, false) {}
 
     NodeType *NodePosition::getNodeType() const {
@@ -51,7 +51,7 @@ namespace CHelper::Node {
     bool NodePosition::collectIdError(const ASTNode *astNode,
                                       std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (HEDLEY_UNLIKELY(!astNode->isError() && astNode->id == ASTNodeId::NODE_POSITION_POSITIONS_WITH_ERROR)) {
-            idErrorReasons.push_back(ErrorReason::logicError(astNode->tokens, "绝对坐标和相对坐标不能与局部坐标混用"));
+            idErrorReasons.push_back(ErrorReason::logicError(astNode->tokens, L"绝对坐标和相对坐标不能与局部坐标混用"));
             return true;
         } else {
             return false;
@@ -77,7 +77,7 @@ namespace CHelper::Node {
     void NodePosition::collectStructure(const ASTNode *astNode,
                                         StructureBuilder &structure,
                                         bool isMustHave) const {
-        structure.append(isMustHave, "位置");
+        structure.append(isMustHave, L"位置");
     }
 
     bool NodePosition::collectColor(const ASTNode *astNode,

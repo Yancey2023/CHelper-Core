@@ -17,8 +17,8 @@ namespace CHelper::Node {
 
         NodeJsonInteger() = default;
 
-        NodeJsonInteger(const std::optional<std::string> &id,
-                        const std::optional<std::string> &description,
+        NodeJsonInteger(const std::optional<std::wstring> &id,
+                        const std::optional<std::wstring> &description,
                         const std::optional<int32_t> &min,
                         const std::optional<int32_t> &max);
 

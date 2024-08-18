@@ -17,6 +17,30 @@ static TCHAR szTitle[] = "CHelper";
 
 static CHelper::Core *core = nullptr;
 
+std::string wstring2string(const std::wstring &wstring) {
+    UINT codePage = GetACP();
+    std::string result;
+    int len = WideCharToMultiByte(codePage, 0, wstring.c_str(), static_cast<int>(wstring.size()), nullptr, 0, nullptr, nullptr);
+    char *buffer = new char[len + 1];
+    WideCharToMultiByte(codePage, 0, wstring.c_str(), static_cast<int>(wstring.size()), buffer, len, nullptr, nullptr);
+    buffer[len] = '\0';
+    result.append(buffer);
+    delete[] buffer;
+    return result;
+}
+
+std::wstring string2wstring(const std::string &string) {
+    UINT codePage = GetACP();
+    std::wstring result;
+    int len = MultiByteToWideChar(codePage, 0, string.c_str(), static_cast<int>(string.size()), nullptr, 0);
+    auto *buffer = new TCHAR[len + 1];
+    MultiByteToWideChar(codePage, 0, string.c_str(), static_cast<int>(string.size()), reinterpret_cast<LPWSTR>(buffer), len);
+    buffer[len] = '\0';
+    result.append(reinterpret_cast<wchar_t *>(buffer));
+    delete[] buffer;
+    return result;
+}
+
 /**
  * @param hInstance 应用程序的当前实例的句柄
  * @param hPrevInstance 应用程序上一个实例的句柄
@@ -25,7 +49,7 @@ static CHelper::Core *core = nullptr;
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
     std::filesystem::path projectDir(PROJECT_DIR);
-    core = CHelper::Core::createByBinary(projectDir / "run" / (std::string("beta-experiment-") + CPACK_VERSION_BETA + ".cpack"));
+    core = CHelper::Core::createByBinary(projectDir / L"run" / (std::wstring(L"beta-experiment-") + CPACK_VERSION_BETA + L".cpack"));
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         exit(-1);
     }
@@ -87,11 +111,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
                                            0, 0, 0, 0, hWnd, (HMENU) ID_DESCRIPTION, nullptr, nullptr);
             hWndListBox = CreateWindow(WC_LISTBOX, "", WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | LBS_NOTIFY,
                                        0, 0, 0, 0, hWnd, (HMENU) ID_LIST_VIEW, nullptr, nullptr);
-            onTextChanged("");
+            onTextChanged(L"");
             break;
         case WM_COMMAND:
             if (LOWORD(wParam) == ID_INPUT && HIWORD(wParam) == EN_CHANGE) {
-                CHelper::Profile::push("get command from input");
+                CHelper::Profile::push(L"get command from input");
                 int length = GetWindowTextLength(hWndInput);
                 auto *buffer = new char[length + 1];
                 GetWindowText(hWndInput, buffer, length + 1);
@@ -99,14 +123,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
                 int wideCharLength = MultiByteToWideChar(codePage, 0, buffer, -1, nullptr, 0);
                 auto *wideCharBuffer = new wchar_t[wideCharLength + 1];
                 MultiByteToWideChar(codePage, 0, buffer, -1, wideCharBuffer, wideCharLength + 1);
-                int utf8Length = WideCharToMultiByte(CP_UTF8, 0, wideCharBuffer, -1, nullptr, 0, nullptr, nullptr);
-                char *utf8Buffer = new char[utf8Length + 1];
-                WideCharToMultiByte(CP_UTF8, 0, wideCharBuffer, -1, utf8Buffer, utf8Length + 1, nullptr, nullptr);
                 CHelper::Profile::pop();
-                onTextChanged(utf8Buffer);
+                onTextChanged(wideCharBuffer);
                 delete[] buffer;
                 delete[] wideCharBuffer;
-                delete[] utf8Buffer;
             }
             break;
         case WM_SIZE:
@@ -126,14 +146,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     return 0;
 }
 
-void onTextChanged(const std::string &command) {
+void onTextChanged(const std::wstring &command) {
     try {
         std::chrono::high_resolution_clock::time_point startParse, endParse,
                 startDescription, endDescription,
                 startErrorReasons, endErrorReasons,
                 startSuggestions, endSuggestions,
                 startStructure, endStructure;
-        CHelper::Profile::push("parsing command: {}", command);
+        CHelper::Profile::push(L"parsing command: {}", command);
         startParse = std::chrono::high_resolution_clock::now();
         core->onTextChanged(command, command.length());
         endParse = std::chrono::high_resolution_clock::now();
@@ -149,28 +169,20 @@ void onTextChanged(const std::string &command) {
         startStructure = std::chrono::high_resolution_clock::now();
         auto structure = core->getStructure();
         endStructure = std::chrono::high_resolution_clock::now();
-        CHelper::Profile::push("update description text view");
-        {
-            int len = MultiByteToWideChar(CP_UTF8, 0, structure.c_str(), -1, nullptr, 0);
-            auto *wstr = new wchar_t[len + 1];
-            MultiByteToWideChar(CP_UTF8, 0, structure.c_str(), -1, wstr, len);
-            SetWindowTextW(hWndDescription, wstr);
-            delete[] wstr;
-        }
-        CHelper::Profile::next("update suggestion list view");
+        CHelper::Profile::push(L"update description text view");
+        SetWindowTextW(hWndDescription, structure.c_str());
+        CHelper::Profile::next(L"update suggestion list view");
         SendMessage(hWndListBox, LB_RESETCONTENT, 0, 0);
         //由于添加全部结果非常耗时，这里只保留前30个
-        int i = 0;
-        for (const auto &suggestion: *suggestions) {
-            if (++i > 30) {
-                break;
+        {
+            int i = 0;
+            for (const auto &suggestion: *suggestions) {
+                if (++i > 30) {
+                    break;
+                }
+                auto content = std::wstring(suggestion.content->name).append(L" - ").append(suggestion.content->description.value_or(L""));
+                SendMessageW(hWndListBox, LB_ADDSTRING, 0, (LPARAM) content.c_str());
             }
-            auto content = std::string(suggestion.content->name).append(" - ").append(suggestion.content->description.value_or(""));
-            int len = MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, nullptr, 0);
-            auto *wstr = new wchar_t[len];
-            MultiByteToWideChar(CP_UTF8, 0, content.c_str(), -1, wstr, len);
-            SendMessageW(hWndListBox, LB_ADDSTRING, 0, (LPARAM) wstr);
-            delete[] wstr;
         }
         CHelper::Profile::pop();
         fmt::print("parse successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startParse).count()) + "ms", fg(fmt::color::medium_purple)));
@@ -183,19 +195,20 @@ void onTextChanged(const std::string &command) {
         std::cout << core->getAstNode()->toOptimizedJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
         std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
 #endif
-        std::cout << "structure: " + structure << std::endl;
-        std::cout << "description: " + description << std::endl;
+        fmt::print(L"structure: \n", structure);
+        fmt::print(L"description: \n", description);
         if (errorReasons.empty()) {
             std::cout << "no error" << std::endl;
         } else {
             std::cout << "error reasons:" << std::endl;
+            int i = 0;
             for (const auto &errorReason: errorReasons) {
-                fmt::print("{}. {} {}\n{}{}{}\n",
+                fmt::print(L"{}. {} {}\n{}{}{}\n",
                            ++i,
                            fmt::styled(command.substr(errorReason->start, errorReason->end - errorReason->start), fg(fmt::color::red)),
                            fmt::styled(errorReason->errorReason, fg(fmt::color::cornflower_blue)),
                            command.substr(0, errorReason->start),
-                           fmt::styled(errorReason->start == errorReason->end ? "~" : command.substr(errorReason->start, errorReason->end - errorReason->start), fg(fmt::color::red)),
+                           fmt::styled(errorReason->start == errorReason->end ? L"~" : command.substr(errorReason->start, errorReason->end - errorReason->start), fg(fmt::color::red)),
                            command.substr((errorReason->end)));
             }
         }
@@ -203,27 +216,27 @@ void onTextChanged(const std::string &command) {
             std::cout << "no suggestion" << std::endl;
         } else {
             std::cout << "suggestions: " << std::endl;
-            int j = 0;
+            int i = 0;
             for (const auto &item: *suggestions) {
-                if (j == 30) {
+                if (i == 30) {
                     std::cout << "..." << std::endl;
                     break;
                 }
-                fmt::print("{}. {} {}\n",
-                           ++j,
+                fmt::print(L"{}. {} {}\n",
+                           ++i,
                            fmt::styled(item.content->name, fg(fmt::color::lime_green)),
-                           fmt::styled(item.content->description.value_or(""), fg(fmt::color::cornflower_blue)));
-                std::string result = command.substr(0, item.start)
-                                             .append(item.content->name)
-                                             .append(command.substr(item.end));
-                std::string greenPart = item.content->name;
+                           fmt::styled(item.content->description.value_or(L""), fg(fmt::color::cornflower_blue)));
+                std::wstring result = command.substr(0, item.start)
+                                              .append(item.content->name)
+                                              .append(command.substr(item.end));
+                std::wstring greenPart = item.content->name;
                 if (item.end == command.length()) {
                     CHelper::ASTNode astNode = CHelper::Parser::parse(result, core->getCPack());
                     if (item.isAddWhitespace && astNode.isAllWhitespaceError()) {
-                        greenPart.push_back(' ');
+                        greenPart.push_back(L' ');
                     }
                 }
-                fmt::print("{}{}{}\n",
+                fmt::print(L"{}{}{}\n",
                            command.substr(0, item.start),
                            fmt::styled(greenPart, fg(fmt::color::lime_green)),
                            command.substr(item.end));

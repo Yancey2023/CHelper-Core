@@ -32,7 +32,7 @@ namespace CHelper {
 
         Suggestion(const TokensView &tokens, bool isAddWhitespace, const std::shared_ptr<NormalId> &content);
 
-        [[nodiscard]] std::pair<std::string, size_t> apply(Core *core, const std::string_view &before) const;
+        [[nodiscard]] std::pair<std::wstring, size_t> apply(Core *core, const std::wstring_view &before) const;
 
         [[nodiscard]] size_t hashCode() const {
             return mHashCode;

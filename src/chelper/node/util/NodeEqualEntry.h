@@ -11,13 +11,13 @@ namespace CHelper::Node {
 
     class EqualData {
     public:
-        std::string name;
-        std::optional<std::string> description;
+        std::wstring name;
+        std::optional<std::wstring> description;
         bool canUseNotEqual;
         const NodeBase *nodeValue;
 
-        EqualData(std::string name,
-                  const std::optional<std::string> &description,
+        EqualData(std::wstring name,
+                  const std::optional<std::wstring> &description,
                   bool canUseNotEqual,
                   const NodeBase *nodeValue);
     };
@@ -33,8 +33,8 @@ namespace CHelper::Node {
     public:
         NodeEqualEntry() = default;
 
-        NodeEqualEntry(const std::optional<std::string> &id,
-                       const std::optional<std::string> &description,
+        NodeEqualEntry(const std::optional<std::wstring> &id,
+                       const std::optional<std::wstring> &description,
                        std::vector<EqualData> equalDatas);
 
         [[nodiscard]] NodeType *getNodeType() const override;

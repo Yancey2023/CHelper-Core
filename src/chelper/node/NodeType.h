@@ -30,7 +30,7 @@ namespace CHelper {
         class NodeType {
         public:
             uint8_t id{};
-            std::string nodeName;
+            std::wstring nodeName;
 
 #if CHelperOnlyReadBinary != true
             std::function<void(const nlohmann::json &j, std::unique_ptr<NodeBase> &t)> decodeByJson;
@@ -42,10 +42,10 @@ namespace CHelper {
 #endif
 
 #if CHelperOnlyReadBinary == true
-            NodeType(std::string nodeName,
+            NodeType(std::wstring nodeName,
                      std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary);
 #else
-            NodeType(std::string nodeName,
+            NodeType(std::wstring nodeName,
                      std::function<void(const nlohmann::json &j, std::unique_ptr<NodeBase> &t)> decodeByJson,
                      std::function<void(nlohmann::json &j, const std::unique_ptr<NodeBase> &t)> encodeByJson,
                      std::function<void(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t)> decodeByBinary,

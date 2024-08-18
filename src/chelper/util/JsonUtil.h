@@ -17,7 +17,7 @@ namespace CHelper {
 
         class ConvertResult {
         public:
-            std::string result;
+            std::wstring result;
             std::shared_ptr<ErrorReason> errorReason;
             std::vector<size_t> indexConvertList;
             bool isComplete = false;
@@ -25,21 +25,21 @@ namespace CHelper {
             size_t convert(size_t index);
         };
 
-        std::string string2jsonString(const std::string &input);
+        std::wstring string2jsonString(const std::wstring &input);
 
-        ConvertResult jsonString2String(const std::string &input);
+        ConvertResult jsonString2String(const std::wstring &input);
 
 #if CHelperOnlyReadBinary != true
 
         template<class T>
-        void encode(nlohmann::json &json, const std::string &key, const T &data) {
-            json[key] = data;
+        void encode(nlohmann::json &json, const std::string &key, const T &t) {
+            json[key] = t;
         }
 
         template<class T>
-        void encode(nlohmann::json &json, const std::string &key, const std::optional<T> &data) {
-            if (HEDLEY_LIKELY(data.has_value())) {
-                json[key] = data.value();
+        void encode(nlohmann::json &json, const std::string &key, const std::optional<T> &t) {
+            if (HEDLEY_LIKELY(t.has_value())) {
+                json[key] = t.value();
             }
         }
 
@@ -54,6 +54,8 @@ namespace CHelper {
             if (HEDLEY_LIKELY(it != json.end())) {
                 t = std::make_optional<T>();
                 it->get_to(t.value());
+            } else {
+                t = std::nullopt;
             }
         }
 
@@ -93,6 +95,18 @@ namespace nlohmann {
 
         static void to_json(json &j, const std::shared_ptr<T> &t) {
             j = *t;
+        }
+    };
+
+    template<>
+    struct [[maybe_unused]] adl_serializer<std::wstring> {
+
+        static void from_json(const json &j, std::wstring &t) {
+            t = string2wstring(j);
+        }
+
+        static void to_json(json &j, const std::wstring &t) {
+            j = wstring2string(t);
         }
     };
 

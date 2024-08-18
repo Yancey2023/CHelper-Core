@@ -4,11 +4,58 @@
 
 #include "../chelper/Core.h"
 #include "pch.h"
+#include <codecvt>
+#include <locale>
+#include <unicode/ustring.h>
 
-std::string jstring2string(JNIEnv *env, jstring jStr) {
-    const char *cstr = env->GetStringUTFChars(jStr, nullptr);
-    std::string str = std::string(cstr);
-    env->ReleaseStringUTFChars(jStr, cstr);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
+// TODO these two method is slow and codecvt is deprecated in c++17
+
+static std::wstring_convert<std::codecvt_utf8<wchar_t>> utf8_conv;
+
+std::string wstring2string(const std::wstring &wstring) {
+    return utf8_conv.to_bytes(wstring);
+}
+
+std::wstring string2wstring(const std::string &string) {
+    //    icu::UnicodeString unicodeString;
+    //    u_strlen(string);
+    //    auto *dest = new UChar[string.size()];
+    //    UErrorCode errorCode;
+    //    int32_t destLength;
+    //    u_strFromUTF8(dest, 100, &destLength, string.c_str(), static_cast<int32_t>(string.length()), &errorCode);
+    //    std::wstring result = std::wstring(reinterpret_cast<wchar_t *>(dest));
+    //    delete[] dest;
+    //    return result;
+    return utf8_conv.from_bytes(string);
+}
+
+#pragma clang diagnostic pop
+
+std::wstring jstring2wstring(JNIEnv *env, jstring jString) {
+    if (HEDLEY_UNLIKELY(jString == nullptr)) {
+        return {};
+    }
+    jsize length = env->GetStringLength(jString);
+    const jchar *jchars = env->GetStringChars(jString, nullptr);
+    std::wstring str = std::wstring(reinterpret_cast<const wchar_t *>(jchars), length);
+    env->ReleaseStringChars(jString, jchars);
+    return str;
+}
+
+jstring wstring2jstring(JNIEnv *env, const std::wstring &wstring) {
+    return env->NewString(reinterpret_cast<const jchar *>(wstring.c_str()), static_cast<jsize>(wstring.size()));
+}
+
+std::string jstring2string(JNIEnv *env, jstring jString) {
+    if (HEDLEY_UNLIKELY(jString == nullptr)) {
+        return {};
+    }
+    const char *cstr = env->GetStringUTFChars(jString, nullptr);
+    std::string str = cstr;
+    env->ReleaseStringUTFChars(jString, cstr);
     return str;
 }
 
@@ -59,7 +106,7 @@ Java_yancey_chelper_core_CHelperCore_onTextChanged0(
     if (HEDLEY_UNLIKELY(core == nullptr || text == nullptr)) {
         return;
     }
-    core->onTextChanged(jstring2string(env, text), index);
+    core->onTextChanged(jstring2wstring(env, text), index);
 }
 
 extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
@@ -79,7 +126,7 @@ Java_yancey_chelper_core_CHelperCore_getDescription0(
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
-    return env->NewStringUTF(core->getDescription().c_str());
+    return wstring2jstring(env, core->getDescription());
 }
 
 extern "C" [[maybe_unused]] JNIEXPORT jobjectArray JNICALL
@@ -97,7 +144,7 @@ Java_yancey_chelper_core_CHelperCore_getErrorReasons0(
         jobject javaErrorReason = env->AllocObject(errorReasonClass);
         env->SetObjectField(javaErrorReason,
                             env->GetFieldID(errorReasonClass, "errorReason", "Ljava/lang/String;"),
-                            env->NewStringUTF(item.errorReason.c_str()));
+                            wstring2jstring(env, item.errorReason));
         env->SetIntField(javaErrorReason,
                          env->GetFieldID(errorReasonClass, "start", "I"),
                          static_cast<jint>(item.start));
@@ -135,11 +182,11 @@ Java_yancey_chelper_core_CHelperCore_getSuggestion0(
     jobject javaSuggestion = env->AllocObject(suggestionClass);
     env->SetObjectField(javaSuggestion,
                         env->GetFieldID(suggestionClass, "name", "Ljava/lang/String;"),
-                        env->NewStringUTF(suggestion.content->name.c_str()));
+                        wstring2jstring(env, suggestion.content->name));
     env->SetObjectField(javaSuggestion,
                         env->GetFieldID(suggestionClass, "description", "Ljava/lang/String;"),
                         suggestion.content->description.has_value()
-                                ? env->NewStringUTF(suggestion.content->description.value().c_str())
+                                ? wstring2jstring(env, suggestion.content->description.value())
                                 : nullptr);
     return javaSuggestion;
 }
@@ -162,11 +209,11 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions0(
         jobject javaSuggestion = env->AllocObject(suggestionClass);
         env->SetObjectField(javaSuggestion,
                             env->GetFieldID(suggestionClass, "name", "Ljava/lang/String;"),
-                            env->NewStringUTF(item.content->name.c_str()));
+                            wstring2jstring(env, item.content->name));
         env->SetObjectField(javaSuggestion,
                             env->GetFieldID(suggestionClass, "description", "Ljava/lang/String;"),
                             item.content->description.has_value()
-                                    ? env->NewStringUTF(item.content->description.value().c_str())
+                                    ? wstring2jstring(env, item.content->description.value())
                                     : nullptr);
         env->SetObjectArrayElement(result, i, javaSuggestion);
     }
@@ -180,7 +227,7 @@ Java_yancey_chelper_core_CHelperCore_getStructure0(
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
-    return env->NewStringUTF(core->getStructure().c_str());
+    return wstring2jstring(env, core->getStructure());
 }
 
 extern "C" [[maybe_unused]] JNIEXPORT jobject JNICALL
@@ -190,13 +237,13 @@ Java_yancey_chelper_core_CHelperCore_onSuggestionClick0(
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
-    std::optional<std::pair<std::string, size_t>> result = core->onSuggestionClick(which);
+    std::optional<std::pair<std::wstring, size_t>> result = core->onSuggestionClick(which);
     if (HEDLEY_LIKELY(result.has_value())) {
         jclass resultClass = env->FindClass("yancey/chelper/core/ClickSuggestionResult");
         jobject javaResult = env->AllocObject(resultClass);
         env->SetObjectField(javaResult,
                             env->GetFieldID(resultClass, "text", "Ljava/lang/String;"),
-                            env->NewStringUTF(result.value().first.c_str()));
+                            wstring2jstring(env, result.value().first));
         env->SetIntField(javaResult,
                          env->GetFieldID(resultClass, "selection", "I"),
                          static_cast<jint>(result.value().second));
@@ -287,5 +334,5 @@ Java_yancey_chelper_core_CHelperCore_old2new0(
     if (HEDLEY_UNLIKELY(old == nullptr)) {
         return old;
     }
-    return env->NewStringUTF(CHelper::Core::old2new(blockFixData0, jstring2string(env, old)).c_str());
+    return wstring2jstring(env, CHelper::Core::old2new(blockFixData0, jstring2wstring(env, old)));
 }
