@@ -5,7 +5,6 @@
 #include "CHelperWindows.h"
 #include "../chelper/Core.h"
 #include "../chelper/parser/Parser.h"
-#include "param_deliver.h"
 #include <AtlBase.h>
 #include <atlconv.h>
 #include <commctrl.h>
@@ -38,9 +37,8 @@ std::wstring string2wstring(const std::string &string) {
  * @param nCmdShow 控制窗口的显示方式
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
-    std::locale::global(std::locale("zh_cn.UTF-8"));
     std::filesystem::path projectDir(PROJECT_DIR);
-    core = CHelper::Core::createByBinary(projectDir / L"run" / L"cpack" / (std::wstring(L"beta-experiment-") + CPACK_VERSION_BETA + L".cpack"));
+    core = CHelper::Core::createByBinary(projectDir / "run" / "cpack" / (std::wstring(L"beta-experiment-") + CPACK_VERSION_BETA + L".cpack"));
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         exit(-1);
     }
@@ -106,7 +104,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
             break;
         case WM_COMMAND:
             if (LOWORD(wParam) == ID_INPUT && HIWORD(wParam) == EN_CHANGE) {
-                CHelper::Profile::push(L"get command from input");
+                CHelper::Profile::push("get command from input");
                 int length = GetWindowTextLength(hWndInput);
                 auto *buffer = new char[length + 1];
                 GetWindowText(hWndInput, buffer, length + 1);
@@ -144,7 +142,7 @@ void onTextChanged(const std::wstring &command) {
                 startErrorReasons, endErrorReasons,
                 startSuggestions, endSuggestions,
                 startStructure, endStructure;
-        CHelper::Profile::push(L"parsing command: {}", command);
+        CHelper::Profile::push("parsing command: {}", command);
         startParse = std::chrono::high_resolution_clock::now();
         core->onTextChanged(command, command.length());
         endParse = std::chrono::high_resolution_clock::now();
@@ -160,9 +158,9 @@ void onTextChanged(const std::wstring &command) {
         startStructure = std::chrono::high_resolution_clock::now();
         auto structure = core->getStructure();
         endStructure = std::chrono::high_resolution_clock::now();
-        CHelper::Profile::push(L"update description text view");
+        CHelper::Profile::push("update description text view");
         SetWindowTextW(hWndDescription, structure.c_str());
-        CHelper::Profile::next(L"update suggestion list view");
+        CHelper::Profile::next("update suggestion list view");
         SendMessage(hWndListBox, LB_RESETCONTENT, 0, 0);
         //由于添加全部结果非常耗时，这里只保留前30个
         {
@@ -184,40 +182,40 @@ void onTextChanged(const std::wstring &command) {
         fmt::print("get suggestions successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms", fg(fmt::color::medium_purple)));
         fmt::print("get structure successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms", fg(fmt::color::medium_purple)));
 #if CHelperTest == true
-        std::cout << core->getAstNode()->toOptimizedJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
-        std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
+        fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
+        fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
 #endif
-        fmt::print(L"structure: \n", structure);
-        fmt::print(L"description: \n", description);
+        fmt::print("structure: \n", wstring2string(structure));
+        fmt::print("description: \n", wstring2string(description));
         if (errorReasons.empty()) {
-            std::cout << "no error" << std::endl;
+            fmt::println("no error");
         } else {
-            std::cout << "error reasons:" << std::endl;
+            fmt::println("error reasons:");
             int i = 0;
             for (const auto &errorReason: errorReasons) {
-                fmt::print(L"{}. {} {}\n{}{}{}\n",
+                fmt::print("{}. {} {}\n{}{}{}\n",
                            ++i,
-                           fmt::styled(command.substr(errorReason->start, errorReason->end - errorReason->start), fg(fmt::color::red)),
-                           fmt::styled(errorReason->errorReason, fg(fmt::color::cornflower_blue)),
-                           command.substr(0, errorReason->start),
-                           fmt::styled(errorReason->start == errorReason->end ? L"~" : command.substr(errorReason->start, errorReason->end - errorReason->start), fg(fmt::color::red)),
-                           command.substr((errorReason->end)));
+                           fmt::styled(wstring2string(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
+                           fmt::styled(wstring2string(errorReason->errorReason), fg(fmt::color::cornflower_blue)),
+                           wstring2string(command.substr(0, errorReason->start)),
+                           fmt::styled(errorReason->start == errorReason->end ? "~" : wstring2string(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
+                           wstring2string(command.substr((errorReason->end))));
             }
         }
         if (suggestions->empty()) {
-            std::cout << "no suggestion" << std::endl;
+            fmt::println("no suggestion");
         } else {
-            std::cout << "suggestions: " << std::endl;
+            fmt::println("suggestions: ");
             int i = 0;
             for (const auto &item: *suggestions) {
                 if (i == 30) {
-                    std::cout << "..." << std::endl;
+                    fmt::println("...");
                     break;
                 }
-                fmt::print(L"{}. {} {}\n",
+                fmt::print("{}. {} {}\n",
                            ++i,
-                           fmt::styled(item.content->name, fg(fmt::color::lime_green)),
-                           fmt::styled(item.content->description.value_or(L""), fg(fmt::color::cornflower_blue)));
+                           fmt::styled(wstring2string(item.content->name), fg(fmt::color::lime_green)),
+                           fmt::styled(wstring2string(item.content->description.value_or(L"")), fg(fmt::color::cornflower_blue)));
                 std::wstring result = command.substr(0, item.start)
                                               .append(item.content->name)
                                               .append(command.substr(item.end));
@@ -228,13 +226,13 @@ void onTextChanged(const std::wstring &command) {
                         greenPart.push_back(L' ');
                     }
                 }
-                fmt::print(L"{}{}{}\n",
-                           command.substr(0, item.start),
-                           fmt::styled(greenPart, fg(fmt::color::lime_green)),
-                           command.substr(item.end));
+                fmt::print("{}{}{}\n",
+                           wstring2string(command.substr(0, item.start)),
+                           fmt::styled(wstring2string(greenPart), fg(fmt::color::lime_green)),
+                           wstring2string(command.substr(item.end)));
             }
         }
-        std::cout << std::endl;
+        fmt::print("\n");
     } catch (const std::exception &e) {
         CHELPER_ERROR("parse failed");
         CHelper::Profile::printAndClear(e);

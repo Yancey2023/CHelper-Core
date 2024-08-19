@@ -11,20 +11,35 @@
 
 namespace CHelper::Logger {
 
+    // 辅助函数，用于处理参数
+    template<typename T>
+    auto convertArg(T &&arg) -> decltype(std::forward<T>(arg)) {
+        return std::forward<T>(arg);
+    }
+
+    // 特化版本，用于处理 std::wstring
+    std::string convertArg(std::wstring &wstring);
+
+    // 特化版本，用于处理 std::wstring
+    std::string convertArg(const std::wstring &wstring);
+
+    // 特化版本，用于处理 wchar_t
+    std::string convertArg(const wchar_t *wstring);
+
 #if CHelperAndroid == true
     static const char *KEY = "CHelperNative";
 #endif
 
 #if CHelperLogger == DEBUG
     template<typename... T>
-    void debug(fmt::wformat_string<T...> fmt, T &&...args) {
+    void debug(fmt::format_string<T...> fmt, T &&...args) {
 #if CHelperAndroid == true
-        std::string content = wstring2string(fmt::format(fmt, args...));
+        std::string content = fmt::format(fmt, convertArg(args)...);
         __android_log_print(ANDROID_LOG_DEBUG, KEY, "%s", content.c_str());
 #else
-        fmt::print(L"{}\t{}\n",
-                   fmt::styled(L"[DEBUG]", fg(fmt::color::lime_green)),
-                   fmt::format(fmt, fmt::styled(args, fg(fmt::color::medium_purple))...));
+        fmt::print("{}\t{}\n",
+                   fmt::styled("[DEBUG]", fg(fmt::color::lime_green)),
+                   fmt::format(fmt, fmt::styled(convertArg(args), fg(fmt::color::medium_purple))...));
         fflush(stdout);
 #endif
     }
@@ -32,14 +47,14 @@ namespace CHelper::Logger {
 
 #if CHelperLogger == DEBUG || CHelperLogger == INFO
     template<typename... T>
-    void info(fmt::wformat_string<T...> fmt, T &&...args) {
+    void info(fmt::format_string<T...> fmt, T &&...args) {
 #if CHelperAndroid == true
-        std::string content = wstring2string(fmt::format(fmt, args...));
+        std::string content = fmt::format(fmt, convertArg(args)...);
         __android_log_print(ANDROID_LOG_INFO, KEY, "%s", content.c_str());
 #else
-        fmt::print(L"{}\t{}\n",
-                   fmt::styled(L"[INFO]", fg(fmt::color::cornflower_blue)),
-                   fmt::format(fmt, fmt::styled(args, fg(fmt::color::medium_purple))...));
+        fmt::print("{}\t{}\n",
+                   fmt::styled("[INFO]", fg(fmt::color::cornflower_blue)),
+                   fmt::format(fmt, fmt::styled(convertArg(args), fg(fmt::color::medium_purple))...));
         fflush(stdout);
 #endif
     }
@@ -47,29 +62,14 @@ namespace CHelper::Logger {
 
 #if CHelperLogger == DEBUG || CHelperLogger == INFO || CHelperLogger == WARN
     template<typename... T>
-    void warn(fmt::wformat_string<T...> fmt, T &&...args) {
+    void warn(fmt::format_string<T...> fmt, T &&...args) {
 #if CHelperAndroid == true
-        std::string content = wstring2string(fmt::format(fmt, args...));
+        std::string content = fmt::format(fmt, convertArg(args)...);
         __android_log_print(ANDROID_LOG_WARN, KEY, "%s", content.c_str());
 #else
-        fmt::print(L"{}\t{}\n",
-                   fmt::styled(L"[WARN]", fg(fmt::color::gold)),
-                   fmt::format(fmt, fmt::styled(args, fg(fmt::color::medium_purple))...));
-        fflush(stdout);
-#endif
-    }
-#endif
-
-#if CHelperLogger == DEBUG || CHelperLogger == INFO || CHelperLogger == WARN || CHelperLogger == ERROR
-    template<typename... T>
-    void error(fmt::wformat_string<T...> fmt, T &&...args) {
-#if CHelperAndroid == true
-        std::string content = wstring2string(fmt::format(fmt, args...));
-        __android_log_print(ANDROID_LOG_ERROR, KEY, "%s", content.c_str());
-#else
-        fmt::print(L"{}\t{}\n",
-                   fmt::styled(L"[ERROR]", fg(fmt::color::red)),
-                   fmt::format(fmt, fmt::styled(args, fg(fmt::color::medium_purple))...));
+        fmt::print("{}\t{}\n",
+                   fmt::styled("[WARN]", fg(fmt::color::gold)),
+                   fmt::format(fmt, fmt::styled(convertArg(args), fg(fmt::color::medium_purple))...));
         fflush(stdout);
 #endif
     }
@@ -79,12 +79,12 @@ namespace CHelper::Logger {
     template<typename... T>
     void error(fmt::format_string<T...> fmt, T &&...args) {
 #if CHelperAndroid == true
-        std::string content = fmt::format(fmt, args...);
+        std::string content = fmt::format(fmt, convertArg(args)...);
         __android_log_print(ANDROID_LOG_ERROR, KEY, "%s", content.c_str());
 #else
         fmt::print("{}\t{}\n",
                    fmt::styled("[ERROR]", fg(fmt::color::red)),
-                   fmt::format(fmt, fmt::styled(args, fg(fmt::color::medium_purple))...));
+                   fmt::format(fmt, fmt::styled(convertArg(args), fg(fmt::color::medium_purple))...));
         fflush(stdout);
 #endif
     }

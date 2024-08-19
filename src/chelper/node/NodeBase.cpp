@@ -33,7 +33,11 @@ namespace CHelper::Node {
         //当前节点
         DEBUG_GET_NODE_BEGIN(this)
         ASTNode currentASTNode = getASTNode(tokenReader, cpack);
-        DEBUG_GET_NODE_END(this)
+        if (__builtin_expect(!!(thisIndex != tokenReader.indexStack.size()), 0)) {
+            Profile::push("TokenReaderIndexError: {} {} {}", (this)->getNodeType()->nodeName, (this)->id.value_or(L""), (this)->description.value_or(L""));
+            throw std::runtime_error("TokenReaderIndexError");
+        }
+//        DEBUG_GET_NODE_END(this)
         if (HEDLEY_UNLIKELY(currentASTNode.isError() || nextNodes.empty())) {
             return ASTNode::andNode(this, {std::move(currentASTNode)}, tokenReader.collect(), nullptr, ASTNodeId::COMPOUND);
         }
@@ -97,7 +101,7 @@ namespace CHelper::Node {
     std::optional<std::wstring> NodeBase::collectDescription(const ASTNode *node, size_t index) const {
 #if CHelperDebug == true
         if (HEDLEY_UNLIKELY(!description.has_value())) {
-            CHELPER_WARN(L"description is null");
+            CHELPER_WARN("description is null");
         }
 #endif
         return description;
@@ -160,14 +164,14 @@ namespace CHelper::Node {
 
 #if CHelperOnlyReadBinary != true
     void from_json(const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
-        Profile::push(L"loading type");
+        Profile::push("loading type");
         auto type = JsonUtil::read<std::wstring>(j, "type");
         auto id = JsonUtil::read<std::optional<std::wstring>>(j, "id");
-        Profile::next(L"loading node {}", type);
+        Profile::next("loading node {}", type);
         if (HEDLEY_LIKELY(id.has_value())) {
-            Profile::next(L"loading node {} with id \"{}\"", type, id.value());
+            Profile::next("loading node {} with id \"{}\"", type, id.value());
         } else {
-            Profile::next(L"loading node {} without id", type);
+            Profile::next("loading node {} without id", type);
         }
         for (const auto &item: NodeType::NODE_TYPES) {
             if (HEDLEY_UNLIKELY(item->nodeName == type)) {
@@ -176,7 +180,7 @@ namespace CHelper::Node {
                 return;
             }
         }
-        Profile::next(L"unknown node type -> {}", type);
+        Profile::next("unknown node type -> {}", type);
         throw std::runtime_error("unknown node type");
     }
 

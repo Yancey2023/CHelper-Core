@@ -116,7 +116,7 @@ namespace CHelper::Lexer {
     LexerResult lex(const std::wstring &content) {
         StringReader stringReader(content);
 #if CHelperTest == true
-        Profile::push(L"start lex: {}", stringReader.content);
+        Profile::push("start lex: {}", stringReader.content);
 #endif
         std::vector<Token> tokenList = std::vector<Token>();
         while (true) {

@@ -21,8 +21,8 @@ namespace CHelper::Node {
                 return;
             }
         }
-        Profile::push(L"linking contents to {}", key);
-        Profile::push(L"failed to find json data in the cpack -> {}", key);
+        Profile::push("linking contents to {}", key);
+        Profile::push("failed to find json data in the cpack -> {}", key);
         throw std::runtime_error("failed to find json data");
     }
 

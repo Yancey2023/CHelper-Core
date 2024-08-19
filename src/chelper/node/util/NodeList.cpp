@@ -65,7 +65,7 @@ namespace CHelper::Node {
             }
 #if CHelperDebug == true
             if (HEDLEY_UNLIKELY(startIndex == tokenReader.index)) {
-                CHELPER_WARN(L"NodeList has some error");
+                CHELPER_WARN("NodeList has some error");
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
 #endif
@@ -99,7 +99,7 @@ namespace CHelper::Node {
             }
 #if CHelperDebug == true
             if (HEDLEY_UNLIKELY(startIndex == tokenReader.index)) {
-                CHELPER_WARN(L"NodeList has some error");
+                CHELPER_WARN("NodeList has some error");
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
 #endif

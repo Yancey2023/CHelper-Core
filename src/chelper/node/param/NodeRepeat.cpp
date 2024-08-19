@@ -15,8 +15,8 @@ namespace CHelper::Node {
             nodeElement = it->second.second;
             return;
         }
-        Profile::push(L"link repeat data {} to content", key);
-        Profile::push(L"fail to find repeat data by id {}", key);
+        Profile::push("link repeat data {} to content", key);
+        Profile::push("fail to find repeat data by id {}", key);
         throw std::runtime_error("fail to find repeat data");
     }
 

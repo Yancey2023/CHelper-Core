@@ -45,9 +45,9 @@ namespace CHelper::Node {
                 }
             }
             if (notFind) {
-                Profile::push(L"linking contents to {}", item);
-                Profile::push(L"failed to find node id -> {}", item);
-                Profile::push(L"unknown node id -> {} (in node \"{}\")", id.value_or(L"UNKNOWN"), item);
+                Profile::push("linking contents to {}", item);
+                Profile::push("failed to find node id -> {}", item);
+                Profile::push("unknown node id -> {} (in node \"{}\")", id.value_or(L"UNKNOWN"), item);
                 throw std::runtime_error("unknown node id");
             }
         }

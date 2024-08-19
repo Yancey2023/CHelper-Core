@@ -306,7 +306,7 @@ namespace CHelper {
         }
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
 #if CHelperTest == true
-            Profile::push(L"collect suggestions: " + node->getNodeType()->nodeName + " " + node->description.value_or(""));
+            Profile::push("collect suggestions: " + node->getNodeType()->nodeName + " " + node->description.value_or(""));
 #endif
             auto flag = node->collectSuggestions(this, index, suggestions);
 #if CHelperTest == true
@@ -341,7 +341,7 @@ namespace CHelper {
                 return;
             } else {
 #if CHelperTest == true
-                Profile::push(L"collect structure: {}", node->getNodeType()->nodeName + " " + node->description.value_or(""));
+                Profile::push("collect structure: {}", node->getNodeType()->nodeName + " " + node->description.value_or(""));
 #endif
                 node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ? nullptr : this, structure, isMustHave);
 #if CHelperTest == true
@@ -393,7 +393,7 @@ namespace CHelper {
         bool isNext = id == ASTNodeId::NEXT_NODE;
         if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
 #if CHelperTest == true
-            Profile::push(L"collect color: {}", node->getNodeType()->nodeName + " " + node->description.value_or(""));
+            Profile::push("collect color: {}", node->getNodeType()->nodeName + " " + node->description.value_or(""));
 #endif
             bool isDirty = node->collectColor(this, coloredString, theme);
 #if CHelperTest == true
@@ -419,7 +419,7 @@ namespace CHelper {
 
     std::wstring ASTNode::getDescription(size_t index) const {
 #if CHelperTest == true
-        Profile::push(L"start getting description: {}", std::wstring(tokens.toString()));
+        Profile::push("start getting description: {}", std::wstring(tokens.toString()));
 #endif
         auto result = collectDescription(index).value_or(L"未知");
 #if CHelperTest == true
@@ -448,7 +448,7 @@ namespace CHelper {
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getIdErrors() const {
         std::vector<std::shared_ptr<ErrorReason>> input;
 #if CHelperTest == true
-        Profile::push(L"start getting id error: " + std::wstring(tokens.toString()));
+        Profile::push("start getting id error: " + std::wstring(tokens.toString()));
 #endif
         collectIdErrors(input);
 #if CHelperTest == true
@@ -460,7 +460,7 @@ namespace CHelper {
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
         std::vector<std::shared_ptr<ErrorReason>> result = errorReasons;
 #if CHelperTest == true
-        Profile::push(L"start getting error reasons: {}", std::wstring(tokens.toString()));
+        Profile::push("start getting error reasons: {}", std::wstring(tokens.toString()));
 #endif
         collectIdErrors(result);
 #if CHelperTest == true
@@ -496,7 +496,7 @@ namespace CHelper {
     std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
         std::wstring_view str = tokens.toString();
 #if CHelperTest == true
-        Profile::push(L"start getting suggestions: {}", str);
+        Profile::push("start getting suggestions: {}", str);
 #endif
         std::vector<Suggestions> suggestions;
         if (HEDLEY_UNLIKELY(canAddWhitespace0(*this, index))) {
@@ -511,7 +511,7 @@ namespace CHelper {
 
     std::wstring ASTNode::getStructure() const {
 #if CHelperTest == true
-        Profile::push(L"start getting structure: {}", tokens.toString());
+        Profile::push("start getting structure: {}", tokens.toString());
 #endif
         StructureBuilder structureBuilder;
         collectStructure(structureBuilder, true);
@@ -527,7 +527,7 @@ namespace CHelper {
 
     ColoredString ASTNode::getColors(const Theme &theme) const {
 #if CHelperTest == true
-        Profile::push(L"start getting colors: {}", std::wstring(tokens.toString()));
+        Profile::push("start getting colors: {}", std::wstring(tokens.toString()));
 #endif
         ColoredString coloredString(tokens.lexerResult->content);
         collectColor(coloredString, theme);

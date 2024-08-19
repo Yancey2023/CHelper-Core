@@ -15,40 +15,40 @@ namespace CHelper {
 #if CHelperDebug == true
         size_t stackSize = Profile::stack.size();
 #endif
-        Profile::push(L"init codes");
+        Profile::push("init codes");
         Node::NodeType::init();
-        Profile::next(L"loading manifest");
-        JsonUtil::getJsonFromFile(path / L"manifest.json").get_to<Manifest>(manifest);
-        Profile::next(L"loading id data");
-        for (const auto &file: std::filesystem::recursive_directory_iterator(path / L"id")) {
-            Profile::next(LR"(loading id data in path "{}")", file.path().wstring());
+        Profile::next("loading manifest");
+        JsonUtil::getJsonFromFile(path / "manifest.json").get_to<Manifest>(manifest);
+        Profile::next("loading id data");
+        for (const auto &file: std::filesystem::recursive_directory_iterator(path / "id")) {
+            Profile::next(R"(loading id data in path "{}")", file.path().wstring());
             applyId(JsonUtil::getJsonFromFile(file));
         }
-        Profile::next(L"loading json data");
+        Profile::next("loading json data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::JSON_NODE;
-        for (const auto &file: std::filesystem::recursive_directory_iterator(path / L"json")) {
-            Profile::next(LR"(loading json data in path "{}")", file.path().wstring());
+        for (const auto &file: std::filesystem::recursive_directory_iterator(path / "json")) {
+            Profile::next(R"(loading json data in path "{}")", file.path().wstring());
             applyJson(JsonUtil::getJsonFromFile(file));
         }
-        Profile::next(L"loading repeat data");
+        Profile::next("loading repeat data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
-        for (const auto &file: std::filesystem::recursive_directory_iterator(path / L"repeat")) {
-            Profile::next(LR"(loading repeat data in path "{}")", file.path().wstring());
+        for (const auto &file: std::filesystem::recursive_directory_iterator(path / "repeat")) {
+            Profile::next(R"(loading repeat data in path "{}")", file.path().wstring());
             applyRepeat(JsonUtil::getJsonFromFile(file));
         }
-        Profile::next(L"loading commands");
+        Profile::next("loading commands");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
-        for (const auto &file: std::filesystem::recursive_directory_iterator(path / L"command")) {
-            Profile::next(LR"(loading command in path "{}")", file.path().wstring());
+        for (const auto &file: std::filesystem::recursive_directory_iterator(path / "command")) {
+            Profile::next(R"(loading command in path "{}")", file.path().wstring());
             applyCommand(JsonUtil::getJsonFromFile(file));
         }
-        Profile::next(L"init cpack");
+        Profile::next("init cpack");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
 #if CHelperDebug == true
         if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
-            CHELPER_WARN(L"error profile stack after loading cpack");
+            CHELPER_WARN("error profile stack after loading cpack");
         }
 #endif
     }
@@ -57,36 +57,36 @@ namespace CHelper {
 #if CHelperDebug == true
         size_t stackSize = Profile::stack.size();
 #endif
-        Profile::push(L"init codes");
+        Profile::push("init codes");
         Node::NodeType::init();
-        Profile::next(L"loading manifest");
+        Profile::next("loading manifest");
         j.at("manifest").get_to(manifest);
-        Profile::next(L"loading id data");
+        Profile::next("loading id data");
         for (const auto &item: j.at("id")) {
             applyId(item);
         }
-        Profile::next(L"loading json data");
+        Profile::next("loading json data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::JSON_NODE;
         for (const auto &item: j.at("json")) {
             applyJson(item);
         }
-        Profile::next(L"loading repeat data");
+        Profile::next("loading repeat data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
         for (const auto &item: j.at("repeat")) {
             applyRepeat(item);
         }
-        Profile::next(L"loading command data");
+        Profile::next("loading command data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
         for (const auto &item: j.at("command")) {
             applyCommand(item);
         }
-        Profile::next(L"init cpack");
+        Profile::next("init cpack");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
 #if CHelperDebug == true
         if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
-            CHELPER_WARN(L"error profile stack after loading cpack");
+            CHELPER_WARN("error profile stack after loading cpack");
         }
 #endif
     }
@@ -96,40 +96,40 @@ namespace CHelper {
 #if CHelperDebug == true
         size_t stackSize = Profile::stack.size();
 #endif
-        Profile::push(L"init node types");
+        Profile::push("init node types");
         Node::NodeType::init();
-        Profile::next(L"loading manifest");
+        Profile::next("loading manifest");
         binaryReader.decode(manifest);
-        Profile::next(L"loading normal id data");
+        Profile::next("loading normal id data");
         binaryReader.decode(normalIds);
-        Profile::next(L"loading namespace id data");
+        Profile::next("loading namespace id data");
         binaryReader.decode(namespaceIds);
-        Profile::next(L"loading item id data");
+        Profile::next("loading item id data");
         size_t itemIdSize = binaryReader.readSize();
         for (int i = 0; i < itemIdSize; ++i) {
             itemIds->push_back(binaryReader.read<std::shared_ptr<ItemId>>());
         }
-        Profile::next(L"loading block id data");
+        Profile::next("loading block id data");
         size_t blockIdSize = binaryReader.readSize();
         for (int i = 0; i < blockIdSize; ++i) {
             blockIds->push_back(binaryReader.read<std::shared_ptr<BlockId>>());
         }
-        Profile::next(L"loading json data");
+        Profile::next("loading json data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::JSON_NODE;
         binaryReader.decode(jsonNodes);
-        Profile::next(L"loading repeat data");
+        Profile::next("loading repeat data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
         binaryReader.decode(repeatNodeData);
-        Profile::next(L"loading command data");
+        Profile::next("loading command data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
         binaryReader.decode(commands);
-        Profile::next(L"init cpack");
+        Profile::next("init cpack");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
 #if CHelperDebug == true
         if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
-            CHELPER_WARN(L"error profile stack after loading cpack");
+            CHELPER_WARN("error profile stack after loading cpack");
         }
 #endif
     }
@@ -168,7 +168,7 @@ namespace CHelper {
                 itemIds->push_back(std::make_shared<ItemId>(item));
             }
         } else {
-            Profile::push(L"unknown id type -> {}", type);
+            Profile::push("unknown id type -> {}", type);
             throw std::runtime_error("unknown id type");
         }
     }
@@ -188,15 +188,15 @@ namespace CHelper {
 
     void CPack::afterApply() {
         // json nodes
-        Profile::push(L"init json nodes");
+        Profile::push("init json nodes");
         for (const auto &item: jsonNodes) {
             item->init(*this);
         }
         // repeat nodes
-        Profile::next(L"init repeat nodes");
+        Profile::next("init repeat nodes");
         for (const auto &item: repeatNodeData) {
             if (HEDLEY_UNLIKELY(item.repeatNodes.size() != item.isEnd.size())) {
-                Profile::push(L"checking repeat node: {}", item.id);
+                Profile::push("checking repeat node: {}", item.id);
                 throw std::runtime_error("fail to check repeat id because repeatNodes size not equal isEnd size");
             }
         }
@@ -243,30 +243,30 @@ namespace CHelper {
             }
         }
         for (const auto &item: *commands) {
-            Profile::next(LR"(init command: "{}")", StringUtil::join(L",", item->name));
+            Profile::next(R"(init command: "{}")", StringUtil::join(L",", item->name));
             item->init(*this);
         }
-        Profile::next(L"sort command nodes");
+        Profile::next("sort command nodes");
         std::sort(commands->begin(), commands->end(),
                   [](const auto &item1, const auto &item2) {
                       return ((Node::NodePerCommand *) item1.get())->name[0] <
                              ((Node::NodePerCommand *) item2.get())->name[0];
                   });
-        Profile::next(L"create main node");
+        Profile::next("create main node");
         mainNode = std::make_unique<Node::NodeCommand>(L"MAIN_NODE", L"欢迎使用命令助手(作者：Yancey)", commands.get());
         Profile::pop();
     }
 
 #if CHelperOnlyReadBinary != true
     std::unique_ptr<CPack> CPack::createByDirectory(const std::filesystem::path &path) {
-        Profile::push(L"start load CPack by DIRECTORY: {}", path.wstring());
+        Profile::push("start load CPack by DIRECTORY: {}", path.wstring());
         std::unique_ptr<CPack> cpack = std::make_unique<CPack>(path);
         Profile::pop();
         return cpack;
     }
 
     std::unique_ptr<CPack> CPack::createByJson(const nlohmann::json &j) {
-        Profile::push(L"start load CPack by JSON");
+        Profile::push("start load CPack by JSON");
         std::unique_ptr<CPack> cpack = std::make_unique<CPack>(j);
         Profile::pop();
         return cpack;
@@ -274,7 +274,7 @@ namespace CHelper {
 #endif
 
     std::unique_ptr<CPack> CPack::createByBinary(BinaryReader &binaryReader) {
-        Profile::push(L"start load CPack by binary");
+        Profile::push("start load CPack by binary");
         std::unique_ptr<CPack> cpack = std::make_unique<CPack>(binaryReader);
         Profile::pop();
         return cpack;
@@ -282,42 +282,42 @@ namespace CHelper {
 
 #if CHelperOnlyReadBinary != true
     void CPack::writeJsonToDirectory(const std::filesystem::path &path) const {
-        JsonUtil::writeJsonToFile(path / L"manifest.json", manifest);
+        JsonUtil::writeJsonToFile(path / "manifest.json", manifest);
         for (const auto &item: normalIds) {
             nlohmann::json j;
             j["id"] = item.first;
             j["type"] = "normal";
             j["content"] = item.second;
-            JsonUtil::writeJsonToFile(path / L"id" / (item.first + L".json"), j);
+            JsonUtil::writeJsonToFile(path / "id" / (item.first + L".json"), j);
         }
         for (const auto &item: namespaceIds) {
             nlohmann::json j;
             j["id"] = item.first;
             j["type"] = "namespace";
             j["content"] = item.second;
-            JsonUtil::writeJsonToFile(path / L"id" / (item.first + L".json"), j);
+            JsonUtil::writeJsonToFile(path / "id" / (item.first + L".json"), j);
         }
         {
             nlohmann::json j;
             j["type"] = "item";
             j["items"] = *itemIds;
-            JsonUtil::writeJsonToFile(path / L"id" / L"items.json", j);
+            JsonUtil::writeJsonToFile(path / "id" / "items.json", j);
         }
         {
             nlohmann::json j;
             j["type"] = "block";
             j["blocks"] = *blockIds;
-            JsonUtil::writeJsonToFile(path / L"id" / L"blocks.json", j);
+            JsonUtil::writeJsonToFile(path / "id" / "blocks.json", j);
         }
         for (const auto &item: jsonNodes) {
-            JsonUtil::writeJsonToFile(path / L"json" / (item->id.value() + L".json"), item);
+            JsonUtil::writeJsonToFile(path / "json" / (item->id.value() + L".json"), item);
         }
         for (const auto &item: repeatNodeData) {
-            JsonUtil::writeJsonToFile(path / L"repeat" / (item.id + L".json"), item);
+            JsonUtil::writeJsonToFile(path / "repeat" / (item.id + L".json"), item);
         }
         for (const auto &item: *commands) {
             JsonUtil::writeJsonToFile(
-                    path / L"command" / (((Node::NodePerCommand *) item.get())->name[0] + L".json"),
+                    path / "command" / (((Node::NodePerCommand *) item.get())->name[0] + L".json"),
                     item);
         }
     }
@@ -379,7 +379,7 @@ namespace CHelper {
 
     void CPack::writeBinToFile(const std::filesystem::path &path) const {
         std::filesystem::create_directories(path.parent_path());
-        Profile::push(L"writing binary cpack to file: {}", path.wstring());
+        Profile::push("writing binary cpack to file: {}", path.wstring());
         std::ofstream f(path, std::ios::binary);
         BinaryWriter binaryWriter(true, f);
 
@@ -416,7 +416,7 @@ namespace CHelper {
         auto it = normalIds.find(key);
         if (HEDLEY_UNLIKELY(it == normalIds.end())) {
 #if CHelperDebug == true
-            CHELPER_WARN(L"fail to find normal ids by key: \"" + key + L'\"');
+            CHELPER_WARN(R"(fail to find normal ids by key: "{}")", key);
 #endif
             return nullptr;
         }
@@ -433,7 +433,7 @@ namespace CHelper {
         auto it = namespaceIds.find(key);
         if (HEDLEY_UNLIKELY(it == namespaceIds.end())) {
 #if CHelperDebug == true
-            CHELPER_WARN(L"fail to find namespace ids by key: \"" + key + L'\"');
+            CHELPER_WARN(R"(fail to find namespace ids by key: "{}")", key);
 #endif
             return nullptr;
         }

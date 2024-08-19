@@ -6,7 +6,6 @@
 
 #include "../chelper/Core.h"
 #include "../chelper/parser/Parser.h"
-#include "param_deliver.h"
 #include <codecvt>
 #include <locale>
 
@@ -56,7 +55,7 @@ namespace CHelper::Test {
                 core->getSuggestions();
                 core->getStructure();
             } catch (const std::exception &e) {
-                CHELPER_INFO(L"parse command: {}", command);
+                CHELPER_INFO("parse command: {}", command);
                 CHelper::Profile::printAndClear(e);
                 flag = true;
             }
@@ -69,7 +68,7 @@ namespace CHelper::Test {
     void writeBson(const std::filesystem::path &input, const std::filesystem::path &output) {
         try {
             auto core = Core::createByDirectory(input);
-            std::cout << std::endl;
+            fmt::print("\n");
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
@@ -77,10 +76,10 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeBsonToFile(output);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO(L"write successfully({})", std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
-            std::cout << std::endl;
+            CHELPER_INFO("write successfully({})", std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
+            fmt::print("\n");
             [[maybe_unused]] auto core2 = Core::createByBson(output);
-            std::cout << std::endl;
+            fmt::print("\n");
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             throw e;
@@ -90,10 +89,9 @@ namespace CHelper::Test {
 }// namespace CHelper::Test
 
 TEST(MainTest, ParseCommand) {
-    std::locale::global(std::locale("zh_cn.UTF-8"));
     std::filesystem::path projectDir(PROJECT_DIR);
     CHelper::Test::test(
-            projectDir / L"resources" / L"beta" / L"vanilla",
+            projectDir / "resources" / "beta" / "vanilla",
             std::vector<std::wstring>{
                     LR"(execute run clear )",
                     LR"(give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m)",

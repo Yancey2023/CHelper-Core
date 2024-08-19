@@ -63,7 +63,7 @@ namespace CHelper::Node {
 #if CHelperOnlyReadBinary != true
                 [nodeName, isMustAfterWhiteSpace, nodeCreateStage](const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
                     if (std::find(nodeCreateStage.begin(), nodeCreateStage.end(), NodeType::currentCreateStage) == nodeCreateStage.end()) {
-                        Profile::push(L"unknown node type -> {}", nodeName);
+                        Profile::push("unknown node type -> {}", nodeName);
                         throw std::runtime_error("unknown node type");
                     }
                     t = std::make_unique<T>();
@@ -78,7 +78,7 @@ namespace CHelper::Node {
 #endif
                 [nodeName, isMustAfterWhiteSpace, nodeCreateStage](BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
                     if (std::find(nodeCreateStage.begin(), nodeCreateStage.end(), NodeType::currentCreateStage) == nodeCreateStage.end()) {
-                        Profile::push(L"unknown node type -> {}", nodeName);
+                        Profile::push("unknown node type -> {}", nodeName);
                         throw std::runtime_error("unknown node type");
                     }
                     t = std::make_unique<T>();
@@ -107,7 +107,7 @@ namespace CHelper::Node {
                 nodeName,
 #if CHelperOnlyReadBinary != true
                 [nodeName](const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
-                    Profile::push(L"unknown node type -> {}", nodeName);
+                    Profile::push("unknown node type -> {}", nodeName);
                     throw std::runtime_error("unknown node type");
                 },
                 [](nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {
@@ -115,7 +115,7 @@ namespace CHelper::Node {
                 },
 #endif
                 [nodeName](BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
-                    Profile::push(L"unknown node type -> {}", nodeName);
+                    Profile::push("unknown node type -> {}", nodeName);
                     throw std::runtime_error("unknown node type");
                 }
 #if CHelperOnlyReadBinary != true

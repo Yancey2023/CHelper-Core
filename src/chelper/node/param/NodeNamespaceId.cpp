@@ -23,8 +23,8 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(customContents == nullptr)) {
             if (HEDLEY_UNLIKELY(key.has_value())) {
-                Profile::push(L"linking contents to {}", key.value());
-                Profile::push(L"failed to find namespace id in the cpack -> {}", key.value());
+                Profile::push("linking contents to {}", key.value());
+                Profile::push("failed to find namespace id in the cpack -> {}", key.value());
                 throw std::runtime_error("failed to find namespace id");
             } else {
                 throw std::runtime_error("missing content");

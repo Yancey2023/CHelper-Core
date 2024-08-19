@@ -173,7 +173,7 @@ namespace CHelper::JsonUtil {
     }
 
     nlohmann::json getJsonFromFile(const std::filesystem::path &path) {
-        Profile::push(L"reading and parsing json in file: {}", path.wstring());
+        Profile::push("reading and parsing json in file: {}", path.wstring());
         std::ifstream f(path);
         nlohmann::json j = nlohmann::json::parse(f);
         f.close();
@@ -182,7 +182,7 @@ namespace CHelper::JsonUtil {
     }
 
     nlohmann::json getBsonFromFile(const std::filesystem::path &path) {
-        Profile::push(L"reading and parsing bjdata in file: {}", path.wstring());
+        Profile::push("reading and parsing bjdata in file: {}", path.wstring());
         std::ifstream f(path, std::ios::binary);
         nlohmann::json j = nlohmann::json::from_bjdata(f);
         f.close();
@@ -192,7 +192,7 @@ namespace CHelper::JsonUtil {
 
     void writeJsonToFile(const std::filesystem::path &path, const nlohmann::json &j) {
         std::filesystem::create_directories(path.parent_path());
-        Profile::push(L"writing json in file: {}", path.wstring());
+        Profile::push("writing json in file: {}", path.wstring());
         std::ofstream f(path);
         f << j;
         f.close();
@@ -201,7 +201,7 @@ namespace CHelper::JsonUtil {
 
     void writeBsonToFile(const std::filesystem::path &path, const nlohmann::json &j) {
         std::filesystem::create_directories(path.parent_path());
-        Profile::push(L"writing bjdata in file: {}", path.wstring());
+        Profile::push("writing bjdata in file: {}", path.wstring());
         std::ofstream f(path, std::ios::binary);
         nlohmann::json::to_bjdata(j, f);
         f.close();

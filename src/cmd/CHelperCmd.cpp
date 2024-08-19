@@ -4,17 +4,15 @@
 
 #include "CHelperCmd.h"
 #include "../chelper/Core.h"
-#include "param_deliver.h"
 #include <codecvt>
 #include <locale>
 
 int main() {
-    std::locale::global(std::locale("zh_cn.UTF-8"));
     //    testDir();
     //    testBin();
-    outputFile(CHelper::Test::writeSingleJson, L"json");
-    outputFile(CHelper::Test::writeBson, L"bson");
-    outputFile(CHelper::Test::writeBinary, L"cpack");
+    outputFile(CHelper::Test::writeSingleJson, "json");
+    outputFile(CHelper::Test::writeBson, "bson");
+    outputFile(CHelper::Test::writeBinary, "cpack");
     outputOld2New();
     return 0;
 }
@@ -42,53 +40,53 @@ std::wstring string2wstring(const std::string &string) {
 
 [[maybe_unused]] void testDir() {
     std::filesystem::path projectDir(PROJECT_DIR);
-    CHelper::Test::testDir(projectDir / L"resources" / L"beta" / L"vanilla",
-                           projectDir / L"test" / L"test.txt",
+    CHelper::Test::testDir(projectDir / "resources" / "beta" / "vanilla",
+                           projectDir / "test" / "test.txt",
                            true);
-    //    CHelper::Test::testDir(projectDir / L"resources" / L"beta" / L"vanilla",
+    //    CHelper::Test::testDir(projectDir / "resources" / "beta" / "vanilla",
     //                           std::vector<std::wstring>{"execute run clear "}, false);
 }
 
 [[maybe_unused]] void testBin() {
     std::filesystem::path projectDir(PROJECT_DIR);
-    CHelper::Test::testBin(projectDir / L"run" / (std::wstring(L"beta-experiment-") + CPACK_VERSION_BETA + L".cpack"),
-                           projectDir / L"test" / L"test.txt",
+    CHelper::Test::testBin(projectDir / "run" / (std::string("beta-experiment-") + CPACK_VERSION_BETA + ".cpack"),
+                           projectDir / "test" / "test.txt",
                            true);
 }
 
 [[maybe_unused]] void outputFile(
         const std::filesystem::path &projectDir,
         void function(const std::filesystem::path &input, const std::filesystem::path &output),
-        const std::wstring &branch1,
-        const std::wstring &branch2,
-        const std::wstring &version,
-        const std::wstring &fileType) {
-    std::wstring fileName = branch1 + L'-' + branch2 + L'-' + version + L'.' + fileType;
-    CHELPER_INFO(L"----- start output {} -----", fileName);
-    function(projectDir / L"resources" / branch1 / branch2,
-             projectDir / L"run" / fileType / fileName);
+        const std::string &branch1,
+        const std::string &branch2,
+        const std::string &version,
+        const std::string &fileType) {
+    std::string fileName = branch1 + '-' + branch2 + '-' + version + '.' + fileType;
+    CHELPER_INFO("----- start output {} -----", fileName);
+    function(projectDir / "resources" / branch1 / branch2,
+             projectDir / "run" / fileType / fileName);
 }
 
 [[maybe_unused]] void outputFile(
         void function(const std::filesystem::path &input, const std::filesystem::path &output),
-        const std::wstring &fileType) {
+        const std::string &fileType) {
     std::filesystem::path projectDir(PROJECT_DIR);
     // release
-    outputFile(projectDir, function, L"release", L"vanilla", CPACK_VERSION_RELEASE, fileType);
-    outputFile(projectDir, function, L"release", L"experiment", CPACK_VERSION_RELEASE, fileType);
+    outputFile(projectDir, function, "release", "vanilla", CPACK_VERSION_RELEASE, fileType);
+    outputFile(projectDir, function, "release", "experiment", CPACK_VERSION_RELEASE, fileType);
     // beta
-    outputFile(projectDir, function, L"beta", L"vanilla", CPACK_VERSION_BETA, fileType);
-    outputFile(projectDir, function, L"beta", L"experiment", CPACK_VERSION_BETA, fileType);
+    outputFile(projectDir, function, "beta", "vanilla", CPACK_VERSION_BETA, fileType);
+    outputFile(projectDir, function, "beta", "experiment", CPACK_VERSION_BETA, fileType);
     // netease
-    outputFile(projectDir, function, L"netease", L"vanilla", CPACK_VERSION_NETEASE, fileType);
-    outputFile(projectDir, function, L"netease", L"experiment", CPACK_VERSION_NETEASE, fileType);
+    outputFile(projectDir, function, "netease", "vanilla", CPACK_VERSION_NETEASE, fileType);
+    outputFile(projectDir, function, "netease", "experiment", CPACK_VERSION_NETEASE, fileType);
 }
 
 void outputOld2New() {
     // old2new
     std::filesystem::path projectDir(PROJECT_DIR);
-    std::filesystem::path input = projectDir / L"resources" / L"old2new" / L"blockFixData.json";
-    std::filesystem::path output = projectDir / L"run" / L"old2new" / L"old2new.dat";
+    std::filesystem::path input = projectDir / "resources" / "old2new" / "blockFixData.json";
+    std::filesystem::path output = projectDir / "run" / "old2new" / "old2new.dat";
     CHelper::Old2New::BlockFixData blockFixData = CHelper::Old2New::blockFixDataFromJson(CHelper::JsonUtil::getJsonFromFile(input));
     std::filesystem::create_directories(output.parent_path());
     std::ofstream f(output, std::ios::binary);
@@ -165,7 +163,7 @@ namespace CHelper::Test {
         Core *core;
         try {
             core = Core::createByDirectory(cpackPath);
-            std::cout << std::endl;
+            fmt::print("\n");
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
@@ -184,7 +182,7 @@ namespace CHelper::Test {
         Core *core;
         try {
             core = Core::createByBinary(cpackPath);
-            std::cout << std::endl;
+            fmt::print("\n");
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
@@ -234,40 +232,40 @@ namespace CHelper::Test {
                     fmt::print("get structure successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms", fg(fmt::color::medium_purple)));
                 }
 #if CHelperTest == true
-                std::cout << core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
-                std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace) << std::endl;
+                fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
+                fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
 #endif
-                fmt::print(L"structure: \n", structure);
-                fmt::print(L"description: \n", description);
+                fmt::print("structure: \n", wstring2string(structure));
+                fmt::print("description: \n", wstring2string(description));
                 if (errorReasons.empty()) {
-                    std::cout << "no error" << std::endl;
+                    fmt::println("no error");
                 } else {
-                    std::cout << "error reasons:" << std::endl;
+                    fmt::println("error reasons:");
                     int i = 0;
                     for (const auto &errorReason: errorReasons) {
-                        fmt::print(L"{}. {} {}\n{}{}{}\n",
+                        fmt::print("{}. {} {}\n{}{}{}\n",
                                    ++i,
-                                   fmt::styled(command.substr(errorReason->start, errorReason->end - errorReason->start), fg(fmt::color::red)),
-                                   fmt::styled(errorReason->errorReason, fg(fmt::color::cornflower_blue)),
-                                   command.substr(0, errorReason->start),
-                                   fmt::styled(errorReason->start == errorReason->end ? L"~" : command.substr(errorReason->start, errorReason->end - errorReason->start), fg(fmt::color::red)),
-                                   command.substr((errorReason->end)));
+                                   fmt::styled(wstring2string(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
+                                   fmt::styled(wstring2string(errorReason->errorReason), fg(fmt::color::cornflower_blue)),
+                                   wstring2string(command.substr(0, errorReason->start)),
+                                   fmt::styled(errorReason->start == errorReason->end ? "~" : wstring2string(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
+                                   wstring2string(command.substr((errorReason->end))));
                     }
                 }
                 if (suggestions->empty()) {
-                    std::cout << "no suggestion" << std::endl;
+                    fmt::println("no suggestion");
                 } else {
-                    std::cout << "suggestions: " << std::endl;
+                    fmt::println("suggestions: ");
                     int i = 0;
                     for (const auto &item: *suggestions) {
                         if (i == 30) {
-                            std::cout << "..." << std::endl;
+                            fmt::println("...");
                             break;
                         }
-                        fmt::print(L"{}. {} {}\n",
+                        fmt::print("{}. {} {}\n",
                                    ++i,
-                                   fmt::styled(item.content->name, fg(fmt::color::lime_green)),
-                                   fmt::styled(item.content->description.value_or(L""), fg(fmt::color::cornflower_blue)));
+                                   fmt::styled(wstring2string(item.content->name), fg(fmt::color::lime_green)),
+                                   fmt::styled(wstring2string(item.content->description.value_or(L"")), fg(fmt::color::cornflower_blue)));
                         std::wstring result = command.substr(0, item.start)
                                                       .append(item.content->name)
                                                       .append(command.substr(item.end));
@@ -278,13 +276,13 @@ namespace CHelper::Test {
                                 greenPart.push_back(L' ');
                             }
                         }
-                        fmt::print(L"{}{}{}\n",
-                                   command.substr(0, item.start),
-                                   fmt::styled(greenPart, fg(fmt::color::lime_green)),
-                                   command.substr(item.end));
+                        fmt::print("{}{}{}\n",
+                                   wstring2string(command.substr(0, item.start)),
+                                   fmt::styled(wstring2string(greenPart), fg(fmt::color::lime_green)),
+                                   wstring2string(command.substr(item.end)));
                     }
                 }
-                std::cout << std::endl;
+                fmt::print("\n");
             }
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
@@ -298,7 +296,7 @@ namespace CHelper::Test {
     [[maybe_unused]] void test2(const std::filesystem::path &cpackPath, const std::vector<std::wstring> &commands, int times) {
         try {
             auto core = Core::createByDirectory(cpackPath);
-            std::cout << std::endl;
+            fmt::print("\n");
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
@@ -314,10 +312,10 @@ namespace CHelper::Test {
                 }
             }
             end = std::chrono::high_resolution_clock::now();
-            fmt::print(L"{}{}",
+            fmt::print("{}{}",
                        fmt::styled(commands.size(), fg(fmt::color::medium_purple)),
-                       fmt::styled(L" commands\n", fg(fmt::color::lime_green)));
-            CHELPER_INFO(L"run successfully({})", std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
+                       fmt::styled(" commands\n", fg(fmt::color::lime_green)));
+            CHELPER_INFO("run successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
@@ -334,7 +332,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeJsonToDirectory(output);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO(L"CPack write successfully({})", std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
+            CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
             [[maybe_unused]] auto core2 = Core::createByDirectory(output);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
@@ -352,7 +350,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeJsonToFile(output);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO(L"CPack write successfully({})", std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
+            CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
             [[maybe_unused]] auto core2 = Core::createByJson(output);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
@@ -370,7 +368,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeBsonToFile(output);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO(L"CPack write successfully({})", std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
+            CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
@@ -387,7 +385,7 @@ namespace CHelper::Test {
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeBinToFile(output);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO(L"CPack write successfully({})", std::to_wstring(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + L"ms");
+            CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
             [[maybe_unused]] auto core2 = Core::createByBinary(output);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);

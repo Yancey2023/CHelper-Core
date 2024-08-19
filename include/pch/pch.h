@@ -7,9 +7,11 @@
 #ifndef CHELPER_PCH_H
 #define CHELPER_PCH_H
 
+#include "param_deliver.h"
+
 #define CHelperLogger INFO
 
-#ifndef NDEBUG
+#if !defined(NDEBUG) && !defined(_DEBUG)
 // 可以在运行时增加一些检测，快速定位错误
 #define CHelperDebug true
 // 增加一些用于调试方法

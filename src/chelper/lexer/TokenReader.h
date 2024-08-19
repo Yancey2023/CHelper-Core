@@ -22,7 +22,7 @@
 #if CHelperDebug == true
 #define DEBUG_GET_NODE_END(node)                                         \
     if (HEDLEY_UNLIKELY(node##Index != tokenReader.indexStack.size())) { \
-        Profile::push(L"TokenReaderIndexError: {} {} {}",                \
+        Profile::push("TokenReaderIndexError: {} {} {}",                 \
                       (node)->getNodeType()->nodeName,                   \
                       (node)->id.value_or(L""),                          \
                       (node)->description.value_or(L""));                \

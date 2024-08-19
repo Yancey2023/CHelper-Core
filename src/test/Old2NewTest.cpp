@@ -5,14 +5,12 @@
 #include <gtest/gtest.h>
 
 #include "../chelper/old2new/Old2New.h"
-#include "param_deliver.h"
 
 namespace CHelper::Test {
 
     TEST(Old2NewTest, Old2New) {
-        std::locale::global(std::locale("zh_cn.UTF-8"));
         std::filesystem::path projectDir(PROJECT_DIR);
-        Old2New::BlockFixData blockFixData = Old2New::blockFixDataFromJson(JsonUtil::getJsonFromFile(projectDir / L"resources" / L"old2new" / L"blockFixData.json"));
+        Old2New::BlockFixData blockFixData = Old2New::blockFixDataFromJson(JsonUtil::getJsonFromFile(projectDir / "resources" / "old2new" / "blockFixData.json"));
         std::vector<std::wstring> oldCommands = {
                 LR"(execute @e[x=~5] ~~~ detect ~~-1~ stone 0 setblock ~~1~ command_block 0)",
                 LR"(execute @e[type=zombie] ~ ~ ~ summon lightning_bolt)",
@@ -39,9 +37,9 @@ namespace CHelper::Test {
                 LR"(setblock ~~~ acacia_door["direction":1])",
         };
         for (const auto &item: oldCommands) {
-            fmt::print(L"{}\n{}\n",
-                       styled(item, fg(fmt::color::red)),
-                       styled(Old2New::old2new(blockFixData, item), fg(fmt::color::lime_green)));
+            fmt::print("{}\n{}\n",
+                       styled(wstring2string(item), fg(fmt::color::red)),
+                       styled(wstring2string(Old2New::old2new(blockFixData, item)), fg(fmt::color::lime_green)));
         }
     }
 }// namespace CHelper::Test

@@ -3,7 +3,6 @@
 //
 
 #include "../chelper/Core.h"
-#include "param_deliver.h"
 #include <gtest/gtest.h>
 
 void testCommand(CHelper::Core *core, const std::wstring &command) {
@@ -21,9 +20,8 @@ void testCommand(CHelper::Core *core, const std::wstring &command) {
 }
 
 TEST(ColorStringTest, ColorString) {
-    std::locale::global(std::locale("zh_cn.UTF-8"));
     std::filesystem::path projectDir(PROJECT_DIR);
-    CHelper::Core *core = CHelper::Core::createByDirectory(projectDir / L"resources" / L"beta" / L"vanilla");
+    CHelper::Core *core = CHelper::Core::createByDirectory(projectDir / "resources" / "beta" / "vanilla");
     auto commands = std::vector<std::wstring>{
             LR"(execute run clear )",
             LR"(give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m)",

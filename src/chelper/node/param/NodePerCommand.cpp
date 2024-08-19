@@ -11,16 +11,16 @@ namespace CHelper::Node {
     void NodePerCommand::init(const CPack &cpack) {
         for (const auto &item: nodes) {
             if (HEDLEY_LIKELY(item->id.has_value())) {
-                Profile::push(LR"(init node {}: "{}")", item->getNodeType()->nodeName, item->id.value());
+                Profile::push(R"(init node {}: "{}")", item->getNodeType()->nodeName, item->id.value());
             } else {
-                Profile::push(L"init node {}", item->getNodeType()->nodeName);
+                Profile::push("init node {}", item->getNodeType()->nodeName);
             }
             item->init(cpack);
             Profile::pop();
         }
         for (const auto &item: nodes) {
             if (HEDLEY_UNLIKELY(item->nextNodes.empty())) {
-                Profile::push(L"dismiss child node ids, the parent node is {} (in command {})",
+                Profile::push("dismiss child node ids, the parent node is {} (in command {})",
                               item->id.value_or(L"UNKNOWN"),
                               StringUtil::join(L",", name));
                 throw std::runtime_error("dismiss child node ids");
@@ -37,7 +37,7 @@ namespace CHelper::Node {
                 bool flag2 = item2->getNodeType() == NodeType::POSITION.get() ||
                              item2->getNodeType() == NodeType::RELATIVE_FLOAT.get();
                 if (HEDLEY_UNLIKELY(flag1 && flag2 == item2->isMustAfterWhiteSpace)) {
-                    Profile::push(LR"({} should be {} in node "{}")",
+                    Profile::push(R"({} should be {} in node "{}")",
                                   L"isMustAfterWhiteSpace",
                                   item2->isMustAfterWhiteSpace ? L"false" : L"true",
                                   item2->id.value_or(L"unknown"));
@@ -76,21 +76,21 @@ namespace CHelper::Node {
     void from_json(const nlohmann::json &j, std::unique_ptr<NodePerCommand> &t) {
         t = std::make_unique<NodePerCommand>();
         //name
-        Profile::push(L"loading node name");
+        Profile::push("loading node name");
         JsonUtil::decode(j, "name", t->name);
         //description
-        Profile::next(L"loading node description");
+        Profile::next("loading node description");
         JsonUtil::decode(j, "description", t->description);
         //node
         if (HEDLEY_LIKELY(j.contains("node"))) {
             JsonUtil::decode(j, "node", t->nodes);
         }
         //start
-        Profile::next(L"loading start nodes");
+        Profile::next("loading start nodes");
         auto startNodeIds = JsonUtil::read<std::vector<std::wstring>>(j, "start");
         t->startNodes.reserve(startNodeIds.size());
         for (const auto &startNodeId: startNodeIds) {
-            Profile::next(LR"(linking startNode "{}" to nodes)", startNodeId);
+            Profile::next(R"(linking startNode "{}" to nodes)", startNodeId);
             if (HEDLEY_UNLIKELY(startNodeId == L"LF")) {
                 t->startNodes.push_back(NodeLF::getInstance());
                 continue;
@@ -104,24 +104,24 @@ namespace CHelper::Node {
                 }
             }
             if (HEDLEY_UNLIKELY(flag)) {
-                Profile::push(LR"("unknown node id -> {} (in command \"{}\")", startNodeId, StringUtil::join(L",", t->name));
+                Profile::push(R"("unknown node id -> {} (in command \"{}\")", startNodeId, StringUtil::join(L",", t->name));
                 throw std::runtime_error("unknown node id");
             }
         }
         //ast
         auto jsonAst = j.find("ast");
         if (HEDLEY_LIKELY(jsonAst != j.end())) {
-            Profile::next(L"loading ast");
+            Profile::next("loading ast");
             for (const auto &childNodes: jsonAst->get<std::vector<std::vector<std::wstring>>>()) {
-                Profile::next(L"linking child nodes to parent node");
+                Profile::next("linking child nodes to parent node");
                 if (HEDLEY_UNLIKELY(childNodes.empty())) {
-                    Profile::push(LR"("dismiss parent node id (in command "{}"))", StringUtil::join(L",", t->name));
+                    Profile::push(R"("dismiss parent node id (in command "{}"))", StringUtil::join(L",", t->name));
                     throw std::runtime_error("dismiss parent node id");
                 }
                 auto parentNodeId = childNodes.at(0);
-                Profile::next(LR"("linking child nodes to parent node "{}"))", parentNodeId);
+                Profile::next(R"("linking child nodes to parent node "{}"))", parentNodeId);
                 if (HEDLEY_UNLIKELY(childNodes.size() == 1)) {
-                    Profile::push(LR"("dismiss parent node id, the parent node is {} (in command "{}"))", parentNodeId, StringUtil::join(L",", t->name));
+                    Profile::push(R"("dismiss parent node id, the parent node is {} (in command "{}"))", parentNodeId, StringUtil::join(L",", t->name));
                     throw std::runtime_error("dismiss parent node id");
                 }
                 Node::NodeBase *parentNode = nullptr;
@@ -132,16 +132,16 @@ namespace CHelper::Node {
                     }
                 }
                 if (HEDLEY_UNLIKELY(parentNode == nullptr)) {
-                    Profile::push(LR"("unknown node id -> {} (in command "{}"))", parentNodeId, StringUtil::join(L",", t->name));
+                    Profile::push(R"("unknown node id -> {} (in command "{}"))", parentNodeId, StringUtil::join(L",", t->name));
                     throw std::runtime_error("unknown node id");
                 }
                 if (HEDLEY_UNLIKELY(!parentNode->nextNodes.empty())) {
-                    Profile::push(LR"(repeating parent node -> {} (in command "{}"))", parentNodeId, StringUtil::join(L",", t->name));
+                    Profile::push(R"(repeating parent node -> {} (in command "{}"))", parentNodeId, StringUtil::join(L",", t->name));
                     throw std::runtime_error("repeating parent node");
                 }
                 parentNode->nextNodes.reserve(childNodes.size() - 1);
                 for_each(childNodes.begin() + 1, childNodes.end(), [&](const auto &childNodeId) {
-                    Profile::next(LR"(linking child nodes "{}" to parent node "{} (in command "{}"))", childNodeId, parentNodeId, StringUtil::join(L",", t->name));
+                    Profile::next(R"(linking child nodes "{}" to parent node "{} (in command "{}"))", childNodeId, parentNodeId, StringUtil::join(L",", t->name));
                     if (HEDLEY_UNLIKELY(childNodeId == L"LF")) {
                         parentNode->nextNodes.push_back(Node::NodeLF::getInstance());
                         return;
@@ -154,7 +154,7 @@ namespace CHelper::Node {
                         }
                     }
                     if (HEDLEY_UNLIKELY(childNode == nullptr)) {
-                        Profile::push(LR"("unknown node id -> {} (in command "{}"))", childNodeId, StringUtil::join(L",", t->name));
+                        Profile::push(R"("unknown node id -> {} (in command "{}"))", childNodeId, StringUtil::join(L",", t->name));
                         throw std::runtime_error("unknown node id");
                     }
                     parentNode->nextNodes.push_back(childNode);
@@ -220,7 +220,7 @@ namespace CHelper::Node {
                 }
             }
             if (HEDLEY_UNLIKELY(flag)) {
-                Profile::push(LR"("unknown node id -> {} (in command "{}"))", startNodeId, StringUtil::join(L",", t->name));
+                Profile::push(R"("unknown node id -> {} (in command "{}"))", startNodeId, StringUtil::join(L",", t->name));
                 throw std::runtime_error("unknown node id");
             }
         }
@@ -243,7 +243,7 @@ namespace CHelper::Node {
                     }
                 }
                 if (HEDLEY_UNLIKELY(childNode == nullptr)) {
-                    Profile::push(LR"("unknown node id -> {} (in command "{}"))", childNodeId, StringUtil::join(L",", t->name));
+                    Profile::push(R"("unknown node id -> {} (in command "{}"))", childNodeId, StringUtil::join(L",", t->name));
                     throw std::runtime_error("unknown node id");
                 }
                 parentNode->nextNodes.push_back(childNode);

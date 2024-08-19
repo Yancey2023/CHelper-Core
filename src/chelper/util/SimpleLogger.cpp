@@ -4,12 +4,21 @@
 
 #include "SimpleLogger.h"
 
-#if CHelperLogger == DEBUG || CHelperLogger == INFO || CHelperLogger == WARN || CHelperLogger == ERROR
-
 namespace CHelper::Logger {
 
+    // 特化版本，用于处理 std::wstring
+    std::string convertArg(std::wstring &wstring) {
+        return wstring2string(wstring);
+    }
 
+    // 特化版本，用于处理 std::wstring
+    std::string convertArg(const std::wstring &wstring) {
+        return wstring2string(wstring);
+    }
+
+    // 特化版本，用于处理 wchar_t
+    std::string convertArg(const wchar_t *wstring) {
+        return wstring2string(wstring);
+    }
 
 }// namespace CHelper::Logger
-
-#endif

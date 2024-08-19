@@ -23,14 +23,14 @@ int main();
 [[maybe_unused]] void outputFile(
         const std::filesystem::path &projectDir,
         void function(const std::filesystem::path &input, const std::filesystem::path &output),
-        const std::wstring &str1,
-        const std::wstring &str2,
-        const std::wstring &str3,
-        const std::wstring &fileType);
+        const std::string &str1,
+        const std::string &str2,
+        const std::string &str3,
+        const std::string &fileType);
 
 [[maybe_unused]] void outputFile(
         void function(const std::filesystem::path &input, const std::filesystem::path &output),
-        const std::wstring &fileType);
+        const std::string &fileType);
 
 [[maybe_unused]] void outputOld2New();
 

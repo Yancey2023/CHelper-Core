@@ -21,12 +21,12 @@ namespace CHelper {
             std::unique_ptr<CPack> cPack = getCPack();
 #if CHelperOnlyReadBinary != true
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO(L"CPack load successfully ({})", std::to_wstring(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + L"ms");
+            CHELPER_INFO("CPack load successfully ({})", std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms");
 #endif
             ASTNode astNode = Parser::parse(L"", cPack.get());
             return new Core(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
-            CHELPER_ERROR(L"CPack load failed");
+            CHELPER_ERROR("CPack load failed");
             CHelper::Profile::printAndClear(e);
             return nullptr;
         }
@@ -54,16 +54,16 @@ namespace CHelper {
     Core *Core::createByBinary(const std::filesystem::path &cpackPath) {
         return create([&cpackPath]() {
             // 检查文件名后缀
-            std::wstring fileType = L".cpack";
-            std::wstring cpackPathStr = cpackPath.wstring();
+            std::string fileType = ".cpack";
+            std::string cpackPathStr = cpackPath.string();
             if (HEDLEY_UNLIKELY(cpackPathStr.size() < fileType.size() || cpackPathStr.substr(cpackPathStr.length() - fileType.size()) != fileType)) {
-                Profile::push(L"error file type -> {}", cpackPathStr);
+                Profile::push("error file type -> {}", cpackPathStr);
                 throw std::runtime_error("error file type");
             }
             // 打开文件
             std::ifstream is(cpackPath, std::ios::binary);
             if (HEDLEY_UNLIKELY(!is.is_open())) {
-                Profile::push(L"fail to read file -> {}", cpackPathStr);
+                Profile::push("fail to read file -> {}", cpackPathStr);
                 throw std::runtime_error("fail to read file");
             }
             // 读取文件
@@ -74,7 +74,7 @@ namespace CHelper {
                 char ch;
                 is.read(&ch, 1);
                 if (HEDLEY_UNLIKELY(is.gcount() > 0)) {
-                    Profile::push(L"file is not read completed -> {}", cpackPathStr);
+                    Profile::push("file is not read completed -> {}", cpackPathStr);
                     throw std::runtime_error("file is not read completed");
                 }
             }

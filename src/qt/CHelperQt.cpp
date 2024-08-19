@@ -63,10 +63,8 @@ void CHelperApp::onTextChanged(const QString &string) {
         ui->errorReasonLabel->setText(nullptr);
     } else {
 #if CHelperTest == true
-        std::cout << core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
-                  << std::endl;
-        std::cout << core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace)
-                  << std::endl;
+        fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
+        fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
         CHelper::ColoredString coloredString = core->getColors();
         std::wstring stringBuilder;
         for (int i = 0; i < coloredString.colors.size(); ++i) {

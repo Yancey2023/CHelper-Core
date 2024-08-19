@@ -18,7 +18,7 @@ namespace CHelper::Node {
     }
 
     void NodeJsonElement::init(const CPack &cpack) {
-        Profile::push(L"linking startNode \"{}\" to nodes", startNodeId);
+        Profile::push("linking startNode \"{}\" to nodes", startNodeId);
         for (const auto &item: nodes) {
             item->init(cpack);
         }
@@ -31,7 +31,7 @@ namespace CHelper::Node {
             }
         }
         if (HEDLEY_UNLIKELY(start == nullptr)) {
-            Profile::push(L"unknown node id -> {} (in node \"{}\")", startNodeId);
+            Profile::push("unknown node id -> {} (in node \"{}\")", startNodeId);
         }
         for (const auto &item: nodes) {
             if (HEDLEY_UNLIKELY(item->getNodeType() == NodeType::JSON_LIST.get())) {
@@ -83,9 +83,9 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(!t->id.has_value())) {
             throw std::runtime_error("dismiss json data id");
         }
-        Profile::push(L"loading nodes");
+        Profile::push("loading nodes");
         JsonUtil::decode(j, "node", t->nodes);
-        Profile::next(L"loading start nodes");
+        Profile::next("loading start nodes");
         JsonUtil::decode(j, "start", t->startNodeId);
         Profile::pop();
     }
