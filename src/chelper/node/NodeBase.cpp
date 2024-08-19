@@ -33,11 +33,7 @@ namespace CHelper::Node {
         //当前节点
         DEBUG_GET_NODE_BEGIN(this)
         ASTNode currentASTNode = getASTNode(tokenReader, cpack);
-        if (__builtin_expect(!!(thisIndex != tokenReader.indexStack.size()), 0)) {
-            Profile::push("TokenReaderIndexError: {} {} {}", (this)->getNodeType()->nodeName, (this)->id.value_or(L""), (this)->description.value_or(L""));
-            throw std::runtime_error("TokenReaderIndexError");
-        }
-//        DEBUG_GET_NODE_END(this)
+        DEBUG_GET_NODE_END(this)
         if (HEDLEY_UNLIKELY(currentASTNode.isError() || nextNodes.empty())) {
             return ASTNode::andNode(this, {std::move(currentASTNode)}, tokenReader.collect(), nullptr, ASTNodeId::COMPOUND);
         }
