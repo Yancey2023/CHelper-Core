@@ -38,7 +38,7 @@ std::wstring string2wstring(const std::string &string) {
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
     std::filesystem::path projectDir(PROJECT_DIR);
-    core = CHelper::Core::createByBinary(projectDir / "run" / "cpack" / (std::wstring(L"beta-experiment-") + CPACK_VERSION_BETA + L".cpack"));
+    core = CHelper::Core::createByBinary(projectDir / "run" / "cpack" / (std::string("beta-experiment-") + CPACK_VERSION_BETA + ".cpack"));
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         exit(-1);
     }
