@@ -19,7 +19,7 @@ namespace CHelper::Profile {
     template<typename... T>
     void push(fmt::format_string<T...> fmt, T &&...args) {
 #ifdef CHelperAndroid
-        stack.push_back(fmt::format(fmt, Logger::convertArg(std::forward<T>(args))...));
+        stack.push_back(fmt::format(fmt, Logger::convertArg(args)...));
 #else
         stack.push_back(fmt::format(fmt, styled(Logger::convertArg(args), fg(fmt::color::medium_purple))...));
 #endif

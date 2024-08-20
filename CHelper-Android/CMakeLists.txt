@@ -14,7 +14,7 @@ set(CHELPER_CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Core)
 if (PROJECT_IS_TOP_LEVEL)
     # ThirdParty: hedley
     include_directories(${CHELPER_CORE_DIR}/include/hedley/include)
-#    add_subdirectory(${CHELPER_CORE_DIR}/include/hedley ${CMAKE_BINARY_DIR}/include/hedley)
+    #    add_subdirectory(${CHELPER_CORE_DIR}/include/hedley ${CMAKE_BINARY_DIR}/include/hedley)
 
     # ThirdParty: json
     add_subdirectory(${CHELPER_CORE_DIR}/include/json ${CMAKE_BINARY_DIR}/include/json)
@@ -27,11 +27,7 @@ if (PROJECT_IS_TOP_LEVEL)
 endif ()
 
 # Param Deliver
-if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-    set(CHelperDebug true)
-else ()
-    set(CHelperDebug false)
-endif ()
+set(CHelperDebug false)
 set(RESOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Resource)
 configure_file(${CHELPER_CORE_DIR}/include/param_deliver/CHelperCoreParamDeliver.h.in include/param_deliver/CHelperCoreParamDeliver.h @ONLY)
 
