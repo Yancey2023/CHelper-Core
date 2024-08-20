@@ -21,7 +21,7 @@ namespace CHelper {
                           size_t line = 0,
                           size_t col = 0);
 
-        void next(wchar_t ch);
+        void next(char16_t ch);
     };
 
     std::ostream &operator<<(std::ostream &os, const LexerPos &pos);
