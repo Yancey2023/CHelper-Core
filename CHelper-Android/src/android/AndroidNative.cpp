@@ -222,7 +222,7 @@ Java_yancey_chelper_core_CHelperCore_onSuggestionClick0(
         env->SetIntField(javaResult,
                          env->GetFieldID(resultClass, "selection", "I"),
                          static_cast<jint>(result.value().second));
-        return resultClass;
+        return javaResult;
     } else {
         return nullptr;
     }
