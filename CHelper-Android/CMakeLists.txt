@@ -26,7 +26,7 @@ if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 else ()
     set(CHelperDebug false)
 endif ()
-set(RESOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../resource)
+set(RESOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Resource)
 configure_file(../CHelper-Core/include/param_deliver/CHelperCoreParamDeliver.h.in include/param_deliver/CHelperCoreParamDeliver.h @ONLY)
 
 # Sources

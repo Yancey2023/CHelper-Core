@@ -9,6 +9,8 @@
 
 namespace CHelper::Test {
 
+#pragma warning(disable:4068)
+#pragma warning(disable:4834)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-result"
 
