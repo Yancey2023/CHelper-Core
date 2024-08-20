@@ -8,15 +8,17 @@
 void testCommand(CHelper::Core *core, const std::u16string &command) {
     core->onTextChanged(command, command.length());
     CHelper::ColoredString coloredString = core->getColors();
-    std::u16string stringBuilder;
+    std::string stringBuilder;
     for (int i = 0; i < coloredString.colors.size(); ++i) {
         uint32_t color = coloredString.colors[i];
         if (color == CHelper::NO_COLOR) {
             color = 0xFFFFFFFF;
         }
-        stringBuilder.append(fmt::format(u"{}", fmt::styled(coloredString.str[i], fg(fmt::rgb(color)))));
+        std::u16string strChar;
+        strChar.push_back(coloredString.str[i]);
+        stringBuilder.append(fmt::format("{}", fmt::styled(utf8::utf16to8(strChar), fg(fmt::rgb(color)))));
     }
-    std::wcout << stringBuilder << std::endl;
+    std::cout << stringBuilder << std::endl;
 }
 
 TEST(ColorStringTest, ColorString) {
