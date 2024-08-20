@@ -18,7 +18,7 @@ git submodule update --init --recursive --progress
 |    [CHelper-Core](https://github.com/Yancey2023/CHelper-Core)    |                                   CHelper-Core is the core of CHelper, written in c++                                    |
 | [CHelper-Android](https://github.com/Yancey2023/CHelper-Android) | CHelper-Android is the Android version of the app, depends on [CHelper-Core](https://github.com/Yancey2023/CHelper-Core) |
 |     [CHelper-Web](https://github.com/Yancey2023/chelper_web)     |     CHelper-Web is the web version of the app, depends on [CHelper-Core](https://github.com/Yancey2023/CHelper-Core)     |
-|                            CHelper-Qt                            |       maintain in [CHelper-Core](https://github.com/Yancey2023/CHelper-Core) for development and debugging purpose       |
+|                    [CHelper-Qt](./CHelper-Qt)                    |       maintain in [CHelper-Core](https://github.com/Yancey2023/CHelper-Core) for development and debugging purpose       |
 
 ## Usage
 
@@ -85,10 +85,10 @@ The desired function has been completed, and the new function to be developed is
 
 |                   project                   |                                    description                                     |                                 license                                 |
 |:-------------------------------------------:|:----------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
-|  [json](https://github.com/nlohmann/json)   |                                JSON for Modern C++                                 | [MIT license](https://github.com/nlohmann/json/blob/master/LICENSE.MIT) |
 |    [fmt](https://github.com/fmtlib/fmt)     |                                 formatting library                                 |    [MIT license](https://github.com/fmtlib/fmt/blob/master/LICENSE)     |
-|  [Hedley](https://github.com/cblck/hedley)  | enable compiler-specific features while retaining compatibility with all compilers |     [CC0 1.0](https://github.com/cblck/hedley/blob/master/LICENSE)      |
+|  [json](https://github.com/nlohmann/json)   |                                JSON for Modern C++                                 | [MIT license](https://github.com/nlohmann/json/blob/master/LICENSE.MIT) |
 | [utfcpp](https://github.com/nemtrif/utfcpp) |                          UTF-8 with C++ in a Portable Way                          | [BSL-1.0 license](https://github.com/cblck/hedley/blob/master/LICENSE)  |
+|  [Hedley](https://github.com/cblck/hedley)  | enable compiler-specific features while retaining compatibility with all compilers |     [CC0 1.0](https://github.com/cblck/hedley/blob/master/LICENSE)      |
 
 ### CHelper-Qt
 

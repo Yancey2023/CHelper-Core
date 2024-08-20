@@ -16,4 +16,4 @@ jobs:
           submodules: 'recursive'
 
       - name: Install emsdk and build wasm
-        run: cd ./script/wasm && sudo bash ./build-wasm.bash
+        run: cd ./CHelper-Web/script && sudo bash ./build-wasm.bash

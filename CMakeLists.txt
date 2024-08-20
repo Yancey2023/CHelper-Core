@@ -12,98 +12,27 @@ if (MSVC)
     add_compile_options("/permissive-")
 endif ()
 
-# ThirdParty: Qt6
-find_package(Qt6 COMPONENTS Core Gui Widgets)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
-
-# ThirdParty: GTest
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-add_subdirectory(include/googletest)
-
-# ThirdParty: hedley
-add_subdirectory(include/hedley)
-
-# ThirdParty: json
-include_directories(include/json/include)
-
-# ThirdParty: fmt
-add_subdirectory(include/fmt)
-
-# ThirdParty: utf8cpp
-add_subdirectory(include/utfcpp)
-
-# Param Deliver
-set(CPACK_VERSION_RELEASE "1.21.20.03")
-set(CPACK_VERSION_BETA "1.21.30.22")
-set(CPACK_VERSION_NETEASE "1.20.10.25")
-if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-    set(CHelperDebug true)
-else ()
-    set(CHelperDebug false)
-endif ()
-configure_file(include/param_deliver.h.in include/param_deliver.h @ONLY)
-
-# Sources
-file(GLOB_RECURSE SOURCE_FILE src/chelper/*.h src/chelper/*.cpp)
-include_directories(include/pch ${CMAKE_BINARY_DIR}/include)
-link_libraries(fmt::fmt hedley utf8cpp)
+# CHelper Core
+add_subdirectory(CHelper-Core)
 
 # Console Application
-add_executable(CHelperCmd
-        src/cmd/CHelperCmd.h
-        src/cmd/CHelperCmd.cpp
-        ${SOURCE_FILE}
-)
-target_precompile_headers(CHelperCmd PRIVATE include/pch/pch.h)
+add_subdirectory(CHelper-Cmd)
 
 # Web Application
-add_library(CHelperWeb
-        src/web/CHelperWeb.cpp
-        ${SOURCE_FILE}
-)
-target_include_directories(CHelperWeb PUBLIC include/emscripten/system/include)
-target_precompile_headers(CHelperWeb PRIVATE include/pch/pch.h)
-target_compile_definitions(CHelperWeb PRIVATE CHelperWeb=true)
+add_subdirectory(CHelper-Web)
 
 # Windows Application
 if (CMAKE_SYSTEM_NAME MATCHES "Windows")
-    add_executable(CHelperWindows
-            src/windows/CHelperWindows.h
-            src/windows/CHelperWindows.cpp
-            ${SOURCE_FILE}
-    )
-    target_precompile_headers(CHelperWindows PRIVATE include/pch/pch.h)
-    if (MSVC)
-        set_target_properties(CHelperWindows PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
-    endif ()
+    add_subdirectory(CHelper-Windows)
 endif ()
 
 # Qt Application
-add_executable(CHelperQt WIN32
-        src/qt/CHelperQt.h
-        src/qt/CHelperQt.cpp
-        src/qt/chelper.qrc
-        src/qt/chelper.ui
-        ${SOURCE_FILE}
-)
-target_precompile_headers(CHelperQt PRIVATE include/pch/pch.h)
-target_link_libraries(CHelperQt Qt6::Core Qt6::Gui Qt6::Widgets)
+add_subdirectory(CHelper-Qt)
 
 # Android Shared Libary (not support MSVC)
 if (NOT MSVC)
-    add_library(CHelperAndroid SHARED
-            src/android/AndroidNative.cpp
-            ${SOURCE_FILE}
-    )
-    target_include_directories(CHelperAndroid PUBLIC include/android)
-    target_precompile_headers(CHelperAndroid PRIVATE include/pch/pch.h)
-    target_compile_definitions(CHelperAndroid PRIVATE CHelperAndroid=true)
+    add_subdirectory(CHelper-Android)
 endif ()
 
 # Using GTest to test codes
-file(GLOB_RECURSE TEST_FILE src/test/*.h src/test/*.cpp)
-add_executable(CHelperTest ${TEST_FILE} ${SOURCE_FILE})
-target_precompile_headers(CHelperTest PRIVATE include/pch/pch.h)
-target_link_libraries(CHelperTest PUBLIC GTest::gtest_main)
+add_subdirectory(CHelper-Test)
