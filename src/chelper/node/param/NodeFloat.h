@@ -8,34 +8,20 @@
 #define CHELPER_NODEFLOAT_H
 
 #include "../NodeBase.h"
+#include "../template/NodeNumber.h"
 
 namespace CHelper::Node {
 
-    class NodeFloat : public NodeBase {
+    class NodeFloat : public NodeNumber<float> {
     public:
-        std::optional<float> min, max;
-
         NodeFloat() = default;
-
-        NodeFloat(const std::optional<std::wstring> &id,
-                  const std::optional<std::wstring> &description,
-                  const std::optional<float> &min,
-                  const std::optional<float> &max);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
-
-        bool collectIdError(const ASTNode *astNode,
-                            std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
-
-        void collectStructure(const ASTNode *astNode,
-                              StructureBuilder &structure,
-                              bool isMustHave) const override;
-
-        bool collectColor(const ASTNode *astNode,
-                          ColoredString &coloredString,
-                          const Theme &theme) const override;
+        static std::unique_ptr<NodeFloat> make(const std::optional<std::u16string> &id,
+                                               const std::optional<std::u16string> &description,
+                                               const std::optional<float> &min,
+                                               const std::optional<float> &max);
     };
 
     CODEC_NODE_H(NodeFloat)

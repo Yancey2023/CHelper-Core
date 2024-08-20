@@ -11,13 +11,13 @@ namespace CHelper {
 
     class KMPMatcher {
     private:
-        std::wstring_view pattern;
+        std::u16string_view pattern;
         std::vector<size_t> next;
 
     public:
-        explicit KMPMatcher(const std::wstring_view &pattern);
+        explicit KMPMatcher(const std::u16string_view &pattern);
 
-        size_t match(const std::wstring &str);
+        size_t match(const std::u16string &str);
     };
 
 

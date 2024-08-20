@@ -8,9 +8,9 @@
 
 namespace CHelper::Node {
 
-    NodeJson::NodeJson(const std::optional<std::wstring> &id,
-                       const std::optional<std::wstring> &description,
-                       std::wstring key)
+    NodeJson::NodeJson(const std::optional<std::u16string> &id,
+                       const std::optional<std::u16string> &description,
+                       std::u16string key)
         : NodeBase(id, description, false),
           key(std::move(key)) {}
 
@@ -37,7 +37,7 @@ namespace CHelper::Node {
     void NodeJson::collectStructure(const ASTNode *astNode,
                                     StructureBuilder &structure,
                                     bool isMustHave) const {
-        structure.append(isMustHave, description.value_or(L"JSON文本"));
+        structure.append(isMustHave, description.value_or(u"JSON文本"));
     }
 
     CODEC_NODE(NodeJson, key)

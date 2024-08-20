@@ -13,14 +13,14 @@ namespace CHelper::Node {
 
     class NodeBoolean : public NodeBase {
     public:
-        std::optional<std::wstring> descriptionTrue, descriptionFalse;
+        std::optional<std::u16string> descriptionTrue, descriptionFalse;
 
         NodeBoolean() = default;
 
-        NodeBoolean(const std::optional<std::wstring> &id,
-                    const std::optional<std::wstring> &description,
-                    const std::optional<std::wstring> &descriptionTrue,
-                    const std::optional<std::wstring> &descriptionFalse);
+        NodeBoolean(const std::optional<std::u16string> &id,
+                    const std::optional<std::u16string> &description,
+                    const std::optional<std::u16string> &descriptionTrue,
+                    const std::optional<std::u16string> &descriptionFalse);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 

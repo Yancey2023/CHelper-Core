@@ -10,13 +10,13 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NodeBase> nodeCount = std::make_shared<NodeInteger>(L"ITEM_COUNT", L"物品数量", 0, std::nullopt);
-    static std::shared_ptr<NodeBase> nodeAllData = std::make_shared<NodeInteger>(L"ITEM_DATA", L"物品附加值", -1, std::nullopt);
+    static std::shared_ptr<NodeBase> nodeCount = NodeInteger::make(u"ITEM_COUNT", u"物品数量", 0, std::nullopt);
+    static std::shared_ptr<NodeBase> nodeAllData = NodeInteger::make(u"ITEM_DATA", u"物品附加值", -1, std::nullopt);
 
     void NodeItem::init(const CPack &cpack) {
         itemIds = cpack.itemIds;
-        nodeItemId = std::make_unique<NodeNamespaceId>(L"ITEM_ID", L"物品ID", L"items", true);
-        nodeComponent = std::make_unique<NodeJson>(L"ITEM_COMPONENT", L"物品组件", L"components");
+        nodeItemId = std::make_unique<NodeNamespaceId>(u"ITEM_ID", u"物品ID", u"items", true);
+        nodeComponent = std::make_unique<NodeJson>(u"ITEM_COMPONENT", u"物品组件", u"components");
         nodeItemId->init(cpack);
         nodeComponent->init(cpack);
     }
@@ -28,7 +28,7 @@ namespace CHelper::Node {
     ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         ASTNode itemId = nodeItemId->getASTNode(tokenReader, cpack);
-        size_t strHash = std::hash<std::wstring_view>{}(itemId.tokens.toString());
+        size_t strHash = std::hash<std::u16string_view>{}(itemId.tokens.toString());
         std::shared_ptr<NamespaceId> currentItem = nullptr;
         for (const auto &item: *itemIds) {
             if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash))) {
@@ -55,7 +55,7 @@ namespace CHelper::Node {
         return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
     }
 
-    std::optional<std::wstring> NodeItem::collectDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::u16string> NodeItem::collectDescription(const ASTNode *node, size_t index) const {
         return std::nullopt;
     }
 

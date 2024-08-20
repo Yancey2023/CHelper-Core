@@ -7,13 +7,13 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NormalId> doubleQuoteMask = NormalId::make(L"\"", L"双引号");
+    static std::shared_ptr<NormalId> doubleQuoteMask = NormalId::make(u"\"", u"双引号");
 
-    NodeJsonString::NodeJsonString(const std::optional<std::wstring> &id,
-                                   const std::optional<std::wstring> &description)
+    NodeJsonString::NodeJsonString(const std::optional<std::u16string> &id,
+                                   const std::optional<std::u16string> &description)
         : NodeBase(id, description, false) {
         nodeData = std::make_unique<NodeOr>(
-                L"JSON_STRING_DATA", L"JSON字符串内容",
+                u"JSON_STRING_DATA", u"JSON字符串内容",
                 std::vector<const NodeBase *>(), false);
     }
 
@@ -31,7 +31,7 @@ namespace CHelper::Node {
             }
         }
         nodeData = std::make_unique<NodeOr>(
-                L"JSON_STRING_DATA", L"JSON字符串内容",
+                u"JSON_STRING_DATA", u"JSON字符串内容",
                 std::move(nodeDataElement), false);
     }
 
@@ -42,7 +42,7 @@ namespace CHelper::Node {
     static std::pair<ASTNode, JsonUtil::ConvertResult>
     getInnerASTNode(const NodeJsonString *node,
                     const TokensView &tokens,
-                    const std::wstring &content,
+                    const std::u16string &content,
                     const CPack *cpack,
                     const NodeBase *mainNode) {
         auto convertResult = JsonUtil::jsonString2String(content);
@@ -69,21 +69,21 @@ namespace CHelper::Node {
         ASTNode result = tokenReader.readStringASTNode(this);
         tokenReader.pop();
         TokensView tokens = result.tokens;
-        std::wstring_view str = tokens.toString();
+        std::u16string_view str = tokens.toString();
         if (HEDLEY_UNLIKELY(str.empty())) {
-            return ASTNode::simpleNode(this, tokens, ErrorReason::incomplete(tokens, L"字符串参数内容为空"));
+            return ASTNode::simpleNode(this, tokens, ErrorReason::incomplete(tokens, u"字符串参数内容为空"));
         } else if (HEDLEY_UNLIKELY(str[0] != '"')) {
-            return ASTNode::simpleNode(this, tokens, ErrorReason::contentError(tokens, L"字符串参数内容应该在双引号内 -> " + std::wstring(str)));
+            return ASTNode::simpleNode(this, tokens, ErrorReason::contentError(tokens, u"字符串参数内容应该在双引号内 -> " + std::u16string(str)));
         }
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_LIKELY(str.size() <= 1 || str[str.size() - 1] != '"')) {
-            errorReason = ErrorReason::contentError(tokens, L"字符串参数内容应该在双引号内 -> " + std::wstring(str));
+            errorReason = ErrorReason::contentError(tokens, u"字符串参数内容应该在双引号内 -> " + std::u16string(str));
         }
         if (HEDLEY_LIKELY(!data.has_value() || data->empty())) {
             return ASTNode::simpleNode(this, tokens, errorReason);
         }
         size_t offset = tokens.getStartIndex() + 1;
-        auto innerNode = getInnerASTNode(this, tokens, std::wstring(str), cpack, nodeData.get());
+        auto innerNode = getInnerASTNode(this, tokens, std::u16string(str), cpack, nodeData.get());
         ASTNode newResult = ASTNode::andNode(this, {std::move(innerNode.first)}, tokens, errorReason, ASTNodeId::NODE_STRING_INNER);
         if (HEDLEY_UNLIKELY(errorReason == nullptr)) {
             for (auto &item: newResult.errorReasons) {
@@ -100,7 +100,7 @@ namespace CHelper::Node {
     bool NodeJsonString::collectIdError(const ASTNode *astNode,
                                         std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (HEDLEY_UNLIKELY(astNode->id == ASTNodeId::NODE_STRING_INNER)) {
-            auto convertResult = JsonUtil::jsonString2String(std::wstring(astNode->tokens.toString()));
+            auto convertResult = JsonUtil::jsonString2String(std::u16string(astNode->tokens.toString()));
             size_t offset = astNode->tokens.getStartIndex() + 1;
             for (const auto &item: astNode->childNodes[0].getIdErrors()) {
                 item->start = convertResult.convert(item->start) + offset;
@@ -114,13 +114,13 @@ namespace CHelper::Node {
     bool NodeJsonString::collectSuggestions(const ASTNode *astNode,
                                             size_t index,
                                             std::vector<Suggestions> &suggestions) const {
-        std::wstring_view str = astNode->tokens.toString()
+        std::u16string_view str = astNode->tokens.toString()
                                        .substr(0, index - astNode->tokens.getStartIndex());
         if (HEDLEY_UNLIKELY(str.empty())) {
             suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, doubleQuoteMask}));
             return true;
         }
-        auto convertResult = JsonUtil::jsonString2String(std::wstring(str));
+        auto convertResult = JsonUtil::jsonString2String(std::u16string(str));
         if (HEDLEY_UNLIKELY(astNode->id == ASTNodeId::NODE_STRING_INNER)) {
             size_t offset = astNode->tokens.getStartIndex() + 1;
             Suggestions suggestions1(SuggestionsType::LITERAL);
@@ -128,7 +128,7 @@ namespace CHelper::Node {
             for (auto &item: suggestions1.suggestions) {
                 item.start = convertResult.convert(item.start) + offset;
                 item.end = convertResult.convert(item.end) + offset;
-                std::wstring convertStr = JsonUtil::string2jsonString(item.content->name);
+                std::u16string convertStr = JsonUtil::string2jsonString(item.content->name);
                 if (HEDLEY_UNLIKELY(convertStr.size() != str.size())) {
                     item.content = NormalId::make(convertStr, item.content->description);
                 }
@@ -153,8 +153,8 @@ namespace CHelper::Node {
             return false;
         }
         coloredString.setColor(astNode->tokens.getStartIndex(), theme.colorString);
-        std::wstring_view str = astNode->tokens.toString();
-        auto convertResult = JsonUtil::jsonString2String(std::wstring(str));
+        std::u16string_view str = astNode->tokens.toString();
+        auto convertResult = JsonUtil::jsonString2String(std::u16string(str));
         if (convertResult.isComplete) {
             coloredString.setColor(astNode->tokens.getEndIndex() - 1, theme.colorString);
         }

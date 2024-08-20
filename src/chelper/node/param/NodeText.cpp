@@ -7,8 +7,8 @@
 
 namespace CHelper::Node {
 
-    NodeText::NodeText(const std::optional<std::wstring> &id,
-                       const std::optional<std::wstring> &description,
+    NodeText::NodeText(const std::optional<std::u16string> &id,
+                       const std::optional<std::u16string> &description,
                        const std::shared_ptr<NormalId> &data,
                        const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getTextASTNode)
         : NodeBase(id, description, false),
@@ -30,13 +30,13 @@ namespace CHelper::Node {
         DEBUG_GET_NODE_BEGIN(this)
         auto result = getTextASTNode(this, tokenReader);
         DEBUG_GET_NODE_END(this)
-        std::wstring_view str = result.tokens.toString();
+        std::u16string_view str = result.tokens.toString();
         if (HEDLEY_UNLIKELY(str != data->name)) {
             TokensView tokens = result.tokens;
             if (HEDLEY_UNLIKELY(str.empty())) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, L"命令不完整"));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, u"命令不完整"));
             } else {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, L"找不到含义 -> " + std::wstring(str)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, u"找不到含义 -> " + std::u16string(str)));
             }
         }
         return result;
@@ -45,18 +45,18 @@ namespace CHelper::Node {
     bool NodeText::collectSuggestions(const ASTNode *astNode,
                                       size_t index,
                                       std::vector<Suggestions> &suggestions) const {
-        std::wstring_view str = astNode->tokens.toString()
+        std::u16string_view str = astNode->tokens.toString()
                                        .substr(0, index - astNode->tokens.getStartIndex());
         //通过名字进行搜索
         size_t index1 = data->name.find(str);
-        if (HEDLEY_LIKELY(index1 != std::wstring::npos)) {
+        if (HEDLEY_LIKELY(index1 != std::u16string::npos)) {
             suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, isAfterWhitespace(), data}));
             return true;
         }
         //通过介绍进行搜索
         if (HEDLEY_LIKELY(data->description.has_value())) {
             size_t index2 = data->description.value().find(str);
-            if (HEDLEY_LIKELY(index2 != std::wstring::npos)) {
+            if (HEDLEY_LIKELY(index2 != std::u16string::npos)) {
                 suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, isAfterWhitespace(), data}));
             }
         }
@@ -72,7 +72,7 @@ namespace CHelper::Node {
     bool NodeText::collectColor(const ASTNode *astNode,
                                 ColoredString &coloredString,
                                 const Theme &theme) const {
-        if (id != L"TARGET_SELECTOR_ARGUMENT_EQUAL" && id != L"TARGET_SELECTOR_ARGUMENT_NOT_EQUAL") {
+        if (id != u"TARGET_SELECTOR_ARGUMENT_EQUAu" && id != u"TARGET_SELECTOR_ARGUMENT_NOT_EQUAu") {
             coloredString.setColor(astNode->tokens, theme.colorLiteral);
         } else {
             coloredString.setColor(astNode->tokens, theme.colorSymbol);

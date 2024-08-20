@@ -17,7 +17,7 @@ namespace CHelper {
 
     class Core {
     private:
-        std::wstring input;
+        std::u16string input;
         size_t index = 0;
         std::unique_ptr<CPack> cpack;
         ASTNode astNode;
@@ -40,7 +40,7 @@ namespace CHelper {
         static Core *createByBinary(const std::filesystem::path &cpackPath);
 #endif
 
-        void onTextChanged(const std::wstring &content, size_t index);
+        void onTextChanged(const std::u16string &content, size_t index);
 
         void onSelectionChanged(size_t index0);
 
@@ -48,19 +48,19 @@ namespace CHelper {
 
         [[nodiscard]] const ASTNode *getAstNode() const;
 
-        [[nodiscard]] std::wstring getDescription() const;
+        [[nodiscard]] std::u16string getDescription() const;
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
 
         std::vector<Suggestion> *getSuggestions();
 
-        [[nodiscard]] std::wstring getStructure() const;
+        [[nodiscard]] std::u16string getStructure() const;
 
         [[nodiscard]] ColoredString getColors() const;
 
-        [[nodiscard]] std::optional<std::pair<std::wstring, size_t>> onSuggestionClick(size_t which);
+        [[nodiscard]] std::optional<std::pair<std::u16string, size_t>> onSuggestionClick(size_t which);
 
-        static std::wstring old2new(const Old2New::BlockFixData &blockFixData, const std::wstring &old);
+        static std::u16string old2new(const Old2New::BlockFixData &blockFixData, const std::u16string &old);
 
     };
 

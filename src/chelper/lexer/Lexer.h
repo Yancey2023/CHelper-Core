@@ -13,7 +13,7 @@
 
 namespace CHelper::Lexer {
 
-    LexerResult lex(const std::wstring &content);
+    LexerResult lex(const std::u16string &content);
 
 }// namespace CHelper::Lexer
 

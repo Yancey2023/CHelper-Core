@@ -17,14 +17,14 @@ namespace CHelper::Logger {
         return std::forward<T>(arg);
     }
 
-    // 特化版本，用于处理 std::wstring
-    std::string convertArg(std::wstring &wstring);
+    // 特化版本，用于处理 std::u16string
+    std::string convertArg(std::u16string &u16string);
 
-    // 特化版本，用于处理 std::wstring
-    std::string convertArg(const std::wstring &wstring);
+    // 特化版本，用于处理 std::u16string
+    std::string convertArg(const std::u16string &u16string);
 
-    // 特化版本，用于处理 wchar_t
-    std::string convertArg(const wchar_t *wstring);
+    // 特化版本，用于处理 char16_t
+    std::string convertArg(const char16_t *u16string);
 
 #if CHelperAndroid == true
     static const char *KEY = "CHelperNative";

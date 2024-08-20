@@ -7,8 +7,8 @@
 
 namespace CHelper::Node {
 
-    NodeBase::NodeBase(const std::optional<std::wstring> &id,
-                       const std::optional<std::wstring> &description,
+    NodeBase::NodeBase(const std::optional<std::u16string> &id,
+                       const std::optional<std::u16string> &description,
                        bool isMustAfterWhiteSpace)
         : id(id),
           description(description),
@@ -94,7 +94,7 @@ namespace CHelper::Node {
         return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect(), nullptr, astNodeId);
     }
 
-    std::optional<std::wstring> NodeBase::collectDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::u16string> NodeBase::collectDescription(const ASTNode *node, size_t index) const {
 #if CHelperDebug == true
         if (HEDLEY_UNLIKELY(!description.has_value())) {
             CHELPER_WARN("description is null");
@@ -161,8 +161,8 @@ namespace CHelper::Node {
 #if CHelperOnlyReadBinary != true
     void from_json(const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
         Profile::push("loading type");
-        auto type = JsonUtil::read<std::wstring>(j, "type");
-        auto id = JsonUtil::read<std::optional<std::wstring>>(j, "id");
+        auto type = JsonUtil::read<std::u16string>(j, "type");
+        auto id = JsonUtil::read<std::optional<std::u16string>>(j, "id");
         Profile::next("loading node {}", type);
         if (HEDLEY_LIKELY(id.has_value())) {
             Profile::next("loading node {} with id \"{}\"", type, id.value());

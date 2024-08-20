@@ -23,8 +23,8 @@ namespace CHelper {
     class BlockStateValue {
     public:
         BlockStateType::BlockStateType type;
-        std::variant<std::wstring, int32_t, bool> value;
-        std::optional<std::wstring> description;
+        std::variant<std::u16string, int32_t, bool> value;
+        std::optional<std::u16string> description;
 
     private:
         std::shared_ptr<Node::NodeBase> node;
@@ -35,8 +35,8 @@ namespace CHelper {
 
     class BlockState {
     public:
-        std::wstring key;
-        std::optional<std::wstring> description;
+        std::u16string key;
+        std::optional<std::u16string> description;
         std::vector<BlockStateValue> values;
         int32_t defaultValue;
 

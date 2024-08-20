@@ -6,8 +6,8 @@
 
 namespace CHelper::Node {
 
-    NodeAnd::NodeAnd(const std::optional<std::wstring> &id,
-                     const std::optional<std::wstring> &description,
+    NodeAnd::NodeAnd(const std::optional<std::u16string> &id,
+                     const std::optional<std::u16string> &description,
                      WhitespaceMode::WhitespaceMode whitespaceMode,
                      const std::vector<const NodeBase *> &childNodes)
         : NodeBase(id, description, false),
@@ -40,13 +40,13 @@ namespace CHelper::Node {
                 tokenReader.skip();
                 TokensView tokens = tokenReader.collect();
                 return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect(),
-                                        ErrorReason::contentError(tokens, L"意外的空格"));
+                                        ErrorReason::contentError(tokens, u"意外的空格"));
             }
         }
         return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect());
     }
 
-    std::optional<std::wstring> NodeAnd::collectDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::u16string> NodeAnd::collectDescription(const ASTNode *node, size_t index) const {
         return std::nullopt;
     }
 

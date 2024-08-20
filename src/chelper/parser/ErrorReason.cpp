@@ -15,7 +15,7 @@ namespace CHelper {
     ErrorReason::ErrorReason(ErrorReasonLevel::ErrorReasonLevel level,
                              size_t start,
                              size_t end,
-                             std::wstring errorReason)
+                             std::u16string errorReason)
         : level(level),
           start(start),
           end(end),
@@ -23,7 +23,7 @@ namespace CHelper {
 
     ErrorReason::ErrorReason(ErrorReasonLevel::ErrorReasonLevel level,
                              const TokensView &tokens,
-                             std::wstring errorReason)
+                             std::u16string errorReason)
         : level(level),
           start(tokens.getStartIndex()),
           end(tokens.getEndIndex()),

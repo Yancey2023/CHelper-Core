@@ -14,6 +14,6 @@
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-void onTextChanged(const std::wstring &command);
+void onTextChanged(const std::u16string &command);
 
 #endif//CHELPER_CHELPERWINDOWS_H

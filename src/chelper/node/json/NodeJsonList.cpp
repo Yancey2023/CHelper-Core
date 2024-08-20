@@ -10,25 +10,25 @@
 namespace CHelper::Node {
 
     static std::unique_ptr<NodeBase> nodLeft = std::make_unique<NodeSingleSymbol>(
-            L"JSON_LIST_LEFT", L"JSON列表左括号", L'[');
+            u"JSON_LIST_LEFT", u"JSON列表左括号", u'[');
     static std::unique_ptr<NodeBase> nodeRight = std::make_unique<NodeSingleSymbol>(
-            L"JSON_LIST_RIGHT", L"JSON列表右括号", L']');
+            u"JSON_LIST_RIGHT", u"JSON列表右括号", u']');
     static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(
-            L"JSON_LIST_SEPARATOR", L"JSON列表分隔符", L',');
+            u"JSON_LIST_SEPARATOR", u"JSON列表分隔符", u',');
     static std::unique_ptr<NodeBase> nodeAllList = std::make_unique<NodeList>(
-            L"JSON_OBJECT", L"JSON对象",
+            u"JSON_OBJECT", u"JSON对象",
             nodLeft.get(), NodeJsonElement::getNodeJsonElement(), nodeSeparator.get(), nodeRight.get());
 
-    NodeJsonList::NodeJsonList(const std::optional<std::wstring> &id,
-                               const std::optional<std::wstring> &description,
-                               std::wstring data)
+    NodeJsonList::NodeJsonList(const std::optional<std::u16string> &id,
+                               const std::optional<std::u16string> &description,
+                               std::u16string data)
         : NodeBase(id, description, false),
           data(std::move(data)) {}
 
     void NodeJsonList::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
             if (HEDLEY_UNLIKELY(item->id == data)) {
-                nodeList = std::make_unique<NodeList>(L"JSON_LIST", L"JSON列表",
+                nodeList = std::make_unique<NodeList>(u"JSON_LIST", u"JSON列表",
                                                       nodLeft.get(), item.get(),
                                                       nodeSeparator.get(), nodeRight.get());
                 return;
@@ -36,7 +36,7 @@ namespace CHelper::Node {
         }
         Profile::push("linking contents to {}", data);
         Profile::push("failed to find node id -> {}", data);
-        Profile::push("unknown node id -> {} (in node \"{}\")", id.value_or(L"UNKNOWN"), data);
+        Profile::push("unknown node id -> {} (in node \"{}\")", id.value_or(u"UNKNOWN"), data);
         throw std::runtime_error("unknown node id");
     }
 

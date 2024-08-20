@@ -24,8 +24,8 @@
     if (HEDLEY_UNLIKELY(node##Index != tokenReader.indexStack.size())) { \
         Profile::push("TokenReaderIndexError: {} {} {}",                 \
                       (node)->getNodeType()->nodeName,                   \
-                      (node)->id.value_or(L""),                          \
-                      (node)->description.value_or(L""));                \
+                      (node)->id.value_or(u""),                          \
+                      (node)->description.value_or(u""));                \
         throw std::runtime_error("TokenReaderIndexError");               \
     }
 #else
@@ -74,9 +74,9 @@ namespace CHelper {
 
         ASTNode readSimpleASTNode(const Node::NodeBase *node,
                                   TokenType::TokenType type,
-                                  const std::wstring &requireType,
+                                  const std::u16string &requireType,
                                   const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE,
-                                  std::shared_ptr<ErrorReason> (*check)(const std::wstring_view &str,
+                                  std::shared_ptr<ErrorReason> (*check)(const std::u16string_view &str,
                                                                         const TokensView &tokens) = nullptr);
 
         ASTNode readStringASTNode(const Node::NodeBase *node,

@@ -22,7 +22,7 @@ namespace CHelper::Node {
         for (const auto &item: nodes) {
             item->init(cpack);
         }
-        if (HEDLEY_LIKELY(startNodeId != L"LF")) {
+        if (HEDLEY_LIKELY(startNodeId != u"LF")) {
             for (auto &node: nodes) {
                 if (HEDLEY_UNLIKELY(node->id == startNodeId)) {
                     start = node.get();
@@ -51,28 +51,28 @@ namespace CHelper::Node {
 
     NodeBase *NodeJsonElement::getNodeJsonElement() {
         static std::unique_ptr<NodeBase> jsonString = std::make_unique<NodeJsonString>(
-                L"JSON_STRING", L"JSON字符串");
-        static std::unique_ptr<NodeBase> jsonInteger = std::make_unique<NodeJsonInteger>(
-                L"JSON_INTEGER", L"JSON整数", std::nullopt, std::nullopt);
-        static std::unique_ptr<NodeBase> jsonFloat = std::make_unique<NodeJsonFloat>(
-                L"JSON_FLOAT", L"JSON小数", std::nullopt, std::nullopt);
+                u"JSON_STRING", u"JSON字符串");
+        static std::unique_ptr<NodeBase> jsonInteger = NodeJsonInteger::make(
+                u"JSON_INTEGER", u"JSON整数", std::nullopt, std::nullopt);
+        static std::unique_ptr<NodeBase> jsonFloat = NodeJsonFloat::make(
+                u"JSON_FLOAT", u"JSON小数", std::nullopt, std::nullopt);
         static std::unique_ptr<NodeBase> jsonNull = std::make_unique<NodeJsonNull>(
-                L"JSON_NULL", L"JSON空值");
+                u"JSON_NULu", u"JSON空值");
         static std::unique_ptr<NodeBase> jsonBoolean = std::make_unique<NodeJsonBoolean>(
-                L"JSON_BOOLEAN", L"JSON布尔值", std::nullopt, std::nullopt);
+                u"JSON_BOOLEAN", u"JSON布尔值", std::nullopt, std::nullopt);
         static std::unique_ptr<NodeBase> jsonList = std::make_unique<NodeJsonList>(
-                L"JSON_LIST", L"JSON列表");
+                u"JSON_LIST", u"JSON列表");
         static std::unique_ptr<NodeBase> jsonObject = std::make_unique<NodeJsonObject>(
-                L"JSON_OBJECT", L"JSON对象");
+                u"JSON_OBJECT", u"JSON对象");
         static std::unique_ptr<NodeBase> jsonElement = std::make_unique<NodeOr>(
-                L"JSON_ELEMENT", L"JSON元素",
+                u"JSON_ELEMENT", u"JSON元素",
                 std::vector<const NodeBase *>{
                         jsonBoolean.get(), jsonFloat.get(),
                         jsonInteger.get(), jsonNull.get(),
                         jsonString.get(), jsonList.get(),
                         jsonObject.get()},
-                false, false,true,
-                L"类型不匹配，当前内容不是有效的JSON元素");
+                false, false, true,
+                u"类型不匹配，当前内容不是有效的JSON元素");
         return jsonElement.get();
     }
 
@@ -99,7 +99,7 @@ namespace CHelper::Node {
 
     void from_binary(BinaryReader &binaryReader, std::unique_ptr<NodeJsonElement> &t) {
         t = std::make_unique<NodeJsonElement>();
-        t->id = std::make_optional<std::wstring>();
+        t->id = std::make_optional<std::u16string>();
         binaryReader.decode(t->id.value());
         binaryReader.decode(t->nodes);
         if (HEDLEY_UNLIKELY(!t->id.has_value())) {

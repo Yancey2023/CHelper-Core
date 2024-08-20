@@ -52,7 +52,7 @@ namespace CHelper {
 
         void encode(const std::string &t);
 
-        void encode(const std::wstring &t);
+        void encode(const std::u16string &t);
 
         template<class T>
         void encode(const std::shared_ptr<T> &t) {
@@ -136,7 +136,7 @@ namespace CHelper {
 
         void decode(std::string &t);
 
-        void decode(std::wstring &t);
+        void decode(std::u16string &t);
 
         template<class T>
         void decode(std::vector<T> &t) {

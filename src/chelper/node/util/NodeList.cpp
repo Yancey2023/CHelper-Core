@@ -6,8 +6,8 @@
 
 namespace CHelper::Node {
 
-    NodeList::NodeList(const std::optional<std::wstring> &id,
-                       const std::optional<std::wstring> &description,
+    NodeList::NodeList(const std::optional<std::u16string> &id,
+                       const std::optional<std::u16string> &description,
                        NodeBase *nodeLeft,
                        NodeBase *nodeElement,
                        NodeBase *nodeSeparator,
@@ -18,12 +18,12 @@ namespace CHelper::Node {
           nodeSeparator(nodeSeparator),
           nodeRight(nodeRight),
           nodeElementOrRight(
-                  L"ELEMENT_OR_RIGHT", L"element or right",
+                  u"ELEMENT_OR_RIGHT", u"element or right",
                   std::vector<const NodeBase *>{
                           nodeElement, nodeRight},
                   false),
           nodeSeparatorOrRight(
-                  L"SEPARATOR_OR_RIGHT", L"separator or right",
+                  u"SEPARATOR_OR_RIGHT", u"separator or right",
                   std::vector<const NodeBase *>{
                           nodeSeparator, nodeRight},
                   false) {
@@ -106,7 +106,7 @@ namespace CHelper::Node {
         }
     }
 
-    std::optional<std::wstring> NodeList::collectDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::u16string> NodeList::collectDescription(const ASTNode *node, size_t index) const {
         return std::nullopt;
     }
 

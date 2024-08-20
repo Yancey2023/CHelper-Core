@@ -8,18 +8,18 @@ namespace CHelper::Old2New {
 
     DataFix::DataFix(size_t start,
                      size_t anEnd,
-                     std::wstring content)
+                     std::u16string content)
         : start(start),
           end(anEnd),
           content(std::move(content)) {}
 
     DataFix::DataFix(const TokensView &tokens,
-                     std::wstring content)
+                     std::u16string content)
         : start(tokens.getStartIndex()),
           end(tokens.getEndIndex()),
           content(std::move(content)) {}
 
-    std::wstring trip(std::wstring str) {
+    std::u16string trip(std::u16string str) {
         str.erase(0, str.find_first_not_of(' '));
         str.erase(str.find_last_not_of(' ') + 1);
         return str;
@@ -43,13 +43,13 @@ namespace CHelper::Old2New {
         });
     }
 
-    bool expectString(TokenReader &tokenReader, const std::wstring &str) {
+    bool expectString(TokenReader &tokenReader, const std::u16string &str) {
         return expect(tokenReader, [&str](const Token &token) {
             return token.type == TokenType::STRING && token.content == str;
         });
     }
 
-    bool expectSymbol(TokenReader &tokenReader, wchar_t ch) {
+    bool expectSymbol(TokenReader &tokenReader, char16_t ch) {
         return expect(tokenReader, [&ch](const Token &token) {
             return token.type == TokenType::SYMBOL && token.content.length() == 1 && token.content[0] == ch;
         });
@@ -61,7 +61,7 @@ namespace CHelper::Old2New {
         });
     }
 
-    bool expectList(TokenReader &tokenReader, wchar_t leftSymbol, wchar_t rightSymbol) {
+    bool expectList(TokenReader &tokenReader, char16_t leftSymbol, char16_t rightSymbol) {
         tokenReader.push();
         if (!expectSymbol(tokenReader, leftSymbol)) {
             tokenReader.restore();
@@ -94,7 +94,7 @@ namespace CHelper::Old2New {
             return true;
         }
         tokenReader.push();
-        if (!expectSymbol(tokenReader, L'@')) {
+        if (!expectSymbol(tokenReader, u'@')) {
             tokenReader.restore();
             return false;
         }
@@ -102,13 +102,13 @@ namespace CHelper::Old2New {
             tokenReader.restore();
             return false;
         }
-        expectList(tokenReader, L'[', L']');
+        expectList(tokenReader, u'[', u']');
         return true;
     }
 
     bool expectRelativeFloat(TokenReader &tokenReader) {
         tokenReader.push();
-        if (expectSymbol(tokenReader, L'~') || expectSymbol(tokenReader, L'^')) {
+        if (expectSymbol(tokenReader, u'~') || expectSymbol(tokenReader, u'^')) {
             tokenReader.push();
             if (!tokenReader.skipWhitespace()) {
                 tokenReader.pop();
@@ -146,13 +146,13 @@ namespace CHelper::Old2New {
         return true;
     }
 
-    std::wstring blockOld2New(const BlockFixData &blockFixData, const TokensView &blockIdToken, const TokensView &dataValueToken) {
+    std::u16string blockOld2New(const BlockFixData &blockFixData, const TokensView &blockIdToken, const TokensView &dataValueToken) {
         // get block id
-        std::wstring blockId = std::wstring(blockIdToken.toString());
+        std::u16string blockId = std::u16string(blockIdToken.toString());
         // get block data value
-        wchar_t *end;
-        std::wstring dataValueStr = std::wstring(dataValueToken.toString());
-        std::intmax_t dataValue = std::wcstoimax(dataValueStr.c_str(), &end, 10);
+        char *end;
+        std::string dataValueStr = utf8::utf16to8(dataValueToken.toString());
+        std::intmax_t dataValue = std::strtoimax(dataValueStr.c_str(), &end, 10);
         if (HEDLEY_UNLIKELY(end == dataValueStr.c_str() || *end != '\0' ||
                             dataValue == HUGE_VALF || dataValue == -HUGE_VALF ||
                             dataValue < 0)) {
@@ -160,8 +160,8 @@ namespace CHelper::Old2New {
             return blockId;
         }
         // get key
-        std::wstring front = L"minecraft:";
-        std::wstring key = trip(blockId);
+        std::u16string front = u"minecraft:";
+        std::u16string key = trip(blockId);
         bool isStartWithMinecraft = key.size() > front.size() && key.substr(0, front.size()) == front;
         if (isStartWithMinecraft) {
             key = key.substr(front.size());
@@ -178,9 +178,9 @@ namespace CHelper::Old2New {
         }
         const auto &blockIdWithBlockState = dataValueIter->second;
         if (blockIdWithBlockState.first.has_value()) {
-            return front + blockIdWithBlockState.first.value() + blockIdWithBlockState.second.value_or(L"");
+            return front + blockIdWithBlockState.first.value() + blockIdWithBlockState.second.value_or(u"");
         } else {
-            return blockIdWithBlockState.first.value_or(blockId) + blockIdWithBlockState.second.value_or(L"");
+            return blockIdWithBlockState.first.value_or(blockId) + blockIdWithBlockState.second.value_or(u"");
         }
     }
 
@@ -193,7 +193,7 @@ namespace CHelper::Old2New {
         tokenReader.push();
         // execute
         tokenReader.push();
-        if (!expectString(tokenReader, L"execute")) {
+        if (!expectString(tokenReader, u"execute")) {
             tokenReader.restore();
             tokenReader.restore();
             return false;
@@ -218,13 +218,13 @@ namespace CHelper::Old2New {
         // end?
         tokenReader.pop();
         if (depth > 0) {
-            dataFixList.emplace_back(tokens1, L"");
+            dataFixList.emplace_back(tokens1, u"");
         }
-        std::wstring targetSelector = std::wstring(tokens2.toString());
-        if (trip(targetSelector) != L"@s") {
-            dataFixList.emplace_back(tokens2, L" as" + targetSelector + L" at @s");
+        std::u16string targetSelector = std::u16string(tokens2.toString());
+        if (trip(targetSelector) != u"@s") {
+            dataFixList.emplace_back(tokens2, u" as" + targetSelector + u" at @s");
         } else {
-            dataFixList.emplace_back(tokens2, L"");
+            dataFixList.emplace_back(tokens2, u"");
         }
         bool isHavePosition = false;
         tokens3.forEach([&isHavePosition](const Token &token) {
@@ -233,14 +233,14 @@ namespace CHelper::Old2New {
             }
         });
         if (isHavePosition) {
-            dataFixList.emplace_back(tokens3, L" positioned" + std::wstring(tokens3.toString()));
+            dataFixList.emplace_back(tokens3, u" positioned" + std::u16string(tokens3.toString()));
         } else {
-            dataFixList.emplace_back(tokens3, L"");
+            dataFixList.emplace_back(tokens3, u"");
         }
         tokenReader.push();
         // detect
         tokenReader.push();
-        if (!expectString(tokenReader, L"detect")) {
+        if (!expectString(tokenReader, u"detect")) {
             tokenReader.pop();
             return true;
         }
@@ -262,18 +262,18 @@ namespace CHelper::Old2New {
         tokenReader.push();
         if (expectNumber(tokenReader)) {
             TokensView tokens6 = tokenReader.collect();
-            dataFixList.emplace_back(tokens4, L" if block");
+            dataFixList.emplace_back(tokens4, u" if block");
             dataFixList.emplace_back(tokens5, blockOld2New(blockFixData, tokens5, tokens6));
-            dataFixList.emplace_back(tokens6, L"");
-        } else if (expectSymbol(tokenReader, L'[')) {
+            dataFixList.emplace_back(tokens6, u"");
+        } else if (expectSymbol(tokenReader, u'[')) {
             tokenReader.restore();
             tokenReader.push();
-            expectList(tokenReader, L'[', L']');
+            expectList(tokenReader, u'[', u']');
             TokensView tokens6 = tokenReader.collect();
-            dataFixList.emplace_back(tokens4, L" if block");
+            dataFixList.emplace_back(tokens4, u" if block");
             tokens6.forEach([&dataFixList](const Token &token) {
-                if (token.type == TokenType::SYMBOL && token.content == L":") {
-                    dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), L"=");
+                if (token.type == TokenType::SYMBOL && token.content == u":") {
+                    dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), u"=");
                 }
             });
         } else {
@@ -290,7 +290,7 @@ namespace CHelper::Old2New {
         size_t depth = 0;
         while (true) {
             tokenReader.push();
-            expectSymbol(tokenReader, L'/');
+            expectSymbol(tokenReader, u'/');
             if (!expectCommandExecute(blockFixData, tokenReader, dataFixList, depth)) {
                 tokenReader.restore();
                 break;
@@ -304,7 +304,7 @@ namespace CHelper::Old2New {
         tokenReader.push();
         tokenReader.skipWhitespace();
         TokensView tokens = tokenReader.collect();
-        dataFixList.emplace_back(tokens, L" run ");
+        dataFixList.emplace_back(tokens, u" run ");
         return true;
     }
 
@@ -316,7 +316,7 @@ namespace CHelper::Old2New {
     bool expectCommandSummon(TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         tokenReader.push();
         // summon
-        if (!expectString(tokenReader, L"summon")) {
+        if (!expectString(tokenReader, u"summon")) {
             tokenReader.restore();
             return false;
         }
@@ -334,7 +334,7 @@ namespace CHelper::Old2New {
         // end?
         tokenReader.push();
         TokensView tokens1 = tokenReader.collect();
-        dataFixList.emplace_back(tokens1, L" 0 0");
+        dataFixList.emplace_back(tokens1, u" 0 0");
         // minecraft:become_charged
         if (!expectString(tokenReader)) {
             return true;
@@ -355,12 +355,12 @@ namespace CHelper::Old2New {
     bool expectCommandStructure(TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         tokenReader.push();
         // structure
-        if (!expectString(tokenReader, L"structure")) {
+        if (!expectString(tokenReader, u"structure")) {
             tokenReader.restore();
             return false;
         }
         // load
-        if (!expectString(tokenReader, L"load")) {
+        if (!expectString(tokenReader, u"load")) {
             tokenReader.restore();
             return false;
         }
@@ -396,7 +396,7 @@ namespace CHelper::Old2New {
         // end?
         tokenReader.push();
         TokensView tokens1 = tokenReader.collect();
-        dataFixList.emplace_back(tokens1, L" true");
+        dataFixList.emplace_back(tokens1, u" true");
         // [integrity: float]
         if (!expectNumber(tokenReader)) {
             return true;
@@ -417,7 +417,7 @@ namespace CHelper::Old2New {
     bool expectCommandSetBlock(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         tokenReader.push();
         // setblock
-        if (!expectString(tokenReader, L"setblock")) {
+        if (!expectString(tokenReader, u"setblock")) {
             tokenReader.restore();
             return false;
         }
@@ -439,15 +439,15 @@ namespace CHelper::Old2New {
         if (expectNumber(tokenReader)) {
             TokensView tokens2 = tokenReader.collect();
             dataFixList.emplace_back(tokens1, blockOld2New(blockFixData, tokens1, tokens2));
-            dataFixList.emplace_back(tokens2, L"");
-        } else if (expectSymbol(tokenReader, L'[')) {
+            dataFixList.emplace_back(tokens2, u"");
+        } else if (expectSymbol(tokenReader, u'[')) {
             tokenReader.restore();
             tokenReader.push();
-            expectList(tokenReader, L'[', L']');
+            expectList(tokenReader, u'[', u']');
             TokensView tokens2 = tokenReader.collect();
             tokens2.forEach([&dataFixList](const Token &token) {
-                if (token.type == TokenType::SYMBOL && token.content == L":") {
-                    dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), L"=");
+                if (token.type == TokenType::SYMBOL && token.content == u":") {
+                    dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), u"=");
                 }
             });
         } else {
@@ -470,7 +470,7 @@ namespace CHelper::Old2New {
     bool expectCommandFill(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         tokenReader.push();
         // fill
-        if (!expectString(tokenReader, L"fill")) {
+        if (!expectString(tokenReader, u"fill")) {
             tokenReader.restore();
             return false;
         }
@@ -499,15 +499,15 @@ namespace CHelper::Old2New {
         if (expectNumber(tokenReader)) {
             TokensView tokens2 = tokenReader.collect();
             dataFixList.emplace_back(tokens1, blockOld2New(blockFixData, tokens1, tokens2));
-            dataFixList.emplace_back(tokens2, L"");
-        } else if (expectSymbol(tokenReader, L'[')) {
+            dataFixList.emplace_back(tokens2, u"");
+        } else if (expectSymbol(tokenReader, u'[')) {
             tokenReader.restore();
             tokenReader.push();
-            expectList(tokenReader, L'[', L']');
+            expectList(tokenReader, u'[', u']');
             TokensView tokens2 = tokenReader.collect();
             tokens2.forEach([&dataFixList](const Token &token) {
-                if (token.type == TokenType::SYMBOL && token.content == L":") {
-                    dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), L"=");
+                if (token.type == TokenType::SYMBOL && token.content == u":") {
+                    dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), u"=");
                 }
             });
         } else {
@@ -516,7 +516,7 @@ namespace CHelper::Old2New {
             return true;
         }
         // replace
-        if (!expectString(tokenReader, L"replace")) {
+        if (!expectString(tokenReader, u"replace")) {
             return true;
         }
         // stone
@@ -531,15 +531,15 @@ namespace CHelper::Old2New {
         if (expectNumber(tokenReader)) {
             TokensView tokens4 = tokenReader.collect();
             dataFixList.emplace_back(tokens3, blockOld2New(blockFixData, tokens3, tokens4));
-            dataFixList.emplace_back(tokens4, L"");
-        } else if (expectSymbol(tokenReader, L'[')) {
+            dataFixList.emplace_back(tokens4, u"");
+        } else if (expectSymbol(tokenReader, u'[')) {
             tokenReader.restore();
             tokenReader.push();
-            expectList(tokenReader, L'[', L']');
+            expectList(tokenReader, u'[', u']');
             TokensView tokens4 = tokenReader.collect();
             tokens4.forEach([&dataFixList](const Token &token) {
-                if (token.type == TokenType::SYMBOL && token.content == L":") {
-                    dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), L"=");
+                if (token.type == TokenType::SYMBOL && token.content == u":") {
+                    dataFixList.emplace_back(token.getStartIndex(), token.getEndIndex(), u"=");
                 }
             });
         } else {
@@ -558,7 +558,7 @@ namespace CHelper::Old2New {
     bool expectCommandTestForSetBlock(const BlockFixData &blockFixData, TokenReader &tokenReader, std::vector<DataFix> &dataFixList) {
         tokenReader.push();
         // testforblock
-        if (!expectString(tokenReader, L"testforblock")) {
+        if (!expectString(tokenReader, u"testforblock")) {
             tokenReader.restore();
             return false;
         }
@@ -585,7 +585,7 @@ namespace CHelper::Old2New {
         TokensView tokens2 = tokenReader.collect();
         // end
         dataFixList.emplace_back(tokens1, blockOld2New(blockFixData, tokens1, tokens2));
-        dataFixList.emplace_back(tokens2, L"");
+        dataFixList.emplace_back(tokens2, u"");
         tokenReader.pop();
         return true;
     }
@@ -595,7 +595,7 @@ namespace CHelper::Old2New {
             return false;
         }
         expectCommandExecuteRepeat(blockFixData, tokenReader, dataFixList);
-        expectSymbol(tokenReader, L'/');
+        expectSymbol(tokenReader, u'/');
         expectCommandFill(blockFixData, tokenReader, dataFixList);
         expectCommandSetBlock(blockFixData, tokenReader, dataFixList);
         expectCommandSummon(tokenReader, dataFixList);
@@ -605,14 +605,14 @@ namespace CHelper::Old2New {
         return true;
     }
 
-    std::wstring old2new(const BlockFixData &blockFixData, const std::wstring &old) {
+    std::u16string old2new(const BlockFixData &blockFixData, const std::u16string &old) {
         TokenReader tokenReader(std::make_shared<LexerResult>(Lexer::lex(old)));
         std::vector<DataFix> dataFixList;
         expectCommand(blockFixData, tokenReader, dataFixList);
         std::sort(dataFixList.begin(), dataFixList.end(), [](const DataFix &dataFix1, const DataFix &dataFix2) {
             return dataFix1.start < dataFix2.start;
         });
-        std::wstring result;
+        std::u16string result;
         size_t index = 0;
         for (const auto &item: dataFixList) {
             if (item.start > index) {
@@ -638,10 +638,10 @@ namespace CHelper::Old2New {
     BlockFixData blockFixDataFromJson(const nlohmann::json &j) {
         BlockFixData blockFixData;
         for (const auto &item: j) {
-            const auto name = JsonUtil::read<std::wstring>(item, "name");
+            const auto name = JsonUtil::read<std::u16string>(item, "name");
             const auto data = JsonUtil::read<uint32_t>(item, "data");
-            const auto newBlockId = JsonUtil::read<std::optional<std::wstring>>(item, "newBlockId");
-            const auto blockState = JsonUtil::read<std::optional<std::wstring>>(item, "blockState");
+            const auto newBlockId = JsonUtil::read<std::optional<std::u16string>>(item, "newBlockId");
+            const auto blockState = JsonUtil::read<std::optional<std::u16string>>(item, "blockState");
             getOrCreate(blockFixData, name).insert({data, {newBlockId, blockState}});
         }
         return blockFixData;

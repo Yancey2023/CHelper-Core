@@ -9,11 +9,11 @@
 namespace CHelper::Node {
 
     static std::unique_ptr<Node::NodeSingleSymbol> nodeBlockStateLeftBracket = std::make_unique<Node::NodeSingleSymbol>(
-            L"BLOCK_STATE_LEFT_BRACKET", L"方块状态左括号", L'[');
+            u"BLOCK_STATE_LEFT_BRACKET", u"方块状态左括号", u'[');
 
     void NodeBlock::init(const CPack &cpack) {
         blockIds = cpack.blockIds;
-        nodeBlockId = std::make_shared<NodeNamespaceId>(L"BLOCK_ID", L"方块ID", L"blocks", true);
+        nodeBlockId = std::make_shared<NodeNamespaceId>(u"BLOCK_ID", u"方块ID", u"blocks", true);
         nodeBlockId->init(cpack);
     }
 
@@ -35,7 +35,7 @@ namespace CHelper::Node {
             return ASTNode::andNode(this, {blockId}, tokenReader.collect(),
                                     nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
         }
-        size_t strHash = std::hash<std::wstring_view>{}(blockId.tokens.toString());
+        size_t strHash = std::hash<std::u16string_view>{}(blockId.tokens.toString());
         std::shared_ptr<NamespaceId> currentBlock = nullptr;
         for (const auto &item: *blockIds) {
             if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash))) {
@@ -49,11 +49,11 @@ namespace CHelper::Node {
                                 nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
     }
 
-    std::optional<std::wstring> NodeBlock::collectDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::u16string> NodeBlock::collectDescription(const ASTNode *node, size_t index) const {
         if (HEDLEY_LIKELY(node->id == ASTNodeId::NODE_BLOCK_BLOCK_ID)) {
-            return L"方块ID";
+            return u"方块ID";
         } else if (HEDLEY_LIKELY(node->id == ASTNodeId::NODE_BLOCK_BLOCK_STATE)) {
-            return L"方块状态";
+            return u"方块状态";
         } else {
             return std::nullopt;
         }
@@ -70,9 +70,9 @@ namespace CHelper::Node {
     }
 
     void NodeBlock::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {
-        structure.append(isMustHave, L"方块ID");
+        structure.append(isMustHave, u"方块ID");
         if (HEDLEY_LIKELY(nodeBlockType == NodeBlockType::BLOCK_WITH_BLOCK_STATE)) {
-            structure.append(false, L"方块状态");
+            structure.append(false, u"方块状态");
         }
     }
 

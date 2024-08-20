@@ -37,16 +37,16 @@ namespace CHelper {
     }
 
     [[nodiscard]] bool TokensView::isAllWhitespace() const {
-        return std::all_of(lexerResult->allTokens.begin() + static_cast<std::wstring::difference_type>(start),
-                           lexerResult->allTokens.begin() + static_cast<std::wstring::difference_type>(end),
+        return std::all_of(lexerResult->allTokens.begin() + static_cast<std::u16string::difference_type>(start),
+                           lexerResult->allTokens.begin() + static_cast<std::u16string::difference_type>(end),
                            [](const auto &item) {
                                return item.type == TokenType::WHITE_SPACE;
                            });
     }
 
     void TokensView::forEach(std::function<void(const Token &token)> function) const {
-        std::for_each(lexerResult->allTokens.begin() + static_cast<std::wstring::difference_type>(start),
-                      lexerResult->allTokens.begin() + static_cast<std::wstring::difference_type>(end),
+        std::for_each(lexerResult->allTokens.begin() + static_cast<std::u16string::difference_type>(start),
+                      lexerResult->allTokens.begin() + static_cast<std::u16string::difference_type>(end),
                       std::move(function));
     }
 
@@ -68,7 +68,7 @@ namespace CHelper {
         return endIndex;
     }
 
-    [[nodiscard]] std::wstring_view TokensView::toString() const {
+    [[nodiscard]] std::u16string_view TokensView::toString() const {
         return cacheString;
     }
 

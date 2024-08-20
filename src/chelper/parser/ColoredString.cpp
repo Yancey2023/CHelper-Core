@@ -7,7 +7,7 @@
 
 namespace CHelper {
 
-    ColoredString::ColoredString(const std::wstring_view &str)
+    ColoredString::ColoredString(const std::u16string_view &str)
         : str(str),
           colors(str.length(), NO_COLOR) {}
 
@@ -40,8 +40,8 @@ namespace CHelper {
             return;
         }
 #endif
-        std::fill(colors.begin() + static_cast<std::wstring::difference_type>(start),
-                  colors.begin() + static_cast<std::wstring::difference_type>(end),
+        std::fill(colors.begin() + static_cast<std::u16string::difference_type>(start),
+                  colors.begin() + static_cast<std::u16string::difference_type>(end),
                   color);
     }
     void ColoredString::setColor(const TokensView &tokensView, uint32_t color) {

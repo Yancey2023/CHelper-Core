@@ -13,16 +13,16 @@ namespace CHelper {
 
     class StructureBuilder {
     private:
-        std::wstring structure;
+        std::u16string structure;
 
     public:
         bool isDirty = false;
 
         StructureBuilder &appendUnknown(bool isMustHave);
 
-        StructureBuilder &appendSymbol(wchar_t ch);
+        StructureBuilder &appendSymbol(char16_t ch);
 
-        StructureBuilder &append(const std::wstring &str);
+        StructureBuilder &append(const std::u16string &str);
 
         StructureBuilder &appendWhiteSpace();
 
@@ -30,9 +30,9 @@ namespace CHelper {
 
         StructureBuilder &appendRightBracket(bool isMustHave);
 
-        StructureBuilder &append(bool isMustHave, const std::wstring &str);
+        StructureBuilder &append(bool isMustHave, const std::u16string &str);
 
-        std::wstring build();
+        std::u16string build();
     };
 
 }// namespace CHelper

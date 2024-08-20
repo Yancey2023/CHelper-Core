@@ -15,8 +15,8 @@ namespace CHelper::Node {
     //在json数据文件并没有这个类型，添加这个节点类型只是为了更好实现json数据类型中的object类型
     class NodeJsonEntry : public NodeBase {
     public:
-        std::wstring key;
-        std::vector<std::wstring> value;
+        std::u16string key;
+        std::vector<std::u16string> value;
 
     private:
         std::unique_ptr<NodeBase> nodeKey, nodeValue, nodeEntry;
@@ -24,10 +24,10 @@ namespace CHelper::Node {
     public:
         NodeJsonEntry() = default;
 
-        NodeJsonEntry(const std::optional<std::wstring> &id,
-                      const std::optional<std::wstring> &description,
-                      std::wstring key = std::wstring(),
-                      std::vector<std::wstring> value = std::vector<std::wstring>());
+        NodeJsonEntry(const std::optional<std::u16string> &id,
+                      const std::optional<std::u16string> &description,
+                      std::u16string key = std::u16string(),
+                      std::vector<std::u16string> value = std::vector<std::u16string>());
 
         [[nodiscard]] NodeType *getNodeType() const override;
 

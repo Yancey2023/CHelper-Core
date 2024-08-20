@@ -23,14 +23,16 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 add_subdirectory(include/googletest)
 
 # ThirdParty: hedley
-include_directories(include/hedley/include)
+add_subdirectory(include/hedley)
 
 # ThirdParty: json
 include_directories(include/json/include)
 
 # ThirdParty: fmt
 add_subdirectory(include/fmt)
-link_libraries(fmt::fmt)
+
+# ThirdParty: utf8cpp
+include_directories(include/utfcpp/source)
 
 # Param Deliver
 set(CPACK_VERSION_RELEASE "1.21.20.03")
@@ -46,6 +48,7 @@ configure_file(include/param_deliver.h.in include/param_deliver.h @ONLY)
 # Sources
 file(GLOB_RECURSE SOURCE_FILE src/chelper/*.h src/chelper/*.cpp)
 include_directories(include/pch ${CMAKE_BINARY_DIR}/include)
+link_libraries(fmt::fmt hedley)
 
 # Console Application
 add_executable(CHelperCmd

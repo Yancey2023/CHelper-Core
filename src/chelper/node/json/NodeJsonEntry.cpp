@@ -13,18 +13,18 @@
 namespace CHelper::Node {
 
     static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(
-            L"JSON_LIST_ELEMENT_SEPARATOR", L"冒号", L':');
+            u"JSON_LIST_ELEMENT_SEPARATOR", u"冒号", u':');
     static std::unique_ptr<NodeBase> jsonString = std::make_unique<NodeJsonString>(
-            L"JSON_STRING", L"JSON字符串");
+            u"JSON_STRING", u"JSON字符串");
     static std::unique_ptr<NodeBase> nodeAllEntry = std::make_unique<NodeEntry>(
-            L"JSON_OBJECT_ENTRY", L"JSON对象键值对",
+            u"JSON_OBJECT_ENTRY", u"JSON对象键值对",
             jsonString.get(), nodeSeparator.get(),
             NodeJsonElement::getNodeJsonElement());
 
-    NodeJsonEntry::NodeJsonEntry(const std::optional<std::wstring> &id,
-                                 const std::optional<std::wstring> &description,
-                                 std::wstring key,
-                                 std::vector<std::wstring> value)
+    NodeJsonEntry::NodeJsonEntry(const std::optional<std::u16string> &id,
+                                 const std::optional<std::u16string> &description,
+                                 std::u16string key,
+                                 std::vector<std::u16string> value)
         : NodeBase(id, description, false),
           key(std::move(key)),
           value(std::move(value)) {}
@@ -47,18 +47,18 @@ namespace CHelper::Node {
             if (notFind) {
                 Profile::push("linking contents to {}", item);
                 Profile::push("failed to find node id -> {}", item);
-                Profile::push("unknown node id -> {} (in node \"{}\")", id.value_or(L"UNKNOWN"), item);
+                Profile::push("unknown node id -> {} (in node \"{}\")", id.value_or(u"UNKNOWN"), item);
                 throw std::runtime_error("unknown node id");
             }
         }
         nodeKey = std::make_unique<NodeText>(
-                L"JSON_OBJECT_ENTRY_KEY", L"JSON对象键",
-                NormalId::make(L'\"' + key + L'\"', description));
+                u"JSON_OBJECT_ENTRY_KEY", u"JSON对象键",
+                NormalId::make(u'\"' + key + u'\"', description));
         nodeValue = std::make_unique<NodeOr>(
-                L"JSON_OBJECT_ENTRY_VALUE", L"JSON对象值",
+                u"JSON_OBJECT_ENTRY_VALUE", u"JSON对象值",
                 std::move(valueNodes), false);
         nodeEntry = std::make_unique<NodeEntry>(
-                L"JSON_OBJECT_ENTRY", L"JSON对象键值对",
+                u"JSON_OBJECT_ENTRY", u"JSON对象键值对",
                 nodeKey.get(), nodeSeparator.get(), nodeValue.get());
     }
 
@@ -67,7 +67,7 @@ namespace CHelper::Node {
     }
 
     NodeBase *NodeJsonEntry::getNodeJsonAllEntry() {
-        static NodeJsonEntry nodeJsonAllEntry(L"NODE_JSON_ENTRY", L"JSON对象键值对");
+        static NodeJsonEntry nodeJsonAllEntry(u"NODE_JSON_ENTRY", u"JSON对象键值对");
         return &nodeJsonAllEntry;
     }
 

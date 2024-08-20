@@ -6,7 +6,7 @@
 
 namespace CHelper {
 
-    KMPMatcher::KMPMatcher(const std::wstring_view &pattern) : pattern(pattern) {
+    KMPMatcher::KMPMatcher(const std::u16string_view &pattern) : pattern(pattern) {
         next.reserve(this->pattern.length());
         next.push_back(0);
         size_t j = 0;
@@ -21,7 +21,7 @@ namespace CHelper {
         }
     }
 
-    size_t KMPMatcher::match(const std::wstring &str) {
+    size_t KMPMatcher::match(const std::u16string &str) {
         if (pattern.empty()) {
             return 0;
         }
@@ -34,7 +34,7 @@ namespace CHelper {
                 return i - j + 1;
             }
         }
-        return std::wstring::npos;
+        return std::u16string::npos;
     }
 
 }// namespace CHelper

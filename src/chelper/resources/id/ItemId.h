@@ -21,7 +21,7 @@ namespace CHelper {
     class ItemId : public NamespaceId {
     public:
         std::optional<int32_t> max;
-        std::optional<std::vector<std::wstring>> descriptions;
+        std::optional<std::vector<std::u16string>> descriptions;
 
     private:
         std::vector<std::shared_ptr<Node::NodeBase>> nodeChildren;

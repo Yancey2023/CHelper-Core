@@ -19,7 +19,7 @@ namespace CHelper {
 
     class RepeatData {
     public:
-        std::wstring id;
+        std::u16string id;
         std::vector<std::unique_ptr<Node::NodeBase>> breakNodes;
         std::vector<std::vector<std::unique_ptr<Node::NodeBase>>> repeatNodes;
         std::vector<bool> isEnd;
@@ -30,13 +30,13 @@ namespace CHelper {
     class CPack {
     public:
         Manifest manifest;
-        std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>> normalIds;
-        std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> namespaceIds;
+        std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>> normalIds;
+        std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> namespaceIds;
         std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> blockIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
         std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
         std::vector<std::unique_ptr<Node::NodeJsonElement>> jsonNodes;
         std::vector<RepeatData> repeatNodeData;
-        std::unordered_map<std::wstring, std::pair<const RepeatData *, const Node::NodeBase *>> repeatNodes;
+        std::unordered_map<std::u16string, std::pair<const RepeatData *, const Node::NodeBase *>> repeatNodes;
         std::shared_ptr<std::vector<std::unique_ptr<Node::NodePerCommand>>> commands = std::make_shared<std::vector<std::unique_ptr<Node::NodePerCommand>>>();
         std::unique_ptr<Node::NodeCommand> mainNode;
 
@@ -87,10 +87,10 @@ namespace CHelper {
 #endif
 
         [[nodiscard]] std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
-        getNormalId(const std::wstring &key) const;
+        getNormalId(const std::u16string &key) const;
 
         [[nodiscard]] std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
-        getNamespaceId(const std::wstring &key) const;
+        getNamespaceId(const std::u16string &key) const;
     };
 
 }// namespace CHelper

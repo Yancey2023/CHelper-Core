@@ -4,8 +4,6 @@
 
 #include "CHelperCmd.h"
 #include "../chelper/Core.h"
-#include <codecvt>
-#include <locale>
 
 int main() {
     //    testDir();
@@ -17,25 +15,6 @@ int main() {
     return 0;
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-
-// these two method is slow and codecvt is deprecated in c++17
-// do not use this implementation in your project.
-// you should implement it depend on your platform, such as use Windows API.
-
-static std::wstring_convert<std::codecvt_utf8<wchar_t>> utf8_conv;
-
-std::string wstring2string(const std::wstring &wstring) {
-    return utf8_conv.to_bytes(wstring);
-}
-
-std::wstring string2wstring(const std::string &string) {
-    return utf8_conv.from_bytes(string);
-}
-
-#pragma clang diagnostic pop
-
 #if CHelperOnlyReadBinary != true
 
 [[maybe_unused]] void testDir() {
@@ -44,7 +23,7 @@ std::wstring string2wstring(const std::string &string) {
                            projectDir / "test" / "test.txt",
                            true);
     //    CHelper::Test::testDir(projectDir / "resources" / "beta" / "vanilla",
-    //                           std::vector<std::wstring>{"execute run clear "}, false);
+    //                           std::vector<std::u16string>{"execute run clear "}, false);
 }
 
 [[maybe_unused]] void testBin() {
@@ -101,11 +80,11 @@ namespace CHelper::Test {
      * 读取测试文件进行测试
      */
     [[maybe_unused]] void testDir(const std::filesystem::path &cpackPath, const std::filesystem::path &testFilePath, bool isTestTime) {
-        std::vector<std::wstring> commands;
-        std::wifstream fin;
+        std::vector<std::u16string> commands;
+        std::basic_ifstream<char16_t, std::char_traits<char16_t>> fin;
         fin.open(testFilePath, std::ios::in);
         while (fin.is_open()) {
-            std::wstring str;
+            std::u16string str;
             getline(fin, str);
             if (HEDLEY_UNLIKELY(str.empty())) {
                 break;
@@ -120,7 +99,7 @@ namespace CHelper::Test {
         }
         fin.close();
         CHelper::Test::testDir(cpackPath, commands, isTestTime);
-        //        std::vector<std::wstring> commands1;
+        //        std::vector<std::u16string> commands1;
         //        for (const auto &item: commands) {
         //            for (size_t i = 0; i < item.size(); i++) {
         //                commands1.push_back(item.substr(0, i + 1));
@@ -134,11 +113,11 @@ namespace CHelper::Test {
      * 读取测试文件进行测试
      */
     [[maybe_unused]] void testBin(const std::filesystem::path &cpackPath, const std::filesystem::path &testFilePath, bool isTestTime) {
-        std::vector<std::wstring> commands;
-        std::wifstream fin;
+        std::vector<std::u16string> commands;
+        std::basic_ifstream<char16_t, std::char_traits<char16_t>> fin;
         fin.open(testFilePath, std::ios::in);
         while (fin.is_open()) {
-            std::wstring str;
+            std::u16string str;
             getline(fin, str);
             if (HEDLEY_UNLIKELY(str.empty())) {
                 break;
@@ -159,7 +138,7 @@ namespace CHelper::Test {
      * 测试程序是否可以正常运行
      */
     [[maybe_unused]] void
-    testDir(const std::filesystem::path &cpackPath, const std::vector<std::wstring> &commands, bool isTestTime) {
+    testDir(const std::filesystem::path &cpackPath, const std::vector<std::u16string> &commands, bool isTestTime) {
         Core *core;
         try {
             core = Core::createByDirectory(cpackPath);
@@ -178,7 +157,7 @@ namespace CHelper::Test {
      * 测试程序是否可以正常运行
      */
     [[maybe_unused]] void
-    testBin(const std::filesystem::path &cpackPath, const std::vector<std::wstring> &commands, bool isTestTime) {
+    testBin(const std::filesystem::path &cpackPath, const std::vector<std::u16string> &commands, bool isTestTime) {
         Core *core;
         try {
             core = Core::createByBinary(cpackPath);
@@ -197,7 +176,7 @@ namespace CHelper::Test {
      * 测试程序是否可以正常运行
      */
     [[maybe_unused]] void
-    test(Core *core, const std::vector<std::wstring> &commands, bool isTestTime) {
+    test(Core *core, const std::vector<std::u16string> &commands, bool isTestTime) {
         try {
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
@@ -235,8 +214,8 @@ namespace CHelper::Test {
                 fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
                 fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
 #endif
-                fmt::print("structure: \n", wstring2string(structure));
-                fmt::print("description: \n", wstring2string(description));
+                fmt::print("structure: \n", utf8::utf16to8(structure));
+                fmt::print("description: \n", utf8::utf16to8(description));
                 if (errorReasons.empty()) {
                     fmt::println("no error");
                 } else {
@@ -245,11 +224,11 @@ namespace CHelper::Test {
                     for (const auto &errorReason: errorReasons) {
                         fmt::print("{}. {} {}\n{}{}{}\n",
                                    ++i,
-                                   fmt::styled(wstring2string(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
-                                   fmt::styled(wstring2string(errorReason->errorReason), fg(fmt::color::cornflower_blue)),
-                                   wstring2string(command.substr(0, errorReason->start)),
-                                   fmt::styled(errorReason->start == errorReason->end ? "~" : wstring2string(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
-                                   wstring2string(command.substr((errorReason->end))));
+                                   fmt::styled(utf8::utf16to8(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
+                                   fmt::styled(utf8::utf16to8(errorReason->errorReason), fg(fmt::color::cornflower_blue)),
+                                   utf8::utf16to8(command.substr(0, errorReason->start)),
+                                   fmt::styled(errorReason->start == errorReason->end ? "~" : utf8::utf16to8(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
+                                   utf8::utf16to8(command.substr((errorReason->end))));
                     }
                 }
                 if (suggestions->empty()) {
@@ -264,22 +243,22 @@ namespace CHelper::Test {
                         }
                         fmt::print("{}. {} {}\n",
                                    ++i,
-                                   fmt::styled(wstring2string(item.content->name), fg(fmt::color::lime_green)),
-                                   fmt::styled(wstring2string(item.content->description.value_or(L"")), fg(fmt::color::cornflower_blue)));
-                        std::wstring result = command.substr(0, item.start)
+                                   fmt::styled(utf8::utf16to8(item.content->name), fg(fmt::color::lime_green)),
+                                   fmt::styled(utf8::utf16to8(item.content->description.value_or(u"")), fg(fmt::color::cornflower_blue)));
+                        std::u16string result = command.substr(0, item.start)
                                                       .append(item.content->name)
                                                       .append(command.substr(item.end));
-                        std::wstring greenPart = item.content->name;
+                        std::u16string greenPart = item.content->name;
                         if (item.end == command.length()) {
                             ASTNode astNode = Parser::parse(result, core->getCPack());
                             if (item.isAddWhitespace && astNode.isAllWhitespaceError()) {
-                                greenPart.push_back(L' ');
+                                greenPart.push_back(u' ');
                             }
                         }
                         fmt::print("{}{}{}\n",
-                                   wstring2string(command.substr(0, item.start)),
-                                   fmt::styled(wstring2string(greenPart), fg(fmt::color::lime_green)),
-                                   wstring2string(command.substr(item.end)));
+                                   utf8::utf16to8(command.substr(0, item.start)),
+                                   fmt::styled(utf8::utf16to8(greenPart), fg(fmt::color::lime_green)),
+                                   utf8::utf16to8(command.substr(item.end)));
                     }
                 }
                 fmt::print("\n");
@@ -293,7 +272,7 @@ namespace CHelper::Test {
     /**
      * 测试程序性能
      */
-    [[maybe_unused]] void test2(const std::filesystem::path &cpackPath, const std::vector<std::wstring> &commands, int times) {
+    [[maybe_unused]] void test2(const std::filesystem::path &cpackPath, const std::vector<std::u16string> &commands, int times) {
         try {
             auto core = Core::createByDirectory(cpackPath);
             fmt::print("\n");
@@ -322,7 +301,7 @@ namespace CHelper::Test {
         }
     }
 
-    [[maybe_unused]] void writeDirectory(const std::wstring &input, const std::filesystem::path &output) {
+    [[maybe_unused]] void writeDirectory(const std::u16string &input, const std::filesystem::path &output) {
         try {
             auto core = Core::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {

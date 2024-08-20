@@ -7,28 +7,28 @@
 namespace CHelper::Lexer {
 
     //字符串的结束字符
-    const std::wstring endChars = L" ,@~^/$&\"'!#%+*=[{]}\\|<>`\n";
+    const std::u16string endChars = u" ,@~^/$&\"'!#%+*=[{]}\\|<>`\n";
     //可以被识别成符号的字符，这些字符不一定是字符串的结束字符
-    const std::wstring symbols = L",@~^/$&'!#%+*=[{]}\\|<>`+-=:";
+    const std::u16string symbols = u",@~^/$&'!#%+*=[{]}\\|<>`+-=:";
 
-    bool isNum(wchar_t ch) {
+    bool isNum(char16_t ch) {
         return (ch >= '0' && ch <= '9') || ch == '.';
     }
 
-    bool isEndChar(wchar_t ch) {
-        return std::any_of(endChars.begin(), endChars.end(), [&ch](const wchar_t &endChar) {
+    bool isEndChar(char16_t ch) {
+        return std::any_of(endChars.begin(), endChars.end(), [&ch](const char16_t &endChar) {
             return ch == endChar;
         });
     }
 
-    bool isSymbol(wchar_t ch) {
-        return std::any_of(symbols.begin(), symbols.end(), [&ch](const wchar_t &endChar) {
+    bool isSymbol(char16_t ch) {
+        return std::any_of(symbols.begin(), symbols.end(), [&ch](const char16_t &endChar) {
             return ch == endChar;
         });
     }
 
     std::optional<TokenType::TokenType> getNextTokenType(StringReader &stringReader) {
-        std::optional<wchar_t> ch = stringReader.peek();
+        std::optional<char16_t> ch = stringReader.peek();
         if (!HEDLEY_UNLIKELY(ch.has_value())) {
             return std::nullopt;
         } else if (HEDLEY_UNLIKELY(ch.value() == '\n')) {
@@ -55,7 +55,7 @@ namespace CHelper::Lexer {
 
     Token nextTokenNumber(StringReader &stringReader) {
         stringReader.mark();
-        std::optional<wchar_t> ch = stringReader.peek();
+        std::optional<char16_t> ch = stringReader.peek();
         while (ch.has_value() && (isNum(ch.value()) || ch.value() == '+' || ch.value() == '-')) {
             ch = stringReader.next();
         }
@@ -71,7 +71,7 @@ namespace CHelper::Lexer {
     Token nextTokenString(StringReader &stringReader) {
         // NOTE: please ensure stringReader.peek().has_value() before call nextTokenString()
         stringReader.mark();
-        std::optional<wchar_t> ch = stringReader.peek();
+        std::optional<char16_t> ch = stringReader.peek();
         bool isDoubleQuotation = ch.value() == '"';
         if (HEDLEY_UNLIKELY(isDoubleQuotation)) {
             ch = stringReader.next();
@@ -113,7 +113,7 @@ namespace CHelper::Lexer {
         return {TokenType::LF, stringReader.posBackup, stringReader.collect()};
     }
 
-    LexerResult lex(const std::wstring &content) {
+    LexerResult lex(const std::u16string &content) {
         StringReader stringReader(content);
 #if CHelperTest == true
         Profile::push("start lex: {}", stringReader.content);

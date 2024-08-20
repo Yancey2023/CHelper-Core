@@ -24,8 +24,8 @@ namespace CHelper::Node {
         NodeText() = default;
 
         NodeText(
-                const std::optional<std::wstring> &id,
-                const std::optional<std::wstring> &description,
+                const std::optional<std::u16string> &id,
+                const std::optional<std::u16string> &description,
                 const std::shared_ptr<NormalId> &data,
                 const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getTextASTNode =
                         [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {

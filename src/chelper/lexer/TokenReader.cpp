@@ -106,9 +106,9 @@ namespace CHelper {
 
     ASTNode TokenReader::readSimpleASTNode(const Node::NodeBase *node,
                                            TokenType::TokenType type,
-                                           const std::wstring &requireType,
+                                           const std::u16string &requireType,
                                            const ASTNodeId::ASTNodeId &astNodeId,
-                                           std::shared_ptr<ErrorReason> (*check)(const std::wstring_view &str,
+                                           std::shared_ptr<ErrorReason> (*check)(const std::u16string_view &str,
                                                                                  const TokensView &tokens)) {
         skipWhitespace();
         push();
@@ -116,9 +116,9 @@ namespace CHelper {
         TokensView tokens = collect();
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_UNLIKELY(token == nullptr)) {
-            errorReason = ErrorReason::incomplete(tokens, fmt::format(L"命令不完整，需要的参数类型为{}", requireType));
+            errorReason = ErrorReason::incomplete(tokens, fmt::format(u"命令不完整，需要的参数类型为{}", requireType));
         } else if (HEDLEY_UNLIKELY(token->type != type)) {
-            errorReason = ErrorReason::typeError(tokens, fmt::format(L"类型不匹配，正确的参数类型为{}，但当前参数类型为{}", requireType, TokenType::getName(token->type)));
+            errorReason = ErrorReason::typeError(tokens, fmt::format(u"类型不匹配，正确的参数类型为{}，但当前参数类型为{}", requireType, TokenType::getName(token->type)));
         } else {
             errorReason = check == nullptr ? nullptr : check(token->content, tokens);
         }
@@ -127,18 +127,18 @@ namespace CHelper {
 
     ASTNode TokenReader::readStringASTNode(const Node::NodeBase *node,
                                            const ASTNodeId::ASTNodeId &astNodeId) {
-        return readSimpleASTNode(node, TokenType::STRING, L"字符串类型", astNodeId);
+        return readSimpleASTNode(node, TokenType::STRING, u"字符串类型", astNodeId);
     }
 
     ASTNode TokenReader::readIntegerASTNode(const Node::NodeBase *node,
                                             const ASTNodeId::ASTNodeId &astNodeId) {
         return readSimpleASTNode(
-                node, TokenType::NUMBER, L"整数类型", astNodeId,
-                [](const std::wstring_view &str, const TokensView &tokens) -> std::shared_ptr<ErrorReason> {
+                node, TokenType::NUMBER, u"整数类型", astNodeId,
+                [](const std::u16string_view &str, const TokensView &tokens) -> std::shared_ptr<ErrorReason> {
                     for (const auto &ch: str) {
                         if (HEDLEY_UNLIKELY(ch == '.')) {
                             return ErrorReason::contentError(
-                                    tokens, L"类型不匹配，正确的参数类型为整数，但当前参数类型为小数");
+                                    tokens, u"类型不匹配，正确的参数类型为整数，但当前参数类型为小数");
                         }
                     }
                     return nullptr;
@@ -148,15 +148,15 @@ namespace CHelper {
     ASTNode TokenReader::readFloatASTNode(const Node::NodeBase *node,
                                           const ASTNodeId::ASTNodeId &astNodeId) {
         return readSimpleASTNode(
-                node, TokenType::NUMBER, L"数字类型", astNodeId,
-                [](const std::wstring_view &str, const TokensView &tokens) -> std::shared_ptr<ErrorReason> {
+                node, TokenType::NUMBER, u"数字类型", astNodeId,
+                [](const std::u16string_view &str, const TokensView &tokens) -> std::shared_ptr<ErrorReason> {
                     bool isHavePoint = false;
                     for (const auto &ch: str) {
                         if (HEDLEY_LIKELY(ch != '.')) {
                             continue;
                         }
                         if (HEDLEY_UNLIKELY(isHavePoint)) {
-                            return ErrorReason::contentError(tokens, L"数字格式错误");
+                            return ErrorReason::contentError(tokens, u"数字格式错误");
                         }
                         isHavePoint = true;
                     }
@@ -166,7 +166,7 @@ namespace CHelper {
 
     ASTNode TokenReader::readSymbolASTNode(const Node::NodeBase *node,
                                            const ASTNodeId::ASTNodeId &astNodeId) {
-        return readSimpleASTNode(node, TokenType::SYMBOL, L"符号类型", astNodeId);
+        return readSimpleASTNode(node, TokenType::SYMBOL, u"符号类型", astNodeId);
     }
 
     ASTNode TokenReader::readUntilWhitespace(const Node::NodeBase *node,

@@ -7,16 +7,16 @@
 namespace CHelper {
 
     StructureBuilder &StructureBuilder::appendUnknown(bool isMustHave) {
-        return append(isMustHave, L"未知");
+        return append(isMustHave, u"未知");
     }
 
-    StructureBuilder &StructureBuilder::appendSymbol(wchar_t ch) {
+    StructureBuilder &StructureBuilder::appendSymbol(char16_t ch) {
         structure.push_back(ch);
         isDirty = true;
         return *this;
     }
 
-    StructureBuilder &StructureBuilder::append(const std::wstring &str) {
+    StructureBuilder &StructureBuilder::append(const std::u16string &str) {
         structure.append(str);
         isDirty = true;
         return *this;
@@ -31,18 +31,18 @@ namespace CHelper {
     }
 
     StructureBuilder &StructureBuilder::appendLeftBracket(bool isMustHave) {
-        return appendSymbol(isMustHave ? L'<' : L'[');
+        return appendSymbol(isMustHave ? u'<' : u'[');
     }
 
     StructureBuilder &StructureBuilder::appendRightBracket(bool isMustHave) {
-        return appendSymbol(isMustHave ? L'>' : L']');
+        return appendSymbol(isMustHave ? u'>' : u']');
     }
 
-    StructureBuilder &StructureBuilder::append(bool isMustHave, const std::wstring &str) {
+    StructureBuilder &StructureBuilder::append(bool isMustHave, const std::u16string &str) {
         return appendWhiteSpace().appendLeftBracket(isMustHave).append(str).appendRightBracket(isMustHave);
     }
 
-    std::wstring StructureBuilder::build() {
+    std::u16string StructureBuilder::build() {
         return std::move(structure);
     }
 

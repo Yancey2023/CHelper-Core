@@ -30,7 +30,7 @@ namespace CHelper {
         nlohmann::json j;
         j["isError"] = isError();
         j["astNodeId"] = id;
-        std::wstring astNodeModeStr;
+        std::u16string astNodeModeStr;
         switch (mode) {
             case CHelper::ASTNodeMode::NONE:
                 astNodeModeStr = "NONE";
@@ -49,7 +49,7 @@ namespace CHelper {
         j["nodeType"] = node->getNodeType()->nodeName;
         j["nodeDescription"] = node->description.value_or("unknown");
         j["content"] = tokens.toString();
-        std::wstring content = tokens.lexerResult->content;
+        std::u16string content = tokens.lexerResult->content;
         if (HEDLEY_LIKELY(isError())) {
             std::vector<nlohmann::json> errorReasonJsonList;
             for (const auto &item: errorReasons) {
@@ -86,7 +86,7 @@ namespace CHelper {
         nlohmann::json j;
         j["isError"] = isError();
         j["astNodeId"] = id;
-        std::wstring astNodeModeStr;
+        std::u16string astNodeModeStr;
         switch (mode) {
             case CHelper::ASTNodeMode::NONE:
                 astNodeModeStr = "NONE";
@@ -105,7 +105,7 @@ namespace CHelper {
         j["nodeType"] = node->getNodeType()->nodeName;
         j["nodeDescription"] = node->description.value_or("unknown");
         j["content"] = tokens.toString();
-        std::wstring content = tokens.lexerResult->content;
+        std::u16string content = tokens.lexerResult->content;
         if (HEDLEY_LIKELY(isError())) {
             std::vector<nlohmann::json> errorReasonJsonList;
             for (const auto &item: errorReasons) {
@@ -164,7 +164,7 @@ namespace CHelper {
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             std::vector<ASTNode> &&childNodes,
                             const TokensView *tokens,
-                            const wchar_t *errorReason,
+                            const char16_t *errorReason,
                             const ASTNodeId::ASTNodeId &id) {
         // 收集错误的节点数，如果有节点没有错就设为0
         size_t errorCount = 0;
@@ -230,7 +230,7 @@ namespace CHelper {
     ASTNode ASTNode::orNode(const Node::NodeBase *node,
                             std::vector<ASTNode> &&childNodes,
                             const TokensView &tokens,
-                            const wchar_t *errorReason,
+                            const char16_t *errorReason,
                             const ASTNodeId::ASTNodeId &id) {
         return orNode(node, std::move(childNodes), &tokens, errorReason, id);
     }
@@ -242,7 +242,7 @@ namespace CHelper {
                                         });
     }
 
-    std::optional<std::wstring> ASTNode::collectDescription(size_t index) const {
+    std::optional<std::u16string> ASTNode::collectDescription(size_t index) const {
         if (HEDLEY_UNLIKELY(index < tokens.getStartIndex() || index > tokens.getEndIndex())) {
             return std::nullopt;
         }
@@ -273,7 +273,7 @@ namespace CHelper {
     void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
 #if CHelperTest == true
-            Profile::push(std::wstring(L"collect id errors: ")
+            Profile::push(std::u16string(u"collect id errors: ")
                                   .append(node->getNodeType()->nodeName)
                                   .append(" ")
                                   .append(node->description.value_or("")));
@@ -417,11 +417,11 @@ namespace CHelper {
         }
     }
 
-    std::wstring ASTNode::getDescription(size_t index) const {
+    std::u16string ASTNode::getDescription(size_t index) const {
 #if CHelperTest == true
-        Profile::push("start getting description: {}", std::wstring(tokens.toString()));
+        Profile::push("start getting description: {}", std::u16string(tokens.toString()));
 #endif
-        auto result = collectDescription(index).value_or(L"未知");
+        auto result = collectDescription(index).value_or(u"未知");
 #if CHelperTest == true
         Profile::pop();
 #endif
@@ -448,7 +448,7 @@ namespace CHelper {
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getIdErrors() const {
         std::vector<std::shared_ptr<ErrorReason>> input;
 #if CHelperTest == true
-        Profile::push("start getting id error: " + std::wstring(tokens.toString()));
+        Profile::push("start getting id error: " + std::u16string(tokens.toString()));
 #endif
         collectIdErrors(input);
 #if CHelperTest == true
@@ -460,7 +460,7 @@ namespace CHelper {
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
         std::vector<std::shared_ptr<ErrorReason>> result = errorReasons;
 #if CHelperTest == true
-        Profile::push("start getting error reasons: {}", std::wstring(tokens.toString()));
+        Profile::push("start getting error reasons: {}", std::u16string(tokens.toString()));
 #endif
         collectIdErrors(result);
 #if CHelperTest == true
@@ -494,7 +494,7 @@ namespace CHelper {
     }
 
     std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
-        std::wstring_view str = tokens.toString();
+        std::u16string_view str = tokens.toString();
 #if CHelperTest == true
         Profile::push("start getting suggestions: {}", str);
 #endif
@@ -509,7 +509,7 @@ namespace CHelper {
         return Suggestions::filter(suggestions);
     }
 
-    std::wstring ASTNode::getStructure() const {
+    std::u16string ASTNode::getStructure() const {
 #if CHelperTest == true
         Profile::push("start getting structure: {}", tokens.toString());
 #endif
@@ -518,7 +518,7 @@ namespace CHelper {
 #if CHelperTest == true
         Profile::pop();
 #endif
-        std::wstring result = structureBuilder.build();
+        std::u16string result = structureBuilder.build();
         while (HEDLEY_UNLIKELY(!result.empty() && result[result.size() - 1] == '\n')) {
             result.pop_back();
         }
@@ -527,7 +527,7 @@ namespace CHelper {
 
     ColoredString ASTNode::getColors(const Theme &theme) const {
 #if CHelperTest == true
-        Profile::push("start getting colors: {}", std::wstring(tokens.toString()));
+        Profile::push("start getting colors: {}", std::u16string(tokens.toString()));
 #endif
         ColoredString coloredString(tokens.lexerResult->content);
         collectColor(coloredString, theme);

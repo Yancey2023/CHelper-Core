@@ -10,15 +10,15 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NodeBase> nodeInteger = std::make_shared<NodeInteger>(
-            L"INTEGER", L"整数", std::nullopt, std::nullopt);
+    static std::shared_ptr<NodeBase> nodeInteger = NodeInteger::make(
+            u"INTEGER", u"整数", std::nullopt, std::nullopt);
     static std::shared_ptr<NodeBase> nodeLevel = std::make_shared<NodeText>(
-            L"L", L"等级", NormalId::make(L"L", L"等级"));
+            u"u", u"等级", NormalId::make(u"u", u"等级"));
     static std::shared_ptr<NodeBase> levelXp = std::make_shared<NodeAnd>(
-            L"LEVEL_XP", L"等级经验", WhitespaceMode::NO_WHITESPACE,
+            u"LEVEL_XP", u"等级经验", WhitespaceMode::NO_WHITESPACE,
             std::vector<const NodeBase *>{nodeInteger.get(), nodeLevel.get()});
     static std::shared_ptr<NodeBase> xp = std::make_shared<NodeOr>(
-            L"XP", L"经验",
+            u"XP", u"经验",
             std::vector<const NodeBase *>{levelXp.get(), nodeInteger.get()},
             false, true);
 
@@ -33,7 +33,7 @@ namespace CHelper::Node {
     void NodeXpInteger::collectStructure(const ASTNode *astNode,
                                          StructureBuilder &structure,
                                          bool isMustHave) const {
-        structure.append(isMustHave, description.value_or(L"经验值"));
+        structure.append(isMustHave, description.value_or(u"经验值"));
     }
 
     bool NodeXpInteger::collectColor(const ASTNode *astNode,

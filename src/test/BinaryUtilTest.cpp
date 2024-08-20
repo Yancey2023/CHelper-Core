@@ -74,47 +74,47 @@ void testNode(CHelper::CPack &cpack,
 }
 
 TEST(BinaryUtilTest, String) {
-    auto getInstance1 = []() { return L""; };
-    auto getInstance2 = []() { return L"Yancey"; };
+    auto getInstance1 = []() { return u""; };
+    auto getInstance2 = []() { return u"Yancey"; };
     auto testEqual = [](const auto &t1, const auto &t2) -> void {
         EXPECT_EQ(t1, t2);
     };
-    test<std::wstring>({getInstance1, getInstance2}, testEqual);
+    test<std::u16string>({getInstance1, getInstance2}, testEqual);
 }
 
 TEST(BinaryUtilTest, OptioanlString) {
-    auto getInstance1 = []() { return L""; };
-    auto getInstance2 = []() { return L"Yancey"; };
+    auto getInstance1 = []() { return u""; };
+    auto getInstance2 = []() { return u"Yancey"; };
     auto getInstance3 = []() { return std::nullopt; };
     auto testEqual = [](const auto &t1, const auto &t2) -> void {
         EXPECT_EQ(t1, t2);
     };
-    test<std::optional<std::wstring>>({getInstance1, getInstance2, getInstance3}, testEqual);
+    test<std::optional<std::u16string>>({getInstance1, getInstance2, getInstance3}, testEqual);
 }
 
 TEST(BinaryUtilTest, Manifest) {
     auto getInstance1 = []() -> CHelper::Manifest {
-        return {L"name", L"description",
-                L"minecraftVersion", L"author",
-                L"updateDate", L"packId",
+        return {u"name", u"description",
+                u"minecraftVersion", u"author",
+                u"updateDate", u"packId",
                 1, true, true};
     };
     auto getInstance2 = []() -> CHelper::Manifest {
-        return {L"name", std::nullopt,
-                L"minecraftVersion", L"author",
-                L"updateDate", L"packId",
+        return {u"name", std::nullopt,
+                u"minecraftVersion", u"author",
+                u"updateDate", u"packId",
                 2, std::nullopt, true};
     };
     auto getInstance3 = []() -> CHelper::Manifest {
-        return {L"name", L"description",
-                std::nullopt, L"author",
-                L"updateDate", L"packId",
+        return {u"name", u"description",
+                std::nullopt, u"author",
+                u"updateDate", u"packId",
                 3, false, std::nullopt};
     };
     auto getInstance4 = []() -> CHelper::Manifest {
         return {std::nullopt, std::nullopt,
-                std::nullopt, L"author",
-                L"updateDate", L"packId",
+                std::nullopt, u"author",
+                u"updateDate", u"packId",
                 5, std::nullopt, std::nullopt};
     };
     auto testEqual = [](const auto &t1, const auto &t2) -> void {
@@ -132,9 +132,9 @@ TEST(BinaryUtilTest, Manifest) {
 }
 
 TEST(BinaryUtilTest, NormalId) {
-    auto getInstance1 = []() { return CHelper::NormalId::make(L"name", L"description"); };
-    auto getInstance2 = []() { return CHelper::NormalId::make(L"name", L""); };
-    auto getInstance3 = []() { return CHelper::NormalId::make(L"name", std::nullopt); };
+    auto getInstance1 = []() { return CHelper::NormalId::make(u"name", u"description"); };
+    auto getInstance2 = []() { return CHelper::NormalId::make(u"name", u""); };
+    auto getInstance3 = []() { return CHelper::NormalId::make(u"name", std::nullopt); };
     auto testEqual = [](const auto &t1, const auto &t2) -> void {
         EXPECT_EQ(t1->name, t2->name);
         EXPECT_EQ(t1->description, t2->description);
@@ -242,8 +242,8 @@ TEST(BinaryUtilTest, CPackNormalIds) {
         exit(-1);
     }
     auto testEqual = [](
-                             const std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>> &t1,
-                             const std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>> &t2) -> void {
+                             const std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>> &t1,
+                             const std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>> &t2) -> void {
         ASSERT_EQ(t1.size(), t2.size());
         auto it1 = t1.begin();
         while (it1 != t1.end()) {
@@ -258,7 +258,7 @@ TEST(BinaryUtilTest, CPackNormalIds) {
             it1++;
         }
     };
-    test<std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>>>(
+    test<std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>>>(
             [&cpack]() { return cpack->normalIds; }, testEqual);
 }
 
@@ -272,8 +272,8 @@ TEST(BinaryUtilTest, CPackNamespaceId) {
         exit(-1);
     }
     auto testEqual = [](
-                             const std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>> &t1,
-                             const std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>> &t2) -> void {
+                             const std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>> &t1,
+                             const std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>> &t2) -> void {
         ASSERT_EQ(t1.size(), t2.size());
         auto it1 = t1.begin();
         while (it1 != t1.end()) {
@@ -289,7 +289,7 @@ TEST(BinaryUtilTest, CPackNamespaceId) {
             it1++;
         }
     };
-    test<std::unordered_map<std::wstring, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>>>(
+    test<std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>>>(
             [&cpack]() { return cpack->namespaceIds; }, testEqual);
 }
 
@@ -313,8 +313,8 @@ TEST(BinaryUtilTest, NodeJsonElement) {
         EXPECT_EQ(t1.descriptionFalse, t2.descriptionFalse);
     };
     CHelper::Node::NodeJsonBoolean node(
-            L"ID", L"description",
-            L"descriptionTrue", L"descriptionFalse");
+            u"ID", u"description",
+            u"descriptionTrue", u"descriptionFalse");
     testNode<CHelper::Node::NodeJsonBoolean>(*cpack, [&node]() { return node; }, testEqual);
 }
 
@@ -341,24 +341,40 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
             *cpack,
             {
                     []() {
-                        return CHelper::Node::NodeJsonInteger{
-                                L"ID", L"description",
-                                0, 3};
+                        CHelper::Node::NodeJsonInteger node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = 0;
+                        node.max = 3;
+                        return node;
                     },
                     []() {
-                        return CHelper::Node::NodeJsonInteger{
-                                L"ID", L"description",
-                                std::nullopt, 3};
+                        CHelper::Node::NodeJsonInteger node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = std::nullopt;
+                        node.max = 3;
+                        return node;
                     },
                     []() {
-                        return CHelper::Node::NodeJsonInteger{
-                                L"ID", L"description",
-                                1, std::nullopt};
+                        CHelper::Node::NodeJsonInteger node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = 1;
+                        node.max = std::nullopt;
+                        return node;
                     },
                     []() {
-                        return CHelper::Node::NodeJsonInteger{
-                                L"ID", L"description",
-                                std::nullopt, std::nullopt};
+                        CHelper::Node::NodeJsonInteger node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = std::nullopt;
+                        node.max = std::nullopt;
+                        return node;
                     },
             },
             testEqual);
@@ -387,24 +403,40 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
             *cpack,
             {
                     []() {
-                        return CHelper::Node::NodeJsonFloat{
-                                L"ID", L"description",
-                                0.0F, 3.0F};
+                        CHelper::Node::NodeJsonFloat node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = 0.0F;
+                        node.max = 3.0F;
+                        return node;
                     },
                     []() {
-                        return CHelper::Node::NodeJsonFloat{
-                                L"ID", L"description",
-                                std::nullopt, 3.0F};
+                        CHelper::Node::NodeJsonFloat node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = std::nullopt;
+                        node.max = 3.0F;
+                        return node;
                     },
                     []() {
-                        return CHelper::Node::NodeJsonFloat{
-                                L"ID", L"description",
-                                1.0F, std::nullopt};
+                        CHelper::Node::NodeJsonFloat node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = 1.0F;
+                        node.max = std::nullopt;
+                        return node;
                     },
                     []() {
-                        return CHelper::Node::NodeJsonFloat{
-                                L"ID", L"description",
-                                std::nullopt, std::nullopt};
+                        CHelper::Node::NodeJsonFloat node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = std::nullopt;
+                        node.max = std::nullopt;
+                        return node;
                     },
             },
             testEqual);
@@ -429,6 +461,6 @@ TEST(BinaryUtilTest, NodeJsonNull) {
     };
     testNode<CHelper::Node::NodeJsonNull>(
             *cpack,
-            []() { return CHelper::Node::NodeJsonNull{L"ID", L"description"}; },
+            []() { return CHelper::Node::NodeJsonNull{u"ID", u"description"}; },
             testEqual);
 }

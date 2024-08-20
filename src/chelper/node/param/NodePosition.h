@@ -13,8 +13,8 @@ namespace CHelper::Node {
 
     class NodePosition : public NodeBase {
     public:
-        NodePosition(const std::optional<std::wstring> &id,
-                     const std::optional<std::wstring> &description);
+        NodePosition(const std::optional<std::u16string> &id,
+                     const std::optional<std::u16string> &description);
 
         NodePosition() = default;
 

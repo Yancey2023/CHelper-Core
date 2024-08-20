@@ -14,10 +14,10 @@ namespace CHelper {
 
     class LexerResult {
     public:
-        const std::wstring content;
+        const std::u16string content;
         const std::vector<Token> allTokens;
 
-        LexerResult(std::wstring content, std::vector<Token> allTokens);
+        LexerResult(std::u16string content, std::vector<Token> allTokens);
     };
 
 }// namespace CHelper

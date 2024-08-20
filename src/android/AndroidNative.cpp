@@ -5,19 +5,19 @@
 #include "../chelper/Core.h"
 #include "pch.h"
 
-std::wstring jstring2wstring(JNIEnv *env, jstring jString) {
+std::u16string jstring2u16string(JNIEnv *env, jstring jString) {
     if (HEDLEY_UNLIKELY(jString == nullptr)) {
         return {};
     }
     jsize length = env->GetStringLength(jString);
     const jchar *jchars = env->GetStringChars(jString, nullptr);
-    std::wstring str = std::wstring(reinterpret_cast<const wchar_t *>(jchars), length);
+    std::u16string str = std::u16string(reinterpret_cast<const char16_t *>(jchars), length);
     env->ReleaseStringChars(jString, jchars);
     return str;
 }
 
-jstring wstring2jstring(JNIEnv *env, const std::wstring &wstring) {
-    return env->NewString(reinterpret_cast<const jchar *>(wstring.c_str()), static_cast<jsize>(wstring.size()));
+jstring u16string2jstring(JNIEnv *env, const std::u16string &u16string) {
+    return env->NewString(reinterpret_cast<const jchar *>(u16string.c_str()), static_cast<jsize>(u16string.size()));
 }
 
 std::string jstring2string(JNIEnv *env, jstring jString) {
@@ -34,16 +34,6 @@ jstring string2jstring(JNIEnv *env, const std::string &string) {
     return env->NewStringUTF(string.c_str());
 }
 
-JNIEnv *envGlobal = nullptr;
-
-std::string wstring2string(const std::wstring &wstring) {
-    return jstring2string(envGlobal, wstring2jstring(envGlobal, wstring));
-}
-
-std::wstring string2wstring(const std::string &string) {
-    return jstring2wstring(envGlobal, string2jstring(envGlobal, string));
-}
-
 extern "C" [[maybe_unused]] JNIEXPORT jlong JNICALL
 Java_yancey_chelper_core_CHelperCore_create0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jobject assetManager, jstring cpack_path) {
@@ -53,9 +43,7 @@ Java_yancey_chelper_core_CHelperCore_create0(
     try {
         std::string cpackPath = jstring2string(env, cpack_path);
         if (HEDLEY_UNLIKELY(assetManager == nullptr)) {
-            envGlobal = env;
             CHelper::Core *core = CHelper::Core::createByBinary(cpackPath);
-            envGlobal = nullptr;
             return reinterpret_cast<jlong>(core);
         } else {
             AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
@@ -68,12 +56,10 @@ Java_yancey_chelper_core_CHelperCore_create0(
             int numBytesRead = AAsset_read(asset, buffer, dataFileSize);
             AAsset_close(asset);
             std::istringstream iss(std::string(buffer, numBytesRead));
-            envGlobal = env;
             CHelper::Core *core = CHelper::Core::create([&iss]() {
                 CHelper::BinaryReader binaryReader(true, iss);
                 return CHelper::CPack::createByBinary(binaryReader);
             });
-            envGlobal = nullptr;
             delete[] buffer;
             return reinterpret_cast<jlong>(core);
         }
@@ -95,7 +81,7 @@ Java_yancey_chelper_core_CHelperCore_onTextChanged0(
     if (HEDLEY_UNLIKELY(core == nullptr || text == nullptr)) {
         return;
     }
-    core->onTextChanged(jstring2wstring(env, text), index);
+    core->onTextChanged(jstring2u16string(env, text), index);
 }
 
 extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
@@ -115,7 +101,7 @@ Java_yancey_chelper_core_CHelperCore_getDescription0(
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
-    return wstring2jstring(env, core->getDescription());
+    return u16string2jstring(env, core->getDescription());
 }
 
 extern "C" [[maybe_unused]] JNIEXPORT jobjectArray JNICALL
@@ -133,7 +119,7 @@ Java_yancey_chelper_core_CHelperCore_getErrorReasons0(
         jobject javaErrorReason = env->AllocObject(errorReasonClass);
         env->SetObjectField(javaErrorReason,
                             env->GetFieldID(errorReasonClass, "errorReason", "Ljava/lang/String;"),
-                            wstring2jstring(env, item.errorReason));
+                            u16string2jstring(env, item.errorReason));
         env->SetIntField(javaErrorReason,
                          env->GetFieldID(errorReasonClass, "start", "I"),
                          static_cast<jint>(item.start));
@@ -171,11 +157,11 @@ Java_yancey_chelper_core_CHelperCore_getSuggestion0(
     jobject javaSuggestion = env->AllocObject(suggestionClass);
     env->SetObjectField(javaSuggestion,
                         env->GetFieldID(suggestionClass, "name", "Ljava/lang/String;"),
-                        wstring2jstring(env, suggestion.content->name));
+                        u16string2jstring(env, suggestion.content->name));
     env->SetObjectField(javaSuggestion,
                         env->GetFieldID(suggestionClass, "description", "Ljava/lang/String;"),
                         suggestion.content->description.has_value()
-                                ? wstring2jstring(env, suggestion.content->description.value())
+                                ? u16string2jstring(env, suggestion.content->description.value())
                                 : nullptr);
     return javaSuggestion;
 }
@@ -198,11 +184,11 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions0(
         jobject javaSuggestion = env->AllocObject(suggestionClass);
         env->SetObjectField(javaSuggestion,
                             env->GetFieldID(suggestionClass, "name", "Ljava/lang/String;"),
-                            wstring2jstring(env, item.content->name));
+                            u16string2jstring(env, item.content->name));
         env->SetObjectField(javaSuggestion,
                             env->GetFieldID(suggestionClass, "description", "Ljava/lang/String;"),
                             item.content->description.has_value()
-                                    ? wstring2jstring(env, item.content->description.value())
+                                    ? u16string2jstring(env, item.content->description.value())
                                     : nullptr);
         env->SetObjectArrayElement(result, i, javaSuggestion);
     }
@@ -216,7 +202,7 @@ Java_yancey_chelper_core_CHelperCore_getStructure0(
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
-    return wstring2jstring(env, core->getStructure());
+    return u16string2jstring(env, core->getStructure());
 }
 
 extern "C" [[maybe_unused]] JNIEXPORT jobject JNICALL
@@ -226,13 +212,13 @@ Java_yancey_chelper_core_CHelperCore_onSuggestionClick0(
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
-    std::optional<std::pair<std::wstring, size_t>> result = core->onSuggestionClick(which);
+    std::optional<std::pair<std::u16string, size_t>> result = core->onSuggestionClick(which);
     if (HEDLEY_LIKELY(result.has_value())) {
         jclass resultClass = env->FindClass("yancey/chelper/core/ClickSuggestionResult");
         jobject javaResult = env->AllocObject(resultClass);
         env->SetObjectField(javaResult,
                             env->GetFieldID(resultClass, "text", "Ljava/lang/String;"),
-                            wstring2jstring(env, result.value().first));
+                            u16string2jstring(env, result.value().first));
         env->SetIntField(javaResult,
                          env->GetFieldID(resultClass, "selection", "I"),
                          static_cast<jint>(result.value().second));
@@ -309,9 +295,7 @@ Java_yancey_chelper_core_CHelperCore_old2newInit0(
         AAsset_close(asset);
         std::istringstream iss(std::string(buffer, numBytesRead));
         CHelper::BinaryReader binaryReader(true, iss);
-        envGlobal = env;
         blockFixData0 = binaryReader.read<CHelper::Old2New::BlockFixData>();
-        envGlobal = nullptr;
         delete[] buffer;
         return true;
     } catch (const std::exception &e) {
@@ -325,5 +309,5 @@ Java_yancey_chelper_core_CHelperCore_old2new0(
     if (HEDLEY_UNLIKELY(old == nullptr)) {
         return old;
     }
-    return wstring2jstring(env, CHelper::Core::old2new(blockFixData0, jstring2wstring(env, old)));
+    return u16string2jstring(env, CHelper::Core::old2new(blockFixData0, jstring2u16string(env, old)));
 }

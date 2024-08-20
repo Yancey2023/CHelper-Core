@@ -6,8 +6,8 @@
 
 namespace CHelper::Node {
 
-    NodeEntry::NodeEntry(const std::optional<std::wstring> &id,
-                         const std::optional<std::wstring> &description,
+    NodeEntry::NodeEntry(const std::optional<std::u16string> &id,
+                         const std::optional<std::u16string> &description,
                          NodeBase *nodeKey,
                          NodeBase *nodeSeparator,
                          NodeBase *nodeValue)
@@ -39,7 +39,7 @@ namespace CHelper::Node {
         return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
     }
 
-    std::optional<std::wstring> NodeEntry::collectDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::u16string> NodeEntry::collectDescription(const ASTNode *node, size_t index) const {
         return std::nullopt;
     }
 

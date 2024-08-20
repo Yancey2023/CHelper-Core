@@ -17,7 +17,7 @@ namespace CHelper {
 
         class ConvertResult {
         public:
-            std::wstring result;
+            std::u16string result;
             std::shared_ptr<ErrorReason> errorReason;
             std::vector<size_t> indexConvertList;
             bool isComplete = false;
@@ -25,9 +25,9 @@ namespace CHelper {
             size_t convert(size_t index);
         };
 
-        std::wstring string2jsonString(const std::wstring &input);
+        std::u16string string2jsonString(const std::u16string &input);
 
-        ConvertResult jsonString2String(const std::wstring &input);
+        ConvertResult jsonString2String(const std::u16string &input);
 
 #if CHelperOnlyReadBinary != true
 
@@ -99,14 +99,14 @@ namespace nlohmann {
     };
 
     template<>
-    struct [[maybe_unused]] adl_serializer<std::wstring> {
+    struct [[maybe_unused]] adl_serializer<std::u16string> {
 
-        static void from_json(const json &j, std::wstring &t) {
-            t = string2wstring(j);
+        static void from_json(const json &j, std::u16string &t) {
+            t = utf8::utf8to16(j.get<std::string>());
         }
 
-        static void to_json(json &j, const std::wstring &t) {
-            j = wstring2string(t);
+        static void to_json(json &j, const std::u16string &t) {
+            j = utf8::utf16to8(t);
         }
     };
 

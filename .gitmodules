@@ -18,3 +18,7 @@
 	path = include/emscripten
 	url = https://github.com/emscripten-core/emscripten.git
 	branch = main
+[submodule "include/utfcpp"]
+	path = include/utfcpp
+	url = https://github.com/nemtrif/utfcpp.git
+	branch = master

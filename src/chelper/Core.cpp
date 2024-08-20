@@ -23,7 +23,7 @@ namespace CHelper {
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO("CPack load successfully ({})", std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms");
 #endif
-            ASTNode astNode = Parser::parse(L"", cPack.get());
+            ASTNode astNode = Parser::parse(u"", cPack.get());
             return new Core(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
             CHELPER_ERROR("CPack load failed");
@@ -85,7 +85,7 @@ namespace CHelper {
     }
 #endif
 
-    void Core::onTextChanged(const std::wstring &content, size_t index0) {
+    void Core::onTextChanged(const std::u16string &content, size_t index0) {
         if (HEDLEY_LIKELY(input != content)) {
             input = content;
             astNode = Parser::parse(input, cpack.get());
@@ -109,7 +109,7 @@ namespace CHelper {
         return &astNode;
     }
 
-    [[nodiscard]] std::wstring Core::getDescription() const {
+    [[nodiscard]] std::u16string Core::getDescription() const {
         return astNode.getDescription(index);
     }
 
@@ -124,7 +124,7 @@ namespace CHelper {
         return suggestions.get();
     }
 
-    [[nodiscard]] std::wstring Core::getStructure() const {
+    [[nodiscard]] std::u16string Core::getStructure() const {
         return astNode.getStructure();
     }
 
@@ -132,14 +132,14 @@ namespace CHelper {
         return astNode.getColors(settings.theme);
     }
 
-    std::optional<std::pair<std::wstring, size_t>> Core::onSuggestionClick(size_t which) {
+    std::optional<std::pair<std::u16string, size_t>> Core::onSuggestionClick(size_t which) {
         if (HEDLEY_UNLIKELY(suggestions == nullptr || which >= suggestions->size())) {
             return std::nullopt;
         }
         return suggestions->at(which).apply(this, astNode.tokens.toString());
     }
 
-    std::wstring Core::old2new(const Old2New::BlockFixData &blockFixData, const std::wstring &old) {
+    std::u16string Core::old2new(const Old2New::BlockFixData &blockFixData, const std::u16string &old) {
         return Old2New::old2new(blockFixData, old);
     }
 

@@ -18,18 +18,6 @@ static TCHAR szTitle[] = "CHelper";
 
 static CHelper::Core *core = nullptr;
 
-std::string wstring2string(const std::wstring &wstring) {
-    CW2A ca2a(wstring.c_str(), CP_UTF8);
-    std::string result = ca2a.m_szBuffer;
-    return result;
-}
-
-std::wstring string2wstring(const std::string &string) {
-    CA2W ca2w(string.c_str(), CP_UTF8);
-    std::wstring result = ca2w.m_szBuffer;
-    return result;
-}
-
 /**
  * @param hInstance 应用程序的当前实例的句柄
  * @param hPrevInstance 应用程序上一个实例的句柄
@@ -100,7 +88,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
                                            0, 0, 0, 0, hWnd, (HMENU) ID_DESCRIPTION, nullptr, nullptr);
             hWndListBox = CreateWindow(WC_LISTBOX, "", WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | LBS_NOTIFY,
                                        0, 0, 0, 0, hWnd, (HMENU) ID_LIST_VIEW, nullptr, nullptr);
-            onTextChanged(L"");
+            onTextChanged(u"");
             break;
         case WM_COMMAND:
             if (LOWORD(wParam) == ID_INPUT && HIWORD(wParam) == EN_CHANGE) {
@@ -112,8 +100,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
                 int wideCharLength = MultiByteToWideChar(codePage, 0, buffer, -1, nullptr, 0);
                 auto *wideCharBuffer = new wchar_t[wideCharLength + 1];
                 MultiByteToWideChar(codePage, 0, buffer, -1, wideCharBuffer, wideCharLength + 1);
+                int utf8Length = WideCharToMultiByte(CP_UTF8, 0, wideCharBuffer, -1, nullptr, 0, nullptr, nullptr);
+                char *utf8Buffer = new char[utf8Length + 1];
+                WideCharToMultiByte(CP_UTF8, 0, wideCharBuffer, -1, utf8Buffer, utf8Length + 1, nullptr, nullptr);
                 CHelper::Profile::pop();
-                onTextChanged(wideCharBuffer);
+                onTextChanged(utf8::utf8to16(std::string(utf8Buffer)));
+                delete[] utf8Buffer;
                 delete[] buffer;
                 delete[] wideCharBuffer;
             }
@@ -135,7 +127,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     return 0;
 }
 
-void onTextChanged(const std::wstring &command) {
+void onTextChanged(const std::u16string &command) {
     try {
         std::chrono::high_resolution_clock::time_point startParse, endParse,
                 startDescription, endDescription,
@@ -159,7 +151,14 @@ void onTextChanged(const std::wstring &command) {
         auto structure = core->getStructure();
         endStructure = std::chrono::high_resolution_clock::now();
         CHelper::Profile::push("update description text view");
-        SetWindowTextW(hWndDescription, structure.c_str());
+        {
+            auto structureUtf8 = utf8::utf16to8(structure);
+            int len = MultiByteToWideChar(CP_UTF8, 0, structureUtf8.c_str(), -1, nullptr, 0);
+            auto *wstr = new wchar_t[len + 1];
+            MultiByteToWideChar(CP_UTF8, 0, structureUtf8.c_str(), -1, wstr, len);
+            SetWindowTextW(hWndDescription, wstr);
+            delete[] wstr;
+        }
         CHelper::Profile::next("update suggestion list view");
         SendMessage(hWndListBox, LB_RESETCONTENT, 0, 0);
         //由于添加全部结果非常耗时，这里只保留前30个
@@ -169,9 +168,12 @@ void onTextChanged(const std::wstring &command) {
                 if (++i > 30) {
                     break;
                 }
-                auto content = std::wstring(suggestion.content->name).append(L" - ").append(suggestion.content->description.value_or(L""));
-                CW2W cw2w(content.c_str(), CP_UTF8);
-                SendMessageW(hWndListBox, LB_ADDSTRING, 0, reinterpret_cast<LPARAM>(cw2w.m_szBuffer));
+                auto content = std::u16string(suggestion.content->name)
+                                       .append(u" - ")
+                                       .append(suggestion.content->description.value_or(u""));
+                auto contentUtf8 = utf8::utf16to8(content);
+                CA2W ca2w(contentUtf8.c_str(), GetACP());
+                SendMessageW(hWndListBox, LB_ADDSTRING, 0, reinterpret_cast<LPARAM>(ca2w.m_szBuffer));
             }
         }
         CHelper::Profile::pop();
@@ -185,8 +187,8 @@ void onTextChanged(const std::wstring &command) {
         fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
         fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
 #endif
-        fmt::print("structure: \n", wstring2string(structure));
-        fmt::print("description: \n", wstring2string(description));
+        fmt::print("structure: \n", utf8::utf16to8(structure));
+        fmt::print("description: \n", utf8::utf16to8(description));
         if (errorReasons.empty()) {
             fmt::println("no error");
         } else {
@@ -195,11 +197,11 @@ void onTextChanged(const std::wstring &command) {
             for (const auto &errorReason: errorReasons) {
                 fmt::print("{}. {} {}\n{}{}{}\n",
                            ++i,
-                           fmt::styled(wstring2string(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
-                           fmt::styled(wstring2string(errorReason->errorReason), fg(fmt::color::cornflower_blue)),
-                           wstring2string(command.substr(0, errorReason->start)),
-                           fmt::styled(errorReason->start == errorReason->end ? "~" : wstring2string(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
-                           wstring2string(command.substr((errorReason->end))));
+                           fmt::styled(utf8::utf16to8(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
+                           fmt::styled(utf8::utf16to8(errorReason->errorReason), fg(fmt::color::cornflower_blue)),
+                           utf8::utf16to8(command.substr(0, errorReason->start)),
+                           fmt::styled(errorReason->start == errorReason->end ? "~" : utf8::utf16to8(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
+                           utf8::utf16to8(command.substr((errorReason->end))));
             }
         }
         if (suggestions->empty()) {
@@ -214,22 +216,22 @@ void onTextChanged(const std::wstring &command) {
                 }
                 fmt::print("{}. {} {}\n",
                            ++i,
-                           fmt::styled(wstring2string(item.content->name), fg(fmt::color::lime_green)),
-                           fmt::styled(wstring2string(item.content->description.value_or(L"")), fg(fmt::color::cornflower_blue)));
-                std::wstring result = command.substr(0, item.start)
-                                              .append(item.content->name)
-                                              .append(command.substr(item.end));
-                std::wstring greenPart = item.content->name;
+                           fmt::styled(utf8::utf16to8(item.content->name), fg(fmt::color::lime_green)),
+                           fmt::styled(utf8::utf16to8(item.content->description.value_or(u"")), fg(fmt::color::cornflower_blue)));
+                std::u16string result = command.substr(0, item.start)
+                                                .append(item.content->name)
+                                                .append(command.substr(item.end));
+                std::u16string greenPart = item.content->name;
                 if (item.end == command.length()) {
                     CHelper::ASTNode astNode = CHelper::Parser::parse(result, core->getCPack());
                     if (item.isAddWhitespace && astNode.isAllWhitespaceError()) {
-                        greenPart.push_back(L' ');
+                        greenPart.push_back(u' ');
                     }
                 }
                 fmt::print("{}{}{}\n",
-                           wstring2string(command.substr(0, item.start)),
-                           fmt::styled(wstring2string(greenPart), fg(fmt::color::lime_green)),
-                           wstring2string(command.substr(item.end)));
+                           utf8::utf16to8(command.substr(0, item.start)),
+                           fmt::styled(utf8::utf16to8(greenPart), fg(fmt::color::lime_green)),
+                           utf8::utf16to8(command.substr(item.end)));
             }
         }
         fmt::print("\n");

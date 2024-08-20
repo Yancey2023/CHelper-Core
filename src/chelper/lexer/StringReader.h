@@ -15,25 +15,25 @@ namespace CHelper {
     class StringReader {
     public:
         LexerPos pos, posBackup;
-        const std::wstring &content;
+        const std::u16string &content;
 
-        explicit StringReader(const std::wstring &content);
+        explicit StringReader(const std::u16string &content);
 
         [[nodiscard]] bool ready() const;
 
-        [[nodiscard]] std::optional<wchar_t> read();
+        [[nodiscard]] std::optional<char16_t> read();
 
         bool skip();
 
-        [[nodiscard]] std::optional<wchar_t> next();
+        [[nodiscard]] std::optional<char16_t> next();
 
-        [[nodiscard]] std::optional<wchar_t> peek() const;
+        [[nodiscard]] std::optional<char16_t> peek() const;
 
         void mark();
 
         void reset();
 
-        [[nodiscard]] std::wstring_view collect() const;
+        [[nodiscard]] std::u16string_view collect() const;
     };
 
 }// namespace CHelper

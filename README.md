@@ -83,11 +83,12 @@ The desired function has been completed, and the new function to be developed is
 
 ### CHelper-Core
 
-|                  project                  |                                    description                                     |                                           license                                           |
-|:-----------------------------------------:|:----------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------:|
-| [json](https://github.com/nlohmann/json)  |                                JSON for Modern C++                                 |           [MIT license](https://github.com/nlohmann/json/blob/master/LICENSE.MIT)           |
-|   [fmt](https://github.com/fmtlib/fmt)    |                                 formatting library                                 |              [MIT license](https://github.com/fmtlib/fmt/blob/master/LICENSE)               |
-| [Hedley](https://github.com/cblck/hedley) | enable compiler-specific features while retaining compatibility with all compilers | [Creative Commons Zero v1.0 Universal](https://github.com/cblck/hedley/blob/master/LICENSE) |
+|                   project                   |                                    description                                     |                                 license                                 |
+|:-------------------------------------------:|:----------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
+|  [json](https://github.com/nlohmann/json)   |                                JSON for Modern C++                                 | [MIT license](https://github.com/nlohmann/json/blob/master/LICENSE.MIT) |
+|    [fmt](https://github.com/fmtlib/fmt)     |                                 formatting library                                 |    [MIT license](https://github.com/fmtlib/fmt/blob/master/LICENSE)     |
+|  [Hedley](https://github.com/cblck/hedley)  | enable compiler-specific features while retaining compatibility with all compilers |     [CC0 1.0](https://github.com/cblck/hedley/blob/master/LICENSE)      |
+| [utfcpp](https://github.com/nemtrif/utfcpp) |                          UTF-8 with C++ in a Portable Way                          | [BSL-1.0 license](https://github.com/cblck/hedley/blob/master/LICENSE)  |
 
 ### CHelper-Qt
 

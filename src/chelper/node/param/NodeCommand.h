@@ -18,8 +18,8 @@ namespace CHelper::Node {
         std::vector<std::unique_ptr<Node::NodePerCommand>> *commands = nullptr;
 
     public:
-        NodeCommand(const std::optional<std::wstring> &id,
-                    const std::optional<std::wstring> &description,
+        NodeCommand(const std::optional<std::u16string> &id,
+                    const std::optional<std::u16string> &description,
                     std::vector<std::unique_ptr<Node::NodePerCommand>> *commands);
 
         NodeCommand() = default;
@@ -30,7 +30,7 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
-        std::optional<std::wstring> collectDescription(const ASTNode *node, size_t index) const override;
+        std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const override;
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,

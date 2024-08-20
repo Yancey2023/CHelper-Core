@@ -26,8 +26,8 @@ namespace CHelper::Node {
 
         NodeAnd() = default;
 
-        NodeAnd(const std::optional<std::wstring> &id,
-                const std::optional<std::wstring> &description,
+        NodeAnd(const std::optional<std::u16string> &id,
+                const std::optional<std::u16string> &description,
                 WhitespaceMode::WhitespaceMode whitespaceMode,
                 const std::vector<const NodeBase *> &childNodes);
 
@@ -35,7 +35,7 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
-        std::optional<std::wstring> collectDescription(const ASTNode *node, size_t index) const override;
+        std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const override;
     };
 
 }// namespace CHelper::Node

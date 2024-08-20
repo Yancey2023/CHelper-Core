@@ -8,30 +8,20 @@
 #define CHELPER_NODEJSONINTEGER_H
 
 #include "../NodeBase.h"
+#include "../template/NodeNumber.h"
 
 namespace CHelper::Node {
 
-    class NodeJsonInteger : public NodeBase {
+    class NodeJsonInteger : public NodeNumber<int32_t> {
     public:
-        std::optional<int32_t> min, max;
-
         NodeJsonInteger() = default;
-
-        NodeJsonInteger(const std::optional<std::wstring> &id,
-                        const std::optional<std::wstring> &description,
-                        const std::optional<int32_t> &min,
-                        const std::optional<int32_t> &max);
 
         [[nodiscard]] NodeType *getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
-
-        bool collectIdError(const ASTNode *astNode,
-                            std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
-
-        bool collectColor(const ASTNode *astNode,
-                          ColoredString &coloredString,
-                          const Theme &theme) const override;
+        static std::unique_ptr<NodeJsonInteger> make(const std::optional<std::u16string> &id,
+                                                     const std::optional<std::u16string> &description,
+                                                     const std::optional<int32_t> &min,
+                                                     const std::optional<int32_t> &max);
     };
 
     CODEC_NODE_H(NodeJsonInteger)

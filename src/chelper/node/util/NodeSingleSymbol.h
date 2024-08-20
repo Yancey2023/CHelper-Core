@@ -14,15 +14,15 @@ namespace CHelper::Node {
 
     class NodeSingleSymbol : public NodeBase {
     public:
-        wchar_t symbol = ' ';
+        char16_t symbol = ' ';
         std::shared_ptr<NormalId> normalId;
         bool isAddWhitespace = false;
 
         NodeSingleSymbol() = default;
 
-        NodeSingleSymbol(const std::optional<std::wstring> &id,
-                         const std::optional<std::wstring> &description,
-                         wchar_t symbol,
+        NodeSingleSymbol(const std::optional<std::u16string> &id,
+                         const std::optional<std::u16string> &description,
+                         char16_t symbol,
                          bool isAddWhitespace = true);
 
         [[nodiscard]] NodeType *getNodeType() const override;

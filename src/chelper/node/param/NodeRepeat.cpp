@@ -40,7 +40,7 @@ namespace CHelper::Node {
         }
     }
 
-    std::optional<std::wstring> NodeRepeat::collectDescription(const ASTNode *node, size_t index) const {
+    std::optional<std::u16string> NodeRepeat::collectDescription(const ASTNode *node, size_t index) const {
         if (HEDLEY_UNLIKELY(node->tokens.isEmpty())) {
             return description;
         } else {
@@ -80,7 +80,7 @@ namespace CHelper::Node {
             }
         }
         //如果没有遇到结束语句，添加...和结束语句的结构
-        structure.appendWhiteSpace().append(L"...");
+        structure.appendWhiteSpace().append(u"...");
         for (const auto &item: ((NodeAnd *) ((NodeOr *) nodeElement)->childNodes[1])->childNodes) {
             item->collectStructure(nullptr, structure, true);
         }
