@@ -2,7 +2,7 @@
 // Created by Yancey on 2024/2/24.
 //
 
-#include "../core/Core.h"
+#include <chelper/CHelperCore.h>
 #include "pch.h"
 
 std::u16string jstring2u16string(JNIEnv *env, jstring jString) {
@@ -43,7 +43,7 @@ Java_yancey_chelper_core_CHelperCore_create0(
     try {
         std::string cpackPath = jstring2string(env, cpack_path);
         if (HEDLEY_UNLIKELY(assetManager == nullptr)) {
-            CHelper::Core *core = CHelper::Core::createByBinary(cpackPath);
+            CHelper::CHelperCore *core = CHelper::CHelperCore::createByBinary(cpackPath);
             return reinterpret_cast<jlong>(core);
         } else {
             AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
@@ -56,7 +56,7 @@ Java_yancey_chelper_core_CHelperCore_create0(
             int numBytesRead = AAsset_read(asset, buffer, dataFileSize);
             AAsset_close(asset);
             std::istringstream iss(std::string(buffer, numBytesRead));
-            CHelper::Core *core = CHelper::Core::create([&iss]() {
+            CHelper::CHelperCore *core = CHelper::CHelperCore::create([&iss]() {
                 CHelper::BinaryReader binaryReader(true, iss);
                 return CHelper::CPack::createByBinary(binaryReader);
             });
@@ -71,13 +71,13 @@ Java_yancey_chelper_core_CHelperCore_create0(
 extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
 Java_yancey_chelper_core_CHelperCore_release0(
         [[maybe_unused]] JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
-    delete reinterpret_cast<CHelper::Core *>(pointer);
+    delete reinterpret_cast<CHelper::CHelperCore *>(pointer);
 }
 
 extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
 Java_yancey_chelper_core_CHelperCore_onTextChanged0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer, jstring text, jint index) {
-    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     if (HEDLEY_UNLIKELY(core == nullptr || text == nullptr)) {
         return;
     }
@@ -87,7 +87,7 @@ Java_yancey_chelper_core_CHelperCore_onTextChanged0(
 extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
 Java_yancey_chelper_core_CHelperCore_onSelectionChanged0(
         [[maybe_unused]] JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer, jint index) {
-    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
@@ -97,7 +97,7 @@ Java_yancey_chelper_core_CHelperCore_onSelectionChanged0(
 extern "C" [[maybe_unused]] JNIEXPORT jstring JNICALL
 Java_yancey_chelper_core_CHelperCore_getDescription0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
-    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
@@ -107,7 +107,7 @@ Java_yancey_chelper_core_CHelperCore_getDescription0(
 extern "C" [[maybe_unused]] JNIEXPORT jobjectArray JNICALL
 Java_yancey_chelper_core_CHelperCore_getErrorReasons0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
-    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     jclass errorReasonClass = env->FindClass("yancey/chelper/core/ErrorReason");
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return env->NewObjectArray(0, errorReasonClass, nullptr);
@@ -134,7 +134,7 @@ Java_yancey_chelper_core_CHelperCore_getErrorReasons0(
 extern "C" [[maybe_unused]] JNIEXPORT jlong JNICALL
 Java_yancey_chelper_core_CHelperCore_getSuggestionsSize0(
         [[maybe_unused]] JNIEnv *env, [[maybe_unused]] jint thiz, jlong pointer) {
-    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return 0;
     }
@@ -144,7 +144,7 @@ Java_yancey_chelper_core_CHelperCore_getSuggestionsSize0(
 extern "C" [[maybe_unused]] JNIEXPORT jobject JNICALL
 Java_yancey_chelper_core_CHelperCore_getSuggestion0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer, jint which) {
-    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     if (HEDLEY_UNLIKELY(core == nullptr || which < 0)) {
         return nullptr;
     }
@@ -169,7 +169,7 @@ Java_yancey_chelper_core_CHelperCore_getSuggestion0(
 extern "C" [[maybe_unused]] JNIEXPORT jobject JNICALL
 Java_yancey_chelper_core_CHelperCore_getSuggestions0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
-    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     jclass suggestionClass = env->FindClass("yancey/chelper/core/Suggestion");
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return env->NewObjectArray(0, suggestionClass, nullptr);
@@ -198,7 +198,7 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions0(
 extern "C" [[maybe_unused]] JNIEXPORT jstring JNICALL
 Java_yancey_chelper_core_CHelperCore_getStructure0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
-    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
@@ -208,7 +208,7 @@ Java_yancey_chelper_core_CHelperCore_getStructure0(
 extern "C" [[maybe_unused]] JNIEXPORT jobject JNICALL
 Java_yancey_chelper_core_CHelperCore_onSuggestionClick0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer, jint which) {
-    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
@@ -231,7 +231,7 @@ Java_yancey_chelper_core_CHelperCore_onSuggestionClick0(
 extern "C" [[maybe_unused]] JNIEXPORT jintArray JNICALL
 Java_yancey_chelper_core_CHelperCore_getColors0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
-    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
@@ -253,7 +253,7 @@ Java_yancey_chelper_core_CHelperCore_setTheme0(
     if (HEDLEY_UNLIKELY(theme == nullptr)) {
         return;
     }
-    auto *core = reinterpret_cast<CHelper::Core *>(pointer);
+    auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
@@ -309,5 +309,5 @@ Java_yancey_chelper_core_CHelperCore_old2new0(
     if (HEDLEY_UNLIKELY(old == nullptr)) {
         return old;
     }
-    return u16string2jstring(env, CHelper::Core::old2new(blockFixData0, jstring2u16string(env, old)));
+    return u16string2jstring(env, CHelper::CHelperCore::old2new(blockFixData0, jstring2u16string(env, old)));
 }
