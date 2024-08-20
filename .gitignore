@@ -5,3 +5,5 @@
 /out
 /CHelper-Resource/run
 /release
+/CHelper-Web/cmake-build-emscripten-release
+/CHelper-Web/cmake-build-emscripten-minsizerel

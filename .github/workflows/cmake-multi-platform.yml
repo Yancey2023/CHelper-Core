@@ -76,7 +76,7 @@ jobs:
       - name: Run Test
         if: runner.os == 'Windows'
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
-        run: .\${{ matrix.build_type }}\CHelper-Test\CHelperTest.exe
+        run: .\CHelper-Test\${{ matrix.build_type }}\CHelperTest.exe
 
       - name: Run Test
         if: runner.os != 'Windows'
@@ -90,7 +90,7 @@ jobs:
       - name: Run CHelperCmd
         if: runner.os == 'Windows'
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
-        run: .\${{ matrix.build_type }}\CHelper-Cmd\CHelperCmd.exe
+        run: .\CHelper-Cmd\${{ matrix.build_type }}\CHelperCmd.exe
 
       - name: Run CHelperCmd
         if: runner.os != 'Windows'
