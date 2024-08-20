@@ -12,7 +12,7 @@
 
 namespace CHelper::Node {
 
-    class NodeInteger : public NodeNumber<float> {
+    class NodeInteger : public NodeNumber<int32_t> {
     public:
         NodeInteger() = default;
 

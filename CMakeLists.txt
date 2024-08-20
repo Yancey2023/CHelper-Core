@@ -32,7 +32,7 @@ include_directories(include/json/include)
 add_subdirectory(include/fmt)
 
 # ThirdParty: utf8cpp
-include_directories(include/utfcpp/source)
+add_subdirectory(include/utfcpp)
 
 # Param Deliver
 set(CPACK_VERSION_RELEASE "1.21.20.03")
@@ -48,7 +48,7 @@ configure_file(include/param_deliver.h.in include/param_deliver.h @ONLY)
 # Sources
 file(GLOB_RECURSE SOURCE_FILE src/chelper/*.h src/chelper/*.cpp)
 include_directories(include/pch ${CMAKE_BINARY_DIR}/include)
-link_libraries(fmt::fmt hedley)
+link_libraries(fmt::fmt hedley utf8cpp)
 
 # Console Application
 add_executable(CHelperCmd

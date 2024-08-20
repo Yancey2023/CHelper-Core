@@ -13,11 +13,14 @@ include_directories(include/json/include)
 
 # ThirdParty: fmt
 add_subdirectory(include/fmt)
-link_libraries(fmt::fmt)
+
+# ThirdParty: utf8cpp
+add_subdirectory(include/utfcpp)
 
 # Sources
 file(GLOB_RECURSE SOURCE_FILE src/chelper/*.h src/chelper/*.cpp)
 include_directories(include/pch ${CMAKE_BINARY_DIR}/include)
+link_libraries(fmt::fmt hedley utf8cpp)
 
 # Web Application
 add_library(CHelperWeb
