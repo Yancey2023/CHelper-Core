@@ -42,7 +42,9 @@ add_library(CHelperAndroid SHARED
         src/android/AndroidNative.cpp
         ${CHELPER_CORE_SOURCE_FILE}
 )
-if (NOT PROJECT_IS_TOP_LEVEL)
+if (PROJECT_IS_TOP_LEVEL)
+    target_link_libraries(CHelperAndroid PRIVATE android log)
+else ()
     target_include_directories(CHelperAndroid PRIVATE include/android)
 endif ()
 target_include_directories(CHelperAndroid PUBLIC ${CHELPER_CORE_DIR}/include/pch ${CHELPER_CORE_DIR}/include/chelper ${CMAKE_CURRENT_BINARY_DIR}/include)
