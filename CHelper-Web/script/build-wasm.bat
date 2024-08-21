@@ -26,6 +26,3 @@ call cd ..
 @REM 修改JS胶水代码
 echo ----- 修改JS胶水代码 -----
 call python ./script/patch-wasm.py
-
-@REM 暂停
-call pause

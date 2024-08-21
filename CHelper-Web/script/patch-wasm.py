@@ -69,17 +69,22 @@ export class CHelperCore {
     }
 
     getSuggestionDescription(which) {
-        return Module.ccall("getSuggestionDescription", null, ["number", "number"], [this._corePtr, which]);
+        return Module.ccall("getSuggestionDescription", "string", ["number", "number"], [this._corePtr, which]);
     }
 
-    getStringAfterSuggestionClick(which) {
+    onSuggestionClick(which) {
+        return Module.ccall("onSuggestionClick", null, ["number", "number"], [this._corePtr, which]);
+    }
+
+    getStringAfterSuggestionClick() {
         return Module.ccall("getStringAfterSuggestionClick", "string", ["number"], [this._corePtr]);
     }
 
-    getSelectionAfterSuggestionClick(which) {
+    getSelectionAfterSuggestionClick() {
         return Module.ccall("getSelectionAfterSuggestionClick", "number", ["number"], [this._corePtr]);
     }
-}'''.replace(' ', '')
+}'''
+                .replace(' ', '')
                 .replace('\n', '')
                 .replace('exportclassCHelperCore', 'export class CHelperCore')
                 .replace('constcpackPtr', 'const cpackPtr')
