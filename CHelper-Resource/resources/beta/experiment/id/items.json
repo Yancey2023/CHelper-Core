@@ -699,6 +699,10 @@
       "description": "紫水晶母岩"
     },
     {
+      "name": "bundle",
+      "description": "收纳袋"
+    },
+    {
       "name": "burn_pottery_sherd",
       "description": "烈焰纹样陶片"
     },

@@ -652,15 +652,15 @@
     },
     {
       "name": "minecraft:white_smoke_particle",
-      "description": "合成器掷出物品粒子"
+      "description": "合成器掷出物品的粒子"
     },
     {
       "name": "minecraft:wind_charged_ambient",
-      "description": "未知"
+      "description": "受到蓄风效果的生物周围的粒子"
     },
     {
       "name": "minecraft:wind_charged_emitter",
-      "description": "未知"
+      "description": "受到蓄风效果的生物死亡时的粒子"
     },
     {
       "name": "minecraft:wind_explosion_emitter",
