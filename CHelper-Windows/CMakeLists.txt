@@ -19,8 +19,8 @@ endif()
 
 # Windows Application
 add_executable(CHelperWindows
-        src/windows/CHelperWindows.h
-        src/windows/CHelperWindows.cpp
+        src/CHelperWindows.h
+        src/CHelperWindows.cpp
 )
 if (MSVC)
     set_target_properties(CHelperWindows PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")

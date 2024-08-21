@@ -27,9 +27,9 @@ endif()
 
 # Qt Application
 add_executable(CHelperQt WIN32
-        src/qt/CHelperQt.h
-        src/qt/CHelperQt.cpp
-        src/qt/chelper.qrc
-        src/qt/chelper.ui
+        src/CHelperQt.h
+        src/CHelperQt.cpp
+        src/chelper.qrc
+        src/chelper.ui
 )
 target_link_libraries(CHelperQt PRIVATE CHelper::Core Qt6::Core Qt6::Gui Qt6::Widgets)

@@ -22,6 +22,6 @@ if(NOT TARGET CHelperCore)
 endif()
 
 # Using GTest to test codes
-file(GLOB_RECURSE TEST_FILE src/test/*.h src/test/*.cpp)
+file(GLOB_RECURSE TEST_FILE src/*.h src/*.cpp)
 add_executable(CHelperTest ${TEST_FILE})
 target_link_libraries(CHelperTest PRIVATE CHelper::Core GTest::gtest_main)

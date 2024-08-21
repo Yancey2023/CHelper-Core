@@ -36,7 +36,7 @@ file(GLOB_RECURSE CHELPER_CORE_SOURCE_FILE ${CHELPER_CORE_DIR}/src/chelper/*.h $
 
 # Web Application
 add_library(CHelperAndroid SHARED
-        src/android/AndroidNative.cpp
+        src/AndroidNative.cpp
         ${CHELPER_CORE_SOURCE_FILE}
 )
 if (PROJECT_IS_TOP_LEVEL)

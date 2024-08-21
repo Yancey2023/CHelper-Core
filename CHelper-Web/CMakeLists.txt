@@ -35,7 +35,7 @@ file(GLOB_RECURSE CHELPER_CORE_SOURCE_FILE ${CHELPER_CORE_DIR}/src/chelper/*.h $
 
 # Web Application
 add_library(CHelperWeb
-        src/web/CHelperWeb.cpp
+        src/CHelperWeb.cpp
         ${CHELPER_CORE_SOURCE_FILE}
 )
 if (NOT PROJECT_IS_TOP_LEVEL)
