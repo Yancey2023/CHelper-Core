@@ -7,31 +7,35 @@
 namespace CHelper {
 
     KMPMatcher::KMPMatcher(const std::u16string_view &pattern) : pattern(pattern) {
-        next.reserve(this->pattern.length());
-        next.push_back(0);
-        size_t j = 0;
-        for (size_t i = 1; i < this->pattern.length(); ++i) {
-            while (j > 0 && this->pattern[i] != this->pattern[j]) {
-                j = next[j - 1];
+        size_t patternLength = this->pattern.size();
+        failure = new size_t[patternLength + 1];
+        failure[0] = std::u16string::npos;
+        size_t j = std::u16string::npos;
+        for (size_t i = 0; i < patternLength; i++) {
+            while (j != std::u16string::npos && this->pattern[j] != this->pattern[i]) {
+                j = failure[j];
             }
-            if (this->pattern[i] == this->pattern[j]) {
-                ++j;
-            }
-            next.push_back(j);
+            failure[i + 1] = ++j;
         }
     }
 
-    size_t KMPMatcher::match(const std::u16string &str) {
+    KMPMatcher::~KMPMatcher() {
+        delete[] failure;
+    }
+
+    size_t KMPMatcher::match(const std::u16string &text) {
         if (pattern.empty()) {
             return 0;
         }
-        size_t j = 0;
-        for (size_t i = 0; i < str.length(); ++i) {
-            while (j > 0 && str[i] != pattern[j]) {
-                j = next[j - 1];
+        size_t textLength = text.size();
+        size_t patternLength = pattern.size();
+        size_t k = 0;
+        for (size_t j = 0; j < textLength; j++) {
+            while (k != std::u16string::npos && pattern[k] != text[j]) {
+                k = failure[k];
             }
-            if (str[i] == pattern[j] && ++j == pattern.length()) {
-                return i - j + 1;
+            if (++k == patternLength) {
+                return j - k + 1;
             }
         }
         return std::u16string::npos;
