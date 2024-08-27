@@ -21374,6 +21374,65 @@
       ]
     },
     {
+      "name": "jigsaw",
+      "description": "拼图方块",
+      "blockStates": [
+        {
+          "key": "facing_direction",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）方块朝向下方"
+            },
+            {
+              "value": 1,
+              "description": "方块朝向上方"
+            },
+            {
+              "value": 2,
+              "description": "方块朝向北方"
+            },
+            {
+              "value": 3,
+              "description": "方块朝向南方"
+            },
+            {
+              "value": 4,
+              "description": "方块朝向西方"
+            },
+            {
+              "value": 5,
+              "description": "方块朝向东方"
+            }
+          ]
+        },
+        {
+          "key": "rotation",
+          "description": "拼图方块朝向上方或下方时绕Y轴的旋转，朝向水平方向的拼图方块的该属性值为0 0：北 1：西 2：南 3：东",
+          "defaultValue": 0,
+          "values": [
+            {
+              "value": 0,
+              "description": "（默认值）拼图方块朝向上方或下方时绕Y轴的旋转，朝向水平方向的拼图方块的该属性值为0 0：北 1：西 2：南 3：东"
+            },
+            {
+              "value": 1,
+              "description": "拼图方块朝向上方或下方时绕Y轴的旋转，朝向水平方向的拼图方块的该属性值为0 0：北 1：西 2：南 3：东"
+            },
+            {
+              "value": 2,
+              "description": "拼图方块朝向上方或下方时绕Y轴的旋转，朝向水平方向的拼图方块的该属性值为0 0：北 1：西 2：南 3：东"
+            },
+            {
+              "value": 3,
+              "description": "拼图方块朝向上方或下方时绕Y轴的旋转，朝向水平方向的拼图方块的该属性值为0 0：北 1：西 2：南 3：东"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "jukebox",
       "description": "唱片机"
     },

@@ -155,7 +155,7 @@
         "description": "作为命令的执行位置、执行朝向和执行维度的实体",
         "isMustPlayer": false,
         "isOnlyOne": false,
-        "isMustNPC": true,
+        "isMustNPC": false,
         "isWildcard": false
       }
     ],
@@ -196,7 +196,7 @@
         "description": "需要朝向的实体",
         "isOnlyOne": false,
         "isMustPlayer": false,
-        "isMustNPC": true,
+        "isMustNPC": false,
         "isWildcard": false
       },
       {
@@ -282,7 +282,7 @@
         "description": "作为命令执行的位置为实体",
         "isOnlyOne": false,
         "isMustPlayer": false,
-        "isMustNPC": true,
+        "isMustNPC": false,
         "isWildcard": false
       }
     ],
@@ -330,7 +330,7 @@
         "description": "作为命令执行朝向的实体",
         "isOnlyOne": false,
         "isMustPlayer": false,
-        "isMustNPC": true,
+        "isMustNPC": false,
         "isWildcard": false
       }
     ],
@@ -454,7 +454,7 @@
         "description": "要检测是否存在的实体",
         "isOnlyOne": false,
         "isMustPlayer": false,
-        "isMustNPC": true,
+        "isMustNPC": false,
         "isWildcard": false
       }
     ],
@@ -487,7 +487,7 @@
         "description": "要检查分数的实体",
         "isOnlyOne": false,
         "isMustPlayer": false,
-        "isMustNPC": true,
+        "isMustNPC": false,
         "isWildcard": false
       },
       {
@@ -529,7 +529,7 @@
         "description": "要检查分数的实体",
         "isOnlyOne": false,
         "isMustPlayer": false,
-        "isMustNPC": true,
+        "isMustNPC": false,
         "isWildcard": false
       },
       {
@@ -569,7 +569,7 @@
         "description": "要检查分数的实体",
         "isOnlyOne": false,
         "isMustPlayer": false,
-        "isMustNPC": true,
+        "isMustNPC": false,
         "isWildcard": false
       },
       {

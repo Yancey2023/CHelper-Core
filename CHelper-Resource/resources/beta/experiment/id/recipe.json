@@ -774,6 +774,10 @@
       "description": "\u003c工作台\u003e铁锭*3-\u003e铁桶"
     },
     {
+      "name": "minecraft:bundle",
+      "description": "\u003c工作台\u003e线+皮革-\u003e收纳袋"
+    },
+    {
       "name": "minecraft:cake",
       "description": "\u003c工作台\u003e奶桶*3+糖*2+小麦*3+鸡蛋-\u003e蛋糕,铁桶*3"
     },
@@ -1219,7 +1223,7 @@
     },
     {
       "name": "minecraft:cyan_dye_from_pitcher_plant",
-      "description": "\u003c工作台\u003e瓶子草~\u003e青色染料"
+      "description": "\u003c工作台\u003e瓶子草~\u003e青色染料*2"
     },
     {
       "name": "minecraft:cyan_stained_glass",

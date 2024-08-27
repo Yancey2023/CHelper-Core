@@ -16,6 +16,10 @@ CHelperApp::CHelperApp(QWidget *parent)
       ui(new Ui::CHelperApp) {
     ui->setupUi(this);
     setWindowIcon(QIcon(":/img/logo.webp"));
+#if CHelperDebug == true
+    std::filesystem::path resourcePath(RESOURCE_DIR);
+    core = CHelper::CHelperCore::createByDirectory(resourcePath / "resources" / "beta" / "vanilla");
+#else
     QFile file(QString(":/assets/release-experiment-").append(CPACK_VERSION_RELEASE).append(".cpack"));
     if (file.open(QIODevice::ReadOnly) && file.isReadable()) {
         std::istringstream iss(file.readAll().toStdString());
@@ -24,6 +28,7 @@ CHelperApp::CHelperApp(QWidget *parent)
             return CHelper::CPack::createByBinary(binaryReader);
         });
     }
+#endif
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         throw std::runtime_error("fail to load cpack");
     }
