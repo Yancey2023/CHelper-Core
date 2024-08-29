@@ -22,7 +22,7 @@
 namespace CHelper {
 
     /**
-     * \see https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/strings/knuth_morris_pratt.cpp
+     * @see https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/strings/knuth_morris_pratt.cpp
      */
     class KMPMatcher {
     private:
@@ -31,9 +31,9 @@ namespace CHelper {
 
     public:
         /**
-        * Generate the partial match table aka failure function for a pattern to search.
-        * \param[in] pattern text for which to create the partial match table
-        * \returns the partial match table as a vector array
+        * @brief Generate the partial match table aka failure function for a pattern to search.
+        * @param pattern text for which to create the partial match table
+        * @returns the partial match table as a vector array
         */
         explicit KMPMatcher(const std::u16string_view &pattern);
 
@@ -44,10 +44,10 @@ namespace CHelper {
         KMPMatcher &operator=(const KMPMatcher &kmpMatcher) = delete;
 
         /**
-        * KMP algorithm to find a pattern in a text
-        * \param[in] text text in which to search
-        * \returns position if pattern was found
-        * \returns `-1` if pattern was not found
+        * @brief KMP algorithm to find a pattern in a text
+        * @param text text in which to search
+        * @returns the starting index of the pattern if found
+        * @returns `std::string::npos` if not found
         */
         size_t match(const std::u16string &text);
     };
