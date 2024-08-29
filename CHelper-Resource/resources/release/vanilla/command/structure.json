@@ -181,9 +181,9 @@
       "type": "BOOLEAN",
       "id": "loadIncludeBlocks",
       "brief": "是否包括方块",
-      "description": "保存时是否包括方块",
-      "descriptionTrue": "保存时包括方块",
-      "descriptionFalse": "保存时不包括方块"
+      "description": "加载时是否包括方块",
+      "descriptionTrue": "加载时包括方块",
+      "descriptionFalse": "加载时不包括方块"
     },
     {
       "type": "BOOLEAN",
