@@ -2,8 +2,8 @@
 // Created by Yancey on 2023/11/8.
 //
 
-#include <chelper/node/param/NodeInteger.h>
 #include <chelper/node/param/NodeText.h>
+#include <chelper/node/template/NodeNumber.h>
 #include <chelper/node/util/NodeOr.h>
 #include <chelper/resources/id/ItemId.h>
 

@@ -3,9 +3,8 @@
 //
 
 #include <chelper/node/json/NodeJsonBoolean.h>
-#include <chelper/node/json/NodeJsonFloat.h>
-#include <chelper/node/json/NodeJsonInteger.h>
 #include <chelper/node/json/NodeJsonNull.h>
+#include <chelper/node/template/NodeNumber.h>
 #include <chelper/resources/CPack.h>
 #include <gtest/gtest.h>
 
@@ -186,8 +185,8 @@ namespace CHelper {
             return true;
         }
 
-        template<class T>
-        bool operator==(const NodeNumber<T> &t1, const NodeNumber<T> &t2) {
+        template<class T, bool isJson>
+        bool operator==(const NodeNumber<T, isJson> &t1, const NodeNumber<T, isJson> &t2) {
             if (!((NodeBase &) t1 == (NodeBase &) t2)) {
                 return false;
             }

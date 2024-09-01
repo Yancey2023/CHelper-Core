@@ -2,9 +2,9 @@
 // Created by Yancey on 2024/3/1.
 //
 
-#include <chelper/node/param/NodeInteger.h>
 #include <chelper/node/param/NodeText.h>
 #include <chelper/node/param/NodeXpInteger.h>
+#include <chelper/node/template/NodeNumber.h>
 #include <chelper/node/util/NodeAnd.h>
 #include <chelper/node/util/NodeOr.h>
 

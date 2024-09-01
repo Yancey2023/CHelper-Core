@@ -9,18 +9,30 @@
 
 namespace CHelper::Node {
 
-    template<class T>
+    template<class T, bool isJson>
     class NodeNumber : public NodeBase {
     public:
         std::optional<T> min, max;
 
         NodeNumber() = default;
 
+        [[nodiscard]] NodeType *getNodeType() const override {
+            if constexpr (std::is_same<T, int32_t>() && !isJson) {
+                return NodeType::INTEGER.get();
+            } else if constexpr (std::is_same<T, float>() && !isJson) {
+                return NodeType::FLOAT.get();
+            } else if constexpr (std::is_same<T, int32_t>() && isJson) {
+                return NodeType::JSON_INTEGER.get();
+            } else if constexpr (std::is_same<T, float>() && isJson) {
+                return NodeType::JSON_FLOAT.get();
+            }
+        }
+
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override {
-            if constexpr (std::is_same<T, float>() || std::is_same<T, double>()) {
-                return tokenReader.readFloatASTNode(this);
-            } else {
+            if constexpr (std::numeric_limits<T>::is_integer) {
                 return tokenReader.readIntegerASTNode(this);
+            } else {
+                return tokenReader.readFloatASTNode(this);
             }
         }
 
@@ -82,7 +94,30 @@ namespace CHelper::Node {
             }
             return true;
         }
+
+        static std::unique_ptr<NodeNumber<T, isJson>> make(const std::optional<std::u16string> &id,
+                                                           const std::optional<std::u16string> &description,
+                                                           const std::optional<T> &min0,
+                                                           const std::optional<T> &max0) {
+            auto result = std::make_unique<NodeNumber<T, isJson>>();
+            result->id = id;
+            result->description = description;
+            result->isMustAfterWhiteSpace = false;
+            result->min = min0;
+            result->max = max0;
+            return std::move(result);
+        }
     };
+
+    typedef NodeNumber<float, false> NodeFloat;
+    typedef NodeNumber<int32_t, false> NodeInteger;
+    typedef NodeNumber<float, true> NodeJsonFloat;
+    typedef NodeNumber<int32_t, true> NodeJsonInteger;
+
+    CODEC_NODE_H(NodeFloat)
+    CODEC_NODE_H(NodeInteger)
+    CODEC_NODE_H(NodeJsonFloat)
+    CODEC_NODE_H(NodeJsonInteger)
 
 }// namespace CHelper::Node
 

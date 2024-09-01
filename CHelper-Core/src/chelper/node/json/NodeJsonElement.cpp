@@ -2,15 +2,14 @@
 // Created by Yancey on 2024/2/28.
 //
 
-#include <chelper/node/json/NodeJsonElement.h>
 #include <chelper/node/json/NodeJsonBoolean.h>
+#include <chelper/node/json/NodeJsonElement.h>
 #include <chelper/node/json/NodeJsonEntry.h>
-#include <chelper/node/json/NodeJsonFloat.h>
-#include <chelper/node/json/NodeJsonInteger.h>
 #include <chelper/node/json/NodeJsonList.h>
 #include <chelper/node/json/NodeJsonNull.h>
 #include <chelper/node/json/NodeJsonObject.h>
 #include <chelper/node/json/NodeJsonString.h>
+#include <chelper/node/template/NodeNumber.h>
 
 namespace CHelper::Node {
 

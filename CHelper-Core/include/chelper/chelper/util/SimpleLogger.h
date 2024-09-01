@@ -11,20 +11,30 @@
 
 namespace CHelper::Logger {
 
-    // 辅助函数，用于处理参数
     template<typename T>
-    auto convertArg(T &&arg) -> decltype(std::forward<T>(arg)) {
-        return std::forward<T>(arg);
+    auto convertArg(const T &arg) {
+        if constexpr (std::is_same<T, std::u16string>() ||
+                      std::is_same<T, const std::u16string>() ||
+                      std::is_same<T, char16_t *>() ||
+                      std::is_same<T, const char16_t *>()) {
+            return utf8::utf16to8((const std::u16string &) arg);
+        } else {
+            return arg;
+        }
     }
 
-    // 特化版本，用于处理 std::u16string
-    std::string convertArg(std::u16string &u16string);
-
-    // 特化版本，用于处理 std::u16string
-    std::string convertArg(const std::u16string &u16string);
-
-    // 特化版本，用于处理 char16_t
-    std::string convertArg(const char16_t *u16string);
+    template<typename T>
+    auto convertArg(const T &&arg) {
+        if constexpr (std::is_same<T, std::u16string>() ||
+                      std::is_same<T, const std::u16string>()) {
+            return utf8::utf16to8((const std::u16string &) arg);
+        } else if constexpr (std::is_same<T, char16_t *>() ||
+                             std::is_same<T, const char16_t *>()) {
+            return utf8::utf16to8(arg);
+        } else {
+            return arg;
+        }
+    }
 
 #if CHelperAndroid == true
     static const char *KEY = "CHelperNative";
@@ -32,7 +42,7 @@ namespace CHelper::Logger {
 
 #if CHelperLogger == DEBUG
     template<typename... T>
-    void debug(fmt::format_string<T...> fmt, T &&...args) {
+    void debug(const std::string &fmt, T &&...args) {
 #if CHelperAndroid == true
         std::string content = fmt::format(fmt, convertArg(args)...);
         __android_log_print(ANDROID_LOG_DEBUG, KEY, "%s", content.c_str());
@@ -47,7 +57,7 @@ namespace CHelper::Logger {
 
 #if CHelperLogger == DEBUG || CHelperLogger == INFO
     template<typename... T>
-    void info(fmt::format_string<T...> fmt, T &&...args) {
+    void info(const std::string &fmt, T &&...args) {
 #if CHelperAndroid == true
         std::string content = fmt::format(fmt, convertArg(args)...);
         __android_log_print(ANDROID_LOG_INFO, KEY, "%s", content.c_str());
@@ -62,7 +72,7 @@ namespace CHelper::Logger {
 
 #if CHelperLogger == DEBUG || CHelperLogger == INFO || CHelperLogger == WARN
     template<typename... T>
-    void warn(fmt::format_string<T...> fmt, T &&...args) {
+    void warn(const std::string &fmt, T &&...args) {
 #if CHelperAndroid == true
         std::string content = fmt::format(fmt, convertArg(args)...);
         __android_log_print(ANDROID_LOG_WARN, KEY, "%s", content.c_str());
@@ -77,7 +87,7 @@ namespace CHelper::Logger {
 
 #if CHelperLogger == DEBUG || CHelperLogger == INFO || CHelperLogger == WARN || CHelperLogger == ERROR
     template<typename... T>
-    void error(fmt::format_string<T...> fmt, T &&...args) {
+    void error(const std::string &fmt, T &&...args) {
 #if CHelperAndroid == true
         std::string content = fmt::format(fmt, convertArg(args)...);
         __android_log_print(ANDROID_LOG_ERROR, KEY, "%s", content.c_str());

@@ -272,10 +272,10 @@ namespace CHelper {
     void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
 #if CHelperTest == true
-            Profile::push(std::u16string(u"collect id errors: ")
-                                  .append(node->getNodeType()->nodeName)
+            Profile::push(std::string("collect id errors: ")
+                                  .append(utf8::utf16to8(node->getNodeType()->nodeName))
                                   .append(" ")
-                                  .append(node->description.value_or("")));
+                                  .append(utf8::utf16to8(node->description.value_or(u""))));
 #endif
             auto flag = node->collectIdError(this, idErrorReasons);
 #if CHelperTest == true

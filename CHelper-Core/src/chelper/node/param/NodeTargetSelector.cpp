@@ -3,8 +3,6 @@
 //
 
 #include <chelper/node/param/NodeBoolean.h>
-#include <chelper/node/param/NodeFloat.h>
-#include <chelper/node/param/NodeInteger.h>
 #include <chelper/node/param/NodeItem.h>
 #include <chelper/node/param/NodeNormalId.h>
 #include <chelper/node/param/NodeRange.h>
@@ -12,6 +10,7 @@
 #include <chelper/node/param/NodeString.h>
 #include <chelper/node/param/NodeTargetSelector.h>
 #include <chelper/node/param/NodeText.h>
+#include <chelper/node/template/NodeNumber.h>
 #include <chelper/node/util/NodeEntry.h>
 #include <chelper/node/util/NodeSingleSymbol.h>
 

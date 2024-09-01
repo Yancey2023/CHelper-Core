@@ -3,8 +3,8 @@
 //
 
 #include <chelper/node/param/NodeItem.h>
-#include <chelper/node/param/NodeInteger.h>
 #include <chelper/node/param/NodeJson.h>
+#include <chelper/node/template/NodeNumber.h>
 #include <chelper/resources/CPack.h>
 
 namespace CHelper::Node {

@@ -38,8 +38,8 @@ namespace CHelper::Node {
                              item2->getNodeType() == NodeType::RELATIVE_FLOAT.get();
                 if (HEDLEY_UNLIKELY(flag1 && flag2 == item2->isMustAfterWhiteSpace)) {
                     Profile::push(R"({} should be {} in node "{}")",
-                                  u"isMustAfterWhiteSpace",
-                                  item2->isMustAfterWhiteSpace ? u"false" : u"true",
+                                  "isMustAfterWhiteSpace",
+                                  item2->isMustAfterWhiteSpace ? "false" : "true",
                                   item2->id.value_or(u"unknown"));
                     throw std::runtime_error("value is wrong");
                 }
