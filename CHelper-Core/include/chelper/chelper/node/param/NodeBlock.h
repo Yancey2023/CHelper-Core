@@ -26,7 +26,7 @@ namespace CHelper::Node {
         NodeBlockType::NodeBlockType nodeBlockType = NodeBlockType::BLOCK_WITH_BLOCK_STATE;
 
     private:
-        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> blockIds = nullptr;
+        std::shared_ptr<BlockIds> blockIds = nullptr;
         std::shared_ptr<NodeBase> nodeBlockId = nullptr;
 
     public:

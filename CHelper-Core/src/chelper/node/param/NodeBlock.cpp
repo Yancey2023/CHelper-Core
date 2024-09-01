@@ -36,13 +36,15 @@ namespace CHelper::Node {
         }
         size_t strHash = std::hash<std::u16string_view>{}(blockId.tokens.toString());
         std::shared_ptr<NamespaceId> currentBlock = nullptr;
-        for (const auto &item: *blockIds) {
+        for (const auto &item: *blockIds->blockStateValues) {
             if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash))) {
                 currentBlock = item;
                 break;
             }
         }
-        auto nodeBlockState = currentBlock == nullptr ? BlockId::getNodeAllBlockState() : std::static_pointer_cast<BlockId>(currentBlock)->getNode().get();
+        auto nodeBlockState = currentBlock == nullptr
+                                      ? BlockId::getNodeAllBlockState()
+                                      : std::static_pointer_cast<BlockId>(currentBlock)->getNode(blockIds->blockPropertyDescriptions).get();
         auto astNodeBlockState = getByChildNode(tokenReader, cpack, nodeBlockState, ASTNodeId::NODE_BLOCK_BLOCK_STATE);
         return ASTNode::andNode(this, {blockId, astNodeBlockState}, tokenReader.collect(),
                                 nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);

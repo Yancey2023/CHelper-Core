@@ -187,8 +187,6 @@ namespace CHelper {
 
     void BinaryWriter::encode(const std::u16string &t) {
         encode(utf8::utf16to8(t));
-        //        encodeSize(t.length());
-        //        ostream.write(reinterpret_cast<const char *>(t.data()), static_cast<std::streamsize>(t.length() * sizeof(char16_t)));
     }
 #endif
 
@@ -358,9 +356,6 @@ namespace CHelper {
 
     void BinaryReader::decode(std::u16string &t) {
         t = utf8::utf8to16(read<std::string>());
-        //        size_t length = readSize();
-        //        t.resize(length);
-        //        istream.read(reinterpret_cast<char *>(&t[0]), static_cast<std::streamsize>(length * sizeof(char16_t)));
     }
 
 }// namespace CHelper

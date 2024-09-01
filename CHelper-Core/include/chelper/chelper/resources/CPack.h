@@ -32,8 +32,8 @@ namespace CHelper {
         Manifest manifest;
         std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>> normalIds;
         std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> namespaceIds;
-        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> blockIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
-        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds = std::make_shared<std::vector<std::shared_ptr<NamespaceId>>>();
+        std::shared_ptr<BlockIds> blockIds = std::make_shared<BlockIds>();
+        std::shared_ptr<std::vector<std::shared_ptr<ItemId>>> itemIds = std::make_shared<std::vector<std::shared_ptr<ItemId>>>();
         std::vector<std::unique_ptr<Node::NodeJsonElement>> jsonNodes;
         std::vector<RepeatData> repeatNodeData;
         std::unordered_map<std::u16string, std::pair<const RepeatData *, const Node::NodeBase *>> repeatNodes;

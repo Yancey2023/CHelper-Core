@@ -7128,1439 +7128,6 @@
         "description": "黄色羊毛"
       }
     ],
-    "blockPropertyValues": [
-      {
-        "propertyName": "upside_down_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "weirdo_direction",
-        "validValues": [
-          0,
-          1,
-          2,
-          3
-        ]
-      },
-      {
-        "propertyName": "direction",
-        "validValues": [
-          0,
-          1,
-          2,
-          3
-        ]
-      },
-      {
-        "propertyName": "in_wall_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "open_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "facing_direction",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5
-        ]
-      },
-      {
-        "propertyName": "ground_sign_direction",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "propertyName": "color",
-        "validValues": [
-          "white",
-          "orange",
-          "magenta",
-          "light_blue",
-          "yellow",
-          "lime",
-          "pink",
-          "gray",
-          "silver",
-          "cyan",
-          "purple",
-          "blue",
-          "brown",
-          "green",
-          "red",
-          "black"
-        ]
-      },
-      {
-        "propertyName": "top_slot_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "new_leaf_type",
-        "validValues": [
-          "acacia",
-          "dark_oak"
-        ]
-      },
-      {
-        "propertyName": "persistent_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "update_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "attached_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "hanging",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "repeater_delay",
-        "validValues": [
-          0,
-          1,
-          2,
-          3
-        ]
-      },
-      {
-        "propertyName": "stability",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ]
-      },
-      {
-        "propertyName": "stability_check",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "redstone_signal",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "propertyName": "button_pressed_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "age",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "propertyName": "liquid_depth",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "propertyName": "pillar_axis",
-        "validValues": [
-          "y",
-          "x",
-          "z"
-        ]
-      },
-      {
-        "propertyName": "upper_block_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "deprecated",
-        "validValues": [
-          0,
-          1,
-          2,
-          3
-        ]
-      },
-      {
-        "propertyName": "door_hinge_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "wall_block_type",
-        "validValues": [
-          "cobblestone",
-          "mossy_cobblestone",
-          "granite",
-          "diorite",
-          "andesite",
-          "sandstone",
-          "brick",
-          "stone_brick",
-          "mossy_stone_brick",
-          "nether_brick",
-          "end_brick",
-          "prismarine",
-          "red_sandstone",
-          "red_nether_brick"
-        ]
-      },
-      {
-        "propertyName": "wall_connection_type_east",
-        "validValues": [
-          "none",
-          "short",
-          "tall"
-        ]
-      },
-      {
-        "propertyName": "wall_connection_type_north",
-        "validValues": [
-          "none",
-          "short",
-          "tall"
-        ]
-      },
-      {
-        "propertyName": "wall_connection_type_south",
-        "validValues": [
-          "none",
-          "short",
-          "tall"
-        ]
-      },
-      {
-        "propertyName": "wall_connection_type_west",
-        "validValues": [
-          "none",
-          "short",
-          "tall"
-        ]
-      },
-      {
-        "propertyName": "wall_post_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "huge_mushroom_bits",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "propertyName": "candles",
-        "validValues": [
-          0,
-          1,
-          2,
-          3
-        ]
-      },
-      {
-        "propertyName": "lit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "flower_type",
-        "validValues": [
-          "poppy",
-          "orchid",
-          "allium",
-          "houstonia",
-          "tulip_red",
-          "tulip_orange",
-          "tulip_white",
-          "tulip_pink",
-          "oxeye",
-          "cornflower",
-          "lily_of_the_valley"
-        ]
-      },
-      {
-        "propertyName": "moisturized_amount",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ]
-      },
-      {
-        "propertyName": "structure_block_type",
-        "validValues": [
-          "data",
-          "save",
-          "load",
-          "corner",
-          "invalid",
-          "export"
-        ]
-      },
-      {
-        "propertyName": "sand_type",
-        "validValues": [
-          "normal",
-          "red"
-        ]
-      },
-      {
-        "propertyName": "stone_slab_type",
-        "validValues": [
-          "smooth_stone",
-          "sandstone",
-          "wood",
-          "cobblestone",
-          "brick",
-          "stone_brick",
-          "quartz",
-          "nether_brick"
-        ]
-      },
-      {
-        "propertyName": "honey_level",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5
-        ]
-      },
-      {
-        "propertyName": "torch_facing_direction",
-        "validValues": [
-          "unknown",
-          "west",
-          "east",
-          "north",
-          "south",
-          "top"
-        ]
-      },
-      {
-        "propertyName": "minecraft:cardinal_direction",
-        "validValues": [
-          "south",
-          "west",
-          "north",
-          "east"
-        ]
-      },
-      {
-        "propertyName": "conditional_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "weeping_vines_age",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          24,
-          25
-        ]
-      },
-      {
-        "propertyName": "drag_down",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "coral_color",
-        "validValues": [
-          "blue",
-          "pink",
-          "purple",
-          "red",
-          "yellow"
-        ]
-      },
-      {
-        "propertyName": "dead_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "rotation",
-        "validValues": [
-          0,
-          1,
-          2,
-          3
-        ]
-      },
-      {
-        "propertyName": "allow_underwater_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "explode_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "stripped_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "sand_stone_type",
-        "validValues": [
-          "default",
-          "heiroglyphs",
-          "cut",
-          "smooth"
-        ]
-      },
-      {
-        "propertyName": "infiniburn_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "chisel_type",
-        "validValues": [
-          "default",
-          "chiseled",
-          "lines",
-          "smooth"
-        ]
-      },
-      {
-        "propertyName": "block_light_level",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "propertyName": "coral_direction",
-        "validValues": [
-          0,
-          1,
-          2,
-          3
-        ]
-      },
-      {
-        "propertyName": "coral_hang_type_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "rail_data_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "rail_direction",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9
-        ]
-      },
-      {
-        "propertyName": "structure_void_type",
-        "validValues": [
-          "void",
-          "air"
-        ]
-      },
-      {
-        "propertyName": "big_dripleaf_head",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "big_dripleaf_tilt",
-        "validValues": [
-          "none",
-          "unstable",
-          "partial_tilt",
-          "full_tilt"
-        ]
-      },
-      {
-        "propertyName": "monster_egg_stone_type",
-        "validValues": [
-          "stone",
-          "cobblestone",
-          "stone_brick",
-          "mossy_stone_brick",
-          "cracked_stone_brick",
-          "chiseled_stone_brick"
-        ]
-      },
-      {
-        "propertyName": "brewing_stand_slot_a_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "brewing_stand_slot_b_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "brewing_stand_slot_c_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "sculk_sensor_phase",
-        "validValues": [
-          0,
-          1,
-          2
-        ]
-      },
-      {
-        "propertyName": "growth",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ]
-      },
-      {
-        "propertyName": "bite_counter",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6
-        ]
-      },
-      {
-        "propertyName": "age_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "bamboo_leaf_size",
-        "validValues": [
-          "no_leaves",
-          "small_leaves",
-          "large_leaves"
-        ]
-      },
-      {
-        "propertyName": "bamboo_stalk_thickness",
-        "validValues": [
-          "thin",
-          "thick"
-        ]
-      },
-      {
-        "propertyName": "powered_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "books_stored",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          24,
-          25,
-          26,
-          27,
-          28,
-          29,
-          30,
-          31,
-          32,
-          33,
-          34,
-          35,
-          36,
-          37,
-          38,
-          39,
-          40,
-          41,
-          42,
-          43,
-          44,
-          45,
-          46,
-          47,
-          48,
-          49,
-          50,
-          51,
-          52,
-          53,
-          54,
-          55,
-          56,
-          57,
-          58,
-          59,
-          60,
-          61,
-          62,
-          63
-        ]
-      },
-      {
-        "propertyName": "sapling_type",
-        "validValues": [
-          "oak",
-          "spruce",
-          "birch",
-          "jungle",
-          "acacia",
-          "dark_oak"
-        ]
-      },
-      {
-        "propertyName": "sea_grass_type",
-        "validValues": [
-          "default",
-          "double_top",
-          "double_bot"
-        ]
-      },
-      {
-        "propertyName": "active",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "can_summon",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "color_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "end_portal_eye_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "attachment",
-        "validValues": [
-          "standing",
-          "hanging",
-          "side",
-          "multiple"
-        ]
-      },
-      {
-        "propertyName": "double_plant_type",
-        "validValues": [
-          "sunflower",
-          "syringa",
-          "grass",
-          "fern",
-          "rose",
-          "paeonia"
-        ]
-      },
-      {
-        "propertyName": "cauldron_liquid",
-        "validValues": [
-          "water",
-          "lava",
-          "powder_snow"
-        ]
-      },
-      {
-        "propertyName": "fill_level",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6
-        ]
-      },
-      {
-        "propertyName": "growing_plant_age",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          24,
-          25
-        ]
-      },
-      {
-        "propertyName": "prismarine_block_type",
-        "validValues": [
-          "default",
-          "dark",
-          "bricks"
-        ]
-      },
-      {
-        "propertyName": "tall_grass_type",
-        "validValues": [
-          "default",
-          "tall",
-          "fern",
-          "snow"
-        ]
-      },
-      {
-        "propertyName": "vine_direction_bits",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "propertyName": "multi_face_direction_bits",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          24,
-          25,
-          26,
-          27,
-          28,
-          29,
-          30,
-          31,
-          32,
-          33,
-          34,
-          35,
-          36,
-          37,
-          38,
-          39,
-          40,
-          41,
-          42,
-          43,
-          44,
-          45,
-          46,
-          47,
-          48,
-          49,
-          50,
-          51,
-          52,
-          53,
-          54,
-          55,
-          56,
-          57,
-          58,
-          59,
-          60,
-          61,
-          62,
-          63
-        ]
-      },
-      {
-        "propertyName": "stone_slab_type_4",
-        "validValues": [
-          "mossy_stone_brick",
-          "smooth_quartz",
-          "stone",
-          "cut_sandstone",
-          "cut_red_sandstone"
-        ]
-      },
-      {
-        "propertyName": "stone_slab_type_3",
-        "validValues": [
-          "end_stone_brick",
-          "smooth_red_sandstone",
-          "polished_andesite",
-          "andesite",
-          "diorite",
-          "polished_diorite",
-          "granite",
-          "polished_granite"
-        ]
-      },
-      {
-        "propertyName": "stone_slab_type_2",
-        "validValues": [
-          "red_sandstone",
-          "purpur",
-          "prismarine_rough",
-          "prismarine_dark",
-          "prismarine_brick",
-          "mossy_cobblestone",
-          "smooth_sandstone",
-          "red_nether_brick"
-        ]
-      },
-      {
-        "propertyName": "toggle_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "disarmed_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "suspended_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "item_frame_map_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "item_frame_photo_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "sponge_type",
-        "validValues": [
-          "dry",
-          "wet"
-        ]
-      },
-      {
-        "propertyName": "kelp_age",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          24,
-          25
-        ]
-      },
-      {
-        "propertyName": "head_piece_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "occupied_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "brushed_progress",
-        "validValues": [
-          0,
-          1,
-          2,
-          3
-        ]
-      },
-      {
-        "propertyName": "triggered_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "wood_type",
-        "validValues": [
-          "oak",
-          "spruce",
-          "birch",
-          "jungle",
-          "acacia",
-          "dark_oak"
-        ]
-      },
-      {
-        "propertyName": "portal_axis",
-        "validValues": [
-          "unknown",
-          "x",
-          "z"
-        ]
-      },
-      {
-        "propertyName": "bloom",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "cracked_state",
-        "validValues": [
-          "no_cracks",
-          "cracked",
-          "max_cracked"
-        ]
-      },
-      {
-        "propertyName": "coral_fan_direction",
-        "validValues": [
-          0,
-          1
-        ]
-      },
-      {
-        "propertyName": "damage",
-        "validValues": [
-          "undamaged",
-          "slightly_damaged",
-          "very_damaged",
-          "broken"
-        ]
-      },
-      {
-        "propertyName": "stone_brick_type",
-        "validValues": [
-          "default",
-          "mossy",
-          "cracked",
-          "chiseled",
-          "smooth"
-        ]
-      },
-      {
-        "propertyName": "cluster_count",
-        "validValues": [
-          0,
-          1,
-          2,
-          3
-        ]
-      },
-      {
-        "propertyName": "dirt_type",
-        "validValues": [
-          "normal",
-          "coarse"
-        ]
-      },
-      {
-        "propertyName": "output_lit_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "output_subtract_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "lever_direction",
-        "validValues": [
-          "down_east_west",
-          "east",
-          "west",
-          "south",
-          "north",
-          "up_north_south",
-          "up_east_west",
-          "down_north_south"
-        ]
-      },
-      {
-        "propertyName": "propagule_stage",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4
-        ]
-      },
-      {
-        "propertyName": "minecraft:facing_direction",
-        "validValues": [
-          "down",
-          "up",
-          "north",
-          "south",
-          "west",
-          "east"
-        ]
-      },
-      {
-        "propertyName": "dripstone_thickness",
-        "validValues": [
-          "tip",
-          "frustum",
-          "middle",
-          "base",
-          "merge"
-        ]
-      },
-      {
-        "propertyName": "extinguished",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "old_leaf_type",
-        "validValues": [
-          "oak",
-          "spruce",
-          "birch",
-          "jungle"
-        ]
-      },
-      {
-        "propertyName": "composter_fill_level",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8
-        ]
-      },
-      {
-        "propertyName": "stone_type",
-        "validValues": [
-          "stone",
-          "granite",
-          "granite_smooth",
-          "diorite",
-          "diorite_smooth",
-          "andesite",
-          "andesite_smooth"
-        ]
-      },
-      {
-        "propertyName": "respawn_anchor_charge",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4
-        ]
-      },
-      {
-        "propertyName": "chemistry_table_type",
-        "validValues": [
-          "compound_creator",
-          "material_reducer",
-          "element_constructor",
-          "lab_table"
-        ]
-      },
-      {
-        "propertyName": "turtle_egg_count",
-        "validValues": [
-          "one_egg",
-          "two_egg",
-          "three_egg",
-          "four_egg"
-        ]
-      },
-      {
-        "propertyName": "twisting_vines_age",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23,
-          24,
-          25
-        ]
-      },
-      {
-        "propertyName": "covered_bit",
-        "validValues": [
-          false,
-          true
-        ]
-      },
-      {
-        "propertyName": "height",
-        "validValues": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ]
-      }
-    ],
     "blockPropertyDescriptions": {
       "common": [
         {
@@ -8578,7 +7145,57 @@
         },
         {
           "propertyName": "age",
-          "description": "植物的生长阶段 刚种下或刚生长出的植物方块的该属性值为0 该值随着时间变化不断增长，直到15时可以继续在上方生长出新的植物方块"
+          "description": "植物的生长阶段 刚种下或刚生长出的植物方块的该属性值为0 该值随着时间变化不断增长，直到15时可以继续在上方生长出新的植物方块",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            },
+            {
+              "valueName": 4
+            },
+            {
+              "valueName": 5
+            },
+            {
+              "valueName": 6
+            },
+            {
+              "valueName": 7
+            },
+            {
+              "valueName": 8
+            },
+            {
+              "valueName": 9
+            },
+            {
+              "valueName": 10
+            },
+            {
+              "valueName": 11
+            },
+            {
+              "valueName": 12
+            },
+            {
+              "valueName": 13
+            },
+            {
+              "valueName": 14
+            },
+            {
+              "valueName": 15
+            }
+          ]
         },
         {
           "propertyName": "age_bit",
@@ -8659,7 +7276,15 @@
         },
         {
           "propertyName": "bamboo_stalk_thickness",
-          "description": "竹子的生长阶段，若此值为thick，竹子会显得更粗"
+          "description": "竹子的生长阶段，若此值为thick，竹子会显得更粗",
+          "values": [
+            {
+              "valueName": "thin"
+            },
+            {
+              "valueName": "thick"
+            }
+          ]
         },
         {
           "propertyName": "big_dripleaf_head",
@@ -8730,7 +7355,57 @@
         },
         {
           "propertyName": "block_light_level",
-          "description": "已弃用，为兼容性而保留 光源方块的亮度等级"
+          "description": "已弃用，为兼容性而保留 光源方块的亮度等级",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            },
+            {
+              "valueName": 4
+            },
+            {
+              "valueName": 5
+            },
+            {
+              "valueName": 6
+            },
+            {
+              "valueName": 7
+            },
+            {
+              "valueName": 8
+            },
+            {
+              "valueName": 9
+            },
+            {
+              "valueName": 10
+            },
+            {
+              "valueName": 11
+            },
+            {
+              "valueName": 12
+            },
+            {
+              "valueName": 13
+            },
+            {
+              "valueName": 14
+            },
+            {
+              "valueName": 15
+            }
+          ]
         },
         {
           "propertyName": "bloom",
@@ -8747,7 +7422,201 @@
         },
         {
           "propertyName": "books_stored",
-          "description": "雕纹书架各槽位是否有书，每个二进制位决定一个槽位有无物品： 0x1：雕纹书架0号槽位有无物品 0x2：雕纹书架1号槽位有无物品 0x4：雕纹书架2号槽位有无物品 0x8：雕纹书架3号槽位有无物品 0x10：雕纹书架4号槽位有无物品 0x20：雕纹书架5号槽位有无物品"
+          "description": "雕纹书架各槽位是否有书，每个二进制位决定一个槽位有无物品： 0x1：雕纹书架0号槽位有无物品 0x2：雕纹书架1号槽位有无物品 0x4：雕纹书架2号槽位有无物品 0x8：雕纹书架3号槽位有无物品 0x10：雕纹书架4号槽位有无物品 0x20：雕纹书架5号槽位有无物品",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            },
+            {
+              "valueName": 4
+            },
+            {
+              "valueName": 5
+            },
+            {
+              "valueName": 6
+            },
+            {
+              "valueName": 7
+            },
+            {
+              "valueName": 8
+            },
+            {
+              "valueName": 9
+            },
+            {
+              "valueName": 10
+            },
+            {
+              "valueName": 11
+            },
+            {
+              "valueName": 12
+            },
+            {
+              "valueName": 13
+            },
+            {
+              "valueName": 14
+            },
+            {
+              "valueName": 15
+            },
+            {
+              "valueName": 16
+            },
+            {
+              "valueName": 17
+            },
+            {
+              "valueName": 18
+            },
+            {
+              "valueName": 19
+            },
+            {
+              "valueName": 20
+            },
+            {
+              "valueName": 21
+            },
+            {
+              "valueName": 22
+            },
+            {
+              "valueName": 23
+            },
+            {
+              "valueName": 24
+            },
+            {
+              "valueName": 25
+            },
+            {
+              "valueName": 26
+            },
+            {
+              "valueName": 27
+            },
+            {
+              "valueName": 28
+            },
+            {
+              "valueName": 29
+            },
+            {
+              "valueName": 30
+            },
+            {
+              "valueName": 31
+            },
+            {
+              "valueName": 32
+            },
+            {
+              "valueName": 33
+            },
+            {
+              "valueName": 34
+            },
+            {
+              "valueName": 35
+            },
+            {
+              "valueName": 36
+            },
+            {
+              "valueName": 37
+            },
+            {
+              "valueName": 38
+            },
+            {
+              "valueName": 39
+            },
+            {
+              "valueName": 40
+            },
+            {
+              "valueName": 41
+            },
+            {
+              "valueName": 42
+            },
+            {
+              "valueName": 43
+            },
+            {
+              "valueName": 44
+            },
+            {
+              "valueName": 45
+            },
+            {
+              "valueName": 46
+            },
+            {
+              "valueName": 47
+            },
+            {
+              "valueName": 48
+            },
+            {
+              "valueName": 49
+            },
+            {
+              "valueName": 50
+            },
+            {
+              "valueName": 51
+            },
+            {
+              "valueName": 52
+            },
+            {
+              "valueName": 53
+            },
+            {
+              "valueName": 54
+            },
+            {
+              "valueName": 55
+            },
+            {
+              "valueName": 56
+            },
+            {
+              "valueName": 57
+            },
+            {
+              "valueName": 58
+            },
+            {
+              "valueName": 59
+            },
+            {
+              "valueName": 60
+            },
+            {
+              "valueName": 61
+            },
+            {
+              "valueName": 62
+            },
+            {
+              "valueName": 63
+            }
+          ]
         },
         {
           "propertyName": "brewing_stand_slot_a_bit",
@@ -8790,7 +7659,21 @@
         },
         {
           "propertyName": "brushed_progress",
-          "description": "可疑的方块被清刷的程度"
+          "description": "可疑的方块被清刷的程度",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            }
+          ]
         },
         {
           "propertyName": "button_pressed_bit",
@@ -8820,11 +7703,36 @@
         },
         {
           "propertyName": "candles",
-          "description": "方块内额外的蜡烛的数量"
+          "description": "方块内额外的蜡烛的数量",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            }
+          ]
         },
         {
           "propertyName": "cauldron_liquid",
-          "description": "炼药锅中内容物的类型"
+          "description": "炼药锅中内容物的类型",
+          "values": [
+            {
+              "valueName": "water"
+            },
+            {
+              "valueName": "lava"
+            },
+            {
+              "valueName": "powder_snow"
+            }
+          ]
         },
         {
           "propertyName": "chemistry_table_type",
@@ -8849,19 +7757,105 @@
         },
         {
           "propertyName": "chisel_type",
-          "description": "已弃用，为兼容性而保留 default：普通变种 chiseled：雕纹变种 lines：柱变种 smooth：平滑变种"
+          "description": "已弃用，为兼容性而保留 default：普通变种 chiseled：雕纹变种 lines：柱变种 smooth：平滑变种",
+          "values": [
+            {
+              "valueName": "default"
+            },
+            {
+              "valueName": "chiseled"
+            },
+            {
+              "valueName": "lines"
+            },
+            {
+              "valueName": "smooth"
+            }
+          ]
         },
         {
           "propertyName": "cluster_count",
-          "description": "方块内额外的海泡菜的数量"
+          "description": "方块内额外的海泡菜的数量",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            }
+          ]
         },
         {
           "propertyName": "color",
-          "description": "已弃用，为兼容性而保留 方块的颜色"
+          "description": "已弃用，为兼容性而保留 方块的颜色",
+          "values": [
+            {
+              "valueName": "white"
+            },
+            {
+              "valueName": "orange"
+            },
+            {
+              "valueName": "magenta"
+            },
+            {
+              "valueName": "light_blue"
+            },
+            {
+              "valueName": "yellow"
+            },
+            {
+              "valueName": "lime"
+            },
+            {
+              "valueName": "pink"
+            },
+            {
+              "valueName": "gray"
+            },
+            {
+              "valueName": "silver"
+            },
+            {
+              "valueName": "cyan"
+            },
+            {
+              "valueName": "purple"
+            },
+            {
+              "valueName": "blue"
+            },
+            {
+              "valueName": "brown"
+            },
+            {
+              "valueName": "green"
+            },
+            {
+              "valueName": "red"
+            },
+            {
+              "valueName": "black"
+            }
+          ]
         },
         {
           "propertyName": "color_bit",
-          "description": "彩色火把的颜色"
+          "description": "彩色火把的颜色",
+          "values": [
+            {
+              "valueName": false
+            },
+            {
+              "valueName": true
+            }
+          ]
         },
         {
           "propertyName": "composter_fill_level",
@@ -8919,19 +7913,66 @@
         },
         {
           "propertyName": "coral_color",
-          "description": "已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种"
+          "description": "已弃用，为兼容性而保留 珊瑚的变种 blue：管珊瑚变种 pink：脑纹珊瑚变种 purple：气泡珊瑚变种 red：火珊瑚变种 yellow：鹿角珊瑚变种",
+          "values": [
+            {
+              "valueName": "blue"
+            },
+            {
+              "valueName": "pink"
+            },
+            {
+              "valueName": "purple"
+            },
+            {
+              "valueName": "red"
+            },
+            {
+              "valueName": "yellow"
+            }
+          ]
         },
         {
           "propertyName": "coral_direction",
-          "description": "墙上的珊瑚扇朝向的方向。 0：朝北 1：朝东 2：朝南 3：朝西"
+          "description": "墙上的珊瑚扇朝向的方向。 0：朝北 1：朝东 2：朝南 3：朝西",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            }
+          ]
         },
         {
           "propertyName": "coral_fan_direction",
-          "description": "未使用，正常情况下均为1"
+          "description": "未使用，正常情况下均为1",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            }
+          ]
         },
         {
           "propertyName": "coral_hang_type_bit",
-          "description": "墙上的珊瑚扇的类型"
+          "description": "墙上的珊瑚扇的类型",
+          "values": [
+            {
+              "valueName": false
+            },
+            {
+              "valueName": true
+            }
+          ]
         },
         {
           "propertyName": "covered_bit",
@@ -8948,7 +7989,18 @@
         },
         {
           "propertyName": "cracked_state",
-          "description": "蛋的孵化阶段"
+          "description": "蛋的孵化阶段",
+          "values": [
+            {
+              "valueName": "no_cracks"
+            },
+            {
+              "valueName": "cracked"
+            },
+            {
+              "valueName": "max_cracked"
+            }
+          ]
         },
         {
           "propertyName": "crafting",
@@ -8965,7 +8017,21 @@
         },
         {
           "propertyName": "damage",
-          "description": "已弃用，为兼容性而保留 broken： 破碎的铁砧（只能通过命令获得，与完好的铁砧纹理类似，可以正常使用） slightly_damaged： 开裂的铁砧 undamaged： 铁砧 very_damaged： 损坏的铁砧"
+          "description": "已弃用，为兼容性而保留 broken： 破碎的铁砧（只能通过命令获得，与完好的铁砧纹理类似，可以正常使用） slightly_damaged： 开裂的铁砧 undamaged： 铁砧 very_damaged： 损坏的铁砧",
+          "values": [
+            {
+              "valueName": "undamaged"
+            },
+            {
+              "valueName": "slightly_damaged"
+            },
+            {
+              "valueName": "very_damaged"
+            },
+            {
+              "valueName": "broken"
+            }
+          ]
         },
         {
           "propertyName": "dead_bit",
@@ -8982,7 +8048,21 @@
         },
         {
           "propertyName": "deprecated",
-          "description": "已弃用但未被移除的方块状态，作用未知"
+          "description": "已弃用但未被移除的方块状态，作用未知",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            }
+          ]
         },
         {
           "propertyName": "direction",
@@ -9007,7 +8087,15 @@
         },
         {
           "propertyName": "dirt_type",
-          "description": "已弃用，为兼容性而保留 normal coarse"
+          "description": "已弃用，为兼容性而保留 normal coarse",
+          "values": [
+            {
+              "valueName": "normal"
+            },
+            {
+              "valueName": "coarse"
+            }
+          ]
         },
         {
           "propertyName": "disarmed_bit",
@@ -9024,11 +8112,39 @@
         },
         {
           "propertyName": "door_hinge_bit",
-          "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false"
+          "description": "门轴在哪一侧，当为false时为左侧。储存在上半层的门中，对于下半层的门，该值正常情况下永远为false",
+          "values": [
+            {
+              "valueName": false
+            },
+            {
+              "valueName": true
+            }
+          ]
         },
         {
           "propertyName": "double_plant_type",
-          "description": "已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa"
+          "description": "已弃用，为兼容性而保留 双层植物的类型 fern grass paeonia rose sunflower syringa",
+          "values": [
+            {
+              "valueName": "sunflower"
+            },
+            {
+              "valueName": "syringa"
+            },
+            {
+              "valueName": "grass"
+            },
+            {
+              "valueName": "fern"
+            },
+            {
+              "valueName": "rose"
+            },
+            {
+              "valueName": "paeonia"
+            }
+          ]
         },
         {
           "propertyName": "drag_down",
@@ -9138,11 +8254,69 @@
         },
         {
           "propertyName": "fill_level",
-          "description": "炼药锅内容物的高度"
+          "description": "炼药锅内容物的高度",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            },
+            {
+              "valueName": 4
+            },
+            {
+              "valueName": 5
+            },
+            {
+              "valueName": 6
+            }
+          ]
         },
         {
           "propertyName": "flower_type",
-          "description": "已弃用，为兼容性而保留 花的类型 allium： cornflower： houstonia： lily_of_the_valley： orchid： oxeye： poppy： tulip_orange： tulip_pink： tulip_red： tulip_white："
+          "description": "已弃用，为兼容性而保留 花的类型 allium： cornflower： houstonia： lily_of_the_valley： orchid： oxeye： poppy： tulip_orange： tulip_pink： tulip_red： tulip_white：",
+          "values": [
+            {
+              "valueName": "poppy"
+            },
+            {
+              "valueName": "orchid"
+            },
+            {
+              "valueName": "allium"
+            },
+            {
+              "valueName": "houstonia"
+            },
+            {
+              "valueName": "tulip_red"
+            },
+            {
+              "valueName": "tulip_orange"
+            },
+            {
+              "valueName": "tulip_white"
+            },
+            {
+              "valueName": "tulip_pink"
+            },
+            {
+              "valueName": "oxeye"
+            },
+            {
+              "valueName": "cornflower"
+            },
+            {
+              "valueName": "lily_of_the_valley"
+            }
+          ]
         },
         {
           "propertyName": "ground_sign_direction",
@@ -9215,7 +8389,87 @@
         },
         {
           "propertyName": "growing_plant_age",
-          "description": "洞穴藤蔓的生长程度 当此值小于25时可以继续生长出新的植物方块，且使得末端植物方块的该属性增加1 当此值达到25时植物不再生长"
+          "description": "洞穴藤蔓的生长程度 当此值小于25时可以继续生长出新的植物方块，且使得末端植物方块的该属性增加1 当此值达到25时植物不再生长",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            },
+            {
+              "valueName": 4
+            },
+            {
+              "valueName": 5
+            },
+            {
+              "valueName": 6
+            },
+            {
+              "valueName": 7
+            },
+            {
+              "valueName": 8
+            },
+            {
+              "valueName": 9
+            },
+            {
+              "valueName": 10
+            },
+            {
+              "valueName": 11
+            },
+            {
+              "valueName": 12
+            },
+            {
+              "valueName": 13
+            },
+            {
+              "valueName": 14
+            },
+            {
+              "valueName": 15
+            },
+            {
+              "valueName": 16
+            },
+            {
+              "valueName": 17
+            },
+            {
+              "valueName": 18
+            },
+            {
+              "valueName": 19
+            },
+            {
+              "valueName": 20
+            },
+            {
+              "valueName": 21
+            },
+            {
+              "valueName": 22
+            },
+            {
+              "valueName": 23
+            },
+            {
+              "valueName": 24
+            },
+            {
+              "valueName": 25
+            }
+          ]
         },
         {
           "propertyName": "growth",
@@ -9282,7 +8536,33 @@
         },
         {
           "propertyName": "height",
-          "description": "方块中额外的雪层厚度"
+          "description": "方块中额外的雪层厚度",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            },
+            {
+              "valueName": 4
+            },
+            {
+              "valueName": 5
+            },
+            {
+              "valueName": 6
+            },
+            {
+              "valueName": 7
+            }
+          ]
         },
         {
           "propertyName": "honey_level",
@@ -9436,7 +8716,87 @@
         },
         {
           "propertyName": "kelp_age",
-          "description": "海带的生长程度 当此值小于25时可以继续生长出新的植物方块，且使得末端植物方块的该属性增加1 当此值达到25时植物不再生长"
+          "description": "海带的生长程度 当此值小于25时可以继续生长出新的植物方块，且使得末端植物方块的该属性增加1 当此值达到25时植物不再生长",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            },
+            {
+              "valueName": 4
+            },
+            {
+              "valueName": 5
+            },
+            {
+              "valueName": 6
+            },
+            {
+              "valueName": 7
+            },
+            {
+              "valueName": 8
+            },
+            {
+              "valueName": 9
+            },
+            {
+              "valueName": 10
+            },
+            {
+              "valueName": 11
+            },
+            {
+              "valueName": 12
+            },
+            {
+              "valueName": 13
+            },
+            {
+              "valueName": 14
+            },
+            {
+              "valueName": 15
+            },
+            {
+              "valueName": 16
+            },
+            {
+              "valueName": 17
+            },
+            {
+              "valueName": 18
+            },
+            {
+              "valueName": 19
+            },
+            {
+              "valueName": 20
+            },
+            {
+              "valueName": 21
+            },
+            {
+              "valueName": 22
+            },
+            {
+              "valueName": 23
+            },
+            {
+              "valueName": 24
+            },
+            {
+              "valueName": 25
+            }
+          ]
         },
         {
           "propertyName": "lever_direction",
@@ -9688,7 +9048,27 @@
         },
         {
           "propertyName": "monster_egg_stone_type",
-          "description": "已弃用，为兼容性而保留 chiseled_stone_brick： 虫蚀雕纹石砖 cobblestone： 虫蚀圆石 cracked_stone_brick： 虫蚀裂纹石砖 stone： 虫蚀石头 mossy_stone_brick： 虫蚀苔石砖 stone_brick： 虫蚀石砖"
+          "description": "已弃用，为兼容性而保留 chiseled_stone_brick： 虫蚀雕纹石砖 cobblestone： 虫蚀圆石 cracked_stone_brick： 虫蚀裂纹石砖 stone： 虫蚀石头 mossy_stone_brick： 虫蚀苔石砖 stone_brick： 虫蚀石砖",
+          "values": [
+            {
+              "valueName": "stone"
+            },
+            {
+              "valueName": "cobblestone"
+            },
+            {
+              "valueName": "stone_brick"
+            },
+            {
+              "valueName": "mossy_stone_brick"
+            },
+            {
+              "valueName": "cracked_stone_brick"
+            },
+            {
+              "valueName": "chiseled_stone_brick"
+            }
+          ]
         },
         {
           "propertyName": "multi_face_direction_bits",
@@ -9953,15 +9333,15 @@
         },
         {
           "propertyName": "new_leaf_type",
-          "description": "已弃用，为兼容性而保留 树叶的类型 acacia： 金合欢树叶 dark_oak： 深色橡树树叶"
-        },
-        {
-          "propertyName": "new_log_type",
-          "description": "已弃用，为兼容性而保留 原木的类型 acacia： 金合欢原木 dark_oak： 深色橡木原木"
-        },
-        {
-          "propertyName": "no_drop_bit",
-          "description": "技术性，标记该头颅正在由创造模式玩家破坏，从而避免掉落"
+          "description": "已弃用，为兼容性而保留 树叶的类型 acacia： 金合欢树叶 dark_oak： 深色橡树树叶",
+          "values": [
+            {
+              "valueName": "acacia"
+            },
+            {
+              "valueName": "dark_oak"
+            }
+          ]
         },
         {
           "propertyName": "occupied_bit",
@@ -9978,11 +9358,21 @@
         },
         {
           "propertyName": "old_leaf_type",
-          "description": "已弃用，为兼容性而保留 树叶的类型 oak： 橡树树叶 spruce： 云杉树叶 birch： 白桦树叶 jungle： 丛林树叶"
-        },
-        {
-          "propertyName": "old_log_type",
-          "description": "已弃用，为兼容性而保留 原木的类型 oak： 橡木原木 spruce： 云杉原木 birch： 白桦原木 jungle： 丛林原木"
+          "description": "已弃用，为兼容性而保留 树叶的类型 oak： 橡树树叶 spruce： 云杉树叶 birch： 白桦树叶 jungle： 丛林树叶",
+          "values": [
+            {
+              "valueName": "oak"
+            },
+            {
+              "valueName": "spruce"
+            },
+            {
+              "valueName": "birch"
+            },
+            {
+              "valueName": "jungle"
+            }
+          ]
         },
         {
           "propertyName": "ominous",
@@ -10151,7 +9541,18 @@
         },
         {
           "propertyName": "prismarine_block_type",
-          "description": "已弃用，为兼容性而保留 default： 海晶石 dark： 暗海晶石 bricks： 海晶石砖"
+          "description": "已弃用，为兼容性而保留 default： 海晶石 dark： 暗海晶石 bricks： 海晶石砖",
+          "values": [
+            {
+              "valueName": "default"
+            },
+            {
+              "valueName": "dark"
+            },
+            {
+              "valueName": "bricks"
+            }
+          ]
         },
         {
           "propertyName": "propagule_stage",
@@ -10238,11 +9639,75 @@
         },
         {
           "propertyName": "redstone_signal",
-          "description": "红石信号等级"
+          "description": "红石信号等级",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            },
+            {
+              "valueName": 4
+            },
+            {
+              "valueName": 5
+            },
+            {
+              "valueName": 6
+            },
+            {
+              "valueName": 7
+            },
+            {
+              "valueName": 8
+            },
+            {
+              "valueName": 9
+            },
+            {
+              "valueName": 10
+            },
+            {
+              "valueName": 11
+            },
+            {
+              "valueName": 12
+            },
+            {
+              "valueName": 13
+            },
+            {
+              "valueName": 14
+            },
+            {
+              "valueName": 15
+            }
+          ]
         },
         {
           "propertyName": "repeater_delay",
-          "description": "红石中继器的挡位 每升高一档，延迟时间增加1红石刻（0.1秒）"
+          "description": "红石中继器的挡位 每升高一档，延迟时间增加1红石刻（0.1秒）",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            }
+          ]
         },
         {
           "propertyName": "respawn_anchor_charge",
@@ -10271,19 +9736,75 @@
         },
         {
           "propertyName": "rotation",
-          "description": "拼图方块朝向上方或下方时绕Y轴的旋转，朝向水平方向的拼图方块的该属性值为0 0：北 1：西 2：南 3：东"
+          "description": "拼图方块朝向上方或下方时绕Y轴的旋转，朝向水平方向的拼图方块的该属性值为0 0：北 1：西 2：南 3：东",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            }
+          ]
         },
         {
           "propertyName": "sand_stone_type",
-          "description": "已弃用，为兼容性而保留 default： 普通变种 heiroglyphs： 雕纹变种 cut： 切制变种 smooth： 平滑变种"
+          "description": "已弃用，为兼容性而保留 default： 普通变种 heiroglyphs： 雕纹变种 cut： 切制变种 smooth： 平滑变种",
+          "values": [
+            {
+              "valueName": "default"
+            },
+            {
+              "valueName": "heiroglyphs"
+            },
+            {
+              "valueName": "cut"
+            },
+            {
+              "valueName": "smooth"
+            }
+          ]
         },
         {
           "propertyName": "sand_type",
-          "description": "已弃用，为兼容性而保留 normal： red："
+          "description": "已弃用，为兼容性而保留 normal： red：",
+          "values": [
+            {
+              "valueName": "normal"
+            },
+            {
+              "valueName": "red"
+            }
+          ]
         },
         {
           "propertyName": "sapling_type",
-          "description": "已弃用，为兼容性而保留 树苗的类型 acacia： 金合欢树苗 dark_oak： 深色橡树树苗 oak： 橡树树苗 spruce： 云杉树苗 birch： 白桦树苗 jungle： 丛林树苗"
+          "description": "已弃用，为兼容性而保留 树苗的类型 acacia： 金合欢树苗 dark_oak： 深色橡树树苗 oak： 橡树树苗 spruce： 云杉树苗 birch： 白桦树苗 jungle： 丛林树苗",
+          "values": [
+            {
+              "valueName": "oak"
+            },
+            {
+              "valueName": "spruce"
+            },
+            {
+              "valueName": "birch"
+            },
+            {
+              "valueName": "jungle"
+            },
+            {
+              "valueName": "acacia"
+            },
+            {
+              "valueName": "dark_oak"
+            }
+          ]
         },
         {
           "propertyName": "sculk_sensor_phase",
@@ -10384,31 +9905,174 @@
         },
         {
           "propertyName": "stone_brick_type",
-          "description": "已弃用，为兼容性而保留 chiseled： 雕纹石砖 cracked： 裂纹石砖 default： 石砖 mossy： 苔石砖 smooth： 平滑石砖（和普通石砖纹理相同）"
+          "description": "已弃用，为兼容性而保留 chiseled： 雕纹石砖 cracked： 裂纹石砖 default： 石砖 mossy： 苔石砖 smooth： 平滑石砖（和普通石砖纹理相同）",
+          "values": [
+            {
+              "valueName": "default"
+            },
+            {
+              "valueName": "mossy"
+            },
+            {
+              "valueName": "cracked"
+            },
+            {
+              "valueName": "chiseled"
+            },
+            {
+              "valueName": "smooth"
+            }
+          ]
         },
         {
           "propertyName": "stone_slab_type",
-          "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶"
+          "description": "已弃用，为兼容性而保留 smooth_stone：平滑石头台阶 sandstone：砂岩台阶 wood：石化橡木台阶 cobblestone：圆石台阶 brick：红砖台阶 stone_brick：石砖台阶 quartz：石英台阶 nether_brick：下界砖台阶",
+          "values": [
+            {
+              "valueName": "smooth_stone"
+            },
+            {
+              "valueName": "sandstone"
+            },
+            {
+              "valueName": "wood"
+            },
+            {
+              "valueName": "cobblestone"
+            },
+            {
+              "valueName": "brick"
+            },
+            {
+              "valueName": "stone_brick"
+            },
+            {
+              "valueName": "quartz"
+            },
+            {
+              "valueName": "nether_brick"
+            }
+          ]
         },
         {
           "propertyName": "stone_slab_type_2",
-          "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶"
+          "description": "已弃用，为兼容性而保留 red_sandstone：红砂岩台阶 purpur：紫珀台阶 prismarine_rough：海晶石台阶 prismarine_dark：暗海晶石台阶 prismarine_brick：海晶石砖台阶 mossy_cobblestone：苔石台阶 smooth_sandstone：平滑砂岩台阶 red_nether_brick：红色下界砖台阶",
+          "values": [
+            {
+              "valueName": "red_sandstone"
+            },
+            {
+              "valueName": "purpur"
+            },
+            {
+              "valueName": "prismarine_rough"
+            },
+            {
+              "valueName": "prismarine_dark"
+            },
+            {
+              "valueName": "prismarine_brick"
+            },
+            {
+              "valueName": "mossy_cobblestone"
+            },
+            {
+              "valueName": "smooth_sandstone"
+            },
+            {
+              "valueName": "red_nether_brick"
+            }
+          ]
         },
         {
           "propertyName": "stone_slab_type_3",
-          "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶"
+          "description": "已弃用，为兼容性而保留 end_stone_brick：末地石砖台阶 smooth_red_sandstone：平滑红砂岩台阶 polished_andesite：磨制安山岩台阶 andesite：安山岩台阶 diorite：闪长岩台阶 polished_diorite：磨制闪长岩台阶 granite：花岗岩台阶 polished_granite：磨制花岗岩台阶",
+          "values": [
+            {
+              "valueName": "end_stone_brick"
+            },
+            {
+              "valueName": "smooth_red_sandstone"
+            },
+            {
+              "valueName": "polished_andesite"
+            },
+            {
+              "valueName": "andesite"
+            },
+            {
+              "valueName": "diorite"
+            },
+            {
+              "valueName": "polished_diorite"
+            },
+            {
+              "valueName": "granite"
+            },
+            {
+              "valueName": "polished_granite"
+            }
+          ]
         },
         {
           "propertyName": "stone_slab_type_4",
-          "description": "已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶"
+          "description": "已弃用，为兼容性而保留 mossy_stone_brick：苔石砖台阶 smooth_quartz：平滑石英台阶 stone：石头台阶 cut_sandstone：切制砂岩台阶 cut_red_sandstone：切制红砂岩台阶",
+          "values": [
+            {
+              "valueName": "mossy_stone_brick"
+            },
+            {
+              "valueName": "smooth_quartz"
+            },
+            {
+              "valueName": "stone"
+            },
+            {
+              "valueName": "cut_sandstone"
+            },
+            {
+              "valueName": "cut_red_sandstone"
+            }
+          ]
         },
         {
           "propertyName": "stone_type",
-          "description": "已弃用，为兼容性而保留 石头的类型 stone： granite： granite_smooth： diorite： diorite_smooth： andesite： andesite_smooth："
+          "description": "已弃用，为兼容性而保留 石头的类型 stone： granite： granite_smooth： diorite： diorite_smooth： andesite： andesite_smooth：",
+          "values": [
+            {
+              "valueName": "stone"
+            },
+            {
+              "valueName": "granite"
+            },
+            {
+              "valueName": "granite_smooth"
+            },
+            {
+              "valueName": "diorite"
+            },
+            {
+              "valueName": "diorite_smooth"
+            },
+            {
+              "valueName": "andesite"
+            },
+            {
+              "valueName": "andesite_smooth"
+            }
+          ]
         },
         {
           "propertyName": "stripped_bit",
-          "description": "已弃用，为兼容性而保留 方块为去皮木头还是普通木头"
+          "description": "已弃用，为兼容性而保留 方块为去皮木头还是普通木头",
+          "values": [
+            {
+              "valueName": false
+            },
+            {
+              "valueName": true
+            }
+          ]
         },
         {
           "propertyName": "structure_block_type",
@@ -10441,7 +10105,15 @@
         },
         {
           "propertyName": "structure_void_type",
-          "description": "已弃用，为兼容性而保留 air： 结构空气（已移除） void： 结构空位"
+          "description": "已弃用，为兼容性而保留 air： 结构空气（已移除） void： 结构空位",
+          "values": [
+            {
+              "valueName": "void"
+            },
+            {
+              "valueName": "air"
+            }
+          ]
         },
         {
           "propertyName": "suspended_bit",
@@ -10458,7 +10130,21 @@
         },
         {
           "propertyName": "tall_grass_type",
-          "description": "已弃用，为兼容性而保留 草丛的类型 default：未使用，草灌木 tall： 草 fern： 蕨 snow：未使用"
+          "description": "已弃用，为兼容性而保留 草丛的类型 default：未使用，草灌木 tall： 草 fern： 蕨 snow：未使用",
+          "values": [
+            {
+              "valueName": "default"
+            },
+            {
+              "valueName": "tall"
+            },
+            {
+              "valueName": "fern"
+            },
+            {
+              "valueName": "snow"
+            }
+          ]
         },
         {
           "propertyName": "toggle_bit",
@@ -10475,7 +10161,15 @@
         },
         {
           "propertyName": "top_slot_bit",
-          "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false"
+          "description": "已弃用，为兼容性而保留 台阶是否是上半台阶，双层台阶正常情况下为false",
+          "values": [
+            {
+              "valueName": false
+            },
+            {
+              "valueName": true
+            }
+          ]
         },
         {
           "propertyName": "torch_facing_direction",
@@ -10550,11 +10244,105 @@
         },
         {
           "propertyName": "turtle_egg_count",
-          "description": "海龟蛋的个数"
+          "description": "海龟蛋的个数",
+          "values": [
+            {
+              "valueName": "one_egg"
+            },
+            {
+              "valueName": "two_egg"
+            },
+            {
+              "valueName": "three_egg"
+            },
+            {
+              "valueName": "four_egg"
+            }
+          ]
         },
         {
           "propertyName": "twisting_vines_age",
-          "description": "缠怨藤的生长程度 当此值小于25时可以继续生长出新的植物方块，且使得末端植物方块的该属性增加1 当此值达到25时植物不再生长"
+          "description": "缠怨藤的生长程度 当此值小于25时可以继续生长出新的植物方块，且使得末端植物方块的该属性增加1 当此值达到25时植物不再生长",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            },
+            {
+              "valueName": 4
+            },
+            {
+              "valueName": 5
+            },
+            {
+              "valueName": 6
+            },
+            {
+              "valueName": 7
+            },
+            {
+              "valueName": 8
+            },
+            {
+              "valueName": 9
+            },
+            {
+              "valueName": 10
+            },
+            {
+              "valueName": 11
+            },
+            {
+              "valueName": 12
+            },
+            {
+              "valueName": 13
+            },
+            {
+              "valueName": 14
+            },
+            {
+              "valueName": 15
+            },
+            {
+              "valueName": 16
+            },
+            {
+              "valueName": 17
+            },
+            {
+              "valueName": 18
+            },
+            {
+              "valueName": 19
+            },
+            {
+              "valueName": 20
+            },
+            {
+              "valueName": 21
+            },
+            {
+              "valueName": 22
+            },
+            {
+              "valueName": 23
+            },
+            {
+              "valueName": 24
+            },
+            {
+              "valueName": 25
+            }
+          ]
         },
         {
           "propertyName": "update_bit",
@@ -10687,7 +10475,51 @@
         },
         {
           "propertyName": "wall_block_type",
-          "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙"
+          "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙",
+          "values": [
+            {
+              "valueName": "cobblestone"
+            },
+            {
+              "valueName": "mossy_cobblestone"
+            },
+            {
+              "valueName": "granite"
+            },
+            {
+              "valueName": "diorite"
+            },
+            {
+              "valueName": "andesite"
+            },
+            {
+              "valueName": "sandstone"
+            },
+            {
+              "valueName": "brick"
+            },
+            {
+              "valueName": "stone_brick"
+            },
+            {
+              "valueName": "mossy_stone_brick"
+            },
+            {
+              "valueName": "nether_brick"
+            },
+            {
+              "valueName": "end_brick"
+            },
+            {
+              "valueName": "prismarine"
+            },
+            {
+              "valueName": "red_sandstone"
+            },
+            {
+              "valueName": "red_nether_brick"
+            }
+          ]
         },
         {
           "propertyName": "wall_connection_type_east",
@@ -10772,7 +10604,87 @@
         },
         {
           "propertyName": "weeping_vines_age",
-          "description": "垂泪藤的生长程度 当此值小于25时可以继续生长出新的植物方块，且使得末端植物方块的该属性增加1当此值达到25时植物不再生长"
+          "description": "垂泪藤的生长程度 当此值小于25时可以继续生长出新的植物方块，且使得末端植物方块的该属性增加1当此值达到25时植物不再生长",
+          "values": [
+            {
+              "valueName": 0
+            },
+            {
+              "valueName": 1
+            },
+            {
+              "valueName": 2
+            },
+            {
+              "valueName": 3
+            },
+            {
+              "valueName": 4
+            },
+            {
+              "valueName": 5
+            },
+            {
+              "valueName": 6
+            },
+            {
+              "valueName": 7
+            },
+            {
+              "valueName": 8
+            },
+            {
+              "valueName": 9
+            },
+            {
+              "valueName": 10
+            },
+            {
+              "valueName": 11
+            },
+            {
+              "valueName": 12
+            },
+            {
+              "valueName": 13
+            },
+            {
+              "valueName": 14
+            },
+            {
+              "valueName": 15
+            },
+            {
+              "valueName": 16
+            },
+            {
+              "valueName": 17
+            },
+            {
+              "valueName": 18
+            },
+            {
+              "valueName": 19
+            },
+            {
+              "valueName": 20
+            },
+            {
+              "valueName": 21
+            },
+            {
+              "valueName": 22
+            },
+            {
+              "valueName": 23
+            },
+            {
+              "valueName": 24
+            },
+            {
+              "valueName": 25
+            }
+          ]
         },
         {
           "propertyName": "weirdo_direction",
@@ -10797,7 +10709,27 @@
         },
         {
           "propertyName": "wood_type",
-          "description": "已弃用，为兼容性而保留 木质方块的变种 acacia：金合欢木 dark_oak：深色橡木 oak：橡木 spruce：云杉木 birch：白桦木 jungle：丛林木"
+          "description": "已弃用，为兼容性而保留 木质方块的变种 acacia：金合欢木 dark_oak：深色橡木 oak：橡木 spruce：云杉木 birch：白桦木 jungle：丛林木",
+          "values": [
+            {
+              "valueName": "oak"
+            },
+            {
+              "valueName": "spruce"
+            },
+            {
+              "valueName": "birch"
+            },
+            {
+              "valueName": "jungle"
+            },
+            {
+              "valueName": "acacia"
+            },
+            {
+              "valueName": "dark_oak"
+            }
+          ]
         }
       ],
       "block": [
@@ -11129,10 +11061,18 @@
           "blocks": [
             "bell"
           ],
-          "description": "未使用，钟每响一次，该值就切换一次",
           "properties": [
             {
-              "propertyName": "toggle_bit"
+              "propertyName": "toggle_bit",
+              "description": "未使用，钟每响一次，该值就切换一次",
+              "values": [
+                {
+                  "valueName": false
+                },
+                {
+                  "valueName": true
+                }
+              ]
             }
           ]
         },
@@ -11360,10 +11300,30 @@
           "blocks": [
             "hopper"
           ],
-          "description": "漏斗的输出方向 漏斗将只会把物品注入这个方向的容器 0：朝下 2：朝北 3：朝南 4：朝西 5：朝东",
           "properties": [
             {
-              "propertyName": "facing_direction"
+              "propertyName": "facing_direction",
+              "description": "漏斗的输出方向 漏斗将只会把物品注入这个方向的容器 0：朝下 2：朝北 3：朝南 4：朝西 5：朝东",
+              "values": [
+                {
+                  "valueName": 0
+                },
+                {
+                  "valueName": 1
+                },
+                {
+                  "valueName": 2
+                },
+                {
+                  "valueName": 3
+                },
+                {
+                  "valueName": 4
+                },
+                {
+                  "valueName": 5
+                }
+              ]
             }
           ]
         },
@@ -11385,10 +11345,30 @@
             "stonecutter_block",
             "trapped_chest"
           ],
-          "description": "已弃用，为兼容性而保留 方块的朝向",
           "properties": [
             {
-              "propertyName": "facing_direction"
+              "propertyName": "facing_direction",
+              "description": "已弃用，为兼容性而保留 方块的朝向",
+              "values": [
+                {
+                  "valueName": 0
+                },
+                {
+                  "valueName": 1
+                },
+                {
+                  "valueName": 2
+                },
+                {
+                  "valueName": 3
+                },
+                {
+                  "valueName": 4
+                },
+                {
+                  "valueName": 5
+                }
+              ]
             }
           ]
         },
@@ -11487,10 +11467,24 @@
             "unpowered_comparator",
             "unpowered_repeater"
           ],
-          "description": "已弃用，为兼容性而保留 方块的朝向",
           "properties": [
             {
-              "propertyName": "direction"
+              "propertyName": "direction",
+              "description": "已弃用，为兼容性而保留 方块的朝向",
+              "values": [
+                {
+                  "valueName": 0
+                },
+                {
+                  "valueName": 1
+                },
+                {
+                  "valueName": 2
+                },
+                {
+                  "valueName": 3
+                }
+              ]
             }
           ]
         },
@@ -11499,10 +11493,18 @@
             "suspicious_gravel",
             "suspicious_sand"
           ],
-          "description": "作用未知，为false时不读取其战利品表",
           "properties": [
             {
-              "propertyName": "hanging"
+              "propertyName": "hanging",
+              "description": "作用未知，为false时不读取其战利品表",
+              "values": [
+                {
+                  "valueName": false
+                },
+                {
+                  "valueName": true
+                }
+              ]
             }
           ]
         },
@@ -11563,10 +11565,18 @@
             "dead_brain_coral_wall_fan",
             "dead_tube_coral_wall_fan"
           ],
-          "description": "已弃用，为兼容性而保留 true： 脑纹珊瑚扇 false： 管珊瑚扇",
           "properties": [
             {
-              "propertyName": "coral_hang_type_bit"
+              "propertyName": "coral_hang_type_bit",
+              "description": "已弃用，为兼容性而保留 true： 脑纹珊瑚扇 false： 管珊瑚扇",
+              "values": [
+                {
+                  "valueName": false
+                },
+                {
+                  "valueName": true
+                }
+              ]
             }
           ]
         },
@@ -11575,10 +11585,18 @@
             "horn_coral_wall_fan",
             "dead_horn_coral_wall_fan"
           ],
-          "description": "已弃用，为兼容性而保留 true：未使用 false： 鹿角珊瑚扇",
           "properties": [
             {
-              "propertyName": "coral_hang_type_bit"
+              "propertyName": "coral_hang_type_bit",
+              "description": "已弃用，为兼容性而保留 true：未使用 false： 鹿角珊瑚扇",
+              "values": [
+                {
+                  "valueName": false
+                },
+                {
+                  "valueName": true
+                }
+              ]
             }
           ]
         },
@@ -11682,13 +11700,36 @@
             "weathered_copper_door",
             "wooden_door"
           ],
-          "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
           "properties": [
             {
-              "propertyName": "direction"
+              "propertyName": "direction",
+              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南",
+              "values": [
+                {
+                  "valueName": 0
+                },
+                {
+                  "valueName": 1
+                },
+                {
+                  "valueName": 2
+                },
+                {
+                  "valueName": 3
+                }
+              ]
             },
             {
-              "propertyName": "open_bit"
+              "propertyName": "open_bit",
+              "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
+              "values": [
+                {
+                  "valueName": false
+                },
+                {
+                  "valueName": true
+                }
+              ]
             }
           ]
         },
@@ -11696,10 +11737,60 @@
           "blocks": [
             "soul_fire"
           ],
-          "description": "未使用",
           "properties": [
             {
-              "propertyName": "age"
+              "propertyName": "age",
+              "description": "未使用",
+              "values": [
+                {
+                  "valueName": 0
+                },
+                {
+                  "valueName": 1
+                },
+                {
+                  "valueName": 2
+                },
+                {
+                  "valueName": 3
+                },
+                {
+                  "valueName": 4
+                },
+                {
+                  "valueName": 5
+                },
+                {
+                  "valueName": 6
+                },
+                {
+                  "valueName": 7
+                },
+                {
+                  "valueName": 8
+                },
+                {
+                  "valueName": 9
+                },
+                {
+                  "valueName": 10
+                },
+                {
+                  "valueName": 11
+                },
+                {
+                  "valueName": 12
+                },
+                {
+                  "valueName": 13
+                },
+                {
+                  "valueName": 14
+                },
+                {
+                  "valueName": 15
+                }
+              ]
             }
           ]
         },
@@ -11710,10 +11801,18 @@
             "dead_bubble_coral_wall_fan",
             "dead_fire_coral_wall_fan"
           ],
-          "description": "已弃用，为兼容性而保留 true： 火珊瑚扇 false： 气泡珊瑚扇",
           "properties": [
             {
-              "propertyName": "coral_hang_type_bit"
+              "propertyName": "coral_hang_type_bit",
+              "description": "已弃用，为兼容性而保留 true： 火珊瑚扇 false： 气泡珊瑚扇",
+              "values": [
+                {
+                  "valueName": false
+                },
+                {
+                  "valueName": true
+                }
+              ]
             }
           ]
         },
@@ -11797,7 +11896,6 @@
           "blocks": [
             "bamboo_sapling"
           ],
-          "description": "未使用，正常情况下均为oak",
           "properties": [
             {
               "propertyName": "age_bit",
@@ -11813,7 +11911,28 @@
               ]
             },
             {
-              "propertyName": "sapling_type"
+              "propertyName": "sapling_type",
+              "description": "未使用，正常情况下均为oak",
+              "values": [
+                {
+                  "valueName": "oak"
+                },
+                {
+                  "valueName": "spruce"
+                },
+                {
+                  "valueName": "birch"
+                },
+                {
+                  "valueName": "jungle"
+                },
+                {
+                  "valueName": "acacia"
+                },
+                {
+                  "valueName": "dark_oak"
+                }
+              ]
             }
           ]
         },
@@ -11842,10 +11961,18 @@
             "cherry_wood",
             "mangrove_wood"
           ],
-          "description": "此方块属性本应处于已弃用状态，且应为了兼容性而保留，由于存在漏洞，此属性没有被弃用，且其值没有实际效果 方块为去皮木头还是普通木头",
           "properties": [
             {
-              "propertyName": "stripped_bit"
+              "propertyName": "stripped_bit",
+              "description": "此方块属性本应处于已弃用状态，且应为了兼容性而保留，由于存在漏洞，此属性没有被弃用，且其值没有实际效果 方块为去皮木头还是普通木头",
+              "values": [
+                {
+                  "valueName": false
+                },
+                {
+                  "valueName": true
+                }
+              ]
             }
           ]
         },
@@ -11929,10 +12056,36 @@
           "blocks": [
             "pink_petals"
           ],
-          "description": "粉红色花簇中花的数量",
           "properties": [
             {
-              "propertyName": "growth"
+              "propertyName": "growth",
+              "description": "粉红色花簇中花的数量",
+              "values": [
+                {
+                  "valueName": 0
+                },
+                {
+                  "valueName": 1
+                },
+                {
+                  "valueName": 2
+                },
+                {
+                  "valueName": 3
+                },
+                {
+                  "valueName": 4
+                },
+                {
+                  "valueName": 5
+                },
+                {
+                  "valueName": 6
+                },
+                {
+                  "valueName": 7
+                }
+              ]
             }
           ]
         },
@@ -12036,10 +12189,60 @@
           "blocks": [
             "fire"
           ],
-          "description": "火的“年龄”，影响火的传播和熄灭 随时间变化，此值会逐渐增长直到15",
           "properties": [
             {
-              "propertyName": "age"
+              "propertyName": "age",
+              "description": "火的“年龄”，影响火的传播和熄灭 随时间变化，此值会逐渐增长直到15",
+              "values": [
+                {
+                  "valueName": 0
+                },
+                {
+                  "valueName": 1
+                },
+                {
+                  "valueName": 2
+                },
+                {
+                  "valueName": 3
+                },
+                {
+                  "valueName": 4
+                },
+                {
+                  "valueName": 5
+                },
+                {
+                  "valueName": 6
+                },
+                {
+                  "valueName": 7
+                },
+                {
+                  "valueName": 8
+                },
+                {
+                  "valueName": 9
+                },
+                {
+                  "valueName": 10
+                },
+                {
+                  "valueName": 11
+                },
+                {
+                  "valueName": 12
+                },
+                {
+                  "valueName": 13
+                },
+                {
+                  "valueName": 14
+                },
+                {
+                  "valueName": 15
+                }
+              ]
             }
           ]
         },
@@ -12112,10 +12315,18 @@
             "tube_coral_block",
             "tube_coral_wall_fan"
           ],
-          "description": "已弃用，为兼容性而保留 方块是否因离开水而失活",
           "properties": [
             {
-              "propertyName": "dead_bit"
+              "propertyName": "dead_bit",
+              "description": "已弃用，为兼容性而保留 方块是否因离开水而失活",
+              "values": [
+                {
+                  "valueName": false
+                },
+                {
+                  "valueName": true
+                }
+              ]
             }
           ]
         }

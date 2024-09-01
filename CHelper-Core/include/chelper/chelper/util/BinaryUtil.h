@@ -188,7 +188,7 @@ namespace CHelper {
         T read() {
             T t;
             decode(t);
-            return t;
+            return std::move(t);
         }
     };
 

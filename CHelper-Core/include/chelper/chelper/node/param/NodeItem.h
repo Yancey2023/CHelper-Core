@@ -27,7 +27,7 @@ namespace CHelper::Node {
 
     private:
         std::unique_ptr<NodeNamespaceId> nodeItemId;
-        std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> itemIds;
+        std::shared_ptr<std::vector<std::shared_ptr<ItemId>>> itemIds;
         std::unique_ptr<NodeBase> nodeComponent;
 
     public:

@@ -2,7 +2,7 @@
 // Created by Yancey on 2024/4/2.
 //
 
-#include "chelper/CHelperCore.h"
+#include <chelper/CHelperCore.h>
 #include <emscripten/emscripten.h>
 #include <emscripten/val.h>
 

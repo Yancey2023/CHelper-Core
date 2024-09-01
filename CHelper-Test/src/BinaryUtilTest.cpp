@@ -9,500 +9,555 @@
 #include <chelper/resources/CPack.h>
 #include <gtest/gtest.h>
 
-template <class T>
+namespace std {
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "cert-dcl58-cpp"
+    template<class T>
+    bool operator==(const std::shared_ptr<T> &t1, const std::shared_ptr<T> &t2) {
+        return *t1 == *t2;
+    }
+#pragma clang diagnostic pop
+
+}// namespace std
+
+namespace CHelper {
+
+    bool operator==(const Manifest &t1, const Manifest &t2) {
+        return t1.name == t2.name &&
+               t1.description == t2.description &&
+               t1.minecraftVersion == t2.minecraftVersion &&
+               t1.author == t2.author &&
+               t1.updateDate == t2.updateDate &&
+               t1.packId == t2.packId &&
+               t1.versionCode == t2.versionCode &&
+               t1.isBasicPack == t2.isBasicPack &&
+               t1.isDefault == t2.isDefault;
+    }
+
+    bool operator==(const NormalId &t1, const NormalId &t2) {
+        return t1.name == t2.name &&
+               t1.description == t2.description;
+    }
+
+    bool operator==(const NamespaceId &t1, const NamespaceId &t2) {
+        if (!((NormalId &) t1 == (NormalId &) t2)) {
+            return false;
+        }
+        return t1.idNamespace == t2.idNamespace;
+    }
+
+    bool operator==(const ItemId &t1, const ItemId &t2) {
+        if (!((NormalId &) t1 == (NormalId &) t2)) {
+            return false;
+        }
+        return t1.max == t2.max && t1.descriptions == t2.descriptions;
+    }
+
+    bool operator==(const Property &t1, const Property &t2) {
+        if (t1.type != t2.type || t1.name != t2.name) {
+            return false;
+        }
+        switch (t1.type) {
+            case PropertyType::BOOLEAN:
+                if (t1.defaultValue.boolean != t2.defaultValue.boolean) {
+                    return false;
+                }
+                break;
+            case PropertyType::STRING:
+                if (*t1.defaultValue.string != *t2.defaultValue.string) {
+                    return false;
+                }
+                break;
+            case PropertyType::INTEGER:
+                if (t1.defaultValue.integer != t2.defaultValue.integer) {
+                    return false;
+                }
+                break;
+            default:
+                HEDLEY_UNREACHABLE();
+        }
+        if (t1.valid.has_value() != t2.valid.has_value()) {
+            return false;
+        }
+        if (t1.valid.has_value() && t2.valid.has_value()) {
+            if (t1.valid.value().size() != t2.valid.value().size()) {
+                return false;
+            }
+            for (int i = 0; i < t1.valid.value().size(); ++i) {
+                switch (t1.type) {
+                    case PropertyType::BOOLEAN:
+                        if (t1.valid.value()[i].boolean != t2.valid.value()[i].boolean) {
+                            return false;
+                        }
+                        break;
+                    case PropertyType::STRING:
+                        if (*t1.valid.value()[i].string != *t2.valid.value()[i].string) {
+                            return false;
+                        }
+                        break;
+                    case PropertyType::INTEGER:
+                        if (t1.valid.value()[i].integer != t2.valid.value()[i].integer) {
+                            return false;
+                        }
+                        break;
+                    default:
+                        HEDLEY_UNREACHABLE();
+                }
+            }
+        }
+        return true;
+    }
+
+    bool operator==(const BlockId &t1, const BlockId &t2) {
+        if (!((NamespaceId &) t1 == (NamespaceId &) t2)) {
+            return false;
+        }
+        return t1.properties == t2.properties;
+    }
+
+    bool operator==(const BlockPropertyDescription &t1, const BlockPropertyDescription &t2) {
+        if (t1.type != t2.type || t1.propertyName != t2.propertyName || t1.description != t2.description) {
+            return false;
+        }
+        if (t1.values.size() != t2.values.size()) {
+            return false;
+        }
+        for (int i = 0; i < t1.values.size(); ++i) {
+            switch (t1.type) {
+                case PropertyType::BOOLEAN:
+                    if (t1.values[i].valueName.boolean != t2.values[i].valueName.boolean) {
+                        return false;
+                    }
+                    break;
+                case PropertyType::STRING:
+                    if (*t1.values[i].valueName.string != *t2.values[i].valueName.string) {
+                        return false;
+                    }
+                    break;
+                case PropertyType::INTEGER:
+                    if (t1.values[i].valueName.integer != t2.values[i].valueName.integer) {
+                        return false;
+                    }
+                    break;
+                default:
+                    HEDLEY_UNREACHABLE();
+            }
+            if (t1.values[i].description != t2.values[i].description) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool operator==(const PerBlockPropertyDescription &t1, const PerBlockPropertyDescription &t2) {
+        return t1.blocks == t2.blocks && t1.properties == t2.properties;
+    }
+
+    bool operator==(const BlockPropertyDescriptions &t1, const BlockPropertyDescriptions &t2) {
+        return t1.common == t2.common && t1.block == t2.block;
+    }
+
+    bool operator==(const BlockIds &t1, const BlockIds &t2) {
+        return t1.blockStateValues == t2.blockStateValues && t1.blockPropertyDescriptions == t2.blockPropertyDescriptions;
+    }
+
+    namespace Node {
+
+        bool operator==(const NodeBase &t1, const NodeBase &t2) {
+            return t1.id == t2.id &&
+                   t1.brief == t2.brief &&
+                   t1.description == t2.description &&
+                   t1.isMustAfterWhiteSpace == t2.isMustAfterWhiteSpace;
+        }
+
+        bool operator==(const NodeJsonBoolean &t1, const NodeJsonBoolean &t2) {
+            if (!((NodeBase &) t1 == (NodeBase &) t2)) {
+                return false;
+            }
+            return t1.descriptionTrue == t2.descriptionTrue &&
+                   t1.descriptionFalse == t2.descriptionFalse;
+        }
+
+        bool operator==(const NodeJsonNull &t1, const NodeJsonNull &t2) {
+            if (!((NodeBase &) t1 == (NodeBase &) t2)) {
+                return false;
+            }
+            return true;
+        }
+
+        template<class T>
+        bool operator==(const NodeNumber<T> &t1, const NodeNumber<T> &t2) {
+            if (!((NodeBase &) t1 == (NodeBase &) t2)) {
+                return false;
+            }
+            return t1.min == t2.min && t1.max == t2.max;
+        }
+
+    }// namespace Node
+
+}// namespace CHelper
+
+template<class T>
 void test(std::function<T()> getInstance,
-          std::function<void(const T &, const T &)> testEqual,
           bool isTargetSmallEndian) {
-  std::ostringstream oss;
-  CHelper::BinaryWriter binaryWriter(isTargetSmallEndian, oss);
-  T t1 = getInstance();
-  binaryWriter.encode(t1);
-  std::istringstream iss(oss.str());
-  CHelper::BinaryReader binaryReader(isTargetSmallEndian, iss);
-  T t2 = binaryReader.read<T>();
-  testEqual(t1, t2);
-  EXPECT_FALSE(iss.eof());
+    std::ostringstream oss;
+    CHelper::BinaryWriter binaryWriter(isTargetSmallEndian, oss);
+    T t1 = getInstance();
+    binaryWriter.encode(t1);
+    std::istringstream iss(oss.str());
+    CHelper::BinaryReader binaryReader(isTargetSmallEndian, iss);
+    T t2 = binaryReader.read<T>();
+    EXPECT_EQ(t1, t2);
+    EXPECT_FALSE(iss.eof());
 }
 
-template <class T>
-void test(std::function<T()> getInstance,
-          std::function<void(const T &, const T &)> testEqual) {
-  test(getInstance, testEqual, true);
-  test(getInstance, testEqual, false);
+template<class T>
+void test(std::function<T()> getInstance) {
+    test(getInstance, true);
+    test(getInstance, false);
 }
 
-template <class T>
+template<class T>
 void testNode(CHelper::CPack &cpack, std::function<T()> getInstance,
-              std::function<void(const T &, const T &)> testEqual,
               bool isTargetSmallEndian) {
-  std::ostringstream oss;
-  CHelper::BinaryWriter binaryWriter(isTargetSmallEndian, oss);
-  T t1 = getInstance();
-  binaryWriter.encode(t1);
-  std::istringstream iss(oss.str());
-  CHelper::BinaryReader binaryReader(isTargetSmallEndian, iss);
-  T t2 = binaryReader.read<T>();
-  t2.init(cpack);
-  testEqual(t1, t2);
-  EXPECT_FALSE(iss.eof());
+    std::ostringstream oss;
+    CHelper::BinaryWriter binaryWriter(isTargetSmallEndian, oss);
+    T t1 = getInstance();
+    binaryWriter.encode(t1);
+    std::istringstream iss(oss.str());
+    CHelper::BinaryReader binaryReader(isTargetSmallEndian, iss);
+    T t2 = binaryReader.read<T>();
+    t2.init(cpack);
+    EXPECT_EQ(t1, t2);
+    EXPECT_FALSE(iss.eof());
 }
 
-template <class T>
-void testNode(CHelper::CPack &cpack, std::function<T()> getInstance,
-              std::function<void(const T &, const T &)> testEqual) {
-  testNode(cpack, getInstance, testEqual, true);
-  testNode(cpack, getInstance, testEqual, false);
+template<class T>
+void testNode(CHelper::CPack &cpack, std::function<T()> getInstance) {
+    testNode(cpack, getInstance, true);
+    testNode(cpack, getInstance, false);
 }
 
-template <class T>
-void test(std::vector<std::function<T()>> getInstance,
-          std::function<void(const T &, const T &)> testEqual) {
-  for (const auto &item : getInstance) {
-    test(item, testEqual);
-  }
+template<class T>
+void test(std::vector<std::function<T()>> getInstance) {
+    for (const auto &item: getInstance) {
+        test(item);
+    }
 }
 
-template <class T>
+template<class T>
 void testNode(CHelper::CPack &cpack,
-              std::vector<std::function<T()>> getInstance,
-              std::function<void(const T &, const T &)> testEqual) {
-  for (const auto &item : getInstance) {
-    testNode(cpack, item, testEqual);
-  }
+              std::vector<std::function<T()>> getInstance) {
+    for (const auto &item: getInstance) {
+        testNode(cpack, item);
+    }
 }
 
 TEST(BinaryUtilTest, String) {
-  auto getInstance1 = []() { return u""; };
-  auto getInstance2 = []() { return u"Yancey"; };
-  auto testEqual = [](const auto &t1, const auto &t2) -> void {
-    EXPECT_EQ(t1, t2);
-  };
-  test<std::u16string>({getInstance1, getInstance2}, testEqual);
+    auto getInstance1 = []() { return u""; };
+    auto getInstance2 = []() { return u"Yancey"; };
+    test<std::u16string>({getInstance1, getInstance2});
 }
 
 TEST(BinaryUtilTest, OptioanlString) {
-  auto getInstance1 = []() { return u""; };
-  auto getInstance2 = []() { return u"Yancey"; };
-  auto getInstance3 = []() { return std::nullopt; };
-  auto testEqual = [](const auto &t1, const auto &t2) -> void {
-    EXPECT_EQ(t1, t2);
-  };
-  test<std::optional<std::u16string>>(
-      {getInstance1, getInstance2, getInstance3}, testEqual);
+    auto getInstance1 = []() { return u""; };
+    auto getInstance2 = []() { return u"Yancey"; };
+    auto getInstance3 = []() { return std::nullopt; };
+    test<std::optional<std::u16string>>({getInstance1, getInstance2, getInstance3});
 }
 
 TEST(BinaryUtilTest, Manifest) {
-  auto getInstance1 = []() -> CHelper::Manifest {
-    return {u"name",   u"description", u"minecraftVersion",
-            u"author", u"updateDate",  u"packId",
-            1,         true,           true};
-  };
-  auto getInstance2 = []() -> CHelper::Manifest {
-    return {u"name",   std::nullopt,  u"minecraftVersion",
-            u"author", u"updateDate", u"packId",
-            2,         std::nullopt,  true};
-  };
-  auto getInstance3 = []() -> CHelper::Manifest {
-    return {u"name",   u"description", std::nullopt,
-            u"author", u"updateDate",  u"packId",
-            3,         false,          std::nullopt};
-  };
-  auto getInstance4 = []() -> CHelper::Manifest {
-    return {std::nullopt,
-            std::nullopt,
-            std::nullopt,
-            u"author",
-            u"updateDate",
-            u"packId",
-            5,
-            std::nullopt,
-            std::nullopt};
-  };
-  auto testEqual = [](const auto &t1, const auto &t2) -> void {
-    EXPECT_EQ(t1.name, t2.name);
-    EXPECT_EQ(t1.description, t2.description);
-    EXPECT_EQ(t1.minecraftVersion, t2.minecraftVersion);
-    EXPECT_EQ(t1.author, t2.author);
-    EXPECT_EQ(t1.updateDate, t2.updateDate);
-    EXPECT_EQ(t1.packId, t2.packId);
-    EXPECT_EQ(t1.versionCode, t2.versionCode);
-    EXPECT_EQ(t1.isBasicPack, t2.isBasicPack);
-    EXPECT_EQ(t1.isDefault, t2.isDefault);
-  };
-  test<CHelper::Manifest>(
-      {getInstance1, getInstance2, getInstance3, getInstance4}, testEqual);
+    auto getInstance1 = []() -> CHelper::Manifest {
+        return {u"name", u"description", u"minecraftVersion",
+                u"author", u"updateDate", u"packId",
+                1, true, true};
+    };
+    auto getInstance2 = []() -> CHelper::Manifest {
+        return {u"name", std::nullopt, u"minecraftVersion",
+                u"author", u"updateDate", u"packId",
+                2, std::nullopt, true};
+    };
+    auto getInstance3 = []() -> CHelper::Manifest {
+        return {u"name", u"description", std::nullopt,
+                u"author", u"updateDate", u"packId",
+                3, false, std::nullopt};
+    };
+    auto getInstance4 = []() -> CHelper::Manifest {
+        return {std::nullopt,
+                std::nullopt,
+                std::nullopt,
+                u"author",
+                u"updateDate",
+                u"packId",
+                5,
+                std::nullopt,
+                std::nullopt};
+    };
+    test<CHelper::Manifest>({getInstance1, getInstance2, getInstance3, getInstance4});
 }
 
 TEST(BinaryUtilTest, NormalId) {
-  auto getInstance1 = []() {
-    return CHelper::NormalId::make(u"name", u"description");
-  };
-  auto getInstance2 = []() { return CHelper::NormalId::make(u"name", u""); };
-  auto getInstance3 = []() {
-    return CHelper::NormalId::make(u"name", std::nullopt);
-  };
-  auto testEqual = [](const auto &t1, const auto &t2) -> void {
-    EXPECT_EQ(t1->name, t2->name);
-    EXPECT_EQ(t1->description, t2->description);
-  };
-  test<std::shared_ptr<CHelper::NormalId>>(
-      {getInstance1, getInstance2, getInstance3}, testEqual);
+    auto getInstance1 = []() {
+        return CHelper::NormalId::make(u"name", u"description");
+    };
+    auto getInstance2 = []() {
+        return CHelper::NormalId::make(u"name", u"");
+    };
+    auto getInstance3 = []() {
+        return CHelper::NormalId::make(u"name", std::nullopt);
+    };
+    test<std::shared_ptr<CHelper::NormalId>>({getInstance1, getInstance2, getInstance3});
 }
 
 TEST(BinaryUtilTest, NamespaceId) {
-  auto testEqual = [](const auto &t1, const auto &t2) -> void {
-    EXPECT_EQ(t1.name, t2.name);
-    EXPECT_EQ(t1.description, t2.description);
-    EXPECT_EQ(t1.idNamespace, t2.idNamespace);
-  };
-  std::filesystem::path resourceDir(RESOURCE_DIR);
-  nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(
-      resourceDir / "resources" / "beta" / "vanilla" / "id" / "entities.json");
-  std::vector<std::function<CHelper::NamespaceId()>> getInstance;
-  for (const auto &item : j.at("content")) {
-    CHelper::NamespaceId namespaceId = item;
-    getInstance.emplace_back([namespaceId]() { return namespaceId; });
-  }
-  test<CHelper::NamespaceId>(getInstance, testEqual);
+    std::filesystem::path resourceDir(RESOURCE_DIR);
+    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(
+            resourceDir / "resources" / "beta" / "vanilla" / "id" / "entities.json");
+    std::vector<std::function<CHelper::NamespaceId()>> getInstance;
+    for (const auto &item: j.at("content")) {
+        CHelper::NamespaceId namespaceId = item;
+        getInstance.emplace_back([namespaceId]() { return namespaceId; });
+    }
+    test<CHelper::NamespaceId>(getInstance);
 }
 
 TEST(BinaryUtilTest, ItemId) {
-  auto testEqual = [](const auto &t1, const auto &t2) -> void {
-    EXPECT_EQ(t1.name, t2.name);
-    EXPECT_EQ(t1.description, t2.description);
-    EXPECT_EQ(t1.idNamespace, t2.idNamespace);
-    EXPECT_EQ(t1.max, t2.max);
-    EXPECT_EQ(t1.descriptions, t2.descriptions);
-  };
-  std::filesystem::path resourceDir(RESOURCE_DIR);
-  nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(
-      resourceDir / "resources" / "beta" / "vanilla" / "id" / "items.json");
-  std::vector<std::function<CHelper::ItemId()>> getInstance;
-  for (const auto &item : j.at("items")) {
-    CHelper::ItemId itemId(item);
-    getInstance.emplace_back([itemId]() { return itemId; });
-  }
-  test<CHelper::ItemId>(getInstance, testEqual);
+    std::filesystem::path resourceDir(RESOURCE_DIR);
+    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(
+            resourceDir / "resources" / "beta" / "vanilla" / "id" / "items.json");
+    std::vector<std::function<CHelper::ItemId()>> getInstance;
+    for (const auto &item: j.at("items")) {
+        CHelper::ItemId itemId(item);
+        getInstance.emplace_back([itemId]() { return itemId; });
+    }
+    test<CHelper::ItemId>(getInstance);
+}
+
+TEST(BinaryUtilTest, Property) {
+    auto getInstance1 = []() {
+        CHelper::Property aProperty;
+        aProperty.name = u"name1";
+        aProperty.type = CHelper::PropertyType::BOOLEAN;
+        aProperty.defaultValue.boolean = true;
+        aProperty.valid = std::vector<CHelper::PropertyValue>(2);
+        aProperty.valid->at(0).boolean = true;
+        aProperty.valid->at(1).boolean = false;
+        return aProperty;
+    };
+    auto getInstance2 = []() {
+        CHelper::Property aProperty;
+        aProperty.name = u"name2";
+        aProperty.type = CHelper::PropertyType::INTEGER;
+        aProperty.defaultValue.integer = 0;
+        aProperty.valid = std::vector<CHelper::PropertyValue>(3);
+        aProperty.valid->at(0).integer = 0;
+        aProperty.valid->at(1).integer = 1;
+        aProperty.valid->at(2).integer = 2;
+        return aProperty;
+    };
+    auto getInstance3 = []() {
+        CHelper::Property aProperty;
+        aProperty.name = u"name3";
+        aProperty.type = CHelper::PropertyType::STRING;
+        aProperty.defaultValue.string = new std::u16string(u"aaa");
+        aProperty.valid = std::vector<CHelper::PropertyValue>(3);
+        aProperty.valid->at(0).string = new std::u16string(u"a1");
+        aProperty.valid->at(1).string = new std::u16string(u"a2");
+        aProperty.valid->at(2).string = new std::u16string(u"a3");
+        return aProperty;
+    };
+    test<CHelper::Property>({getInstance1, getInstance2, getInstance3});
 }
 
 TEST(BinaryUtilTest, BlockId) {
-  auto testEqual = [](const CHelper::BlockId &t1,
-                      const CHelper::BlockId &t2) -> void {
-    EXPECT_EQ(t1.name, t2.name);
-    EXPECT_EQ(t1.description, t2.description);
-    EXPECT_EQ(t1.idNamespace, t2.idNamespace);
-    ASSERT_EQ(!t1.blockStates.has_value() || t1.blockStates.value().empty(),
-              !t2.blockStates.has_value());
-    if (HEDLEY_LIKELY(t2.blockStates.has_value())) {
-      ASSERT_EQ(t1.blockStates->size(), t2.blockStates->size());
-      for (int i = 0; i < t2.blockStates->size(); ++i) {
-        EXPECT_EQ(t1.blockStates.value()[i].key, t2.blockStates.value()[i].key);
-        EXPECT_EQ(t1.blockStates.value()[i].description,
-                  t2.blockStates.value()[i].description);
-        ASSERT_EQ(t1.blockStates.value()[i].values.size(),
-                  t2.blockStates.value()[i].values.size());
-        for (int j = 0; j < t1.blockStates.value()[i].values.size(); ++j) {
-          EXPECT_EQ(t1.blockStates.value()[i].values[j].description,
-                    t2.blockStates.value()[i].values[j].description);
-          EXPECT_EQ((uint8_t)t1.blockStates.value()[i].values[j].type,
-                    (uint8_t)t2.blockStates.value()[i].values[j].type);
-          EXPECT_EQ(t1.blockStates.value()[i].values[j].value,
-                    t2.blockStates.value()[i].values[j].value);
-        }
-        EXPECT_EQ(t1.blockStates.value()[i].defaultValue,
-                  t2.blockStates.value()[i].defaultValue);
-      }
-    }
-  };
-  std::filesystem::path resourceDir(RESOURCE_DIR);
-  nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(
-      resourceDir / "resources" / "beta" / "vanilla" / "id" / "blocks.json");
-  std::vector<std::function<CHelper::BlockId()>> getInstance;
-  for (const auto &item : j.at("blocks")) {
-    CHelper::BlockId blockId(item);
-    getInstance.emplace_back([blockId]() { return blockId; });
-  }
-  test<CHelper::BlockId>(getInstance, testEqual);
+    std::filesystem::path resourceDir(RESOURCE_DIR);
+    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(
+            resourceDir / "resources" / "beta" / "vanilla" / "id" / "blocks.json");
+    CHelper::BlockIds blockIds(j.at("blocks"));
+    test<CHelper::BlockIds>([&blockIds]() { return blockIds; });
 }
 
 TEST(BinaryUtilTest, PerCPackNormalIds) {
 
-  std::unique_ptr<CHelper::CPack> cpack;
-  try {
-    std::filesystem::path resourceDir(RESOURCE_DIR);
-    cpack = CHelper::CPack::createByDirectory(
-        std::filesystem::path(resourceDir / "resources" / "beta" / "vanilla"));
-  } catch (const std::exception &e) {
-    CHelper::Profile::printAndClear(e);
-    exit(-1);
-  }
-  auto testEqual = [](const auto &t1, const auto &t2) -> void {
-    ASSERT_EQ(t1->size(), t2->size());
-    for (int i = 0; i < t1->size(); ++i) {
-      EXPECT_EQ(t1->at(i)->name, t2->at(i)->name);
-      EXPECT_EQ(t1->at(i)->description, t2->at(i)->description);
+    std::unique_ptr<CHelper::CPack> cpack;
+    try {
+        std::filesystem::path resourceDir(RESOURCE_DIR);
+        cpack = CHelper::CPack::createByDirectory(
+                std::filesystem::path(resourceDir / "resources" / "beta" / "vanilla"));
+    } catch (const std::exception &e) {
+        CHelper::Profile::printAndClear(e);
+        exit(-1);
     }
-  };
-  std::vector<std::function<
-      std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>()>>
-      getInstance;
-  for (const auto &item : cpack->normalIds) {
-    const auto &ids = item.second;
-    getInstance.emplace_back([&ids]() { return ids; });
-  }
-  test<std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>>(
-      getInstance, testEqual);
+    std::vector<std::function<
+            std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>()>>
+            getInstance;
+    for (const auto &item: cpack->normalIds) {
+        const auto &ids = item.second;
+        getInstance.emplace_back([&ids]() { return ids; });
+    }
+    test<std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>>(getInstance);
 }
 
 TEST(BinaryUtilTest, CPackNormalIds) {
-  std::unique_ptr<CHelper::CPack> cpack;
-  try {
-    std::filesystem::path resourceDir(RESOURCE_DIR);
-    cpack = CHelper::CPack::createByDirectory(resourceDir / "resources" /
-                                              "beta" / "vanilla");
-  } catch (const std::exception &e) {
-    CHelper::Profile::printAndClear(e);
-    exit(-1);
-  }
-  auto testEqual =
-      [](const std::unordered_map<
-             std::u16string,
-             std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>>
-             &t1,
-         const std::unordered_map<
-             std::u16string,
-             std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>>
-             &t2) -> void {
-    ASSERT_EQ(t1.size(), t2.size());
-    auto it1 = t1.begin();
-    while (it1 != t1.end()) {
-      auto it2 = t2.find(it1->first);
-      ASSERT_TRUE(it2 != t2.end());
-      EXPECT_EQ(it1->first, it2->first);
-      ASSERT_EQ(it1->second->size(), it2->second->size());
-      for (int i = 0; i < it1->second->size(); ++i) {
-        EXPECT_EQ(it1->second->at(i)->name, it2->second->at(i)->name);
-        EXPECT_EQ(it1->second->at(i)->description,
-                  it2->second->at(i)->description);
-      }
-      it1++;
+    std::unique_ptr<CHelper::CPack> cpack;
+    try {
+        std::filesystem::path resourceDir(RESOURCE_DIR);
+        cpack = CHelper::CPack::createByDirectory(resourceDir / "resources" /
+                                                  "beta" / "vanilla");
+    } catch (const std::exception &e) {
+        CHelper::Profile::printAndClear(e);
+        exit(-1);
     }
-  };
-  test<std::unordered_map<
-      std::u16string,
-      std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>>>(
-      [&cpack]() { return cpack->normalIds; }, testEqual);
+    test<std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>>>(
+            [&cpack]() { return cpack->normalIds; });
 }
 
 TEST(BinaryUtilTest, CPackNamespaceId) {
-  std::unique_ptr<CHelper::CPack> cpack;
-  try {
-    std::filesystem::path resourceDir(RESOURCE_DIR);
-    cpack = CHelper::CPack::createByDirectory(resourceDir / "resources" /
-                                              "beta" / "vanilla");
-  } catch (const std::exception &e) {
-    CHelper::Profile::printAndClear(e);
-    exit(-1);
-  }
-  auto testEqual =
-      [](const std::unordered_map<
-             std::u16string, std::shared_ptr<std::vector<
-                                 std::shared_ptr<CHelper::NamespaceId>>>> &t1,
-         const std::unordered_map<std::u16string,
-                                  std::shared_ptr<std::vector<
-                                      std::shared_ptr<CHelper::NamespaceId>>>>
-             &t2) -> void {
-    ASSERT_EQ(t1.size(), t2.size());
-    auto it1 = t1.begin();
-    while (it1 != t1.end()) {
-      auto it2 = t2.find(it1->first);
-      ASSERT_TRUE(it2 != t2.end());
-      EXPECT_EQ(it1->first, it2->first);
-      ASSERT_EQ(it1->second->size(), it2->second->size());
-      for (int i = 0; i < it1->second->size(); ++i) {
-        EXPECT_EQ(it1->second->at(i)->name, it2->second->at(i)->name);
-        EXPECT_EQ(it1->second->at(i)->description,
-                  it2->second->at(i)->description);
-        EXPECT_EQ(it1->second->at(i)->idNamespace,
-                  it2->second->at(i)->idNamespace);
-      }
-      it1++;
+    std::unique_ptr<CHelper::CPack> cpack;
+    try {
+        std::filesystem::path resourceDir(RESOURCE_DIR);
+        cpack = CHelper::CPack::createByDirectory(resourceDir / "resources" /
+                                                  "beta" / "vanilla");
+    } catch (const std::exception &e) {
+        CHelper::Profile::printAndClear(e);
+        exit(-1);
     }
-  };
-  test<std::unordered_map<
-      std::u16string,
-      std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>>>(
-      [&cpack]() { return cpack->namespaceIds; }, testEqual);
+    test<std::unordered_map<
+            std::u16string,
+            std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>>>(
+            [&cpack]() { return cpack->namespaceIds; });
 }
 
-TEST(BinaryUtilTest, NodeJsonElement) {
-  std::unique_ptr<CHelper::CPack> cpack;
-  std::filesystem::path resourceDir(RESOURCE_DIR);
-  try {
-    cpack = CHelper::CPack::createByDirectory(resourceDir / "resources" /
-                                              "beta" / "vanilla");
-  } catch (const std::exception &e) {
-    CHelper::Profile::printAndClear(e);
-    exit(-1);
-  }
-  auto testEqual = [](const CHelper::Node::NodeJsonBoolean &t1,
-                      const CHelper::Node::NodeJsonBoolean &t2) -> void {
-    EXPECT_EQ(t1.id, t2.id);
-    EXPECT_EQ(t1.brief, t2.brief);
-    EXPECT_EQ(t1.description, t2.description);
-    EXPECT_EQ(t1.isMustAfterWhiteSpace, t2.isMustAfterWhiteSpace);
-    EXPECT_EQ(t1.descriptionTrue, t2.descriptionTrue);
-    EXPECT_EQ(t1.descriptionFalse, t2.descriptionFalse);
-  };
-  CHelper::Node::NodeJsonBoolean node(u"ID", u"description", u"descriptionTrue",
-                                      u"descriptionFalse");
-  testNode<CHelper::Node::NodeJsonBoolean>(
-      *cpack, [&node]() { return node; }, testEqual);
+TEST(BinaryUtilTest, NodeJsonBoolean) {
+    std::unique_ptr<CHelper::CPack> cpack;
+    std::filesystem::path resourceDir(RESOURCE_DIR);
+    try {
+        cpack = CHelper::CPack::createByDirectory(resourceDir / "resources" /
+                                                  "beta" / "vanilla");
+    } catch (const std::exception &e) {
+        CHelper::Profile::printAndClear(e);
+        exit(-1);
+    }
+    CHelper::Node::NodeJsonBoolean node(u"ID", u"description", u"descriptionTrue",
+                                        u"descriptionFalse");
+    testNode<CHelper::Node::NodeJsonBoolean>(
+            *cpack, [&node]() { return node; });
 }
 
 TEST(BinaryUtilTest, NodeJsonInteger) {
-  std::unique_ptr<CHelper::CPack> cpack;
-  try {
-    std::filesystem::path resourceDir(RESOURCE_DIR);
-    cpack = CHelper::CPack::createByDirectory(resourceDir / "resources" /
-                                              "beta" / "vanilla");
-  } catch (const std::exception &e) {
-    CHelper::Profile::printAndClear(e);
-    exit(-1);
-  }
-  auto testEqual = [](const CHelper::Node::NodeJsonInteger &t1,
-                      const CHelper::Node::NodeJsonInteger &t2) -> void {
-    EXPECT_EQ(t1.id, t2.id);
-    EXPECT_EQ(t1.brief, t2.brief);
-    EXPECT_EQ(t1.description, t2.description);
-    EXPECT_EQ(t1.isMustAfterWhiteSpace, t2.isMustAfterWhiteSpace);
-    EXPECT_EQ(t1.min, t2.min);
-    EXPECT_EQ(t1.max, t2.max);
-  };
-  testNode<CHelper::Node::NodeJsonInteger>(
-      *cpack,
-      {
-          []() {
-            CHelper::Node::NodeJsonInteger node;
-            node.id = u"ID";
-            node.description = u"description";
-            node.isMustAfterWhiteSpace = false;
-            node.min = 0;
-            node.max = 3;
-            return node;
-          },
-          []() {
-            CHelper::Node::NodeJsonInteger node;
-            node.id = u"ID";
-            node.description = u"description";
-            node.isMustAfterWhiteSpace = false;
-            node.min = std::nullopt;
-            node.max = 3;
-            return node;
-          },
-          []() {
-            CHelper::Node::NodeJsonInteger node;
-            node.id = u"ID";
-            node.description = u"description";
-            node.isMustAfterWhiteSpace = false;
-            node.min = 1;
-            node.max = std::nullopt;
-            return node;
-          },
-          []() {
-            CHelper::Node::NodeJsonInteger node;
-            node.id = u"ID";
-            node.description = u"description";
-            node.isMustAfterWhiteSpace = false;
-            node.min = std::nullopt;
-            node.max = std::nullopt;
-            return node;
-          },
-      },
-      testEqual);
+    std::unique_ptr<CHelper::CPack> cpack;
+    try {
+        std::filesystem::path resourceDir(RESOURCE_DIR);
+        cpack = CHelper::CPack::createByDirectory(resourceDir / "resources" /
+                                                  "beta" / "vanilla");
+    } catch (const std::exception &e) {
+        CHelper::Profile::printAndClear(e);
+        exit(-1);
+    }
+    testNode<CHelper::Node::NodeJsonInteger>(
+            *cpack,
+            {
+                    []() {
+                        CHelper::Node::NodeJsonInteger node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = 0;
+                        node.max = 3;
+                        return node;
+                    },
+                    []() {
+                        CHelper::Node::NodeJsonInteger node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = std::nullopt;
+                        node.max = 3;
+                        return node;
+                    },
+                    []() {
+                        CHelper::Node::NodeJsonInteger node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = 1;
+                        node.max = std::nullopt;
+                        return node;
+                    },
+                    []() {
+                        CHelper::Node::NodeJsonInteger node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = std::nullopt;
+                        node.max = std::nullopt;
+                        return node;
+                    },
+            });
 }
 
 TEST(BinaryUtilTest, NodeJsonFloat) {
-  std::unique_ptr<CHelper::CPack> cpack;
-  try {
-    std::filesystem::path resourceDir(RESOURCE_DIR);
-    cpack = CHelper::CPack::createByDirectory(resourceDir / "resources" /
-                                              "beta" / "vanilla");
-  } catch (const std::exception &e) {
-    CHelper::Profile::printAndClear(e);
-    exit(-1);
-  }
-  auto testEqual = [](const CHelper::Node::NodeJsonFloat &t1,
-                      const CHelper::Node::NodeJsonFloat &t2) -> void {
-    EXPECT_EQ(t1.id, t2.id);
-    EXPECT_EQ(t1.brief, t2.brief);
-    EXPECT_EQ(t1.description, t2.description);
-    EXPECT_EQ(t1.isMustAfterWhiteSpace, t2.isMustAfterWhiteSpace);
-    EXPECT_EQ(t1.min, t2.min);
-    EXPECT_EQ(t1.max, t2.max);
-  };
-  testNode<CHelper::Node::NodeJsonFloat>(
-      *cpack,
-      {
-          []() {
-            CHelper::Node::NodeJsonFloat node;
-            node.id = u"ID";
-            node.description = u"description";
-            node.isMustAfterWhiteSpace = false;
-            node.min = 0.0F;
-            node.max = 3.0F;
-            return node;
-          },
-          []() {
-            CHelper::Node::NodeJsonFloat node;
-            node.id = u"ID";
-            node.description = u"description";
-            node.isMustAfterWhiteSpace = false;
-            node.min = std::nullopt;
-            node.max = 3.0F;
-            return node;
-          },
-          []() {
-            CHelper::Node::NodeJsonFloat node;
-            node.id = u"ID";
-            node.description = u"description";
-            node.isMustAfterWhiteSpace = false;
-            node.min = 1.0F;
-            node.max = std::nullopt;
-            return node;
-          },
-          []() {
-            CHelper::Node::NodeJsonFloat node;
-            node.id = u"ID";
-            node.description = u"description";
-            node.isMustAfterWhiteSpace = false;
-            node.min = std::nullopt;
-            node.max = std::nullopt;
-            return node;
-          },
-      },
-      testEqual);
+    std::unique_ptr<CHelper::CPack> cpack;
+    try {
+        std::filesystem::path resourceDir(RESOURCE_DIR);
+        cpack = CHelper::CPack::createByDirectory(resourceDir / "resources" /
+                                                  "beta" / "vanilla");
+    } catch (const std::exception &e) {
+        CHelper::Profile::printAndClear(e);
+        exit(-1);
+    }
+    testNode<CHelper::Node::NodeJsonFloat>(
+            *cpack,
+            {
+                    []() {
+                        CHelper::Node::NodeJsonFloat node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = 0.0F;
+                        node.max = 3.0F;
+                        return node;
+                    },
+                    []() {
+                        CHelper::Node::NodeJsonFloat node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = std::nullopt;
+                        node.max = 3.0F;
+                        return node;
+                    },
+                    []() {
+                        CHelper::Node::NodeJsonFloat node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = 1.0F;
+                        node.max = std::nullopt;
+                        return node;
+                    },
+                    []() {
+                        CHelper::Node::NodeJsonFloat node;
+                        node.id = u"ID";
+                        node.description = u"description";
+                        node.isMustAfterWhiteSpace = false;
+                        node.min = std::nullopt;
+                        node.max = std::nullopt;
+                        return node;
+                    },
+            });
 }
 
 TEST(BinaryUtilTest, NodeJsonNull) {
-  std::unique_ptr<CHelper::CPack> cpack;
-  try {
-    std::filesystem::path resourceDir(RESOURCE_DIR);
-    cpack = CHelper::CPack::createByDirectory(resourceDir / "resources" /
-                                              "beta" / "vanilla");
-  } catch (const std::exception &e) {
-    CHelper::Profile::printAndClear(e);
-    exit(-1);
-  }
-  auto testEqual = [](const CHelper::Node::NodeJsonNull &t1,
-                      const CHelper::Node::NodeJsonNull &t2) -> void {
-    EXPECT_EQ(t1.id, t2.id);
-    EXPECT_EQ(t1.brief, t2.brief);
-    EXPECT_EQ(t1.description, t2.description);
-    EXPECT_EQ(t1.isMustAfterWhiteSpace, t2.isMustAfterWhiteSpace);
-  };
-  testNode<CHelper::Node::NodeJsonNull>(
-      *cpack,
-      []() { return CHelper::Node::NodeJsonNull{u"ID", u"description"}; },
-      testEqual);
+    std::unique_ptr<CHelper::CPack> cpack;
+    try {
+        std::filesystem::path resourceDir(RESOURCE_DIR);
+        cpack = CHelper::CPack::createByDirectory(resourceDir / "resources" / "beta" / "vanilla");
+    } catch (const std::exception &e) {
+        CHelper::Profile::printAndClear(e);
+        exit(-1);
+    }
+    testNode<CHelper::Node::NodeJsonNull>(
+            *cpack, []() { return CHelper::Node::NodeJsonNull{u"ID", u"description"}; });
 }

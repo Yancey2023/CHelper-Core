@@ -109,10 +109,7 @@ namespace CHelper {
             itemIds->push_back(binaryReader.read<std::shared_ptr<ItemId>>());
         }
         Profile::next("loading block id data");
-        size_t blockIdSize = binaryReader.readSize();
-        for (int i = 0; i < blockIdSize; ++i) {
-            blockIds->push_back(binaryReader.read<std::shared_ptr<BlockId>>());
-        }
+        binaryReader.decode(blockIds);
         Profile::next("loading json data");
         Node::NodeType::currentCreateStage = Node::NodeCreateStage::JSON_NODE;
         binaryReader.decode(jsonNodes);
@@ -155,17 +152,9 @@ namespace CHelper {
             }
             namespaceIds.emplace(std::move(id), std::move(content));
         } else if (HEDLEY_LIKELY(type == u"block")) {
-            const auto &blocksJson = j.at("blocks");
-            blockIds->reserve(blockIds->size() + blocksJson.size());
-            for (const auto &item: blocksJson) {
-                blockIds->push_back(std::make_shared<BlockId>(item));
-            }
+            JsonUtil::decode(j, "blocks", blockIds);
         } else if (HEDLEY_LIKELY(type == u"item")) {
-            const auto &itemsJson = j.at("items");
-            itemIds->reserve(itemIds->size() + itemsJson.size());
-            for (const auto &item: itemsJson) {
-                itemIds->push_back(std::make_shared<ItemId>(item));
-            }
+            JsonUtil::decode(j, "items", itemIds);
         } else {
             Profile::push("unknown id type -> {}", type);
             throw std::runtime_error("unknown id type");
@@ -299,13 +288,13 @@ namespace CHelper {
         {
             nlohmann::json j;
             j["type"] = "item";
-            j["items"] = *itemIds;
+            j["items"] = itemIds;
             JsonUtil::writeJsonToFile(path / "id" / "items.json", j);
         }
         {
             nlohmann::json j;
             j["type"] = "block";
-            j["blocks"] = *blockIds;
+            j["blocks"] = blockIds;
             JsonUtil::writeJsonToFile(path / "id" / "blocks.json", j);
         }
         for (const auto &item: jsonNodes) {
@@ -343,22 +332,14 @@ namespace CHelper {
             nlohmann::json j;
             j["id"] = "items";
             j["type"] = "item";
-            nlohmann::json items;
-            for (const auto &item: *itemIds) {
-                items.push_back(std::static_pointer_cast<ItemId>(item));
-            }
-            j["items"] = items;
+            j["items"] = itemIds;
             idJson.push_back(std::move(j));
         }
         {
             nlohmann::json j;
             j["id"] = "blocks";
             j["type"] = "block";
-            nlohmann::json blocks;
-            for (const auto &item: *blockIds) {
-                blocks.push_back(std::static_pointer_cast<BlockId>(item));
-            }
-            j["blocks"] = blocks;
+            j["blocks"] = blockIds;
             idJson.push_back(std::move(j));
         }
         result["id"] = std::move(idJson);
@@ -394,10 +375,7 @@ namespace CHelper {
             binaryWriter.encode(std::static_pointer_cast<ItemId>(item));
         }
         //block id
-        binaryWriter.encodeSize(blockIds->size());
-        for (const auto &item: *blockIds) {
-            binaryWriter.encode(std::static_pointer_cast<BlockId>(item));
-        }
+        binaryWriter.encode(blockIds);
         //json node
         binaryWriter.encode(jsonNodes);
         //repeat node
@@ -425,9 +403,9 @@ namespace CHelper {
     std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
     CPack::getNamespaceId(const std::u16string &key) const {
         if (HEDLEY_UNLIKELY(key == u"blocks")) {
-            return blockIds;
+            return std::reinterpret_pointer_cast<std::vector<std::shared_ptr<NamespaceId>>>(blockIds->blockStateValues);
         } else if (HEDLEY_UNLIKELY(key == u"items")) {
-            return itemIds;
+            return std::reinterpret_pointer_cast<std::vector<std::shared_ptr<NamespaceId>>>(itemIds);
         }
         auto it = namespaceIds.find(key);
         if (HEDLEY_UNLIKELY(it == namespaceIds.end())) {
