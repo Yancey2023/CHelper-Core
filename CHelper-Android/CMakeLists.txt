@@ -8,6 +8,9 @@ project(CHelperAndroid
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Release
+set(CMAKE_BUILD_TYPE Release)
+
 # CHelper-Core
 set(CHELPER_CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Core)
 
@@ -21,6 +24,7 @@ if (PROJECT_IS_TOP_LEVEL)
 
     # ThirdParty: fmt
     add_subdirectory(${CHELPER_CORE_DIR}/include/fmt ${CMAKE_BINARY_DIR}/include/fmt)
+    target_compile_definitions(fmt PRIVATE FMT_USE_BITINT=false)
 
     # ThirdParty: utf8cpp
     add_subdirectory(${CHELPER_CORE_DIR}/include/utfcpp ${CMAKE_BINARY_DIR}/include/utfcpp)
@@ -49,5 +53,5 @@ target_precompile_headers(CHelperAndroid PRIVATE ${CHELPER_CORE_DIR}/include/pch
 target_compile_definitions(CHelperAndroid PRIVATE CHelperAndroid=true)
 target_link_libraries(CHelperAndroid PRIVATE fmt::fmt nlohmann_json::nlohmann_json utf8cpp)
 if (NOT PROJECT_IS_TOP_LEVEL)
-    target_link_libraries(CHelperAndroid PRIVATE hedley)
+    target_link_libraries(CHelperAndroid PRIVATE hedley  FMT_USE_BITINT=false)
 endif ()
