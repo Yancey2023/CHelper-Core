@@ -3,7 +3,7 @@
 //
 
 #include <chelper/node/param/NodeText.h>
-#include <chelper/node/template/NodeNumber.h>
+#include <chelper/node/template/NodeTemplateNumber.h>
 #include <chelper/node/util/NodeOr.h>
 #include <chelper/resources/id/ItemId.h>
 

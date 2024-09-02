@@ -2,7 +2,6 @@
 // Created by Yancey on 2023/12/1.
 //
 
-#include <chelper/node/param/NodeBoolean.h>
 #include <chelper/node/param/NodeItem.h>
 #include <chelper/node/param/NodeNormalId.h>
 #include <chelper/node/param/NodeRange.h>
@@ -10,7 +9,8 @@
 #include <chelper/node/param/NodeString.h>
 #include <chelper/node/param/NodeTargetSelector.h>
 #include <chelper/node/param/NodeText.h>
-#include <chelper/node/template/NodeNumber.h>
+#include <chelper/node/template/NodeTemplateBoolean.h>
+#include <chelper/node/template/NodeTemplateNumber.h>
 #include <chelper/node/util/NodeEntry.h>
 #include <chelper/node/util/NodeSingleSymbol.h>
 
@@ -121,7 +121,7 @@ namespace CHelper::Node {
             u"TARGET_SELECTOR_ARGUMENT_HASPROPERTY_RIGHT", u"目标选择器has_property参数右括号", '}');
     static std::unique_ptr<NodeBase> nodeHasPropertyValueSeparator = std::make_unique<NodeSingleSymbol>(
             u"TARGET_SELECTOR_ARGUMENT_HASPROPERTY_SEPARATOR", u"目标选择器has_property参数分隔符", ',');
-    static std::unique_ptr<NodeBase> nodeBoolean = std::make_unique<NodeBoolean>(
+    static std::unique_ptr<NodeBase> nodeBoolean = NodeBoolean::make(
             u"BOOLEAN", u"布尔值", std::nullopt, std::nullopt);
     static std::unique_ptr<NodeBase> nodeAny = std::make_unique<NodeOr>(
             u"ANY", u"任何值",

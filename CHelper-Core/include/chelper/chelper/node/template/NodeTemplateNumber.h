@@ -2,19 +2,19 @@
 // Created by Yancey on 2024-08-20.
 //
 
-#ifndef CHELPER_NODENUMBER_H
-#define CHELPER_NODENUMBER_H
+#ifndef CHELPER_NODETEMPLATENUMBER_H
+#define CHELPER_NODETEMPLATENUMBER_H
 
 #include "../NodeBase.h"
 
 namespace CHelper::Node {
 
     template<class T, bool isJson>
-    class NodeNumber : public NodeBase {
+    class NodeTemplateNumber : public NodeBase {
     public:
         std::optional<T> min, max;
 
-        NodeNumber() = default;
+        NodeTemplateNumber() = default;
 
         [[nodiscard]] NodeType *getNodeType() const override {
             if constexpr (std::is_same<T, int32_t>() && !isJson) {
@@ -95,11 +95,11 @@ namespace CHelper::Node {
             return true;
         }
 
-        static std::unique_ptr<NodeNumber<T, isJson>> make(const std::optional<std::u16string> &id,
-                                                           const std::optional<std::u16string> &description,
-                                                           const std::optional<T> &min0,
-                                                           const std::optional<T> &max0) {
-            auto result = std::make_unique<NodeNumber<T, isJson>>();
+        static std::unique_ptr<NodeTemplateNumber<T, isJson>> make(const std::optional<std::u16string> &id,
+                                                                   const std::optional<std::u16string> &description,
+                                                                   const std::optional<T> &min0,
+                                                                   const std::optional<T> &max0) {
+            auto result = std::make_unique<NodeTemplateNumber<T, isJson>>();
             result->id = id;
             result->description = description;
             result->isMustAfterWhiteSpace = false;
@@ -109,10 +109,10 @@ namespace CHelper::Node {
         }
     };
 
-    typedef NodeNumber<float, false> NodeFloat;
-    typedef NodeNumber<int32_t, false> NodeInteger;
-    typedef NodeNumber<float, true> NodeJsonFloat;
-    typedef NodeNumber<int32_t, true> NodeJsonInteger;
+    typedef NodeTemplateNumber<float, false> NodeFloat;
+    typedef NodeTemplateNumber<int32_t, false> NodeInteger;
+    typedef NodeTemplateNumber<float, true> NodeJsonFloat;
+    typedef NodeTemplateNumber<int32_t, true> NodeJsonInteger;
 
     CODEC_NODE_H(NodeFloat)
     CODEC_NODE_H(NodeInteger)
@@ -121,4 +121,4 @@ namespace CHelper::Node {
 
 }// namespace CHelper::Node
 
-#endif//CHELPER_NODENUMBER_H
+#endif//CHELPER_NODETEMPLATENUMBER_H

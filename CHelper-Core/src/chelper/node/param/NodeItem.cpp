@@ -4,7 +4,7 @@
 
 #include <chelper/node/param/NodeItem.h>
 #include <chelper/node/param/NodeJson.h>
-#include <chelper/node/template/NodeNumber.h>
+#include <chelper/node/template/NodeTemplateNumber.h>
 #include <chelper/resources/CPack.h>
 
 namespace CHelper::Node {

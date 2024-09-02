@@ -2,9 +2,9 @@
 // Created by Yancey on2024-5-21.
 //
 
-#include <chelper/node/json/NodeJsonBoolean.h>
 #include <chelper/node/json/NodeJsonNull.h>
-#include <chelper/node/template/NodeNumber.h>
+#include <chelper/node/template/NodeTemplateBoolean.h>
+#include <chelper/node/template/NodeTemplateNumber.h>
 #include <chelper/resources/CPack.h>
 #include <gtest/gtest.h>
 
@@ -186,7 +186,7 @@ namespace CHelper {
         }
 
         template<class T, bool isJson>
-        bool operator==(const NodeNumber<T, isJson> &t1, const NodeNumber<T, isJson> &t2) {
+        bool operator==(const NodeTemplateNumber<T, isJson> &t1, const NodeTemplateNumber<T, isJson> &t2) {
             if (!((NodeBase &) t1 == (NodeBase &) t2)) {
                 return false;
             }
@@ -438,10 +438,10 @@ TEST(BinaryUtilTest, NodeJsonBoolean) {
         CHelper::Profile::printAndClear(e);
         exit(-1);
     }
-    CHelper::Node::NodeJsonBoolean node(u"ID", u"description", u"descriptionTrue",
-                                        u"descriptionFalse");
+    auto node = CHelper::Node::NodeJsonBoolean::make(
+            u"ID", u"description", u"descriptionTrue", u"descriptionFalse");
     testNode<CHelper::Node::NodeJsonBoolean>(
-            *cpack, [&node]() { return node; });
+            *cpack, [&node]() { return *node; });
 }
 
 TEST(BinaryUtilTest, NodeJsonInteger) {

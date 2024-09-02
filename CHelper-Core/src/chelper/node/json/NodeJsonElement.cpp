@@ -2,14 +2,14 @@
 // Created by Yancey on 2024/2/28.
 //
 
-#include <chelper/node/json/NodeJsonBoolean.h>
 #include <chelper/node/json/NodeJsonElement.h>
 #include <chelper/node/json/NodeJsonEntry.h>
 #include <chelper/node/json/NodeJsonList.h>
 #include <chelper/node/json/NodeJsonNull.h>
 #include <chelper/node/json/NodeJsonObject.h>
 #include <chelper/node/json/NodeJsonString.h>
-#include <chelper/node/template/NodeNumber.h>
+#include <chelper/node/template/NodeTemplateBoolean.h>
+#include <chelper/node/template/NodeTemplateNumber.h>
 
 namespace CHelper::Node {
 
@@ -58,7 +58,7 @@ namespace CHelper::Node {
                 u"JSON_FLOAT", u"JSON小数", std::nullopt, std::nullopt);
         static std::unique_ptr<NodeBase> jsonNull = std::make_unique<NodeJsonNull>(
                 u"JSON_NULu", u"JSON空值");
-        static std::unique_ptr<NodeBase> jsonBoolean = std::make_unique<NodeJsonBoolean>(
+        static std::unique_ptr<NodeBase> jsonBoolean = NodeJsonBoolean::make(
                 u"JSON_BOOLEAN", u"JSON布尔值", std::nullopt, std::nullopt);
         static std::unique_ptr<NodeBase> jsonList = std::make_unique<NodeJsonList>(
                 u"JSON_LIST", u"JSON列表");

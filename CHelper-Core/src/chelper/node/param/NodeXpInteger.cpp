@@ -4,7 +4,7 @@
 
 #include <chelper/node/param/NodeText.h>
 #include <chelper/node/param/NodeXpInteger.h>
-#include <chelper/node/template/NodeNumber.h>
+#include <chelper/node/template/NodeTemplateNumber.h>
 #include <chelper/node/util/NodeAnd.h>
 #include <chelper/node/util/NodeOr.h>
 

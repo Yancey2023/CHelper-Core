@@ -3,10 +3,10 @@
 //
 
 #include <chelper/node/NodeBase.h>
-#include <chelper/node/param/NodeBoolean.h>
 #include <chelper/node/param/NodeString.h>
 #include <chelper/node/param/NodeText.h>
-#include <chelper/node/template/NodeNumber.h>
+#include <chelper/node/template/NodeTemplateBoolean.h>
+#include <chelper/node/template/NodeTemplateNumber.h>
 #include <chelper/node/util/NodeEntry.h>
 #include <chelper/node/util/NodeList.h>
 #include <chelper/node/util/NodeOr.h>
@@ -21,7 +21,7 @@ namespace CHelper {
             u"BLOCK_STATE_ENTRY_KEY", u"方块状态键值对的键", false, false, false);
     static std::unique_ptr<Node::NodeBase> nodeBlockStateEntrySeparator = std::make_unique<Node::NodeSingleSymbol>(
             u"BLOCK_STATE_ENTRY_SEPARATOR", u"方块状态键值对分隔符", '=');
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueBoolean = std::make_unique<Node::NodeBoolean>(
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueBoolean = Node::NodeBoolean::make(
             u"BLOCK_STATE_ENTRY_VALUE_BOOLEAN", u"方块状态键值对的值（布尔值）",
             std::nullopt, std::nullopt);
     static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueInteger = Node::NodeInteger::make(

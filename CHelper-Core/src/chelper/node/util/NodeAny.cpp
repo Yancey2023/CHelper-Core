@@ -1,11 +1,12 @@
 //
 // Created by Yancey on 2024-05-25.
 //
-#include <chelper/node/param/NodeBoolean.h>
+
 #include <chelper/node/param/NodeRange.h>
 #include <chelper/node/param/NodeRelativeFloat.h>
 #include <chelper/node/param/NodeString.h>
 #include <chelper/node/param/NodeText.h>
+#include <chelper/node/template/NodeTemplateBoolean.h>
 #include <chelper/node/util/NodeAny.h>
 #include <chelper/node/util/NodeEntry.h>
 #include <chelper/node/util/NodeList.h>
@@ -32,7 +33,7 @@ namespace CHelper::Node {
             std::vector<const NodeBase *>{
                     nodeEqual.get(), nodeNotEqual.get()},
             false);
-    static std::unique_ptr<NodeBase> nodeBoolean = std::make_unique<NodeBoolean>(
+    static std::unique_ptr<NodeBase> nodeBoolean = NodeBoolean::make(
             u"BOOLEAN", u"布尔值", std::nullopt, std::nullopt);
     static std::unique_ptr<NodeBase> nodeRelativeFloat = std::make_unique<NodeRelativeFloat>(
             u"RELATIVE_FLOAT", u"坐标", true);

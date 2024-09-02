@@ -3,13 +3,11 @@
 //
 
 #include <chelper/node/NodeType.h>
-#include <chelper/node/json/NodeJsonBoolean.h>
 #include <chelper/node/json/NodeJsonList.h>
 #include <chelper/node/json/NodeJsonNull.h>
 #include <chelper/node/json/NodeJsonObject.h>
 #include <chelper/node/json/NodeJsonString.h>
 #include <chelper/node/param/NodeBlock.h>
-#include <chelper/node/param/NodeBoolean.h>
 #include <chelper/node/param/NodeCommand.h>
 #include <chelper/node/param/NodeCommandName.h>
 #include <chelper/node/param/NodeItem.h>
@@ -24,7 +22,8 @@
 #include <chelper/node/param/NodeTargetSelector.h>
 #include <chelper/node/param/NodeText.h>
 #include <chelper/node/param/NodeXpInteger.h>
-#include <chelper/node/template/NodeNumber.h>
+#include <chelper/node/template/NodeTemplateBoolean.h>
+#include <chelper/node/template/NodeTemplateNumber.h>
 #include <chelper/node/util/NodeAny.h>
 #include <chelper/node/util/NodeEntry.h>
 #include <chelper/node/util/NodeSingleSymbol.h>
