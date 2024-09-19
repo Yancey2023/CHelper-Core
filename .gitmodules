@@ -12,7 +12,7 @@
 	branch = master
 [submodule "CHelper-Core/include/hedley"]
 	path = CHelper-Core/include/hedley
-	url = https://github.com/cblck/hedley.git
+	url = https://github.com/Yancey2023/hedley.git
 	branch = master
 [submodule "CHelper-Test/include/googletest"]
 	path = CHelper-Test/include/googletest

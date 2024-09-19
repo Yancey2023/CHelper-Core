@@ -16,8 +16,7 @@ set(CHELPER_CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Core)
 
 if (PROJECT_IS_TOP_LEVEL)
     # ThirdParty: hedley
-    include_directories(${CHELPER_CORE_DIR}/include/hedley/include)
-    #    add_subdirectory(${CHELPER_CORE_DIR}/include/hedley ${CMAKE_BINARY_DIR}/include/hedley)
+    add_subdirectory(${CHELPER_CORE_DIR}/include/hedley ${CMAKE_BINARY_DIR}/include/hedley)
 
     # ThirdParty: json
     add_subdirectory(${CHELPER_CORE_DIR}/include/json ${CMAKE_BINARY_DIR}/include/json)
