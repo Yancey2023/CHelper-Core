@@ -81,10 +81,10 @@ namespace CHelper::Test {
      */
     [[maybe_unused]] void testDir(const std::filesystem::path &cpackPath, const std::filesystem::path &testFilePath, bool isTestTime) {
         std::vector<std::u16string> commands;
-        std::basic_ifstream<char16_t, std::char_traits<char16_t>> fin;
+        std::ifstream fin;
         fin.open(testFilePath, std::ios::in);
         while (fin.is_open()) {
-            std::u16string str;
+            std::string str;
             getline(fin, str);
             if (HEDLEY_UNLIKELY(str.empty())) {
                 break;
@@ -95,7 +95,7 @@ namespace CHelper::Test {
             if (HEDLEY_UNLIKELY(str[str.length() - 1] == '\r')) {
                 str = str.substr(0, str.length() - 1);
             }
-            commands.push_back(str);
+            commands.push_back(utf8::utf8to16(str));
         }
         fin.close();
         CHelper::Test::testDir(cpackPath, commands, isTestTime);
@@ -114,10 +114,10 @@ namespace CHelper::Test {
      */
     [[maybe_unused]] void testBin(const std::filesystem::path &cpackPath, const std::filesystem::path &testFilePath, bool isTestTime) {
         std::vector<std::u16string> commands;
-        std::basic_ifstream<char16_t, std::char_traits<char16_t>> fin;
+        std::ifstream fin;
         fin.open(testFilePath, std::ios::in);
         while (fin.is_open()) {
-            std::u16string str;
+            std::string str;
             getline(fin, str);
             if (HEDLEY_UNLIKELY(str.empty())) {
                 break;
@@ -128,7 +128,7 @@ namespace CHelper::Test {
             if (HEDLEY_UNLIKELY(str[str.length() - 1] == '\r')) {
                 str = str.substr(0, str.length() - 1);
             }
-            commands.push_back(str);
+            commands.push_back(utf8::utf8to16(str));
         }
         fin.close();
         CHelper::Test::testBin(cpackPath, commands, isTestTime);

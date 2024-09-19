@@ -487,7 +487,7 @@ namespace CHelper {
         JsonUtil::decode(j, "name", t.name);
         t.type = from_json(j.at("defaultValue"), t.defaultValue);
         const auto &it = j.find("valid");
-        if (it == j.end()) {
+        if (HEDLEY_LIKELY(it == j.end())) {
             t.valid = std::nullopt;
         } else {
             t.valid = std::make_optional<std::vector<PropertyValue>>();
@@ -495,7 +495,7 @@ namespace CHelper {
             for (const auto &item: it.value()) {
                 PropertyValue propertyValue;
                 PropertyType::PropertyType type = from_json(item, propertyValue);
-                if (t.type != type) {
+                if (HEDLEY_UNLIKELY(t.type != type)) {
                     if (type == PropertyType::STRING) {
                         delete propertyValue.string;
                     }
