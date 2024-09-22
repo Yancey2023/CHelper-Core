@@ -395,6 +395,10 @@
       "description": "白桦木"
     },
     {
+      "name": "black_bundle",
+      "description": "黑色收纳袋"
+    },
+    {
       "name": "black_candle",
       "description": "黑色蜡烛"
     },
@@ -473,6 +477,10 @@
     {
       "name": "blaze_spawn_egg",
       "description": "烈焰人刷怪蛋"
+    },
+    {
+      "name": "blue_bundle",
+      "description": "蓝色收纳袋"
     },
     {
       "name": "blue_candle",
@@ -621,6 +629,10 @@
     {
       "name": "brick_wall",
       "description": "红砖墙"
+    },
+    {
+      "name": "brown_bundle",
+      "description": "棕色收纳袋"
     },
     {
       "name": "brown_candle",
@@ -1135,6 +1147,10 @@
       "description": "苦力怕盾徽旗帜图案"
     },
     {
+      "name": "creeper_head",
+      "description": "苦力怕的头"
+    },
+    {
       "name": "creeper_spawn_egg",
       "description": "苦力怕刷怪蛋"
     },
@@ -1237,6 +1253,10 @@
     {
       "name": "cut_sandstone_slab",
       "description": "切制砂岩台阶"
+    },
+    {
+      "name": "cyan_bundle",
+      "description": "青色收纳袋"
     },
     {
       "name": "cyan_candle",
@@ -1621,6 +1641,10 @@
     {
       "name": "dragon_egg",
       "description": "龙蛋"
+    },
+    {
+      "name": "dragon_head",
+      "description": "龙首"
     },
     {
       "name": "dried_kelp",
@@ -2083,6 +2107,10 @@
       "description": "沙砾"
     },
     {
+      "name": "gray_bundle",
+      "description": "灰色收纳袋"
+    },
+    {
       "name": "gray_candle",
       "description": "灰色蜡烛"
     },
@@ -2125,6 +2153,10 @@
     {
       "name": "gray_wool",
       "description": "灰色羊毛"
+    },
+    {
+      "name": "green_bundle",
+      "description": "绿色收纳袋"
     },
     {
       "name": "green_candle",
@@ -2599,6 +2631,10 @@
       "description": "光源方块（9）"
     },
     {
+      "name": "light_blue_bundle",
+      "description": "淡蓝色收纳袋"
+    },
+    {
       "name": "light_blue_candle",
       "description": "淡蓝色蜡烛"
     },
@@ -2641,6 +2677,10 @@
     {
       "name": "light_blue_wool",
       "description": "淡蓝色羊毛"
+    },
+    {
+      "name": "light_gray_bundle",
+      "description": "淡灰色收纳袋"
     },
     {
       "name": "light_gray_candle",
@@ -2697,6 +2737,10 @@
     {
       "name": "lily_of_the_valley",
       "description": "铃兰"
+    },
+    {
+      "name": "lime_bundle",
+      "description": "黄绿色收纳袋"
     },
     {
       "name": "lime_candle",
@@ -2769,6 +2813,10 @@
     {
       "name": "mace",
       "description": "重锤"
+    },
+    {
+      "name": "magenta_bundle",
+      "description": "品红色收纳袋"
     },
     {
       "name": "magenta_candle",
@@ -3009,6 +3057,10 @@
     {
       "name": "mule_spawn_egg",
       "description": "骡刷怪蛋"
+    },
+    {
+      "name": "mushroom_stem",
+      "description": "蘑菇柄"
     },
     {
       "name": "mushroom_stew",
@@ -3291,6 +3343,10 @@
       "description": "不祥试炼钥匙"
     },
     {
+      "name": "orange_bundle",
+      "description": "橙色收纳袋"
+    },
+    {
       "name": "orange_candle",
       "description": "橙色蜡烛"
     },
@@ -3435,12 +3491,20 @@
       "description": "猪灵蛮兵刷怪蛋"
     },
     {
+      "name": "piglin_head",
+      "description": "猪灵的头"
+    },
+    {
       "name": "piglin_spawn_egg",
       "description": "猪灵刷怪蛋"
     },
     {
       "name": "pillager_spawn_egg",
       "description": "掠夺者刷怪蛋"
+    },
+    {
+      "name": "pink_bundle",
+      "description": "粉红色收纳袋"
     },
     {
       "name": "pink_candle",
@@ -3505,6 +3569,10 @@
     {
       "name": "pitcher_pod",
       "description": "瓶子草荚果"
+    },
+    {
+      "name": "player_head",
+      "description": "玩家的头"
     },
     {
       "name": "plenty_pottery_sherd",
@@ -3727,6 +3795,10 @@
       "description": "南瓜种子"
     },
     {
+      "name": "purple_bundle",
+      "description": "紫色收纳袋"
+    },
+    {
       "name": "purple_candle",
       "description": "紫色蜡烛"
     },
@@ -3873,6 +3945,10 @@
     {
       "name": "recovery_compass",
       "description": "追溯指针"
+    },
+    {
+      "name": "red_bundle",
+      "description": "红色收纳袋"
     },
     {
       "name": "red_candle",
@@ -4151,12 +4227,12 @@
       "description": "骷髅马刷怪蛋"
     },
     {
-      "name": "skeleton_spawn_egg",
-      "description": "骷髅刷怪蛋"
+      "name": "skeleton_skull",
+      "description": "骷髅头颅"
     },
     {
-      "name": "skull",
-      "description": "生物头颅"
+      "name": "skeleton_spawn_egg",
+      "description": "骷髅刷怪蛋"
     },
     {
       "name": "skull_banner_pattern",
@@ -5071,6 +5147,10 @@
       "description": "小麦种子"
     },
     {
+      "name": "white_bundle",
+      "description": "白色收纳袋"
+    },
+    {
       "name": "white_candle",
       "description": "白色蜡烛"
     },
@@ -5135,6 +5215,10 @@
       "description": "凋灵玫瑰"
     },
     {
+      "name": "wither_skeleton_skull",
+      "description": "凋灵骷髅头颅"
+    },
+    {
       "name": "wither_skeleton_spawn_egg",
       "description": "凋灵骷髅刷怪蛋"
     },
@@ -5187,6 +5271,10 @@
       "description": "书与笔"
     },
     {
+      "name": "yellow_bundle",
+      "description": "黄色收纳袋"
+    },
+    {
       "name": "yellow_candle",
       "description": "黄色蜡烛"
     },
@@ -5233,6 +5321,10 @@
     {
       "name": "zoglin_spawn_egg",
       "description": "僵尸疣猪兽刷怪蛋"
+    },
+    {
+      "name": "zombie_head",
+      "description": "僵尸的头"
     },
     {
       "name": "zombie_horse_spawn_egg",

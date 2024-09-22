@@ -52,7 +52,7 @@
     },
     {
       "name": "fallDamage",
-      "description": "玩家是否承受跌落伤害。"
+      "description": "玩家是否承受摔落伤害。"
     },
     {
       "name": "fireDamage",

@@ -1219,7 +1219,7 @@
     },
     {
       "name": "minecraft:cyan_dye_from_pitcher_plant",
-      "description": "\u003c工作台\u003e瓶子草~\u003e青色染料"
+      "description": "\u003c工作台\u003e瓶子草~\u003e青色染料*2"
     },
     {
       "name": "minecraft:cyan_stained_glass",
@@ -1543,7 +1543,7 @@
     },
     {
       "name": "minecraft:end_brick_wall",
-      "description": "\u003c工作台\u003e末地石砖*6-\u003e下界砖墙*6"
+      "description": "\u003c工作台\u003e末地石砖*6-\u003e末地石砖墙*6"
     },
     {
       "name": "minecraft:end_bricks",
@@ -2471,7 +2471,7 @@
     },
     {
       "name": "minecraft:nether_brick_wall",
-      "description": "\u003c工作台\u003e下界砖块*6-\u003e末地石砖墙*6"
+      "description": "\u003c工作台\u003e下界砖块*6-\u003e下界砖墙*6"
     },
     {
       "name": "minecraft:nether_wart_block",
@@ -2887,11 +2887,11 @@
     },
     {
       "name": "minecraft:purpur_block",
-      "description": "\u003c工作台\u003e爆裂紫颂果*4-\u003e紫珀块/雕纹紫珀块/紫珀柱/平滑紫珀块*4"
+      "description": "\u003c工作台\u003e爆裂紫颂果*4-\u003e紫珀块*4"
     },
     {
       "name": "minecraft:purpur_stairs",
-      "description": "\u003c工作台\u003e紫珀块/雕纹紫珀块/紫珀柱/平滑紫珀块*6-\u003e紫珀楼梯*4"
+      "description": "\u003c工作台\u003e紫珀块*6-\u003e紫珀楼梯*4"
     },
     {
       "name": "minecraft:quartz_block",
@@ -3195,7 +3195,7 @@
     },
     {
       "name": "minecraft:spire_armor_trim_smithing_template_duplicate",
-      "description": "\u003c工作台\u003e尖塔盔甲纹饰锻造模板+钻石*7+紫珀块/雕纹紫珀块/紫珀柱/平滑紫珀块-\u003e尖塔盔甲纹饰锻造模板*2"
+      "description": "\u003c工作台\u003e尖塔盔甲纹饰锻造模板+钻石*7+紫珀块-\u003e尖塔盔甲纹饰锻造模板*2"
     },
     {
       "name": "minecraft:spruce_boat",
@@ -3463,11 +3463,11 @@
     },
     {
       "name": "minecraft:stonecutter_endbrick_wall",
-      "description": "\u003c切石机\u003e末地石~\u003e下界砖墙"
+      "description": "\u003c切石机\u003e末地石~\u003e末地石砖墙"
     },
     {
       "name": "minecraft:stonecutter_endbrick_wall2",
-      "description": "\u003c切石机\u003e末地石砖~\u003e下界砖墙"
+      "description": "\u003c切石机\u003e末地石砖~\u003e末地石砖墙"
     },
     {
       "name": "minecraft:stonecutter_endbricks",
@@ -3563,7 +3563,7 @@
     },
     {
       "name": "minecraft:stonecutter_nether_brick_wall",
-      "description": "\u003c切石机\u003e下界砖块~\u003e末地石砖墙"
+      "description": "\u003c切石机\u003e下界砖块~\u003e下界砖墙"
     },
     {
       "name": "minecraft:stonecutter_oxidized_copper_to_cut_copper",

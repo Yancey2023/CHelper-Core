@@ -737,6 +737,18 @@
       "description": "铁桶：装满水"
     },
     {
+      "name": "bundle.drop_contents"
+    },
+    {
+      "name": "bundle.insert"
+    },
+    {
+      "name": "bundle.insert_fail"
+    },
+    {
+      "name": "bundle.remove_one"
+    },
+    {
       "name": "cake.add_candle",
       "description": "蛋糕：吧唧"
     },

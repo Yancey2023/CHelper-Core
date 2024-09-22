@@ -503,6 +503,9 @@
       "description": "未知"
     },
     {
+      "name": "minecraft:sneeze"
+    },
+    {
       "name": "minecraft:snowflake_particle",
       "description": "细雪中的实体产生的雪花粒子"
     },
@@ -665,6 +668,9 @@
     {
       "name": "minecraft:wind_explosion_emitter",
       "description": "风弹实体爆炸时的一阵狂风粒子"
+    },
+    {
+      "name": "minecraft:witchspell_emitter"
     },
     {
       "name": "minecraft:wither_boss_invulnerable",

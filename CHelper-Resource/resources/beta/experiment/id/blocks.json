@@ -1906,7 +1906,7 @@
         "properties": [
           {
             "name": "huge_mushroom_bits",
-            "defaultValue": 0
+            "defaultValue": 14
           }
         ]
       },
@@ -2465,10 +2465,6 @@
           {
             "name": "pillar_axis",
             "defaultValue": "y"
-          },
-          {
-            "name": "stripped_bit",
-            "defaultValue": false
           }
         ]
       },
@@ -2981,6 +2977,16 @@
       {
         "name": "crafting_table",
         "description": "工作台"
+      },
+      {
+        "name": "creeper_head",
+        "description": "苦力怕的头",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
+          }
+        ]
       },
       {
         "name": "crimson_button",
@@ -4660,6 +4666,16 @@
       {
         "name": "dragon_egg",
         "description": "龙蛋"
+      },
+      {
+        "name": "dragon_head",
+        "description": "龙首",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
+          }
+        ]
       },
       {
         "name": "dried_kelp_block",
@@ -7486,10 +7502,6 @@
           {
             "name": "pillar_axis",
             "defaultValue": "y"
-          },
-          {
-            "name": "stripped_bit",
-            "defaultValue": false
           }
         ]
       },
@@ -7815,6 +7827,16 @@
           {
             "name": "pillar_axis",
             "defaultValue": "y"
+          }
+        ]
+      },
+      {
+        "name": "mushroom_stem",
+        "description": "蘑菇柄",
+        "properties": [
+          {
+            "name": "huge_mushroom_bits",
+            "defaultValue": 15
           }
         ]
       },
@@ -8584,6 +8606,16 @@
         ]
       },
       {
+        "name": "piglin_head",
+        "description": "猪灵的头",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
+          }
+        ]
+      },
+      {
         "name": "pink_candle",
         "description": "粉红色蜡烛",
         "properties": [
@@ -8793,6 +8825,16 @@
           {
             "name": "upper_block_bit",
             "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "player_head",
+        "description": "玩家的头",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
           }
         ]
       },
@@ -10042,7 +10084,7 @@
         "properties": [
           {
             "name": "huge_mushroom_bits",
-            "defaultValue": 0
+            "defaultValue": 14
           }
         ]
       },
@@ -10656,8 +10698,8 @@
         ]
       },
       {
-        "name": "skull",
-        "description": "生物头颅",
+        "name": "skeleton_skull",
+        "description": "骷髅头颅",
         "properties": [
           {
             "name": "facing_direction",
@@ -13437,6 +13479,16 @@
         "description": "凋灵玫瑰"
       },
       {
+        "name": "wither_skeleton_skull",
+        "description": "凋灵骷髅头颅",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
+          }
+        ]
+      },
+      {
         "name": "wooden_button",
         "description": "橡木按钮",
         "properties": [
@@ -13617,6 +13669,16 @@
             "valid": [
               "yellow"
             ]
+          }
+        ]
+      },
+      {
+        "name": "zombie_head",
+        "description": "僵尸的头",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
           }
         ]
       }

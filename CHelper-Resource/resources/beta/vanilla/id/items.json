@@ -1131,6 +1131,10 @@
       "description": "苦力怕盾徽旗帜图案"
     },
     {
+      "name": "creeper_head",
+      "description": "苦力怕的头"
+    },
+    {
       "name": "creeper_spawn_egg",
       "description": "苦力怕刷怪蛋"
     },
@@ -1617,6 +1621,10 @@
     {
       "name": "dragon_egg",
       "description": "龙蛋"
+    },
+    {
+      "name": "dragon_head",
+      "description": "龙首"
     },
     {
       "name": "dried_kelp",
@@ -3007,6 +3015,10 @@
       "description": "骡刷怪蛋"
     },
     {
+      "name": "mushroom_stem",
+      "description": "蘑菇柄"
+    },
+    {
       "name": "mushroom_stew",
       "description": "蘑菇煲"
     },
@@ -3431,6 +3443,10 @@
       "description": "猪灵蛮兵刷怪蛋"
     },
     {
+      "name": "piglin_head",
+      "description": "猪灵的头"
+    },
+    {
       "name": "piglin_spawn_egg",
       "description": "猪灵刷怪蛋"
     },
@@ -3501,6 +3517,10 @@
     {
       "name": "pitcher_pod",
       "description": "瓶子草荚果"
+    },
+    {
+      "name": "player_head",
+      "description": "玩家的头"
     },
     {
       "name": "plenty_pottery_sherd",
@@ -4147,12 +4167,12 @@
       "description": "骷髅马刷怪蛋"
     },
     {
-      "name": "skeleton_spawn_egg",
-      "description": "骷髅刷怪蛋"
+      "name": "skeleton_skull",
+      "description": "骷髅头颅"
     },
     {
-      "name": "skull",
-      "description": "生物头颅"
+      "name": "skeleton_spawn_egg",
+      "description": "骷髅刷怪蛋"
     },
     {
       "name": "skull_banner_pattern",
@@ -5131,6 +5151,10 @@
       "description": "凋灵玫瑰"
     },
     {
+      "name": "wither_skeleton_skull",
+      "description": "凋灵骷髅头颅"
+    },
+    {
       "name": "wither_skeleton_spawn_egg",
       "description": "凋灵骷髅刷怪蛋"
     },
@@ -5229,6 +5253,10 @@
     {
       "name": "zoglin_spawn_egg",
       "description": "僵尸疣猪兽刷怪蛋"
+    },
+    {
+      "name": "zombie_head",
+      "description": "僵尸的头"
     },
     {
       "name": "zombie_horse_spawn_egg",

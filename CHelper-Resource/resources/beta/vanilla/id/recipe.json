@@ -3423,7 +3423,7 @@
     },
     {
       "name": "minecraft:stonecutter_dark_prismarine_slab",
-      "description": "\u003c切石机\u003e暗海晶石~\u003e暗海晶石双层台阶*2"
+      "description": "\u003c切石机\u003e暗海晶石~\u003e暗海晶石台阶*2"
     },
     {
       "name": "minecraft:stonecutter_dark_prismarine_stairs",
@@ -3519,7 +3519,7 @@
     },
     {
       "name": "minecraft:stonecutter_mossy_cobbledouble_stone_slab",
-      "description": "\u003c切石机\u003e苔石~\u003e苔石双层台阶*2"
+      "description": "\u003c切石机\u003e苔石~\u003e苔石台阶*2"
     },
     {
       "name": "minecraft:stonecutter_mossy_cobblestone_stairs",
@@ -3727,7 +3727,7 @@
     },
     {
       "name": "minecraft:stonecutter_prismarine_brick_slab",
-      "description": "\u003c切石机\u003e海晶石砖~\u003e海晶石砖双层台阶*2"
+      "description": "\u003c切石机\u003e海晶石砖~\u003e海晶石砖台阶*2"
     },
     {
       "name": "minecraft:stonecutter_prismarine_brick_stairs",
@@ -3735,7 +3735,7 @@
     },
     {
       "name": "minecraft:stonecutter_prismarine_slab",
-      "description": "\u003c切石机\u003e海晶石~\u003e海晶石双层台阶*2"
+      "description": "\u003c切石机\u003e海晶石~\u003e海晶石台阶*2"
     },
     {
       "name": "minecraft:stonecutter_prismarine_stairs",
@@ -3751,7 +3751,7 @@
     },
     {
       "name": "minecraft:stonecutter_purpur_slab",
-      "description": "\u003c切石机\u003e紫珀块~\u003e紫珀双层台阶*2"
+      "description": "\u003c切石机\u003e紫珀块~\u003e紫珀台阶*2"
     },
     {
       "name": "minecraft:stonecutter_purpur_stairs",
@@ -3779,7 +3779,7 @@
     },
     {
       "name": "minecraft:stonecutter_red_nether_brick_slab",
-      "description": "\u003c切石机\u003e红色下界砖块~\u003e红色下界砖双层台阶*2"
+      "description": "\u003c切石机\u003e红色下界砖块~\u003e红色下界砖台阶*2"
     },
     {
       "name": "minecraft:stonecutter_red_nether_brick_stairs",
@@ -3859,7 +3859,7 @@
     },
     {
       "name": "minecraft:stonecutter_smooth_sanddouble_stone_slab",
-      "description": "\u003c切石机\u003e平滑砂岩~\u003e平滑砂岩双层台阶*2"
+      "description": "\u003c切石机\u003e平滑砂岩~\u003e平滑砂岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_smooth_sandstone_stairs",

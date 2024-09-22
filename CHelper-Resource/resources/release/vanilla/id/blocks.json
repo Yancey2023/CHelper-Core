@@ -423,6 +423,39 @@
         ]
       },
       {
+        "name": "andesite_wall",
+        "description": "安山岩墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "andesite",
+            "valid": [
+              "andesite"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
         "name": "anvil",
         "description": "铁砧",
         "properties": [
@@ -1758,6 +1791,39 @@
         ]
       },
       {
+        "name": "brick_wall",
+        "description": "红砖墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "brick",
+            "valid": [
+              "brick"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
         "name": "brown_candle",
         "description": "棕色蜡烛",
         "properties": [
@@ -2708,11 +2774,14 @@
       },
       {
         "name": "cobblestone_wall",
-        "description": "圆石墙/苔石墙/花岗岩墙/闪长岩墙/安山岩墙/砂岩墙/红砖墙/石砖墙/苔石砖墙/末地石砖墙/下界砖墙/海晶石墙/红砂岩墙/红色下界砖墙",
+        "description": "圆石墙",
         "properties": [
           {
             "name": "wall_block_type",
-            "defaultValue": "cobblestone"
+            "defaultValue": "cobblestone",
+            "valid": [
+              "cobblestone"
+            ]
           },
           {
             "name": "wall_connection_type_east",
@@ -4511,6 +4580,39 @@
         ]
       },
       {
+        "name": "diorite_wall",
+        "description": "闪长岩墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "diorite",
+            "valid": [
+              "diorite"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
         "name": "dirt",
         "description": "泥土",
         "properties": [
@@ -4685,6 +4787,39 @@
           },
           {
             "name": "top_slot_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "end_stone_brick_wall",
+        "description": "末地石砖墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "end_brick",
+            "valid": [
+              "end_brick"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
             "defaultValue": false
           }
         ]
@@ -5189,6 +5324,39 @@
           {
             "name": "weirdo_direction",
             "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "name": "granite_wall",
+        "description": "花岗岩墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "granite",
+            "valid": [
+              "granite"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
           }
         ]
       },
@@ -5774,6 +5942,20 @@
           {
             "name": "upside_down_bit",
             "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "jigsaw",
+        "description": "拼图方块",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
+          },
+          {
+            "name": "rotation",
+            "defaultValue": 0
           }
         ]
       },
@@ -7416,6 +7598,39 @@
         ]
       },
       {
+        "name": "mossy_cobblestone_wall",
+        "description": "苔石墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "mossy_cobblestone",
+            "valid": [
+              "mossy_cobblestone"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
         "name": "mossy_stone_brick_double_slab",
         "description": "苔石砖双层台阶",
         "properties": [
@@ -7468,6 +7683,39 @@
           {
             "name": "weirdo_direction",
             "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "name": "mossy_stone_brick_wall",
+        "description": "苔石砖墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "mossy_stone_brick",
+            "valid": [
+              "mossy_stone_brick"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
           }
         ]
       },
@@ -7635,6 +7883,39 @@
           {
             "name": "weirdo_direction",
             "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "name": "nether_brick_wall",
+        "description": "下界砖墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "nether_brick",
+            "valid": [
+              "nether_brick"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
           }
         ]
       },
@@ -9270,6 +9551,39 @@
         ]
       },
       {
+        "name": "prismarine_wall",
+        "description": "海晶石墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "prismarine",
+            "valid": [
+              "prismarine"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
         "name": "pumpkin",
         "description": "南瓜",
         "properties": [
@@ -9437,11 +9751,14 @@
       },
       {
         "name": "purpur_block",
-        "description": "紫珀块/雕纹紫珀块/紫珀柱/平滑紫珀块",
+        "description": "紫珀块",
         "properties": [
           {
             "name": "chisel_type",
-            "defaultValue": "default"
+            "defaultValue": "default",
+            "valid": [
+              "default"
+            ]
           },
           {
             "name": "pillar_axis",
@@ -9467,6 +9784,23 @@
           {
             "name": "top_slot_bit",
             "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "purpur_pillar",
+        "description": "紫珀柱",
+        "properties": [
+          {
+            "name": "chisel_type",
+            "defaultValue": "lines",
+            "valid": [
+              "lines"
+            ]
+          },
+          {
+            "name": "pillar_axis",
+            "defaultValue": "y"
           }
         ]
       },
@@ -9773,6 +10107,39 @@
         ]
       },
       {
+        "name": "red_nether_brick_wall",
+        "description": "红色下界砖墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "red_nether_brick",
+            "valid": [
+              "red_nether_brick"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
         "name": "red_sand",
         "description": "红沙",
         "properties": [
@@ -9851,6 +10218,39 @@
           {
             "name": "weirdo_direction",
             "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "name": "red_sandstone_wall",
+        "description": "红砂岩墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "red_sandstone",
+            "valid": [
+              "red_sandstone"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
           }
         ]
       },
@@ -10098,6 +10498,39 @@
           {
             "name": "weirdo_direction",
             "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "name": "sandstone_wall",
+        "description": "砂岩墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "sandstone",
+            "valid": [
+              "sandstone"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
           }
         ]
       },
@@ -10639,11 +11072,14 @@
       },
       {
         "name": "sponge",
-        "description": "海绵/湿海绵",
+        "description": "海绵",
         "properties": [
           {
             "name": "sponge_type",
-            "defaultValue": "dry"
+            "defaultValue": "dry",
+            "valid": [
+              "dry"
+            ]
           }
         ]
       },
@@ -11046,6 +11482,39 @@
         ]
       },
       {
+        "name": "stone_brick_wall",
+        "description": "石砖墙",
+        "properties": [
+          {
+            "name": "wall_block_type",
+            "defaultValue": "stone_brick",
+            "valid": [
+              "stone_brick"
+            ]
+          },
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
         "name": "stone_bricks",
         "description": "石砖",
         "properties": [
@@ -11426,7 +11895,10 @@
         "properties": [
           {
             "name": "structure_void_type",
-            "defaultValue": "void"
+            "defaultValue": "void",
+            "valid": [
+              "void"
+            ]
           }
         ]
       },
@@ -12780,6 +13252,19 @@
           {
             "name": "weeping_vines_age",
             "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "name": "wet_sponge",
+        "description": "湿海绵",
+        "properties": [
+          {
+            "name": "sponge_type",
+            "defaultValue": "wet",
+            "valid": [
+              "wet"
+            ]
           }
         ]
       },

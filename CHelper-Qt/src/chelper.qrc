@@ -2,6 +2,6 @@
 <RCC version="1.0">
     <qresource>
         <file>img/logo.webp</file>
-        <file>assets/release-experiment-1.21.21.01.cpack</file>
+        <file>assets/release-experiment-1.21.30.03.cpack</file>
     </qresource>
 </RCC>

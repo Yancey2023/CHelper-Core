@@ -119,6 +119,10 @@
       "description": "安山岩楼梯"
     },
     {
+      "name": "andesite_wall",
+      "description": "安山岩墙"
+    },
+    {
       "name": "angler_pottery_sherd",
       "description": "垂钓纹样陶片"
     },
@@ -615,6 +619,10 @@
       "description": "红砖楼梯"
     },
     {
+      "name": "brick_wall",
+      "description": "红砖墙"
+    },
+    {
       "name": "brown_candle",
       "description": "棕色蜡烛"
     },
@@ -980,23 +988,7 @@
     },
     {
       "name": "cobblestone_wall",
-      "description": "圆石墙/苔石墙/花岗岩墙/闪长岩墙/安山岩墙/砂岩墙/红砖墙/石砖墙/苔石砖墙/末地石砖墙/下界砖墙/海晶石墙/红砂岩墙/红色下界砖墙",
-      "descriptions": [
-        "圆石墙",
-        "苔石墙",
-        "花岗岩墙",
-        "闪长岩墙",
-        "安山岩墙",
-        "砂岩墙",
-        "红砖墙",
-        "石砖墙",
-        "苔石砖墙",
-        "末地石砖墙",
-        "下界砖墙",
-        "海晶石墙",
-        "红砂岩墙",
-        "红色下界砖墙"
-      ]
+      "description": "圆石墙"
     },
     {
       "name": "cocoa_beans",
@@ -1591,6 +1583,10 @@
       "description": "闪长岩楼梯"
     },
     {
+      "name": "diorite_wall",
+      "description": "闪长岩墙"
+    },
+    {
       "name": "dirt",
       "description": "泥土"
     },
@@ -1717,6 +1713,10 @@
     {
       "name": "end_stone_brick_slab",
       "description": "末地石砖台阶"
+    },
+    {
+      "name": "end_stone_brick_wall",
+      "description": "末地石砖墙"
     },
     {
       "name": "ender_chest",
@@ -2061,6 +2061,10 @@
     {
       "name": "granite_stairs",
       "description": "花岗岩楼梯"
+    },
+    {
+      "name": "granite_wall",
+      "description": "花岗岩墙"
     },
     {
       "name": "grass_block",
@@ -2527,10 +2531,6 @@
       "description": "拉杆"
     },
     {
-      "name": "light_block",
-      "description": "光源方块"
-    },
-    {
       "name": "light_block_0",
       "description": "光源方块（0）"
     },
@@ -2955,12 +2955,20 @@
       "description": "苔石楼梯"
     },
     {
+      "name": "mossy_cobblestone_wall",
+      "description": "苔石墙"
+    },
+    {
       "name": "mossy_stone_brick_slab",
       "description": "苔石砖台阶"
     },
     {
       "name": "mossy_stone_brick_stairs",
       "description": "苔石砖楼梯"
+    },
+    {
+      "name": "mossy_stone_brick_wall",
+      "description": "苔石砖墙"
     },
     {
       "name": "mossy_stone_bricks",
@@ -3109,6 +3117,10 @@
     {
       "name": "nether_brick_stairs",
       "description": "下界砖楼梯"
+    },
+    {
+      "name": "nether_brick_wall",
+      "description": "下界砖墙"
     },
     {
       "name": "nether_gold_ore",
@@ -3679,6 +3691,10 @@
       "description": "海晶石楼梯"
     },
     {
+      "name": "prismarine_wall",
+      "description": "海晶石墙"
+    },
+    {
       "name": "prize_pottery_sherd",
       "description": "珍宝纹样陶片"
     },
@@ -3752,13 +3768,11 @@
     },
     {
       "name": "purpur_block",
-      "description": "紫珀块/雕纹紫珀块/紫珀柱/平滑紫珀块",
-      "descriptions": [
-        "紫珀块",
-        "雕纹紫珀块",
-        "紫珀柱",
-        "平滑紫珀块"
-      ]
+      "description": "紫珀块"
+    },
+    {
+      "name": "purpur_pillar",
+      "description": "紫珀柱"
     },
     {
       "name": "purpur_slab",
@@ -3901,6 +3915,10 @@
       "description": "红色下界砖楼梯"
     },
     {
+      "name": "red_nether_brick_wall",
+      "description": "红色下界砖墙"
+    },
+    {
       "name": "red_sand",
       "description": "红沙"
     },
@@ -3915,6 +3933,10 @@
     {
       "name": "red_sandstone_stairs",
       "description": "红砂岩楼梯"
+    },
+    {
+      "name": "red_sandstone_wall",
+      "description": "红砂岩墙"
     },
     {
       "name": "red_shulker_box",
@@ -4019,6 +4041,10 @@
     {
       "name": "sandstone_stairs",
       "description": "砂岩楼梯"
+    },
+    {
+      "name": "sandstone_wall",
+      "description": "砂岩墙"
     },
     {
       "name": "scaffolding",
@@ -4282,11 +4308,7 @@
     },
     {
       "name": "sponge",
-      "description": "海绵/湿海绵",
-      "descriptions": [
-        "海绵",
-        "湿海绵"
-      ]
+      "description": "海绵"
     },
     {
       "name": "spore_blossom",
@@ -4391,6 +4413,10 @@
     {
       "name": "stone_brick_stairs",
       "description": "石砖楼梯"
+    },
+    {
+      "name": "stone_brick_wall",
+      "description": "石砖墙"
     },
     {
       "name": "stone_bricks",
@@ -5027,6 +5053,10 @@
     {
       "name": "weeping_vines",
       "description": "垂泪藤"
+    },
+    {
+      "name": "wet_sponge",
+      "description": "湿海绵"
     },
     {
       "name": "wheat",
