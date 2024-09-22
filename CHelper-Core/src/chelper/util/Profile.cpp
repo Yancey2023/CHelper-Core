@@ -22,7 +22,7 @@ namespace CHelper::Profile {
     }
 
     void printAndClear(const std::exception &e) {
-        CHELPER_ERROR(std::string(e.what()) + "stack trace:\n" + Profile::getStackTrace());
+        CHELPER_ERROR(std::string(e.what()) + "\nstack trace:\n" + Profile::getStackTrace());
         stack.clear();
     }
 
