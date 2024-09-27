@@ -58,9 +58,9 @@ use [CHelper-Android](https://github.com/Yancey2023/CHelper-Android).
 
 Cpack(Command Pack) is the resource pack of CHelper(Command Helper).
 
-[English](doc/README.md)
+[English](CHelper-Resource/doc/README.md)
 
-[Chinese](doc/README_CN.md)
+[Chinese](CHelper-Resource/doc/README_CN.md)
 
 ## Plan
 
@@ -83,12 +83,12 @@ The desired function has been completed, and the new function to be developed is
 
 ### CHelper-Core
 
-|                   project                   |                                    description                                     |                                 license                                 |
-|:-------------------------------------------:|:----------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
-|    [fmt](https://github.com/fmtlib/fmt)     |                                 formatting library                                 |    [MIT license](https://github.com/fmtlib/fmt/blob/master/LICENSE)     |
-|  [json](https://github.com/nlohmann/json)   |                                JSON for Modern C++                                 | [MIT license](https://github.com/nlohmann/json/blob/master/LICENSE.MIT) |
-| [utfcpp](https://github.com/nemtrif/utfcpp) |                          UTF-8 with C++ in a Portable Way                          | [BSL-1.0 license](https://github.com/cblck/hedley/blob/master/LICENSE)  |
-|  [Hedley](https://github.com/cblck/hedley)  | enable compiler-specific features while retaining compatibility with all compilers |     [CC0 1.0](https://github.com/cblck/hedley/blob/master/LICENSE)      |
+|                    project                     |                                    description                                     |                                 license                                 |
+|:----------------------------------------------:|:----------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
+|      [fmt](https://github.com/fmtlib/fmt)      |                                 formatting library                                 |    [MIT license](https://github.com/fmtlib/fmt/blob/master/LICENSE)     |
+|    [json](https://github.com/nlohmann/json)    |                                JSON for Modern C++                                 | [MIT license](https://github.com/nlohmann/json/blob/master/LICENSE.MIT) |
+|  [utfcpp](https://github.com/nemtrif/utfcpp)   |                          UTF-8 with C++ in a Portable Way                          | [BSL-1.0 license](https://github.com/cblck/hedley/blob/master/LICENSE)  |
+| [Hedley](https://github.com/Yancey2023/hedley) | enable compiler-specific features while retaining compatibility with all compilers |   [CC0 1.0](https://github.com/Yancey2023/hedley/blob/master/LICENSE)   |
 
 ### CHelper-Qt
 
