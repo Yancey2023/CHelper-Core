@@ -7,3 +7,5 @@
 /release
 /CHelper-Web/cmake-build-emscripten-release
 /CHelper-Web/cmake-build-emscripten-minsizerel
+vcpkg.json
+vcpkg-configuration.json
