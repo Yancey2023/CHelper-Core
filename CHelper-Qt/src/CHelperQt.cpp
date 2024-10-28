@@ -4,12 +4,11 @@
 
 #include "CHelperQt.h"
 #include "ui_chelper.h"
+#include <ParamDeliver.h>
 #include <QClipboard>
 #include <QFile>
 #include <QListWidget>
-#include <QMessageBox>
 #include <QStringListModel>
-#include <param_deliver/CHelperCoreParamDeliver.h>
 
 CHelperApp::CHelperApp(QWidget *parent)
     : QMainWindow(parent),
@@ -23,9 +22,8 @@ CHelperApp::CHelperApp(QWidget *parent)
     QFile file(QString(":/assets/release-experiment-").append(CPACK_VERSION_RELEASE).append(".cpack"));
     if (file.open(QIODevice::ReadOnly) && file.isReadable()) {
         std::istringstream iss(file.readAll().toStdString());
-        core = CHelper::CHelperCore::create([&iss]() {
-            CHelper::BinaryReader binaryReader(true, iss);
-            return CHelper::CPack::createByBinary(binaryReader);
+        core = CHelper::CHelperCore::create([&iss] {
+            return CHelper::CPack::createByBinary(iss);
         });
     }
 #endif

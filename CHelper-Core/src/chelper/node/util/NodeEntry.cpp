@@ -16,8 +16,8 @@ namespace CHelper::Node {
           nodeSeparator(nodeSeparator),
           nodeValue(nodeValue) {}
 
-    NodeType *NodeEntry::getNodeType() const {
-        return NodeType::ENTRY.get();
+    NodeTypeId::NodeTypeId NodeEntry::getNodeType() const {
+        return NodeTypeId::ENTRY;
     }
 
     ASTNode NodeEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

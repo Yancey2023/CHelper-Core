@@ -31,13 +31,13 @@ namespace CHelper::Node {
 
         void init(const CPack &cpack) override;
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
     };
 
-    CODEC_NODE_H(NodeJsonObject)
-
 }// namespace CHelper::Node
+
+CODEC_NODE(CHelper::Node::NodeJsonObject, data)
 
 #endif//CHELPER_NODEJSONOBJECT_H

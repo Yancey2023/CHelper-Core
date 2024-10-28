@@ -19,8 +19,8 @@ namespace CHelper::Node {
         throw std::runtime_error("fail to find repeat data");
     }
 
-    NodeType *NodeRepeat::getNodeType() const {
-        return NodeType::REPEAT.get();
+    NodeTypeId::NodeTypeId NodeRepeat::getNodeType() const {
+        return NodeTypeId::REPEAT;
     }
 
     ASTNode NodeRepeat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -85,7 +85,5 @@ namespace CHelper::Node {
         }
         structure.isDirty = true;
     }
-
-    CODEC_NODE(NodeRepeat, key)
 
 }// namespace CHelper::Node

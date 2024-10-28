@@ -32,8 +32,8 @@ namespace CHelper {
         static std::shared_ptr<NormalId> make(const std::u16string &name, const std::optional<std::u16string> &description);
     };
 
-    CODEC_H(NormalId)
-
 }// namespace CHelper
+
+CODEC(CHelper::NormalId, name, description)
 
 #endif//CHELPER_NORMALID_H

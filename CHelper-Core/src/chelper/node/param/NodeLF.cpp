@@ -10,8 +10,8 @@ namespace CHelper::Node {
                    const std::optional<std::u16string> &description)
         : NodeBase(id, description, false) {}
 
-    NodeType *NodeLF::getNodeType() const {
-        return NodeType::LF.get();
+    NodeTypeId::NodeTypeId NodeLF::getNodeType() const {
+        return NodeTypeId::LF;
     }
 
     NodeLF *NodeLF::getInstance() {

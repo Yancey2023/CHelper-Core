@@ -3,8 +3,8 @@
 //
 
 
-#include <chelper/node/json/NodeJsonEntry.h>
 #include <chelper/node/json/NodeJsonElement.h>
+#include <chelper/node/json/NodeJsonEntry.h>
 #include <chelper/node/json/NodeJsonString.h>
 #include <chelper/node/util/NodeEntry.h>
 #include <chelper/node/util/NodeOr.h>
@@ -29,8 +29,8 @@ namespace CHelper::Node {
           key(std::move(key)),
           value(std::move(value)) {}
 
-    NodeType *NodeJsonEntry::getNodeType() const {
-        return NodeType::JSON_ENTRY.get();
+    NodeTypeId::NodeTypeId NodeJsonEntry::getNodeType() const {
+        return NodeTypeId::JSON_ENTRY;
     }
 
     void NodeJsonEntry::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
@@ -70,7 +70,5 @@ namespace CHelper::Node {
         static NodeJsonEntry nodeJsonAllEntry(u"NODE_JSON_ENTRY", u"JSON对象键值对");
         return &nodeJsonAllEntry;
     }
-
-    CODEC_WITH_UNIQUE_PTR(NodeJsonEntry, key, description, value)
 
 }// namespace CHelper::Node

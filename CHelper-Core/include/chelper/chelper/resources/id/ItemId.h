@@ -31,8 +31,8 @@ namespace CHelper {
         std::shared_ptr<Node::NodeBase> getNode();
     };
 
-    CODEC_WITH_PARENT_H(ItemId)
-
 }// namespace CHelper
+
+CODEC_WITH_PARENT(CHelper::ItemId, CHelper::NamespaceId, max, descriptions)
 
 #endif//CHELPER_ITEMID_H

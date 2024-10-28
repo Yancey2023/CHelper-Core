@@ -30,7 +30,7 @@ namespace CHelper::Node {
                const char16_t *defaultErrorReason = nullptr,
                ASTNodeId::ASTNodeId nodeId = ASTNodeId::NONE);
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 

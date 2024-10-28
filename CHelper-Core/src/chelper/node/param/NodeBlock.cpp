@@ -16,8 +16,8 @@ namespace CHelper::Node {
         nodeBlockId->init(cpack);
     }
 
-    NodeType *NodeBlock::getNodeType() const {
-        return NodeType::BLOCK.get();
+    NodeTypeId::NodeTypeId NodeBlock::getNodeType() const {
+        return NodeTypeId::BLOCK;
     }
 
     ASTNode NodeBlock::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -76,13 +76,5 @@ namespace CHelper::Node {
             structure.append(false, u"方块状态");
         }
     }
-
-    namespace NodeBlockType {
-
-        CODEC_ENUM(NodeBlockType, uint8_t)
-
-    }// namespace NodeBlockType
-
-    CODEC_NODE(NodeBlock, nodeBlockType)
 
 }// namespace CHelper::Node

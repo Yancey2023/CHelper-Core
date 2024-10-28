@@ -7,40 +7,40 @@
 #ifndef CHELPER_PCH_H
 #define CHELPER_PCH_H
 
-#include <param_deliver/CHelperCoreParamDeliver.h>
+#include <ParamDeliver.h>
 
+#ifndef CHelperLogger
 #define CHelperLogger INFO
+#endif
 
-#if !defined(NDEBUG) && !defined(_DEBUG)
-// 可以在运行时增加一些检测，快速定位错误
-#define CHelperDebug true
-// 增加一些用于调试方法
+#ifndef CHelperTest
 #define CHelperTest false
 #endif
 
 // 是否支持导入或导出JSON格式的资源包
-#if CHelperWeb == true
-#define CHelperOnlyReadBinary true
-#else
-#define CHelperOnlyReadBinary false
-#endif
+// #ifndef CHelperOnlyReadBinary
+// #define CHelperOnlyReadBinary false
+// #endif
 
 // 由于测试过程需要用到JSON相关的东西，所以CHelperTest和CHelperOnlyReadBinary不能同时为true
-#if CHelperTest == true && CHelperOnlyReadBinary == true
-#error CHelperTest and CHelperOnlyReadBinary cannot both be true
+// #if CHelperTest == true && CHelperOnlyReadBinary == true
+// #error CHelperTest and CHelperOnlyReadBinary cannot both be true
+// #endif
+
+#ifndef CHelperAndroid
+#define CHelperAndroid false
 #endif
 
 #if CHelperAndroid == true
-
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
 #include <android/log.h>
 #include <jni.h>
-
 #endif
 
 // 数据结构
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <functional>
 #include <optional>
@@ -53,17 +53,11 @@
 // 抛出的错误
 #include <exception>
 // 文件读写
-#if CHelperOnlyReadBinary != true
-#include <fstream>
-#endif
+// #if CHelperOnlyReadBinary != true
+#include <filesystem>
+// #endif
 // 用于字符串转整数或小数
 #include <cinttypes>
-// json库
-#if CHelperOnlyReadBinary == true
-#include <nlohmann/detail/macro_scope.hpp>
-#else
-#include <nlohmann/json.hpp>
-#endif
 // 字符串格式化
 #include <fmt/color.h>
 #include <fmt/format.h>
@@ -72,10 +66,10 @@
 #include <hedley.h>
 // UTF编码处理库
 #include <utf8.h>
+// 序列化
+#include <serialization/serialization.h>
 // 二进制读写
 #include <chelper/util/BinaryUtil.h>
-// 一些处理json和二进制序列化的宏
-#include <chelper/util/Codec.h>
 // json读写
 #include <chelper/util/JsonUtil.h>
 // 简单的调用栈
@@ -87,4 +81,4 @@
 // KMP字符串匹配算法
 #include <chelper/util/KMPMatcher.h>
 
-#endif // CHELPER_PCH_H
+#endif// CHELPER_PCH_H

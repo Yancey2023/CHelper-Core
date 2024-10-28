@@ -8,7 +8,7 @@
 #define CHELPER_TOKEN_H
 
 #include "LexerPos.h"
-#include "pch.h"
+#include <pch.h>
 
 namespace CHelper {
 
@@ -23,8 +23,6 @@ namespace CHelper {
         };
 
         std::u16string getName(TokenType tokenType);
-
-        CODEC_ENUM_H(TokenType)
 
     }// namespace TokenType
 
@@ -49,5 +47,7 @@ std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &
 
 std::ostream &operator<<(std::ostream &os, const CHelper::Token &token);
 #endif
+
+CODEC_ENUM(CHelper::TokenType::TokenType, uint8_t)
 
 #endif//CHELPER_TOKEN_H

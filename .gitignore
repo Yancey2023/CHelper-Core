@@ -1,11 +1,16 @@
+# build directory
 /cmake-build-debug
 /cmake-build-release
-/.idea
-/plan
-/out
-/CHelper-Resource/run
-/release
 /CHelper-Web/cmake-build-emscripten-release
 /CHelper-Web/cmake-build-emscripten-minsizerel
-vcpkg.json
-vcpkg-configuration.json
+
+# run directory
+/CHelper-Resource/run
+
+# IDE
+/.vscode
+/.idea
+
+# others
+/plan
+/release

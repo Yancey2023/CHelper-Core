@@ -2,7 +2,7 @@
 // Created by Yancey on 2023/12/1.
 //
 
-#include <chelper/node/param/NodeItem.h>
+#include <chelper/node/NodeType.h>
 #include <chelper/node/param/NodeNormalId.h>
 #include <chelper/node/param/NodeRange.h>
 #include <chelper/node/param/NodeRelativeFloat.h>
@@ -213,8 +213,8 @@ namespace CHelper::Node {
         nodeArguments->init(cpack);
     }
 
-    NodeType *NodeTargetSelector::getNodeType() const {
-        return NodeType::TARGET_SELECTOR.get();
+    NodeTypeId::NodeTypeId NodeTargetSelector::getNodeType() const {
+        return NodeTypeId::TARGET_SELECTOR;
     }
 
     ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -292,7 +292,5 @@ namespace CHelper::Node {
                                               bool isMustHave) const {
         structure.append(isMustHave, u"目标选择器");
     }
-
-    CODEC_NODE(NodeTargetSelector, isMustPlayer, isMustNPC, isOnlyOne, isWildcard)
 
 }// namespace CHelper::Node

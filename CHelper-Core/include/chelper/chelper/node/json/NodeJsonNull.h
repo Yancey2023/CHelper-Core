@@ -18,7 +18,7 @@ namespace CHelper::Node {
         NodeJsonNull(const std::optional<std::u16string> &id,
                      const std::optional<std::u16string> &description);
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -31,8 +31,8 @@ namespace CHelper::Node {
                           const Theme &theme) const override;
     };
 
-    CODEC_UNIQUE_PTR_H(NodeJsonNull)
-
 }// namespace CHelper::Node
+
+CODEC_NODE_NONE(CHelper::Node::NodeJsonNull)
 
 #endif//CHELPER_NODEJSONNULL_H

@@ -31,7 +31,7 @@ namespace CHelper::Node {
                 WhitespaceMode::WhitespaceMode whitespaceMode,
                 const std::vector<const NodeBase *> &childNodes);
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 

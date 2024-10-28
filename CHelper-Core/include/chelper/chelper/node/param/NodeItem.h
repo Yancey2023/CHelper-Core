@@ -35,7 +35,7 @@ namespace CHelper::Node {
 
         void init(const CPack &cpack) override;
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -46,14 +46,10 @@ namespace CHelper::Node {
                               bool isMustHave) const override;
     };
 
-    namespace NodeItemType {
-
-        CODEC_ENUM_H(NodeItemType)
-
-    }// namespace NodeItemType
-
-    CODEC_NODE_H(NodeItem)
-
 }// namespace CHelper::Node
+
+CODEC_ENUM(CHelper::Node::NodeItemType::NodeItemType, uint8_t);
+
+CODEC_NODE(CHelper::Node::NodeItem, nodeItemType)
 
 #endif//CHELPER_NODEITEM_H

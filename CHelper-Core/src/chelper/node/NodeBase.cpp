@@ -3,6 +3,7 @@
 //
 
 #include <chelper/node/NodeBase.h>
+#include <chelper/node/NodeType.h>
 #include <chelper/node/param/NodeLF.h>
 
 namespace CHelper::Node {
@@ -24,7 +25,7 @@ namespace CHelper::Node {
     ASTNode NodeBase::getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack, bool isRequireWhitespace) const {
         //空格检测
         tokenReader.push();
-        if (HEDLEY_UNLIKELY(isRequireWhitespace && getNodeType() != NodeType::LF.get() && tokenReader.skipWhitespace() == 0)) {
+        if (HEDLEY_UNLIKELY(isRequireWhitespace && getNodeType() != NodeTypeId::LF && tokenReader.skipWhitespace() == 0)) {
             TokensView tokens = tokenReader.collect();
             return ASTNode::simpleNode(this, tokens, ErrorReason::requireWhiteSpace(tokens), ASTNodeId::COMPOUND);
         }
@@ -155,51 +156,5 @@ namespace CHelper::Node {
     bool NodeBase::isAfterWhitespace() const {
         return isMustAfterWhiteSpace.value_or(false);
     }
-
-    CODEC(NodeBase, id, brief, description, isMustAfterWhiteSpace)
-
-#if CHelperOnlyReadBinary != true
-    void from_json(const nlohmann::json &j, std::unique_ptr<NodeBase> &t) {
-        Profile::push("loading type");
-        auto type = JsonUtil::read<std::u16string>(j, "type");
-        auto id = JsonUtil::read<std::optional<std::u16string>>(j, "id");
-        Profile::next("loading node {}", type);
-        if (HEDLEY_LIKELY(id.has_value())) {
-            Profile::next("loading node {} with id \"{}\"", type, id.value());
-        } else {
-            Profile::next("loading node {} without id", type);
-        }
-        for (const auto &item: NodeType::NODE_TYPES) {
-            if (HEDLEY_UNLIKELY(item->nodeName == type)) {
-                item->decodeByJson(j, t);
-                Profile::pop();
-                return;
-            }
-        }
-        Profile::next("unknown node type -> {}", type);
-        throw std::runtime_error("unknown node type");
-    }
-
-    void to_json(nlohmann::json &j, const std::unique_ptr<NodeBase> &t) {
-        t->getNodeType()->encodeByJson(j, t);
-        JsonUtil::encode(j, "type", t->getNodeType()->nodeName);
-    }
-#endif
-
-    void from_binary(BinaryReader &binaryReader, std::unique_ptr<NodeBase> &t) {
-        auto typeId = binaryReader.read<uint8_t>();
-        if (HEDLEY_UNLIKELY(typeId > NodeType::NODE_TYPES.size())) {
-            throw std::runtime_error("unknown typeId");
-        }
-        const NodeType *type = NodeType::NODE_TYPES[typeId];
-        type->decodeByBinary(binaryReader, t);
-    }
-
-#if CHelperOnlyReadBinary != true
-    void to_binary(BinaryWriter &binaryWriter, const std::unique_ptr<NodeBase> &t) {
-        binaryWriter.encode(t->getNodeType()->id);
-        t->getNodeType()->encodeByBinary(binaryWriter, t);
-    }
-#endif
 
 }// namespace CHelper::Node

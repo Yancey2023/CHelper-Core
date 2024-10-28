@@ -3,6 +3,7 @@
 //
 
 #include <chelper/lexer/Lexer.h>
+#include <chelper/node/NodeType.h>
 #include <chelper/node/param/NodeText.h>
 
 namespace CHelper::Node {
@@ -22,8 +23,8 @@ namespace CHelper::Node {
         };
     }
 
-    NodeType *NodeText::getNodeType() const {
-        return NodeType::TEXT.get();
+    NodeTypeId::NodeTypeId NodeText::getNodeType() const {
+        return NodeTypeId::TEXT;
     }
 
     ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -79,7 +80,5 @@ namespace CHelper::Node {
         }
         return true;
     }
-
-    CODEC_NODE(NodeText, tokenTypes, data)
 
 }// namespace CHelper::Node

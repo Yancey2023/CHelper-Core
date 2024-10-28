@@ -29,7 +29,7 @@ namespace CHelper::Node {
                       std::u16string key = std::u16string(),
                       std::vector<std::u16string> value = std::vector<std::u16string>());
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
 
@@ -38,9 +38,10 @@ namespace CHelper::Node {
         static NodeBase *getNodeJsonAllEntry();
     };
 
-    CODEC_WITH_UNIQUE_PTR_H(NodeJsonEntry)
-
 }// namespace CHelper::Node
 
+CODEC_NODE(CHelper::Node::NodeJsonEntry, key, description, value)
+
+CODEC_UNIQUE_PTR(CHelper::Node::NodeJsonEntry)
 
 #endif//CHELPER_NODEJSONENTRY_H

@@ -34,7 +34,7 @@ namespace CHelper::Node {
 
         void init(const CPack &cpack) override;
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -51,8 +51,8 @@ namespace CHelper::Node {
                           const Theme &theme) const override;
     };
 
-    CODEC_NODE_H(NodeText)
-
 }// namespace CHelper::Node
+
+CODEC_NODE(CHelper::Node::NodeText, tokenTypes, data)
 
 #endif//CHELPER_NODETEXT_H

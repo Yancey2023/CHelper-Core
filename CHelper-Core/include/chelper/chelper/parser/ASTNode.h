@@ -85,9 +85,9 @@ namespace CHelper {
 
     public:
 #if CHelperTest == true
-        [[nodiscard]] nlohmann::json toJson() const;
+        [[nodiscard]]json toJson() const;
 
-        [[nodiscard]] nlohmann::json toBestJson() const;
+        [[nodiscard]]json toBestJson() const;
 #endif
 
         static ASTNode simpleNode(const Node::NodeBase *node,

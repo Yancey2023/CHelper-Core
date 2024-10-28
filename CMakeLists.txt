@@ -27,7 +27,7 @@ if (CMAKE_SYSTEM_NAME MATCHES "Windows")
 endif ()
 
 # Qt Application
-add_subdirectory(CHelper-Qt)
+ add_subdirectory(CHelper-Qt)
 
 # Android Shared Libary (not support MSVC)
 if (NOT MSVC)

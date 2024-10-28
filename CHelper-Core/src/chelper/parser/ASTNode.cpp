@@ -25,8 +25,8 @@ namespace CHelper {
           whichBest(whichBest) {}
 
 #if CHelperTest == true
-    nlohmann::json ASTNode::toJson() const {
-        nlohmann::json j;
+    json ASTNode::toJson() const {
+        json j;
         j["isError"] = isError();
         j["astNodeId"] = id;
         std::u16string astNodeModeStr;
@@ -45,14 +45,14 @@ namespace CHelper {
                 break;
         }
         j["astNodeMode"] = astNodeModeStr;
-        j["nodeType"] = node->getNodeType()->nodeName;
+        j["nodeType"] = NodeTypeHelper::getName(node->getNodeType());
         j["nodeDescription"] = node->description.value_or("unknown");
         j["content"] = tokens.toString();
         std::u16string content = tokens.lexerResult->content;
         if (HEDLEY_LIKELY(isError())) {
-            std::vector<nlohmann::json> errorReasonJsonList;
+            std::vector<json> errorReasonJsonList;
             for (const auto &item: errorReasons) {
-                nlohmann::json errorJson;
+                json errorJson;
                 errorJson["content"] = content.substr(item->start, item->end - item->start);
                 errorJson["reason"] = item->errorReason;
                 errorJson["start"] = item->start;
@@ -64,7 +64,7 @@ namespace CHelper {
             j["errorReasons"] = nullptr;
         }
         if (HEDLEY_LIKELY(hasChildNode())) {
-            std::vector<nlohmann::json> childNodeJsonList;
+            std::vector<json> childNodeJsonList;
             childNodeJsonList.reserve(childNodes.size());
             for (const auto &item: childNodes) {
                 childNodeJsonList.push_back(item.toJson());
@@ -76,13 +76,13 @@ namespace CHelper {
         return j;
     }
 
-    nlohmann::json ASTNode::toBestJson() const {
+    json ASTNode::toBestJson() const {
         if (HEDLEY_UNLIKELY(mode == ASTNodeMode::OR)) {
             return childNodes[whichBest].toBestJson();
         } else if (HEDLEY_UNLIKELY(id == ASTNodeId::COMPOUND && childNodes.size() == 1)) {
             return childNodes[0].toBestJson();
         }
-        nlohmann::json j;
+        json j;
         j["isError"] = isError();
         j["astNodeId"] = id;
         std::u16string astNodeModeStr;
@@ -101,14 +101,14 @@ namespace CHelper {
                 break;
         }
         j["astNodeMode"] = astNodeModeStr;
-        j["nodeType"] = node->getNodeType()->nodeName;
+        j["nodeType"] = NodeTypeHelper::getName(node->getNodeType());
         j["nodeDescription"] = node->description.value_or("unknown");
         j["content"] = tokens.toString();
         std::u16string content = tokens.lexerResult->content;
         if (HEDLEY_LIKELY(isError())) {
-            std::vector<nlohmann::json> errorReasonJsonList;
+            std::vector<json> errorReasonJsonList;
             for (const auto &item: errorReasons) {
-                nlohmann::json errorJson;
+                json errorJson;
                 errorJson["content"] = content.substr(item->start, item->end - item->start);
                 errorJson["reason"] = item->errorReason;
                 errorJson["start"] = item->start;
@@ -122,7 +122,7 @@ namespace CHelper {
         if (HEDLEY_UNLIKELY(childNodes.empty())) {
             j["childNodes"] = nullptr;
         } else {
-            std::vector<nlohmann::json> childNodeJsonList;
+            std::vector<json> childNodeJsonList;
             childNodeJsonList.reserve(childNodes.size());
             for (const auto &item: childNodes) {
                 childNodeJsonList.push_back(item.toBestJson());
@@ -273,7 +273,7 @@ namespace CHelper {
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
 #if CHelperTest == true
             Profile::push(std::string("collect id errors: ")
-                                  .append(utf8::utf16to8(node->getNodeType()->nodeName))
+                                  .append(utf8::utf16to8(NodeTypeHelper::getName(node->getNodeType())))
                                   .append(" ")
                                   .append(utf8::utf16to8(node->description.value_or(u""))));
 #endif
@@ -305,7 +305,7 @@ namespace CHelper {
         }
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
 #if CHelperTest == true
-            Profile::push("collect suggestions: " + node->getNodeType()->nodeName + " " + node->description.value_or(""));
+            Profile::push("collect suggestions: " + NodeTypeHelper::getName(node->getNodeType()) + " " + node->description.value_or(""));
 #endif
             auto flag = node->collectSuggestions(this, index, suggestions);
 #if CHelperTest == true
@@ -340,7 +340,7 @@ namespace CHelper {
                 return;
             } else {
 #if CHelperTest == true
-                Profile::push("collect structure: {}", node->getNodeType()->nodeName + " " + node->description.value_or(""));
+                Profile::push("collect structure: {}", NodeTypeHelper::getName(node->getNodeType()) + " " + node->description.value_or(""));
 #endif
                 node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ? nullptr : this, structure, isMustHave);
 #if CHelperTest == true
@@ -392,7 +392,7 @@ namespace CHelper {
         bool isNext = id == ASTNodeId::NEXT_NODE;
         if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
 #if CHelperTest == true
-            Profile::push("collect color: {}", node->getNodeType()->nodeName + " " + node->description.value_or(""));
+            Profile::push("collect color: {}", NodeTypeHelper::getName(node->getNodeType()) + " " + node->description.value_or(""));
 #endif
             bool isDirty = node->collectColor(this, coloredString, theme);
 #if CHelperTest == true

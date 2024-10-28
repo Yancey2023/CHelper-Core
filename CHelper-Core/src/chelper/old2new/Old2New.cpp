@@ -2,7 +2,11 @@
 // Created by Yancey on2024-6-12.
 //
 
+#include <chelper/node/json/NodeJsonEntry.h>
+#include <chelper/node/param/NodeRelativeFloat.h>
 #include <chelper/old2new/Old2New.h>
+
+CODEC_REGISTER_JSON_KEY(CHelper::Old2New::DataFix, name, data, newBlockId, blockState)
 
 namespace CHelper::Old2New {
 
@@ -625,9 +629,8 @@ namespace CHelper::Old2New {
         return result;
     }
 
-#if CHelperOnlyReadBinary != true
     template<class T, class S>
-    S &getOrCreate(std::unordered_map<T, S> &map, const T &key) {
+    S &getOrCreate(std::unordered_map<T, S> &map, const T &&key) {
         const auto &iter = map.find(key);
         if (iter != map.end()) {
             return iter->second;
@@ -635,17 +638,26 @@ namespace CHelper::Old2New {
         return map.emplace(key, S()).first->second;
     }
 
-    BlockFixData blockFixDataFromJson(const nlohmann::json &j) {
+    BlockFixData blockFixDataFromJson(const rapidjson::GenericDocument<rapidjson::UTF8<>> &j) {
+        if (HEDLEY_UNLIKELY(!j.IsArray())) {
+            throw serialization::exceptions::JsonSerializationTypeException("array", serialization::getJsonTypeStr(j.GetType()));
+        }
         BlockFixData blockFixData;
-        for (const auto &item: j) {
-            const auto name = JsonUtil::read<std::u16string>(item, "name");
-            const auto data = JsonUtil::read<uint32_t>(item, "data");
-            const auto newBlockId = JsonUtil::read<std::optional<std::u16string>>(item, "newBlockId");
-            const auto blockState = JsonUtil::read<std::optional<std::u16string>>(item, "blockState");
-            getOrCreate(blockFixData, name).insert({data, {newBlockId, blockState}});
+        for (const auto &item: j.GetArray()) {
+            if (HEDLEY_UNLIKELY(!item.IsObject())) {
+                throw serialization::exceptions::JsonSerializationTypeException("object", serialization::getJsonTypeStr(j.GetType()));
+            }
+            std::u16string name;
+            serialization::Codec<decltype(name)>::template from_json_member(item, serialization::details::JsonKey<DataFix, rapidjson::UTF8<>::Ch>::name(), name);
+            uint32_t data;
+            serialization::Codec<decltype(data)>::template from_json_member(item, serialization::details::JsonKey<DataFix, rapidjson::UTF8<>::Ch>::data(), data);
+            std::optional<std::u16string> newBlockId;
+            serialization::Codec<decltype(newBlockId)>::template from_json_member(item, serialization::details::JsonKey<DataFix, rapidjson::UTF8<>::Ch>::newBlockId(), newBlockId);
+            std::optional<std::u16string> blockState;
+            serialization::Codec<decltype(blockState)>::template from_json_member(item, serialization::details::JsonKey<DataFix, rapidjson::UTF8<>::Ch>::blockState(), blockState);
+            getOrCreate(blockFixData, std::move(name)).insert({data, {std::move(newBlockId), std::move(blockState)}});
         }
         return blockFixData;
     }
-#endif
 
 }// namespace CHelper::Old2New

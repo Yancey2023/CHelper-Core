@@ -2,6 +2,7 @@
 // Created by Yancey on 2023/12/23.
 //
 
+#include <chelper/node/NodeType.h>
 #include <chelper/node/util/NodeList.h>
 
 namespace CHelper::Node {
@@ -35,8 +36,8 @@ namespace CHelper::Node {
 #endif
     }
 
-    NodeType *NodeList::getNodeType() const {
-        return NodeType::LIST.get();
+    NodeTypeId::NodeTypeId NodeList::getNodeType() const {
+        return NodeTypeId::LIST;
     }
 
     ASTNode NodeList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

@@ -12,20 +12,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Release)
 
 # CHelper-Core
-set(CHELPER_CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Core)
-
 if (PROJECT_IS_TOP_LEVEL)
-    # ThirdParty: hedley
-    add_subdirectory(${CHELPER_CORE_DIR}/include/hedley ${CMAKE_BINARY_DIR}/include/hedley)
-
-    # ThirdParty: json
-    add_subdirectory(${CHELPER_CORE_DIR}/include/json ${CMAKE_BINARY_DIR}/include/json)
-
-    # ThirdParty: fmt
-    add_subdirectory(${CHELPER_CORE_DIR}/include/fmt ${CMAKE_BINARY_DIR}/include/fmt)
-
-    # ThirdParty: utf8cpp
-    add_subdirectory(${CHELPER_CORE_DIR}/include/utfcpp ${CMAKE_BINARY_DIR}/include/utfcpp)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Core ${CMAKE_BINARY_DIR}/include/CHelper-Core)
 endif ()
 
 # Param Deliver
@@ -36,17 +24,12 @@ configure_file(${CHELPER_CORE_DIR}/include/param_deliver/CHelperCoreParamDeliver
 # Sources
 file(GLOB_RECURSE CHELPER_CORE_SOURCE_FILE ${CHELPER_CORE_DIR}/src/chelper/*.h ${CHELPER_CORE_DIR}/src/chelper/*.cpp)
 
-# Web Application
-add_library(CHelperAndroid SHARED
-        src/AndroidNative.cpp
-        ${CHELPER_CORE_SOURCE_FILE}
-)
-if (PROJECT_IS_TOP_LEVEL)
-    target_link_libraries(CHelperAndroid PRIVATE android log)
-else ()
-    target_include_directories(CHelperAndroid PRIVATE include/android)
-endif ()
-target_include_directories(CHelperAndroid PUBLIC ${CHELPER_CORE_DIR}/include/pch ${CHELPER_CORE_DIR}/include/chelper ${CMAKE_CURRENT_BINARY_DIR}/include)
-target_precompile_headers(CHelperAndroid PRIVATE ${CHELPER_CORE_DIR}/include/pch/pch.h)
+# Android Application
+add_library(CHelperAndroid SHARED src/AndroidNative.cpp)
+init_chelper_library(CHelperAndroid)
 target_compile_definitions(CHelperAndroid PRIVATE CHelperAndroid=true)
-target_link_libraries(CHelperAndroid PRIVATE fmt::fmt nlohmann_json::nlohmann_json utf8cpp hedley)
+if (PROJECT_IS_TOP_LEVEL)
+    target_link_libraries(CHelper::AndroidCore PUBLIC android log)
+else ()
+    target_include_directories(CHelper::AndroidCore PUBLIC include/android)
+endif ()

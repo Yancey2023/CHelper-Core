@@ -31,15 +31,13 @@ namespace CHelper {
 
         static CHelperCore *create(const std::function<std::unique_ptr<CPack>()> &getCPack);
 
-#if CHelperOnlyReadBinary != true
+// #if CHelperOnlyReadBinary != true
         static CHelperCore *createByDirectory(const std::filesystem::path &cpackPath);
 
         static CHelperCore *createByJson(const std::filesystem::path &cpackPath);
 
-        static CHelperCore *createByBson(const std::filesystem::path &cpackPath);
-
         static CHelperCore *createByBinary(const std::filesystem::path &cpackPath);
-#endif
+// #endif
 
         void onTextChanged(const std::u16string &content, size_t index);
 

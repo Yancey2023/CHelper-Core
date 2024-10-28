@@ -10,8 +10,8 @@ namespace CHelper::Node {
                                const std::optional<std::u16string> &description)
         : NodeBase(id, description, false) {}
 
-    NodeType *NodeJsonNull::getNodeType() const {
-        return NodeType::JSON_NULL.get();
+    NodeTypeId::NodeTypeId NodeJsonNull::getNodeType() const {
+        return NodeTypeId::JSON_NULL;
     }
 
     ASTNode NodeJsonNull::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -48,7 +48,5 @@ namespace CHelper::Node {
         coloredString.setColor(astNode->tokens, theme.colorNull);
         return true;
     }
-
-    CODEC_UNIQUE_PTR(NodeJsonNull)
 
 }// namespace CHelper::Node

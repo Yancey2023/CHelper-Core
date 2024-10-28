@@ -20,8 +20,8 @@ namespace CHelper::Node {
         nodeComponent->init(cpack);
     }
 
-    NodeType *NodeItem::getNodeType() const {
-        return NodeType::ITEM.get();
+    NodeTypeId::NodeTypeId NodeItem::getNodeType() const {
+        return NodeTypeId::ITEM;
     }
 
     ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -79,13 +79,5 @@ namespace CHelper::Node {
                 break;
         }
     }
-
-    namespace NodeItemType {
-
-        CODEC_ENUM(NodeItemType, uint8_t)
-
-    }// namespace NodeItemType
-
-    CODEC_NODE(NodeItem, nodeItemType)
 
 }// namespace CHelper::Node

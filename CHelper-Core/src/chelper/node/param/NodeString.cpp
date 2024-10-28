@@ -18,8 +18,8 @@ namespace CHelper::Node {
           canContainSpace(canContainSpace),
           ignoreLater(ignoreLater) {}
 
-    NodeType *NodeString::getNodeType() const {
-        return NodeType::STRING.get();
+    NodeTypeId::NodeTypeId NodeString::getNodeType() const {
+        return NodeTypeId::STRING;
     }
 
     ASTNode NodeString::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -102,7 +102,5 @@ namespace CHelper::Node {
         coloredString.setColor(astNode->tokens, theme.colorString);
         return true;
     }
-
-    CODEC_NODE(NodeString, canContainSpace, ignoreLater)
 
 }// namespace CHelper::Node

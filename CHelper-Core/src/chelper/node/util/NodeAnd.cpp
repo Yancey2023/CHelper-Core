@@ -14,8 +14,8 @@ namespace CHelper::Node {
           whitespaceMode(whitespaceMode),
           childNodes(childNodes) {}
 
-    NodeType *NodeAnd::getNodeType() const {
-        return NodeType::AND.get();
+    NodeTypeId::NodeTypeId NodeAnd::getNodeType() const {
+        return NodeTypeId::AND;
     }
 
     ASTNode NodeAnd::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

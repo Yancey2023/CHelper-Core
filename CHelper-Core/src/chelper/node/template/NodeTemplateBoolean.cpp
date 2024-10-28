@@ -6,7 +6,4 @@
 
 namespace CHelper::Node {
 
-    CODEC_NODE(NodeBoolean, descriptionTrue, descriptionFalse)
-    CODEC_NODE(NodeJsonBoolean, descriptionTrue, descriptionFalse)
-
 }// namespace CHelper::Node

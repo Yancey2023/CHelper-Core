@@ -31,11 +31,14 @@ namespace CHelper::Test {
         bool flag = false;
         for (const auto &command: commands) {
             try {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-result"
                 core->onTextChanged(command, command.length());
                 core->getDescription();
                 core->getSuggestions();
                 core->getSuggestions();
                 core->getStructure();
+#pragma GCC diagnostic pop
             } catch (const std::exception &e) {
                 CHELPER_INFO("parse command: {}", command);
                 CHelper::Profile::printAndClear(e);
@@ -48,33 +51,6 @@ namespace CHelper::Test {
     }
 
 #pragma clang diagnostic pop
-
-    void writeBson(const std::filesystem::path &input,
-                   const std::filesystem::path &output) {
-        try {
-            auto core = CHelperCore::createByDirectory(input);
-            fmt::print("\n");
-            if (HEDLEY_UNLIKELY(core == nullptr)) {
-                return;
-            }
-            std::chrono::high_resolution_clock::time_point start, end;
-            start = std::chrono::high_resolution_clock::now();
-            core->getCPack()->writeBsonToFile(output);
-            end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO("write successfully({})",
-                         std::to_string(
-                                 std::chrono::duration_cast<
-                                         std::chrono::duration<float, std::milli>>(end - start)
-                                         .count()) +
-                                 "ms");
-            fmt::print("\n");
-            [[maybe_unused]] auto core2 = CHelperCore::createByBson(output);
-            fmt::print("\n");
-        } catch (const std::exception &e) {
-            Profile::printAndClear(e);
-            throw e;
-        }
-    }
 
 }// namespace CHelper::Test
 

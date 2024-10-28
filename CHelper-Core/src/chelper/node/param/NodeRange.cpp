@@ -13,8 +13,8 @@ namespace CHelper::Node {
                          const std::optional<std::u16string> &description)
         : NodeBase(id, description, false) {}
 
-    NodeType *NodeRange::getNodeType() const {
-        return NodeType::RANGE.get();
+    NodeTypeId::NodeTypeId NodeRange::getNodeType() const {
+        return NodeTypeId::RANGE;
     }
 
     std::shared_ptr<ErrorReason> checkNumber(const TokensView &tokens, std::u16string_view str) {
@@ -90,7 +90,5 @@ namespace CHelper::Node {
         }
         return true;
     }
-
-    CODEC_UNIQUE_PTR(NodeRange)
 
 }// namespace CHelper::Node

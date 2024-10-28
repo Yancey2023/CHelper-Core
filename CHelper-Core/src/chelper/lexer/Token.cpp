@@ -25,8 +25,6 @@ namespace CHelper {
             }
         }
 
-        CODEC_ENUM(TokenType, uint8_t)
-
     }// namespace TokenType
 
     Token::Token(TokenType::TokenType type,

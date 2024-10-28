@@ -22,8 +22,8 @@ namespace CHelper::Node {
         : NodeBase(id, description, false),
           canUseCaretNotation(canUseCaretNotation) {}
 
-    NodeType *NodeRelativeFloat::getNodeType() const {
-        return NodeType::RELATIVE_FLOAT.get();
+    NodeTypeId::NodeTypeId NodeRelativeFloat::getNodeType() const {
+        return NodeTypeId::RELATIVE_FLOAT;
     }
 
     ASTNode NodeRelativeFloat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -135,7 +135,5 @@ namespace CHelper::Node {
             return false;
         }
     }
-
-    CODEC_NODE(NodeRelativeFloat, canUseCaretNotation)
 
 }// namespace CHelper::Node

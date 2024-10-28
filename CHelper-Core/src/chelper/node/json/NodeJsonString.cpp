@@ -2,8 +2,9 @@
 // Created by Yancey on 2024/2/28.
 //
 
-#include <chelper/node/json/NodeJsonString.h>
 #include <chelper/lexer/Lexer.h>
+#include <chelper/node/NodeType.h>
+#include <chelper/node/json/NodeJsonString.h>
 #include <chelper/node/util/NodeOr.h>
 #include <chelper/parser/Parser.h>
 
@@ -37,8 +38,8 @@ namespace CHelper::Node {
                 std::move(nodeDataElement), false);
     }
 
-    NodeType *NodeJsonString::getNodeType() const {
-        return NodeType::JSON_STRING.get();
+    NodeTypeId::NodeTypeId NodeJsonString::getNodeType() const {
+        return NodeTypeId::JSON_STRING;
     }
 
     static std::pair<ASTNode, JsonUtil::ConvertResult>
@@ -171,7 +172,5 @@ namespace CHelper::Node {
         }
         return true;
     }
-
-    CODEC_NODE(NodeJsonString, data)
 
 }// namespace CHelper::Node

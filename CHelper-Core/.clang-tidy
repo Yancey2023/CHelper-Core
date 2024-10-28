@@ -88,4 +88,5 @@ Checks: -*,
   -readability-operators-representation,
   -readability-implicit-bool-conversion,
   -readability-identifier-naming,
-  -readability-reference-to-constructed-temporary
+  -readability-reference-to-constructed-temporary,
+  -*-pro-type-member-init

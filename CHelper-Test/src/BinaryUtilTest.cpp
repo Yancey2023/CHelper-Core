@@ -10,13 +10,10 @@
 
 namespace std {
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cert-dcl58-cpp"
     template<class T>
-    bool operator==(const std::shared_ptr<T> &t1, const std::shared_ptr<T> &t2) {
+    bool operator==(const std::shared_ptr<T> &t1, const std::shared_ptr<T> &t2) {// NOLINT(*-dcl58-cpp)
         return *t1 == *t2;
     }
-#pragma clang diagnostic pop
 
 }// namespace std
 
@@ -197,36 +194,32 @@ namespace CHelper {
 
 }// namespace CHelper
 
-template<class T>
-void test(std::function<T()> getInstance,
-          bool isTargetSmallEndian) {
+template<class T, bool isConvertEndian>
+void test(std::function<T()> getInstance) {
     std::ostringstream oss;
-    CHelper::BinaryWriter binaryWriter(isTargetSmallEndian, oss);
     T t1 = getInstance();
-    binaryWriter.encode(t1);
+    serialization::Codec<T>::template to_binary<isConvertEndian>(oss, t1);
     std::istringstream iss(oss.str());
-    CHelper::BinaryReader binaryReader(isTargetSmallEndian, iss);
-    T t2 = binaryReader.read<T>();
+    T t2;
+    serialization::Codec<T>::template from_binary<isConvertEndian>(iss, t2);
     EXPECT_EQ(t1, t2);
     EXPECT_FALSE(iss.eof());
 }
 
 template<class T>
 void test(std::function<T()> getInstance) {
-    test(getInstance, true);
-    test(getInstance, false);
+    test<T, true>(getInstance);
+    test<T, false>(getInstance);
 }
 
-template<class T>
-void testNode(CHelper::CPack &cpack, std::function<T()> getInstance,
-              bool isTargetSmallEndian) {
+template<class T, bool isConvertEndian>
+void testNode(CHelper::CPack &cpack, std::function<T()> getInstance) {
     std::ostringstream oss;
-    CHelper::BinaryWriter binaryWriter(isTargetSmallEndian, oss);
     T t1 = getInstance();
-    binaryWriter.encode(t1);
+    serialization::Codec<T>::template to_binary<isConvertEndian>(oss, t1);
     std::istringstream iss(oss.str());
-    CHelper::BinaryReader binaryReader(isTargetSmallEndian, iss);
-    T t2 = binaryReader.read<T>();
+    T t2;
+    serialization::Codec<T>::template from_binary<isConvertEndian>(iss, t2);
     t2.init(cpack);
     EXPECT_EQ(t1, t2);
     EXPECT_FALSE(iss.eof());
@@ -234,8 +227,8 @@ void testNode(CHelper::CPack &cpack, std::function<T()> getInstance,
 
 template<class T>
 void testNode(CHelper::CPack &cpack, std::function<T()> getInstance) {
-    testNode(cpack, getInstance, true);
-    testNode(cpack, getInstance, false);
+    testNode<T, true>(cpack, getInstance);
+    testNode<T, false>(cpack, getInstance);
 }
 
 template<class T>
@@ -311,11 +304,12 @@ TEST(BinaryUtilTest, NormalId) {
 
 TEST(BinaryUtilTest, NamespaceId) {
     std::filesystem::path resourceDir(RESOURCE_DIR);
-    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(
+    rapidjson::GenericDocument<rapidjson::UTF8<>> j = serialization::get_json_from_file(
             resourceDir / "resources" / "beta" / "vanilla" / "id" / "entities.json");
     std::vector<std::function<CHelper::NamespaceId()>> getInstance;
-    for (const auto &item: j.at("content")) {
-        CHelper::NamespaceId namespaceId = item;
+    for (const auto &item: serialization::find_array_member_or_throw(j, "content")) {
+        CHelper::NamespaceId namespaceId;
+        serialization::Codec<CHelper::NamespaceId>::from_json(item, namespaceId);
         getInstance.emplace_back([namespaceId]() { return namespaceId; });
     }
     test<CHelper::NamespaceId>(getInstance);
@@ -323,11 +317,12 @@ TEST(BinaryUtilTest, NamespaceId) {
 
 TEST(BinaryUtilTest, ItemId) {
     std::filesystem::path resourceDir(RESOURCE_DIR);
-    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(
+    rapidjson::GenericDocument<rapidjson::UTF8<>> j = serialization::get_json_from_file(
             resourceDir / "resources" / "beta" / "vanilla" / "id" / "items.json");
     std::vector<std::function<CHelper::ItemId()>> getInstance;
-    for (const auto &item: j.at("items")) {
-        CHelper::ItemId itemId(item);
+    for (const auto &item: serialization::find_array_member_or_throw(j, "items")) {
+        CHelper::ItemId itemId;
+        serialization::Codec<CHelper::NamespaceId>::from_json(item, itemId);
         getInstance.emplace_back([itemId]() { return itemId; });
     }
     test<CHelper::ItemId>(getInstance);
@@ -371,9 +366,10 @@ TEST(BinaryUtilTest, Property) {
 
 TEST(BinaryUtilTest, BlockId) {
     std::filesystem::path resourceDir(RESOURCE_DIR);
-    nlohmann::json j = CHelper::JsonUtil::getJsonFromFile(
+    rapidjson::GenericDocument<rapidjson::UTF8<>> j = serialization::get_json_from_file(
             resourceDir / "resources" / "beta" / "vanilla" / "id" / "blocks.json");
-    CHelper::BlockIds blockIds(j.at("blocks"));
+    CHelper::BlockIds blockIds;
+    serialization::Codec<CHelper::BlockIds>::from_json(serialization::find_member_or_throw(j, "blocks"), blockIds);
     test<CHelper::BlockIds>([&blockIds]() { return blockIds; });
 }
 

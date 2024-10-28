@@ -13,8 +13,8 @@
 
 namespace CHelper::Node {
 
-    NodeType *NodeJsonElement::getNodeType() const {
-        return NodeType::JSON_ELEMENT.get();
+    NodeTypeId::NodeTypeId NodeJsonElement::getNodeType() const {
+        return NodeTypeId::JSON_ELEMENT;
     }
 
     void NodeJsonElement::init(const CPack &cpack) {
@@ -34,11 +34,11 @@ namespace CHelper::Node {
             Profile::push("unknown node id -> {} (in node \"{}\")", startNodeId);
         }
         for (const auto &item: nodes) {
-            if (HEDLEY_UNLIKELY(item->getNodeType() == NodeType::JSON_LIST.get())) {
+            if (HEDLEY_UNLIKELY(item->getNodeType() == NodeTypeId::JSON_LIST)) {
                 ((NodeJsonList *) item.get())->init(nodes);
-            } else if (HEDLEY_UNLIKELY(item->getNodeType() == NodeType::JSON_OBJECT.get())) {
-                for (const auto &item2: ((NodeJsonObject *) item.get())->data) {
-                    ((NodeJsonEntry *) item2.get())->init(nodes);
+            } else if (HEDLEY_UNLIKELY(item->getNodeType() == NodeTypeId::JSON_OBJECT)) {
+                for (const auto &item2: reinterpret_cast<NodeJsonObject *>(item.get())->data) {
+                    item2.get()->init(nodes);
                 }
             }
         }
@@ -75,45 +75,5 @@ namespace CHelper::Node {
                 u"类型不匹配，当前内容不是有效的JSON元素");
         return jsonElement.get();
     }
-
-#if CHelperOnlyReadBinary != true
-    void from_json(const nlohmann::json &j, std::unique_ptr<NodeJsonElement> &t) {
-        t = std::make_unique<NodeJsonElement>();
-        JsonUtil::decode(j, "id", t->id);
-        if (HEDLEY_UNLIKELY(!t->id.has_value())) {
-            throw std::runtime_error("dismiss json data id");
-        }
-        Profile::push("loading nodes");
-        JsonUtil::decode(j, "node", t->nodes);
-        Profile::next("loading start nodes");
-        JsonUtil::decode(j, "start", t->startNodeId);
-        Profile::pop();
-    }
-
-    void to_json(nlohmann::json &j, const std::unique_ptr<NodeJsonElement> &t) {
-        JsonUtil::encode(j, "id", t->id);
-        JsonUtil::encode(j, "node", t->nodes);
-        JsonUtil::encode(j, "start", t->startNodeId);
-    }
-#endif
-
-    void from_binary(BinaryReader &binaryReader, std::unique_ptr<NodeJsonElement> &t) {
-        t = std::make_unique<NodeJsonElement>();
-        t->id = std::make_optional<std::u16string>();
-        binaryReader.decode(t->id.value());
-        binaryReader.decode(t->nodes);
-        if (HEDLEY_UNLIKELY(!t->id.has_value())) {
-            throw std::runtime_error("dismiss json data id");
-        }
-        binaryReader.decode(t->startNodeId);
-    }
-
-#if CHelperOnlyReadBinary != true
-    void to_binary(BinaryWriter &binaryWriter, const std::unique_ptr<NodeJsonElement> &t) {
-        binaryWriter.encode(t->id.value());
-        binaryWriter.encode(t->nodes);
-        binaryWriter.encode(t->startNodeId);
-    }
-#endif
 
 }// namespace CHelper::Node

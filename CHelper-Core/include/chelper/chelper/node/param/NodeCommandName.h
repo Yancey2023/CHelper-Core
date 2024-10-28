@@ -8,19 +8,18 @@
 #define CHELPER_NODECOMMANDNAME_H
 
 #include "../NodeBase.h"
-#include "../NodeType.h"
 #include "NodePerCommand.h"
 
 namespace CHelper::Node {
 
     class NodeCommandName : public NodeBase {
     private:
-        std::vector<std::unique_ptr<Node::NodePerCommand>> *commands = nullptr;
+        std::vector<std::unique_ptr<NodePerCommand>> *commands = nullptr;
 
     public:
         void init(const CPack &cpack) override;
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -40,8 +39,8 @@ namespace CHelper::Node {
                           const Theme &theme) const override;
     };
 
-    CODEC_UNIQUE_PTR_H(NodeCommandName)
-
 }// namespace CHelper::Node
+
+CODEC_NODE_NONE(CHelper::Node::NodeCommandName)
 
 #endif//CHELPER_NODECOMMANDNAME_H

@@ -21,7 +21,7 @@ namespace CHelper::Node {
                           const std::optional<std::u16string> &description,
                           bool canUseCaretNotation);
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -45,8 +45,8 @@ namespace CHelper::Node {
                           const Theme &theme) const override;
     };
 
-    CODEC_NODE_H(NodeRelativeFloat)
-
 }// namespace CHelper::Node
+
+CODEC_NODE(CHelper::Node::NodeRelativeFloat, canUseCaretNotation)
 
 #endif//CHELPER_NODERELATIVEFLOAT_H

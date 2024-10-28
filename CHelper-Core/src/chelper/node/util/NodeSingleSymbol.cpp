@@ -21,8 +21,8 @@ namespace CHelper::Node {
           normalId(getNormalId(symbol, description)),
           isAddWhitespace(isAddWhitespace) {}
 
-    NodeType *NodeSingleSymbol::getNodeType() const {
-        return NodeType::SINGLE_SYMBOL.get();
+    NodeTypeId::NodeTypeId NodeSingleSymbol::getNodeType() const {
+        return NodeTypeId::SINGLE_SYMBOL;
     }
 
     ASTNode NodeSingleSymbol::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

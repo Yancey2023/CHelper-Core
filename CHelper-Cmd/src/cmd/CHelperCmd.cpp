@@ -9,13 +9,12 @@ int main() {
     //    testDir();
     //    testBin();
     outputFile(CHelper::Test::writeSingleJson, "json");
-    outputFile(CHelper::Test::writeBson, "bson");
     outputFile(CHelper::Test::writeBinary, "cpack");
     outputOld2New();
     return 0;
 }
 
-#if CHelperOnlyReadBinary != true
+// #if CHelperOnlyReadBinary != true
 
 [[maybe_unused]] void testDir() {
     std::filesystem::path resourceDir(RESOURCE_DIR);
@@ -66,12 +65,11 @@ void outputOld2New() {
     std::filesystem::path resourceDir(RESOURCE_DIR);
     std::filesystem::path input = resourceDir / "resources" / "old2new" / "blockFixData.json";
     std::filesystem::path output = resourceDir / "run" / "old2new" / "old2new.dat";
-    CHelper::Old2New::BlockFixData blockFixData = CHelper::Old2New::blockFixDataFromJson(CHelper::JsonUtil::getJsonFromFile(input));
+    CHelper::Old2New::BlockFixData blockFixData = CHelper::Old2New::blockFixDataFromJson(serialization::get_json_from_file(input));
     std::filesystem::create_directories(output.parent_path());
-    std::ofstream f(output, std::ios::binary);
-    CHelper::BinaryWriter binaryWriter(true, f);
-    binaryWriter.encode(blockFixData);
-    f.close();
+    std::ofstream ostream(output, std::ios::binary);
+    serialization::Codec<decltype(blockFixData)>::to_binary<true>(ostream, blockFixData);
+    ostream.close();
 }
 
 namespace CHelper::Test {
@@ -337,23 +335,6 @@ namespace CHelper::Test {
         }
     }
 
-    [[maybe_unused]] void writeBson(const std::filesystem::path &input, const std::filesystem::path &output) {
-        try {
-            auto core = CHelperCore::createByDirectory(input);
-            if (HEDLEY_UNLIKELY(core == nullptr)) {
-                return;
-            }
-            std::chrono::high_resolution_clock::time_point start, end;
-            start = std::chrono::high_resolution_clock::now();
-            core->getCPack()->writeBsonToFile(output);
-            end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
-        } catch (const std::exception &e) {
-            Profile::printAndClear(e);
-            exit(-1);
-        }
-    }
-
     [[maybe_unused]] void writeBinary(const std::filesystem::path &input, const std::filesystem::path &output) {
         try {
             auto core = CHelperCore::createByDirectory(input);
@@ -372,6 +353,7 @@ namespace CHelper::Test {
         }
     }
 
+// #endif
+
 }// namespace CHelper::Test
 
-#endif

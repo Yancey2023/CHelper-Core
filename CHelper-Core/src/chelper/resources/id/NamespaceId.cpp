@@ -17,6 +17,4 @@ namespace CHelper {
         return idWithNamespace;
     }
 
-    CODEC_WITH_PARENT(NamespaceId, NormalId, idNamespace)
-
 }// namespace CHelper

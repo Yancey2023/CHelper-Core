@@ -2,9 +2,9 @@
 // Created by Yancey on 2024/2/28.
 //
 
-#include <chelper/node/json/NodeJsonList.h>
 #include <chelper/node/NodeBase.h>
 #include <chelper/node/json/NodeJsonElement.h>
+#include <chelper/node/json/NodeJsonList.h>
 #include <chelper/node/util/NodeList.h>
 #include <chelper/node/util/NodeSingleSymbol.h>
 
@@ -41,8 +41,8 @@ namespace CHelper::Node {
         throw std::runtime_error("unknown node id");
     }
 
-    NodeType *NodeJsonList::getNodeType() const {
-        return NodeType::JSON_LIST.get();
+    NodeTypeId::NodeTypeId NodeJsonList::getNodeType() const {
+        return NodeTypeId::JSON_LIST;
     }
 
     ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -70,7 +70,5 @@ namespace CHelper::Node {
                                           std::vector<Suggestions> &suggestions) const {
         return astNode->id == ASTNodeId::NODE_JSON_ALL_LIST;
     }
-
-    CODEC_NODE(NodeJsonList, data)
 
 }// namespace CHelper::Node

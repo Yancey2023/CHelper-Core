@@ -22,8 +22,8 @@ namespace CHelper::Node {
             std::vector<const NodeBase *>{levelXp.get(), nodeInteger.get()},
             false, true);
 
-    NodeType *NodeXpInteger::getNodeType() const {
-        return NodeType::XP_INTEGER.get();
+    NodeTypeId::NodeTypeId NodeXpInteger::getNodeType() const {
+        return NodeTypeId::XP_INTEGER;
     }
 
     ASTNode NodeXpInteger::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -42,7 +42,5 @@ namespace CHelper::Node {
         coloredString.setColor(astNode->tokens, theme.colorInteger);
         return true;
     }
-
-    CODEC_UNIQUE_PTR(NodeXpInteger)
 
 }// namespace CHelper::Node

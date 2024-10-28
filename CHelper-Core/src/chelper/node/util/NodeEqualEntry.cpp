@@ -53,8 +53,8 @@ namespace CHelper::Node {
                 true, nodeKeyContent);
     }
 
-    NodeType *NodeEqualEntry::getNodeType() const {
-        return NodeType::EQUAL_ENTRY.get();
+    NodeTypeId::NodeTypeId NodeEqualEntry::getNodeType() const {
+        return NodeTypeId::EQUAL_ENTRY;
     }
 
     ASTNode NodeEqualEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

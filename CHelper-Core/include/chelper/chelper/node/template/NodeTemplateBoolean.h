@@ -18,11 +18,11 @@ namespace CHelper::Node {
 
         NodeTemplateBoolean() = default;
 
-        [[nodiscard]] NodeType *getNodeType() const override {
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override {
             if constexpr (!isJson) {
-                return NodeType::BOOLEAN.get();
+                return NodeTypeId::BOOLEAN;
             } else {
-                return NodeType::JSON_BOOLEAN.get();
+                return NodeTypeId::JSON_BOOLEAN;
             }
         }
 
@@ -86,9 +86,9 @@ namespace CHelper::Node {
     typedef NodeTemplateBoolean<false> NodeBoolean;
     typedef NodeTemplateBoolean<true> NodeJsonBoolean;
 
-    CODEC_NODE_H(NodeBoolean)
-    CODEC_NODE_H(NodeJsonBoolean)
-
 }// namespace CHelper::Node
+
+CODEC_NODE(CHelper::Node::NodeBoolean, descriptionTrue, descriptionFalse)
+CODEC_NODE(CHelper::Node::NodeJsonBoolean, descriptionTrue, descriptionFalse)
 
 #endif//CHELPER_NODEBOOLEAN_H

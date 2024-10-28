@@ -37,7 +37,7 @@ namespace CHelper::Node {
 
         void init(const CPack &cpack) override;
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -50,8 +50,8 @@ namespace CHelper::Node {
                               bool isMustHave) const override;
     };
 
-    CODEC_NODE_H(NodeTargetSelector)
-
 }// namespace CHelper::Node
+
+CODEC_NODE(CHelper::Node::NodeTargetSelector, isMustPlayer, isMustNPC, isOnlyOne, isWildcard)
 
 #endif//CHELPER_NODETARGETSELECTOR_H

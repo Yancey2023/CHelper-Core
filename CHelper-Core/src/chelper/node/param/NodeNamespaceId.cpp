@@ -2,8 +2,8 @@
 // Created by Yancey on 2023/11/12.
 //
 
+#include <chelper/node/NodeType.h>
 #include <chelper/node/param/NodeNamespaceId.h>
-#include <chelper/node/param/NodeString.h>
 
 namespace CHelper::Node {
 
@@ -32,8 +32,8 @@ namespace CHelper::Node {
         }
     }
 
-    NodeType *NodeNamespaceId::getNodeType() const {
-        return NodeType::NAMESPACE_ID.get();
+    NodeTypeId::NodeTypeId NodeNamespaceId::getNodeType() const {
+        return NodeTypeId::NAMESPACE_ID;
     }
 
     ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -108,7 +108,8 @@ namespace CHelper::Node {
                 descriptionContain.push_back(item);
             }
         }
-        Suggestions suggestions1(SuggestionsType::ID);;
+        Suggestions suggestions1(SuggestionsType::ID);
+        ;
         suggestions1.suggestions.reserve(nameStartOf.size() + nameContain.size() +
                                          namespaceStartOf.size() + namespaceContain.size() +
                                          2 * descriptionContain.size());
@@ -161,7 +162,5 @@ namespace CHelper::Node {
         coloredString.setColor(astNode->tokens, theme.colorId);
         return true;
     }
-
-    CODEC_NODE(NodeNamespaceId, key, ignoreError, contents)
 
 }// namespace CHelper::Node

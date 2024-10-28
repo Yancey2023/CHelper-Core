@@ -30,8 +30,8 @@ namespace CHelper::Node {
 #endif
     }
 
-    NodeType *NodeOr::getNodeType() const {
-        return NodeType::OR.get();
+    NodeTypeId::NodeTypeId NodeOr::getNodeType() const {
+        return NodeTypeId::OR;
     }
 
     ASTNode NodeOr::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {

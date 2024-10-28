@@ -21,7 +21,7 @@ namespace CHelper::Node {
                 const std::optional<std::u16string> &description);
 
     public:
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         void init(const CPack &cpack) override;
 

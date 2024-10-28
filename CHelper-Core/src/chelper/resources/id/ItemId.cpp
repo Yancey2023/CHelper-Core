@@ -45,6 +45,4 @@ namespace CHelper {
         return node;
     }
 
-    CODEC_WITH_PARENT(ItemId, NamespaceId, max, descriptions)
-
 }// namespace CHelper

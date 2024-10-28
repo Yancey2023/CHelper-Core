@@ -2,8 +2,8 @@
 // Created by Yancey on 2023/11/11.
 //
 
+#include <chelper/node/NodeType.h>
 #include <chelper/node/param/NodeNormalId.h>
-#include <chelper/lexer/Lexer.h>
 
 namespace CHelper::Node {
 
@@ -62,8 +62,8 @@ namespace CHelper::Node {
         }
     }
 
-    NodeType *NodeNormalId::getNodeType() const {
-        return NodeType::NORMAL_ID.get();
+    NodeTypeId::NodeTypeId NodeNormalId::getNodeType() const {
+        return NodeTypeId::NORMAL_ID;
     }
 
     ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -177,7 +177,5 @@ namespace CHelper::Node {
         }
         return true;
     }
-
-    CODEC_NODE(NodeNormalId, key, ignoreError, contents)
 
 }// namespace CHelper::Node

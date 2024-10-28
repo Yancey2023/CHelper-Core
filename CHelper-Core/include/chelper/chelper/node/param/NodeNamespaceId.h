@@ -7,7 +7,6 @@
 #ifndef CHELPER_NODENAMESPACEID_H
 #define CHELPER_NODENAMESPACEID_H
 
-
 #include "../../resources/CPack.h"
 #include "../../resources/id/NamespaceId.h"
 #include "../NodeBase.h"
@@ -33,7 +32,7 @@ namespace CHelper::Node {
 
         void init(const CPack &cpack) override;
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -53,8 +52,8 @@ namespace CHelper::Node {
                           const Theme &theme) const override;
     };
 
-    CODEC_NODE_H(NodeNamespaceId)
-
 }// namespace CHelper::Node
+
+CODEC_NODE(CHelper::Node::NodeNamespaceId, key, ignoreError, contents)
 
 #endif//CHELPER_NODENAMESPACEID_H

@@ -26,7 +26,7 @@ namespace CHelper::Node {
                    bool canContainSpace,
                    bool ignoreLater);
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -43,8 +43,8 @@ namespace CHelper::Node {
                           const Theme &theme) const override;
     };
 
-    CODEC_NODE_H(NodeString)
-
 }// namespace CHelper::Node
+
+CODEC_NODE(CHelper::Node::NodeString, canContainSpace, ignoreLater)
 
 #endif//CHELPER_NODESTRING_H

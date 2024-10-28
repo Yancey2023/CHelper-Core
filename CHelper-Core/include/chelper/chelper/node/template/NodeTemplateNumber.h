@@ -16,15 +16,15 @@ namespace CHelper::Node {
 
         NodeTemplateNumber() = default;
 
-        [[nodiscard]] NodeType *getNodeType() const override {
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override {
             if constexpr (std::is_same<T, int32_t>() && !isJson) {
-                return NodeType::INTEGER.get();
+                return NodeTypeId::INTEGER;
             } else if constexpr (std::is_same<T, float>() && !isJson) {
-                return NodeType::FLOAT.get();
+                return NodeTypeId::FLOAT;
             } else if constexpr (std::is_same<T, int32_t>() && isJson) {
-                return NodeType::JSON_INTEGER.get();
+                return NodeTypeId::JSON_INTEGER;
             } else if constexpr (std::is_same<T, float>() && isJson) {
-                return NodeType::JSON_FLOAT.get();
+                return NodeTypeId::JSON_FLOAT;
             }
         }
 
@@ -114,11 +114,11 @@ namespace CHelper::Node {
     typedef NodeTemplateNumber<float, true> NodeJsonFloat;
     typedef NodeTemplateNumber<int32_t, true> NodeJsonInteger;
 
-    CODEC_NODE_H(NodeFloat)
-    CODEC_NODE_H(NodeInteger)
-    CODEC_NODE_H(NodeJsonFloat)
-    CODEC_NODE_H(NodeJsonInteger)
-
 }// namespace CHelper::Node
+
+CODEC_NODE(CHelper::Node::NodeFloat, min, max)
+CODEC_NODE(CHelper::Node::NodeInteger, min, max)
+CODEC_NODE(CHelper::Node::NodeJsonInteger, min, max)
+CODEC_NODE(CHelper::Node::NodeJsonFloat, min, max)
 
 #endif//CHELPER_NODETEMPLATENUMBER_H

@@ -13,15 +13,15 @@ namespace CHelper {
 
     CHelperCore *CHelperCore::create(const std::function<std::unique_ptr<CPack>()> &getCPack) {
         try {
-#if CHelperOnlyReadBinary != true
-            std::chrono::high_resolution_clock::time_point start, end;
-            start = std::chrono::high_resolution_clock::now();
-#endif
+// #if CHelperOnlyReadBinary != true
+             std::chrono::high_resolution_clock::time_point start, end;
+             start = std::chrono::high_resolution_clock::now();
+// #endif
             std::unique_ptr<CPack> cPack = getCPack();
-#if CHelperOnlyReadBinary != true
+// #if CHelperOnlyReadBinary != true
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO("CPack load successfully ({})", std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms");
-#endif
+// #endif
             ASTNode astNode = Parser::parse(u"", cPack.get());
             return new CHelperCore(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
@@ -31,7 +31,7 @@ namespace CHelper {
         }
     }
 
-#if CHelperOnlyReadBinary != true
+// #if CHelperOnlyReadBinary != true
     CHelperCore *CHelperCore::createByDirectory(const std::filesystem::path &cpackPath) {
         return create([&cpackPath]() {
             return CPack::createByDirectory(cpackPath);
@@ -40,13 +40,7 @@ namespace CHelper {
 
     CHelperCore *CHelperCore::createByJson(const std::filesystem::path &cpackPath) {
         return create([&cpackPath]() {
-            return CPack::createByJson(JsonUtil::getJsonFromFile(cpackPath));
-        });
-    }
-
-    CHelperCore *CHelperCore::createByBson(const std::filesystem::path &cpackPath) {
-        return create([&cpackPath]() {
-            return CPack::createByJson(JsonUtil::getBsonFromFile(cpackPath));
+            return CPack::createByJson(serialization::get_json_from_file(cpackPath));
         });
     }
 
@@ -66,8 +60,7 @@ namespace CHelper {
                 throw std::runtime_error("fail to read file");
             }
             // 读取文件
-            BinaryReader binaryReader(true, is);
-            std::unique_ptr<CPack> result = CPack::createByBinary(binaryReader);
+            std::unique_ptr<CPack> result = CPack::createByBinary(is);
             // 检查文件是否读完
             if (HEDLEY_UNLIKELY(!is.eof())) {
                 char ch;
@@ -82,7 +75,7 @@ namespace CHelper {
             return std::move(result);
         });
     }
-#endif
+// #endif
 
     void CHelperCore::onTextChanged(const std::u16string &content, size_t index0) {
         if (HEDLEY_LIKELY(input != content)) {

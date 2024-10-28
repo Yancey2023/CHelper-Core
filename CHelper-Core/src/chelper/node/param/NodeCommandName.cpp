@@ -11,8 +11,8 @@ namespace CHelper::Node {
         commands = cpack.commands.get();
     }
 
-    NodeType *NodeCommandName::getNodeType() const {
-        return NodeType::COMMAND_NAME.get();
+    NodeTypeId::NodeTypeId NodeCommandName::getNodeType() const {
+        return NodeTypeId::COMMAND_NAME;
     }
 
     ASTNode NodeCommandName::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -103,7 +103,5 @@ namespace CHelper::Node {
         coloredString.setColor(astNode->tokens, theme.colorId);
         return true;
     }
-
-    CODEC_UNIQUE_PTR(NodeCommandName)
 
 }// namespace CHelper::Node

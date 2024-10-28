@@ -22,3 +22,7 @@
 	path = CHelper-Web/include/emscripten
 	url = https://github.com/emscripten-core/emscripten.git
 	branch = main
+[submodule "CHelper-Core/include/rapidjson"]
+	path = CHelper-Core/include/rapidjson
+	url = https://github.com/Tencent/rapidjson.git
+	branch = master

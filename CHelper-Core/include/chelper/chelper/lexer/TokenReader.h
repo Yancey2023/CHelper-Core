@@ -20,13 +20,13 @@
 #endif
 
 #if CHelperDebug == true
-#define DEBUG_GET_NODE_END(node)                                         \
-    if (HEDLEY_UNLIKELY(node##Index != tokenReader.indexStack.size())) { \
-        Profile::push("TokenReaderIndexError: {} {} {}",                 \
-                      (node)->getNodeType()->nodeName,                   \
-                      (node)->id.value_or(u""),                          \
-                      (node)->description.value_or(u""));                \
-        throw std::runtime_error("TokenReaderIndexError");               \
+#define DEBUG_GET_NODE_END(node)                                            \
+    if (HEDLEY_UNLIKELY(node##Index != tokenReader.indexStack.size())) {    \
+        Profile::push("TokenReaderIndexError: {} {} {}",                    \
+                      Node::NodeTypeHelper::getName((node)->getNodeType()), \
+                      (node)->id.value_or(u""),                             \
+                      (node)->description.value_or(u""));                   \
+        throw std::runtime_error("TokenReaderIndexError");                  \
     }
 #else
 #define DEBUG_GET_NODE_END(node)

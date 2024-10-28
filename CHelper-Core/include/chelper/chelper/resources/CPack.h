@@ -25,15 +25,13 @@ namespace CHelper {
         std::vector<bool> isEnd;
     };
 
-    CODEC_H(RepeatData)
-
     class CPack {
     public:
         Manifest manifest;
         std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>> normalIds;
         std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> namespaceIds;
-        std::shared_ptr<BlockIds> blockIds = std::make_shared<BlockIds>();
-        std::shared_ptr<std::vector<std::shared_ptr<ItemId>>> itemIds = std::make_shared<std::vector<std::shared_ptr<ItemId>>>();
+        std::shared_ptr<BlockIds> blockIds;
+        std::shared_ptr<std::vector<std::shared_ptr<ItemId>>> itemIds;
         std::vector<std::unique_ptr<Node::NodeJsonElement>> jsonNodes;
         std::vector<RepeatData> repeatNodeData;
         std::unordered_map<std::u16string, std::pair<const RepeatData *, const Node::NodeBase *>> repeatNodes;
@@ -44,47 +42,37 @@ namespace CHelper {
         std::vector<std::unique_ptr<Node::NodeBase>> repeatCacheNodes;
 
     public:
-#if CHelperOnlyReadBinary != true
         explicit CPack(const std::filesystem::path &path);
 
-        explicit CPack(const nlohmann::json &j);
-#endif
+        explicit CPack(const rapidjson::GenericDocument<rapidjson::UTF8<>> &j);
 
-        explicit CPack(BinaryReader &binaryReader);
+        explicit CPack(std::istream &binaryReader);
 
     private:
-#if CHelperOnlyReadBinary != true
-        void applyId(const nlohmann::json &j);
+        void applyId(const rapidjson::GenericValue<rapidjson::UTF8<>> &j);
 
-        void applyJson(const nlohmann::json &j);
+        void applyJson(const rapidjson::GenericValue<rapidjson::UTF8<>> &j);
 
-        void applyRepeat(const nlohmann::json &j);
+        void applyRepeat(const rapidjson::GenericValue<rapidjson::UTF8<>> &j);
 
-        void applyCommand(const nlohmann::json &j) const;
-#endif
+        void applyCommand(const rapidjson::GenericValue<rapidjson::UTF8<>> &j) const;
 
         void afterApply();
 
     public:
-#if CHelperOnlyReadBinary != true
         static std::unique_ptr<CPack> createByDirectory(const std::filesystem::path &path);
 
-        static std::unique_ptr<CPack> createByJson(const nlohmann::json &j);
-#endif
+        static std::unique_ptr<CPack> createByJson(const rapidjson::GenericDocument<rapidjson::UTF8<>> &j);
 
-        static std::unique_ptr<CPack> createByBinary(BinaryReader &binaryReader);
+        static std::unique_ptr<CPack> createByBinary(std::istream &binaryReader);
 
-#if CHelperOnlyReadBinary != true
         void writeJsonToDirectory(const std::filesystem::path &path) const;
 
-        [[nodiscard]] nlohmann::json toJson() const;
+        [[nodiscard]] rapidjson::GenericDocument<rapidjson::UTF8<>> toJson() const;
 
         void writeJsonToFile(const std::filesystem::path &path) const;
 
-        void writeBsonToFile(const std::filesystem::path &path) const;
-
         void writeBinToFile(const std::filesystem::path &path) const;
-#endif
 
         [[nodiscard]] std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
         getNormalId(const std::u16string &key) const;
@@ -94,5 +82,7 @@ namespace CHelper {
     };
 
 }// namespace CHelper
+
+CODEC(CHelper::RepeatData, id, breakNodes, repeatNodes, isEnd)
 
 #endif//CHELPER_CPACK_H

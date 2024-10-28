@@ -59,9 +59,7 @@ namespace CHelper::Old2New {
 
     std::u16string old2new(const BlockFixData &blockFixData, const std::u16string &old);
 
-#if CHelperOnlyReadBinary != true
-    BlockFixData blockFixDataFromJson(const nlohmann::json &j);
-#endif
+    BlockFixData blockFixDataFromJson(const rapidjson::GenericDocument<rapidjson::UTF8<>> &j);
 
 }// namespace CHelper::Old2New
 

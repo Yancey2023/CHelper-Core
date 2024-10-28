@@ -20,8 +20,8 @@ namespace CHelper {
         std::optional<bool> isBasicPack, isDefault;
     };
 
-    CODEC_H(Manifest)
-
 }// namespace CHelper
+
+CODEC(CHelper::Manifest, name, description, minecraftVersion, author, updateDate, packId, versionCode, isBasicPack, isDefault)
 
 #endif//CHELPER_MANIFEST_H

@@ -67,8 +67,8 @@ namespace CHelper::Node {
                      const std::optional<std::u16string> &description)
         : NodeBase(id, description, false) {}
 
-    NodeType *NodeAny::getNodeType() const {
-        return NodeType::ANY.get();
+    NodeTypeId::NodeTypeId NodeAny::getNodeType() const {
+        return NodeTypeId::ANY;
     }
 
     void NodeAny::init(const CPack &cpack) {

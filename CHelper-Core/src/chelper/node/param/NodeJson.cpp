@@ -25,8 +25,8 @@ namespace CHelper::Node {
         throw std::runtime_error("failed to find json data");
     }
 
-    NodeType *NodeJson::getNodeType() const {
-        return NodeType::JSON.get();
+    NodeTypeId::NodeTypeId NodeJson::getNodeType() const {
+        return NodeTypeId::JSON;
     }
 
     ASTNode NodeJson::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -38,7 +38,5 @@ namespace CHelper::Node {
                                     bool isMustHave) const {
         structure.append(isMustHave, description.value_or(u"JSON文本"));
     }
-
-    CODEC_NODE(NodeJson, key)
 
 }// namespace CHelper::Node

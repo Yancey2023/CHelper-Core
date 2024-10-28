@@ -23,8 +23,8 @@ namespace CHelper {
         std::shared_ptr<NormalId> &getIdWithNamespace();
     };
 
-    CODEC_WITH_PARENT_H(NamespaceId)
-
 }// namespace CHelper
+
+CODEC_WITH_PARENT(CHelper::NamespaceId, CHelper::NormalId, idNamespace)
 
 #endif//CHELPER_NAMESPACEID_H

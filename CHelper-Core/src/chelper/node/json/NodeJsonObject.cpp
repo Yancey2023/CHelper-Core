@@ -56,14 +56,12 @@ namespace CHelper::Node {
                 nodeSeparator.get(), nodeRight.get());
     }
 
-    NodeType *NodeJsonObject::getNodeType() const {
-        return NodeType::JSON_OBJECT.get();
+    NodeTypeId::NodeTypeId NodeJsonObject::getNodeType() const {
+        return NodeTypeId::JSON_OBJECT;
     }
 
     ASTNode NodeJsonObject::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         return getByChildNode(tokenReader, cpack, nodeList.get());
     }
-
-    CODEC_NODE(NodeJsonObject, data)
 
 }// namespace CHelper::Node

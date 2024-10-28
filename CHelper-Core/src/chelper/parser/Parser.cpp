@@ -2,6 +2,7 @@
 // Created by Yancey on 2023/11/6.
 //
 
+#include <chelper/node/NodeType.h>
 #include <chelper/parser/Parser.h>
 
 namespace CHelper::Parser {

@@ -30,7 +30,7 @@ namespace CHelper::Node {
                  NodeBase *nodeSeparator,
                  NodeBase *nodeRight);
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 

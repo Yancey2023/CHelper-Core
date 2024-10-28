@@ -11,8 +11,8 @@ namespace CHelper::Node {
                                const std::optional<std::u16string> &description)
         : NodeBase(id, description, false) {}
 
-    NodeType *NodePosition::getNodeType() const {
-        return NodeType::POSITION.get();
+    NodeTypeId::NodeTypeId NodePosition::getNodeType() const {
+        return NodeTypeId::POSITION;
     }
 
     ASTNode NodePosition::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
@@ -90,7 +90,5 @@ namespace CHelper::Node {
             return false;
         }
     }
-
-    CODEC_UNIQUE_PTR(NodePosition)
 
 }// namespace CHelper::Node

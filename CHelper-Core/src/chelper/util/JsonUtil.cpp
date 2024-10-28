@@ -8,12 +8,13 @@
 
 namespace CHelper::JsonUtil {
 
-    size_t ConvertResult::convert(size_t index) {
+    size_t ConvertResult::convert(size_t index) const {
         return indexConvertList[index];
     }
 
     std::u16string string2jsonString(const std::u16string &input) {
         std::u16string result;
+        result.reserve(input.length());
         StringReader stringReader(input);
         while (true) {
             std::optional<char16_t> ch = stringReader.read();
@@ -161,52 +162,5 @@ namespace CHelper::JsonUtil {
         }
         return std::move(result);
     }
-
-#if CHelperOnlyReadBinary != true
-
-    void encode(nlohmann::json &json, const std::string &key, const std::u16string &t) {
-        json[key] = utf8::utf16to8(t);
-    }
-
-    void decode(const nlohmann::json &json, const std::string &key, std::u16string &t) {
-        t = utf8::utf8to16(json.at(key).get<std::string>());
-    }
-
-    nlohmann::json getJsonFromFile(const std::filesystem::path &path) {
-        Profile::push("reading and parsing json in file: {}", path.u16string());
-        std::ifstream f(path);
-        nlohmann::json j = nlohmann::json::parse(f);
-        f.close();
-        Profile::pop();
-        return std::move(j);
-    }
-
-    nlohmann::json getBsonFromFile(const std::filesystem::path &path) {
-        Profile::push("reading and parsing bjdata in file: {}", path.u16string());
-        std::ifstream f(path, std::ios::binary);
-        nlohmann::json j = nlohmann::json::from_bjdata(f);
-        f.close();
-        Profile::pop();
-        return std::move(j);
-    }
-
-    void writeJsonToFile(const std::filesystem::path &path, const nlohmann::json &j) {
-        std::filesystem::create_directories(path.parent_path());
-        Profile::push("writing json in file: {}", path.u16string());
-        std::ofstream f(path);
-        f << j;
-        f.close();
-        Profile::pop();
-    }
-
-    void writeBsonToFile(const std::filesystem::path &path, const nlohmann::json &j) {
-        std::filesystem::create_directories(path.parent_path());
-        Profile::push("writing bjdata in file: {}", path.u16string());
-        std::ofstream f(path, std::ios::binary);
-        nlohmann::json::to_bjdata(j, f);
-        f.close();
-        Profile::pop();
-    }
-#endif
 
 }// namespace CHelper::JsonUtil

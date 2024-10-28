@@ -27,7 +27,7 @@ namespace CHelper::Node {
 
         void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
 
-        [[nodiscard]] NodeType *getNodeType() const override;
+        [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
 
@@ -36,8 +36,8 @@ namespace CHelper::Node {
                                 std::vector<Suggestions> &suggestions) const override;
     };
 
-    CODEC_NODE_H(NodeJsonList)
-
 }// namespace CHelper::Node
+
+CODEC_NODE(CHelper::Node::NodeJsonList, data)
 
 #endif//CHELPER_NODEJSONLIST_H
