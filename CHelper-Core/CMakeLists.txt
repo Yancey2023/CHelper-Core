@@ -34,7 +34,7 @@ add_subdirectory(include/utfcpp)
 add_subdirectory(include/hedley)
 
 # ThirdParty: serialization
-include_directories(include/serialization)
+add_subdirectory(include/serialization)
 
 # Param Deliver
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
@@ -63,7 +63,7 @@ function(init_chelper_library target CHELPER_CORE_DIR)
             ${CHELPER_CORE_DIR}/include/rapidjson/include
             ${CHELPER_CORE_DIR}/include/serialization
     )
-    target_link_libraries(${target} PUBLIC fmt::fmt utf8cpp hedley)
+    target_link_libraries(${target} PUBLIC fmt::fmt utf8cpp hedley serialization::serialization)
 endfunction()
 
 # CHelper Core
