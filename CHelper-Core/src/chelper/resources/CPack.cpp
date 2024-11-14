@@ -53,12 +53,13 @@ namespace CHelper {
 #endif
 
     CPack::CPack(const rapidjson::GenericDocument<rapidjson::UTF8<>> &j) {
+        using JsonValueType = rapidjson::GenericDocument<rapidjson::UTF8<>>;
 #ifdef CHelperDebug
         size_t stackSize = Profile::stack.size();
 #endif
         Node::currentCreateStage = Node::NodeCreateStage::NONE;
         Profile::push("loading manifest");
-        serialization::Codec<Manifest>::template from_json_member(j, "manifest", manifest);
+        serialization::Codec<Manifest>::template from_json_member<JsonValueType>(j, "manifest", manifest);
         Profile::next("loading id data");
         for (const auto &item: serialization::find_array_member_or_throw(j, "id")) {
             applyId(item);
@@ -125,24 +126,25 @@ namespace CHelper {
     }
 
     void CPack::applyId(const rapidjson::GenericValue<rapidjson::UTF8<>> &j) {
+        using JsonValueType = rapidjson::GenericValue<rapidjson::UTF8<>>;
         std::u16string type;
-        serialization::Codec<decltype(type)>::template from_json_member(j, "type", type);
+        serialization::Codec<decltype(type)>::template from_json_member<JsonValueType>(j, "type", type);
         if (HEDLEY_LIKELY(type == u"normal")) {
             std::u16string id;
-            serialization::Codec<decltype(id)>::template from_json_member(j, "id", id);
+            serialization::Codec<decltype(id)>::template from_json_member<JsonValueType>(j, "id", id);
             std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> content;
-            serialization::Codec<decltype(content)>::template from_json_member(j, "content", content);
+            serialization::Codec<decltype(content)>::template from_json_member<JsonValueType>(j, "content", content);
             normalIds.emplace(std::move(id), std::move(content));
         } else if (HEDLEY_LIKELY(type == u"namespace")) {
             std::u16string id;
-            serialization::Codec<decltype(id)>::template from_json_member(j, "id", id);
+            serialization::Codec<decltype(id)>::template from_json_member<JsonValueType>(j, "id", id);
             std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> content;
-            serialization::Codec<decltype(content)>::template from_json_member(j, "content", content);
+            serialization::Codec<decltype(content)>::template from_json_member<JsonValueType>(j, "content", content);
             namespaceIds.emplace(std::move(id), std::move(content));
         } else if (HEDLEY_LIKELY(type == u"block")) {
-            serialization::Codec<decltype(blockIds)>::template from_json_member(j, "blocks", blockIds);
+            serialization::Codec<decltype(blockIds)>::template from_json_member<JsonValueType>(j, "blocks", blockIds);
         } else if (HEDLEY_LIKELY(type == u"item")) {
-            serialization::Codec<decltype(itemIds)>::template from_json_member(j, "items", itemIds);
+            serialization::Codec<decltype(itemIds)>::template from_json_member<JsonValueType>(j, "items", itemIds);
         } else {
             Profile::push("unknown id type -> {}", type);
             throw std::runtime_error("unknown id type");
@@ -150,20 +152,23 @@ namespace CHelper {
     }
 
     void CPack::applyJson(const rapidjson::GenericValue<rapidjson::UTF8<>> &j) {
+        using JsonValueType = rapidjson::GenericValue<rapidjson::UTF8<>>;
         std::unique_ptr<Node::NodeJsonElement> item;
-        serialization::Codec<decltype(item)>::template from_json(j, item);
+        serialization::Codec<decltype(item)>::template from_json<JsonValueType>(j, item);
         jsonNodes.push_back(std::move(item));
     }
 
     void CPack::applyRepeat(const rapidjson::GenericValue<rapidjson::UTF8<>> &j) {
+        using JsonValueType = rapidjson::GenericValue<rapidjson::UTF8<>>;
         RepeatData item;
-        serialization::Codec<decltype(item)>::template from_json(j, item);
+        serialization::Codec<decltype(item)>::template from_json<JsonValueType>(j, item);
         repeatNodeData.push_back(std::move(item));
     }
 
     void CPack::applyCommand(const rapidjson::GenericValue<rapidjson::UTF8<>> &j) const {
+        using JsonValueType = rapidjson::GenericValue<rapidjson::UTF8<>>;
         std::unique_ptr<Node::NodePerCommand> item;
-        serialization::Codec<decltype(item)>::template from_json(j, item);
+        serialization::Codec<decltype(item)>::template from_json<JsonValueType>(j, item);
         commands->push_back(std::move(item));
     }
 
@@ -260,118 +265,122 @@ namespace CHelper {
         return cpack;
     }
 
+#ifndef CHELPER_NO_FILESYSTEM
     template<class JsonType>
     void writeJsonToFileWithCreateDirectory(const std::filesystem::path &path, const JsonType &j) {
         if (!exists(path)) {
             std::filesystem::create_directories(path.parent_path());
         }
-        serialization::write_json_to_file(path, j);
+        serialization::template write_json_to_file<JsonType>(path, j);
     }
+#endif
 
 #ifndef CHELPER_NO_FILESYSTEM
     void CPack::writeJsonToDirectory(const std::filesystem::path &path) const {
+        using JsonValueType = rapidjson::GenericDocument<rapidjson::UTF8<>>;
         {
-            rapidjson::GenericDocument<rapidjson::UTF8<>> j;
-            serialization::Codec<decltype(manifest)>::template to_json(j.GetAllocator(), j, manifest);
+            JsonValueType j;
+            serialization::Codec<decltype(manifest)>::template to_json<JsonValueType>(j.GetAllocator(), j, manifest);
             writeJsonToFileWithCreateDirectory(path / "manifest.json", j);
         }
         for (const auto &item: normalIds) {
-            rapidjson::GenericDocument<rapidjson::UTF8<>> j;
+            JsonValueType j;
             j.SetObject();
             j.MemberReserve(3, j.GetAllocator());
-            serialization::Codec<decltype(item.first)>::template to_json_member(j.GetAllocator(), j, "id", item.first);
-            serialization::Codec<std::string>::template to_json_member(j.GetAllocator(), j, "type", "normal");
-            serialization::Codec<decltype(item.second)>::template to_json_member(j.GetAllocator(), j, "content", item.second);
+            serialization::Codec<decltype(item.first)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", item.first);
+            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "normal");
+            serialization::Codec<decltype(item.second)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "content", item.second);
             writeJsonToFileWithCreateDirectory(path / "id" / (item.first + u".json"), j);
         }
         for (const auto &item: namespaceIds) {
-            rapidjson::GenericDocument<rapidjson::UTF8<>> j;
+            JsonValueType j;
             j.SetObject();
             j.MemberReserve(3, j.GetAllocator());
-            serialization::Codec<decltype(item.first)>::template to_json_member(j.GetAllocator(), j, "id", item.first);
-            serialization::Codec<std::string>::template to_json_member(j.GetAllocator(), j, "type", "namespace");
-            serialization::Codec<decltype(item.second)>::template to_json_member(j.GetAllocator(), j, "content", item.second);
+            serialization::Codec<decltype(item.first)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", item.first);
+            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "namespace");
+            serialization::Codec<decltype(item.second)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "content", item.second);
             writeJsonToFileWithCreateDirectory(path / "id" / (item.first + u".json"), j);
         }
         {
-            rapidjson::GenericDocument<rapidjson::UTF8<>> j;
+            JsonValueType j;
             j.SetObject();
             j.MemberReserve(3, j.GetAllocator());
-            serialization::Codec<std::string>::template to_json_member(j.GetAllocator(), j, "id", "items");
-            serialization::Codec<std::string>::template to_json_member(j.GetAllocator(), j, "type", "item");
-            serialization::Codec<decltype(itemIds)>::template to_json_member(j.GetAllocator(), j, "items", itemIds);
+            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", "items");
+            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "item");
+            serialization::Codec<decltype(itemIds)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "items", itemIds);
             writeJsonToFileWithCreateDirectory(path / "id" / "items.json", j);
         }
         {
-            rapidjson::GenericDocument<rapidjson::UTF8<>> j;
+            JsonValueType j;
             j.SetObject();
             j.MemberReserve(3, j.GetAllocator());
-            serialization::Codec<std::string>::template to_json_member(j.GetAllocator(), j, "id", "blocks");
-            serialization::Codec<std::string>::template to_json_member(j.GetAllocator(), j, "type", "block");
-            serialization::Codec<decltype(blockIds)>::template to_json_member(j.GetAllocator(), j, "blocks", blockIds);
+            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", "blocks");
+            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "block");
+            serialization::Codec<decltype(blockIds)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "blocks", blockIds);
             writeJsonToFileWithCreateDirectory(path / "id" / "blocks.json", j);
         }
         for (const auto &item: jsonNodes) {
-            rapidjson::GenericDocument<rapidjson::UTF8<>> j;
-            serialization::Codec<decltype(item)>::template to_json(j.GetAllocator(), j, item);
+            JsonValueType j;
+            serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
             writeJsonToFileWithCreateDirectory(path / "json" / (item->id.value() + u".json"), j);
         }
         for (const auto &item: repeatNodeData) {
-            rapidjson::GenericDocument<rapidjson::UTF8<>> j;
-            serialization::Codec<decltype(item)>::template to_json(j.GetAllocator(), j, item);
+            JsonValueType j;
+            serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
             writeJsonToFileWithCreateDirectory(path / "repeat" / (item.id + u".json"), j);
         }
         for (const auto &item: *commands) {
-            rapidjson::GenericDocument<rapidjson::UTF8<>> j;
-            serialization::Codec<decltype(item)>::template to_json(j.GetAllocator(), j, item);
+            JsonValueType j;
+            serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
             writeJsonToFileWithCreateDirectory(path / "command" / (item->name[0] + u".json"), j);
         }
     }
 #endif
 
     [[nodiscard]] rapidjson::GenericDocument<rapidjson::UTF8<>> CPack::toJson() const {
+        using JsonValueType = rapidjson::GenericDocument<rapidjson::UTF8<>>;
         rapidjson::GenericDocument<rapidjson::UTF8<>> result;
         result.SetObject();
-        serialization::Codec<decltype(manifest)>::template to_json_member(result.GetAllocator(), result, "manifest", manifest);
-        rapidjson::GenericValue<rapidjson::UTF8<>> idJson;
+        serialization::Codec<decltype(manifest)>::template to_json_member<JsonValueType>(result.GetAllocator(), result, "manifest", manifest);
+        JsonValueType::ValueType idJson;
         idJson.SetArray();
         idJson.Reserve(normalIds.size() + namespaceIds.size() + 2, result.GetAllocator());
         for (const auto &item: normalIds) {
-            rapidjson::GenericValue<rapidjson::UTF8<>> j;
+            JsonValueType::ValueType j;
             j.SetObject();
-            serialization::Codec<decltype(item.first)>::template to_json_member(result.GetAllocator(), j, "id", item.first);
-            serialization::Codec<std::string>::template to_json_member(result.GetAllocator(), j, "type", "normal");
-            serialization::Codec<decltype(item.second)>::template to_json_member(result.GetAllocator(), j, "content", item.second);
+            serialization::Codec<decltype(item.first)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "id", item.first);
+            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "type", "normal");
+            serialization::Codec<decltype(item.second)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "content", item.second);
             idJson.PushBack(std::move(j), result.GetAllocator());
         }
         for (const auto &item: namespaceIds) {
-            rapidjson::GenericValue<rapidjson::UTF8<>> j;
+            JsonValueType::ValueType j;
             j.SetObject();
-            serialization::Codec<decltype(item.first)>::template to_json_member(result.GetAllocator(), j, "id", item.first);
-            serialization::Codec<std::string>::template to_json_member(result.GetAllocator(), j, "type", "namespace");
-            serialization::Codec<decltype(item.second)>::template to_json_member(result.GetAllocator(), j, "content", item.second);
+            serialization::Codec<decltype(item.first)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "id", item.first);
+            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "type", "namespace");
+            serialization::Codec<decltype(item.second)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "content", item.second);
             idJson.PushBack(std::move(j), result.GetAllocator());
         }
         {
-            rapidjson::GenericValue<rapidjson::UTF8<>> j;
+            JsonValueType::ValueType j;
             j.SetObject();
-            serialization::Codec<std::string>::template to_json_member(result.GetAllocator(), j, "id", "items");
-            serialization::Codec<std::string>::template to_json_member(result.GetAllocator(), j, "type", "item");
-            serialization::Codec<decltype(itemIds)>::template to_json_member(result.GetAllocator(), j, "items", itemIds);
+            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "id", "items");
+            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "type", "item");
+            serialization::Codec<decltype(itemIds)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "items", itemIds);
             idJson.PushBack(std::move(j), result.GetAllocator());
         }
         {
-            rapidjson::GenericValue<rapidjson::UTF8<>> j;
+            JsonValueType::ValueType j;
             j.SetObject();
-            serialization::Codec<std::string>::template to_json_member(result.GetAllocator(), j, "id", "blocks");
-            serialization::Codec<std::string>::template to_json_member(result.GetAllocator(), j, "type", "block");
-            serialization::Codec<decltype(blockIds)>::template to_json_member(result.GetAllocator(), j, "blocks", blockIds);
+            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "id", "blocks");
+            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "type", "block");
+            serialization::Codec<decltype(blockIds)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "blocks", blockIds);
             idJson.PushBack(std::move(j), result.GetAllocator());
         }
         result.AddMember(rapidjson::GenericValue<rapidjson::UTF8<>>("id"), std::move(idJson), result.GetAllocator());
-        serialization::Codec<decltype(jsonNodes)>::template to_json_member(result.GetAllocator(), result, "json", jsonNodes);
-        serialization::Codec<decltype(repeatNodeData)>::template to_json_member(result.GetAllocator(), result, "repeat", repeatNodeData);
-        serialization::Codec<decltype(commands)>::template to_json_member(result.GetAllocator(), result, "command", commands);
+        serialization::Codec<decltype(jsonNodes)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), result, "json", jsonNodes);
+        serialization::Codec<decltype(repeatNodeData)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), result, "repeat", repeatNodeData);
+        serialization::Codec<decltype(commands)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), result, "command", commands);
         return result;
     }
 

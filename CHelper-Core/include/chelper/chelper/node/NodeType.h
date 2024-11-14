@@ -39,11 +39,11 @@
 
 #define CHELPER_CODEC_NODE_TO_JSON(v1) \
     case NodeTypeId::v1:               \
-        return details::NodeCodec<NodeTypeId::v1>::template to_json(allocator, jsonValue, t);
+        return details::NodeCodec<NodeTypeId::v1>::template to_json<JsonValueType>(allocator, jsonValue, t);
 
 #define CHELPER_CODEC_NODE_FROM_JSON(v1) \
     case NodeTypeId::v1:                 \
-        return details::NodeCodec<NodeTypeId::v1>::template from_json(jsonValue, t);
+        return details::NodeCodec<NodeTypeId::v1>::template from_json<JsonValueType>(jsonValue, t);
 
 #define CHELPER_CODEC_NODE_TO_BINARY(v1) \
     case NodeTypeId::v1:                 \
@@ -338,7 +338,7 @@ namespace CHelper {
                     assert(serialization::Codec<Type>::enable || nodeCreateStage.empty());
 #endif
                     if constexpr (serialization::Codec<Type>::enable) {
-                        serialization::Codec<Type>::template to_json(allocator, jsonValue, *reinterpret_cast<Type *>(t.get()));
+                        serialization::Codec<Type>::template to_json<JsonValueType>(allocator, jsonValue, *reinterpret_cast<Type *>(t.get()));
                     }
                 }
 
@@ -357,7 +357,7 @@ namespace CHelper {
                             throw std::runtime_error("unknown node type");
                         }
                         t = std::make_unique<Type>();
-                        serialization::Codec<Type>::template from_json(jsonValue, *reinterpret_cast<Type *>(t.get()));
+                        serialization::Codec<Type>::template from_json<JsonValueType>(jsonValue, *reinterpret_cast<Type *>(t.get()));
                         if (HEDLEY_UNLIKELY(!t->isMustAfterWhiteSpace.has_value())) {
                             t->isMustAfterWhiteSpace = isMustAfterWhiteSpace;
                         }
@@ -459,9 +459,9 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::to_json(
         JsonValueType &jsonValue,
         const Type &t) {
     std::u16string nodeIdName = CHelper::Node::NodeTypeHelper::getName(t->getNodeType());
-    CHelper::Node::NodeTypeHelper::template to_json(t->getNodeType(), allocator, jsonValue, t);
+    CHelper::Node::NodeTypeHelper::template to_json<JsonValueType>(t->getNodeType(), allocator, jsonValue, t);
     assert(jsonValue.IsObject());
-    Codec<decltype(nodeIdName)>::template to_json_member(allocator, jsonValue, "type", nodeIdName);
+    Codec<decltype(nodeIdName)>::template to_json_member<JsonValueType>(allocator, jsonValue, "type", nodeIdName);
 }
 
 template<class JsonValueType>
@@ -473,9 +473,9 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::from_json(
     }
     CHelper::Profile::push("loading type");
     std::u16string type;
-    Codec<decltype(type)>::template from_json_member(jsonValue, "type", type);
+    Codec<decltype(type)>::template from_json_member<JsonValueType>(jsonValue, "type", type);
     std::optional<std::u16string> id;
-    Codec<decltype(id)>::template from_json_member(jsonValue, "id", id);
+    Codec<decltype(id)>::template from_json_member<JsonValueType>(jsonValue, "id", id);
     CHelper::Profile::next("loading node {}", type);
     if (HEDLEY_LIKELY(id.has_value())) {
         CHelper::Profile::next("loading node {} with id \"{}\"", type, id.value());
@@ -493,7 +493,7 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::from_json(
         CHelper::Profile::next("unknown node type -> {}", type);
         throw std::runtime_error("unknown node type");
     }
-    CHelper::Node::NodeTypeHelper::template from_json(nodeTypeId.value(), jsonValue, t);
+    CHelper::Node::NodeTypeHelper::template from_json<JsonValueType>(nodeTypeId.value(), jsonValue, t);
     CHelper::Profile::pop();
 }
 

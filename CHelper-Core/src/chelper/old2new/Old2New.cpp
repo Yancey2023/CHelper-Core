@@ -639,6 +639,7 @@ namespace CHelper::Old2New {
     }
 
     BlockFixData blockFixDataFromJson(const rapidjson::GenericDocument<rapidjson::UTF8<>> &j) {
+        using JsonValueType = rapidjson::GenericDocument<rapidjson::UTF8<>>;
         if (HEDLEY_UNLIKELY(!j.IsArray())) {
             throw serialization::exceptions::JsonSerializationTypeException("array", serialization::getJsonTypeStr(j.GetType()));
         }
@@ -648,13 +649,13 @@ namespace CHelper::Old2New {
                 throw serialization::exceptions::JsonSerializationTypeException("object", serialization::getJsonTypeStr(j.GetType()));
             }
             std::u16string name;
-            serialization::Codec<decltype(name)>::template from_json_member(item, serialization::details::JsonKey<DataFix, rapidjson::UTF8<>::Ch>::name(), name);
+            serialization::Codec<decltype(name)>::template from_json_member<typename JsonValueType::ValueType>(item, serialization::details::JsonKey<DataFix, JsonValueType::Ch>::name(), name);
             uint32_t data;
-            serialization::Codec<decltype(data)>::template from_json_member(item, serialization::details::JsonKey<DataFix, rapidjson::UTF8<>::Ch>::data(), data);
+            serialization::Codec<decltype(data)>::template from_json_member<typename JsonValueType::ValueType>(item, serialization::details::JsonKey<DataFix, JsonValueType::Ch>::data(), data);
             std::optional<std::u16string> newBlockId;
-            serialization::Codec<decltype(newBlockId)>::template from_json_member(item, serialization::details::JsonKey<DataFix, rapidjson::UTF8<>::Ch>::newBlockId(), newBlockId);
+            serialization::Codec<decltype(newBlockId)>::template from_json_member<typename JsonValueType::ValueType>(item, serialization::details::JsonKey<DataFix, JsonValueType::Ch>::newBlockId(), newBlockId);
             std::optional<std::u16string> blockState;
-            serialization::Codec<decltype(blockState)>::template from_json_member(item, serialization::details::JsonKey<DataFix, rapidjson::UTF8<>::Ch>::blockState(), blockState);
+            serialization::Codec<decltype(blockState)>::template from_json_member<typename JsonValueType::ValueType>(item, serialization::details::JsonKey<DataFix, JsonValueType::Ch>::blockState(), blockState);
             getOrCreate(blockFixData, std::move(name)).insert({data, {std::move(newBlockId), std::move(blockState)}});
         }
         return blockFixData;

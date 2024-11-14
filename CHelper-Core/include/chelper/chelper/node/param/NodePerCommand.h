@@ -48,18 +48,18 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
                         const Type &t) {
         jsonValue.SetObject();
         //name
-        Codec<decltype(t.name)>::template to_json_member(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::name(), t.name);
+        Codec<decltype(t.name)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::name(), t.name);
         //description
-        Codec<decltype(t.description)>::template to_json_member(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::description(), t.description);
+        Codec<decltype(t.description)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::description(), t.description);
         //node
-        Codec<decltype(t.nodes)>::template to_json_member(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::node(), t.nodes);
+        Codec<decltype(t.nodes)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::node(), t.nodes);
         //start
         std::vector<std::u16string> startIds;
         startIds.reserve(t.startNodes.size());
         for (const auto &item: t.startNodes) {
             startIds.push_back(item->id.value());
         }
-        Codec<decltype(startIds)>::template to_json_member(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::start(), startIds);
+        Codec<decltype(startIds)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::start(), startIds);
         //ast
         std::vector<std::vector<std::u16string>> ast;
         for (const auto &item: t.nodes) {
@@ -70,7 +70,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
             }
             ast.push_back(std::move(ast1));
         }
-        Codec<decltype(ast)>::template to_json_member(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::ast(), ast);
+        Codec<decltype(ast)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::ast(), ast);
     }
 
     template<class JsonValueType>
@@ -81,19 +81,19 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         }
         //name
         CHelper::Profile::push("loading node name");
-        Codec<decltype(t.name)>::template from_json_member(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::name(), t.name);
+        Codec<decltype(t.name)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::name(), t.name);
         //description
         CHelper::Profile::next("loading node description");
-        Codec<decltype(t.description)>::template from_json_member(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::description(), t.description);
+        Codec<decltype(t.description)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::description(), t.description);
         //node
         const typename JsonValueType::ConstMemberIterator nodeIter = jsonValue.FindMember(details::JsonKey<Type, typename JsonValueType::Ch>::node());
         if (HEDLEY_LIKELY(nodeIter != jsonValue.MemberEnd())) {
-            Codec<decltype(t.nodes)>::template from_json(nodeIter->value, t.nodes);
+            Codec<decltype(t.nodes)>::template from_json<typename JsonValueType::ValueType>(nodeIter->value, t.nodes);
         }
         //start
         CHelper::Profile::next("loading start nodes");
         std::vector<std::u16string> startNodeIds;
-        Codec<decltype(startNodeIds)>::template from_json_member(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::start(), startNodeIds);
+        Codec<decltype(startNodeIds)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::start(), startNodeIds);
         t.startNodes.reserve(startNodeIds.size());
         for (const auto &startNodeId: startNodeIds) {
             CHelper::Profile::next(R"(linking startNode "{}" to nodes)", startNodeId);
@@ -119,7 +119,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         if (HEDLEY_LIKELY(jsonAstIter != jsonValue.MemberEnd())) {
             CHelper::Profile::next("loading ast");
             std::vector<std::vector<std::u16string>> ast;
-            Codec<decltype(ast)>::template from_json(jsonAstIter->value, ast);
+            Codec<decltype(ast)>::template from_json<typename JsonValueType::ValueType>(jsonAstIter->value, ast);
             for (const auto &childNodes: ast) {
                 CHelper::Profile::next("linking child nodes to parent node");
                 if (HEDLEY_UNLIKELY(childNodes.empty())) {

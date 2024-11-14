@@ -48,9 +48,9 @@ struct serialization::Codec<CHelper::Node::NodeJsonElement> : BaseCodec<CHelper:
                         JsonValueType &jsonValue,
                         const Type &t) {
         jsonValue.SetObject();
-        Codec<std::u16string>::template to_json_member(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::id(), t.id.value());
-        Codec<decltype(t.nodes)>::template to_json_member(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::node(), t.nodes);
-        Codec<decltype(t.startNodeId)>::template to_json_member(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::start(), t.startNodeId);
+        Codec<std::u16string>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::id(), t.id.value());
+        Codec<decltype(t.nodes)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::node(), t.nodes);
+        Codec<decltype(t.startNodeId)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::start(), t.startNodeId);
     }
 
     template<class JsonValueType>
@@ -61,11 +61,11 @@ struct serialization::Codec<CHelper::Node::NodeJsonElement> : BaseCodec<CHelper:
         }
         CHelper::Profile::push("loading id");
         t.id = std::make_optional<std::u16string>();
-        Codec<std::u16string>::template from_json_member(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::id(), t.id.value());
+        Codec<std::u16string>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::id(), t.id.value());
         CHelper::Profile::next("loading nodes");
-        Codec<decltype(t.nodes)>::template from_json_member(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::node(), t.nodes);
+        Codec<decltype(t.nodes)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::node(), t.nodes);
         CHelper::Profile::next("loading start nodes");
-        Codec<decltype(t.startNodeId)>::template from_json_member(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::start(), t.startNodeId);
+        Codec<decltype(t.startNodeId)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::start(), t.startNodeId);
         CHelper::Profile::pop();
     }
 

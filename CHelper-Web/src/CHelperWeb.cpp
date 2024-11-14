@@ -23,11 +23,11 @@ public:
         delete core;
     }
 
-    void onTextChanged(const char *content, size_t index) {
+    void onTextChanged(const char *content, size_t index) const {
         core->onTextChanged(utf8::utf8to16(std::string(content)), index);
     }
 
-    void onSelectionChanged(size_t index0) {
+    void onSelectionChanged(size_t index0) const {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return;
         }
@@ -62,7 +62,7 @@ public:
         }
     }
 
-    const char *getStringAfterSuggestionClick() {
+    [[nodiscard]] const char *getStringAfterSuggestionClick() const {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
@@ -73,7 +73,7 @@ public:
         }
     }
 
-    size_t getSelectionAfterSuggestionClick() {
+    [[nodiscard]] size_t getSelectionAfterSuggestionClick() const {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return 0;
         }
@@ -107,7 +107,7 @@ public:
         }
     }
 
-    size_t getSuggestionSize() {
+    [[nodiscard]] size_t getSuggestionSize() const {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return 0;
         }
@@ -168,14 +168,14 @@ EMSCRIPTEN_KEEPALIVE void release(const WrappedCHelperCore *core) {
     delete core;
 }
 
-EMSCRIPTEN_KEEPALIVE void onTextChanged(WrappedCHelperCore *core, const char *content, size_t index) {
+EMSCRIPTEN_KEEPALIVE void onTextChanged(const WrappedCHelperCore *core, const char *content, size_t index) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
     core->onTextChanged(content, index);
 }
 
-EMSCRIPTEN_KEEPALIVE void onSelectionChanged(WrappedCHelperCore *core, size_t index) {
+EMSCRIPTEN_KEEPALIVE void onSelectionChanged(const WrappedCHelperCore *core, size_t index) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
@@ -203,7 +203,7 @@ EMSCRIPTEN_KEEPALIVE const char *getErrorReason(WrappedCHelperCore *core) {
     return core->getErrorReason();
 }
 
-EMSCRIPTEN_KEEPALIVE size_t getSuggestionSize(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE size_t getSuggestionSize(const WrappedCHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return 0;
     }
@@ -231,14 +231,14 @@ EMSCRIPTEN_KEEPALIVE void onSuggestionClick(WrappedCHelperCore *core, size_t whi
     core->onSuggestionClick(which);
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getStringAfterSuggestionClick(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const char *getStringAfterSuggestionClick(const WrappedCHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     return core->getStringAfterSuggestionClick();
 }
 
-EMSCRIPTEN_KEEPALIVE size_t getSelectionAfterSuggestionClick(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE size_t getSelectionAfterSuggestionClick(const WrappedCHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return 0;
     }
