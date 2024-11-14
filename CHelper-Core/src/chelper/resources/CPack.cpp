@@ -263,7 +263,7 @@ namespace CHelper {
     template<class JsonType>
     void writeJsonToFileWithCreateDirectory(const std::filesystem::path &path, const JsonType &j) {
         if (!exists(path)) {
-            std::filesystem::create_directories(path);
+            std::filesystem::create_directories(path.parent_path());
         }
         serialization::write_json_to_file(path, j);
     }
