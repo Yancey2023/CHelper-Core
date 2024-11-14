@@ -24,3 +24,7 @@ endif()
 # Console Application
 add_executable(CHelperCmd src/cmd/CHelperCmd.h src/cmd/CHelperCmd.cpp)
 target_link_libraries(CHelperCmd PRIVATE CHelper::Core)
+
+if (MSVC)
+    target_compile_options(CHelperCmd PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+endif ()

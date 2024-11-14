@@ -18,6 +18,9 @@ endif ()
 
 # ThirdParty: fmt
 add_subdirectory(include/fmt)
+if (MSVC)
+    target_compile_options(fmt PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+endif ()
 
 # ThirdParty: json
 #add_subdirectory(include/json)
@@ -66,12 +69,18 @@ endfunction()
 # CHelper Core
 add_library(CHelperCore STATIC)
 init_chelper_library(CHelperCore ${CMAKE_CURRENT_SOURCE_DIR})
+if (MSVC)
+    target_compile_options(CHelperCore PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+endif ()
 add_library(CHelper::Core ALIAS CHelperCore)
 
 # CHelper Core (no filesystem)
 add_library(CHelperNoFilesystemCore STATIC)
 init_chelper_library(CHelperNoFilesystemCore ${CMAKE_CURRENT_SOURCE_DIR})
 target_compile_definitions(CHelperNoFilesystemCore PUBLIC CHELPER_NO_FILESYSTEM)
+if (MSVC)
+    target_compile_options(CHelperNoFilesystemCore PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+endif ()
 add_library(CHelper::NoFilesystemCore ALIAS CHelperNoFilesystemCore)
 
 # Install
