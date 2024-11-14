@@ -281,7 +281,7 @@ namespace CHelper {
         {
             JsonValueType j;
             serialization::Codec<decltype(manifest)>::template to_json<JsonValueType>(j.GetAllocator(), j, manifest);
-            writeJsonToFileWithCreateDirectory(path / "manifest.json", j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "manifest.json", j);
         }
         for (const auto &item: normalIds) {
             JsonValueType j;
@@ -290,7 +290,7 @@ namespace CHelper {
             serialization::Codec<decltype(item.first)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", item.first);
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "normal");
             serialization::Codec<decltype(item.second)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "content", item.second);
-            writeJsonToFileWithCreateDirectory(path / "id" / (item.first + u".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / (item.first + u".json"), j);
         }
         for (const auto &item: namespaceIds) {
             JsonValueType j;
@@ -299,7 +299,7 @@ namespace CHelper {
             serialization::Codec<decltype(item.first)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", item.first);
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "namespace");
             serialization::Codec<decltype(item.second)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "content", item.second);
-            writeJsonToFileWithCreateDirectory(path / "id" / (item.first + u".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / (item.first + u".json"), j);
         }
         {
             JsonValueType j;
@@ -308,7 +308,7 @@ namespace CHelper {
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", "items");
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "item");
             serialization::Codec<decltype(itemIds)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "items", itemIds);
-            writeJsonToFileWithCreateDirectory(path / "id" / "items.json", j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / "items.json", j);
         }
         {
             JsonValueType j;
@@ -317,22 +317,22 @@ namespace CHelper {
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", "blocks");
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "block");
             serialization::Codec<decltype(blockIds)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "blocks", blockIds);
-            writeJsonToFileWithCreateDirectory(path / "id" / "blocks.json", j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / "blocks.json", j);
         }
         for (const auto &item: jsonNodes) {
             JsonValueType j;
             serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
-            writeJsonToFileWithCreateDirectory(path / "json" / (item->id.value() + u".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "json" / (item->id.value() + u".json"), j);
         }
         for (const auto &item: repeatNodeData) {
             JsonValueType j;
             serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
-            writeJsonToFileWithCreateDirectory(path / "repeat" / (item.id + u".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "repeat" / (item.id + u".json"), j);
         }
         for (const auto &item: *commands) {
             JsonValueType j;
             serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
-            writeJsonToFileWithCreateDirectory(path / "command" / (item->name[0] + u".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "command" / (item->name[0] + u".json"), j);
         }
     }
 #endif
@@ -386,7 +386,7 @@ namespace CHelper {
 
 #ifndef CHELPER_NO_FILESYSTEM
     void CPack::writeJsonToFile(const std::filesystem::path &path) const {
-        writeJsonToFileWithCreateDirectory(path, toJson());
+        writeJsonToFileWithCreateDirectory<rapidjson::GenericDocument<rapidjson::UTF8<>>>(path, toJson());
     }
 
     void CPack::writeBinToFile(const std::filesystem::path &path) const {
