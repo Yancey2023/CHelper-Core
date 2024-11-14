@@ -22,11 +22,6 @@ if (MSVC)
     target_compile_options(fmt PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
 endif ()
 
-# ThirdParty: json
-#add_subdirectory(include/json)
-
-# ThirdParty: RapidJSON
-
 # ThirdParty: utf8cpp
 add_subdirectory(include/utfcpp)
 

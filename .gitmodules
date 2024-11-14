@@ -2,10 +2,6 @@
 	path = CHelper-Core/include/fmt
 	url = https://github.com/fmtlib/fmt.git
 	branch = master
-[submodule "CHelper-Core/include/json"]
-	path = CHelper-Core/include/json
-	url = https://github.com/nlohmann/json.git
-	branch = master
 [submodule "CHelper-Core/include/utfcpp"]
 	path = CHelper-Core/include/utfcpp
 	url = https://github.com/nemtrif/utfcpp.git
