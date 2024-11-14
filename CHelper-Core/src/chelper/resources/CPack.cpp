@@ -260,12 +260,20 @@ namespace CHelper {
         return cpack;
     }
 
+    template<class JsonType>
+    void writeJsonToFileWithCreateDirectory(const std::filesystem::path &path, const JsonType &j) {
+        if (!exists(path)) {
+            std::filesystem::create_directories(path);
+        }
+        serialization::write_json_to_file(path, j);
+    }
+
 #ifndef CHELPER_NO_FILESYSTEM
     void CPack::writeJsonToDirectory(const std::filesystem::path &path) const {
         {
             rapidjson::GenericDocument<rapidjson::UTF8<>> j;
             serialization::Codec<decltype(manifest)>::template to_json(j.GetAllocator(), j, manifest);
-            serialization::write_json_to_file(path / "manifest.json", j);
+            writeJsonToFileWithCreateDirectory(path / "manifest.json", j);
         }
         for (const auto &item: normalIds) {
             rapidjson::GenericDocument<rapidjson::UTF8<>> j;
@@ -274,7 +282,7 @@ namespace CHelper {
             serialization::Codec<decltype(item.first)>::template to_json_member(j.GetAllocator(), j, "id", item.first);
             serialization::Codec<std::string>::template to_json_member(j.GetAllocator(), j, "type", "normal");
             serialization::Codec<decltype(item.second)>::template to_json_member(j.GetAllocator(), j, "content", item.second);
-            serialization::write_json_to_file(path / "id" / (item.first + u".json"), j);
+            writeJsonToFileWithCreateDirectory(path / "id" / (item.first + u".json"), j);
         }
         for (const auto &item: namespaceIds) {
             rapidjson::GenericDocument<rapidjson::UTF8<>> j;
@@ -283,7 +291,7 @@ namespace CHelper {
             serialization::Codec<decltype(item.first)>::template to_json_member(j.GetAllocator(), j, "id", item.first);
             serialization::Codec<std::string>::template to_json_member(j.GetAllocator(), j, "type", "namespace");
             serialization::Codec<decltype(item.second)>::template to_json_member(j.GetAllocator(), j, "content", item.second);
-            serialization::write_json_to_file(path / "id" / (item.first + u".json"), j);
+            writeJsonToFileWithCreateDirectory(path / "id" / (item.first + u".json"), j);
         }
         {
             rapidjson::GenericDocument<rapidjson::UTF8<>> j;
@@ -292,7 +300,7 @@ namespace CHelper {
             serialization::Codec<std::string>::template to_json_member(j.GetAllocator(), j, "id", "items");
             serialization::Codec<std::string>::template to_json_member(j.GetAllocator(), j, "type", "item");
             serialization::Codec<decltype(itemIds)>::template to_json_member(j.GetAllocator(), j, "items", itemIds);
-            serialization::write_json_to_file(path / "id" / "items.json", j);
+            writeJsonToFileWithCreateDirectory(path / "id" / "items.json", j);
         }
         {
             rapidjson::GenericDocument<rapidjson::UTF8<>> j;
@@ -301,22 +309,22 @@ namespace CHelper {
             serialization::Codec<std::string>::template to_json_member(j.GetAllocator(), j, "id", "blocks");
             serialization::Codec<std::string>::template to_json_member(j.GetAllocator(), j, "type", "block");
             serialization::Codec<decltype(blockIds)>::template to_json_member(j.GetAllocator(), j, "blocks", blockIds);
-            serialization::write_json_to_file(path / "id" / "blocks.json", j);
+            writeJsonToFileWithCreateDirectory(path / "id" / "blocks.json", j);
         }
         for (const auto &item: jsonNodes) {
             rapidjson::GenericDocument<rapidjson::UTF8<>> j;
             serialization::Codec<decltype(item)>::template to_json(j.GetAllocator(), j, item);
-            serialization::write_json_to_file(path / "json" / (item->id.value() + u".json"), j);
+            writeJsonToFileWithCreateDirectory(path / "json" / (item->id.value() + u".json"), j);
         }
         for (const auto &item: repeatNodeData) {
             rapidjson::GenericDocument<rapidjson::UTF8<>> j;
             serialization::Codec<decltype(item)>::template to_json(j.GetAllocator(), j, item);
-            serialization::write_json_to_file(path / "repeat" / (item.id + u".json"), j);
+            writeJsonToFileWithCreateDirectory(path / "repeat" / (item.id + u".json"), j);
         }
         for (const auto &item: *commands) {
             rapidjson::GenericDocument<rapidjson::UTF8<>> j;
             serialization::Codec<decltype(item)>::template to_json(j.GetAllocator(), j, item);
-            serialization::write_json_to_file(path / "command" / (item->name[0] + u".json"), j);
+            writeJsonToFileWithCreateDirectory(path / "command" / (item->name[0] + u".json"), j);
         }
     }
 #endif
@@ -369,7 +377,7 @@ namespace CHelper {
 
 #ifndef CHELPER_NO_FILESYSTEM
     void CPack::writeJsonToFile(const std::filesystem::path &path) const {
-        serialization::write_json_to_file(path, toJson());
+        writeJsonToFileWithCreateDirectory(path, toJson());
     }
 
     void CPack::writeBinToFile(const std::filesystem::path &path) const {

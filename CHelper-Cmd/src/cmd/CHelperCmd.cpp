@@ -135,7 +135,7 @@ namespace CHelper::Test {
      */
     [[maybe_unused]] void
     testDir(const std::filesystem::path &cpackPath, const std::vector<std::u16string> &commands, bool isTestTime) {
-        CHelperCore *core;
+        CHelperCore *core = nullptr;
         try {
             core = CHelperCore::createByDirectory(cpackPath);
             fmt::print("\n");
@@ -147,6 +147,7 @@ namespace CHelper::Test {
             exit(-1);
         }
         test(core, commands, isTestTime);
+        delete core;
     }
 
     /**
@@ -154,7 +155,7 @@ namespace CHelper::Test {
      */
     [[maybe_unused]] void
     testBin(const std::filesystem::path &cpackPath, const std::vector<std::u16string> &commands, bool isTestTime) {
-        CHelperCore *core;
+        CHelperCore *core = nullptr;;
         try {
             core = CHelperCore::createByBinary(cpackPath);
             fmt::print("\n");
@@ -166,6 +167,7 @@ namespace CHelper::Test {
             exit(-1);
         }
         test(core, commands, isTestTime);
+        delete core;
     }
 
     /**
@@ -269,8 +271,9 @@ namespace CHelper::Test {
      * 测试程序性能
      */
     [[maybe_unused]] void test2(const std::filesystem::path &cpackPath, const std::vector<std::u16string> &commands, int times) {
+        CHelperCore *core = nullptr;
         try {
-            auto core = CHelperCore::createByDirectory(cpackPath);
+            core = CHelperCore::createByDirectory(cpackPath);
             fmt::print("\n");
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
@@ -295,11 +298,13 @@ namespace CHelper::Test {
             Profile::printAndClear(e);
             exit(-1);
         }
+        delete core;
     }
 
     [[maybe_unused]] void writeDirectory(const std::u16string &input, const std::filesystem::path &output) {
+        CHelperCore *core = nullptr;
         try {
-            auto core = CHelperCore::createByDirectory(input);
+            core = CHelperCore::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
@@ -313,11 +318,13 @@ namespace CHelper::Test {
             Profile::printAndClear(e);
             exit(-1);
         }
+        delete core;
     }
 
     [[maybe_unused]] void writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output) {
+        CHelperCore *core = nullptr;
         try {
-            auto core = CHelperCore::createByDirectory(input);
+            core = CHelperCore::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
@@ -331,11 +338,13 @@ namespace CHelper::Test {
             Profile::printAndClear(e);
             exit(-1);
         }
+        delete core;
     }
 
     [[maybe_unused]] void writeBinary(const std::filesystem::path &input, const std::filesystem::path &output) {
+        CHelperCore *core = nullptr;
         try {
-            auto core = CHelperCore::createByDirectory(input);
+            core = CHelperCore::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return;
             }
@@ -349,6 +358,7 @@ namespace CHelper::Test {
             Profile::printAndClear(e);
             exit(-1);
         }
+        delete core;
     }
 
 }// namespace CHelper::Test
