@@ -454,7 +454,7 @@ namespace CHelper {
 CODEC_ENUM(CHelper::Node::NodeTypeId::NodeTypeId, uint8_t);
 
 template<class JsonValueType>
-void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::template to_json(
+void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::to_json(
         typename JsonValueType::AllocatorType &allocator,
         JsonValueType &jsonValue,
         const Type &t) {
@@ -465,7 +465,7 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::template to
 }
 
 template<class JsonValueType>
-void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::template from_json(
+void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::from_json(
         const JsonValueType &jsonValue,
         Type &t) {
     if (HEDLEY_UNLIKELY(!jsonValue.IsObject())) {
@@ -498,7 +498,7 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::template fr
 }
 
 template<bool isNeedConvert>
-void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::template to_binary(
+void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::to_binary(
         std::ostream &ostream,
         const Type &t) {
     Codec<decltype(t->getNodeType())>::template to_binary<isNeedConvert>(ostream, t->getNodeType());
@@ -506,7 +506,7 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::template to
 }
 
 template<bool isNeedConvert>
-void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::template from_binary(
+void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::from_binary(
         std::istream &istream,
         Type &t) {
     CHelper::Node::NodeTypeId::NodeTypeId typeId;

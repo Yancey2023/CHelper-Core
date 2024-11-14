@@ -1,8 +1,12 @@
 # build directory
+/build
 /cmake-build-debug
 /cmake-build-release
 /CHelper-Web/cmake-build-emscripten-release
 /CHelper-Web/cmake-build-emscripten-minsizerel
+
+# cache
+/.cache
 
 # run directory
 /CHelper-Resource/run

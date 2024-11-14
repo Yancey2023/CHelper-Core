@@ -13,15 +13,11 @@ namespace CHelper {
 
     CHelperCore *CHelperCore::create(const std::function<std::unique_ptr<CPack>()> &getCPack) {
         try {
-// #if CHelperOnlyReadBinary != true
-             std::chrono::high_resolution_clock::time_point start, end;
-             start = std::chrono::high_resolution_clock::now();
-// #endif
+            std::chrono::high_resolution_clock::time_point start, end;
+            start = std::chrono::high_resolution_clock::now();
             std::unique_ptr<CPack> cPack = getCPack();
-// #if CHelperOnlyReadBinary != true
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO("CPack load successfully ({})", std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms");
-// #endif
             ASTNode astNode = Parser::parse(u"", cPack.get());
             return new CHelperCore(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
@@ -31,7 +27,7 @@ namespace CHelper {
         }
     }
 
-// #if CHelperOnlyReadBinary != true
+#ifndef CHELPER_NO_FILESYSTEM
     CHelperCore *CHelperCore::createByDirectory(const std::filesystem::path &cpackPath) {
         return create([&cpackPath]() {
             return CPack::createByDirectory(cpackPath);
@@ -75,7 +71,7 @@ namespace CHelper {
             return std::move(result);
         });
     }
-// #endif
+#endif
 
     void CHelperCore::onTextChanged(const std::u16string &content, size_t index0) {
         if (HEDLEY_LIKELY(input != content)) {

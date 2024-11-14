@@ -14,8 +14,6 @@ int main() {
     return 0;
 }
 
-// #if CHelperOnlyReadBinary != true
-
 [[maybe_unused]] void testDir() {
     std::filesystem::path resourceDir(RESOURCE_DIR);
     CHelper::Test::testDir(resourceDir / "resources" / "beta" / "vanilla",
@@ -208,7 +206,7 @@ namespace CHelper::Test {
                     fmt::print("get suggestions successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms", fg(fmt::color::medium_purple)));
                     fmt::print("get structure successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms", fg(fmt::color::medium_purple)));
                 }
-#if CHelperTest == true
+#ifdef CHelperTest
                 fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
                 fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
 #endif
@@ -352,8 +350,6 @@ namespace CHelper::Test {
             exit(-1);
         }
     }
-
-// #endif
 
 }// namespace CHelper::Test
 

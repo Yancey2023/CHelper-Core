@@ -15,7 +15,7 @@ CHelperApp::CHelperApp(QWidget *parent)
       ui(new Ui::CHelperApp) {
     ui->setupUi(this);
     setWindowIcon(QIcon(":/img/logo.webp"));
-#if CHelperDebug == true
+#ifdef CHelperDebug
     std::filesystem::path resourcePath(RESOURCE_DIR);
     core = CHelper::CHelperCore::createByDirectory(resourcePath / "resources" / "beta" / "vanilla");
 #else
@@ -57,7 +57,7 @@ void CHelperApp::onTextChanged(const QString &string) {
         ui->descriptionLabel->setText("作者：Yancey");
         ui->errorReasonLabel->setText(nullptr);
     } else {
-#if CHelperTest == true
+#ifdef CHelperTest
         fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
         fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
         CHelper::ColoredString coloredString = core->getColors();

@@ -157,11 +157,10 @@ public:
 extern "C" {
 
 EMSCRIPTEN_KEEPALIVE WrappedCHelperCore *init(const char *cpackPtr, size_t cpackLength) {
-    return new WrappedCHelperCore(CHelper::CHelperCore::create([&cpackPtr, &cpackLength]() {
+    return new WrappedCHelperCore(CHelper::CHelperCore::create([&cpackPtr, &cpackLength]() -> std::unique_ptr<CHelper::CPack> {
         std::string str = std::string(cpackPtr, cpackLength);
         std::istringstream iss(str);
-        CHelper::BinaryReader binaryReader(true, iss);
-        return CHelper::CPack::createByBinary(binaryReader);
+        return CHelper::CPack::createByBinary(iss);
     }));
 }
 

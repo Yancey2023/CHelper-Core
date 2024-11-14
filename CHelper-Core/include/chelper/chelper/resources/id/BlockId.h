@@ -137,7 +137,7 @@ struct serialization::Codec<CHelper::PropertyValue> {
                 Codec<decltype(t.integer)>::template to_json(allocator, jsonValue, t.integer);
                 break;
             default:
-#if CHelperDebug == true
+#ifdef CHelperDebug
                 throw std::runtime_error("error block state property type");
 #else
                 HEDLEY_UNREACHABLE();
@@ -203,7 +203,7 @@ struct serialization::Codec<CHelper::PropertyValue> {
                 Codec<decltype(t.integer)>::template to_binary<isNeedConvert>(ostream, t.integer);
                 break;
             default:
-#if CHelperDebug == true
+#ifdef CHelperDebug
                 throw std::runtime_error("error block state property type");
 #else
                 HEDLEY_UNREACHABLE();
@@ -299,7 +299,7 @@ struct serialization::Codec<CHelper::Property> : BaseCodec<CHelper::Property> {
     static void to_binary(std::ostream &ostream,
                           const Type &t) {
         Codec<decltype(t.name)>::template to_binary<isNeedConvert>(ostream, t.name);
-#if CHelperDebug == true
+#ifdef CHelperDebug
         if (t.type != CHelper::PropertyType::BOOLEAN && t.type != CHelper::PropertyType::STRING && t.type != CHelper::PropertyType::INTEGER) {
             throw std::runtime_error("error block state property type");
         }
@@ -321,7 +321,7 @@ struct serialization::Codec<CHelper::Property> : BaseCodec<CHelper::Property> {
         t.release();
         Codec<decltype(t.name)>::template from_binary<isNeedConvert>(istream, t.name);
         Codec<decltype(t.type)>::template from_binary<isNeedConvert>(istream, t.type);
-#if CHelperDebug == true
+#ifdef CHelperDebug
         if (t.type != CHelper::PropertyType::BOOLEAN && t.type != CHelper::PropertyType::STRING && t.type != CHelper::PropertyType::INTEGER) {
             throw std::runtime_error("error block state property type");
         }

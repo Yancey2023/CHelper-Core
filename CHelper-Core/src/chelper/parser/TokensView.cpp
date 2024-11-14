@@ -13,7 +13,7 @@ namespace CHelper {
         startIndex = getIndex(start);
         endIndex = getIndex(end);
         cacheString = {lexerResult->content.c_str() + startIndex, endIndex - startIndex};
-#if CHelperDebug == true
+#ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(start > end)) {
             throw std::runtime_error("TokensView: wrong range: (" + std::to_string(start) + ", " + std::to_string(end) + ")");
         }

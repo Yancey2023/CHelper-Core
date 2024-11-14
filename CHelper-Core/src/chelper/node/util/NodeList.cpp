@@ -28,7 +28,7 @@ namespace CHelper::Node {
                   std::vector<const NodeBase *>{
                           nodeSeparator, nodeRight},
                   false) {
-#if CHelperDebug == true
+#ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(
                     nodeLeft == nullptr || nodeElement == nullptr || nodeSeparator == nullptr || nodeRight == nullptr)) {
             throw std::runtime_error("NodeOr has a null child node");
@@ -49,7 +49,7 @@ namespace CHelper::Node {
         }
         std::vector<ASTNode> childNodes = {std::move(left)};
         {
-#if CHelperDebug == true
+#ifdef CHelperDebug
             size_t startIndex = tokenReader.index;
 #endif
             //检测[]中间有没有内容
@@ -64,7 +64,7 @@ namespace CHelper::Node {
             if (HEDLEY_UNLIKELY(flag)) {
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
-#if CHelperDebug == true
+#ifdef CHelperDebug
             if (HEDLEY_UNLIKELY(startIndex == tokenReader.index)) {
                 CHELPER_WARN("NodeList has some error");
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
@@ -72,7 +72,7 @@ namespace CHelper::Node {
 #endif
         }
         while (true) {
-#if CHelperDebug == true
+#ifdef CHelperDebug
             size_t startIndex = tokenReader.index;
 #endif
             //检测是分隔符还是右括号
@@ -98,7 +98,7 @@ namespace CHelper::Node {
             if (HEDLEY_UNLIKELY(flag)) {
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
             }
-#if CHelperDebug == true
+#ifdef CHelperDebug
             if (HEDLEY_UNLIKELY(startIndex == tokenReader.index)) {
                 CHELPER_WARN("NodeList has some error");
                 return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());

@@ -13,25 +13,11 @@
 #define CHelperLogger INFO
 #endif
 
-#ifndef CHelperTest
-#define CHelperTest false
+#if _CHELPER_DEBUG == true
+#define CHelperDebug
 #endif
 
-// 是否支持导入或导出JSON格式的资源包
-// #ifndef CHelperOnlyReadBinary
-// #define CHelperOnlyReadBinary false
-// #endif
-
-// 由于测试过程需要用到JSON相关的东西，所以CHelperTest和CHelperOnlyReadBinary不能同时为true
-// #if CHelperTest == true && CHelperOnlyReadBinary == true
-// #error CHelperTest and CHelperOnlyReadBinary cannot both be true
-// #endif
-
-#ifndef CHelperAndroid
-#define CHelperAndroid false
-#endif
-
-#if CHelperAndroid == true
+#ifdef CHelperAndroid
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
 #include <android/log.h>
@@ -53,9 +39,9 @@
 // 抛出的错误
 #include <exception>
 // 文件读写
-// #if CHelperOnlyReadBinary != true
+#ifndef CHELPER_NO_FILESYSTEM
 #include <filesystem>
-// #endif
+#endif
 // 用于字符串转整数或小数
 #include <cinttypes>
 // 字符串格式化
@@ -67,6 +53,9 @@
 // UTF编码处理库
 #include <utf8.h>
 // 序列化
+#ifdef CHELPER_NO_FILESYSTEM
+#define SERIALIZATION_NO_FILESYSTEM
+#endif
 #include <serialization/serialization.h>
 // 二进制读写
 #include <chelper/util/BinaryUtil.h>

@@ -7,12 +7,12 @@
 #ifndef CHELPER_CHELPERCORE_H
 #define CHELPER_CHELPERCORE_H
 
-#include "node/NodeType.h"
 #include "old2new/Old2New.h"
-#include <chelper/parser/ASTNode.h>
-#include "pch.h"
-#include <chelper/resources/CPack.h>
 #include "settings/Settings.h"
+#include <chelper/parser/ASTNode.h>
+#include <chelper/resources/CPack.h>
+#include <pch.h>
+
 
 namespace CHelper {
 
@@ -31,13 +31,13 @@ namespace CHelper {
 
         static CHelperCore *create(const std::function<std::unique_ptr<CPack>()> &getCPack);
 
-// #if CHelperOnlyReadBinary != true
+      #ifndef CHELPER_NO_FILESYSTEM
         static CHelperCore *createByDirectory(const std::filesystem::path &cpackPath);
 
         static CHelperCore *createByJson(const std::filesystem::path &cpackPath);
 
         static CHelperCore *createByBinary(const std::filesystem::path &cpackPath);
-// #endif
+#endif
 
         void onTextChanged(const std::u16string &content, size_t index);
 

@@ -44,7 +44,7 @@ namespace CHelper {
 
 }// namespace CHelper
 
-#if CHelperTest == true
+#ifdef CHelperTest
 std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType) {
     switch (tokenType) {
         case CHelper::TokenType::NUMBER:

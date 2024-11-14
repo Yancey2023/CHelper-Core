@@ -42,7 +42,7 @@ namespace CHelper {
 
 }// namespace CHelper
 
-#if CHelperTest == true
+#ifdef CHelperTest
 std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType);
 
 std::ostream &operator<<(std::ostream &os, const CHelper::Token &token);

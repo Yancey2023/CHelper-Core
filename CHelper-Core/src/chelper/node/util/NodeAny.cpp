@@ -84,7 +84,7 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeAny::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-#if CHelperDebug == true
+#ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(node == nullptr)) {
             throw std::runtime_error("not init");
         }

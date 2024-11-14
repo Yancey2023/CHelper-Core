@@ -8,8 +8,9 @@
 
 namespace CHelper {
 
+#ifndef CHELPER_NO_FILESYSTEM
     CPack::CPack(const std::filesystem::path &path) {
-#if CHelperDebug == true
+#ifdef CHelperDebug
         size_t stackSize = Profile::stack.size();
 #endif
         Node::currentCreateStage = Node::NodeCreateStage::NONE;
@@ -43,15 +44,16 @@ namespace CHelper {
         Node::currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
-#if CHelperDebug == true
+#ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
             CHELPER_WARN("error profile stack after loading cpack");
         }
 #endif
     }
+#endif
 
     CPack::CPack(const rapidjson::GenericDocument<rapidjson::UTF8<>> &j) {
-#if CHelperDebug == true
+#ifdef CHelperDebug
         size_t stackSize = Profile::stack.size();
 #endif
         Node::currentCreateStage = Node::NodeCreateStage::NONE;
@@ -80,7 +82,7 @@ namespace CHelper {
         Node::currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
-#if CHelperDebug == true
+#ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
             CHELPER_WARN("error profile stack after loading cpack");
         }
@@ -88,7 +90,7 @@ namespace CHelper {
     }
 
     CPack::CPack(std::istream &istream) {
-#if CHelperDebug == true
+#ifdef CHelperDebug
         size_t stackSize = Profile::stack.size();
 #endif
         Node::currentCreateStage = Node::NodeCreateStage::NONE;
@@ -115,7 +117,7 @@ namespace CHelper {
         Node::currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
-#if CHelperDebug == true
+#ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
             CHELPER_WARN("error profile stack after loading cpack");
         }
@@ -235,12 +237,14 @@ namespace CHelper {
         Profile::pop();
     }
 
+#ifndef CHELPER_NO_FILESYSTEM
     std::unique_ptr<CPack> CPack::createByDirectory(const std::filesystem::path &path) {
         Profile::push("start load CPack by DIRECTORY: {}", path.u16string());
         std::unique_ptr<CPack> cpack = std::make_unique<CPack>(path);
         Profile::pop();
         return cpack;
     }
+#endif
 
     std::unique_ptr<CPack> CPack::createByJson(const rapidjson::GenericDocument<rapidjson::UTF8<>> &j) {
         Profile::push("start load CPack by JSON");
@@ -256,6 +260,7 @@ namespace CHelper {
         return cpack;
     }
 
+#ifndef CHELPER_NO_FILESYSTEM
     void CPack::writeJsonToDirectory(const std::filesystem::path &path) const {
         {
             rapidjson::GenericDocument<rapidjson::UTF8<>> j;
@@ -314,6 +319,7 @@ namespace CHelper {
             serialization::write_json_to_file(path / "command" / (item->name[0] + u".json"), j);
         }
     }
+#endif
 
     [[nodiscard]] rapidjson::GenericDocument<rapidjson::UTF8<>> CPack::toJson() const {
         rapidjson::GenericDocument<rapidjson::UTF8<>> result;
@@ -361,6 +367,7 @@ namespace CHelper {
         return result;
     }
 
+#ifndef CHELPER_NO_FILESYSTEM
     void CPack::writeJsonToFile(const std::filesystem::path &path) const {
         serialization::write_json_to_file(path, toJson());
     }
@@ -389,12 +396,13 @@ namespace CHelper {
         ostream.close();
         Profile::pop();
     }
+#endif
 
     std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
     CPack::getNormalId(const std::u16string &key) const {
         auto it = normalIds.find(key);
         if (HEDLEY_UNLIKELY(it == normalIds.end())) {
-#if CHelperDebug == true
+#ifdef CHelperDebug
             CHELPER_WARN(R"(fail to find normal ids by key: "{}")", key);
 #endif
             return nullptr;
@@ -411,7 +419,7 @@ namespace CHelper {
         }
         auto it = namespaceIds.find(key);
         if (HEDLEY_UNLIKELY(it == namespaceIds.end())) {
-#if CHelperDebug == true
+#ifdef CHelperDebug
             CHELPER_WARN(R"(fail to find namespace ids by key: "{}")", key);
 #endif
             return nullptr;

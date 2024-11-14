@@ -42,7 +42,9 @@ namespace CHelper {
         std::vector<std::unique_ptr<Node::NodeBase>> repeatCacheNodes;
 
     public:
+#ifndef CHELPER_NO_FILESYSTEM
         explicit CPack(const std::filesystem::path &path);
+#endif
 
         explicit CPack(const rapidjson::GenericDocument<rapidjson::UTF8<>> &j);
 
@@ -60,19 +62,25 @@ namespace CHelper {
         void afterApply();
 
     public:
+#ifndef CHELPER_NO_FILESYSTEM
         static std::unique_ptr<CPack> createByDirectory(const std::filesystem::path &path);
+#endif
 
         static std::unique_ptr<CPack> createByJson(const rapidjson::GenericDocument<rapidjson::UTF8<>> &j);
 
         static std::unique_ptr<CPack> createByBinary(std::istream &binaryReader);
 
+#ifndef CHELPER_NO_FILESYSTEM
         void writeJsonToDirectory(const std::filesystem::path &path) const;
+#endif
 
         [[nodiscard]] rapidjson::GenericDocument<rapidjson::UTF8<>> toJson() const;
 
+#ifndef CHELPER_NO_FILESYSTEM
         void writeJsonToFile(const std::filesystem::path &path) const;
 
         void writeBinToFile(const std::filesystem::path &path) const;
+#endif
 
         [[nodiscard]] std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
         getNormalId(const std::u16string &key) const;

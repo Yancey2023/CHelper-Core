@@ -94,11 +94,13 @@
 
 // rapid json
 #include <rapidjson/document.h>
-#include <rapidjson/filereadstream.h>
-#include <rapidjson/filewritestream.h>
 #include <rapidjson/rapidjson.h>
 #include <rapidjson/stringbuffer.h>
+#ifndef SERIALIZATION_NO_FILESYSTEM
+#include <rapidjson/filereadstream.h>
+#include <rapidjson/filewritestream.h>
 #include <rapidjson/writer.h>
+#endif
 
 namespace serialization {
     namespace details {
@@ -362,6 +364,7 @@ namespace serialization {
                                              .append("\"")) {}
         };
 
+#ifndef SERIALIZATION_NO_FILESYSTEM
         class OpenFileException final : public std::runtime_error {
         public:
             explicit OpenFileException(const char *path, const char *mode, const errno_t err)
@@ -372,6 +375,7 @@ namespace serialization {
                                              .append(": ")
                                              .append(path)) {}
         };
+#endif
 
     }// namespace exceptions
 
@@ -1055,6 +1059,7 @@ namespace serialization {
         }
     }
 
+#ifndef SERIALIZATION_NO_FILESYSTEM
     template<class EncodingType = rapidjson::UTF8<>>
     rapidjson::GenericDocument<EncodingType> get_json_from_file(const char *path) {
         FILE *fp;
@@ -1106,6 +1111,7 @@ namespace serialization {
     void write_json_to_file(const std::filesystem::path &path, const rapidjson::GenericValue<EncodingType> &j) {
         write_json_to_file(path.string().c_str(), j);
     }
+#endif
 #endif
 
 }// namespace serialization

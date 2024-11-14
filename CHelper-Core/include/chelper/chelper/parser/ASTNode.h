@@ -84,7 +84,7 @@ namespace CHelper {
         class CPack;
 
     public:
-#if CHelperTest == true
+#ifdef CHelperTest
         [[nodiscard]]json toJson() const;
 
         [[nodiscard]]json toBestJson() const;

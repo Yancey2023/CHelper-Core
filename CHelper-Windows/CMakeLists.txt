@@ -8,6 +8,9 @@ project(CHelperWindows
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# export compile commands
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Fix issues in MSVC
 if (MSVC)
     add_compile_options("/utf-8")

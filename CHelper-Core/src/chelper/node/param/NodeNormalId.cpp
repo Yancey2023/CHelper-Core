@@ -32,7 +32,7 @@ namespace CHelper::Node {
           contents(contents),
           allowMissingID(allowMissingID),
           getNormalIdASTNode(getNormalIdASTNode) {
-#if CHelperDebug == true
+#ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(contents == nullptr)) {
             throw std::runtime_error("contents should not be nullptr");
         }

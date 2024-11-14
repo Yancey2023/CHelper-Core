@@ -12,7 +12,7 @@ namespace CHelper {
           colors(str.length(), NO_COLOR) {}
 
     void ColoredString::setColor(size_t index, uint32_t color) {
-#if CHelperDebug == true
+#ifdef CHelperDebug
         if (colors[index] != NO_COLOR && str[index] != '[' && str[index] != ']' && str[index] != '{' && str[index] != '}') {
             CHELPER_ERROR("replace color");
         }
@@ -25,7 +25,7 @@ namespace CHelper {
     }
 
     void ColoredString::setColor(size_t start, size_t end, uint32_t color) {
-#if CHelperDebug == true
+#ifdef CHelperDebug
         for (size_t i = start; i < end; i++) {
             if (colors[i] != NO_COLOR && str[i] != '[' && str[i] != ']' && str[i] != '{' && str[i] != '}') {
                 CHELPER_ERROR("replace color");

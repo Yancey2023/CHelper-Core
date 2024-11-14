@@ -13,13 +13,13 @@
 #include "Token.h"
 #include "pch.h"
 
-#if CHelperDebug == true
+#ifdef CHelperDebug
 #define DEBUG_GET_NODE_BEGIN(node) size_t node##Index = tokenReader.indexStack.size();
 #else
 #define DEBUG_GET_NODE_BEGIN(node)
 #endif
 
-#if CHelperDebug == true
+#ifdef CHelperDebug
 #define DEBUG_GET_NODE_END(node)                                            \
     if (HEDLEY_UNLIKELY(node##Index != tokenReader.indexStack.size())) {    \
         Profile::push("TokenReaderIndexError: {} {} {}",                    \

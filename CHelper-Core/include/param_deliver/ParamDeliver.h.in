@@ -1,4 +1,4 @@
-#define CHelperDebug @CHelperDebug@
+#define _CHELPER_DEBUG @CHelperDebug@
 #define RESOURCE_DIR "@RESOURCE_DIR@"
 #define CPACK_VERSION_RELEASE "@CPACK_VERSION_RELEASE@"
 #define CPACK_VERSION_BETA "@CPACK_VERSION_BETA@"

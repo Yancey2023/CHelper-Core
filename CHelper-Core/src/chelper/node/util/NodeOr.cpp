@@ -21,7 +21,7 @@ namespace CHelper::Node {
           childNodes(std::move(childNodes)),
           defaultErrorReason(defaultErrorReason),
           nodeId(nodeId) {
-#if CHelperDebug == true
+#ifdef CHelperDebug
         for (const auto &item: this->childNodes) {
             if (HEDLEY_UNLIKELY(item == nullptr)) {
                 throw std::runtime_error("null node in node or");

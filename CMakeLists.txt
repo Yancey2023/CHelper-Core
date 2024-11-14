@@ -27,7 +27,10 @@ if (CMAKE_SYSTEM_NAME MATCHES "Windows")
 endif ()
 
 # Qt Application
- add_subdirectory(CHelper-Qt)
+find_package(Qt6 COMPONENTS Core Gui Widgets)
+if (Qt6_FOUND)
+    add_subdirectory(CHelper-Qt)
+endif()
 
 # Android Shared Libary (not support MSVC)
 if (NOT MSVC)

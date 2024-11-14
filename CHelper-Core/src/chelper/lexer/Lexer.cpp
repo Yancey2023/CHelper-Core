@@ -115,7 +115,7 @@ namespace CHelper::Lexer {
 
     LexerResult lex(const std::u16string &content) {
         StringReader stringReader(content);
-#if CHelperTest == true
+#ifdef CHelperTest
         Profile::push("start lex: {}", stringReader.content);
 #endif
         std::vector<Token> tokenList = std::vector<Token>();
@@ -142,7 +142,7 @@ namespace CHelper::Lexer {
                     break;
             }
         }
-#if CHelperTest == true
+#ifdef CHelperTest
         Profile::pop();
 #endif
         return {content, std::move(tokenList)};

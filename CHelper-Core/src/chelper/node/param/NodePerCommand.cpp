@@ -27,7 +27,7 @@ namespace CHelper::Node {
                 throw std::runtime_error("dismiss child node ids");
             }
         }
-#if CHelperDebug == true
+#ifdef CHelperDebug
         for (const auto &item: nodes) {
             bool flag1 = item->getNodeType() == NodeTypeId::POSITION ||
                          item->getNodeType() == NodeTypeId::RELATIVE_FLOAT;

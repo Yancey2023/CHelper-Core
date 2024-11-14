@@ -8,28 +8,24 @@ project(CHelperAndroid
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# export compile commands
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Release
 set(CMAKE_BUILD_TYPE Release)
 
 # CHelper-Core
+set(CMAKE_CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Core)
 if (PROJECT_IS_TOP_LEVEL)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Core ${CMAKE_BINARY_DIR}/include/CHelper-Core)
+    add_subdirectory(${CMAKE_CORE_DIR} ${CMAKE_BINARY_DIR}/include/CHelper-Core)
 endif ()
-
-# Param Deliver
-set(CHelperDebug false)
-set(RESOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Resource)
-configure_file(${CHELPER_CORE_DIR}/include/param_deliver/CHelperCoreParamDeliver.h.in include/param_deliver/CHelperCoreParamDeliver.h @ONLY)
-
-# Sources
-file(GLOB_RECURSE CHELPER_CORE_SOURCE_FILE ${CHELPER_CORE_DIR}/src/chelper/*.h ${CHELPER_CORE_DIR}/src/chelper/*.cpp)
 
 # Android Application
 add_library(CHelperAndroid SHARED src/AndroidNative.cpp)
-init_chelper_library(CHelperAndroid)
-target_compile_definitions(CHelperAndroid PRIVATE CHelperAndroid=true)
+init_chelper_library(CHelperAndroid ${CMAKE_CORE_DIR})
+target_compile_definitions(CHelperAndroid PUBLIC CHelperAndroid)
 if (PROJECT_IS_TOP_LEVEL)
-    target_link_libraries(CHelper::AndroidCore PUBLIC android log)
+    target_link_libraries(CHelperAndroid PUBLIC android log)
 else ()
-    target_include_directories(CHelper::AndroidCore PUBLIC include/android)
+    target_include_directories(CHelperAndroid PUBLIC include/android)
 endif ()

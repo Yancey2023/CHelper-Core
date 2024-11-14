@@ -36,14 +36,14 @@ namespace CHelper::Logger {
         }
     }
 
-#if CHelperAndroid == true
+#ifdef CHelperAndroid
     static const char *KEY = "CHelperNative";
 #endif
 
 #if CHelperLogger == DEBUG
     template<typename... T>
     void debug(const std::string &fmt, T &&...args) {
-#if CHelperAndroid == true
+#ifdef CHelperAndroid
         std::string content = fmt::format(fmt, convertArg(args)...);
         __android_log_print(ANDROID_LOG_DEBUG, KEY, "%s", content.c_str());
 #else
@@ -58,7 +58,7 @@ namespace CHelper::Logger {
 #if CHelperLogger == DEBUG || CHelperLogger == INFO
     template<typename... T>
     void info(const std::string &fmt, T &&...args) {
-#if CHelperAndroid == true
+#ifdef CHelperAndroid
         std::string content = fmt::format(fmt, convertArg(args)...);
         __android_log_print(ANDROID_LOG_INFO, KEY, "%s", content.c_str());
 #else
@@ -73,7 +73,7 @@ namespace CHelper::Logger {
 #if CHelperLogger == DEBUG || CHelperLogger == INFO || CHelperLogger == WARN
     template<typename... T>
     void warn(const std::string &fmt, T &&...args) {
-#if CHelperAndroid == true
+#ifdef CHelperAndroid
         std::string content = fmt::format(fmt, convertArg(args)...);
         __android_log_print(ANDROID_LOG_WARN, KEY, "%s", content.c_str());
 #else
@@ -88,7 +88,7 @@ namespace CHelper::Logger {
 #if CHelperLogger == DEBUG || CHelperLogger == INFO || CHelperLogger == WARN || CHelperLogger == ERROR
     template<typename... T>
     void error(const std::string &fmt, T &&...args) {
-#if CHelperAndroid == true
+#ifdef CHelperAndroid
         std::string content = fmt::format(fmt, convertArg(args)...);
         __android_log_print(ANDROID_LOG_ERROR, KEY, "%s", content.c_str());
 #else
