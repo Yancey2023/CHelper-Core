@@ -21,7 +21,6 @@ endif ()
 
 # Android Application
 add_library(CHelperAndroid SHARED src/AndroidNative.cpp)
-init_chelper_library(CHelperAndroid ${CMAKE_CORE_DIR})
 target_compile_definitions(CHelperAndroid PUBLIC CHelperAndroid)
 if (PROJECT_IS_TOP_LEVEL)
     target_link_libraries(CHelperAndroid PUBLIC android log)
