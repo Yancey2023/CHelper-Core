@@ -15,9 +15,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_BUILD_TYPE Release)
 
 # CHelper-Core
-set(CMAKE_CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Core)
 if (PROJECT_IS_TOP_LEVEL)
-    add_subdirectory(${CMAKE_CORE_DIR} ${CMAKE_BINARY_DIR}/include/CHelper-Core)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Core ${CMAKE_BINARY_DIR}/include/CHelper-Core)
 endif ()
 
 # Android Application
