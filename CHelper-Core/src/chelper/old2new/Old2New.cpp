@@ -649,13 +649,13 @@ namespace CHelper::Old2New {
                 throw serialization::exceptions::JsonSerializationTypeException("object", serialization::getJsonTypeStr(j.GetType()));
             }
             std::u16string name;
-            serialization::Codec<decltype(name)>::template from_json_member<typename JsonValueType::ValueType>(item, serialization::details::JsonKey<DataFix, JsonValueType::Ch>::name(), name);
+            serialization::Codec<decltype(name)>::template from_json_member<typename JsonValueType::ValueType>(item, serialization::details::JsonKey<DataFix, JsonValueType::Ch>::name_(), name);
             uint32_t data;
-            serialization::Codec<decltype(data)>::template from_json_member<typename JsonValueType::ValueType>(item, serialization::details::JsonKey<DataFix, JsonValueType::Ch>::data(), data);
+            serialization::Codec<decltype(data)>::template from_json_member<typename JsonValueType::ValueType>(item, serialization::details::JsonKey<DataFix, JsonValueType::Ch>::data_(), data);
             std::optional<std::u16string> newBlockId;
-            serialization::Codec<decltype(newBlockId)>::template from_json_member<typename JsonValueType::ValueType>(item, serialization::details::JsonKey<DataFix, JsonValueType::Ch>::newBlockId(), newBlockId);
+            serialization::Codec<decltype(newBlockId)>::template from_json_member<typename JsonValueType::ValueType>(item, serialization::details::JsonKey<DataFix, JsonValueType::Ch>::newBlockId_(), newBlockId);
             std::optional<std::u16string> blockState;
-            serialization::Codec<decltype(blockState)>::template from_json_member<typename JsonValueType::ValueType>(item, serialization::details::JsonKey<DataFix, JsonValueType::Ch>::blockState(), blockState);
+            serialization::Codec<decltype(blockState)>::template from_json_member<typename JsonValueType::ValueType>(item, serialization::details::JsonKey<DataFix, JsonValueType::Ch>::blockState_(), blockState);
             getOrCreate(blockFixData, std::move(name)).insert({data, {std::move(newBlockId), std::move(blockState)}});
         }
         return blockFixData;

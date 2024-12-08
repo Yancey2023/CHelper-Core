@@ -248,8 +248,8 @@ struct serialization::Codec<CHelper::Property> : BaseCodec<CHelper::Property> {
                         JsonValueType &jsonValue,
                         const Type &t) {
         jsonValue.SetObject();
-        Codec<decltype(t.name)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::name(), t.name);
-        Codec<decltype(t.defaultValue)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::defaultValue(), t.defaultValue, t.type);
+        Codec<decltype(t.name)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::name_(), t.name);
+        Codec<decltype(t.defaultValue)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::defaultValue_(), t.defaultValue, t.type);
         if (t.valid.has_value()) {
             rapidjson::GenericValue<typename JsonValueType::EncodingType> valid;
             valid.SetArray();
@@ -259,7 +259,7 @@ struct serialization::Codec<CHelper::Property> : BaseCodec<CHelper::Property> {
                 Codec<CHelper::PropertyValue>::template to_json<typename JsonValueType::ValueType>(allocator, perValid, item, t.type);
                 valid.PushBack(std::move(perValid), allocator);
             }
-            jsonValue.AddMember(JsonValueType(details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::valid(), allocator), std::move(valid), allocator);
+            jsonValue.AddMember(JsonValueType(details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::valid_(), allocator), std::move(valid), allocator);
         }
     }
 
@@ -270,9 +270,9 @@ struct serialization::Codec<CHelper::Property> : BaseCodec<CHelper::Property> {
             throw exceptions::JsonSerializationTypeException("object", getJsonTypeStr(jsonValue.GetType()));
         }
         t.release();
-        Codec<decltype(t.name)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::name(), t.name);
-        t.type = Codec<decltype(t.defaultValue)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::defaultValue(), t.defaultValue);
-        const typename JsonValueType::ConstMemberIterator &it = jsonValue.FindMember(details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::valid());
+        Codec<decltype(t.name)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::name_(), t.name);
+        t.type = Codec<decltype(t.defaultValue)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::defaultValue_(), t.defaultValue);
+        const typename JsonValueType::ConstMemberIterator &it = jsonValue.FindMember(details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::valid_());
         if (HEDLEY_LIKELY(it == jsonValue.MemberEnd())) {
             t.valid = std::nullopt;
         } else {
@@ -359,19 +359,19 @@ struct serialization::Codec<CHelper::BlockPropertyDescription> : BaseCodec<CHelp
                         JsonValueType &jsonValue,
                         const Type &t) {
         jsonValue.SetObject();
-        Codec<decltype(t.propertyName)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::propertyName(), t.propertyName);
-        Codec<decltype(t.description)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::description(), t.description);
+        Codec<decltype(t.propertyName)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::propertyName_(), t.propertyName);
+        Codec<decltype(t.description)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::description_(), t.description);
         rapidjson::GenericValue<typename JsonValueType::EncodingType> values;
         values.SetArray();
         values.Reserve(t.values.size(), allocator);
         for (const auto &item: t.values) {
             rapidjson::GenericValue<typename JsonValueType::EncodingType> perValue;
             perValue.SetObject();
-            Codec<decltype(item.valueName)>::template to_json_member<JsonValueType>(allocator, perValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::valueName(), item.valueName, t.type);
-            Codec<decltype(item.description)>::template to_json_member<JsonValueType>(allocator, perValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::description(), item.description);
+            Codec<decltype(item.valueName)>::template to_json_member<JsonValueType>(allocator, perValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::valueName_(), item.valueName, t.type);
+            Codec<decltype(item.description)>::template to_json_member<JsonValueType>(allocator, perValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::description_(), item.description);
             values.PushBack(std::move(perValue), allocator);
         }
-        jsonValue.AddMember(JsonValueType(details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::values(), allocator), std::move(values), allocator);
+        jsonValue.AddMember(JsonValueType(details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::values_(), allocator), std::move(values), allocator);
     }
 
     template<class JsonValueType>
@@ -381,12 +381,12 @@ struct serialization::Codec<CHelper::BlockPropertyDescription> : BaseCodec<CHelp
             throw exceptions::JsonSerializationTypeException("object", getJsonTypeStr(jsonValue.GetType()));
         }
         t.release();
-        Codec<decltype(t.propertyName)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::propertyName(), t.propertyName);
-        Codec<decltype(t.description)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::description(), t.description);
+        Codec<decltype(t.propertyName)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::propertyName_(), t.propertyName);
+        Codec<decltype(t.description)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::description_(), t.description);
         bool hasPropertyType = false;
-        for (const auto &item: serialization::find_array_member_or_throw(jsonValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::values())) {
+        for (const auto &item: serialization::find_array_member_or_throw(jsonValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::values_())) {
             CHelper::BlockPropertyValueDescription blockPropertyValueDescription;
-            CHelper::PropertyType::PropertyType type = Codec<decltype(blockPropertyValueDescription.valueName)>::template from_json_member<typename JsonValueType::ValueType>(item, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::valueName(), blockPropertyValueDescription.valueName);
+            CHelper::PropertyType::PropertyType type = Codec<decltype(blockPropertyValueDescription.valueName)>::template from_json_member<typename JsonValueType::ValueType>(item, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::valueName_(), blockPropertyValueDescription.valueName);
             if (HEDLEY_LIKELY(hasPropertyType)) {
                 if (t.type != type) {
                     if (type == CHelper::PropertyType::STRING) {
@@ -398,7 +398,7 @@ struct serialization::Codec<CHelper::BlockPropertyDescription> : BaseCodec<CHelp
                 hasPropertyType = true;
                 t.type = type;
             }
-            Codec<decltype(blockPropertyValueDescription.description)>::template from_json_member<typename JsonValueType::ValueType>(item, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::description(), blockPropertyValueDescription.description);
+            Codec<decltype(blockPropertyValueDescription.description)>::template from_json_member<typename JsonValueType::ValueType>(item, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::description_(), blockPropertyValueDescription.description);
             t.values.push_back(std::move(blockPropertyValueDescription));
         }
     }

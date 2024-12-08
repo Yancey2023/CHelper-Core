@@ -27,5 +27,6 @@ add_executable(CHelperWindows
 )
 if (MSVC)
     set_target_properties(CHelperWindows PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
+    target_compile_options(CHelperWindows PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
 endif ()
 target_link_libraries(CHelperWindows PRIVATE CHelper::Core)
