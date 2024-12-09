@@ -19,8 +19,8 @@ int main() {
     CHelper::Test::testDir(resourceDir / "resources" / "beta" / "vanilla",
                            resourceDir / "test" / "test.txt",
                            true);
-    //    CHelper::Test::testDir(projectDir / "resources" / "beta" / "vanilla",
-    //                           std::vector<std::u16string>{"execute run clear "}, false);
+    // CHelper::Test::testDir(resourceDir / "resources" / "beta" / "vanilla",
+    //                        std::vector<std::u16string>{u"execute run clear "}, false);
 }
 
 [[maybe_unused]] void testBin() {
@@ -155,7 +155,7 @@ namespace CHelper::Test {
      */
     [[maybe_unused]] void
     testBin(const std::filesystem::path &cpackPath, const std::vector<std::u16string> &commands, bool isTestTime) {
-        CHelperCore *core = nullptr;;
+        CHelperCore *core = nullptr;
         try {
             core = CHelperCore::createByBinary(cpackPath);
             fmt::print("\n");
@@ -283,10 +283,10 @@ namespace CHelper::Test {
             for (int i = 0; i < times; ++i) {
                 for (const auto &command: commands) {
                     core->onTextChanged(command, command.length());
-                    auto description = core->getDescription();
+                    auto description = core->getDescription();// NOLINT(*-unused-local-non-trivial-variable)
                     auto errorReasons = core->getErrorReasons();
                     core->getSuggestions();
-                    auto structure = core->getStructure();
+                    auto structure = core->getStructure();// NOLINT(*-unused-local-non-trivial-variable)
                 }
             }
             end = std::chrono::high_resolution_clock::now();
@@ -303,6 +303,7 @@ namespace CHelper::Test {
 
     [[maybe_unused]] void writeDirectory(const std::u16string &input, const std::filesystem::path &output) {
         CHelperCore *core = nullptr;
+        CHelperCore *core2 = nullptr;
         try {
             core = CHelperCore::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {
@@ -313,16 +314,18 @@ namespace CHelper::Test {
             core->getCPack()->writeJsonToDirectory(output);
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
-            [[maybe_unused]] auto core2 = CHelperCore::createByDirectory(output);
+            core2 = CHelperCore::createByDirectory(output);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
         }
         delete core;
+        delete core2;
     }
 
     [[maybe_unused]] void writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output) {
         CHelperCore *core = nullptr;
+        CHelperCore *core2 = nullptr;
         try {
             core = CHelperCore::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {
@@ -333,16 +336,18 @@ namespace CHelper::Test {
             core->getCPack()->writeJsonToFile(output);
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
-            [[maybe_unused]] auto core2 = CHelperCore::createByJson(output);
+            core2 = CHelperCore::createByJson(output);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
         }
         delete core;
+        delete core2;
     }
 
     [[maybe_unused]] void writeBinary(const std::filesystem::path &input, const std::filesystem::path &output) {
         CHelperCore *core = nullptr;
+        CHelperCore *core2 = nullptr;
         try {
             core = CHelperCore::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {
@@ -353,13 +358,13 @@ namespace CHelper::Test {
             core->getCPack()->writeBinToFile(output);
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
-            [[maybe_unused]] auto core2 = CHelperCore::createByBinary(output);
+            core2 = CHelperCore::createByBinary(output);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
         }
         delete core;
+        delete core2;
     }
 
 }// namespace CHelper::Test
-
