@@ -66,7 +66,7 @@ void outputOld2New() {
     CHelper::Old2New::BlockFixData blockFixData = CHelper::Old2New::blockFixDataFromJson(serialization::get_json_from_file(input));
     std::filesystem::create_directories(output.parent_path());
     std::ofstream ostream(output, std::ios::binary);
-    serialization::Codec<decltype(blockFixData)>::to_binary<true>(ostream, blockFixData);
+    serialization::to_binary<true>(ostream, blockFixData);
     ostream.close();
 }
 

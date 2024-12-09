@@ -11,7 +11,7 @@
 
 namespace CHelper::Old2New {
 
-    typedef std::unordered_map<std::u16string, std::unordered_map<uint32_t, std::pair<std::optional<std::u16string>, std::optional<std::u16string>>>> BlockFixData;
+    using BlockFixData = std::unordered_map<std::u16string, std::unordered_map<uint32_t, std::pair<std::optional<std::u16string>, std::optional<std::u16string>>>>;
 
     class DataFix {
     public:
