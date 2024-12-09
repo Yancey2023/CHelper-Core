@@ -2,8 +2,8 @@
 // Created by Yancey on 2024/2/24.
 //
 
-#include <pch.h>
 #include <chelper/CHelperCore.h>
+#include <pch.h>
 
 std::u16string jstring2u16string(JNIEnv *env, jstring jString) {
     if (HEDLEY_UNLIKELY(jString == nullptr)) {
@@ -60,8 +60,7 @@ Java_yancey_chelper_core_CHelperCore_create0(
             AAsset_close(asset);
             std::istringstream iss(std::string(buffer, numBytesRead));
             CHelper::CHelperCore *core = CHelper::CHelperCore::create([&iss]() {
-                CHelper::BinaryReader binaryReader(true, iss);
-                return CHelper::CPack::createByBinary(binaryReader);
+                return CHelper::CPack::createByBinary(iss);
             });
             delete[] buffer;
             return reinterpret_cast<jlong>(core);
@@ -317,8 +316,7 @@ Java_yancey_chelper_core_CHelperCore_old2newInit0(
         int numBytesRead = AAsset_read(asset, buffer, dataFileSize);
         AAsset_close(asset);
         std::istringstream iss(std::string(buffer, numBytesRead));
-        CHelper::BinaryReader binaryReader(true, iss);
-        blockFixData0 = binaryReader.read<CHelper::Old2New::BlockFixData>();
+        serialization::from_binary<true>(iss, blockFixData0);
         delete[] buffer;
         return true;
     } catch (const std::exception &e) {
