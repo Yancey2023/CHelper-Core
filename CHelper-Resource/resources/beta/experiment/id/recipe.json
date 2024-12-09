@@ -2094,6 +2094,10 @@
       "description": "\u003c工作台\u003e磨制黑石台阶*2-\u003e雕纹磨制黑石"
     },
     {
+      "name": "minecraft:chiseled_resin_bricks_from_slabs",
+      "description": "\u003c工作台\u003e树脂砖台阶*2-\u003e雕纹树脂砖块"
+    },
+    {
       "name": "minecraft:chiseled_tuff",
       "description": "\u003c工作台\u003e凝灰岩台阶*2-\u003e雕纹凝灰岩"
     },
@@ -2304,6 +2308,10 @@
     {
       "name": "minecraft:crafting_table_weathered_cut_copper_stairs",
       "description": "\u003c工作台\u003e锈蚀的切制铜块*6-\u003e锈蚀的切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:creaking_heart",
+      "description": "\u003c工作台\u003e苍白橡木原木*2+树脂块-\u003e嘎枝之心"
     },
     {
       "name": "minecraft:crimson_button",
@@ -2924,6 +2932,10 @@
     {
       "name": "minecraft:gray_dye_from_black_bonemeal",
       "description": "\u003c工作台\u003e黑色染料+骨粉~\u003e灰色染料*2"
+    },
+    {
+      "name": "minecraft:gray_dye_from_closed_eyeblossom",
+      "description": "\u003c工作台\u003e闭合的眼眸花~\u003e灰色染料"
     },
     {
       "name": "minecraft:gray_dye_from_ink_bonemeal",
@@ -3742,6 +3754,10 @@
       "description": "\u003c工作台\u003e橙色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e橙色混凝土粉末*8"
     },
     {
+      "name": "minecraft:orange_dye_from_open_eyeblossom",
+      "description": "\u003c工作台\u003e张开的眼眸花~\u003e橙色染料"
+    },
+    {
       "name": "minecraft:orange_dye_from_orange_tulip",
       "description": "\u003c工作台\u003e橙色郁金香~\u003e橙色染料"
     },
@@ -3792,6 +3808,82 @@
     {
       "name": "minecraft:painting",
       "description": "\u003c工作台\u003e木棍*8+羊毛-\u003e画"
+    },
+    {
+      "name": "minecraft:pale_moss_carpet",
+      "description": "\u003c工作台\u003e苍白苔藓块*2-\u003e苍白覆地苔藓*3"
+    },
+    {
+      "name": "minecraft:pale_oak_boat",
+      "description": "\u003c工作台\u003e苍白橡木木板*5-\u003e苍白橡木船"
+    },
+    {
+      "name": "minecraft:pale_oak_button",
+      "description": "\u003c工作台\u003e苍白橡木木板-\u003e苍白橡木按钮"
+    },
+    {
+      "name": "minecraft:pale_oak_chest_boat",
+      "description": "\u003c工作台\u003e箱子+苍白橡木船~\u003e苍白橡木运输船"
+    },
+    {
+      "name": "minecraft:pale_oak_door",
+      "description": "\u003c工作台\u003e苍白橡木木板*6-\u003e苍白橡木门*3"
+    },
+    {
+      "name": "minecraft:pale_oak_fence",
+      "description": "\u003c工作台\u003e木棍*2+苍白橡木木板*4-\u003e苍白橡木栅栏*3"
+    },
+    {
+      "name": "minecraft:pale_oak_fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+苍白橡木木板*2-\u003e苍白橡木栅栏门"
+    },
+    {
+      "name": "minecraft:pale_oak_hanging_sign",
+      "description": "\u003c工作台\u003e去皮苍白橡木原木*6+锁链*2-\u003e悬挂式苍白橡木告示牌*6"
+    },
+    {
+      "name": "minecraft:pale_oak_planks_from_log",
+      "description": "\u003c工作台\u003e苍白橡木原木-\u003e苍白橡木木板*4"
+    },
+    {
+      "name": "minecraft:pale_oak_planks_from_stripped_log",
+      "description": "\u003c工作台\u003e去皮苍白橡木原木-\u003e苍白橡木木板*4"
+    },
+    {
+      "name": "minecraft:pale_oak_planks_from_stripped_wood",
+      "description": "\u003c工作台\u003e去皮苍白橡木-\u003e苍白橡木木板*4"
+    },
+    {
+      "name": "minecraft:pale_oak_planks_from_wood",
+      "description": "\u003c工作台\u003e苍白橡木-\u003e苍白橡木木板*4"
+    },
+    {
+      "name": "minecraft:pale_oak_pressure_plate",
+      "description": "\u003c工作台\u003e苍白橡木木板*2-\u003e苍白橡木压力板"
+    },
+    {
+      "name": "minecraft:pale_oak_sign",
+      "description": "\u003c工作台\u003e苍白橡木木板*6+木棍-\u003e苍白橡木告示牌*3"
+    },
+    {
+      "name": "minecraft:pale_oak_slab",
+      "description": "\u003c工作台\u003e苍白橡木木板*3-\u003e苍白橡木台阶*6"
+    },
+    {
+      "name": "minecraft:pale_oak_stairs",
+      "description": "\u003c工作台\u003e苍白橡木木板*6-\u003e苍白橡木楼梯*4"
+    },
+    {
+      "name": "minecraft:pale_oak_trapdoor",
+      "description": "\u003c工作台\u003e苍白橡木木板*6-\u003e苍白橡木活板门*2"
+    },
+    {
+      "name": "minecraft:pale_oak_wood_from_log",
+      "description": "\u003c工作台\u003e苍白橡木原木*4-\u003e苍白橡木*3"
+    },
+    {
+      "name": "minecraft:pale_oak_wood_from_stripped_log",
+      "description": "\u003c工作台\u003e去皮苍白橡木原木*4-\u003e去皮苍白橡木*3"
     },
     {
       "name": "minecraft:paper",
@@ -4070,6 +4162,10 @@
       "description": "\u003c工作台\u003e爆裂紫颂果*4-\u003e紫珀块*4"
     },
     {
+      "name": "minecraft:purpur_slab",
+      "description": "\u003c工作台\u003e紫珀柱*3-\u003e紫珀台阶*6"
+    },
+    {
       "name": "minecraft:purpur_stairs",
       "description": "\u003c工作台\u003e紫珀块*6-\u003e紫珀楼梯*4"
     },
@@ -4194,6 +4290,14 @@
       "description": "\u003c工作台\u003e红砂岩*6-\u003e红砂岩楼梯*4"
     },
     {
+      "name": "minecraft:red_sandstone_stairs_from_chiseled",
+      "description": "\u003c工作台\u003e雕纹红砂岩*6-\u003e红砂岩楼梯*4"
+    },
+    {
+      "name": "minecraft:red_sandstone_stairs_from_cut",
+      "description": "\u003c工作台\u003e切制红砂岩*6-\u003e红砂岩楼梯*4"
+    },
+    {
       "name": "minecraft:red_sandstone_wall",
       "description": "\u003c工作台\u003e红砂岩*6-\u003e红砂岩墙*6"
     },
@@ -4234,6 +4338,30 @@
       "description": "\u003c工作台\u003e红石火把*2+红石粉+石头*3-\u003e红石中继器"
     },
     {
+      "name": "minecraft:resin_block",
+      "description": "\u003c工作台\u003e树脂团*9-\u003e树脂块"
+    },
+    {
+      "name": "minecraft:resin_brick_slab",
+      "description": "\u003c工作台\u003e树脂砖块*3-\u003e树脂砖台阶*6"
+    },
+    {
+      "name": "minecraft:resin_brick_stairs",
+      "description": "\u003c工作台\u003e树脂砖块*6-\u003e树脂砖楼梯*4"
+    },
+    {
+      "name": "minecraft:resin_brick_wall",
+      "description": "\u003c工作台\u003e树脂砖块*6-\u003e树脂砖墙*6"
+    },
+    {
+      "name": "minecraft:resin_bricks",
+      "description": "\u003c工作台\u003e树脂砖*4-\u003e树脂砖块"
+    },
+    {
+      "name": "minecraft:resin_clump_from_resin_block",
+      "description": "\u003c工作台\u003e树脂块-\u003e树脂团*9"
+    },
+    {
       "name": "minecraft:respawn_anchor",
       "description": "\u003c工作台\u003e哭泣的黑曜石*6+荧石*3-\u003e重生锚"
     },
@@ -4248,6 +4376,14 @@
     {
       "name": "minecraft:sandstone_stairs",
       "description": "\u003c工作台\u003e砂岩*6-\u003e砂岩楼梯*4"
+    },
+    {
+      "name": "minecraft:sandstone_stairs_from_chiseled",
+      "description": "\u003c工作台\u003e雕纹砂岩*6-\u003e砂岩楼梯*4"
+    },
+    {
+      "name": "minecraft:sandstone_stairs_from_cut",
+      "description": "\u003c工作台\u003e切制砂岩*6-\u003e砂岩楼梯*4"
     },
     {
       "name": "minecraft:sandstone_wall",
@@ -4990,6 +5126,22 @@
       "description": "\u003c切石机\u003e红砂岩~\u003e红砂岩墙"
     },
     {
+      "name": "minecraft:stonecutter_resin_brick_chiseled",
+      "description": "\u003c切石机\u003e树脂砖块~\u003e雕纹树脂砖块"
+    },
+    {
+      "name": "minecraft:stonecutter_resin_brick_slab",
+      "description": "\u003c切石机\u003e树脂砖块~\u003e树脂砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_resin_brick_stairs",
+      "description": "\u003c切石机\u003e树脂砖块~\u003e树脂砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_resin_brick_wall",
+      "description": "\u003c切石机\u003e树脂砖块~\u003e树脂砖墙"
+    },
+    {
       "name": "minecraft:stonecutter_sanddouble_stone_slab",
       "description": "\u003c切石机\u003e砂岩~\u003e砂岩台阶*2"
     },
@@ -5060,6 +5212,10 @@
     {
       "name": "minecraft:stonecutter_stonebrick_chiseled",
       "description": "\u003c切石机\u003e石头~\u003e雕纹石砖"
+    },
+    {
+      "name": "minecraft:stonecutter_stonebrick_chiseled2",
+      "description": "\u003c切石机\u003e石砖~\u003e雕纹石砖"
     },
     {
       "name": "minecraft:stonecutter_stonebrick_slab",

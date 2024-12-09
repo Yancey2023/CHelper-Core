@@ -7131,19 +7131,6 @@
     "blockPropertyDescriptions": {
       "common": [
         {
-          "propertyName": "active",
-          "values": [
-            {
-              "valueName": true,
-              "description": "幽匿尖啸体处于激活状态"
-            },
-            {
-              "valueName": false,
-              "description": "幽匿尖啸体处于未激活状态"
-            }
-          ]
-        },
-        {
           "propertyName": "age",
           "description": "植物的生长阶段 刚种下或刚生长出的植物方块的该属性值为0 该值随着时间变化不断增长，直到15时可以继续在上方生长出新的植物方块",
           "values": [
@@ -8706,11 +8693,11 @@
           "values": [
             {
               "valueName": true,
-              "description": "此物品展示框在展示相片"
+              "description": "此物品展示框在展示照片"
             },
             {
               "valueName": false,
-              "description": "此物品展示框不在展示相片"
+              "description": "此物品展示框不在展示照片"
             }
           ]
         },
@@ -9328,6 +9315,19 @@
             {
               "valueName": 63,
               "description": "方块所附着的面，每个二进制位决定一个面： 0x1：下 0x2：上 0x4：北 0x8：南 0x10：西 0x20：东"
+            }
+          ]
+        },
+        {
+          "propertyName": "natural",
+          "values": [
+            {
+              "valueName": true,
+              "description": "方块为自然生成"
+            },
+            {
+              "valueName": false,
+              "description": "方块非自然生成"
             }
           ]
         },
@@ -10147,6 +10147,19 @@
           ]
         },
         {
+          "propertyName": "tip",
+          "values": [
+            {
+              "valueName": true,
+              "description": "苍白垂须下方不是苍白垂须"
+            },
+            {
+              "valueName": false,
+              "description": "苍白垂须下方是苍白垂须"
+            }
+          ]
+        },
+        {
           "propertyName": "toggle_bit",
           "values": [
             {
@@ -10735,6 +10748,26 @@
       "block": [
         {
           "blocks": [
+            "creaking_heart"
+          ],
+          "properties": [
+            {
+              "propertyName": "active",
+              "values": [
+                {
+                  "valueName": true,
+                  "description": "嘎枝之心处于激活状态"
+                },
+                {
+                  "valueName": false,
+                  "description": "嘎枝之心处于未激活状态"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blocks": [
             "pitcher_crop"
           ],
           "properties": [
@@ -10921,6 +10954,26 @@
                 {
                   "valueName": false,
                   "description": "花盆中没有植物"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blocks": [
+            "sculk_shrieker"
+          ],
+          "properties": [
+            {
+              "propertyName": "active",
+              "values": [
+                {
+                  "valueName": true,
+                  "description": "幽匿尖啸体处于激活状态"
+                },
+                {
+                  "valueName": false,
+                  "description": "幽匿尖啸体处于未激活状态"
                 }
               ]
             }

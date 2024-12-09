@@ -87,6 +87,9 @@
       "name": "animation.armor_stand.hero_pose"
     },
     {
+      "name": "animation.armor_stand.holding_heavy_core"
+    },
+    {
       "name": "animation.armor_stand.honor_pose"
     },
     {
@@ -256,6 +259,21 @@
     },
     {
       "name": "animation.cow.setup.v1.0"
+    },
+    {
+      "name": "animation.creaking.attack"
+    },
+    {
+      "name": "animation.creaking.look_at_target"
+    },
+    {
+      "name": "animation.creaking.sway"
+    },
+    {
+      "name": "animation.creaking.twitch"
+    },
+    {
+      "name": "animation.creaking.walk"
     },
     {
       "name": "animation.creeper.legs"
@@ -913,6 +931,9 @@
     },
     {
       "name": "animation.player.holding.zombie"
+    },
+    {
+      "name": "animation.player.holding_heavy_core"
     },
     {
       "name": "animation.player.look_at_target.inverted"

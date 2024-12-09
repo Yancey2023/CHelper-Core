@@ -919,6 +919,10 @@
       "description": "雕纹红砂岩"
     },
     {
+      "name": "chiseled_resin_bricks",
+      "description": "雕纹树脂砖块"
+    },
+    {
       "name": "chiseled_sandstone",
       "description": "雕纹砂岩"
     },
@@ -957,6 +961,10 @@
     {
       "name": "clock",
       "description": "时钟"
+    },
+    {
+      "name": "closed_eyeblossom",
+      "description": "闭合的眼眸花"
     },
     {
       "name": "coal",
@@ -1141,6 +1149,14 @@
     {
       "name": "crafting_table",
       "description": "工作台"
+    },
+    {
+      "name": "creaking_heart",
+      "description": "嘎枝之心"
+    },
+    {
+      "name": "creaking_spawn_egg",
+      "description": "嘎枝刷怪蛋"
     },
     {
       "name": "creeper_banner_pattern",
@@ -3343,6 +3359,10 @@
       "description": "不祥试炼钥匙"
     },
     {
+      "name": "open_eyeblossom",
+      "description": "张开的眼眸花"
+    },
+    {
       "name": "orange_bundle",
       "description": "橙色收纳袋"
     },
@@ -3445,6 +3465,86 @@
     {
       "name": "painting",
       "description": "画"
+    },
+    {
+      "name": "pale_hanging_moss",
+      "description": "苍白垂须"
+    },
+    {
+      "name": "pale_moss_block",
+      "description": "苍白苔藓块"
+    },
+    {
+      "name": "pale_moss_carpet",
+      "description": "苍白覆地苔藓"
+    },
+    {
+      "name": "pale_oak_boat",
+      "description": "苍白橡木船"
+    },
+    {
+      "name": "pale_oak_button",
+      "description": "苍白橡木按钮"
+    },
+    {
+      "name": "pale_oak_chest_boat",
+      "description": "苍白橡木运输船"
+    },
+    {
+      "name": "pale_oak_door",
+      "description": "苍白橡木门"
+    },
+    {
+      "name": "pale_oak_fence",
+      "description": "苍白橡木栅栏"
+    },
+    {
+      "name": "pale_oak_fence_gate",
+      "description": "苍白橡木栅栏门"
+    },
+    {
+      "name": "pale_oak_hanging_sign",
+      "description": "悬挂式苍白橡木告示牌"
+    },
+    {
+      "name": "pale_oak_leaves",
+      "description": "苍白橡树树叶"
+    },
+    {
+      "name": "pale_oak_log",
+      "description": "苍白橡木原木"
+    },
+    {
+      "name": "pale_oak_planks",
+      "description": "苍白橡木木板"
+    },
+    {
+      "name": "pale_oak_pressure_plate",
+      "description": "苍白橡木压力板"
+    },
+    {
+      "name": "pale_oak_sapling",
+      "description": "苍白橡树树苗"
+    },
+    {
+      "name": "pale_oak_sign",
+      "description": "苍白橡木告示牌"
+    },
+    {
+      "name": "pale_oak_slab",
+      "description": "苍白橡木台阶"
+    },
+    {
+      "name": "pale_oak_stairs",
+      "description": "苍白橡木楼梯"
+    },
+    {
+      "name": "pale_oak_trapdoor",
+      "description": "苍白橡木活板门"
+    },
+    {
+      "name": "pale_oak_wood",
+      "description": "苍白橡木"
     },
     {
       "name": "panda_spawn_egg",
@@ -4075,6 +4175,34 @@
       "description": "循环型命令方块"
     },
     {
+      "name": "resin_block",
+      "description": "树脂块"
+    },
+    {
+      "name": "resin_brick",
+      "description": "树脂砖"
+    },
+    {
+      "name": "resin_brick_slab",
+      "description": "树脂砖台阶"
+    },
+    {
+      "name": "resin_brick_stairs",
+      "description": "树脂砖楼梯"
+    },
+    {
+      "name": "resin_brick_wall",
+      "description": "树脂砖墙"
+    },
+    {
+      "name": "resin_bricks",
+      "description": "树脂砖块"
+    },
+    {
+      "name": "resin_clump",
+      "description": "树脂团"
+    },
+    {
       "name": "respawn_anchor",
       "description": "重生锚"
     },
@@ -4613,6 +4741,14 @@
     {
       "name": "stripped_oak_wood",
       "description": "去皮橡木"
+    },
+    {
+      "name": "stripped_pale_oak_log",
+      "description": "去皮苍白橡木原木"
+    },
+    {
+      "name": "stripped_pale_oak_wood",
+      "description": "去皮苍白橡木"
     },
     {
       "name": "stripped_spruce_log",

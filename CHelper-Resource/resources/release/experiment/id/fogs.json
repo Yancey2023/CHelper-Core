@@ -219,6 +219,10 @@
       "description": "海洋"
     },
     {
+      "name": "minecraft:fog_pale_garden",
+      "description": "苍白之园"
+    },
+    {
       "name": "minecraft:fog_plains",
       "description": "平原"
     },

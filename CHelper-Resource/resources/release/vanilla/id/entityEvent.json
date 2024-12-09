@@ -72,6 +72,12 @@
       "name": "escaped_event"
     },
     {
+      "name": "fed_open_eyeblossom"
+    },
+    {
+      "name": "fed_wither_rose"
+    },
+    {
       "name": "find_flower_timeout"
     },
     {
@@ -129,6 +135,12 @@
       "name": "minecraft:add_can_ride"
     },
     {
+      "name": "minecraft:add_damage_timer"
+    },
+    {
+      "name": "minecraft:add_periodic_damage"
+    },
+    {
       "name": "minecraft:ageable_grow_up"
     },
     {
@@ -156,6 +168,9 @@
       "name": "minecraft:ate_bluet"
     },
     {
+      "name": "minecraft:ate_closed_eyeblossom"
+    },
+    {
       "name": "minecraft:ate_cornflower"
     },
     {
@@ -166,6 +181,9 @@
     },
     {
       "name": "minecraft:ate_lily"
+    },
+    {
+      "name": "minecraft:ate_open_eyeblossom"
     },
     {
       "name": "minecraft:ate_orchid"
@@ -375,7 +393,16 @@
       "name": "minecraft:convert_to_zombie"
     },
     {
+      "name": "minecraft:crumble"
+    },
+    {
       "name": "minecraft:crystal_explode"
+    },
+    {
+      "name": "minecraft:damaged_by_entity"
+    },
+    {
+      "name": "minecraft:damaged_by_player"
     },
     {
       "name": "minecraft:defend_wandering_trader"
@@ -409,6 +436,9 @@
     },
     {
       "name": "minecraft:entity_spawned"
+    },
+    {
+      "name": "minecraft:entity_spawned_by_creaking_heart"
     },
     {
       "name": "minecraft:entity_transformed"
@@ -490,6 +520,9 @@
     },
     {
       "name": "minecraft:increase_max_health"
+    },
+    {
+      "name": "minecraft:increment_swaying_ticks"
     },
     {
       "name": "minecraft:join_caravan"
@@ -600,6 +633,12 @@
       "name": "minecraft:on_tame"
     },
     {
+      "name": "minecraft:on_target_start_looking"
+    },
+    {
+      "name": "minecraft:on_target_stop_looking"
+    },
+    {
       "name": "minecraft:on_trust"
     },
     {
@@ -643,6 +682,9 @@
     },
     {
       "name": "minecraft:remove_raid_trigger"
+    },
+    {
+      "name": "minecraft:reset_swaying_ticks"
     },
     {
       "name": "minecraft:resupply_trades"
@@ -846,6 +888,9 @@
       "name": "minecraft:start_transforming"
     },
     {
+      "name": "minecraft:start_twitching"
+    },
+    {
       "name": "minecraft:start_unrolling"
     },
     {
@@ -981,6 +1026,9 @@
       "name": "on_not_riding_parent"
     },
     {
+      "name": "on_poison_effect_added"
+    },
+    {
       "name": "on_pregnant"
     },
     {
@@ -991,6 +1039,9 @@
     },
     {
       "name": "on_search_and_digging_success"
+    },
+    {
+      "name": "on_wither_effect_added"
     },
     {
       "name": "perish_event"

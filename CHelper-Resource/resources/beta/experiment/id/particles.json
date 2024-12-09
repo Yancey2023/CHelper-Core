@@ -80,7 +80,7 @@
     },
     {
       "name": "minecraft:camera_shoot_explosion",
-      "description": "相机拍摄（仅教育版）时的粒子"
+      "description": "摄像机拍摄（仅教育版）时的粒子"
     },
     {
       "name": "minecraft:campfire_smoke_particle",
@@ -129,6 +129,15 @@
     {
       "name": "minecraft:conduit_particle",
       "description": "潮涌核心产生的粒子（该粒子未被使用）"
+    },
+    {
+      "name": "minecraft:creaking_crumble_body"
+    },
+    {
+      "name": "minecraft:creaking_crumble_head"
+    },
+    {
+      "name": "minecraft:creaking_heart_trail"
     },
     {
       "name": "minecraft:critical_hit_emitter",
@@ -223,6 +232,12 @@
       "description": "末影之眼在水下运动时的气泡粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
     },
     {
+      "name": "minecraft:eyeblossom_close"
+    },
+    {
+      "name": "minecraft:eyeblossom_open"
+    },
+    {
       "name": "minecraft:eyeofender_death_explode_particle",
       "description": "末影之眼破碎时的粒子"
     },
@@ -304,11 +319,11 @@
     },
     {
       "name": "minecraft:infested_ambient",
-      "description": "未知"
+      "description": "寄生效果产生的粒子"
     },
     {
       "name": "minecraft:infested_emitter",
-      "description": "未知"
+      "description": "带有寄生效果的生物死亡时的粒子"
     },
     {
       "name": "minecraft:ink_emitter",
@@ -375,6 +390,9 @@
       "description": "带有状态效果的生物、区域效果云产生的粒子"
     },
     {
+      "name": "minecraft:mobspell_lingering"
+    },
+    {
       "name": "minecraft:mycelium_dust_particle",
       "description": "菌丝体的孢子粒子"
     },
@@ -400,11 +418,14 @@
     },
     {
       "name": "minecraft:oozing_ambient",
-      "description": "未知"
+      "description": "渗浆效果产生的粒子"
     },
     {
       "name": "minecraft:oozing_emitter",
-      "description": "未知"
+      "description": "带有渗浆效果的生物死亡时的粒子"
+    },
+    {
+      "name": "minecraft:pale_oak_leaves_particle"
     },
     {
       "name": "minecraft:phantom_trail_particle",
@@ -428,15 +449,15 @@
     },
     {
       "name": "minecraft:raid_omen_ambient",
-      "description": "未知"
+      "description": "袭击之兆效果产生的粒子"
     },
     {
       "name": "minecraft:raid_omen_emitter",
-      "description": "未知"
+      "description": "袭击之兆效果产生的粒子"
     },
     {
       "name": "minecraft:rain_splash_particle",
-      "description": "实验台制作冰弹（仅教育版）时的飞溅粒子；stalactite_water_drip_particl粒子、water_drip_particle粒子、雨水落地后的飞溅粒子。\u0027\u0027该粒子只能在空气中生成和存在。\u0027\u0027"
+      "description": "实验台制作冰弹（仅教育版）时的飞溅粒子；stalactite_water_drip_particle粒子、water_drip_particle粒子、雨水落地后的飞溅粒子。\u0027\u0027该粒子只能在空气中生成和存在。\u0027\u0027"
     },
     {
       "name": "minecraft:redstone_ore_dust_particle",
@@ -563,7 +584,7 @@
     },
     {
       "name": "minecraft:totem_manual",
-      "description": "激活不死图腾时的粒子（该粒子未被使用）"
+      "description": "激活不死图腾时的单个粒子（该粒子未被使用）"
     },
     {
       "name": "minecraft:totem_particle",
@@ -571,15 +592,15 @@
     },
     {
       "name": "minecraft:trial_omen_ambient",
-      "description": "未知"
+      "description": "试炼之兆效果产生的粒子"
     },
     {
       "name": "minecraft:trial_omen_emitter",
-      "description": "未知"
+      "description": "试炼之兆效果产生的粒子"
     },
     {
       "name": "minecraft:trial_omen_single",
-      "description": "未知"
+      "description": "试炼之兆效果产生的粒子"
     },
     {
       "name": "minecraft:trial_spawner_detection",
@@ -647,11 +668,11 @@
     },
     {
       "name": "minecraft:weaving_ambient",
-      "description": "未知"
+      "description": "盘丝效果产生的粒子"
     },
     {
       "name": "minecraft:weaving_emitter",
-      "description": "未知"
+      "description": "带有盘丝效果的生物死亡时的粒子"
     },
     {
       "name": "minecraft:white_smoke_particle",
@@ -659,11 +680,11 @@
     },
     {
       "name": "minecraft:wind_charged_ambient",
-      "description": "受到蓄风效果的生物周围的粒子"
+      "description": "蓄风效果产生的粒子"
     },
     {
       "name": "minecraft:wind_charged_emitter",
-      "description": "受到蓄风效果的生物死亡时的粒子"
+      "description": "带有蓄风效果的生物死亡时的粒子"
     },
     {
       "name": "minecraft:wind_explosion_emitter",

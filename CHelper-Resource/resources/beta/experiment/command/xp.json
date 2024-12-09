@@ -8,10 +8,16 @@
   ],
   "node": [
     {
-      "type": "XP_INTEGER",
+      "type": "INTEGER_WITH_UNIT",
       "id": "amount",
       "brief": "经验值数量",
-      "description": "给予玩家的经验值数量"
+      "description": "给予玩家的经验值数量",
+      "units": [
+        {
+          "name": "L",
+          "description": "一个经验等级"
+        }
+      ]
     },
     {
       "type": "TARGET_SELECTOR",

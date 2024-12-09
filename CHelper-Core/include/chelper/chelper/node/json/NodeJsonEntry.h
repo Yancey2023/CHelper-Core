@@ -40,7 +40,7 @@ namespace CHelper::Node {
 
 }// namespace CHelper::Node
 
-CODEC_NODE(CHelper::Node::NodeJsonEntry, key, description, value)
+CODEC_NODE(CHelper::Node::NodeJsonEntry, key, value)
 
 CODEC_UNIQUE_PTR(CHelper::Node::NodeJsonEntry)
 

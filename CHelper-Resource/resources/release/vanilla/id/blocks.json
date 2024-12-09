@@ -1906,7 +1906,7 @@
         "properties": [
           {
             "name": "huge_mushroom_bits",
-            "defaultValue": 0
+            "defaultValue": 14
           }
         ]
       },
@@ -2465,10 +2465,6 @@
           {
             "name": "pillar_axis",
             "defaultValue": "y"
-          },
-          {
-            "name": "stripped_bit",
-            "defaultValue": false
           }
         ]
       },
@@ -2574,6 +2570,10 @@
         ]
       },
       {
+        "name": "chiseled_resin_bricks",
+        "description": "雕纹树脂砖块"
+      },
+      {
         "name": "chiseled_sandstone",
         "description": "雕纹砂岩",
         "properties": [
@@ -2632,6 +2632,10 @@
       {
         "name": "clay",
         "description": "黏土"
+      },
+      {
+        "name": "closed_eyeblossom",
+        "description": "闭合的眼眸花"
       },
       {
         "name": "coal_block",
@@ -2981,6 +2985,34 @@
       {
         "name": "crafting_table",
         "description": "工作台"
+      },
+      {
+        "name": "creaking_heart",
+        "description": "嘎枝之心",
+        "properties": [
+          {
+            "name": "active",
+            "defaultValue": false
+          },
+          {
+            "name": "natural",
+            "defaultValue": false
+          },
+          {
+            "name": "pillar_axis",
+            "defaultValue": "y"
+          }
+        ]
+      },
+      {
+        "name": "creeper_head",
+        "description": "苦力怕的头",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
+          }
+        ]
       },
       {
         "name": "crimson_button",
@@ -4660,6 +4692,16 @@
       {
         "name": "dragon_egg",
         "description": "龙蛋"
+      },
+      {
+        "name": "dragon_head",
+        "description": "龙首",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
+          }
+        ]
       },
       {
         "name": "dried_kelp_block",
@@ -7486,10 +7528,6 @@
           {
             "name": "pillar_axis",
             "defaultValue": "y"
-          },
-          {
-            "name": "stripped_bit",
-            "defaultValue": false
           }
         ]
       },
@@ -7815,6 +7853,16 @@
           {
             "name": "pillar_axis",
             "defaultValue": "y"
+          }
+        ]
+      },
+      {
+        "name": "mushroom_stem",
+        "description": "蘑菇柄",
+        "properties": [
+          {
+            "name": "huge_mushroom_bits",
+            "defaultValue": 15
           }
         ]
       },
@@ -8231,6 +8279,10 @@
         ]
       },
       {
+        "name": "open_eyeblossom",
+        "description": "张开的眼眸花"
+      },
+      {
         "name": "orange_candle",
         "description": "橙色蜡烛",
         "properties": [
@@ -8515,6 +8567,256 @@
         "description": "泥坯"
       },
       {
+        "name": "pale_hanging_moss",
+        "description": "苍白垂须",
+        "properties": [
+          {
+            "name": "tip",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "pale_moss_block",
+        "description": "苍白苔藓块"
+      },
+      {
+        "name": "pale_moss_carpet",
+        "description": "苍白覆地苔藓",
+        "properties": [
+          {
+            "name": "pale_moss_carpet_side_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "pale_moss_carpet_side_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "pale_moss_carpet_side_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "pale_moss_carpet_side_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "upper_block_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_button",
+        "description": "苍白橡木按钮",
+        "properties": [
+          {
+            "name": "button_pressed_bit",
+            "defaultValue": false
+          },
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_door",
+        "description": "苍白橡木门",
+        "properties": [
+          {
+            "name": "direction",
+            "defaultValue": 0
+          },
+          {
+            "name": "door_hinge_bit",
+            "defaultValue": false
+          },
+          {
+            "name": "open_bit",
+            "defaultValue": false
+          },
+          {
+            "name": "upper_block_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_double_slab",
+        "description": "苍白橡木双层台阶",
+        "properties": [
+          {
+            "name": "minecraft:vertical_half",
+            "defaultValue": "bottom"
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_fence",
+        "description": "苍白橡木栅栏"
+      },
+      {
+        "name": "pale_oak_fence_gate",
+        "description": "苍白橡木栅栏门",
+        "properties": [
+          {
+            "name": "direction",
+            "defaultValue": 0
+          },
+          {
+            "name": "in_wall_bit",
+            "defaultValue": false
+          },
+          {
+            "name": "open_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_hanging_sign",
+        "description": "悬挂式苍白橡木告示牌",
+        "properties": [
+          {
+            "name": "attached_bit",
+            "defaultValue": false
+          },
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
+          },
+          {
+            "name": "ground_sign_direction",
+            "defaultValue": 0
+          },
+          {
+            "name": "hanging",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_leaves",
+        "description": "苍白橡树树叶",
+        "properties": [
+          {
+            "name": "persistent_bit",
+            "defaultValue": false
+          },
+          {
+            "name": "update_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_log",
+        "description": "苍白橡木原木",
+        "properties": [
+          {
+            "name": "pillar_axis",
+            "defaultValue": "y"
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_planks",
+        "description": "苍白橡木木板"
+      },
+      {
+        "name": "pale_oak_pressure_plate",
+        "description": "苍白橡木压力板",
+        "properties": [
+          {
+            "name": "redstone_signal",
+            "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_sapling",
+        "description": "苍白橡树树苗",
+        "properties": [
+          {
+            "name": "age_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_slab",
+        "description": "苍白橡木台阶",
+        "properties": [
+          {
+            "name": "minecraft:vertical_half",
+            "defaultValue": "bottom"
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_stairs",
+        "description": "苍白橡木楼梯",
+        "properties": [
+          {
+            "name": "upside_down_bit",
+            "defaultValue": false
+          },
+          {
+            "name": "weirdo_direction",
+            "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_standing_sign",
+        "description": "苍白橡木告示牌",
+        "properties": [
+          {
+            "name": "ground_sign_direction",
+            "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_trapdoor",
+        "description": "苍白橡木活板门",
+        "properties": [
+          {
+            "name": "direction",
+            "defaultValue": 0
+          },
+          {
+            "name": "open_bit",
+            "defaultValue": false
+          },
+          {
+            "name": "upside_down_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_wall_sign",
+        "description": "墙上的苍白橡木告示牌",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "name": "pale_oak_wood",
+        "description": "苍白橡木",
+        "properties": [
+          {
+            "name": "pillar_axis",
+            "defaultValue": "y"
+          }
+        ]
+      },
+      {
         "name": "pearlescent_froglight",
         "description": "珠光蛙明灯",
         "properties": [
@@ -8580,6 +8882,16 @@
           {
             "name": "top_slot_bit",
             "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "piglin_head",
+        "description": "猪灵的头",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
           }
         ]
       },
@@ -8793,6 +9105,16 @@
           {
             "name": "upper_block_bit",
             "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "player_head",
+        "description": "玩家的头",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
           }
         ]
       },
@@ -10042,7 +10364,7 @@
         "properties": [
           {
             "name": "huge_mushroom_bits",
-            "defaultValue": 0
+            "defaultValue": 14
           }
         ]
       },
@@ -10393,6 +10715,84 @@
         ]
       },
       {
+        "name": "resin_block",
+        "description": "树脂块"
+      },
+      {
+        "name": "resin_brick_double_slab",
+        "description": "树脂砖双层台阶",
+        "properties": [
+          {
+            "name": "minecraft:vertical_half",
+            "defaultValue": "bottom"
+          }
+        ]
+      },
+      {
+        "name": "resin_brick_slab",
+        "description": "树脂砖台阶",
+        "properties": [
+          {
+            "name": "minecraft:vertical_half",
+            "defaultValue": "bottom"
+          }
+        ]
+      },
+      {
+        "name": "resin_brick_stairs",
+        "description": "树脂砖楼梯",
+        "properties": [
+          {
+            "name": "upside_down_bit",
+            "defaultValue": false
+          },
+          {
+            "name": "weirdo_direction",
+            "defaultValue": 0
+          }
+        ]
+      },
+      {
+        "name": "resin_brick_wall",
+        "description": "树脂砖墙",
+        "properties": [
+          {
+            "name": "wall_connection_type_east",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_north",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_south",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_connection_type_west",
+            "defaultValue": "none"
+          },
+          {
+            "name": "wall_post_bit",
+            "defaultValue": false
+          }
+        ]
+      },
+      {
+        "name": "resin_bricks",
+        "description": "树脂砖块"
+      },
+      {
+        "name": "resin_clump",
+        "description": "树脂团",
+        "properties": [
+          {
+            "name": "multi_face_direction_bits",
+            "defaultValue": 0
+          }
+        ]
+      },
+      {
         "name": "respawn_anchor",
         "description": "重生锚",
         "properties": [
@@ -10656,8 +11056,8 @@
         ]
       },
       {
-        "name": "skull",
-        "description": "生物头颅",
+        "name": "skeleton_skull",
+        "description": "骷髅头颅",
         "properties": [
           {
             "name": "facing_direction",
@@ -11826,6 +12226,26 @@
         ]
       },
       {
+        "name": "stripped_pale_oak_log",
+        "description": "去皮苍白橡木原木",
+        "properties": [
+          {
+            "name": "pillar_axis",
+            "defaultValue": "y"
+          }
+        ]
+      },
+      {
+        "name": "stripped_pale_oak_wood",
+        "description": "去皮苍白橡木",
+        "properties": [
+          {
+            "name": "pillar_axis",
+            "defaultValue": "y"
+          }
+        ]
+      },
+      {
         "name": "stripped_spruce_log",
         "description": "去皮云杉原木",
         "properties": [
@@ -11988,7 +12408,10 @@
         "properties": [
           {
             "name": "allow_underwater_bit",
-            "defaultValue": false
+            "defaultValue": false,
+            "valid": [
+              false
+            ]
           },
           {
             "name": "explode_bit",
@@ -13434,6 +13857,16 @@
         "description": "凋灵玫瑰"
       },
       {
+        "name": "wither_skeleton_skull",
+        "description": "凋灵骷髅头颅",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
+          }
+        ]
+      },
+      {
         "name": "wooden_button",
         "description": "橡木按钮",
         "properties": [
@@ -13616,23 +14049,20 @@
             ]
           }
         ]
+      },
+      {
+        "name": "zombie_head",
+        "description": "僵尸的头",
+        "properties": [
+          {
+            "name": "facing_direction",
+            "defaultValue": 0
+          }
+        ]
       }
     ],
     "blockPropertyDescriptions": {
       "common": [
-        {
-          "propertyName": "active",
-          "values": [
-            {
-              "valueName": true,
-              "description": "幽匿尖啸体处于激活状态"
-            },
-            {
-              "valueName": false,
-              "description": "幽匿尖啸体处于未激活状态"
-            }
-          ]
-        },
         {
           "propertyName": "age",
           "description": "植物的生长阶段 刚种下或刚生长出的植物方块的该属性值为0 该值随着时间变化不断增长，直到15时可以继续在上方生长出新的植物方块",
@@ -15196,11 +15626,11 @@
           "values": [
             {
               "valueName": true,
-              "description": "此物品展示框在展示相片"
+              "description": "此物品展示框在展示照片"
             },
             {
               "valueName": false,
-              "description": "此物品展示框不在展示相片"
+              "description": "此物品展示框不在展示照片"
             }
           ]
         },
@@ -15822,6 +16252,19 @@
           ]
         },
         {
+          "propertyName": "natural",
+          "values": [
+            {
+              "valueName": true,
+              "description": "方块为自然生成"
+            },
+            {
+              "valueName": false,
+              "description": "方块非自然生成"
+            }
+          ]
+        },
+        {
           "propertyName": "new_leaf_type",
           "description": "已弃用，为兼容性而保留 树叶的类型 acacia： 金合欢树叶 dark_oak： 深色橡树树叶",
           "values": [
@@ -16323,6 +16766,9 @@
             },
             {
               "valueName": "dark_oak"
+            },
+            {
+              "valueName": "pale_oak"
             }
           ]
         },
@@ -16663,6 +17109,19 @@
             },
             {
               "valueName": "snow"
+            }
+          ]
+        },
+        {
+          "propertyName": "tip",
+          "values": [
+            {
+              "valueName": true,
+              "description": "苍白垂须下方不是苍白垂须"
+            },
+            {
+              "valueName": false,
+              "description": "苍白垂须下方是苍白垂须"
             }
           ]
         },
@@ -17255,6 +17714,26 @@
       "block": [
         {
           "blocks": [
+            "creaking_heart"
+          ],
+          "properties": [
+            {
+              "propertyName": "active",
+              "values": [
+                {
+                  "valueName": true,
+                  "description": "嘎枝之心处于激活状态"
+                },
+                {
+                  "valueName": false,
+                  "description": "嘎枝之心处于未激活状态"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blocks": [
             "pitcher_crop"
           ],
           "properties": [
@@ -17441,6 +17920,26 @@
                 {
                   "valueName": false,
                   "description": "花盆中没有植物"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blocks": [
+            "sculk_shrieker"
+          ],
+          "properties": [
+            {
+              "propertyName": "active",
+              "values": [
+                {
+                  "valueName": true,
+                  "description": "幽匿尖啸体处于激活状态"
+                },
+                {
+                  "valueName": false,
+                  "description": "幽匿尖啸体处于未激活状态"
                 }
               ]
             }
@@ -18451,6 +18950,9 @@
                 },
                 {
                   "valueName": "dark_oak"
+                },
+                {
+                  "valueName": "pale_oak"
                 }
               ]
             }

@@ -12,6 +12,7 @@
 #include "param/NodeBlock.h"
 #include "param/NodeCommand.h"
 #include "param/NodeCommandName.h"
+#include "param/NodeIntegerWithUnit.h"
 #include "param/NodeItem.h"
 #include "param/NodeJson.h"
 #include "param/NodeLF.h"
@@ -23,7 +24,6 @@
 #include "param/NodeString.h"
 #include "param/NodeTargetSelector.h"
 #include "param/NodeText.h"
-#include "param/NodeXpInteger.h"
 #include "pch.h"
 #include "template/NodeTemplateBoolean.h"
 #include "template/NodeTemplateNumber.h"
@@ -140,6 +140,12 @@ namespace CHelper {
             };
 
             template<>
+            struct NodeTypeDetail<NodeTypeId::INTEGER_WITH_UNIT> : CommandParamNodeTypeDetail {
+                using Type = NodeIntegerWithUnit;
+                static inline const std::u16string name = u"INTEGER_WITH_UNIT";
+            };
+
+            template<>
             struct NodeTypeDetail<NodeTypeId::ITEM> : CommandParamNodeTypeDetail {
                 using Type = NodeItem;
                 static inline const std::u16string name = u"ITEM";
@@ -212,12 +218,6 @@ namespace CHelper {
             struct NodeTypeDetail<NodeTypeId::RANGE> : CommandParamNodeTypeDetail {
                 using Type = NodeRange;
                 static inline const std::u16string name = u"RANGE";
-            };
-
-            template<>
-            struct NodeTypeDetail<NodeTypeId::XP_INTEGER> : CommandParamNodeTypeDetail {
-                using Type = NodeXpInteger;
-                static inline const std::u16string name = u"XP_INTEGER";
             };
 
             template<>

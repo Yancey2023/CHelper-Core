@@ -198,6 +198,1182 @@
       "name": "birch_stairs_birch_recipeId"
     },
     {
+      "name": "bundle_dye_0"
+    },
+    {
+      "name": "bundle_dye_0_1"
+    },
+    {
+      "name": "bundle_dye_0_10"
+    },
+    {
+      "name": "bundle_dye_0_11"
+    },
+    {
+      "name": "bundle_dye_0_12"
+    },
+    {
+      "name": "bundle_dye_0_13"
+    },
+    {
+      "name": "bundle_dye_0_14"
+    },
+    {
+      "name": "bundle_dye_0_15"
+    },
+    {
+      "name": "bundle_dye_0_17"
+    },
+    {
+      "name": "bundle_dye_0_18"
+    },
+    {
+      "name": "bundle_dye_0_19"
+    },
+    {
+      "name": "bundle_dye_0_2"
+    },
+    {
+      "name": "bundle_dye_0_3"
+    },
+    {
+      "name": "bundle_dye_0_4"
+    },
+    {
+      "name": "bundle_dye_0_5"
+    },
+    {
+      "name": "bundle_dye_0_6"
+    },
+    {
+      "name": "bundle_dye_0_7"
+    },
+    {
+      "name": "bundle_dye_0_8"
+    },
+    {
+      "name": "bundle_dye_0_9"
+    },
+    {
+      "name": "bundle_dye_1"
+    },
+    {
+      "name": "bundle_dye_10"
+    },
+    {
+      "name": "bundle_dye_10_0"
+    },
+    {
+      "name": "bundle_dye_10_1"
+    },
+    {
+      "name": "bundle_dye_10_11"
+    },
+    {
+      "name": "bundle_dye_10_12"
+    },
+    {
+      "name": "bundle_dye_10_13"
+    },
+    {
+      "name": "bundle_dye_10_14"
+    },
+    {
+      "name": "bundle_dye_10_15"
+    },
+    {
+      "name": "bundle_dye_10_16"
+    },
+    {
+      "name": "bundle_dye_10_17"
+    },
+    {
+      "name": "bundle_dye_10_18"
+    },
+    {
+      "name": "bundle_dye_10_19"
+    },
+    {
+      "name": "bundle_dye_10_2"
+    },
+    {
+      "name": "bundle_dye_10_3"
+    },
+    {
+      "name": "bundle_dye_10_4"
+    },
+    {
+      "name": "bundle_dye_10_5"
+    },
+    {
+      "name": "bundle_dye_10_6"
+    },
+    {
+      "name": "bundle_dye_10_7"
+    },
+    {
+      "name": "bundle_dye_10_8"
+    },
+    {
+      "name": "bundle_dye_10_9"
+    },
+    {
+      "name": "bundle_dye_11"
+    },
+    {
+      "name": "bundle_dye_11_0"
+    },
+    {
+      "name": "bundle_dye_11_1"
+    },
+    {
+      "name": "bundle_dye_11_10"
+    },
+    {
+      "name": "bundle_dye_11_12"
+    },
+    {
+      "name": "bundle_dye_11_13"
+    },
+    {
+      "name": "bundle_dye_11_14"
+    },
+    {
+      "name": "bundle_dye_11_15"
+    },
+    {
+      "name": "bundle_dye_11_16"
+    },
+    {
+      "name": "bundle_dye_11_17"
+    },
+    {
+      "name": "bundle_dye_11_18"
+    },
+    {
+      "name": "bundle_dye_11_19"
+    },
+    {
+      "name": "bundle_dye_11_2"
+    },
+    {
+      "name": "bundle_dye_11_3"
+    },
+    {
+      "name": "bundle_dye_11_4"
+    },
+    {
+      "name": "bundle_dye_11_5"
+    },
+    {
+      "name": "bundle_dye_11_6"
+    },
+    {
+      "name": "bundle_dye_11_7"
+    },
+    {
+      "name": "bundle_dye_11_8"
+    },
+    {
+      "name": "bundle_dye_11_9"
+    },
+    {
+      "name": "bundle_dye_12"
+    },
+    {
+      "name": "bundle_dye_12_0"
+    },
+    {
+      "name": "bundle_dye_12_1"
+    },
+    {
+      "name": "bundle_dye_12_10"
+    },
+    {
+      "name": "bundle_dye_12_11"
+    },
+    {
+      "name": "bundle_dye_12_13"
+    },
+    {
+      "name": "bundle_dye_12_14"
+    },
+    {
+      "name": "bundle_dye_12_15"
+    },
+    {
+      "name": "bundle_dye_12_16"
+    },
+    {
+      "name": "bundle_dye_12_17"
+    },
+    {
+      "name": "bundle_dye_12_18"
+    },
+    {
+      "name": "bundle_dye_12_19"
+    },
+    {
+      "name": "bundle_dye_12_2"
+    },
+    {
+      "name": "bundle_dye_12_3"
+    },
+    {
+      "name": "bundle_dye_12_4"
+    },
+    {
+      "name": "bundle_dye_12_5"
+    },
+    {
+      "name": "bundle_dye_12_6"
+    },
+    {
+      "name": "bundle_dye_12_7"
+    },
+    {
+      "name": "bundle_dye_12_8"
+    },
+    {
+      "name": "bundle_dye_12_9"
+    },
+    {
+      "name": "bundle_dye_13"
+    },
+    {
+      "name": "bundle_dye_13_0"
+    },
+    {
+      "name": "bundle_dye_13_1"
+    },
+    {
+      "name": "bundle_dye_13_10"
+    },
+    {
+      "name": "bundle_dye_13_11"
+    },
+    {
+      "name": "bundle_dye_13_12"
+    },
+    {
+      "name": "bundle_dye_13_14"
+    },
+    {
+      "name": "bundle_dye_13_15"
+    },
+    {
+      "name": "bundle_dye_13_16"
+    },
+    {
+      "name": "bundle_dye_13_17"
+    },
+    {
+      "name": "bundle_dye_13_18"
+    },
+    {
+      "name": "bundle_dye_13_19"
+    },
+    {
+      "name": "bundle_dye_13_2"
+    },
+    {
+      "name": "bundle_dye_13_3"
+    },
+    {
+      "name": "bundle_dye_13_4"
+    },
+    {
+      "name": "bundle_dye_13_5"
+    },
+    {
+      "name": "bundle_dye_13_6"
+    },
+    {
+      "name": "bundle_dye_13_7"
+    },
+    {
+      "name": "bundle_dye_13_8"
+    },
+    {
+      "name": "bundle_dye_13_9"
+    },
+    {
+      "name": "bundle_dye_14"
+    },
+    {
+      "name": "bundle_dye_14_0"
+    },
+    {
+      "name": "bundle_dye_14_1"
+    },
+    {
+      "name": "bundle_dye_14_10"
+    },
+    {
+      "name": "bundle_dye_14_11"
+    },
+    {
+      "name": "bundle_dye_14_12"
+    },
+    {
+      "name": "bundle_dye_14_13"
+    },
+    {
+      "name": "bundle_dye_14_15"
+    },
+    {
+      "name": "bundle_dye_14_16"
+    },
+    {
+      "name": "bundle_dye_14_17"
+    },
+    {
+      "name": "bundle_dye_14_18"
+    },
+    {
+      "name": "bundle_dye_14_19"
+    },
+    {
+      "name": "bundle_dye_14_2"
+    },
+    {
+      "name": "bundle_dye_14_3"
+    },
+    {
+      "name": "bundle_dye_14_4"
+    },
+    {
+      "name": "bundle_dye_14_5"
+    },
+    {
+      "name": "bundle_dye_14_6"
+    },
+    {
+      "name": "bundle_dye_14_7"
+    },
+    {
+      "name": "bundle_dye_14_8"
+    },
+    {
+      "name": "bundle_dye_14_9"
+    },
+    {
+      "name": "bundle_dye_15"
+    },
+    {
+      "name": "bundle_dye_15_0"
+    },
+    {
+      "name": "bundle_dye_15_1"
+    },
+    {
+      "name": "bundle_dye_15_10"
+    },
+    {
+      "name": "bundle_dye_15_11"
+    },
+    {
+      "name": "bundle_dye_15_12"
+    },
+    {
+      "name": "bundle_dye_15_13"
+    },
+    {
+      "name": "bundle_dye_15_14"
+    },
+    {
+      "name": "bundle_dye_15_16"
+    },
+    {
+      "name": "bundle_dye_15_17"
+    },
+    {
+      "name": "bundle_dye_15_18"
+    },
+    {
+      "name": "bundle_dye_15_2"
+    },
+    {
+      "name": "bundle_dye_15_3"
+    },
+    {
+      "name": "bundle_dye_15_4"
+    },
+    {
+      "name": "bundle_dye_15_5"
+    },
+    {
+      "name": "bundle_dye_15_6"
+    },
+    {
+      "name": "bundle_dye_15_7"
+    },
+    {
+      "name": "bundle_dye_15_8"
+    },
+    {
+      "name": "bundle_dye_15_9"
+    },
+    {
+      "name": "bundle_dye_16"
+    },
+    {
+      "name": "bundle_dye_16_1"
+    },
+    {
+      "name": "bundle_dye_16_10"
+    },
+    {
+      "name": "bundle_dye_16_11"
+    },
+    {
+      "name": "bundle_dye_16_12"
+    },
+    {
+      "name": "bundle_dye_16_13"
+    },
+    {
+      "name": "bundle_dye_16_14"
+    },
+    {
+      "name": "bundle_dye_16_15"
+    },
+    {
+      "name": "bundle_dye_16_17"
+    },
+    {
+      "name": "bundle_dye_16_18"
+    },
+    {
+      "name": "bundle_dye_16_19"
+    },
+    {
+      "name": "bundle_dye_16_2"
+    },
+    {
+      "name": "bundle_dye_16_3"
+    },
+    {
+      "name": "bundle_dye_16_4"
+    },
+    {
+      "name": "bundle_dye_16_5"
+    },
+    {
+      "name": "bundle_dye_16_6"
+    },
+    {
+      "name": "bundle_dye_16_7"
+    },
+    {
+      "name": "bundle_dye_16_8"
+    },
+    {
+      "name": "bundle_dye_16_9"
+    },
+    {
+      "name": "bundle_dye_17"
+    },
+    {
+      "name": "bundle_dye_17_0"
+    },
+    {
+      "name": "bundle_dye_17_1"
+    },
+    {
+      "name": "bundle_dye_17_10"
+    },
+    {
+      "name": "bundle_dye_17_11"
+    },
+    {
+      "name": "bundle_dye_17_12"
+    },
+    {
+      "name": "bundle_dye_17_13"
+    },
+    {
+      "name": "bundle_dye_17_14"
+    },
+    {
+      "name": "bundle_dye_17_15"
+    },
+    {
+      "name": "bundle_dye_17_16"
+    },
+    {
+      "name": "bundle_dye_17_18"
+    },
+    {
+      "name": "bundle_dye_17_19"
+    },
+    {
+      "name": "bundle_dye_17_2"
+    },
+    {
+      "name": "bundle_dye_17_4"
+    },
+    {
+      "name": "bundle_dye_17_5"
+    },
+    {
+      "name": "bundle_dye_17_6"
+    },
+    {
+      "name": "bundle_dye_17_7"
+    },
+    {
+      "name": "bundle_dye_17_8"
+    },
+    {
+      "name": "bundle_dye_17_9"
+    },
+    {
+      "name": "bundle_dye_18"
+    },
+    {
+      "name": "bundle_dye_18_0"
+    },
+    {
+      "name": "bundle_dye_18_1"
+    },
+    {
+      "name": "bundle_dye_18_10"
+    },
+    {
+      "name": "bundle_dye_18_11"
+    },
+    {
+      "name": "bundle_dye_18_12"
+    },
+    {
+      "name": "bundle_dye_18_13"
+    },
+    {
+      "name": "bundle_dye_18_14"
+    },
+    {
+      "name": "bundle_dye_18_15"
+    },
+    {
+      "name": "bundle_dye_18_16"
+    },
+    {
+      "name": "bundle_dye_18_17"
+    },
+    {
+      "name": "bundle_dye_18_19"
+    },
+    {
+      "name": "bundle_dye_18_2"
+    },
+    {
+      "name": "bundle_dye_18_3"
+    },
+    {
+      "name": "bundle_dye_18_5"
+    },
+    {
+      "name": "bundle_dye_18_6"
+    },
+    {
+      "name": "bundle_dye_18_7"
+    },
+    {
+      "name": "bundle_dye_18_8"
+    },
+    {
+      "name": "bundle_dye_18_9"
+    },
+    {
+      "name": "bundle_dye_19"
+    },
+    {
+      "name": "bundle_dye_19_0"
+    },
+    {
+      "name": "bundle_dye_19_1"
+    },
+    {
+      "name": "bundle_dye_19_10"
+    },
+    {
+      "name": "bundle_dye_19_11"
+    },
+    {
+      "name": "bundle_dye_19_12"
+    },
+    {
+      "name": "bundle_dye_19_13"
+    },
+    {
+      "name": "bundle_dye_19_14"
+    },
+    {
+      "name": "bundle_dye_19_16"
+    },
+    {
+      "name": "bundle_dye_19_17"
+    },
+    {
+      "name": "bundle_dye_19_18"
+    },
+    {
+      "name": "bundle_dye_19_2"
+    },
+    {
+      "name": "bundle_dye_19_3"
+    },
+    {
+      "name": "bundle_dye_19_4"
+    },
+    {
+      "name": "bundle_dye_19_5"
+    },
+    {
+      "name": "bundle_dye_19_6"
+    },
+    {
+      "name": "bundle_dye_19_7"
+    },
+    {
+      "name": "bundle_dye_19_8"
+    },
+    {
+      "name": "bundle_dye_19_9"
+    },
+    {
+      "name": "bundle_dye_1_0"
+    },
+    {
+      "name": "bundle_dye_1_10"
+    },
+    {
+      "name": "bundle_dye_1_11"
+    },
+    {
+      "name": "bundle_dye_1_12"
+    },
+    {
+      "name": "bundle_dye_1_13"
+    },
+    {
+      "name": "bundle_dye_1_14"
+    },
+    {
+      "name": "bundle_dye_1_15"
+    },
+    {
+      "name": "bundle_dye_1_16"
+    },
+    {
+      "name": "bundle_dye_1_17"
+    },
+    {
+      "name": "bundle_dye_1_18"
+    },
+    {
+      "name": "bundle_dye_1_19"
+    },
+    {
+      "name": "bundle_dye_1_2"
+    },
+    {
+      "name": "bundle_dye_1_3"
+    },
+    {
+      "name": "bundle_dye_1_4"
+    },
+    {
+      "name": "bundle_dye_1_5"
+    },
+    {
+      "name": "bundle_dye_1_6"
+    },
+    {
+      "name": "bundle_dye_1_7"
+    },
+    {
+      "name": "bundle_dye_1_8"
+    },
+    {
+      "name": "bundle_dye_1_9"
+    },
+    {
+      "name": "bundle_dye_2"
+    },
+    {
+      "name": "bundle_dye_2_0"
+    },
+    {
+      "name": "bundle_dye_2_1"
+    },
+    {
+      "name": "bundle_dye_2_10"
+    },
+    {
+      "name": "bundle_dye_2_11"
+    },
+    {
+      "name": "bundle_dye_2_12"
+    },
+    {
+      "name": "bundle_dye_2_13"
+    },
+    {
+      "name": "bundle_dye_2_14"
+    },
+    {
+      "name": "bundle_dye_2_15"
+    },
+    {
+      "name": "bundle_dye_2_16"
+    },
+    {
+      "name": "bundle_dye_2_17"
+    },
+    {
+      "name": "bundle_dye_2_18"
+    },
+    {
+      "name": "bundle_dye_2_19"
+    },
+    {
+      "name": "bundle_dye_2_3"
+    },
+    {
+      "name": "bundle_dye_2_4"
+    },
+    {
+      "name": "bundle_dye_2_5"
+    },
+    {
+      "name": "bundle_dye_2_6"
+    },
+    {
+      "name": "bundle_dye_2_7"
+    },
+    {
+      "name": "bundle_dye_2_8"
+    },
+    {
+      "name": "bundle_dye_2_9"
+    },
+    {
+      "name": "bundle_dye_3"
+    },
+    {
+      "name": "bundle_dye_3_0"
+    },
+    {
+      "name": "bundle_dye_3_1"
+    },
+    {
+      "name": "bundle_dye_3_10"
+    },
+    {
+      "name": "bundle_dye_3_11"
+    },
+    {
+      "name": "bundle_dye_3_12"
+    },
+    {
+      "name": "bundle_dye_3_13"
+    },
+    {
+      "name": "bundle_dye_3_14"
+    },
+    {
+      "name": "bundle_dye_3_15"
+    },
+    {
+      "name": "bundle_dye_3_16"
+    },
+    {
+      "name": "bundle_dye_3_18"
+    },
+    {
+      "name": "bundle_dye_3_19"
+    },
+    {
+      "name": "bundle_dye_3_2"
+    },
+    {
+      "name": "bundle_dye_3_4"
+    },
+    {
+      "name": "bundle_dye_3_5"
+    },
+    {
+      "name": "bundle_dye_3_6"
+    },
+    {
+      "name": "bundle_dye_3_7"
+    },
+    {
+      "name": "bundle_dye_3_8"
+    },
+    {
+      "name": "bundle_dye_3_9"
+    },
+    {
+      "name": "bundle_dye_4"
+    },
+    {
+      "name": "bundle_dye_4_0"
+    },
+    {
+      "name": "bundle_dye_4_1"
+    },
+    {
+      "name": "bundle_dye_4_10"
+    },
+    {
+      "name": "bundle_dye_4_11"
+    },
+    {
+      "name": "bundle_dye_4_12"
+    },
+    {
+      "name": "bundle_dye_4_13"
+    },
+    {
+      "name": "bundle_dye_4_14"
+    },
+    {
+      "name": "bundle_dye_4_15"
+    },
+    {
+      "name": "bundle_dye_4_16"
+    },
+    {
+      "name": "bundle_dye_4_17"
+    },
+    {
+      "name": "bundle_dye_4_19"
+    },
+    {
+      "name": "bundle_dye_4_2"
+    },
+    {
+      "name": "bundle_dye_4_3"
+    },
+    {
+      "name": "bundle_dye_4_5"
+    },
+    {
+      "name": "bundle_dye_4_6"
+    },
+    {
+      "name": "bundle_dye_4_7"
+    },
+    {
+      "name": "bundle_dye_4_8"
+    },
+    {
+      "name": "bundle_dye_4_9"
+    },
+    {
+      "name": "bundle_dye_5"
+    },
+    {
+      "name": "bundle_dye_5_0"
+    },
+    {
+      "name": "bundle_dye_5_1"
+    },
+    {
+      "name": "bundle_dye_5_10"
+    },
+    {
+      "name": "bundle_dye_5_11"
+    },
+    {
+      "name": "bundle_dye_5_12"
+    },
+    {
+      "name": "bundle_dye_5_13"
+    },
+    {
+      "name": "bundle_dye_5_14"
+    },
+    {
+      "name": "bundle_dye_5_15"
+    },
+    {
+      "name": "bundle_dye_5_16"
+    },
+    {
+      "name": "bundle_dye_5_17"
+    },
+    {
+      "name": "bundle_dye_5_18"
+    },
+    {
+      "name": "bundle_dye_5_19"
+    },
+    {
+      "name": "bundle_dye_5_2"
+    },
+    {
+      "name": "bundle_dye_5_3"
+    },
+    {
+      "name": "bundle_dye_5_4"
+    },
+    {
+      "name": "bundle_dye_5_6"
+    },
+    {
+      "name": "bundle_dye_5_7"
+    },
+    {
+      "name": "bundle_dye_5_8"
+    },
+    {
+      "name": "bundle_dye_5_9"
+    },
+    {
+      "name": "bundle_dye_6"
+    },
+    {
+      "name": "bundle_dye_6_0"
+    },
+    {
+      "name": "bundle_dye_6_1"
+    },
+    {
+      "name": "bundle_dye_6_10"
+    },
+    {
+      "name": "bundle_dye_6_11"
+    },
+    {
+      "name": "bundle_dye_6_12"
+    },
+    {
+      "name": "bundle_dye_6_13"
+    },
+    {
+      "name": "bundle_dye_6_14"
+    },
+    {
+      "name": "bundle_dye_6_15"
+    },
+    {
+      "name": "bundle_dye_6_16"
+    },
+    {
+      "name": "bundle_dye_6_17"
+    },
+    {
+      "name": "bundle_dye_6_18"
+    },
+    {
+      "name": "bundle_dye_6_19"
+    },
+    {
+      "name": "bundle_dye_6_2"
+    },
+    {
+      "name": "bundle_dye_6_3"
+    },
+    {
+      "name": "bundle_dye_6_4"
+    },
+    {
+      "name": "bundle_dye_6_5"
+    },
+    {
+      "name": "bundle_dye_6_7"
+    },
+    {
+      "name": "bundle_dye_6_8"
+    },
+    {
+      "name": "bundle_dye_6_9"
+    },
+    {
+      "name": "bundle_dye_7"
+    },
+    {
+      "name": "bundle_dye_7_0"
+    },
+    {
+      "name": "bundle_dye_7_1"
+    },
+    {
+      "name": "bundle_dye_7_10"
+    },
+    {
+      "name": "bundle_dye_7_11"
+    },
+    {
+      "name": "bundle_dye_7_12"
+    },
+    {
+      "name": "bundle_dye_7_13"
+    },
+    {
+      "name": "bundle_dye_7_14"
+    },
+    {
+      "name": "bundle_dye_7_15"
+    },
+    {
+      "name": "bundle_dye_7_16"
+    },
+    {
+      "name": "bundle_dye_7_17"
+    },
+    {
+      "name": "bundle_dye_7_18"
+    },
+    {
+      "name": "bundle_dye_7_19"
+    },
+    {
+      "name": "bundle_dye_7_2"
+    },
+    {
+      "name": "bundle_dye_7_3"
+    },
+    {
+      "name": "bundle_dye_7_4"
+    },
+    {
+      "name": "bundle_dye_7_5"
+    },
+    {
+      "name": "bundle_dye_7_6"
+    },
+    {
+      "name": "bundle_dye_7_8"
+    },
+    {
+      "name": "bundle_dye_7_9"
+    },
+    {
+      "name": "bundle_dye_8"
+    },
+    {
+      "name": "bundle_dye_8_0"
+    },
+    {
+      "name": "bundle_dye_8_1"
+    },
+    {
+      "name": "bundle_dye_8_10"
+    },
+    {
+      "name": "bundle_dye_8_11"
+    },
+    {
+      "name": "bundle_dye_8_12"
+    },
+    {
+      "name": "bundle_dye_8_13"
+    },
+    {
+      "name": "bundle_dye_8_14"
+    },
+    {
+      "name": "bundle_dye_8_15"
+    },
+    {
+      "name": "bundle_dye_8_16"
+    },
+    {
+      "name": "bundle_dye_8_17"
+    },
+    {
+      "name": "bundle_dye_8_18"
+    },
+    {
+      "name": "bundle_dye_8_19"
+    },
+    {
+      "name": "bundle_dye_8_2"
+    },
+    {
+      "name": "bundle_dye_8_3"
+    },
+    {
+      "name": "bundle_dye_8_4"
+    },
+    {
+      "name": "bundle_dye_8_5"
+    },
+    {
+      "name": "bundle_dye_8_6"
+    },
+    {
+      "name": "bundle_dye_8_7"
+    },
+    {
+      "name": "bundle_dye_8_9"
+    },
+    {
+      "name": "bundle_dye_9"
+    },
+    {
+      "name": "bundle_dye_9_0"
+    },
+    {
+      "name": "bundle_dye_9_1"
+    },
+    {
+      "name": "bundle_dye_9_10"
+    },
+    {
+      "name": "bundle_dye_9_11"
+    },
+    {
+      "name": "bundle_dye_9_12"
+    },
+    {
+      "name": "bundle_dye_9_13"
+    },
+    {
+      "name": "bundle_dye_9_14"
+    },
+    {
+      "name": "bundle_dye_9_15"
+    },
+    {
+      "name": "bundle_dye_9_16"
+    },
+    {
+      "name": "bundle_dye_9_17"
+    },
+    {
+      "name": "bundle_dye_9_18"
+    },
+    {
+      "name": "bundle_dye_9_19"
+    },
+    {
+      "name": "bundle_dye_9_2"
+    },
+    {
+      "name": "bundle_dye_9_3"
+    },
+    {
+      "name": "bundle_dye_9_4"
+    },
+    {
+      "name": "bundle_dye_9_5"
+    },
+    {
+      "name": "bundle_dye_9_6"
+    },
+    {
+      "name": "bundle_dye_9_7"
+    },
+    {
+      "name": "bundle_dye_9_8"
+    },
+    {
       "name": "chiseled_quartz_recipeId"
     },
     {
@@ -918,6 +2094,10 @@
       "description": "\u003c工作台\u003e磨制黑石台阶*2-\u003e雕纹磨制黑石"
     },
     {
+      "name": "minecraft:chiseled_resin_bricks_from_slabs",
+      "description": "\u003c工作台\u003e树脂砖台阶*2-\u003e雕纹树脂砖块"
+    },
+    {
       "name": "minecraft:chiseled_tuff",
       "description": "\u003c工作台\u003e凝灰岩台阶*2-\u003e雕纹凝灰岩"
     },
@@ -1128,6 +2308,10 @@
     {
       "name": "minecraft:crafting_table_weathered_cut_copper_stairs",
       "description": "\u003c工作台\u003e锈蚀的切制铜块*6-\u003e锈蚀的切制铜楼梯*4"
+    },
+    {
+      "name": "minecraft:creaking_heart",
+      "description": "\u003c工作台\u003e苍白橡木原木*2+树脂块-\u003e嘎枝之心"
     },
     {
       "name": "minecraft:crimson_button",
@@ -1748,6 +2932,10 @@
     {
       "name": "minecraft:gray_dye_from_black_bonemeal",
       "description": "\u003c工作台\u003e黑色染料+骨粉~\u003e灰色染料*2"
+    },
+    {
+      "name": "minecraft:gray_dye_from_closed_eyeblossom",
+      "description": "\u003c工作台\u003e闭合的眼眸花~\u003e灰色染料"
     },
     {
       "name": "minecraft:gray_dye_from_ink_bonemeal",
@@ -2566,6 +3754,10 @@
       "description": "\u003c工作台\u003e橙色染料+沙子+沙子+沙子+沙子+沙砾+沙砾+沙砾+沙砾~\u003e橙色混凝土粉末*8"
     },
     {
+      "name": "minecraft:orange_dye_from_open_eyeblossom",
+      "description": "\u003c工作台\u003e张开的眼眸花~\u003e橙色染料"
+    },
+    {
       "name": "minecraft:orange_dye_from_orange_tulip",
       "description": "\u003c工作台\u003e橙色郁金香~\u003e橙色染料"
     },
@@ -2616,6 +3808,82 @@
     {
       "name": "minecraft:painting",
       "description": "\u003c工作台\u003e木棍*8+羊毛-\u003e画"
+    },
+    {
+      "name": "minecraft:pale_moss_carpet",
+      "description": "\u003c工作台\u003e苍白苔藓块*2-\u003e苍白覆地苔藓*3"
+    },
+    {
+      "name": "minecraft:pale_oak_boat",
+      "description": "\u003c工作台\u003e苍白橡木木板*5-\u003e苍白橡木船"
+    },
+    {
+      "name": "minecraft:pale_oak_button",
+      "description": "\u003c工作台\u003e苍白橡木木板-\u003e苍白橡木按钮"
+    },
+    {
+      "name": "minecraft:pale_oak_chest_boat",
+      "description": "\u003c工作台\u003e箱子+苍白橡木船~\u003e苍白橡木运输船"
+    },
+    {
+      "name": "minecraft:pale_oak_door",
+      "description": "\u003c工作台\u003e苍白橡木木板*6-\u003e苍白橡木门*3"
+    },
+    {
+      "name": "minecraft:pale_oak_fence",
+      "description": "\u003c工作台\u003e木棍*2+苍白橡木木板*4-\u003e苍白橡木栅栏*3"
+    },
+    {
+      "name": "minecraft:pale_oak_fence_gate",
+      "description": "\u003c工作台\u003e木棍*4+苍白橡木木板*2-\u003e苍白橡木栅栏门"
+    },
+    {
+      "name": "minecraft:pale_oak_hanging_sign",
+      "description": "\u003c工作台\u003e去皮苍白橡木原木*6+锁链*2-\u003e悬挂式苍白橡木告示牌*6"
+    },
+    {
+      "name": "minecraft:pale_oak_planks_from_log",
+      "description": "\u003c工作台\u003e苍白橡木原木-\u003e苍白橡木木板*4"
+    },
+    {
+      "name": "minecraft:pale_oak_planks_from_stripped_log",
+      "description": "\u003c工作台\u003e去皮苍白橡木原木-\u003e苍白橡木木板*4"
+    },
+    {
+      "name": "minecraft:pale_oak_planks_from_stripped_wood",
+      "description": "\u003c工作台\u003e去皮苍白橡木-\u003e苍白橡木木板*4"
+    },
+    {
+      "name": "minecraft:pale_oak_planks_from_wood",
+      "description": "\u003c工作台\u003e苍白橡木-\u003e苍白橡木木板*4"
+    },
+    {
+      "name": "minecraft:pale_oak_pressure_plate",
+      "description": "\u003c工作台\u003e苍白橡木木板*2-\u003e苍白橡木压力板"
+    },
+    {
+      "name": "minecraft:pale_oak_sign",
+      "description": "\u003c工作台\u003e苍白橡木木板*6+木棍-\u003e苍白橡木告示牌*3"
+    },
+    {
+      "name": "minecraft:pale_oak_slab",
+      "description": "\u003c工作台\u003e苍白橡木木板*3-\u003e苍白橡木台阶*6"
+    },
+    {
+      "name": "minecraft:pale_oak_stairs",
+      "description": "\u003c工作台\u003e苍白橡木木板*6-\u003e苍白橡木楼梯*4"
+    },
+    {
+      "name": "minecraft:pale_oak_trapdoor",
+      "description": "\u003c工作台\u003e苍白橡木木板*6-\u003e苍白橡木活板门*2"
+    },
+    {
+      "name": "minecraft:pale_oak_wood_from_log",
+      "description": "\u003c工作台\u003e苍白橡木原木*4-\u003e苍白橡木*3"
+    },
+    {
+      "name": "minecraft:pale_oak_wood_from_stripped_log",
+      "description": "\u003c工作台\u003e去皮苍白橡木原木*4-\u003e去皮苍白橡木*3"
     },
     {
       "name": "minecraft:paper",
@@ -2894,6 +4162,10 @@
       "description": "\u003c工作台\u003e爆裂紫颂果*4-\u003e紫珀块*4"
     },
     {
+      "name": "minecraft:purpur_slab",
+      "description": "\u003c工作台\u003e紫珀柱*3-\u003e紫珀台阶*6"
+    },
+    {
       "name": "minecraft:purpur_stairs",
       "description": "\u003c工作台\u003e紫珀块*6-\u003e紫珀楼梯*4"
     },
@@ -3018,6 +4290,14 @@
       "description": "\u003c工作台\u003e红砂岩*6-\u003e红砂岩楼梯*4"
     },
     {
+      "name": "minecraft:red_sandstone_stairs_from_chiseled",
+      "description": "\u003c工作台\u003e雕纹红砂岩*6-\u003e红砂岩楼梯*4"
+    },
+    {
+      "name": "minecraft:red_sandstone_stairs_from_cut",
+      "description": "\u003c工作台\u003e切制红砂岩*6-\u003e红砂岩楼梯*4"
+    },
+    {
       "name": "minecraft:red_sandstone_wall",
       "description": "\u003c工作台\u003e红砂岩*6-\u003e红砂岩墙*6"
     },
@@ -3058,6 +4338,30 @@
       "description": "\u003c工作台\u003e红石火把*2+红石粉+石头*3-\u003e红石中继器"
     },
     {
+      "name": "minecraft:resin_block",
+      "description": "\u003c工作台\u003e树脂团*9-\u003e树脂块"
+    },
+    {
+      "name": "minecraft:resin_brick_slab",
+      "description": "\u003c工作台\u003e树脂砖块*3-\u003e树脂砖台阶*6"
+    },
+    {
+      "name": "minecraft:resin_brick_stairs",
+      "description": "\u003c工作台\u003e树脂砖块*6-\u003e树脂砖楼梯*4"
+    },
+    {
+      "name": "minecraft:resin_brick_wall",
+      "description": "\u003c工作台\u003e树脂砖块*6-\u003e树脂砖墙*6"
+    },
+    {
+      "name": "minecraft:resin_bricks",
+      "description": "\u003c工作台\u003e树脂砖*4-\u003e树脂砖块"
+    },
+    {
+      "name": "minecraft:resin_clump_from_resin_block",
+      "description": "\u003c工作台\u003e树脂块-\u003e树脂团*9"
+    },
+    {
       "name": "minecraft:respawn_anchor",
       "description": "\u003c工作台\u003e哭泣的黑曜石*6+荧石*3-\u003e重生锚"
     },
@@ -3072,6 +4376,14 @@
     {
       "name": "minecraft:sandstone_stairs",
       "description": "\u003c工作台\u003e砂岩*6-\u003e砂岩楼梯*4"
+    },
+    {
+      "name": "minecraft:sandstone_stairs_from_chiseled",
+      "description": "\u003c工作台\u003e雕纹砂岩*6-\u003e砂岩楼梯*4"
+    },
+    {
+      "name": "minecraft:sandstone_stairs_from_cut",
+      "description": "\u003c工作台\u003e切制砂岩*6-\u003e砂岩楼梯*4"
     },
     {
       "name": "minecraft:sandstone_wall",
@@ -3427,7 +4739,7 @@
     },
     {
       "name": "minecraft:stonecutter_dark_prismarine_slab",
-      "description": "\u003c切石机\u003e暗海晶石~\u003e暗海晶石双层台阶*2"
+      "description": "\u003c切石机\u003e暗海晶石~\u003e暗海晶石台阶*2"
     },
     {
       "name": "minecraft:stonecutter_dark_prismarine_stairs",
@@ -3523,7 +4835,7 @@
     },
     {
       "name": "minecraft:stonecutter_mossy_cobbledouble_stone_slab",
-      "description": "\u003c切石机\u003e苔石~\u003e苔石双层台阶*2"
+      "description": "\u003c切石机\u003e苔石~\u003e苔石台阶*2"
     },
     {
       "name": "minecraft:stonecutter_mossy_cobblestone_stairs",
@@ -3731,7 +5043,7 @@
     },
     {
       "name": "minecraft:stonecutter_prismarine_brick_slab",
-      "description": "\u003c切石机\u003e海晶石砖~\u003e海晶石砖双层台阶*2"
+      "description": "\u003c切石机\u003e海晶石砖~\u003e海晶石砖台阶*2"
     },
     {
       "name": "minecraft:stonecutter_prismarine_brick_stairs",
@@ -3739,7 +5051,7 @@
     },
     {
       "name": "minecraft:stonecutter_prismarine_slab",
-      "description": "\u003c切石机\u003e海晶石~\u003e海晶石双层台阶*2"
+      "description": "\u003c切石机\u003e海晶石~\u003e海晶石台阶*2"
     },
     {
       "name": "minecraft:stonecutter_prismarine_stairs",
@@ -3755,7 +5067,7 @@
     },
     {
       "name": "minecraft:stonecutter_purpur_slab",
-      "description": "\u003c切石机\u003e紫珀块~\u003e紫珀双层台阶*2"
+      "description": "\u003c切石机\u003e紫珀块~\u003e紫珀台阶*2"
     },
     {
       "name": "minecraft:stonecutter_purpur_stairs",
@@ -3783,7 +5095,7 @@
     },
     {
       "name": "minecraft:stonecutter_red_nether_brick_slab",
-      "description": "\u003c切石机\u003e红色下界砖块~\u003e红色下界砖双层台阶*2"
+      "description": "\u003c切石机\u003e红色下界砖块~\u003e红色下界砖台阶*2"
     },
     {
       "name": "minecraft:stonecutter_red_nether_brick_stairs",
@@ -3812,6 +5124,22 @@
     {
       "name": "minecraft:stonecutter_red_sandstone_wall",
       "description": "\u003c切石机\u003e红砂岩~\u003e红砂岩墙"
+    },
+    {
+      "name": "minecraft:stonecutter_resin_brick_chiseled",
+      "description": "\u003c切石机\u003e树脂砖块~\u003e雕纹树脂砖块"
+    },
+    {
+      "name": "minecraft:stonecutter_resin_brick_slab",
+      "description": "\u003c切石机\u003e树脂砖块~\u003e树脂砖台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_resin_brick_stairs",
+      "description": "\u003c切石机\u003e树脂砖块~\u003e树脂砖楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_resin_brick_wall",
+      "description": "\u003c切石机\u003e树脂砖块~\u003e树脂砖墙"
     },
     {
       "name": "minecraft:stonecutter_sanddouble_stone_slab",
@@ -3863,7 +5191,7 @@
     },
     {
       "name": "minecraft:stonecutter_smooth_sanddouble_stone_slab",
-      "description": "\u003c切石机\u003e平滑砂岩~\u003e平滑砂岩双层台阶*2"
+      "description": "\u003c切石机\u003e平滑砂岩~\u003e平滑砂岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_smooth_sandstone_stairs",
@@ -3884,6 +5212,10 @@
     {
       "name": "minecraft:stonecutter_stonebrick_chiseled",
       "description": "\u003c切石机\u003e石头~\u003e雕纹石砖"
+    },
+    {
+      "name": "minecraft:stonecutter_stonebrick_chiseled2",
+      "description": "\u003c切石机\u003e石砖~\u003e雕纹石砖"
     },
     {
       "name": "minecraft:stonecutter_stonebrick_slab",

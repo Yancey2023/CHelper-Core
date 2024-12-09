@@ -27,15 +27,15 @@ There should be a file named `manifest.json` in the root directory of the pack:
 
 |       name       |  type   |       meaning        |                                    Remarks                                     |            Required            |
 |:----------------:|:-------:|:--------------------:|:------------------------------------------------------------------------------:|:------------------------------:|
-|       name       | string  |      pack name       |                                Used for display                                | No (not recommended to ignore) |
-|   description    | string  |   pack description   |                                Used for display                                |               No               |
-| minecraftVersion | string  |  minecraft version   |                                Used for display                                |               No               |
-|      author      | string  |        author        |                                Used for display                                |               No               |
-|    updateDate    | string  |  latest update date  |                                Used for display                                |               No               |
-|      packId      | string  |       pack ID        |                           Used for recognizing pack                            |               No               |
-|   requiredPack   |  array  | IDs of required pack |                       Used for recognizing dependencies                        |  No(no default dependencies)   |
-|   versionCode    | integer |     version code     |                          Used for recognizing version                          |              Yes               |
-|   isBasicPack    | boolean | if it is basic pack  | only one basic pack and multiple extension pack can be loaded at the same time |      No(default is false)      |
+|       name       | string  |      pack name       |                                used for display                                | no (not recommended to ignore) |
+|   description    | string  |   pack description   |                                used for display                                |               no               |
+| minecraftVersion | string  |  minecraft version   |                                used for display                                |               no               |
+|      author      | string  |        author        |                                used for display                                |               no               |
+|    updateDate    | string  |  latest update date  |                                used for display                                |               no               |
+|      packId      | string  |       pack ID        |                           used for recognizing pack                            |               no               |
+|   requiredPack   |  array  | IDs of required pack |                       used for recognizing dependencies                        |  no(no default dependencies)   |
+|   versionCode    | integer |     version code     |                          used for recognizing version                          |              yes               |
+|   isBasicPack    | boolean | if it is basic pack  | only one basic pack and multiple extension pack can be loaded at the same time |      no(default is false)      |
 
 > Note: Extension pack is not currently supported. You only can use basic pack now.
 

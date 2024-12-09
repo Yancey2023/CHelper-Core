@@ -27,6 +27,9 @@
       "name": "controller.animation.armadillo.walk"
     },
     {
+      "name": "controller.animation.armor_stand.holding_heavy_core"
+    },
+    {
       "name": "controller.animation.armor_stand.pose"
     },
     {
@@ -91,6 +94,21 @@
     },
     {
       "name": "controller.animation.cat.move"
+    },
+    {
+      "name": "controller.animation.creaking.attack"
+    },
+    {
+      "name": "controller.animation.creaking.look_at_target"
+    },
+    {
+      "name": "controller.animation.creaking.sway"
+    },
+    {
+      "name": "controller.animation.creaking.twitch"
+    },
+    {
+      "name": "controller.animation.creaking.walk"
     },
     {
       "name": "controller.animation.creeper.head"

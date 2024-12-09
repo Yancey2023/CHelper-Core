@@ -107,6 +107,10 @@
       "description": "牛"
     },
     {
+      "name": "creaking",
+      "description": "嘎枝"
+    },
+    {
       "name": "creeper",
       "description": "苦力怕"
     },
@@ -432,7 +436,7 @@
     },
     {
       "name": "tripodcamera",
-      "description": "相机"
+      "description": "摄像机"
     },
     {
       "name": "tropicalfish",

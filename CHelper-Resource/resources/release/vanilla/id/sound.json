@@ -269,6 +269,30 @@
       "name": "block.copper_bulb.turn_on"
     },
     {
+      "name": "block.creaking_heart.ambient"
+    },
+    {
+      "name": "block.creaking_heart.break"
+    },
+    {
+      "name": "block.creaking_heart.fall"
+    },
+    {
+      "name": "block.creaking_heart.hit"
+    },
+    {
+      "name": "block.creaking_heart.place"
+    },
+    {
+      "name": "block.creaking_heart.spawn_mob"
+    },
+    {
+      "name": "block.creaking_heart.step"
+    },
+    {
+      "name": "block.creaking_heart.trail"
+    },
+    {
       "name": "block.decorated_pot.insert"
     },
     {
@@ -285,6 +309,21 @@
     {
       "name": "block.end_portal_frame.fill",
       "description": "末影之眼：嵌入"
+    },
+    {
+      "name": "block.eyeblossom.ambient"
+    },
+    {
+      "name": "block.eyeblossom.close"
+    },
+    {
+      "name": "block.eyeblossom.close_long"
+    },
+    {
+      "name": "block.eyeblossom.open"
+    },
+    {
+      "name": "block.eyeblossom.open_long"
     },
     {
       "name": "block.false_permissions",
@@ -447,6 +486,39 @@
     {
       "name": "block.packed_mud.step",
       "description": "泥坯：踩上"
+    },
+    {
+      "name": "block.pale_hanging_moss.ambient"
+    },
+    {
+      "name": "block.resin.break"
+    },
+    {
+      "name": "block.resin.fall"
+    },
+    {
+      "name": "block.resin.hit"
+    },
+    {
+      "name": "block.resin.place"
+    },
+    {
+      "name": "block.resin.step"
+    },
+    {
+      "name": "block.resin_brick.break"
+    },
+    {
+      "name": "block.resin_brick.fall"
+    },
+    {
+      "name": "block.resin_brick.hit"
+    },
+    {
+      "name": "block.resin_brick.place"
+    },
+    {
+      "name": "block.resin_brick.step"
     },
     {
       "name": "block.scaffolding.break",
@@ -650,6 +722,9 @@
       "description": "小型紫晶芽：被破坏"
     },
     {
+      "name": "break.sponge"
+    },
+    {
       "name": "break.spore_blossom",
       "description": "孢子花：被破坏"
     },
@@ -665,6 +740,9 @@
     },
     {
       "name": "break.web"
+    },
+    {
+      "name": "break.wet_sponge"
     },
     {
       "name": "breeze_wind_charge.burst"
@@ -737,12 +815,24 @@
       "description": "铁桶：装满水"
     },
     {
+      "name": "bundle.drop_contents"
+    },
+    {
+      "name": "bundle.insert"
+    },
+    {
+      "name": "bundle.insert_fail"
+    },
+    {
+      "name": "bundle.remove_one"
+    },
+    {
       "name": "cake.add_candle",
       "description": "蛋糕：吧唧"
     },
     {
       "name": "camera.take_picture",
-      "description": "相机：拍照"
+      "description": "摄像机：拍照"
     },
     {
       "name": "cauldron.adddye",
@@ -1622,6 +1712,9 @@
       "description": "灵魂土：损坏中"
     },
     {
+      "name": "hit.sponge"
+    },
+    {
       "name": "hit.spore_blossom",
       "description": "孢子花：损坏中"
     },
@@ -1646,6 +1739,9 @@
     {
       "name": "hit.vines",
       "description": "藤蔓：损坏中"
+    },
+    {
+      "name": "hit.wet_sponge"
     },
     {
       "name": "hit.wood",
@@ -2420,6 +2516,39 @@
       "description": "牛：行走"
     },
     {
+      "name": "mob.creaking.activate"
+    },
+    {
+      "name": "mob.creaking.ambient"
+    },
+    {
+      "name": "mob.creaking.attack"
+    },
+    {
+      "name": "mob.creaking.deactivate"
+    },
+    {
+      "name": "mob.creaking.death"
+    },
+    {
+      "name": "mob.creaking.freeze"
+    },
+    {
+      "name": "mob.creaking.spawn"
+    },
+    {
+      "name": "mob.creaking.step"
+    },
+    {
+      "name": "mob.creaking.sway"
+    },
+    {
+      "name": "mob.creaking.twitch"
+    },
+    {
+      "name": "mob.creaking.unfreeze"
+    },
+    {
       "name": "mob.creeper.death",
       "description": "苦力怕：死亡"
     },
@@ -3128,6 +3257,9 @@
     {
       "name": "mob.parrot.idle",
       "description": "鹦鹉：说话"
+    },
+    {
+      "name": "mob.parrot.imitate_creaking"
     },
     {
       "name": "mob.parrot.step",
@@ -4377,6 +4509,9 @@
       "description": "小型紫晶芽：被放置"
     },
     {
+      "name": "place.sponge"
+    },
+    {
       "name": "place.spore_blossom",
       "description": "孢子花：被放置"
     },
@@ -4392,6 +4527,9 @@
     },
     {
       "name": "place.tuff_bricks"
+    },
+    {
+      "name": "place.wet_sponge"
     },
     {
       "name": "portal.portal",
@@ -4687,6 +4825,9 @@
       "description": "锻造台：使用"
     },
     {
+      "name": "sponge.absorb"
+    },
+    {
       "name": "spread.sculk",
       "description": "幽匿块：蔓延"
     },
@@ -4925,6 +5066,9 @@
       "description": "灵魂土：踩上"
     },
     {
+      "name": "step.sponge"
+    },
+    {
       "name": "step.spore_blossom",
       "description": "孢子花：踩上"
     },
@@ -4955,6 +5099,9 @@
     },
     {
       "name": "step.web"
+    },
+    {
+      "name": "step.wet_sponge"
     },
     {
       "name": "step.wood",
