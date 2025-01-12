@@ -36,11 +36,29 @@
     },
     {
       "type": "TEXT",
+      "id": "remove_target",
+      "description": "移除玩家相机视角聚焦的实体",
+      "data": {
+        "name": "remove_target",
+        "description": "移除玩家相机视角聚焦的实体"
+      }
+    },
+    {
+      "type": "TEXT",
       "id": "set",
       "description": "给玩家设置相机视角/预设",
       "data": {
         "name": "set",
         "description": "给玩家设置相机视角/预设"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "target_entity",
+      "description": " 设置玩家相机视角聚焦的实体",
+      "data": {
+        "name": "target_entity",
+        "description": " 设置玩家相机视角聚焦的实体"
       }
     },
     {
@@ -167,7 +185,7 @@
     },
     {
       "type": "TEXT",
-      "id": "rot",
+      "id": "rot1",
       "description": "相机视角的旋转角度",
       "data": {
         "name": "rot",
@@ -176,14 +194,37 @@
     },
     {
       "type": "RELATIVE_FLOAT",
-      "id": "xRot",
+      "id": "xRot1",
       "brief": "rx",
       "description": "相机视角绕Y轴旋转的旋转角度(-180.0表示北，-90.0表示东，0.0表示南，90.0表示西)",
       "canUseCaretNotation": false
     },
     {
       "type": "RELATIVE_FLOAT",
-      "id": "yRot",
+      "id": "yRot1",
+      "brief": "ry",
+      "description": "相机视角绕X轴旋转的旋转角度(竖直上方为-90.0，至竖直下方90.0)",
+      "canUseCaretNotation": false
+    },
+    {
+      "type": "TEXT",
+      "id": "rot2",
+      "description": "相机视角的旋转角度",
+      "data": {
+        "name": "rot",
+        "description": "相机视角的旋转角度"
+      }
+    },
+    {
+      "type": "RELATIVE_FLOAT",
+      "id": "xRot2",
+      "brief": "rx",
+      "description": "相机视角绕Y轴旋转的旋转角度(-180.0表示北，-90.0表示东，0.0表示南，90.0表示西)",
+      "canUseCaretNotation": false
+    },
+    {
+      "type": "RELATIVE_FLOAT",
+      "id": "yRot2",
       "brief": "ry",
       "description": "相机视角绕X轴旋转的旋转角度(竖直上方为-90.0，至竖直下方90.0)",
       "canUseCaretNotation": false
@@ -307,10 +348,72 @@
           "name": "in_out_elastic"
         }
       ]
+    },
+    {
+      "type": "TEXT",
+      "id": "view_offset",
+      "description": "设置视角的偏移量",
+      "data": {
+        "name": "view_offset",
+        "description": "设置视角的偏移量"
+      }
+    },
+    {
+      "type": "RELATIVE_FLOAT",
+      "id": "xViewOffset",
+      "brief": "x方向偏移量",
+      "description": "相机视角x方向偏移量",
+      "canUseCaretNotation": false
+    },
+    {
+      "type": "RELATIVE_FLOAT",
+      "id": "yViewOffset",
+      "brief": "y方向偏移量",
+      "description": "相机视角y方向偏移量",
+      "canUseCaretNotation": false
+    },
+    {
+      "type": "TARGET_SELECTOR",
+      "id": "entity",
+      "description": "要将相机视角聚焦的实体",
+      "isOnlyOne": false,
+      "isMustPlayer": false,
+      "isMustNPC": false,
+      "isWildcard": false
+    },
+    {
+      "type": "TEXT",
+      "id": "target_center_offset",
+      "description": "设置目标中心的偏移量, 调整摄像机对准实体时的中心点",
+      "data": {
+        "name": "target_center_offset",
+        "description": "设置目标中心的偏移量, 调整摄像机对准实体时的中心点"
+      }
+    },
+    {
+      "type": "RELATIVE_FLOAT",
+      "id": "xTargetCenterOffset",
+      "brief": "x方向中心偏移量",
+      "description": "x方向中心偏移量",
+      "canUseCaretNotation": true
+    },
+    {
+      "type": "RELATIVE_FLOAT",
+      "id": "yTargetCenterOffset",
+      "brief": "y方向中心偏移量",
+      "description": "y方向中心偏移量",
+      "canUseCaretNotation": true
+    },
+    {
+      "type": "RELATIVE_FLOAT",
+      "id": "zTargetCenterOffset",
+      "brief": "z方向中心偏移量",
+      "description": "z方向中心偏移量",
+      "canUseCaretNotation": true
     }
   ],
   "ast": [
-    ["players", "clear", "fade", "set"],
+    ["players", "clear", "fade", "remove_target", "set", "target_entity"],
     ["clear", "LF"],
     ["fade", "LF", "color", "time"],
     ["color", "red"],
@@ -321,19 +424,32 @@
     ["fadeInSeconds", "holdSeconds"],
     ["holdSeconds", "fadeOutSeconds"],
     ["fadeOutSeconds", "LF", "color"],
+    ["remove_target", "LF"],
     ["set", "preset"],
-    ["preset", "default", "LF", "facing", "pos", "rot", "ease"],
+    ["preset", "default", "LF", "facing", "pos", "rot2", "ease", "view_offset"],
     ["default", "LF"],
     ["ease", "easeTime"],
-    ["easeTime", "easeType", "facing", "pos"],
-    ["easeType", "default", "LF", "rot"],
+    ["easeTime", "easeType"],
+    ["easeType", "default", "LF", "rot1", "facing", "pos"],
     ["facing", "lookAtEntity", "lookAtPosition"],
     ["lookAtEntity", "LF"],
     ["lookAtPosition", "LF"],
     ["pos", "position"],
-    ["position", "LF", "facing", "rot"],
-    ["rot", "xRot"],
-    ["xRot", "yRot"],
-    ["yRot", "LF"]
+    ["position", "LF", "facing", "rot1"],
+    ["rot1", "xRot1"],
+    ["xRot1", "yRot1"],
+    ["yRot1", "LF"],
+    ["rot2", "xRot2"],
+    ["xRot2", "yRot2"],
+    ["yRot2", "LF", "view_offset"],
+    ["view_offset", "xViewOffset"],
+    ["xViewOffset", "yViewOffset"],
+    ["yViewOffset", "LF"],
+    ["target_entity", "entity"],
+    ["entity", "LF", "target_center_offset"],
+    ["target_center_offset", "xTargetCenterOffset"],
+    ["xTargetCenterOffset", "yTargetCenterOffset"],
+    ["yTargetCenterOffset", "zTargetCenterOffset"],
+    ["zTargetCenterOffset", "LF"]
   ]
 }
