@@ -27,7 +27,7 @@ namespace CHelper::Node {
         return NodeTypeId::TEXT;
     }
 
-    ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         DEBUG_GET_NODE_BEGIN(this)
         auto result = getTextASTNode(this, tokenReader);
         DEBUG_GET_NODE_END(this)

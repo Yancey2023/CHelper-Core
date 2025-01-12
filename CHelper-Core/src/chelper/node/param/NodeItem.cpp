@@ -24,7 +24,7 @@ namespace CHelper::Node {
         return NodeTypeId::ITEM;
     }
 
-    ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         tokenReader.push();
         ASTNode itemId = nodeItemId->getASTNode(tokenReader, cpack);
         size_t strHash = std::hash<std::u16string_view>{}(itemId.tokens.toString());

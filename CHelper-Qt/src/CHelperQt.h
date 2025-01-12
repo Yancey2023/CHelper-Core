@@ -7,7 +7,6 @@
 
 #include <chelper/CHelperCore.h>
 #include <QMainWindow>
-#include <QModelIndex>
 #include <QStyledItemDelegate>
 
 QT_BEGIN_NAMESPACE

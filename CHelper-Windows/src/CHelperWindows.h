@@ -7,6 +7,8 @@
 #ifndef CHELPER_CHELPERWINDOWS_H
 #define CHELPER_CHELPERWINDOWS_H
 
+#define UNICODE
+
 #include "pch.h"
 #include <windows.h>
 

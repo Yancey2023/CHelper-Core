@@ -66,7 +66,7 @@ namespace CHelper::Node {
         return NodeTypeId::NORMAL_ID;
     }
 
-    ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(this)
         ASTNode result = getNormalIdASTNode(this, tokenReader);

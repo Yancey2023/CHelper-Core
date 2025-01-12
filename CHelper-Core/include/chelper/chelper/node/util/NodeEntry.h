@@ -28,7 +28,7 @@ namespace CHelper::Node {
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data = nullptr) const override;
 
         std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const override;
     };

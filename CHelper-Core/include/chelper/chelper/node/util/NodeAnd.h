@@ -11,29 +11,19 @@
 
 namespace CHelper::Node {
 
-    namespace WhitespaceMode {
-        enum WhitespaceMode : uint8_t {
-            NORMAL,
-            NO_WHITESPACE
-        };
-    }// namespace WhitespaceMode
-
-
     class NodeAnd : public NodeBase {
     public:
-        WhitespaceMode::WhitespaceMode whitespaceMode = WhitespaceMode::NO_WHITESPACE;
         std::vector<const NodeBase *> childNodes;
 
         NodeAnd() = default;
 
         NodeAnd(const std::optional<std::u16string> &id,
                 const std::optional<std::u16string> &description,
-                WhitespaceMode::WhitespaceMode whitespaceMode,
                 const std::vector<const NodeBase *> &childNodes);
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data = nullptr) const override;
 
         std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const override;
     };

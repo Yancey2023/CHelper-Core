@@ -67,7 +67,7 @@ namespace CHelper::Node {
         return {std::move(result), std::move(convertResult)};
     }
 
-    ASTNode NodeJsonString::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeJsonString::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         tokenReader.push();
         ASTNode result = tokenReader.readStringASTNode(this);
         tokenReader.pop();

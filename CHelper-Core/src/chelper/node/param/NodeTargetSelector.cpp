@@ -217,11 +217,11 @@ namespace CHelper::Node {
         return NodeTypeId::TARGET_SELECTOR;
     }
 
-    ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         tokenReader.skipWhitespace();
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(nodeAt)
-        ASTNode at = nodeAt->getASTNodeWithNextNode(tokenReader, cpack);
+        ASTNode at = nodeAt->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeAt)
         tokenReader.restore();
         if (HEDLEY_UNLIKELY(at.isError())) {
@@ -230,7 +230,7 @@ namespace CHelper::Node {
                 // 尝试匹配通配符
                 tokenReader.push();
                 DEBUG_GET_NODE_BEGIN(nodeWildcard)
-                ASTNode wildcard = nodeWildcard->getASTNodeWithNextNode(tokenReader, cpack);
+                ASTNode wildcard = nodeWildcard->getASTNode(tokenReader, cpack);
                 DEBUG_GET_NODE_END(nodeWildcard)
                 if (wildcard.isError()) {
                     tokenReader.restore();
@@ -249,11 +249,11 @@ namespace CHelper::Node {
         //目标选择器变量
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(nodeTargetSelectorVariable)
-        ASTNode targetSelectorVariable = nodeTargetSelectorVariable->getASTNodeWithNextNode(tokenReader, cpack);
+        ASTNode targetSelectorVariable = nodeTargetSelectorVariable->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeTargetSelectorVariable)
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(nodeLeft)
-        ASTNode leftBracket = nodeLeft->getASTNodeWithNextNode(tokenReader, cpack);
+        ASTNode leftBracket = nodeLeft->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(nodeLeft)
         tokenReader.restore();
         if (HEDLEY_LIKELY(leftBracket.isError())) {
@@ -261,7 +261,7 @@ namespace CHelper::Node {
             return ASTNode::andNode(this, {targetSelectorVariable}, tokenReader.collect(),
                                     nullptr, ASTNodeId::NODE_TARGET_SELECTOR_NO_ARGUMENTS);
         }
-        ASTNode arguments = nodeArguments->getASTNodeWithNextNode(tokenReader, cpack);
+        ASTNode arguments = nodeArguments->getASTNode(tokenReader, cpack);
         return ASTNode::andNode(this, {targetSelectorVariable, arguments}, tokenReader.collect(),
                                 nullptr, ASTNodeId::NODE_TARGET_SELECTOR_WITH_ARGUMENTS);
     }

@@ -10,38 +10,38 @@
 namespace CHelper::Node {
 
     void NodePerCommand::init(const CPack &cpack) {
-        for (const auto &item: nodes) {
-            if (HEDLEY_LIKELY(item->id.has_value())) {
-                Profile::push(R"(init node {}: "{}")", NodeTypeHelper::getName(item->getNodeType()), item->id.value());
+        for (auto &item: wrappedNodes) {
+            if (HEDLEY_LIKELY(item.innerNode->id.has_value())) {
+                Profile::push(R"(init node {}: "{}")", NodeTypeHelper::getName(item.innerNode->getNodeType()), item.innerNode->id.value());
             } else {
-                Profile::push("init node {}", NodeTypeHelper::getName(item->getNodeType()));
+                Profile::push("init node {}", NodeTypeHelper::getName(item.innerNode->getNodeType()));
             }
-            item->init(cpack);
+            item.init(cpack);
             Profile::pop();
         }
-        for (const auto &item: nodes) {
-            if (HEDLEY_UNLIKELY(item->nextNodes.empty())) {
+        for (const auto &item: wrappedNodes) {
+            if (HEDLEY_UNLIKELY(item.nextNodes.empty())) {
                 Profile::push("dismiss child node ids, the parent node is {} (in command {})",
-                              item->id.value_or(u"UNKNOWN"),
+                              item.innerNode->id.value_or(u"UNKNOWN"),
                               StringUtil::join(u",", name));
                 throw std::runtime_error("dismiss child node ids");
             }
         }
 #ifdef CHelperDebug
-        for (const auto &item: nodes) {
-            bool flag1 = item->getNodeType() == NodeTypeId::POSITION ||
-                         item->getNodeType() == NodeTypeId::RELATIVE_FLOAT;
-            for (const auto &item2: item->nextNodes) {
+        for (const auto &item: wrappedNodes) {
+            bool flag1 = item.innerNode->getNodeType() == NodeTypeId::POSITION ||
+                         item.innerNode->getNodeType() == NodeTypeId::RELATIVE_FLOAT;
+            for (const auto &item2: item.nextNodes) {
                 if (HEDLEY_UNLIKELY(item2 == NodeLF::getInstance())) {
                     continue;
                 }
-                bool flag2 = item2->getNodeType() == NodeTypeId::POSITION ||
-                             item2->getNodeType() == NodeTypeId::RELATIVE_FLOAT;
-                if (HEDLEY_UNLIKELY(flag1 && flag2 == item2->isMustAfterWhiteSpace)) {
+                bool flag2 = item2->innerNode->getNodeType() == NodeTypeId::POSITION ||
+                             item2->innerNode->getNodeType() == NodeTypeId::RELATIVE_FLOAT;
+                if (HEDLEY_UNLIKELY(flag1 && flag2 == item2->innerNode->isMustAfterWhiteSpace)) {
                     Profile::push(R"({} should be {} in node "{}")",
                                   "isMustAfterWhiteSpace",
-                                  item2->isMustAfterWhiteSpace ? "false" : "true",
-                                  item2->id.value_or(u"unknown"));
+                                  item2->innerNode->isMustAfterWhiteSpace ? "false" : "true",
+                                  item2->innerNode->id.value_or(u"unknown"));
                     throw std::runtime_error("value is wrong");
                 }
             }
@@ -53,14 +53,13 @@ namespace CHelper::Node {
         return NodeTypeId::PER_COMMAND;
     }
 
-    ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         std::vector<ASTNode> childASTNodes;
         childASTNodes.reserve(startNodes.size());
         for (const auto &item: startNodes) {
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(item)
-            childASTNodes.push_back(item->getASTNodeWithNextNode(
-                    tokenReader, cpack, item->getNodeType() != NodeTypeId::REPEAT));
+            childASTNodes.push_back(item->getASTNode(tokenReader, cpack));
             DEBUG_GET_NODE_END(item)
             tokenReader.restore();
         }

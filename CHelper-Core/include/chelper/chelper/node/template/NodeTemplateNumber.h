@@ -28,7 +28,7 @@ namespace CHelper::Node {
             }
         }
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override {
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const override {
             if constexpr (std::numeric_limits<T>::is_integer) {
                 return tokenReader.readIntegerASTNode(this);
             } else {

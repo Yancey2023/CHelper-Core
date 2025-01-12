@@ -25,7 +25,7 @@ namespace CHelper::Node {
         return NodeTypeId::SINGLE_SYMBOL;
     }
 
-    ASTNode NodeSingleSymbol::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeSingleSymbol::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         ASTNode symbolNode = tokenReader.readSymbolASTNode(this);
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_UNLIKELY(symbolNode.isError())) {

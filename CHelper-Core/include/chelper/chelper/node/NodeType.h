@@ -30,6 +30,7 @@
 #include "util/NodeAny.h"
 #include "util/NodeEntry.h"
 #include "util/NodeSingleSymbol.h"
+#include "util/NodeWrapped.h"
 #include "json/NodeJsonElement.h"
 #include "json/NodeJsonEntry.h"
 #include "json/NodeJsonList.h"
@@ -320,6 +321,12 @@ namespace CHelper {
             struct NodeTypeDetail<NodeTypeId::SINGLE_SYMBOL> : JsonNodeTypeDetail {
                 using Type = NodeSingleSymbol;
                 static inline const std::u16string name = u"SINGLE_SYMBOL";
+            };
+
+            template<>
+            struct NodeTypeDetail<NodeTypeId::WRAPPED> : JsonNodeTypeDetail {
+                using Type = NodeWrapped;
+                static inline const std::u16string name = u"WRAPPED";
             };
 
             template<NodeTypeId::NodeTypeId nodeTypeId>

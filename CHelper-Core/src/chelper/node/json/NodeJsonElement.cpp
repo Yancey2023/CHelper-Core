@@ -45,7 +45,7 @@ namespace CHelper::Node {
         Profile::pop();
     }
 
-    ASTNode NodeJsonElement::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeJsonElement::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         return getByChildNode(tokenReader, cpack, start);
     }
 

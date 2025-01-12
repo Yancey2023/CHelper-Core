@@ -8,6 +8,7 @@
 #define CHELPER_NODELF_H
 
 #include "../NodeBase.h"
+#include "../util/NodeWrapped.h"
 
 namespace CHelper::Node {
 
@@ -20,9 +21,9 @@ namespace CHelper::Node {
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
-        static NodeLF *getInstance();
+        static NodeWrapped *getInstance();
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data = nullptr) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

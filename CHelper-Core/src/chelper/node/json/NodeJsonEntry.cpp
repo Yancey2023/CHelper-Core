@@ -62,7 +62,7 @@ namespace CHelper::Node {
                 nodeKey.get(), nodeSeparator.get(), nodeValue.get());
     }
 
-    ASTNode NodeJsonEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeJsonEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         return getByChildNode(tokenReader, cpack, HEDLEY_UNLIKELY(nodeEntry == nullptr) ? nodeAllEntry.get() : nodeEntry.get());
     }
 

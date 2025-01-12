@@ -57,7 +57,7 @@ namespace CHelper::Node {
         return NodeTypeId::EQUAL_ENTRY;
     }
 
-    ASTNode NodeEqualEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeEqualEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         // key
@@ -81,9 +81,9 @@ namespace CHelper::Node {
         //value
         if (HEDLEY_UNLIKELY(it == equalDatas.end())) {
             NodeAny::getNodeAny()->init(*cpack);
-            childNodes.push_back(NodeAny::getNodeAny()->getASTNodeWithNextNode(tokenReader, cpack));
+            childNodes.push_back(NodeAny::getNodeAny()->getASTNode(tokenReader, cpack));
         } else {
-            childNodes.push_back(it->nodeValue->getASTNodeWithNextNode(tokenReader, cpack));
+            childNodes.push_back(it->nodeValue->getASTNode(tokenReader, cpack));
         }
         return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
     }

@@ -46,11 +46,8 @@
                            EQUAL_ENTRY,       \
                            LIST,              \
                            OR,                \
-                           SINGLE_SYMBOL
-
-// #define CODEC_NODE(CodecType, ...)                                     \
-//     CODEC_WITH_PARENT(CodecType, CHelper::Node::NodeBase, __VA_ARGS__) \
-//     CODEC_UNIQUE_PTR(CodecType)
+                           SINGLE_SYMBOL,     \
+                           WRAPPED
 
 #define CODEC_NODE(CodecType, ...) \
     CODEC_WITH_PARENT(CodecType, CHelper::Node::NodeBase, __VA_ARGS__)
@@ -68,7 +65,7 @@ namespace CHelper {
             enum NodeTypeId : uint8_t {
                 CHELPER_NODE_TYPES
             };
-        };
+        }
 
         constexpr NodeTypeId::NodeTypeId MAX_TYPE_ID = NodeTypeId::SINGLE_SYMBOL;
 
@@ -79,8 +76,6 @@ namespace CHelper {
             std::optional<std::u16string> description;
             //true-一定要在空格后 false-不一定在空格后
             std::optional<bool> isMustAfterWhiteSpace;
-            //存储下一个节点，需要调用构造函数之后再进行添加
-            std::vector<NodeBase *> nextNodes;
 
             NodeBase() = default;
 
@@ -95,13 +90,7 @@ namespace CHelper {
             [[nodiscard]] virtual NodeTypeId::NodeTypeId getNodeType() const = 0;
 
             [[nodiscard]] HEDLEY_NON_NULL(3) virtual ASTNode
-                    getASTNode(TokenReader &tokenReader, const CPack *cpack) const = 0;
-
-            [[nodiscard]] HEDLEY_NON_NULL(3) ASTNode
-                    getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack) const;
-
-            [[nodiscard]] HEDLEY_NON_NULL(3) ASTNode
-                    getASTNodeWithNextNode(TokenReader &tokenReader, const CPack *cpack, bool isRequireWhitespace) const;
+            getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data = nullptr) const = 0;
 
         protected:
             HEDLEY_NON_NULL(3, 4)
@@ -143,9 +132,6 @@ namespace CHelper {
             virtual bool collectColor(const ASTNode *astNode,
                                       ColoredString &coloredString,
                                       const Theme &theme) const;
-
-            void collectStructureWithNextNodes(StructureBuilder &structure,
-                                               bool isMustHave) const;
         };
 
     }// namespace Node

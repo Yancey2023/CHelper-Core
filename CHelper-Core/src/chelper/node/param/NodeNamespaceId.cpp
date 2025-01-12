@@ -36,7 +36,7 @@ namespace CHelper::Node {
         return NodeTypeId::NAMESPACE_ID;
     }
 
-    ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         // namespace:id
         // 字符串中已经包含冒号，因为冒号不是结束字符
         DEBUG_GET_NODE_BEGIN(this)

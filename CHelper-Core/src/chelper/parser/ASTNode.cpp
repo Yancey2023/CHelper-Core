@@ -24,7 +24,7 @@ namespace CHelper {
           id(id),
           whichBest(whichBest) {}
 
-#ifdef CHelperTest 
+#ifdef CHelperTest
     json ASTNode::toJson() const {
         json j;
         j["isError"] = isError();
@@ -271,14 +271,14 @@ namespace CHelper {
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
-#ifdef CHelperTest 
+#ifdef CHelperTest
             Profile::push(std::string("collect id errors: ")
                                   .append(utf8::utf16to8(NodeTypeHelper::getName(node->getNodeType())))
                                   .append(" ")
                                   .append(utf8::utf16to8(node->description.value_or(u""))));
 #endif
             auto flag = node->collectIdError(this, idErrorReasons);
-#ifdef CHelperTest 
+#ifdef CHelperTest
             Profile::pop();
 #endif
             if (HEDLEY_UNLIKELY(flag)) {
@@ -304,11 +304,11 @@ namespace CHelper {
             return;
         }
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
-#ifdef CHelperTest 
+#ifdef CHelperTest
             Profile::push("collect suggestions: " + NodeTypeHelper::getName(node->getNodeType()) + " " + node->description.value_or(""));
 #endif
             auto flag = node->collectSuggestions(this, index, suggestions);
-#ifdef CHelperTest 
+#ifdef CHelperTest
             Profile::pop();
 #endif
             if (HEDLEY_UNLIKELY(flag)) {
@@ -339,11 +339,11 @@ namespace CHelper {
                 structure.append(isMustHave, node->brief.value());
                 return;
             } else {
-#ifdef CHelperTest 
+#ifdef CHelperTest
                 Profile::push("collect structure: {}", NodeTypeHelper::getName(node->getNodeType()) + " " + node->description.value_or(""));
 #endif
                 node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ? nullptr : this, structure, isMustHave);
-#ifdef CHelperTest 
+#ifdef CHelperTest
                 Profile::pop();
 #endif
                 if (HEDLEY_UNLIKELY(structure.isDirty)) {
@@ -354,13 +354,13 @@ namespace CHelper {
         }
         switch (mode) {
             case ASTNodeMode::NONE:
-                node->collectStructureWithNextNodes(structure, isMustHave);
+                node->collectStructure(nullptr, structure, isMustHave);
                 return;
             case ASTNodeMode::AND:
                 for (const ASTNode &astNode: childNodes) {
                     astNode.collectStructure(structure, isMustHave);
-                    if (HEDLEY_LIKELY(isMustHave)) {
-                        for (const auto &item: astNode.node->nextNodes) {
+                    if (HEDLEY_LIKELY(isMustHave) && astNode.node->getNodeType() == Node::NodeTypeId::NodeTypeId::WRAPPED) {
+                        for (const auto &item: reinterpret_cast<const Node::NodeWrapped *>(astNode.node)->nextNodes) {
                             if (HEDLEY_UNLIKELY(item == Node::NodeLF::getInstance())) {
                                 isMustHave = false;
                             }
@@ -369,11 +369,13 @@ namespace CHelper {
                 }
                 break;
             case ASTNodeMode::OR:
-                if (HEDLEY_UNLIKELY(isNext && node->nextNodes.size() != 1 &&
+                if (HEDLEY_UNLIKELY(isNext &&
+                                    (node->getNodeType() != Node::NodeTypeId::NodeTypeId::WRAPPED ||
+                                     reinterpret_cast<const Node::NodeWrapped *>(node)->nextNodes.size() != 1) &&
                                     childNodes[whichBest].node == Node::NodeLF::getInstance())) {
-                    for (const auto &item: node->nextNodes) {
+                    for (const auto &item: reinterpret_cast<const Node::NodeWrapped *>(node)->nextNodes) {
                         if (HEDLEY_UNLIKELY(item != Node::NodeLF::getInstance())) {
-                            item->collectStructureWithNextNodes(structure, isMustHave);
+                            item->collectStructure(nullptr, structure, isMustHave);
                             break;
                         }
                     }
@@ -382,8 +384,11 @@ namespace CHelper {
                 childNodes[whichBest].collectStructure(structure, isMustHave);
                 break;
         }
-        if (HEDLEY_UNLIKELY(isCompound && childNodes.size() <= 1 && !node->nextNodes.empty())) {
-            node->nextNodes[0]->collectStructureWithNextNodes(structure, isMustHave);
+        if (HEDLEY_UNLIKELY(isCompound &&
+                            childNodes.size() <= 1 &&
+                            node->getNodeType() != Node::NodeTypeId::NodeTypeId::WRAPPED &&
+                            !reinterpret_cast<const Node::NodeWrapped *>(node)->nextNodes.empty())) {
+            reinterpret_cast<const Node::NodeWrapped *>(node)->nextNodes[0]->collectStructure(nullptr, structure, isMustHave);
         }
     }
 
@@ -391,11 +396,11 @@ namespace CHelper {
         bool isCompound = id == ASTNodeId::COMPOUND;
         bool isNext = id == ASTNodeId::NEXT_NODE;
         if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
-#ifdef CHelperTest 
+#ifdef CHelperTest
             Profile::push("collect color: {}", NodeTypeHelper::getName(node->getNodeType()) + " " + node->description.value_or(""));
 #endif
             bool isDirty = node->collectColor(this, coloredString, theme);
-#ifdef CHelperTest 
+#ifdef CHelperTest
             Profile::pop();
 #endif
             if (HEDLEY_UNLIKELY(isDirty)) {
@@ -417,11 +422,11 @@ namespace CHelper {
     }
 
     std::u16string ASTNode::getDescription(size_t index) const {
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::push("start getting description: {}", std::u16string(tokens.toString()));
 #endif
         auto result = collectDescription(index).value_or(u"未知");
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::pop();
 #endif
         return std::move(result);
@@ -446,11 +451,11 @@ namespace CHelper {
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getIdErrors() const {
         std::vector<std::shared_ptr<ErrorReason>> input;
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::push("start getting id error: " + std::u16string(tokens.toString()));
 #endif
         collectIdErrors(input);
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::pop();
 #endif
         return sortByLevel(input);
@@ -458,11 +463,11 @@ namespace CHelper {
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
         std::vector<std::shared_ptr<ErrorReason>> result = errorReasons;
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::push("start getting error reasons: {}", std::u16string(tokens.toString()));
 #endif
         collectIdErrors(result);
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::pop();
 #endif
         return sortByLevel(result);
@@ -494,7 +499,7 @@ namespace CHelper {
 
     std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
         std::u16string_view str = tokens.toString();
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::push("start getting suggestions: {}", str);
 #endif
         std::vector<Suggestions> suggestions;
@@ -502,19 +507,19 @@ namespace CHelper {
             suggestions.push_back(Suggestions::singleWhitespaceSuggestion({str.length(), str.length(), false, whitespaceId}));
         }
         collectSuggestions(index, suggestions);
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::pop();
 #endif
         return Suggestions::filter(suggestions);
     }
 
     std::u16string ASTNode::getStructure() const {
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::push("start getting structure: {}", tokens.toString());
 #endif
         StructureBuilder structureBuilder;
         collectStructure(structureBuilder, true);
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::pop();
 #endif
         std::u16string result = structureBuilder.build();
@@ -525,7 +530,7 @@ namespace CHelper {
     }
 
     ColoredString ASTNode::getColors(const Theme &theme) const {
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::push("start getting colors: {}", std::u16string(tokens.toString()));
 #endif
         ColoredString coloredString(tokens.lexerResult->content);

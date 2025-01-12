@@ -15,7 +15,7 @@ namespace CHelper::Node {
         return NodeTypeId::COMMAND_NAME;
     }
 
-    ASTNode NodeCommandName::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeCommandName::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         return tokenReader.readStringASTNode(this);
     }
 

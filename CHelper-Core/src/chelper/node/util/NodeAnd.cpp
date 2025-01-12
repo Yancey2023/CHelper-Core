@@ -8,32 +8,26 @@ namespace CHelper::Node {
 
     NodeAnd::NodeAnd(const std::optional<std::u16string> &id,
                      const std::optional<std::u16string> &description,
-                     WhitespaceMode::WhitespaceMode whitespaceMode,
                      const std::vector<const NodeBase *> &childNodes)
         : NodeBase(id, description, false),
-          whitespaceMode(whitespaceMode),
           childNodes(childNodes) {}
 
     NodeTypeId::NodeTypeId NodeAnd::getNodeType() const {
         return NodeTypeId::AND;
     }
 
-    ASTNode NodeAnd::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeAnd::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         tokenReader.push();
         std::vector<ASTNode> childASTNodes;
         for (int i = 0; i < childNodes.size(); ++i) {
             const auto &item = childNodes[i];
-            auto node = item->getASTNodeWithNextNode(
-                    tokenReader, cpack,
-                    whitespaceMode == WhitespaceMode::NORMAL &&
-                            (i == 0 || childNodes[i - 1]->isAfterWhitespace() || item->isAfterWhitespace()));
+            auto node = item->getASTNode(tokenReader, cpack);
             bool isError = node.isError();
             childASTNodes.push_back(std::move(node));
             if (HEDLEY_UNLIKELY(isError)) {
                 break;
             }
-            if (HEDLEY_UNLIKELY(whitespaceMode == WhitespaceMode::NO_WHITESPACE &&
-                                i < childNodes.size() - 1 &&
+            if (HEDLEY_UNLIKELY(i < childNodes.size() - 1 &&
                                 tokenReader.ready() &&
                                 tokenReader.peek()->type == TokenType::WHITE_SPACE)) {
                 tokenReader.push();

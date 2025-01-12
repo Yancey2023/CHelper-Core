@@ -14,12 +14,13 @@ namespace CHelper::Node {
         return NodeTypeId::LF;
     }
 
-    NodeLF *NodeLF::getInstance() {
+    NodeWrapped *NodeLF::getInstance() {
         static std::unique_ptr<NodeLF> INSTANCE = std::make_unique<NodeLF>(u"LF", u"命令终止");
-        return INSTANCE.get();
+        static std::unique_ptr<NodeWrapped> INSTANCE_WRAPPED = std::make_unique<NodeWrapped>(INSTANCE.get());
+        return INSTANCE_WRAPPED.get();
     }
 
-    ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         tokenReader.push();
         tokenReader.skipToLF();
         TokensView tokens = tokenReader.collect();

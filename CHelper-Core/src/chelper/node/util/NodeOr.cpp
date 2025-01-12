@@ -34,7 +34,7 @@ namespace CHelper::Node {
         return NodeTypeId::OR;
     }
 
-    ASTNode NodeOr::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeOr::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         std::vector<ASTNode> childASTNodes;
         std::vector<size_t> indexes;
         if (HEDLEY_LIKELY(!isUseFirst)) {

@@ -23,7 +23,7 @@ namespace CHelper::Node {
         return NodeTypeId::REPEAT;
     }
 
-    ASTNode NodeRepeat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+    ASTNode NodeRepeat::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         while (true) {
@@ -60,7 +60,7 @@ namespace CHelper::Node {
                 const ASTNode &astNode1 = HEDLEY_LIKELY(item.whichBest == 0)
                                                   ? item.getBestNode().getBestNode()
                                                   : item.getBestNode();
-                const NodeAnd *node1 = (NodeAnd *) astNode1.node;
+                auto node1 = reinterpret_cast<const NodeAnd *>(astNode1.node);
                 size_t astNodeSize = astNode1.childNodes.size();
                 size_t nodeSize = node1->childNodes.size();
                 structure.isDirty = false;
@@ -68,7 +68,7 @@ namespace CHelper::Node {
                     if (HEDLEY_LIKELY(i < astNodeSize)) {
                         astNode1.childNodes[i].collectStructure(structure, true);
                     } else {
-                        node1->childNodes[i]->collectStructureWithNextNodes(structure, true);
+                        node1->childNodes[i]->collectStructure(nullptr, structure, true);
                     }
                 }
                 if (HEDLEY_UNLIKELY(item.whichBest == 1)) {
@@ -80,7 +80,7 @@ namespace CHelper::Node {
         }
         //如果没有遇到结束语句，添加...和结束语句的结构
         structure.appendWhiteSpace().append(u"...");
-        for (const auto &item: ((NodeAnd *) ((NodeOr *) nodeElement)->childNodes[1])->childNodes) {
+        for (const auto &item: reinterpret_cast<const NodeAnd *>(reinterpret_cast<const NodeOr *>(nodeElement)->childNodes[1])->childNodes) {
             item->collectStructure(nullptr, structure, true);
         }
         structure.isDirty = true;
