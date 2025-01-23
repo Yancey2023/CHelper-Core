@@ -5,10 +5,9 @@
 #ifndef CHELPER_CHELPERQT_H
 #define CHELPER_CHELPERQT_H
 
-#include <chelper/CHelperCore.h>
 #include <QMainWindow>
-#include <QModelIndex>
 #include <QStyledItemDelegate>
+#include <chelper/CHelperCore.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,7 +22,6 @@ public:
     explicit CHelperApp(QWidget *parent = nullptr);
 
     ~CHelperApp() override;
-
 
 private slots:
     void onTextChanged(const QString &string);

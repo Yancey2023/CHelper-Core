@@ -30,6 +30,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -580,6 +584,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -950,6 +958,10 @@
           {
             "name": "door_hinge_bit",
             "defaultValue": false
+          },
+          {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
           },
           {
             "name": "open_bit",
@@ -2289,6 +2301,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -2903,6 +2919,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -3011,6 +3031,10 @@
             "defaultValue": false
           },
           {
+            "name": "creaking_heart_state",
+            "defaultValue": "uprooted"
+          },
+          {
             "name": "natural",
             "defaultValue": false
           },
@@ -3055,6 +3079,10 @@
           {
             "name": "door_hinge_bit",
             "defaultValue": false
+          },
+          {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
           },
           {
             "name": "open_bit",
@@ -3574,6 +3602,10 @@
           {
             "name": "door_hinge_bit",
             "defaultValue": false
+          },
+          {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
           },
           {
             "name": "open_bit",
@@ -4945,6 +4977,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -5984,6 +6020,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -6058,6 +6098,10 @@
           {
             "name": "door_hinge_bit",
             "defaultValue": false
+          },
+          {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
           },
           {
             "name": "open_bit",
@@ -7364,6 +7408,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -8517,6 +8565,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -8667,6 +8719,10 @@
           {
             "name": "door_hinge_bit",
             "defaultValue": false
+          },
+          {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
           },
           {
             "name": "open_bit",
@@ -11554,6 +11610,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -12951,6 +13011,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -13187,6 +13251,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -13297,6 +13365,10 @@
           {
             "name": "door_hinge_bit",
             "defaultValue": false
+          },
+          {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
           },
           {
             "name": "open_bit",
@@ -13411,6 +13483,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -13523,6 +13599,10 @@
             "defaultValue": false
           },
           {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
+          },
+          {
             "name": "open_bit",
             "defaultValue": false
           },
@@ -13633,6 +13713,10 @@
           {
             "name": "door_hinge_bit",
             "defaultValue": false
+          },
+          {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
           },
           {
             "name": "open_bit",
@@ -13939,6 +14023,10 @@
           {
             "name": "door_hinge_bit",
             "defaultValue": false
+          },
+          {
+            "name": "minecraft:cardinal_direction",
+            "defaultValue": "south"
           },
           {
             "name": "open_bit",
@@ -17775,6 +17863,23 @@
                 {
                   "valueName": false,
                   "description": "嘎枝之心处于未激活状态"
+                }
+              ]
+            },
+            {
+              "propertyName": "creaking_heart_state",
+              "values": [
+                {
+                  "valueName": "uprooted",
+                  "description": "嘎枝之心因脱离有效的结构而失活"
+                },
+                {
+                  "valueName": "dormant",
+                  "description": "嘎枝之心未失活，但因处于白天而休眠"
+                },
+                {
+                  "valueName": "awake",
+                  "description": "嘎枝之心未失活，且因处于夜晚而激活"
                 }
               ]
             }

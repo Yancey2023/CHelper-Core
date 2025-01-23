@@ -5,16 +5,14 @@
 #include "CHelperWindows.h"
 #include <chelper/ChelperCore.h>
 #include <chelper/parser/Parser.h>
-#include <AtlBase.h>
-#include <atlconv.h>
 #include <commctrl.h>
 
 static size_t ID_INPUT = 1;
 static size_t ID_DESCRIPTION = 2;
 static size_t ID_LIST_VIEW = 3;
 
-static TCHAR szWindowClass[] = "CHelper";
-static TCHAR szTitle[] = "CHelper";
+static TCHAR szWindowClass[] = TEXT("CHelper");
+static TCHAR szTitle[] = TEXT("CHelper");
 
 static CHelper::CHelperCore *core = nullptr;
 
@@ -40,13 +38,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
     wcex.hInstance = hInstance;
     wcex.hIcon = LoadIcon(wcex.hInstance, IDI_APPLICATION);
     wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
+    wcex.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
     wcex.lpszMenuName = nullptr;
     wcex.lpszClassName = szWindowClass;
     wcex.hIconSm = LoadIcon(wcex.hInstance, IDI_APPLICATION);
     //注册窗口
     if (HEDLEY_UNLIKELY(!RegisterClassEx(&wcex))) {
-        MessageBox(nullptr, "Call to RegisterClassEx failed!", "CHelper", 0);
+        MessageBox(nullptr, TEXT("Call to RegisterClassEx failed!"), TEXT("CHelper"), 0);
         return 1;
     }
     //创建窗口
@@ -60,7 +58,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
             nullptr, nullptr,
             hInstance, nullptr);
     if (HEDLEY_UNLIKELY(hWnd == nullptr)) {
-        MessageBox(nullptr, "Call to CreateWindow failed!", "CHelper", 0);
+        MessageBox(nullptr, TEXT("Call to CreateWindow failed!"), TEXT("CHelper"), 0);
         return 1;
     }
     //显示并更新窗口
@@ -74,7 +72,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
     }
     delete core;
     core = nullptr;
-    return (int) msg.wParam;
+    return static_cast<int>(msg.wParam);
 }
 
 static HWND hWndInput, hWndDescription, hWndListBox;
@@ -82,32 +80,29 @@ static HWND hWndInput, hWndDescription, hWndListBox;
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_CREATE:
-            hWndInput = CreateWindow("EDIT", "", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL,
-                                     0, 0, 0, 0, hWnd, (HMENU) ID_INPUT, nullptr, nullptr);
-            hWndDescription = CreateWindow("STATIC", "", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL,
-                                           0, 0, 0, 0, hWnd, (HMENU) ID_DESCRIPTION, nullptr, nullptr);
-            hWndListBox = CreateWindow(WC_LISTBOX, "", WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | LBS_NOTIFY,
-                                       0, 0, 0, 0, hWnd, (HMENU) ID_LIST_VIEW, nullptr, nullptr);
+            hWndInput = CreateWindow(TEXT("EDIT"), TEXT(""), WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL,
+                                     0, 0, 0, 0, hWnd, reinterpret_cast<HMENU>(ID_INPUT), nullptr, nullptr);
+            hWndDescription = CreateWindow(TEXT("STATIC"), TEXT(""), WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL,
+                                           0, 0, 0, 0, hWnd, reinterpret_cast<HMENU>(ID_DESCRIPTION), nullptr, nullptr);
+            hWndListBox = CreateWindow(WC_LISTBOX, TEXT("LIST"), WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | LBS_NOTIFY,
+                                       0, 0, 0, 0, hWnd, reinterpret_cast<HMENU>(ID_LIST_VIEW), nullptr, nullptr);
             onTextChanged(u"");
             break;
         case WM_COMMAND:
             if (LOWORD(wParam) == ID_INPUT && HIWORD(wParam) == EN_CHANGE) {
                 CHelper::Profile::push("get command from input");
                 int length = GetWindowTextLength(hWndInput);
-                auto *buffer = new char[length + 1];
+                auto *buffer = new WCHAR[length + 1];
                 GetWindowText(hWndInput, buffer, length + 1);
-                UINT codePage = GetACP();
-                int wideCharLength = MultiByteToWideChar(codePage, 0, buffer, -1, nullptr, 0);
-                auto *wideCharBuffer = new wchar_t[wideCharLength + 1];
-                MultiByteToWideChar(codePage, 0, buffer, -1, wideCharBuffer, wideCharLength + 1);
-                int utf8Length = WideCharToMultiByte(CP_UTF8, 0, wideCharBuffer, -1, nullptr, 0, nullptr, nullptr);
-                char *utf8Buffer = new char[utf8Length + 1];
-                WideCharToMultiByte(CP_UTF8, 0, wideCharBuffer, -1, utf8Buffer, utf8Length + 1, nullptr, nullptr);
-                CHelper::Profile::pop();
-                onTextChanged(utf8::utf8to16(std::string(utf8Buffer)));
-                delete[] utf8Buffer;
+                onTextChanged(reinterpret_cast<char16_t *>(buffer));
                 delete[] buffer;
-                delete[] wideCharBuffer;
+            } else if (LOWORD(wParam) == ID_LIST_VIEW && HIWORD(wParam) == LBN_SELCHANGE) {
+                int index = SendMessage(hWndListBox, LB_GETCURSEL, 0, 0);
+                std::optional<std::pair<std::u16string, size_t>> result = core->onSuggestionClick(index);
+                if (result.has_value()) {
+                    SetWindowText(hWndInput, reinterpret_cast<const WCHAR *>(result.value().first.c_str()));
+                    SendMessage(hWndInput, EM_SETSEL, result.value().second, -1);
+                }
             }
             break;
         case WM_SIZE:
@@ -171,9 +166,7 @@ void onTextChanged(const std::u16string &command) {
                 auto content = std::u16string(suggestion.content->name)
                                        .append(u" - ")
                                        .append(suggestion.content->description.value_or(u""));
-                auto contentUtf8 = utf8::utf16to8(content);
-                CA2W ca2w(contentUtf8.c_str(), GetACP());
-                SendMessageW(hWndListBox, LB_ADDSTRING, 0, reinterpret_cast<LPARAM>(ca2w.m_szBuffer));
+                SendMessage(hWndListBox, LB_ADDSTRING, 0, reinterpret_cast<LPARAM>(content.c_str()));
             }
         }
         CHelper::Profile::pop();
@@ -183,7 +176,7 @@ void onTextChanged(const std::u16string &command) {
         fmt::print("get error successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endErrorReasons - startErrorReasons).count()) + "ms", fg(fmt::color::medium_purple)));
         fmt::print("get suggestions successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms", fg(fmt::color::medium_purple)));
         fmt::print("get structure successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms", fg(fmt::color::medium_purple)));
-#ifdef CHelperTest 
+#ifdef CHelperTest
         fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
         fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
 #endif

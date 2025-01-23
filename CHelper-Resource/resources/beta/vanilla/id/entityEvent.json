@@ -897,6 +897,9 @@
       "name": "minecraft:start_unrolling"
     },
     {
+      "name": "minecraft:started_riding"
+    },
+    {
       "name": "minecraft:stop_aggro"
     },
     {
@@ -922,6 +925,9 @@
     },
     {
       "name": "minecraft:stop_transforming"
+    },
+    {
+      "name": "minecraft:stopped_riding"
     },
     {
       "name": "minecraft:switch_to_melee"

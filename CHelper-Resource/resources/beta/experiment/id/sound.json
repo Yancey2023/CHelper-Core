@@ -59,10 +59,12 @@
       "description": "灵魂沙峡谷：怪异的噪声"
     },
     {
-      "name": "ambient.underwater.enter"
+      "name": "ambient.underwater.enter",
+      "description": "玩家：进入水中"
     },
     {
-      "name": "ambient.underwater.exit"
+      "name": "ambient.underwater.exit",
+      "description": "玩家：离开水中"
     },
     {
       "name": "ambient.warped_forest.additions",
@@ -89,22 +91,28 @@
       "description": "雷鸣"
     },
     {
-      "name": "apply_effect.bad_omen"
+      "name": "apply_effect.bad_omen",
+      "description": "不祥之兆：显现"
     },
     {
-      "name": "apply_effect.raid_omen"
+      "name": "apply_effect.raid_omen",
+      "description": "袭击：迫在眉睫"
     },
     {
-      "name": "apply_effect.trial_omen"
+      "name": "apply_effect.trial_omen",
+      "description": "不祥试炼：迫在眉睫"
     },
     {
-      "name": "armor.break_wolf"
+      "name": "armor.break_wolf",
+      "description": "狼铠：损坏"
     },
     {
-      "name": "armor.crack_wolf"
+      "name": "armor.crack_wolf",
+      "description": "狼铠：裂开"
     },
     {
-      "name": "armor.damage_wolf"
+      "name": "armor.damage_wolf",
+      "description": "狼铠：受损"
     },
     {
       "name": "armor.equip_chain",
@@ -135,13 +143,16 @@
       "description": "下界合金盔甲：铿锵"
     },
     {
-      "name": "armor.equip_wolf"
+      "name": "armor.equip_wolf",
+      "description": "狼铠：装备"
     },
     {
-      "name": "armor.repair_wolf"
+      "name": "armor.repair_wolf",
+      "description": "狼铠：被修复"
     },
     {
-      "name": "armor.unequip_wolf"
+      "name": "armor.unequip_wolf",
+      "description": "狼铠：滑落"
     },
     {
       "name": "beacon.activate",
@@ -177,7 +188,7 @@
     },
     {
       "name": "block.bamboo.step",
-      "description": "竹子：踩上"
+      "description": "竹子：被踩上"
     },
     {
       "name": "block.bamboo_sapling.break",
@@ -236,6 +247,10 @@
       "description": "地图：绘制"
     },
     {
+      "name": "block.cave_vines.place",
+      "description": "洞穴藤蔓：被放置"
+    },
+    {
       "name": "block.chorusflower.death",
       "description": "紫颂花：凋零"
     },
@@ -263,40 +278,52 @@
       "description": "堆肥桶：堆肥"
     },
     {
-      "name": "block.copper_bulb.turn_off"
+      "name": "block.copper_bulb.turn_off",
+      "description": "铜灯：熄灭"
     },
     {
-      "name": "block.copper_bulb.turn_on"
+      "name": "block.copper_bulb.turn_on",
+      "description": "铜灯：亮起"
     },
     {
-      "name": "block.creaking_heart.ambient"
+      "name": "block.creaking_heart.ambient",
+      "description": "怪异的噪声"
     },
     {
-      "name": "block.creaking_heart.break"
+      "name": "block.creaking_heart.break",
+      "description": "嘎枝之心：被破坏"
     },
     {
-      "name": "block.creaking_heart.fall"
+      "name": "block.creaking_heart.fall",
+      "description": "嘎枝之心：某物摔落"
     },
     {
-      "name": "block.creaking_heart.hit"
+      "name": "block.creaking_heart.hit",
+      "description": "嘎枝之心：损坏中"
     },
     {
-      "name": "block.creaking_heart.place"
+      "name": "block.creaking_heart.place",
+      "description": "嘎枝之心：被放置"
     },
     {
-      "name": "block.creaking_heart.spawn_mob"
+      "name": "block.creaking_heart.spawn_mob",
+      "description": "嘎枝之心：苏醒"
     },
     {
-      "name": "block.creaking_heart.step"
+      "name": "block.creaking_heart.step",
+      "description": "嘎枝之心：被踩上"
     },
     {
-      "name": "block.creaking_heart.trail"
+      "name": "block.creaking_heart.trail",
+      "description": "嘎枝之心：咕哝"
     },
     {
-      "name": "block.decorated_pot.insert"
+      "name": "block.decorated_pot.insert",
+      "description": "饰纹陶罐：装入"
     },
     {
-      "name": "block.decorated_pot.insert_fail"
+      "name": "block.decorated_pot.insert_fail",
+      "description": "饰纹陶罐：晃动"
     },
     {
       "name": "block.enchanting_table.use",
@@ -311,19 +338,24 @@
       "description": "末影之眼：嵌入"
     },
     {
-      "name": "block.eyeblossom.ambient"
+      "name": "block.eyeblossom.ambient",
+      "description": "眼眸花：沙沙作响"
     },
     {
-      "name": "block.eyeblossom.close"
+      "name": "block.eyeblossom.close",
+      "description": "眼眸花：闭合"
     },
     {
-      "name": "block.eyeblossom.close_long"
+      "name": "block.eyeblossom.close_long",
+      "description": "眼眸花：闭合"
     },
     {
-      "name": "block.eyeblossom.open"
+      "name": "block.eyeblossom.open",
+      "description": "眼眸花：张开"
     },
     {
-      "name": "block.eyeblossom.open_long"
+      "name": "block.eyeblossom.open_long",
+      "description": "眼眸花：张开"
     },
     {
       "name": "block.false_permissions",
@@ -375,7 +407,7 @@
     },
     {
       "name": "block.lantern.step",
-      "description": "灯笼：踩上"
+      "description": "灯笼：被踩上"
     },
     {
       "name": "block.loom.use",
@@ -399,13 +431,15 @@
     },
     {
       "name": "block.mangrove_roots.step",
-      "description": "红树根：踩上"
+      "description": "红树根：被踩上"
     },
     {
-      "name": "block.mob_spawner.break"
+      "name": "block.mob_spawner.break",
+      "description": "刷怪笼：被破坏"
     },
     {
-      "name": "block.mob_spawner.step"
+      "name": "block.mob_spawner.step",
+      "description": "刷怪笼：被踩上"
     },
     {
       "name": "block.mud.break",
@@ -425,7 +459,7 @@
     },
     {
       "name": "block.mud.step",
-      "description": "泥巴：踩上"
+      "description": "泥巴：被踩上"
     },
     {
       "name": "block.mud_bricks.break",
@@ -445,7 +479,7 @@
     },
     {
       "name": "block.mud_bricks.step",
-      "description": "泥砖：踩上"
+      "description": "泥砖：被踩上"
     },
     {
       "name": "block.muddy_mangrove_roots.break",
@@ -465,7 +499,7 @@
     },
     {
       "name": "block.muddy_mangrove_roots.step",
-      "description": "沾泥的红树根：踩上"
+      "description": "沾泥的红树根：被踩上"
     },
     {
       "name": "block.packed_mud.break",
@@ -485,40 +519,51 @@
     },
     {
       "name": "block.packed_mud.step",
-      "description": "泥坯：踩上"
+      "description": "泥坯：被踩上"
     },
     {
-      "name": "block.pale_hanging_moss.ambient"
+      "name": "block.pale_hanging_moss.ambient",
+      "description": "怪异的噪声"
     },
     {
-      "name": "block.resin.break"
+      "name": "block.resin.break",
+      "description": "树脂块：被破坏"
     },
     {
-      "name": "block.resin.fall"
+      "name": "block.resin.fall",
+      "description": "树脂块：某物摔落"
     },
     {
-      "name": "block.resin.hit"
+      "name": "block.resin.hit",
+      "description": "树脂块：损坏中"
     },
     {
-      "name": "block.resin.place"
+      "name": "block.resin.place",
+      "description": "树脂块：被放置"
     },
     {
-      "name": "block.resin.step"
+      "name": "block.resin.step",
+      "description": "树脂块：被踩上"
     },
     {
-      "name": "block.resin_brick.break"
+      "name": "block.resin_brick.break",
+      "description": "树脂砖：被破坏"
     },
     {
-      "name": "block.resin_brick.fall"
+      "name": "block.resin_brick.fall",
+      "description": "树脂砖：某物摔落"
     },
     {
-      "name": "block.resin_brick.hit"
+      "name": "block.resin_brick.hit",
+      "description": "树脂砖：损坏中"
     },
     {
-      "name": "block.resin_brick.place"
+      "name": "block.resin_brick.place",
+      "description": "树脂砖：被放置"
     },
     {
-      "name": "block.resin_brick.step"
+      "name": "block.resin_brick.step",
+      "description": "树脂砖：被踩上"
     },
     {
       "name": "block.scaffolding.break",
@@ -542,20 +587,23 @@
     },
     {
       "name": "block.scaffolding.step",
-      "description": "脚手架：踩上"
+      "description": "脚手架：被踩上"
     },
     {
-      "name": "block.sign.waxed_interact_fail"
+      "name": "block.sign.waxed_interact_fail",
+      "description": "告示牌：晃动"
     },
     {
       "name": "block.smoker.smoke",
       "description": "烟熏炉：烟熏"
     },
     {
-      "name": "block.sniffer_egg.crack"
+      "name": "block.sniffer_egg.crack",
+      "description": "嗅探兽蛋：裂开"
     },
     {
-      "name": "block.sniffer_egg.hatch"
+      "name": "block.sniffer_egg.hatch",
+      "description": "嗅探兽蛋：孵化"
     },
     {
       "name": "block.stonecutter.use",
@@ -587,7 +635,39 @@
     },
     {
       "name": "block.turtle_egg.drop",
-      "description": "海龟蛋：孵化"
+      "description": "海龟：产卵"
+    },
+    {
+      "name": "block.weeping_vines.break",
+      "description": "垂泪藤：被破坏"
+    },
+    {
+      "name": "block.weeping_vines.fall",
+      "description": "垂泪藤：某物摔落"
+    },
+    {
+      "name": "block.weeping_vines.hit",
+      "description": "垂泪藤：损坏中"
+    },
+    {
+      "name": "block.weeping_vines.jump",
+      "description": "垂泪藤：某物跳跃"
+    },
+    {
+      "name": "block.weeping_vines.land",
+      "description": "垂泪藤：某物着陆"
+    },
+    {
+      "name": "block.weeping_vines.place",
+      "description": "垂泪藤：被放置"
+    },
+    {
+      "name": "block.weeping_vines.step",
+      "description": "垂泪藤：被踩上"
+    },
+    {
+      "name": "block.weeping_vines.use",
+      "description": "垂泪藤：被使用"
     },
     {
       "name": "bloom.sculk_catalyst",
@@ -598,10 +678,12 @@
       "description": "龙息：被装起"
     },
     {
-      "name": "bottle.empty"
+      "name": "bottle.empty",
+      "description": "玻璃瓶：倒空"
     },
     {
-      "name": "bottle.fill"
+      "name": "bottle.fill",
+      "description": "玻璃瓶：装满"
     },
     {
       "name": "break.amethyst_block",
@@ -616,10 +698,12 @@
       "description": "杜鹃花丛：被破坏"
     },
     {
-      "name": "break.bamboo_wood"
+      "name": "break.bamboo_wood",
+      "description": "竹子：被破坏"
     },
     {
-      "name": "break.bamboo_wood_hanging_sign"
+      "name": "break.bamboo_wood_hanging_sign",
+      "description": "悬挂式竹告示牌：被破坏"
     },
     {
       "name": "break.big_dripleaf",
@@ -630,25 +714,32 @@
       "description": "方解石：被破坏"
     },
     {
-      "name": "break.cherry_leaves"
+      "name": "break.cherry_leaves",
+      "description": "樱花树叶：被破坏"
     },
     {
-      "name": "break.cherry_wood"
+      "name": "break.cherry_wood",
+      "description": "樱花木：被破坏"
     },
     {
-      "name": "break.cherry_wood_hanging_sign"
+      "name": "break.cherry_wood_hanging_sign",
+      "description": "悬挂式樱花木告示牌：被破坏"
     },
     {
-      "name": "break.chiseled_bookshelf"
+      "name": "break.chiseled_bookshelf",
+      "description": "雕纹书架：被破坏"
     },
     {
-      "name": "break.copper_bulb"
+      "name": "break.copper_bulb",
+      "description": "铜灯：被破坏"
     },
     {
-      "name": "break.copper_grate"
+      "name": "break.copper_grate",
+      "description": "铜格栅：被破坏"
     },
     {
-      "name": "break.decorated_pot"
+      "name": "break.decorated_pot",
+      "description": "饰纹陶罐：被破坏"
     },
     {
       "name": "break.dirt_with_roots",
@@ -671,10 +762,16 @@
       "description": "垂根：被破坏"
     },
     {
-      "name": "break.hanging_sign"
+      "name": "break.hanging_sign",
+      "description": "悬挂式告示牌：被破坏"
     },
     {
-      "name": "break.heavy_core"
+      "name": "break.heavy_core",
+      "description": "沉重核心：被破坏"
+    },
+    {
+      "name": "break.iron",
+      "description": "铁质方块：被破坏"
     },
     {
       "name": "break.large_amethyst_bud",
@@ -685,13 +782,16 @@
       "description": "中型紫晶芽：被破坏"
     },
     {
-      "name": "break.nether_wood"
+      "name": "break.nether_wood",
+      "description": "下界木头：被破坏"
     },
     {
-      "name": "break.nether_wood_hanging_sign"
+      "name": "break.nether_wood_hanging_sign",
+      "description": "悬挂式下界木告示牌：被破坏"
     },
     {
-      "name": "break.pink_petals"
+      "name": "break.pink_petals",
+      "description": "粉红色花簇：被破坏"
     },
     {
       "name": "break.pointed_dripstone",
@@ -722,45 +822,56 @@
       "description": "小型紫晶芽：被破坏"
     },
     {
-      "name": "break.sponge"
+      "name": "break.sponge",
+      "description": "海绵：被破坏"
     },
     {
       "name": "break.spore_blossom",
       "description": "孢子花：被破坏"
     },
     {
-      "name": "break.suspicious_gravel"
+      "name": "break.suspicious_gravel",
+      "description": "可疑的沙砾：被破坏"
     },
     {
-      "name": "break.suspicious_sand"
+      "name": "break.suspicious_sand",
+      "description": "可疑的沙子：被破坏"
     },
     {
       "name": "break.tuff",
       "description": "凝灰岩：被破坏"
     },
     {
-      "name": "break.web"
+      "name": "break.web",
+      "description": "蜘蛛网：被破坏"
     },
     {
-      "name": "break.wet_sponge"
+      "name": "break.wet_sponge",
+      "description": "湿海绵：被破坏"
     },
     {
-      "name": "breeze_wind_charge.burst"
+      "name": "breeze_wind_charge.burst",
+      "description": "风弹：爆裂"
     },
     {
-      "name": "brush.generic"
+      "name": "brush.generic",
+      "description": "刷子：刷扫中"
     },
     {
-      "name": "brush.suspicious_gravel"
+      "name": "brush.suspicious_gravel",
+      "description": "刷子：刷扫沙砾中"
     },
     {
-      "name": "brush.suspicious_sand"
+      "name": "brush.suspicious_sand",
+      "description": "刷子：刷扫沙子中"
     },
     {
-      "name": "brush_completed.suspicious_gravel"
+      "name": "brush_completed.suspicious_gravel",
+      "description": "刷子：刷扫沙砾完毕"
     },
     {
-      "name": "brush_completed.suspicious_sand"
+      "name": "brush_completed.suspicious_sand",
+      "description": "刷子：刷扫沙子完毕"
     },
     {
       "name": "bubble.down",
@@ -815,16 +926,20 @@
       "description": "铁桶：装满水"
     },
     {
-      "name": "bundle.drop_contents"
+      "name": "bundle.drop_contents",
+      "description": "收纳袋：倒空"
     },
     {
-      "name": "bundle.insert"
+      "name": "bundle.insert",
+      "description": "物品：装入袋中"
     },
     {
-      "name": "bundle.insert_fail"
+      "name": "bundle.insert_fail",
+      "description": "收纳袋：已满"
     },
     {
-      "name": "bundle.remove_one"
+      "name": "bundle.remove_one",
+      "description": "物品：从袋中取出"
     },
     {
       "name": "cake.add_candle",
@@ -880,110 +995,143 @@
     },
     {
       "name": "charge.sculk",
-      "description": "幽匿块：充能"
+      "description": "幽匿块：冒泡"
     },
     {
       "name": "chime.amethyst_block",
       "description": "紫水晶：叮铃"
     },
     {
-      "name": "click_off.bamboo_wood_button"
+      "name": "click_off.bamboo_wood_button",
+      "description": "竹按钮：弹起"
     },
     {
-      "name": "click_off.bamboo_wood_pressure_plate"
+      "name": "click_off.bamboo_wood_pressure_plate",
+      "description": "竹压力板：弹起"
     },
     {
-      "name": "click_off.cherry_wood_button"
+      "name": "click_off.cherry_wood_button",
+      "description": "樱花木按钮：弹起"
     },
     {
-      "name": "click_off.cherry_wood_pressure_plate"
+      "name": "click_off.cherry_wood_pressure_plate",
+      "description": "樱花木压力板：弹起"
     },
     {
-      "name": "click_off.metal_pressure_plate"
+      "name": "click_off.metal_pressure_plate",
+      "description": "测重压力板：弹起"
     },
     {
-      "name": "click_off.nether_wood_button"
+      "name": "click_off.nether_wood_button",
+      "description": "下界木按钮：弹起"
     },
     {
-      "name": "click_off.nether_wood_pressure_plate"
+      "name": "click_off.nether_wood_pressure_plate",
+      "description": "下界木压力板：弹起"
     },
     {
-      "name": "click_off.stone_pressure_plate"
+      "name": "click_off.stone_pressure_plate",
+      "description": "石头压力板：弹起"
     },
     {
-      "name": "click_off.wooden_pressure_plate"
+      "name": "click_off.wooden_pressure_plate",
+      "description": "木质压力板：弹起"
     },
     {
-      "name": "click_on.bamboo_wood_button"
+      "name": "click_on.bamboo_wood_button",
+      "description": "竹按钮：压下"
     },
     {
-      "name": "click_on.bamboo_wood_pressure_plate"
+      "name": "click_on.bamboo_wood_pressure_plate",
+      "description": "竹压力板：压下"
     },
     {
-      "name": "click_on.cherry_wood_button"
+      "name": "click_on.cherry_wood_button",
+      "description": "樱花木按钮：压下"
     },
     {
-      "name": "click_on.cherry_wood_pressure_plate"
+      "name": "click_on.cherry_wood_pressure_plate",
+      "description": "樱花木压力板：压下"
     },
     {
-      "name": "click_on.metal_pressure_plate"
+      "name": "click_on.metal_pressure_plate",
+      "description": "测重压力板：压下"
     },
     {
-      "name": "click_on.nether_wood_button"
+      "name": "click_on.nether_wood_button",
+      "description": "下界木按钮：压下"
     },
     {
-      "name": "click_on.nether_wood_pressure_plate"
+      "name": "click_on.nether_wood_pressure_plate",
+      "description": "下界木压力板：压下"
     },
     {
-      "name": "click_on.stone_pressure_plate"
+      "name": "click_on.stone_pressure_plate",
+      "description": "石头压力板：压下"
     },
     {
-      "name": "click_on.wooden_pressure_plate"
+      "name": "click_on.wooden_pressure_plate",
+      "description": "木质压力板：压下"
     },
     {
-      "name": "close.bamboo_wood_door"
+      "name": "close.bamboo_wood_door",
+      "description": "竹门：关闭"
     },
     {
-      "name": "close.bamboo_wood_fence_gate"
+      "name": "close.bamboo_wood_fence_gate",
+      "description": "竹栅栏门：关闭"
     },
     {
-      "name": "close.bamboo_wood_trapdoor"
+      "name": "close.bamboo_wood_trapdoor",
+      "description": "竹栅栏门：关闭"
     },
     {
-      "name": "close.cherry_wood_door"
+      "name": "close.cherry_wood_door",
+      "description": "樱花木门：关闭"
     },
     {
-      "name": "close.cherry_wood_fence_gate"
+      "name": "close.cherry_wood_fence_gate",
+      "description": "樱花木栅栏门：关闭"
     },
     {
-      "name": "close.cherry_wood_trapdoor"
+      "name": "close.cherry_wood_trapdoor",
+      "description": "樱花木活板门：关闭"
     },
     {
-      "name": "close.fence_gate"
+      "name": "close.fence_gate",
+      "description": "栅栏门：关闭"
     },
     {
-      "name": "close.iron_door"
+      "name": "close.iron_door",
+      "description": "铁门：关闭"
     },
     {
-      "name": "close.iron_trapdoor"
+      "name": "close.iron_trapdoor",
+      "description": "铁活板门：关闭"
     },
     {
-      "name": "close.nether_wood_door"
+      "name": "close.nether_wood_door",
+      "description": "下界木门：关闭"
     },
     {
-      "name": "close.nether_wood_fence_gate"
+      "name": "close.nether_wood_fence_gate",
+      "description": "下界木栅栏门：关闭"
     },
     {
-      "name": "close.nether_wood_trapdoor"
+      "name": "close.nether_wood_trapdoor",
+      "description": "下界木活板门：关闭"
     },
     {
-      "name": "close.wooden_door"
+      "name": "close.wooden_door",
+      "description": "木门：关闭"
     },
     {
-      "name": "close.wooden_trapdoor"
+      "name": "close.wooden_trapdoor",
+      "description": "木质活板门：关闭"
     },
     {
-      "name": "close_door.copper"
+      "name": "close_door.copper",
+      "description": "铜门：关闭"
     },
     {
       "name": "component.jump_to_block",
@@ -1018,13 +1166,16 @@
       "description": "涂蜡"
     },
     {
-      "name": "crafter.craft"
+      "name": "crafter.craft",
+      "description": "合成器：合成"
     },
     {
-      "name": "crafter.disable_slot"
+      "name": "crafter.disable_slot",
+      "description": "合成器：槽位被禁用"
     },
     {
-      "name": "crafter.fail"
+      "name": "crafter.fail",
+      "description": "合成器：合成失败"
     },
     {
       "name": "crossbow.loading.end",
@@ -1063,7 +1214,8 @@
       "description": "某物：摔倒"
     },
     {
-      "name": "damage.thorns"
+      "name": "damage.thorns",
+      "description": "荆棘：反刺"
     },
     {
       "name": "dig.ancient_debris",
@@ -1219,22 +1371,27 @@
     },
     {
       "name": "elytra.loop",
-      "description": "鞘翅：飞行"
+      "description": "呼啸声"
     },
     {
-      "name": "entity.generic.splash"
+      "name": "entity.generic.splash",
+      "description": "溅起水花"
     },
     {
-      "name": "entity.wither_skeleton.ambient"
+      "name": "entity.wither_skeleton.ambient",
+      "description": "凋灵骷髅：咯咯声"
     },
     {
-      "name": "entity.wither_skeleton.death"
+      "name": "entity.wither_skeleton.death",
+      "description": "凋灵骷髅：死亡"
     },
     {
-      "name": "entity.wither_skeleton.hurt"
+      "name": "entity.wither_skeleton.hurt",
+      "description": "凋灵骷髅：受伤"
     },
     {
-      "name": "entity.wither_skeleton.step"
+      "name": "entity.wither_skeleton.step",
+      "description": "凋灵骷髅：行走"
     },
     {
       "name": "entity.zombie.converted_to_drowned",
@@ -1265,7 +1422,8 @@
       "description": "杜鹃树叶：某物摔落"
     },
     {
-      "name": "fall.bamboo_wood"
+      "name": "fall.bamboo_wood",
+      "description": "竹子：某物摔落"
     },
     {
       "name": "fall.basalt",
@@ -1292,10 +1450,12 @@
       "description": "锁链：某物摔落"
     },
     {
-      "name": "fall.cherry_leaves"
+      "name": "fall.cherry_leaves",
+      "description": "樱花树叶：某物摔落"
     },
     {
-      "name": "fall.cherry_wood"
+      "name": "fall.cherry_wood",
+      "description": "樱花木：某物摔落"
     },
     {
       "name": "fall.cloth",
@@ -1306,7 +1466,8 @@
       "description": "铜块：某物摔落"
     },
     {
-      "name": "fall.copper_bulb"
+      "name": "fall.copper_bulb",
+      "description": "铜灯：某物摔落"
     },
     {
       "name": "fall.coral",
@@ -1330,7 +1491,7 @@
     },
     {
       "name": "fall.egg",
-      "description": "海龟蛋：某物摔落"
+      "description": "海龟蛋：被踩踏"
     },
     {
       "name": "fall.grass",
@@ -1373,7 +1534,8 @@
       "description": "下界疣：某物摔落"
     },
     {
-      "name": "fall.nether_wood"
+      "name": "fall.nether_wood",
+      "description": "下界木头：某物摔落"
     },
     {
       "name": "fall.netherite",
@@ -1388,7 +1550,8 @@
       "description": "菌岩：某物摔落"
     },
     {
-      "name": "fall.pink_petals"
+      "name": "fall.pink_petals",
+      "description": "粉红色花簇：某物摔落"
     },
     {
       "name": "fall.pointed_dripstone",
@@ -1531,7 +1694,8 @@
       "description": "杜鹃树叶：损坏中"
     },
     {
-      "name": "hit.bamboo_wood"
+      "name": "hit.bamboo_wood",
+      "description": "竹子：损坏中"
     },
     {
       "name": "hit.basalt",
@@ -1562,13 +1726,16 @@
       "description": "锁链：损坏中"
     },
     {
-      "name": "hit.cherry_leaves"
+      "name": "hit.cherry_leaves",
+      "description": "樱花树叶：损坏中"
     },
     {
-      "name": "hit.cherry_wood"
+      "name": "hit.cherry_wood",
+      "description": "樱花木：损坏中"
     },
     {
-      "name": "hit.chiseled_bookshelf"
+      "name": "hit.chiseled_bookshelf",
+      "description": "雕纹书架：损坏中"
     },
     {
       "name": "hit.cloth",
@@ -1579,7 +1746,8 @@
       "description": "铜块：损坏中"
     },
     {
-      "name": "hit.copper_bulb"
+      "name": "hit.copper_bulb",
+      "description": "铜灯：损坏中"
     },
     {
       "name": "hit.coral",
@@ -1618,6 +1786,10 @@
       "description": "蜂蜜块：损坏中"
     },
     {
+      "name": "hit.iron",
+      "description": "铁质方块：损坏中"
+    },
+    {
       "name": "hit.ladder",
       "description": "梯子：损坏中"
     },
@@ -1642,7 +1814,8 @@
       "description": "下界疣：损坏中"
     },
     {
-      "name": "hit.nether_wood"
+      "name": "hit.nether_wood",
+      "description": "下界木头：损坏中"
     },
     {
       "name": "hit.netherite",
@@ -1657,7 +1830,8 @@
       "description": "菌岩：损坏中"
     },
     {
-      "name": "hit.pink_petals"
+      "name": "hit.pink_petals",
+      "description": "粉红色花簇：损坏中"
     },
     {
       "name": "hit.pointed_dripstone",
@@ -1712,7 +1886,8 @@
       "description": "灵魂土：损坏中"
     },
     {
-      "name": "hit.sponge"
+      "name": "hit.sponge",
+      "description": "海绵：损坏中"
     },
     {
       "name": "hit.spore_blossom",
@@ -1727,10 +1902,12 @@
       "description": "石头：损坏中"
     },
     {
-      "name": "hit.suspicious_gravel"
+      "name": "hit.suspicious_gravel",
+      "description": "可疑的沙砾：损坏中"
     },
     {
-      "name": "hit.suspicious_sand"
+      "name": "hit.suspicious_sand",
+      "description": "可疑的沙子：损坏中"
     },
     {
       "name": "hit.tuff",
@@ -1741,44 +1918,56 @@
       "description": "藤蔓：损坏中"
     },
     {
-      "name": "hit.wet_sponge"
+      "name": "hit.wet_sponge",
+      "description": "湿海绵：损坏中"
     },
     {
       "name": "hit.wood",
       "description": "木头：损坏中"
     },
     {
-      "name": "horn.call.0"
+      "name": "horn.call.0",
+      "description": "山羊角：吹奏“沉思”"
     },
     {
-      "name": "horn.call.1"
+      "name": "horn.call.1",
+      "description": "山羊角：吹奏“歌颂”"
     },
     {
-      "name": "horn.call.2"
+      "name": "horn.call.2",
+      "description": "山羊角：吹奏“寻觅”"
     },
     {
-      "name": "horn.call.3"
+      "name": "horn.call.3",
+      "description": "山羊角：吹奏“感受”"
     },
     {
-      "name": "horn.call.4"
+      "name": "horn.call.4",
+      "description": "山羊角：吹奏“仰慕”"
     },
     {
-      "name": "horn.call.5"
+      "name": "horn.call.5",
+      "description": "山羊角：吹奏“呼唤”"
     },
     {
-      "name": "horn.call.6"
+      "name": "horn.call.6",
+      "description": "山羊角：吹奏“憧憬”"
     },
     {
-      "name": "horn.call.7"
+      "name": "horn.call.7",
+      "description": "山羊角：吹奏“想象”"
     },
     {
-      "name": "hud.bubble.pop"
+      "name": "hud.bubble.pop",
+      "description": "氧气值：减少"
     },
     {
-      "name": "insert.chiseled_bookshelf"
+      "name": "insert.chiseled_bookshelf",
+      "description": "书：被放入"
     },
     {
-      "name": "insert_enchanted.chiseled_bookshelf"
+      "name": "insert_enchanted.chiseled_bookshelf",
+      "description": "附魔书：被放入"
     },
     {
       "name": "item.bone_meal.use",
@@ -2173,13 +2362,16 @@
       "description": "磁石指针：绑定磁石"
     },
     {
-      "name": "mace.heavy_smash_ground"
+      "name": "mace.heavy_smash_ground",
+      "description": "重锤：猛击"
     },
     {
-      "name": "mace.smash_air"
+      "name": "mace.smash_air",
+      "description": "重锤：猛击"
     },
     {
-      "name": "mace.smash_ground"
+      "name": "mace.smash_ground",
+      "description": "重锤：猛击"
     },
     {
       "name": "minecart.base",
@@ -2187,7 +2379,7 @@
     },
     {
       "name": "minecart.inside",
-      "description": "矿车：骑乘"
+      "description": "矿车：哐啷作响"
     },
     {
       "name": "mob.agent.spawn",
@@ -2222,43 +2414,56 @@
       "description": "悦灵：投掷"
     },
     {
-      "name": "mob.armadillo.ambient"
+      "name": "mob.armadillo.ambient",
+      "description": "犰狳：呼噜"
     },
     {
-      "name": "mob.armadillo.brush"
+      "name": "mob.armadillo.brush",
+      "description": "鳞甲：被刷落"
     },
     {
-      "name": "mob.armadillo.death"
+      "name": "mob.armadillo.death",
+      "description": "犰狳：死亡"
     },
     {
-      "name": "mob.armadillo.eat"
+      "name": "mob.armadillo.eat",
+      "description": "犰狳：进食"
     },
     {
-      "name": "mob.armadillo.hurt"
+      "name": "mob.armadillo.hurt",
+      "description": "犰狳：受伤"
     },
     {
-      "name": "mob.armadillo.hurt_reduced"
+      "name": "mob.armadillo.hurt_reduced",
+      "description": "犰狳：自卫"
     },
     {
-      "name": "mob.armadillo.land"
+      "name": "mob.armadillo.land",
+      "description": "犰狳：着陆"
     },
     {
-      "name": "mob.armadillo.peek"
+      "name": "mob.armadillo.peek",
+      "description": "犰狳：窥视"
     },
     {
-      "name": "mob.armadillo.roll"
+      "name": "mob.armadillo.roll",
+      "description": "犰狳：蜷缩"
     },
     {
-      "name": "mob.armadillo.scute_drop"
+      "name": "mob.armadillo.scute_drop",
+      "description": "犰狳：脱落鳞甲"
     },
     {
-      "name": "mob.armadillo.step"
+      "name": "mob.armadillo.step",
+      "description": "犰狳：爬行"
     },
     {
-      "name": "mob.armadillo.unroll_finish"
+      "name": "mob.armadillo.unroll_finish",
+      "description": "犰狳：伸展"
     },
     {
-      "name": "mob.armadillo.unroll_start"
+      "name": "mob.armadillo.unroll_start",
+      "description": "犰狳：窥视"
     },
     {
       "name": "mob.armor_stand.break",
@@ -2361,52 +2566,68 @@
       "description": "烈焰人：射击"
     },
     {
-      "name": "mob.bogged.ambient"
+      "name": "mob.bogged.ambient",
+      "description": "沼骸：咯咯声"
     },
     {
-      "name": "mob.bogged.death"
+      "name": "mob.bogged.death",
+      "description": "沼骸：死亡"
     },
     {
-      "name": "mob.bogged.hurt"
+      "name": "mob.bogged.hurt",
+      "description": "沼骸：受伤"
     },
     {
-      "name": "mob.bogged.step"
+      "name": "mob.bogged.step",
+      "description": "沼骸：咯咯声"
     },
     {
-      "name": "mob.breeze.charge"
+      "name": "mob.breeze.charge",
+      "description": "旋风人：蓄力"
     },
     {
-      "name": "mob.breeze.death"
+      "name": "mob.breeze.death",
+      "description": "旋风人：死亡"
     },
     {
-      "name": "mob.breeze.deflect"
+      "name": "mob.breeze.deflect",
+      "description": "旋风人：反弹"
     },
     {
-      "name": "mob.breeze.hurt"
+      "name": "mob.breeze.hurt",
+      "description": "旋风人：受伤"
     },
     {
-      "name": "mob.breeze.idle_air"
+      "name": "mob.breeze.idle_air",
+      "description": "旋风人：飞行"
     },
     {
-      "name": "mob.breeze.idle_ground"
+      "name": "mob.breeze.idle_ground",
+      "description": "旋风人：呼啸"
     },
     {
-      "name": "mob.breeze.inhale"
+      "name": "mob.breeze.inhale",
+      "description": "旋风人：吸气"
     },
     {
-      "name": "mob.breeze.jump"
+      "name": "mob.breeze.jump",
+      "description": "旋风人：跳跃"
     },
     {
-      "name": "mob.breeze.land"
+      "name": "mob.breeze.land",
+      "description": "旋风人：着陆"
     },
     {
-      "name": "mob.breeze.shoot"
+      "name": "mob.breeze.shoot",
+      "description": "旋风人：射击"
     },
     {
-      "name": "mob.breeze.slide"
+      "name": "mob.breeze.slide",
+      "description": "旋风人：滑行"
     },
     {
-      "name": "mob.breeze.whirl"
+      "name": "mob.breeze.whirl",
+      "description": "旋风人：旋转"
     },
     {
       "name": "mob.camel.ambient",
@@ -2453,7 +2674,8 @@
       "description": "猫：求食"
     },
     {
-      "name": "mob.cat.beg_for_food"
+      "name": "mob.cat.beg_for_food",
+      "description": "猫：求食"
     },
     {
       "name": "mob.cat.eat",
@@ -2516,37 +2738,48 @@
       "description": "牛：行走"
     },
     {
-      "name": "mob.creaking.activate"
+      "name": "mob.creaking.activate",
+      "description": "嘎枝：注视"
     },
     {
-      "name": "mob.creaking.ambient"
+      "name": "mob.creaking.ambient",
+      "description": "嘎枝：嘎吱作响"
     },
     {
-      "name": "mob.creaking.attack"
+      "name": "mob.creaking.attack",
+      "description": "嘎枝：攻击"
     },
     {
-      "name": "mob.creaking.deactivate"
+      "name": "mob.creaking.deactivate",
+      "description": "嘎枝：静息"
     },
     {
-      "name": "mob.creaking.death"
+      "name": "mob.creaking.death",
+      "description": "嘎枝：碎裂"
     },
     {
-      "name": "mob.creaking.freeze"
+      "name": "mob.creaking.freeze",
+      "description": "嘎枝：驻足"
     },
     {
-      "name": "mob.creaking.spawn"
+      "name": "mob.creaking.spawn",
+      "description": "嘎枝：显现"
     },
     {
-      "name": "mob.creaking.step"
+      "name": "mob.creaking.step",
+      "description": "嘎枝：行走"
     },
     {
-      "name": "mob.creaking.sway"
+      "name": "mob.creaking.sway",
+      "description": "嘎枝：被击打"
     },
     {
-      "name": "mob.creaking.twitch"
+      "name": "mob.creaking.twitch",
+      "description": "嘎枝：抽搐"
     },
     {
-      "name": "mob.creaking.unfreeze"
+      "name": "mob.creaking.unfreeze",
+      "description": "嘎枝：移动"
     },
     {
       "name": "mob.creeper.death",
@@ -2686,7 +2919,7 @@
     },
     {
       "name": "mob.endermen.scream",
-      "description": "末影人：低鸣（敌对状态）"
+      "description": "末影人：尖叫"
     },
     {
       "name": "mob.endermen.stare",
@@ -2754,7 +2987,7 @@
     },
     {
       "name": "mob.fish.step",
-      "description": "鳕鱼：游泳"
+      "description": "溅起水花"
     },
     {
       "name": "mob.fox.aggro",
@@ -2954,7 +3187,7 @@
     },
     {
       "name": "mob.guardian.land_idle",
-      "description": "守卫者：低鸣（陆地上）"
+      "description": "守卫者：弹跳"
     },
     {
       "name": "mob.hoglin.ambient",
@@ -2969,7 +3202,8 @@
       "description": "疣猪兽：攻击"
     },
     {
-      "name": "mob.hoglin.converted_to_zombified"
+      "name": "mob.hoglin.converted_to_zombified",
+      "description": "疣猪兽：转化为僵尸疣猪兽"
     },
     {
       "name": "mob.hoglin.death",
@@ -3088,7 +3322,8 @@
       "description": "尸壳：低吼"
     },
     {
-      "name": "mob.husk.convert_to_zombie"
+      "name": "mob.husk.convert_to_zombie",
+      "description": "尸壳：转化为僵尸"
     },
     {
       "name": "mob.husk.death",
@@ -3259,7 +3494,8 @@
       "description": "鹦鹉：说话"
     },
     {
-      "name": "mob.parrot.imitate_creaking"
+      "name": "mob.parrot.imitate_creaking",
+      "description": "鹦鹉：嘎吱作响"
     },
     {
       "name": "mob.parrot.step",
@@ -3419,7 +3655,7 @@
     },
     {
       "name": "mob.polarbear_baby.idle",
-      "description": "北极熊：低吼（幼年）"
+      "description": "幼年北极熊：哼哼"
     },
     {
       "name": "mob.rabbit.death",
@@ -3582,43 +3818,56 @@
       "description": "史莱姆：挤压"
     },
     {
-      "name": "mob.sniffer.death"
+      "name": "mob.sniffer.death",
+      "description": "嗅探兽：死亡"
     },
     {
-      "name": "mob.sniffer.digging"
+      "name": "mob.sniffer.digging",
+      "description": "嗅探兽：挖掘"
     },
     {
-      "name": "mob.sniffer.drop_seed"
+      "name": "mob.sniffer.drop_seed",
+      "description": "嗅探兽：丢下种子"
     },
     {
-      "name": "mob.sniffer.eat"
+      "name": "mob.sniffer.eat",
+      "description": "嗅探兽：进食"
     },
     {
-      "name": "mob.sniffer.happy"
+      "name": "mob.sniffer.happy",
+      "description": "嗅探兽：愉悦"
     },
     {
-      "name": "mob.sniffer.hurt"
+      "name": "mob.sniffer.hurt",
+      "description": "嗅探兽：受伤"
     },
     {
-      "name": "mob.sniffer.idle"
+      "name": "mob.sniffer.idle",
+      "description": "嗅探兽：呼噜"
     },
     {
-      "name": "mob.sniffer.long_sniff"
+      "name": "mob.sniffer.long_sniff",
+      "description": "嗅探兽：嗅探"
     },
     {
-      "name": "mob.sniffer.plop"
+      "name": "mob.sniffer.plop",
+      "description": "嗅探兽：下蛋"
     },
     {
-      "name": "mob.sniffer.searching"
+      "name": "mob.sniffer.searching",
+      "description": "嗅探兽：搜寻"
     },
     {
-      "name": "mob.sniffer.sniffsniff"
+      "name": "mob.sniffer.sniffsniff",
+      "description": "嗅探兽：嗅闻"
     },
     {
-      "name": "mob.sniffer.stand_up"
+      "name": "mob.sniffer.stand_up",
+      "description": "嗅探兽：站起"
     },
     {
-      "name": "mob.sniffer.step"
+      "name": "mob.sniffer.step",
+      "description": "嗅探兽：脚步声"
     },
     {
       "name": "mob.snowgolem.death",
@@ -3709,7 +3958,8 @@
       "description": "炽足兽：颤鸣"
     },
     {
-      "name": "mob.tadpole.convert_to_frog"
+      "name": "mob.tadpole.convert_to_frog",
+      "description": "蝌蚪：成长"
     },
     {
       "name": "mob.tadpole.death",
@@ -4188,56 +4438,72 @@
       "description": "水下背景音乐"
     },
     {
-      "name": "music.game_and_wild_equal_chance"
+      "name": "music.game_and_wild_equal_chance",
+      "description": "森林背景音乐"
     },
     {
-      "name": "music.game_and_wild_favor_game"
+      "name": "music.game_and_wild_favor_game",
+      "description": "针叶林背景音乐"
     },
     {
       "name": "music.menu",
-      "description": "菜单背景音乐"
+      "description": "游戏菜单背景音乐"
     },
     {
-      "name": "music.overworld.bamboo_jungle"
+      "name": "music.overworld.bamboo_jungle",
+      "description": "竹林背景音乐"
     },
     {
-      "name": "music.overworld.cherry_grove"
+      "name": "music.overworld.cherry_grove",
+      "description": "樱花树林背景音乐"
     },
     {
-      "name": "music.overworld.deep_dark"
+      "name": "music.overworld.deep_dark",
+      "description": "深暗之域背景音乐"
     },
     {
-      "name": "music.overworld.desert"
+      "name": "music.overworld.desert",
+      "description": "沙漠背景音乐"
     },
     {
-      "name": "music.overworld.dripstone_caves"
+      "name": "music.overworld.dripstone_caves",
+      "description": "溶洞背景音乐"
     },
     {
-      "name": "music.overworld.flower_forest"
+      "name": "music.overworld.flower_forest",
+      "description": "繁花森林背景音乐"
     },
     {
-      "name": "music.overworld.grove"
+      "name": "music.overworld.grove",
+      "description": "雪林背景音乐"
     },
     {
-      "name": "music.overworld.jagged_peaks"
+      "name": "music.overworld.jagged_peaks",
+      "description": "尖峭山峰背景音乐"
     },
     {
-      "name": "music.overworld.jungle"
+      "name": "music.overworld.jungle",
+      "description": "丛林背景音乐"
     },
     {
-      "name": "music.overworld.jungle_edge"
+      "name": "music.overworld.jungle_edge",
+      "description": "丛林边缘背景音乐"
     },
     {
-      "name": "music.overworld.lush_caves"
+      "name": "music.overworld.lush_caves",
+      "description": "繁茂洞穴背景音乐"
     },
     {
-      "name": "music.overworld.mesa"
+      "name": "music.overworld.mesa",
+      "description": "恶地背景音乐"
     },
     {
-      "name": "music.overworld.snowy_slopes"
+      "name": "music.overworld.snowy_slopes",
+      "description": "积雪山坡背景音乐"
     },
     {
-      "name": "music.overworld.stony_peaks"
+      "name": "music.overworld.stony_peaks",
+      "description": "裸岩山峰背景音乐"
     },
     {
       "name": "note.banjo",
@@ -4261,7 +4527,7 @@
     },
     {
       "name": "note.bit",
-      "description": "音符盒：播放方波"
+      "description": "音符盒：播放合成器"
     },
     {
       "name": "note.chime",
@@ -4272,14 +4538,16 @@
       "description": "音符盒：播放牛铃"
     },
     {
-      "name": "note.creeper"
+      "name": "note.creeper",
+      "description": "音符盒：播放“苦力怕：嘶~”"
     },
     {
       "name": "note.didgeridoo",
       "description": "音符盒：播放迪吉里杜管"
     },
     {
-      "name": "note.enderdragon"
+      "name": "note.enderdragon",
+      "description": "音符盒：播放“末影龙：咆哮”"
     },
     {
       "name": "note.flute",
@@ -4302,88 +4570,112 @@
       "description": "音符盒：播放颤音琴"
     },
     {
-      "name": "note.piglin"
+      "name": "note.piglin",
+      "description": "音符盒：播放“猪灵：哼叫”"
     },
     {
       "name": "note.pling",
       "description": "音符盒：播放电钢琴"
     },
     {
-      "name": "note.skeleton"
+      "name": "note.skeleton",
+      "description": "音符盒：播放“骷髅：咯咯声”"
     },
     {
       "name": "note.snare",
       "description": "音符盒：播放小军鼓"
     },
     {
-      "name": "note.witherskeleton"
+      "name": "note.witherskeleton",
+      "description": "音符盒：播放“凋灵骷髅：咯咯声”"
     },
     {
       "name": "note.xylophone",
       "description": "音符盒：播放木琴"
     },
     {
-      "name": "note.zombie"
+      "name": "note.zombie",
+      "description": "音符盒：播放“僵尸：低吼”"
     },
     {
-      "name": "ominous_bottle.end_use"
+      "name": "ominous_bottle.end_use",
+      "description": "玻璃瓶：碎裂"
     },
     {
-      "name": "ominous_item_spawner.about_to_spawn_item"
+      "name": "ominous_item_spawner.about_to_spawn_item",
+      "description": "不祥之物：准备"
     },
     {
-      "name": "ominous_item_spawner.spawn_item"
+      "name": "ominous_item_spawner.spawn_item",
+      "description": "不祥之物：掉落"
     },
     {
-      "name": "ominous_item_spawner.spawn_item_begin"
+      "name": "ominous_item_spawner.spawn_item_begin",
+      "description": "不祥之物：出现"
     },
     {
-      "name": "open.bamboo_wood_door"
+      "name": "open.bamboo_wood_door",
+      "description": "竹门：打开"
     },
     {
-      "name": "open.bamboo_wood_fence_gate"
+      "name": "open.bamboo_wood_fence_gate",
+      "description": "竹栅栏门：打开"
     },
     {
-      "name": "open.bamboo_wood_trapdoor"
+      "name": "open.bamboo_wood_trapdoor",
+      "description": "竹栅栏门：打开"
     },
     {
-      "name": "open.cherry_wood_door"
+      "name": "open.cherry_wood_door",
+      "description": "樱花木门：打开"
     },
     {
-      "name": "open.cherry_wood_fence_gate"
+      "name": "open.cherry_wood_fence_gate",
+      "description": "樱花木栅栏门：打开"
     },
     {
-      "name": "open.cherry_wood_trapdoor"
+      "name": "open.cherry_wood_trapdoor",
+      "description": "樱花木活板门：打开"
     },
     {
-      "name": "open.fence_gate"
+      "name": "open.fence_gate",
+      "description": "栅栏门：打开"
     },
     {
-      "name": "open.iron_door"
+      "name": "open.iron_door",
+      "description": "铁门：打开"
     },
     {
-      "name": "open.iron_trapdoor"
+      "name": "open.iron_trapdoor",
+      "description": "铁活板门：打开"
     },
     {
-      "name": "open.nether_wood_door"
+      "name": "open.nether_wood_door",
+      "description": "下界木门：打开"
     },
     {
-      "name": "open.nether_wood_fence_gate"
+      "name": "open.nether_wood_fence_gate",
+      "description": "下界木栅栏门：打开"
     },
     {
-      "name": "open.nether_wood_trapdoor"
+      "name": "open.nether_wood_trapdoor",
+      "description": "下界木活板门：打开"
     },
     {
-      "name": "open.wooden_door"
+      "name": "open.wooden_door",
+      "description": "木门：打开"
     },
     {
-      "name": "open.wooden_trapdoor"
+      "name": "open.wooden_trapdoor",
+      "description": "木质活板门：打开"
     },
     {
-      "name": "open_door.copper"
+      "name": "open_door.copper",
+      "description": "铜门：打开"
     },
     {
-      "name": "open_trapdoor.copper"
+      "name": "open_trapdoor.copper",
+      "description": "铜活板门：打开"
     },
     {
       "name": "particle.soul_escape",
@@ -4394,10 +4686,12 @@
       "description": "发光浆果：弹出"
     },
     {
-      "name": "pickup.chiseled_bookshelf"
+      "name": "pickup.chiseled_bookshelf",
+      "description": "书：被取出"
     },
     {
-      "name": "pickup_enchanted.chiseled_bookshelf"
+      "name": "pickup_enchanted.chiseled_bookshelf",
+      "description": "附魔书：被取出"
     },
     {
       "name": "place.amethyst_block",
@@ -4416,7 +4710,8 @@
       "description": "杜鹃树叶：被放置"
     },
     {
-      "name": "place.bamboo_wood"
+      "name": "place.bamboo_wood",
+      "description": "竹子：被放置"
     },
     {
       "name": "place.big_dripleaf",
@@ -4427,20 +4722,24 @@
       "description": "方解石：被放置"
     },
     {
-      "name": "place.cherry_leaves"
+      "name": "place.cherry_leaves",
+      "description": "樱花树叶：被放置"
     },
     {
-      "name": "place.cherry_wood"
+      "name": "place.cherry_wood",
+      "description": "樱花木：被放置"
     },
     {
-      "name": "place.chiseled_bookshelf"
+      "name": "place.chiseled_bookshelf",
+      "description": "雕纹书架：被放置"
     },
     {
       "name": "place.copper",
       "description": "铜块：被放置"
     },
     {
-      "name": "place.copper_bulb"
+      "name": "place.copper_bulb",
+      "description": "铜灯：被放置"
     },
     {
       "name": "place.deepslate",
@@ -4463,6 +4762,10 @@
       "description": "垂根：被放置"
     },
     {
+      "name": "place.iron",
+      "description": "铁质方块：被放置"
+    },
+    {
       "name": "place.large_amethyst_bud",
       "description": "大型紫晶芽：被放置"
     },
@@ -4475,10 +4778,12 @@
       "description": "苔藓：被放置"
     },
     {
-      "name": "place.nether_wood"
+      "name": "place.nether_wood",
+      "description": "下界木头：被放置"
     },
     {
-      "name": "place.pink_petals"
+      "name": "place.pink_petals",
+      "description": "粉红色花簇：被放置"
     },
     {
       "name": "place.pointed_dripstone",
@@ -4509,27 +4814,32 @@
       "description": "小型紫晶芽：被放置"
     },
     {
-      "name": "place.sponge"
+      "name": "place.sponge",
+      "description": "海绵：被放置"
     },
     {
       "name": "place.spore_blossom",
       "description": "孢子花：被放置"
     },
     {
-      "name": "place.suspicious_gravel"
+      "name": "place.suspicious_gravel",
+      "description": "可疑的沙砾：被放置"
     },
     {
-      "name": "place.suspicious_sand"
+      "name": "place.suspicious_sand",
+      "description": "可疑的沙子：被放置"
     },
     {
       "name": "place.tuff",
       "description": "凝灰岩：被放置"
     },
     {
-      "name": "place.tuff_bricks"
+      "name": "place.tuff_bricks",
+      "description": "凝灰岩砖：被放置"
     },
     {
-      "name": "place.wet_sponge"
+      "name": "place.wet_sponge",
+      "description": "湿海绵：被放置"
     },
     {
       "name": "portal.portal",
@@ -4552,7 +4862,8 @@
       "description": "幽匿感测体：颤动"
     },
     {
-      "name": "pumpkin.carve"
+      "name": "pumpkin.carve",
+      "description": "剪刀：雕刻"
     },
     {
       "name": "raid.horn",
@@ -4651,7 +4962,8 @@
       "description": "玩家：升级"
     },
     {
-      "name": "random.lever_click"
+      "name": "random.lever_click",
+      "description": "拉杆：拉动"
     },
     {
       "name": "random.orb",
@@ -4686,7 +4998,8 @@
       "description": "溅起水花"
     },
     {
-      "name": "random.stone_click"
+      "name": "random.stone_click",
+      "description": "石头按钮：激活"
     },
     {
       "name": "random.swim",
@@ -4697,10 +5010,12 @@
       "description": "UI：弹出"
     },
     {
-      "name": "random.toast_recipe_unlocking_in"
+      "name": "random.toast_recipe_unlocking_in",
+      "description": "UI：解锁配方提示弹出"
     },
     {
-      "name": "random.toast_recipe_unlocking_out"
+      "name": "random.toast_recipe_unlocking_out",
+      "description": "UI：解锁配方提示消失"
     },
     {
       "name": "random.totem",
@@ -4735,10 +5050,12 @@
       "description": "音乐唱片（C418 - chirp）"
     },
     {
-      "name": "record.creator"
+      "name": "record.creator",
+      "description": "音乐唱片（Lena Raine - Creator）"
     },
     {
-      "name": "record.creator_music_box"
+      "name": "record.creator_music_box",
+      "description": "音乐唱片（Lena Raine - Creator（八音盒））"
     },
     {
       "name": "record.far",
@@ -4761,10 +5078,12 @@
       "description": "音乐唱片（Lena Raine - Pigstep）"
     },
     {
-      "name": "record.precipice"
+      "name": "record.precipice",
+      "description": "音乐唱片（Aaron Cherof - Precipice）"
     },
     {
-      "name": "record.relic"
+      "name": "record.relic",
+      "description": "音乐唱片（Aaron Cherof - Relic）"
     },
     {
       "name": "record.stal",
@@ -4783,7 +5102,8 @@
       "description": "音乐唱片（C418 - ward）"
     },
     {
-      "name": "resonate.amethyst_block"
+      "name": "resonate.amethyst_block",
+      "description": "紫水晶：共振"
     },
     {
       "name": "respawn_anchor.ambient",
@@ -4806,7 +5126,8 @@
       "description": "斧：刮削"
     },
     {
-      "name": "shatter.decorated_pot"
+      "name": "shatter.decorated_pot",
+      "description": "饰纹陶罐：碎裂"
     },
     {
       "name": "shriek.sculk_shrieker",
@@ -4825,7 +5146,8 @@
       "description": "锻造台：使用"
     },
     {
-      "name": "sponge.absorb"
+      "name": "sponge.absorb",
+      "description": "海绵：吸水"
     },
     {
       "name": "spread.sculk",
@@ -4833,279 +5155,303 @@
     },
     {
       "name": "step.amethyst_block",
-      "description": "紫水晶块：踩上"
+      "description": "紫水晶块：被踩上"
     },
     {
       "name": "step.amethyst_cluster",
-      "description": "紫水晶簇：踩上"
+      "description": "紫水晶簇：被踩上"
     },
     {
       "name": "step.ancient_debris",
-      "description": "远古残骸：踩上"
+      "description": "远古残骸：被踩上"
     },
     {
       "name": "step.azalea",
-      "description": "杜鹃花丛：踩上"
+      "description": "杜鹃花丛：被踩上"
     },
     {
       "name": "step.azalea_leaves",
-      "description": "杜鹃树叶：踩上"
+      "description": "杜鹃树叶：被踩上"
     },
     {
-      "name": "step.bamboo_wood"
+      "name": "step.bamboo_wood",
+      "description": "竹子：被踩上"
     },
     {
-      "name": "step.bamboo_wood_hanging_sign"
+      "name": "step.bamboo_wood_hanging_sign",
+      "description": "悬挂式竹告示牌：被踩上"
     },
     {
       "name": "step.basalt",
-      "description": "玄武岩：踩上"
+      "description": "玄武岩：被踩上"
     },
     {
       "name": "step.big_dripleaf",
-      "description": "大型垂滴叶：踩上"
+      "description": "大型垂滴叶：被踩上"
     },
     {
       "name": "step.bone_block",
-      "description": "骨块：踩上"
+      "description": "骨块：被踩上"
     },
     {
       "name": "step.calcite",
-      "description": "方解石：踩上"
+      "description": "方解石：被踩上"
     },
     {
       "name": "step.candle",
-      "description": "蜡烛：踩上"
+      "description": "蜡烛：被踩上"
     },
     {
       "name": "step.cave_vines",
-      "description": "洞穴藤蔓：踩上"
+      "description": "洞穴藤蔓：被踩上"
     },
     {
       "name": "step.chain",
-      "description": "锁链：踩上"
+      "description": "锁链：被踩上"
     },
     {
-      "name": "step.cherry_leaves"
+      "name": "step.cherry_leaves",
+      "description": "樱花树叶：被踩上"
     },
     {
-      "name": "step.cherry_wood"
+      "name": "step.cherry_wood",
+      "description": "樱花木：被踩上"
     },
     {
-      "name": "step.cherry_wood_hanging_sign"
+      "name": "step.cherry_wood_hanging_sign",
+      "description": "悬挂式樱花木告示牌：被踩上"
     },
     {
-      "name": "step.chiseled_bookshelf"
+      "name": "step.chiseled_bookshelf",
+      "description": "雕纹书架：被踩上"
     },
     {
       "name": "step.cloth",
-      "description": "布质方块：踩上"
+      "description": "布质方块：被踩上"
     },
     {
       "name": "step.copper",
-      "description": "铜块：踩上"
+      "description": "铜块：被踩上"
     },
     {
-      "name": "step.copper_bulb"
+      "name": "step.copper_bulb",
+      "description": "铜灯：被踩上"
     },
     {
-      "name": "step.copper_grate"
+      "name": "step.copper_grate",
+      "description": "铜格栅：被踩上"
     },
     {
       "name": "step.coral",
-      "description": "珊瑚：踩上"
+      "description": "珊瑚：被踩上"
     },
     {
-      "name": "step.decorated_pot"
+      "name": "step.decorated_pot",
+      "description": "饰纹陶罐：被踩上"
     },
     {
       "name": "step.deepslate",
-      "description": "深板岩：踩上"
+      "description": "深板岩：被踩上"
     },
     {
       "name": "step.deepslate_bricks",
-      "description": "深板岩砖：踩上"
+      "description": "深板岩砖：被踩上"
     },
     {
       "name": "step.dirt_with_roots",
-      "description": "缠根泥土：踩上"
+      "description": "缠根泥土：被踩上"
     },
     {
       "name": "step.dripstone_block",
-      "description": "滴水石块：踩上"
+      "description": "滴水石块：被踩上"
     },
     {
       "name": "step.frog_spawn",
-      "description": "青蛙卵：踩上"
+      "description": "青蛙卵：被踩上"
     },
     {
       "name": "step.froglight",
-      "description": "蛙明灯：踩上"
+      "description": "蛙明灯：被踩上"
     },
     {
       "name": "step.grass",
-      "description": "草：踩上"
+      "description": "草：被踩上"
     },
     {
       "name": "step.gravel",
-      "description": "沙砾：踩上"
+      "description": "沙砾：被踩上"
     },
     {
       "name": "step.hanging_roots",
-      "description": "垂根：踩上"
+      "description": "垂根：被踩上"
     },
     {
-      "name": "step.hanging_sign"
+      "name": "step.hanging_sign",
+      "description": "悬挂式告示牌：被踩上"
     },
     {
-      "name": "step.heavy_core"
+      "name": "step.heavy_core",
+      "description": "沉重核心：被踩上"
     },
     {
       "name": "step.honey_block",
-      "description": "蜂蜜块：踩上"
+      "description": "蜂蜜块：被踩上"
+    },
+    {
+      "name": "step.iron",
+      "description": "铁质方块：被踩上"
     },
     {
       "name": "step.ladder",
-      "description": "梯子：踩上"
+      "description": "梯子：被踩上"
     },
     {
       "name": "step.moss",
-      "description": "苔藓：踩上"
+      "description": "苔藓：被踩上"
     },
     {
       "name": "step.nether_brick",
-      "description": "下界砖：踩上"
+      "description": "下界砖：被踩上"
     },
     {
       "name": "step.nether_gold_ore",
-      "description": "下界金矿石：踩上"
+      "description": "下界金矿石：被踩上"
     },
     {
       "name": "step.nether_sprouts",
-      "description": "下界苗：踩上"
+      "description": "下界苗：被踩上"
     },
     {
       "name": "step.nether_wart",
-      "description": "下界疣：踩上"
+      "description": "下界疣：被踩上"
     },
     {
-      "name": "step.nether_wood"
+      "name": "step.nether_wood",
+      "description": "下界木头：被踩上"
     },
     {
-      "name": "step.nether_wood_hanging_sign"
+      "name": "step.nether_wood_hanging_sign",
+      "description": "悬挂式下界木告示牌：被踩上"
     },
     {
       "name": "step.netherite",
-      "description": "下界合金块：踩上"
+      "description": "下界合金块：被踩上"
     },
     {
       "name": "step.netherrack",
-      "description": "下界岩：踩上"
+      "description": "下界岩：被踩上"
     },
     {
       "name": "step.nylium",
-      "description": "菌岩：踩上"
+      "description": "菌岩：被踩上"
     },
     {
-      "name": "step.pink_petals"
+      "name": "step.pink_petals",
+      "description": "粉红色花簇：被踩上"
     },
     {
       "name": "step.pointed_dripstone",
-      "description": "滴水石锥：踩上"
+      "description": "滴水石锥：被踩上"
     },
     {
       "name": "step.powder_snow",
-      "description": "细雪：踩上"
+      "description": "细雪：被踩上"
     },
     {
       "name": "step.roots",
-      "description": "菌索：踩上"
+      "description": "菌索：被踩上"
     },
     {
       "name": "step.sand",
-      "description": "沙子：踩上"
+      "description": "沙子：被踩上"
     },
     {
       "name": "step.sculk",
-      "description": "幽匿块：踩上"
+      "description": "幽匿块：被踩上"
     },
     {
       "name": "step.sculk_catalyst",
-      "description": "幽匿催发体：踩上"
+      "description": "幽匿催发体：被踩上"
     },
     {
       "name": "step.sculk_sensor",
-      "description": "幽匿感测体：踩上"
+      "description": "幽匿感测体：被踩上"
     },
     {
       "name": "step.sculk_shrieker",
-      "description": "幽匿尖啸体：踩上"
+      "description": "幽匿尖啸体：被踩上"
     },
     {
       "name": "step.sculk_vein",
-      "description": "幽匿脉络：踩上"
+      "description": "幽匿脉络：被踩上"
     },
     {
       "name": "step.shroomlight",
-      "description": "菌光体：踩上"
+      "description": "菌光体：被踩上"
     },
     {
       "name": "step.slime",
-      "description": "黏液块：踩上"
+      "description": "黏液块：被踩上"
     },
     {
       "name": "step.snow",
-      "description": "雪块：踩上"
+      "description": "雪块：被踩上"
     },
     {
       "name": "step.soul_sand",
-      "description": "灵魂沙：踩上"
+      "description": "灵魂沙：被踩上"
     },
     {
       "name": "step.soul_soil",
-      "description": "灵魂土：踩上"
+      "description": "灵魂土：被踩上"
     },
     {
-      "name": "step.sponge"
+      "name": "step.sponge",
+      "description": "海绵：被踩上"
     },
     {
       "name": "step.spore_blossom",
-      "description": "孢子花：踩上"
+      "description": "孢子花：被踩上"
     },
     {
       "name": "step.stem",
-      "description": "菌柄：踩上"
+      "description": "菌柄：被踩上"
     },
     {
       "name": "step.stone",
-      "description": "石头：踩上"
+      "description": "石头：被踩上"
     },
     {
-      "name": "step.suspicious_gravel"
+      "name": "step.suspicious_gravel",
+      "description": "可疑的沙砾：被踩上"
     },
     {
-      "name": "step.suspicious_sand"
+      "name": "step.suspicious_sand",
+      "description": "可疑的沙子：被踩上"
     },
     {
       "name": "step.tuff",
-      "description": "凝灰岩：踩上"
+      "description": "凝灰岩：被踩上"
     },
     {
-      "name": "step.tuff_bricks"
+      "name": "step.tuff_bricks",
+      "description": "凝灰岩砖：被踩上"
     },
     {
       "name": "step.vines",
-      "description": "藤蔓：踩上"
+      "description": "藤蔓：被踩上"
     },
     {
-      "name": "step.web"
+      "name": "step.web",
+      "description": "蜘蛛网：被踩上"
     },
     {
-      "name": "step.wet_sponge"
+      "name": "step.wet_sponge",
+      "description": "湿海绵：被踩上"
     },
     {
       "name": "step.wood",
-      "description": "木头：踩上"
+      "description": "木头：被踩上"
     },
     {
       "name": "tile.piston.in",
@@ -5124,40 +5470,52 @@
       "description": "垂滴叶：升起"
     },
     {
-      "name": "trial_spawner.ambient"
+      "name": "trial_spawner.ambient",
+      "description": "试炼刷怪笼：噼啪作响"
     },
     {
-      "name": "trial_spawner.ambient_ominous"
+      "name": "trial_spawner.ambient_ominous",
+      "description": "不祥试炼刷怪笼：噼啪作响"
     },
     {
-      "name": "trial_spawner.break"
+      "name": "trial_spawner.break",
+      "description": "试炼刷怪笼：被破坏"
     },
     {
-      "name": "trial_spawner.charge_activate"
+      "name": "trial_spawner.charge_activate",
+      "description": "试炼刷怪笼：不祥涌动"
     },
     {
-      "name": "trial_spawner.close_shutter"
+      "name": "trial_spawner.close_shutter",
+      "description": "试炼刷怪笼：关闭"
     },
     {
-      "name": "trial_spawner.detect_player"
+      "name": "trial_spawner.detect_player",
+      "description": "试炼刷怪笼：充能"
     },
     {
-      "name": "trial_spawner.eject_item"
+      "name": "trial_spawner.eject_item",
+      "description": "试炼刷怪笼：喷出物品"
     },
     {
-      "name": "trial_spawner.hit"
+      "name": "trial_spawner.hit",
+      "description": "试炼刷怪笼：损坏中"
     },
     {
-      "name": "trial_spawner.open_shutter"
+      "name": "trial_spawner.open_shutter",
+      "description": "试炼刷怪笼：开启"
     },
     {
-      "name": "trial_spawner.place"
+      "name": "trial_spawner.place",
+      "description": "试炼刷怪笼：被放置"
     },
     {
-      "name": "trial_spawner.spawn_mob"
+      "name": "trial_spawner.spawn_mob",
+      "description": "试炼刷怪笼：生成生物"
     },
     {
-      "name": "trial_spawner.step"
+      "name": "trial_spawner.step",
+      "description": "试炼刷怪笼：被踩上"
     },
     {
       "name": "ui.cartography_table.take_result",
@@ -5170,13 +5528,16 @@
       "name": "ui.drawer_open"
     },
     {
-      "name": "ui.hardcore_disable"
+      "name": "ui.hardcore_disable",
+      "description": "UI：禁用极限模式"
     },
     {
-      "name": "ui.hardcore_enable"
+      "name": "ui.hardcore_enable",
+      "description": "UI：启用极限模式"
     },
     {
-      "name": "ui.hardcore_toggle_press"
+      "name": "ui.hardcore_toggle_press",
+      "description": "UI：按下切换极限模式按钮"
     },
     {
       "name": "ui.loom.select_pattern",
@@ -5192,208 +5553,222 @@
     },
     {
       "name": "use.ancient_debris",
-      "description": "远古残骸：使用"
+      "description": "远古残骸：被使用"
     },
     {
       "name": "use.basalt",
-      "description": "玄武岩：使用"
+      "description": "玄武岩：被使用"
     },
     {
       "name": "use.bone_block",
-      "description": "骨块：使用"
+      "description": "骨块：被使用"
     },
     {
       "name": "use.candle",
-      "description": "蜡烛：使用"
+      "description": "蜡烛：被使用"
     },
     {
       "name": "use.cave_vines",
-      "description": "洞穴藤蔓：使用"
+      "description": "洞穴藤蔓：被使用"
     },
     {
       "name": "use.chain",
-      "description": "锁链：使用"
+      "description": "锁链：被使用"
     },
     {
       "name": "use.cloth",
-      "description": "布质方块：使用"
+      "description": "布质方块：被使用"
     },
     {
       "name": "use.copper",
-      "description": "铜块：使用"
+      "description": "铜块：被使用"
     },
     {
       "name": "use.coral",
-      "description": "珊瑚：使用"
+      "description": "珊瑚：被使用"
     },
     {
       "name": "use.deepslate",
-      "description": "深板岩：使用"
+      "description": "深板岩：被使用"
     },
     {
       "name": "use.deepslate_bricks",
-      "description": "深板岩砖：使用"
+      "description": "深板岩砖：被使用"
     },
     {
       "name": "use.dirt_with_roots",
-      "description": "缠根泥土：使用"
+      "description": "缠根泥土：被使用"
     },
     {
       "name": "use.dripstone_block",
-      "description": "滴水石块：使用"
+      "description": "滴水石块：被使用"
     },
     {
       "name": "use.grass",
-      "description": "草：使用"
+      "description": "草：被使用"
     },
     {
       "name": "use.gravel",
-      "description": "沙砾：使用"
+      "description": "沙砾：被使用"
     },
     {
       "name": "use.hanging_roots",
-      "description": "垂根：使用"
+      "description": "垂根：被使用"
     },
     {
       "name": "use.honey_block",
-      "description": "蜂蜜块：使用"
+      "description": "蜂蜜块：被使用"
     },
     {
       "name": "use.ladder",
-      "description": "梯子：使用"
+      "description": "梯子：被使用"
     },
     {
       "name": "use.moss",
-      "description": "苔藓：使用"
+      "description": "苔藓：被使用"
     },
     {
       "name": "use.nether_brick",
-      "description": "下界砖：使用"
+      "description": "下界砖：被使用"
     },
     {
       "name": "use.nether_gold_ore",
-      "description": "下界金矿石：使用"
+      "description": "下界金矿石：被使用"
     },
     {
       "name": "use.nether_sprouts",
-      "description": "下界苗：使用"
+      "description": "下界苗：被使用"
     },
     {
       "name": "use.nether_wart",
-      "description": "下界疣：使用"
+      "description": "下界疣：被使用"
     },
     {
       "name": "use.netherite",
-      "description": "下界合金块：使用"
+      "description": "下界合金块：被使用"
     },
     {
       "name": "use.netherrack",
-      "description": "下界岩：使用"
+      "description": "下界岩：被使用"
     },
     {
       "name": "use.nylium",
-      "description": "菌岩：使用"
+      "description": "菌岩：被使用"
     },
     {
       "name": "use.pointed_dripstone",
-      "description": "滴水石锥：使用"
+      "description": "滴水石锥：被使用"
     },
     {
       "name": "use.roots",
-      "description": "菌索：使用"
+      "description": "菌索：被使用"
     },
     {
       "name": "use.sand",
-      "description": "沙子：使用"
+      "description": "沙子：被使用"
     },
     {
       "name": "use.sculk_sensor",
-      "description": "幽匿感测体：使用"
+      "description": "幽匿感测体：被使用"
     },
     {
       "name": "use.shroomlight",
-      "description": "菌光体：使用"
+      "description": "菌光体：被使用"
     },
     {
       "name": "use.slime",
-      "description": "黏液块：使用"
+      "description": "黏液块：被使用"
     },
     {
       "name": "use.snow",
-      "description": "雪块：使用"
+      "description": "雪块：被使用"
     },
     {
       "name": "use.soul_sand",
-      "description": "灵魂沙：使用"
+      "description": "灵魂沙：被使用"
     },
     {
       "name": "use.soul_soil",
-      "description": "灵魂土：使用"
+      "description": "灵魂土：被使用"
     },
     {
       "name": "use.spore_blossom",
-      "description": "孢子花：使用"
+      "description": "孢子花：被使用"
     },
     {
       "name": "use.stem",
-      "description": "菌柄：使用"
+      "description": "菌柄：被使用"
     },
     {
       "name": "use.stone",
-      "description": "石头：使用"
+      "description": "石头：被使用"
     },
     {
       "name": "use.vines",
-      "description": "藤蔓：使用"
+      "description": "藤蔓：被使用"
     },
     {
       "name": "use.wood",
-      "description": "木头：使用"
+      "description": "木头：被使用"
     },
     {
-      "name": "vault.activate"
+      "name": "vault.activate",
+      "description": "宝库：燃起"
     },
     {
-      "name": "vault.ambient"
+      "name": "vault.ambient",
+      "description": "宝库：噼啪作响"
     },
     {
-      "name": "vault.break"
+      "name": "vault.break",
+      "description": "宝库：被破坏"
     },
     {
-      "name": "vault.close_shutter"
+      "name": "vault.close_shutter",
+      "description": "宝库：关闭"
     },
     {
-      "name": "vault.deactivate"
+      "name": "vault.deactivate",
+      "description": "宝库：熄灭"
     },
     {
-      "name": "vault.eject_item"
+      "name": "vault.eject_item",
+      "description": "宝库：喷出物品"
     },
     {
-      "name": "vault.hit"
+      "name": "vault.hit",
+      "description": "宝库：损坏中"
     },
     {
-      "name": "vault.insert_item"
+      "name": "vault.insert_item",
+      "description": "宝库：解锁"
     },
     {
-      "name": "vault.insert_item_fail"
+      "name": "vault.insert_item_fail",
+      "description": "宝库：解锁失败"
     },
     {
-      "name": "vault.open_shutter"
+      "name": "vault.open_shutter",
+      "description": "宝库：打开"
     },
     {
-      "name": "vault.place"
+      "name": "vault.place",
+      "description": "宝库：被放置"
     },
     {
-      "name": "vault.reject_rewarded_player"
+      "name": "vault.reject_rewarded_player",
+      "description": "宝库：拒绝已奖励玩家"
     },
     {
-      "name": "vault.step"
+      "name": "vault.step",
+      "description": "宝库：被踩上"
     },
     {
       "name": "vr.stutterturn"
     },
     {
-      "name": "wind_charge.burst"
+      "name": "wind_charge.burst",
+      "description": "风弹：爆裂"
     }
   ]
 }

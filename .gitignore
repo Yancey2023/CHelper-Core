@@ -1,19 +1,20 @@
-# build directory
-/build
-/cmake-build-debug
-/cmake-build-release
-/CHelper-Web/cmake-build-emscripten-release
-/CHelper-Web/cmake-build-emscripten-minsizerel
+# clion
+.idea
+cmake-build-*
 
-# cache
-/.cache
+# vscode
+.vscode
+.cache
+build
+
+# MacOS
+.DS_STORE
+
+# QtCreator
+*.user
 
 # run directory
 /CHelper-Resource/run
-
-# IDE
-/.vscode
-/.idea
 
 # others
 /plan

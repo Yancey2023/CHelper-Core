@@ -115,10 +115,12 @@
       "description": "音乐唱片（C418 - chirp）"
     },
     {
-      "name": "record.creator"
+      "name": "record.creator",
+      "description": "音乐唱片（Lena Raine - Creator）"
     },
     {
-      "name": "record.creator_music_box"
+      "name": "record.creator_music_box",
+      "description": "音乐唱片（Lena Raine - Creator（八音盒））"
     },
     {
       "name": "record.far",
@@ -141,10 +143,12 @@
       "description": "音乐唱片（Lena Raine - Pigstep）"
     },
     {
-      "name": "record.precipice"
+      "name": "record.precipice",
+      "description": "音乐唱片（Aaron Cherof - Precipice）"
     },
     {
-      "name": "record.relic"
+      "name": "record.relic",
+      "description": "音乐唱片（Aaron Cherof - Relic）"
     },
     {
       "name": "record.stal",
