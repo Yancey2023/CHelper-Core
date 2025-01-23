@@ -74,6 +74,7 @@
   "ast": [
     ["player", "clear", "effect"],
     ["clear", "clear_effect", "LF"],
+    ["clear_effect", "LF"],
     ["effect", "seconds", "infinite", "LF"],
     ["seconds", "amplifier", "LF"],
     ["amplifier", "hideParticles", "LF"],
