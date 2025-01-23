@@ -39,7 +39,7 @@ else ()
 endif ()
 set(RESOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Resource)
 set(CPACK_VERSION_RELEASE "1.21.51.02")
-set(CPACK_VERSION_BETA "1.21.60.25")
+set(CPACK_VERSION_BETA "1.21.60.27")
 set(CPACK_VERSION_NETEASE "1.20.10.25")
 configure_file(include/param_deliver/ParamDeliver.h.in ${CMAKE_BINARY_DIR}/include/param_deliver/ParamDeliver.h @ONLY)
 

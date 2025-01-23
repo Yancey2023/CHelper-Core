@@ -71,7 +71,7 @@
       "brief": "结构地物",
       "description": "要放置的结构地物",
       "ignoreError": true,
-      "key": "structureFeature"
+      "key": "feature"
     },
     {
       "type": "STRING",
@@ -131,7 +131,7 @@
     ["feature", "features"],
     ["features", "position1", "LF"],
     ["position1", "LF"],
-    ["featureRule", "feature_rules"],
+    ["featurerule", "feature_rules"],
     ["feature_rules", "position1"],
     ["jigsaw", "pool"],
     ["pool", "jigsawTarget"],
