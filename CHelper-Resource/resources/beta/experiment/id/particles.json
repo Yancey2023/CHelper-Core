@@ -7,6 +7,10 @@
       "description": "从药箭上飘散的药水粒子"
     },
     {
+      "name": "minecraft:azalea_leaves_particle",
+      "description": "杜鹃树叶飘落的花瓣粒子"
+    },
+    {
       "name": "minecraft:balloon_gas_particle",
       "description": "气球炸裂（仅教育版）时的气体"
     },
