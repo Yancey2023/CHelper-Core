@@ -29,7 +29,7 @@
       "type": "NORMAL_ID",
       "id": "effect",
       "brief": "效果",
-      "description": "给予或者需要移除的效果",
+      "description": "需要给予的效果",
       "ignoreError": true,
       "key": "effects"
     },
@@ -61,11 +61,20 @@
         "name": "infinite",
         "description": "无限时长"
       }
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "clear_effect",
+      "brief": "效果",
+      "description": "需要移除的效果",
+      "ignoreError": true,
+      "key": "effects"
     }
   ],
   "ast": [
     ["player", "clear", "effect"],
-    ["clear", "effect", "LF"],
+    ["clear", "clear_effect", "LF"],
+    ["clear_effect", "LF"],
     ["effect", "seconds", "infinite", "LF"],
     ["seconds", "amplifier", "LF"],
     ["amplifier", "hideParticles", "LF"],
