@@ -71,7 +71,16 @@
       "brief": "结构地物",
       "description": "指定要放置的结构地物",
       "ignoreError": true,
-      "key": "structureFeature"
+      "contents": [
+        {
+          "name": "minecraft:trail_ruins",
+          "description": "古迹废墟"
+        },
+        {
+          "name": "minecraft:trial_chambers",
+          "description": "试炼密室"
+        }
+      ]
     },
     {
       "type": "STRING",
