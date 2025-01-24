@@ -1,0 +1,79 @@
+name: CMake on multiple platforms
+
+on:
+  push:
+    branches: [ "master", "dev" ]
+    paths:
+      - 'CHelper-Cmd/**'
+      - 'CHelper-Core/**'
+      - 'CHelper-Qt/**'
+      - 'CHelper-Test/**'
+      - 'CHelper-Windows/**'
+  pull_request:
+    branches: [ "master", "dev" ]
+    paths:
+      - 'CHelper-Cmd/**'
+      - 'CHelper-Core/**'
+      - 'CHelper-Qt/**'
+      - 'CHelper-Test/**'
+      - 'CHelper-Windows/**'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        build_type: [ Release, Debug ]
+        c_compiler: [ cl ]
+        include:
+          - os: windows-latest
+            c_compiler: cl
+            cpp_compiler: cl
+
+    steps:
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.5.3'
+
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+
+      - name: Set reusable strings
+        id: strings
+        shell: bash
+        run: |
+          echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+      - name: Configure CMake
+        run: >
+          cmake -B ${{ steps.strings.outputs.build-output-dir }}
+          -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+          -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -S ${{ github.workspace }}
+
+      - name: Build Test
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target CHelperTest
+
+      - name: Run Test
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        run: .\CHelper-Test\${{ matrix.build_type }}\CHelperTest.exe
+
+      - name: Build CHelperCmd
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target CHelperCmd
+
+      - name: Run CHelperCmd
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        run: .\CHelper-Cmd\${{ matrix.build_type }}\CHelperCmd.exe
+
+      - name: Build CHelperQt
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target CHelperQt
+
+      - name: Build CHelperWindows
+        if: runner.os == 'Windows'
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target CHelperWindows

@@ -17,7 +17,7 @@ namespace CHelper::Logger {
                       std::is_same<T, const std::u16string>() ||
                       std::is_same<T, char16_t *>() ||
                       std::is_same<T, const char16_t *>()) {
-            return utf8::utf16to8((const std::u16string &) arg);
+            return utf8::utf16to8(static_cast<const std::u16string &>(arg));
         } else {
             return arg;
         }
@@ -27,7 +27,7 @@ namespace CHelper::Logger {
     auto convertArg(const T &&arg) {
         if constexpr (std::is_same<T, std::u16string>() ||
                       std::is_same<T, const std::u16string>()) {
-            return utf8::utf16to8((const std::u16string &) arg);
+            return utf8::utf16to8(static_cast<const std::u16string &>(arg));
         } else if constexpr (std::is_same<T, char16_t *>() ||
                              std::is_same<T, const char16_t *>()) {
             return utf8::utf16to8(arg);

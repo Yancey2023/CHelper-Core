@@ -3,7 +3,7 @@ from os import path
 buildDirs = ['cmake-build-emscripten-release', 'cmake-build-emscripten-minsizerel']
 
 
-def insert(content, before, end, string):
+def insert(content: str, before: str, end: str, string: str) -> str:
     return content.replace(before + end, before + string + end)
 
 
@@ -12,15 +12,9 @@ for buildDir in buildDirs:
         content = fp.read()
     content = insert(
         content,
-        '',
-        'function createWasm()',
-        'export var wasmInitFuture = undefined;'
-    )
-    content = insert(
-        content,
-        '',
-        'instantiateAsync(wasmBinary,wasmBinaryFile,info,receiveInstantiationResult);',
-        'wasmInitFuture='
+        'var wasmExports;',
+        'createWasm();',
+        'export var createWasmFuture = '
     )
     content = content.replace('\n', '')
     content += ('''
