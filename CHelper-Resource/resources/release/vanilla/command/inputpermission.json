@@ -47,8 +47,8 @@
     {
       "type": "NORMAL_ID",
       "id": "queryPermission",
-      "brief": "指定操作所作用的权限",
-      "description": "指定操作所作用的权限",
+      "brief": "操作所作用的权限",
+      "description": "操作所作用的权限",
       "ignoreError": true,
       "key": "inputPermission"
     },

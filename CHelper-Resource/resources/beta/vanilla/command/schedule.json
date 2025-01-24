@@ -183,19 +183,19 @@
     {
       "type": "TEXT",
       "id": "on_area_loaded_clear_function",
-      "description": "指定函数",
+      "description": "函数",
       "data": {
         "name": "function",
-        "description": "指定函数"
+        "description": "函数"
       }
     },
     {
       "type": "TEXT",
       "id": "on_area_loaded_clear_tickingarea",
-      "description": "指定常加载区",
+      "description": "常加载区",
       "data": {
         "name": "tickingarea",
-        "description": "指定常加载区"
+        "description": "常加载区"
       }
     }
   ],

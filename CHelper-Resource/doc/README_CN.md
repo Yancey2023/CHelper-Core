@@ -667,7 +667,7 @@ contents每个ID：
   "type": "NORMAL_ID",
   "id": "hud_element",
   "brief": "HUD元素",
-  "description": "指定将被修改的HUD元素",
+  "description": "将被修改的HUD元素",
   "key": "hudElement",
   "ignoreError": true
 }

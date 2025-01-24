@@ -708,7 +708,7 @@
     },
     {
       "name": "minecraft:witchspell_emitter",
-      "description": ""
+      "description": "女巫产生的粒子"
     },
     {
       "name": "minecraft:wither_boss_invulnerable",

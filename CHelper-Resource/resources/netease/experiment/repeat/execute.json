@@ -271,10 +271,10 @@
       },
       {
         "type": "TEXT",
-        "description": "指定命令执行的位置为实体所处的坐标",
+        "description": "命令执行的位置为实体所处的坐标",
         "data": {
           "name": "as",
-          "description": "指定命令执行的位置为实体所处的坐标"
+          "description": "命令执行的位置为实体所处的坐标"
         }
       },
       {

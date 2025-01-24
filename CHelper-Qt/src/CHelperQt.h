@@ -28,7 +28,7 @@ private slots:
 
     void onSuggestionClick(const QModelIndex &index);
 
-    void copy();
+    void copy() const;
 
 private:
     Ui::CHelperApp *ui;

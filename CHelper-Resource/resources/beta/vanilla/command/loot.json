@@ -203,7 +203,7 @@
       "type": "POSITION",
       "id": "TargetBlockPosition",
       "brief": "位置",
-      "description": "指定方块坐标"
+      "description": "方块坐标"
     }
   ],
   "ast": [

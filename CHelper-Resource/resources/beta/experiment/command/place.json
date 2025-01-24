@@ -19,10 +19,10 @@
     {
       "type": "TEXT",
       "id": "featurerule",
-      "description": "指定要设置的地物规则",
+      "description": "要设置的地物规则",
       "data": {
         "name": "featurerule",
-        "description": "指定要设置的地物规则*"
+        "description": "要设置的地物规则*"
       }
     },
     {
@@ -63,13 +63,13 @@
       "type": "POSITION",
       "id": "position1",
       "brief": "生成原点",
-      "description": "指定放置时使用的生成原点"
+      "description": "放置时使用的生成原点"
     },
     {
       "type": "NORMAL_ID",
       "id": "structure_feature",
       "brief": "结构地物",
-      "description": "指定要放置的结构地物",
+      "description": "要放置的结构地物",
       "ignoreError": true,
       "contents": [
         {
@@ -86,7 +86,7 @@
       "type": "STRING",
       "id": "pool",
       "brief": "结构池",
-      "description": "指定要放置的结构池(文件路径)",
+      "description": "要放置的结构池(文件路径)",
       "canContainSpace": true,
       "ignoreLater": false
     },
@@ -94,30 +94,30 @@
       "type": "STRING",
       "id": "jigsawTarget",
       "brief": "起始拼图方块",
-      "description": "指定放置结构池时的结构中的起始拼图方块",
+      "description": "放置结构池时的结构中的起始拼图方块",
       "canContainSpace": true,
       "ignoreLater": false
     },
     {
       "type": "TEXT",
       "id": "maxDepth",
-      "description": "指定要展开拼图方块的最大深度(1~7)",
+      "description": "要展开拼图方块的最大深度(1~7)",
       "data": {
         "name": "maxDepth",
-        "description": "指定要展开拼图方块的最大深度(1~7)"
+        "description": "要展开拼图方块的最大深度(1~7)"
       }
     },
     {
       "type": "POSITION",
       "id": "pos",
       "brief": "位置",
-      "description": "指定放置时使用的生成原点"
+      "description": "放置时使用的生成原点"
     },
     {
       "type": "BOOLEAN",
       "id": "keepJigsaws",
       "brief": "值",
-      "description": "指定被放置结构是否保留拼图方块，默认为false",
+      "description": "被放置结构是否保留拼图方块，默认为false",
       "descriptionFalse": "设置为false",
       "descriptionTrue": "设置为true"
     },
@@ -125,13 +125,13 @@
       "type": "POSITION",
       "id": "pos1",
       "brief": "位置",
-      "description": "指定放置时使用的生成原点"
+      "description": "放置时使用的生成原点"
     },
     {
       "type": "BOOLEAN",
       "id": "ignoreStartHeight",
       "brief": "值",
-      "description": "指定放置结构时是否忽略起始高度",
+      "description": "放置结构时是否忽略起始高度",
       "descriptionFalse": "设置为false",
       "descriptionTrue": "设置为true"
     }

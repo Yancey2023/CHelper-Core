@@ -414,31 +414,31 @@
     {
       "type": "TEXT",
       "id": "entity_offset",
-      "description": "指定相机视角相对于实体的偏移量",
+      "description": "相机视角相对于实体的偏移量",
       "data": {
         "name": "entity_offset",
-        "description": "指定相机视角相对于实体的偏移量"
+        "description": "相机视角相对于实体的偏移量"
       }
     },
     {
       "type": "RELATIVE_FLOAT",
       "id": "xEntityOffset",
       "brief": "x方向相对于实体的偏移量",
-      "description": "指定相机视角x方向相对于实体的偏移量",
+      "description": "相机视角x方向相对于实体的偏移量",
       "canUseCaretNotation": true
     },
     {
       "type": "RELATIVE_FLOAT",
       "id": "yEntityOffset",
       "brief": "y方向相对于实体的偏移量",
-      "description": "指定相机视角y方向相对于实体的偏移量",
+      "description": "相机视角y方向相对于实体的偏移量",
       "canUseCaretNotation": true
     },
     {
       "type": "RELATIVE_FLOAT",
       "id": "zEntityOffset",
       "brief": "z方向相对于实体的偏移量",
-      "description": "指定相机视角z方向相对于实体的偏移量",
+      "description": "相机视角z方向相对于实体的偏移量",
       "canUseCaretNotation": true
     }
   ],

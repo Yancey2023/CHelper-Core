@@ -114,7 +114,7 @@ void CHelperApp::onSuggestionClick(const QModelIndex &index) {
     }
 }
 
-void CHelperApp::copy() {
+void CHelperApp::copy() const {
     QClipboard *clip = QApplication::clipboard();
     clip->setText(ui->lineEdit->text());
 }
