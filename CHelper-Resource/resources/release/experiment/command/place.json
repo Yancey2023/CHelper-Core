@@ -4,7 +4,7 @@
   ],
   "description": "以指定位置为生成原点，放置已配置的地物、结构地物、结构模板或结构池",
   "start": [
-    "feature", "featurerule", "jigsaw", "structure"
+    "jigsaw", "structure"
   ],
   "node": [
     {
