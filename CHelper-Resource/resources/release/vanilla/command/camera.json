@@ -36,15 +36,6 @@
     },
     {
       "type": "TEXT",
-      "id": "remove_target",
-      "description": "移除玩家相机视角聚焦的实体",
-      "data": {
-        "name": "remove_target",
-        "description": "移除玩家相机视角聚焦的实体"
-      }
-    },
-    {
-      "type": "TEXT",
       "id": "set",
       "description": "给玩家设置相机视角/预设",
       "data": {
@@ -365,7 +356,7 @@
     }
   ],
   "ast": [
-    ["players", "clear", "fade", "remove_target", "set"],
+    ["players", "clear", "fade", "set"],
     ["clear", "LF"],
     ["fade", "LF", "color", "time"],
     ["color", "red"],
@@ -376,7 +367,6 @@
     ["fadeInSeconds", "holdSeconds"],
     ["holdSeconds", "fadeOutSeconds"],
     ["fadeOutSeconds", "LF", "color"],
-    ["remove_target", "LF"],
     ["set", "preset"],
     ["preset", "default", "LF", "facing", "pos", "rot2", "ease", "view_offset"],
     ["default", "LF"],
