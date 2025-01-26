@@ -231,15 +231,15 @@
         "ignoreError": true,
         "contents": [
           {
-            "name": "minecraft:overworld",
+            "name": "overworld",
             "description": "主世界"
           },
           {
-            "name": "minecraft:the_nether",
+            "name": "nether",
             "description": "下届"
           },
           {
-            "name": "minecraft:the_end",
+            "name": "the_end",
             "description": "末地"
           }
         ]
