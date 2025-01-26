@@ -4,12 +4,12 @@ on:
   push:
     branches: [ "master", "dev" ]
     paths:
-      - '.github/test-resource.yml'
+      - '.github/workflows/test-resource.yml'
       - 'CHelper-Resource/**'
   pull_request:
     branches: [ "master", "dev" ]
     paths:
-      - '.github/test-resource.yml'
+      - '.github/workflows/test-resource.yml'
       - 'CHelper-Resource/**'
 
 jobs:

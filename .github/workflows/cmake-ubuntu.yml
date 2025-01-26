@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "master", "dev" ]
     paths:
-      - '.github/cmake-ubuntu.yml'
+      - '.github/workflows/cmake-ubuntu.yml'
       - 'CHelper-Cmd/**'
       - 'CHelper-Core/**'
       - 'CHelper-Qt/**'
@@ -12,7 +12,7 @@ on:
   pull_request:
     branches: [ "master", "dev" ]
     paths:
-      - '.github/cmake-ubuntu.yml'
+      - '.github/workflows/cmake-ubuntu.yml'
       - 'CHelper-Cmd/**'
       - 'CHelper-Core/**'
       - 'CHelper-Qt/**'

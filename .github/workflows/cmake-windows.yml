@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "master", "dev" ]
     paths:
-      - '.github/cmake-windows.yml'
+      - '.github/workflows/cmake-windows.yml'
       - 'CHelper-Cmd/**'
       - 'CHelper-Core/**'
       - 'CHelper-Qt/**'
@@ -13,7 +13,7 @@ on:
   pull_request:
     branches: [ "master", "dev" ]
     paths:
-      - '.github/cmake-windows.yml'
+      - '.github/workflows/cmake-windows.yml'
       - 'CHelper-Cmd/**'
       - 'CHelper-Core/**'
       - 'CHelper-Qt/**'
