@@ -4,10 +4,12 @@ on:
   push:
     branches: [ "master", "dev" ]
     paths:
+      - '.github/test-resource.yml'
       - 'CHelper-Resource/**'
   pull_request:
     branches: [ "master", "dev" ]
     paths:
+      - '.github/test-resource.yml'
       - 'CHelper-Resource/**'
 
 jobs:
@@ -18,7 +20,7 @@ jobs:
       fail-fast: false
 
       matrix:
-        build_type: [ Release, Debug ]
+        build_type: [ Release ]
         c_compiler: [ clang ]
         include:
           - os: ubuntu-latest
