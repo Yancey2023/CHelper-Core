@@ -28,11 +28,6 @@ jobs:
             cpp_compiler: clang++
 
     steps:
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v4
-        with:
-          version: '6.5.3'
-
       - uses: actions/checkout@v4
         with:
           submodules: 'recursive'
