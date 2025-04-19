@@ -63,10 +63,10 @@
     {
       "type": "TEXT",
       "id": "entity",
-      "description": "替换方块或实体物品栏内的物品",
+      "description": "替换实体物品栏内的物品",
       "data": {
         "name": "entity",
-        "description": "替换方块或实体物品栏内的物品"
+        "description": "替换实体物品栏内的物品"
       }
     },
     {
