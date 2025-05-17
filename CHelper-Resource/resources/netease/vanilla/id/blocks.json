@@ -7199,14 +7199,13 @@
         },
         {
           "propertyName": "allow_underwater_bit",
+          "description": "已弃用，为兼容性而保留 false： TNT true： 水下TNT",
           "values": [
             {
-              "valueName": false,
-              "description": "普通的TNT"
+              "valueName": false
             },
             {
-              "valueName": true,
-              "description": "水下TNT"
+              "valueName": true
             }
           ]
         },
@@ -7723,22 +7722,19 @@
         },
         {
           "propertyName": "chemistry_table_type",
+          "description": "已弃用，为兼容性而保留 compound_creator： element_constructor： lab_table： material_reducer：",
           "values": [
             {
-              "valueName": "compound_creator",
-              "description": ""
+              "valueName": "compound_creator"
             },
             {
-              "valueName": "element_constructor",
-              "description": ""
+              "valueName": "material_reducer"
             },
             {
-              "valueName": "lab_table",
-              "description": ""
+              "valueName": "element_constructor"
             },
             {
-              "valueName": "material_reducer",
-              "description": ""
+              "valueName": "lab_table"
             }
           ]
         },
@@ -7829,18 +7825,6 @@
             },
             {
               "valueName": "black"
-            }
-          ]
-        },
-        {
-          "propertyName": "color_bit",
-          "description": "彩色火把的颜色",
-          "values": [
-            {
-              "valueName": false
-            },
-            {
-              "valueName": true
             }
           ]
         },
@@ -9480,6 +9464,74 @@
           ]
         },
         {
+          "propertyName": "pale_moss_carpet_side_east",
+          "values": [
+            {
+              "valueName": "none",
+              "description": "东侧没有向上延伸"
+            },
+            {
+              "valueName": "short",
+              "description": "东侧向上延伸，且高度较低"
+            },
+            {
+              "valueName": "tall",
+              "description": "东侧向上延伸，且高度较高"
+            }
+          ]
+        },
+        {
+          "propertyName": "pale_moss_carpet_side_north",
+          "values": [
+            {
+              "valueName": "none",
+              "description": "北侧没有向上延伸"
+            },
+            {
+              "valueName": "short",
+              "description": "北侧向上延伸，且高度较低"
+            },
+            {
+              "valueName": "tall",
+              "description": "北侧向上延伸，且高度较高"
+            }
+          ]
+        },
+        {
+          "propertyName": "pale_moss_carpet_side_south",
+          "values": [
+            {
+              "valueName": "none",
+              "description": "南侧没有向上延伸"
+            },
+            {
+              "valueName": "short",
+              "description": "南侧向上延伸，且高度较低"
+            },
+            {
+              "valueName": "tall",
+              "description": "南侧向上延伸，且高度较高"
+            }
+          ]
+        },
+        {
+          "propertyName": "pale_moss_carpet_side_west",
+          "values": [
+            {
+              "valueName": "none",
+              "description": "西侧没有向上延伸"
+            },
+            {
+              "valueName": "short",
+              "description": "西侧向上延伸，且高度较低"
+            },
+            {
+              "valueName": "tall",
+              "description": "西侧向上延伸，且高度较高"
+            }
+          ]
+        },
+        {
           "propertyName": "persistent_bit",
           "values": [
             {
@@ -9784,7 +9836,7 @@
         },
         {
           "propertyName": "sapling_type",
-          "description": "已弃用，为兼容性而保留 树苗的类型 acacia： 金合欢树苗 dark_oak： 深色橡树树苗 oak： 橡树树苗 spruce： 云杉树苗 birch： 白桦树苗 jungle： 丛林树苗",
+          "description": "已弃用，为兼容性而保留 树苗的类型 acacia： 金合欢树苗 dark_oak： 深色橡树树苗 oak： 橡树树苗 spruce： 云杉树苗 birch： 白桦树苗 jungle： 丛林树苗 pale_oak：未使用",
           "values": [
             {
               "valueName": "oak"
@@ -9842,14 +9894,13 @@
         },
         {
           "propertyName": "sponge_type",
+          "description": "已弃用，为兼容性而保留 海绵的类型 dry： 海绵 wet： 湿海绵",
           "values": [
             {
-              "valueName": "dry",
-              "description": ""
+              "valueName": "dry"
             },
             {
-              "valueName": "wet",
-              "description": ""
+              "valueName": "wet"
             }
           ]
         },
@@ -10748,19 +10799,60 @@
       "block": [
         {
           "blocks": [
+            "skeleton_skull",
+            "wither_skeleton_skull",
+            "zombie_head",
+            "player_head",
+            "creeper_head",
+            "piglin_head",
+            "dragon_head"
+          ],
+          "properties": [
+            {
+              "propertyName": "facing_direction",
+              "values": [
+                {
+                  "valueName": 0,
+                  "description": "未使用"
+                },
+                {
+                  "valueName": 1,
+                  "description": "生物头颅在地上"
+                },
+                {
+                  "valueName": 2,
+                  "description": "生物头颅朝向北方"
+                },
+                {
+                  "valueName": 3,
+                  "description": "生物头颅朝向南方"
+                },
+                {
+                  "valueName": 4,
+                  "description": "生物头颅朝向西方"
+                },
+                {
+                  "valueName": 5,
+                  "description": "生物头颅朝向东方"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blocks": [
             "creaking_heart"
           ],
           "properties": [
             {
               "propertyName": "active",
+              "description": "已弃用，为兼容性而保留 方块是否失活 false：对应dormant true：对应uprooted",
               "values": [
                 {
-                  "valueName": true,
-                  "description": "嘎枝之心处于激活状态"
+                  "valueName": false
                 },
                 {
-                  "valueName": false,
-                  "description": "嘎枝之心处于未激活状态"
+                  "valueName": true
                 }
               ]
             },
@@ -10881,76 +10973,30 @@
         },
         {
           "blocks": [
-            "acacia_hanging_sign",
-            "acacia_wall_sign",
-            "bamboo_hanging_sign",
-            "bamboo_wall_sign",
-            "birch_hanging_sign",
-            "birch_wall_sign",
-            "black_glazed_terracotta",
-            "blue_glazed_terracotta",
-            "brown_glazed_terracotta",
-            "cherry_hanging_sign",
-            "cherry_wall_sign",
-            "crimson_hanging_sign",
-            "crimson_wall_sign",
-            "cyan_glazed_terracotta",
-            "dark_oak_hanging_sign",
-            "darkoak_wall_sign",
-            "gray_glazed_terracotta",
-            "green_glazed_terracotta",
-            "jungle_hanging_sign",
-            "jungle_wall_sign",
-            "ladder",
-            "light_blue_glazed_terracotta",
-            "lime_glazed_terracotta",
-            "magenta_glazed_terracotta",
-            "mangrove_hanging_sign",
-            "mangrove_wall_sign",
-            "melon_stem",
             "oak_hanging_sign",
-            "orange_glazed_terracotta",
-            "pink_glazed_terracotta",
-            "pumpkin_stem",
-            "purple_glazed_terracotta",
-            "red_glazed_terracotta",
-            "silver_glazed_terracotta",
             "spruce_hanging_sign",
-            "spruce_wall_sign",
-            "wall_banner",
-            "wall_sign",
+            "birch_hanging_sign",
+            "jungle_hanging_sign",
+            "acacia_hanging_sign",
+            "dark_oak_hanging_sign",
+            "mangrove_hanging_sign",
+            "cherry_hanging_sign",
+            "bamboo_hanging_sign",
+            "crimson_hanging_sign",
             "warped_hanging_sign",
-            "warped_wall_sign",
-            "white_glazed_terracotta",
-            "yellow_glazed_terracotta"
+            "pale_oak_hanging_sign"
           ],
           "properties": [
             {
-              "propertyName": "facing_direction",
+              "propertyName": "attached_bit",
               "values": [
                 {
-                  "valueName": 0,
-                  "description": "未使用"
+                  "valueName": true,
+                  "description": "非墙上的悬挂式告示牌的锁链系于一点"
                 },
                 {
-                  "valueName": 1,
-                  "description": "未使用"
-                },
-                {
-                  "valueName": 2,
-                  "description": "方块朝向北方"
-                },
-                {
-                  "valueName": 3,
-                  "description": "方块朝向南方"
-                },
-                {
-                  "valueName": 4,
-                  "description": "方块朝向西方"
-                },
-                {
-                  "valueName": 5,
-                  "description": "方块朝向东方"
+                  "valueName": false,
+                  "description": "非墙上的悬挂式告示牌的锁链互相平行"
                 }
               ]
             }
@@ -11082,46 +11128,74 @@
         },
         {
           "blocks": [
-            "acacia_trapdoor",
-            "bamboo_trapdoor",
-            "birch_trapdoor",
-            "cherry_trapdoor",
-            "copper_trapdoor",
-            "crimson_trapdoor",
-            "dark_oak_trapdoor",
-            "exposed_copper_trapdoor",
-            "iron_trapdoor",
-            "jungle_trapdoor",
-            "mangrove_trapdoor",
-            "oxidized_copper_trapdoor",
-            "spruce_trapdoor",
-            "warped_trapdoor",
-            "waxed_copper_trapdoor",
-            "waxed_exposed_copper_trapdoor",
-            "waxed_oxidized_copper_trapdoor",
-            "waxed_weathered_copper_trapdoor",
-            "weathered_copper_trapdoor",
-            "trapdoor"
+            "acacia_door",
+            "bamboo_door",
+            "birch_door",
+            "cherry_door",
+            "copper_door",
+            "crimson_door",
+            "dark_oak_door",
+            "exposed_copper_door",
+            "iron_door",
+            "jungle_door",
+            "mangrove_door",
+            "oxidized_copper_door",
+            "pale_oak_door",
+            "spruce_door",
+            "warped_door",
+            "waxed_copper_door",
+            "waxed_exposed_copper_door",
+            "waxed_oxidized_copper_door",
+            "waxed_weathered_copper_door",
+            "weathered_copper_door",
+            "wooden_door"
           ],
           "properties": [
             {
               "propertyName": "direction",
+              "description": "已弃用，为兼容性而保留 门的朝向，门关闭时把手所在的方向。 0：南 1：西 2：北 3：东",
               "values": [
                 {
-                  "valueName": 0,
-                  "description": "活板门朝向东方，轴在西方"
+                  "valueName": 0
                 },
                 {
-                  "valueName": 1,
-                  "description": "活板门朝向西方，轴在东方"
+                  "valueName": 1
                 },
                 {
-                  "valueName": 2,
-                  "description": "活板门朝向南方，轴在北方"
+                  "valueName": 2
                 },
                 {
-                  "valueName": 3,
-                  "description": "活板门朝向北方，轴在南方"
+                  "valueName": 3
+                }
+              ]
+            },
+            {
+              "propertyName": "minecraft:cardinal_direction",
+              "description": "门的朝向，门关闭时把手所在的方向。 west：西 north：北 east：东 south：南",
+              "values": [
+                {
+                  "valueName": "south"
+                },
+                {
+                  "valueName": "west"
+                },
+                {
+                  "valueName": "north"
+                },
+                {
+                  "valueName": "east"
+                }
+              ]
+            },
+            {
+              "propertyName": "open_bit",
+              "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
+              "values": [
+                {
+                  "valueName": false
+                },
+                {
+                  "valueName": true
                 }
               ]
             }
@@ -11141,26 +11215,6 @@
                 },
                 {
                   "valueName": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "blocks": [
-            "colored_torch_bp"
-          ],
-          "properties": [
-            {
-              "propertyName": "color_bit",
-              "values": [
-                {
-                  "valueName": true,
-                  "description": "紫色火把"
-                },
-                {
-                  "valueName": false,
-                  "description": "蓝色火把"
                 }
               ]
             }
@@ -11368,6 +11422,26 @@
         },
         {
           "blocks": [
+            "colored_torch_red",
+            "colored_torch_green"
+          ],
+          "properties": [
+            {
+              "propertyName": "color_bit",
+              "description": "已弃用，为兼容性而保留 彩色火把的颜色 true：绿色火把 false：红色火把",
+              "values": [
+                {
+                  "valueName": false
+                },
+                {
+                  "valueName": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blocks": [
             "hopper"
           ],
           "properties": [
@@ -11437,35 +11511,6 @@
                 },
                 {
                   "valueName": 5
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "blocks": [
-            "cocoa",
-            "chemistry_table"
-          ],
-          "properties": [
-            {
-              "propertyName": "direction",
-              "values": [
-                {
-                  "valueName": 0,
-                  "description": "方块朝向北方"
-                },
-                {
-                  "valueName": 1,
-                  "description": "方块朝向东方"
-                },
-                {
-                  "valueName": 2,
-                  "description": "方块朝向南方"
-                },
-                {
-                  "valueName": 3,
-                  "description": "方块朝向西方"
                 }
               ]
             }
@@ -11573,6 +11618,54 @@
                 },
                 {
                   "valueName": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blocks": [
+            "acacia_trapdoor",
+            "bamboo_trapdoor",
+            "birch_trapdoor",
+            "cherry_trapdoor",
+            "copper_trapdoor",
+            "crimson_trapdoor",
+            "dark_oak_trapdoor",
+            "exposed_copper_trapdoor",
+            "iron_trapdoor",
+            "jungle_trapdoor",
+            "mangrove_trapdoor",
+            "oxidized_copper_trapdoor",
+            "pale_oak_trapdoor",
+            "spruce_trapdoor",
+            "warped_trapdoor",
+            "waxed_copper_trapdoor",
+            "waxed_exposed_copper_trapdoor",
+            "waxed_oxidized_copper_trapdoor",
+            "waxed_weathered_copper_trapdoor",
+            "weathered_copper_trapdoor",
+            "trapdoor"
+          ],
+          "properties": [
+            {
+              "propertyName": "direction",
+              "values": [
+                {
+                  "valueName": 0,
+                  "description": "活板门朝向东方，轴在西方"
+                },
+                {
+                  "valueName": 1,
+                  "description": "活板门朝向西方，轴在东方"
+                },
+                {
+                  "valueName": 2,
+                  "description": "活板门朝向南方，轴在北方"
+                },
+                {
+                  "valueName": 3,
+                  "description": "活板门朝向北方，轴在南方"
                 }
               ]
             }
@@ -11749,31 +11842,23 @@
         },
         {
           "blocks": [
-            "acacia_door",
-            "bamboo_door",
-            "birch_door",
-            "cherry_door",
-            "copper_door",
-            "crimson_door",
-            "dark_oak_door",
-            "exposed_copper_door",
-            "iron_door",
-            "jungle_door",
-            "mangrove_door",
-            "oxidized_copper_door",
-            "spruce_door",
-            "warped_door",
-            "waxed_copper_door",
-            "waxed_exposed_copper_door",
-            "waxed_oxidized_copper_door",
-            "waxed_weathered_copper_door",
-            "weathered_copper_door",
-            "wooden_door"
+            "acacia_fence_gate",
+            "bamboo_fence_gate",
+            "birch_fence_gate",
+            "cherry_fence_gate",
+            "crimson_fence_gate",
+            "dark_oak_fence_gate",
+            "fence_gate",
+            "jungle_fence_gate",
+            "mangrove_fence_gate",
+            "pale_oak_fence_gate",
+            "spruce_fence_gate",
+            "warped_fence_gate"
           ],
           "properties": [
             {
               "propertyName": "direction",
-              "description": "门的朝向，门在关闭时位于方块的哪一侧。储存在下半层的门中，对于上半层的门，该值正常情况下永远为0。 0：朝西 1：朝北 2：朝东 3：朝南",
+              "description": "已弃用，为兼容性而保留 方块的朝向 0：朝南 1：朝西 2：朝北 3：朝东",
               "values": [
                 {
                   "valueName": 0
@@ -11788,16 +11873,50 @@
                   "valueName": 3
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "blocks": [
+            "pink_petals",
+            "leaf_litter",
+            "wildflowers"
+          ],
+          "properties": [
             {
-              "propertyName": "open_bit",
-              "description": "门是否已打开，当为true时已打开。储存在下半层的门中，对于上半层的门，该值正常情况下永远为false",
+              "propertyName": "growth",
               "values": [
                 {
-                  "valueName": false
+                  "valueName": 0,
+                  "description": "占据方块的四分之一"
                 },
                 {
-                  "valueName": true
+                  "valueName": 1,
+                  "description": "占据方块的四分之二"
+                },
+                {
+                  "valueName": 2,
+                  "description": "占据方块的四分之三"
+                },
+                {
+                  "valueName": 3,
+                  "description": "占据整个方块"
+                },
+                {
+                  "valueName": 4,
+                  "description": "未使用"
+                },
+                {
+                  "valueName": 5,
+                  "description": "未使用"
+                },
+                {
+                  "valueName": 6,
+                  "description": "未使用"
+                },
+                {
+                  "valueName": 7,
+                  "description": "未使用"
                 }
               ]
             }
@@ -11888,29 +12007,31 @@
         },
         {
           "blocks": [
-            "oak_hanging_sign",
-            "spruce_hanging_sign",
-            "birch_hanging_sign",
-            "jungle_hanging_sign",
-            "acacia_hanging_sign",
-            "dark_oak_hanging_sign",
-            "mangrove_hanging_sign",
-            "cherry_hanging_sign",
-            "bamboo_hanging_sign",
-            "crimson_hanging_sign",
-            "warped_hanging_sign"
+            "cocoa",
+            "compound_creator",
+            "material_reducer",
+            "element_constructor",
+            "lab_table"
           ],
           "properties": [
             {
-              "propertyName": "attached_bit",
+              "propertyName": "direction",
               "values": [
                 {
-                  "valueName": true,
-                  "description": "非墙上的悬挂式告示牌的锁链系于一点"
+                  "valueName": 0,
+                  "description": "方块朝向北方"
                 },
                 {
-                  "valueName": false,
-                  "description": "非墙上的悬挂式告示牌的锁链互相平行"
+                  "valueName": 1,
+                  "description": "方块朝向东方"
+                },
+                {
+                  "valueName": 2,
+                  "description": "方块朝向南方"
+                },
+                {
+                  "valueName": 3,
+                  "description": "方块朝向西方"
                 }
               ]
             }
@@ -12008,46 +12129,6 @@
         },
         {
           "blocks": [
-            "colored_torch_rg"
-          ],
-          "properties": [
-            {
-              "propertyName": "color_bit",
-              "values": [
-                {
-                  "valueName": true,
-                  "description": "绿色火把"
-                },
-                {
-                  "valueName": false,
-                  "description": "红色火把"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "blocks": [
-            "cherry_wood",
-            "mangrove_wood"
-          ],
-          "properties": [
-            {
-              "propertyName": "stripped_bit",
-              "description": "此方块属性本应处于已弃用状态，且应为了兼容性而保留，由于存在漏洞，此属性没有被弃用，且其值没有实际效果 方块为去皮木头还是普通木头",
-              "values": [
-                {
-                  "valueName": false
-                },
-                {
-                  "valueName": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "blocks": [
             "chorus_flower"
           ],
           "properties": [
@@ -12124,36 +12205,98 @@
         },
         {
           "blocks": [
-            "pink_petals"
+            "colored_torch_blue",
+            "colored_torch_purple"
           ],
           "properties": [
             {
-              "propertyName": "growth",
-              "description": "粉红色花簇中花的数量",
+              "propertyName": "color_bit",
+              "description": "已弃用，为兼容性而保留 彩色火把的颜色 true：紫色火把 false：蓝色火把",
               "values": [
                 {
-                  "valueName": 0
+                  "valueName": false
                 },
                 {
-                  "valueName": 1
+                  "valueName": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "blocks": [
+            "acacia_hanging_sign",
+            "acacia_wall_sign",
+            "bamboo_hanging_sign",
+            "bamboo_wall_sign",
+            "birch_hanging_sign",
+            "birch_wall_sign",
+            "black_glazed_terracotta",
+            "blue_glazed_terracotta",
+            "brown_glazed_terracotta",
+            "cherry_hanging_sign",
+            "cherry_wall_sign",
+            "crimson_hanging_sign",
+            "crimson_wall_sign",
+            "cyan_glazed_terracotta",
+            "dark_oak_hanging_sign",
+            "darkoak_wall_sign",
+            "gray_glazed_terracotta",
+            "green_glazed_terracotta",
+            "jungle_hanging_sign",
+            "jungle_wall_sign",
+            "ladder",
+            "light_blue_glazed_terracotta",
+            "lime_glazed_terracotta",
+            "magenta_glazed_terracotta",
+            "mangrove_hanging_sign",
+            "mangrove_wall_sign",
+            "melon_stem",
+            "oak_hanging_sign",
+            "orange_glazed_terracotta",
+            "pale_oak_hanging_sign",
+            "pale_oak_wall_sign",
+            "pink_glazed_terracotta",
+            "pumpkin_stem",
+            "purple_glazed_terracotta",
+            "red_glazed_terracotta",
+            "silver_glazed_terracotta",
+            "spruce_hanging_sign",
+            "spruce_wall_sign",
+            "wall_banner",
+            "wall_sign",
+            "warped_hanging_sign",
+            "warped_wall_sign",
+            "white_glazed_terracotta",
+            "yellow_glazed_terracotta"
+          ],
+          "properties": [
+            {
+              "propertyName": "facing_direction",
+              "values": [
+                {
+                  "valueName": 0,
+                  "description": "未使用"
                 },
                 {
-                  "valueName": 2
+                  "valueName": 1,
+                  "description": "未使用"
                 },
                 {
-                  "valueName": 3
+                  "valueName": 2,
+                  "description": "方块朝向北方"
                 },
                 {
-                  "valueName": 4
+                  "valueName": 3,
+                  "description": "方块朝向南方"
                 },
                 {
-                  "valueName": 5
+                  "valueName": 4,
+                  "description": "方块朝向西方"
                 },
                 {
-                  "valueName": 6
-                },
-                {
-                  "valueName": 7
+                  "valueName": 5,
+                  "description": "方块朝向东方"
                 }
               ]
             }
@@ -12311,42 +12454,6 @@
                 },
                 {
                   "valueName": 15
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "blocks": [
-            "skull"
-          ],
-          "properties": [
-            {
-              "propertyName": "facing_direction",
-              "values": [
-                {
-                  "valueName": 0,
-                  "description": "未使用"
-                },
-                {
-                  "valueName": 1,
-                  "description": "生物头颅在地上"
-                },
-                {
-                  "valueName": 2,
-                  "description": "生物头颅朝向北方"
-                },
-                {
-                  "valueName": 3,
-                  "description": "生物头颅朝向南方"
-                },
-                {
-                  "valueName": 4,
-                  "description": "生物头颅朝向西方"
-                },
-                {
-                  "valueName": 5,
-                  "description": "生物头颅朝向东方"
                 }
               ]
             }

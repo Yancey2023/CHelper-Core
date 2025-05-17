@@ -3411,7 +3411,7 @@
     },
     {
       "name": "minecraft:lodestone",
-      "description": "\u003c工作台\u003e雕纹石砖*8+下界合金锭-\u003e磁石"
+      "description": "\u003c工作台\u003e雕纹石砖*8+铁锭-\u003e磁石"
     },
     {
       "name": "minecraft:loom",
@@ -3916,6 +3916,10 @@
     {
       "name": "minecraft:pink_dye",
       "description": "\u003c工作台\u003e红色染料+白色染料~\u003e粉红色染料*2"
+    },
+    {
+      "name": "minecraft:pink_dye_from_cactus_flower",
+      "description": "\u003c工作台\u003e仙人掌花~\u003e粉红色染料"
     },
     {
       "name": "minecraft:pink_dye_from_peony",
@@ -4736,6 +4740,14 @@
     {
       "name": "minecraft:stonecutter_cut_copper_to_cut_copper_stairs",
       "description": "\u003c切石机\u003e切制铜块~\u003e切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_cut_red_sandstone_slab",
+      "description": "\u003c切石机\u003e切制红砂岩~\u003e切制红砂岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_cut_sandstone_slab",
+      "description": "\u003c切石机\u003e切制砂岩~\u003e切制砂岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_dark_prismarine_slab",
@@ -5968,6 +5980,10 @@
     {
       "name": "minecraft:yellow_dye_from_sunflower",
       "description": "\u003c工作台\u003e向日葵~\u003e黄色染料*2"
+    },
+    {
+      "name": "minecraft:yellow_dye_from_wildflowers",
+      "description": "\u003c工作台\u003e野花簇~\u003e黄色染料"
     },
     {
       "name": "minecraft:yellow_stained_glass",

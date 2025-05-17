@@ -1386,6 +1386,1182 @@
       "name": "decorated_pot_base_recipeId"
     },
     {
+      "name": "harness_color_0"
+    },
+    {
+      "name": "harness_color_0_1"
+    },
+    {
+      "name": "harness_color_0_10"
+    },
+    {
+      "name": "harness_color_0_11"
+    },
+    {
+      "name": "harness_color_0_12"
+    },
+    {
+      "name": "harness_color_0_13"
+    },
+    {
+      "name": "harness_color_0_14"
+    },
+    {
+      "name": "harness_color_0_15"
+    },
+    {
+      "name": "harness_color_0_17"
+    },
+    {
+      "name": "harness_color_0_18"
+    },
+    {
+      "name": "harness_color_0_19"
+    },
+    {
+      "name": "harness_color_0_2"
+    },
+    {
+      "name": "harness_color_0_3"
+    },
+    {
+      "name": "harness_color_0_4"
+    },
+    {
+      "name": "harness_color_0_5"
+    },
+    {
+      "name": "harness_color_0_6"
+    },
+    {
+      "name": "harness_color_0_7"
+    },
+    {
+      "name": "harness_color_0_8"
+    },
+    {
+      "name": "harness_color_0_9"
+    },
+    {
+      "name": "harness_color_1"
+    },
+    {
+      "name": "harness_color_10"
+    },
+    {
+      "name": "harness_color_10_0"
+    },
+    {
+      "name": "harness_color_10_1"
+    },
+    {
+      "name": "harness_color_10_11"
+    },
+    {
+      "name": "harness_color_10_12"
+    },
+    {
+      "name": "harness_color_10_13"
+    },
+    {
+      "name": "harness_color_10_14"
+    },
+    {
+      "name": "harness_color_10_15"
+    },
+    {
+      "name": "harness_color_10_16"
+    },
+    {
+      "name": "harness_color_10_17"
+    },
+    {
+      "name": "harness_color_10_18"
+    },
+    {
+      "name": "harness_color_10_19"
+    },
+    {
+      "name": "harness_color_10_2"
+    },
+    {
+      "name": "harness_color_10_3"
+    },
+    {
+      "name": "harness_color_10_4"
+    },
+    {
+      "name": "harness_color_10_5"
+    },
+    {
+      "name": "harness_color_10_6"
+    },
+    {
+      "name": "harness_color_10_7"
+    },
+    {
+      "name": "harness_color_10_8"
+    },
+    {
+      "name": "harness_color_10_9"
+    },
+    {
+      "name": "harness_color_11"
+    },
+    {
+      "name": "harness_color_11_0"
+    },
+    {
+      "name": "harness_color_11_1"
+    },
+    {
+      "name": "harness_color_11_10"
+    },
+    {
+      "name": "harness_color_11_12"
+    },
+    {
+      "name": "harness_color_11_13"
+    },
+    {
+      "name": "harness_color_11_14"
+    },
+    {
+      "name": "harness_color_11_15"
+    },
+    {
+      "name": "harness_color_11_16"
+    },
+    {
+      "name": "harness_color_11_17"
+    },
+    {
+      "name": "harness_color_11_18"
+    },
+    {
+      "name": "harness_color_11_19"
+    },
+    {
+      "name": "harness_color_11_2"
+    },
+    {
+      "name": "harness_color_11_3"
+    },
+    {
+      "name": "harness_color_11_4"
+    },
+    {
+      "name": "harness_color_11_5"
+    },
+    {
+      "name": "harness_color_11_6"
+    },
+    {
+      "name": "harness_color_11_7"
+    },
+    {
+      "name": "harness_color_11_8"
+    },
+    {
+      "name": "harness_color_11_9"
+    },
+    {
+      "name": "harness_color_12"
+    },
+    {
+      "name": "harness_color_12_0"
+    },
+    {
+      "name": "harness_color_12_1"
+    },
+    {
+      "name": "harness_color_12_10"
+    },
+    {
+      "name": "harness_color_12_11"
+    },
+    {
+      "name": "harness_color_12_13"
+    },
+    {
+      "name": "harness_color_12_14"
+    },
+    {
+      "name": "harness_color_12_15"
+    },
+    {
+      "name": "harness_color_12_16"
+    },
+    {
+      "name": "harness_color_12_17"
+    },
+    {
+      "name": "harness_color_12_18"
+    },
+    {
+      "name": "harness_color_12_19"
+    },
+    {
+      "name": "harness_color_12_2"
+    },
+    {
+      "name": "harness_color_12_3"
+    },
+    {
+      "name": "harness_color_12_4"
+    },
+    {
+      "name": "harness_color_12_5"
+    },
+    {
+      "name": "harness_color_12_6"
+    },
+    {
+      "name": "harness_color_12_7"
+    },
+    {
+      "name": "harness_color_12_8"
+    },
+    {
+      "name": "harness_color_12_9"
+    },
+    {
+      "name": "harness_color_13"
+    },
+    {
+      "name": "harness_color_13_0"
+    },
+    {
+      "name": "harness_color_13_1"
+    },
+    {
+      "name": "harness_color_13_10"
+    },
+    {
+      "name": "harness_color_13_11"
+    },
+    {
+      "name": "harness_color_13_12"
+    },
+    {
+      "name": "harness_color_13_14"
+    },
+    {
+      "name": "harness_color_13_15"
+    },
+    {
+      "name": "harness_color_13_16"
+    },
+    {
+      "name": "harness_color_13_17"
+    },
+    {
+      "name": "harness_color_13_18"
+    },
+    {
+      "name": "harness_color_13_19"
+    },
+    {
+      "name": "harness_color_13_2"
+    },
+    {
+      "name": "harness_color_13_3"
+    },
+    {
+      "name": "harness_color_13_4"
+    },
+    {
+      "name": "harness_color_13_5"
+    },
+    {
+      "name": "harness_color_13_6"
+    },
+    {
+      "name": "harness_color_13_7"
+    },
+    {
+      "name": "harness_color_13_8"
+    },
+    {
+      "name": "harness_color_13_9"
+    },
+    {
+      "name": "harness_color_14"
+    },
+    {
+      "name": "harness_color_14_0"
+    },
+    {
+      "name": "harness_color_14_1"
+    },
+    {
+      "name": "harness_color_14_10"
+    },
+    {
+      "name": "harness_color_14_11"
+    },
+    {
+      "name": "harness_color_14_12"
+    },
+    {
+      "name": "harness_color_14_13"
+    },
+    {
+      "name": "harness_color_14_15"
+    },
+    {
+      "name": "harness_color_14_16"
+    },
+    {
+      "name": "harness_color_14_17"
+    },
+    {
+      "name": "harness_color_14_18"
+    },
+    {
+      "name": "harness_color_14_19"
+    },
+    {
+      "name": "harness_color_14_2"
+    },
+    {
+      "name": "harness_color_14_3"
+    },
+    {
+      "name": "harness_color_14_4"
+    },
+    {
+      "name": "harness_color_14_5"
+    },
+    {
+      "name": "harness_color_14_6"
+    },
+    {
+      "name": "harness_color_14_7"
+    },
+    {
+      "name": "harness_color_14_8"
+    },
+    {
+      "name": "harness_color_14_9"
+    },
+    {
+      "name": "harness_color_15"
+    },
+    {
+      "name": "harness_color_15_0"
+    },
+    {
+      "name": "harness_color_15_1"
+    },
+    {
+      "name": "harness_color_15_10"
+    },
+    {
+      "name": "harness_color_15_11"
+    },
+    {
+      "name": "harness_color_15_12"
+    },
+    {
+      "name": "harness_color_15_13"
+    },
+    {
+      "name": "harness_color_15_14"
+    },
+    {
+      "name": "harness_color_15_16"
+    },
+    {
+      "name": "harness_color_15_17"
+    },
+    {
+      "name": "harness_color_15_18"
+    },
+    {
+      "name": "harness_color_15_2"
+    },
+    {
+      "name": "harness_color_15_3"
+    },
+    {
+      "name": "harness_color_15_4"
+    },
+    {
+      "name": "harness_color_15_5"
+    },
+    {
+      "name": "harness_color_15_6"
+    },
+    {
+      "name": "harness_color_15_7"
+    },
+    {
+      "name": "harness_color_15_8"
+    },
+    {
+      "name": "harness_color_15_9"
+    },
+    {
+      "name": "harness_color_16"
+    },
+    {
+      "name": "harness_color_16_1"
+    },
+    {
+      "name": "harness_color_16_10"
+    },
+    {
+      "name": "harness_color_16_11"
+    },
+    {
+      "name": "harness_color_16_12"
+    },
+    {
+      "name": "harness_color_16_13"
+    },
+    {
+      "name": "harness_color_16_14"
+    },
+    {
+      "name": "harness_color_16_15"
+    },
+    {
+      "name": "harness_color_16_17"
+    },
+    {
+      "name": "harness_color_16_18"
+    },
+    {
+      "name": "harness_color_16_19"
+    },
+    {
+      "name": "harness_color_16_2"
+    },
+    {
+      "name": "harness_color_16_3"
+    },
+    {
+      "name": "harness_color_16_4"
+    },
+    {
+      "name": "harness_color_16_5"
+    },
+    {
+      "name": "harness_color_16_6"
+    },
+    {
+      "name": "harness_color_16_7"
+    },
+    {
+      "name": "harness_color_16_8"
+    },
+    {
+      "name": "harness_color_16_9"
+    },
+    {
+      "name": "harness_color_17"
+    },
+    {
+      "name": "harness_color_17_0"
+    },
+    {
+      "name": "harness_color_17_1"
+    },
+    {
+      "name": "harness_color_17_10"
+    },
+    {
+      "name": "harness_color_17_11"
+    },
+    {
+      "name": "harness_color_17_12"
+    },
+    {
+      "name": "harness_color_17_13"
+    },
+    {
+      "name": "harness_color_17_14"
+    },
+    {
+      "name": "harness_color_17_15"
+    },
+    {
+      "name": "harness_color_17_16"
+    },
+    {
+      "name": "harness_color_17_18"
+    },
+    {
+      "name": "harness_color_17_19"
+    },
+    {
+      "name": "harness_color_17_2"
+    },
+    {
+      "name": "harness_color_17_4"
+    },
+    {
+      "name": "harness_color_17_5"
+    },
+    {
+      "name": "harness_color_17_6"
+    },
+    {
+      "name": "harness_color_17_7"
+    },
+    {
+      "name": "harness_color_17_8"
+    },
+    {
+      "name": "harness_color_17_9"
+    },
+    {
+      "name": "harness_color_18"
+    },
+    {
+      "name": "harness_color_18_0"
+    },
+    {
+      "name": "harness_color_18_1"
+    },
+    {
+      "name": "harness_color_18_10"
+    },
+    {
+      "name": "harness_color_18_11"
+    },
+    {
+      "name": "harness_color_18_12"
+    },
+    {
+      "name": "harness_color_18_13"
+    },
+    {
+      "name": "harness_color_18_14"
+    },
+    {
+      "name": "harness_color_18_15"
+    },
+    {
+      "name": "harness_color_18_16"
+    },
+    {
+      "name": "harness_color_18_17"
+    },
+    {
+      "name": "harness_color_18_19"
+    },
+    {
+      "name": "harness_color_18_2"
+    },
+    {
+      "name": "harness_color_18_3"
+    },
+    {
+      "name": "harness_color_18_5"
+    },
+    {
+      "name": "harness_color_18_6"
+    },
+    {
+      "name": "harness_color_18_7"
+    },
+    {
+      "name": "harness_color_18_8"
+    },
+    {
+      "name": "harness_color_18_9"
+    },
+    {
+      "name": "harness_color_19"
+    },
+    {
+      "name": "harness_color_19_0"
+    },
+    {
+      "name": "harness_color_19_1"
+    },
+    {
+      "name": "harness_color_19_10"
+    },
+    {
+      "name": "harness_color_19_11"
+    },
+    {
+      "name": "harness_color_19_12"
+    },
+    {
+      "name": "harness_color_19_13"
+    },
+    {
+      "name": "harness_color_19_14"
+    },
+    {
+      "name": "harness_color_19_16"
+    },
+    {
+      "name": "harness_color_19_17"
+    },
+    {
+      "name": "harness_color_19_18"
+    },
+    {
+      "name": "harness_color_19_2"
+    },
+    {
+      "name": "harness_color_19_3"
+    },
+    {
+      "name": "harness_color_19_4"
+    },
+    {
+      "name": "harness_color_19_5"
+    },
+    {
+      "name": "harness_color_19_6"
+    },
+    {
+      "name": "harness_color_19_7"
+    },
+    {
+      "name": "harness_color_19_8"
+    },
+    {
+      "name": "harness_color_19_9"
+    },
+    {
+      "name": "harness_color_1_0"
+    },
+    {
+      "name": "harness_color_1_10"
+    },
+    {
+      "name": "harness_color_1_11"
+    },
+    {
+      "name": "harness_color_1_12"
+    },
+    {
+      "name": "harness_color_1_13"
+    },
+    {
+      "name": "harness_color_1_14"
+    },
+    {
+      "name": "harness_color_1_15"
+    },
+    {
+      "name": "harness_color_1_16"
+    },
+    {
+      "name": "harness_color_1_17"
+    },
+    {
+      "name": "harness_color_1_18"
+    },
+    {
+      "name": "harness_color_1_19"
+    },
+    {
+      "name": "harness_color_1_2"
+    },
+    {
+      "name": "harness_color_1_3"
+    },
+    {
+      "name": "harness_color_1_4"
+    },
+    {
+      "name": "harness_color_1_5"
+    },
+    {
+      "name": "harness_color_1_6"
+    },
+    {
+      "name": "harness_color_1_7"
+    },
+    {
+      "name": "harness_color_1_8"
+    },
+    {
+      "name": "harness_color_1_9"
+    },
+    {
+      "name": "harness_color_2"
+    },
+    {
+      "name": "harness_color_2_0"
+    },
+    {
+      "name": "harness_color_2_1"
+    },
+    {
+      "name": "harness_color_2_10"
+    },
+    {
+      "name": "harness_color_2_11"
+    },
+    {
+      "name": "harness_color_2_12"
+    },
+    {
+      "name": "harness_color_2_13"
+    },
+    {
+      "name": "harness_color_2_14"
+    },
+    {
+      "name": "harness_color_2_15"
+    },
+    {
+      "name": "harness_color_2_16"
+    },
+    {
+      "name": "harness_color_2_17"
+    },
+    {
+      "name": "harness_color_2_18"
+    },
+    {
+      "name": "harness_color_2_19"
+    },
+    {
+      "name": "harness_color_2_3"
+    },
+    {
+      "name": "harness_color_2_4"
+    },
+    {
+      "name": "harness_color_2_5"
+    },
+    {
+      "name": "harness_color_2_6"
+    },
+    {
+      "name": "harness_color_2_7"
+    },
+    {
+      "name": "harness_color_2_8"
+    },
+    {
+      "name": "harness_color_2_9"
+    },
+    {
+      "name": "harness_color_3"
+    },
+    {
+      "name": "harness_color_3_0"
+    },
+    {
+      "name": "harness_color_3_1"
+    },
+    {
+      "name": "harness_color_3_10"
+    },
+    {
+      "name": "harness_color_3_11"
+    },
+    {
+      "name": "harness_color_3_12"
+    },
+    {
+      "name": "harness_color_3_13"
+    },
+    {
+      "name": "harness_color_3_14"
+    },
+    {
+      "name": "harness_color_3_15"
+    },
+    {
+      "name": "harness_color_3_16"
+    },
+    {
+      "name": "harness_color_3_18"
+    },
+    {
+      "name": "harness_color_3_19"
+    },
+    {
+      "name": "harness_color_3_2"
+    },
+    {
+      "name": "harness_color_3_4"
+    },
+    {
+      "name": "harness_color_3_5"
+    },
+    {
+      "name": "harness_color_3_6"
+    },
+    {
+      "name": "harness_color_3_7"
+    },
+    {
+      "name": "harness_color_3_8"
+    },
+    {
+      "name": "harness_color_3_9"
+    },
+    {
+      "name": "harness_color_4"
+    },
+    {
+      "name": "harness_color_4_0"
+    },
+    {
+      "name": "harness_color_4_1"
+    },
+    {
+      "name": "harness_color_4_10"
+    },
+    {
+      "name": "harness_color_4_11"
+    },
+    {
+      "name": "harness_color_4_12"
+    },
+    {
+      "name": "harness_color_4_13"
+    },
+    {
+      "name": "harness_color_4_14"
+    },
+    {
+      "name": "harness_color_4_15"
+    },
+    {
+      "name": "harness_color_4_16"
+    },
+    {
+      "name": "harness_color_4_17"
+    },
+    {
+      "name": "harness_color_4_19"
+    },
+    {
+      "name": "harness_color_4_2"
+    },
+    {
+      "name": "harness_color_4_3"
+    },
+    {
+      "name": "harness_color_4_5"
+    },
+    {
+      "name": "harness_color_4_6"
+    },
+    {
+      "name": "harness_color_4_7"
+    },
+    {
+      "name": "harness_color_4_8"
+    },
+    {
+      "name": "harness_color_4_9"
+    },
+    {
+      "name": "harness_color_5"
+    },
+    {
+      "name": "harness_color_5_0"
+    },
+    {
+      "name": "harness_color_5_1"
+    },
+    {
+      "name": "harness_color_5_10"
+    },
+    {
+      "name": "harness_color_5_11"
+    },
+    {
+      "name": "harness_color_5_12"
+    },
+    {
+      "name": "harness_color_5_13"
+    },
+    {
+      "name": "harness_color_5_14"
+    },
+    {
+      "name": "harness_color_5_15"
+    },
+    {
+      "name": "harness_color_5_16"
+    },
+    {
+      "name": "harness_color_5_17"
+    },
+    {
+      "name": "harness_color_5_18"
+    },
+    {
+      "name": "harness_color_5_19"
+    },
+    {
+      "name": "harness_color_5_2"
+    },
+    {
+      "name": "harness_color_5_3"
+    },
+    {
+      "name": "harness_color_5_4"
+    },
+    {
+      "name": "harness_color_5_6"
+    },
+    {
+      "name": "harness_color_5_7"
+    },
+    {
+      "name": "harness_color_5_8"
+    },
+    {
+      "name": "harness_color_5_9"
+    },
+    {
+      "name": "harness_color_6"
+    },
+    {
+      "name": "harness_color_6_0"
+    },
+    {
+      "name": "harness_color_6_1"
+    },
+    {
+      "name": "harness_color_6_10"
+    },
+    {
+      "name": "harness_color_6_11"
+    },
+    {
+      "name": "harness_color_6_12"
+    },
+    {
+      "name": "harness_color_6_13"
+    },
+    {
+      "name": "harness_color_6_14"
+    },
+    {
+      "name": "harness_color_6_15"
+    },
+    {
+      "name": "harness_color_6_16"
+    },
+    {
+      "name": "harness_color_6_17"
+    },
+    {
+      "name": "harness_color_6_18"
+    },
+    {
+      "name": "harness_color_6_19"
+    },
+    {
+      "name": "harness_color_6_2"
+    },
+    {
+      "name": "harness_color_6_3"
+    },
+    {
+      "name": "harness_color_6_4"
+    },
+    {
+      "name": "harness_color_6_5"
+    },
+    {
+      "name": "harness_color_6_7"
+    },
+    {
+      "name": "harness_color_6_8"
+    },
+    {
+      "name": "harness_color_6_9"
+    },
+    {
+      "name": "harness_color_7"
+    },
+    {
+      "name": "harness_color_7_0"
+    },
+    {
+      "name": "harness_color_7_1"
+    },
+    {
+      "name": "harness_color_7_10"
+    },
+    {
+      "name": "harness_color_7_11"
+    },
+    {
+      "name": "harness_color_7_12"
+    },
+    {
+      "name": "harness_color_7_13"
+    },
+    {
+      "name": "harness_color_7_14"
+    },
+    {
+      "name": "harness_color_7_15"
+    },
+    {
+      "name": "harness_color_7_16"
+    },
+    {
+      "name": "harness_color_7_17"
+    },
+    {
+      "name": "harness_color_7_18"
+    },
+    {
+      "name": "harness_color_7_19"
+    },
+    {
+      "name": "harness_color_7_2"
+    },
+    {
+      "name": "harness_color_7_3"
+    },
+    {
+      "name": "harness_color_7_4"
+    },
+    {
+      "name": "harness_color_7_5"
+    },
+    {
+      "name": "harness_color_7_6"
+    },
+    {
+      "name": "harness_color_7_8"
+    },
+    {
+      "name": "harness_color_7_9"
+    },
+    {
+      "name": "harness_color_8"
+    },
+    {
+      "name": "harness_color_8_0"
+    },
+    {
+      "name": "harness_color_8_1"
+    },
+    {
+      "name": "harness_color_8_10"
+    },
+    {
+      "name": "harness_color_8_11"
+    },
+    {
+      "name": "harness_color_8_12"
+    },
+    {
+      "name": "harness_color_8_13"
+    },
+    {
+      "name": "harness_color_8_14"
+    },
+    {
+      "name": "harness_color_8_15"
+    },
+    {
+      "name": "harness_color_8_16"
+    },
+    {
+      "name": "harness_color_8_17"
+    },
+    {
+      "name": "harness_color_8_18"
+    },
+    {
+      "name": "harness_color_8_19"
+    },
+    {
+      "name": "harness_color_8_2"
+    },
+    {
+      "name": "harness_color_8_3"
+    },
+    {
+      "name": "harness_color_8_4"
+    },
+    {
+      "name": "harness_color_8_5"
+    },
+    {
+      "name": "harness_color_8_6"
+    },
+    {
+      "name": "harness_color_8_7"
+    },
+    {
+      "name": "harness_color_8_9"
+    },
+    {
+      "name": "harness_color_9"
+    },
+    {
+      "name": "harness_color_9_0"
+    },
+    {
+      "name": "harness_color_9_1"
+    },
+    {
+      "name": "harness_color_9_10"
+    },
+    {
+      "name": "harness_color_9_11"
+    },
+    {
+      "name": "harness_color_9_12"
+    },
+    {
+      "name": "harness_color_9_13"
+    },
+    {
+      "name": "harness_color_9_14"
+    },
+    {
+      "name": "harness_color_9_15"
+    },
+    {
+      "name": "harness_color_9_16"
+    },
+    {
+      "name": "harness_color_9_17"
+    },
+    {
+      "name": "harness_color_9_18"
+    },
+    {
+      "name": "harness_color_9_19"
+    },
+    {
+      "name": "harness_color_9_2"
+    },
+    {
+      "name": "harness_color_9_3"
+    },
+    {
+      "name": "harness_color_9_4"
+    },
+    {
+      "name": "harness_color_9_5"
+    },
+    {
+      "name": "harness_color_9_6"
+    },
+    {
+      "name": "harness_color_9_7"
+    },
+    {
+      "name": "harness_color_9_8"
+    },
+    {
       "name": "heiroglyphs_redsandstone_recipeId"
     },
     {
@@ -2690,6 +3866,10 @@
       "description": "\u003c工作台\u003e红石粉+圆石*7+弓-\u003e发射器"
     },
     {
+      "name": "minecraft:dried_ghast",
+      "description": "\u003c工作台\u003e恶魂之泪*8+骨块-\u003e失水恶魂"
+    },
+    {
       "name": "minecraft:dried_kelp",
       "description": "\u003c工作台\u003e干海带块-\u003e干海带*9"
     },
@@ -3411,7 +4591,7 @@
     },
     {
       "name": "minecraft:lodestone",
-      "description": "\u003c工作台\u003e雕纹石砖*8+下界合金锭-\u003e磁石"
+      "description": "\u003c工作台\u003e雕纹石砖*8+铁锭-\u003e磁石"
     },
     {
       "name": "minecraft:loom",
@@ -3916,6 +5096,10 @@
     {
       "name": "minecraft:pink_dye",
       "description": "\u003c工作台\u003e红色染料+白色染料~\u003e粉红色染料*2"
+    },
+    {
+      "name": "minecraft:pink_dye_from_cactus_flower",
+      "description": "\u003c工作台\u003e仙人掌花~\u003e粉红色染料"
     },
     {
       "name": "minecraft:pink_dye_from_peony",
@@ -4736,6 +5920,14 @@
     {
       "name": "minecraft:stonecutter_cut_copper_to_cut_copper_stairs",
       "description": "\u003c切石机\u003e切制铜块~\u003e切制铜楼梯"
+    },
+    {
+      "name": "minecraft:stonecutter_cut_red_sandstone_slab",
+      "description": "\u003c切石机\u003e切制红砂岩~\u003e切制红砂岩台阶*2"
+    },
+    {
+      "name": "minecraft:stonecutter_cut_sandstone_slab",
+      "description": "\u003c切石机\u003e切制砂岩~\u003e切制砂岩台阶*2"
     },
     {
       "name": "minecraft:stonecutter_dark_prismarine_slab",
@@ -5968,6 +7160,10 @@
     {
       "name": "minecraft:yellow_dye_from_sunflower",
       "description": "\u003c工作台\u003e向日葵~\u003e黄色染料*2"
+    },
+    {
+      "name": "minecraft:yellow_dye_from_wildflowers",
+      "description": "\u003c工作台\u003e野花簇~\u003e黄色染料"
     },
     {
       "name": "minecraft:yellow_stained_glass",

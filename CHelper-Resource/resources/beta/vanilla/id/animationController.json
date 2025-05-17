@@ -171,6 +171,12 @@
       "name": "controller.animation.goat.move"
     },
     {
+      "name": "controller.animation.happy_ghast.move"
+    },
+    {
+      "name": "controller.animation.happy_ghast.scale"
+    },
+    {
       "name": "controller.animation.hoglin.attack"
     },
     {

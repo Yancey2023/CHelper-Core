@@ -239,12 +239,22 @@
       "description": "箭：击中"
     },
     {
+      "name": "block.cactus_flower.break"
+    },
+    {
+      "name": "block.cactus_flower.place"
+    },
+    {
       "name": "block.campfire.crackle",
       "description": "营火：噼啪作响"
     },
     {
       "name": "block.cartography_table.use",
       "description": "地图：绘制"
+    },
+    {
+      "name": "block.cave_vines.place",
+      "description": "洞穴藤蔓：被放置"
     },
     {
       "name": "block.chorusflower.death",
@@ -314,12 +324,47 @@
       "description": "嘎枝之心：咕哝"
     },
     {
+      "name": "block.deadbush.ambient",
+      "description": "干枯声"
+    },
+    {
       "name": "block.decorated_pot.insert",
       "description": "饰纹陶罐：装入"
     },
     {
       "name": "block.decorated_pot.insert_fail",
       "description": "饰纹陶罐：晃动"
+    },
+    {
+      "name": "block.dried_ghast.ambient",
+      "description": "干燥声"
+    },
+    {
+      "name": "block.dried_ghast.ambient_water",
+      "description": "失水恶魂：补水"
+    },
+    {
+      "name": "block.dried_ghast.break"
+    },
+    {
+      "name": "block.dried_ghast.fall"
+    },
+    {
+      "name": "block.dried_ghast.hit"
+    },
+    {
+      "name": "block.dried_ghast.place"
+    },
+    {
+      "name": "block.dried_ghast.place_in_water",
+      "description": "失水恶魂：浸泡"
+    },
+    {
+      "name": "block.dried_ghast.state_change",
+      "description": "失水恶魂：恢复"
+    },
+    {
+      "name": "block.dried_ghast.step"
     },
     {
       "name": "block.enchanting_table.use",
@@ -356,6 +401,10 @@
     {
       "name": "block.false_permissions",
       "description": "方块：无权限"
+    },
+    {
+      "name": "block.firefly_bush.ambient",
+      "description": "萤火虫：嗡嗡"
     },
     {
       "name": "block.furnace.lit",
@@ -404,6 +453,15 @@
     {
       "name": "block.lantern.step",
       "description": "灯笼：被踩上"
+    },
+    {
+      "name": "block.leaf_litter.break"
+    },
+    {
+      "name": "block.leaf_litter.place"
+    },
+    {
+      "name": "block.leaf_litter.step"
     },
     {
       "name": "block.loom.use",
@@ -562,6 +620,14 @@
       "description": "树脂砖：被踩上"
     },
     {
+      "name": "block.sand.ambient",
+      "description": "沙沙声"
+    },
+    {
+      "name": "block.sand.ambient.attached",
+      "description": "风声"
+    },
+    {
       "name": "block.scaffolding.break",
       "description": "脚手架：被破坏"
     },
@@ -632,6 +698,38 @@
     {
       "name": "block.turtle_egg.drop",
       "description": "海龟：产卵"
+    },
+    {
+      "name": "block.weeping_vines.break",
+      "description": "垂泪藤：被破坏"
+    },
+    {
+      "name": "block.weeping_vines.fall",
+      "description": "垂泪藤：某物摔落"
+    },
+    {
+      "name": "block.weeping_vines.hit",
+      "description": "垂泪藤：损坏中"
+    },
+    {
+      "name": "block.weeping_vines.jump",
+      "description": "垂泪藤：某物跳跃"
+    },
+    {
+      "name": "block.weeping_vines.land",
+      "description": "垂泪藤：某物着陆"
+    },
+    {
+      "name": "block.weeping_vines.place",
+      "description": "垂泪藤：被放置"
+    },
+    {
+      "name": "block.weeping_vines.step",
+      "description": "垂泪藤：被踩上"
+    },
+    {
+      "name": "block.weeping_vines.use",
+      "description": "垂泪藤：被使用"
     },
     {
       "name": "bloom.sculk_catalyst",
@@ -732,6 +830,10 @@
     {
       "name": "break.heavy_core",
       "description": "沉重核心：被破坏"
+    },
+    {
+      "name": "break.iron",
+      "description": "铁质方块：被破坏"
     },
     {
       "name": "break.large_amethyst_bud",
@@ -1227,7 +1329,7 @@
     },
     {
       "name": "dig.fungus",
-      "description": "菌类：被破坏"
+      "description": "下界菌：被破坏"
     },
     {
       "name": "dig.grass",
@@ -1607,7 +1709,7 @@
     },
     {
       "name": "firework.twinkle",
-      "description": "烟火：闪烁"
+      "description": "烟花：闪烁"
     },
     {
       "name": "game.player.attack.nodamage",
@@ -1744,6 +1846,10 @@
     {
       "name": "hit.honey_block",
       "description": "蜂蜜块：损坏中"
+    },
+    {
+      "name": "hit.iron",
+      "description": "铁质方块：损坏中"
     },
     {
       "name": "hit.ladder",
@@ -3042,6 +3148,22 @@
       "description": "恶魂：受伤"
     },
     {
+      "name": "mob.ghastling.ambient",
+      "description": "小恶魂：咕咕"
+    },
+    {
+      "name": "mob.ghastling.death",
+      "description": "小恶魂：死亡"
+    },
+    {
+      "name": "mob.ghastling.hurt",
+      "description": "小恶魂：受伤"
+    },
+    {
+      "name": "mob.ghastling.spawn",
+      "description": "小恶魂：出现"
+    },
+    {
       "name": "mob.glow_squid.ambient",
       "description": "发光鱿鱼：游泳"
     },
@@ -3144,6 +3266,37 @@
     {
       "name": "mob.guardian.land_idle",
       "description": "守卫者：弹跳"
+    },
+    {
+      "name": "mob.happy_ghast.ambient",
+      "description": "快乐恶魂：哼唱"
+    },
+    {
+      "name": "mob.happy_ghast.death",
+      "description": "快乐恶魂：死亡"
+    },
+    {
+      "name": "mob.happy_ghast.goggles_down",
+      "description": "快乐恶魂：就绪"
+    },
+    {
+      "name": "mob.happy_ghast.goggles_up",
+      "description": "快乐恶魂：停下"
+    },
+    {
+      "name": "mob.happy_ghast.harness_equip",
+      "description": "挽具：装备"
+    },
+    {
+      "name": "mob.happy_ghast.harness_unequip",
+      "description": "挽具：卸下"
+    },
+    {
+      "name": "mob.happy_ghast.hurt",
+      "description": "快乐恶魂：受伤"
+    },
+    {
+      "name": "mob.happy_ghast.ride"
     },
     {
       "name": "mob.hoglin.ambient",
@@ -4190,6 +4343,42 @@
       "description": "狼：吠叫"
     },
     {
+      "name": "mob.wolf.big.bark"
+    },
+    {
+      "name": "mob.wolf.big.death"
+    },
+    {
+      "name": "mob.wolf.big.growl"
+    },
+    {
+      "name": "mob.wolf.big.hurt"
+    },
+    {
+      "name": "mob.wolf.big.panting"
+    },
+    {
+      "name": "mob.wolf.big.whine"
+    },
+    {
+      "name": "mob.wolf.cute.bark"
+    },
+    {
+      "name": "mob.wolf.cute.death"
+    },
+    {
+      "name": "mob.wolf.cute.growl"
+    },
+    {
+      "name": "mob.wolf.cute.hurt"
+    },
+    {
+      "name": "mob.wolf.cute.panting"
+    },
+    {
+      "name": "mob.wolf.cute.whine"
+    },
+    {
       "name": "mob.wolf.death",
       "description": "狼：死亡"
     },
@@ -4198,12 +4387,84 @@
       "description": "狼：嚎叫"
     },
     {
+      "name": "mob.wolf.grumpy.bark"
+    },
+    {
+      "name": "mob.wolf.grumpy.death"
+    },
+    {
+      "name": "mob.wolf.grumpy.growl"
+    },
+    {
+      "name": "mob.wolf.grumpy.hurt"
+    },
+    {
+      "name": "mob.wolf.grumpy.panting"
+    },
+    {
+      "name": "mob.wolf.grumpy.whine"
+    },
+    {
       "name": "mob.wolf.hurt",
       "description": "狼：受伤"
     },
     {
+      "name": "mob.wolf.mad.bark"
+    },
+    {
+      "name": "mob.wolf.mad.death"
+    },
+    {
+      "name": "mob.wolf.mad.growl"
+    },
+    {
+      "name": "mob.wolf.mad.hurt"
+    },
+    {
+      "name": "mob.wolf.mad.panting"
+    },
+    {
+      "name": "mob.wolf.mad.whine"
+    },
+    {
       "name": "mob.wolf.panting",
       "description": "狼：喘息"
+    },
+    {
+      "name": "mob.wolf.puglin.bark"
+    },
+    {
+      "name": "mob.wolf.puglin.death"
+    },
+    {
+      "name": "mob.wolf.puglin.growl"
+    },
+    {
+      "name": "mob.wolf.puglin.hurt"
+    },
+    {
+      "name": "mob.wolf.puglin.panting"
+    },
+    {
+      "name": "mob.wolf.puglin.whine"
+    },
+    {
+      "name": "mob.wolf.sad.bark"
+    },
+    {
+      "name": "mob.wolf.sad.death"
+    },
+    {
+      "name": "mob.wolf.sad.growl"
+    },
+    {
+      "name": "mob.wolf.sad.hurt"
+    },
+    {
+      "name": "mob.wolf.sad.panting"
+    },
+    {
+      "name": "mob.wolf.sad.whine"
     },
     {
       "name": "mob.wolf.shake",
@@ -4368,10 +4629,6 @@
     {
       "name": "music.game.snowy_slopes",
       "description": "积雪山坡背景音乐"
-    },
-    {
-      "name": "music.game.soul_sand_valley",
-      "description": "灵魂沙峡谷背景音乐"
     },
     {
       "name": "music.game.soulsand_valley",
@@ -4716,6 +4973,10 @@
     {
       "name": "place.hanging_roots",
       "description": "垂根：被放置"
+    },
+    {
+      "name": "place.iron",
+      "description": "铁质方块：被放置"
     },
     {
       "name": "place.large_amethyst_bud",
@@ -5248,6 +5509,10 @@
     {
       "name": "step.honey_block",
       "description": "蜂蜜块：被踩上"
+    },
+    {
+      "name": "step.iron",
+      "description": "铁质方块：被踩上"
     },
     {
       "name": "step.ladder",

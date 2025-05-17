@@ -381,6 +381,9 @@
       "name": "minecraft:clear_add_raid_omen"
     },
     {
+      "name": "minecraft:cold_color"
+    },
+    {
       "name": "minecraft:command_block_activate"
     },
     {
@@ -507,6 +510,12 @@
       "name": "minecraft:has_target"
     },
     {
+      "name": "minecraft:hatch_cold"
+    },
+    {
+      "name": "minecraft:hatch_warm"
+    },
+    {
       "name": "minecraft:hive_full"
     },
     {
@@ -603,6 +612,9 @@
       "name": "minecraft:on_half_puff"
     },
     {
+      "name": "minecraft:on_harnessed"
+    },
+    {
       "name": "minecraft:on_hurt_event"
     },
     {
@@ -612,10 +624,22 @@
       "name": "minecraft:on_leash"
     },
     {
+      "name": "minecraft:on_no_player_detected_above"
+    },
+    {
       "name": "minecraft:on_normal_puff"
     },
     {
       "name": "minecraft:on_not_riding_player"
+    },
+    {
+      "name": "minecraft:on_passenger_dismount"
+    },
+    {
+      "name": "minecraft:on_passenger_mount"
+    },
+    {
+      "name": "minecraft:on_player_detected_above"
     },
     {
       "name": "minecraft:on_prime"
@@ -633,6 +657,9 @@
       "name": "minecraft:on_sheared"
     },
     {
+      "name": "minecraft:on_stop_tempting"
+    },
+    {
       "name": "minecraft:on_tame"
     },
     {
@@ -645,7 +672,13 @@
       "name": "minecraft:on_trust"
     },
     {
+      "name": "minecraft:on_unharnessed"
+    },
+    {
       "name": "minecraft:on_unleash"
+    },
+    {
+      "name": "minecraft:on_unleashed"
     },
     {
       "name": "minecraft:panda_aggressive"
@@ -676,6 +709,9 @@
     },
     {
       "name": "minecraft:raid_expired"
+    },
+    {
+      "name": "minecraft:randomize_sound_variant"
     },
     {
       "name": "minecraft:ranged_mode"
@@ -759,6 +795,9 @@
       "name": "minecraft:spawn_cleric"
     },
     {
+      "name": "minecraft:spawn_cold"
+    },
+    {
       "name": "minecraft:spawn_emerging"
     },
     {
@@ -790,6 +829,12 @@
     },
     {
       "name": "minecraft:spawn_tame_baby"
+    },
+    {
+      "name": "minecraft:spawn_temperate"
+    },
+    {
+      "name": "minecraft:spawn_warm"
     },
     {
       "name": "minecraft:spawn_wild_adult"
@@ -942,6 +987,9 @@
       "name": "minecraft:target_too_close"
     },
     {
+      "name": "minecraft:temperate_color"
+    },
+    {
       "name": "minecraft:threat_detected"
     },
     {
@@ -1000,6 +1048,9 @@
     },
     {
       "name": "minecraft:unroll"
+    },
+    {
+      "name": "minecraft:warm_color"
     },
     {
       "name": "navigation_off_land"

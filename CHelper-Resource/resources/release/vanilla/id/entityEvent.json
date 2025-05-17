@@ -381,6 +381,9 @@
       "name": "minecraft:clear_add_raid_omen"
     },
     {
+      "name": "minecraft:cold_color"
+    },
+    {
       "name": "minecraft:command_block_activate"
     },
     {
@@ -394,6 +397,9 @@
     },
     {
       "name": "minecraft:crumble"
+    },
+    {
+      "name": "minecraft:crumble_and_notify_creaking_heart"
     },
     {
       "name": "minecraft:crystal_explode"
@@ -502,6 +508,12 @@
     },
     {
       "name": "minecraft:has_target"
+    },
+    {
+      "name": "minecraft:hatch_cold"
+    },
+    {
+      "name": "minecraft:hatch_warm"
     },
     {
       "name": "minecraft:hive_full"
@@ -675,6 +687,9 @@
       "name": "minecraft:raid_expired"
     },
     {
+      "name": "minecraft:randomize_sound_variant"
+    },
+    {
       "name": "minecraft:ranged_mode"
     },
     {
@@ -756,6 +771,9 @@
       "name": "minecraft:spawn_cleric"
     },
     {
+      "name": "minecraft:spawn_cold"
+    },
+    {
       "name": "minecraft:spawn_emerging"
     },
     {
@@ -787,6 +805,12 @@
     },
     {
       "name": "minecraft:spawn_tame_baby"
+    },
+    {
+      "name": "minecraft:spawn_temperate"
+    },
+    {
+      "name": "minecraft:spawn_warm"
     },
     {
       "name": "minecraft:spawn_wild_adult"
@@ -894,6 +918,9 @@
       "name": "minecraft:start_unrolling"
     },
     {
+      "name": "minecraft:started_riding"
+    },
+    {
       "name": "minecraft:stop_aggro"
     },
     {
@@ -921,6 +948,9 @@
       "name": "minecraft:stop_transforming"
     },
     {
+      "name": "minecraft:stopped_riding"
+    },
+    {
       "name": "minecraft:switch_to_melee"
     },
     {
@@ -931,6 +961,9 @@
     },
     {
       "name": "minecraft:target_too_close"
+    },
+    {
+      "name": "minecraft:temperate_color"
     },
     {
       "name": "minecraft:threat_detected"
@@ -991,6 +1024,9 @@
     },
     {
       "name": "minecraft:unroll"
+    },
+    {
+      "name": "minecraft:warm_color"
     },
     {
       "name": "navigation_off_land"

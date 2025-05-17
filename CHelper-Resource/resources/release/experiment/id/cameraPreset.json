@@ -3,6 +3,9 @@
   "type": "normal",
   "content": [
     {
+      "name": "minecraft:control_scheme_camera"
+    },
+    {
       "name": "minecraft:first_person",
       "description": "第一人称视角"
     },

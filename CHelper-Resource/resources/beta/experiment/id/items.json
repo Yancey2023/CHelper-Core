@@ -423,6 +423,10 @@
       "description": "黑色带釉陶瓦"
     },
     {
+      "name": "black_harness",
+      "description": "黑色挽具"
+    },
+    {
       "name": "black_shulker_box",
       "description": "黑色潜影盒"
     },
@@ -503,8 +507,16 @@
       "description": "蓝色染料"
     },
     {
+      "name": "blue_egg",
+      "description": "蓝色鸡蛋"
+    },
+    {
       "name": "blue_glazed_terracotta",
       "description": "蓝色带釉陶瓦"
+    },
+    {
+      "name": "blue_harness",
+      "description": "蓝色挽具"
     },
     {
       "name": "blue_ice",
@@ -655,8 +667,16 @@
       "description": "棕色染料"
     },
     {
+      "name": "brown_egg",
+      "description": "棕色鸡蛋"
+    },
+    {
       "name": "brown_glazed_terracotta",
       "description": "棕色带釉陶瓦"
+    },
+    {
+      "name": "brown_harness",
+      "description": "棕色挽具"
     },
     {
       "name": "brown_mushroom",
@@ -719,8 +739,16 @@
       "description": "烈焰纹样陶片"
     },
     {
+      "name": "bush",
+      "description": "灌木丛"
+    },
+    {
       "name": "cactus",
       "description": "仙人掌"
+    },
+    {
+      "name": "cactus_flower",
+      "description": "仙人掌花"
     },
     {
       "name": "cake",
@@ -1299,6 +1327,10 @@
       "description": "青色带釉陶瓦"
     },
     {
+      "name": "cyan_harness",
+      "description": "青色挽具"
+    },
+    {
       "name": "cyan_shulker_box",
       "description": "青色潜影盒"
     },
@@ -1663,6 +1695,10 @@
       "description": "龙首"
     },
     {
+      "name": "dried_ghast",
+      "description": "失水恶魂"
+    },
+    {
       "name": "dried_kelp",
       "description": "干海带"
     },
@@ -1881,6 +1917,10 @@
     {
       "name": "fire_coral_fan",
       "description": "火珊瑚扇"
+    },
+    {
+      "name": "firefly_bush",
+      "description": "萤火虫灌木丛"
     },
     {
       "name": "firework_rocket",
@@ -2151,6 +2191,10 @@
       "description": "灰色带釉陶瓦"
     },
     {
+      "name": "gray_harness",
+      "description": "灰色挽具"
+    },
+    {
       "name": "gray_shulker_box",
       "description": "灰色潜影盒"
     },
@@ -2199,6 +2243,10 @@
       "description": "绿色带釉陶瓦"
     },
     {
+      "name": "green_harness",
+      "description": "绿色挽具"
+    },
+    {
       "name": "green_shulker_box",
       "description": "绿色潜影盒"
     },
@@ -2241,6 +2289,10 @@
     {
       "name": "hanging_roots",
       "description": "垂根"
+    },
+    {
+      "name": "happy_ghast_spawn_egg",
+      "description": "快乐恶魂刷怪蛋"
     },
     {
       "name": "hardened_clay",
@@ -2551,6 +2603,10 @@
       "description": "拴绳"
     },
     {
+      "name": "leaf_litter",
+      "description": "枯叶"
+    },
+    {
       "name": "leather",
       "description": "皮革"
     },
@@ -2675,6 +2731,10 @@
       "description": "淡蓝色带釉陶瓦"
     },
     {
+      "name": "light_blue_harness",
+      "description": "淡蓝色挽具"
+    },
+    {
       "name": "light_blue_shulker_box",
       "description": "淡蓝色潜影盒"
     },
@@ -2717,6 +2777,10 @@
     {
       "name": "light_gray_dye",
       "description": "淡灰色染料"
+    },
+    {
+      "name": "light_gray_harness",
+      "description": "淡灰色挽具"
     },
     {
       "name": "light_gray_shulker_box",
@@ -2781,6 +2845,10 @@
     {
       "name": "lime_glazed_terracotta",
       "description": "黄绿色带釉陶瓦"
+    },
+    {
+      "name": "lime_harness",
+      "description": "黄绿色挽具"
     },
     {
       "name": "lime_shulker_box",
@@ -2857,6 +2925,10 @@
     {
       "name": "magenta_glazed_terracotta",
       "description": "品红色带釉陶瓦"
+    },
+    {
+      "name": "magenta_harness",
+      "description": "品红色挽具"
     },
     {
       "name": "magenta_shulker_box",
@@ -3391,6 +3463,10 @@
       "description": "橙色带釉陶瓦"
     },
     {
+      "name": "orange_harness",
+      "description": "橙色挽具"
+    },
+    {
       "name": "orange_shulker_box",
       "description": "橙色潜影盒"
     },
@@ -3629,6 +3705,10 @@
     {
       "name": "pink_glazed_terracotta",
       "description": "粉红色带釉陶瓦"
+    },
+    {
+      "name": "pink_harness",
+      "description": "粉红色挽具"
     },
     {
       "name": "pink_petals",
@@ -3923,6 +4003,10 @@
       "description": "紫色带釉陶瓦"
     },
     {
+      "name": "purple_harness",
+      "description": "紫色挽具"
+    },
+    {
       "name": "purple_shulker_box",
       "description": "紫色潜影盒"
     },
@@ -4073,6 +4157,10 @@
     {
       "name": "red_glazed_terracotta",
       "description": "红色带釉陶瓦"
+    },
+    {
+      "name": "red_harness",
+      "description": "红色挽具"
     },
     {
       "name": "red_mushroom",
@@ -4321,6 +4409,10 @@
     {
       "name": "shield",
       "description": "盾牌"
+    },
+    {
+      "name": "short_dry_grass",
+      "description": "矮枯草丛"
     },
     {
       "name": "short_grass",
@@ -4809,6 +4901,10 @@
     {
       "name": "tadpole_spawn_egg",
       "description": "蝌蚪刷怪蛋"
+    },
+    {
+      "name": "tall_dry_grass",
+      "description": "高枯草丛"
     },
     {
       "name": "tall_grass",
@@ -5311,6 +5407,10 @@
       "description": "白色带釉陶瓦"
     },
     {
+      "name": "white_harness",
+      "description": "白色挽具"
+    },
+    {
       "name": "white_shulker_box",
       "description": "白色潜影盒"
     },
@@ -5337,6 +5437,10 @@
     {
       "name": "wild_armor_trim_smithing_template",
       "description": "荒野盔甲纹饰锻造模板"
+    },
+    {
+      "name": "wildflowers",
+      "description": "野花簇"
     },
     {
       "name": "wind_charge",
@@ -5433,6 +5537,10 @@
     {
       "name": "yellow_glazed_terracotta",
       "description": "黄色带釉陶瓦"
+    },
+    {
+      "name": "yellow_harness",
+      "description": "黄色挽具"
     },
     {
       "name": "yellow_shulker_box",

@@ -7,12 +7,8 @@
       "description": "从药箭上飘散的药水粒子"
     },
     {
-      "name": "minecraft:azalea_leaves_particle",
-      "description": "杜鹃树叶飘落的花瓣粒子"
-    },
-    {
       "name": "minecraft:balloon_gas_particle",
-      "description": "气球炸裂（仅教育版）时的气体"
+      "description": "气球炸裂时的气体"
     },
     {
       "name": "minecraft:basic_bubble_particle",
@@ -28,7 +24,7 @@
     },
     {
       "name": "minecraft:basic_flame_particle",
-      "description": "火把；烧制物品的熔炉、高炉和烟熏炉；岩浆怪着地；刷怪笼工作；用实验台制作化合物（仅教育版）时的火苗粒子"
+      "description": "火把；烧制物品的熔炉、高炉和烟熏炉；岩浆怪着地；刷怪笼工作；用实验台制作化合物时的火苗粒子"
     },
     {
       "name": "minecraft:basic_portal_particle",
@@ -36,7 +32,7 @@
     },
     {
       "name": "minecraft:basic_smoke_particle",
-      "description": "雨中的熔岩、岩浆块产生的粒子；伴随着lava_particle粒子产生的粒子；火、火把、灵魂火把的烟雾粒子；投掷器投掷物品；发射器发射物品；烈焰人；末地传送门；酿造台；正在工作的刷怪笼；烧制物品的熔炉、高炉、烟熏炉；点燃的蜡烛；凋灵；营火；凋灵玫瑰；驯服生物失败；给棕色哞菇喂食小型花；使用末影之眼；试炼刷怪笼、宝库、实验台产出废物、制作加热块（仅教育版）；凋灵之首、火球的飞行轨迹粒子"
+      "description": "雨中的熔岩、岩浆块产生的粒子；伴随着lava_particle粒子产生的粒子；火、火把、灵魂火把的烟雾粒子；投掷器投掷物品；发射器发射物品；烈焰人；末地传送门；酿造台；正在工作的刷怪笼；烧制物品的熔炉、高炉、烟熏炉；点燃的蜡烛；凋灵；营火；凋灵玫瑰；驯服生物失败；给棕色哞菇喂食小型花；使用末影之眼；试炼刷怪笼、宝库、实验台产出废物、制作加热块；凋灵之首、火球的飞行轨迹粒子"
     },
     {
       "name": "minecraft:biome_tinted_leaves_particle",
@@ -44,11 +40,11 @@
     },
     {
       "name": "minecraft:bleach",
-      "description": "实验台制作漂白剂（仅教育版）时的漂白粒子"
+      "description": "实验台制作漂白剂时的漂白粒子"
     },
     {
       "name": "minecraft:block_destruct",
-      "description": "方块被摧毁；生物摔伤；玩家疾跑；羊吃草；兔子跳跃；嗅探兽刨挖；盔甲架被玩家破坏；使用刷子；实验台制作超级肥料（仅教育版）时的粒子；旋风人跳跃时的方块碎片粒子"
+      "description": "方块被摧毁；生物摔伤；玩家疾跑；羊吃草；兔子跳跃；嗅探兽刨挖；盔甲架被玩家破坏；使用刷子；实验台制作超级肥料时的粒子；旋风人跳跃时的方块碎片粒子"
     },
     {
       "name": "minecraft:block_slide",
@@ -60,7 +56,7 @@
     },
     {
       "name": "minecraft:breaking_item_icon",
-      "description": "玩家进食；狐狸进食；鸡蛋、喷溅药水、滞留药水、附魔之瓶、雪球和冰弹（仅教育版）破碎；史莱姆跳跃；海龟蛋孵化时的物品碎片粒子"
+      "description": "玩家进食；狐狸进食；鸡蛋、喷溅药水、滞留药水、附魔之瓶、雪球和冰弹破碎；史莱姆跳跃；海龟蛋孵化时的物品碎片粒子"
     },
     {
       "name": "minecraft:breaking_item_terrain",
@@ -124,7 +120,7 @@
     },
     {
       "name": "minecraft:colored_flame_particle",
-      "description": "彩色火把（仅教育版）的火焰粒子"
+      "description": "彩色火把的火焰粒子"
     },
     {
       "name": "minecraft:conduit_absorb_particle",
@@ -140,15 +136,15 @@
     },
     {
       "name": "minecraft:creaking_crumble_body",
-      "description": ""
+      "description": "嘎枝之心被破坏时嘎枝的身体发出的粒子"
     },
     {
       "name": "minecraft:creaking_crumble_head",
-      "description": ""
+      "description": "嘎枝之心被破坏时嘎枝的头部发出的粒子"
     },
     {
       "name": "minecraft:creaking_heart_trail",
-      "description": ""
+      "description": "嘎枝被攻击时嘎枝和嘎枝之心发出的粒子"
     },
     {
       "name": "minecraft:critical_hit_emitter",
@@ -208,7 +204,7 @@
     },
     {
       "name": "minecraft:elephant_tooth_paste_vapor_particle",
-      "description": "实验台产出废物（仅教育版）时的\"大象牙膏\"粒子"
+      "description": "实验台产出废物时的\"大象牙膏\"粒子"
     },
     {
       "name": "minecraft:enchanting_table_particle",
@@ -291,6 +287,9 @@
       "description": "浮空而未下落的雪层粒子"
     },
     {
+      "name": "minecraft:firefly_particle"
+    },
+    {
       "name": "minecraft:fish_hook_particle",
       "description": "鱼钩的气泡粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
     },
@@ -369,6 +368,9 @@
     {
       "name": "minecraft:llama_spit_smoke",
       "description": "羊驼啐生物时的唾沫粒子"
+    },
+    {
+      "name": "minecraft:magic_critical_hit_emitter"
     },
     {
       "name": "minecraft:magnesium_salts_emitter",
@@ -540,7 +542,7 @@
     },
     {
       "name": "minecraft:sneeze",
-      "description": ""
+      "description": "幼年熊猫打喷嚏时产生的粒子"
     },
     {
       "name": "minecraft:snowflake_particle",

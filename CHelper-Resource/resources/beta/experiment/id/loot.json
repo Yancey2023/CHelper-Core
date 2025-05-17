@@ -158,6 +158,9 @@
       "description": "村庄盔甲匠宝箱"
     },
     {
+      "name": "\"chests/village/village_bundle\""
+    },
+    {
       "name": "\"chests/village/village_butcher\"",
       "description": "村庄屠夫宝箱"
     },

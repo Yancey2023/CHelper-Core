@@ -7,6 +7,10 @@
       "description": "第一人称视角"
     },
     {
+      "name": "minecraft:fixed_boom",
+      "description": "第三人称固定视角"
+    },
+    {
       "name": "minecraft:follow_orbit",
       "description": "第三人称越肩视角"
     },

@@ -503,6 +503,10 @@
       "description": "蓝色染料"
     },
     {
+      "name": "blue_egg",
+      "description": "蓝色鸡蛋"
+    },
+    {
       "name": "blue_glazed_terracotta",
       "description": "蓝色带釉陶瓦"
     },
@@ -655,6 +659,10 @@
       "description": "棕色染料"
     },
     {
+      "name": "brown_egg",
+      "description": "棕色鸡蛋"
+    },
+    {
       "name": "brown_glazed_terracotta",
       "description": "棕色带釉陶瓦"
     },
@@ -719,8 +727,16 @@
       "description": "烈焰纹样陶片"
     },
     {
+      "name": "bush",
+      "description": "灌木丛"
+    },
+    {
       "name": "cactus",
       "description": "仙人掌"
+    },
+    {
+      "name": "cactus_flower",
+      "description": "仙人掌花"
     },
     {
       "name": "cake",
@@ -1883,6 +1899,10 @@
       "description": "火珊瑚扇"
     },
     {
+      "name": "firefly_bush",
+      "description": "萤火虫灌木丛"
+    },
+    {
       "name": "firework_rocket",
       "description": "烟花火箭"
     },
@@ -2549,6 +2569,10 @@
     {
       "name": "lead",
       "description": "拴绳"
+    },
+    {
+      "name": "leaf_litter",
+      "description": "枯叶"
     },
     {
       "name": "leather",
@@ -4323,6 +4347,10 @@
       "description": "盾牌"
     },
     {
+      "name": "short_dry_grass",
+      "description": "矮枯草丛"
+    },
+    {
       "name": "short_grass",
       "description": "矮草丛"
     },
@@ -4809,6 +4837,10 @@
     {
       "name": "tadpole_spawn_egg",
       "description": "蝌蚪刷怪蛋"
+    },
+    {
+      "name": "tall_dry_grass",
+      "description": "高枯草丛"
     },
     {
       "name": "tall_grass",
@@ -5337,6 +5369,10 @@
     {
       "name": "wild_armor_trim_smithing_template",
       "description": "荒野盔甲纹饰锻造模板"
+    },
+    {
+      "name": "wildflowers",
+      "description": "野花簇"
     },
     {
       "name": "wind_charge",

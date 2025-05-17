@@ -456,6 +456,12 @@
       "name": "animation.guardian.swim"
     },
     {
+      "name": "animation.happy_ghast.move"
+    },
+    {
+      "name": "animation.happy_ghast.scale"
+    },
+    {
       "name": "animation.hoglin.attack"
     },
     {
