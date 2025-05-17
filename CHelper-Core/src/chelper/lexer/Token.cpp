@@ -54,7 +54,7 @@ std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &
             os << "STRING";
             break;
         case CHelper::TokenType::SYMBOL:
-            os << "SYMBOu";
+            os << "SYMBOL";
             break;
         case CHelper::TokenType::WHITE_SPACE:
             os << "WHITE_SPACE";
