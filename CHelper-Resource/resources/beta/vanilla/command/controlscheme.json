@@ -39,7 +39,7 @@
       "id": "controlScheme",
       "brief": "控制方案",
       "description": "控制方案",
-      "ignoreError": false,
+      "ignoreError": true,
       "key": "controlScheme"
     }
   ],
