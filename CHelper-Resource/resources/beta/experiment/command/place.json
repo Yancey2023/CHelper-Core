@@ -134,6 +134,23 @@
       "description": "放置结构时是否忽略起始高度",
       "descriptionFalse": "设置为false",
       "descriptionTrue": "设置为true"
+    },
+    {
+      "type": "NORMAL_ID",
+      "id": "liquidSettings",
+      "brief": "流体处理方式",
+      "description": "指定流体处理方式",
+      "ignoreError": true,
+      "content": [
+        {
+          "name": "apply_waterlogging",
+          "description": "允许含水"
+        },
+        {
+          "name": "ignore_waterlogging",
+          "description": " 忽略含水"
+        }
+      ]
     }
   ],
   "ast": [
@@ -147,7 +164,8 @@
     ["jigsawTarget", "maxDepth"],
     ["maxDepth", "LF", "pos"],
     ["pos", "LF", "keepJigsaws"],
-    ["keepJigsaws", "LF"],
+    ["keepJigsaws", "liquidSettings", "LF"],
+    ["liquidSettings", "LF"],
     ["structure", "structure_feature"],
     ["structure_feature", "LF", "pos1"],
     ["pos1", "LF", "ignoreStartHeight"],
