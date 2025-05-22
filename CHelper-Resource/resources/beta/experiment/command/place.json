@@ -141,7 +141,7 @@
       "brief": "流体处理方式",
       "description": "指定流体处理方式",
       "ignoreError": true,
-      "content": [
+      "contents": [
         {
           "name": "apply_waterlogging",
           "description": "允许含水"
