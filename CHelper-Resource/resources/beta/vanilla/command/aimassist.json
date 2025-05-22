@@ -64,7 +64,7 @@
       "brief": "瞄准模式",
       "description": "指定瞄准模式, 默认为距离",
       "ignoreError": true,
-      "content": [
+      "contents": [
         {
           "name": "distance",
           "description": "指定瞄准模式为距离"
