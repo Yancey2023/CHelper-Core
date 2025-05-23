@@ -4,7 +4,7 @@
   ],
   "description": "调试GameTest框架选项",
   "start": [
-    "debugger", "profiler", "watchdog"
+    "debugger", "profiler", "diagnostics"
   ],
   "node": [
     {
@@ -27,11 +27,29 @@
     },
     {
       "type": "TEXT",
-      "id": "watchdog",
-      "description": "调试GameTest框架选项",
+      "id": "diagnostics",
+      "description": "开始或停止捕获诊断",
       "data": {
-        "name": "watchdog",
-        "description": "监视器"
+        "name": "diagnostics",
+        "description": "开始或停止捕获诊断"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "startcapture",
+      "description": "开始捕获诊断",
+      "data": {
+        "name": "startcapture",
+        "description": "开始捕获诊断"
+      }
+    },
+    {
+      "type": "TEXT",
+      "id": "stopcapture",
+      "description": "停止捕获诊断",
+      "data": {
+        "name": "stopcapture",
+        "description": "停止捕获诊断"
       }
     },
     {
@@ -80,15 +98,6 @@
       }
     },
     {
-      "type": "TEXT",
-      "id": "exportstats",
-      "description": "监视器选项",
-      "data": {
-        "name": "exportstats",
-        "description": "导出监视器的统计信息文件"
-      }
-    },
-    {
       "type": "STRING",
       "id": "host",
       "description": "主机名称",
@@ -114,7 +123,8 @@
     ["profiler", "start", "stop"],
     ["start", "LF"],
     ["stop", "LF"],
-    ["watchdog", "exportstats"],
-    ["exportstats", "LF"]
+    ["diagnostics", "startcapture", "stopcapture"],
+    ["startcapture", "LF"],
+    ["stopcapture", "LF"]
   ]
 }
