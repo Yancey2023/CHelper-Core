@@ -142,7 +142,7 @@
       "brief": "物品栏",
       "description": "要修改的物品栏",
       "ignoreError": true,
-      "key": "slot"
+      "key": "entitySlot"
     },
     {
       "type": "INTEGER",
@@ -197,7 +197,7 @@
       "brief": "战利品表",
       "description": "使用的战利品表",
       "ignoreError": true,
-      "key": "loot"
+      "key": "lootTable"
     },
     {
       "type": "POSITION",

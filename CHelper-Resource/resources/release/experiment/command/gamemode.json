@@ -13,7 +13,7 @@
       "brief": "游戏模式",
       "description": "玩家的新游戏模式",
       "ignoreError": true,
-      "key": "gameModes"
+      "key": "gameMode"
     },
     {
       "type": "TARGET_SELECTOR",

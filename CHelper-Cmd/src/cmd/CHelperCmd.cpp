@@ -8,10 +8,11 @@
 int main() {
     //    testDir();
     //    testBin();
-    outputFile(CHelper::Test::writeSingleJson, "json");
-    outputFile(CHelper::Test::writeBinary, "cpack");
-    outputOld2New();
-    return 0;
+    bool isSuccess = true;
+    isSuccess = outputFile(CHelper::Test::writeSingleJson, "json") && isSuccess;
+    isSuccess = outputFile(CHelper::Test::writeBinary, "cpack") && isSuccess;
+    isSuccess = outputOld2New() && isSuccess;
+    return isSuccess ? 0 : -1;
 }
 
 [[maybe_unused]] void testDir() {
@@ -30,35 +31,37 @@ int main() {
                            true);
 }
 
-[[maybe_unused]] void outputFile(
+[[maybe_unused]] bool outputFile(
         const std::filesystem::path &projectDir,
-        void function(const std::filesystem::path &input, const std::filesystem::path &output),
+        bool function(const std::filesystem::path &input, const std::filesystem::path &output),
         const std::string &branch1,
         const std::string &branch2,
         const std::string &version,
         const std::string &fileType) {
     std::string fileName = branch1 + '-' + branch2 + '-' + version + '.' + fileType;
     CHELPER_INFO("----- start output {} -----", fileName);
-    function(projectDir / "resources" / branch1 / branch2,
-             projectDir / "run" / fileType / fileName);
+    return function(projectDir / "resources" / branch1 / branch2,
+                    projectDir / "run" / fileType / fileName);
 }
 
-[[maybe_unused]] void outputFile(
-        void function(const std::filesystem::path &input, const std::filesystem::path &output),
+[[maybe_unused]] bool outputFile(
+        bool function(const std::filesystem::path &input, const std::filesystem::path &output),
         const std::string &fileType) {
     std::filesystem::path projectDir(RESOURCE_DIR);
+    bool isSuccess = true;
     // release
-    outputFile(projectDir, function, "release", "vanilla", CPACK_VERSION_RELEASE, fileType);
-    outputFile(projectDir, function, "release", "experiment", CPACK_VERSION_RELEASE, fileType);
+    isSuccess = outputFile(projectDir, function, "release", "vanilla", CPACK_VERSION_RELEASE, fileType) && isSuccess;
+    isSuccess = outputFile(projectDir, function, "release", "experiment", CPACK_VERSION_RELEASE, fileType) && isSuccess;
     // beta
-    outputFile(projectDir, function, "beta", "vanilla", CPACK_VERSION_BETA, fileType);
-    outputFile(projectDir, function, "beta", "experiment", CPACK_VERSION_BETA, fileType);
+    isSuccess = outputFile(projectDir, function, "beta", "vanilla", CPACK_VERSION_BETA, fileType) && isSuccess;
+    isSuccess = outputFile(projectDir, function, "beta", "experiment", CPACK_VERSION_BETA, fileType) && isSuccess;
     // netease
-    outputFile(projectDir, function, "netease", "vanilla", CPACK_VERSION_NETEASE, fileType);
-    outputFile(projectDir, function, "netease", "experiment", CPACK_VERSION_NETEASE, fileType);
+    isSuccess = outputFile(projectDir, function, "netease", "vanilla", CPACK_VERSION_NETEASE, fileType) && isSuccess;
+    isSuccess = outputFile(projectDir, function, "netease", "experiment", CPACK_VERSION_NETEASE, fileType) && isSuccess;
+    return isSuccess;
 }
 
-void outputOld2New() {
+bool outputOld2New() {
     // old2new
     std::filesystem::path resourceDir(RESOURCE_DIR);
     std::filesystem::path input = resourceDir / "resources" / "old2new" / "blockFixData.json";
@@ -68,6 +71,7 @@ void outputOld2New() {
     std::ofstream ostream(output, std::ios::binary);
     serialization::to_binary<true>(ostream, blockFixData);
     ostream.close();
+    return true;
 }
 
 namespace CHelper::Test {
@@ -301,13 +305,13 @@ namespace CHelper::Test {
         delete core;
     }
 
-    [[maybe_unused]] void writeDirectory(const std::u16string &input, const std::filesystem::path &output) {
+    [[maybe_unused]] bool writeDirectory(const std::u16string &input, const std::filesystem::path &output) {
         CHelperCore *core = nullptr;
         CHelperCore *core2 = nullptr;
         try {
             core = CHelperCore::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {
-                return;
+                return false;
             }
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
@@ -323,13 +327,13 @@ namespace CHelper::Test {
         delete core2;
     }
 
-    [[maybe_unused]] void writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output) {
+    [[maybe_unused]] bool writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output) {
         CHelperCore *core = nullptr;
         CHelperCore *core2 = nullptr;
         try {
             core = CHelperCore::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {
-                return;
+                return false;
             }
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
@@ -345,13 +349,13 @@ namespace CHelper::Test {
         delete core2;
     }
 
-    [[maybe_unused]] void writeBinary(const std::filesystem::path &input, const std::filesystem::path &output) {
+    [[maybe_unused]] bool writeBinary(const std::filesystem::path &input, const std::filesystem::path &output) {
         CHelperCore *core = nullptr;
         CHelperCore *core2 = nullptr;
         try {
             core = CHelperCore::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {
-                return;
+                return false;
             }
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();

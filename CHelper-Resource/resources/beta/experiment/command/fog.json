@@ -31,7 +31,7 @@
       "brief": "方块",
       "description": "修改的迷雾ID",
       "ignoreError": true,
-      "key": "fogs"
+      "key": "fog"
     },
     {
       "type": "STRING",

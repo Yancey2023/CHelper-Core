@@ -143,11 +143,11 @@ namespace CHelper::Node {
             u"TARGET_SELECTOR_ARGUMENT_HASITEM_SLOT_SLOT_RANGE", u"目标选择器hasitem要检测的槽位范围");
 
     void NodeTargetSelector::init(const CPack &cpack) {
-        nodeItem = std::make_unique<NodeNamespaceId>(u"ITEM_ID", u"物品ID", u"items", true),
-        nodeFamily = std::make_unique<NodeNormalId>(u"FAMILIES", u"族", u"families", true);
-        nodeGameMode = std::make_unique<NodeNormalId>(u"GAME_MODES", u"游戏模式", u"gameModes", true),
-        nodeSlot = std::make_unique<NodeNormalId>(u"SLOT", u"物品栏", u"slot", true),
-        nodeEntities = std::make_unique<NodeNamespaceId>(u"ENTITIES", u"实体", u"entities", true),
+        nodeItem = std::make_unique<NodeNamespaceId>(u"ITEM_ID", u"物品ID", u"item", true),
+        nodeFamily = std::make_unique<NodeNormalId>(u"FAMILIES", u"族", u"entityFamily", true);
+        nodeGameMode = std::make_unique<NodeNormalId>(u"GAME_MODES", u"游戏模式", u"gameMode", true),
+        nodeSlot = std::make_unique<NodeNormalId>(u"SLOT", u"物品栏", u"entitySlot", true),
+        nodeEntities = std::make_unique<NodeNamespaceId>(u"ENTITIES", u"实体", u"entity", true),
         nodeHasItemElement = std::make_unique<NodeEqualEntry>(
                 u"TARGET_SELECTOR_ARGUMENT_HASITEM_ELEMENT", u"目标选择器参数值(物品检测)的内容",
                 std::vector<EqualData>{

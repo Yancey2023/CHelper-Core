@@ -31,7 +31,7 @@
       "brief": "效果",
       "description": "需要给予的效果",
       "ignoreError": true,
-      "key": "effects"
+      "key": "effect"
     },
     {
       "type": "INTEGER",
@@ -68,7 +68,7 @@
       "brief": "效果",
       "description": "需要移除的效果",
       "ignoreError": true,
-      "key": "effects"
+      "key": "effect"
     }
   ],
   "ast": [

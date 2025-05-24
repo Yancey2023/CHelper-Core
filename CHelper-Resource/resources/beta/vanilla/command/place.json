@@ -57,7 +57,7 @@
       "brief": "地物规则",
       "description": "要设置了地物规则",
       "ignoreError": true,
-      "key": "feature_rule"
+      "key": "featureRule"
     },
     {
       "type": "POSITION",

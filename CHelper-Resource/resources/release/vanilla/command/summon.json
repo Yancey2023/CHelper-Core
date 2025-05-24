@@ -13,7 +13,7 @@
       "brief": "实体类型",
       "description": "要被召唤的实体类型",
       "ignoreError": true,
-      "key": "entities"
+      "key": "entity"
     },
     {
       "type": "POSITION",

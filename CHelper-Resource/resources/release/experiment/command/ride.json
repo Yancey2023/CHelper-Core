@@ -108,14 +108,14 @@
       "id": "entityType1",
       "description": "召唤的实体",
       "ignoreError": true,
-      "key": "entities"
+      "key": "entity"
     },
     {
       "type": "NAMESPACE_ID",
       "id": "entityType2",
       "description": "召唤的实体",
       "ignoreError": true,
-      "key": "entities"
+      "key": "entity"
     },
     {
       "type": "NORMAL_ID",

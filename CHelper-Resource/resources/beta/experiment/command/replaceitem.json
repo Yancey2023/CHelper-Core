@@ -84,7 +84,7 @@
       "brief": "物品栏",
       "description": "要改变的物品栏",
       "ignoreError": true,
-      "key": "slot"
+      "key": "entitySlot"
     }
   ],
   "ast": [

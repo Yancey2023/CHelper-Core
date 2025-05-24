@@ -12,7 +12,7 @@ namespace CHelper::Node {
 
     void NodeBlock::init(const CPack &cpack) {
         blockIds = cpack.blockIds;
-        nodeBlockId = std::make_shared<NodeNamespaceId>(u"BLOCK_ID", u"方块ID", u"blocks", true);
+        nodeBlockId = std::make_shared<NodeNamespaceId>(u"BLOCK_ID", u"方块ID", u"block", true);
         nodeBlockId->init(cpack);
     }
 

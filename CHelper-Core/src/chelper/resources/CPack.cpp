@@ -142,9 +142,9 @@ namespace CHelper {
             serialization::Codec<decltype(content)>::template from_json_member<JsonValueType>(j, "content", content);
             namespaceIds.emplace(std::move(id), std::move(content));
         } else if (HEDLEY_LIKELY(type == u"block")) {
-            serialization::Codec<decltype(blockIds)>::template from_json_member<JsonValueType>(j, "blocks", blockIds);
+            serialization::Codec<decltype(blockIds)>::template from_json_member<JsonValueType>(j, "content", blockIds);
         } else if (HEDLEY_LIKELY(type == u"item")) {
-            serialization::Codec<decltype(itemIds)>::template from_json_member<JsonValueType>(j, "items", itemIds);
+            serialization::Codec<decltype(itemIds)>::template from_json_member<JsonValueType>(j, "content", itemIds);
         } else {
             Profile::push("unknown id type -> {}", type);
             throw std::runtime_error("unknown id type");
@@ -305,19 +305,19 @@ namespace CHelper {
             JsonValueType j;
             j.SetObject();
             j.MemberReserve(3, j.GetAllocator());
-            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", "items");
+            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", "item");
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "item");
-            serialization::Codec<decltype(itemIds)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "items", itemIds);
+            serialization::Codec<decltype(itemIds)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "content", itemIds);
             writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / "items.json", j);
         }
         {
             JsonValueType j;
             j.SetObject();
             j.MemberReserve(3, j.GetAllocator());
-            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", "blocks");
+            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", "block");
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "block");
-            serialization::Codec<decltype(blockIds)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "blocks", blockIds);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / "blocks.json", j);
+            serialization::Codec<decltype(blockIds)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "content", blockIds);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / "block.json", j);
         }
         for (const auto &item: jsonNodes) {
             JsonValueType j;
@@ -364,17 +364,17 @@ namespace CHelper {
         {
             JsonValueType::ValueType j;
             j.SetObject();
-            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "id", "items");
+            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "id", "item");
             serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "type", "item");
-            serialization::Codec<decltype(itemIds)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "items", itemIds);
+            serialization::Codec<decltype(itemIds)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "content", itemIds);
             idJson.PushBack(std::move(j), result.GetAllocator());
         }
         {
             JsonValueType::ValueType j;
             j.SetObject();
-            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "id", "blocks");
+            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "id", "block");
             serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "type", "block");
-            serialization::Codec<decltype(blockIds)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "blocks", blockIds);
+            serialization::Codec<decltype(blockIds)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "content", blockIds);
             idJson.PushBack(std::move(j), result.GetAllocator());
         }
         result.AddMember(rapidjson::GenericValue<rapidjson::UTF8<>>("id"), std::move(idJson), result.GetAllocator());
@@ -429,9 +429,9 @@ namespace CHelper {
 
     std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
     CPack::getNamespaceId(const std::u16string &key) const {
-        if (HEDLEY_UNLIKELY(key == u"blocks")) {
+        if (HEDLEY_UNLIKELY(key == u"block")) {
             return std::reinterpret_pointer_cast<std::vector<std::shared_ptr<NamespaceId>>>(blockIds->blockStateValues);
-        } else if (HEDLEY_UNLIKELY(key == u"items")) {
+        } else if (HEDLEY_UNLIKELY(key == u"item")) {
             return std::reinterpret_pointer_cast<std::vector<std::shared_ptr<NamespaceId>>>(itemIds);
         }
         auto it = namespaceIds.find(key);

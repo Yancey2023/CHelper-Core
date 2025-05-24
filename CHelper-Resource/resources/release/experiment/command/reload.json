@@ -19,7 +19,7 @@
           "description": "对整个编辑器进行完整的热重载"
         }
       ],
-      "ignoreError": true 
+      "ignoreError": true
     }
   ],
   "ast": [

@@ -31,7 +31,7 @@
       "brief": "效果",
       "description": "给予或者需要移除的效果",
       "ignoreError": true,
-      "key": "effects"
+      "key": "effect"
     },
     {
       "type": "INTEGER",

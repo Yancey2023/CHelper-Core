@@ -22,7 +22,7 @@
       "brief": "魔咒",
       "description": "添加至实体手持物品的魔咒",
       "ignoreError": true,
-      "key": "enchant"
+      "key": "enchantType"
     },
     {
       "type": "INTEGER",

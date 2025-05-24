@@ -4,17 +4,17 @@
   ],
   "description": "设置或查询游戏规则",
   "start": [
-    "gameRulesForBoolean",
-    "gameRulesForInteger"
+    "gameRuleBoolean",
+    "gameRuleInteger"
   ],
   "node": [
     {
       "type": "NORMAL_ID",
-      "id": "gameRulesForBoolean",
+      "id": "gameRuleBoolean",
       "brief": "游戏规则",
       "description": "要设置或查询的游戏规则",
       "ignoreError": true,
-      "key": "gameRulesForBoolean"
+      "key": "gameRuleBoolean"
     },
     {
       "type": "BOOLEAN",
@@ -26,11 +26,11 @@
     },
     {
       "type": "NORMAL_ID",
-      "id": "gameRulesForInteger",
+      "id": "gameRuleInteger",
       "brief": "游戏规则",
       "description": "要设置或查询的游戏规则",
       "ignoreError": true,
-      "key": "gameRulesForInteger"
+      "key": "gameRuleInteger"
     },
     {
       "type": "INTEGER",
@@ -40,9 +40,9 @@
     }
   ],
   "ast": [
-    ["gameRulesForBoolean", "valueBoolean", "LF"],
+    ["gameRuleBoolean", "valueBoolean", "LF"],
     ["valueBoolean", "LF"],
-    ["gameRulesForInteger", "valueInteger", "LF"],
+    ["gameRuleInteger", "valueInteger", "LF"],
     ["valueInteger", "LF"]
   ]
 }
