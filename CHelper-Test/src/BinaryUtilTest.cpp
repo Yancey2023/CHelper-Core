@@ -305,7 +305,7 @@ TEST(BinaryUtilTest, NormalId) {
 TEST(BinaryUtilTest, NamespaceId) {
     std::filesystem::path resourceDir(RESOURCE_DIR);
     rapidjson::GenericDocument<rapidjson::UTF8<>> j = serialization::get_json_from_file(
-            resourceDir / "resources" / "beta" / "vanilla" / "id" / "entities.json");
+            resourceDir / "resources" / "beta" / "vanilla" / "id" / "entity.json");
     std::vector<std::function<CHelper::NamespaceId()>> getInstance;
     for (const auto &item: serialization::find_array_member_or_throw(j, "content")) {
         CHelper::NamespaceId namespaceId;
@@ -318,9 +318,9 @@ TEST(BinaryUtilTest, NamespaceId) {
 TEST(BinaryUtilTest, ItemId) {
     std::filesystem::path resourceDir(RESOURCE_DIR);
     rapidjson::GenericDocument<rapidjson::UTF8<>> j = serialization::get_json_from_file(
-            resourceDir / "resources" / "beta" / "vanilla" / "id" / "items.json");
+            resourceDir / "resources" / "beta" / "vanilla" / "id" / "item.json");
     std::vector<std::function<CHelper::ItemId()>> getInstance;
-    for (const auto &item: serialization::find_array_member_or_throw(j, "items")) {
+    for (const auto &item: serialization::find_array_member_or_throw(j, "content")) {
         CHelper::ItemId itemId;
         serialization::Codec<CHelper::NamespaceId>::from_json(item, itemId);
         getInstance.emplace_back([itemId]() { return itemId; });
@@ -367,9 +367,9 @@ TEST(BinaryUtilTest, Property) {
 TEST(BinaryUtilTest, BlockId) {
     std::filesystem::path resourceDir(RESOURCE_DIR);
     rapidjson::GenericDocument<rapidjson::UTF8<>> j = serialization::get_json_from_file(
-            resourceDir / "resources" / "beta" / "vanilla" / "id" / "blocks.json");
+            resourceDir / "resources" / "beta" / "vanilla" / "id" / "block.json");
     CHelper::BlockIds blockIds;
-    serialization::Codec<CHelper::BlockIds>::from_json(serialization::find_member_or_throw(j, "blocks"), blockIds);
+    serialization::Codec<CHelper::BlockIds>::from_json(serialization::find_member_or_throw(j, "content"), blockIds);
     test<CHelper::BlockIds>([&blockIds]() { return blockIds; });
 }
 
