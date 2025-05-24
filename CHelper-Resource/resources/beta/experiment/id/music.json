@@ -3,6 +3,10 @@
     "type": "normal",
     "content": [
         {
+            "name": "music.game",
+            "description": "生存模式背景音乐"
+        },
+        {
             "name": "music.game.basalt_deltas",
             "description": "玄武岩三角洲背景音乐"
         },
@@ -87,6 +91,77 @@
             "description": "水下背景音乐"
         },
         {
+            "name": "music.game_and_wild_equal_chance",
+            "description": "森林背景音乐"
+        },
+        {
+            "name": "music.game_and_wild_favor_game",
+            "description": "针叶林背景音乐"
+        },
+        {
+            "name": "music.menu",
+            "description": "游戏菜单背景音乐"
+        },
+        {
+            "name": "music.overworld.bamboo_jungle",
+            "description": "竹林背景音乐"
+        },
+        {
+            "name": "music.overworld.cherry_grove",
+            "description": "樱花树林背景音乐"
+        },
+        {
+            "name": "music.overworld.deep_dark",
+            "description": "深暗之域背景音乐"
+        },
+        {
+            "name": "music.overworld.desert",
+            "description": "沙漠背景音乐"
+        },
+        {
+            "name": "music.overworld.dripstone_caves",
+            "description": "溶洞背景音乐"
+        },
+        {
+            "name": "music.overworld.flower_forest",
+            "description": "繁花森林背景音乐"
+        },
+        {
+            "name": "music.overworld.forest"
+        },
+        {
+            "name": "music.overworld.grove",
+            "description": "雪林背景音乐"
+        },
+        {
+            "name": "music.overworld.jagged_peaks",
+            "description": "尖峭山峰背景音乐"
+        },
+        {
+            "name": "music.overworld.jungle",
+            "description": "丛林背景音乐"
+        },
+        {
+            "name": "music.overworld.jungle_edge",
+            "description": "丛林边缘背景音乐"
+        },
+        {
+            "name": "music.overworld.lush_caves",
+            "description": "繁茂洞穴背景音乐"
+        },
+        {
+            "name": "music.overworld.mesa",
+            "description": "恶地背景音乐"
+        },
+        {
+            "name": "music.overworld.snowy_slopes",
+            "description": "积雪山坡背景音乐"
+        },
+        {
+            "name": "music.overworld.stony_peaks",
+            "description": "裸岩山峰背景音乐"
+        },
+        {
             "name": "record.11",
             "description": "音乐唱片（C418 - 11）"
         },
@@ -153,6 +228,10 @@
         {
             "name": "record.strad",
             "description": "音乐唱片（C418 - strad）"
+        },
+        {
+            "name": "record.tears",
+            "description": "音乐唱片（Amos Roddy - Tears）"
         },
         {
             "name": "record.wait",

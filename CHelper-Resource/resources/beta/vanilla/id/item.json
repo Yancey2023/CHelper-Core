@@ -3223,6 +3223,10 @@
             "description": "音乐唱片 C418 - strad"
         },
         {
+            "name": "music_disc_tears",
+            "description": "音乐唱片 Amos Roddy - Tears"
+        },
+        {
             "name": "music_disc_wait",
             "description": "音乐唱片 C418 - wait"
         },

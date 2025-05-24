@@ -14344,12 +14344,12 @@
                     "propertyName": "attached_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "绊线和有效的绊线钩连接在一起"
-                        },
-                        {
                             "valueName": false,
                             "description": "绊线和绊线钩没有连接在一起"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "绊线和有效的绊线钩连接在一起"
                         }
                     ]
                 },
@@ -14407,12 +14407,12 @@
                     "propertyName": "big_dripleaf_head",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "大型垂滴叶的叶片部分"
-                        },
-                        {
                             "valueName": false,
                             "description": "大型垂滴叶的叶茎部分"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "大型垂滴叶的叶片部分"
                         }
                     ]
                 },
@@ -14528,12 +14528,12 @@
                     "propertyName": "bloom",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "幽匿催发体处于蔓延状态"
-                        },
-                        {
                             "valueName": false,
                             "description": "幽匿催发体不处于蔓延状态"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "幽匿催发体处于蔓延状态"
                         }
                     ]
                 },
@@ -14739,12 +14739,12 @@
                     "propertyName": "brewing_stand_slot_a_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "酿造台的0号槽位放置了药水"
-                        },
-                        {
                             "valueName": false,
                             "description": "酿造台的0号槽位没有放置药水"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "酿造台的0号槽位放置了药水"
                         }
                     ]
                 },
@@ -14752,12 +14752,12 @@
                     "propertyName": "brewing_stand_slot_b_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "酿造台的1号槽位放置了药水"
-                        },
-                        {
                             "valueName": false,
                             "description": "酿造台的1号槽位没有放置药水"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "酿造台的1号槽位放置了药水"
                         }
                     ]
                 },
@@ -14765,12 +14765,12 @@
                     "propertyName": "brewing_stand_slot_c_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "酿造台的2号槽位放置了药水"
-                        },
-                        {
                             "valueName": false,
                             "description": "酿造台的2号槽位没有放置药水"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "酿造台的2号槽位放置了药水"
                         }
                     ]
                 },
@@ -14796,12 +14796,12 @@
                     "propertyName": "button_pressed_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "按钮处于按下状态"
-                        },
-                        {
                             "valueName": false,
                             "description": "按钮没有处于按下状态"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "按钮处于按下状态"
                         }
                     ]
                 },
@@ -14809,12 +14809,12 @@
                     "propertyName": "can_summon",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "幽匿尖啸体可以召唤监守者"
-                        },
-                        {
                             "valueName": false,
                             "description": "幽匿尖啸体不能召唤监守者"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "幽匿尖啸体可以召唤监守者"
                         }
                     ]
                 },
@@ -15004,12 +15004,12 @@
                     "propertyName": "conditional_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "命令方块处于条件制约模式"
-                        },
-                        {
                             "valueName": false,
                             "description": "命令方块不处于条件制约模式"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "命令方块处于条件制约模式"
                         }
                     ]
                 },
@@ -15080,12 +15080,12 @@
                     "propertyName": "covered_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "含雪植物里的雪层"
-                        },
-                        {
                             "valueName": false,
                             "description": "普通的雪层"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "含雪植物里的雪层"
                         }
                     ]
                 },
@@ -15108,12 +15108,12 @@
                     "propertyName": "crafting",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "合成器正在合成物品"
-                        },
-                        {
                             "valueName": false,
                             "description": "合成器没有在合成物品"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "合成器正在合成物品"
                         }
                     ]
                 },
@@ -15139,12 +15139,12 @@
                     "propertyName": "dead_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "该方块因离开水而失活"
-                        },
-                        {
                             "valueName": false,
                             "description": "该方块没有失活"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "该方块因离开水而失活"
                         }
                     ]
                 },
@@ -15203,12 +15203,12 @@
                     "propertyName": "disarmed_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "绊线已经被拆除，经过绊线时不会使得连接的绊线钩发出红石信号"
-                        },
-                        {
                             "valueName": false,
                             "description": "绊线没有被拆除，经过绊线时会使得连接的绊线钩发出红石信号"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "绊线已经被拆除，经过绊线时不会使得连接的绊线钩发出红石信号"
                         }
                     ]
                 },
@@ -15252,12 +15252,12 @@
                     "propertyName": "drag_down",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "气泡柱是涡流，向下拉动在其中的实体"
-                        },
-                        {
                             "valueName": false,
                             "description": "气泡柱是涌流，向上推动在其中的实体"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "气泡柱是涡流，向下拉动在其中的实体"
                         }
                     ]
                 },
@@ -15266,23 +15266,23 @@
                     "values": [
                         {
                             "valueName": "tip",
-                            "description": "滴水石锥的末梢，只有一段连接"
-                        },
-                        {
-                            "valueName": "merge",
-                            "description": "滴水石锥的末梢，与另一个末梢连接形成石柱"
+                            "description": "  滴水石锥的末梢，只有一段连接"
                         },
                         {
                             "valueName": "frustum",
-                            "description": "滴水石锥的末端部分，连接末梢"
+                            "description": "  滴水石锥的末端部分，连接末梢"
                         },
                         {
                             "valueName": "middle",
-                            "description": "滴水石锥的中间部分，在长度超过三格的结构上被使用"
+                            "description": "  滴水石锥的中间部分，在长度超过三格的结构上被使用"
                         },
                         {
                             "valueName": "base",
-                            "description": "滴水石锥的基底部分，在长度达到三格的结构上被使用"
+                            "description": "  滴水石锥的基底部分，在长度达到三格的结构上被使用"
+                        },
+                        {
+                            "valueName": "merge",
+                            "description": "  滴水石锥的末梢，与另一个末梢连接形成石柱"
                         }
                     ]
                 },
@@ -15290,12 +15290,12 @@
                     "propertyName": "end_portal_eye_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "末地传送门框架嵌入了末影之眼"
-                        },
-                        {
                             "valueName": false,
                             "description": "末地传送门框架没有嵌入末影之眼"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "末地传送门框架嵌入了末影之眼"
                         }
                     ]
                 },
@@ -15303,12 +15303,12 @@
                     "propertyName": "explode_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "标记该TNT方块已被点燃，将会生成被激活的TNT实体"
-                        },
-                        {
                             "valueName": false,
                             "description": "TNT未被点燃"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "标记该TNT方块已被点燃，将会生成被激活的TNT实体"
                         }
                     ]
                 },
@@ -15316,12 +15316,12 @@
                     "propertyName": "extinguished",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "方块已经熄灭"
-                        },
-                        {
                             "valueName": false,
                             "description": "方块没有熄灭"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "方块已经熄灭"
                         }
                     ]
                 },
@@ -15614,12 +15614,12 @@
                     "propertyName": "hanging",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "此方块悬挂在方块下方"
-                        },
-                        {
                             "valueName": false,
                             "description": "此方块没有悬挂在方块下方"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "此方块悬挂在方块下方"
                         }
                     ]
                 },
@@ -15627,12 +15627,12 @@
                     "propertyName": "head_piece_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "此方块是床头"
-                        },
-                        {
                             "valueName": false,
                             "description": "此方块是床尾"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "此方块是床头"
                         }
                     ]
                 },
@@ -15768,12 +15768,12 @@
                     "propertyName": "in_wall_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "栅栏门嵌入墙内，高度更低"
-                        },
-                        {
                             "valueName": false,
                             "description": "栅栏门没有嵌入墙内，高度更高"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "栅栏门嵌入墙内，高度更低"
                         }
                     ]
                 },
@@ -15781,12 +15781,12 @@
                     "propertyName": "infiniburn_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "此基岩上的火焰能无限燃烧，用于生成在末地的基岩"
-                        },
-                        {
                             "valueName": false,
                             "description": "此基岩上的火焰不能无限燃烧"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "此基岩上的火焰能无限燃烧，用于生成在末地的基岩"
                         }
                     ]
                 },
@@ -15794,12 +15794,12 @@
                     "propertyName": "item_frame_map_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "此物品展示框在展示地图"
-                        },
-                        {
                             "valueName": false,
                             "description": "此物品展示框不在展示地图"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "此物品展示框在展示地图"
                         }
                     ]
                 },
@@ -15807,12 +15807,12 @@
                     "propertyName": "item_frame_photo_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "此物品展示框在展示照片"
-                        },
-                        {
                             "valueName": false,
                             "description": "此物品展示框不在展示照片"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "此物品展示框在展示照片"
                         }
                     ]
                 },
@@ -16010,12 +16010,12 @@
                     "propertyName": "lit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "方块处于点亮状态"
-                        },
-                        {
                             "valueName": false,
                             "description": "方块处于熄灭状态"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "方块处于点亮状态"
                         }
                     ]
                 },
@@ -16023,12 +16023,16 @@
                     "propertyName": "minecraft:block_face",
                     "values": [
                         {
-                            "valueName": "north",
-                            "description": "方块附着在方块北面，朝向北方"
+                            "valueName": "down",
+                            "description": "方块附着在方块底面，朝向下方"
                         },
                         {
-                            "valueName": "east",
-                            "description": "方块附着在方块东面，朝向东方"
+                            "valueName": "up",
+                            "description": "方块附着在方块顶面，朝向上方"
+                        },
+                        {
+                            "valueName": "north",
+                            "description": "方块附着在方块北面，朝向北方"
                         },
                         {
                             "valueName": "south",
@@ -16039,12 +16043,8 @@
                             "description": "方块附着在方块西面，朝向西方"
                         },
                         {
-                            "valueName": "up",
-                            "description": "方块附着在方块顶面，朝向上方"
-                        },
-                        {
-                            "valueName": "down",
-                            "description": "方块附着在方块底面，朝向下方"
+                            "valueName": "east",
+                            "description": "方块附着在方块东面，朝向东方"
                         }
                     ]
                 },
@@ -16052,20 +16052,20 @@
                     "propertyName": "minecraft:cardinal_direction",
                     "values": [
                         {
-                            "valueName": "north",
-                            "description": "方块朝向北方"
-                        },
-                        {
-                            "valueName": "east",
-                            "description": "方块朝向东方"
-                        },
-                        {
                             "valueName": "south",
                             "description": "方块朝向南方"
                         },
                         {
                             "valueName": "west",
                             "description": "方块朝向西方"
+                        },
+                        {
+                            "valueName": "north",
+                            "description": "方块朝向北方"
+                        },
+                        {
+                            "valueName": "east",
+                            "description": "方块朝向东方"
                         }
                     ]
                 },
@@ -16073,12 +16073,16 @@
                     "propertyName": "minecraft:facing_direction",
                     "values": [
                         {
-                            "valueName": "north",
-                            "description": "方块朝向北方"
+                            "valueName": "down",
+                            "description": "方块朝向下方"
                         },
                         {
-                            "valueName": "east",
-                            "description": "方块朝向东方"
+                            "valueName": "up",
+                            "description": "方块朝向上方"
+                        },
+                        {
+                            "valueName": "north",
+                            "description": "方块朝向北方"
                         },
                         {
                             "valueName": "south",
@@ -16089,12 +16093,8 @@
                             "description": "方块朝向西方"
                         },
                         {
-                            "valueName": "up",
-                            "description": "方块朝向上方"
-                        },
-                        {
-                            "valueName": "down",
-                            "description": "方块朝向下方"
+                            "valueName": "east",
+                            "description": "方块朝向东方"
                         }
                     ]
                 },
@@ -16102,12 +16102,12 @@
                     "propertyName": "minecraft:vertical_half",
                     "values": [
                         {
-                            "valueName": "top",
-                            "description": "台阶是上半台阶"
-                        },
-                        {
                             "valueName": "bottom",
                             "description": "台阶是下半台阶，双层台阶正常情况下均为此值"
+                        },
+                        {
+                            "valueName": "top",
+                            "description": "台阶是上半台阶"
                         }
                     ]
                 },
@@ -16437,12 +16437,12 @@
                     "propertyName": "natural",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "方块为自然生成"
-                        },
-                        {
                             "valueName": false,
                             "description": "方块非自然生成"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "方块为自然生成"
                         }
                     ]
                 },
@@ -16474,12 +16474,12 @@
                     "propertyName": "occupied_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "床被生物占用"
-                        },
-                        {
                             "valueName": false,
                             "description": "床没有被占用，可以睡觉"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "床被生物占用"
                         }
                     ]
                 },
@@ -16523,12 +16523,12 @@
                     "propertyName": "ominous",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "方块为不祥变种"
-                        },
-                        {
                             "valueName": false,
                             "description": "方块为普通变种"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "方块为不祥变种"
                         }
                     ]
                 },
@@ -16536,12 +16536,12 @@
                     "propertyName": "open_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "方块处于打开状态"
-                        },
-                        {
                             "valueName": false,
                             "description": "方块处于关闭状态"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "方块处于打开状态"
                         }
                     ]
                 },
@@ -16565,18 +16565,6 @@
                             "description": "方块面朝下，顶部朝西"
                         },
                         {
-                            "valueName": "east_up",
-                            "description": "方块面朝东，顶部朝上"
-                        },
-                        {
-                            "valueName": "north_up",
-                            "description": "方块面朝北，顶部朝上"
-                        },
-                        {
-                            "valueName": "south_up",
-                            "description": "方块面朝南，顶部朝上"
-                        },
-                        {
                             "valueName": "up_east",
                             "description": "方块面朝上，顶部朝东"
                         },
@@ -16595,6 +16583,18 @@
                         {
                             "valueName": "west_up",
                             "description": "方块面朝西，顶部朝上"
+                        },
+                        {
+                            "valueName": "east_up",
+                            "description": "方块面朝东，顶部朝上"
+                        },
+                        {
+                            "valueName": "north_up",
+                            "description": "方块面朝北，顶部朝上"
+                        },
+                        {
+                            "valueName": "south_up",
+                            "description": "方块面朝南，顶部朝上"
                         }
                     ]
                 },
@@ -16602,12 +16602,12 @@
                     "propertyName": "output_lit_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "比较器有输出信号"
-                        },
-                        {
                             "valueName": false,
                             "description": "比较器无输出信号"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "比较器有输出信号"
                         }
                     ]
                 },
@@ -16696,12 +16696,12 @@
                     "propertyName": "persistent_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "树叶可以无视距离持久存在"
-                        },
-                        {
                             "valueName": false,
                             "description": "树叶距离最近的原木7格以上时会自然消失"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "树叶可以无视距离持久存在"
                         }
                     ]
                 },
@@ -16709,12 +16709,12 @@
                     "propertyName": "pillar_axis",
                     "values": [
                         {
-                            "valueName": "x",
-                            "description": "方块东西朝向"
-                        },
-                        {
                             "valueName": "y",
                             "description": "方块垂直朝向"
+                        },
+                        {
+                            "valueName": "x",
+                            "description": "方块东西朝向"
                         },
                         {
                             "valueName": "z",
@@ -16743,12 +16743,12 @@
                     "propertyName": "powered_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "方块被红石信号激活"
-                        },
-                        {
                             "valueName": false,
                             "description": "方块未被激活"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "方块被红石信号激活"
                         }
                     ]
                 },
@@ -16796,12 +16796,12 @@
                     "propertyName": "rail_data_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "铁轨被红石信号激活"
-                        },
-                        {
                             "valueName": false,
                             "description": "铁轨未被激活"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "铁轨被红石信号激活"
                         }
                     ]
                 },
@@ -17065,12 +17065,12 @@
                             "description": "此方块是普通海草"
                         },
                         {
-                            "valueName": "double_bot",
-                            "description": "此方块是高海草的下半部"
-                        },
-                        {
                             "valueName": "double_top",
                             "description": "此方块是高海草的上半部"
+                        },
+                        {
+                            "valueName": "double_bot",
+                            "description": "此方块是高海草的下半部"
                         }
                     ]
                 },
@@ -17127,12 +17127,12 @@
                     "propertyName": "stability_check",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "脚手架放置后已稳定存在"
-                        },
-                        {
                             "valueName": false,
                             "description": "脚手架放置后还未进行稳定性检查"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "脚手架放置后已稳定存在"
                         }
                     ]
                 },
@@ -17311,6 +17311,10 @@
                     "propertyName": "structure_block_type",
                     "values": [
                         {
+                            "valueName": "data",
+                            "description": "结构方块处于数据模式"
+                        },
+                        {
                             "valueName": "save",
                             "description": "结构方块处于保存模式"
                         },
@@ -17323,16 +17327,12 @@
                             "description": "结构方块处于角落模式"
                         },
                         {
-                            "valueName": "data",
-                            "description": "结构方块处于数据模式"
+                            "valueName": "invalid",
+                            "description": "作用未知"
                         },
                         {
                             "valueName": "export",
                             "description": "结构方块处于3D输出模式"
-                        },
-                        {
-                            "valueName": "invalid",
-                            "description": "作用未知"
                         }
                     ]
                 },
@@ -17352,12 +17352,12 @@
                     "propertyName": "suspended_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "绊线组成有效绊线线路中时变为true，具有较矮的击中箱"
-                        },
-                        {
                             "valueName": false,
                             "description": "绊线未曾在有效的绊线线路中"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "绊线组成有效绊线线路中时变为true，具有较矮的击中箱"
                         }
                     ]
                 },
@@ -17383,12 +17383,12 @@
                     "propertyName": "tip",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "苍白垂须下方不是苍白垂须"
-                        },
-                        {
                             "valueName": false,
                             "description": "苍白垂须下方是苍白垂须"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "苍白垂须下方不是苍白垂须"
                         }
                     ]
                 },
@@ -17396,12 +17396,12 @@
                     "propertyName": "toggle_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "漏斗可以吸取和传输物品"
-                        },
-                        {
                             "valueName": false,
                             "description": "漏斗被禁用，无法吸取和传输物品"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "漏斗可以吸取和传输物品"
                         }
                     ]
                 },
@@ -17479,12 +17479,12 @@
                     "propertyName": "triggered_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "方块被红石信号激活"
-                        },
-                        {
                             "valueName": false,
                             "description": "方块未被红石信号激活"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "方块被红石信号激活"
                         }
                     ]
                 },
@@ -17594,12 +17594,12 @@
                     "propertyName": "update_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "周围有原木或树叶方块发生变化，需要在下一次随机刻时检查是否应枯萎"
-                        },
-                        {
                             "valueName": false,
                             "description": "周围没有原木或树叶方块发生变化，不处理下一次随机刻"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "周围有原木或树叶方块发生变化，需要在下一次随机刻时检查是否应枯萎"
                         }
                     ]
                 },
@@ -17620,12 +17620,12 @@
                     "propertyName": "upside_down_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "方块主要位于方块网格的上半部分"
-                        },
-                        {
                             "valueName": false,
                             "description": "方块主要位于方块网格的下半部分"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "方块主要位于方块网格的上半部分"
                         }
                     ]
                 },
@@ -17721,7 +17721,7 @@
                 },
                 {
                     "propertyName": "wall_block_type",
-                    "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙",
+                    "description": "已弃用，为兼容性而保留 墙的变种 andesite：安山岩墙 brick：红砖墙 cobblestone：圆石墙 diorite：闪长岩墙 end_brick：末地石砖墙 granite：花岗岩墙 mossy_cobblestone：苔石墙 mossy_stone_brick：苔石砖墙 nether_brick：下界砖墙 prismarine：海晶石墙 red_nether_brick：红色下界砖墙 red_sandstone：红砂岩墙 sandstone：砂岩墙 stone_brick：石砖墙 ",
                     "values": [
                         {
                             "valueName": "cobblestone"
@@ -17839,12 +17839,12 @@
                     "propertyName": "wall_post_bit",
                     "values": [
                         {
-                            "valueName": true,
-                            "description": "墙有中心柱"
-                        },
-                        {
                             "valueName": false,
                             "description": "墙没有中心柱"
+                        },
+                        {
+                            "valueName": true,
+                            "description": "墙有中心柱"
                         }
                     ]
                 },
@@ -17936,20 +17936,20 @@
                     "propertyName": "weirdo_direction",
                     "values": [
                         {
-                            "valueName": 2,
-                            "description": "楼梯面朝北方"
+                            "valueName": 0,
+                            "description": "楼梯面朝西方"
                         },
                         {
                             "valueName": 1,
                             "description": "楼梯面朝东方"
                         },
                         {
-                            "valueName": 3,
-                            "description": "楼梯面朝南方"
+                            "valueName": 2,
+                            "description": "楼梯面朝北方"
                         },
                         {
-                            "valueName": 0,
-                            "description": "楼梯面朝西方"
+                            "valueName": 3,
+                            "description": "楼梯面朝南方"
                         }
                     ]
                 },
@@ -17981,54 +17981,11 @@
             "block": [
                 {
                     "blocks": [
-                        "skeleton_skull",
-                        "wither_skeleton_skull",
-                        "zombie_head",
-                        "player_head",
-                        "creeper_head",
-                        "piglin_head",
-                        "dragon_head"
+                        "bamboo_sapling"
                     ],
                     "properties": [
                         {
-                            "propertyName": "facing_direction",
-                            "values": [
-                                {
-                                    "valueName": 0,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 1,
-                                    "description": "生物头颅在地上"
-                                },
-                                {
-                                    "valueName": 2,
-                                    "description": "生物头颅朝向北方"
-                                },
-                                {
-                                    "valueName": 3,
-                                    "description": "生物头颅朝向南方"
-                                },
-                                {
-                                    "valueName": 4,
-                                    "description": "生物头颅朝向西方"
-                                },
-                                {
-                                    "valueName": 5,
-                                    "description": "生物头颅朝向东方"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "creaking_heart"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "active",
-                            "description": "已弃用，为兼容性而保留 方块是否失活 false：对应dormant true：对应uprooted",
+                            "propertyName": "age_bit",
                             "values": [
                                 {
                                     "valueName": false
@@ -18039,19 +17996,29 @@
                             ]
                         },
                         {
-                            "propertyName": "creaking_heart_state",
+                            "propertyName": "sapling_type",
+                            "description": "未使用，正常情况下均为oak",
                             "values": [
                                 {
-                                    "valueName": "uprooted",
-                                    "description": "嘎枝之心因脱离有效的结构而失活"
+                                    "valueName": "oak"
                                 },
                                 {
-                                    "valueName": "dormant",
-                                    "description": "嘎枝之心未失活，但因处于白天而休眠"
+                                    "valueName": "spruce"
                                 },
                                 {
-                                    "valueName": "awake",
-                                    "description": "嘎枝之心未失活，且因处于夜晚而激活"
+                                    "valueName": "birch"
+                                },
+                                {
+                                    "valueName": "jungle"
+                                },
+                                {
+                                    "valueName": "acacia"
+                                },
+                                {
+                                    "valueName": "dark_oak"
+                                },
+                                {
+                                    "valueName": "pale_oak"
                                 }
                             ]
                         }
@@ -18059,95 +18026,17 @@
                 },
                 {
                     "blocks": [
-                        "pitcher_crop"
+                        "bamboo"
                     ],
                     "properties": [
                         {
-                            "propertyName": "growth",
+                            "propertyName": "age_bit",
                             "values": [
                                 {
-                                    "valueName": 0,
-                                    "description": ""
+                                    "valueName": false
                                 },
                                 {
-                                    "valueName": 1,
-                                    "description": ""
-                                },
-                                {
-                                    "valueName": 2,
-                                    "description": ""
-                                },
-                                {
-                                    "valueName": 3,
-                                    "description": ""
-                                },
-                                {
-                                    "valueName": 4,
-                                    "description": "瓶子草成熟"
-                                },
-                                {
-                                    "valueName": 5,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 6,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 7,
-                                    "description": "未使用"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "rail"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "rail_direction",
-                            "values": [
-                                {
-                                    "valueName": 0,
-                                    "description": "南北朝向的平坦铁轨"
-                                },
-                                {
-                                    "valueName": 1,
-                                    "description": "东西朝向的平坦铁轨"
-                                },
-                                {
-                                    "valueName": 2,
-                                    "description": "朝向东的上坡铁轨"
-                                },
-                                {
-                                    "valueName": 3,
-                                    "description": "朝向西的上坡铁轨"
-                                },
-                                {
-                                    "valueName": 4,
-                                    "description": "朝向北的上坡铁轨"
-                                },
-                                {
-                                    "valueName": 5,
-                                    "description": "朝向南的上坡铁轨"
-                                },
-                                {
-                                    "valueName": 6,
-                                    "description": "东南方向的转弯铁轨"
-                                },
-                                {
-                                    "valueName": 7,
-                                    "description": "西南方向的转弯铁轨"
-                                },
-                                {
-                                    "valueName": 8,
-                                    "description": "西北方向的转弯铁轨"
-                                },
-                                {
-                                    "valueName": 9,
-                                    "description": "东北方向的转弯铁轨"
+                                    "valueName": true
                                 }
                             ]
                         }
@@ -18173,12 +18062,10 @@
                             "propertyName": "attached_bit",
                             "values": [
                                 {
-                                    "valueName": true,
-                                    "description": "非墙上的悬挂式告示牌的锁链系于一点"
+                                    "valueName": false
                                 },
                                 {
-                                    "valueName": false,
-                                    "description": "非墙上的悬挂式告示牌的锁链互相平行"
+                                    "valueName": true
                                 }
                             ]
                         }
@@ -18186,82 +18073,26 @@
                 },
                 {
                     "blocks": [
-                        "flower_pot"
+                        "grindstone"
                     ],
                     "properties": [
                         {
-                            "propertyName": "update_bit",
+                            "propertyName": "attachment",
                             "values": [
                                 {
-                                    "valueName": true,
-                                    "description": "花盆中有植物"
+                                    "valueName": "standing",
+                                    "description": "砂轮附着在其他方块的上面"
                                 },
                                 {
-                                    "valueName": false,
-                                    "description": "花盆中没有植物"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "sculk_shrieker"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "active",
-                            "values": [
-                                {
-                                    "valueName": true,
-                                    "description": "幽匿尖啸体处于激活状态"
+                                    "valueName": "hanging",
+                                    "description": "砂轮附着在其他方块的下面"
                                 },
                                 {
-                                    "valueName": false,
-                                    "description": "幽匿尖啸体处于未激活状态"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "torchflower_crop"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "growth",
-                            "values": [
-                                {
-                                    "valueName": 0,
-                                    "description": ""
+                                    "valueName": "side",
+                                    "description": "砂轮附着在一个其他方块的侧面"
                                 },
                                 {
-                                    "valueName": 1,
-                                    "description": ""
-                                },
-                                {
-                                    "valueName": 2,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 3,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 4,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 5,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 6,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 7,
+                                    "valueName": "multiple",
                                     "description": "未使用"
                                 }
                             ]
@@ -18270,39 +18101,103 @@
                 },
                 {
                     "blocks": [
-                        "end_rod",
-                        "piston",
-                        "piston_arm_collision",
-                        "sticky_piston",
-                        "sticky_piston_arm_collision"
+                        "colored_torch_red",
+                        "colored_torch_green"
                     ],
                     "properties": [
                         {
-                            "propertyName": "facing_direction",
+                            "propertyName": "color_bit",
+                            "description": "已弃用，为兼容性而保留 彩色火把的颜色 true：绿色火把 false：红色火把",
                             "values": [
                                 {
-                                    "valueName": 0,
-                                    "description": "方块朝向下方"
+                                    "valueName": false
                                 },
                                 {
-                                    "valueName": 1,
-                                    "description": "方块朝向上方"
+                                    "valueName": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "colored_torch_blue",
+                        "colored_torch_purple"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "color_bit",
+                            "description": "已弃用，为兼容性而保留 彩色火把的颜色 true：紫色火把 false：蓝色火把",
+                            "values": [
+                                {
+                                    "valueName": false
                                 },
                                 {
-                                    "valueName": 2,
-                                    "description": "方块朝向南方"
+                                    "valueName": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "brain_coral_wall_fan",
+                        "tube_coral_wall_fan",
+                        "dead_brain_coral_wall_fan",
+                        "dead_tube_coral_wall_fan"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "coral_hang_type_bit",
+                            "description": "已弃用，为兼容性而保留 true： 脑纹珊瑚扇 false： 管珊瑚扇",
+                            "values": [
+                                {
+                                    "valueName": false
                                 },
                                 {
-                                    "valueName": 3,
-                                    "description": "方块朝向北方"
+                                    "valueName": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "bubble_coral_wall_fan",
+                        "fire_coral_wall_fan",
+                        "dead_bubble_coral_wall_fan",
+                        "dead_fire_coral_wall_fan"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "coral_hang_type_bit",
+                            "description": "已弃用，为兼容性而保留 true： 火珊瑚扇 false： 气泡珊瑚扇",
+                            "values": [
+                                {
+                                    "valueName": false
                                 },
                                 {
-                                    "valueName": 4,
-                                    "description": "方块朝向东方"
+                                    "valueName": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "horn_coral_wall_fan",
+                        "dead_horn_coral_wall_fan"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "coral_hang_type_bit",
+                            "description": "已弃用，为兼容性而保留 true：未使用 false： 鹿角珊瑚扇",
+                            "values": [
+                                {
+                                    "valueName": false
                                 },
                                 {
-                                    "valueName": 5,
-                                    "description": "方块朝向西方"
+                                    "valueName": true
                                 }
                             ]
                         }
@@ -18385,6 +18280,525 @@
                 },
                 {
                     "blocks": [
+                        "acacia_trapdoor",
+                        "bamboo_trapdoor",
+                        "birch_trapdoor",
+                        "cherry_trapdoor",
+                        "copper_trapdoor",
+                        "crimson_trapdoor",
+                        "dark_oak_trapdoor",
+                        "exposed_copper_trapdoor",
+                        "iron_trapdoor",
+                        "jungle_trapdoor",
+                        "mangrove_trapdoor",
+                        "oxidized_copper_trapdoor",
+                        "pale_oak_trapdoor",
+                        "spruce_trapdoor",
+                        "warped_trapdoor",
+                        "waxed_copper_trapdoor",
+                        "waxed_exposed_copper_trapdoor",
+                        "waxed_oxidized_copper_trapdoor",
+                        "waxed_weathered_copper_trapdoor",
+                        "weathered_copper_trapdoor",
+                        "trapdoor"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "direction",
+                            "values": [
+                                {
+                                    "valueName": 0,
+                                    "description": "活板门朝向东方，轴在西方"
+                                },
+                                {
+                                    "valueName": 1,
+                                    "description": "活板门朝向西方，轴在东方"
+                                },
+                                {
+                                    "valueName": 2,
+                                    "description": "活板门朝向南方，轴在北方"
+                                },
+                                {
+                                    "valueName": 3,
+                                    "description": "活板门朝向北方，轴在南方"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "cocoa",
+                        "compound_creator",
+                        "material_reducer",
+                        "element_constructor",
+                        "lab_table"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "direction",
+                            "values": [
+                                {
+                                    "valueName": 0,
+                                    "description": "方块朝向北方"
+                                },
+                                {
+                                    "valueName": 1,
+                                    "description": "方块朝向东方"
+                                },
+                                {
+                                    "valueName": 2,
+                                    "description": "方块朝向南方"
+                                },
+                                {
+                                    "valueName": 3,
+                                    "description": "方块朝向西方"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "bed"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "direction",
+                            "values": [
+                                {
+                                    "valueName": 0,
+                                    "description": "床头指向南方"
+                                },
+                                {
+                                    "valueName": 1,
+                                    "description": "床头指向西方"
+                                },
+                                {
+                                    "valueName": 2,
+                                    "description": "床头指向北方"
+                                },
+                                {
+                                    "valueName": 3,
+                                    "description": "床头指向东方"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "beetroot",
+                        "carrots",
+                        "potatoes"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "growth",
+                            "values": [
+                                {
+                                    "valueName": 0,
+                                    "description": "作物生长第一阶段"
+                                },
+                                {
+                                    "valueName": 1,
+                                    "description": "作物生长第一阶段"
+                                },
+                                {
+                                    "valueName": 2,
+                                    "description": "作物生长第二阶段"
+                                },
+                                {
+                                    "valueName": 3,
+                                    "description": "作物生长第二阶段"
+                                },
+                                {
+                                    "valueName": 4,
+                                    "description": "作物生长第三阶段"
+                                },
+                                {
+                                    "valueName": 5,
+                                    "description": "作物生长第三阶段"
+                                },
+                                {
+                                    "valueName": 6,
+                                    "description": "作物生长第三阶段"
+                                },
+                                {
+                                    "valueName": 7,
+                                    "description": "作物成熟"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "pink_petals",
+                        "leaf_litter",
+                        "wildflowers"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "growth",
+                            "values": [
+                                {
+                                    "valueName": 0,
+                                    "description": "占据方块的四分之一"
+                                },
+                                {
+                                    "valueName": 1,
+                                    "description": "占据方块的四分之二"
+                                },
+                                {
+                                    "valueName": 2,
+                                    "description": "占据方块的四分之三"
+                                },
+                                {
+                                    "valueName": 3,
+                                    "description": "占据整个方块"
+                                },
+                                {
+                                    "valueName": 4,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 5,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 6,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 7,
+                                    "description": "未使用"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "pitcher_crop"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "growth",
+                            "values": [
+                                {
+                                    "valueName": 0,
+                                    "description": ""
+                                },
+                                {
+                                    "valueName": 1,
+                                    "description": ""
+                                },
+                                {
+                                    "valueName": 2,
+                                    "description": ""
+                                },
+                                {
+                                    "valueName": 3,
+                                    "description": ""
+                                },
+                                {
+                                    "valueName": 4,
+                                    "description": " 瓶子草成熟"
+                                },
+                                {
+                                    "valueName": 5,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 6,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 7,
+                                    "description": "未使用"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "sweet_berry_bush"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "growth",
+                            "values": [
+                                {
+                                    "valueName": 0,
+                                    "description": " 甜浆果丛幼苗"
+                                },
+                                {
+                                    "valueName": 1,
+                                    "description": " 没有浆果的甜浆果丛"
+                                },
+                                {
+                                    "valueName": 2,
+                                    "description": " 有少量浆果的甜浆果丛，采收后此方块属性回到1"
+                                },
+                                {
+                                    "valueName": 3,
+                                    "description": " 有大量浆果的甜浆果丛，采收后此方块属性回到1"
+                                },
+                                {
+                                    "valueName": 4,
+                                    "description": " 未使用"
+                                },
+                                {
+                                    "valueName": 5,
+                                    "description": " 未使用"
+                                },
+                                {
+                                    "valueName": 6,
+                                    "description": " 未使用"
+                                },
+                                {
+                                    "valueName": 7,
+                                    "description": " 未使用"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "torchflower_crop"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "growth",
+                            "values": [
+                                {
+                                    "valueName": 0,
+                                    "description": ""
+                                },
+                                {
+                                    "valueName": 1,
+                                    "description": ""
+                                },
+                                {
+                                    "valueName": 2,
+                                    "description": " 未使用"
+                                },
+                                {
+                                    "valueName": 3,
+                                    "description": " 未使用"
+                                },
+                                {
+                                    "valueName": 4,
+                                    "description": " 未使用"
+                                },
+                                {
+                                    "valueName": 5,
+                                    "description": " 未使用"
+                                },
+                                {
+                                    "valueName": 6,
+                                    "description": " 未使用"
+                                },
+                                {
+                                    "valueName": 7,
+                                    "description": " 未使用"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "suspicious_gravel",
+                        "suspicious_sand"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "hanging",
+                            "description": "作用未知，为false时不读取其战利品表",
+                            "values": [
+                                {
+                                    "valueName": false
+                                },
+                                {
+                                    "valueName": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "lava",
+                        "flowing_lava"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "liquid_depth",
+                            "values": [
+                                {
+                                    "valueName": 0,
+                                    "description": "熔岩源方块"
+                                },
+                                {
+                                    "valueName": 1,
+                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
+                                },
+                                {
+                                    "valueName": 2,
+                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
+                                },
+                                {
+                                    "valueName": 3,
+                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
+                                },
+                                {
+                                    "valueName": 4,
+                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
+                                },
+                                {
+                                    "valueName": 5,
+                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
+                                },
+                                {
+                                    "valueName": 6,
+                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
+                                },
+                                {
+                                    "valueName": 7,
+                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
+                                },
+                                {
+                                    "valueName": 8,
+                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
+                                },
+                                {
+                                    "valueName": 9,
+                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
+                                },
+                                {
+                                    "valueName": 10,
+                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
+                                },
+                                {
+                                    "valueName": 11,
+                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
+                                },
+                                {
+                                    "valueName": 12,
+                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
+                                },
+                                {
+                                    "valueName": 13,
+                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
+                                },
+                                {
+                                    "valueName": 14,
+                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
+                                },
+                                {
+                                    "valueName": 15,
+                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "lectern",
+                        "observer",
+                        "tripwire_hook"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "powered_bit",
+                            "values": [
+                                {
+                                    "valueName": false
+                                },
+                                {
+                                    "valueName": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "trip_wire"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "powered_bit",
+                            "values": [
+                                {
+                                    "valueName": false
+                                },
+                                {
+                                    "valueName": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "rail"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "rail_direction",
+                            "values": [
+                                {
+                                    "valueName": 0,
+                                    "description": "南北朝向的平坦铁轨"
+                                },
+                                {
+                                    "valueName": 1,
+                                    "description": "东西朝向的平坦铁轨"
+                                },
+                                {
+                                    "valueName": 2,
+                                    "description": "朝向东的上坡铁轨"
+                                },
+                                {
+                                    "valueName": 3,
+                                    "description": "朝向西的上坡铁轨"
+                                },
+                                {
+                                    "valueName": 4,
+                                    "description": "朝向北的上坡铁轨"
+                                },
+                                {
+                                    "valueName": 5,
+                                    "description": "朝向南的上坡铁轨"
+                                },
+                                {
+                                    "valueName": 6,
+                                    "description": "东南方向的转弯铁轨"
+                                },
+                                {
+                                    "valueName": 7,
+                                    "description": "西南方向的转弯铁轨"
+                                },
+                                {
+                                    "valueName": 8,
+                                    "description": "西北方向的转弯铁轨"
+                                },
+                                {
+                                    "valueName": 9,
+                                    "description": "东北方向的转弯铁轨"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
                         "bell"
                     ],
                     "properties": [
@@ -18404,26 +18818,214 @@
                 },
                 {
                     "blocks": [
-                        "grindstone"
+                        "flower_pot"
                     ],
                     "properties": [
                         {
-                            "propertyName": "attachment",
+                            "propertyName": "update_bit",
                             "values": [
                                 {
-                                    "valueName": "standing",
-                                    "description": "砂轮附着在其他方块的上面"
+                                    "valueName": false
                                 },
                                 {
-                                    "valueName": "hanging",
-                                    "description": "砂轮附着在其他方块的下面"
+                                    "valueName": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "fire"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "age",
+                            "description": "火的“年龄”，影响火的传播和熄灭 随时间变化，此值会逐渐增长直到15",
+                            "values": [
+                                {
+                                    "valueName": 0
                                 },
                                 {
-                                    "valueName": "side",
-                                    "description": "砂轮附着在一个其他方块的侧面"
+                                    "valueName": 1
                                 },
                                 {
-                                    "valueName": "multiple",
+                                    "valueName": 2
+                                },
+                                {
+                                    "valueName": 3
+                                },
+                                {
+                                    "valueName": 4
+                                },
+                                {
+                                    "valueName": 5
+                                },
+                                {
+                                    "valueName": 6
+                                },
+                                {
+                                    "valueName": 7
+                                },
+                                {
+                                    "valueName": 8
+                                },
+                                {
+                                    "valueName": 9
+                                },
+                                {
+                                    "valueName": 10
+                                },
+                                {
+                                    "valueName": 11
+                                },
+                                {
+                                    "valueName": 12
+                                },
+                                {
+                                    "valueName": 13
+                                },
+                                {
+                                    "valueName": 14
+                                },
+                                {
+                                    "valueName": 15
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "soul_fire"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "age",
+                            "description": "未使用",
+                            "values": [
+                                {
+                                    "valueName": 0
+                                },
+                                {
+                                    "valueName": 1
+                                },
+                                {
+                                    "valueName": 2
+                                },
+                                {
+                                    "valueName": 3
+                                },
+                                {
+                                    "valueName": 4
+                                },
+                                {
+                                    "valueName": 5
+                                },
+                                {
+                                    "valueName": 6
+                                },
+                                {
+                                    "valueName": 7
+                                },
+                                {
+                                    "valueName": 8
+                                },
+                                {
+                                    "valueName": 9
+                                },
+                                {
+                                    "valueName": 10
+                                },
+                                {
+                                    "valueName": 11
+                                },
+                                {
+                                    "valueName": 12
+                                },
+                                {
+                                    "valueName": 13
+                                },
+                                {
+                                    "valueName": 14
+                                },
+                                {
+                                    "valueName": 15
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "chorus_flower"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "age",
+                            "values": [
+                                {
+                                    "valueName": 0,
+                                    "description": " 紫颂花的age从0开始。当水平生长时或额外长出一朵新的紫颂花时增加"
+                                },
+                                {
+                                    "valueName": 1,
+                                    "description": " 紫颂花的age从0开始。当水平生长时或额外长出一朵新的紫颂花时增加"
+                                },
+                                {
+                                    "valueName": 2,
+                                    "description": " 紫颂花的age从0开始。当水平生长时或额外长出一朵新的紫颂花时增加"
+                                },
+                                {
+                                    "valueName": 3,
+                                    "description": " 紫颂花的age从0开始。当水平生长时或额外长出一朵新的紫颂花时增加"
+                                },
+                                {
+                                    "valueName": 4,
+                                    "description": " 紫颂花的age从0开始。当水平生长时或额外长出一朵新的紫颂花时增加"
+                                },
+                                {
+                                    "valueName": 5,
+                                    "description": " 紫颂花不再生长 紫颂花的age可以在任何时候变成5"
+                                },
+                                {
+                                    "valueName": 6,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 7,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 8,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 9,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 10,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 11,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 12,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 13,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 14,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 15,
                                     "description": "未使用"
                                 }
                             ]
@@ -18584,737 +19186,7 @@
                 },
                 {
                     "blocks": [
-                        "bamboo"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "age_bit",
-                            "values": [
-                                {
-                                    "valueName": false,
-                                    "description": "竹子刚被种下或刚生长出来，在一段时间后此值将变为true"
-                                },
-                                {
-                                    "valueName": true,
-                                    "description": "竹子在此阶段可以在上方长出新的竹子"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "colored_torch_red",
-                        "colored_torch_green"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "color_bit",
-                            "description": "已弃用，为兼容性而保留 彩色火把的颜色 true：绿色火把 false：红色火把",
-                            "values": [
-                                {
-                                    "valueName": false
-                                },
-                                {
-                                    "valueName": true
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "hopper"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "facing_direction",
-                            "description": "漏斗的输出方向 漏斗将只会把物品注入这个方向的容器 0：朝下 2：朝北 3：朝南 4：朝西 5：朝东",
-                            "values": [
-                                {
-                                    "valueName": 0
-                                },
-                                {
-                                    "valueName": 1
-                                },
-                                {
-                                    "valueName": 2
-                                },
-                                {
-                                    "valueName": 3
-                                },
-                                {
-                                    "valueName": 4
-                                },
-                                {
-                                    "valueName": 5
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "amethyst_cluster",
-                        "blast_furnace",
-                        "chest",
-                        "ender_chest",
-                        "furnace",
-                        "large_amethyst_bud",
-                        "lit_blast_furnace",
-                        "lit_furnace",
-                        "lit_smoker",
-                        "medium_amethyst_bud",
-                        "observer",
-                        "small_amethyst_bud",
-                        "smoker",
-                        "stonecutter_block",
-                        "trapped_chest"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "facing_direction",
-                            "description": "已弃用，为兼容性而保留 方块的朝向",
-                            "values": [
-                                {
-                                    "valueName": 0
-                                },
-                                {
-                                    "valueName": 1
-                                },
-                                {
-                                    "valueName": 2
-                                },
-                                {
-                                    "valueName": 3
-                                },
-                                {
-                                    "valueName": 4
-                                },
-                                {
-                                    "valueName": 5
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "sweet_berry_bush"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "growth",
-                            "values": [
-                                {
-                                    "valueName": 0,
-                                    "description": "甜浆果丛幼苗"
-                                },
-                                {
-                                    "valueName": 1,
-                                    "description": "没有浆果的甜浆果丛"
-                                },
-                                {
-                                    "valueName": 2,
-                                    "description": "有少量浆果的甜浆果丛，采收后此方块属性回到1"
-                                },
-                                {
-                                    "valueName": 3,
-                                    "description": "有大量浆果的甜浆果丛，采收后此方块属性回到1"
-                                },
-                                {
-                                    "valueName": 4,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 5,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 6,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 7,
-                                    "description": "未使用"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "anvil",
-                        "chipped_anvil",
-                        "damaged_anvil",
-                        "deprecated_anvil",
-                        "big_dripleaf",
-                        "calibrated_sculk_sensor",
-                        "campfire",
-                        "carved_pumpkin",
-                        "end_portal_frame",
-                        "lectern",
-                        "lit_pumpkin",
-                        "pink_petals",
-                        "powered_comparator",
-                        "powered_repeater",
-                        "pumpkin",
-                        "small_dripleaf_block",
-                        "soul_campfire",
-                        "unpowered_comparator",
-                        "unpowered_repeater"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "direction",
-                            "description": "已弃用，为兼容性而保留 方块的朝向",
-                            "values": [
-                                {
-                                    "valueName": 0
-                                },
-                                {
-                                    "valueName": 1
-                                },
-                                {
-                                    "valueName": 2
-                                },
-                                {
-                                    "valueName": 3
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "suspicious_gravel",
-                        "suspicious_sand"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "hanging",
-                            "description": "作用未知，为false时不读取其战利品表",
-                            "values": [
-                                {
-                                    "valueName": false
-                                },
-                                {
-                                    "valueName": true
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "acacia_trapdoor",
-                        "bamboo_trapdoor",
-                        "birch_trapdoor",
-                        "cherry_trapdoor",
-                        "copper_trapdoor",
-                        "crimson_trapdoor",
-                        "dark_oak_trapdoor",
-                        "exposed_copper_trapdoor",
-                        "iron_trapdoor",
-                        "jungle_trapdoor",
-                        "mangrove_trapdoor",
-                        "oxidized_copper_trapdoor",
-                        "pale_oak_trapdoor",
-                        "spruce_trapdoor",
-                        "warped_trapdoor",
-                        "waxed_copper_trapdoor",
-                        "waxed_exposed_copper_trapdoor",
-                        "waxed_oxidized_copper_trapdoor",
-                        "waxed_weathered_copper_trapdoor",
-                        "weathered_copper_trapdoor",
-                        "trapdoor"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "direction",
-                            "values": [
-                                {
-                                    "valueName": 0,
-                                    "description": "活板门朝向东方，轴在西方"
-                                },
-                                {
-                                    "valueName": 1,
-                                    "description": "活板门朝向西方，轴在东方"
-                                },
-                                {
-                                    "valueName": 2,
-                                    "description": "活板门朝向南方，轴在北方"
-                                },
-                                {
-                                    "valueName": 3,
-                                    "description": "活板门朝向北方，轴在南方"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "lectern",
-                        "observer",
-                        "tripwire_hook"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "powered_bit",
-                            "values": [
-                                {
-                                    "valueName": true,
-                                    "description": "方块被触发而正在提供红石信号"
-                                },
-                                {
-                                    "valueName": false,
-                                    "description": "方块未被触发故不提供红石信号"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "bed"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "direction",
-                            "values": [
-                                {
-                                    "valueName": 0,
-                                    "description": "床头指向南方"
-                                },
-                                {
-                                    "valueName": 1,
-                                    "description": "床头指向西方"
-                                },
-                                {
-                                    "valueName": 2,
-                                    "description": "床头指向北方"
-                                },
-                                {
-                                    "valueName": 3,
-                                    "description": "床头指向东方"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "brain_coral_wall_fan",
-                        "tube_coral_wall_fan",
-                        "dead_brain_coral_wall_fan",
-                        "dead_tube_coral_wall_fan"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "coral_hang_type_bit",
-                            "description": "已弃用，为兼容性而保留 true： 脑纹珊瑚扇 false： 管珊瑚扇",
-                            "values": [
-                                {
-                                    "valueName": false
-                                },
-                                {
-                                    "valueName": true
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "horn_coral_wall_fan",
-                        "dead_horn_coral_wall_fan"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "coral_hang_type_bit",
-                            "description": "已弃用，为兼容性而保留 true：未使用 false： 鹿角珊瑚扇",
-                            "values": [
-                                {
-                                    "valueName": false
-                                },
-                                {
-                                    "valueName": true
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "lava",
-                        "flowing_lava"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "liquid_depth",
-                            "values": [
-                                {
-                                    "valueName": 0,
-                                    "description": "熔岩源方块"
-                                },
-                                {
-                                    "valueName": 1,
-                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
-                                },
-                                {
-                                    "valueName": 2,
-                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
-                                },
-                                {
-                                    "valueName": 3,
-                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
-                                },
-                                {
-                                    "valueName": 4,
-                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
-                                },
-                                {
-                                    "valueName": 5,
-                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
-                                },
-                                {
-                                    "valueName": 6,
-                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
-                                },
-                                {
-                                    "valueName": 7,
-                                    "description": "距最近熔岩源或向下流淌的熔岩的距离，距离越大厚度越薄，在主世界和末地只使用了2、4和6"
-                                },
-                                {
-                                    "valueName": 8,
-                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
-                                },
-                                {
-                                    "valueName": 9,
-                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
-                                },
-                                {
-                                    "valueName": 10,
-                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
-                                },
-                                {
-                                    "valueName": 11,
-                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
-                                },
-                                {
-                                    "valueName": 12,
-                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
-                                },
-                                {
-                                    "valueName": 13,
-                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
-                                },
-                                {
-                                    "valueName": 14,
-                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
-                                },
-                                {
-                                    "valueName": 15,
-                                    "description": "向下流淌的熔岩，等于它上方非向下流淌的熔岩的等级加上8，数字差异并不会对熔岩的行为造成影响"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "acacia_fence_gate",
-                        "bamboo_fence_gate",
-                        "birch_fence_gate",
-                        "cherry_fence_gate",
-                        "crimson_fence_gate",
-                        "dark_oak_fence_gate",
-                        "fence_gate",
-                        "jungle_fence_gate",
-                        "mangrove_fence_gate",
-                        "pale_oak_fence_gate",
-                        "spruce_fence_gate",
-                        "warped_fence_gate"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "direction",
-                            "description": "已弃用，为兼容性而保留 方块的朝向 0：朝南 1：朝西 2：朝北 3：朝东",
-                            "values": [
-                                {
-                                    "valueName": 0
-                                },
-                                {
-                                    "valueName": 1
-                                },
-                                {
-                                    "valueName": 2
-                                },
-                                {
-                                    "valueName": 3
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "pink_petals",
-                        "leaf_litter",
-                        "wildflowers"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "growth",
-                            "values": [
-                                {
-                                    "valueName": 0,
-                                    "description": "占据方块的四分之一"
-                                },
-                                {
-                                    "valueName": 1,
-                                    "description": "占据方块的四分之二"
-                                },
-                                {
-                                    "valueName": 2,
-                                    "description": "占据方块的四分之三"
-                                },
-                                {
-                                    "valueName": 3,
-                                    "description": "占据整个方块"
-                                },
-                                {
-                                    "valueName": 4,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 5,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 6,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 7,
-                                    "description": "未使用"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "soul_fire"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "age",
-                            "description": "未使用",
-                            "values": [
-                                {
-                                    "valueName": 0
-                                },
-                                {
-                                    "valueName": 1
-                                },
-                                {
-                                    "valueName": 2
-                                },
-                                {
-                                    "valueName": 3
-                                },
-                                {
-                                    "valueName": 4
-                                },
-                                {
-                                    "valueName": 5
-                                },
-                                {
-                                    "valueName": 6
-                                },
-                                {
-                                    "valueName": 7
-                                },
-                                {
-                                    "valueName": 8
-                                },
-                                {
-                                    "valueName": 9
-                                },
-                                {
-                                    "valueName": 10
-                                },
-                                {
-                                    "valueName": 11
-                                },
-                                {
-                                    "valueName": 12
-                                },
-                                {
-                                    "valueName": 13
-                                },
-                                {
-                                    "valueName": 14
-                                },
-                                {
-                                    "valueName": 15
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "bubble_coral_wall_fan",
-                        "fire_coral_wall_fan",
-                        "dead_bubble_coral_wall_fan",
-                        "dead_fire_coral_wall_fan"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "coral_hang_type_bit",
-                            "description": "已弃用，为兼容性而保留 true： 火珊瑚扇 false： 气泡珊瑚扇",
-                            "values": [
-                                {
-                                    "valueName": false
-                                },
-                                {
-                                    "valueName": true
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "cocoa",
-                        "compound_creator",
-                        "material_reducer",
-                        "element_constructor",
-                        "lab_table"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "direction",
-                            "values": [
-                                {
-                                    "valueName": 0,
-                                    "description": "方块朝向北方"
-                                },
-                                {
-                                    "valueName": 1,
-                                    "description": "方块朝向东方"
-                                },
-                                {
-                                    "valueName": 2,
-                                    "description": "方块朝向南方"
-                                },
-                                {
-                                    "valueName": 3,
-                                    "description": "方块朝向西方"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "beetroot",
-                        "carrots",
-                        "potatoes"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "growth",
-                            "values": [
-                                {
-                                    "valueName": 0,
-                                    "description": "作物生长第一阶段"
-                                },
-                                {
-                                    "valueName": 1,
-                                    "description": "作物生长第一阶段"
-                                },
-                                {
-                                    "valueName": 2,
-                                    "description": "作物生长第二阶段"
-                                },
-                                {
-                                    "valueName": 3,
-                                    "description": "作物生长第二阶段"
-                                },
-                                {
-                                    "valueName": 4,
-                                    "description": "作物生长第三阶段"
-                                },
-                                {
-                                    "valueName": 5,
-                                    "description": "作物生长第三阶段"
-                                },
-                                {
-                                    "valueName": 6,
-                                    "description": "作物生长第三阶段"
-                                },
-                                {
-                                    "valueName": 7,
-                                    "description": "作物成熟"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "bamboo_sapling"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "age_bit",
-                            "values": [
-                                {
-                                    "valueName": false,
-                                    "description": "竹笋刚被种下，在一段时间后此值将变为true"
-                                },
-                                {
-                                    "valueName": true,
-                                    "description": "竹笋在此阶段可以生长为竹子"
-                                }
-                            ]
-                        },
-                        {
-                            "propertyName": "sapling_type",
-                            "description": "未使用，正常情况下均为oak",
-                            "values": [
-                                {
-                                    "valueName": "oak"
-                                },
-                                {
-                                    "valueName": "spruce"
-                                },
-                                {
-                                    "valueName": "birch"
-                                },
-                                {
-                                    "valueName": "jungle"
-                                },
-                                {
-                                    "valueName": "acacia"
-                                },
-                                {
-                                    "valueName": "dark_oak"
-                                },
-                                {
-                                    "valueName": "pale_oak"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "chorus_flower"
+                        "nether_wart"
                     ],
                     "properties": [
                         {
@@ -19322,27 +19194,27 @@
                             "values": [
                                 {
                                     "valueName": 0,
-                                    "description": "紫颂花的age从0开始。当水平生长时或额外长出一朵新的紫颂花时增加"
+                                    "description": " 生长第一阶段"
                                 },
                                 {
                                     "valueName": 1,
-                                    "description": "紫颂花的age从0开始。当水平生长时或额外长出一朵新的紫颂花时增加"
+                                    "description": " 生长第二阶段"
                                 },
                                 {
                                     "valueName": 2,
-                                    "description": "紫颂花的age从0开始。当水平生长时或额外长出一朵新的紫颂花时增加"
+                                    "description": " 生长第二阶段"
                                 },
                                 {
                                     "valueName": 3,
-                                    "description": "紫颂花的age从0开始。当水平生长时或额外长出一朵新的紫颂花时增加"
+                                    "description": " 成熟"
                                 },
                                 {
                                     "valueName": 4,
-                                    "description": "紫颂花的age从0开始。当水平生长时或额外长出一朵新的紫颂花时增加"
+                                    "description": "未使用"
                                 },
                                 {
                                     "valueName": 5,
-                                    "description": "紫颂花不再生长 紫颂花的age可以在任何时候变成5"
+                                    "description": "未使用"
                                 },
                                 {
                                     "valueName": 6,
@@ -19383,26 +19255,6 @@
                                 {
                                     "valueName": 15,
                                     "description": "未使用"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "colored_torch_blue",
-                        "colored_torch_purple"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "color_bit",
-                            "description": "已弃用，为兼容性而保留 彩色火把的颜色 true：紫色火把 false：蓝色火把",
-                            "values": [
-                                {
-                                    "valueName": false
-                                },
-                                {
-                                    "valueName": true
                                 }
                             ]
                         }
@@ -19489,95 +19341,39 @@
                 },
                 {
                     "blocks": [
-                        "trip_wire"
+                        "end_rod",
+                        "piston",
+                        "piston_arm_collision",
+                        "sticky_piston",
+                        "sticky_piston_arm_collision"
                     ],
                     "properties": [
                         {
-                            "propertyName": "powered_bit",
-                            "values": [
-                                {
-                                    "valueName": true,
-                                    "description": "绊线被在其中的实体触发"
-                                },
-                                {
-                                    "valueName": false,
-                                    "description": "绊线未被触发"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "blocks": [
-                        "nether_wart"
-                    ],
-                    "properties": [
-                        {
-                            "propertyName": "age",
+                            "propertyName": "facing_direction",
                             "values": [
                                 {
                                     "valueName": 0,
-                                    "description": "生长第一阶段"
+                                    "description": "方块朝向下方"
                                 },
                                 {
                                     "valueName": 1,
-                                    "description": "生长第二阶段"
+                                    "description": "方块朝向上方"
                                 },
                                 {
                                     "valueName": 2,
-                                    "description": "生长第二阶段"
+                                    "description": "方块朝向南方"
                                 },
                                 {
                                     "valueName": 3,
-                                    "description": "成熟"
+                                    "description": "方块朝向北方"
                                 },
                                 {
                                     "valueName": 4,
-                                    "description": "未使用"
+                                    "description": "方块朝向东方"
                                 },
                                 {
                                     "valueName": 5,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 6,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 7,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 8,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 9,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 10,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 11,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 12,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 13,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 14,
-                                    "description": "未使用"
-                                },
-                                {
-                                    "valueName": 15,
-                                    "description": "未使用"
+                                    "description": "方块朝向西方"
                                 }
                             ]
                         }
@@ -19585,12 +19381,54 @@
                 },
                 {
                     "blocks": [
-                        "fire"
+                        "skeleton_skull",
+                        "wither_skeleton_skull",
+                        "zombie_head",
+                        "player_head",
+                        "creeper_head",
+                        "piglin_head",
+                        "dragon_head"
                     ],
                     "properties": [
                         {
-                            "propertyName": "age",
-                            "description": "火的“年龄”，影响火的传播和熄灭 随时间变化，此值会逐渐增长直到15",
+                            "propertyName": "facing_direction",
+                            "values": [
+                                {
+                                    "valueName": 0,
+                                    "description": "未使用"
+                                },
+                                {
+                                    "valueName": 1,
+                                    "description": "生物头颅在地上"
+                                },
+                                {
+                                    "valueName": 2,
+                                    "description": "生物头颅朝向北方"
+                                },
+                                {
+                                    "valueName": 3,
+                                    "description": "生物头颅朝向南方"
+                                },
+                                {
+                                    "valueName": 4,
+                                    "description": "生物头颅朝向西方"
+                                },
+                                {
+                                    "valueName": 5,
+                                    "description": "生物头颅朝向东方"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "hopper"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "facing_direction",
+                            "description": "漏斗的输出方向 漏斗将只会把物品注入这个方向的容器 0：朝下 2：朝北 3：朝南 4：朝西 5：朝东",
                             "values": [
                                 {
                                     "valueName": 0
@@ -19609,36 +19447,130 @@
                                 },
                                 {
                                     "valueName": 5
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "amethyst_cluster",
+                        "blast_furnace",
+                        "chest",
+                        "ender_chest",
+                        "furnace",
+                        "large_amethyst_bud",
+                        "lit_blast_furnace",
+                        "lit_furnace",
+                        "lit_smoker",
+                        "medium_amethyst_bud",
+                        "observer",
+                        "small_amethyst_bud",
+                        "smoker",
+                        "stonecutter_block",
+                        "trapped_chest"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "facing_direction",
+                            "description": "已弃用，为兼容性而保留 方块的朝向",
+                            "values": [
+                                {
+                                    "valueName": 0
                                 },
                                 {
-                                    "valueName": 6
+                                    "valueName": 1
                                 },
                                 {
-                                    "valueName": 7
+                                    "valueName": 2
                                 },
                                 {
-                                    "valueName": 8
+                                    "valueName": 3
                                 },
                                 {
-                                    "valueName": 9
+                                    "valueName": 4
                                 },
                                 {
-                                    "valueName": 10
+                                    "valueName": 5
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "anvil",
+                        "chipped_anvil",
+                        "damaged_anvil",
+                        "deprecated_anvil",
+                        "big_dripleaf",
+                        "calibrated_sculk_sensor",
+                        "campfire",
+                        "carved_pumpkin",
+                        "end_portal_frame",
+                        "lectern",
+                        "lit_pumpkin",
+                        "pink_petals",
+                        "powered_comparator",
+                        "powered_repeater",
+                        "pumpkin",
+                        "small_dripleaf_block",
+                        "soul_campfire",
+                        "unpowered_comparator",
+                        "unpowered_repeater"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "direction",
+                            "description": "已弃用，为兼容性而保留 方块的朝向",
+                            "values": [
+                                {
+                                    "valueName": 0
                                 },
                                 {
-                                    "valueName": 11
+                                    "valueName": 1
                                 },
                                 {
-                                    "valueName": 12
+                                    "valueName": 2
                                 },
                                 {
-                                    "valueName": 13
+                                    "valueName": 3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "acacia_fence_gate",
+                        "bamboo_fence_gate",
+                        "birch_fence_gate",
+                        "cherry_fence_gate",
+                        "crimson_fence_gate",
+                        "dark_oak_fence_gate",
+                        "fence_gate",
+                        "jungle_fence_gate",
+                        "mangrove_fence_gate",
+                        "pale_oak_fence_gate",
+                        "spruce_fence_gate",
+                        "warped_fence_gate"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "direction",
+                            "description": "已弃用，为兼容性而保留 方块的朝向 0：朝南 1：朝西 2：朝北 3：朝东",
+                            "values": [
+                                {
+                                    "valueName": 0
                                 },
                                 {
-                                    "valueName": 14
+                                    "valueName": 1
                                 },
                                 {
-                                    "valueName": 15
+                                    "valueName": 2
+                                },
+                                {
+                                    "valueName": 3
                                 }
                             ]
                         }
@@ -19687,6 +19619,60 @@
                                 },
                                 {
                                     "valueName": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "sculk_shrieker"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "active",
+                            "values": [
+                                {
+                                    "valueName": false
+                                },
+                                {
+                                    "valueName": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "blocks": [
+                        "creaking_heart"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "active",
+                            "description": "已弃用，为兼容性而保留 方块是否失活 false：对应dormant true：对应uprooted",
+                            "values": [
+                                {
+                                    "valueName": false
+                                },
+                                {
+                                    "valueName": true
+                                }
+                            ]
+                        },
+                        {
+                            "propertyName": "creaking_heart_state",
+                            "values": [
+                                {
+                                    "valueName": "uprooted",
+                                    "description": "嘎枝之心因脱离有效的结构而失活"
+                                },
+                                {
+                                    "valueName": "dormant",
+                                    "description": "嘎枝之心未失活，但因处于白天而休眠"
+                                },
+                                {
+                                    "valueName": "awake",
+                                    "description": "嘎枝之心未失活，且因处于夜晚而激活"
                                 }
                             ]
                         }

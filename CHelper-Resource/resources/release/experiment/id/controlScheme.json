@@ -6,6 +6,9 @@
             "name": "camera_relative"
         },
         {
+            "name": "camera_relative_strafe"
+        },
+        {
             "name": "locked_player_relative_strafe"
         },
         {

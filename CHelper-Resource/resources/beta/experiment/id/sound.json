@@ -87,6 +87,9 @@
             "description": "雨：落下"
         },
         {
+            "name": "ambient.weather.the_end_light_flash"
+        },
+        {
             "name": "ambient.weather.thunder",
             "description": "雷鸣"
         },
@@ -348,9 +351,6 @@
         },
         {
             "name": "block.dried_ghast.fall"
-        },
-        {
-            "name": "block.dried_ghast.hit"
         },
         {
             "name": "block.dried_ghast.place"
@@ -2400,6 +2400,9 @@
             "description": "木头：某物着陆"
         },
         {
+            "name": "lead.break"
+        },
+        {
             "name": "leashknot.break",
             "description": "拴绳结：被破坏"
         },
@@ -3379,6 +3382,9 @@
             "description": "马：受伤"
         },
         {
+            "name": "mob.horse.horse_armor_unequip"
+        },
+        {
             "name": "mob.horse.idle",
             "description": "马：嘶鸣"
         },
@@ -3473,6 +3479,9 @@
         {
             "name": "mob.llama.angry",
             "description": "羊驼：怒吼"
+        },
+        {
+            "name": "mob.llama.carpet_unequip"
         },
         {
             "name": "mob.llama.death",
@@ -4115,6 +4124,9 @@
             "description": "幼年海龟：爬行"
         },
         {
+            "name": "mob.unsaddle"
+        },
+        {
             "name": "mob.vex.ambient",
             "description": "恼鬼：恼人"
         },
@@ -4685,6 +4697,9 @@
         {
             "name": "music.overworld.flower_forest",
             "description": "繁花森林背景音乐"
+        },
+        {
+            "name": "music.overworld.forest"
         },
         {
             "name": "music.overworld.grove",
@@ -5305,6 +5320,10 @@
         {
             "name": "record.strad",
             "description": "音乐唱片（C418 - strad）"
+        },
+        {
+            "name": "record.tears",
+            "description": "音乐唱片（Amos Roddy - Tears）"
         },
         {
             "name": "record.wait",

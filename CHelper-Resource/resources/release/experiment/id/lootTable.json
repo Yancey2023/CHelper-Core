@@ -3,10 +3,6 @@
     "type": "normal",
     "content": [
         {
-            "name": "empty",
-            "description": "不生成战利品"
-        },
-        {
             "name": "\"chests/abandoned_mineshaft\"",
             "description": "废弃矿井宝箱"
         },
@@ -239,6 +235,10 @@
         },
         {
             "name": "\"empty\"",
+            "description": "不生成战利品"
+        },
+        {
+            "name": "empty",
             "description": "不生成战利品"
         },
         {

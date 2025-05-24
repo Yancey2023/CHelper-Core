@@ -87,6 +87,9 @@
             "description": "沙漠丘陵"
         },
         {
+            "name": "minecraft:fog_dry"
+        },
+        {
             "name": "minecraft:fog_extreme_hills",
             "description": "山地"
         },
@@ -131,6 +134,9 @@
             "description": "下界荒地"
         },
         {
+            "name": "minecraft:fog_humid"
+        },
+        {
             "name": "minecraft:fog_ice_mountains",
             "description": "雪山"
         },
@@ -161,6 +167,9 @@
         {
             "name": "minecraft:fog_lukewarm_ocean",
             "description": "温水海洋"
+        },
+        {
+            "name": "minecraft:fog_lush_caves"
         },
         {
             "name": "minecraft:fog_mangrove_swamp",
@@ -249,6 +258,9 @@
         {
             "name": "minecraft:fog_savanna_plateau",
             "description": "热带高原"
+        },
+        {
+            "name": "minecraft:fog_semi_humid"
         },
         {
             "name": "minecraft:fog_soulsand_valley",
