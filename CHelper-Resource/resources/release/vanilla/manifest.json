@@ -1,11 +1,11 @@
 {
-  "name": "正式版原版",
-  "description": "CHelper内置资源包",
-  "minecraftVersion": "1.21.80.3-vanilla",
-  "author": "Yancey",
-  "updateDate": "2025-5-18",
-  "packId": "BasicPack-1.21.80.3-vanilla",
-  "versionCode": 1,
-  "isBasicPack": true,
-  "isDefault": true
+    "name": "正式版原版",
+    "description": "CHelper内置资源包",
+    "minecraftVersion": "1.21.80.3-vanilla",
+    "author": "Yancey",
+    "updateDate": "2025-5-18",
+    "packId": "BasicPack-1.21.80.3-vanilla",
+    "versionCode": 1,
+    "isBasicPack": true,
+    "isDefault": true
 }

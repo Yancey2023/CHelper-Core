@@ -1,35 +1,35 @@
 {
-  "name": [
-    "listd"
-  ],
-  "description": "列出在服务器上的玩家（隐藏命令）",
-  "start": [
-    "details"
-  ],
-  "node": [
-    {
-      "type": "NORMAL_ID",
-      "id": "details",
-      "brief": "内容",
-      "description": "要列出的内容",
-      "ignoreError": false,
-      "contents": [
+    "name": [
+        "listd"
+    ],
+    "description": "列出在服务器上的玩家（隐藏命令）",
+    "start": [
+        "details"
+    ],
+    "node": [
         {
-          "name": "ids",
-          "description": "玩家的ID"
-        },
-        {
-          "name": "stats",
-          "description": "玩家的统计"
-        },
-        {
-          "name": "uuids",
-          "description": "玩家的UUID"
+            "type": "NORMAL_ID",
+            "id": "details",
+            "brief": "内容",
+            "description": "要列出的内容",
+            "ignoreError": false,
+            "contents": [
+                {
+                    "name": "ids",
+                    "description": "玩家的ID"
+                },
+                {
+                    "name": "stats",
+                    "description": "玩家的统计"
+                },
+                {
+                    "name": "uuids",
+                    "description": "玩家的UUID"
+                }
+            ]
         }
-      ]
-    }
-  ],
-  "ast": [
-    ["details", "LF"]
-  ]
+    ],
+    "ast": [
+        ["details", "LF"]
+    ]
 }

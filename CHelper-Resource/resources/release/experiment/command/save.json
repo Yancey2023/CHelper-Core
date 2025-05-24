@@ -1,34 +1,34 @@
 {
-  "name": [
-    "save"
-  ],
-  "description": "准备备份、查询存档状态或恢复存档",
-  "start": [
-    "saveMode"
-  ],
-  "node": [
-    {
-      "type": "NORMAL_ID",
-      "id": "saveMode",
-      "description": "保存模式",
-      "ignoreError": false,
-      "contents": [
+    "name": [
+        "save"
+    ],
+    "description": "准备备份、查询存档状态或恢复存档",
+    "start": [
+        "saveMode"
+    ],
+    "node": [
         {
-          "name": "hold",
-          "description": "准备备份"
-        },
-        {
-          "name": "query",
-          "description": " 查询存档状态"
-        },
-        {
-          "name": "query",
-          "description": " 恢复存档"
+            "type": "NORMAL_ID",
+            "id": "saveMode",
+            "description": "保存模式",
+            "ignoreError": false,
+            "contents": [
+                {
+                    "name": "hold",
+                    "description": "准备备份"
+                },
+                {
+                    "name": "query",
+                    "description": " 查询存档状态"
+                },
+                {
+                    "name": "query",
+                    "description": " 恢复存档"
+                }
+            ]
         }
-      ]
-    }
-  ],
-  "ast": [
-    ["saveMode", "LF"]
-  ]
+    ],
+    "ast": [
+        ["saveMode", "LF"]
+    ]
 }
