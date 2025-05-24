@@ -322,11 +322,11 @@
           "description": " 赋值"
         },
         {
-          "name": "<=",
+          "name": "<",
           "description": "取较小值"
         },
         {
-          "name": ">=",
+          "name": ">",
           "description": "取较大值"
         },
         {
