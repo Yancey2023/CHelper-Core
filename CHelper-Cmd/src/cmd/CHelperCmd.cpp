@@ -148,7 +148,6 @@ namespace CHelper::Test {
             }
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
-            exit(-1);
         }
         test(core, commands, isTestTime);
         delete core;
@@ -168,7 +167,6 @@ namespace CHelper::Test {
             }
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
-            exit(-1);
         }
         test(core, commands, isTestTime);
         delete core;
@@ -267,7 +265,6 @@ namespace CHelper::Test {
             }
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
-            exit(-1);
         }
     }
 
@@ -323,8 +320,10 @@ namespace CHelper::Test {
             Profile::printAndClear(e);
             exit(-1);
         }
+        bool isSuccess = core2 != nullptr;
         delete core;
         delete core2;
+        return isSuccess;
     }
 
     [[maybe_unused]] bool writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output) {
@@ -345,8 +344,10 @@ namespace CHelper::Test {
             Profile::printAndClear(e);
             exit(-1);
         }
+        bool isSuccess = core2 != nullptr;
         delete core;
         delete core2;
+        return isSuccess;
     }
 
     [[maybe_unused]] bool writeBinary(const std::filesystem::path &input, const std::filesystem::path &output) {
@@ -367,8 +368,10 @@ namespace CHelper::Test {
             Profile::printAndClear(e);
             exit(-1);
         }
+        bool isSuccess = core2 != nullptr;
         delete core;
         delete core2;
+        return isSuccess;
     }
 
 }// namespace CHelper::Test
