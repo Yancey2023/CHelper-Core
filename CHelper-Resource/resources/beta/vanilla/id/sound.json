@@ -2400,7 +2400,8 @@
             "description": "木头：某物着陆"
         },
         {
-            "name": "lead.break"
+            "name": "lead.break",
+            "description": "拴绳：剪断"
         },
         {
             "name": "leashknot.break",

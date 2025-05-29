@@ -22,7 +22,9 @@ namespace CHelper {
     bool operator==(const Manifest &t1, const Manifest &t2) {
         return t1.name == t2.name &&
                t1.description == t2.description &&
-               t1.minecraftVersion == t2.minecraftVersion &&
+               t1.version == t2.version &&
+               t1.versionType == t2.versionType &&
+               t1.branch == t2.branch &&
                t1.author == t2.author &&
                t1.updateDate == t2.updateDate &&
                t1.packId == t2.packId &&
@@ -261,22 +263,24 @@ TEST(BinaryUtilTest, OptioanlString) {
 
 TEST(BinaryUtilTest, Manifest) {
     auto getInstance1 = []() -> CHelper::Manifest {
-        return {u"name", u"description", u"minecraftVersion",
-                u"author", u"updateDate", u"packId",
+        return {u"name", u"description", u"version", u"versionType",
+                u"branch", u"author", u"updateDate", u"packId",
                 1, true, true};
     };
     auto getInstance2 = []() -> CHelper::Manifest {
-        return {u"name", std::nullopt, u"minecraftVersion",
-                u"author", u"updateDate", u"packId",
+        return {u"name", std::nullopt, u"version", u"versionType",
+                u"branch", u"author", u"updateDate", u"packId",
                 2, std::nullopt, true};
     };
     auto getInstance3 = []() -> CHelper::Manifest {
-        return {u"name", u"description", std::nullopt,
-                u"author", u"updateDate", u"packId",
+        return {u"name", u"description", std::nullopt, u"versionType",
+                u"branch", u"author", u"updateDate", u"packId",
                 3, false, std::nullopt};
     };
     auto getInstance4 = []() -> CHelper::Manifest {
         return {std::nullopt,
+                std::nullopt,
+                std::nullopt,
                 std::nullopt,
                 std::nullopt,
                 u"author",

@@ -1,7 +1,9 @@
 {
     "name": "正式版实验性玩法",
     "description": "CHelper内置资源包",
-    "minecraftVersion": "1.21.81.2-experiment",
+    "version": "1.21.81.2",
+    "versionType": "release",
+    "branch": "experiment",
     "author": "Yancey",
     "updateDate": "2025-5-18",
     "packId": "BasicPack-1.21.81.2-experiment",

@@ -1,10 +1,12 @@
 {
     "name": "[内置] 测试版原版",
     "description": "CHelper内置资源包",
-    "minecraftVersion": "1.21.90.26-vanilla",
+    "version": "1.21.90.27",
+    "versionType": "beta",
+    "branch": "vanilla",
     "author": "Yancey",
-    "updateDate": "2025-5-25",
-    "packId": "BasicPack-1.21.90.26 -vanilla",
+    "updateDate": "2025-5-30",
+    "packId": "BasicPack-1.21.90.27 -vanilla",
     "versionCode": 1,
     "isBasicPack": true,
     "isDefault": true

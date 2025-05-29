@@ -19,15 +19,7 @@ int main();
 [[maybe_unused]] void testBin();
 
 [[maybe_unused]] bool outputFile(
-        const std::filesystem::path &projectDir,
-        bool function(const std::filesystem::path &input, const std::filesystem::path &output),
-        const std::string &str1,
-        const std::string &str2,
-        const std::string &str3,
-        const std::string &fileType);
-
-[[maybe_unused]] bool outputFile(
-        bool function(const std::filesystem::path &input, const std::filesystem::path &output),
+        bool function(const std::filesystem::path &input, const std::filesystem::path &output, const std::string &fileType),
         const std::string &fileType);
 
 [[maybe_unused]] bool outputOld2New();
@@ -46,11 +38,11 @@ namespace CHelper::Test {
 
     [[maybe_unused]] void test2(const std::filesystem::path &cpackPath, const std::vector<std::u16string> &commands, int times);
 
-    [[maybe_unused]] bool writeDirectory(const std::filesystem::path &input, const std::filesystem::path &output);
+    [[maybe_unused]] bool writeDirectory(const std::filesystem::path &input, const std::filesystem::path &output, const std::string &fileType);
 
-    [[maybe_unused]] bool writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output);
+    [[maybe_unused]] bool writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output, const std::string &fileType);
 
-    [[maybe_unused]] bool writeBinary(const std::filesystem::path &input, const std::filesystem::path &output);
+    [[maybe_unused]] bool writeBinary(const std::filesystem::path &input, const std::filesystem::path &output, const std::string &fileType);
 
 }// namespace CHelper::Test
 

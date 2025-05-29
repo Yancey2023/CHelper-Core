@@ -26,38 +26,26 @@ int main() {
 
 [[maybe_unused]] void testBin() {
     std::filesystem::path resourceDir(RESOURCE_DIR);
-    CHelper::Test::testBin(resourceDir / "run" / (std::string("beta-experiment-") + CPACK_VERSION_BETA + ".cpack"),
-                           resourceDir / "test" / "test.txt",
-                           true);
+    for (const auto &cpackPath: std::filesystem::directory_iterator(resourceDir / "run" / "cpack")) {
+        std::string fileName = cpackPath.path().filename().string();
+        if (fileName.find("beta-experiment-") != -1) {
+            CHelper::Test::testBin(cpackPath, resourceDir / "test" / "test.txt", true);
+            break;
+        }
+    }
 }
 
 [[maybe_unused]] bool outputFile(
-        const std::filesystem::path &projectDir,
-        bool function(const std::filesystem::path &input, const std::filesystem::path &output),
-        const std::string &branch1,
-        const std::string &branch2,
-        const std::string &version,
-        const std::string &fileType) {
-    std::string fileName = branch1 + '-' + branch2 + '-' + version + '.' + fileType;
-    CHELPER_INFO("----- start output {} -----", fileName);
-    return function(projectDir / "resources" / branch1 / branch2,
-                    projectDir / "run" / fileType / fileName);
-}
-
-[[maybe_unused]] bool outputFile(
-        bool function(const std::filesystem::path &input, const std::filesystem::path &output),
+        bool function(const std::filesystem::path &input, const std::filesystem::path &output, const std::string &fileType),
         const std::string &fileType) {
     std::filesystem::path projectDir(RESOURCE_DIR);
     bool isSuccess = true;
-    // release
-    isSuccess = outputFile(projectDir, function, "release", "vanilla", CPACK_VERSION_RELEASE, fileType) && isSuccess;
-    isSuccess = outputFile(projectDir, function, "release", "experiment", CPACK_VERSION_RELEASE, fileType) && isSuccess;
-    // beta
-    isSuccess = outputFile(projectDir, function, "beta", "vanilla", CPACK_VERSION_BETA, fileType) && isSuccess;
-    isSuccess = outputFile(projectDir, function, "beta", "experiment", CPACK_VERSION_BETA, fileType) && isSuccess;
-    // netease
-    isSuccess = outputFile(projectDir, function, "netease", "vanilla", CPACK_VERSION_NETEASE, fileType) && isSuccess;
-    isSuccess = outputFile(projectDir, function, "netease", "experiment", CPACK_VERSION_NETEASE, fileType) && isSuccess;
+    for (const auto &branchDir: std::filesystem::directory_iterator(projectDir / "resources" / "release")) {
+        isSuccess = function(branchDir, projectDir / "run" / fileType, fileType) && isSuccess;
+    }
+    for (const auto &branchDir: std::filesystem::directory_iterator(projectDir / "resources" / "beta")) {
+        isSuccess = function(branchDir, projectDir / "run" / fileType, fileType) && isSuccess;
+    }
     return isSuccess;
 }
 
@@ -302,7 +290,7 @@ namespace CHelper::Test {
         delete core;
     }
 
-    [[maybe_unused]] bool writeDirectory(const std::u16string &input, const std::filesystem::path &output) {
+    [[maybe_unused]] bool writeDirectory(const std::u16string &input, const std::filesystem::path &output, const std::string &fileType) {
         CHelperCore *core = nullptr;
         CHelperCore *core2 = nullptr;
         try {
@@ -310,12 +298,14 @@ namespace CHelper::Test {
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return false;
             }
+            const Manifest &manifest = core->getCPack()->manifest;
+            std::filesystem::path realOutput = output / utf8::utf16to8(manifest.versionType.value_or(u"") + u"-" + manifest.branch.value_or(u"") + u"-" + manifest.version.value_or(u"") + u"." + utf8::utf8to16(fileType));
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
-            core->getCPack()->writeJsonToDirectory(output);
+            core->getCPack()->writeJsonToDirectory(realOutput);
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
-            core2 = CHelperCore::createByDirectory(output);
+            core2 = CHelperCore::createByDirectory(realOutput);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
@@ -326,7 +316,7 @@ namespace CHelper::Test {
         return isSuccess;
     }
 
-    [[maybe_unused]] bool writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output) {
+    [[maybe_unused]] bool writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output, const std::string &fileType) {
         CHelperCore *core = nullptr;
         CHelperCore *core2 = nullptr;
         try {
@@ -334,12 +324,14 @@ namespace CHelper::Test {
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return false;
             }
+            const Manifest &manifest = core->getCPack()->manifest;
+            std::filesystem::path realOutput = output / utf8::utf16to8(manifest.versionType.value_or(u"") + u"-" + manifest.branch.value_or(u"") + u"-" + manifest.version.value_or(u"") + u"." + utf8::utf8to16(fileType));
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
-            core->getCPack()->writeJsonToFile(output);
+            core->getCPack()->writeJsonToFile(realOutput);
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
-            core2 = CHelperCore::createByJson(output);
+            core2 = CHelperCore::createByJson(realOutput);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
@@ -350,7 +342,7 @@ namespace CHelper::Test {
         return isSuccess;
     }
 
-    [[maybe_unused]] bool writeBinary(const std::filesystem::path &input, const std::filesystem::path &output) {
+    [[maybe_unused]] bool writeBinary(const std::filesystem::path &input, const std::filesystem::path &output, const std::string &fileType) {
         CHelperCore *core = nullptr;
         CHelperCore *core2 = nullptr;
         try {
@@ -358,12 +350,14 @@ namespace CHelper::Test {
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return false;
             }
+            const Manifest &manifest = core->getCPack()->manifest;
+            std::filesystem::path realOutput = output / utf8::utf16to8(manifest.versionType.value_or(u"") + u"-" + manifest.branch.value_or(u"") + u"-" + manifest.version.value_or(u"") + u"." + utf8::utf8to16(fileType));
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
-            core->getCPack()->writeBinToFile(output);
+            core->getCPack()->writeBinToFile(realOutput);
             end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
-            core2 = CHelperCore::createByBinary(output);
+            core2 = CHelperCore::createByBinary(realOutput);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
