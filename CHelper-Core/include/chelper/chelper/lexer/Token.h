@@ -33,7 +33,7 @@ namespace CHelper {
         const LexerPos pos;
         const std::u16string_view content;
 
-        Token(TokenType::TokenType type, LexerPos pos, const std::u16string_view &content);
+        Token(TokenType::TokenType type, const LexerPos &pos, const std::u16string_view &content);
 
         [[nodiscard]] size_t getStartIndex() const;
 

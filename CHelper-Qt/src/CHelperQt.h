@@ -24,9 +24,9 @@ public:
     ~CHelperApp() override;
 
 private slots:
-    void onTextChanged(const QString &string);
+    void onTextChanged(const QString &string) const;
 
-    void onSuggestionClick(const QModelIndex &index);
+    void onSuggestionClick(const QModelIndex &index) const;
 
     void copy() const;
 

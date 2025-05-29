@@ -28,7 +28,7 @@ namespace CHelper {
     }// namespace TokenType
 
     Token::Token(TokenType::TokenType type,
-                 CHelper::LexerPos pos,
+                 const CHelper::LexerPos &pos,
                  const std::u16string_view &content)
         : type(type),
           pos(pos),

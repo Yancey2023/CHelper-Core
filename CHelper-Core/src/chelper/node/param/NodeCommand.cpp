@@ -42,7 +42,7 @@ namespace CHelper::Node {
         if (HEDLEY_LIKELY(!commandName.isError())) {
             bool isBreak = false;
             for (const auto &item: *commands) {
-                currentCommand = (NodePerCommand *) item.get();
+                currentCommand = static_cast<NodePerCommand *>(item.get());
                 for (const auto &item2: currentCommand->name) {
                     if (HEDLEY_UNLIKELY(str == item2)) {
                         isBreak = true;
@@ -87,7 +87,7 @@ namespace CHelper::Node {
         for (const auto &item: *commands) {
             //通过名字进行搜索
             bool flag = false;
-            for (const auto &item2: ((NodePerCommand *) item.get())->name) {
+            for (const auto &item2: static_cast<NodePerCommand *>(item.get())->name) {
                 size_t index1 = item2.find(str);
                 if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
                     if (HEDLEY_UNLIKELY(index1 == 0)) {
@@ -104,7 +104,7 @@ namespace CHelper::Node {
             //通过介绍进行搜索
             if (HEDLEY_UNLIKELY(item->description.has_value() &&
                                 item->description.value().find(str) != std::u16string::npos)) {
-                for (const auto &item2: ((NodePerCommand *) item.get())->name) {
+                for (const auto &item2: static_cast<NodePerCommand *>(item.get())->name) {
                     descriptionContain.push_back(NormalId::make(item2, item->description));
                 }
             }

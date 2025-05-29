@@ -13,7 +13,7 @@ namespace CHelper::Node {
             u"INTEGER", u"整数", std::nullopt, std::nullopt);
 
     void NodeIntegerWithUnit::init(const CPack &cpack) {
-        nodeUnits = std::make_unique<NodeNormalId>(u"UNITS", u"单位", false, units);
+        nodeUnits = std::make_unique<NodeNormalId>(u"UNITS", u"单位", units, false);
         nodeIntegerWithUnit = std::make_unique<NodeAnd>(
                 u"NODE_INTEGER_WITH_UINT", u"带单位的整数", WhitespaceMode::NO_WHITESPACE,
                 std::vector<const NodeBase *>{nodeInteger.get(), nodeUnits.get()});

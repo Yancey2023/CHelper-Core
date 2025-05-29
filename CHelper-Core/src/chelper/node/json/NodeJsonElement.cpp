@@ -35,7 +35,7 @@ namespace CHelper::Node {
         }
         for (const auto &item: nodes) {
             if (HEDLEY_UNLIKELY(item->getNodeType() == NodeTypeId::JSON_LIST)) {
-                ((NodeJsonList *) item.get())->init(nodes);
+                reinterpret_cast<NodeJsonList *>(item.get())->init(nodes);
             } else if (HEDLEY_UNLIKELY(item->getNodeType() == NodeTypeId::JSON_OBJECT)) {
                 for (const auto &item2: reinterpret_cast<NodeJsonObject *>(item.get())->data) {
                     item2.get()->init(nodes);

@@ -26,7 +26,7 @@ namespace CHelper::Node {
         }
         std::u16string_view str = astNode->tokens.toString();
         for (const auto &command: *commands) {
-            for (const auto &name: ((NodePerCommand *) command.get())->name) {
+            for (const auto &name: static_cast<NodePerCommand *>(command.get())->name) {
                 if (HEDLEY_UNLIKELY(str == name)) {
                     return true;
                 }
@@ -44,7 +44,7 @@ namespace CHelper::Node {
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *commands) {
             bool flag = false;
-            for (const auto &item2: ((NodePerCommand *) item.get())->name) {
+            for (const auto &item2: static_cast<NodePerCommand *>(item.get())->name) {
                 //通过名字进行搜索
                 size_t index1 = item2.find(str);
                 if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
@@ -62,7 +62,7 @@ namespace CHelper::Node {
             //通过介绍进行搜索
             if (HEDLEY_UNLIKELY(item->description.has_value() &&
                                 item->description.value().find(str) != std::u16string::npos)) {
-                for (const auto &item2: ((NodePerCommand *) item.get())->name) {
+                for (const auto &item2: static_cast<NodePerCommand *>(item.get())->name) {
                     descriptionContain.push_back(NormalId::make(item2, item->description));
                 }
             }

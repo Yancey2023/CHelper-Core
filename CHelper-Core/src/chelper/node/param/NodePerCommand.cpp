@@ -3,9 +3,7 @@
 //
 
 #include <chelper/node/NodeType.h>
-#include <chelper/node/param/NodeLF.h>
 #include <chelper/node/param/NodePerCommand.h>
-#include <chelper/resources/CPack.h>
 
 namespace CHelper::Node {
 

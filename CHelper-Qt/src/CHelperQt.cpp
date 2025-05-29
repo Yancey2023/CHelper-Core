@@ -47,7 +47,7 @@ CHelperApp::~CHelperApp() {
     delete core;
 }
 
-void CHelperApp::onTextChanged(const QString &string) {
+void CHelperApp::onTextChanged(const QString &string) const {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
@@ -96,11 +96,11 @@ void CHelperApp::onTextChanged(const QString &string) {
                         ? suggestion.content->name + u" - " + suggestion.content->description.value()
                         : suggestion.content->name));
     }
-    ((QStringListModel *) ui->listView->model())->setStringList(list);
+    reinterpret_cast<QStringListModel *>(ui->listView->model())->setStringList(list);
     ui->listView->scrollToTop();
 }
 
-void CHelperApp::onSuggestionClick(const QModelIndex &index) {
+void CHelperApp::onSuggestionClick(const QModelIndex &index) const {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }

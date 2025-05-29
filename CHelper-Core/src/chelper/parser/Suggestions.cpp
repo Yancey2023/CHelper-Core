@@ -16,11 +16,11 @@ namespace CHelper {
     Suggestions::Suggestions(SuggestionsType::SuggestionsType suggestionsType)
         : suggestionsType(suggestionsType) {}
 
-    bool Suggestions::isFiltered() {
+    bool Suggestions::isFiltered() const {
         return mHashCode.has_value();
     }
 
-    size_t Suggestions::hashCode() {
+    size_t Suggestions::hashCode() const {
         return mHashCode.value_or(0);
     }
 

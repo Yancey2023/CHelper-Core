@@ -23,13 +23,13 @@ namespace CHelper::Node {
     NodeNormalId::NodeNormalId(
             const std::optional<std::u16string> &id,
             const std::optional<std::u16string> &description,
-            bool ignoreError,
             const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
+            bool ignoreError,
             bool allowMissingID,
             const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode)
         : NodeBase(id, description, false),
-          ignoreError(ignoreError),
           contents(contents),
+          ignoreError(ignoreError),
           allowMissingID(allowMissingID),
           getNormalIdASTNode(getNormalIdASTNode) {
 #ifdef CHelperDebug

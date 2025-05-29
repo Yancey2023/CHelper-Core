@@ -23,7 +23,7 @@ namespace CHelper::Node {
     static std::shared_ptr<NodeBase> nodeAt = std::make_shared<NodeSingleSymbol>(
             u"TARGET_SELECTOR_AT", u"@符号", u'@');
     static std::shared_ptr<NodeBase> nodeTargetSelectorVariable = std::make_shared<NodeNormalId>(
-            u"TARGET_SELECTOR_VARIABLE", u"目标选择器变量", true,
+            u"TARGET_SELECTOR_VARIABLE", u"目标选择器变量",
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     NormalId::make(u"@e", u"选择所有实体(只选择活着的实体)"),
                     NormalId::make(u"@a", u"选择所有玩家(无论死活)"),
@@ -31,7 +31,7 @@ namespace CHelper::Node {
                     NormalId::make(u"@p", u"选择最近的玩家(若距离相同，会在其中选择最晚进入服务器的玩家)"),
                     NormalId::make(u"@s", u"命令的执行者(只选择唯一一个实体)(包括已死亡玩家)"),
                     NormalId::make(u"@initiator", u"选择当前与该NPC进行交互(在NPC内置的命令界面中使用)")}),
-            false,
+            true, false,
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 tokenReader.push();
                 auto childNodes = {tokenReader.readSymbolASTNode(node), tokenReader.readStringASTNode(node)};
@@ -102,10 +102,11 @@ namespace CHelper::Node {
     static std::unique_ptr<NodeBase> nodeHasPermissionValueSeparator = std::make_unique<NodeSingleSymbol>(
             u"TARGET_SELECTOR_ARGUMENT_HASPERMISSION_SEPARATOR", u"目标选择器haspermission参数分隔符", u',');
     static std::unique_ptr<NodeBase> nodeHasPermissionState = std::make_unique<NodeNormalId>(
-            u"PERMISSION_STATUS", u"权限状态", false,
+            u"PERMISSION_STATUS", u"权限状态",
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     NormalId::make(u"enabled", u"启用"),
-                    NormalId::make(u"disabled", u"禁用")}));
+                    NormalId::make(u"disabled", u"禁用")}),
+            false);
     static std::unique_ptr<NodeBase> nodeHasPermissionEntry = std::make_unique<NodeEqualEntry>(
             u"TARGET_SELECTOR_ARGUMENT_HASPERMISSION_ENTRY", u"目标选择器haspermission参数内容",
             std::vector<EqualData>{

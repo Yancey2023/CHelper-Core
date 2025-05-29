@@ -427,7 +427,7 @@ namespace CHelper {
         return std::move(result);
     }
 
-    static std::vector<std::shared_ptr<ErrorReason>> sortByLevel(std::vector<std::shared_ptr<ErrorReason>> &input) {
+    static std::vector<std::shared_ptr<ErrorReason>> sortByLevel(const std::vector<std::shared_ptr<ErrorReason>> &input) {
         std::vector<std::shared_ptr<ErrorReason>> output;
         uint8_t i = ErrorReasonLevel::maxLevel;
         while (true) {
@@ -535,7 +535,7 @@ namespace CHelper {
             if (HEDLEY_LIKELY(token.type != TokenType::SYMBOL || token.content.empty())) {
                 return;
             }
-            char ch = token.content[0];
+            char16_t ch = token.content[0];
             switch (ch) {
                 case '[':
                 case '{': {

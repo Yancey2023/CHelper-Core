@@ -50,7 +50,7 @@ namespace CHelper {
          * @returns the starting index of the pattern if found
          * @returns `std::string::npos` if not found
          */
-        size_t match(const std::u16string &text);
+        size_t match(const std::u16string &text) const;
     };
 
 
