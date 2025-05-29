@@ -24,7 +24,13 @@ static CHelper::CHelperCore *core = nullptr;
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
     std::filesystem::path resourceDir(RESOURCE_DIR);
-    core = CHelper::CHelperCore::createByBinary(resourceDir / "run" / "cpack" / (std::string("beta-experiment-") + CPACK_VERSION_BETA + ".cpack"));
+    for (const auto &cpackPath: std::filesystem::directory_iterator(resourceDir / "run" / "cpack")) {
+        std::string fileName = cpackPath.path().filename().string();
+        if (fileName.find("beta-experiment-") != -1) {
+            core = CHelper::CHelperCore::createByBinary(cpackPath);
+            break;
+        }
+    }
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         exit(-1);
     }
