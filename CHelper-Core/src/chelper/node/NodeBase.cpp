@@ -5,6 +5,10 @@
 #include <chelper/node/NodeBase.h>
 #include <chelper/node/param/NodeLF.h>
 
+#ifdef CHelperDebug
+#include <chelper/node/NodeType.h>
+#endif
+
 namespace CHelper::Node {
 
     NodeBase::NodeBase(const std::optional<std::u16string> &id,
