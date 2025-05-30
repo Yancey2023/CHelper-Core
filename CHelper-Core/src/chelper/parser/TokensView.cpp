@@ -22,11 +22,11 @@ namespace CHelper {
 
     [[nodiscard]] bool TokensView::isEmpty() const {
         return start >= end;
-    };
+    }
 
     [[nodiscard]] bool TokensView::hasValue() const {
         return start < end;
-    };
+    }
 
     const Token &TokensView::operator[](size_t which) const {
         return lexerResult->allTokens[start + which];

@@ -11,34 +11,19 @@ namespace CHelper::Test {
 #pragma warning(disable : 4068)
 #pragma warning(disable : 4834)
 
-    std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType) {
+    const char *getTokenTypeStr(const CHelper::TokenType::TokenType &tokenType) {
         switch (tokenType) {
             case CHelper::TokenType::NUMBER:
-                os << "NUMBER";
-                break;
+                return "NUMBER";
             case CHelper::TokenType::STRING:
-                os << "STRING";
-                break;
+                return "STRING";
             case CHelper::TokenType::SYMBOL:
-                os << "SYMBOL";
-                break;
+                return "SYMBOL";
             case CHelper::TokenType::WHITE_SPACE:
-                os << "WHITE_SPACE";
-                break;
+                return "WHITE_SPACE";
             default:
-                os << "UNKNOWN";
-                break;
+                return "UNKNOWN";
         }
-        return os;
-    }
-
-    std::ostream &operator<<(std::ostream &os, const CHelper::Token &token) {
-        return os << '['
-                  << token.type
-                  << "] "
-                  << token.pos
-                  << ' '
-                  << utf8::utf16to8(token.content);
     }
 
     /**
@@ -49,7 +34,7 @@ namespace CHelper::Test {
             for (const auto &command: commands) {
                 CHELPER_INFO("lex command: {}", command);
                 for (const auto &item: Lexer::lex(command).allTokens) {
-                    std::cout << item << std::endl;
+                    fmt::println("[{}] ({}, {})", getTokenTypeStr(item.type), item.pos.line, item.pos.col);
                 }
             }
         } catch (const std::exception &e) {

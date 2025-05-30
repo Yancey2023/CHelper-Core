@@ -7,8 +7,6 @@
 #ifndef CHELPER_ERRORREASON_H
 #define CHELPER_ERRORREASON_H
 
-
-#include "../lexer/Token.h"
 #include "TokensView.h"
 #include "pch.h"
 
@@ -41,8 +39,8 @@ namespace CHelper {
     class ErrorReason {
     public:
         ErrorReasonLevel::ErrorReasonLevel level;
-        std::u16string errorReason;
         size_t start, end;
+        std::u16string errorReason;
 
         ErrorReason(ErrorReasonLevel::ErrorReasonLevel level,
                     size_t start,
@@ -50,7 +48,7 @@ namespace CHelper {
                     std::u16string errorReason);
 
         ErrorReason(ErrorReasonLevel::ErrorReasonLevel level,
-                    const TokensView &,
+                    const TokensView &tokens,
                     std::u16string errorReason);
 
         //命令后面有多余部分

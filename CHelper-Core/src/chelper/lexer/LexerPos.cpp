@@ -20,7 +20,3 @@ void CHelper::LexerPos::next(char16_t ch) {
         col++;
     }
 }
-
-std::ostream &CHelper::operator<<(std::ostream &os, const CHelper::LexerPos &pos) {
-    return os << '(' << pos.line << ',' << pos.col << ')';
-}

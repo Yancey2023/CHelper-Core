@@ -61,14 +61,15 @@ namespace CHelper {
     class ASTNode {
     public:
         ASTNodeMode::ASTNodeMode mode;
+        //一个Node可能会生成多个ASTNode，这些ASTNode使用id进行区分
+        const Node::NodeBase *node;
         //子节点为AND类型和OR类型特有
         std::vector<ASTNode> childNodes;
         TokensView tokens;
-        //一个Node可能会生成多个ASTNode，这些ASTNode使用id进行区分
-        ASTNodeId::ASTNodeId id;
-        const Node::NodeBase *node;
         //不要直接用这个，这里不包括ID错误，只有结构错误，应该用getErrorReason()
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
+        //AST节点ID
+        ASTNodeId::ASTNodeId id;
         //哪个节点最好，OR类型特有，获取颜色和生成命令格式文本的时候使用
         size_t whichBest;
 

@@ -152,7 +152,7 @@ namespace CHelper::Old2New {
 
     std::u16string blockOld2New(const BlockFixData &blockFixData, const TokensView &blockIdToken, const TokensView &dataValueToken) {
         // get block id
-        std::u16string blockId = std::u16string(blockIdToken.toString());
+        auto blockId = std::u16string(blockIdToken.toString());
         // get block data value
         char *end;
         std::string dataValueStr = utf8::utf16to8(dataValueToken.toString());
@@ -224,7 +224,7 @@ namespace CHelper::Old2New {
         if (depth > 0) {
             dataFixList.emplace_back(tokens1, u"");
         }
-        std::u16string targetSelector = std::u16string(tokens2.toString());
+        auto  targetSelector = std::u16string(tokens2.toString());
         if (trip(targetSelector) != u"@s") {
             dataFixList.emplace_back(tokens2, u" as" + targetSelector + u" at @s");
         } else {

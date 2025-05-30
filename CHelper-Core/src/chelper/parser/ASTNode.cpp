@@ -440,7 +440,7 @@ namespace CHelper {
                 break;
             }
             --i;
-        };
+        }
         return std::move(output);
     }
 
@@ -530,7 +530,7 @@ namespace CHelper {
 #endif
         ColoredString coloredString(tokens.lexerResult->content);
         collectColor(coloredString, theme);
-        std::stack<char> brackets;
+        std::stack<char16_t> brackets;
         tokens.forEach([&brackets, &coloredString, &theme](const Token &token) {
             if (HEDLEY_LIKELY(token.type != TokenType::SYMBOL || token.content.empty())) {
                 return;

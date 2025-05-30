@@ -15,7 +15,7 @@ namespace CHelper::Node {
     }
 
     NodeLF *NodeLF::getInstance() {
-        static std::unique_ptr<NodeLF> INSTANCE = std::make_unique<NodeLF>(u"LF", u"命令终止");
+        static auto INSTANCE = std::make_unique<NodeLF>(u"LF", u"命令终止");
         return INSTANCE.get();
     }
 

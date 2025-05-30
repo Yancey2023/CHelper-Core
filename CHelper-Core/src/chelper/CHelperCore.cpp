@@ -13,10 +13,9 @@ namespace CHelper {
 
     CHelperCore *CHelperCore::create(const std::function<std::unique_ptr<CPack>()> &getCPack) {
         try {
-            std::chrono::high_resolution_clock::time_point start, end;
-            start = std::chrono::high_resolution_clock::now();
+            const auto start = std::chrono::high_resolution_clock::now();
             std::unique_ptr<CPack> cPack = getCPack();
-            end = std::chrono::high_resolution_clock::now();
+            const auto end = std::chrono::high_resolution_clock::now();
             CHELPER_INFO("CPack load successfully ({})", std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms");
             ASTNode astNode = Parser::parse(u"", cPack.get());
             return new CHelperCore(std::move(cPack), std::move(astNode));

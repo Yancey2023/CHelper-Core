@@ -85,7 +85,7 @@ namespace CHelper {
             item.filter();
             if (HEDLEY_LIKELY(std::all_of(
                         filteredSuggestions.begin(), filteredSuggestions.end(),
-                        [&item](Suggestions &item2) {
+                        [&item](const Suggestions &item2) {
                             return item.hashCode() != item2.hashCode();
                         }))) {
                 filteredSuggestions.push_back(item);

@@ -213,8 +213,8 @@ namespace CHelper {
             const std::u16string &blockId,
             const std::u16string &propertyName) const {
         for (const auto &item: block) {
-            if ((std::find(item.blocks.begin(), item.blocks.end(), blockId) != item.blocks.end() ||
-                 std::find(item.blocks.begin(), item.blocks.end(), blockIdWithNamespace) != item.blocks.end())) {
+            if (std::find(item.blocks.begin(), item.blocks.end(), blockId) != item.blocks.end() ||
+                 std::find(item.blocks.begin(), item.blocks.end(), blockIdWithNamespace) != item.blocks.end()) {
                 const auto &it = std::find_if(
                         item.properties.begin(), item.properties.end(),
                         [&propertyName](const BlockPropertyDescription &item1) -> bool {

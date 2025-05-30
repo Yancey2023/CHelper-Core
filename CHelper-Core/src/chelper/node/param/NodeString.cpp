@@ -52,7 +52,7 @@ namespace CHelper::Node {
             return result;
         }
         std::u16string_view str = result.tokens.toString();
-        if (HEDLEY_LIKELY((str.empty() || str[0] != '"'))) {
+        if (HEDLEY_LIKELY(str.empty() || str[0] != '"')) {
             return result;
         }
         auto convertResult = JsonUtil::jsonString2String(std::u16string(str));
