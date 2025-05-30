@@ -334,7 +334,7 @@ struct serialization::Codec<CHelper::Property> : BaseCodec<CHelper::Property> {
             uint32_t size;
             Codec<decltype(size)>::template from_binary<isNeedConvert>(istream, size);
             t.valid.value().reserve(size);
-            for (int i = 0; i < size; ++i) {
+            for (size_t i = 0; i < size; ++i) {
                 CHelper::PropertyValue propertyValue;
                 Codec<decltype(propertyValue)>::template from_binary<isNeedConvert>(istream, propertyValue, t.type);
                 t.valid.value().push_back(propertyValue);
@@ -426,7 +426,7 @@ struct serialization::Codec<CHelper::BlockPropertyDescription> : BaseCodec<CHelp
         uint32_t size;
         Codec<decltype(size)>::template from_binary<isNeedConvert>(istream, size);
         t.values.reserve(size);
-        for (int i = 0; i < size; ++i) {
+        for (size_t i = 0; i < size; ++i) {
             CHelper::BlockPropertyValueDescription blockPropertyValueDescription;
             Codec<decltype(blockPropertyValueDescription.valueName)>::template from_binary<isNeedConvert>(istream, blockPropertyValueDescription.valueName, t.type);
             Codec<decltype(blockPropertyValueDescription.description)>::template from_binary<isNeedConvert>(istream, blockPropertyValueDescription.description);

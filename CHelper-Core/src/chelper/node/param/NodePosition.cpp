@@ -62,7 +62,7 @@ namespace CHelper::Node {
         if (HEDLEY_LIKELY(astNode->id != ASTNodeId::NODE_POSITION_POSITIONS)) {
             return false;
         }
-        int errorCount = 0;
+        size_t errorCount = 0;
         for (const auto &item: astNode->childNodes) {
             if (item.isError()) {
                 errorCount++;

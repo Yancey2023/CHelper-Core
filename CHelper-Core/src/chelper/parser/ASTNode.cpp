@@ -468,7 +468,7 @@ namespace CHelper {
         return sortByLevel(result);
     }
 
-    static bool canAddWhitespace0(const ASTNode &astNode, int index) {
+    static bool canAddWhitespace0(const ASTNode &astNode, size_t index) {
         if (std::any_of(astNode.errorReasons.begin(), astNode.errorReasons.end(),
                         [&index](const auto &item) {
                             return item->level == ErrorReasonLevel::REQUIRE_WHITE_SPACE && item->start >= index && item->end <= index;

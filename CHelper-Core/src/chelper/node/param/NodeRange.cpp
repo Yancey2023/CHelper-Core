@@ -21,7 +21,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(str.empty())) {
             return ErrorReason::contentError(tokens, u"范围的数值为空");
         }
-        for (int i = 0; i < str.length(); ++i) {
+        for (size_t i = 0; i < str.length(); ++i) {
             size_t ch = str[i];
             if (HEDLEY_UNLIKELY(ch < '0' || ch > '9') && (i != 0 || (ch != '-' && ch != '+'))) {
                 return ErrorReason::contentError(tokens, u"范围的数值格式不正确，检测非法字符");
@@ -82,7 +82,7 @@ namespace CHelper::Node {
                                  ColoredString &coloredString,
                                  const Theme &theme) const {
         std::u16string_view str = astNode->tokens.toString();
-        for (int i = 0; i < str.length(); ++i) {
+        for (size_t i = 0; i < str.length(); ++i) {
             size_t ch = str[i];
             coloredString.setColor(
                     astNode->tokens.startIndex + i,

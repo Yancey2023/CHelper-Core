@@ -98,7 +98,7 @@ namespace CHelper {
             sum += item.suggestions.size();
         }
         result.reserve(sum);
-        for (int suggestionsType = 0; suggestionsType <= SuggestionsType::suggestionsTypeMax; ++suggestionsType) {
+        for (size_t suggestionsType = 0; suggestionsType <= SuggestionsType::suggestionsTypeMax; ++suggestionsType) {
             for (const auto &item: filteredSuggestions) {
                 if (item.suggestionsType == suggestionsType) {
                     std::copy(item.suggestions.begin(), item.suggestions.end(), std::back_inserter(result));

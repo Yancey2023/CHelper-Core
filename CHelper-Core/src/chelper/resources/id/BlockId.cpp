@@ -60,7 +60,7 @@ namespace CHelper {
             if (aProperty.valid.has_value()) {
                 size_t size = aProperty.valid.value().size();
                 valid = std::vector<PropertyValue>(size);
-                for (int i = 0; i < size; ++i) {
+                for (size_t i = 0; i < size; ++i) {
                     valid.value()[i].string = new std::u16string(*aProperty.valid.value()[i].string);
                 }
             } else {
@@ -89,7 +89,7 @@ namespace CHelper {
             if (aProperty.valid.has_value()) {
                 size_t size = aProperty.valid.value().size();
                 valid = std::vector<PropertyValue>(size);
-                for (int i = 0; i < size; ++i) {
+                for (size_t i = 0; i < size; ++i) {
                     valid.value()[i].string = new std::u16string(*aProperty.valid.value()[i].string);
                 }
             } else {
@@ -144,7 +144,7 @@ namespace CHelper {
         if (type == PropertyType::STRING) {
             size_t size = aBlockPropertyDescription.values.size();
             values.resize(size);
-            for (int i = 0; i < size; ++i) {
+            for (size_t i = 0; i < size; ++i) {
                 BlockPropertyValueDescription &t1 = values[i];
                 const BlockPropertyValueDescription &t2 = aBlockPropertyDescription.values[i];
                 t1.valueName.string = new std::u16string(*t2.valueName.string);
@@ -170,7 +170,7 @@ namespace CHelper {
         if (type == PropertyType::STRING) {
             size_t size = aBlockPropertyDescription.values.size();
             values.resize(size);
-            for (int i = 0; i < size; ++i) {
+            for (size_t i = 0; i < size; ++i) {
                 BlockPropertyValueDescription &t1 = values[i];
                 const BlockPropertyValueDescription &t2 = aBlockPropertyDescription.values[i];
                 t1.valueName.string = new std::u16string(*t2.valueName.string);

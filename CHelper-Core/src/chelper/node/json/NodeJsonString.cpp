@@ -162,8 +162,8 @@ namespace CHelper::Node {
             coloredString.setColor(astNode->tokens.getEndIndex() - 1, theme.colorString);
         }
         ColoredString coloredString1 = astNode->childNodes[0].getColors(theme);
-        int index = 0;
-        for (int i = 0; i < convertResult.result.size(); ++i) {
+        size_t index = 0;
+        for (size_t i = 0; i < convertResult.result.size(); ++i) {
             size_t end = convertResult.convert(i + 1);
             while (index < end) {
                 coloredString.setColor(astNode->tokens.getStartIndex() + index + 1, coloredString1.colors[i]);

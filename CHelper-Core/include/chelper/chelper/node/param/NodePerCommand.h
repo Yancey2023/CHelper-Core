@@ -211,7 +211,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         uint32_t startNodeIdSize;
         Codec<uint32_t>::template from_binary<isNeedConvert>(istream, startNodeIdSize);
         t.startNodes.reserve(startNodeIdSize);
-        for (int i = 0; i < startNodeIdSize; ++i) {
+        for (size_t i = 0; i < startNodeIdSize; ++i) {
             std::u16string startNodeId;
             Codec<decltype(startNodeId)>::template from_binary<isNeedConvert>(istream, startNodeId);
             if (HEDLEY_UNLIKELY(startNodeId == u"LF")) {
@@ -237,7 +237,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
             uint32_t childNodeSize;
             Codec<uint32_t>::template from_binary<isNeedConvert>(istream, childNodeSize);
             parentNode->nextNodes.reserve(childNodeSize);
-            for (int j = 0; j < childNodeSize; ++j) {
+            for (size_t j = 0; j < childNodeSize; ++j) {
                 std::u16string childNodeId;
                 Codec<decltype(childNodeId)>::template from_binary<isNeedConvert>(istream, childNodeId);
                 if (HEDLEY_UNLIKELY(childNodeId == u"LF")) {
