@@ -46,6 +46,9 @@ int main() {
     for (const auto &branchDir: std::filesystem::directory_iterator(projectDir / "resources" / "beta")) {
         isSuccess = function(branchDir, projectDir / "run" / fileType, fileType) && isSuccess;
     }
+    for (const auto &branchDir: std::filesystem::directory_iterator(projectDir / "resources" / "netease")) {
+        isSuccess = function(branchDir, projectDir / "run" / fileType, fileType) && isSuccess;
+    }
     return isSuccess;
 }
 
