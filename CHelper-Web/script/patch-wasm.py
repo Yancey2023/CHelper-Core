@@ -21,7 +21,7 @@ for buildDir in buildDirs:
 export class CHelperCore {
     constructor(cpack) {
         const cpackPtr = Module._malloc(cpack.byteLength);
-        Module.HEAP8.set(cpack, cpackPtr);
+        HEAP8.set(cpack, cpackPtr);
         this._corePtr = Module._init(cpackPtr, cpack.byteLength);
         Module._free(cpackPtr);
         if (this._corePtr === 0) {
