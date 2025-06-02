@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 project(CHelperCore
-        VERSION 0.2.29
+        VERSION 0.3.1
         DESCRIPTION "Command Helper for Minecraft Bedrock Edition"
         LANGUAGES CXX)
 
