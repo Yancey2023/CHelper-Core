@@ -20,9 +20,9 @@ namespace CHelper::Node {
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
         std::vector<ASTNode> threeChildNodes;
         threeChildNodes.reserve(3);
-        uint8_t types[3];
-        for (uint8_t &type: types) {
-            std::pair<uint8_t, ASTNode> node = NodeRelativeFloat::getASTNode(this, cpack, tokenReader);
+        NodeRelativeFloatType::NodeRelativeFloatType types[3];
+        for (NodeRelativeFloatType::NodeRelativeFloatType &type: types) {
+            std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode> node = NodeRelativeFloat::getASTNode(this, cpack, tokenReader);
             if (threeChildNodes.empty() && node.second.isError() && !node.second.tokens.isEmpty()) {
                 tokenReader.pop();
                 TokensView tokens = node.second.tokens;
@@ -36,8 +36,8 @@ namespace CHelper::Node {
         ASTNode result = ASTNode::andNode(this, std::move(threeChildNodes), tokens, nullptr, ASTNodeId::NODE_POSITION_POSITIONS);
         if (HEDLEY_UNLIKELY(!result.isError())) {
             uint8_t count = 0;
-            for (uint8_t item: types) {
-                if (HEDLEY_UNLIKELY(item == 3)) {
+            for (NodeRelativeFloatType::NodeRelativeFloatType item: types) {
+                if (HEDLEY_UNLIKELY(item == NodeRelativeFloatType::LOCAL_COORDINATE)) {
                     count++;
                 }
             }

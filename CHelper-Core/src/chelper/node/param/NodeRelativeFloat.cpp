@@ -27,7 +27,7 @@ namespace CHelper::Node {
     }
 
     ASTNode NodeRelativeFloat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        std::pair<uint8_t, ASTNode> result = getASTNode(this, cpack, tokenReader);
+        std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode> result = getASTNode(this, cpack, tokenReader);
         if (HEDLEY_UNLIKELY(result.second.isError())) {
             return std::move(result.second);
         }
@@ -48,23 +48,24 @@ namespace CHelper::Node {
         }
     }
 
-    std::pair<uint8_t, ASTNode> NodeRelativeFloat::getASTNode(const NodeBase *node,
-                                                              const CPack *cpack,
-                                                              TokenReader &tokenReader) {
+    std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode>
+    NodeRelativeFloat::getASTNode(const NodeBase *node,
+                                  const CPack *cpack,
+                                  TokenReader &tokenReader) {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
-        uint8_t type;
+        NodeRelativeFloatType::NodeRelativeFloatType type;
         tokenReader.push();
         ASTNode preSymbol = nodePreSymbol->getASTNode(tokenReader, cpack);
         if (HEDLEY_UNLIKELY(preSymbol.isError())) {
-            type = 0;
+            type = NodeRelativeFloatType::ABSOLUTE_COORDINATE;
             tokenReader.restore();
         } else {
             if (HEDLEY_LIKELY(preSymbol.childNodes[1].isError())) {
-                type = 1;
+                type = NodeRelativeFloatType::RELATIVE_WORLD_COORDINATE;
             } else {
-                type = 2;
+                type = NodeRelativeFloatType::LOCAL_COORDINATE;
             }
             tokenReader.pop();
             //空格检测

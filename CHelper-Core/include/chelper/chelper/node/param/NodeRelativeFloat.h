@@ -11,6 +11,14 @@
 
 namespace CHelper::Node {
 
+    namespace NodeRelativeFloatType {
+        enum NodeRelativeFloatType : uint8_t {
+            ABSOLUTE_COORDINATE,
+            RELATIVE_WORLD_COORDINATE,
+            LOCAL_COORDINATE,
+        };
+    }
+
     class NodeRelativeFloat : public NodeBase {
     public:
         bool canUseCaretNotation = true;
@@ -28,9 +36,10 @@ namespace CHelper::Node {
         bool collectIdError(const ASTNode *astNode,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
 
-        static std::pair<uint8_t, ASTNode> getASTNode(const NodeBase *node,
-                                                      const CPack *cpack,
-                                                      TokenReader &tokenReader);
+        static std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode>
+        getASTNode(const NodeBase *node,
+                   const CPack *cpack,
+                   TokenReader &tokenReader);
 
         bool collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestions> &suggestions) const override;
 
