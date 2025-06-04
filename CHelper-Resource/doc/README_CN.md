@@ -190,13 +190,13 @@ ID 有4种类型：
 |    name     | 字符串 | ID名字 |               -                | 是  |
 | description | 字符串 | ID介绍 |               -                | 否  |
 
-- blocks
+- block
 
 ```json
 {
-    "id": "blocks",
+    "id": "block",
     "type": "block",
-    "blocks": {
+    "content": {
         "blockStateValues": [
             {
                 "name": "acacia_button",
@@ -259,17 +259,18 @@ ID 有4种类型：
 }
 ```
 
-|   名字   | 类型  |  含义  |    备注     | 必需 |
-|:------:|:---:|:----:|:---------:|:--:|
-|   id   | 字符串 | ID名字 | 永远是blocks | 否  |
-|  type  | 字符串 | ID类型 |     -     | 是  |
-| blocks | 数组  | ID列表 |     -     | 是  |
+|  名字   | 类型  |  含义  |  备注   | 必需 |
+|:-----:|:---:|:----:|:-----:|:--:|
+|  id   | 字符串 | ID名字 | block | 否  |
+| type  | 字符串 | ID类型 |   -   | 是  |
+| block | 数组  | ID列表 |   -   | 是  |
 
 blocks：
-| 名字 | 类型 | 含义 | 备注 | 必需 |
-|:------:|:---:|:----:|:---------:|:--:|
-| blockStateValues | 数组 | 所有方块及其方块状态属性名和默认值 | - | 是 |
-| blockPropertyDescriptions | 所有方块状态值及注释 | ID类型 | - | 是 |
+
+|            名字             |     类型     |        含义         | 备注 | 必需 |
+|:-------------------------:|:----------:|:-----------------:|:--:|:--:|
+|     blockStateValues      |     数组     | 所有方块及其方块状态属性名和默认值 | -  | 是  |
+| blockPropertyDescriptions | 所有方块状态值及注释 |       ID类型        | -  | 是  |
 
 blockStateValues每个ID：
 
@@ -331,13 +332,13 @@ values每个方块状态的值：
 |    value    | 布尔值 / 正整数 / 字符串 | 方块状态参数值 | -  | 是  |
 | description |       字符串       |   介绍    | -  | 否  |
 
-- items
+- item
 
 ```json
 {
-    "id": "items",
+    "id": "item",
     "type": "item",
-    "items": [
+    "item": [
         {
             "name": "stone_block_slab2",
             "description": "红砂岩台阶/紫珀台阶/海晶石台阶/暗海晶石台阶/海晶石砖台阶/苔石台阶/平滑砂岩台阶/红色下界砖台阶",
@@ -357,11 +358,11 @@ values每个方块状态的值：
 }
 ```
 
-|  名字   | 类型  |  含义  |    备注    | 必需 |
-|:-----:|:---:|:----:|:--------:|:--:|
-|  id   | 字符串 | ID名字 | 永远是items | 否  |
-| type  | 字符串 | ID类型 |    -     | 是  |
-| items | 数组  | ID列表 |    -     | 是  |
+|   名字    | 类型  |  含义  |   备注    | 必需 |
+|:-------:|:---:|:----:|:-------:|:--:|
+|   id    | 字符串 | ID名字 | 永远是item | 否  |
+|  type   | 字符串 | ID类型 |    -    | 是  |
+| content | 数组  | ID列表 |    -    | 是  |
 
 每个ID：
 
@@ -637,7 +638,7 @@ values每个方块状态的值：
     "id": "entityType",
     "brief": "实体类型",
     "description": "要被召唤的实体类型",
-    "key": "entities",
+    "key": "entity",
     "ignoreError": true
 }
 ```
@@ -1039,7 +1040,7 @@ data：
     "description": "方块类型",
     "data": [
         {
-            "key": "blocks",
+            "key": "block",
             "description": "方块类型",
             "value": [
                 "BLOCK_ID_LIST"
