@@ -27,7 +27,7 @@
             "description": "方块类型",
             "data": [
                 {
-                    "key": "blocks",
+                    "key": "block",
                     "description": "方块类型",
                     "value": [
                         "BLOCK_ID_LIST"
