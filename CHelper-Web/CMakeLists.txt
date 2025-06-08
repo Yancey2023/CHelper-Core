@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(CHelperWeb
-        VERSION 0.3.1
-        DESCRIPTION "Command Helper for Minecraft Bedrock Edition"
-        LANGUAGES CXX)
+project(CHelperWeb LANGUAGES CXX)
 
 # using c++ 17
 set(CMAKE_CXX_STANDARD 17)

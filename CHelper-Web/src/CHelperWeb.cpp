@@ -93,10 +93,10 @@ public:
                 errorReason->append(u"\n").append(utf8::utf8to16(std::to_string(++i)).append(u". ").append(item->errorReason));
             }
         }
-        if (errorReason == std::nullopt) {
-            return nullptr;
-        } else {
+        if (errorReason.has_value()) {
             return errorReason->c_str();
+        } else {
+            return nullptr;
         }
     }
 
@@ -137,10 +137,10 @@ public:
             return nullptr;
         }
         const std::optional<std::u16string> &suggestDescription = (*suggestions)[which].content->description;
-        if (suggestDescription == std::nullopt) {
-            return nullptr;
-        } else {
+        if (suggestDescription.has_value()) {
             return suggestDescription.value().c_str();
+        } else {
+            return nullptr;
         }
     }
 };

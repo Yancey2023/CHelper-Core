@@ -11,7 +11,7 @@ namespace CHelper::Profile {
 
     void pop() {
         if (stack.empty()) {
-            CHELPER_ERROR("pop stack when stack is empty");
+            SPDLOG_ERROR("pop stack when stack is empty");
             return;
         }
         stack.pop_back();
@@ -22,12 +22,12 @@ namespace CHelper::Profile {
     }
 
     void printAndClear(const std::exception &e) {
-        CHELPER_ERROR(std::string(e.what()) + "\nstack trace:\n" + Profile::getStackTrace());
+        SPDLOG_ERROR("{}\nstack trace:\n{}", e.what(), Profile::getStackTrace());
         stack.clear();
     }
 
-    std::string getStackTrace() {
-        return StringUtil::join("\n", stack);
+    fmt::join_view<decltype(std::begin(stack)), decltype(std::end(stack)), char> getStackTrace() {
+        return StringUtil::join(stack, "\n");
     }
 
 }// namespace CHelper::Profile

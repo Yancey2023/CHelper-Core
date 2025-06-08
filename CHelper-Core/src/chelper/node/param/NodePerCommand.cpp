@@ -10,9 +10,9 @@ namespace CHelper::Node {
     void NodePerCommand::init(const CPack &cpack) {
         for (const auto &item: nodes) {
             if (HEDLEY_LIKELY(item->id.has_value())) {
-                Profile::push(R"(init node {}: "{}")", NodeTypeHelper::getName(item->getNodeType()), item->id.value());
+                Profile::push(R"(init node {}: "{}")", FORMAT_ARG(utf8::utf16to8(NodeTypeHelper::getName(item->getNodeType()))), FORMAT_ARG(utf8::utf16to8(item->id.value())));
             } else {
-                Profile::push("init node {}", NodeTypeHelper::getName(item->getNodeType()));
+                Profile::push("init node {}", FORMAT_ARG(utf8::utf16to8(NodeTypeHelper::getName(item->getNodeType()))));
             }
             item->init(cpack);
             Profile::pop();
@@ -20,8 +20,8 @@ namespace CHelper::Node {
         for (const auto &item: nodes) {
             if (HEDLEY_UNLIKELY(item->nextNodes.empty())) {
                 Profile::push("dismiss child node ids, the parent node is {} (in command {})",
-                              item->id.value_or(u"UNKNOWN"),
-                              StringUtil::join(u",", name));
+                              FORMAT_ARG(item->id == std::nullopt ? "UNKNOWN" : utf8::utf16to8(item->id.value())),
+                              FORMAT_ARG(utf8::utf16to8(fmt::format(u"", StringUtil::join(name, u",")))));
                 throw std::runtime_error("dismiss child node ids");
             }
         }
@@ -39,7 +39,7 @@ namespace CHelper::Node {
                     Profile::push(R"({} should be {} in node "{}")",
                                   "isMustAfterWhiteSpace",
                                   item2->isMustAfterWhiteSpace ? "false" : "true",
-                                  item2->id.value_or(u"unknown"));
+                                  item2->id == std::nullopt ? "unknown" : utf8::utf16to8(item2->id.value()));
                     throw std::runtime_error("value is wrong");
                 }
             }

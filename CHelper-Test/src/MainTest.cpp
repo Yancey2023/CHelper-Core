@@ -32,7 +32,7 @@ namespace CHelper::Test {
     [[maybe_unused]] void testLex(const std::vector<std::u16string> &commands) {
         try {
             for (const auto &command: commands) {
-                CHELPER_INFO("lex command: {}", command);
+                fmt::println("lex command: {}", fmt::styled(utf8::utf16to8(command), fg(fmt::color::medium_purple)));
                 for (const auto &item: Lexer::lex(command).allTokens) {
                     fmt::println("[{}] ({}, {})", getTokenTypeStr(item.type), item.pos.line, item.pos.col);
                 }
@@ -72,7 +72,7 @@ namespace CHelper::Test {
 #pragma clang diagnostic pop
 #pragma GCC diagnostic pop
             } catch (const std::exception &e) {
-                CHELPER_INFO("parse command: {}", command);
+                fmt::println("parse command: {}", fmt::styled(utf8::utf16to8(command), fg(fmt::color::medium_purple)));
                 CHelper::Profile::printAndClear(e);
                 flag = true;
             }

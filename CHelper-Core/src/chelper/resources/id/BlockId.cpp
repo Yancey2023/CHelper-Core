@@ -233,7 +233,9 @@ namespace CHelper {
         if (HEDLEY_LIKELY(it != common.end())) {
             return *it;
         }
-        Profile::push("fail to find block property value by block id {} and property name {}", blockIdWithNamespace, propertyName);
+        Profile::push("fail to find block property value by block id {} and property name {}",
+            FORMAT_ARG(utf8::utf16to8(blockIdWithNamespace)),
+            FORMAT_ARG(utf8::utf16to8(propertyName)));
         throw std::runtime_error("fail to find block property value by block id and property name");
     }
 

@@ -22,3 +22,7 @@
 	path = CHelper-Core/include/serialization
 	url = https://github.com/Yancey2023/serialization.git
 	branch = master
+[submodule "CHelper-Core/include/spdlog"]
+	path = CHelper-Core/include/spdlog
+	url = https://github.com/gabime/spdlog.git
+	branch = v1.x

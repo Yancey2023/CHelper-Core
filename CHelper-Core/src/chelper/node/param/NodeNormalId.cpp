@@ -53,8 +53,8 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(customContents == nullptr)) {
             if (HEDLEY_LIKELY(key.has_value())) {
-                Profile::push("linking contents to {}", key.value());
-                Profile::push("failed to find normal id in the cpack -> ", key.value());
+                Profile::push("linking contents to {}", FORMAT_ARG(utf8::utf16to8(key.value())));
+                Profile::push("failed to find normal id in the cpack -> ", FORMAT_ARG(utf8::utf16to8(key.value())));
                 throw std::runtime_error("failed to find normal id");
             } else {
                 throw std::runtime_error("missing content");

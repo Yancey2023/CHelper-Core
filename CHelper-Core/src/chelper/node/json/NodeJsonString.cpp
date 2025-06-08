@@ -56,7 +56,7 @@ namespace CHelper::Node {
         }
         auto tokenReader = TokenReader(std::make_shared<LexerResult>(Lexer::lex(convertResult.result)));
 #ifdef CHelperTest
-        Profile::push("start parsing: {}", content);
+        Profile::push("start parsing: {}", FORMAT_ARG(utf8::utf16to8(content)));
 #endif
         DEBUG_GET_NODE_BEGIN(mainNode)
         ASTNode result = Parser::parse(convertResult.result, cpack, mainNode);

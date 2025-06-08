@@ -43,35 +43,3 @@ namespace CHelper {
     }
 
 }// namespace CHelper
-
-#ifdef CHelperTest
-std::ostream &operator<<(std::ostream &os, const CHelper::TokenType::TokenType &tokenType) {
-    switch (tokenType) {
-        case CHelper::TokenType::NUMBER:
-            os << "NUMBER";
-            break;
-        case CHelper::TokenType::STRING:
-            os << "STRING";
-            break;
-        case CHelper::TokenType::SYMBOL:
-            os << "SYMBOL";
-            break;
-        case CHelper::TokenType::WHITE_SPACE:
-            os << "WHITE_SPACE";
-            break;
-        default:
-            os << "UNKNOWN";
-            break;
-    }
-    return os;
-}
-
-std::ostream &operator<<(std::ostream &os, const CHelper::Token &token) {
-    return os << '['
-              << token.type
-              << "] "
-              << token.pos
-              << ' '
-              << token.content;
-}
-#endif

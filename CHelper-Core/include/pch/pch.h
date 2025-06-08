@@ -9,12 +9,17 @@
 
 #include <ParamDeliver.h>
 
-#ifndef CHelperLogger
-#define CHelperLogger INFO
-#endif
-
 #if _CHELPER_DEBUG == true
 #define CHelperDebug
+#endif
+
+#define CHelperTest
+
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_INFO
+#if defined(CHelperAndroid) || defined(CHELPER_NO_FILESYSTEM)
+#define FORMAT_ARG(arg) arg
+#else
+#define FORMAT_ARG(arg) fmt::styled(arg, fg(fmt::color::medium_purple))
 #endif
 
 #ifdef CHelperAndroid
@@ -45,9 +50,12 @@
 // 用于字符串转整数或小数
 #include <cinttypes>
 // 字符串格式化
+#include <fmt/chrono.h>
 #include <fmt/color.h>
 #include <fmt/format.h>
 #include <fmt/xchar.h>
+// 日志库
+#include <spdlog/spdlog.h>
 // 开启编译器特性
 #include <hedley.h>
 // UTF编码处理库
@@ -57,14 +65,10 @@
 #define SERIALIZATION_NO_FILESYSTEM
 #endif
 #include <serialization/serialization.h>
-// 二进制读写
-#include <chelper/util/BinaryUtil.h>
-// json读写
+// json工具
 #include <chelper/util/JsonUtil.h>
 // 简单的调用栈
 #include <chelper/util/Profile.h>
-// 简单的日志系统
-#include <chelper/util/SimpleLogger.h>
 // 字符串工具类
 #include <chelper/util/StringUtil.h>
 // KMP字符串匹配算法

@@ -7,7 +7,6 @@
 #ifndef CHELPER_ASTNODE_H
 #define CHELPER_ASTNODE_H
 
-#include "../lexer/Token.h"
 #include "StructureBuilder.h"
 #include "Suggestions.h"
 #include "pch.h"
@@ -85,12 +84,6 @@ namespace CHelper {
         class CPack;
 
     public:
-#ifdef CHelperTest
-        [[nodiscard]]json toJson() const;
-
-        [[nodiscard]]json toBestJson() const;
-#endif
-
         static ASTNode simpleNode(const Node::NodeBase *node,
                                   const TokensView &tokens,
                                   const std::shared_ptr<ErrorReason> &errorReason = nullptr,

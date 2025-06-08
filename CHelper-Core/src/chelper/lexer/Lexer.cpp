@@ -116,7 +116,7 @@ namespace CHelper::Lexer {
     LexerResult lex(const std::u16string &content) {
         StringReader stringReader(content);
 #ifdef CHelperTest
-        Profile::push("start lex: {}", stringReader.content);
+        Profile::push("start lex: {}", FORMAT_ARG(utf8::utf16to8(stringReader.content)));
 #endif
         std::vector<Token> tokenList = std::vector<Token>();
         while (true) {

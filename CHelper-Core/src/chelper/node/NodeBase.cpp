@@ -105,7 +105,7 @@ namespace CHelper::Node {
     std::optional<std::u16string> NodeBase::collectDescription(const ASTNode *node, size_t index) const {
 #ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(!description.has_value())) {
-            CHELPER_WARN("description is null");
+            SPDLOG_WARN("description is null");
         }
 #endif
         return description;

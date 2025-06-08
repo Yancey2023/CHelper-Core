@@ -41,12 +41,15 @@ int main() {
     std::filesystem::path projectDir(RESOURCE_DIR);
     bool isSuccess = true;
     for (const auto &branchDir: std::filesystem::directory_iterator(projectDir / "resources" / "release")) {
+        SPDLOG_INFO("----- start output {}: {}-{} -----", FORMAT_ARG(fileType), FORMAT_ARG("release"), FORMAT_ARG(branchDir.path().filename().string()));
         isSuccess = function(branchDir, projectDir / "run" / fileType, fileType) && isSuccess;
     }
     for (const auto &branchDir: std::filesystem::directory_iterator(projectDir / "resources" / "beta")) {
+        SPDLOG_INFO("----- start output {}: {}-{} -----", FORMAT_ARG(fileType), FORMAT_ARG("beta"), FORMAT_ARG(branchDir.path().filename().string()));
         isSuccess = function(branchDir, projectDir / "run" / fileType, fileType) && isSuccess;
     }
     for (const auto &branchDir: std::filesystem::directory_iterator(projectDir / "resources" / "netease")) {
+        SPDLOG_INFO("----- start output {}: {}-{} -----", FORMAT_ARG(fileType), FORMAT_ARG("netease"), FORMAT_ARG(branchDir.path().filename().string()));
         isSuccess = function(branchDir, projectDir / "run" / fileType, fileType) && isSuccess;
     }
     return isSuccess;
@@ -193,20 +196,16 @@ namespace CHelper::Test {
                 startStructure = std::chrono::high_resolution_clock::now();
                 auto structure = core->getStructure();
                 endStructure = std::chrono::high_resolution_clock::now();
-                fmt::print("parse successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startParse).count()) + "ms", fg(fmt::color::medium_purple)));
+                fmt::println("parse successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startParse)));
                 if (isTestTime) {
-                    fmt::print("parse successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endParse - startParse).count()) + "ms", fg(fmt::color::medium_purple)));
-                    fmt::print("get description successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endDescription - startDescription).count()) + "ms", fg(fmt::color::medium_purple)));
-                    fmt::print("get error successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endErrorReasons - startErrorReasons).count()) + "ms", fg(fmt::color::medium_purple)));
-                    fmt::print("get suggestions successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms", fg(fmt::color::medium_purple)));
-                    fmt::print("get structure successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms", fg(fmt::color::medium_purple)));
+                    fmt::println("parse successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endParse - startParse)));
+                    fmt::println("get description successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endDescription - startDescription)));
+                    fmt::println("get error successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endErrorReasons - startErrorReasons)));
+                    fmt::println("get suggestions successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endSuggestions - startSuggestions)));
+                    fmt::println("get structure successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startStructure)));
                 }
-#ifdef CHelperTest
-                fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
-                fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
-#endif
-                fmt::print("structure: \n", utf8::utf16to8(structure));
-                fmt::print("description: \n", utf8::utf16to8(description));
+                fmt::println("structure: ", utf8::utf16to8(structure));
+                fmt::println("description: ", utf8::utf16to8(description));
                 if (errorReasons.empty()) {
                     fmt::println("no error");
                 } else {
@@ -232,10 +231,10 @@ namespace CHelper::Test {
                             fmt::println("...");
                             break;
                         }
-                        fmt::print("{}. {} {}\n",
-                                   ++i,
-                                   fmt::styled(utf8::utf16to8(item.content->name), fg(fmt::color::lime_green)),
-                                   fmt::styled(utf8::utf16to8(item.content->description.value_or(u"")), fg(fmt::color::cornflower_blue)));
+                        fmt::println("{}. {} {}",
+                                     ++i,
+                                     fmt::styled(utf8::utf16to8(item.content->name), fg(fmt::color::lime_green)),
+                                     fmt::styled(utf8::utf16to8(item.content->description.value_or(u"")), fg(fmt::color::cornflower_blue)));
                         std::u16string result = command.substr(0, item.start)
                                                         .append(item.content->name)
                                                         .append(command.substr(item.end));
@@ -246,10 +245,10 @@ namespace CHelper::Test {
                                 greenPart.push_back(u' ');
                             }
                         }
-                        fmt::print("{}{}{}\n",
-                                   utf8::utf16to8(command.substr(0, item.start)),
-                                   fmt::styled(utf8::utf16to8(greenPart), fg(fmt::color::lime_green)),
-                                   utf8::utf16to8(command.substr(item.end)));
+                        fmt::println("{}{}{}",
+                                     utf8::utf16to8(command.substr(0, item.start)),
+                                     fmt::styled(utf8::utf16to8(greenPart), fg(fmt::color::lime_green)),
+                                     utf8::utf16to8(command.substr(item.end)));
                     }
                 }
                 fmt::print("\n");
@@ -282,10 +281,8 @@ namespace CHelper::Test {
                 }
             }
             end = std::chrono::high_resolution_clock::now();
-            fmt::print("{}{}",
-                       fmt::styled(commands.size(), fg(fmt::color::medium_purple)),
-                       fmt::styled(" commands\n", fg(fmt::color::lime_green)));
-            CHELPER_INFO("run successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
+            SPDLOG_INFO("{} commands", FORMAT_ARG(commands.size()));
+            SPDLOG_INFO("run successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(end - start)));
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
@@ -302,12 +299,19 @@ namespace CHelper::Test {
                 return false;
             }
             const Manifest &manifest = core->getCPack()->manifest;
-            std::filesystem::path realOutput = output / utf8::utf16to8(manifest.versionType.value_or(u"") + u"-" + manifest.branch.value_or(u"") + u"-" + manifest.version.value_or(u"") + u"." + utf8::utf8to16(fileType));
+
+            std::string filename = fmt::format(
+                    "{}-{}-{}.{}",
+                    manifest.versionType.has_value() ? utf8::utf16to8(manifest.versionType.value()) : "",
+                    manifest.branch.has_value() ? utf8::utf16to8(manifest.branch.value()) : "",
+                    manifest.version.has_value() ? utf8::utf16to8(manifest.version.value()) : "",
+                    fileType);
+            std::filesystem::path realOutput = output / filename;
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeJsonToDirectory(realOutput);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
+            SPDLOG_INFO("CPack write successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(end - start)));
             core2 = CHelperCore::createByDirectory(realOutput);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
@@ -328,12 +332,18 @@ namespace CHelper::Test {
                 return false;
             }
             const Manifest &manifest = core->getCPack()->manifest;
-            std::filesystem::path realOutput = output / utf8::utf16to8(manifest.versionType.value_or(u"") + u"-" + manifest.branch.value_or(u"") + u"-" + manifest.version.value_or(u"") + u"." + utf8::utf8to16(fileType));
+            std::string filename = fmt::format(
+                    "{}-{}-{}.{}",
+                    manifest.versionType.has_value() ? utf8::utf16to8(manifest.versionType.value()) : "",
+                    manifest.branch.has_value() ? utf8::utf16to8(manifest.branch.value()) : "",
+                    manifest.version.has_value() ? utf8::utf16to8(manifest.version.value()) : "",
+                    fileType);
+            std::filesystem::path realOutput = output / filename;
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeJsonToFile(realOutput);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
+            SPDLOG_INFO("CPack write successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(end - start)));
             core2 = CHelperCore::createByJson(realOutput);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
@@ -354,12 +364,18 @@ namespace CHelper::Test {
                 return false;
             }
             const Manifest &manifest = core->getCPack()->manifest;
-            std::filesystem::path realOutput = output / utf8::utf16to8(manifest.versionType.value_or(u"") + u"-" + manifest.branch.value_or(u"") + u"-" + manifest.version.value_or(u"") + u"." + utf8::utf8to16(fileType));
+            std::string filename = fmt::format(
+                    "{}-{}-{}.{}",
+                    manifest.versionType.has_value() ? utf8::utf16to8(manifest.versionType.value()) : "",
+                    manifest.branch.has_value() ? utf8::utf16to8(manifest.branch.value()) : "",
+                    manifest.version.has_value() ? utf8::utf16to8(manifest.version.value()) : "",
+                    fileType);
+            std::filesystem::path realOutput = output / filename;
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
             core->getCPack()->writeBinToFile(realOutput);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
+            SPDLOG_INFO("run successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(end - start)));
             core2 = CHelperCore::createByBinary(realOutput);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);

@@ -58,18 +58,16 @@ void CHelperApp::onTextChanged(const QString &string) const {
         ui->errorReasonLabel->setText(nullptr);
     } else {
 #ifdef CHelperTest
-        fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
-        fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
         CHelper::ColoredString coloredString = core->getColors();
-        std::u16string stringBuilder;
+        std::string stringBuilder;
         for (int i = 0; i < coloredString.colors.size(); ++i) {
             uint32_t color = coloredString.colors[i];
             if (color == CHelper::NO_COLOR) {
                 color = 0xFFFFFFFF;
             }
-            stringBuilder.append(fmt::format("{}", fmt::styled(coloredString.str[i], fg(fmt::rgb(color)))));
+            stringBuilder.append(fmt::format("{}", fmt::styled(utf8::utf16to8(coloredString.str.substr(i, 1)), fg(fmt::rgb(color)))));
         }
-        stringBuilder.append("\n");
+        stringBuilder.push_back('\n');
         fmt::print(stringBuilder);
 #endif
         ui->structureLabel->setText(QString::fromStdU16String(core->getStructure()));

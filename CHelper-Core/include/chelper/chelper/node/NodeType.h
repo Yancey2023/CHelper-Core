@@ -349,11 +349,11 @@ namespace CHelper {
                     assert(serialization::Codec<Type>::enable || nodeCreateStage.empty());
 #endif
                     if constexpr (!serialization::Codec<Type>::enable) {
-                        Profile::push("unknown node type -> {}", name);
+                        Profile::push("unknown node type -> {}", FORMAT_ARG(utf8::utf16to8(name)));
                         throw std::runtime_error("unknown node type");
                     } else {
                         if (std::find(nodeCreateStage.begin(), nodeCreateStage.end(), currentCreateStage) == nodeCreateStage.end()) {
-                            Profile::push("unknown node type -> {}", name);
+                            Profile::push("unknown node type -> {}", FORMAT_ARG(utf8::utf16to8(name)));
                             throw std::runtime_error("unknown node type");
                         }
                         t = std::make_unique<Type>();
@@ -382,11 +382,11 @@ namespace CHelper {
                     assert(serialization::Codec<Type>::enable || nodeCreateStage.empty());
 #endif
                     if constexpr (!serialization::Codec<Type>::enable) {
-                        Profile::push("unknown node type -> {}", name);
+                        Profile::push("unknown node type -> {}", FORMAT_ARG(utf8::utf16to8(name)));
                         throw std::runtime_error("unknown node type");
                     } else {
                         if (std::find(nodeCreateStage.begin(), nodeCreateStage.end(), currentCreateStage) == nodeCreateStage.end()) {
-                            Profile::push("unknown node type -> {}", name);
+                            Profile::push("unknown node type -> {}", FORMAT_ARG(utf8::utf16to8(name)));
                             throw std::runtime_error("unknown node type");
                         }
                         t = std::make_unique<Type>();
@@ -476,11 +476,11 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::from_json(
     Codec<decltype(type)>::template from_json_member<JsonValueType>(jsonValue, "type", type);
     std::optional<std::u16string> id;
     Codec<decltype(id)>::template from_json_member<JsonValueType>(jsonValue, "id", id);
-    CHelper::Profile::next("loading node {}", type);
+    CHelper::Profile::next("loading node {}", FORMAT_ARG(utf8::utf16to8(type)));
     if (HEDLEY_LIKELY(id.has_value())) {
-        CHelper::Profile::next("loading node {} with id \"{}\"", type, id.value());
+        CHelper::Profile::next("loading node {} with id \"{}\"", FORMAT_ARG(utf8::utf16to8(type)), FORMAT_ARG(utf8::utf16to8(id.value())));
     } else {
-        CHelper::Profile::next("loading node {} without id", type);
+        CHelper::Profile::next("loading node {} without id", FORMAT_ARG(utf8::utf16to8(type)));
     }
     std::optional<CHelper::Node::NodeTypeId::NodeTypeId> nodeTypeId;
     for (uint8_t i = 0; i <= CHelper::Node::MAX_TYPE_ID; ++i) {
@@ -490,7 +490,7 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::from_json(
         }
     }
     if (HEDLEY_UNLIKELY(nodeTypeId == std::nullopt)) {
-        CHelper::Profile::next("unknown node type -> {}", type);
+        CHelper::Profile::next("unknown node type -> {}", FORMAT_ARG(utf8::utf16to8(type)));
         throw std::runtime_error("unknown node type");
     }
     CHelper::Node::NodeTypeHelper::template from_json<JsonValueType>(nodeTypeId.value(), jsonValue, t);

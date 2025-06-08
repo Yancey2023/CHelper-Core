@@ -14,10 +14,10 @@ namespace CHelper {
     void ColoredString::setColor(size_t index, uint32_t color) {
 #ifdef CHelperDebug
         if (colors[index] != NO_COLOR && str[index] != '[' && str[index] != ']' && str[index] != '{' && str[index] != '}') {
-            CHELPER_ERROR("replace color");
+            SPDLOG_ERROR("replace color");
         }
         if (index > str.length()) {
-            CHELPER_ERROR("index out of range");
+            SPDLOG_ERROR("index out of range");
             return;
         }
 #endif
@@ -28,15 +28,15 @@ namespace CHelper {
 #ifdef CHelperDebug
         for (size_t i = start; i < end; i++) {
             if (colors[i] != NO_COLOR && str[i] != '[' && str[i] != ']' && str[i] != '{' && str[i] != '}') {
-                CHELPER_ERROR("replace color");
+                SPDLOG_ERROR("replace color");
             }
         }
         if (start > str.length() || end > str.length()) {
-            CHELPER_ERROR("index out of range");
+            SPDLOG_ERROR("index out of range");
             return;
         }
         if (start > end) {
-            CHELPER_ERROR("start should less than end");
+            SPDLOG_ERROR("start should less than end");
             return;
         }
 #endif
