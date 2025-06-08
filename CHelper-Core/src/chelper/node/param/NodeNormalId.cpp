@@ -165,15 +165,14 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"ID"));
     }
 
-    bool NodeNormalId::collectColor(const ASTNode *astNode,
-                                    ColoredString &coloredString,
-                                    const Theme &theme) const {
+    bool NodeNormalId::collectSyntax(const ASTNode *astNode,
+                                     SyntaxResult &syntaxResult) const {
         if (key.has_value()) {
-            coloredString.setColor(astNode->tokens, theme.colorId);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::ID);
         } else if (id != u"TARGET_SELECTOR_VARIABLE") {
-            coloredString.setColor(astNode->tokens, theme.colorLiteral);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::LITERAL);
         } else {
-            coloredString.setColor(astNode->tokens, theme.colorTargetSelector);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::TARGET_SELECTOR);
         }
         return true;
     }

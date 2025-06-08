@@ -37,10 +37,9 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"可能带单位的整数"));
     }
 
-    bool NodeIntegerWithUnit::collectColor(const ASTNode *astNode,
-                                           ColoredString &coloredString,
-                                           const Theme &theme) const {
-        coloredString.setColor(astNode->tokens, theme.colorInteger);
+    bool NodeIntegerWithUnit::collectSyntax(const ASTNode *astNode,
+                                            SyntaxResult &syntaxResult) const {
+        syntaxResult.update(astNode->tokens, SyntaxTokenType::INTEGER);
         return true;
     }
 

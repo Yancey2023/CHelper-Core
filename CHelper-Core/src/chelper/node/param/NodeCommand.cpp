@@ -82,7 +82,7 @@ namespace CHelper::Node {
             suggestions.push_back(Suggestions::singleSymbolSuggestion({0, 0, false, nodeCommandStart->normalId}));
         }
         std::u16string_view str = astNode->tokens.toString()
-                                       .substr(0, index - astNode->tokens.getStartIndex());
+                                          .substr(0, index - astNode->tokens.getStartIndex());
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *commands) {
             //通过名字进行搜索
@@ -144,11 +144,10 @@ namespace CHelper::Node {
         }
     }
 
-    bool NodeCommand::collectColor(const ASTNode *astNode,
-                                   ColoredString &coloredString,
-                                   const Theme &theme) const {
+    bool NodeCommand::collectSyntax(const ASTNode *astNode,
+                                    SyntaxResult &syntaxResult) const {
         if (HEDLEY_LIKELY(astNode->id == ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
-            coloredString.setColor(astNode->tokens, theme.colorCommand);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::COMMAND);
             return true;
         }
         return false;

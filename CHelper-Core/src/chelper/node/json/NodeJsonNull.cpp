@@ -42,10 +42,9 @@ namespace CHelper::Node {
         return true;
     }
 
-    bool NodeJsonNull::collectColor(const ASTNode *astNode,
-                                    ColoredString &coloredString,
-                                    const Theme &theme) const {
-        coloredString.setColor(astNode->tokens, theme.colorNull);
+    bool NodeJsonNull::collectSyntax(const ASTNode *astNode,
+                                     SyntaxResult &syntaxResult) const {
+        syntaxResult.update(astNode->tokens, SyntaxTokenType::NULL_TOKEN);
         return true;
     }
 

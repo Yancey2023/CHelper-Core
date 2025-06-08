@@ -115,8 +115,8 @@ namespace CHelper {
         return astNode.getStructure();
     }
 
-    [[nodiscard]] ColoredString CHelperCore::getColors() const {
-        return astNode.getColors(settings.theme);
+    [[nodiscard]] SyntaxResult CHelperCore::getSyntaxResult() const {
+        return astNode.getSyntaxResult();
     }
 
     std::optional<std::pair<std::u16string, size_t>> CHelperCore::onSuggestionClick(size_t which) {

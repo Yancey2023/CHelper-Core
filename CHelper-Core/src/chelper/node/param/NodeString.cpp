@@ -75,7 +75,7 @@ namespace CHelper::Node {
             return true;
         }
         std::u16string_view str = astNode->tokens.toString()
-                                       .substr(0, index - astNode->tokens.getStartIndex());
+                                          .substr(0, index - astNode->tokens.getStartIndex());
         if (HEDLEY_UNLIKELY(str.empty())) {
             suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, doubleQuoteMask}));
             return true;
@@ -96,10 +96,9 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"字符串"));
     }
 
-    bool NodeString::collectColor(const ASTNode *astNode,
-                                  ColoredString &coloredString,
-                                  const Theme &theme) const {
-        coloredString.setColor(astNode->tokens, theme.colorString);
+    bool NodeString::collectSyntax(const ASTNode *astNode,
+                                   SyntaxResult &syntaxResult) const {
+        syntaxResult.update(astNode->tokens, SyntaxTokenType::STRING);
         return true;
     }
 

@@ -62,10 +62,9 @@ namespace CHelper::Node {
             structure.append(isMustHave, description.value_or(u"布尔值"));
         }
 
-        bool collectColor(const ASTNode *astNode,
-                          ColoredString &coloredString,
-                          const Theme &theme) const override {
-            coloredString.setColor(astNode->tokens, theme.colorBoolean);
+        bool collectSyntax(const ASTNode *astNode,
+                           SyntaxResult &syntaxResult) const override {
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::BOOLEAN);
             return true;
         }
 

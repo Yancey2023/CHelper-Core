@@ -214,7 +214,7 @@ namespace CHelper {
             const std::u16string &propertyName) const {
         for (const auto &item: block) {
             if (std::find(item.blocks.begin(), item.blocks.end(), blockId) != item.blocks.end() ||
-                 std::find(item.blocks.begin(), item.blocks.end(), blockIdWithNamespace) != item.blocks.end()) {
+                std::find(item.blocks.begin(), item.blocks.end(), blockIdWithNamespace) != item.blocks.end()) {
                 const auto &it = std::find_if(
                         item.properties.begin(), item.properties.end(),
                         [&propertyName](const BlockPropertyDescription &item1) -> bool {
@@ -234,8 +234,8 @@ namespace CHelper {
             return *it;
         }
         Profile::push("fail to find block property value by block id {} and property name {}",
-            FORMAT_ARG(utf8::utf16to8(blockIdWithNamespace)),
-            FORMAT_ARG(utf8::utf16to8(propertyName)));
+                      FORMAT_ARG(utf8::utf16to8(blockIdWithNamespace)),
+                      FORMAT_ARG(utf8::utf16to8(propertyName)));
         throw std::runtime_error("fail to find block property value by block id and property name");
     }
 

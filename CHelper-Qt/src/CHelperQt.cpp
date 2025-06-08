@@ -57,19 +57,6 @@ void CHelperApp::onTextChanged(const QString &string) const {
         ui->descriptionLabel->setText("作者：Yancey");
         ui->errorReasonLabel->setText(nullptr);
     } else {
-#ifdef CHelperTest
-        CHelper::ColoredString coloredString = core->getColors();
-        std::string stringBuilder;
-        for (int i = 0; i < coloredString.colors.size(); ++i) {
-            uint32_t color = coloredString.colors[i];
-            if (color == CHelper::NO_COLOR) {
-                color = 0xFFFFFFFF;
-            }
-            stringBuilder.append(fmt::format("{}", fmt::styled(utf8::utf16to8(coloredString.str.substr(i, 1)), fg(fmt::rgb(color)))));
-        }
-        stringBuilder.push_back('\n');
-        fmt::print(stringBuilder);
-#endif
         ui->structureLabel->setText(QString::fromStdU16String(core->getStructure()));
         ui->descriptionLabel->setText(QString::fromStdU16String(core->getDescription()));
         std::vector<std::shared_ptr<CHelper::ErrorReason>> errorReasons = core->getErrorReasons();

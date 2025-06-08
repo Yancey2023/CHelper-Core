@@ -163,13 +163,13 @@ namespace CHelper {
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
-#ifdef CHelperTest 
+#ifdef CHelperTest
             Profile::push("collect id errors: {} {}",
-                FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName(node->getNodeType()))),
-                FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
+                          FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName(node->getNodeType()))),
+                          FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
 #endif
             auto flag = node->collectIdError(this, idErrorReasons);
-#ifdef CHelperTest 
+#ifdef CHelperTest
             Profile::pop();
 #endif
             if (HEDLEY_UNLIKELY(flag)) {
@@ -195,13 +195,13 @@ namespace CHelper {
             return;
         }
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
-#ifdef CHelperTest 
+#ifdef CHelperTest
             Profile::push("collect suggestions: {} {}",
-                FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName(node->getNodeType()))),
-                FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
+                          FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName(node->getNodeType()))),
+                          FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
 #endif
             auto flag = node->collectSuggestions(this, index, suggestions);
-#ifdef CHelperTest 
+#ifdef CHelperTest
             Profile::pop();
 #endif
             if (HEDLEY_UNLIKELY(flag)) {
@@ -234,11 +234,11 @@ namespace CHelper {
             } else {
 #ifdef CHelperTest
                 Profile::push("collect structure: {} {}",
-                    FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName(node->getNodeType()))),
-                    FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
+                              FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName(node->getNodeType()))),
+                              FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
 #endif
                 node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ? nullptr : this, structure, isMustHave);
-#ifdef CHelperTest 
+#ifdef CHelperTest
                 Profile::pop();
 #endif
                 if (HEDLEY_UNLIKELY(structure.isDirty)) {
@@ -282,17 +282,17 @@ namespace CHelper {
         }
     }
 
-    void ASTNode::collectColor(ColoredString &coloredString, const Theme &theme) const {
+    void ASTNode::collectSyntaxResult(SyntaxResult &syntaxResult) const {
         bool isCompound = id == ASTNodeId::COMPOUND;
         bool isNext = id == ASTNodeId::NEXT_NODE;
         if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
 #ifdef CHelperTest
             Profile::push("collect color: {} {}",
-                FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName(node->getNodeType()))),
-                FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
+                          FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName(node->getNodeType()))),
+                          FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
 #endif
-            bool isDirty = node->collectColor(this, coloredString, theme);
-#ifdef CHelperTest 
+            bool isDirty = node->collectSyntax(this, syntaxResult);
+#ifdef CHelperTest
             Profile::pop();
 #endif
             if (HEDLEY_UNLIKELY(isDirty)) {
@@ -304,21 +304,21 @@ namespace CHelper {
                 return;
             case ASTNodeMode::AND:
                 for (const ASTNode &astNode: childNodes) {
-                    astNode.collectColor(coloredString, theme);
+                    astNode.collectSyntaxResult(syntaxResult);
                 }
                 break;
             case ASTNodeMode::OR:
-                childNodes[whichBest].collectColor(coloredString, theme);
+                childNodes[whichBest].collectSyntaxResult(syntaxResult);
                 break;
         }
     }
 
     std::u16string ASTNode::getDescription(size_t index) const {
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::push("start getting description: {}", FORMAT_ARG(utf8::utf16to8(tokens.toString())));
 #endif
         auto result = collectDescription(index).value_or(u"未知");
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::pop();
 #endif
         return std::move(result);
@@ -343,11 +343,11 @@ namespace CHelper {
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getIdErrors() const {
         std::vector<std::shared_ptr<ErrorReason>> input;
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::push("start getting id error: {}", FORMAT_ARG(utf8::utf16to8(tokens.toString())));
 #endif
         collectIdErrors(input);
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::pop();
 #endif
         return sortByLevel(input);
@@ -355,11 +355,11 @@ namespace CHelper {
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getErrorReasons() const {
         std::vector<std::shared_ptr<ErrorReason>> result = errorReasons;
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::push("start getting error reasons: {}", FORMAT_ARG(utf8::utf16to8(tokens.toString())));
 #endif
         collectIdErrors(result);
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::pop();
 #endif
         return sortByLevel(result);
@@ -391,7 +391,7 @@ namespace CHelper {
 
     std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
         std::u16string_view str = tokens.toString();
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::push("start getting suggestions: {}", FORMAT_ARG(utf8::utf16to8(str)));
 #endif
         std::vector<Suggestions> suggestions;
@@ -399,19 +399,19 @@ namespace CHelper {
             suggestions.push_back(Suggestions::singleWhitespaceSuggestion({str.length(), str.length(), false, whitespaceId}));
         }
         collectSuggestions(index, suggestions);
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::pop();
 #endif
         return Suggestions::filter(suggestions);
     }
 
     std::u16string ASTNode::getStructure() const {
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::push("start getting structure: {}", FORMAT_ARG(utf8::utf16to8(tokens.toString())));
 #endif
         StructureBuilder structureBuilder;
         collectStructure(structureBuilder, true);
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::pop();
 #endif
         std::u16string result = structureBuilder.build();
@@ -421,14 +421,14 @@ namespace CHelper {
         return std::move(result);
     }
 
-    ColoredString ASTNode::getColors(const Theme &theme) const {
-#ifdef CHelperTest 
+    SyntaxResult ASTNode::getSyntaxResult() const {
+#ifdef CHelperTest
         Profile::push("start getting colors: {}", FORMAT_ARG(utf8::utf16to8(tokens.toString())));
 #endif
-        ColoredString coloredString(tokens.lexerResult->content);
-        collectColor(coloredString, theme);
+        SyntaxResult syntacResult(tokens.lexerResult->content);
+        collectSyntaxResult(syntacResult);
         std::stack<char16_t> brackets;
-        tokens.forEach([&brackets, &coloredString, &theme](const Token &token) {
+        tokens.forEach([&brackets, &syntacResult](const Token &token) {
             if (HEDLEY_LIKELY(token.type != TokenType::SYMBOL || token.content.empty())) {
                 return;
             }
@@ -439,13 +439,13 @@ namespace CHelper {
                     size_t indexOfColor = brackets.size() % 3;
                     switch (indexOfColor) {
                         case 0:
-                            coloredString.setColor(token.pos.index, theme.colorBrackets1);
+                            syntacResult.update(token.pos.index, SyntaxTokenType::BRACKET1);
                             break;
                         case 1:
-                            coloredString.setColor(token.pos.index, theme.colorBrackets2);
+                            syntacResult.update(token.pos.index, SyntaxTokenType::BRACKET2);
                             break;
                         case 2:
-                            coloredString.setColor(token.pos.index, theme.colorBrackets3);
+                            syntacResult.update(token.pos.index, SyntaxTokenType::BRACKET3);
                             break;
                         default:
                             HEDLEY_UNREACHABLE();
@@ -460,13 +460,13 @@ namespace CHelper {
                     size_t indexOfColor = (brackets.size() - 1) % 3;
                     switch (indexOfColor) {
                         case 0:
-                            coloredString.setColor(token.pos.index, theme.colorBrackets1);
+                            syntacResult.update(token.pos.index, SyntaxTokenType::BRACKET1);
                             break;
                         case 1:
-                            coloredString.setColor(token.pos.index, theme.colorBrackets2);
+                            syntacResult.update(token.pos.index, SyntaxTokenType::BRACKET2);
                             break;
                         case 2:
-                            coloredString.setColor(token.pos.index, theme.colorBrackets3);
+                            syntacResult.update(token.pos.index, SyntaxTokenType::BRACKET3);
                             break;
                         default:
                             HEDLEY_UNREACHABLE();
@@ -480,7 +480,7 @@ namespace CHelper {
 #ifdef CHelperTest 
         Profile::pop();
 #endif
-        return coloredString;
+        return syntacResult;
     }
 
 }// namespace CHelper

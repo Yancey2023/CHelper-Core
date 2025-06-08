@@ -224,7 +224,7 @@ namespace CHelper::Old2New {
         if (depth > 0) {
             dataFixList.emplace_back(tokens1, u"");
         }
-        auto  targetSelector = std::u16string(tokens2.toString());
+        auto targetSelector = std::u16string(tokens2.toString());
         if (trip(targetSelector) != u"@s") {
             dataFixList.emplace_back(tokens2, u" as" + targetSelector + u" at @s");
         } else {

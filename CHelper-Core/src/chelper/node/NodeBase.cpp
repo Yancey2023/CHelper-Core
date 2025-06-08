@@ -128,9 +128,8 @@ namespace CHelper::Node {
                                     bool isMustHave) const {
     }
 
-    bool NodeBase::collectColor(const ASTNode *astNode,
-                                ColoredString &coloredString,
-                                const Theme &theme) const {
+    bool NodeBase::collectSyntax(const ASTNode *astNode,
+                                 SyntaxResult &syntaxResult) const {
         return false;
     }
 

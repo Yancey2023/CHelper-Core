@@ -156,10 +156,9 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"ID"));
     }
 
-    bool NodeNamespaceId::collectColor(const ASTNode *astNode,
-                                       ColoredString &coloredString,
-                                       const Theme &theme) const {
-        coloredString.setColor(astNode->tokens, theme.colorId);
+    bool NodeNamespaceId::collectSyntax(const ASTNode *astNode,
+                                        SyntaxResult &syntaxResult) const {
+        syntaxResult.update(astNode->tokens, SyntaxTokenType::ID);
         return true;
     }
 

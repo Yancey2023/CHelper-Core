@@ -126,11 +126,10 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"坐标"));
     }
 
-    bool NodeRelativeFloat::collectColor(const ASTNode *astNode,
-                                         ColoredString &coloredString,
-                                         const Theme &theme) const {
+    bool NodeRelativeFloat::collectSyntax(const ASTNode *astNode,
+                                          SyntaxResult &syntaxResult) const {
         if (astNode->id == ASTNodeId::NODE_RELATIVE_FLOAT_NUMBER) {
-            coloredString.setColor(astNode->tokens, theme.colorFloat);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::FLOAT);
             return true;
         } else {
             return false;

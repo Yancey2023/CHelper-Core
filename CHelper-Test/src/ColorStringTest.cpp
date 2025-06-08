@@ -7,15 +7,89 @@
 
 void testCommand(CHelper::CHelperCore *core, const std::u16string &command) {
     core->onTextChanged(command, command.length());
-    CHelper::ColoredString coloredString = core->getColors();
+    CHelper::SyntaxResult syntaxResult = core->getSyntaxResult();
     std::string stringBuilder;
-    for (int i = 0; i < coloredString.colors.size(); ++i) {
-        uint32_t color = coloredString.colors[i];
-        if (color == CHelper::NO_COLOR) {
-            color = 0xFFFFFFFF;
-        }
+
+    constexpr uint32_t NO_COLOR = 0xFFFFFFFF;
+    constexpr uint32_t COLOR_PURPLE = 0xFFc586c0;
+    constexpr uint32_t COLOR_ORANGE = 0xFFce9178;
+    constexpr uint32_t COLOR_LIGHT_BLUE = 0xFF9cdcfe;
+    constexpr uint32_t COLOR_BLUE = 0xFF179fff;
+    constexpr uint32_t COLOR_LIGHT_GREEN = 0xFFb5cea8;
+    constexpr uint32_t COLOR_GREEN = 0xFF4ec9b0;
+    constexpr uint32_t COLOR_LIGHT_YELLOW = 0xFFdcdcaa;
+    constexpr uint32_t COLOR_YELLOW = 0xFFffd700;
+
+    constexpr uint32_t colorUnknown = NO_COLOR;
+    constexpr uint32_t colorBoolean = COLOR_LIGHT_GREEN;
+    constexpr uint32_t colorFloat = COLOR_LIGHT_GREEN;
+    constexpr uint32_t colorInteger = COLOR_LIGHT_GREEN;
+    constexpr uint32_t colorSymbol = COLOR_LIGHT_GREEN;
+    constexpr uint32_t colorId = COLOR_LIGHT_YELLOW;
+    constexpr uint32_t colorTargetSelector = COLOR_GREEN;
+    constexpr uint32_t colorCommand = COLOR_PURPLE;
+    constexpr uint32_t colorBrackets1 = COLOR_YELLOW;
+    constexpr uint32_t colorBrackets2 = COLOR_PURPLE;
+    constexpr uint32_t colorBrackets3 = COLOR_BLUE;
+    constexpr uint32_t colorString = COLOR_ORANGE;
+    constexpr uint32_t colorNull = COLOR_LIGHT_BLUE;
+    constexpr uint32_t colorRange = COLOR_LIGHT_BLUE;
+    constexpr uint32_t colorLiteral = COLOR_LIGHT_BLUE;
+
+    for (int i = 0; i < syntaxResult.tokenTypes.size(); ++i) {
+        uint32_t tokenType = syntaxResult.tokenTypes[i];
         std::u16string strChar;
-        strChar.push_back(coloredString.str[i]);
+        strChar.push_back(syntaxResult.str[i]);
+        uint32_t color = colorUnknown;
+        switch (tokenType) {
+            case CHelper::SyntaxTokenType::UNKNOWN:
+                color = colorUnknown;
+                break;
+            case CHelper::SyntaxTokenType::BOOLEAN:
+                color = colorBoolean;
+                break;
+            case CHelper::SyntaxTokenType::FLOAT:
+                color = colorFloat;
+                break;
+            case CHelper::SyntaxTokenType::INTEGER:
+                color = colorInteger;
+                break;
+            case CHelper::SyntaxTokenType::SYMBOL:
+                color = colorSymbol;
+                break;
+            case CHelper::SyntaxTokenType::ID:
+                color = colorId;
+                break;
+            case CHelper::SyntaxTokenType::TARGET_SELECTOR:
+                color = colorTargetSelector;
+                break;
+            case CHelper::SyntaxTokenType::COMMAND:
+                color = colorCommand;
+                break;
+            case CHelper::SyntaxTokenType::BRACKET1:
+                color = colorBrackets1;
+                break;
+            case CHelper::SyntaxTokenType::BRACKET2:
+                color = colorBrackets2;
+                break;
+            case CHelper::SyntaxTokenType::BRACKET3:
+                color = colorBrackets3;
+                break;
+            case CHelper::SyntaxTokenType::STRING:
+                color = colorString;
+                break;
+            case CHelper::SyntaxTokenType::NULL_TOKEN:
+                color = colorNull;
+                break;
+            case CHelper::SyntaxTokenType::RANGE:
+                color = colorRange;
+                break;
+            case CHelper::SyntaxTokenType::LITERAL:
+                color = colorLiteral;
+                break;
+            default:
+                break;
+        }
         stringBuilder.append(fmt::format(
                 "{}", fmt::styled(utf8::utf16to8(strChar), fg(fmt::rgb(color)))));
     }

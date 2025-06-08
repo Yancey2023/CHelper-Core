@@ -20,13 +20,13 @@
 #endif
 
 #ifdef CHelperDebug
-#define DEBUG_GET_NODE_END(node)                                                                                          \
-    if (HEDLEY_UNLIKELY(node##Index != tokenReader.indexStack.size())) {                                                  \
-        Profile::push("TokenReaderIndexError: {} {} {}",                                                                  \
-                      FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName((node)->getNodeType()))),                   \
-                      FORMAT_ARG((node)->id == std::nullopt ? "" : utf8::utf16to8((node)->id.value())),                   \
-                      FORMAT_ARG((node)->description == std::nullopt ? "" : utf8::utf16to8((node)->description.value())));\
-        throw std::runtime_error("TokenReaderIndexError");                                                                \
+#define DEBUG_GET_NODE_END(node)                                                                                           \
+    if (HEDLEY_UNLIKELY(node##Index != tokenReader.indexStack.size())) {                                                   \
+        Profile::push("TokenReaderIndexError: {} {} {}",                                                                   \
+                      FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName((node)->getNodeType()))),                    \
+                      FORMAT_ARG((node)->id == std::nullopt ? "" : utf8::utf16to8((node)->id.value())),                    \
+                      FORMAT_ARG((node)->description == std::nullopt ? "" : utf8::utf16to8((node)->description.value()))); \
+        throw std::runtime_error("TokenReaderIndexError");                                                                 \
     }
 #else
 #define DEBUG_GET_NODE_END(node)

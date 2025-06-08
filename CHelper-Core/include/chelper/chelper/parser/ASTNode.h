@@ -10,9 +10,8 @@
 #include "StructureBuilder.h"
 #include "Suggestions.h"
 #include "pch.h"
-#include <chelper/parser/ColoredString.h>
 #include <chelper/parser/ErrorReason.h>
-#include <chelper/settings/Settings.h>
+#include <chelper/parser/SyntaxResult.h>
 
 namespace CHelper {
 
@@ -132,7 +131,7 @@ namespace CHelper {
 
         void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 
-        void collectColor(ColoredString &coloredString, const Theme &theme) const;
+        void collectSyntaxResult(SyntaxResult &syntaxResult) const;
 
         [[nodiscard]] std::u16string getDescription(size_t index) const;
 
@@ -144,7 +143,7 @@ namespace CHelper {
 
         [[nodiscard]] std::u16string getStructure() const;
 
-        [[nodiscard]] ColoredString getColors(const Theme &theme) const;
+        [[nodiscard]] SyntaxResult getSyntaxResult() const;
     };
 
 }// namespace CHelper

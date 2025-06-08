@@ -40,7 +40,7 @@ namespace CHelper::Node {
                                              size_t index,
                                              std::vector<Suggestions> &suggestions) const {
         std::u16string_view str = astNode->tokens.toString()
-                                       .substr(0, index - astNode->tokens.getStartIndex());
+                                          .substr(0, index - astNode->tokens.getStartIndex());
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *commands) {
             bool flag = false;
@@ -97,10 +97,9 @@ namespace CHelper::Node {
         structure.append(isMustHave, u"命令名");
     }
 
-    bool NodeCommandName::collectColor(const ASTNode *astNode,
-                                       ColoredString &coloredString,
-                                       const Theme &theme) const {
-        coloredString.setColor(astNode->tokens, theme.colorId);
+    bool NodeCommandName::collectSyntax(const ASTNode *astNode,
+                                        SyntaxResult &syntaxResult) const {
+        syntaxResult.update(astNode->tokens, SyntaxTokenType::ID);
         return true;
     }
 

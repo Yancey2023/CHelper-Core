@@ -140,9 +140,8 @@ namespace CHelper {
                                           bool isMustHave) const;
 
             HEDLEY_NON_NULL(2)
-            virtual bool collectColor(const ASTNode *astNode,
-                                      ColoredString &coloredString,
-                                      const Theme &theme) const;
+            virtual bool collectSyntax(const ASTNode *astNode,
+                                       SyntaxResult &syntaxResult) const;
 
             void collectStructureWithNextNodes(StructureBuilder &structure,
                                                bool isMustHave) const;

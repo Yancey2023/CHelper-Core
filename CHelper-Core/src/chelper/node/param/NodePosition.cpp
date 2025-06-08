@@ -80,11 +80,10 @@ namespace CHelper::Node {
         structure.append(isMustHave, u"位置");
     }
 
-    bool NodePosition::collectColor(const ASTNode *astNode,
-                                    ColoredString &coloredString,
-                                    const Theme &theme) const {
+    bool NodePosition::collectSyntax(const ASTNode *astNode,
+                                     SyntaxResult &syntaxResult) const {
         if (astNode->id == ASTNodeId::NODE_RELATIVE_FLOAT_NUMBER) {
-            coloredString.setColor(astNode->tokens, theme.colorFloat);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::FLOAT);
             return true;
         } else {
             return false;

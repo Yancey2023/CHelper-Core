@@ -84,13 +84,12 @@ namespace CHelper::Node {
             structure.append(isMustHave, description.value_or(u"数字"));
         }
 
-        bool collectColor(const ASTNode *astNode,
-                          ColoredString &coloredString,
-                          const Theme &theme) const override {
+        bool collectSyntax(const ASTNode *astNode,
+                           SyntaxResult &syntaxResult) const override {
             if constexpr (std::numeric_limits<T>::is_integer) {
-                coloredString.setColor(astNode->tokens, theme.colorInteger);
+                syntaxResult.update(astNode->tokens, SyntaxTokenType::INTEGER);
             } else {
-                coloredString.setColor(astNode->tokens, theme.colorFloat);
+                syntaxResult.update(astNode->tokens, SyntaxTokenType::FLOAT);
             }
             return true;
         }

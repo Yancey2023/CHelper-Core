@@ -70,13 +70,12 @@ namespace CHelper::Node {
         structure.appendWhiteSpace().append(data->name);
     }
 
-    bool NodeText::collectColor(const ASTNode *astNode,
-                                ColoredString &coloredString,
-                                const Theme &theme) const {
+    bool NodeText::collectSyntax(const ASTNode *astNode,
+                                 SyntaxResult &syntaxResult) const {
         if (id != u"TARGET_SELECTOR_ARGUMENT_EQUAu" && id != u"TARGET_SELECTOR_ARGUMENT_NOT_EQUAu") {
-            coloredString.setColor(astNode->tokens, theme.colorLiteral);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::LITERAL);
         } else {
-            coloredString.setColor(astNode->tokens, theme.colorSymbol);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::SYMBOL);
         }
         return true;
     }

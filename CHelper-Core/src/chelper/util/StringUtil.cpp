@@ -7,5 +7,4 @@
 namespace CHelper::StringUtil {
 
 
-
 }// namespace CHelper::StringUtil

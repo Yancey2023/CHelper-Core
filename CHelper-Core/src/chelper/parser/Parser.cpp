@@ -9,13 +9,13 @@ namespace CHelper::Parser {
 
     ASTNode parse(const std::u16string &content, const CPack *cpack, const Node::NodeBase *mainNode) {
         TokenReader tokenReader = TokenReader(std::make_shared<LexerResult>(Lexer::lex(content)));
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::push("start parsing: {}", FORMAT_ARG(utf8::utf16to8(tokenReader.lexerResult->content)));
 #endif
         DEBUG_GET_NODE_BEGIN(mainNode)
         auto result = mainNode->getASTNode(tokenReader, cpack);
         DEBUG_GET_NODE_END(mainNode)
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::pop();
 #endif
         return result;

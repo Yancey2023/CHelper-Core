@@ -148,25 +148,24 @@ namespace CHelper::Node {
         return true;
     }
 
-    bool NodeJsonString::collectColor(const ASTNode *astNode,
-                                      ColoredString &coloredString,
-                                      const Theme &theme) const {
+    bool NodeJsonString::collectSyntax(const ASTNode *astNode,
+                                       SyntaxResult &syntaxResult) const {
         if (astNode->id != ASTNodeId::NODE_STRING_INNER) {
-            coloredString.setColor(astNode->tokens, theme.colorString);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::STRING);
             return false;
         }
-        coloredString.setColor(astNode->tokens.getStartIndex(), theme.colorString);
+        syntaxResult.update(astNode->tokens.getStartIndex(), SyntaxTokenType::STRING);
         std::u16string_view str = astNode->tokens.toString();
         auto convertResult = JsonUtil::jsonString2String(std::u16string(str));
         if (convertResult.isComplete) {
-            coloredString.setColor(astNode->tokens.getEndIndex() - 1, theme.colorString);
+            syntaxResult.update(astNode->tokens.getEndIndex() - 1, SyntaxTokenType::STRING);
         }
-        ColoredString coloredString1 = astNode->childNodes[0].getColors(theme);
+        SyntaxResult syntaxResult1 = astNode->childNodes[0].getSyntaxResult();
         size_t index = 0;
         for (size_t i = 0; i < convertResult.result.size(); ++i) {
             size_t end = convertResult.convert(i + 1);
             while (index < end) {
-                coloredString.setColor(astNode->tokens.getStartIndex() + index + 1, coloredString1.colors[i]);
+                syntaxResult.update(astNode->tokens.getStartIndex() + index + 1, syntaxResult1.tokenTypes[i]);
                 index++;
             }
         }
