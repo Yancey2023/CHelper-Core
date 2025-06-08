@@ -59,7 +59,7 @@ function(init_chelper_library target CHELPER_CORE_DIR)
             ${CHELPER_CORE_DIR}/include/rapidjson/include
             ${CHELPER_CORE_DIR}/include/serialization
     )
-    target_link_libraries(${target} PUBLIC fmt::fmt spdlog::spdlog utf8cpp hedley serialization::serialization)
+    target_link_libraries(${target} PUBLIC fmt::fmt-header-only spdlog::spdlog_header_only utf8cpp hedley serialization::serialization)
 endfunction()
 
 # CHelper Core
