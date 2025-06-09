@@ -1,58 +1,58 @@
 {
-  "name": [
-    "damage"
-  ],
-  "description": "对指定实体造成伤害",
-  "start": [
-    "target"
-  ],
-  "node": [
-    {
-      "type": "TARGET_SELECTOR",
-      "id": "target",
-      "description": "要被伤害的目标实体",
-      "isOnlyOne": false,
-      "isMustPlayer": false,
-      "isMustNPC": false,
-      "isWildcard": false
-    },
-    {
-      "type": "INTEGER",
-      "id": "amount",
-      "brief": "伤害值",
-      "description": "要造成的伤害值"
-    },
-    {
-      "type": "NORMAL_ID",
-      "id": "cause",
-      "description": "伤害的成因",
-      "ignoreError": true,
-      "key": "damageCause"
-    },
-    {
-      "type": "TEXT",
-      "id": "entity",
-      "description": "攻击实体",
-      "data": {
-        "name": "entity",
-        "description": "攻击实体"
-      }
-    },
-    {
-      "type": "TARGET_SELECTOR",
-      "id": "damager",
-      "description": "伤害的施加者",
-      "isOnlyOne": true,
-      "isMustPlayer": false,
-      "isMustNPC": false,
-      "isWildcard": false
-    }
-  ],
-  "ast": [
-    ["target", "amount"],
-    ["amount", "cause", "LF"],
-    ["cause", "entity", "LF"],
-    ["entity", "damager"],
-    ["damager", "LF"]
-  ]
+    "name": [
+        "damage"
+    ],
+    "description": "对指定实体造成伤害",
+    "start": [
+        "target"
+    ],
+    "node": [
+        {
+            "type": "TARGET_SELECTOR",
+            "id": "target",
+            "description": "要被伤害的目标实体",
+            "isOnlyOne": false,
+            "isMustPlayer": false,
+            "isMustNPC": false,
+            "isWildcard": false
+        },
+        {
+            "type": "INTEGER",
+            "id": "amount",
+            "brief": "伤害值",
+            "description": "要造成的伤害值"
+        },
+        {
+            "type": "NORMAL_ID",
+            "id": "cause",
+            "description": "伤害的成因",
+            "ignoreError": true,
+            "key": "damageCause"
+        },
+        {
+            "type": "TEXT",
+            "id": "entity",
+            "description": "攻击实体",
+            "data": {
+                "name": "entity",
+                "description": "攻击实体"
+            }
+        },
+        {
+            "type": "TARGET_SELECTOR",
+            "id": "damager",
+            "description": "伤害的施加者",
+            "isOnlyOne": true,
+            "isMustPlayer": false,
+            "isMustNPC": false,
+            "isWildcard": false
+        }
+    ],
+    "ast": [
+        ["target", "amount"],
+        ["amount", "cause", "LF"],
+        ["cause", "entity", "LF"],
+        ["entity", "damager"],
+        ["damager", "LF"]
+    ]
 }

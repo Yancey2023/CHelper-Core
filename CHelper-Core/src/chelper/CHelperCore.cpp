@@ -13,15 +13,14 @@ namespace CHelper {
 
     CHelperCore *CHelperCore::create(const std::function<std::unique_ptr<CPack>()> &getCPack) {
         try {
-            std::chrono::high_resolution_clock::time_point start, end;
-            start = std::chrono::high_resolution_clock::now();
+            const auto start = std::chrono::high_resolution_clock::now();
             std::unique_ptr<CPack> cPack = getCPack();
-            end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO("CPack load successfully ({})", std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms");
+            const auto end = std::chrono::high_resolution_clock::now();
+            SPDLOG_INFO("CPack load successfully ({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(end - start), fg(fmt::color::medium_purple)));
             ASTNode astNode = Parser::parse(u"", cPack.get());
             return new CHelperCore(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
-            CHELPER_ERROR("CPack load failed");
+            SPDLOG_ERROR("CPack load failed");
             CHelper::Profile::printAndClear(e);
             return nullptr;
         }
@@ -46,13 +45,13 @@ namespace CHelper {
             std::string fileType = ".cpack";
             std::string cpackPathStr = cpackPath.string();
             if (HEDLEY_UNLIKELY(cpackPathStr.size() < fileType.size() || cpackPathStr.substr(cpackPathStr.length() - fileType.size()) != fileType)) {
-                Profile::push("error file type -> {}", cpackPathStr);
+                Profile::push("error file type -> {}", FORMAT_ARG(cpackPathStr));
                 throw std::runtime_error("error file type");
             }
             // 打开文件
             std::ifstream is(cpackPath, std::ios::binary);
             if (HEDLEY_UNLIKELY(!is.is_open())) {
-                Profile::push("fail to read file -> {}", cpackPathStr);
+                Profile::push("fail to read file -> {}", FORMAT_ARG(cpackPathStr));
                 throw std::runtime_error("fail to read file");
             }
             // 读取文件
@@ -62,7 +61,7 @@ namespace CHelper {
                 char ch;
                 is.read(&ch, 1);
                 if (HEDLEY_UNLIKELY(is.gcount() > 0)) {
-                    Profile::push("file is not read completed -> {}", cpackPathStr);
+                    Profile::push("file is not read completed -> {}", FORMAT_ARG(cpackPathStr));
                     throw std::runtime_error("file is not read completed");
                 }
             }
@@ -116,8 +115,8 @@ namespace CHelper {
         return astNode.getStructure();
     }
 
-    [[nodiscard]] ColoredString CHelperCore::getColors() const {
-        return astNode.getColors(settings.theme);
+    [[nodiscard]] SyntaxResult CHelperCore::getSyntaxResult() const {
+        return astNode.getSyntaxResult();
     }
 
     std::optional<std::pair<std::u16string, size_t>> CHelperCore::onSuggestionClick(size_t which) {

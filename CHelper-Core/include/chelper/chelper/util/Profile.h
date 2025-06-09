@@ -7,8 +7,6 @@
 #ifndef CHELPER_PROFILE_H
 #define CHELPER_PROFILE_H
 
-#include "SimpleLogger.h"
-
 /**
  * 跟踪代码的运行，为了在遇到bug的时候方便排查错误的位置
  */
@@ -17,12 +15,8 @@ namespace CHelper::Profile {
     extern std::vector<std::string> stack;
 
     template<typename... T>
-    void push(const std::string &fmt, T &&...args) {
-#ifdef CHelperAndroid
-        stack.push_back(fmt::format(fmt, Logger::convertArg(args)...));
-#else
-        stack.push_back(fmt::format(fmt, styled(Logger::convertArg(args), fg(fmt::color::medium_purple))...));
-#endif
+    void push(fmt::format_string<T...> fmt, T &&...args) {
+        stack.push_back(fmt::format(fmt, args...));
     }
 
     void pop();
@@ -37,7 +31,7 @@ namespace CHelper::Profile {
 
     void printAndClear(const std::exception &e);
 
-    std::string getStackTrace();
+    fmt::join_view<decltype(std::begin(stack)), decltype(std::end(stack)), char> getStackTrace();
 
 }// namespace CHelper::Profile
 

@@ -52,7 +52,7 @@ namespace CHelper::Node {
             return result;
         }
         std::u16string_view str = result.tokens.toString();
-        if (HEDLEY_LIKELY((str.empty() || str[0] != '"'))) {
+        if (HEDLEY_LIKELY(str.empty() || str[0] != '"')) {
             return result;
         }
         auto convertResult = JsonUtil::jsonString2String(std::u16string(str));
@@ -63,7 +63,7 @@ namespace CHelper::Node {
             return ASTNode::simpleNode(this, result.tokens, convertResult.errorReason);
         }
         if (HEDLEY_UNLIKELY(!convertResult.isComplete)) {
-            return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, u"字符串参数内容双引号不封闭 -> " + std::u16string(str)));
+            return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, fmt::format(u"字符串参数内容双引号不封闭 -> {}", str)));
         }
         return result;
     }
@@ -75,7 +75,7 @@ namespace CHelper::Node {
             return true;
         }
         std::u16string_view str = astNode->tokens.toString()
-                                       .substr(0, index - astNode->tokens.getStartIndex());
+                                          .substr(0, index - astNode->tokens.getStartIndex());
         if (HEDLEY_UNLIKELY(str.empty())) {
             suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, doubleQuoteMask}));
             return true;
@@ -96,10 +96,9 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"字符串"));
     }
 
-    bool NodeString::collectColor(const ASTNode *astNode,
-                                  ColoredString &coloredString,
-                                  const Theme &theme) const {
-        coloredString.setColor(astNode->tokens, theme.colorString);
+    bool NodeString::collectSyntax(const ASTNode *astNode,
+                                   SyntaxResult &syntaxResult) const {
+        syntaxResult.update(astNode->tokens, SyntaxTokenType::STRING);
         return true;
     }
 

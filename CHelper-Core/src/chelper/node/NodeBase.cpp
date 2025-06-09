@@ -3,8 +3,11 @@
 //
 
 #include <chelper/node/NodeBase.h>
-#include <chelper/node/NodeType.h>
 #include <chelper/node/param/NodeLF.h>
+
+#ifdef CHelperDebug
+#include <chelper/node/NodeType.h>
+#endif
 
 namespace CHelper::Node {
 
@@ -30,8 +33,12 @@ namespace CHelper::Node {
     /**
      * 节点不一定有
      *
+     * @param tokenReader token读取器
+     * @param cpack 资源包
      * @param isIgnoreChildNodesError true - 第一个错误节点到后面都不算做子节点
      *                                false - 第一个内容为空的错误节点到后面都不算做子节点
+     * @param childNodes 子节点
+     * @param astNodeId 节点ID；
      */
     ASTNode NodeBase::getOptionalASTNode(TokenReader &tokenReader,
                                          const CPack *cpack,
@@ -64,7 +71,7 @@ namespace CHelper::Node {
     std::optional<std::u16string> NodeBase::collectDescription(const ASTNode *node, size_t index) const {
 #ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(!description.has_value())) {
-            CHELPER_WARN("description is null");
+            SPDLOG_WARN("description is null");
         }
 #endif
         return description;
@@ -87,9 +94,8 @@ namespace CHelper::Node {
                                     bool isMustHave) const {
     }
 
-    bool NodeBase::collectColor(const ASTNode *astNode,
-                                ColoredString &coloredString,
-                                const Theme &theme) const {
+    bool NodeBase::collectSyntax(const ASTNode *astNode,
+                                 SyntaxResult &syntaxResult) const {
         return false;
     }
 

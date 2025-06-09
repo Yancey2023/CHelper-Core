@@ -48,9 +48,7 @@ namespace CHelper::Node {
         for (const auto &item: this->equalDatas) {
             nodeKeyContent->push_back(NormalId::make(item.name, item.description));
         }
-        nodeKey = std::make_unique<NodeNormalId>(
-                u"KEY", u"参数名",
-                true, nodeKeyContent);
+        nodeKey = std::make_unique<NodeNormalId>(u"KEY", u"参数名", nodeKeyContent, true);
     }
 
     NodeTypeId::NodeTypeId NodeEqualEntry::getNodeType() const {

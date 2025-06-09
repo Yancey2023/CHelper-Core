@@ -23,13 +23,13 @@ namespace CHelper::Node {
     NodeNormalId::NodeNormalId(
             const std::optional<std::u16string> &id,
             const std::optional<std::u16string> &description,
-            bool ignoreError,
             const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
+            bool ignoreError,
             bool allowMissingID,
             const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode)
         : NodeBase(id, description, false),
-          ignoreError(ignoreError),
           contents(contents),
+          ignoreError(ignoreError),
           allowMissingID(allowMissingID),
           getNormalIdASTNode(getNormalIdASTNode) {
 #ifdef CHelperDebug
@@ -53,8 +53,8 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(customContents == nullptr)) {
             if (HEDLEY_LIKELY(key.has_value())) {
-                Profile::push("linking contents to {}", key.value());
-                Profile::push("failed to find normal id in the cpack -> ", key.value());
+                Profile::push("linking contents to {}", FORMAT_ARG(utf8::utf16to8(key.value())));
+                Profile::push("failed to find normal id in the cpack -> ", FORMAT_ARG(utf8::utf16to8(key.value())));
                 throw std::runtime_error("failed to find normal id");
             } else {
                 throw std::runtime_error("missing content");
@@ -92,7 +92,7 @@ namespace CHelper::Node {
             if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                     return !item->fastMatch(strHash);
                 }))) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, u"找不到含义 -> " + std::u16string(str)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, fmt::format(u"找不到含义 -> {}", str)));
             }
         }
         return result;
@@ -108,7 +108,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                 return !item->fastMatch(strHash);
             }))) {
-            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::u16string(u"找不到ID -> ").append(str)));
+            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, fmt::format(u"找不到ID -> {}", str)));
         }
         return true;
     }
@@ -165,15 +165,14 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"ID"));
     }
 
-    bool NodeNormalId::collectColor(const ASTNode *astNode,
-                                    ColoredString &coloredString,
-                                    const Theme &theme) const {
+    bool NodeNormalId::collectSyntax(const ASTNode *astNode,
+                                     SyntaxResult &syntaxResult) const {
         if (key.has_value()) {
-            coloredString.setColor(astNode->tokens, theme.colorId);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::ID);
         } else if (id != u"TARGET_SELECTOR_VARIABLE") {
-            coloredString.setColor(astNode->tokens, theme.colorLiteral);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::LITERAL);
         } else {
-            coloredString.setColor(astNode->tokens, theme.colorTargetSelector);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::TARGET_SELECTOR);
         }
         return true;
     }

@@ -15,18 +15,18 @@ namespace CHelper {
         cacheString = {lexerResult->content.c_str() + startIndex, endIndex - startIndex};
 #ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(start > end)) {
-            throw std::runtime_error("TokensView: wrong range: (" + std::to_string(start) + ", " + std::to_string(end) + ")");
+            throw std::runtime_error(fmt::format("TokensView: wrong range: ({}, {})", start, end));
         }
 #endif
     }
 
     [[nodiscard]] bool TokensView::isEmpty() const {
         return start >= end;
-    };
+    }
 
     [[nodiscard]] bool TokensView::hasValue() const {
         return start < end;
-    };
+    }
 
     const Token &TokensView::operator[](size_t which) const {
         return lexerResult->allTokens[start + which];

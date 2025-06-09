@@ -9,11 +9,9 @@
 class WrappedCHelperCore {
 private:
     CHelper::CHelperCore *core;
-    std::string description;
-    std::string structure;
-    std::optional<std::pair<std::string, size_t>> newStr;
-    std::optional<std::string> errorReason;
-    std::string tempStr;
+    std::optional<std::pair<std::u16string, size_t>> newStr;
+    std::optional<std::u16string> errorReason;
+    std::u16string tempStr;
 
 public:
     explicit WrappedCHelperCore(CHelper::CHelperCore *core)
@@ -23,8 +21,8 @@ public:
         delete core;
     }
 
-    void onTextChanged(const char *content, size_t index) const {
-        core->onTextChanged(utf8::utf8to16(std::string(content)), index);
+    void onTextChanged(const char16_t *content, size_t index) const {
+        core->onTextChanged(content, index);
     }
 
     void onSelectionChanged(size_t index0) const {
@@ -34,35 +32,30 @@ public:
         core->onSelectionChanged(index0);
     }
 
-    const char *getStructure() {
+    [[nodiscard]] const char16_t *getStructure() {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
-        structure = utf8::utf16to8(core->getStructure());
-        return structure.c_str();
+        tempStr = core->getStructure();
+        return tempStr.c_str();
     }
 
-    const char *getDescription() {
+    [[nodiscard]] const char16_t *getDescription() {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
-        description = utf8::utf16to8(core->getDescription());
-        return description.c_str();
+        tempStr = core->getDescription();
+        return tempStr.c_str();
     }
 
     void onSuggestionClick(size_t which) {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return;
         }
-        std::optional<std::pair<std::u16string, size_t>> result = core->onSuggestionClick(which);
-        if (result.has_value()) {
-            newStr = {utf8::utf16to8(result.value().first), result.value().second};
-        } else {
-            newStr = std::nullopt;
-        }
+        newStr = core->onSuggestionClick(which);
     }
 
-    [[nodiscard]] const char *getStringAfterSuggestionClick() const {
+    [[nodiscard]] const char16_t *getStringAfterSuggestionClick() const {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
@@ -84,7 +77,7 @@ public:
         }
     }
 
-    const char *getErrorReason() {
+    const char16_t *getErrorReason() {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
@@ -92,18 +85,18 @@ public:
         if (HEDLEY_UNLIKELY(errorReasons.empty())) {
             errorReason = std::nullopt;
         } else if (HEDLEY_UNLIKELY(errorReasons.size() == 1)) {
-            errorReason = utf8::utf16to8(errorReasons[0]->errorReason);
+            errorReason = errorReasons[0]->errorReason;
         } else {
-            errorReason = "可能的错误原因：";
+            errorReason = u"可能的错误原因：";
             int i = 0;
             for (const auto &item: errorReasons) {
-                errorReason->append("\n").append(std::to_string(++i)).append(". ").append(utf8::utf16to8(item->errorReason));
+                errorReason->append(u"\n").append(utf8::utf8to16(std::to_string(++i)).append(u". ").append(item->errorReason));
             }
         }
-        if (errorReason == std::nullopt) {
-            return nullptr;
-        } else {
+        if (errorReason.has_value()) {
             return errorReason->c_str();
+        } else {
+            return nullptr;
         }
     }
 
@@ -118,7 +111,7 @@ public:
         return suggestions->size();
     }
 
-    const char *getSuggestionTitle(size_t which) {
+    [[nodiscard]] const char16_t *getSuggestionTitle(size_t which) const {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
@@ -129,11 +122,10 @@ public:
         if (which >= suggestions->size()) {
             return nullptr;
         }
-        tempStr = utf8::utf16to8(suggestions->at(which).content->name);
-        return tempStr.c_str();
+        return (*suggestions)[which].content->name.c_str();
     }
 
-    const char *getSuggestionDescription(size_t which) {
+    [[nodiscard]] const char16_t *getSuggestionDescription(size_t which) const {
         if (HEDLEY_UNLIKELY(core == nullptr)) {
             return nullptr;
         }
@@ -144,12 +136,11 @@ public:
         if (which >= suggestions->size()) {
             return nullptr;
         }
-        const std::optional<std::u16string> &suggestDescription = suggestions->at(which).content->description;
-        if (suggestDescription == std::nullopt) {
-            return nullptr;
+        const std::optional<std::u16string> &suggestDescription = (*suggestions)[which].content->description;
+        if (suggestDescription.has_value()) {
+            return suggestDescription.value().c_str();
         } else {
-            tempStr = utf8::utf16to8(suggestDescription.value());
-            return tempStr.c_str();
+            return nullptr;
         }
     }
 };
@@ -168,7 +159,7 @@ EMSCRIPTEN_KEEPALIVE void release(const WrappedCHelperCore *core) {
     delete core;
 }
 
-EMSCRIPTEN_KEEPALIVE void onTextChanged(const WrappedCHelperCore *core, const char *content, size_t index) {
+EMSCRIPTEN_KEEPALIVE void onTextChanged(const WrappedCHelperCore *core, const char16_t *content, size_t index) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
@@ -182,21 +173,21 @@ EMSCRIPTEN_KEEPALIVE void onSelectionChanged(const WrappedCHelperCore *core, siz
     core->onSelectionChanged(index);
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getStructure(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const char16_t *getStructure(WrappedCHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     return core->getStructure();
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getDescription(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const char16_t *getDescription(WrappedCHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     return core->getDescription();
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getErrorReason(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const char16_t *getErrorReason(WrappedCHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
@@ -210,14 +201,14 @@ EMSCRIPTEN_KEEPALIVE size_t getSuggestionSize(const WrappedCHelperCore *core) {
     return core->getSuggestionSize();
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getSuggestionTitle(WrappedCHelperCore *core, size_t which) {
+EMSCRIPTEN_KEEPALIVE const char16_t *getSuggestionTitle(WrappedCHelperCore *core, size_t which) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     return core->getSuggestionTitle(which);
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getSuggestionDescription(WrappedCHelperCore *core, size_t which) {
+EMSCRIPTEN_KEEPALIVE const char16_t *getSuggestionDescription(WrappedCHelperCore *core, size_t which) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
@@ -231,7 +222,7 @@ EMSCRIPTEN_KEEPALIVE void onSuggestionClick(WrappedCHelperCore *core, size_t whi
     core->onSuggestionClick(which);
 }
 
-EMSCRIPTEN_KEEPALIVE const char *getStringAfterSuggestionClick(const WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const char16_t *getStringAfterSuggestionClick(const WrappedCHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }

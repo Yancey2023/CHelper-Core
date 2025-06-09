@@ -32,9 +32,8 @@ namespace CHelper::Node {
                                 size_t index,
                                 std::vector<Suggestions> &suggestions) const override;
 
-        bool collectColor(const ASTNode *astNode,
-                          ColoredString &coloredString,
-                          const Theme &theme) const override;
+        bool collectSyntax(const ASTNode *astNode,
+                           SyntaxResult &syntaxResult) const override;
     };
 
 }// namespace CHelper::Node

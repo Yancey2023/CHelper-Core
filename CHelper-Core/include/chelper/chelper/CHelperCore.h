@@ -8,7 +8,6 @@
 #define CHELPER_CHELPERCORE_H
 
 #include "old2new/Old2New.h"
-#include "settings/Settings.h"
 #include <chelper/parser/ASTNode.h>
 #include <chelper/resources/CPack.h>
 #include <pch.h>
@@ -25,13 +24,11 @@ namespace CHelper {
         std::shared_ptr<std::vector<Suggestion>> suggestions;
 
     public:
-        Settings settings;
-
         CHelperCore(std::unique_ptr<CPack> cpack, ASTNode astNode);
 
         static CHelperCore *create(const std::function<std::unique_ptr<CPack>()> &getCPack);
 
-      #ifndef CHELPER_NO_FILESYSTEM
+#ifndef CHELPER_NO_FILESYSTEM
         static CHelperCore *createByDirectory(const std::filesystem::path &cpackPath);
 
         static CHelperCore *createByJson(const std::filesystem::path &cpackPath);
@@ -55,7 +52,7 @@ namespace CHelper {
 
         [[nodiscard]] std::u16string getStructure() const;
 
-        [[nodiscard]] ColoredString getColors() const;
+        [[nodiscard]] SyntaxResult getSyntaxResult() const;
 
         [[nodiscard]] std::optional<std::pair<std::u16string, size_t>> onSuggestionClick(size_t which);
 

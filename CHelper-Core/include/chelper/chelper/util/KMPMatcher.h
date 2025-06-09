@@ -16,7 +16,7 @@
 #ifndef CHELPER_KMPMATCHER_H
 #define CHELPER_KMPMATCHER_H
 
-#include <iostream>
+#include <string>
 #include <string_view>
 #include <vector>
 
@@ -50,7 +50,7 @@ namespace CHelper {
          * @returns the starting index of the pattern if found
          * @returns `std::string::npos` if not found
          */
-        size_t match(const std::u16string &text);
+        [[nodiscard]] size_t match(const std::u16string &text) const;
     };
 
 

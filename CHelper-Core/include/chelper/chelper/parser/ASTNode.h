@@ -7,13 +7,11 @@
 #ifndef CHELPER_ASTNODE_H
 #define CHELPER_ASTNODE_H
 
-#include "../lexer/Token.h"
 #include "StructureBuilder.h"
 #include "Suggestions.h"
 #include "pch.h"
-#include <chelper/parser/ColoredString.h>
 #include <chelper/parser/ErrorReason.h>
-#include <chelper/settings/Settings.h>
+#include <chelper/parser/SyntaxResult.h>
 
 namespace CHelper {
 
@@ -61,14 +59,15 @@ namespace CHelper {
     class ASTNode {
     public:
         ASTNodeMode::ASTNodeMode mode;
+        //一个Node可能会生成多个ASTNode，这些ASTNode使用id进行区分
+        const Node::NodeBase *node;
         //子节点为AND类型和OR类型特有
         std::vector<ASTNode> childNodes;
         TokensView tokens;
-        //一个Node可能会生成多个ASTNode，这些ASTNode使用id进行区分
-        ASTNodeId::ASTNodeId id;
-        const Node::NodeBase *node;
         //不要直接用这个，这里不包括ID错误，只有结构错误，应该用getErrorReason()
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
+        //AST节点ID
+        ASTNodeId::ASTNodeId id;
         //哪个节点最好，OR类型特有，获取颜色和生成命令格式文本的时候使用
         size_t whichBest;
 
@@ -84,12 +83,6 @@ namespace CHelper {
         class CPack;
 
     public:
-#ifdef CHelperTest
-        [[nodiscard]]json toJson() const;
-
-        [[nodiscard]]json toBestJson() const;
-#endif
-
         static ASTNode simpleNode(const Node::NodeBase *node,
                                   const TokensView &tokens,
                                   const std::shared_ptr<ErrorReason> &errorReason = nullptr,
@@ -138,7 +131,7 @@ namespace CHelper {
 
         void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 
-        void collectColor(ColoredString &coloredString, const Theme &theme) const;
+        void collectSyntaxResult(SyntaxResult &syntaxResult) const;
 
         [[nodiscard]] std::u16string getDescription(size_t index) const;
 
@@ -150,7 +143,7 @@ namespace CHelper {
 
         [[nodiscard]] std::u16string getStructure() const;
 
-        [[nodiscard]] ColoredString getColors(const Theme &theme) const;
+        [[nodiscard]] SyntaxResult getSyntaxResult() const;
     };
 
 }// namespace CHelper

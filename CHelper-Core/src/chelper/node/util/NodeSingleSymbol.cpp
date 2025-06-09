@@ -52,10 +52,9 @@ namespace CHelper::Node {
         return true;
     }
 
-    bool NodeSingleSymbol::collectColor(const ASTNode *astNode,
-                                        ColoredString &coloredString,
-                                        const Theme &theme) const {
-        coloredString.setColor(astNode->tokens, theme.colorSymbol);
+    bool NodeSingleSymbol::collectSyntax(const ASTNode *astNode,
+                                         SyntaxResult &syntaxResult) const {
+        syntaxResult.update(astNode->tokens, SyntaxTokenType::SYMBOL);
         return true;
     }
 

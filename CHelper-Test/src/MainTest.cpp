@@ -1,24 +1,53 @@
 //
-// Created by Yancey on2024-5-21.
+// Created by Yancey on 2024-5-21.
 //
-
-#include <gtest/gtest.h>
 
 #include <chelper/CHelperCore.h>
 #include <chelper/parser/Parser.h>
+#include <gtest/gtest.h>
 
 namespace CHelper::Test {
 
 #pragma warning(disable : 4068)
 #pragma warning(disable : 4834)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-result"
+
+    const char *getTokenTypeStr(const CHelper::TokenType::TokenType &tokenType) {
+        switch (tokenType) {
+            case CHelper::TokenType::NUMBER:
+                return "NUMBER";
+            case CHelper::TokenType::STRING:
+                return "STRING";
+            case CHelper::TokenType::SYMBOL:
+                return "SYMBOL";
+            case CHelper::TokenType::WHITE_SPACE:
+                return "WHITE_SPACE";
+            default:
+                return "UNKNOWN";
+        }
+    }
 
     /**
- * 测试程序是否可以正常运行
- */
-    [[maybe_unused]] void test(const std::filesystem::path &cpackPath,
-                               const std::vector<std::u16string> &commands) {
+     * 测试程序是否可以正常运行
+     */
+    [[maybe_unused]] void testLex(const std::vector<std::u16string> &commands) {
+        try {
+            for (const auto &command: commands) {
+                fmt::println("lex command: {}", fmt::styled(utf8::utf16to8(command), fg(fmt::color::medium_purple)));
+                for (const auto &item: Lexer::lex(command).allTokens) {
+                    fmt::println("[{}] ({}, {})", getTokenTypeStr(item.type), item.pos.line, item.pos.col);
+                }
+            }
+        } catch (const std::exception &e) {
+            Profile::printAndClear(e);
+            FAIL();
+        }
+    }
+
+    /**
+     * 测试程序是否可以正常运行
+     */
+    [[maybe_unused]] void testParse(const std::filesystem::path &cpackPath,
+                                    const std::vector<std::u16string> &commands) {
         std::shared_ptr<CHelperCore> core;
         try {
             std::unique_ptr<CPack> cPack = CPack::createByDirectory(cpackPath);
@@ -33,14 +62,17 @@ namespace CHelper::Test {
             try {
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-result"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-result"
                 core->onTextChanged(command, command.length());
                 core->getDescription();
                 core->getSuggestions();
                 core->getSuggestions();
                 core->getStructure();
+#pragma clang diagnostic pop
 #pragma GCC diagnostic pop
             } catch (const std::exception &e) {
-                CHELPER_INFO("parse command: {}", command);
+                fmt::println("parse command: {}", fmt::styled(utf8::utf16to8(command), fg(fmt::color::medium_purple)));
                 CHelper::Profile::printAndClear(e);
                 flag = true;
             }
@@ -50,13 +82,44 @@ namespace CHelper::Test {
         }
     }
 
-#pragma clang diagnostic pop
-
 }// namespace CHelper::Test
+
+TEST(MainTest, LexCommand) {
+    CHelper::Test::testLex(
+            std::vector<std::u16string>{
+                    uR"(execute run clear )",
+                    uR"(give @s[hasitem=[{item=air,data=1},{item=minecraft:bed}],has_property={minecraft:is_rolled_up=true,m)",
+                    uR"(give @s command_block 112 12 {"minecraft:can_place_on":{"blocks":[")",
+                    uR"(tellraw @a {"rawtext":[{"text":"aaa","selector":"@a[type=\")",
+                    uR"(execute if block 12~23~)",
+                    uR"(give @s stone 12 21 {"minecraft:item_lock":{"mode":"l)",
+                    uR"(execute if block ~~~ anvil["aaa"=90.5] run g)",
+                    uR"(setblock ~~~ stone[)",
+                    uR"(give @s stone 12 1)",
+                    uR"(tag @s add "\\\"\u1110\/\b\f\n\r\t\p\")",
+                    uR"(give @s command_block 12 12 {"minecraft:can_destroy":{"blocks":["minecraft:acacia_door"]}})",
+                    uR"(give @s s)",
+                    uR"(give @s stone 1 1 {)",
+                    uR"(give @s 石头)",
+                    uR"(give @s command_block 12 12 {"minecraft:can_destroy":{"blocks":[")",
+                    uR"(give)",
+                    uR"(give @)",
+                    uR"(give @a[x=^,has_property={""=!..12,="..}})",
+                    uR"(execute as @a run)",
+                    uR"(execute run)",
+                    uR"(execute if block ~~~ command_block run)",
+                    uR"(execute if block ~~~ bamboo)",
+                    uR"(give @s apple 12 1)",
+                    uR"(spreadplayers ~ ~ 0 1200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)",
+                    uR"(camerashake add @a 10000000000000000000000000000000000000000000000000000 3402823466385288598117041834845169254401)",
+                    uR"(setblock ~~~ candle_cake[lit=)",
+                    uR"(give @s repeating_command_block)",
+            });
+}
 
 TEST(MainTest, ParseCommand) {
     std::filesystem::path resourceDir(RESOURCE_DIR);
-    CHelper::Test::test(
+    CHelper::Test::testParse(
             resourceDir / "resources" / "beta" / "vanilla",
             std::vector<std::u16string>{
                     uR"(execute run clear )",

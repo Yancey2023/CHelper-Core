@@ -60,7 +60,7 @@ namespace CHelper {
             if (aProperty.valid.has_value()) {
                 size_t size = aProperty.valid.value().size();
                 valid = std::vector<PropertyValue>(size);
-                for (int i = 0; i < size; ++i) {
+                for (size_t i = 0; i < size; ++i) {
                     valid.value()[i].string = new std::u16string(*aProperty.valid.value()[i].string);
                 }
             } else {
@@ -89,7 +89,7 @@ namespace CHelper {
             if (aProperty.valid.has_value()) {
                 size_t size = aProperty.valid.value().size();
                 valid = std::vector<PropertyValue>(size);
-                for (int i = 0; i < size; ++i) {
+                for (size_t i = 0; i < size; ++i) {
                     valid.value()[i].string = new std::u16string(*aProperty.valid.value()[i].string);
                 }
             } else {
@@ -144,7 +144,7 @@ namespace CHelper {
         if (type == PropertyType::STRING) {
             size_t size = aBlockPropertyDescription.values.size();
             values.resize(size);
-            for (int i = 0; i < size; ++i) {
+            for (size_t i = 0; i < size; ++i) {
                 BlockPropertyValueDescription &t1 = values[i];
                 const BlockPropertyValueDescription &t2 = aBlockPropertyDescription.values[i];
                 t1.valueName.string = new std::u16string(*t2.valueName.string);
@@ -170,7 +170,7 @@ namespace CHelper {
         if (type == PropertyType::STRING) {
             size_t size = aBlockPropertyDescription.values.size();
             values.resize(size);
-            for (int i = 0; i < size; ++i) {
+            for (size_t i = 0; i < size; ++i) {
                 BlockPropertyValueDescription &t1 = values[i];
                 const BlockPropertyValueDescription &t2 = aBlockPropertyDescription.values[i];
                 t1.valueName.string = new std::u16string(*t2.valueName.string);
@@ -213,8 +213,8 @@ namespace CHelper {
             const std::u16string &blockId,
             const std::u16string &propertyName) const {
         for (const auto &item: block) {
-            if ((std::find(item.blocks.begin(), item.blocks.end(), blockId) != item.blocks.end() ||
-                 std::find(item.blocks.begin(), item.blocks.end(), blockIdWithNamespace) != item.blocks.end())) {
+            if (std::find(item.blocks.begin(), item.blocks.end(), blockId) != item.blocks.end() ||
+                std::find(item.blocks.begin(), item.blocks.end(), blockIdWithNamespace) != item.blocks.end()) {
                 const auto &it = std::find_if(
                         item.properties.begin(), item.properties.end(),
                         [&propertyName](const BlockPropertyDescription &item1) -> bool {
@@ -233,7 +233,9 @@ namespace CHelper {
         if (HEDLEY_LIKELY(it != common.end())) {
             return *it;
         }
-        Profile::push("fail to find block property value by block id {} and property name {}", blockIdWithNamespace, propertyName);
+        Profile::push("fail to find block property value by block id {} and property name {}",
+                      FORMAT_ARG(utf8::utf16to8(blockIdWithNamespace)),
+                      FORMAT_ARG(utf8::utf16to8(propertyName)));
         throw std::runtime_error("fail to find block property value by block id and property name");
     }
 

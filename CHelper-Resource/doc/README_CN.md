@@ -16,31 +16,36 @@ CHelper是我的世界基岩版的命令助手。
 
 ```json
 {
-  "name": "资源包示例",
-  "description": "CHelper扩展包的官方示例",
-  "minecraftVersion": "1.20",
-  "author": "Yancey",
-  "updateDate": "2023-11-7",
-  "packID": "ExamplePack-1.20",
-  "requiredPack": [
-    "BasicPack-1.20"
-  ],
-  "versionCode": 1,
-  "isBasicPack": false
+    "name": "资源包示例",
+    "description": "CHelper扩展包的官方示例",
+    "version": "1.20",
+    "versionType": "release",
+    "branch": "vanilla",
+    "author": "Yancey",
+    "updateDate": "2025-5-30",
+    "packId": "ExamplePack-1.20-vanilla",
+    "requiredPack": [
+        "BasicPack-1.20"
+    ],
+    "versionCode": 1,
+    "isBasicPack": true,
+    "isDefault": true
 }
 ```
 
-|        名字        | 类型  |     含义      |          备注           |     必需      |
-|:----------------:|:---:|:-----------:|:---------------------:|:-----------:|
-|       name       | 字符串 |   资源包的名字    |         用于显示          |  否（不建议忽略）   |
-|   description    | 字符串 |   资源包的简介    |         用于显示          |      否      |
-| minecraftVersion | 字符串 |   对应的游戏版本   |         用于显示          |      否      |
-|      author      | 字符串 |     作者      |         用于显示          |      否      |
-|    updateDate    | 字符串 |    更新日期     |         用于显示          |      否      |
-|      packId      | 字符串 |   资源包的ID    |        用于识别资源包        |      是      |
-|   requiredPack   | 数组  | 需要依赖的资源包的ID |     用于识别资源包的依赖关系      |  否（默认没有依赖）  |
-|   versionCode    | 整数  |     版本号     |       用于显示和判断版本       |      是      |
-|   isBasicPack    | 布尔值 |  是否是命令基础包   | 只能同时加载一个命令基础包和多个命令扩展包 | 否（默认为false） |
+|      名字      | 类型  |     含义      |          备注           |     必需      |
+|:------------:|:---:|:-----------:|:---------------------:|:-----------:|
+|     name     | 字符串 |   资源包的名字    |         用于显示          |  否（不建议忽略）   |
+| description  | 字符串 |   资源包的简介    |         用于显示          |      否      |
+|   version    | 字符串 |   对应的游戏版本   |         用于显示          |      否      |
+| versionType  | 字符串 |   游戏版本类型    |         用于显示          |      否      |
+|    branch    | 字符串 |   游戏版本分支    |         用于显示          |      否      |
+|    author    | 字符串 |     作者      |         用于显示          |      否      |
+|  updateDate  | 字符串 |    更新日期     |         用于显示          |      否      |
+|    packId    | 字符串 |   资源包的ID    |        用于识别资源包        |      是      |
+| requiredPack | 数组  | 需要依赖的资源包的ID |     用于识别资源包的依赖关系      |  否（默认没有依赖）  |
+| versionCode  | 整数  |     版本号     |       用于显示和判断版本       |      是      |
+| isBasicPack  | 布尔值 |  是否是命令基础包   | 只能同时加载一个命令基础包和多个命令扩展包 | 否（默认为false） |
 
 > 注意：暂时还不支持命令拓展包，目前只支持命令基础包
 
@@ -50,55 +55,55 @@ CHelper是我的世界基岩版的命令助手。
 
 ```json
 {
-  "name": [
-    "ability"
-  ],
-  "description": "赋予或剥夺玩家的能力",
-  "start": [
-    "player"
-  ],
-  "node": [
-    {
-      "type": "TARGET_SELECTOR",
-      "id": "player",
-      "description": "要赋予或剥夺能力的玩家",
-      "isOnlyOne": false,
-      "isMustPlayer": true,
-      "isMustNPC": false
-    },
-    {
-      "type": "NORMAL_ID",
-      "id": "ability",
-      "description": "要操作的能力",
-      "ignoreError": false,
-      "contents": [
+    "name": [
+        "ability"
+    ],
+    "description": "赋予或剥夺玩家的能力",
+    "start": [
+        "player"
+    ],
+    "node": [
         {
-          "name": "worldbuilder",
-          "description": "给予玩家成为世界建造者的能力"
+            "type": "TARGET_SELECTOR",
+            "id": "player",
+            "description": "要赋予或剥夺能力的玩家",
+            "isOnlyOne": false,
+            "isMustPlayer": true,
+            "isMustNPC": false
         },
         {
-          "name": "mayfly",
-          "description": "给予飞行的能力"
+            "type": "NORMAL_ID",
+            "id": "ability",
+            "description": "要操作的能力",
+            "ignoreError": false,
+            "contents": [
+                {
+                    "name": "worldbuilder",
+                    "description": "给予玩家成为世界建造者的能力"
+                },
+                {
+                    "name": "mayfly",
+                    "description": "给予飞行的能力"
+                },
+                {
+                    "name": "mute",
+                    "description": "将玩家禁言，聊天时其他人将无法看见或听见目标"
+                }
+            ]
         },
         {
-          "name": "mute",
-          "description": "将玩家禁言，聊天时其他人将无法看见或听见目标"
+            "type": "BOOLEAN",
+            "id": "value",
+            "description": "此能力是否对玩家可用",
+            "descriptionTrue": "此能力对玩家可用",
+            "descriptionFalse": "此能力对玩家不可用"
         }
-      ]
-    },
-    {
-      "type": "BOOLEAN",
-      "id": "value",
-      "description": "此能力是否对玩家可用",
-      "descriptionTrue": "此能力对玩家可用",
-      "descriptionFalse": "此能力对玩家不可用"
-    }
-  ],
-  "ast": [
-    ["player", "ability", "LF"],
-    ["ability", "value"],
-    ["value", "LF"]
-  ]
+    ],
+    "ast": [
+        ["player", "ability", "LF"],
+        ["ability", "value"],
+        ["value", "LF"]
+    ]
 }
 ```
 
@@ -129,15 +134,15 @@ ID 有4种类型：
 
 ```json
 {
-  "type": "normal",
-  "id": "fogs",
-  "content": [
-    {
-      "name": "minecraft:fog_bamboo_jungle",
-      "description": "竹林"
-    },
-    ...
-  ]
+    "type": "normal",
+    "id": "fogs",
+    "content": [
+        {
+            "name": "minecraft:fog_bamboo_jungle",
+            "description": "竹林"
+        },
+        ...
+    ]
 }
 ```
 
@@ -158,16 +163,16 @@ ID 有4种类型：
 
 ```json
 {
-  "type": "namespace",
-  "id": "entities",
-  "content": [
-    {
-      "idNamespace": "minecraft",
-      "name": "allay",
-      "description": "悦灵"
-    },
-    ...
-  ]
+    "type": "namespace",
+    "id": "entities",
+    "content": [
+        {
+            "idNamespace": "minecraft",
+            "name": "allay",
+            "description": "悦灵"
+        },
+        ...
+    ]
 }
 ```
 
@@ -185,86 +190,87 @@ ID 有4种类型：
 |    name     | 字符串 | ID名字 |               -                | 是  |
 | description | 字符串 | ID介绍 |               -                | 否  |
 
-- blocks
+- block
 
 ```json
 {
-  "id": "blocks",
-  "type": "block",
-  "blocks": {
-    "blockStateValues": [
-      {
-        "name": "acacia_button",
-        "description": "金合欢木按钮",
-        "properties": [
-          {
-            "name": "button_pressed_bit",
-            "defaultValue": false
-          },
-          {
-            "name": "facing_direction",
-            "defaultValue": 0
-          }
-        ]
-      },
-      ...
-    ],
-    "blockPropertyDescriptions": {
-      "common": [
-        {
-          "propertyName": "age",
-          "description": "植物的生长阶段 刚种下或刚生长出的植物方块的该属性值为0 该值随着时间变化不断增长，直到15时可以继续在上方生长出新的植物方块",
-          "values": [
+    "id": "block",
+    "type": "block",
+    "content": {
+        "blockStateValues": [
             {
-              "valueName": 0
-            },
-            {
-              "valueName": 1
+                "name": "acacia_button",
+                "description": "金合欢木按钮",
+                "properties": [
+                    {
+                        "name": "button_pressed_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "facing_direction",
+                        "defaultValue": 0
+                    }
+                ]
             },
             ...
-          ]
-        },
-        ...
-      ],
-      "block": [
-        {
-          "blocks": [
-            "creaking_heart"
-          ],
-          "properties": [
-            {
-              "propertyName": "active",
-              "values": [
+        ],
+        "blockPropertyDescriptions": {
+            "common": [
                 {
-                  "valueName": true,
-                  "description": "嘎枝之心处于激活状态"
+                    "propertyName": "age",
+                    "description": "植物的生长阶段 刚种下或刚生长出的植物方块的该属性值为0 该值随着时间变化不断增长，直到15时可以继续在上方生长出新的植物方块",
+                    "values": [
+                        {
+                            "valueName": 0
+                        },
+                        {
+                            "valueName": 1
+                        },
+                        ...
+                    ]
                 },
+                ...
+            ],
+            "block": [
                 {
-                  "valueName": false,
-                  "description": "嘎枝之心处于未激活状态"
-                }
-              ]
-            }
-          ]
-        },
-        ...
-      ]
+                    "blocks": [
+                        "creaking_heart"
+                    ],
+                    "properties": [
+                        {
+                            "propertyName": "active",
+                            "values": [
+                                {
+                                    "valueName": true,
+                                    "description": "嘎枝之心处于激活状态"
+                                },
+                                {
+                                    "valueName": false,
+                                    "description": "嘎枝之心处于未激活状态"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                ...
+            ]
+        }
     }
-  }
 }
 ```
 
-|   名字   | 类型  |  含义  |    备注     | 必需 |
-|:------:|:---:|:----:|:---------:|:--:|
-|   id   | 字符串 | ID名字 | 永远是blocks | 否  |
-|  type  | 字符串 | ID类型 |     -     | 是  |
-| blocks | 数组  | ID列表 |     -     | 是  |
+|  名字   | 类型  |  含义  |  备注   | 必需 |
+|:-----:|:---:|:----:|:-----:|:--:|
+|  id   | 字符串 | ID名字 | block | 否  |
+| type  | 字符串 | ID类型 |   -   | 是  |
+| block | 数组  | ID列表 |   -   | 是  |
 
 blocks：
-| 名字 | 类型 | 含义 | 备注 | 必需 |
-|:------:|:---:|:----:|:---------:|:--:|
-| blockStateValues | 数组 | 所有方块及其方块状态属性名和默认值 | - | 是 |
-| blockPropertyDescriptions | 所有方块状态值及注释 | ID类型 | - | 是 |
+
+|            名字             |     类型     |        含义         | 备注 | 必需 |
+|:-------------------------:|:----------:|:-----------------:|:--:|:--:|
+|     blockStateValues      |     数组     | 所有方块及其方块状态属性名和默认值 | -  | 是  |
+| blockPropertyDescriptions | 所有方块状态值及注释 |       ID类型        | -  | 是  |
 
 blockStateValues每个ID：
 
@@ -326,37 +332,37 @@ values每个方块状态的值：
 |    value    | 布尔值 / 正整数 / 字符串 | 方块状态参数值 | -  | 是  |
 | description |       字符串       |   介绍    | -  | 否  |
 
-- items
+- item
 
 ```json
 {
-  "id": "items",
-  "type": "item",
-  "items": [
-    {
-      "name": "stone_block_slab2",
-      "description": "红砂岩台阶/紫珀台阶/海晶石台阶/暗海晶石台阶/海晶石砖台阶/苔石台阶/平滑砂岩台阶/红色下界砖台阶",
-      "descriptions": [
-        "红砂岩台阶",
-        "紫珀台阶",
-        "海晶石台阶",
-        "暗海晶石台阶",
-        "海晶石砖台阶",
-        "苔石台阶",
-        "平滑砂岩台阶",
-        "红色下界砖台阶"
-      ]
-    },
-    ...
-  ]
+    "id": "item",
+    "type": "item",
+    "item": [
+        {
+            "name": "stone_block_slab2",
+            "description": "红砂岩台阶/紫珀台阶/海晶石台阶/暗海晶石台阶/海晶石砖台阶/苔石台阶/平滑砂岩台阶/红色下界砖台阶",
+            "descriptions": [
+                "红砂岩台阶",
+                "紫珀台阶",
+                "海晶石台阶",
+                "暗海晶石台阶",
+                "海晶石砖台阶",
+                "苔石台阶",
+                "平滑砂岩台阶",
+                "红色下界砖台阶"
+            ]
+        },
+        ...
+    ]
 }
 ```
 
-|  名字   | 类型  |  含义  |    备注    | 必需 |
-|:-----:|:---:|:----:|:--------:|:--:|
-|  id   | 字符串 | ID名字 | 永远是items | 否  |
-| type  | 字符串 | ID类型 |    -     | 是  |
-| items | 数组  | ID列表 |    -     | 是  |
+|   名字    | 类型  |  含义  |   备注    | 必需 |
+|:-------:|:---:|:----:|:-------:|:--:|
+|   id    | 字符串 | ID名字 | 永远是item | 否  |
+|  type   | 字符串 | ID类型 |    -    | 是  |
+| content | 数组  | ID列表 |    -    | 是  |
 
 每个ID：
 
@@ -420,10 +426,10 @@ values每个方块状态的值：
 
 ```json
 {
-  "type": "BLOCK",
-  "id": "block",
-  "description": "更改后的新方块",
-  "nodeBlockType": 0
+    "type": "BLOCK",
+    "id": "block",
+    "description": "更改后的新方块",
+    "nodeBlockType": 0
 }
 ```
 
@@ -444,11 +450,11 @@ values每个方块状态的值：
 
 ```json
 {
-  "type": "BOOLEAN",
-  "id": "lock",
-  "description": "是否锁定日夜更替",
-  "descriptionTrue": "锁定昼夜更替",
-  "descriptionFalse": "不锁定昼夜更替"
+    "type": "BOOLEAN",
+    "id": "lock",
+    "description": "是否锁定日夜更替",
+    "descriptionTrue": "锁定昼夜更替",
+    "descriptionFalse": "不锁定昼夜更替"
 }
 ```
 
@@ -470,9 +476,9 @@ values每个方块状态的值：
 
 ```json
 {
-  "type": "COMMAND",
-  "id": "command",
-  "description": "命令"
+    "type": "COMMAND",
+    "id": "command",
+    "description": "命令"
 }
 ```
 
@@ -492,10 +498,10 @@ values每个方块状态的值：
 
 ```json
 {
-  "type": "COMMAND_NAME",
-  "id": "command",
-  "brief": "命令名",
-  "description": "要提供帮助的命令名称"
+    "type": "COMMAND_NAME",
+    "id": "command",
+    "brief": "命令名",
+    "description": "要提供帮助的命令名称"
 }
 ```
 
@@ -515,12 +521,12 @@ values每个方块状态的值：
 
 ```json
 {
-  "type": "FLOAT",
-  "id": "fadeInSeconds",
-  "brief": "淡入时间",
-  "description": "相机视角的淡入时间",
-  "min": 0,
-  "max": 10
+    "type": "FLOAT",
+    "id": "fadeInSeconds",
+    "brief": "淡入时间",
+    "description": "相机视角的淡入时间",
+    "min": 0,
+    "max": 10
 }
 ```
 
@@ -542,10 +548,10 @@ values每个方块状态的值：
 
 ```json
 {
-  "type": "INTEGER",
-  "id": "page",
-  "brief": "页码",
-  "description": "要展示的命令列表的页码（小于1的数字会被视为1，大于总页数会被默认为展示最后一页）"
+    "type": "INTEGER",
+    "id": "page",
+    "brief": "页码",
+    "description": "要展示的命令列表的页码（小于1的数字会被视为1，大于总页数会被默认为展示最后一页）"
 }
 ```
 
@@ -567,16 +573,16 @@ values每个方块状态的值：
 
 ```json
 {
-  "type": "INTEGER_WITH_UNIT",
-  "id": "amount",
-  "brief": "经验值数量",
-  "description": "给予玩家的经验值数量",
-  "units": [
-    {
-      "name": "L",
-      "description": "一个经验等级"
-    }
-  ]
+    "type": "INTEGER_WITH_UNIT",
+    "id": "amount",
+    "brief": "经验值数量",
+    "description": "给予玩家的经验值数量",
+    "units": [
+        {
+            "name": "L",
+            "description": "一个经验等级"
+        }
+    ]
 }
 ```
 
@@ -604,10 +610,10 @@ values每个方块状态的值：
 
 ```json
 {
-  "type": "ITEM",
-  "id": "item",
-  "description": "要给予实体的物品",
-  "nodeItemType": 0
+    "type": "ITEM",
+    "id": "item",
+    "description": "要给予实体的物品",
+    "nodeItemType": 0
 }
 ```
 
@@ -628,12 +634,12 @@ values每个方块状态的值：
 
 ```json
 {
-  "type": "NAMESPACE_ID",
-  "id": "entityType",
-  "brief": "实体类型",
-  "description": "要被召唤的实体类型",
-  "key": "entities",
-  "ignoreError": true
+    "type": "NAMESPACE_ID",
+    "id": "entityType",
+    "brief": "实体类型",
+    "description": "要被召唤的实体类型",
+    "key": "entity",
+    "ignoreError": true
 }
 ```
 
@@ -664,12 +670,12 @@ contents每个ID：
 
 ```json
 {
-  "type": "NORMAL_ID",
-  "id": "hud_element",
-  "brief": "HUD元素",
-  "description": "指定将被修改的HUD元素",
-  "key": "hudElement",
-  "ignoreError": true
+    "type": "NORMAL_ID",
+    "id": "hud_element",
+    "brief": "HUD元素",
+    "description": "将被修改的HUD元素",
+    "key": "hudElement",
+    "ignoreError": true
 }
 ```
 
@@ -699,10 +705,10 @@ contents每个ID：
 
 ```json
 {
-  "type": "POSITION",
-  "id": "position",
-  "brief": "方块位置",
-  "description": "要被更改方块的位置"
+    "type": "POSITION",
+    "id": "position",
+    "brief": "方块位置",
+    "description": "要被更改方块的位置"
 }
 ```
 
@@ -722,11 +728,11 @@ contents每个ID：
 
 ```json
 {
-  "type": "RELATIVE_FLOAT",
-  "id": "xRot",
-  "brief": "rx",
-  "description": "相机视角绕Y轴旋转的旋转角度(-180.0表示北，-90.0表示东，0.0表示南，90.0表示西)",
-  "canUseCaretNotation": false
+    "type": "RELATIVE_FLOAT",
+    "id": "xRot",
+    "brief": "rx",
+    "description": "相机视角绕Y轴旋转的旋转角度(-180.0表示北，-90.0表示东，0.0表示南，90.0表示西)",
+    "canUseCaretNotation": false
 }
 ```
 
@@ -747,10 +753,10 @@ contents每个ID：
 
 ```json
 {
-  "type": "REPEAT",
-  "id": "executeParam",
-  "description": "子命令",
-  "key": "execute"
+    "type": "REPEAT",
+    "id": "executeParam",
+    "description": "子命令",
+    "key": "execute"
 }
 ```
 
@@ -771,12 +777,12 @@ contents每个ID：
 
 ```json
 {
-  "type": "STRING",
-  "id": "trackName",
-  "brief": "播放音乐名",
-  "description": "必须为音乐名或record.<music_name>或music.game.<music_name>",
-  "canContainSpace": true,
-  "ignoreLater": false
+    "type": "STRING",
+    "id": "trackName",
+    "brief": "播放音乐名",
+    "description": "必须为音乐名或record.<music_name>或music.game.<music_name>",
+    "canContainSpace": true,
+    "ignoreLater": false
 }
 ```
 
@@ -798,13 +804,13 @@ contents每个ID：
 
 ```json
 {
-  "type": "TARGET_SELECTOR",
-  "id": "target",
-  "description": "被给予物品的玩家",
-  "isOnlyOne": false,
-  "isMustPlayer": true,
-  "isMustNPC": false,
-  "isWildcard": false
+    "type": "TARGET_SELECTOR",
+    "id": "target",
+    "description": "被给予物品的玩家",
+    "isOnlyOne": false,
+    "isMustPlayer": true,
+    "isMustNPC": false,
+    "isWildcard": false
 }
 ```
 
@@ -828,13 +834,13 @@ contents每个ID：
 
 ```json
 {
-  "type": "TEXT",
-  "id": "play",
-  "description": "播放音乐",
-  "data": {
-    "name": "play",
-    "description": "播放音乐"
-  }
+    "type": "TEXT",
+    "id": "play",
+    "description": "播放音乐",
+    "data": {
+        "name": "play",
+        "description": "播放音乐"
+    }
 }
 ```
 
@@ -862,9 +868,9 @@ data：
 
 ```json
 {
-  "type": "RANGE",
-  "id": "range",
-  "description": "分数范围"
+    "type": "RANGE",
+    "id": "range",
+    "description": "分数范围"
 }
 ```
 
@@ -884,11 +890,11 @@ data：
 
 ```json
 {
-  "type": "JSON",
-  "id": "raw json message",
-  "brief": "JSON文本",
-  "description": "要发送的消息",
-  "key": "rawtext"
+    "type": "JSON",
+    "id": "raw json message",
+    "brief": "JSON文本",
+    "description": "要发送的消息",
+    "key": "rawtext"
 }
 ```
 
@@ -909,11 +915,11 @@ data：
 
 ```json
 {
-  "type": "JSON_BOOLEAN",
-  "id": "lock",
-  "description": "是否锁定日夜更替",
-  "descriptionTrue": "锁定昼夜更替",
-  "descriptionFalse": "不锁定昼夜更替"
+    "type": "JSON_BOOLEAN",
+    "id": "lock",
+    "description": "是否锁定日夜更替",
+    "descriptionTrue": "锁定昼夜更替",
+    "descriptionFalse": "不锁定昼夜更替"
 }
 ```
 
@@ -935,9 +941,9 @@ data：
 
 ```json
 {
-  "type": "JSON_FLOAT",
-  "id": "score",
-  "description": "分数"
+    "type": "JSON_FLOAT",
+    "id": "score",
+    "description": "分数"
 }
 ```
 
@@ -959,9 +965,9 @@ data：
 
 ```json
 {
-  "type": "JSON_INTEGER",
-  "id": "SCORE_VALUE",
-  "description": "可选。如果存在此值，则无论分数是多少，都将使用此值。"
+    "type": "JSON_INTEGER",
+    "id": "SCORE_VALUE",
+    "description": "可选。如果存在此值，则无论分数是多少，都将使用此值。"
 }
 ```
 
@@ -983,10 +989,10 @@ data：
 
 ```json
 {
-  "type": "JSON_LIST",
-  "id": "WITH",
-  "description": "translate使用的聊天字符串参数的列表。",
-  "data": "STRING"
+    "type": "JSON_LIST",
+    "id": "WITH",
+    "description": "translate使用的聊天字符串参数的列表。",
+    "data": "STRING"
 }
 ```
 
@@ -1007,9 +1013,9 @@ data：
 
 ```json
 {
-  "type": "JSON_NULL",
-  "id": "null",
-  "description": "空值"
+    "type": "JSON_NULL",
+    "id": "null",
+    "description": "空值"
 }
 ```
 
@@ -1029,18 +1035,18 @@ data：
 
 ```json
 {
-  "type": "JSON_OBJECT",
-  "id": "BLOCKS",
-  "description": "方块类型",
-  "data": [
-    {
-      "key": "blocks",
-      "description": "方块类型",
-      "value": [
-        "BLOCK_ID_LIST"
-      ]
-    }
-  ]
+    "type": "JSON_OBJECT",
+    "id": "BLOCKS",
+    "description": "方块类型",
+    "data": [
+        {
+            "key": "block",
+            "description": "方块类型",
+            "value": [
+                "BLOCK_ID_LIST"
+            ]
+        }
+    ]
 }
 ```
 
@@ -1069,29 +1075,29 @@ data中的每个键值对：
 
 ```json
 {
-  "type": "JSON_STRING",
-  "id": "TARGET_SELECTOR",
-  "description": "目标选择器",
-  "data": [
-    {
-      "type": "TARGET_SELECTOR",
-      "id": "TARGET_SELECTOR",
-      "description": "目标选择器",
-      "isMustPlayer": false,
-      "isOnlyOne": false,
-      "isMustNPC": false,
-      "isWildcard": false
-    },
-    {
-      "type": "TEXT",
-      "id": "ALL_TARGET",
-      "description": "目标选择器",
-      "data": {
-        "name": "*",
-        "description": "选择全部实体"
-      }
-    }
-  ]
+    "type": "JSON_STRING",
+    "id": "TARGET_SELECTOR",
+    "description": "目标选择器",
+    "data": [
+        {
+            "type": "TARGET_SELECTOR",
+            "id": "TARGET_SELECTOR",
+            "description": "目标选择器",
+            "isMustPlayer": false,
+            "isOnlyOne": false,
+            "isMustNPC": false,
+            "isWildcard": false
+        },
+        {
+            "type": "TEXT",
+            "id": "ALL_TARGET",
+            "description": "目标选择器",
+            "data": {
+                "name": "*",
+                "description": "选择全部实体"
+            }
+        }
+    ]
 }
 ```
 

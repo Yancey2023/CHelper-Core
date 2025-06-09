@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(CHelperAndroid
-        VERSION 0.2.29
-        DESCRIPTION "Command Helper for Minecraft Bedrock Edition"
-        LANGUAGES CXX)
+project(CHelperAndroid LANGUAGES CXX)
 
 # using c++ 17
 set(CMAKE_CXX_STANDARD 17)
@@ -25,6 +22,7 @@ target_compile_definitions(CHelperAndroid PUBLIC CHelperAndroid)
 if (PROJECT_IS_TOP_LEVEL)
     target_link_libraries(CHelperAndroid PUBLIC android log)
 else ()
+    target_compile_definitions(CHelperAndroid PUBLIC __ANDROID__)
     target_include_directories(CHelperAndroid PUBLIC include/android)
 endif ()
 target_link_libraries(CHelperAndroid PRIVATE CHelper::Core)

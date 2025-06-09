@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(CHelperQt
-        VERSION 0.2.29
-        DESCRIPTION "Command Helper for Minecraft Bedrock Edition"
-        LANGUAGES CXX)
+project(CHelperQt LANGUAGES CXX)
 
 # using c++ 17
 set(CMAKE_CXX_STANDARD 17)
@@ -36,7 +33,6 @@ add_executable(CHelperQt WIN32
         src/chelper.ui
 )
 target_link_libraries(CHelperQt PRIVATE CHelper::Core Qt6::Core Qt6::Gui Qt6::Widgets)
-# because I want to use static link, so I add this
 if (MSVC)
     target_compile_options(CHelperQt PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
 endif ()

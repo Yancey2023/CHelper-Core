@@ -4,8 +4,8 @@
 
 #include "CHelperQt.h"
 #include "ui_chelper.h"
-#include <ParamDeliver.h>
 #include <QClipboard>
+#include <QDir>
 #include <QFile>
 #include <QListWidget>
 #include <QStringListModel>
@@ -19,7 +19,7 @@ CHelperApp::CHelperApp(QWidget *parent)
     std::filesystem::path resourcePath(RESOURCE_DIR);
     core = CHelper::CHelperCore::createByDirectory(resourcePath / "resources" / "beta" / "vanilla");
 #else
-    QFile file(QString(":/assets/release-experiment-").append(CPACK_VERSION_RELEASE).append(".cpack"));
+    QFile file = QDir(QString(":/assets")).entryInfoList()[0].filePath();
     if (file.open(QIODevice::ReadOnly) && file.isReadable()) {
         std::istringstream iss(file.readAll().toStdString());
         core = CHelper::CHelperCore::create([&iss] {
@@ -47,7 +47,7 @@ CHelperApp::~CHelperApp() {
     delete core;
 }
 
-void CHelperApp::onTextChanged(const QString &string) {
+void CHelperApp::onTextChanged(const QString &string) const {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
@@ -57,21 +57,6 @@ void CHelperApp::onTextChanged(const QString &string) {
         ui->descriptionLabel->setText("作者：Yancey");
         ui->errorReasonLabel->setText(nullptr);
     } else {
-#ifdef CHelperTest
-        fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
-        fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
-        CHelper::ColoredString coloredString = core->getColors();
-        std::u16string stringBuilder;
-        for (int i = 0; i < coloredString.colors.size(); ++i) {
-            uint32_t color = coloredString.colors[i];
-            if (color == CHelper::NO_COLOR) {
-                color = 0xFFFFFFFF;
-            }
-            stringBuilder.append(fmt::format("{}", fmt::styled(coloredString.str[i], fg(fmt::rgb(color)))));
-        }
-        stringBuilder.append("\n");
-        fmt::print(stringBuilder);
-#endif
         ui->structureLabel->setText(QString::fromStdU16String(core->getStructure()));
         ui->descriptionLabel->setText(QString::fromStdU16String(core->getDescription()));
         std::vector<std::shared_ptr<CHelper::ErrorReason>> errorReasons = core->getErrorReasons();
@@ -96,11 +81,11 @@ void CHelperApp::onTextChanged(const QString &string) {
                         ? suggestion.content->name + u" - " + suggestion.content->description.value()
                         : suggestion.content->name));
     }
-    ((QStringListModel *) ui->listView->model())->setStringList(list);
+    reinterpret_cast<QStringListModel *>(ui->listView->model())->setStringList(list);
     ui->listView->scrollToTop();
 }
 
-void CHelperApp::onSuggestionClick(const QModelIndex &index) {
+void CHelperApp::onSuggestionClick(const QModelIndex &index) const {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
@@ -114,7 +99,7 @@ void CHelperApp::onSuggestionClick(const QModelIndex &index) {
     }
 }
 
-void CHelperApp::copy() {
+void CHelperApp::copy() const {
     QClipboard *clip = QApplication::clipboard();
     clip->setText(ui->lineEdit->text());
 }

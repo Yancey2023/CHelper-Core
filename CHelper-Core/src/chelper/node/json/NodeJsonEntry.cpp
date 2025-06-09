@@ -45,15 +45,15 @@ namespace CHelper::Node {
                 }
             }
             if (notFind) {
-                Profile::push("linking contents to {}", item);
-                Profile::push("failed to find node id -> {}", item);
-                Profile::push("unknown node id -> {} (in node \"{}\")", id.value_or(u"UNKNOWN"), item);
+                Profile::push("linking contents to {}", FORMAT_ARG(utf8::utf16to8(item)));
+                Profile::push("failed to find node id -> {}", FORMAT_ARG(utf8::utf16to8(item)));
+                Profile::push("unknown node id -> {} (in node \"{}\")", FORMAT_ARG(id.has_value() ? utf8::utf16to8(id.value()) : "UNKNOWN"), FORMAT_ARG(utf8::utf16to8(item)));
                 throw std::runtime_error("unknown node id");
             }
         }
         nodeKey = std::make_unique<NodeText>(
                 u"JSON_OBJECT_ENTRY_KEY", u"JSON对象键",
-                NormalId::make(u'\"' + key + u'\"', description));
+                NormalId::make(fmt::format(u"\"{}\"", key), description));
         nodeValue = std::make_unique<NodeOr>(
                 u"JSON_OBJECT_ENTRY_VALUE", u"JSON对象值",
                 std::move(valueNodes), false);

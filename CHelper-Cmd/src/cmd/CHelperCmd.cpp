@@ -8,10 +8,11 @@
 int main() {
     //    testDir();
     //    testBin();
-    outputFile(CHelper::Test::writeSingleJson, "json");
-    outputFile(CHelper::Test::writeBinary, "cpack");
-    outputOld2New();
-    return 0;
+    bool isSuccess = true;
+    isSuccess = outputFile(CHelper::Test::writeSingleJson, "json") && isSuccess;
+    isSuccess = outputFile(CHelper::Test::writeBinary, "cpack") && isSuccess;
+    isSuccess = outputOld2New() && isSuccess;
+    return isSuccess ? 0 : -1;
 }
 
 [[maybe_unused]] void testDir() {
@@ -25,40 +26,36 @@ int main() {
 
 [[maybe_unused]] void testBin() {
     std::filesystem::path resourceDir(RESOURCE_DIR);
-    CHelper::Test::testBin(resourceDir / "run" / (std::string("beta-experiment-") + CPACK_VERSION_BETA + ".cpack"),
-                           resourceDir / "test" / "test.txt",
-                           true);
+    for (const auto &cpackPath: std::filesystem::directory_iterator(resourceDir / "run" / "cpack")) {
+        std::string fileName = cpackPath.path().filename().string();
+        if (fileName.find("beta-experiment-") != -1) {
+            CHelper::Test::testBin(cpackPath, resourceDir / "test" / "test.txt", true);
+            break;
+        }
+    }
 }
 
-[[maybe_unused]] void outputFile(
-        const std::filesystem::path &projectDir,
-        void function(const std::filesystem::path &input, const std::filesystem::path &output),
-        const std::string &branch1,
-        const std::string &branch2,
-        const std::string &version,
-        const std::string &fileType) {
-    std::string fileName = branch1 + '-' + branch2 + '-' + version + '.' + fileType;
-    CHELPER_INFO("----- start output {} -----", fileName);
-    function(projectDir / "resources" / branch1 / branch2,
-             projectDir / "run" / fileType / fileName);
-}
-
-[[maybe_unused]] void outputFile(
-        void function(const std::filesystem::path &input, const std::filesystem::path &output),
+[[maybe_unused]] bool outputFile(
+        bool function(const std::filesystem::path &input, const std::filesystem::path &output, const std::string &fileType),
         const std::string &fileType) {
     std::filesystem::path projectDir(RESOURCE_DIR);
-    // release
-    outputFile(projectDir, function, "release", "vanilla", CPACK_VERSION_RELEASE, fileType);
-    outputFile(projectDir, function, "release", "experiment", CPACK_VERSION_RELEASE, fileType);
-    // beta
-    outputFile(projectDir, function, "beta", "vanilla", CPACK_VERSION_BETA, fileType);
-    outputFile(projectDir, function, "beta", "experiment", CPACK_VERSION_BETA, fileType);
-    // netease
-    outputFile(projectDir, function, "netease", "vanilla", CPACK_VERSION_NETEASE, fileType);
-    outputFile(projectDir, function, "netease", "experiment", CPACK_VERSION_NETEASE, fileType);
+    bool isSuccess = true;
+    for (const auto &branchDir: std::filesystem::directory_iterator(projectDir / "resources" / "release")) {
+        SPDLOG_INFO("----- start output {}: {}-{} -----", FORMAT_ARG(fileType), FORMAT_ARG("release"), FORMAT_ARG(branchDir.path().filename().string()));
+        isSuccess = function(branchDir, projectDir / "run" / fileType, fileType) && isSuccess;
+    }
+    for (const auto &branchDir: std::filesystem::directory_iterator(projectDir / "resources" / "beta")) {
+        SPDLOG_INFO("----- start output {}: {}-{} -----", FORMAT_ARG(fileType), FORMAT_ARG("beta"), FORMAT_ARG(branchDir.path().filename().string()));
+        isSuccess = function(branchDir, projectDir / "run" / fileType, fileType) && isSuccess;
+    }
+    for (const auto &branchDir: std::filesystem::directory_iterator(projectDir / "resources" / "netease")) {
+        SPDLOG_INFO("----- start output {}: {}-{} -----", FORMAT_ARG(fileType), FORMAT_ARG("netease"), FORMAT_ARG(branchDir.path().filename().string()));
+        isSuccess = function(branchDir, projectDir / "run" / fileType, fileType) && isSuccess;
+    }
+    return isSuccess;
 }
 
-void outputOld2New() {
+bool outputOld2New() {
     // old2new
     std::filesystem::path resourceDir(RESOURCE_DIR);
     std::filesystem::path input = resourceDir / "resources" / "old2new" / "blockFixData.json";
@@ -68,6 +65,7 @@ void outputOld2New() {
     std::ofstream ostream(output, std::ios::binary);
     serialization::to_binary<true>(ostream, blockFixData);
     ostream.close();
+    return true;
 }
 
 namespace CHelper::Test {
@@ -144,7 +142,6 @@ namespace CHelper::Test {
             }
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
-            exit(-1);
         }
         test(core, commands, isTestTime);
         delete core;
@@ -164,7 +161,6 @@ namespace CHelper::Test {
             }
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
-            exit(-1);
         }
         test(core, commands, isTestTime);
         delete core;
@@ -200,20 +196,16 @@ namespace CHelper::Test {
                 startStructure = std::chrono::high_resolution_clock::now();
                 auto structure = core->getStructure();
                 endStructure = std::chrono::high_resolution_clock::now();
-                fmt::print("parse successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startParse).count()) + "ms", fg(fmt::color::medium_purple)));
+                fmt::println("parse successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startParse)));
                 if (isTestTime) {
-                    fmt::print("parse successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endParse - startParse).count()) + "ms", fg(fmt::color::medium_purple)));
-                    fmt::print("get description successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endDescription - startDescription).count()) + "ms", fg(fmt::color::medium_purple)));
-                    fmt::print("get error successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endErrorReasons - startErrorReasons).count()) + "ms", fg(fmt::color::medium_purple)));
-                    fmt::print("get suggestions successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms", fg(fmt::color::medium_purple)));
-                    fmt::print("get structure successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms", fg(fmt::color::medium_purple)));
+                    fmt::println("parse successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endParse - startParse)));
+                    fmt::println("get description successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endDescription - startDescription)));
+                    fmt::println("get error successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endErrorReasons - startErrorReasons)));
+                    fmt::println("get suggestions successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endSuggestions - startSuggestions)));
+                    fmt::println("get structure successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startStructure)));
                 }
-#ifdef CHelperTest
-                fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
-                fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
-#endif
-                fmt::print("structure: \n", utf8::utf16to8(structure));
-                fmt::print("description: \n", utf8::utf16to8(description));
+                fmt::println("structure: ", utf8::utf16to8(structure));
+                fmt::println("description: ", utf8::utf16to8(description));
                 if (errorReasons.empty()) {
                     fmt::println("no error");
                 } else {
@@ -239,10 +231,10 @@ namespace CHelper::Test {
                             fmt::println("...");
                             break;
                         }
-                        fmt::print("{}. {} {}\n",
-                                   ++i,
-                                   fmt::styled(utf8::utf16to8(item.content->name), fg(fmt::color::lime_green)),
-                                   fmt::styled(utf8::utf16to8(item.content->description.value_or(u"")), fg(fmt::color::cornflower_blue)));
+                        fmt::println("{}. {} {}",
+                                     ++i,
+                                     fmt::styled(utf8::utf16to8(item.content->name), fg(fmt::color::lime_green)),
+                                     fmt::styled(utf8::utf16to8(item.content->description.value_or(u"")), fg(fmt::color::cornflower_blue)));
                         std::u16string result = command.substr(0, item.start)
                                                         .append(item.content->name)
                                                         .append(command.substr(item.end));
@@ -253,17 +245,16 @@ namespace CHelper::Test {
                                 greenPart.push_back(u' ');
                             }
                         }
-                        fmt::print("{}{}{}\n",
-                                   utf8::utf16to8(command.substr(0, item.start)),
-                                   fmt::styled(utf8::utf16to8(greenPart), fg(fmt::color::lime_green)),
-                                   utf8::utf16to8(command.substr(item.end)));
+                        fmt::println("{}{}{}",
+                                     utf8::utf16to8(command.substr(0, item.start)),
+                                     fmt::styled(utf8::utf16to8(greenPart), fg(fmt::color::lime_green)),
+                                     utf8::utf16to8(command.substr(item.end)));
                     }
                 }
                 fmt::print("\n");
             }
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
-            exit(-1);
         }
     }
 
@@ -290,10 +281,8 @@ namespace CHelper::Test {
                 }
             }
             end = std::chrono::high_resolution_clock::now();
-            fmt::print("{}{}",
-                       fmt::styled(commands.size(), fg(fmt::color::medium_purple)),
-                       fmt::styled(" commands\n", fg(fmt::color::lime_green)));
-            CHELPER_INFO("run successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
+            SPDLOG_INFO("{} commands", FORMAT_ARG(commands.size()));
+            SPDLOG_INFO("run successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(end - start)));
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
@@ -301,70 +290,101 @@ namespace CHelper::Test {
         delete core;
     }
 
-    [[maybe_unused]] void writeDirectory(const std::u16string &input, const std::filesystem::path &output) {
+    [[maybe_unused]] bool writeDirectory(const std::u16string &input, const std::filesystem::path &output, const std::string &fileType) {
         CHelperCore *core = nullptr;
         CHelperCore *core2 = nullptr;
         try {
             core = CHelperCore::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {
-                return;
+                return false;
             }
+            const Manifest &manifest = core->getCPack()->manifest;
+
+            std::string filename = fmt::format(
+                    "{}-{}-{}.{}",
+                    manifest.versionType.has_value() ? utf8::utf16to8(manifest.versionType.value()) : "",
+                    manifest.branch.has_value() ? utf8::utf16to8(manifest.branch.value()) : "",
+                    manifest.version.has_value() ? utf8::utf16to8(manifest.version.value()) : "",
+                    fileType);
+            std::filesystem::path realOutput = output / filename;
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
-            core->getCPack()->writeJsonToDirectory(output);
+            core->getCPack()->writeJsonToDirectory(realOutput);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
-            core2 = CHelperCore::createByDirectory(output);
+            SPDLOG_INFO("CPack write successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(end - start)));
+            core2 = CHelperCore::createByDirectory(realOutput);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
         }
+        bool isSuccess = core2 != nullptr;
         delete core;
         delete core2;
+        return isSuccess;
     }
 
-    [[maybe_unused]] void writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output) {
+    [[maybe_unused]] bool writeSingleJson(const std::filesystem::path &input, const std::filesystem::path &output, const std::string &fileType) {
         CHelperCore *core = nullptr;
         CHelperCore *core2 = nullptr;
         try {
             core = CHelperCore::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {
-                return;
+                return false;
             }
+            const Manifest &manifest = core->getCPack()->manifest;
+            std::string filename = fmt::format(
+                    "{}-{}-{}.{}",
+                    manifest.versionType.has_value() ? utf8::utf16to8(manifest.versionType.value()) : "",
+                    manifest.branch.has_value() ? utf8::utf16to8(manifest.branch.value()) : "",
+                    manifest.version.has_value() ? utf8::utf16to8(manifest.version.value()) : "",
+                    fileType);
+            std::filesystem::path realOutput = output / filename;
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
-            core->getCPack()->writeJsonToFile(output);
+            core->getCPack()->writeJsonToFile(realOutput);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
-            core2 = CHelperCore::createByJson(output);
+            SPDLOG_INFO("CPack write successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(end - start)));
+            core2 = CHelperCore::createByJson(realOutput);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
         }
+        bool isSuccess = core2 != nullptr;
         delete core;
         delete core2;
+        return isSuccess;
     }
 
-    [[maybe_unused]] void writeBinary(const std::filesystem::path &input, const std::filesystem::path &output) {
+    [[maybe_unused]] bool writeBinary(const std::filesystem::path &input, const std::filesystem::path &output, const std::string &fileType) {
         CHelperCore *core = nullptr;
         CHelperCore *core2 = nullptr;
         try {
             core = CHelperCore::createByDirectory(input);
             if (HEDLEY_UNLIKELY(core == nullptr)) {
-                return;
+                return false;
             }
+            const Manifest &manifest = core->getCPack()->manifest;
+            std::string filename = fmt::format(
+                    "{}-{}-{}.{}",
+                    manifest.versionType.has_value() ? utf8::utf16to8(manifest.versionType.value()) : "",
+                    manifest.branch.has_value() ? utf8::utf16to8(manifest.branch.value()) : "",
+                    manifest.version.has_value() ? utf8::utf16to8(manifest.version.value()) : "",
+                    fileType);
+            std::filesystem::path realOutput = output / filename;
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
-            core->getCPack()->writeBinToFile(output);
+            core->getCPack()->writeBinToFile(realOutput);
             end = std::chrono::high_resolution_clock::now();
-            CHELPER_INFO("CPack write successfully({})", std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(end - start).count()) + "ms");
-            core2 = CHelperCore::createByBinary(output);
+            SPDLOG_INFO("run successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(end - start)));
+            core2 = CHelperCore::createByBinary(realOutput);
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
             exit(-1);
         }
+        bool isSuccess = core2 != nullptr;
         delete core;
         delete core2;
+        return isSuccess;
     }
 
 }// namespace CHelper::Test

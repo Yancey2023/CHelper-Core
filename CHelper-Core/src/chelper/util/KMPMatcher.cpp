@@ -23,7 +23,7 @@ namespace CHelper {
         delete[] failure;
     }
 
-    size_t KMPMatcher::match(const std::u16string &text) {
+    size_t KMPMatcher::match(const std::u16string &text) const {
         if (pattern.empty()) {
             return 0;
         }

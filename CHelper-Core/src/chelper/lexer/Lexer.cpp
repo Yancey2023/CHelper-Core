@@ -33,7 +33,7 @@ namespace CHelper::Lexer {
             return std::nullopt;
         } else if (HEDLEY_UNLIKELY(ch.value() == '\n')) {
             return TokenType::LF;
-        } else if (HEDLEY_LIKELY(ch.value() == ' ')) {
+        } else if (HEDLEY_UNLIKELY(ch.value() == ' ')) {
             return TokenType::WHITE_SPACE;
         } else if (HEDLEY_UNLIKELY(isNum(ch.value()))) {
             return TokenType::NUMBER;
@@ -116,7 +116,7 @@ namespace CHelper::Lexer {
     LexerResult lex(const std::u16string &content) {
         StringReader stringReader(content);
 #ifdef CHelperTest
-        Profile::push("start lex: {}", stringReader.content);
+        Profile::push("start lex: {}", FORMAT_ARG(utf8::utf16to8(stringReader.content)));
 #endif
         std::vector<Token> tokenList = std::vector<Token>();
         while (true) {

@@ -14,8 +14,8 @@ namespace CHelper {
 
     class StringReader {
     public:
-        LexerPos pos, posBackup;
         const std::u16string &content;
+        LexerPos pos, posBackup;
 
         explicit StringReader(const std::u16string &content);
 

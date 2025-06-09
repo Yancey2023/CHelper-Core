@@ -23,8 +23,8 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(customContents == nullptr)) {
             if (HEDLEY_UNLIKELY(key.has_value())) {
-                Profile::push("linking contents to {}", key.value());
-                Profile::push("failed to find namespace id in the cpack -> {}", key.value());
+                Profile::push("linking contents to {}", FORMAT_ARG(utf8::utf16to8(key.value())));
+                Profile::push("failed to find namespace id in the cpack -> {}", FORMAT_ARG(utf8::utf16to8(key.value())));
                 throw std::runtime_error("failed to find namespace id");
             } else {
                 throw std::runtime_error("missing content");
@@ -53,7 +53,7 @@ namespace CHelper::Node {
             if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                     return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
                 }))) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, u"找不到含义 -> " + std::u16string(str)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, fmt::format(u"找不到含义 -> {}", str)));
             }
         }
         return result;
@@ -69,7 +69,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                 return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
             }))) {
-            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::u16string(u"找不到ID -> ").append(str)));
+            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, fmt::format(u"找不到ID -> {}", str)));
         }
         return true;
     }
@@ -84,7 +84,7 @@ namespace CHelper::Node {
         for (const auto &item: *customContents) {
             //通过名字进行搜索
             //省略minecraft命名空间
-            if (HEDLEY_LIKELY((!item->idNamespace.has_value() || item->idNamespace.value() == u"minecraft"))) {
+            if (HEDLEY_LIKELY(!item->idNamespace.has_value() || item->idNamespace.value() == u"minecraft")) {
                 size_t index1 = kmpMatcher.match(item->name);
                 if (HEDLEY_UNLIKELY(index1 == 0)) {
                     nameStartOf.push_back(item);
@@ -156,10 +156,9 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"ID"));
     }
 
-    bool NodeNamespaceId::collectColor(const ASTNode *astNode,
-                                       ColoredString &coloredString,
-                                       const Theme &theme) const {
-        coloredString.setColor(astNode->tokens, theme.colorId);
+    bool NodeNamespaceId::collectSyntax(const ASTNode *astNode,
+                                        SyntaxResult &syntaxResult) const {
+        syntaxResult.update(astNode->tokens, SyntaxTokenType::ID);
         return true;
     }
 

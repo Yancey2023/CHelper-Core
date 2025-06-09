@@ -1,11 +1,13 @@
 {
-  "name": "[内置] 中国版原版",
-  "description": "CHelper内置资源包",
-  "minecraftVersion": "1.20.10.25-vanilla",
-  "author": "Yancey",
-  "updateDate": "2024-12-09",
-  "packId": "BasicPack-1.20.10.25-vanilla",
-  "versionCode": 1,
-  "isBasicPack": true,
-  "isDefault": true
+    "name": "[内置] 中国版原版",
+    "description": "CHelper内置资源包",
+    "version": "1.20.10.25",
+    "versionType": "netease",
+    "branch": "vanilla",
+    "author": "Yancey",
+    "updateDate": "2024-12-09",
+    "packId": "BasicPack-1.20.10.25-vanilla",
+    "versionCode": 1,
+    "isBasicPack": true,
+    "isDefault": true
 }

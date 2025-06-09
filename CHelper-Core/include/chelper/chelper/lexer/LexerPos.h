@@ -24,8 +24,6 @@ namespace CHelper {
         void next(char16_t ch);
     };
 
-    std::ostream &operator<<(std::ostream &os, const LexerPos &pos);
-
 }// namespace CHelper
 
 #endif//CHELPER_POS_H

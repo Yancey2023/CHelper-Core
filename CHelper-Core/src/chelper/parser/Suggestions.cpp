@@ -16,11 +16,11 @@ namespace CHelper {
     Suggestions::Suggestions(SuggestionsType::SuggestionsType suggestionsType)
         : suggestionsType(suggestionsType) {}
 
-    bool Suggestions::isFiltered() {
+    bool Suggestions::isFiltered() const {
         return mHashCode.has_value();
     }
 
-    size_t Suggestions::hashCode() {
+    size_t Suggestions::hashCode() const {
         return mHashCode.value_or(0);
     }
 
@@ -85,7 +85,7 @@ namespace CHelper {
             item.filter();
             if (HEDLEY_LIKELY(std::all_of(
                         filteredSuggestions.begin(), filteredSuggestions.end(),
-                        [&item](Suggestions &item2) {
+                        [&item](const Suggestions &item2) {
                             return item.hashCode() != item2.hashCode();
                         }))) {
                 filteredSuggestions.push_back(item);
@@ -98,7 +98,7 @@ namespace CHelper {
             sum += item.suggestions.size();
         }
         result.reserve(sum);
-        for (int suggestionsType = 0; suggestionsType <= SuggestionsType::suggestionsTypeMax; ++suggestionsType) {
+        for (size_t suggestionsType = 0; suggestionsType <= SuggestionsType::suggestionsTypeMax; ++suggestionsType) {
             for (const auto &item: filteredSuggestions) {
                 if (item.suggestionsType == suggestionsType) {
                     std::copy(item.suggestions.begin(), item.suggestions.end(), std::back_inserter(result));

@@ -19,7 +19,7 @@ namespace CHelper::Node {
     ASTNode NodeAnd::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
         tokenReader.push();
         std::vector<ASTNode> childASTNodes;
-        for (int i = 0; i < childNodes.size(); ++i) {
+        for (size_t i = 0; i < childNodes.size(); ++i) {
             const auto &item = childNodes[i];
             auto node = item->getASTNode(tokenReader, cpack);
             bool isError = node.isError();

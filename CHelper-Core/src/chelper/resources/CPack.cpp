@@ -19,25 +19,25 @@ namespace CHelper {
         serialization::Codec<Manifest>::template from_json(jsonManifest, manifest);
         Profile::next("loading id data");
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "id")) {
-            Profile::next(R"(loading id data in path "{}")", file.path().u16string());
+            Profile::next(R"(loading id data in path "{}")", FORMAT_ARG(utf8::utf16to8(file.path().u16string())));
             applyId(serialization::get_json_from_file(file));
         }
         Profile::next("loading json data");
         Node::currentCreateStage = Node::NodeCreateStage::JSON_NODE;
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "json")) {
-            Profile::next(R"(loading json data in path "{}")", file.path().u16string());
+            Profile::next(R"(loading json data in path "{}")", FORMAT_ARG(utf8::utf16to8(file.path().u16string())));
             applyJson(serialization::get_json_from_file(file));
         }
         Profile::next("loading repeat data");
         Node::currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "repeat")) {
-            Profile::next(R"(loading repeat data in path "{}")", file.path().u16string());
+            Profile::next(R"(loading repeat data in path "{}")", FORMAT_ARG(utf8::utf16to8(file.path().u16string())));
             applyRepeat(serialization::get_json_from_file(file));
         }
         Profile::next("loading commands");
         Node::currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "command")) {
-            Profile::next(R"(loading command in path "{}")", file.path().u16string());
+            Profile::next(R"(loading command in path "{}")", FORMAT_ARG(utf8::utf16to8(file.path().u16string())));
             applyCommand(serialization::get_json_from_file(file));
         }
         Profile::next("init cpack");
@@ -46,7 +46,7 @@ namespace CHelper {
         Profile::pop();
 #ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
-            CHELPER_WARN("error profile stack after loading cpack");
+            SPDLOG_WARN("error profile stack after loading cpack");
         }
 #endif
     }
@@ -85,7 +85,7 @@ namespace CHelper {
         Profile::pop();
 #ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
-            CHELPER_WARN("error profile stack after loading cpack");
+            SPDLOG_WARN("error profile stack after loading cpack");
         }
 #endif
     }
@@ -120,7 +120,7 @@ namespace CHelper {
         Profile::pop();
 #ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
-            CHELPER_WARN("error profile stack after loading cpack");
+            SPDLOG_WARN("error profile stack after loading cpack");
         }
 #endif
     }
@@ -142,11 +142,11 @@ namespace CHelper {
             serialization::Codec<decltype(content)>::template from_json_member<JsonValueType>(j, "content", content);
             namespaceIds.emplace(std::move(id), std::move(content));
         } else if (HEDLEY_LIKELY(type == u"block")) {
-            serialization::Codec<decltype(blockIds)>::template from_json_member<JsonValueType>(j, "blocks", blockIds);
+            serialization::Codec<decltype(blockIds)>::template from_json_member<JsonValueType>(j, "content", blockIds);
         } else if (HEDLEY_LIKELY(type == u"item")) {
-            serialization::Codec<decltype(itemIds)>::template from_json_member<JsonValueType>(j, "items", itemIds);
+            serialization::Codec<decltype(itemIds)>::template from_json_member<JsonValueType>(j, "content", itemIds);
         } else {
-            Profile::push("unknown id type -> {}", type);
+            Profile::push("unknown id type -> {}", FORMAT_ARG(utf8::utf16to8(type)));
             throw std::runtime_error("unknown id type");
         }
     }
@@ -182,7 +182,7 @@ namespace CHelper {
         Profile::next("init repeat nodes");
         for (const auto &item: repeatNodeData) {
             if (HEDLEY_UNLIKELY(item.repeatNodes.size() != item.isEnd.size())) {
-                Profile::push("checking repeat node: {}", item.id);
+                Profile::push("checking repeat node: {}", FORMAT_ARG(utf8::utf16to8(item.id)));
                 throw std::runtime_error("fail to check repeat id because repeatNodes size not equal isEnd size");
             }
         }
@@ -233,7 +233,7 @@ namespace CHelper {
             }
         }
         for (const auto &item: *commands) {
-            Profile::next(R"(init command: "{}")", StringUtil::join(u",", item->name));
+            Profile::next(R"(init command: "{}")", FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", StringUtil::join(item->name, u",")))));
             item->init(*this);
         }
         Profile::next("sort command nodes");
@@ -248,7 +248,7 @@ namespace CHelper {
 
 #ifndef CHELPER_NO_FILESYSTEM
     std::unique_ptr<CPack> CPack::createByDirectory(const std::filesystem::path &path) {
-        Profile::push("start load CPack by DIRECTORY: {}", path.u16string());
+        Profile::push("start load CPack by DIRECTORY: {}", FORMAT_ARG(utf8::utf16to8(path.u16string())));
         std::unique_ptr<CPack> cpack = std::make_unique<CPack>(path);
         Profile::pop();
         return cpack;
@@ -262,9 +262,9 @@ namespace CHelper {
         return cpack;
     }
 
-    std::unique_ptr<CPack> CPack::createByBinary(std::istream &ifstream) {
+    std::unique_ptr<CPack> CPack::createByBinary(std::istream &istream) {
         Profile::push("start load CPack by binary");
-        std::unique_ptr<CPack> cpack = std::make_unique<CPack>(ifstream);
+        std::unique_ptr<CPack> cpack = std::make_unique<CPack>(istream);
         Profile::pop();
         return cpack;
     }
@@ -294,7 +294,7 @@ namespace CHelper {
             serialization::Codec<decltype(item.first)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", item.first);
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "normal");
             serialization::Codec<decltype(item.second)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "content", item.second);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / (item.first + u".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / (utf8::utf16to8(item.first) + ".json"), j);
         }
         for (const auto &item: namespaceIds) {
             JsonValueType j;
@@ -303,40 +303,40 @@ namespace CHelper {
             serialization::Codec<decltype(item.first)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", item.first);
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "namespace");
             serialization::Codec<decltype(item.second)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "content", item.second);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / (item.first + u".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / (utf8::utf16to8(item.first) + ".json"), j);
         }
         {
             JsonValueType j;
             j.SetObject();
             j.MemberReserve(3, j.GetAllocator());
-            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", "items");
+            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", "item");
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "item");
-            serialization::Codec<decltype(itemIds)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "items", itemIds);
+            serialization::Codec<decltype(itemIds)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "content", itemIds);
             writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / "items.json", j);
         }
         {
             JsonValueType j;
             j.SetObject();
             j.MemberReserve(3, j.GetAllocator());
-            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", "blocks");
+            serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", "block");
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "block");
-            serialization::Codec<decltype(blockIds)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "blocks", blockIds);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / "blocks.json", j);
+            serialization::Codec<decltype(blockIds)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "content", blockIds);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / "block.json", j);
         }
         for (const auto &item: jsonNodes) {
             JsonValueType j;
             serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "json" / (item->id.value() + u".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "json" / (utf8::utf16to8(item->id.value()) + ".json"), j);
         }
         for (const auto &item: repeatNodeData) {
             JsonValueType j;
             serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "repeat" / (item.id + u".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "repeat" / (utf8::utf16to8(item.id) + ".json"), j);
         }
         for (const auto &item: *commands) {
             JsonValueType j;
             serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "command" / (item->name[0] + u".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "command" / (utf8::utf16to8(item->name[0]) + ".json"), j);
         }
     }
 #endif
@@ -368,17 +368,17 @@ namespace CHelper {
         {
             JsonValueType::ValueType j;
             j.SetObject();
-            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "id", "items");
+            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "id", "item");
             serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "type", "item");
-            serialization::Codec<decltype(itemIds)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "items", itemIds);
+            serialization::Codec<decltype(itemIds)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "content", itemIds);
             idJson.PushBack(std::move(j), result.GetAllocator());
         }
         {
             JsonValueType::ValueType j;
             j.SetObject();
-            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "id", "blocks");
+            serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "id", "block");
             serialization::Codec<std::string>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "type", "block");
-            serialization::Codec<decltype(blockIds)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "blocks", blockIds);
+            serialization::Codec<decltype(blockIds)>::template to_json_member<typename JsonValueType::ValueType>(result.GetAllocator(), j, "content", blockIds);
             idJson.PushBack(std::move(j), result.GetAllocator());
         }
         result.AddMember(rapidjson::GenericValue<rapidjson::UTF8<>>("id"), std::move(idJson), result.GetAllocator());
@@ -395,7 +395,7 @@ namespace CHelper {
 
     void CPack::writeBinToFile(const std::filesystem::path &path) const {
         std::filesystem::create_directories(path.parent_path());
-        Profile::push("writing binary cpack to file: {}", path.u16string());
+        Profile::push("writing binary cpack to file: {}", FORMAT_ARG(utf8::utf16to8(path.u16string())));
         std::ofstream ostream(path, std::ios::binary);
         //manifest
         serialization::template to_binary<true>(ostream, manifest);
@@ -424,7 +424,7 @@ namespace CHelper {
         auto it = normalIds.find(key);
         if (HEDLEY_UNLIKELY(it == normalIds.end())) {
 #ifdef CHelperDebug
-            CHELPER_WARN(R"(fail to find normal ids by key: "{}")", key);
+            SPDLOG_WARN(R"(fail to find normal ids by key: "{}")", FORMAT_ARG(utf8::utf16to8(key)));
 #endif
             return nullptr;
         }
@@ -433,15 +433,15 @@ namespace CHelper {
 
     std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
     CPack::getNamespaceId(const std::u16string &key) const {
-        if (HEDLEY_UNLIKELY(key == u"blocks")) {
+        if (HEDLEY_UNLIKELY(key == u"block")) {
             return std::reinterpret_pointer_cast<std::vector<std::shared_ptr<NamespaceId>>>(blockIds->blockStateValues);
-        } else if (HEDLEY_UNLIKELY(key == u"items")) {
+        } else if (HEDLEY_UNLIKELY(key == u"item")) {
             return std::reinterpret_pointer_cast<std::vector<std::shared_ptr<NamespaceId>>>(itemIds);
         }
         auto it = namespaceIds.find(key);
         if (HEDLEY_UNLIKELY(it == namespaceIds.end())) {
 #ifdef CHelperDebug
-            CHELPER_WARN(R"(fail to find namespace ids by key: "{}")", key);
+            SPDLOG_WARN(R"(fail to find namespace ids by key: "{}")", FORMAT_ARG(utf8::utf16to8(key)));
 #endif
             return nullptr;
         }

@@ -26,13 +26,13 @@ namespace CHelper::Node {
         }
         std::u16string_view str = astNode->tokens.toString();
         for (const auto &command: *commands) {
-            for (const auto &name: ((NodePerCommand *) command.get())->name) {
+            for (const auto &name: static_cast<NodePerCommand *>(command.get())->name) {
                 if (HEDLEY_UNLIKELY(str == name)) {
                     return true;
                 }
             }
         }
-        idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::u16string(u"找不到命令名 -> ").append(str)));
+        idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, fmt::format(u"找不到命令名 -> {}", str)));
         return true;
     }
 
@@ -40,11 +40,11 @@ namespace CHelper::Node {
                                              size_t index,
                                              std::vector<Suggestions> &suggestions) const {
         std::u16string_view str = astNode->tokens.toString()
-                                       .substr(0, index - astNode->tokens.getStartIndex());
+                                          .substr(0, index - astNode->tokens.getStartIndex());
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *commands) {
             bool flag = false;
-            for (const auto &item2: ((NodePerCommand *) item.get())->name) {
+            for (const auto &item2: static_cast<NodePerCommand *>(item.get())->name) {
                 //通过名字进行搜索
                 size_t index1 = item2.find(str);
                 if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
@@ -62,7 +62,7 @@ namespace CHelper::Node {
             //通过介绍进行搜索
             if (HEDLEY_UNLIKELY(item->description.has_value() &&
                                 item->description.value().find(str) != std::u16string::npos)) {
-                for (const auto &item2: ((NodePerCommand *) item.get())->name) {
+                for (const auto &item2: static_cast<NodePerCommand *>(item.get())->name) {
                     descriptionContain.push_back(NormalId::make(item2, item->description));
                 }
             }
@@ -97,10 +97,9 @@ namespace CHelper::Node {
         structure.append(isMustHave, u"命令名");
     }
 
-    bool NodeCommandName::collectColor(const ASTNode *astNode,
-                                       ColoredString &coloredString,
-                                       const Theme &theme) const {
-        coloredString.setColor(astNode->tokens, theme.colorId);
+    bool NodeCommandName::collectSyntax(const ASTNode *astNode,
+                                        SyntaxResult &syntaxResult) const {
+        syntaxResult.update(astNode->tokens, SyntaxTokenType::ID);
         return true;
     }
 

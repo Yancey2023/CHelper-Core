@@ -24,7 +24,13 @@ static CHelper::CHelperCore *core = nullptr;
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
     std::filesystem::path resourceDir(RESOURCE_DIR);
-    core = CHelper::CHelperCore::createByBinary(resourceDir / "run" / "cpack" / (std::string("beta-experiment-") + CPACK_VERSION_BETA + ".cpack"));
+    for (const auto &cpackPath: std::filesystem::directory_iterator(resourceDir / "run" / "cpack")) {
+        std::string fileName = cpackPath.path().filename().string();
+        if (fileName.find("beta-experiment-") != -1) {
+            core = CHelper::CHelperCore::createByBinary(cpackPath);
+            break;
+        }
+    }
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         exit(-1);
     }
@@ -129,7 +135,7 @@ void onTextChanged(const std::u16string &command) {
                 startErrorReasons, endErrorReasons,
                 startSuggestions, endSuggestions,
                 startStructure, endStructure;
-        CHelper::Profile::push("parsing command: {}", command);
+        CHelper::Profile::push("parsing command: {}", FORMAT_ARG(utf8::utf16to8(command)));
         startParse = std::chrono::high_resolution_clock::now();
         core->onTextChanged(command, command.length());
         endParse = std::chrono::high_resolution_clock::now();
@@ -170,18 +176,14 @@ void onTextChanged(const std::u16string &command) {
             }
         }
         CHelper::Profile::pop();
-        fmt::print("parse successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startParse).count()) + "ms", fg(fmt::color::medium_purple)));
-        fmt::print("parse successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endParse - startParse).count()) + "ms", fg(fmt::color::medium_purple)));
-        fmt::print("get description successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endDescription - startDescription).count()) + "ms", fg(fmt::color::medium_purple)));
-        fmt::print("get error successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endErrorReasons - startErrorReasons).count()) + "ms", fg(fmt::color::medium_purple)));
-        fmt::print("get suggestions successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endSuggestions - startSuggestions).count()) + "ms", fg(fmt::color::medium_purple)));
-        fmt::print("get structure successfully({})\n", fmt::styled(std::to_string(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(endStructure - startStructure).count()) + "ms", fg(fmt::color::medium_purple)));
-#ifdef CHelperTest
-        fmt::println(core->getAstNode()->toJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
-        fmt::println(core->getAstNode()->toBestJson().dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace));
-#endif
-        fmt::print("structure: \n", utf8::utf16to8(structure));
-        fmt::print("description: \n", utf8::utf16to8(description));
+        fmt::println("parse successfully({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startParse).count(), fg(fmt::color::medium_purple)));
+        fmt::println("parse successfully({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(endParse - startParse).count(), fg(fmt::color::medium_purple)));
+        fmt::println("get description successfully({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(endDescription - startDescription).count(), fg(fmt::color::medium_purple)));
+        fmt::println("get error successfully({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(endErrorReasons - startErrorReasons).count(), fg(fmt::color::medium_purple)));
+        fmt::println("get suggestions successfully({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(endSuggestions - startSuggestions).count(), fg(fmt::color::medium_purple)));
+        fmt::println("get structure successfully({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startStructure).count(), fg(fmt::color::medium_purple)));
+        fmt::println("structure: ", utf8::utf16to8(structure));
+        fmt::println("description: ", utf8::utf16to8(description));
         if (errorReasons.empty()) {
             fmt::println("no error");
         } else {
@@ -229,7 +231,7 @@ void onTextChanged(const std::u16string &command) {
         }
         fmt::print("\n");
     } catch (const std::exception &e) {
-        CHELPER_ERROR("parse failed");
+        SPDLOG_ERROR("parse failed");
         CHelper::Profile::printAndClear(e);
     }
 }

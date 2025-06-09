@@ -7,9 +7,9 @@
 CHelper::LexerPos::LexerPos(size_t index,
                             size_t line,
                             size_t col)
-    : line(line),
-      col(col),
-      index(index) {}
+    : index(index),
+      line(line),
+      col(col) {}
 
 void CHelper::LexerPos::next(char16_t ch) {
     index++;
@@ -19,8 +19,4 @@ void CHelper::LexerPos::next(char16_t ch) {
     } else {
         col++;
     }
-}
-
-std::ostream &CHelper::operator<<(std::ostream &os, const CHelper::LexerPos &pos) {
-    return os << '(' << pos.line << ',' << pos.col << ')';
 }

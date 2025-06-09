@@ -56,7 +56,7 @@ namespace CHelper::Node {
         }
         auto tokenReader = TokenReader(std::make_shared<LexerResult>(Lexer::lex(convertResult.result)));
 #ifdef CHelperTest
-        Profile::push("start parsing: {}", content);
+        Profile::push("start parsing: {}", FORMAT_ARG(utf8::utf16to8(content)));
 #endif
         DEBUG_GET_NODE_BEGIN(mainNode)
         ASTNode result = Parser::parse(convertResult.result, cpack, mainNode);
@@ -76,11 +76,11 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(str.empty())) {
             return ASTNode::simpleNode(this, tokens, ErrorReason::incomplete(tokens, u"字符串参数内容为空"));
         } else if (HEDLEY_UNLIKELY(str[0] != '"')) {
-            return ASTNode::simpleNode(this, tokens, ErrorReason::contentError(tokens, u"字符串参数内容应该在双引号内 -> " + std::u16string(str)));
+            return ASTNode::simpleNode(this, tokens, ErrorReason::contentError(tokens, fmt::format(u"字符串参数内容应该在双引号内 -> {}", str)));
         }
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_LIKELY(str.size() <= 1 || str[str.size() - 1] != '"')) {
-            errorReason = ErrorReason::contentError(tokens, u"字符串参数内容应该在双引号内 -> " + std::u16string(str));
+            errorReason = ErrorReason::contentError(tokens, fmt::format(u"字符串参数内容应该在双引号内 -> {}", str));
         }
         if (HEDLEY_LIKELY(!data.has_value() || data->empty())) {
             return ASTNode::simpleNode(this, tokens, errorReason);
@@ -148,25 +148,24 @@ namespace CHelper::Node {
         return true;
     }
 
-    bool NodeJsonString::collectColor(const ASTNode *astNode,
-                                      ColoredString &coloredString,
-                                      const Theme &theme) const {
+    bool NodeJsonString::collectSyntax(const ASTNode *astNode,
+                                       SyntaxResult &syntaxResult) const {
         if (astNode->id != ASTNodeId::NODE_STRING_INNER) {
-            coloredString.setColor(astNode->tokens, theme.colorString);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::STRING);
             return false;
         }
-        coloredString.setColor(astNode->tokens.getStartIndex(), theme.colorString);
+        syntaxResult.update(astNode->tokens.getStartIndex(), SyntaxTokenType::STRING);
         std::u16string_view str = astNode->tokens.toString();
         auto convertResult = JsonUtil::jsonString2String(std::u16string(str));
         if (convertResult.isComplete) {
-            coloredString.setColor(astNode->tokens.getEndIndex() - 1, theme.colorString);
+            syntaxResult.update(astNode->tokens.getEndIndex() - 1, SyntaxTokenType::STRING);
         }
-        ColoredString coloredString1 = astNode->childNodes[0].getColors(theme);
-        int index = 0;
-        for (int i = 0; i < convertResult.result.size(); ++i) {
+        SyntaxResult syntaxResult1 = astNode->childNodes[0].getSyntaxResult();
+        size_t index = 0;
+        for (size_t i = 0; i < convertResult.result.size(); ++i) {
             size_t end = convertResult.convert(i + 1);
             while (index < end) {
-                coloredString.setColor(astNode->tokens.getStartIndex() + index + 1, coloredString1.colors[i]);
+                syntaxResult.update(astNode->tokens.getStartIndex() + index + 1, syntaxResult1.tokenTypes[i]);
                 index++;
             }
         }

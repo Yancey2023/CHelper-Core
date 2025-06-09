@@ -1,42 +1,42 @@
 {
-  "name": [
-    "event"
-  ],
-  "description": "触发实体事件",
-  "start": [
-    "entity"
-  ],
-  "node": [
-    {
-      "type": "TEXT",
-      "id": "entity",
-      "description": "触发实体事件",
-      "data": {
-        "name": "entity",
-        "description": "触发实体事件"
-      }
-    },
-    {
-      "type": "TARGET_SELECTOR",
-      "id": "target",
-      "description": "实体事件的作用对象",
-      "isOnlyOne": false,
-      "isMustPlayer": false,
-      "isMustNPC": false,
-      "isWildcard": false
-    },
-    {
-      "type": "NORMAL_ID",
-      "id": "eventName",
-      "brief": "实体事件",
-      "description": "命令触发的实体事件",
-      "ignoreError": true,
-      "key": "entityEvent"
-    }
-  ],
-  "ast": [
-    ["entity", "target"],
-    ["target", "eventName"],
-    ["eventName", "LF"]
-  ]
+    "name": [
+        "event"
+    ],
+    "description": "触发实体事件",
+    "start": [
+        "entity"
+    ],
+    "node": [
+        {
+            "type": "TEXT",
+            "id": "entity",
+            "description": "触发实体事件",
+            "data": {
+                "name": "entity",
+                "description": "触发实体事件"
+            }
+        },
+        {
+            "type": "TARGET_SELECTOR",
+            "id": "target",
+            "description": "实体事件的作用对象",
+            "isOnlyOne": false,
+            "isMustPlayer": false,
+            "isMustNPC": false,
+            "isWildcard": false
+        },
+        {
+            "type": "NORMAL_ID",
+            "id": "eventName",
+            "brief": "实体事件",
+            "description": "命令触发的实体事件",
+            "ignoreError": true,
+            "key": "entityEvent"
+        }
+    ],
+    "ast": [
+        ["entity", "target"],
+        ["target", "eventName"],
+        ["eventName", "LF"]
+    ]
 }

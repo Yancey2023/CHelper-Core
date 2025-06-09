@@ -37,7 +37,7 @@ namespace CHelper::Node {
             if (HEDLEY_UNLIKELY(str.empty())) {
                 return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, u"命令不完整"));
             } else {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, u"找不到含义 -> " + std::u16string(str)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, fmt::format(u"找不到含义 -> {}", str)));
             }
         }
         return result;
@@ -70,13 +70,12 @@ namespace CHelper::Node {
         structure.appendWhiteSpace().append(data->name);
     }
 
-    bool NodeText::collectColor(const ASTNode *astNode,
-                                ColoredString &coloredString,
-                                const Theme &theme) const {
+    bool NodeText::collectSyntax(const ASTNode *astNode,
+                                 SyntaxResult &syntaxResult) const {
         if (id != u"TARGET_SELECTOR_ARGUMENT_EQUAu" && id != u"TARGET_SELECTOR_ARGUMENT_NOT_EQUAu") {
-            coloredString.setColor(astNode->tokens, theme.colorLiteral);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::LITERAL);
         } else {
-            coloredString.setColor(astNode->tokens, theme.colorSymbol);
+            syntaxResult.update(astNode->tokens, SyntaxTokenType::SYMBOL);
         }
         return true;
     }

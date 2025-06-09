@@ -18,8 +18,8 @@ namespace CHelper::Node {
     public:
         std::optional<std::u16string> key;
         std::optional<std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>> contents;
-        bool allowMissingID = false;
         std::optional<bool> ignoreError;
+        bool allowMissingID = false;
         std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> getNormalIdASTNode;
 
     private:
@@ -42,8 +42,8 @@ namespace CHelper::Node {
         NodeNormalId(
                 const std::optional<std::u16string> &id,
                 const std::optional<std::u16string> &description,
-                bool ignoreError,
                 const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
+                bool ignoreError,
                 bool allowMissingID = false,
                 const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode =
                         [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
@@ -67,9 +67,8 @@ namespace CHelper::Node {
                               StructureBuilder &structure,
                               bool isMustHave) const override;
 
-        bool collectColor(const ASTNode *astNode,
-                          ColoredString &coloredString,
-                          const Theme &theme) const override;
+        bool collectSyntax(const ASTNode *astNode,
+                           SyntaxResult &syntaxResult) const override;
     };
 
 }// namespace CHelper::Node

@@ -5,9 +5,9 @@
 #ifndef CHELPER_CHELPERQT_H
 #define CHELPER_CHELPERQT_H
 
-#include <chelper/CHelperCore.h>
 #include <QMainWindow>
 #include <QStyledItemDelegate>
+#include <chelper/CHelperCore.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,13 +23,12 @@ public:
 
     ~CHelperApp() override;
 
-
 private slots:
-    void onTextChanged(const QString &string);
+    void onTextChanged(const QString &string) const;
 
-    void onSuggestionClick(const QModelIndex &index);
+    void onSuggestionClick(const QModelIndex &index) const;
 
-    void copy();
+    void copy() const;
 
 private:
     Ui::CHelperApp *ui;

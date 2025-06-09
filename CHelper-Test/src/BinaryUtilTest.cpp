@@ -1,5 +1,5 @@
 //
-// Created by Yancey on2024-5-21.
+// Created by Yancey on 2024-5-21.
 //
 
 #include <chelper/node/json/NodeJsonNull.h>
@@ -22,7 +22,9 @@ namespace CHelper {
     bool operator==(const Manifest &t1, const Manifest &t2) {
         return t1.name == t2.name &&
                t1.description == t2.description &&
-               t1.minecraftVersion == t2.minecraftVersion &&
+               t1.version == t2.version &&
+               t1.versionType == t2.versionType &&
+               t1.branch == t2.branch &&
                t1.author == t2.author &&
                t1.updateDate == t2.updateDate &&
                t1.packId == t2.packId &&
@@ -261,22 +263,24 @@ TEST(BinaryUtilTest, OptioanlString) {
 
 TEST(BinaryUtilTest, Manifest) {
     auto getInstance1 = []() -> CHelper::Manifest {
-        return {u"name", u"description", u"minecraftVersion",
-                u"author", u"updateDate", u"packId",
+        return {u"name", u"description", u"version", u"versionType",
+                u"branch", u"author", u"updateDate", u"packId",
                 1, true, true};
     };
     auto getInstance2 = []() -> CHelper::Manifest {
-        return {u"name", std::nullopt, u"minecraftVersion",
-                u"author", u"updateDate", u"packId",
+        return {u"name", std::nullopt, u"version", u"versionType",
+                u"branch", u"author", u"updateDate", u"packId",
                 2, std::nullopt, true};
     };
     auto getInstance3 = []() -> CHelper::Manifest {
-        return {u"name", u"description", std::nullopt,
-                u"author", u"updateDate", u"packId",
+        return {u"name", u"description", std::nullopt, u"versionType",
+                u"branch", u"author", u"updateDate", u"packId",
                 3, false, std::nullopt};
     };
     auto getInstance4 = []() -> CHelper::Manifest {
         return {std::nullopt,
+                std::nullopt,
+                std::nullopt,
                 std::nullopt,
                 std::nullopt,
                 u"author",
@@ -305,7 +309,7 @@ TEST(BinaryUtilTest, NormalId) {
 TEST(BinaryUtilTest, NamespaceId) {
     std::filesystem::path resourceDir(RESOURCE_DIR);
     rapidjson::GenericDocument<rapidjson::UTF8<>> j = serialization::get_json_from_file(
-            resourceDir / "resources" / "beta" / "vanilla" / "id" / "entities.json");
+            resourceDir / "resources" / "beta" / "vanilla" / "id" / "entity.json");
     std::vector<std::function<CHelper::NamespaceId()>> getInstance;
     for (const auto &item: serialization::find_array_member_or_throw(j, "content")) {
         CHelper::NamespaceId namespaceId;
@@ -318,9 +322,9 @@ TEST(BinaryUtilTest, NamespaceId) {
 TEST(BinaryUtilTest, ItemId) {
     std::filesystem::path resourceDir(RESOURCE_DIR);
     rapidjson::GenericDocument<rapidjson::UTF8<>> j = serialization::get_json_from_file(
-            resourceDir / "resources" / "beta" / "vanilla" / "id" / "items.json");
+            resourceDir / "resources" / "beta" / "vanilla" / "id" / "item.json");
     std::vector<std::function<CHelper::ItemId()>> getInstance;
-    for (const auto &item: serialization::find_array_member_or_throw(j, "items")) {
+    for (const auto &item: serialization::find_array_member_or_throw(j, "content")) {
         CHelper::ItemId itemId;
         serialization::Codec<CHelper::NamespaceId>::from_json(item, itemId);
         getInstance.emplace_back([itemId]() { return itemId; });
@@ -367,9 +371,9 @@ TEST(BinaryUtilTest, Property) {
 TEST(BinaryUtilTest, BlockId) {
     std::filesystem::path resourceDir(RESOURCE_DIR);
     rapidjson::GenericDocument<rapidjson::UTF8<>> j = serialization::get_json_from_file(
-            resourceDir / "resources" / "beta" / "vanilla" / "id" / "blocks.json");
+            resourceDir / "resources" / "beta" / "vanilla" / "id" / "block.json");
     CHelper::BlockIds blockIds;
-    serialization::Codec<CHelper::BlockIds>::from_json(serialization::find_member_or_throw(j, "blocks"), blockIds);
+    serialization::Codec<CHelper::BlockIds>::from_json(serialization::find_member_or_throw(j, "content"), blockIds);
     test<CHelper::BlockIds>([&blockIds]() { return blockIds; });
 }
 

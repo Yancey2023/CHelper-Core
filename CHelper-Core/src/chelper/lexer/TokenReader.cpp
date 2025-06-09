@@ -69,7 +69,7 @@ namespace CHelper {
     void TokenReader::pop() {
 #ifdef CHelperDebug
         if (indexStack.empty()) {
-            CHELPER_ERROR("pop when indexStack is null");
+            SPDLOG_ERROR("pop when indexStack is null");
             return;
         }
 #endif

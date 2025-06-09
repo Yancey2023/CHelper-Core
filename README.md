@@ -83,12 +83,12 @@ The desired function has been completed, and the new function to be developed is
 
 ### CHelper-Core
 
-|                    project                     |                                    description                                     |                                   license                                   |
-|:----------------------------------------------:|:----------------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|
-|      [fmt](https://github.com/fmtlib/fmt)      |                                 formatting library                                 |      [MIT license](https://github.com/fmtlib/fmt/blob/master/LICENSE)       |
-|  [json](https://github.com/Tencent/rapidjson)  |                        a JSON parser and generator for C++                         | [MIT license](https://github.com/Tencent/rapidjson/blob/master/license.txt) |
-|  [utfcpp](https://github.com/nemtrif/utfcpp)   |                          UTF-8 with C++ in a Portable Way                          |  [BSL-1.0 license](https://github.com/nemtrif/utfcpp/blob/master/LICENSE)   |
-| [Hedley](https://github.com/Yancey2023/hedley) | enable compiler-specific features while retaining compatibility with all compilers |     [CC0 1.0](https://github.com/Yancey2023/hedley/blob/master/LICENSE)     |
+|                      project                      |                                    description                                     |                                   license                                   |
+|:-------------------------------------------------:|:----------------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|
+|       [fmt](https://github.com/fmtlib/fmt)        |                                 formatting library                                 |      [MIT license](https://github.com/fmtlib/fmt/blob/master/LICENSE)       |
+| [rapidjson](https://github.com/Tencent/rapidjson) |                        a JSON parser and generator for C++                         | [MIT license](https://github.com/Tencent/rapidjson/blob/master/license.txt) |
+|    [utfcpp](https://github.com/nemtrif/utfcpp)    |                          UTF-8 with C++ in a Portable Way                          |  [BSL-1.0 license](https://github.com/nemtrif/utfcpp/blob/master/LICENSE)   |
+|  [Hedley](https://github.com/Yancey2023/hedley)   | enable compiler-specific features while retaining compatibility with all compilers |     [CC0 1.0](https://github.com/Yancey2023/hedley/blob/master/LICENSE)     |
 
 ### CHelper-Qt
 

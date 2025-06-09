@@ -1,11 +1,13 @@
 {
-  "name": "[内置] 测试版实验性玩法",
-  "description": "CHelper内置资源包",
-  "minecraftVersion": "1.21.60.21-experiment",
-  "author": "Yancey",
-  "updateDate": "2024-12-09",
-  "packId": "BasicPack-1.21.60.21-experiment",
-  "versionCode": 1,
-  "isBasicPack": true,
-  "isDefault": true
+    "name": "[内置] 测试版实验性玩法",
+    "description": "CHelper内置资源包",
+    "version": "1.21.90.27",
+    "versionType": "beta",
+    "branch": "experiment",
+    "author": "Yancey",
+    "updateDate": "2025-5-30",
+    "packId": "BasicPack-1.21.90.27-experiment",
+    "versionCode": 1,
+    "isBasicPack": true,
+    "isDefault": true
 }

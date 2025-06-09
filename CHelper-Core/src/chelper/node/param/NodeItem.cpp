@@ -14,7 +14,7 @@ namespace CHelper::Node {
 
     void NodeItem::init(const CPack &cpack) {
         itemIds = cpack.itemIds;
-        nodeItemId = std::make_unique<NodeNamespaceId>(u"ITEM_ID", u"物品ID", u"items", true);
+        nodeItemId = std::make_unique<NodeNamespaceId>(u"ITEM_ID", u"物品ID", u"item", true);
         nodeComponent = std::make_unique<NodeJson>(u"ITEM_COMPONENT", u"物品组件", u"components");
         nodeItemId->init(cpack);
         nodeComponent->init(cpack);

@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(CHelperCore
-        VERSION 0.2.29
-        DESCRIPTION "Command Helper for Minecraft Bedrock Edition"
-        LANGUAGES CXX)
+project(CHelperCore LANGUAGES CXX)
 
 # using c++ 17
 set(CMAKE_CXX_STANDARD 17)
@@ -31,6 +28,13 @@ add_subdirectory(include/hedley)
 # ThirdParty: serialization
 add_subdirectory(include/serialization)
 
+# ThirdParty: spdlog
+set(SPDLOG_FMT_EXTERNAL ON)
+add_subdirectory(include/spdlog)
+if (MSVC)
+    target_compile_options(spdlog PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+endif ()
+
 # Param Deliver
 if (CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
     set(CHelperDebug true)
@@ -38,9 +42,6 @@ else ()
     set(CHelperDebug false)
 endif ()
 set(RESOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../CHelper-Resource)
-set(CPACK_VERSION_RELEASE "1.21.50.07")
-set(CPACK_VERSION_BETA "1.21.60.21")
-set(CPACK_VERSION_NETEASE "1.20.10.25")
 configure_file(include/param_deliver/ParamDeliver.h.in ${CMAKE_BINARY_DIR}/include/param_deliver/ParamDeliver.h @ONLY)
 
 # Sources
@@ -58,7 +59,7 @@ function(init_chelper_library target CHELPER_CORE_DIR)
             ${CHELPER_CORE_DIR}/include/rapidjson/include
             ${CHELPER_CORE_DIR}/include/serialization
     )
-    target_link_libraries(${target} PUBLIC fmt::fmt utf8cpp hedley serialization::serialization)
+    target_link_libraries(${target} PUBLIC fmt::fmt-header-only spdlog::spdlog_header_only utf8cpp hedley serialization::serialization)
 endfunction()
 
 # CHelper Core

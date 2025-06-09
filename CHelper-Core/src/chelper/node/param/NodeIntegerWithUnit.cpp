@@ -13,7 +13,7 @@ namespace CHelper::Node {
             u"INTEGER", u"整数", std::nullopt, std::nullopt);
 
     void NodeIntegerWithUnit::init(const CPack &cpack) {
-        nodeUnits = std::make_unique<NodeNormalId>(u"UNITS", u"单位", false, units);
+        nodeUnits = std::make_unique<NodeNormalId>(u"UNITS", u"单位", units, false);
         nodeIntegerWithUnit = std::make_unique<NodeAnd>(
                 u"NODE_INTEGER_WITH_UINT", u"带单位的整数",
                 std::vector<const NodeBase *>{nodeInteger.get(), nodeUnits.get()});
@@ -37,10 +37,9 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"可能带单位的整数"));
     }
 
-    bool NodeIntegerWithUnit::collectColor(const ASTNode *astNode,
-                                           ColoredString &coloredString,
-                                           const Theme &theme) const {
-        coloredString.setColor(astNode->tokens, theme.colorInteger);
+    bool NodeIntegerWithUnit::collectSyntax(const ASTNode *astNode,
+                                            SyntaxResult &syntaxResult) const {
+        syntaxResult.update(astNode->tokens, SyntaxTokenType::INTEGER);
         return true;
     }
 
