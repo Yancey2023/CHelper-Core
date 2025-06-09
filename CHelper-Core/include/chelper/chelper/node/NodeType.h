@@ -82,7 +82,7 @@ namespace CHelper {
 
             template<NodeTypeId::NodeTypeId nodeTypeId>
             struct NodeTypeDetail {
-                static inline const std::u16string name = u"UNKNOWN";
+                static constexpr auto name = "UNKNOWN";
             };
 
             struct CommandParamNodeTypeDetail {
@@ -107,226 +107,226 @@ namespace CHelper {
             template<>
             struct NodeTypeDetail<NodeTypeId::BLOCK> : CommandParamNodeTypeDetail {
                 using Type = NodeBlock;
-                static inline const std::u16string name = u"BLOCK";
+                static constexpr auto name = "BLOCK";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::BOOLEAN> : CommandParamNodeTypeDetail {
                 using Type = NodeBoolean;
-                static inline const std::u16string name = u"BOOLEAN";
+                static constexpr auto name = "BOOLEAN";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::COMMAND> : CommandParamNodeTypeDetail {
                 using Type = NodeCommand;
-                static inline const std::u16string name = u"COMMAND";
+                static constexpr auto name = "COMMAND";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::COMMAND_NAME> : CommandParamNodeTypeDetail {
                 using Type = NodeCommandName;
-                static inline const std::u16string name = u"COMMAND_NAME";
+                static constexpr auto name = "COMMAND_NAME";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::FLOAT> : CommandParamNodeTypeDetail {
                 using Type = NodeFloat;
-                static inline const std::u16string name = u"FLOAT";
+                static constexpr auto name = "FLOAT";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::INTEGER> : CommandParamNodeTypeDetail {
                 using Type = NodeInteger;
-                static inline const std::u16string name = u"INTEGER";
+                static constexpr auto name = "INTEGER";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::INTEGER_WITH_UNIT> : CommandParamNodeTypeDetail {
                 using Type = NodeIntegerWithUnit;
-                static inline const std::u16string name = u"INTEGER_WITH_UNIT";
+                static constexpr auto name = "INTEGER_WITH_UNIT";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::ITEM> : CommandParamNodeTypeDetail {
                 using Type = NodeItem;
-                static inline const std::u16string name = u"ITEM";
+                static constexpr auto name = "ITEM";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::LF> : NoneNodeTypeDetail {
                 using Type = NodeLF;
-                static inline const std::u16string name = u"LF";
+                static constexpr auto name = "LF";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::NAMESPACE_ID> : CommandParamNodeTypeDetail {
                 using Type = NodeNamespaceId;
-                static inline const std::u16string name = u"NAMESPACE_ID";
+                static constexpr auto name = "NAMESPACE_ID";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::NORMAL_ID> : CommandParamNodeTypeDetail {
                 using Type = NodeNormalId;
-                static inline const std::u16string name = u"NORMAL_ID";
+                static constexpr auto name = "NORMAL_ID";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::PER_COMMAND> : CommandParamNodeTypeDetail {
                 using Type = NodePerCommand;
-                static inline const std::u16string name = u"PER_COMMAND";
+                static constexpr auto name = "PER_COMMAND";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::POSITION> : CommandParamNodeTypeDetail {
                 using Type = NodePosition;
-                static inline const std::u16string name = u"POSITION";
+                static constexpr auto name = "POSITION";
                 static constexpr bool isMustAfterWhiteSpace = false;
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::RELATIVE_FLOAT> : CommandParamNodeTypeDetail {
                 using Type = NodeRelativeFloat;
-                static inline const std::u16string name = u"RELATIVE_FLOAT";
+                static constexpr auto name = "RELATIVE_FLOAT";
                 static constexpr bool isMustAfterWhiteSpace = false;
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::REPEAT> : CommandParamNodeTypeDetail {
                 using Type = NodeRepeat;
-                static inline const std::u16string name = u"REPEAT";
+                static constexpr auto name = "REPEAT";
                 static constexpr bool isMustAfterWhiteSpace = false;
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::STRING> : CommandParamNodeTypeDetail {
                 using Type = NodeString;
-                static inline const std::u16string name = u"STRING";
+                static constexpr auto name = "STRING";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::TARGET_SELECTOR> : CommandParamNodeTypeDetail {
                 using Type = NodeTargetSelector;
-                static inline const std::u16string name = u"TARGET_SELECTOR";
+                static constexpr auto name = "TARGET_SELECTOR";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::TEXT> : CommandParamNodeTypeDetail {
                 using Type = NodeText;
-                static inline const std::u16string name = u"TEXT";
+                static constexpr auto name = "TEXT";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::RANGE> : CommandParamNodeTypeDetail {
                 using Type = NodeRange;
-                static inline const std::u16string name = u"RANGE";
+                static constexpr auto name = "RANGE";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::JSON> : CommandParamNodeTypeDetail {
                 using Type = NodeJson;
-                static inline const std::u16string name = u"JSON";
+                static constexpr auto name = "JSON";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::JSON_BOOLEAN> : JsonNodeTypeDetail {
                 using Type = NodeJsonBoolean;
-                static inline const std::u16string name = u"JSON_BOOLEAN";
+                static constexpr auto name = "JSON_BOOLEAN";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::JSON_ELEMENT> : JsonNodeTypeDetail {
                 using Type = NodeJsonElement;
-                static inline const std::u16string name = u"JSON_ELEMENT";
+                static constexpr auto name = "JSON_ELEMENT";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::JSON_ENTRY> : JsonNodeTypeDetail {
                 using Type = NodeJsonEntry;
-                static inline const std::u16string name = u"JSON_ENTRY";
+                static constexpr auto name = "JSON_ENTRY";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::JSON_FLOAT> : JsonNodeTypeDetail {
                 using Type = NodeJsonFloat;
-                static inline const std::u16string name = u"JSON_FLOAT";
+                static constexpr auto name = "JSON_FLOAT";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::JSON_INTEGER> : JsonNodeTypeDetail {
                 using Type = NodeJsonInteger;
-                static inline const std::u16string name = u"JSON_INTEGER";
+                static constexpr auto name = "JSON_INTEGER";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::JSON_LIST> : JsonNodeTypeDetail {
                 using Type = NodeJsonList;
-                static inline const std::u16string name = u"JSON_LIST";
+                static constexpr auto name = "JSON_LIST";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::JSON_NULL> : JsonNodeTypeDetail {
                 using Type = NodeJsonNull;
-                static inline const std::u16string name = u"JSON_NULL";
+                static constexpr auto name = "JSON_NULL";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::JSON_OBJECT> : JsonNodeTypeDetail {
                 using Type = NodeJsonObject;
-                static inline const std::u16string name = u"JSON_OBJECT";
+                static constexpr auto name = "JSON_OBJECT";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::JSON_STRING> : JsonNodeTypeDetail {
                 using Type = NodeJsonString;
-                static inline const std::u16string name = u"JSON_STRING";
+                static constexpr auto name = "JSON_STRING";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::AND> : JsonNodeTypeDetail {
                 using Type = NodeAnd;
-                static inline const std::u16string name = u"AND";
+                static constexpr auto name = "AND";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::ANY> : JsonNodeTypeDetail {
                 using Type = NodeAny;
-                static inline const std::u16string name = u"ANY";
+                static constexpr auto name = "ANY";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::ENTRY> : JsonNodeTypeDetail {
                 using Type = NodeEntry;
-                static inline const std::u16string name = u"ENTRY";
+                static constexpr auto name = "ENTRY";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::EQUAL_ENTRY> : JsonNodeTypeDetail {
                 using Type = NodeEqualEntry;
-                static inline const std::u16string name = u"EQUAL_ENTRY";
+                static constexpr auto name = "EQUAL_ENTRY";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::LIST> : JsonNodeTypeDetail {
                 using Type = NodeList;
-                static inline const std::u16string name = u"LIST";
+                static constexpr auto name = "LIST";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::OR> : JsonNodeTypeDetail {
                 using Type = NodeOr;
-                static inline const std::u16string name = u"OR";
+                static constexpr auto name = "OR";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::SINGLE_SYMBOL> : JsonNodeTypeDetail {
                 using Type = NodeSingleSymbol;
-                static inline const std::u16string name = u"SINGLE_SYMBOL";
+                static constexpr auto name = "SINGLE_SYMBOL";
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::WRAPPED> : JsonNodeTypeDetail {
                 using Type = NodeWrapped;
-                static inline const std::u16string name = u"WRAPPED";
+                static constexpr auto name = "WRAPPED";
             };
 
             template<NodeTypeId::NodeTypeId nodeTypeId>
@@ -334,7 +334,7 @@ namespace CHelper {
 
                 using Type = typename NodeTypeDetail<nodeTypeId>::Type;
                 static constexpr auto nodeCreateStage = NodeTypeDetail<nodeTypeId>::nodeCreateStage;
-                static inline const auto name = NodeTypeDetail<nodeTypeId>::name;
+                static constexpr auto name = NodeTypeDetail<nodeTypeId>::name;
                 static constexpr auto isMustAfterWhiteSpace = NodeTypeDetail<nodeTypeId>::isMustAfterWhiteSpace;
 
                 template<class JsonValueType>
@@ -350,11 +350,11 @@ namespace CHelper {
                 static void from_json(const JsonValueType &jsonValue,
                                       std::unique_ptr<NodeBase> &t) {
                     if constexpr (!serialization::Codec<Type>::enable) {
-                        Profile::push("unknown node type -> {}", FORMAT_ARG(utf8::utf16to8(name)));
+                        Profile::push("unknown node type -> {}", FORMAT_ARG(name));
                         throw std::runtime_error("unknown node type");
                     } else {
                         if (std::find(nodeCreateStage.begin(), nodeCreateStage.end(), currentCreateStage) == nodeCreateStage.end()) {
-                            Profile::push("unknown node type -> {}", FORMAT_ARG(utf8::utf16to8(name)));
+                            Profile::push("unknown node type -> {}", FORMAT_ARG(name));
                             throw std::runtime_error("unknown node type");
                         }
                         t = std::make_unique<Type>();
@@ -377,11 +377,11 @@ namespace CHelper {
                 static void from_binary(std::istream &istream,
                                         std::unique_ptr<NodeBase> &t) {
                     if constexpr (!serialization::Codec<Type>::enable) {
-                        Profile::push("unknown node type -> {}", FORMAT_ARG(utf8::utf16to8(name)));
+                        Profile::push("unknown node type -> {}", FORMAT_ARG(name));
                         throw std::runtime_error("unknown node type");
                     } else {
                         if (std::find(nodeCreateStage.begin(), nodeCreateStage.end(), currentCreateStage) == nodeCreateStage.end()) {
-                            Profile::push("unknown node type -> {}", FORMAT_ARG(utf8::utf16to8(name)));
+                            Profile::push("unknown node type -> {}", FORMAT_ARG(name));
                             throw std::runtime_error("unknown node type");
                         }
                         t = std::make_unique<Type>();
@@ -434,11 +434,11 @@ namespace CHelper {
                 }
             }
 
-            static std::u16string getName(const NodeTypeId::NodeTypeId id) {
+            static const char *getName(const NodeTypeId::NodeTypeId id) {
                 switch (id) {
                     CODEC_PASTE(CHELPER_CODEC_GET_NAME, CHELPER_NODE_TYPES)
                 }
-                return u"UNKNOWN";
+                return "UNKNOWN";
             }
         };
 
@@ -453,7 +453,7 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::to_json(
         typename JsonValueType::AllocatorType &allocator,
         JsonValueType &jsonValue,
         const Type &t) {
-    std::u16string nodeIdName = CHelper::Node::NodeTypeHelper::getName(t->getNodeType());
+    std::string nodeIdName = CHelper::Node::NodeTypeHelper::getName(t->getNodeType());
     CHelper::Node::NodeTypeHelper::template to_json<JsonValueType>(t->getNodeType(), allocator, jsonValue, t);
     assert(jsonValue.IsObject());
     Codec<decltype(nodeIdName)>::template to_json_member<JsonValueType>(allocator, jsonValue, "type", nodeIdName);
@@ -467,15 +467,15 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::from_json(
         throw exceptions::JsonSerializationTypeException("object", getJsonTypeStr(jsonValue.GetType()));
     }
     CHelper::Profile::push("loading type");
-    std::u16string type;
+    std::string type;
     Codec<decltype(type)>::template from_json_member<JsonValueType>(jsonValue, "type", type);
     std::optional<std::u16string> id;
     Codec<decltype(id)>::template from_json_member<JsonValueType>(jsonValue, "id", id);
-    CHelper::Profile::next("loading node {}", FORMAT_ARG(utf8::utf16to8(type)));
+    CHelper::Profile::next("loading node {}", FORMAT_ARG(type));
     if (HEDLEY_LIKELY(id.has_value())) {
-        CHelper::Profile::next("loading node {} with id \"{}\"", FORMAT_ARG(utf8::utf16to8(type)), FORMAT_ARG(utf8::utf16to8(id.value())));
+        CHelper::Profile::next("loading node {} with id \"{}\"", FORMAT_ARG(type), FORMAT_ARG(utf8::utf16to8(id.value())));
     } else {
-        CHelper::Profile::next("loading node {} without id", FORMAT_ARG(utf8::utf16to8(type)));
+        CHelper::Profile::next("loading node {} without id", FORMAT_ARG(type));
     }
     std::optional<CHelper::Node::NodeTypeId::NodeTypeId> nodeTypeId;
     for (uint8_t i = 0; i <= CHelper::Node::MAX_TYPE_ID; ++i) {
@@ -485,7 +485,7 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::from_json(
         }
     }
     if (HEDLEY_UNLIKELY(nodeTypeId == std::nullopt)) {
-        CHelper::Profile::next("unknown node type -> {}", FORMAT_ARG(utf8::utf16to8(type)));
+        CHelper::Profile::next("unknown node type -> {}", FORMAT_ARG(type));
         throw std::runtime_error("unknown node type");
     }
     CHelper::Node::NodeTypeHelper::template from_json<JsonValueType>(nodeTypeId.value(), jsonValue, t);

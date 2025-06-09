@@ -165,7 +165,7 @@ namespace CHelper {
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
 #ifdef CHelperTest
             Profile::push("collect id errors: {} {}",
-                          FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName(node->getNodeType()))),
+                          FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
                           FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
 #endif
             auto flag = node->collectIdError(this, idErrorReasons);
@@ -197,7 +197,7 @@ namespace CHelper {
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
 #ifdef CHelperTest
             Profile::push("collect suggestions: {} {}",
-                          FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName(node->getNodeType()))),
+                          FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
                           FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
 #endif
             auto flag = node->collectSuggestions(this, index, suggestions);
@@ -234,7 +234,7 @@ namespace CHelper {
             } else {
 #ifdef CHelperTest
                 Profile::push("collect structure: {} {}",
-                              FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName(node->getNodeType()))),
+                              FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
                               FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
 #endif
                 node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ? nullptr : this, structure, isMustHave);
@@ -293,7 +293,7 @@ namespace CHelper {
         if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
 #ifdef CHelperTest
             Profile::push("collect color: {} {}",
-                          FORMAT_ARG(utf8::utf16to8(Node::NodeTypeHelper::getName(node->getNodeType()))),
+                          FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
                           FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
 #endif
             bool isDirty = node->collectSyntax(this, syntaxResult);

@@ -10,9 +10,9 @@ namespace CHelper::Node {
     void NodePerCommand::init(const CPack &cpack) {
         for (const auto &item: wrappedNodes) {
             if (HEDLEY_LIKELY(item.id.has_value())) {
-                Profile::push(R"(init node {}: "{}")", FORMAT_ARG(utf8::utf16to8(NodeTypeHelper::getName(item.getNodeType()))), FORMAT_ARG(utf8::utf16to8(item.innerNode->id.value())));
+                Profile::push(R"(init node {}: "{}")", FORMAT_ARG(NodeTypeHelper::getName(item.getNodeType())), FORMAT_ARG(utf8::utf16to8(item.innerNode->id.value())));
             } else {
-                Profile::push("init node {}", FORMAT_ARG(utf8::utf16to8(NodeTypeHelper::getName(item.getNodeType()))));
+                Profile::push("init node {}", FORMAT_ARG(NodeTypeHelper::getName(item.getNodeType())));
             }
             item.innerNode->init(cpack);
             Profile::pop();
