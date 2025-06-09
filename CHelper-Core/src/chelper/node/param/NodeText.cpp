@@ -37,7 +37,7 @@ namespace CHelper::Node {
             if (HEDLEY_UNLIKELY(str.empty())) {
                 return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, u"命令不完整"));
             } else {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, u"找不到含义 -> " + std::u16string(str)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, fmt::format(u"找不到含义 -> {}", str)));
             }
         }
         return result;

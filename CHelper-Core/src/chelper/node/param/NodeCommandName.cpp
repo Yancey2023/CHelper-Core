@@ -32,7 +32,7 @@ namespace CHelper::Node {
                 }
             }
         }
-        idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::u16string(u"找不到命令名 -> ").append(str)));
+        idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, fmt::format(u"找不到命令名 -> {}", str)));
         return true;
     }
 

@@ -33,7 +33,8 @@ namespace CHelper::Node {
                 return astNode;
             }
             TokensView tokens = astNode.tokens;
-            return ASTNode::andNode(this, {std::move(astNode)}, tokens, ErrorReason::contentError(tokens, u"内容不匹配，应该为布尔值，但当前内容为" + std::u16string(str)));
+            return ASTNode::andNode(this, {std::move(astNode)}, tokens,
+                                    ErrorReason::contentError(tokens, fmt::format(u"内容不匹配，应该为布尔值，但当前内容为{}", str)));
         }
 
         bool collectSuggestions(const ASTNode *astNode,
@@ -82,8 +83,8 @@ namespace CHelper::Node {
         }
     };
 
-    typedef NodeTemplateBoolean<false> NodeBoolean;
-    typedef NodeTemplateBoolean<true> NodeJsonBoolean;
+    using NodeBoolean = NodeTemplateBoolean<false>;
+    using NodeJsonBoolean = NodeTemplateBoolean<true>;
 
 }// namespace CHelper::Node
 

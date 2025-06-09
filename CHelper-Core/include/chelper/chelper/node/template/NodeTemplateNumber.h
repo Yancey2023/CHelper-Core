@@ -64,16 +64,13 @@ namespace CHelper::Node {
                                   value == -std::numeric_limits<T>::infinity())) ||
                                 value < min.value_or(std::numeric_limits<T>::lowest()) ||
                                 value > max.value_or(std::numeric_limits<T>::max()))) {
-                idErrorReasons.push_back(
-                        ErrorReason::idError(astNode->tokens,
-                                             std::u16string(u"数值不在范围")
-                                                     .append(u"[")
-                                                     .append(utf8::utf8to16(std::to_string(min.value_or(std::numeric_limits<T>::lowest()))))
-                                                     .append(u", ")
-                                                     .append(utf8::utf8to16(std::to_string(max.value_or(std::numeric_limits<T>::max()))))
-                                                     .append(u"]")
-                                                     .append(u"内 -> ")
-                                                     .append(astNode->tokens.toString())));
+                idErrorReasons.push_back(ErrorReason::idError(
+                        astNode->tokens,
+                        fmt::format(
+                                u"数值不在范围[{}, {}]内 -> {}",
+                                min.value_or(std::numeric_limits<T>::lowest()),
+                                max.value_or(std::numeric_limits<T>::max()),
+                                astNode->tokens.toString())));
             }
             return true;
         }
@@ -108,10 +105,10 @@ namespace CHelper::Node {
         }
     };
 
-    typedef NodeTemplateNumber<float, false> NodeFloat;
-    typedef NodeTemplateNumber<int32_t, false> NodeInteger;
-    typedef NodeTemplateNumber<float, true> NodeJsonFloat;
-    typedef NodeTemplateNumber<int32_t, true> NodeJsonInteger;
+    using NodeFloat = NodeTemplateNumber<float, false>;
+    using NodeInteger = NodeTemplateNumber<int32_t, false>;
+    using NodeJsonFloat = NodeTemplateNumber<float, true>;
+    using NodeJsonInteger = NodeTemplateNumber<int32_t, true>;
 
 }// namespace CHelper::Node
 

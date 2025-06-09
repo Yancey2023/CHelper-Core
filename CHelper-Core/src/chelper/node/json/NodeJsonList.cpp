@@ -37,7 +37,7 @@ namespace CHelper::Node {
         }
         Profile::push("linking contents to {}", FORMAT_ARG(utf8::utf16to8(data)));
         Profile::push("failed to find node id -> {}", FORMAT_ARG(utf8::utf16to8(data)));
-        Profile::push("unknown node id -> {} (in node \"{}\")", FORMAT_ARG(id == std::nullopt ? "UNKNOWN" : utf8::utf16to8(id.value())), FORMAT_ARG(utf8::utf16to8(data)));
+        Profile::push("unknown node id -> {} (in node \"{}\")", FORMAT_ARG(id.has_value() ? utf8::utf16to8(id.value()) : "UNKNOWN"), FORMAT_ARG(utf8::utf16to8(data)));
         throw std::runtime_error("unknown node id");
     }
 

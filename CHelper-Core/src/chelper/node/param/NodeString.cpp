@@ -63,7 +63,7 @@ namespace CHelper::Node {
             return ASTNode::simpleNode(this, result.tokens, convertResult.errorReason);
         }
         if (HEDLEY_UNLIKELY(!convertResult.isComplete)) {
-            return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, u"字符串参数内容双引号不封闭 -> " + std::u16string(str)));
+            return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, fmt::format(u"字符串参数内容双引号不封闭 -> {}", str)));
         }
         return result;
     }

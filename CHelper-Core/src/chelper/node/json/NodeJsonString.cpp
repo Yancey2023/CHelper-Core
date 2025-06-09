@@ -76,11 +76,11 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(str.empty())) {
             return ASTNode::simpleNode(this, tokens, ErrorReason::incomplete(tokens, u"字符串参数内容为空"));
         } else if (HEDLEY_UNLIKELY(str[0] != '"')) {
-            return ASTNode::simpleNode(this, tokens, ErrorReason::contentError(tokens, u"字符串参数内容应该在双引号内 -> " + std::u16string(str)));
+            return ASTNode::simpleNode(this, tokens, ErrorReason::contentError(tokens, fmt::format(u"字符串参数内容应该在双引号内 -> {}", str)));
         }
         std::shared_ptr<ErrorReason> errorReason;
         if (HEDLEY_LIKELY(str.size() <= 1 || str[str.size() - 1] != '"')) {
-            errorReason = ErrorReason::contentError(tokens, u"字符串参数内容应该在双引号内 -> " + std::u16string(str));
+            errorReason = ErrorReason::contentError(tokens, fmt::format(u"字符串参数内容应该在双引号内 -> {}", str));
         }
         if (HEDLEY_LIKELY(!data.has_value() || data->empty())) {
             return ASTNode::simpleNode(this, tokens, errorReason);

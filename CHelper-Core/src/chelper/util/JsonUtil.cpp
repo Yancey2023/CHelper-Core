@@ -46,6 +46,8 @@ namespace CHelper::JsonUtil {
             return std::move(result);
         }
         StringReader stringReader(input);
+        result.result.reserve(static_cast<size_t>(input.size() * 1.2));
+        result.indexConvertList.reserve(input.size());
         result.indexConvertList.push_back(stringReader.pos.index);
         int32_t unicodeValue;
         std::u16string escapeSequence;

@@ -53,7 +53,7 @@ namespace CHelper::Node {
             if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                     return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
                 }))) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, u"找不到含义 -> " + std::u16string(str)));
+                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, fmt::format(u"找不到含义 -> {}", str)));
             }
         }
         return result;
@@ -69,7 +69,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                 return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
             }))) {
-            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, std::u16string(u"找不到ID -> ").append(str)));
+            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, fmt::format(u"找不到ID -> {}", str)));
         }
         return true;
     }

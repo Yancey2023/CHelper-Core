@@ -24,7 +24,7 @@ namespace CHelper::Node {
             return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, u"null参数为空"));
         } else if (HEDLEY_LIKELY(str != u"null")) {
             TokensView tokens = result.tokens;
-            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, u"内容不是null -> " + std::u16string(str)));
+            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, fmt::format(u"内容不是null -> {}", str)));
         }
         return result;
     }
