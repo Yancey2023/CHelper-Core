@@ -90,7 +90,7 @@ namespace CHelper {
             [[nodiscard]] virtual NodeTypeId::NodeTypeId getNodeType() const = 0;
 
             [[nodiscard]] HEDLEY_NON_NULL(3) virtual ASTNode
-            getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data = nullptr) const = 0;
+                    getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data = nullptr) const = 0;
 
         protected:
             HEDLEY_NON_NULL(3, 4)

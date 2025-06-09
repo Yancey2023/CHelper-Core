@@ -99,10 +99,9 @@ namespace CHelper::Node {
         }
     }
 
-    bool NodeWrapped::collectColor(const ASTNode *astNode,
-                                   ColoredString &coloredString,
-                                   const Theme &theme) const {
-        return innerNode->collectColor(astNode, coloredString, theme);
+    bool NodeWrapped::collectSyntax(const ASTNode *astNode,
+                                    SyntaxResult &syntaxResult) const {
+        return innerNode->collectSyntax(astNode, syntaxResult);
     }
 
 }// namespace CHelper::Node

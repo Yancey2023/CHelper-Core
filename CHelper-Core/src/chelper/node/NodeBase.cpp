@@ -3,7 +3,6 @@
 //
 
 #include <chelper/node/NodeBase.h>
-#include <chelper/node/param/NodeLF.h>
 
 #ifdef CHelperDebug
 #include <chelper/node/NodeType.h>
@@ -38,7 +37,7 @@ namespace CHelper::Node {
      * @param isIgnoreChildNodesError true - 第一个错误节点到后面都不算做子节点
      *                                false - 第一个内容为空的错误节点到后面都不算做子节点
      * @param childNodes 子节点
-     * @param astNodeId 节点ID；
+     * @param astNodeId 节点ID
      */
     ASTNode NodeBase::getOptionalASTNode(TokenReader &tokenReader,
                                          const CPack *cpack,

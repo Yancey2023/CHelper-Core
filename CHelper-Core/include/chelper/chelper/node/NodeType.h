@@ -341,9 +341,6 @@ namespace CHelper {
                 static void to_json(typename JsonValueType::AllocatorType &allocator,
                                     JsonValueType &jsonValue,
                                     const std::unique_ptr<NodeBase> &t) {
-#ifdef CHelperDebug
-                    assert(serialization::Codec<Type>::enable || nodeCreateStage.empty());
-#endif
                     if constexpr (serialization::Codec<Type>::enable) {
                         serialization::Codec<Type>::template to_json<JsonValueType>(allocator, jsonValue, *reinterpret_cast<Type *>(t.get()));
                     }
@@ -352,9 +349,6 @@ namespace CHelper {
                 template<class JsonValueType>
                 static void from_json(const JsonValueType &jsonValue,
                                       std::unique_ptr<NodeBase> &t) {
-#ifdef CHelperDebug
-                    assert(serialization::Codec<Type>::enable || nodeCreateStage.empty());
-#endif
                     if constexpr (!serialization::Codec<Type>::enable) {
                         Profile::push("unknown node type -> {}", FORMAT_ARG(utf8::utf16to8(name)));
                         throw std::runtime_error("unknown node type");
@@ -374,9 +368,6 @@ namespace CHelper {
                 template<bool isNeedConvert>
                 static void to_binary(std::ostream &ostream,
                                       const std::unique_ptr<NodeBase> &t) {
-#ifdef CHelperDebug
-                    assert(serialization::Codec<Type>::enable || nodeCreateStage.empty());
-#endif
                     if constexpr (serialization::Codec<Type>::enable) {
                         serialization::Codec<Type>::template to_binary<isNeedConvert>(ostream, *reinterpret_cast<Type *>(t.get()));
                     }
@@ -385,9 +376,6 @@ namespace CHelper {
                 template<bool isNeedConvert>
                 static void from_binary(std::istream &istream,
                                         std::unique_ptr<NodeBase> &t) {
-#ifdef CHelperDebug
-                    assert(serialization::Codec<Type>::enable || nodeCreateStage.empty());
-#endif
                     if constexpr (!serialization::Codec<Type>::enable) {
                         Profile::push("unknown node type -> {}", FORMAT_ARG(utf8::utf16to8(name)));
                         throw std::runtime_error("unknown node type");
