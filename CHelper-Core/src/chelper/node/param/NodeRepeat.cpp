@@ -51,6 +51,7 @@ namespace CHelper::Node {
     void NodeRepeat::collectStructure(const ASTNode *astNode,
                                       StructureBuilder &structure,
                                       bool isMustHave) const {
+        bool isAddMoreSymbol = false;
         if (astNode != nullptr) {
             for (const auto &item: astNode->childNodes) {
                 //如果内容为空，就跳过
@@ -65,11 +66,18 @@ namespace CHelper::Node {
                 size_t astNodeSize = astNode1.childNodes.size();
                 size_t nodeSize = node1->childNodes.size();
                 structure.isDirty = false;
-                for (size_t i = 0; i < nodeSize; ++i) {
-                    if (HEDLEY_LIKELY(i < astNodeSize)) {
-                        astNode1.childNodes[i].collectStructure(structure, true);
-                    } else {
-                        node1->childNodes[i]->collectStructure(nullptr, structure, true);
+                if (HEDLEY_LIKELY(astNode1.isError())) {
+                    for (size_t i = 0; i < nodeSize; ++i) {
+                        if (HEDLEY_LIKELY(i < astNodeSize)) {
+                            astNode1.childNodes[i].collectStructure(structure, true);
+                        } else {
+                            node1->childNodes[i]->collectStructure(nullptr, structure, true);
+                        }
+                    }
+                } else {
+                    if (!isAddMoreSymbol) {
+                        isAddMoreSymbol = true;
+                        structure.appendWhiteSpace().append(u"...");
                     }
                 }
                 if (HEDLEY_UNLIKELY(item.whichBest == 1)) {
@@ -80,7 +88,10 @@ namespace CHelper::Node {
             }
         }
         //如果没有遇到结束语句，添加...和结束语句的结构
-        structure.appendWhiteSpace().append(u"...");
+        if (!isAddMoreSymbol) {
+            isAddMoreSymbol = true;
+            structure.appendWhiteSpace().append(u"...");
+        }
         for (const auto &item: reinterpret_cast<const NodeAnd *>(reinterpret_cast<const NodeOr *>(nodeElement)->childNodes[1])->childNodes) {
             item->collectStructure(nullptr, structure, true);
         }

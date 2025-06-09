@@ -22,12 +22,8 @@ namespace CHelper::Profile {
     }
 
     void printAndClear(const std::exception &e) {
-        SPDLOG_ERROR("{}\nstack trace:\n{}", e.what(), Profile::getStackTrace());
+        SPDLOG_ERROR("{}\nstack trace:\n{}", e.what(), StringUtil::join(stack, "\n"));
         stack.clear();
-    }
-
-    fmt::join_view<decltype(std::begin(stack)), decltype(std::end(stack)), char> getStackTrace() {
-        return StringUtil::join(stack, "\n");
     }
 
 }// namespace CHelper::Profile

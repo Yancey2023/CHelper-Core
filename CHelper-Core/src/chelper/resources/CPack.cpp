@@ -96,24 +96,24 @@ namespace CHelper {
 #endif
         Node::currentCreateStage = Node::NodeCreateStage::NONE;
         Profile::push("loading manifest");
-        serialization::template from_binary<true>(istream, manifest);
+        serialization::Codec<decltype(manifest)>::template from_binary<false>(istream, manifest);
         Profile::next("loading normal id data");
-        serialization::template from_binary<true>(istream, normalIds);
+        serialization::Codec<decltype(normalIds)>::template from_binary<false>(istream, normalIds);
         Profile::next("loading namespace id data");
-        serialization::template from_binary<true>(istream, namespaceIds);
+        serialization::Codec<decltype(namespaceIds)>::template from_binary<false>(istream, namespaceIds);
         Profile::next("loading item id data");
-        serialization::template from_binary<true>(istream, itemIds);
+        serialization::Codec<decltype(itemIds)>::template from_binary<false>(istream, itemIds);
         Profile::next("loading block id data");
-        serialization::template from_binary<true>(istream, blockIds);
+        serialization::Codec<decltype(blockIds)>::template from_binary<false>(istream, blockIds);
         Profile::next("loading json data");
         Node::currentCreateStage = Node::NodeCreateStage::JSON_NODE;
-        serialization::template from_binary<true>(istream, jsonNodes);
+        serialization::Codec<decltype(jsonNodes)>::template from_binary<false>(istream, jsonNodes);
         Profile::next("loading repeat data");
         Node::currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
-        serialization::template from_binary<true>(istream, repeatNodeData);
+        serialization::Codec<decltype(repeatNodeData)>::template from_binary<false>(istream, repeatNodeData);
         Profile::next("loading command data");
         Node::currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
-        serialization::template from_binary<true>(istream, commands);
+        serialization::Codec<decltype(commands)>::template from_binary<false>(istream, commands);
         Profile::next("init cpack");
         Node::currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
@@ -397,21 +397,21 @@ namespace CHelper {
         Profile::push("writing binary cpack to file: {}", FORMAT_ARG(utf8::utf16to8(path.u16string())));
         std::ofstream ostream(path, std::ios::binary);
         //manifest
-        serialization::template to_binary<true>(ostream, manifest);
+        serialization::Codec<decltype(manifest)>::template to_binary<false>(ostream, manifest);
         //normal id
-        serialization::template to_binary<true>(ostream, normalIds);
+        serialization::Codec<decltype(normalIds)>::template to_binary<false>(ostream, normalIds);
         //namespace id
-        serialization::template to_binary<true>(ostream, namespaceIds);
+        serialization::Codec<decltype(namespaceIds)>::template to_binary<false>(ostream, namespaceIds);
         //item id
-        serialization::template to_binary<true>(ostream, itemIds);
+        serialization::Codec<decltype(itemIds)>::template to_binary<false>(ostream, itemIds);
         //block id
-        serialization::template to_binary<true>(ostream, blockIds);
+        serialization::Codec<decltype(blockIds)>::template to_binary<false>(ostream, blockIds);
         //json node
-        serialization::template to_binary<true>(ostream, jsonNodes);
+        serialization::Codec<decltype(jsonNodes)>::template to_binary<false>(ostream, jsonNodes);
         //repeat node
-        serialization::template to_binary<true>(ostream, repeatNodeData);
+        serialization::Codec<decltype(repeatNodeData)>::template to_binary<false>(ostream, repeatNodeData);
         //command
-        serialization::template to_binary<true>(ostream, commands);
+        serialization::Codec<decltype(commands)>::template to_binary<false>(ostream, commands);
 
         ostream.close();
         Profile::pop();

@@ -31,8 +31,6 @@ namespace CHelper::Profile {
 
     void printAndClear(const std::exception &e);
 
-    fmt::join_view<decltype(std::begin(stack)), decltype(std::end(stack)), char> getStackTrace();
-
 }// namespace CHelper::Profile
 
 #endif//CHELPER_PROFILE_H
