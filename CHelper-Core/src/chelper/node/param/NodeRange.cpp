@@ -9,7 +9,7 @@ namespace CHelper::Node {
 
     static std::shared_ptr<NormalId> rangeSymbol = NormalId::make(u"..", u"范围");
 
-    NodeRange::NodeRange(const std::optional<std::u16string> &id,
+    NodeRange::NodeRange(const std::optional<std::string> &id,
                          const std::optional<std::u16string> &description)
         : NodeBase(id, description, false) {}
 

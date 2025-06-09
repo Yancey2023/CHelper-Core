@@ -55,16 +55,16 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         //node
         Codec<decltype(t.nodes)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::node_(), t.nodes);
         //start
-        std::vector<std::u16string> startIds;
+        std::vector<std::string> startIds;
         startIds.reserve(t.startNodes.size());
         for (const auto &item: t.startNodes) {
             startIds.push_back(item->id.value());
         }
         Codec<decltype(startIds)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::start_(), startIds);
         //ast
-        std::vector<std::vector<std::u16string>> ast;
+        std::vector<std::vector<std::string>> ast;
         for (const auto &item: t.wrappedNodes) {
-            std::vector<std::u16string> ast1;
+            std::vector<std::string> ast1;
             ast1.push_back(item.innerNode->id.value());
             for (const auto &item2: item.nextNodes) {
                 ast1.push_back(item2->innerNode->id.value());
@@ -97,12 +97,12 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         }
         //start
         CHelper::Profile::next("loading start nodes");
-        std::vector<std::u16string> startNodeIds;
+        std::vector<std::string> startNodeIds;
         Codec<decltype(startNodeIds)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::start_(), startNodeIds);
         t.startNodes.reserve(startNodeIds.size());
         for (const auto &startNodeId: startNodeIds) {
-            CHelper::Profile::next(R"(linking startNode "{}" to nodes)", FORMAT_ARG(utf8::utf16to8(startNodeId)));
-            if (HEDLEY_UNLIKELY(startNodeId == u"LF")) {
+            CHelper::Profile::next(R"(linking startNode "{}" to nodes)", FORMAT_ARG(startNodeId));
+            if (HEDLEY_UNLIKELY(startNodeId == "LF")) {
                 t.startNodes.push_back(CHelper::Node::NodeLF::getInstance());
                 continue;
             }
@@ -115,7 +115,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
                 }
             }
             if (HEDLEY_UNLIKELY(flag)) {
-                CHelper::Profile::push(R"("unknown node id -> {} (in command \"{}\")", FORMAT_ARG(utf8::utf16to8(startNodeId)), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
+                CHelper::Profile::push(R"("unknown node id -> {} (in command \"{}\")", FORMAT_ARG(startNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                 throw std::runtime_error("unknown node id");
             }
         }
@@ -123,7 +123,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         const typename JsonValueType::ConstMemberIterator jsonAstIter = jsonValue.FindMember(details::JsonKey<Type, typename JsonValueType::Ch>::ast_());
         if (HEDLEY_LIKELY(jsonAstIter != jsonValue.MemberEnd())) {
             CHelper::Profile::next("loading ast");
-            std::vector<std::vector<std::u16string>> ast;
+            std::vector<std::vector<std::string>> ast;
             Codec<decltype(ast)>::template from_json<typename JsonValueType::ValueType>(jsonAstIter->value, ast);
             for (const auto &childNodes: ast) {
                 CHelper::Profile::next("linking child nodes to parent node");
@@ -132,9 +132,9 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
                     throw std::runtime_error("dismiss parent node id");
                 }
                 auto parentNodeId = childNodes.at(0);
-                CHelper::Profile::next(R"("linking child nodes to parent node "{}"))", FORMAT_ARG(utf8::utf16to8(parentNodeId)));
+                CHelper::Profile::next(R"("linking child nodes to parent node "{}"))", FORMAT_ARG(parentNodeId));
                 if (HEDLEY_UNLIKELY(childNodes.size() == 1)) {
-                    CHelper::Profile::push(R"("dismiss parent node id, the parent node is {} (in command "{}"))", FORMAT_ARG(utf8::utf16to8(parentNodeId)), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
+                    CHelper::Profile::push(R"("dismiss parent node id, the parent node is {} (in command "{}"))", FORMAT_ARG(parentNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                     throw std::runtime_error("dismiss parent node id");
                 }
                 CHelper::Node::NodeWrapped *parentNode = nullptr;
@@ -145,17 +145,17 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
                     }
                 }
                 if (HEDLEY_UNLIKELY(parentNode == nullptr)) {
-                    CHelper::Profile::push(R"("unknown node id -> {} (in command "{}"))", FORMAT_ARG(utf8::utf16to8(parentNodeId)), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
+                    CHelper::Profile::push(R"("unknown node id -> {} (in command "{}"))", FORMAT_ARG(parentNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                     throw std::runtime_error("unknown node id");
                 }
                 if (HEDLEY_UNLIKELY(!parentNode->nextNodes.empty())) {
-                    CHelper::Profile::push(R"(repeating parent node -> {} (in command "{}"))", FORMAT_ARG(utf8::utf16to8(parentNodeId)), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
+                    CHelper::Profile::push(R"(repeating parent node -> {} (in command "{}"))", FORMAT_ARG(parentNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                     throw std::runtime_error("repeating parent node");
                 }
                 parentNode->nextNodes.reserve(childNodes.size() - 1);
                 for_each(childNodes.begin() + 1, childNodes.end(), [&](const auto &childNodeId) {
-                    CHelper::Profile::next(R"(linking child nodes "{}" to parent node "{} (in command "{}"))", FORMAT_ARG(utf8::utf16to8(childNodeId)), FORMAT_ARG(utf8::utf16to8(parentNodeId)), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
-                    if (HEDLEY_UNLIKELY(childNodeId == u"LF")) {
+                    CHelper::Profile::next(R"(linking child nodes "{}" to parent node "{} (in command "{}"))", FORMAT_ARG(childNodeId), FORMAT_ARG(parentNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
+                    if (HEDLEY_UNLIKELY(childNodeId == "LF")) {
                         parentNode->nextNodes.push_back(CHelper::Node::NodeLF::getInstance());
                         return;
                     }
@@ -167,7 +167,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
                         }
                     }
                     if (HEDLEY_UNLIKELY(childNode == nullptr)) {
-                        CHelper::Profile::push(R"("unknown node id -> {} (in command "{}"))", FORMAT_ARG(utf8::utf16to8(childNodeId)), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
+                        CHelper::Profile::push(R"("unknown node id -> {} (in command "{}"))", FORMAT_ARG(childNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                         throw std::runtime_error("unknown node id");
                     }
                     parentNode->nextNodes.push_back(childNode);
@@ -189,13 +189,13 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         //start
         Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, t.startNodes.size());
         for (const auto &item: t.startNodes) {
-            Codec<std::u16string>::template to_binary<isNeedConvert>(ostream, item->innerNode->id.value());
+            Codec<std::string>::template to_binary<isNeedConvert>(ostream, item->innerNode->id.value());
         }
         //ast
         for (const auto &item: t.wrappedNodes) {
             Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, item.nextNodes.size());
             for (const auto &item2: item.nextNodes) {
-                Codec<std::u16string>::template to_binary<isNeedConvert>(ostream, item2->innerNode->id.value());
+                Codec<std::string>::template to_binary<isNeedConvert>(ostream, item2->innerNode->id.value());
             }
         }
     }
@@ -221,9 +221,9 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         Codec<uint32_t>::template from_binary<isNeedConvert>(istream, startNodeIdSize);
         t.startNodes.reserve(startNodeIdSize);
         for (size_t i = 0; i < startNodeIdSize; ++i) {
-            std::u16string startNodeId;
+            std::string startNodeId;
             Codec<decltype(startNodeId)>::template from_binary<isNeedConvert>(istream, startNodeId);
-            if (HEDLEY_UNLIKELY(startNodeId == u"LF")) {
+            if (HEDLEY_UNLIKELY(startNodeId == "LF")) {
                 t.startNodes.push_back(CHelper::Node::NodeLF::getInstance());
                 continue;
             }
@@ -236,7 +236,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
                 }
             }
             if (HEDLEY_UNLIKELY(flag)) {
-                CHelper::Profile::push(R"("unknown node id -> {} (in command "{}"))", FORMAT_ARG(utf8::utf16to8(startNodeId)), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
+                CHelper::Profile::push(R"("unknown node id -> {} (in command "{}"))", FORMAT_ARG(startNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                 throw std::runtime_error("unknown node id");
             }
         }
@@ -246,9 +246,9 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
             Codec<uint32_t>::template from_binary<isNeedConvert>(istream, childNodeSize);
             parentNode.nextNodes.reserve(childNodeSize);
             for (size_t j = 0; j < childNodeSize; ++j) {
-                std::u16string childNodeId;
+                std::string childNodeId;
                 Codec<decltype(childNodeId)>::template from_binary<isNeedConvert>(istream, childNodeId);
-                if (HEDLEY_UNLIKELY(childNodeId == u"LF")) {
+                if (HEDLEY_UNLIKELY(childNodeId == "LF")) {
                     parentNode.nextNodes.push_back(CHelper::Node::NodeLF::getInstance());
                     continue;
                 }
@@ -260,7 +260,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
                     }
                 }
                 if (HEDLEY_UNLIKELY(childNode == nullptr)) {
-                    CHelper::Profile::push(R"("unknown node id -> {} (in command "{}"))", FORMAT_ARG(utf8::utf16to8(childNodeId)), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
+                    CHelper::Profile::push(R"("unknown node id -> {} (in command "{}"))", FORMAT_ARG(childNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                     throw std::runtime_error("unknown node id");
                 }
                 parentNode.nextNodes.push_back(childNode);

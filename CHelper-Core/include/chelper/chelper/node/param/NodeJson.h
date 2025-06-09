@@ -15,15 +15,15 @@ namespace CHelper::Node {
 
     class NodeJson : public NodeBase {
     public:
-        std::u16string key;
+        std::string key;
 
     private:
         const NodeBase *nodeJson = nullptr;
 
     public:
-        NodeJson(const std::optional<std::u16string> &id,
+        NodeJson(const std::optional<std::string> &id,
                  const std::optional<std::u16string> &description,
-                 std::u16string key);
+                 std::string key);
 
         NodeJson() = default;
 

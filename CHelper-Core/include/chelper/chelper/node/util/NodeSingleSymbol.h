@@ -19,7 +19,7 @@ namespace CHelper::Node {
 
         NodeSingleSymbol() = default;
 
-        NodeSingleSymbol(const std::optional<std::u16string> &id,
+        NodeSingleSymbol(const std::optional<std::string> &id,
                          const std::optional<std::u16string> &description,
                          char16_t symbol,
                          bool isAddWhitespace = true);

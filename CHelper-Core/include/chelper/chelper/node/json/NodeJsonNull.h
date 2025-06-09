@@ -15,7 +15,7 @@ namespace CHelper::Node {
     public:
         NodeJsonNull() = default;
 
-        NodeJsonNull(const std::optional<std::u16string> &id,
+        NodeJsonNull(const std::optional<std::string> &id,
                      const std::optional<std::u16string> &description);
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;

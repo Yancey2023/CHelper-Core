@@ -71,7 +71,7 @@ namespace CHelper {
 
         class NodeBase {
         public:
-            std::optional<std::u16string> id;
+            std::optional<std::string> id;
             std::optional<std::u16string> brief;
             std::optional<std::u16string> description;
             //true-一定要在空格后 false-不一定在空格后
@@ -79,7 +79,7 @@ namespace CHelper {
 
             NodeBase() = default;
 
-            NodeBase(const std::optional<std::u16string> &id,
+            NodeBase(const std::optional<std::string> &id,
                      const std::optional<std::u16string> &description,
                      bool isMustAfterWhiteSpace);
 

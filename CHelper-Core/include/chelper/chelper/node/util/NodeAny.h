@@ -17,7 +17,7 @@ namespace CHelper::Node {
         NodeAny() = default;
 
     private:
-        NodeAny(const std::optional<std::u16string> &id,
+        NodeAny(const std::optional<std::string> &id,
                 const std::optional<std::u16string> &description);
 
     public:

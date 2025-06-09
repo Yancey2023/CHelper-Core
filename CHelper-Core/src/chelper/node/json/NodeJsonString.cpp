@@ -12,11 +12,11 @@ namespace CHelper::Node {
 
     static std::shared_ptr<NormalId> doubleQuoteMask = NormalId::make(u"\"", u"双引号");
 
-    NodeJsonString::NodeJsonString(const std::optional<std::u16string> &id,
+    NodeJsonString::NodeJsonString(const std::optional<std::string> &id,
                                    const std::optional<std::u16string> &description)
         : NodeBase(id, description, false) {
         nodeData = std::make_unique<NodeOr>(
-                u"JSON_STRING_DATA", u"JSON字符串内容",
+                "JSON_STRING_DATA", u"JSON字符串内容",
                 std::vector<const NodeBase *>(), false);
     }
 
@@ -34,7 +34,7 @@ namespace CHelper::Node {
             }
         }
         nodeData = std::make_unique<NodeOr>(
-                u"JSON_STRING_DATA", u"JSON字符串内容",
+                "JSON_STRING_DATA", u"JSON字符串内容",
                 std::move(nodeDataElement), false);
     }
 

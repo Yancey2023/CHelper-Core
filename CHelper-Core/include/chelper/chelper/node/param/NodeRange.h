@@ -15,7 +15,7 @@ namespace CHelper::Node {
     public:
         NodeRange() = default;
 
-        NodeRange(const std::optional<std::u16string> &id,
+        NodeRange(const std::optional<std::string> &id,
                   const std::optional<std::u16string> &description);
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;

@@ -21,7 +21,7 @@ namespace CHelper::Node {
 
         NodeOr() = default;
 
-        NodeOr(const std::optional<std::u16string> &id,
+        NodeOr(const std::optional<std::string> &id,
                const std::optional<std::u16string> &description,
                std::vector<const NodeBase *> childNodes,
                bool isAttachToEnd,

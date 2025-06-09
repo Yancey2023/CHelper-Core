@@ -16,7 +16,7 @@ namespace CHelper::Node {
     class NodeJsonEntry : public NodeBase {
     public:
         std::u16string key;
-        std::vector<std::u16string> value;
+        std::vector<std::string> value;
 
     private:
         std::unique_ptr<NodeBase> nodeKey, nodeValue, nodeEntry;
@@ -24,10 +24,10 @@ namespace CHelper::Node {
     public:
         NodeJsonEntry() = default;
 
-        NodeJsonEntry(const std::optional<std::u16string> &id,
+        NodeJsonEntry(const std::optional<std::string> &id,
                       const std::optional<std::u16string> &description,
                       std::u16string key = std::u16string(),
-                      std::vector<std::u16string> value = std::vector<std::u16string>());
+                      std::vector<std::string> value = std::vector<std::string>());
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 

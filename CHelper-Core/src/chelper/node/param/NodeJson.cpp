@@ -7,9 +7,9 @@
 
 namespace CHelper::Node {
 
-    NodeJson::NodeJson(const std::optional<std::u16string> &id,
+    NodeJson::NodeJson(const std::optional<std::string> &id,
                        const std::optional<std::u16string> &description,
-                       std::u16string key)
+                       std::string key)
         : NodeBase(id, description, false),
           key(std::move(key)) {}
 
@@ -20,8 +20,8 @@ namespace CHelper::Node {
                 return;
             }
         }
-        Profile::push("linking contents to {}", FORMAT_ARG(utf8::utf16to8(key)));
-        Profile::push("failed to find json data in the cpack -> {}", FORMAT_ARG(utf8::utf16to8(key)));
+        Profile::push("linking contents to {}", FORMAT_ARG(key));
+        Profile::push("failed to find json data in the cpack -> {}", FORMAT_ARG(key));
         throw std::runtime_error("failed to find json data");
     }
 

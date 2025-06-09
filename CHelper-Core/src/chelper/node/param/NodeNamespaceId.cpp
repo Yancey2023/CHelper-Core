@@ -7,9 +7,9 @@
 
 namespace CHelper::Node {
 
-    NodeNamespaceId::NodeNamespaceId(const std::optional<std::u16string> &id,
+    NodeNamespaceId::NodeNamespaceId(const std::optional<std::string> &id,
                                      const std::optional<std::u16string> &description,
-                                     const std::optional<std::u16string> &key,
+                                     const std::optional<std::string> &key,
                                      bool ignoreError)
         : NodeBase(id, description, false),
           key(key),
@@ -23,8 +23,8 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(customContents == nullptr)) {
             if (HEDLEY_UNLIKELY(key.has_value())) {
-                Profile::push("linking contents to {}", FORMAT_ARG(utf8::utf16to8(key.value())));
-                Profile::push("failed to find namespace id in the cpack -> {}", FORMAT_ARG(utf8::utf16to8(key.value())));
+                Profile::push("linking contents to {}", FORMAT_ARG(key.value()));
+                Profile::push("failed to find namespace id in the cpack -> {}", FORMAT_ARG(key.value()));
                 throw std::runtime_error("failed to find namespace id");
             } else {
                 throw std::runtime_error("missing content");

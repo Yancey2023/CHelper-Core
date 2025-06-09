@@ -18,11 +18,11 @@ namespace CHelper::Node {
     }
 
     void NodeJsonElement::init(const CPack &cpack) {
-        Profile::push("linking startNode \"{}\" to nodes", FORMAT_ARG(utf8::utf16to8(startNodeId)));
+        Profile::push("linking startNode \"{}\" to nodes", FORMAT_ARG(startNodeId));
         for (const auto &item: nodes) {
             item->init(cpack);
         }
-        if (HEDLEY_LIKELY(startNodeId != u"LF")) {
+        if (HEDLEY_LIKELY(startNodeId != "LF")) {
             for (auto &node: nodes) {
                 if (HEDLEY_UNLIKELY(node->id == startNodeId)) {
                     start = node.get();
@@ -31,7 +31,7 @@ namespace CHelper::Node {
             }
         }
         if (HEDLEY_UNLIKELY(start == nullptr)) {
-            Profile::push("unknown node id -> {} (in node \"{}\")", FORMAT_ARG(utf8::utf16to8(startNodeId)));
+            Profile::push("unknown node id -> {} (in node \"{}\")", FORMAT_ARG(startNodeId));
         }
         for (const auto &item: nodes) {
             if (HEDLEY_UNLIKELY(item->getNodeType() == NodeTypeId::JSON_LIST)) {
@@ -51,21 +51,21 @@ namespace CHelper::Node {
 
     NodeBase *NodeJsonElement::getNodeJsonElement() {
         static std::unique_ptr<NodeBase> jsonString = std::make_unique<NodeJsonString>(
-                u"JSON_STRING", u"JSON字符串");
+                "JSON_STRING", u"JSON字符串");
         static std::unique_ptr<NodeBase> jsonInteger = NodeJsonInteger::make(
-                u"JSON_INTEGER", u"JSON整数", std::nullopt, std::nullopt);
+                "JSON_INTEGER", u"JSON整数", std::nullopt, std::nullopt);
         static std::unique_ptr<NodeBase> jsonFloat = NodeJsonFloat::make(
-                u"JSON_FLOAT", u"JSON小数", std::nullopt, std::nullopt);
+                "JSON_FLOAT", u"JSON小数", std::nullopt, std::nullopt);
         static std::unique_ptr<NodeBase> jsonNull = std::make_unique<NodeJsonNull>(
-                u"JSON_NULu", u"JSON空值");
+                "JSON_NULu", u"JSON空值");
         static std::unique_ptr<NodeBase> jsonBoolean = NodeJsonBoolean::make(
-                u"JSON_BOOLEAN", u"JSON布尔值", std::nullopt, std::nullopt);
+                "JSON_BOOLEAN", u"JSON布尔值", std::nullopt, std::nullopt);
         static std::unique_ptr<NodeBase> jsonList = std::make_unique<NodeJsonList>(
-                u"JSON_LIST", u"JSON列表");
+                "JSON_LIST", u"JSON列表");
         static std::unique_ptr<NodeBase> jsonObject = std::make_unique<NodeJsonObject>(
-                u"JSON_OBJECT", u"JSON对象");
+                "JSON_OBJECT", u"JSON对象");
         static std::unique_ptr<NodeBase> jsonElement = std::make_unique<NodeOr>(
-                u"JSON_ELEMENT", u"JSON元素",
+                "JSON_ELEMENT", u"JSON元素",
                 std::vector<const NodeBase *>{
                         jsonBoolean.get(), jsonFloat.get(),
                         jsonInteger.get(), jsonNull.get(),

@@ -15,7 +15,7 @@ namespace CHelper::Node {
 
     class NodeNamespaceId : public NodeBase {
     public:
-        std::optional<std::u16string> key;
+        std::optional<std::string> key;
         std::optional<std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> contents;
         std::optional<bool> ignoreError;
 
@@ -25,9 +25,9 @@ namespace CHelper::Node {
     public:
         NodeNamespaceId() = default;
 
-        NodeNamespaceId(const std::optional<std::u16string> &id,
+        NodeNamespaceId(const std::optional<std::string> &id,
                         const std::optional<std::u16string> &description,
-                        const std::optional<std::u16string> &key,
+                        const std::optional<std::string> &key,
                         bool ignoreError);
 
         void init(const CPack &cpack) override;

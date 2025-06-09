@@ -11,13 +11,13 @@
 namespace CHelper::Node {
 
     static std::unique_ptr<NodeBase> nodeEqual = std::make_unique<NodeText>(
-            u"TARGET_SELECTOR_ARGUMENT_EQUAu", u"等于",
+            "TARGET_SELECTOR_ARGUMENT_EQUAL", u"等于",
             NormalId::make(u"=", u"等于"),
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 return tokenReader.readSymbolASTNode(node);
             });
     static std::unique_ptr<NodeBase> nodeNotEqual = std::make_unique<NodeText>(
-            u"TARGET_SELECTOR_ARGUMENT_NOT_EQUAu", u"不等于",
+            "TARGET_SELECTOR_ARGUMENT_NOT_EQUAL", u"不等于",
             NormalId::make(u"=!", u"不等于"),
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 tokenReader.push();
@@ -25,7 +25,7 @@ namespace CHelper::Node {
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
             });
     static std::unique_ptr<NodeBase> nodeEqualOrNotEqual = std::make_unique<NodeOr>(
-            u"TARGET_SELECTOR_ARGUMENT_SEPARATOR", u"等于或不等于",
+            "TARGET_SELECTOR_ARGUMENT_SEPARATOR", u"等于或不等于",
             std::vector<const NodeBase *>{
                     nodeEqual.get(), nodeNotEqual.get()},
             false);
@@ -39,7 +39,7 @@ namespace CHelper::Node {
           canUseNotEqual(canUseNotEqual),
           nodeValue(nodeValue) {}
 
-    NodeEqualEntry::NodeEqualEntry(const std::optional<std::u16string> &id,
+    NodeEqualEntry::NodeEqualEntry(const std::optional<std::string> &id,
                                    const std::optional<std::u16string> &description,
                                    std::vector<EqualData> equalDatas)
         : NodeBase(id, description, false),
@@ -48,7 +48,7 @@ namespace CHelper::Node {
         for (const auto &item: this->equalDatas) {
             nodeKeyContent->push_back(NormalId::make(item.name, item.description));
         }
-        nodeKey = std::make_unique<NodeNormalId>(u"KEY", u"参数名", nodeKeyContent, true);
+        nodeKey = std::make_unique<NodeNormalId>("KEY", u"参数名", nodeKeyContent, true);
     }
 
     NodeTypeId::NodeTypeId NodeEqualEntry::getNodeType() const {

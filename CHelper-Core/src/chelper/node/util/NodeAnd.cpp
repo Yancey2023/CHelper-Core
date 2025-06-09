@@ -6,7 +6,7 @@
 
 namespace CHelper::Node {
 
-    NodeAnd::NodeAnd(const std::optional<std::u16string> &id,
+    NodeAnd::NodeAnd(const std::optional<std::string> &id,
                      const std::optional<std::u16string> &description,
                      const std::vector<const NodeBase *> &childNodes)
         : NodeBase(id, description, false),

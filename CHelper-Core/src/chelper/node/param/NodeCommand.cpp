@@ -9,9 +9,9 @@
 namespace CHelper::Node {
 
     static std::unique_ptr<Node::NodeSingleSymbol> nodeCommandStart = std::make_unique<Node::NodeSingleSymbol>(
-            u"COMMAND_START", u"命令开始字符", u'/');
+            "COMMAND_START", u"命令开始字符", u'/');
 
-    NodeCommand::NodeCommand(const std::optional<std::u16string> &id,
+    NodeCommand::NodeCommand(const std::optional<std::string> &id,
                              const std::optional<std::u16string> &description,
                              std::vector<std::unique_ptr<Node::NodePerCommand>> *commands)
         : NodeBase(id, description, false),

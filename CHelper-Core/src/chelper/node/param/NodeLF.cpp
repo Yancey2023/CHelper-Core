@@ -6,7 +6,7 @@
 
 namespace CHelper::Node {
 
-    NodeLF::NodeLF(const std::optional<std::u16string> &id,
+    NodeLF::NodeLF(const std::optional<std::string> &id,
                    const std::optional<std::u16string> &description)
         : NodeBase(id, description, false) {}
 
@@ -15,7 +15,7 @@ namespace CHelper::Node {
     }
 
     NodeWrapped *NodeLF::getInstance() {
-        static std::unique_ptr<NodeLF> INSTANCE = std::make_unique<NodeLF>(u"LF", u"命令终止");
+        static std::unique_ptr<NodeLF> INSTANCE = std::make_unique<NodeLF>("LF", u"命令终止");
         static std::unique_ptr<NodeWrapped> INSTANCE_WRAPPED = std::make_unique<NodeWrapped>(INSTANCE.get());
         return INSTANCE_WRAPPED.get();
     }

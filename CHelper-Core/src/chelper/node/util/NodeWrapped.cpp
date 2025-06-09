@@ -8,7 +8,7 @@
 namespace CHelper::Node {
 
     NodeWrapped::NodeWrapped(NodeBase *innerNode)
-        : NodeBase(u"WRAPPED_NODE", u"嵌套节点", false),
+        : NodeBase("WRAPPED_NODE", u"嵌套节点", false),
           innerNode(innerNode) {}
 
     void NodeWrapped::init(const CPack &cpack) {

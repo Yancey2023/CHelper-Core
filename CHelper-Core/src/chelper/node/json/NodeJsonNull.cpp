@@ -6,7 +6,7 @@
 
 namespace CHelper::Node {
 
-    NodeJsonNull::NodeJsonNull(const std::optional<std::u16string> &id,
+    NodeJsonNull::NodeJsonNull(const std::optional<std::string> &id,
                                const std::optional<std::u16string> &description)
         : NodeBase(id, description, false) {}
 

@@ -20,7 +20,7 @@ namespace CHelper::Node {
 
         NodeString() = default;
 
-        NodeString(const std::optional<std::u16string> &id,
+        NodeString(const std::optional<std::string> &id,
                    const std::optional<std::u16string> &description,
                    bool allowMissingString,
                    bool canContainSpace,

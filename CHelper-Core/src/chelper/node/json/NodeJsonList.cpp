@@ -11,33 +11,33 @@
 namespace CHelper::Node {
 
     static std::unique_ptr<NodeBase> nodLeft = std::make_unique<NodeSingleSymbol>(
-            u"JSON_LIST_LEFT", u"JSON列表左括号", u'[');
+            "JSON_LIST_LEFT", u"JSON列表左括号", u'[');
     static std::unique_ptr<NodeBase> nodeRight = std::make_unique<NodeSingleSymbol>(
-            u"JSON_LIST_RIGHT", u"JSON列表右括号", u']');
+            "JSON_LIST_RIGHT", u"JSON列表右括号", u']');
     static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(
-            u"JSON_LIST_SEPARATOR", u"JSON列表分隔符", u',');
+            "JSON_LIST_SEPARATOR", u"JSON列表分隔符", u',');
     static std::unique_ptr<NodeBase> nodeAllList = std::make_unique<NodeList>(
-            u"JSON_OBJECT", u"JSON对象",
+            "JSON_OBJECT", u"JSON对象",
             nodLeft.get(), NodeJsonElement::getNodeJsonElement(), nodeSeparator.get(), nodeRight.get());
 
-    NodeJsonList::NodeJsonList(const std::optional<std::u16string> &id,
+    NodeJsonList::NodeJsonList(const std::optional<std::string> &id,
                                const std::optional<std::u16string> &description,
-                               std::u16string data)
+                               std::string data)
         : NodeBase(id, description, false),
           data(std::move(data)) {}
 
     void NodeJsonList::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
         for (const auto &item: dataList) {
             if (HEDLEY_UNLIKELY(item->id == data)) {
-                nodeList = std::make_unique<NodeList>(u"JSON_LIST", u"JSON列表",
+                nodeList = std::make_unique<NodeList>("JSON_LIST", u"JSON列表",
                                                       nodLeft.get(), item.get(),
                                                       nodeSeparator.get(), nodeRight.get());
                 return;
             }
         }
-        Profile::push("linking contents to {}", FORMAT_ARG(utf8::utf16to8(data)));
-        Profile::push("failed to find node id -> {}", FORMAT_ARG(utf8::utf16to8(data)));
-        Profile::push("unknown node id -> {} (in node \"{}\")", FORMAT_ARG(id.has_value() ? utf8::utf16to8(id.value()) : "UNKNOWN"), FORMAT_ARG(utf8::utf16to8(data)));
+        Profile::push("linking contents to {}", FORMAT_ARG(data));
+        Profile::push("failed to find node id -> {}", FORMAT_ARG(data));
+        Profile::push("unknown node id -> {} (in node \"{}\")", FORMAT_ARG(id.value_or("UNKNOWN")));
         throw std::runtime_error("unknown node id");
     }
 

@@ -91,7 +91,7 @@ namespace CHelper::Node {
             return true;
         }
 
-        static std::unique_ptr<NodeTemplateNumber<T, isJson>> make(const std::optional<std::u16string> &id,
+        static std::unique_ptr<NodeTemplateNumber<T, isJson>> make(const std::optional<std::string> &id,
                                                                    const std::optional<std::u16string> &description,
                                                                    const std::optional<T> &min0,
                                                                    const std::optional<T> &max0) {

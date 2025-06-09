@@ -25,7 +25,7 @@ namespace CHelper::Node {
 
         NodeRelativeFloat() = default;
 
-        NodeRelativeFloat(const std::optional<std::u16string> &id,
+        NodeRelativeFloat(const std::optional<std::string> &id,
                           const std::optional<std::u16string> &description,
                           bool canUseCaretNotation);
 

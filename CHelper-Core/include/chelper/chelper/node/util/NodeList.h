@@ -23,7 +23,7 @@ namespace CHelper::Node {
 
         NodeList() = default;
 
-        NodeList(const std::optional<std::u16string> &id,
+        NodeList(const std::optional<std::string> &id,
                  const std::optional<std::u16string> &description,
                  NodeBase *nodeLeft,
                  NodeBase *nodeElement,

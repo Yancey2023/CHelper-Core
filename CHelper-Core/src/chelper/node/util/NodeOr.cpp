@@ -6,7 +6,7 @@
 
 namespace CHelper::Node {
 
-    NodeOr::NodeOr(const std::optional<std::u16string> &id,
+    NodeOr::NodeOr(const std::optional<std::string> &id,
                    const std::optional<std::u16string> &description,
                    std::vector<const NodeBase *> childNodes,
                    const bool isAttachToEnd,

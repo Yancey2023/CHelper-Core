@@ -14,7 +14,7 @@ namespace CHelper::Node {
 
     class NodeRepeat : public NodeBase {
     public:
-        std::u16string key;
+        std::string key;
 
     private:
         const RepeatData *repeatData = nullptr;

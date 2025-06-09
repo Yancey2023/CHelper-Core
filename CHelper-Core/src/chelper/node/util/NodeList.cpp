@@ -7,7 +7,7 @@
 
 namespace CHelper::Node {
 
-    NodeList::NodeList(const std::optional<std::u16string> &id,
+    NodeList::NodeList(const std::optional<std::string> &id,
                        const std::optional<std::u16string> &description,
                        NodeBase *nodeLeft,
                        NodeBase *nodeElement,
@@ -19,12 +19,12 @@ namespace CHelper::Node {
           nodeSeparator(nodeSeparator),
           nodeRight(nodeRight),
           nodeElementOrRight(
-                  u"ELEMENT_OR_RIGHT", u"element or right",
+                  "ELEMENT_OR_RIGHT", u"element or right",
                   std::vector<const NodeBase *>{
                           nodeElement, nodeRight},
                   false),
           nodeSeparatorOrRight(
-                  u"SEPARATOR_OR_RIGHT", u"separator or right",
+                  "SEPARATOR_OR_RIGHT", u"separator or right",
                   std::vector<const NodeBase *>{
                           nodeSeparator, nodeRight},
                   false) {

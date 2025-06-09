@@ -130,13 +130,13 @@ namespace CHelper {
         std::u16string type;
         serialization::Codec<decltype(type)>::template from_json_member<JsonValueType>(j, "type", type);
         if (HEDLEY_LIKELY(type == u"normal")) {
-            std::u16string id;
+            std::string id;
             serialization::Codec<decltype(id)>::template from_json_member<JsonValueType>(j, "id", id);
             std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> content;
             serialization::Codec<decltype(content)>::template from_json_member<JsonValueType>(j, "content", content);
             normalIds.emplace(std::move(id), std::move(content));
         } else if (HEDLEY_LIKELY(type == u"namespace")) {
-            std::u16string id;
+            std::string id;
             serialization::Codec<decltype(id)>::template from_json_member<JsonValueType>(j, "id", id);
             std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> content;
             serialization::Codec<decltype(content)>::template from_json_member<JsonValueType>(j, "content", content);
@@ -182,7 +182,7 @@ namespace CHelper {
         Profile::next("init repeat nodes");
         for (const auto &item: repeatNodeData) {
             if (HEDLEY_UNLIKELY(item.repeatNodes.size() != item.isEnd.size())) {
-                Profile::push("checking repeat node: {}", FORMAT_ARG(utf8::utf16to8(item.id)));
+                Profile::push("checking repeat node: {}", FORMAT_ARG(item.id));
                 throw std::runtime_error("fail to check repeat id because repeatNodes size not equal isEnd size");
             }
         }
@@ -214,7 +214,7 @@ namespace CHelper {
             std::unique_ptr<Node::NodeBase> breakNode = std::make_unique<Node::NodeAnd>(
                     item.id, std::nullopt, std::move(breakChildNodes));
             std::unique_ptr<Node::NodeBase> orNode = std::make_unique<Node::NodeOr>(
-                    u"NODE_REPEAT", u"命令重复部分",
+                    "NODE_REPEAT", u"命令重复部分",
                     std::vector<const Node::NodeBase *>{unBreakNode.get(), breakNode.get()},
                     false);
             repeatNodes.emplace(item.id, std::make_pair(&item, orNode.get()));
@@ -242,7 +242,7 @@ namespace CHelper {
                       return item1.get()->name[0] < item2.get()->name[0];
                   });
         Profile::next("create main node");
-        mainNode = std::make_unique<Node::NodeCommand>(u"MAIN_NODE", u"欢迎使用命令助手(作者：Yancey)", commands.get());
+        mainNode = std::make_unique<Node::NodeCommand>("MAIN_NODE", u"欢迎使用命令助手(作者：Yancey)", commands.get());
         Profile::pop();
     }
 
@@ -294,7 +294,7 @@ namespace CHelper {
             serialization::Codec<decltype(item.first)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", item.first);
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "normal");
             serialization::Codec<decltype(item.second)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "content", item.second);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / (utf8::utf16to8(item.first) + ".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / (item.first + ".json"), j);
         }
         for (const auto &item: namespaceIds) {
             JsonValueType j;
@@ -303,7 +303,7 @@ namespace CHelper {
             serialization::Codec<decltype(item.first)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "id", item.first);
             serialization::Codec<std::string>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "type", "namespace");
             serialization::Codec<decltype(item.second)>::template to_json_member<JsonValueType>(j.GetAllocator(), j, "content", item.second);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / (utf8::utf16to8(item.first) + ".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "id" / (item.first + ".json"), j);
         }
         {
             JsonValueType j;
@@ -326,12 +326,12 @@ namespace CHelper {
         for (const auto &item: jsonNodes) {
             JsonValueType j;
             serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "json" / (utf8::utf16to8(item->id.value()) + ".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "json" / (item->id.value() + ".json"), j);
         }
         for (const auto &item: repeatNodeData) {
             JsonValueType j;
             serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "repeat" / (utf8::utf16to8(item.id) + ".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "repeat" / (item.id + ".json"), j);
         }
         for (const auto &item: *commands) {
             JsonValueType j;
@@ -420,7 +420,7 @@ namespace CHelper {
 #endif
 
     std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
-    CPack::getNormalId(const std::u16string &key) const {
+    CPack::getNormalId(const std::string &key) const {
         auto it = normalIds.find(key);
         if (HEDLEY_UNLIKELY(it == normalIds.end())) {
 #ifdef CHelperDebug
@@ -432,10 +432,10 @@ namespace CHelper {
     }
 
     std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
-    CPack::getNamespaceId(const std::u16string &key) const {
-        if (HEDLEY_UNLIKELY(key == u"block")) {
+    CPack::getNamespaceId(const std::string &key) const {
+        if (HEDLEY_UNLIKELY(key == "block")) {
             return std::reinterpret_pointer_cast<std::vector<std::shared_ptr<NamespaceId>>>(blockIds->blockStateValues);
-        } else if (HEDLEY_UNLIKELY(key == u"item")) {
+        } else if (HEDLEY_UNLIKELY(key == "item")) {
             return std::reinterpret_pointer_cast<std::vector<std::shared_ptr<NamespaceId>>>(itemIds);
         }
         auto it = namespaceIds.find(key);

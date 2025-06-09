@@ -21,7 +21,7 @@ namespace CHelper::Node {
     public:
         NodeJsonString() = default;
 
-        NodeJsonString(const std::optional<std::u16string> &id,
+        NodeJsonString(const std::optional<std::string> &id,
                        const std::optional<std::u16string> &description);
 
         void init(const CPack &cpack) override;

@@ -12,7 +12,7 @@ namespace CHelper::Node {
         return NormalId::make(name, description);
     }
 
-    NodeSingleSymbol::NodeSingleSymbol(const std::optional<std::u16string> &id,
+    NodeSingleSymbol::NodeSingleSymbol(const std::optional<std::string> &id,
                                        const std::optional<std::u16string> &description,
                                        char16_t symbol,
                                        bool isAddWhitespace)

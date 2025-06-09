@@ -8,7 +8,7 @@
 
 namespace CHelper::Node {
 
-    NodeText::NodeText(const std::optional<std::u16string> &id,
+    NodeText::NodeText(const std::optional<std::string> &id,
                        const std::optional<std::u16string> &description,
                        const std::shared_ptr<NormalId> &data,
                        const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getTextASTNode)
@@ -72,7 +72,7 @@ namespace CHelper::Node {
 
     bool NodeText::collectSyntax(const ASTNode *astNode,
                                  SyntaxResult &syntaxResult) const {
-        if (id != u"TARGET_SELECTOR_ARGUMENT_EQUAu" && id != u"TARGET_SELECTOR_ARGUMENT_NOT_EQUAu") {
+        if (id != "TARGET_SELECTOR_ARGUMENT_EQUAL" && id != "TARGET_SELECTOR_ARGUMENT_NOT_EQUAL") {
             syntaxResult.update(astNode->tokens, SyntaxTokenType::LITERAL);
         } else {
             syntaxResult.update(astNode->tokens, SyntaxTokenType::SYMBOL);

@@ -17,7 +17,7 @@ namespace CHelper::Node {
 
         NodeAnd() = default;
 
-        NodeAnd(const std::optional<std::u16string> &id,
+        NodeAnd(const std::optional<std::string> &id,
                 const std::optional<std::u16string> &description,
                 const std::vector<const NodeBase *> &childNodes);
 

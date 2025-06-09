@@ -16,7 +16,7 @@ namespace CHelper::Node {
     public:
         NodeLF() = default;
 
-        NodeLF(const std::optional<std::u16string> &id,
+        NodeLF(const std::optional<std::string> &id,
                const std::optional<std::u16string> &description);
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;

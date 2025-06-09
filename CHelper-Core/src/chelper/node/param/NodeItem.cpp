@@ -9,13 +9,13 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NodeBase> nodeCount = NodeInteger::make(u"ITEM_COUNT", u"物品数量", 0, std::nullopt);
-    static std::shared_ptr<NodeBase> nodeAllData = NodeInteger::make(u"ITEM_DATA", u"物品附加值", -1, std::nullopt);
+    static std::shared_ptr<NodeBase> nodeCount = NodeInteger::make("ITEM_COUNT", u"物品数量", 0, std::nullopt);
+    static std::shared_ptr<NodeBase> nodeAllData = NodeInteger::make("ITEM_DATA", u"物品附加值", -1, std::nullopt);
 
     void NodeItem::init(const CPack &cpack) {
         itemIds = cpack.itemIds;
-        nodeItemId = std::make_unique<NodeNamespaceId>(u"ITEM_ID", u"物品ID", u"item", true);
-        nodeComponent = std::make_unique<NodeJson>(u"ITEM_COMPONENT", u"物品组件", u"components");
+        nodeItemId = std::make_unique<NodeNamespaceId>("ITEM_ID", u"物品ID", "item", true);
+        nodeComponent = std::make_unique<NodeJson>("ITEM_COMPONENT", u"物品组件", "components");
         nodeItemId->init(cpack);
         nodeComponent->init(cpack);
     }

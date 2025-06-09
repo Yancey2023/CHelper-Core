@@ -10,7 +10,7 @@
 
 namespace CHelper::Node {
 
-    NodeBase::NodeBase(const std::optional<std::u16string> &id,
+    NodeBase::NodeBase(const std::optional<std::string> &id,
                        const std::optional<std::u16string> &description,
                        bool isMustAfterWhiteSpace)
         : id(id),

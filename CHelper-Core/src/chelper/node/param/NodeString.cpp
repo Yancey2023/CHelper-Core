@@ -8,7 +8,7 @@ namespace CHelper::Node {
 
     static std::shared_ptr<NormalId> doubleQuoteMask = NormalId::make(u"\"", u"双引号");
 
-    NodeString::NodeString(const std::optional<std::u16string> &id,
+    NodeString::NodeString(const std::optional<std::string> &id,
                            const std::optional<std::u16string> &description,
                            bool allowMissingString,
                            const bool canContainSpace,

@@ -10,15 +10,15 @@
 namespace CHelper::Node {
 
     static std::shared_ptr<NodeBase> nodeInteger = NodeInteger::make(
-            u"INTEGER", u"整数", std::nullopt, std::nullopt);
+            "INTEGER", u"整数", std::nullopt, std::nullopt);
 
     void NodeIntegerWithUnit::init(const CPack &cpack) {
-        nodeUnits = std::make_unique<NodeNormalId>(u"UNITS", u"单位", units, false);
+        nodeUnits = std::make_unique<NodeNormalId>("UNITS", u"单位", units, false);
         nodeIntegerWithUnit = std::make_unique<NodeAnd>(
-                u"NODE_INTEGER_WITH_UINT", u"带单位的整数",
+                "NODE_INTEGER_WITH_UINT", u"带单位的整数",
                 std::vector<const NodeBase *>{nodeInteger.get(), nodeUnits.get()});
         nodeIntegerMaybeHaveUnit = std::make_unique<NodeOr>(
-                u"NODE_INTEGER_MAYBE_HAVE_UNIT", u"可能带单位的整数",
+                "NODE_INTEGER_MAYBE_HAVE_UNIT", u"可能带单位的整数",
                 std::vector<const NodeBase *>{nodeIntegerWithUnit.get(), nodeInteger.get()},
                 false, true);
     }

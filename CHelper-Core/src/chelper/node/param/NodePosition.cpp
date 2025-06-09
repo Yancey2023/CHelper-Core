@@ -7,7 +7,7 @@
 
 namespace CHelper::Node {
 
-    NodePosition::NodePosition(const std::optional<std::u16string> &id,
+    NodePosition::NodePosition(const std::optional<std::string> &id,
                                const std::optional<std::u16string> &description)
         : NodeBase(id, description, false) {}
 

@@ -8,9 +8,9 @@
 namespace CHelper::Node {
 
     NodeNormalId::NodeNormalId(
-            const std::optional<std::u16string> &id,
+            const std::optional<std::string> &id,
             const std::optional<std::u16string> &description,
-            const std::u16string &key,
+            const std::string &key,
             bool ignoreError,
             bool allowMissingID,
             const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode)
@@ -21,7 +21,7 @@ namespace CHelper::Node {
           getNormalIdASTNode(getNormalIdASTNode) {}
 
     NodeNormalId::NodeNormalId(
-            const std::optional<std::u16string> &id,
+            const std::optional<std::string> &id,
             const std::optional<std::u16string> &description,
             const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
             bool ignoreError,
@@ -53,8 +53,8 @@ namespace CHelper::Node {
         }
         if (HEDLEY_UNLIKELY(customContents == nullptr)) {
             if (HEDLEY_LIKELY(key.has_value())) {
-                Profile::push("linking contents to {}", FORMAT_ARG(utf8::utf16to8(key.value())));
-                Profile::push("failed to find normal id in the cpack -> ", FORMAT_ARG(utf8::utf16to8(key.value())));
+                Profile::push("linking contents to {}", FORMAT_ARG(key.value()));
+                Profile::push("failed to find normal id in the cpack -> ", FORMAT_ARG(key.value()));
                 throw std::runtime_error("failed to find normal id");
             } else {
                 throw std::runtime_error("missing content");
@@ -169,7 +169,7 @@ namespace CHelper::Node {
                                      SyntaxResult &syntaxResult) const {
         if (key.has_value()) {
             syntaxResult.update(astNode->tokens, SyntaxTokenType::ID);
-        } else if (id != u"TARGET_SELECTOR_VARIABLE") {
+        } else if (id != "TARGET_SELECTOR_VARIABLE") {
             syntaxResult.update(astNode->tokens, SyntaxTokenType::LITERAL);
         } else {
             syntaxResult.update(astNode->tokens, SyntaxTokenType::TARGET_SELECTOR);

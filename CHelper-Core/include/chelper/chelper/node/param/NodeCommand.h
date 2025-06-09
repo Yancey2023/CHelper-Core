@@ -18,7 +18,7 @@ namespace CHelper::Node {
         std::vector<std::unique_ptr<NodePerCommand>> *commands = nullptr;
 
     public:
-        NodeCommand(const std::optional<std::u16string> &id,
+        NodeCommand(const std::optional<std::string> &id,
                     const std::optional<std::u16string> &description,
                     std::vector<std::unique_ptr<NodePerCommand>> *commands);
 

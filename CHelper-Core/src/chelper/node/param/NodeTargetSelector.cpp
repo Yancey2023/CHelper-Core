@@ -17,13 +17,13 @@
 namespace CHelper::Node {
 
     static std::shared_ptr<NodeBase> nodePlayerName = std::make_shared<NodeString>(
-            u"TARGET_SELECTOR_PLAYER_NAME", u"玩家名字", false, true, false);
+            "TARGET_SELECTOR_PLAYER_NAME", u"玩家名字", false, true, false);
     static std::shared_ptr<NodeBase> nodeWildcard = std::make_shared<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_AT", u"所有正被记分板跟踪的实体", u'*');
+            "TARGET_SELECTOR_AT", u"所有正被记分板跟踪的实体", u'*');
     static std::shared_ptr<NodeBase> nodeAt = std::make_shared<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_AT", u"@符号", u'@');
+            "TARGET_SELECTOR_AT", u"@符号", u'@');
     static std::shared_ptr<NodeBase> nodeTargetSelectorVariable = std::make_shared<NodeNormalId>(
-            u"TARGET_SELECTOR_VARIABLE", u"目标选择器变量",
+            "TARGET_SELECTOR_VARIABLE", u"目标选择器变量",
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     NormalId::make(u"@e", u"选择所有实体(只选择活着的实体)"),
                     NormalId::make(u"@a", u"选择所有玩家(无论死活)"),
@@ -38,19 +38,19 @@ namespace CHelper::Node {
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
             });
     static std::shared_ptr<NodeBase> nodeLeft = std::make_shared<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENTS_LEFT", u"目标选择器参数左括号", u'[');
+            "TARGET_SELECTOR_ARGUMENTS_LEFT", u"目标选择器参数左括号", u'[');
     static std::shared_ptr<NodeBase> nodeRight = std::make_shared<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENTS_RIGHT", u"目标选择器参数右括号", u']');
+            "TARGET_SELECTOR_ARGUMENTS_RIGHT", u"目标选择器参数右括号", u']');
     static std::shared_ptr<NodeBase> nodeSeparator = std::make_shared<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENTS_SEPARATOR", u"目标选择器参数分隔符", u',');
+            "TARGET_SELECTOR_ARGUMENTS_SEPARATOR", u"目标选择器参数分隔符", u',');
     static std::unique_ptr<NodeBase> nodeEqual = std::make_unique<NodeText>(
-            u"TARGET_SELECTOR_ARGUMENT_EQUAu", u"等于",
+            "TARGET_SELECTOR_ARGUMENT_EQUAL", u"等于",
             NormalId::make(u"=", u"等于"),
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 return tokenReader.readSymbolASTNode(node);
             });
     static std::unique_ptr<NodeBase> nodeNotEqual = std::make_unique<NodeText>(
-            u"TARGET_SELECTOR_ARGUMENT_NOT_EQUAu", u"不等于",
+            "TARGET_SELECTOR_ARGUMENT_NOT_EQUAL", u"不等于",
             NormalId::make(u"=!", u"不等于"),
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 tokenReader.push();
@@ -58,99 +58,99 @@ namespace CHelper::Node {
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
             });
     static std::unique_ptr<NodeBase> nodeEqualOrNotEqual = std::make_unique<NodeOr>(
-            u"TARGET_SELECTOR_ARGUMENT_SEPARATOR", u"目标选择器参数分隔符",
+            "TARGET_SELECTOR_ARGUMENT_SEPARATOR", u"目标选择器参数分隔符",
             std::vector<const NodeBase *>{
                     nodeEqual.get(), nodeNotEqual.get()},
             false);
     static std::unique_ptr<NodeBase> nodeRelativeFloat = std::make_unique<NodeRelativeFloat>(
-            u"TARGET_SELECTOR_ARGUMENT_RELATIVE_FLOAT", u"目标选择器参数(小数)", false);
+            "TARGET_SELECTOR_ARGUMENT_RELATIVE_FLOAT", u"目标选择器参数(小数)", false);
     static std::unique_ptr<NodeBase> nodeInteger = NodeInteger::make(
-            u"TARGET_SELECTOR_ARGUMENT_INTEGER", u"目标选择器参数(整数)", std::nullopt, std::nullopt);
+            "TARGET_SELECTOR_ARGUMENT_INTEGER", u"目标选择器参数(整数)", std::nullopt, std::nullopt);
     static std::unique_ptr<NodeBase> nodeFloat = NodeFloat::make(
-            u"TARGET_SELECTOR_ARGUMENT_FLOAT", u"目标选择器参数(小数)", std::nullopt, std::nullopt);
+            "TARGET_SELECTOR_ARGUMENT_FLOAT", u"目标选择器参数(小数)", std::nullopt, std::nullopt);
     static std::unique_ptr<NodeBase> nodeString = std::make_unique<NodeString>(
-            u"TARGET_SELECTOR_ARGUMENT_STRING", u"目标选择器参数(字符串)", true, true, false);
+            "TARGET_SELECTOR_ARGUMENT_STRING", u"目标选择器参数(字符串)", true, true, false);
     static std::unique_ptr<NodeBase> nodeScoreValueLeft = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_SCORES_LEFT", u"目标选择器scores参数左括号", u'{');
+            "TARGET_SELECTOR_ARGUMENT_SCORES_LEFT", u"目标选择器scores参数左括号", u'{');
     static std::unique_ptr<NodeBase> nodeScoreValueRight = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_SCORES_RIGHT", u"目标选择器scores参数右括号", u'}');
+            "TARGET_SELECTOR_ARGUMENT_SCORES_RIGHT", u"目标选择器scores参数右括号", u'}');
     static std::unique_ptr<NodeBase> nodeScoreValueSeparator = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_SCORES_SEPARATOR", u"目标选择器scores参数分隔符", u',');
+            "TARGET_SELECTOR_ARGUMENT_SCORES_SEPARATOR", u"目标选择器scores参数分隔符", u',');
     static std::unique_ptr<NodeBase> nodeScoreRange = std::make_unique<NodeRange>(
-            u"TARGET_SELECTOR_ARGUMENT_SCORES_RANGE", u"目标选择器scores参数值的分数范围)");
+            "TARGET_SELECTOR_ARGUMENT_SCORES_RANGE", u"目标选择器scores参数值的分数范围)");
     static std::unique_ptr<NodeBase> nodeScoreValueElement = std::make_unique<NodeEntry>(
-            u"TARGET_SELECTOR_ARGUMENT_SCORES_ELEMENT", u"目标选择器scores参数内容",
+            "TARGET_SELECTOR_ARGUMENT_SCORES_ELEMENT", u"目标选择器scores参数内容",
             nodeString.get(), nodeEqualOrNotEqual.get(), nodeScoreRange.get());
     static std::unique_ptr<NodeBase> nodeScore = std::make_unique<NodeList>(
-            u"TARGET_SELECTOR_ARGUMENT_SCORES", u"目标选择器scores参数",
+            "TARGET_SELECTOR_ARGUMENT_SCORES", u"目标选择器scores参数",
             nodeScoreValueLeft.get(), nodeScoreValueElement.get(),
             nodeScoreValueSeparator.get(), nodeScoreValueRight.get());
     static std::unique_ptr<NodeBase> nodeHasItemValueLeft1 = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_HASITEM_LEFT1", u"目标选择器hasitem参数左括号", u'{');
+            "TARGET_SELECTOR_ARGUMENT_HASITEM_LEFT1", u"目标选择器hasitem参数左括号", u'{');
     static std::unique_ptr<NodeBase> nodeHasItemValueRight1 = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_HASITEM_RIGHT1", u"目标选择器hasitem参数右括号", u'}');
+            "TARGET_SELECTOR_ARGUMENT_HASITEM_RIGHT1", u"目标选择器hasitem参数右括号", u'}');
     static std::unique_ptr<NodeBase> nodeHasItemValueSeparator = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_HASITEM_SEPARATOR", u"目标选择器hasitem参数分隔符", u',');
+            "TARGET_SELECTOR_ARGUMENT_HASITEM_SEPARATOR", u"目标选择器hasitem参数分隔符", u',');
     static std::unique_ptr<NodeBase> nodeHasItemValueLeft2 = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_HASITEM_LEFT2", u"目标选择器hasitem参数左括号", u'[');
+            "TARGET_SELECTOR_ARGUMENT_HASITEM_LEFT2", u"目标选择器hasitem参数左括号", u'[');
     static std::unique_ptr<NodeBase> nodeHasItemValueRight2 = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_HASITEM_RIGHT2", u"目标选择器haspermission参数右括号", u']');
+            "TARGET_SELECTOR_ARGUMENT_HASITEM_RIGHT2", u"目标选择器haspermission参数右括号", u']');
     static std::unique_ptr<NodeBase> nodeHasPermissionValueLeft = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_HASPERMISSION_LEFT", u"目标选择器haspermission参数左括号", u'{');
+            "TARGET_SELECTOR_ARGUMENT_HASPERMISSION_LEFT", u"目标选择器haspermission参数左括号", u'{');
     static std::unique_ptr<NodeBase> nodeHasPermissionValueRight = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_HASPERMISSION_RIGHT", u"目标选择器haspermission参数右括号", u'}');
+            "TARGET_SELECTOR_ARGUMENT_HASPERMISSION_RIGHT", u"目标选择器haspermission参数右括号", u'}');
     static std::unique_ptr<NodeBase> nodeHasPermissionValueSeparator = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_HASPERMISSION_SEPARATOR", u"目标选择器haspermission参数分隔符", u',');
+            "TARGET_SELECTOR_ARGUMENT_HASPERMISSION_SEPARATOR", u"目标选择器haspermission参数分隔符", u',');
     static std::unique_ptr<NodeBase> nodeHasPermissionState = std::make_unique<NodeNormalId>(
-            u"PERMISSION_STATUS", u"权限状态",
+            "PERMISSION_STATUS", u"权限状态",
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     NormalId::make(u"enabled", u"启用"),
                     NormalId::make(u"disabled", u"禁用")}),
             false);
     static std::unique_ptr<NodeBase> nodeHasPermissionEntry = std::make_unique<NodeEqualEntry>(
-            u"TARGET_SELECTOR_ARGUMENT_HASPERMISSION_ENTRY", u"目标选择器haspermission参数内容",
+            "TARGET_SELECTOR_ARGUMENT_HASPERMISSION_ENTRY", u"目标选择器haspermission参数内容",
             std::vector<EqualData>{
                     {u"camera", u"玩家能否转动相机视角", false, nodeHasPermissionState.get()},
                     {u"movement", u"玩家能否移动", false, nodeHasPermissionState.get()}});
     static std::unique_ptr<NodeBase> nodeHasPermission = std::make_unique<NodeList>(
-            u"TARGET_SELECTOR_ARGUMENT_HASPERMISSION", u"目标选择器haspermission参数",
+            "TARGET_SELECTOR_ARGUMENT_HASPERMISSION", u"目标选择器haspermission参数",
             nodeHasPermissionValueLeft.get(), nodeHasPermissionEntry.get(),
             nodeHasPermissionValueSeparator.get(), nodeHasPermissionValueRight.get());
     static std::unique_ptr<NodeBase> nodeHasPropertyValueLeft = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_HASPROPERTY_LEFT", u"目标选择器has_property参数左括号", '{');
+            "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_LEFT", u"目标选择器has_property参数左括号", '{');
     static std::unique_ptr<NodeBase> nodeHasPropertyValueRight = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_HASPROPERTY_RIGHT", u"目标选择器has_property参数右括号", '}');
+            "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_RIGHT", u"目标选择器has_property参数右括号", '}');
     static std::unique_ptr<NodeBase> nodeHasPropertyValueSeparator = std::make_unique<NodeSingleSymbol>(
-            u"TARGET_SELECTOR_ARGUMENT_HASPROPERTY_SEPARATOR", u"目标选择器has_property参数分隔符", ',');
+            "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_SEPARATOR", u"目标选择器has_property参数分隔符", ',');
     static std::unique_ptr<NodeBase> nodeBoolean = NodeBoolean::make(
-            u"BOOLEAN", u"布尔值", std::nullopt, std::nullopt);
+            "BOOLEAN", u"布尔值", std::nullopt, std::nullopt);
     static std::unique_ptr<NodeBase> nodeAny = std::make_unique<NodeOr>(
-            u"ANY", u"任何值",
+            "ANY", u"任何值",
             std::vector<const NodeBase *>{
                     nodeBoolean.get(), nodeScoreRange.get(), nodeString.get(), nodeFloat.get()},
             false);
     static std::unique_ptr<NodeBase> nodeHasPropertyEntry = std::make_unique<NodeEntry>(
-            u"TARGET_SELECTOR_ARGUMENT_HASPROPERTY_ENTRY", u"目标选择器has_property参数内容",
+            "TARGET_SELECTOR_ARGUMENT_HASPROPERTY_ENTRY", u"目标选择器has_property参数内容",
             nodeString.get(), nodeEqualOrNotEqual.get(), nodeAny.get());
     static std::unique_ptr<NodeBase> nodeHasProperty = std::make_unique<NodeList>(
-            u"TARGET_SELECTOR_ARGUMENT_HASPERMISSION", u"目标选择器has_property参数",
+            "TARGET_SELECTOR_ARGUMENT_HASPERMISSION", u"目标选择器has_property参数",
             nodeHasPropertyValueLeft.get(), nodeHasPropertyEntry.get(),
             nodeHasPropertyValueSeparator.get(), nodeHasPropertyValueRight.get());
     static std::unique_ptr<NodeBase> nodeHasItemData = NodeInteger::make(
-            u"TARGET_SELECTOR_ARGUMENT_HASITEM_ITEM_DATA", u"目标选择器hasitem参数物品数据值", 0, 32767);
+            "TARGET_SELECTOR_ARGUMENT_HASITEM_ITEM_DATA", u"目标选择器hasitem参数物品数据值", 0, 32767);
     static std::unique_ptr<NodeBase> nodeHasItemQuantity = std::make_unique<NodeRange>(
-            u"TARGET_SELECTOR_ARGUMENT_HASITEM_ITEM_QUANTITY", u"目标选择器hasitem限制范围内的所有槽位中符合条件的物品的总和数量");
+            "TARGET_SELECTOR_ARGUMENT_HASITEM_ITEM_QUANTITY", u"目标选择器hasitem限制范围内的所有槽位中符合条件的物品的总和数量");
     static std::unique_ptr<NodeBase> nodeHasItemSlotRange = std::make_unique<NodeRange>(
-            u"TARGET_SELECTOR_ARGUMENT_HASITEM_SLOT_SLOT_RANGE", u"目标选择器hasitem要检测的槽位范围");
+            "TARGET_SELECTOR_ARGUMENT_HASITEM_SLOT_SLOT_RANGE", u"目标选择器hasitem要检测的槽位范围");
 
     void NodeTargetSelector::init(const CPack &cpack) {
-        nodeItem = std::make_unique<NodeNamespaceId>(u"ITEM_ID", u"物品ID", u"item", true),
-        nodeFamily = std::make_unique<NodeNormalId>(u"FAMILIES", u"族", u"entityFamily", true);
-        nodeGameMode = std::make_unique<NodeNormalId>(u"GAME_MODES", u"游戏模式", u"gameMode", true),
-        nodeSlot = std::make_unique<NodeNormalId>(u"SLOT", u"物品栏", u"entitySlot", true),
-        nodeEntities = std::make_unique<NodeNamespaceId>(u"ENTITIES", u"实体", u"entity", true),
+        nodeItem = std::make_unique<NodeNamespaceId>("ITEM_ID", u"物品ID", "item", true),
+        nodeFamily = std::make_unique<NodeNormalId>("FAMILIES", u"族", "entityFamily", true);
+        nodeGameMode = std::make_unique<NodeNormalId>("GAME_MODES", u"游戏模式", "gameMode", true),
+        nodeSlot = std::make_unique<NodeNormalId>("SLOT", u"物品栏", "entitySlot", true),
+        nodeEntities = std::make_unique<NodeNamespaceId>("ENTITIES", u"实体", "entity", true),
         nodeHasItemElement = std::make_unique<NodeEqualEntry>(
-                u"TARGET_SELECTOR_ARGUMENT_HASITEM_ELEMENT", u"目标选择器参数值(物品检测)的内容",
+                "TARGET_SELECTOR_ARGUMENT_HASITEM_ELEMENT", u"目标选择器参数值(物品检测)的内容",
                 std::vector<EqualData>{
                         {u"item", u"要检测的物品", false, nodeItem.get()},
                         {u"data", u"要检测的物品的数据值", false, nodeHasItemData.get()},
@@ -158,20 +158,20 @@ namespace CHelper::Node {
                         {u"location", u"要检测的物品栏", false, nodeSlot.get()},
                         {u"slot", u"用于指定要检测的槽位范围", true, nodeHasItemSlotRange.get()}}),
         nodeHasItemList1 = std::make_unique<NodeList>(
-                u"TARGET_SELECTOR_ARGUMENT_HASITEM", u"目标选择器参数值(物品检测)",
+                "TARGET_SELECTOR_ARGUMENT_HASITEM", u"目标选择器参数值(物品检测)",
                 nodeHasItemValueLeft1.get(), nodeHasItemElement.get(),
                 nodeHasItemValueSeparator.get(), nodeHasItemValueRight1.get()),
         nodeHasItemList2 = std::make_unique<NodeList>(
-                u"TARGET_SELECTOR_ARGUMENT_HASITEM", u"目标选择器参数值(物品检测)",
+                "TARGET_SELECTOR_ARGUMENT_HASITEM", u"目标选择器参数值(物品检测)",
                 nodeHasItemValueLeft2.get(), nodeHasItemList1.get(),
                 nodeHasItemValueSeparator.get(), nodeHasItemValueRight2.get()),
         nodeHasItem = std::make_unique<NodeOr>(
-                u"TARGET_SELECTOR_ARGUMENT_VALUE", u"目标选择器参数值(物品检测)",
+                "TARGET_SELECTOR_ARGUMENT_VALUE", u"目标选择器参数值(物品检测)",
                 std::vector<const NodeBase *>{
                         nodeHasItemList1.get(), nodeHasItemList2.get()},
                 false),
         nodeArgument = std::make_unique<NodeEqualEntry>(
-                u"TARGET_SELECTOR_ARGUMENT", u"目标选择器单个参数",
+                "TARGET_SELECTOR_ARGUMENT", u"目标选择器单个参数",
                 std::vector<EqualData>{
                         {u"x", u"x坐标", false, nodeRelativeFloat.get()},
                         {u"y", u"y坐标", false, nodeRelativeFloat.get()},
@@ -199,7 +199,7 @@ namespace CHelper::Node {
                         {u"c", u"目标数量(按照距离排序)", false, nodeInteger.get()},
                 }),
         nodeArguments = std::make_unique<NodeList>(
-                u"TARGET_SELECTOR_ARGUMENTS", u"目标选择器参数",
+                "TARGET_SELECTOR_ARGUMENTS", u"目标选择器参数",
                 nodeLeft.get(), nodeArgument.get(), nodeSeparator.get(), nodeRight.get());
         nodeItem->init(cpack);
         nodeFamily->init(cpack);
