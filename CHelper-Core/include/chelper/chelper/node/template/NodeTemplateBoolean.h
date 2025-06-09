@@ -12,7 +12,7 @@
 namespace CHelper::Node {
 
     template<bool isJson>
-    class NodeTemplateBoolean : public NodeBase {
+    class NodeTemplateBoolean : public NodeSerializable {
     public:
         std::optional<std::u16string> descriptionTrue, descriptionFalse;
 

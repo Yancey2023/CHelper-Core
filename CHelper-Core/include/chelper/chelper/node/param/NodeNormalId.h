@@ -14,7 +14,7 @@
 
 namespace CHelper::Node {
 
-    class NodeNormalId : public NodeBase {
+    class NodeNormalId : public NodeSerializable {
     public:
         std::optional<std::string> key;
         std::optional<std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>> contents;

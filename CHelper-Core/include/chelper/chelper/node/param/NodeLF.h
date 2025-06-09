@@ -12,7 +12,7 @@
 
 namespace CHelper::Node {
 
-    class NodeLF : public NodeBase {
+    class NodeLF : public NodeSerializable {
     public:
         NodeLF() = default;
 

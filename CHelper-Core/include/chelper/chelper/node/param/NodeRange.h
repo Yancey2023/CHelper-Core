@@ -11,7 +11,7 @@
 
 namespace CHelper::Node {
 
-    class NodeRange : public NodeBase {
+    class NodeRange : public NodeSerializable {
     public:
         NodeRange() = default;
 

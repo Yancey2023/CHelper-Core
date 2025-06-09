@@ -12,12 +12,9 @@
 
 namespace CHelper::Node {
 
-    static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(
-            "JSON_LIST_ELEMENT_SEPARATOR", u"冒号", u':');
-    static std::unique_ptr<NodeBase> jsonString = std::make_unique<NodeJsonString>(
-            "JSON_STRING", u"JSON字符串");
+    static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(u':', u"冒号");
+    static std::unique_ptr<NodeBase> jsonString = std::make_unique<NodeJsonString>("JSON_STRING", u"JSON字符串");
     static std::unique_ptr<NodeBase> nodeAllEntry = std::make_unique<NodeEntry>(
-            "JSON_OBJECT_ENTRY", u"JSON对象键值对",
             jsonString.get(), nodeSeparator.get(),
             NodeJsonElement::getNodeJsonElement());
 
@@ -25,7 +22,7 @@ namespace CHelper::Node {
                                  const std::optional<std::u16string> &description,
                                  std::u16string key,
                                  std::vector<std::string> value)
-        : NodeBase(id, description, false),
+        : NodeSerializable(id, description, false),
           key(std::move(key)),
           value(std::move(value)) {}
 
@@ -33,7 +30,7 @@ namespace CHelper::Node {
         return NodeTypeId::JSON_ENTRY;
     }
 
-    void NodeJsonEntry::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
+    void NodeJsonEntry::init(const std::vector<std::unique_ptr<NodeSerializable>> &dataList) {
         std::vector<const NodeBase *> valueNodes;
         for (const auto &item: value) {
             bool notFind = true;
@@ -55,10 +52,8 @@ namespace CHelper::Node {
                 "JSON_OBJECT_ENTRY_KEY", u"JSON对象键",
                 NormalId::make(fmt::format(u"\"{}\"", key), description));
         nodeValue = std::make_unique<NodeOr>(
-                "JSON_OBJECT_ENTRY_VALUE", u"JSON对象值",
                 std::move(valueNodes), false);
         nodeEntry = std::make_unique<NodeEntry>(
-                "JSON_OBJECT_ENTRY", u"JSON对象键值对",
                 nodeKey.get(), nodeSeparator.get(), nodeValue.get());
     }
 

@@ -11,7 +11,7 @@
 
 namespace CHelper::Node {
 
-    class NodePosition : public NodeBase {
+    class NodePosition : public NodeSerializable {
     public:
         NodePosition(const std::optional<std::string> &id,
                      const std::optional<std::u16string> &description);

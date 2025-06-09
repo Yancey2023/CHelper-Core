@@ -33,9 +33,7 @@ namespace CHelper::Node {
     public:
         NodeEqualEntry() = default;
 
-        NodeEqualEntry(const std::optional<std::string> &id,
-                       const std::optional<std::u16string> &description,
-                       std::vector<EqualData> equalDatas);
+        NodeEqualEntry(std::vector<EqualData> equalDatas);
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 

@@ -21,7 +21,7 @@ namespace CHelper::Node {
         };
     }// namespace NodeBlockType
 
-    class NodeBlock : public NodeBase {
+    class NodeBlock : public NodeSerializable {
     public:
         NodeBlockType::NodeBlockType nodeBlockType = NodeBlockType::BLOCK_WITH_BLOCK_STATE;
 

@@ -19,9 +19,8 @@ namespace CHelper::Node {
 
         NodeSingleSymbol() = default;
 
-        NodeSingleSymbol(const std::optional<std::string> &id,
+        NodeSingleSymbol(char16_t symbol,
                          const std::optional<std::u16string> &description,
-                         char16_t symbol,
                          bool isAddWhitespace = true);
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;

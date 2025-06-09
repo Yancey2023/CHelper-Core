@@ -64,7 +64,7 @@ namespace CHelper {
 
     namespace Node {
 
-        class NodeBase;
+        class NodeSerializable;
 
         namespace NodeCreateStage {
             enum NodeCreateStage : uint8_t {
@@ -99,7 +99,7 @@ namespace CHelper {
                 static constexpr bool isMustAfterWhiteSpace = false;
             };
 
-            struct NoneNodeTypeDetail {
+            struct UnserializableNodeTypeDetail {
                 static constexpr std::array<NodeCreateStage::NodeCreateStage, 0> nodeCreateStage = {};
                 static constexpr bool isMustAfterWhiteSpace = false;
             };
@@ -153,7 +153,7 @@ namespace CHelper {
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::LF> : NoneNodeTypeDetail {
+            struct NodeTypeDetail<NodeTypeId::LF> : UnserializableNodeTypeDetail {
                 using Type = NodeLF;
                 static constexpr auto name = "LF";
             };
@@ -171,7 +171,7 @@ namespace CHelper {
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::PER_COMMAND> : CommandParamNodeTypeDetail {
+            struct NodeTypeDetail<NodeTypeId::PER_COMMAND> : UnserializableNodeTypeDetail {
                 using Type = NodePerCommand;
                 static constexpr auto name = "PER_COMMAND";
             };
@@ -234,13 +234,13 @@ namespace CHelper {
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::JSON_ELEMENT> : JsonNodeTypeDetail {
+            struct NodeTypeDetail<NodeTypeId::JSON_ELEMENT> : UnserializableNodeTypeDetail {
                 using Type = NodeJsonElement;
                 static constexpr auto name = "JSON_ELEMENT";
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::JSON_ENTRY> : JsonNodeTypeDetail {
+            struct NodeTypeDetail<NodeTypeId::JSON_ENTRY> : UnserializableNodeTypeDetail {
                 using Type = NodeJsonEntry;
                 static constexpr auto name = "JSON_ENTRY";
             };
@@ -282,49 +282,49 @@ namespace CHelper {
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::AND> : JsonNodeTypeDetail {
+            struct NodeTypeDetail<NodeTypeId::AND> : UnserializableNodeTypeDetail {
                 using Type = NodeAnd;
                 static constexpr auto name = "AND";
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::ANY> : JsonNodeTypeDetail {
+            struct NodeTypeDetail<NodeTypeId::ANY> : UnserializableNodeTypeDetail {
                 using Type = NodeAny;
                 static constexpr auto name = "ANY";
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::ENTRY> : JsonNodeTypeDetail {
+            struct NodeTypeDetail<NodeTypeId::ENTRY> : UnserializableNodeTypeDetail {
                 using Type = NodeEntry;
                 static constexpr auto name = "ENTRY";
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::EQUAL_ENTRY> : JsonNodeTypeDetail {
+            struct NodeTypeDetail<NodeTypeId::EQUAL_ENTRY> : UnserializableNodeTypeDetail {
                 using Type = NodeEqualEntry;
                 static constexpr auto name = "EQUAL_ENTRY";
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::LIST> : JsonNodeTypeDetail {
+            struct NodeTypeDetail<NodeTypeId::LIST> : UnserializableNodeTypeDetail {
                 using Type = NodeList;
                 static constexpr auto name = "LIST";
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::OR> : JsonNodeTypeDetail {
+            struct NodeTypeDetail<NodeTypeId::OR> : UnserializableNodeTypeDetail {
                 using Type = NodeOr;
                 static constexpr auto name = "OR";
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::SINGLE_SYMBOL> : JsonNodeTypeDetail {
+            struct NodeTypeDetail<NodeTypeId::SINGLE_SYMBOL> : UnserializableNodeTypeDetail {
                 using Type = NodeSingleSymbol;
                 static constexpr auto name = "SINGLE_SYMBOL";
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::WRAPPED> : JsonNodeTypeDetail {
+            struct NodeTypeDetail<NodeTypeId::WRAPPED> : UnserializableNodeTypeDetail {
                 using Type = NodeWrapped;
                 static constexpr auto name = "WRAPPED";
             };
@@ -340,7 +340,7 @@ namespace CHelper {
                 template<class JsonValueType>
                 static void to_json(typename JsonValueType::AllocatorType &allocator,
                                     JsonValueType &jsonValue,
-                                    const std::unique_ptr<NodeBase> &t) {
+                                    const std::unique_ptr<NodeSerializable> &t) {
                     if constexpr (serialization::Codec<Type>::enable) {
                         serialization::Codec<Type>::template to_json<JsonValueType>(allocator, jsonValue, *reinterpret_cast<Type *>(t.get()));
                     }
@@ -348,8 +348,8 @@ namespace CHelper {
 
                 template<class JsonValueType>
                 static void from_json(const JsonValueType &jsonValue,
-                                      std::unique_ptr<NodeBase> &t) {
-                    if constexpr (!serialization::Codec<Type>::enable) {
+                                      std::unique_ptr<NodeSerializable> &t) {
+                    if constexpr (!serialization::Codec<Type>::enable || nodeCreateStage.empty()) {
                         Profile::push("unknown node type -> {}", FORMAT_ARG(name));
                         throw std::runtime_error("unknown node type");
                     } else {
@@ -367,7 +367,7 @@ namespace CHelper {
 
                 template<bool isNeedConvert>
                 static void to_binary(std::ostream &ostream,
-                                      const std::unique_ptr<NodeBase> &t) {
+                                      const std::unique_ptr<NodeSerializable> &t) {
                     if constexpr (serialization::Codec<Type>::enable) {
                         serialization::Codec<Type>::template to_binary<isNeedConvert>(ostream, *reinterpret_cast<Type *>(t.get()));
                     }
@@ -375,8 +375,8 @@ namespace CHelper {
 
                 template<bool isNeedConvert>
                 static void from_binary(std::istream &istream,
-                                        std::unique_ptr<NodeBase> &t) {
-                    if constexpr (!serialization::Codec<Type>::enable) {
+                                        std::unique_ptr<NodeSerializable> &t) {
+                    if constexpr (!serialization::Codec<Type>::enable || nodeCreateStage.empty()) {
                         Profile::push("unknown node type -> {}", FORMAT_ARG(name));
                         throw std::runtime_error("unknown node type");
                     } else {
@@ -401,7 +401,7 @@ namespace CHelper {
             static void to_json(const NodeTypeId::NodeTypeId id,
                                 typename JsonValueType::AllocatorType &allocator,
                                 JsonValueType &jsonValue,
-                                const std::unique_ptr<NodeBase> &t) {
+                                const std::unique_ptr<NodeSerializable> &t) {
                 switch (id) {
                     CODEC_PASTE(CHELPER_CODEC_NODE_TO_JSON, CHELPER_NODE_TYPES)
                 }
@@ -410,7 +410,7 @@ namespace CHelper {
             template<class JsonValueType>
             static void from_json(const NodeTypeId::NodeTypeId id,
                                   const JsonValueType &jsonValue,
-                                  std::unique_ptr<NodeBase> &t) {
+                                  std::unique_ptr<NodeSerializable> &t) {
                 switch (id) {
                     CODEC_PASTE(CHELPER_CODEC_NODE_FROM_JSON, CHELPER_NODE_TYPES)
                 }
@@ -419,7 +419,7 @@ namespace CHelper {
             template<bool isNeedConvert>
             static void to_binary(const NodeTypeId::NodeTypeId id,
                                   std::ostream &ostream,
-                                  const std::unique_ptr<NodeBase> &t) {
+                                  const std::unique_ptr<NodeSerializable> &t) {
                 switch (id) {
                     CODEC_PASTE(CHELPER_CODEC_NODE_TO_BINARY, CHELPER_NODE_TYPES)
                 }
@@ -428,7 +428,7 @@ namespace CHelper {
             template<bool isNeedConvert>
             static void from_binary(const NodeTypeId::NodeTypeId id,
                                     std::istream &istream,
-                                    std::unique_ptr<NodeBase> &t) {
+                                    std::unique_ptr<NodeSerializable> &t) {
                 switch (id) {
                     CODEC_PASTE(CHELPER_CODEC_NODE_FROM_BINARY, CHELPER_NODE_TYPES)
                 }
@@ -449,7 +449,7 @@ namespace CHelper {
 CODEC_ENUM(CHelper::Node::NodeTypeId::NodeTypeId, uint8_t);
 
 template<class JsonValueType>
-void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::to_json(
+void serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>>::to_json(
         typename JsonValueType::AllocatorType &allocator,
         JsonValueType &jsonValue,
         const Type &t) {
@@ -460,7 +460,7 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::to_json(
 }
 
 template<class JsonValueType>
-void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::from_json(
+void serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>>::from_json(
         const JsonValueType &jsonValue,
         Type &t) {
     if (HEDLEY_UNLIKELY(!jsonValue.IsObject())) {
@@ -493,7 +493,7 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::from_json(
 }
 
 template<bool isNeedConvert>
-void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::to_binary(
+void serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>>::to_binary(
         std::ostream &ostream,
         const Type &t) {
     Codec<decltype(t->getNodeType())>::template to_binary<isNeedConvert>(ostream, t->getNodeType());
@@ -501,7 +501,7 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::to_binary(
 }
 
 template<bool isNeedConvert>
-void serialization::Codec<std::unique_ptr<CHelper::Node::NodeBase>>::from_binary(
+void serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>>::from_binary(
         std::istream &istream,
         Type &t) {
     CHelper::Node::NodeTypeId::NodeTypeId typeId;

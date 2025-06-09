@@ -20,9 +20,7 @@ namespace CHelper::Node {
 
         NodeEntry() = default;
 
-        NodeEntry(const std::optional<std::string> &id,
-                  const std::optional<std::u16string> &description,
-                  NodeBase *nodeKey,
+        NodeEntry(NodeBase *nodeKey,
                   NodeBase *nodeSeparator,
                   NodeBase *nodeValue);
 

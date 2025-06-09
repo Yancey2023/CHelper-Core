@@ -6,13 +6,10 @@
 
 namespace CHelper::Node {
 
-    NodeEntry::NodeEntry(const std::optional<std::string> &id,
-                         const std::optional<std::u16string> &description,
-                         NodeBase *nodeKey,
+    NodeEntry::NodeEntry(NodeBase *nodeKey,
                          NodeBase *nodeSeparator,
                          NodeBase *nodeValue)
-        : NodeBase(id, description, false),
-          nodeKey(nodeKey),
+        : nodeKey(nodeKey),
           nodeSeparator(nodeSeparator),
           nodeValue(nodeValue) {}
 

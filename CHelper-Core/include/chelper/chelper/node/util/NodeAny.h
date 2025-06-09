@@ -13,12 +13,8 @@ namespace CHelper::Node {
     private:
         std::unique_ptr<NodeBase> node;
 
-    public:
-        NodeAny() = default;
-
     private:
-        NodeAny(const std::optional<std::string> &id,
-                const std::optional<std::u16string> &description);
+        NodeAny() = default;
 
     public:
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;

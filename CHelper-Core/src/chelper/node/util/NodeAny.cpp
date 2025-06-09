@@ -29,7 +29,6 @@ namespace CHelper::Node {
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
             });
     static std::unique_ptr<NodeBase> nodeEqualOrNotEqual = std::make_unique<NodeOr>(
-            "TARGET_SELECTOR_ARGUMENT_SEPARATOR", u"等于或不等于",
             std::vector<const NodeBase *>{
                     nodeEqual.get(), nodeNotEqual.get()},
             false);
@@ -39,33 +38,21 @@ namespace CHelper::Node {
             "RELATIVE_FLOAT", u"坐标", true);
     static std::unique_ptr<NodeBase> nodeString = std::make_unique<NodeString>(
             "STRING", u"字符串", true, true, false);
-    static std::unique_ptr<NodeBase> nodeLeft1 = std::make_unique<NodeSingleSymbol>(
-            "LEFT1", u"左括号", u'{');
-    static std::unique_ptr<NodeBase> nodeRight1 = std::make_unique<NodeSingleSymbol>(
-            "RIGHT1", u"右括号", u'}');
-    static std::unique_ptr<NodeBase> nodeLeft2 = std::make_unique<NodeSingleSymbol>(
-            "LEFT12", u"左括号", u'[');
-    static std::unique_ptr<NodeBase> nodeRight2 = std::make_unique<NodeSingleSymbol>(
-            "RIGHT2", u"右括号", u']');
-    static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(
-            "SEPARATOR", u"分隔符", u',');
+    static std::unique_ptr<NodeBase> nodeLeft1 = std::make_unique<NodeSingleSymbol>(u'{', u"左括号");
+    static std::unique_ptr<NodeBase> nodeRight1 = std::make_unique<NodeSingleSymbol>(u'}', u"右括号");
+    static std::unique_ptr<NodeBase> nodeLeft2 = std::make_unique<NodeSingleSymbol>(u'[', u"左括号");
+    static std::unique_ptr<NodeBase> nodeRight2 = std::make_unique<NodeSingleSymbol>(u']', u"右括号");
+    static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(u',', u"分隔符");
     static std::unique_ptr<NodeBase> nodeRange = std::make_unique<NodeRange>(
             "RANGE", u"范围");
     static std::unique_ptr<NodeBase> nodeEntry = std::make_unique<NodeEntry>(
-            "ENTRY", u"参数内容",
             nodeString.get(), nodeEqualOrNotEqual.get(), NodeAny::getNodeAny());
     static std::unique_ptr<NodeBase> nodeObject = std::make_unique<NodeList>(
-            "OBJECT", u"对象",
             nodeLeft1.get(), nodeEntry.get(),
             nodeSeparator.get(), nodeRight1.get());
     static std::unique_ptr<NodeBase> nodeList = std::make_unique<NodeList>(
-            "OBJECT", u"对象",
             nodeLeft2.get(), NodeAny::getNodeAny(),
             nodeSeparator.get(), nodeRight2.get());
-
-    NodeAny::NodeAny(const std::optional<std::string> &id,
-                     const std::optional<std::u16string> &description)
-        : NodeBase(id, description, false) {}
 
     NodeTypeId::NodeTypeId NodeAny::getNodeType() const {
         return NodeTypeId::ANY;
@@ -74,7 +61,6 @@ namespace CHelper::Node {
     void NodeAny::init(const CPack &cpack) {
         if (HEDLEY_UNLIKELY(node == nullptr)) {
             node = std::make_unique<NodeOr>(
-                    "VALUE", u"目标选择器参数值",
                     std::vector<const NodeBase *>{
                             nodeRelativeFloat.get(), nodeBoolean.get(),
                             nodeString.get(), nodeObject.get(),
@@ -93,8 +79,8 @@ namespace CHelper::Node {
     }
 
     NodeAny *NodeAny::getNodeAny() {
-        static std::unique_ptr<NodeAny> node = std::make_unique<NodeAny>(NodeAny("ANY", u"任何值"));
-        return node.get();
+        static NodeAny node;
+        return &node;
     }
 
 }// namespace CHelper::Node

@@ -8,12 +8,11 @@
 #define CHELPER_NODECOMMAND_H
 
 #include "../NodeBase.h"
-#include "../util/NodeOr.h"
 #include "NodePerCommand.h"
 
 namespace CHelper::Node {
 
-    class NodeCommand : public NodeBase {
+    class NodeCommand : public NodeSerializable {
     private:
         std::vector<std::unique_ptr<NodePerCommand>> *commands = nullptr;
 

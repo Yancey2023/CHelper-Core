@@ -20,8 +20,8 @@ namespace CHelper {
     class RepeatData {
     public:
         std::string id;
-        std::vector<std::unique_ptr<Node::NodeBase>> breakNodes;
-        std::vector<std::vector<std::unique_ptr<Node::NodeBase>>> repeatNodes;
+        std::vector<std::unique_ptr<Node::NodeSerializable>> breakNodes;
+        std::vector<std::vector<std::unique_ptr<Node::NodeSerializable>>> repeatNodes;
         std::vector<bool> isEnd;
     };
 

@@ -13,7 +13,7 @@ namespace CHelper::Node {
                            bool allowMissingString,
                            const bool canContainSpace,
                            const bool ignoreLater)
-        : NodeBase(id, description, false),
+        : NodeSerializable(id, description, false),
           allowMissingString(allowMissingString),
           canContainSpace(canContainSpace),
           ignoreLater(ignoreLater) {}

@@ -33,10 +33,8 @@ namespace CHelper {
                     nodeChildren.push_back(std::move(nodeChild));
                 }
                 auto nodeOr = std::make_shared<Node::NodeOr>(
-                        "ITEM_DATA", u"物品附加值",
                         std::move(nodeDataChildren), false);
                 node = std::make_shared<Node::NodeOr>(
-                        "ITEM_DATA", u"物品附加值",
                         std::vector<const Node::NodeBase *>{nodeOr.get(), nodeAllData.get()},
                         false, true);
                 nodeChildren.push_back(std::move(nodeOr));

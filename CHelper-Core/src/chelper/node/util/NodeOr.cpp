@@ -6,16 +6,13 @@
 
 namespace CHelper::Node {
 
-    NodeOr::NodeOr(const std::optional<std::string> &id,
-                   const std::optional<std::u16string> &description,
-                   std::vector<const NodeBase *> childNodes,
+    NodeOr::NodeOr(std::vector<const NodeBase *> childNodes,
                    const bool isAttachToEnd,
                    const bool isUseFirst,
                    const bool noSuggestion,
                    const char16_t *defaultErrorReason,
                    ASTNodeId::ASTNodeId nodeId)
-        : NodeBase(id, description, false),
-          isAttachToEnd(isAttachToEnd),
+        : isAttachToEnd(isAttachToEnd),
           isUseFirst(isUseFirst),
           noSuggestion(noSuggestion),
           childNodes(std::move(childNodes)),

@@ -13,7 +13,7 @@
 
 namespace CHelper::Node {
 
-    class NodeNamespaceId : public NodeBase {
+    class NodeNamespaceId : public NodeSerializable {
     public:
         std::optional<std::string> key;
         std::optional<std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> contents;

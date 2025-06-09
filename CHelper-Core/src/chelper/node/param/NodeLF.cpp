@@ -8,7 +8,7 @@ namespace CHelper::Node {
 
     NodeLF::NodeLF(const std::optional<std::string> &id,
                    const std::optional<std::u16string> &description)
-        : NodeBase(id, description, false) {}
+        : NodeSerializable(id, description, false) {}
 
     NodeTypeId::NodeTypeId NodeLF::getNodeType() const {
         return NodeTypeId::LF;

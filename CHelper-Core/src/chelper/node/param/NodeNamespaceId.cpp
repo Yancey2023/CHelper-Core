@@ -11,7 +11,7 @@ namespace CHelper::Node {
                                      const std::optional<std::u16string> &description,
                                      const std::optional<std::string> &key,
                                      bool ignoreError)
-        : NodeBase(id, description, false),
+        : NodeSerializable(id, description, false),
           key(key),
           ignoreError(ignoreError) {}
 

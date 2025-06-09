@@ -12,7 +12,7 @@
 
 namespace CHelper::Node {
 
-    class NodeText : public NodeBase {
+    class NodeText : public NodeSerializable {
     public:
         std::optional<std::vector<TokenType::TokenType>> tokenTypes;
         std::shared_ptr<NormalId> data;

@@ -228,23 +228,18 @@ namespace CHelper {
         bool isCompound = id == ASTNodeId::COMPOUND;
         bool isNext = id == ASTNodeId::NEXT_NODE;
         if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
-            if (HEDLEY_UNLIKELY(node->brief.has_value())) {
-                structure.append(isMustHave, node->brief.value());
+#ifdef CHelperTest
+            Profile::push("collect structure: {} {}",
+                          FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
+                          FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
+#endif
+            node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ? nullptr : this, structure, isMustHave);
+#ifdef CHelperTest
+            Profile::pop();
+#endif
+            if (HEDLEY_UNLIKELY(structure.isDirty)) {
+                structure.isDirty = false;
                 return;
-            } else {
-#ifdef CHelperTest
-                Profile::push("collect structure: {} {}",
-                              FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
-                              FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
-#endif
-                node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ? nullptr : this, structure, isMustHave);
-#ifdef CHelperTest
-                Profile::pop();
-#endif
-                if (HEDLEY_UNLIKELY(structure.isDirty)) {
-                    structure.isDirty = false;
-                    return;
-                }
             }
         }
         switch (mode) {
@@ -416,7 +411,7 @@ namespace CHelper {
 #endif
         StructureBuilder structureBuilder;
         collectStructure(structureBuilder, true);
-#ifdef CHelperTest 
+#ifdef CHelperTest
         Profile::pop();
 #endif
         std::u16string result = structureBuilder.build();

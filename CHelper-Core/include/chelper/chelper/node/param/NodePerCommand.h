@@ -16,7 +16,8 @@ namespace CHelper::Node {
     class NodePerCommand : public NodeBase {
     public:
         std::vector<std::u16string> name;
-        std::vector<std::unique_ptr<Node::NodeBase>> nodes;
+        std::optional<std::u16string> description;
+        std::vector<std::unique_ptr<Node::NodeSerializable>> nodes;
         std::vector<Node::NodeWrapped> wrappedNodes;
         std::vector<Node::NodeWrapped *> startNodes;
 

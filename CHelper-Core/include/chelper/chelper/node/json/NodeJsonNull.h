@@ -11,7 +11,7 @@
 
 namespace CHelper::Node {
 
-    class NodeJsonNull : public NodeBase {
+    class NodeJsonNull : public NodeSerializable {
     public:
         NodeJsonNull() = default;
 

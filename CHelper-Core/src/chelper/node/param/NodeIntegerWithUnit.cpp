@@ -15,10 +15,8 @@ namespace CHelper::Node {
     void NodeIntegerWithUnit::init(const CPack &cpack) {
         nodeUnits = std::make_unique<NodeNormalId>("UNITS", u"单位", units, false);
         nodeIntegerWithUnit = std::make_unique<NodeAnd>(
-                "NODE_INTEGER_WITH_UINT", u"带单位的整数",
                 std::vector<const NodeBase *>{nodeInteger.get(), nodeUnits.get()});
         nodeIntegerMaybeHaveUnit = std::make_unique<NodeOr>(
-                "NODE_INTEGER_MAYBE_HAVE_UNIT", u"可能带单位的整数",
                 std::vector<const NodeBase *>{nodeIntegerWithUnit.get(), nodeInteger.get()},
                 false, true);
     }

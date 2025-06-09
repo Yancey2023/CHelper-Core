@@ -12,7 +12,7 @@
 
 namespace CHelper::Node {
 
-    class NodeRepeat : public NodeBase {
+    class NodeRepeat : public NodeSerializable {
     public:
         std::string key;
 

@@ -15,12 +15,10 @@
 
 namespace CHelper {
 
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateLeftBracket = std::make_unique<Node::NodeSingleSymbol>(
-            "BLOCK_STATE_LEFT_BRACKET", u"方块状态左括号", '[');
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateLeftBracket = std::make_unique<Node::NodeSingleSymbol>('[', u"方块状态左括号");
     static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryKey = std::make_unique<Node::NodeString>(
             "BLOCK_STATE_ENTRY_KEY", u"方块状态键值对的键", false, false, false);
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntrySeparator = std::make_unique<Node::NodeSingleSymbol>(
-            "BLOCK_STATE_ENTRY_SEPARATOR", u"方块状态键值对分隔符", '=');
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntrySeparator = std::make_unique<Node::NodeSingleSymbol>('=', u"方块状态键值对分隔符");
     static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueBoolean = Node::NodeBoolean::make(
             "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", u"方块状态键值对的值（布尔值）",
             std::nullopt, std::nullopt);
@@ -34,21 +32,16 @@ namespace CHelper {
             "BLOCK_STATE_ENTRY_VALUE_STRING", u"方块状态键值对的值（字符串）",
             false, true, false);
     static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryAllValue = std::make_unique<Node::NodeOr>(
-            "BLOCK_STATE_ENTRY_VALUE", u"方块状态键值对的值",
             std::vector<const Node::NodeBase *>{
                     nodeBlockStateEntryValueBoolean.get(), nodeBlockStateEntryValueInteger.get(),
                     nodeBlockStateEntryValueFloat.get(), nodeBlockStateEntryValueString.get()},
             false, false, true,
             u"类型不匹配，当前内容不是有效的方块状态值");
     static std::unique_ptr<Node::NodeBase> nodeBlockStateAllEntry = std::make_unique<Node::NodeEntry>(
-            "BLOCK_STATE_ENTRY", u"方块状态键值对", nodeBlockStateEntryKey.get(),
-            nodeBlockStateEntrySeparator.get(), nodeBlockStateEntryAllValue.get());
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateSeparator = std::make_unique<Node::NodeSingleSymbol>(
-            "BLOCK_STATE_SEPARATOR", u"方块状态分隔符", ',');
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateRightBracket = std::make_unique<Node::NodeSingleSymbol>(
-            "BLOCK_STATE_RIGHT_BRACKET", u"方块状态右括号", ']');
+            nodeBlockStateEntryKey.get(), nodeBlockStateEntrySeparator.get(), nodeBlockStateEntryAllValue.get());
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateSeparator = std::make_unique<Node::NodeSingleSymbol>(',', u"方块状态分隔符");
+    static std::unique_ptr<Node::NodeBase> nodeBlockStateRightBracket = std::make_unique<Node::NodeSingleSymbol>(']', u"方块状态右括号");
     static std::unique_ptr<Node::NodeBase> nodeAllBlockState = std::make_unique<Node::NodeList>(
-            "BLOCK_STATE", u"方块状态",
             nodeBlockStateLeftBracket.get(), nodeBlockStateAllEntry.get(),
             nodeBlockStateSeparator.get(), nodeBlockStateRightBracket.get());
 
@@ -352,11 +345,8 @@ namespace CHelper {
         auto nodeKey = std::make_shared<Node::NodeText>(
                 "BLOCK_STATE_ENTRY_KEY", u"方块状态键值对的键",
                 NormalId::make(u'\"' + blockPropertyDescription.propertyName + u'\"', blockPropertyDescription.description));
-        auto nodeValue = std::make_shared<Node::NodeOr>(
-                "BLOCK_STATE_ENTRY_VALUE", u"方块状态键值对的值",
-                std::move(valueNodes), false);
+        auto nodeValue = std::make_shared<Node::NodeOr>(std::move(valueNodes), false);
         auto result = std::make_shared<Node::NodeEntry>(
-                "BLOCK_STATE_PER_ENTRY", u"方块状态单个键值对",
                 nodeKey.get(),
                 nodeBlockStateEntrySeparator.get(),
                 nodeValue.get());
@@ -387,20 +377,15 @@ namespace CHelper {
                                    nodeChildren.push_back(std::move(node1));
                                    return nodePtr;
                                });
-                auto nodeChild = std::make_shared<Node::NodeOr>(
-                        "BLOCK_STATE_ENTRY", u"方块状态键值对",
-                        std::move(blockStateEntryChildNode1), false);
+                auto nodeChild = std::make_shared<Node::NodeOr>(std::move(blockStateEntryChildNode1), false);
                 blockStateEntryChildNode2.push_back(nodeChild.get());
                 nodeChildren.push_back(std::move(nodeChild));
             }
             //其他未知的方块状态
             blockStateEntryChildNode2.push_back(nodeBlockStateAllEntry.get());
             //把所有方块状态拼在一起
-            auto nodeValue = std::make_shared<Node::NodeOr>("BLOCK_STATE_ENTRY", u"方块状态键值对",
-                                                            std::move(blockStateEntryChildNode2), false, true);
+            auto nodeValue = std::make_shared<Node::NodeOr>(std::move(blockStateEntryChildNode2), false, true);
             node = std::make_shared<Node::NodeList>(
-                    "BLOCK_STATE",
-                    u"方块状态",
                     nodeBlockStateLeftBracket.get(),
                     nodeValue.get(),
                     nodeBlockStateSeparator.get(),

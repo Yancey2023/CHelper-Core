@@ -12,9 +12,9 @@
 
 namespace CHelper::Node {
 
-    class NodeJsonElement : public NodeBase {
+    class NodeJsonElement : public NodeSerializable {
     public:
-        std::vector<std::unique_ptr<NodeBase>> nodes;
+        std::vector<std::unique_ptr<NodeSerializable>> nodes;
         std::string startNodeId;
 
     private:

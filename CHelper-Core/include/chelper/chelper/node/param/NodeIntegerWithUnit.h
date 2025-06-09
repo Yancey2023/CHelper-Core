@@ -9,11 +9,12 @@
 
 #include "../NodeBase.h"
 #include "../util/NodeAnd.h"
+#include "../util/NodeOr.h"
 #include "NodeNormalId.h"
 
 namespace CHelper::Node {
 
-    class NodeIntegerWithUnit : public NodeBase {
+    class NodeIntegerWithUnit : public NodeSerializable {
     public:
         std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> units;
 
@@ -36,7 +37,7 @@ namespace CHelper::Node {
                               bool isMustHave) const override;
 
         bool collectSyntax(const ASTNode *astNode,
-                          SyntaxResult &syntaxResult) const override;
+                           SyntaxResult &syntaxResult) const override;
     };
 
 }// namespace CHelper::Node

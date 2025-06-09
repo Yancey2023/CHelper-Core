@@ -10,7 +10,7 @@ namespace CHelper::Node {
     NodeJson::NodeJson(const std::optional<std::string> &id,
                        const std::optional<std::u16string> &description,
                        std::string key)
-        : NodeBase(id, description, false),
+        : NodeSerializable(id, description, false),
           key(std::move(key)) {}
 
     void NodeJson::init(const CPack &cpack) {

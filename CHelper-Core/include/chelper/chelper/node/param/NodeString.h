@@ -12,7 +12,7 @@
 
 namespace CHelper::Node {
 
-    class NodeString : public NodeBase {
+    class NodeString : public NodeSerializable {
     public:
         bool allowMissingString = false;
         bool canContainSpace = false;

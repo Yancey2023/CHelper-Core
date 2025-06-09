@@ -13,7 +13,7 @@ namespace CHelper::Node {
 
     //TODO 原始JSON文本的目标选择器要支持*，并且不支持
 
-    class NodeJson : public NodeBase {
+    class NodeJson : public NodeSerializable {
     public:
         std::string key;
 

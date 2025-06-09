@@ -4,6 +4,7 @@
 
 #include <chelper/node/param/NodeRepeat.h>
 #include <chelper/node/util/NodeAnd.h>
+#include <chelper/node/util/NodeOr.h>
 
 namespace CHelper::Node {
 

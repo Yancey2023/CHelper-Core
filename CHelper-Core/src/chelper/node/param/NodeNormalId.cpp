@@ -14,7 +14,7 @@ namespace CHelper::Node {
             bool ignoreError,
             bool allowMissingID,
             const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode)
-        : NodeBase(id, description, false),
+        : NodeSerializable(id, description, false),
           key(key),
           ignoreError(ignoreError),
           allowMissingID(allowMissingID),
@@ -27,7 +27,7 @@ namespace CHelper::Node {
             bool ignoreError,
             bool allowMissingID,
             const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode)
-        : NodeBase(id, description, false),
+        : NodeSerializable(id, description, false),
           contents(contents),
           ignoreError(ignoreError),
           allowMissingID(allowMissingID),

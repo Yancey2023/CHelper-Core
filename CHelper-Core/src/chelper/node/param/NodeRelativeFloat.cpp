@@ -9,17 +9,16 @@
 namespace CHelper::Node {
 
     static std::unique_ptr<NodeSingleSymbol> nodeRelativeNotation = std::make_unique<NodeSingleSymbol>(
-            "RELATIVE_FLOAT_RELATIVE_NOTATION", u"相对坐标（~x ~y ~z）", u'~', false);
+             u'~', u"相对坐标（~x ~y ~z）", false);
     static std::unique_ptr<NodeSingleSymbol> nodeCaretNotation = std::make_unique<NodeSingleSymbol>(
-            "RELATIVE_FLOAT_CARET_NOTATION", u"局部坐标（^左 ^上 ^前）", u'^', false);
+            u'^', u"局部坐标（^左 ^上 ^前）", false);
     static std::unique_ptr<NodeOr> nodePreSymbol = std::make_unique<NodeOr>(
-            "RELATIVE_FLOAT_RELATIVE", u"相对坐标（~x ~y ~z）",
             std::vector<const NodeBase *>{nodeRelativeNotation.get(), nodeCaretNotation.get()}, false);
 
     NodeRelativeFloat::NodeRelativeFloat(const std::optional<std::string> &id,
                                          const std::optional<std::u16string> &description,
                                          bool canUseCaretNotation)
-        : NodeBase(id, description, false),
+        : NodeSerializable(id, description, false),
           canUseCaretNotation(canUseCaretNotation) {}
 
     NodeTypeId::NodeTypeId NodeRelativeFloat::getNodeType() const {

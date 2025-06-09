@@ -10,27 +10,22 @@
 
 namespace CHelper::Node {
 
-    static std::unique_ptr<NodeBase> nodLeft = std::make_unique<NodeSingleSymbol>(
-            "JSON_LIST_LEFT", u"JSON列表左括号", u'[');
-    static std::unique_ptr<NodeBase> nodeRight = std::make_unique<NodeSingleSymbol>(
-            "JSON_LIST_RIGHT", u"JSON列表右括号", u']');
-    static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(
-            "JSON_LIST_SEPARATOR", u"JSON列表分隔符", u',');
+    static std::unique_ptr<NodeBase> nodLeft = std::make_unique<NodeSingleSymbol>(u'[', u"JSON列表左括号");
+    static std::unique_ptr<NodeBase> nodeRight = std::make_unique<NodeSingleSymbol>(u']', u"JSON列表右括号");
+    static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(u',', u"JSON列表分隔符");
     static std::unique_ptr<NodeBase> nodeAllList = std::make_unique<NodeList>(
-            "JSON_OBJECT", u"JSON对象",
             nodLeft.get(), NodeJsonElement::getNodeJsonElement(), nodeSeparator.get(), nodeRight.get());
 
     NodeJsonList::NodeJsonList(const std::optional<std::string> &id,
                                const std::optional<std::u16string> &description,
                                std::string data)
-        : NodeBase(id, description, false),
+        : NodeSerializable(id, description, false),
           data(std::move(data)) {}
 
-    void NodeJsonList::init(const std::vector<std::unique_ptr<NodeBase>> &dataList) {
+    void NodeJsonList::init(const std::vector<std::unique_ptr<NodeSerializable>> &dataList) {
         for (const auto &item: dataList) {
             if (HEDLEY_UNLIKELY(item->id == data)) {
-                nodeList = std::make_unique<NodeList>("JSON_LIST", u"JSON列表",
-                                                      nodLeft.get(), item.get(),
+                nodeList = std::make_unique<NodeList>(nodLeft.get(), item.get(),
                                                       nodeSeparator.get(), nodeRight.get());
                 return;
             }

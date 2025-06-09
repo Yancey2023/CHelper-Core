@@ -13,11 +13,11 @@ namespace CHelper::Node {
 
     class NodeWrapped : public NodeBase {
     public:
-        NodeBase *innerNode;
+        NodeSerializable *innerNode;
         //存储下一个节点，需要调用构造函数之后再进行添加
         std::vector<NodeWrapped *> nextNodes;
 
-        explicit NodeWrapped(NodeBase *innerNode);
+        explicit NodeWrapped(NodeSerializable *innerNode);
 
         void init(const CPack &cpack) override;
 

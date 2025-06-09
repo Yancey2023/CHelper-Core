@@ -7,9 +7,8 @@
 
 namespace CHelper::Node {
 
-    NodeWrapped::NodeWrapped(NodeBase *innerNode)
-        : NodeBase("WRAPPED_NODE", u"嵌套节点", false),
-          innerNode(innerNode) {}
+    NodeWrapped::NodeWrapped(NodeSerializable *innerNode)
+        : innerNode(innerNode) {}
 
     void NodeWrapped::init(const CPack &cpack) {
         innerNode->init(cpack);
@@ -77,8 +76,8 @@ namespace CHelper::Node {
         if (astNode == nullptr) {
             innerNode->collectStructure(astNode, structure, isMustHave);
         } else {
-            if (HEDLEY_UNLIKELY(brief.has_value())) {
-                structure.append(isMustHave, brief.value());
+            if (HEDLEY_UNLIKELY(innerNode->brief.has_value())) {
+                structure.append(isMustHave, innerNode->brief.value());
             } else {
                 structure.isDirty = false;
                 collectStructure(nullptr, structure, isMustHave);
@@ -93,7 +92,7 @@ namespace CHelper::Node {
             }
             if (HEDLEY_LIKELY(isMustHave)) {
                 for (const auto &item: nextNodes) {
-                    if (HEDLEY_UNLIKELY(item->innerNode == NodeLF::getInstance())) {
+                    if (HEDLEY_UNLIKELY(item->innerNode->getNodeType() == NodeTypeId::LF)) {
                         isMustHave = false;
                         break;
                     }

@@ -162,7 +162,7 @@ namespace CHelper {
 
     namespace Node {
 
-        bool operator==(const NodeBase &t1, const NodeBase &t2) {
+        bool operator==(const NodeSerializable &t1, const NodeSerializable &t2) {
             return t1.id == t2.id &&
                    t1.brief == t2.brief &&
                    t1.description == t2.description &&
@@ -170,7 +170,7 @@ namespace CHelper {
         }
 
         bool operator==(const NodeJsonBoolean &t1, const NodeJsonBoolean &t2) {
-            if (!((NodeBase &) t1 == (NodeBase &) t2)) {
+            if (!((NodeSerializable &) t1 == (NodeSerializable &) t2)) {
                 return false;
             }
             return t1.descriptionTrue == t2.descriptionTrue &&
@@ -178,7 +178,7 @@ namespace CHelper {
         }
 
         bool operator==(const NodeJsonNull &t1, const NodeJsonNull &t2) {
-            if (!((NodeBase &) t1 == (NodeBase &) t2)) {
+            if (!((NodeSerializable &) t1 == (NodeSerializable &) t2)) {
                 return false;
             }
             return true;
@@ -186,7 +186,7 @@ namespace CHelper {
 
         template<class T, bool isJson>
         bool operator==(const NodeTemplateNumber<T, isJson> &t1, const NodeTemplateNumber<T, isJson> &t2) {
-            if (!((NodeBase &) t1 == (NodeBase &) t2)) {
+            if (!((NodeSerializable &) t1 == (NodeSerializable &) t2)) {
                 return false;
             }
             return t1.min == t2.min && t1.max == t2.max;

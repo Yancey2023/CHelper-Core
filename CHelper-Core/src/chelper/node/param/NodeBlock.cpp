@@ -8,7 +8,7 @@
 namespace CHelper::Node {
 
     static std::unique_ptr<Node::NodeSingleSymbol> nodeBlockStateLeftBracket = std::make_unique<Node::NodeSingleSymbol>(
-            "BLOCK_STATE_LEFT_BRACKET", u"方块状态左括号", u'[');
+            u'[', u"方块状态左括号");
 
     void NodeBlock::init(const CPack &cpack) {
         blockIds = cpack.blockIds;

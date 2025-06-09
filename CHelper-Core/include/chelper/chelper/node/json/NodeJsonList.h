@@ -11,7 +11,7 @@
 
 namespace CHelper::Node {
 
-    class NodeJsonList : public NodeBase {
+    class NodeJsonList : public NodeSerializable {
     public:
         std::string data;
 
@@ -25,7 +25,7 @@ namespace CHelper::Node {
                      const std::optional<std::u16string> &description,
                      std::string data = std::string());
 
-        void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
+        void init(const std::vector<std::unique_ptr<NodeSerializable>> &dataList);
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 

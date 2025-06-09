@@ -14,7 +14,7 @@
 
 namespace CHelper::Node {
 
-    class NodeJsonObject : public NodeBase {
+    class NodeJsonObject : public NodeSerializable {
     public:
         std::vector<std::unique_ptr<NodeJsonEntry>> data;
 

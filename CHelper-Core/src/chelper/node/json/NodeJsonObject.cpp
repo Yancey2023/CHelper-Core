@@ -7,21 +7,18 @@
 
 namespace CHelper::Node {
 
+    static std::unique_ptr<NodeBase> nodLeft = std::make_unique<NodeSingleSymbol>(u'{', u"JSON列表左括号");
+    static std::unique_ptr<NodeBase> nodeRight = std::make_unique<NodeSingleSymbol>(u'}', u"JSON列表右括号");
+    static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(u',', u"JSON列表分隔符");
+
     NodeJsonObject::NodeJsonObject(const std::optional<std::string> &id,
                                    const std::optional<std::u16string> &description)
-        : NodeBase(id, description, false) {
+        : NodeSerializable(id, description, false) {
         nodeElement1 = nullptr;
         std::vector<const NodeBase *> nodeElementData;
         nodeElementData.push_back(NodeJsonEntry::getNodeJsonAllEntry());
-        nodeElement2 = std::make_unique<NodeOr>("JSON_OBJECT_ELEMENT", u"JSON对象键值对", std::move(nodeElementData), false, true);
-        static std::unique_ptr<NodeBase> nodLeft = std::make_unique<NodeSingleSymbol>(
-                "JSON_LIST_LEFT", u"JSON列表左括号", u'{');
-        static std::unique_ptr<NodeBase> nodeRight = std::make_unique<NodeSingleSymbol>(
-                "JSON_LIST_RIGHT", u"JSON列表右括号", u'}');
-        static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(
-                "JSON_LIST_SEPARATOR", u"JSON列表分隔符", u',');
+        nodeElement2 = std::make_unique<NodeOr>(std::move(nodeElementData), false, true);
         nodeList = std::make_unique<NodeList>(
-                "JSON_OBJECT", u"JSON对象",
                 nodLeft.get(), nodeElement2.get(),
                 nodeSeparator.get(), nodeRight.get());
     }
@@ -35,7 +32,7 @@ namespace CHelper::Node {
             for (const auto &item: data) {
                 nodeElementData.push_back(item.get());
             }
-            nodeElement1 = std::make_unique<NodeOr>("JSON_OBJECT_ELEMENT", u"JSON对象键值对", std::move(nodeElementData), false);
+            nodeElement1 = std::make_unique<NodeOr>(std::move(nodeElementData), false);
         }
         std::vector<const NodeBase *> nodeElementData;
         if (HEDLEY_LIKELY(nodeElement1 != nullptr)) {
@@ -43,15 +40,8 @@ namespace CHelper::Node {
             nodeElementData.push_back(nodeElement1.get());
         }
         nodeElementData.push_back(NodeJsonEntry::getNodeJsonAllEntry());
-        nodeElement2 = std::make_unique<NodeOr>("JSON_OBJECT_ELEMENT", u"JSON对象键值对", std::move(nodeElementData), false, true);
-        static std::unique_ptr<NodeBase> nodLeft = std::make_unique<NodeSingleSymbol>(
-                "JSON_LIST_LEFT", u"JSON列表左括号", u'{');
-        static std::unique_ptr<NodeBase> nodeRight = std::make_unique<NodeSingleSymbol>(
-                "JSON_LIST_RIGHT", u"JSON列表右括号", u'}');
-        static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(
-                "JSON_LIST_SEPARATOR", u"JSON列表分隔符", u',');
+        nodeElement2 = std::make_unique<NodeOr>(std::move(nodeElementData), false, true);
         nodeList = std::make_unique<NodeList>(
-                "JSON_OBJECT", u"JSON对象",
                 nodLeft.get(), nodeElement2.get(),
                 nodeSeparator.get(), nodeRight.get());
     }

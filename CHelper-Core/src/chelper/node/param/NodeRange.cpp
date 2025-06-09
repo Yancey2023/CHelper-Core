@@ -11,7 +11,7 @@ namespace CHelper::Node {
 
     NodeRange::NodeRange(const std::optional<std::string> &id,
                          const std::optional<std::u16string> &description)
-        : NodeBase(id, description, false) {}
+        : NodeSerializable(id, description, false) {}
 
     NodeTypeId::NodeTypeId NodeRange::getNodeType() const {
         return NodeTypeId::RANGE;

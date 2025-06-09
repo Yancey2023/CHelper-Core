@@ -10,7 +10,7 @@
 namespace CHelper::Node {
 
     template<class T, bool isJson>
-    class NodeTemplateNumber : public NodeBase {
+    class NodeTemplateNumber : public NodeSerializable {
     public:
         std::optional<T> min, max;
 

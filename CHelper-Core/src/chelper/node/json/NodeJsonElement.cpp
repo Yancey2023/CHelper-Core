@@ -65,7 +65,6 @@ namespace CHelper::Node {
         static std::unique_ptr<NodeBase> jsonObject = std::make_unique<NodeJsonObject>(
                 "JSON_OBJECT", u"JSON对象");
         static std::unique_ptr<NodeBase> jsonElement = std::make_unique<NodeOr>(
-                "JSON_ELEMENT", u"JSON元素",
                 std::vector<const NodeBase *>{
                         jsonBoolean.get(), jsonFloat.get(),
                         jsonInteger.get(), jsonNull.get(),

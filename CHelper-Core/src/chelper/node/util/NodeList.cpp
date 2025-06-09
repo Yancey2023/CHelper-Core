@@ -7,27 +7,16 @@
 
 namespace CHelper::Node {
 
-    NodeList::NodeList(const std::optional<std::string> &id,
-                       const std::optional<std::u16string> &description,
-                       NodeBase *nodeLeft,
+    NodeList::NodeList(NodeBase *nodeLeft,
                        NodeBase *nodeElement,
                        NodeBase *nodeSeparator,
                        NodeBase *nodeRight)
-        : NodeBase(id, description, false),
-          nodeLeft(nodeLeft),
+        : nodeLeft(nodeLeft),
           nodeElement(nodeElement),
           nodeSeparator(nodeSeparator),
           nodeRight(nodeRight),
-          nodeElementOrRight(
-                  "ELEMENT_OR_RIGHT", u"element or right",
-                  std::vector<const NodeBase *>{
-                          nodeElement, nodeRight},
-                  false),
-          nodeSeparatorOrRight(
-                  "SEPARATOR_OR_RIGHT", u"separator or right",
-                  std::vector<const NodeBase *>{
-                          nodeSeparator, nodeRight},
-                  false) {
+          nodeElementOrRight(std::vector<const NodeBase *>{nodeElement, nodeRight}, false),
+          nodeSeparatorOrRight(std::vector<const NodeBase *>{nodeSeparator, nodeRight}, false) {
 #ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(
                     nodeLeft == nullptr || nodeElement == nullptr || nodeSeparator == nullptr || nodeRight == nullptr)) {

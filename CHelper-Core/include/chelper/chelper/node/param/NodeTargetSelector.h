@@ -8,7 +8,6 @@
 #define CHELPER_NODETARGETSELECTOR_H
 
 #include "../NodeBase.h"
-#include "../util/NodeAnd.h"
 #include "../util/NodeEqualEntry.h"
 #include "../util/NodeList.h"
 #include "../util/NodeOr.h"
@@ -18,7 +17,7 @@
 
 namespace CHelper::Node {
 
-    class NodeTargetSelector : public NodeBase {
+    class NodeTargetSelector : public NodeSerializable {
     public:
         bool isMustPlayer = false, isMustNPC = false, isOnlyOne = false, isWildcard = false;
 

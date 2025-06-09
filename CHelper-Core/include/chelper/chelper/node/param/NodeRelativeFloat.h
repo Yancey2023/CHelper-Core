@@ -19,7 +19,7 @@ namespace CHelper::Node {
         };
     }
 
-    class NodeRelativeFloat : public NodeBase {
+    class NodeRelativeFloat : public NodeSerializable {
     public:
         bool canUseCaretNotation = true;
 

@@ -4,18 +4,7 @@
 
 #include <chelper/node/NodeBase.h>
 
-#ifdef CHelperDebug
-#include <chelper/node/NodeType.h>
-#endif
-
 namespace CHelper::Node {
-
-    NodeBase::NodeBase(const std::optional<std::string> &id,
-                       const std::optional<std::u16string> &description,
-                       bool isMustAfterWhiteSpace)
-        : id(id),
-          description(description),
-          isMustAfterWhiteSpace(isMustAfterWhiteSpace) {}
 
     void NodeBase::init(const CPack &cpack) {
     }
@@ -30,12 +19,7 @@ namespace CHelper::Node {
     }
 
     std::optional<std::u16string> NodeBase::collectDescription(const ASTNode *node, size_t index) const {
-#ifdef CHelperDebug
-        if (HEDLEY_UNLIKELY(!description.has_value())) {
-            SPDLOG_WARN("description is null");
-        }
-#endif
-        return description;
+        return std::nullopt;
     }
 
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
@@ -60,7 +44,23 @@ namespace CHelper::Node {
         return false;
     }
 
-    bool NodeBase::getIsMustAfterWhitespace() const {
+    NodeSerializable::NodeSerializable(const std::optional<std::string> &id,
+                                       const std::optional<std::u16string> &description,
+                                       bool isMustAfterWhiteSpace)
+        : id(id),
+          description(description),
+          isMustAfterWhiteSpace(isMustAfterWhiteSpace) {}
+
+    std::optional<std::u16string> NodeSerializable::collectDescription(const ASTNode *node, size_t index) const {
+#ifdef CHelperDebug
+        if (HEDLEY_UNLIKELY(!description.has_value())) {
+            SPDLOG_WARN("description is null");
+        }
+#endif
+        return description;
+    }
+
+    bool NodeSerializable::getIsMustAfterWhitespace() const {
         return isMustAfterWhiteSpace.value_or(false);
     }
 

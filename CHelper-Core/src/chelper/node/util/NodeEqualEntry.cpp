@@ -25,7 +25,6 @@ namespace CHelper::Node {
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
             });
     static std::unique_ptr<NodeBase> nodeEqualOrNotEqual = std::make_unique<NodeOr>(
-            "TARGET_SELECTOR_ARGUMENT_SEPARATOR", u"等于或不等于",
             std::vector<const NodeBase *>{
                     nodeEqual.get(), nodeNotEqual.get()},
             false);
@@ -39,11 +38,8 @@ namespace CHelper::Node {
           canUseNotEqual(canUseNotEqual),
           nodeValue(nodeValue) {}
 
-    NodeEqualEntry::NodeEqualEntry(const std::optional<std::string> &id,
-                                   const std::optional<std::u16string> &description,
-                                   std::vector<EqualData> equalDatas)
-        : NodeBase(id, description, false),
-          equalDatas(std::move(equalDatas)) {
+    NodeEqualEntry::NodeEqualEntry(std::vector<EqualData> equalDatas)
+        : equalDatas(std::move(equalDatas)) {
         nodeKeyContent = std::make_shared<std::vector<std::shared_ptr<NormalId>>>();
         for (const auto &item: this->equalDatas) {
             nodeKeyContent->push_back(NormalId::make(item.name, item.description));

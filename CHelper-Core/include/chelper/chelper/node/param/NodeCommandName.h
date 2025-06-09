@@ -12,7 +12,7 @@
 
 namespace CHelper::Node {
 
-    class NodeCommandName : public NodeBase {
+    class NodeCommandName : public NodeSerializable {
     private:
         std::vector<std::unique_ptr<NodePerCommand>> *commands = nullptr;
 

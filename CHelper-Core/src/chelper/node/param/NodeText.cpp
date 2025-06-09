@@ -12,10 +12,9 @@ namespace CHelper::Node {
                        const std::optional<std::u16string> &description,
                        const std::shared_ptr<NormalId> &data,
                        const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getTextASTNode)
-        : NodeBase(id, description, false),
+        : NodeSerializable(id, description, false),
           data(data),
           getTextASTNode(getTextASTNode) {}
-
 
     void NodeText::init(const CPack &cpack) {
         getTextASTNode = [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {

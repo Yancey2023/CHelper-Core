@@ -14,10 +14,8 @@ namespace CHelper::Node {
 
     NodeJsonString::NodeJsonString(const std::optional<std::string> &id,
                                    const std::optional<std::u16string> &description)
-        : NodeBase(id, description, false) {
-        nodeData = std::make_unique<NodeOr>(
-                "JSON_STRING_DATA", u"JSON字符串内容",
-                std::vector<const NodeBase *>(), false);
+        : NodeSerializable(id, description, false) {
+        nodeData = std::make_unique<NodeOr>(std::vector<const NodeBase *>(), false);
     }
 
     void NodeJsonString::init(const CPack &cpack) {
@@ -33,9 +31,7 @@ namespace CHelper::Node {
                 nodeDataElement.push_back(item.get());
             }
         }
-        nodeData = std::make_unique<NodeOr>(
-                "JSON_STRING_DATA", u"JSON字符串内容",
-                std::move(nodeDataElement), false);
+        nodeData = std::make_unique<NodeOr>(std::move(nodeDataElement), false);
     }
 
     NodeTypeId::NodeTypeId NodeJsonString::getNodeType() const {

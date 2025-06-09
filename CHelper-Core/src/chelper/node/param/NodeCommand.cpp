@@ -8,13 +8,12 @@
 
 namespace CHelper::Node {
 
-    static std::unique_ptr<Node::NodeSingleSymbol> nodeCommandStart = std::make_unique<Node::NodeSingleSymbol>(
-            "COMMAND_START", u"命令开始字符", u'/');
+    static std::unique_ptr<Node::NodeSingleSymbol> nodeCommandStart = std::make_unique<Node::NodeSingleSymbol>(u'/', u"命令开始字符");
 
     NodeCommand::NodeCommand(const std::optional<std::string> &id,
                              const std::optional<std::u16string> &description,
                              std::vector<std::unique_ptr<Node::NodePerCommand>> *commands)
-        : NodeBase(id, description, false),
+        : NodeSerializable(id, description, false),
           commands(commands) {}
 
     void NodeCommand::init(const CPack &cpack) {

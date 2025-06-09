@@ -21,7 +21,7 @@ namespace CHelper::Node {
         };
     }// namespace NodeItemType
 
-    class NodeItem : public NodeBase {
+    class NodeItem : public NodeSerializable {
     public:
         NodeItemType::NodeItemType nodeItemType = NodeItemType::ITEM_GIVE;
 
@@ -45,7 +45,6 @@ namespace CHelper::Node {
                               StructureBuilder &structure,
                               bool isMustHave) const override;
 
-        HEDLEY_NON_NULL(3)
         ASTNode getOptionalASTNode(TokenReader &tokenReader,
                                    const CPack *cpack,
                                    bool isIgnoreChildNodesError,
