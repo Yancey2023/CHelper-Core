@@ -25,7 +25,7 @@ namespace CHelper::Node {
 
         void init(const CPack &cpack) override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data = nullptr) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
         static NodeAny *getNodeAny();
     };

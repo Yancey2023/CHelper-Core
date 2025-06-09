@@ -55,7 +55,7 @@ namespace CHelper::Node {
         return NodeTypeId::EQUAL_ENTRY;
     }
 
-    ASTNode NodeEqualEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeEqualEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         // key

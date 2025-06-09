@@ -22,7 +22,7 @@ namespace CHelper::Node {
         return NodeTypeId::STRING;
     }
 
-    ASTNode NodeString::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeString::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         if (HEDLEY_UNLIKELY(ignoreLater)) {
             //后面的所有内容都算作这个字符串
             tokenReader.push();

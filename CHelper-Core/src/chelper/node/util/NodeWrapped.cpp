@@ -19,12 +19,16 @@ namespace CHelper::Node {
         return NodeTypeId::WRAPPED;
     }
 
-    ASTNode NodeWrapped::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeWrapped::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
+        return getASTNodeWithIsMustAfterWhitespace(tokenReader, cpack, false);
+    }
+
+    ASTNode NodeWrapped::getASTNodeWithIsMustAfterWhitespace(TokenReader &tokenReader, const CPack *cpack, bool isMustAfterWhiteSpace) const {
         //空格检测
-        bool isAfterWhitespace0 = innerNode->isAfterWhitespace();
+        bool isMustAfterWhitespace0 = innerNode->getIsMustAfterWhitespace();
         if (innerNode->getNodeType() != NodeTypeId::REPEAT) {
             tokenReader.push();
-            if (HEDLEY_UNLIKELY((isAfterWhitespace0 || private_data != nullptr && *static_cast<bool *>(private_data)) && getNodeType() != NodeTypeId::LF && tokenReader.skipWhitespace() == 0)) {
+            if (HEDLEY_UNLIKELY((isMustAfterWhitespace0 || isMustAfterWhiteSpace) && innerNode->getNodeType() != NodeTypeId::LF && tokenReader.skipWhitespace() == 0)) {
                 TokensView tokens = tokenReader.collect();
                 return ASTNode::simpleNode(this, tokens, ErrorReason::requireWhiteSpace(tokens), ASTNodeId::COMPOUND);
             }
@@ -43,7 +47,7 @@ namespace CHelper::Node {
         childASTNodes.reserve(nextNodes.size());
         for (const auto &item: nextNodes) {
             tokenReader.push();
-            childASTNodes.push_back(item->getASTNode(tokenReader, cpack, &isAfterWhitespace0));
+            childASTNodes.push_back(item->getASTNodeWithIsMustAfterWhitespace(tokenReader, cpack, isMustAfterWhitespace0));
             tokenReader.restore();
         }
         tokenReader.push();

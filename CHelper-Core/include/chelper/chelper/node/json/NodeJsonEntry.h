@@ -33,7 +33,7 @@ namespace CHelper::Node {
 
         void init(const std::vector<std::unique_ptr<NodeBase>> &dataList);
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data = nullptr) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
         static NodeBase *getNodeJsonAllEntry();
     };

@@ -27,7 +27,7 @@ namespace CHelper::Node {
         return NodeTypeId::TEXT;
     }
 
-    ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         DEBUG_GET_NODE_BEGIN(this)
         auto result = getTextASTNode(this, tokenReader);
         DEBUG_GET_NODE_END(this)
@@ -51,14 +51,14 @@ namespace CHelper::Node {
         //通过名字进行搜索
         size_t index1 = data->name.find(str);
         if (HEDLEY_LIKELY(index1 != std::u16string::npos)) {
-            suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, isAfterWhitespace(), data}));
+            suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, getIsMustAfterWhitespace(), data}));
             return true;
         }
         //通过介绍进行搜索
         if (HEDLEY_LIKELY(data->description.has_value())) {
             size_t index2 = data->description.value().find(str);
             if (HEDLEY_LIKELY(index2 != std::u16string::npos)) {
-                suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, isAfterWhitespace(), data}));
+                suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, getIsMustAfterWhitespace(), data}));
             }
         }
         return true;

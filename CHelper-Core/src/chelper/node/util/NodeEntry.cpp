@@ -20,7 +20,7 @@ namespace CHelper::Node {
         return NodeTypeId::ENTRY;
     }
 
-    ASTNode NodeEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         auto key = nodeKey->getASTNode(tokenReader, cpack);

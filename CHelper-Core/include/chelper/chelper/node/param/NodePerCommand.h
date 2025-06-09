@@ -26,7 +26,7 @@ namespace CHelper::Node {
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data = nullptr) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
         std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const override;
 
@@ -58,7 +58,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         std::vector<std::string> startIds;
         startIds.reserve(t.startNodes.size());
         for (const auto &item: t.startNodes) {
-            startIds.push_back(item->id.value());
+            startIds.push_back(item->innerNode->id.value());
         }
         Codec<decltype(startIds)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::start_(), startIds);
         //ast

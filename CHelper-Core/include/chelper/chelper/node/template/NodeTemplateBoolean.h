@@ -26,7 +26,7 @@ namespace CHelper::Node {
             }
         }
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const override {
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override {
             ASTNode astNode = tokenReader.readStringASTNode(this);
             std::u16string_view str = astNode.tokens.toString();
             if (HEDLEY_LIKELY(str == u"true" || str == u"false")) {

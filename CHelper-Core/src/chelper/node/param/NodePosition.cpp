@@ -15,7 +15,7 @@ namespace CHelper::Node {
         return NodeTypeId::POSITION;
     }
 
-    ASTNode NodePosition::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodePosition::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
         std::vector<ASTNode> threeChildNodes;

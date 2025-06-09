@@ -37,13 +37,20 @@ namespace CHelper::Node {
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data = nullptr) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
         std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
+
+        HEDLEY_NON_NULL(3)
+        ASTNode getOptionalASTNode(TokenReader &tokenReader,
+                                   const CPack *cpack,
+                                   bool isIgnoreChildNodesError,
+                                   const std::vector<const NodeBase *> &childNodes,
+                                   const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE) const;
     };
 
 }// namespace CHelper::Node

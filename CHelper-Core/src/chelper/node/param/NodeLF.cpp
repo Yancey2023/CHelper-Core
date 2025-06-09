@@ -20,7 +20,7 @@ namespace CHelper::Node {
         return INSTANCE_WRAPPED.get();
     }
 
-    ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         tokenReader.skipToLF();
         TokensView tokens = tokenReader.collect();

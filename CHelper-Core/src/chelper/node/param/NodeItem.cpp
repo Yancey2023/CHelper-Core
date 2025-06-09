@@ -7,6 +7,10 @@
 #include <chelper/node/template/NodeTemplateNumber.h>
 #include <chelper/resources/CPack.h>
 
+#ifdef CHelperDebug
+#include <chelper/node/NodeType.h>
+#endif
+
 namespace CHelper::Node {
 
     static std::shared_ptr<NodeBase> nodeCount = NodeInteger::make("ITEM_COUNT", u"物品数量", 0, std::nullopt);
@@ -24,7 +28,7 @@ namespace CHelper::Node {
         return NodeTypeId::ITEM;
     }
 
-    ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeItem::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         ASTNode itemId = nodeItemId->getASTNode(tokenReader, cpack);
         size_t strHash = std::hash<std::u16string_view>{}(itemId.tokens.toString());
@@ -78,6 +82,44 @@ namespace CHelper::Node {
                 nodeComponent->collectStructure(nullptr, structure, false);
                 break;
         }
+    }
+
+    /**
+     * 节点不一定有
+     *
+     * @param tokenReader token读取器
+     * @param cpack 资源包
+     * @param isIgnoreChildNodesError true - 第一个错误节点到后面都不算做子节点
+     *                                false - 第一个内容为空的错误节点到后面都不算做子节点
+     * @param childNodes 子节点
+     * @param astNodeId 节点ID
+     */
+    ASTNode NodeItem::getOptionalASTNode(TokenReader &tokenReader,
+                                         const CPack *cpack,
+                                         bool isIgnoreChildNodesError,
+                                         const std::vector<const NodeBase *> &childNodes,
+                                         const ASTNodeId::ASTNodeId &astNodeId) const {
+        tokenReader.push();
+        std::vector<ASTNode> childASTNodes;
+        for (const auto &item: childNodes) {
+            tokenReader.push();
+            tokenReader.push();
+            DEBUG_GET_NODE_BEGIN(item)
+            ASTNode astNode = item->getASTNode(tokenReader, cpack);
+            DEBUG_GET_NODE_END(item)
+            bool isError = astNode.isError();
+            const TokensView tokens = tokenReader.collect();
+            if (HEDLEY_UNLIKELY(isError && (isIgnoreChildNodesError || tokens.isEmpty()))) {
+                tokenReader.restore();
+                break;
+            }
+            childASTNodes.push_back(std::move(astNode));
+            tokenReader.pop();
+            if (HEDLEY_UNLIKELY(isError)) {
+                break;
+            }
+        }
+        return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect(), nullptr, astNodeId);
     }
 
 }// namespace CHelper::Node

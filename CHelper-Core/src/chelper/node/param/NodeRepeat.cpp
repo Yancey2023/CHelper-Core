@@ -23,7 +23,7 @@ namespace CHelper::Node {
         return NodeTypeId::REPEAT;
     }
 
-    ASTNode NodeRepeat::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeRepeat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         while (true) {

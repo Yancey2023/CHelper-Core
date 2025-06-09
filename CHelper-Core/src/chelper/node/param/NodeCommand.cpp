@@ -25,7 +25,7 @@ namespace CHelper::Node {
         return NodeTypeId::COMMAND;
     }
 
-    ASTNode NodeCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         ASTNode commandStart = nodeCommandStart->getASTNode(tokenReader, cpack);
         if (HEDLEY_UNLIKELY(commandStart.isError())) {

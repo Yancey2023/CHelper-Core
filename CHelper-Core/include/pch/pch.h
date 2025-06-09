@@ -13,8 +13,6 @@
 #define CHelperDebug
 #endif
 
-#define CHelperTest
-
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_INFO
 #if defined(CHelperAndroid) || defined(CHELPER_NO_FILESYSTEM)
 #define FORMAT_ARG(arg) arg

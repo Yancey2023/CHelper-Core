@@ -60,7 +60,7 @@ namespace CHelper::Node {
         return NodeTypeId::JSON_OBJECT;
     }
 
-    ASTNode NodeJsonObject::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeJsonObject::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         return getByChildNode(tokenReader, cpack, nodeList.get());
     }
 

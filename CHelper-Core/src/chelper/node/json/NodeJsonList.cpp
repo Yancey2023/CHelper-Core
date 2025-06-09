@@ -45,7 +45,7 @@ namespace CHelper::Node {
         return NodeTypeId::JSON_LIST;
     }
 
-    ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         if (HEDLEY_UNLIKELY(nodeList == nullptr)) {
             return getByChildNode(tokenReader, cpack, nodeAllList.get(), ASTNodeId::NODE_JSON_ALL_LIST);
         }

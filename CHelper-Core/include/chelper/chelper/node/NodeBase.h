@@ -89,37 +89,27 @@ namespace CHelper {
 
             [[nodiscard]] virtual NodeTypeId::NodeTypeId getNodeType() const = 0;
 
-            [[nodiscard]] HEDLEY_NON_NULL(3) virtual ASTNode
-                    getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data = nullptr) const = 0;
+            [[nodiscard]] virtual ASTNode
+            getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const = 0;
 
         protected:
-            HEDLEY_NON_NULL(3, 4)
-            ASTNode
-            getByChildNode(TokenReader &tokenReader,
-                           const CPack *cpack,
-                           const NodeBase *childNode,
-                           const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE) const;
-
-            //node不一定需要的时侯使用
             HEDLEY_NON_NULL(3)
-            ASTNode
-            getOptionalASTNode(TokenReader &tokenReader,
-                               const CPack *cpack,
-                               bool isIgnoreChildNodesError,
-                               const std::vector<const NodeBase *> &childNodes,
-                               const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE) const;
+            ASTNode getByChildNode(TokenReader &tokenReader,
+                                   const CPack *cpack,
+                                   const NodeBase *childNode,
+                                   const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE) const;
 
         public:
-            [[nodiscard]] bool isAfterWhitespace() const;
+            [[nodiscard]] bool getIsMustAfterWhitespace() const;
 
-            HEDLEY_NON_NULL(2)
+            HEDLEY_NON_NULL(1)
             virtual std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const;
 
-            HEDLEY_NON_NULL(2)
+            HEDLEY_NON_NULL(1)
             virtual bool collectIdError(const ASTNode *astNode,
                                         std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
 
-            HEDLEY_NON_NULL(2)
+            HEDLEY_NON_NULL(1)
             virtual bool collectSuggestions(const ASTNode *astNode,
                                             size_t index,
                                             std::vector<Suggestions> &suggestions) const;
@@ -128,7 +118,7 @@ namespace CHelper {
                                           StructureBuilder &structure,
                                           bool isMustHave) const;
 
-            HEDLEY_NON_NULL(2)
+            HEDLEY_NON_NULL(1)
             virtual bool collectSyntax(const ASTNode *astNode,
                                        SyntaxResult &syntaxResult) const;
         };

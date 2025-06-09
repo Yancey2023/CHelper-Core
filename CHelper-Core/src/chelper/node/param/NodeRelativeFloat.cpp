@@ -26,7 +26,7 @@ namespace CHelper::Node {
         return NodeTypeId::RELATIVE_FLOAT;
     }
 
-    ASTNode NodeRelativeFloat::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeRelativeFloat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode> result = getASTNode(this, cpack, tokenReader);
         if (HEDLEY_UNLIKELY(result.second.isError())) {
             return std::move(result.second);

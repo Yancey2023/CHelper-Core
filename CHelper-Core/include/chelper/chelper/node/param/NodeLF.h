@@ -23,7 +23,7 @@ namespace CHelper::Node {
 
         static NodeWrapped *getInstance();
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data = nullptr) const override;
+        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

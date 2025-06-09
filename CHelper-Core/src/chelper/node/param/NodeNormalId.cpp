@@ -66,7 +66,7 @@ namespace CHelper::Node {
         return NodeTypeId::NORMAL_ID;
     }
 
-    ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(this)
         ASTNode result = getNormalIdASTNode(this, tokenReader);
@@ -142,17 +142,17 @@ namespace CHelper::Node {
         std::transform(nameStartOf.begin(), nameStartOf.end(),
                        std::back_inserter(suggestions1.suggestions),
                        [&start, &end, this](const auto &item) {
-                           return Suggestion(start, end, isAfterWhitespace(), item);
+                           return Suggestion(start, end, getIsMustAfterWhitespace(), item);
                        });
         std::transform(nameContain.begin(), nameContain.end(),
                        std::back_inserter(suggestions1.suggestions),
                        [&start, &end, this](const auto &item) {
-                           return Suggestion(start, end, isAfterWhitespace(), item);
+                           return Suggestion(start, end, getIsMustAfterWhitespace(), item);
                        });
         std::transform(descriptionContain.begin(), descriptionContain.end(),
                        std::back_inserter(suggestions1.suggestions),
                        [&start, &end, this](const auto &item) {
-                           return Suggestion(start, end, isAfterWhitespace(), item);
+                           return Suggestion(start, end, getIsMustAfterWhitespace(), item);
                        });
         suggestions1.markFiltered();
         suggestions.push_back(std::move(suggestions1));

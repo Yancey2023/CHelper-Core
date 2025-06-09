@@ -35,7 +35,7 @@ namespace CHelper::Node {
                     Profile::push(R"({} should be {} in node "{}")",
                                   "isMustAfterWhiteSpace",
                                   item2->innerNode->isMustAfterWhiteSpace ? "false" : "true",
-                                  item2->innerNode->id.has_value() ? utf8::utf16to8(item2->innerNode->id.value()) : "UNKNOWN");
+                                  item2->innerNode->id.value_or("UNKNOWN"));
                     throw std::runtime_error("value is wrong");
                 }
             }
@@ -47,13 +47,13 @@ namespace CHelper::Node {
         return NodeTypeId::PER_COMMAND;
     }
 
-    ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         std::vector<ASTNode> childASTNodes;
         childASTNodes.reserve(startNodes.size());
         for (const auto &item: startNodes) {
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(item)
-            childASTNodes.push_back(item->getASTNode(tokenReader, cpack));
+            childASTNodes.push_back(item->getASTNodeWithIsMustAfterWhitespace(tokenReader, cpack, true));
             DEBUG_GET_NODE_END(item)
             tokenReader.restore();
         }

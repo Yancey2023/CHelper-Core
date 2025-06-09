@@ -408,7 +408,7 @@ TEST(BinaryUtilTest, CPackNormalIds) {
         CHelper::Profile::printAndClear(e);
         exit(-1);
     }
-    test<std::unordered_map<std::u16string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>>>(
+    test<std::unordered_map<std::string, std::shared_ptr<std::vector<std::shared_ptr<CHelper::NormalId>>>>>(
             [&cpack]() { return cpack->normalIds; });
 }
 
@@ -423,7 +423,7 @@ TEST(BinaryUtilTest, CPackNamespaceId) {
         exit(-1);
     }
     test<std::unordered_map<
-            std::u16string,
+            std::string,
             std::shared_ptr<std::vector<std::shared_ptr<CHelper::NamespaceId>>>>>(
             [&cpack]() { return cpack->namespaceIds; });
 }
@@ -439,7 +439,7 @@ TEST(BinaryUtilTest, NodeJsonBoolean) {
         exit(-1);
     }
     auto node = CHelper::Node::NodeJsonBoolean::make(
-            u"ID", u"description", u"descriptionTrue", u"descriptionFalse");
+            "ID", u"description", u"descriptionTrue", u"descriptionFalse");
     testNode<CHelper::Node::NodeJsonBoolean>(
             *cpack, [&node]() { return *node; });
 }
@@ -459,7 +459,7 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
             {
                     []() {
                         CHelper::Node::NodeJsonInteger node;
-                        node.id = u"ID";
+                        node.id = "ID";
                         node.description = u"description";
                         node.isMustAfterWhiteSpace = false;
                         node.min = 0;
@@ -468,7 +468,7 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
                     },
                     []() {
                         CHelper::Node::NodeJsonInteger node;
-                        node.id = u"ID";
+                        node.id = "ID";
                         node.description = u"description";
                         node.isMustAfterWhiteSpace = false;
                         node.min = std::nullopt;
@@ -477,7 +477,7 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
                     },
                     []() {
                         CHelper::Node::NodeJsonInteger node;
-                        node.id = u"ID";
+                        node.id = "ID";
                         node.description = u"description";
                         node.isMustAfterWhiteSpace = false;
                         node.min = 1;
@@ -486,7 +486,7 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
                     },
                     []() {
                         CHelper::Node::NodeJsonInteger node;
-                        node.id = u"ID";
+                        node.id = "ID";
                         node.description = u"description";
                         node.isMustAfterWhiteSpace = false;
                         node.min = std::nullopt;
@@ -511,7 +511,7 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
             {
                     []() {
                         CHelper::Node::NodeJsonFloat node;
-                        node.id = u"ID";
+                        node.id = "ID";
                         node.description = u"description";
                         node.isMustAfterWhiteSpace = false;
                         node.min = 0.0F;
@@ -520,7 +520,7 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
                     },
                     []() {
                         CHelper::Node::NodeJsonFloat node;
-                        node.id = u"ID";
+                        node.id = "ID";
                         node.description = u"description";
                         node.isMustAfterWhiteSpace = false;
                         node.min = std::nullopt;
@@ -529,7 +529,7 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
                     },
                     []() {
                         CHelper::Node::NodeJsonFloat node;
-                        node.id = u"ID";
+                        node.id = "ID";
                         node.description = u"description";
                         node.isMustAfterWhiteSpace = false;
                         node.min = 1.0F;
@@ -538,7 +538,7 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
                     },
                     []() {
                         CHelper::Node::NodeJsonFloat node;
-                        node.id = u"ID";
+                        node.id = "ID";
                         node.description = u"description";
                         node.isMustAfterWhiteSpace = false;
                         node.min = std::nullopt;
@@ -558,5 +558,5 @@ TEST(BinaryUtilTest, NodeJsonNull) {
         exit(-1);
     }
     testNode<CHelper::Node::NodeJsonNull>(
-            *cpack, []() { return CHelper::Node::NodeJsonNull{u"ID", u"description"}; });
+            *cpack, []() { return CHelper::Node::NodeJsonNull{"ID", u"description"}; });
 }

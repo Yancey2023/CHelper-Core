@@ -194,13 +194,13 @@ namespace CHelper {
                 std::vector<const Node::NodeBase *> perContent;
                 perContent.reserve(item2.size());
                 for (const auto &item3: item2) {
-                    perContent.push_back(item3.get());
+                    auto nodeWrapped = std::make_unique<Node::NodeWrapped>(item3.get());
+                    perContent.push_back(nodeWrapped.get());
+                    repeatCacheNodes.push_back(std::move(nodeWrapped));
                 }
                 auto node = std::make_unique<Node::NodeAnd>(item.id, std::nullopt, std::move(perContent));
-                auto nodeWrapped = std::make_unique<Node::NodeWrapped>(node.get());
-                content.push_back(nodeWrapped.get());
+                content.push_back(node.get());
                 repeatCacheNodes.push_back(std::move(node));
-                repeatCacheNodes.push_back(std::move(nodeWrapped));
             }
             std::vector<const Node::NodeBase *> breakChildNodes;
             breakChildNodes.reserve(item.breakNodes.size());
@@ -424,7 +424,7 @@ namespace CHelper {
         auto it = normalIds.find(key);
         if (HEDLEY_UNLIKELY(it == normalIds.end())) {
 #ifdef CHelperDebug
-            SPDLOG_WARN(R"(fail to find normal ids by key: "{}")", FORMAT_ARG(utf8::utf16to8(key)));
+            SPDLOG_WARN(R"(fail to find normal ids by key: "{}")", FORMAT_ARG(key));
 #endif
             return nullptr;
         }
@@ -441,7 +441,7 @@ namespace CHelper {
         auto it = namespaceIds.find(key);
         if (HEDLEY_UNLIKELY(it == namespaceIds.end())) {
 #ifdef CHelperDebug
-            SPDLOG_WARN(R"(fail to find namespace ids by key: "{}")", FORMAT_ARG(utf8::utf16to8(key)));
+            SPDLOG_WARN(R"(fail to find namespace ids by key: "{}")", FORMAT_ARG(key));
 #endif
             return nullptr;
         }

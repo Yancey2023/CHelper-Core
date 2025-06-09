@@ -20,7 +20,7 @@ namespace CHelper::Node {
         return NodeTypeId::BLOCK;
     }
 
-    ASTNode NodeBlock::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeBlock::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         ASTNode blockId = getByChildNode(tokenReader, cpack, nodeBlockId.get(), ASTNodeId::NODE_BLOCK_BLOCK_ID);
         if (HEDLEY_UNLIKELY(nodeBlockType == NodeBlockType::BLOCK || blockId.isError())) {

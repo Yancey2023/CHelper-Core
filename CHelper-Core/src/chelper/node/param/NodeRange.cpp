@@ -30,7 +30,7 @@ namespace CHelper::Node {
         return nullptr;
     }
 
-    ASTNode NodeRange::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeRange::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         ASTNode result = tokenReader.readStringASTNode(this);
         std::u16string_view str = result.tokens.toString();
         std::shared_ptr<ErrorReason> errorReason;

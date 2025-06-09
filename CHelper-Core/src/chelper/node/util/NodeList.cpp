@@ -40,7 +40,7 @@ namespace CHelper::Node {
         return NodeTypeId::LIST;
     }
 
-    ASTNode NodeList::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         //标记整个[...]，在最后进行收集
         tokenReader.push();
         ASTNode left = nodeLeft->getASTNode(tokenReader, cpack);

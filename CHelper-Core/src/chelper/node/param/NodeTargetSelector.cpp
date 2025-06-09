@@ -218,7 +218,7 @@ namespace CHelper::Node {
         return NodeTypeId::TARGET_SELECTOR;
     }
 
-    ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader, const CPack *cpack, void *private_data) const {
+    ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.skipWhitespace();
         tokenReader.push();
         DEBUG_GET_NODE_BEGIN(nodeAt)
