@@ -18,7 +18,7 @@ namespace CHelper {
             STRING,
             NUMBER,
             SYMBOL,
-            WHITE_SPACE,
+            SPACE,
             LF
         };
 

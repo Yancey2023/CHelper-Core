@@ -15,13 +15,13 @@ namespace CHelper::Node {
     public:
         char16_t symbol = ' ';
         std::shared_ptr<NormalId> normalId;
-        bool isAddWhitespace = false;
+        bool isAddSpace = false;
 
         NodeSingleSymbol() = default;
 
         NodeSingleSymbol(char16_t symbol,
                          const std::optional<std::u16string> &description,
-                         bool isAddWhitespace = true);
+                         bool isAddSpace = true);
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 

@@ -66,8 +66,8 @@ namespace CHelper {
         return suggestions;
     }
 
-    Suggestions Suggestions::singleWhitespaceSuggestion(Suggestion suggestion) {
-        return singleSuggestion(SuggestionsType::WHITESPACE, std::move(suggestion));
+    Suggestions Suggestions::singleSpaceSuggestion(Suggestion suggestion) {
+        return singleSuggestion(SuggestionsType::SPACE, std::move(suggestion));
     }
 
     Suggestions Suggestions::singleSymbolSuggestion(Suggestion suggestion) {

@@ -126,10 +126,10 @@ namespace CHelper {
         return orNode(node, std::move(childNodes), &tokens, errorReason, id);
     }
 
-    bool ASTNode::isAllWhitespaceError() const {
+    bool ASTNode::isAllSpaceError() const {
         return isError() && std::all_of(errorReasons.begin(), errorReasons.end(),
                                         [](const auto &item) {
-                                            return item->level == ErrorReasonLevel::REQUIRE_WHITE_SPACE;
+                                            return item->level == ErrorReasonLevel::REQUIRE_SPACE;
                                         });
     }
 
@@ -137,7 +137,7 @@ namespace CHelper {
         if (HEDLEY_UNLIKELY(index < tokens.getStartIndex() || index > tokens.getEndIndex())) {
             return std::nullopt;
         }
-        if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
+        if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllSpaceError())) {
             auto description = node->collectDescription(this, index);
             if (HEDLEY_UNLIKELY(description.has_value())) {
                 return std::move(description);
@@ -162,7 +162,7 @@ namespace CHelper {
 
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
+        if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllSpaceError())) {
 #ifdef CHelperTest
             Profile::push("collect id errors: {} {}",
                           FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
@@ -194,7 +194,7 @@ namespace CHelper {
         if (HEDLEY_LIKELY(index < tokens.getStartIndex() || index > tokens.getEndIndex())) {
             return;
         }
-        if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllWhitespaceError())) {
+        if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllSpaceError())) {
 #ifdef CHelperTest
             Profile::push("collect suggestions: {} {}",
                           FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
@@ -233,7 +233,7 @@ namespace CHelper {
                           FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
                           FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
 #endif
-            node->collectStructure(mode == ASTNodeMode::NONE && isAllWhitespaceError() ? nullptr : this, structure, isMustHave);
+            node->collectStructure(mode == ASTNodeMode::NONE && isAllSpaceError() ? nullptr : this, structure, isMustHave);
 #ifdef CHelperTest
             Profile::pop();
 #endif
@@ -365,10 +365,10 @@ namespace CHelper {
         return sortByLevel(result);
     }
 
-    static bool canAddWhitespace0(const ASTNode &astNode, size_t index) {
+    static bool canAddSpace0(const ASTNode &astNode, size_t index) {
         if (std::any_of(astNode.errorReasons.begin(), astNode.errorReasons.end(),
                         [&index](const auto &item) {
-                            return item->level == ErrorReasonLevel::REQUIRE_WHITE_SPACE && item->start >= index && item->end <= index;
+                            return item->level == ErrorReasonLevel::REQUIRE_SPACE && item->start >= index && item->end <= index;
                         })) {
             return true;
         }
@@ -376,10 +376,10 @@ namespace CHelper {
             case ASTNodeMode::NONE:
                 return false;
             case ASTNodeMode::AND:
-                return !astNode.childNodes.empty() && canAddWhitespace0(astNode.childNodes[astNode.childNodes.size() - 1], index);
+                return !astNode.childNodes.empty() && canAddSpace0(astNode.childNodes[astNode.childNodes.size() - 1], index);
             case ASTNodeMode::OR:
                 for (const auto &item: astNode.childNodes) {
-                    if (HEDLEY_UNLIKELY(canAddWhitespace0(item, index))) {
+                    if (HEDLEY_UNLIKELY(canAddSpace0(item, index))) {
                         return true;
                     }
                 }
@@ -395,8 +395,8 @@ namespace CHelper {
         Profile::push("start getting suggestions: {}", FORMAT_ARG(utf8::utf16to8(str)));
 #endif
         std::vector<Suggestions> suggestions;
-        if (HEDLEY_UNLIKELY(canAddWhitespace0(*this, index))) {
-            suggestions.push_back(Suggestions::singleWhitespaceSuggestion({str.length(), str.length(), false, whitespaceId}));
+        if (HEDLEY_UNLIKELY(canAddSpace0(*this, index))) {
+            suggestions.push_back(Suggestions::singleSpaceSuggestion({str.length(), str.length(), false, spaceId}));
         }
         collectSuggestions(index, suggestions);
 #ifdef CHelperTest

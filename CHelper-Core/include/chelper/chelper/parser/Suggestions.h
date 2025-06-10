@@ -14,7 +14,7 @@ namespace CHelper {
     namespace SuggestionsType {
 
         enum SuggestionsType : uint8_t {
-            WHITESPACE = 0,
+            SPACE = 0,
             SYMBOL = 1,
             LITERAL = 2,
             ID = 3
@@ -45,7 +45,7 @@ namespace CHelper {
 
         static Suggestions singleSuggestion(SuggestionsType::SuggestionsType suggestionsType, Suggestion suggestion);
 
-        static Suggestions singleWhitespaceSuggestion(Suggestion suggestion);
+        static Suggestions singleSpaceSuggestion(Suggestion suggestion);
 
         static Suggestions singleSymbolSuggestion(Suggestion suggestion);
 

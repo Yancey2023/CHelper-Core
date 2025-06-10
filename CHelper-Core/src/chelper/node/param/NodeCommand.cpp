@@ -139,7 +139,7 @@ namespace CHelper::Node {
             structure.append(isMustHave, u"命令");
             return;
         } else if (HEDLEY_LIKELY(astNode->id == ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
-            structure.appendWhiteSpace().append(std::u16string(astNode->tokens.toString()));
+            structure.appendSpace().append(std::u16string(astNode->tokens.toString()));
         }
     }
 

@@ -90,18 +90,18 @@ namespace CHelper {
                         NodeCreateStage::JSON_NODE,
                         NodeCreateStage::REPEAT_NODE,
                         NodeCreateStage::COMMAND_PARAM_NODE};
-                static constexpr bool isMustAfterWhiteSpace = true;
+                static constexpr bool isMustAfterSpace = true;
             };
 
             struct JsonNodeTypeDetail {
                 static constexpr std::array<NodeCreateStage::NodeCreateStage, 1> nodeCreateStage = {
                         NodeCreateStage::JSON_NODE};
-                static constexpr bool isMustAfterWhiteSpace = false;
+                static constexpr bool isMustAfterSpace = false;
             };
 
             struct UnserializableNodeTypeDetail {
                 static constexpr std::array<NodeCreateStage::NodeCreateStage, 0> nodeCreateStage = {};
-                static constexpr bool isMustAfterWhiteSpace = false;
+                static constexpr bool isMustAfterSpace = false;
             };
 
             template<>
@@ -180,21 +180,21 @@ namespace CHelper {
             struct NodeTypeDetail<NodeTypeId::POSITION> : CommandParamNodeTypeDetail {
                 using Type = NodePosition;
                 static constexpr auto name = "POSITION";
-                static constexpr bool isMustAfterWhiteSpace = false;
+                static constexpr bool isMustAfterSpace = false;
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::RELATIVE_FLOAT> : CommandParamNodeTypeDetail {
                 using Type = NodeRelativeFloat;
                 static constexpr auto name = "RELATIVE_FLOAT";
-                static constexpr bool isMustAfterWhiteSpace = false;
+                static constexpr bool isMustAfterSpace = false;
             };
 
             template<>
             struct NodeTypeDetail<NodeTypeId::REPEAT> : CommandParamNodeTypeDetail {
                 using Type = NodeRepeat;
                 static constexpr auto name = "REPEAT";
-                static constexpr bool isMustAfterWhiteSpace = false;
+                static constexpr bool isMustAfterSpace = false;
             };
 
             template<>
@@ -335,7 +335,7 @@ namespace CHelper {
                 using Type = typename NodeTypeDetail<nodeTypeId>::Type;
                 static constexpr auto nodeCreateStage = NodeTypeDetail<nodeTypeId>::nodeCreateStage;
                 static constexpr auto name = NodeTypeDetail<nodeTypeId>::name;
-                static constexpr auto isMustAfterWhiteSpace = NodeTypeDetail<nodeTypeId>::isMustAfterWhiteSpace;
+                static constexpr auto isMustAfterSpace = NodeTypeDetail<nodeTypeId>::isMustAfterSpace;
 
                 template<class JsonValueType>
                 static void to_json(typename JsonValueType::AllocatorType &allocator,
@@ -359,8 +359,8 @@ namespace CHelper {
                         }
                         t = std::make_unique<Type>();
                         serialization::Codec<Type>::template from_json<JsonValueType>(jsonValue, *reinterpret_cast<Type *>(t.get()));
-                        if (HEDLEY_UNLIKELY(!t->isMustAfterWhiteSpace.has_value())) {
-                            t->isMustAfterWhiteSpace = isMustAfterWhiteSpace;
+                        if (HEDLEY_UNLIKELY(!t->isMustAfterSpace.has_value())) {
+                            t->isMustAfterSpace = isMustAfterSpace;
                         }
                     }
                 }
@@ -386,8 +386,8 @@ namespace CHelper {
                         }
                         t = std::make_unique<Type>();
                         serialization::Codec<Type>::template from_binary<isNeedConvert>(istream, *reinterpret_cast<Type *>(t.get()));
-                        if (HEDLEY_UNLIKELY(!t->isMustAfterWhiteSpace.has_value())) {
-                            t->isMustAfterWhiteSpace = isMustAfterWhiteSpace;
+                        if (HEDLEY_UNLIKELY(!t->isMustAfterSpace.has_value())) {
+                            t->isMustAfterSpace = isMustAfterSpace;
                         }
                     }
                 }

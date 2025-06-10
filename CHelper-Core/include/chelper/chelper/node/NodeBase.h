@@ -154,25 +154,25 @@ namespace CHelper {
             std::optional<std::string> id;
             std::optional<std::u16string> brief;
             std::optional<std::u16string> description;
-            std::optional<bool> isMustAfterWhiteSpace;
+            std::optional<bool> isMustAfterSpace;
 
             NodeSerializable() = default;
 
             NodeSerializable(const std::optional<std::string> &id,
                              const std::optional<std::u16string> &description,
-                             bool isMustAfterWhiteSpace);
+                             bool isMustAfterSpace);
 
             std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const override;
 
         public:
-            [[nodiscard]] bool getIsMustAfterWhitespace() const;
+            [[nodiscard]] bool getIsMustAfterSpace() const;
         };
 
     }// namespace Node
 
 }// namespace CHelper
 
-CODEC(CHelper::Node::NodeSerializable, id, brief, description, isMustAfterWhiteSpace)
+CODEC(CHelper::Node::NodeSerializable, id, brief, description, isMustAfterSpace)
 
 template<>
 struct serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>> : BaseCodec<std::unique_ptr<CHelper::Node::NodeSerializable>> {

@@ -31,7 +31,7 @@ namespace CHelper::Old2New {
 
     bool expect(TokenReader &tokenReader, const std::function<bool(const Token &token)> &check) {
         tokenReader.push();
-        tokenReader.skipWhitespace();
+        tokenReader.skipSpace();
         const Token *token = tokenReader.read();
         if (token == nullptr || !check(*token)) {
             tokenReader.restore();
@@ -114,7 +114,7 @@ namespace CHelper::Old2New {
         tokenReader.push();
         if (expectSymbol(tokenReader, u'~') || expectSymbol(tokenReader, u'^')) {
             tokenReader.push();
-            if (!tokenReader.skipWhitespace()) {
+            if (!tokenReader.skipSpace()) {
                 tokenReader.pop();
                 expectNumber(tokenReader);
             } else {
@@ -306,7 +306,7 @@ namespace CHelper::Old2New {
             return false;
         }
         tokenReader.push();
-        tokenReader.skipWhitespace();
+        tokenReader.skipSpace();
         TokensView tokens = tokenReader.collect();
         dataFixList.emplace_back(tokens, u" run ");
         return true;

@@ -17,18 +17,18 @@ namespace CHelper::Node {
     ASTNode NodeAnd::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
         tokenReader.push();
         std::vector<ASTNode> childASTNodes;
-        bool isMustAfterWhitespace = false;
+        bool isMustAfterSpace = false;
         for (size_t i = 0; i < childNodes.size(); ++i) {
             const auto &item = childNodes[i];
             if (item->getNodeType() == NodeTypeId::WRAPPED) {
                 const NodeWrapped * nodeWrapped = reinterpret_cast<const NodeWrapped *>(item);
-                ASTNode node = nodeWrapped->getASTNodeWithIsMustAfterWhitespace(tokenReader, cpack, isMustAfterWhitespace);
+                ASTNode node = nodeWrapped->getASTNodeWithIsMustAfterSpace(tokenReader, cpack, isMustAfterSpace);
                 bool isError = node.isError();
                 childASTNodes.push_back(std::move(node));
                 if (HEDLEY_UNLIKELY(isError)) {
                     break;
                 }
-                isMustAfterWhitespace = nodeWrapped->innerNode->getIsMustAfterWhitespace();
+                isMustAfterSpace = nodeWrapped->innerNode->getIsMustAfterSpace();
             } else {
                 ASTNode node = item->getASTNode(tokenReader, cpack);
                 bool isError = node.isError();
@@ -38,14 +38,14 @@ namespace CHelper::Node {
                 }
                 if (HEDLEY_UNLIKELY(i < childNodes.size() - 1 &&
                                     tokenReader.ready() &&
-                                    tokenReader.peek()->type == TokenType::WHITE_SPACE)) {
+                                    tokenReader.peek()->type == TokenType::SPACE)) {
                     tokenReader.push();
                     tokenReader.skip();
                     TokensView tokens = tokenReader.collect();
                     return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect(),
                                             ErrorReason::contentError(tokens, u"意外的空格"));
                 }
-                isMustAfterWhitespace = false;
+                isMustAfterSpace = false;
             }
         }
         return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect());

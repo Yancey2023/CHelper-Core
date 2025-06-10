@@ -76,7 +76,7 @@ namespace CHelper::Node {
             auto node = std::make_unique<NodeTemplateBoolean>();
             node->id = id;
             node->description = description;
-            node->isMustAfterWhiteSpace = false;
+            node->isMustAfterSpace = false;
             node->descriptionTrue = descriptionTrue;
             node->descriptionFalse = descriptionFalse;
             return node;

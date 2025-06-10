@@ -15,7 +15,7 @@
 
 namespace CHelper {
 
-    static std::shared_ptr<NormalId> whitespaceId = NormalId::make(u" ", u"空格");
+    static std::shared_ptr<NormalId> spaceId = NormalId::make(u" ", u"空格");
 
     namespace Node {
 
@@ -117,7 +117,7 @@ namespace CHelper {
             return !childNodes.empty();
         }
 
-        [[nodiscard]] bool isAllWhitespaceError() const;
+        [[nodiscard]] bool isAllSpaceError() const;
 
         [[nodiscard]] const ASTNode &getBestNode() const {
             return childNodes[whichBest];

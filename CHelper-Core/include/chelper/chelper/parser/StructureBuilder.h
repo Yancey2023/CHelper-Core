@@ -24,7 +24,7 @@ namespace CHelper {
 
         StructureBuilder &append(const std::u16string &str);
 
-        StructureBuilder &appendWhiteSpace();
+        StructureBuilder &appendSpace();
 
         StructureBuilder &appendLeftBracket(bool isMustHave);
 

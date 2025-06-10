@@ -16,7 +16,7 @@ namespace CHelper {
                     return u"数字类型";
                 case SYMBOL:
                     return u"符号类型";
-                case WHITE_SPACE:
+                case SPACE:
                     return u"空格";
                 case LF:
                     return u"换行符类型";

@@ -18,7 +18,7 @@ namespace CHelper::Node {
 
     void NodeText::init(const CPack &cpack) {
         getTextASTNode = [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-            return tokenReader.readUntilWhitespace(node);
+            return tokenReader.readUntilSpace(node);
         };
     }
 
@@ -50,14 +50,14 @@ namespace CHelper::Node {
         //通过名字进行搜索
         size_t index1 = data->name.find(str);
         if (HEDLEY_LIKELY(index1 != std::u16string::npos)) {
-            suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, getIsMustAfterWhitespace(), data}));
+            suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, getIsMustAfterSpace(), data}));
             return true;
         }
         //通过介绍进行搜索
         if (HEDLEY_LIKELY(data->description.has_value())) {
             size_t index2 = data->description.value().find(str);
             if (HEDLEY_LIKELY(index2 != std::u16string::npos)) {
-                suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, getIsMustAfterWhitespace(), data}));
+                suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, getIsMustAfterSpace(), data}));
             }
         }
         return true;
@@ -66,7 +66,7 @@ namespace CHelper::Node {
     void NodeText::collectStructure(const ASTNode *astNode,
                                     StructureBuilder &structure,
                                     bool isMustHave) const {
-        structure.appendWhiteSpace().append(data->name);
+        structure.appendSpace().append(data->name);
     }
 
     bool NodeText::collectSyntax(const ASTNode *astNode,

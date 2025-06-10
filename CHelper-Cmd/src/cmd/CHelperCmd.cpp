@@ -241,7 +241,7 @@ namespace CHelper::Test {
                         std::u16string greenPart = item.content->name;
                         if (item.end == command.length()) {
                             ASTNode astNode = Parser::parse(result, core->getCPack());
-                            if (item.isAddWhitespace && astNode.isAllWhitespaceError()) {
+                            if (item.isAddSpace && astNode.isAllSpaceError()) {
                                 greenPart.push_back(u' ');
                             }
                         }

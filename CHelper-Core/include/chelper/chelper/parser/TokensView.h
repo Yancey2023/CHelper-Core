@@ -33,7 +33,7 @@ namespace CHelper {
 
         [[nodiscard]] size_t size() const;
 
-        [[nodiscard]] bool isAllWhitespace() const;
+        [[nodiscard]] bool isAllSpace() const;
 
         void forEach(std::function<void(const Token &token)> function) const;
 

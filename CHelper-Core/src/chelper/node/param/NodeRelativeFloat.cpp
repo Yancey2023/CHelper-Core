@@ -68,7 +68,7 @@ namespace CHelper::Node {
             }
             tokenReader.pop();
             //空格检测
-            if (HEDLEY_UNLIKELY(tokenReader.ready() && tokenReader.peek()->type == TokenType::WHITE_SPACE)) {
+            if (HEDLEY_UNLIKELY(tokenReader.ready() && tokenReader.peek()->type == TokenType::SPACE)) {
                 childNodes.push_back(std::move(preSymbol));
                 return {type, ASTNode::andNode(node, std::move(childNodes), tokenReader.collect())};
             }
@@ -111,7 +111,7 @@ namespace CHelper::Node {
     }
 
     bool NodeRelativeFloat::collectSuggestions(size_t index, std::vector<Suggestions> &suggestions, bool canUseCaretNotation) {
-        suggestions.push_back(Suggestions::singleWhitespaceSuggestion({index, index, false, whitespaceId}));
+        suggestions.push_back(Suggestions::singleSpaceSuggestion({index, index, false, spaceId}));
         suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, nodeRelativeNotation->normalId}));
         if (HEDLEY_LIKELY(canUseCaretNotation)) {
             suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, nodeCaretNotation->normalId}));

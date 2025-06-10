@@ -42,9 +42,9 @@ namespace CHelper {
         return true;
     }
 
-    size_t TokenReader::skipWhitespace() {
+    size_t TokenReader::skipSpace() {
         size_t start = index;
-        while (ready() && peek()->type == TokenType::WHITE_SPACE) {
+        while (ready() && peek()->type == TokenType::SPACE) {
             skip();
         }
         return index - start;
@@ -110,7 +110,7 @@ namespace CHelper {
                                            const ASTNodeId::ASTNodeId &astNodeId,
                                            std::shared_ptr<ErrorReason> (*check)(const std::u16string_view &str,
                                                                                  const TokensView &tokens)) {
-        skipWhitespace();
+        skipSpace();
         push();
         const Token *token = read();
         TokensView tokens = collect();
@@ -169,12 +169,12 @@ namespace CHelper {
         return readSimpleASTNode(node, TokenType::SYMBOL, u"符号类型", astNodeId);
     }
 
-    ASTNode TokenReader::readUntilWhitespace(const Node::NodeBase *node,
+    ASTNode TokenReader::readUntilSpace(const Node::NodeBase *node,
                                              const ASTNodeId::ASTNodeId &astNodeId) {
         push();
         while (ready()) {
             TokenType::TokenType tokenType = peek()->type;
-            if (HEDLEY_UNLIKELY(tokenType == TokenType::WHITE_SPACE || tokenType == TokenType::LF)) {
+            if (HEDLEY_UNLIKELY(tokenType == TokenType::SPACE || tokenType == TokenType::LF)) {
                 break;
             }
             skip();
@@ -187,7 +187,7 @@ namespace CHelper {
         push();
         while (ready()) {
             TokenType::TokenType tokenType = peek()->type;
-            if (HEDLEY_UNLIKELY(tokenType == TokenType::SYMBOL || tokenType == TokenType::WHITE_SPACE || tokenType == TokenType::LF)) {
+            if (HEDLEY_UNLIKELY(tokenType == TokenType::SYMBOL || tokenType == TokenType::SPACE || tokenType == TokenType::LF)) {
                 break;
             }
             skip();

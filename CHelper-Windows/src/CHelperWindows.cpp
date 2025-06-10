@@ -219,7 +219,7 @@ void onTextChanged(const std::u16string &command) {
                 std::u16string greenPart = item.content->name;
                 if (item.end == command.length()) {
                     CHelper::ASTNode astNode = CHelper::Parser::parse(result, core->getCPack());
-                    if (item.isAddWhitespace && astNode.isAllWhitespaceError()) {
+                    if (item.isAddSpace && astNode.isAllSpaceError()) {
                         greenPart.push_back(u' ');
                     }
                 }

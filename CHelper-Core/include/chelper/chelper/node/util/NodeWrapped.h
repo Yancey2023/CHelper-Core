@@ -25,7 +25,7 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
-        [[nodiscard]] ASTNode getASTNodeWithIsMustAfterWhitespace(TokenReader &tokenReader, const CPack *cpack, bool isMustAfterWhiteSpace) const;
+        [[nodiscard]] ASTNode getASTNodeWithIsMustAfterSpace(TokenReader &tokenReader, const CPack *cpack, bool isMustAfterSpace) const;
 
         std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const override;
 

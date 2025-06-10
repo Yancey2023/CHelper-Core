@@ -46,10 +46,10 @@ namespace CHelper::Node {
 
     NodeSerializable::NodeSerializable(const std::optional<std::string> &id,
                                        const std::optional<std::u16string> &description,
-                                       bool isMustAfterWhiteSpace)
+                                       bool isMustAfterSpace)
         : id(id),
           description(description),
-          isMustAfterWhiteSpace(isMustAfterWhiteSpace) {}
+          isMustAfterSpace(isMustAfterSpace) {}
 
     std::optional<std::u16string> NodeSerializable::collectDescription(const ASTNode *node, size_t index) const {
 #ifdef CHelperDebug
@@ -60,8 +60,8 @@ namespace CHelper::Node {
         return description;
     }
 
-    bool NodeSerializable::getIsMustAfterWhitespace() const {
-        return isMustAfterWhiteSpace.value_or(false);
+    bool NodeSerializable::getIsMustAfterSpace() const {
+        return isMustAfterSpace.value_or(false);
     }
 
 }// namespace CHelper::Node

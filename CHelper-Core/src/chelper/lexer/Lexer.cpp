@@ -7,21 +7,21 @@
 namespace CHelper::Lexer {
 
     //字符串的结束字符
-    const std::u16string endChars = u" ,@~^/$&\"'!#%+*=[{]}\\|<>`\n";
+    const std::u16string endChars = u",@~^/$&'!#%+*=[{]}\\|<>`\" \n";
     //可以被识别成符号的字符，这些字符不一定是字符串的结束字符
-    const std::u16string symbols = u",@~^/$&'!#%+*=[{]}\\|<>`+-=:";
+    const std::u16string symbols = u",@~^/$&'!#%+*=[{]}\\|<>`-:";
 
-    bool isNum(char16_t ch) {
+    bool isNumberChar(char16_t ch) {
         return (ch >= '0' && ch <= '9') || ch == '.';
     }
 
-    bool isEndChar(char16_t ch) {
+    bool isStringEndChar(char16_t ch) {
         return std::any_of(endChars.begin(), endChars.end(), [&ch](const char16_t &endChar) {
             return ch == endChar;
         });
     }
 
-    bool isSymbol(char16_t ch) {
+    bool isSymbolChar(char16_t ch) {
         return std::any_of(symbols.begin(), symbols.end(), [&ch](const char16_t &endChar) {
             return ch == endChar;
         });
@@ -34,19 +34,19 @@ namespace CHelper::Lexer {
         } else if (HEDLEY_UNLIKELY(ch.value() == '\n')) {
             return TokenType::LF;
         } else if (HEDLEY_UNLIKELY(ch.value() == ' ')) {
-            return TokenType::WHITE_SPACE;
-        } else if (HEDLEY_UNLIKELY(isNum(ch.value()))) {
+            return TokenType::SPACE;
+        } else if (HEDLEY_UNLIKELY(isNumberChar(ch.value()))) {
             return TokenType::NUMBER;
         } else if (HEDLEY_UNLIKELY(ch.value() == '+' || ch.value() == '-')) {
             stringReader.mark();
             ch = stringReader.next();
             stringReader.reset();
-            if (HEDLEY_LIKELY(ch.has_value() && isNum(ch.value()))) {
+            if (HEDLEY_LIKELY(ch.has_value() && isNumberChar(ch.value()))) {
                 return TokenType::NUMBER;
             } else {
                 return TokenType::SYMBOL;
             }
-        } else if (HEDLEY_UNLIKELY(isSymbol(ch.value()))) {
+        } else if (HEDLEY_UNLIKELY(isSymbolChar(ch.value()))) {
             return TokenType::SYMBOL;
         } else {
             return TokenType::STRING;
@@ -56,7 +56,7 @@ namespace CHelper::Lexer {
     Token nextTokenNumber(StringReader &stringReader) {
         stringReader.mark();
         std::optional<char16_t> ch = stringReader.peek();
-        while (ch.has_value() && (isNum(ch.value()) || ch.value() == '+' || ch.value() == '-')) {
+        while (ch.has_value() && (isNumberChar(ch.value()) || ch.value() == '+' || ch.value() == '-')) {
             ch = stringReader.next();
         }
         return {TokenType::NUMBER, stringReader.posBackup, stringReader.collect()};
@@ -92,7 +92,7 @@ namespace CHelper::Lexer {
                     stringReader.skip();
                     break;
                 }
-            } else if (HEDLEY_UNLIKELY(isEndChar(ch.value()))) {
+            } else if (HEDLEY_UNLIKELY(isStringEndChar(ch.value()))) {
                 //在检测到字符串结束字符时进行结尾
                 break;
             }
@@ -101,10 +101,10 @@ namespace CHelper::Lexer {
         return {TokenType::STRING, stringReader.posBackup, stringReader.collect()};
     }
 
-    Token nextTokenWhiteSpace(StringReader &stringReader) {
+    Token nextTokenSpace(StringReader &stringReader) {
         stringReader.mark();
         stringReader.skip();
-        return {TokenType::WHITE_SPACE, stringReader.posBackup, stringReader.collect()};
+        return {TokenType::SPACE, stringReader.posBackup, stringReader.collect()};
     }
 
     Token nextTokenLF(StringReader &stringReader) {
@@ -134,8 +134,8 @@ namespace CHelper::Lexer {
                 case TokenType::STRING:
                     tokenList.push_back(nextTokenString(stringReader));
                     break;
-                case TokenType::WHITE_SPACE:
-                    tokenList.push_back(nextTokenWhiteSpace(stringReader));
+                case TokenType::SPACE:
+                    tokenList.push_back(nextTokenSpace(stringReader));
                     break;
                 case TokenType::LF:
                     tokenList.push_back(nextTokenLF(stringReader));

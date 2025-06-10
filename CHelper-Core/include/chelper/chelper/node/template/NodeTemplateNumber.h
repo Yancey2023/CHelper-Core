@@ -98,7 +98,7 @@ namespace CHelper::Node {
             auto result = std::make_unique<NodeTemplateNumber<T, isJson>>();
             result->id = id;
             result->description = description;
-            result->isMustAfterWhiteSpace = false;
+            result->isMustAfterSpace = false;
             result->min = min0;
             result->max = max0;
             return std::move(result);

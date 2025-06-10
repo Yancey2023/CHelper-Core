@@ -10,20 +10,20 @@ namespace CHelper {
 
     Suggestion::Suggestion(size_t start,
                            size_t end,
-                           bool isAddWhitespace,
+                           bool isAddSpace,
                            const std::shared_ptr<NormalId> &content)
         : start(start),
           end(end),
-          isAddWhitespace(isAddWhitespace),
+          isAddSpace(isAddSpace),
           content(content),
           mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
 
     Suggestion::Suggestion(const TokensView &tokens,
-                           bool isAddWhitespace,
+                           bool isAddSpace,
                            const std::shared_ptr<NormalId> &content)
         : start(tokens.getStartIndex()),
           end(tokens.getEndIndex()),
-          isAddWhitespace(isAddWhitespace),
+          isAddSpace(isAddSpace),
           content(content),
           mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
 
@@ -39,7 +39,7 @@ namespace CHelper {
         }
         core->onTextChanged(result.first, result.second);
         const ASTNode *astNode = core->getAstNode();
-        if (HEDLEY_LIKELY(isAddWhitespace && astNode->isAllWhitespaceError())) {
+        if (HEDLEY_LIKELY(isAddSpace && astNode->isAllSpaceError())) {
             result.first.append(u" ");
             result.second++;
         }

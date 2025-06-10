@@ -31,10 +31,10 @@ namespace CHelper::Node {
                 }
                 bool flag2 = item2->innerNode->getNodeType() == NodeTypeId::POSITION ||
                              item2->innerNode->getNodeType() == NodeTypeId::RELATIVE_FLOAT;
-                if (HEDLEY_UNLIKELY(flag1 && flag2 == item2->innerNode->isMustAfterWhiteSpace)) {
+                if (HEDLEY_UNLIKELY(flag1 && flag2 == item2->innerNode->isMustAfterSpace)) {
                     Profile::push(R"({} should be {} in node "{}")",
-                                  "isMustAfterWhiteSpace",
-                                  item2->innerNode->isMustAfterWhiteSpace ? "false" : "true",
+                                  "isMustAfterSpace",
+                                  item2->innerNode->isMustAfterSpace ? "false" : "true",
                                   item2->innerNode->id.value_or("UNKNOWN"));
                     throw std::runtime_error("value is wrong");
                 }
@@ -53,7 +53,7 @@ namespace CHelper::Node {
         for (const auto &item: startNodes) {
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(item)
-            childASTNodes.push_back(item->getASTNodeWithIsMustAfterWhitespace(tokenReader, cpack, true));
+            childASTNodes.push_back(item->getASTNodeWithIsMustAfterSpace(tokenReader, cpack, true));
             DEBUG_GET_NODE_END(item)
             tokenReader.restore();
         }

@@ -55,7 +55,7 @@ namespace CHelper::Node {
         if (astNode != nullptr) {
             for (const auto &item: astNode->childNodes) {
                 //如果内容为空，就跳过
-                if (HEDLEY_UNLIKELY(item.tokens.isEmpty() || item.tokens.isAllWhitespace())) {
+                if (HEDLEY_UNLIKELY(item.tokens.isEmpty() || item.tokens.isAllSpace())) {
                     continue;
                 }
                 //获取结构
@@ -77,7 +77,7 @@ namespace CHelper::Node {
                 } else {
                     if (!isAddMoreSymbol) {
                         isAddMoreSymbol = true;
-                        structure.appendWhiteSpace().append(u"...");
+                        structure.appendSpace().append(u"...");
                     }
                 }
                 if (HEDLEY_UNLIKELY(item.whichBest == 1)) {
@@ -90,7 +90,7 @@ namespace CHelper::Node {
         //如果没有遇到结束语句，添加...和结束语句的结构
         if (!isAddMoreSymbol) {
             isAddMoreSymbol = true;
-            structure.appendWhiteSpace().append(u"...");
+            structure.appendSpace().append(u"...");
         }
         for (const auto &item: reinterpret_cast<const NodeAnd *>(reinterpret_cast<const NodeOr *>(nodeElement)->childNodes[1])->childNodes) {
             item->collectStructure(nullptr, structure, true);

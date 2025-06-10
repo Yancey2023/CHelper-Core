@@ -36,11 +36,11 @@ namespace CHelper {
         return end - start;
     }
 
-    [[nodiscard]] bool TokensView::isAllWhitespace() const {
+    [[nodiscard]] bool TokensView::isAllSpace() const {
         return std::all_of(lexerResult->allTokens.begin() + static_cast<std::u16string::difference_type>(start),
                            lexerResult->allTokens.begin() + static_cast<std::u16string::difference_type>(end),
                            [](const auto &item) {
-                               return item.type == TokenType::WHITE_SPACE;
+                               return item.type == TokenType::SPACE;
                            });
     }
 

@@ -20,7 +20,7 @@ namespace CHelper {
         //要被替换的位置
         size_t start, end;
         //如果光标在最后面，是否需要在最后加空格
-        bool isAddWhitespace;
+        bool isAddSpace;
         //内容
         std::shared_ptr<NormalId> content;
 
@@ -28,9 +28,9 @@ namespace CHelper {
         const size_t mHashCode;
 
     public:
-        Suggestion(size_t start, size_t end, bool isAddWhitespace, const std::shared_ptr<NormalId> &content);
+        Suggestion(size_t start, size_t end, bool isAddSpace, const std::shared_ptr<NormalId> &content);
 
-        Suggestion(const TokensView &tokens, bool isAddWhitespace, const std::shared_ptr<NormalId> &content);
+        Suggestion(const TokensView &tokens, bool isAddSpace, const std::shared_ptr<NormalId> &content);
 
         [[nodiscard]] std::pair<std::u16string, size_t> apply(CHelperCore *core, const std::u16string_view &before) const;
 

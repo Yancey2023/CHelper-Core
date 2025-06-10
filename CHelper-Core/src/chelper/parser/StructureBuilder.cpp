@@ -22,7 +22,7 @@ namespace CHelper {
         return *this;
     }
 
-    StructureBuilder &StructureBuilder::appendWhiteSpace() {
+    StructureBuilder &StructureBuilder::appendSpace() {
         if (HEDLEY_UNLIKELY(structure.empty())) {
             isDirty = true;
             return *this;
@@ -39,7 +39,7 @@ namespace CHelper {
     }
 
     StructureBuilder &StructureBuilder::append(bool isMustHave, const std::u16string &str) {
-        return appendWhiteSpace().appendLeftBracket(isMustHave).append(str).appendRightBracket(isMustHave);
+        return appendSpace().appendLeftBracket(isMustHave).append(str).appendRightBracket(isMustHave);
     }
 
     std::u16string StructureBuilder::build() {

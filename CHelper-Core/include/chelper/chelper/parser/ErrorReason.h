@@ -18,7 +18,7 @@ namespace CHelper {
             //命令后面有多余部分
             EXCESS = 0,
             //缺少空格
-            REQUIRE_WHITE_SPACE = 1,
+            REQUIRE_SPACE = 1,
             //命令不完整
             INCOMPLETE = 2,
             //类型不匹配
@@ -65,13 +65,13 @@ namespace CHelper {
 
         //缺少空格
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        requireWhiteSpace(const TokensView &tokens) {
-            return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, tokens, u"命令不完整，缺少空格");
+        requireSpace(const TokensView &tokens) {
+            return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_SPACE, tokens, u"命令不完整，缺少空格");
         }
 
         [[maybe_unused]] static std::shared_ptr<ErrorReason>
-        requireWhiteSpace(size_t start, size_t end) {
-            return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_WHITE_SPACE, start, end, u"命令不完整，缺少空格");
+        requireSpace(size_t start, size_t end) {
+            return std::make_shared<ErrorReason>(ErrorReasonLevel::REQUIRE_SPACE, start, end, u"命令不完整，缺少空格");
         }
 
         //命令不完整

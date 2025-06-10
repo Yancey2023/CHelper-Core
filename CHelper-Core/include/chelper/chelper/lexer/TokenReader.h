@@ -55,7 +55,7 @@ namespace CHelper {
 
         bool skip();
 
-        size_t skipWhitespace();
+        size_t skipSpace();
 
         void skipToLF();
 
@@ -88,7 +88,7 @@ namespace CHelper {
         ASTNode readSymbolASTNode(const Node::NodeBase *node,
                                   const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
-        ASTNode readUntilWhitespace(const Node::NodeBase *node,
+        ASTNode readUntilSpace(const Node::NodeBase *node,
                                     const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
         ASTNode readStringOrNumberASTNode(const Node::NodeBase *node,

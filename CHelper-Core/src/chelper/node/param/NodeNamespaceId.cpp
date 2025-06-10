@@ -118,32 +118,32 @@ namespace CHelper::Node {
         std::transform(nameStartOf.begin(), nameStartOf.end(),
                        std::back_inserter(suggestions1.suggestions),
                        [&start, &end, this](const auto &item) {
-                           return Suggestion(start, end, getIsMustAfterWhitespace(), item);
+                           return Suggestion(start, end, getIsMustAfterSpace(), item);
                        });
         std::transform(nameContain.begin(), nameContain.end(),
                        std::back_inserter(suggestions1.suggestions),
                        [&start, &end, this](const auto &item) {
-                           return Suggestion(start, end, getIsMustAfterWhitespace(), item);
+                           return Suggestion(start, end, getIsMustAfterSpace(), item);
                        });
         std::transform(namespaceStartOf.begin(), namespaceStartOf.end(),
                        std::back_inserter(suggestions1.suggestions),
                        [&start, &end, this](const auto &item) {
-                           return Suggestion(start, end, getIsMustAfterWhitespace(), item);
+                           return Suggestion(start, end, getIsMustAfterSpace(), item);
                        });
         std::transform(namespaceContain.begin(), namespaceContain.end(),
                        std::back_inserter(suggestions1.suggestions),
                        [&start, &end, this](const auto &item) {
-                           return Suggestion(start, end, getIsMustAfterWhitespace(), item);
+                           return Suggestion(start, end, getIsMustAfterSpace(), item);
                        });
         std::transform(descriptionContain.begin(), descriptionContain.end(),
                        std::back_inserter(suggestions1.suggestions),
                        [&start, &end, this](const auto &item) {
-                           return Suggestion(start, end, getIsMustAfterWhitespace(), item);
+                           return Suggestion(start, end, getIsMustAfterSpace(), item);
                        });
         std::transform(descriptionContain.begin(), descriptionContain.end(),
                        std::back_inserter(suggestions1.suggestions),
                        [&start, &end, this](const auto &item) {
-                           return Suggestion(start, end, getIsMustAfterWhitespace(), item->getIdWithNamespace());
+                           return Suggestion(start, end, getIsMustAfterSpace(), item->getIdWithNamespace());
                        });
         suggestions1.markFiltered();
         suggestions.push_back(std::move(suggestions1));

@@ -19,8 +19,8 @@ namespace CHelper::Test {
                 return "STRING";
             case CHelper::TokenType::SYMBOL:
                 return "SYMBOL";
-            case CHelper::TokenType::WHITE_SPACE:
-                return "WHITE_SPACE";
+            case CHelper::TokenType::SPACE:
+                return "WHITESPACE";
             default:
                 return "UNKNOWN";
         }

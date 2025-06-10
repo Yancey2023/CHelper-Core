@@ -14,10 +14,10 @@ namespace CHelper::Node {
 
     NodeSingleSymbol::NodeSingleSymbol(char16_t symbol,
                                        const std::optional<std::u16string> &description,
-                                       bool isAddWhitespace)
+                                       bool isAddSpace)
         : symbol(symbol),
           normalId(getNormalId(symbol, description)),
-          isAddWhitespace(isAddWhitespace) {}
+          isAddSpace(isAddSpace) {}
 
     NodeTypeId::NodeTypeId NodeSingleSymbol::getNodeType() const {
         return NodeTypeId::SINGLE_SYMBOL;
@@ -46,7 +46,7 @@ namespace CHelper::Node {
         if (HEDLEY_LIKELY(astNode->tokens.getStartIndex() != index)) {
             return true;
         }
-        suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, isAddWhitespace, normalId}));
+        suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, isAddSpace, normalId}));
         return true;
     }
 
