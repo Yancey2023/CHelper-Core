@@ -166,7 +166,7 @@ namespace CHelper {
             return t1.id == t2.id &&
                    t1.brief == t2.brief &&
                    t1.description == t2.description &&
-                   t1.isMustAfterWhiteSpace == t2.isMustAfterWhiteSpace;
+                   t1.isMustAfterSpace == t2.isMustAfterSpace;
         }
 
         bool operator==(const NodeJsonBoolean &t1, const NodeJsonBoolean &t2) {
@@ -461,7 +461,7 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
                         CHelper::Node::NodeJsonInteger node;
                         node.id = "ID";
                         node.description = u"description";
-                        node.isMustAfterWhiteSpace = false;
+                        node.isMustAfterSpace = false;
                         node.min = 0;
                         node.max = 3;
                         return node;
@@ -470,7 +470,7 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
                         CHelper::Node::NodeJsonInteger node;
                         node.id = "ID";
                         node.description = u"description";
-                        node.isMustAfterWhiteSpace = false;
+                        node.isMustAfterSpace = false;
                         node.min = std::nullopt;
                         node.max = 3;
                         return node;
@@ -479,7 +479,7 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
                         CHelper::Node::NodeJsonInteger node;
                         node.id = "ID";
                         node.description = u"description";
-                        node.isMustAfterWhiteSpace = false;
+                        node.isMustAfterSpace = false;
                         node.min = 1;
                         node.max = std::nullopt;
                         return node;
@@ -488,7 +488,7 @@ TEST(BinaryUtilTest, NodeJsonInteger) {
                         CHelper::Node::NodeJsonInteger node;
                         node.id = "ID";
                         node.description = u"description";
-                        node.isMustAfterWhiteSpace = false;
+                        node.isMustAfterSpace = false;
                         node.min = std::nullopt;
                         node.max = std::nullopt;
                         return node;
@@ -513,7 +513,7 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
                         CHelper::Node::NodeJsonFloat node;
                         node.id = "ID";
                         node.description = u"description";
-                        node.isMustAfterWhiteSpace = false;
+                        node.isMustAfterSpace = false;
                         node.min = 0.0F;
                         node.max = 3.0F;
                         return node;
@@ -522,7 +522,7 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
                         CHelper::Node::NodeJsonFloat node;
                         node.id = "ID";
                         node.description = u"description";
-                        node.isMustAfterWhiteSpace = false;
+                        node.isMustAfterSpace = false;
                         node.min = std::nullopt;
                         node.max = 3.0F;
                         return node;
@@ -531,7 +531,7 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
                         CHelper::Node::NodeJsonFloat node;
                         node.id = "ID";
                         node.description = u"description";
-                        node.isMustAfterWhiteSpace = false;
+                        node.isMustAfterSpace = false;
                         node.min = 1.0F;
                         node.max = std::nullopt;
                         return node;
@@ -540,7 +540,7 @@ TEST(BinaryUtilTest, NodeJsonFloat) {
                         CHelper::Node::NodeJsonFloat node;
                         node.id = "ID";
                         node.description = u"description";
-                        node.isMustAfterWhiteSpace = false;
+                        node.isMustAfterSpace = false;
                         node.min = std::nullopt;
                         node.max = std::nullopt;
                         return node;

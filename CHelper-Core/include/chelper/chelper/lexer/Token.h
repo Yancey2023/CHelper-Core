@@ -7,7 +7,6 @@
 #ifndef CHELPER_TOKEN_H
 #define CHELPER_TOKEN_H
 
-#include "LexerPos.h"
 #include <pch.h>
 
 namespace CHelper {
@@ -30,10 +29,10 @@ namespace CHelper {
     class Token {
     public:
         const TokenType::TokenType type;
-        const LexerPos pos;
+        const size_t pos;
         const std::u16string_view content;
 
-        Token(TokenType::TokenType type, const LexerPos &pos, const std::u16string_view &content);
+        Token(TokenType::TokenType type, const size_t &pos, const std::u16string_view &content);
 
         [[nodiscard]] size_t getStartIndex() const;
 

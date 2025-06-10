@@ -439,13 +439,13 @@ namespace CHelper {
                     size_t indexOfColor = brackets.size() % 3;
                     switch (indexOfColor) {
                         case 0:
-                            syntacResult.update(token.pos.index, SyntaxTokenType::BRACKET1);
+                            syntacResult.update(token.pos, SyntaxTokenType::BRACKET1);
                             break;
                         case 1:
-                            syntacResult.update(token.pos.index, SyntaxTokenType::BRACKET2);
+                            syntacResult.update(token.pos, SyntaxTokenType::BRACKET2);
                             break;
                         case 2:
-                            syntacResult.update(token.pos.index, SyntaxTokenType::BRACKET3);
+                            syntacResult.update(token.pos, SyntaxTokenType::BRACKET3);
                             break;
                         default:
                             HEDLEY_UNREACHABLE();
@@ -460,13 +460,13 @@ namespace CHelper {
                     size_t indexOfColor = (brackets.size() - 1) % 3;
                     switch (indexOfColor) {
                         case 0:
-                            syntacResult.update(token.pos.index, SyntaxTokenType::BRACKET1);
+                            syntacResult.update(token.pos, SyntaxTokenType::BRACKET1);
                             break;
                         case 1:
-                            syntacResult.update(token.pos.index, SyntaxTokenType::BRACKET2);
+                            syntacResult.update(token.pos, SyntaxTokenType::BRACKET2);
                             break;
                         case 2:
-                            syntacResult.update(token.pos.index, SyntaxTokenType::BRACKET3);
+                            syntacResult.update(token.pos, SyntaxTokenType::BRACKET3);
                             break;
                         default:
                             HEDLEY_UNREACHABLE();

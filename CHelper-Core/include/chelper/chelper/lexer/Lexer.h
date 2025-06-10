@@ -8,7 +8,6 @@
 #define CHELPER_LEXER_H
 
 #include "LexerResult.h"
-#include "StringReader.h"
 #include "pch.h"
 
 namespace CHelper::Lexer {

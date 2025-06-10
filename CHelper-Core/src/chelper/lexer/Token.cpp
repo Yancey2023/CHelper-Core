@@ -28,18 +28,18 @@ namespace CHelper {
     }// namespace TokenType
 
     Token::Token(TokenType::TokenType type,
-                 const CHelper::LexerPos &pos,
+                 const size_t &pos,
                  const std::u16string_view &content)
         : type(type),
           pos(pos),
           content(content) {}
 
     size_t Token::getStartIndex() const {
-        return pos.index;
+        return pos;
     }
 
     size_t Token::getEndIndex() const {
-        return pos.index + content.size();
+        return pos + content.size();
     }
 
 }// namespace CHelper

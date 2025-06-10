@@ -2,7 +2,6 @@
 // Created by Yancey on 2023/11/8.
 //
 
-#include <chelper/lexer/StringReader.h>
 #include <chelper/parser/ErrorReason.h>
 #include <chelper/util/JsonUtil.h>
 
@@ -15,13 +14,14 @@ namespace CHelper::JsonUtil {
     std::u16string string2jsonString(const std::u16string &input) {
         std::u16string result;
         result.reserve(input.length());
-        StringReader stringReader(input);
+        auto it = input.begin();
         while (true) {
-            std::optional<char16_t> ch = stringReader.read();
-            if (HEDLEY_UNLIKELY(!ch.has_value())) {
+            ++it;
+            if (HEDLEY_UNLIKELY(it == input.end())) {
                 return std::move(result);
             }
-            switch (ch.value()) {
+            char16_t ch = *it;
+            switch (ch) {
                 case u'\"':
                 case u'\\':
                 case u'/':
@@ -35,7 +35,7 @@ namespace CHelper::JsonUtil {
                 default:
                     break;
             }
-            result.push_back(ch.value());
+            result.push_back(ch);
         }
     }
 
@@ -45,37 +45,38 @@ namespace CHelper::JsonUtil {
             result.errorReason = ErrorReason::incomplete(0, 0, u"json字符串必须在双引号内");
             return std::move(result);
         }
-        StringReader stringReader(input);
-        result.result.reserve(static_cast<size_t>(input.size() * 1.2));
+        size_t index = 0;
+        result.result.reserve(static_cast<size_t>(static_cast<double>(input.size()) * 1.2));
         result.indexConvertList.reserve(input.size());
-        result.indexConvertList.push_back(stringReader.pos.index);
+        result.indexConvertList.push_back(index);
         int32_t unicodeValue;
         std::u16string escapeSequence;
         while (true) {
-            std::optional<char16_t> ch = stringReader.next();
             //结束字符
-            if (HEDLEY_UNLIKELY(!ch.has_value())) {
+            if (HEDLEY_UNLIKELY(++index >= input.size())) {
                 result.isComplete = false;
                 break;
-            } else if (HEDLEY_UNLIKELY(ch.value() == u'\"')) {
+            }
+            char16_t ch = input[index];
+            if (HEDLEY_UNLIKELY(ch == u'\"')) {
                 result.isComplete = true;
                 break;
             }
             //正常字符
-            if (HEDLEY_LIKELY(ch.value() != u'\\')) {
-                result.result.push_back(ch.value());
-                result.indexConvertList.push_back(stringReader.pos.index);
+            if (HEDLEY_LIKELY(ch != u'\\')) {
+                result.result.push_back(ch);
+                result.indexConvertList.push_back(index);
                 continue;
             }
             //转义字符
-            ch = stringReader.next();
-            if (HEDLEY_UNLIKELY(!ch.has_value())) {
+            if (HEDLEY_UNLIKELY(index >= input.size())) {
                 result.errorReason = ErrorReason::incomplete(
-                        stringReader.pos.index - 1,
-                        stringReader.pos.index,
+                        index - 1,
+                        index,
                         u"转义字符缺失后半部分");
             } else {
-                switch (ch.value()) {
+                ch = input[index];
+                switch (ch) {
                     case u'\"':
                     case u'\\':
                     case u'/':
@@ -84,33 +85,32 @@ namespace CHelper::JsonUtil {
                     case u'n':
                     case u'r':
                     case u't':
-                        result.result.push_back(ch.value());
-                        result.indexConvertList.push_back(stringReader.pos.index);
+                        result.result.push_back(ch);
+                        result.indexConvertList.push_back(index);
                         break;
                     case u'u':
                         for (uint8_t i = 0; i < 4; ++i) {
-                            ch = stringReader.next();
-                            if (HEDLEY_UNLIKELY(!ch.has_value())) {
+                            if (HEDLEY_UNLIKELY(index >= input.size())) {
                                 result.errorReason = ErrorReason::contentError(
-                                        stringReader.pos.index - 2 - i,
-                                        stringReader.pos.index,
+                                        index - 2 - i,
+                                        index,
                                         fmt::format(u"字符串转义缺失后半部分 -> \\u{}", escapeSequence));
                                 break;
                             }
-                            escapeSequence.push_back(ch.value());
+                            escapeSequence.push_back(input[index]);
                         }
                         if (HEDLEY_UNLIKELY(escapeSequence.length() < 4)) {
                             break;
                         }
                         if (HEDLEY_UNLIKELY(std::any_of(
                                     escapeSequence.begin(), escapeSequence.end(),
-                                    [&result, &stringReader, &escapeSequence](const auto &item) {
+                                    [&result, &index, &escapeSequence](const auto &item) {
                                         if (HEDLEY_LIKELY(std::isxdigit(item))) {
                                             return false;
                                         } else {
                                             result.errorReason = ErrorReason::incomplete(
-                                                    stringReader.pos.index - escapeSequence.length() - 1,
-                                                    stringReader.pos.index + 1,
+                                                    index - escapeSequence.length() - 1,
+                                                    index + 1,
                                                     fmt::format(u"字符串转义出现非法字符{} -> \\u{}", item, escapeSequence));
                                             return true;
                                         }
@@ -120,7 +120,7 @@ namespace CHelper::JsonUtil {
                         unicodeValue = std::stoi(utf8::utf16to8(escapeSequence), nullptr, 16);
                         if (HEDLEY_UNLIKELY(unicodeValue <= 0 || unicodeValue > 0x10FFFF)) {
                             result.errorReason = ErrorReason::contentError(
-                                    stringReader.pos.index - escapeSequence.length() - 1, stringReader.pos.index + 1,
+                                    index - escapeSequence.length() - 1, index + 1,
                                     fmt::format(u"字符串转义的Unicode值无效 -> \\u{}", escapeSequence));
                             break;
                         }
@@ -149,12 +149,12 @@ namespace CHelper::JsonUtil {
                             result.result.push_back(
                                     static_cast<char>(0x80u | (static_cast<uint32_t>(unicodeValue) & 0x3Fu)));
                         }
-                        result.indexConvertList.push_back(stringReader.pos.index);
+                        result.indexConvertList.push_back(index);
                         break;
                     default:
                         result.errorReason = ErrorReason::contentError(
-                                stringReader.pos.index - 1, stringReader.pos.index + 1,
-                                fmt::format(u"未知的转义字符 -> \\{:c}", ch.value()));
+                                index - 1, index + 1,
+                                fmt::format(u"未知的转义字符 -> \\{:c}", ch));
                         break;
                 }
             }

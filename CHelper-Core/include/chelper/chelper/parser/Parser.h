@@ -7,11 +7,6 @@
 #ifndef CHELPER_PARSER_H
 #define CHELPER_PARSER_H
 
-#include "../lexer/Lexer.h"
-#include "../lexer/StringReader.h"
-#include "../lexer/TokenReader.h"
-#include "../node/param/NodeCommand.h"
-#include "../resources/CPack.h"
 #include "ASTNode.h"
 #include "pch.h"
 

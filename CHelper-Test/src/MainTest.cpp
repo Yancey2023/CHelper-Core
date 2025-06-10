@@ -32,9 +32,9 @@ namespace CHelper::Test {
     [[maybe_unused]] void testLex(const std::vector<std::u16string> &commands) {
         try {
             for (const auto &command: commands) {
-                fmt::println("lex command: {}", fmt::styled(utf8::utf16to8(command), fg(fmt::color::medium_purple)));
+                fmt::println("lex command: {}", FORMAT_ARG(utf8::utf16to8(command)));
                 for (const auto &item: Lexer::lex(command).allTokens) {
-                    fmt::println("[{}] ({}, {})", getTokenTypeStr(item.type), item.pos.line, item.pos.col);
+                    fmt::println("[{}] {} {}", getTokenTypeStr(item.type), item.pos, FORMAT_ARG(utf8::utf16to8(item.content)));
                 }
             }
         } catch (const std::exception &e) {
