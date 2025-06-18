@@ -238,7 +238,7 @@ namespace CHelper::Node {
 
     bool NodeTargetSelector::collectSuggestions(const ASTNode *astNode,
                                                 size_t index,
-                                                std::vector<Suggestions> &suggestions) const {
+                                                Suggestions &suggestions) const {
         if (HEDLEY_UNLIKELY(astNode->tokens.isEmpty())) {
             TokensView tokens = {astNode->tokens.lexerResult, astNode->tokens.end, astNode->tokens.end};
             ASTNode newAstNode = ASTNode::simpleNode(this, tokens);

@@ -106,7 +106,7 @@ namespace CHelper {
 
     std::vector<Suggestion> *CHelperCore::getSuggestions() {
         if (HEDLEY_LIKELY(suggestions == nullptr)) {
-            suggestions = std::make_shared<std::vector<Suggestion>>(astNode.getSuggestions(index));
+            suggestions = std::make_shared<std::vector<Suggestion>>(astNode.getSuggestions(index).collect());
         }
         return suggestions.get();
     }
@@ -123,7 +123,7 @@ namespace CHelper {
         if (HEDLEY_UNLIKELY(suggestions == nullptr || which >= suggestions->size())) {
             return std::nullopt;
         }
-        return suggestions->at(which).apply(this, astNode.tokens.toString());
+        return (*suggestions)[which].apply(this, astNode.tokens.toString());
     }
 
     std::u16string CHelperCore::old2new(const Old2New::BlockFixData &blockFixData, const std::u16string &old) {

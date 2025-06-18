@@ -190,7 +190,7 @@ namespace CHelper {
         }
     }
 
-    void ASTNode::collectSuggestions(size_t index, std::vector<Suggestions> &suggestions) const {
+    void ASTNode::collectSuggestions(size_t index, Suggestions &suggestions) const {
         if (HEDLEY_LIKELY(index < tokens.getStartIndex() || index > tokens.getEndIndex())) {
             return;
         }
@@ -389,20 +389,20 @@ namespace CHelper {
         }
     }
 
-    std::vector<Suggestion> ASTNode::getSuggestions(size_t index) const {
+    Suggestions ASTNode::getSuggestions(size_t index) const {
         std::u16string_view str = tokens.toString();
 #ifdef CHelperTest
         Profile::push("start getting suggestions: {}", FORMAT_ARG(utf8::utf16to8(str)));
 #endif
-        std::vector<Suggestions> suggestions;
+        Suggestions suggestions;
         if (HEDLEY_UNLIKELY(canAddSpace0(*this, index))) {
-            suggestions.push_back(Suggestions::singleSpaceSuggestion({str.length(), str.length(), false, spaceId}));
+            suggestions.addSpaceSuggestion({str.length(), str.length(), false, spaceId});
         }
         collectSuggestions(index, suggestions);
 #ifdef CHelperTest
         Profile::pop();
 #endif
-        return Suggestions::filter(suggestions);
+        return std::move(suggestions);
     }
 
     std::u16string ASTNode::getStructure() const {
@@ -436,8 +436,7 @@ namespace CHelper {
             switch (ch) {
                 case '[':
                 case '{': {
-                    size_t indexOfColor = brackets.size() % 3;
-                    switch (indexOfColor) {
+                    switch (brackets.size() % 3) {
                         case 0:
                             syntacResult.update(token.pos, SyntaxTokenType::BRACKET1);
                             break;
@@ -457,8 +456,7 @@ namespace CHelper {
                     if (brackets.empty() || !(brackets.top() == '[' && ch == ']' || brackets.top() == '{' && ch == '}')) {
                         break;
                     }
-                    size_t indexOfColor = (brackets.size() - 1) % 3;
-                    switch (indexOfColor) {
+                    switch ((brackets.size() - 1) % 3) {
                         case 0:
                             syntacResult.update(token.pos, SyntaxTokenType::BRACKET1);
                             break;

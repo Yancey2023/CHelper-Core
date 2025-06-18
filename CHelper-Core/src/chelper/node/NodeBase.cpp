@@ -30,7 +30,7 @@ namespace CHelper::Node {
 
     bool NodeBase::collectSuggestions(const ASTNode *astNode,
                                       size_t index,
-                                      std::vector<Suggestions> &suggestions) const {
+                                      Suggestions &suggestions) const {
         return false;
     }
 

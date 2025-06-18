@@ -22,6 +22,11 @@ endif ()
 # ThirdParty: utf8cpp
 add_subdirectory(include/utfcpp)
 
+# ThirdParty: xxHash
+set(XXHASH_BUILD_XXHSUM OFF)
+option(BUILD_SHARED_LIBS OFF)
+add_subdirectory(include/xxHash/cmake_unofficial EXCLUDE_FROM_ALL)
+
 # ThirdParty: hedley
 add_subdirectory(include/hedley)
 
@@ -59,7 +64,7 @@ function(init_chelper_library target CHELPER_CORE_DIR)
             ${CHELPER_CORE_DIR}/include/rapidjson/include
             ${CHELPER_CORE_DIR}/include/serialization
     )
-    target_link_libraries(${target} PUBLIC fmt::fmt-header-only spdlog::spdlog_header_only utf8cpp hedley serialization::serialization)
+    target_link_libraries(${target} PUBLIC fmt::fmt-header-only spdlog::spdlog_header_only utf8cpp xxHash::xxhash hedley serialization::serialization)
 endfunction()
 
 # CHelper Core

@@ -88,7 +88,7 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(!ignoreError.value_or(true))) {
             TokensView tokens = result.tokens;
             std::u16string_view str = tokens.toString();
-            size_t strHash = std::hash<std::u16string_view>{}(str);
+            XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
             if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
                     return !item->fastMatch(strHash);
                 }))) {
@@ -104,8 +104,8 @@ namespace CHelper::Node {
             return true;
         }
         std::u16string_view str = astNode->tokens.toString();
-        size_t strHash = std::hash<std::u16string_view>{}(str);
-        if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
+        XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
+        if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash, &str](const auto &item) {
                 return !item->fastMatch(strHash);
             }))) {
             idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, fmt::format(u"找不到ID -> {}", str)));
@@ -115,7 +115,7 @@ namespace CHelper::Node {
 
     bool NodeNormalId::collectSuggestions(const ASTNode *astNode,
                                           size_t index,
-                                          std::vector<Suggestions> &suggestions) const {
+                                          Suggestions &suggestions) const {
         KMPMatcher kmpMatcher(astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex()));
         std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
         for (const auto &item: *customContents) {
@@ -135,27 +135,18 @@ namespace CHelper::Node {
                 descriptionContain.push_back(item);
             }
         }
-        Suggestions suggestions1(SuggestionsType::ID);
-        suggestions1.suggestions.reserve(nameStartOf.size() + nameContain.size() + descriptionContain.size());
         size_t start = astNode->tokens.getStartIndex();
         size_t end = astNode->tokens.getEndIndex();
-        std::transform(nameStartOf.begin(), nameStartOf.end(),
-                       std::back_inserter(suggestions1.suggestions),
-                       [&start, &end, this](const auto &item) {
-                           return Suggestion(start, end, getIsMustAfterSpace(), item);
-                       });
-        std::transform(nameContain.begin(), nameContain.end(),
-                       std::back_inserter(suggestions1.suggestions),
-                       [&start, &end, this](const auto &item) {
-                           return Suggestion(start, end, getIsMustAfterSpace(), item);
-                       });
-        std::transform(descriptionContain.begin(), descriptionContain.end(),
-                       std::back_inserter(suggestions1.suggestions),
-                       [&start, &end, this](const auto &item) {
-                           return Suggestion(start, end, getIsMustAfterSpace(), item);
-                       });
-        suggestions1.markFiltered();
-        suggestions.push_back(std::move(suggestions1));
+        suggestions.reserveIdSuggestion(nameStartOf.size() + nameContain.size() + descriptionContain.size());
+        for (const auto &item: nameStartOf) {
+            suggestions.addIdSuggestion({start, end, getIsMustAfterSpace(), item});
+        }
+        for (const auto &item: nameContain) {
+            suggestions.addIdSuggestion({start, end, getIsMustAfterSpace(), item});
+        }
+        for (const auto &item: descriptionContain) {
+            suggestions.addIdSuggestion({start, end, getIsMustAfterSpace(), item});
+        }
         return true;
     }
 

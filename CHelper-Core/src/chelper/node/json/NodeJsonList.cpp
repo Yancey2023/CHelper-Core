@@ -62,7 +62,7 @@ namespace CHelper::Node {
 
     bool NodeJsonList::collectSuggestions(const ASTNode *astNode,
                                           size_t index,
-                                          std::vector<Suggestions> &suggestions) const {
+                                          Suggestions &suggestions) const {
         return astNode->id == ASTNodeId::NODE_JSON_ALL_LIST;
     }
 

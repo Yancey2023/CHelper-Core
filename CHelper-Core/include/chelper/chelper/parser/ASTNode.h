@@ -127,7 +127,7 @@ namespace CHelper {
 
         void collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
 
-        void collectSuggestions(size_t index, std::vector<Suggestions> &suggestions) const;
+        void collectSuggestions(size_t index, Suggestions &suggestions) const;
 
         void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 
@@ -139,7 +139,7 @@ namespace CHelper {
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
 
-        [[nodiscard]] std::vector<Suggestion> getSuggestions(size_t index) const;
+        [[nodiscard]] Suggestions getSuggestions(size_t index) const;
 
         [[nodiscard]] std::u16string getStructure() const;
 

@@ -7,7 +7,6 @@
 #ifndef CHELPER_SUGGESTION_H
 #define CHELPER_SUGGESTION_H
 
-#include "../lexer/Token.h"
 #include "../resources/id/NormalId.h"
 #include "TokensView.h"
 
@@ -24,9 +23,6 @@ namespace CHelper {
         //内容
         std::shared_ptr<NormalId> content;
 
-    private:
-        const size_t mHashCode;
-
     public:
         Suggestion(size_t start, size_t end, bool isAddSpace, const std::shared_ptr<NormalId> &content);
 
@@ -34,13 +30,7 @@ namespace CHelper {
 
         [[nodiscard]] std::pair<std::u16string, size_t> apply(CHelperCore *core, const std::u16string_view &before) const;
 
-        [[nodiscard]] size_t hashCode() const {
-            return mHashCode;
-        }
-
-        [[nodiscard]] bool equal(const Suggestion &suggestion) const {
-            return mHashCode == suggestion.mHashCode;
-        }
+        [[nodiscard]] XXH64_hash_t hashCode() const;
     };
 
 }// namespace CHelper

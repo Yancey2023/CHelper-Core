@@ -73,12 +73,12 @@ namespace CHelper::Node {
 
     bool NodeCommand::collectSuggestions(const ASTNode *astNode,
                                          size_t index,
-                                         std::vector<Suggestions> &suggestions) const {
+                                         Suggestions &suggestions) const {
         if (HEDLEY_UNLIKELY(astNode->id != ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
             return false;
         }
         if (HEDLEY_LIKELY(index == 0 && astNode->tokens.isEmpty())) {
-            suggestions.push_back(Suggestions::singleSymbolSuggestion({0, 0, false, nodeCommandStart->normalId}));
+            suggestions.addSymbolSuggestion({0, 0, false, nodeCommandStart->normalId});
         }
         std::u16string_view str = astNode->tokens.toString()
                                           .substr(0, index - astNode->tokens.getStartIndex());
@@ -114,21 +114,18 @@ namespace CHelper::Node {
         std::sort(nameStartOf.begin(), nameStartOf.end(), compare);
         std::sort(nameContain.begin(), nameContain.end(), compare);
         std::sort(descriptionContain.begin(), descriptionContain.end(), compare);
-        std::vector<std::shared_ptr<NormalId>> suggestions1;
-        suggestions1.reserve(nameStartOf.size() + nameContain.size() + descriptionContain.size());
-        suggestions1.insert(suggestions1.end(), nameStartOf.begin(), nameStartOf.end());
-        suggestions1.insert(suggestions1.end(), nameContain.begin(), nameContain.end());
-        suggestions1.insert(suggestions1.end(), descriptionContain.begin(), descriptionContain.end());
-        Suggestions suggestions2(SuggestionsType::ID);
         size_t start = astNode->tokens.getStartIndex();
         size_t end = astNode->tokens.getEndIndex();
-        std::transform(suggestions1.begin(), suggestions1.end(),
-                       std::back_inserter(suggestions2.suggestions),
-                       [&start, &end](const auto &item) {
-                           return Suggestion(start, end, true, item);
-                       });
-        suggestions2.markFiltered();
-        suggestions.push_back(std::move(suggestions2));
+        suggestions.reserveIdSuggestion(nameStartOf.size() + nameContain.size() + descriptionContain.size());
+        for (const auto &item: nameStartOf) {
+            suggestions.addIdSuggestion({start, end, true, item});
+        }
+        for (const auto &item: nameContain) {
+            suggestions.addIdSuggestion({start, end, true, item});
+        }
+        for (const auto &item: descriptionContain) {
+            suggestions.addIdSuggestion({start, end, true, item});
+        }
         return true;
     }
 

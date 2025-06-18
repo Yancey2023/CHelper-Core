@@ -66,7 +66,7 @@ namespace CHelper::Node {
 
     bool NodeWrapped::collectSuggestions(const ASTNode *astNode,
                                          size_t index,
-                                         std::vector<Suggestions> &suggestions) const {
+                                         Suggestions &suggestions) const {
         return innerNode->collectSuggestions(astNode, index, suggestions);
     }
 

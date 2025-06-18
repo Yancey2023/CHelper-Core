@@ -37,6 +37,7 @@
 #include <stack>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <variant>
 #include <vector>
 // 抛出的错误
@@ -54,9 +55,12 @@
 #include <fmt/xchar.h>
 // 日志库
 #include <spdlog/spdlog.h>
-// 开启编译器特性
+// 编译器特性宏
 #include <hedley.h>
-// UTF编码处理库
+// 哈希算法
+#define XXH_STATIC_LINKING_ONLY
+#include <xxhash.h>
+// UTF编码处理
 #include <utf8.h>
 // 序列化
 #ifdef CHELPER_NO_FILESYSTEM

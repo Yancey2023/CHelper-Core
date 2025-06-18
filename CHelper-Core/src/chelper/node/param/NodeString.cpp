@@ -70,14 +70,14 @@ namespace CHelper::Node {
 
     bool NodeString::collectSuggestions(const ASTNode *astNode,
                                         size_t index,
-                                        std::vector<Suggestions> &suggestions) const {
+                                        Suggestions &suggestions) const {
         if (HEDLEY_UNLIKELY(ignoreLater || !canContainSpace)) {
             return true;
         }
         std::u16string_view str = astNode->tokens.toString()
                                           .substr(0, index - astNode->tokens.getStartIndex());
         if (HEDLEY_UNLIKELY(str.empty())) {
-            suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, doubleQuoteMask}));
+            suggestions.addSymbolSuggestion({index, index, false, doubleQuoteMask});
             return true;
         }
         if (HEDLEY_LIKELY(str[0] != '"')) {
@@ -85,7 +85,7 @@ namespace CHelper::Node {
         }
         auto convertResult = JsonUtil::jsonString2String(std::u16string(str));
         if (HEDLEY_LIKELY(!convertResult.isComplete)) {
-            suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, doubleQuoteMask}));
+            suggestions.addSymbolSuggestion({index, index, false, doubleQuoteMask});
         }
         return true;
     }

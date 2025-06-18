@@ -13,7 +13,7 @@ namespace CHelper::JsonUtil {
 
     std::u16string string2jsonString(const std::u16string &input) {
         std::u16string result;
-        result.reserve(input.length());
+        result.reserve(static_cast<size_t>(static_cast<double>(input.size()) * 1.2));
         auto it = input.begin();
         while (true) {
             ++it;
@@ -46,7 +46,7 @@ namespace CHelper::JsonUtil {
             return std::move(result);
         }
         size_t index = 0;
-        result.result.reserve(static_cast<size_t>(static_cast<double>(input.size()) * 1.2));
+        result.result.reserve(input.size());
         result.indexConvertList.reserve(input.size());
         result.indexConvertList.push_back(index);
         int32_t unicodeValue;

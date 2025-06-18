@@ -44,20 +44,20 @@ namespace CHelper::Node {
 
     bool NodeText::collectSuggestions(const ASTNode *astNode,
                                       size_t index,
-                                      std::vector<Suggestions> &suggestions) const {
+                                      Suggestions &suggestions) const {
         std::u16string_view str = astNode->tokens.toString()
                                           .substr(0, index - astNode->tokens.getStartIndex());
         //通过名字进行搜索
         size_t index1 = data->name.find(str);
         if (HEDLEY_LIKELY(index1 != std::u16string::npos)) {
-            suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, getIsMustAfterSpace(), data}));
+            suggestions.addLiteralSuggestion({astNode->tokens, getIsMustAfterSpace(), data});
             return true;
         }
         //通过介绍进行搜索
         if (HEDLEY_LIKELY(data->description.has_value())) {
             size_t index2 = data->description.value().find(str);
             if (HEDLEY_LIKELY(index2 != std::u16string::npos)) {
-                suggestions.push_back(Suggestions::singleLiteralSuggestion({astNode->tokens, getIsMustAfterSpace(), data}));
+                suggestions.addLiteralSuggestion({astNode->tokens, getIsMustAfterSpace(), data});
             }
         }
         return true;

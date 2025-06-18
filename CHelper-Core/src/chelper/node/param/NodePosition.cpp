@@ -58,7 +58,7 @@ namespace CHelper::Node {
         }
     }
 
-    bool NodePosition::collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestions> &suggestions) const {
+    bool NodePosition::collectSuggestions(const ASTNode *astNode, size_t index, Suggestions &suggestions) const {
         if (HEDLEY_LIKELY(astNode->id != ASTNodeId::NODE_POSITION_POSITIONS)) {
             return false;
         }

@@ -26,3 +26,7 @@
 	path = CHelper-Web/include/emscripten
 	url = https://github.com/emscripten-core/emscripten.git
 	branch = main
+[submodule "CHelper-Core/include/xxHash"]
+	path = CHelper-Core/include/xxHash
+	url = https://github.com/Cyan4973/xxHash.git
+	branch = release

@@ -67,7 +67,7 @@ namespace CHelper::Node {
 
     bool NodeOr::collectSuggestions(const ASTNode *astNode,
                                     size_t index,
-                                    std::vector<Suggestions> &suggestions) const {
+                                    Suggestions &suggestions) const {
         return noSuggestion;
     }
 

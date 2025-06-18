@@ -17,17 +17,17 @@ namespace CHelper {
         std::optional<std::u16string> description;
 
     private:
-        bool isBuildHash = false;
-        size_t nameHash = 0, mHashCode = 0;
+        XXH64_hash_t nameHash = 0;
+        std::optional<XXH3_state_t> hashState;
 
     public:
         virtual ~NormalId() = default;
 
         void buildHash();
 
-        [[nodiscard]] bool fastMatch(size_t strHash);
+        [[nodiscard]] bool fastMatch(XXH64_hash_t strHash);
 
-        [[nodiscard]] size_t hashCode();
+        [[nodiscard]] XXH3_state_t *getHashState();
 
         static std::shared_ptr<NormalId> make(const std::u16string &name, const std::optional<std::u16string> &description);
     };

@@ -42,11 +42,11 @@ namespace CHelper::Node {
 
     bool NodeSingleSymbol::collectSuggestions(const ASTNode *astNode,
                                               size_t index,
-                                              std::vector<Suggestions> &suggestions) const {
+                                              Suggestions &suggestions) const {
         if (HEDLEY_LIKELY(astNode->tokens.getStartIndex() != index)) {
             return true;
         }
-        suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, isAddSpace, normalId}));
+        suggestions.addSymbolSuggestion({index, index, isAddSpace, normalId});
         return true;
     }
 

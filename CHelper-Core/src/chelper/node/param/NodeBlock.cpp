@@ -34,7 +34,8 @@ namespace CHelper::Node {
             return ASTNode::andNode(this, {blockId}, tokenReader.collect(),
                                     nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
         }
-        size_t strHash = std::hash<std::u16string_view>{}(blockId.tokens.toString());
+        std::u16string_view str = blockId.tokens.toString();
+        XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
         std::shared_ptr<NamespaceId> currentBlock = nullptr;
         for (const auto &item: *blockIds->blockStateValues) {
             if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash))) {
@@ -62,10 +63,10 @@ namespace CHelper::Node {
 
     bool NodeBlock::collectSuggestions(const ASTNode *astNode,
                                        size_t index,
-                                       std::vector<Suggestions> &suggestions) const {
+                                       Suggestions &suggestions) const {
         if (HEDLEY_LIKELY(astNode->id == ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE && !astNode->isError() &&
                           astNode->childNodes.size() == 1 && index == astNode->tokens.getEndIndex())) {
-            suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, nodeBlockStateLeftBracket->normalId}));
+            suggestions.addSymbolSuggestion({index, index, false, nodeBlockStateLeftBracket->normalId});
         }
         return false;
     }

@@ -138,7 +138,7 @@ namespace CHelper {
             HEDLEY_NON_NULL(2)
             virtual bool collectSuggestions(const ASTNode *astNode,
                                             size_t index,
-                                            std::vector<Suggestions> &suggestions) const;
+                                            Suggestions &suggestions) const;
 
             virtual void collectStructure(const ASTNode *astNode,
                                           StructureBuilder &structure,

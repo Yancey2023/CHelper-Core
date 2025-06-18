@@ -39,21 +39,18 @@ namespace CHelper::Node {
 
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
-                                std::vector<Suggestions> &suggestions) const override {
+                                Suggestions &suggestions) const override {
             KMPMatcher kmpMatcher(astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex()));
-            Suggestions suggestions1(SuggestionsType::LITERAL);
             if (HEDLEY_UNLIKELY(kmpMatcher.match(u"true") != std::u16string::npos)) {
-                suggestions1.suggestions.emplace_back(
+                suggestions.addLiteralSuggestion({
                         astNode->tokens, true,
-                        NormalId::make(u"true", descriptionTrue));
+                        NormalId::make(u"true", descriptionTrue)});
             }
             if (HEDLEY_UNLIKELY(kmpMatcher.match(u"false") != std::u16string::npos)) {
-                suggestions1.suggestions.emplace_back(
+                suggestions.addLiteralSuggestion({
                         astNode->tokens, true,
-                        NormalId::make(u"false", descriptionFalse));
+                        NormalId::make(u"false", descriptionFalse)});
             }
-            suggestions1.markFiltered();
-            suggestions.push_back(std::move(suggestions1));
             return true;
         }
 

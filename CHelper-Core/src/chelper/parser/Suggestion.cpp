@@ -3,7 +3,6 @@
 //
 
 #include <chelper/CHelperCore.h>
-#include <chelper/parser/Parser.h>
 #include <chelper/parser/Suggestion.h>
 
 namespace CHelper {
@@ -15,8 +14,7 @@ namespace CHelper {
         : start(start),
           end(end),
           isAddSpace(isAddSpace),
-          content(content),
-          mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
+          content(content) {}
 
     Suggestion::Suggestion(const TokensView &tokens,
                            bool isAddSpace,
@@ -24,8 +22,7 @@ namespace CHelper {
         : start(tokens.getStartIndex()),
           end(tokens.getEndIndex()),
           isAddSpace(isAddSpace),
-          content(content),
-          mHashCode(31 * 31 * content->hashCode() + 31 * start + end) {}
+          content(content) {}
 
     std::pair<std::u16string, size_t> Suggestion::apply(CHelperCore *core, const std::u16string_view &before) const {
         if (content->name == u" " && (start == 0 || before[start - 1] == u' ')) {
@@ -44,6 +41,14 @@ namespace CHelper {
             result.second++;
         }
         return result;
+    }
+
+    [[nodiscard]] XXH64_hash_t Suggestion::hashCode() const {
+        XXH3_state_t hashState;
+        XXH3_copyState(&hashState, content->getHashState());
+        XXH3_64bits_update(&hashState, &start, sizeof(start));
+        XXH3_64bits_update(&hashState, &end, sizeof(end));
+        return XXH3_64bits_digest(&hashState);
     }
 
 }// namespace CHelper

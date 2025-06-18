@@ -93,7 +93,7 @@ namespace CHelper::Node {
         return {type, ASTNode::orNode(node, {std::move(result), std::move(preSymbol)}, nullptr)};
     }
 
-    bool NodeRelativeFloat::collectSuggestions(const ASTNode *astNode, size_t index, std::vector<Suggestions> &suggestions) const {
+    bool NodeRelativeFloat::collectSuggestions(const ASTNode *astNode, size_t index, Suggestions &suggestions) const {
         std::u16string_view str = astNode->tokens.toString();
         size_t startIndex = astNode->tokens.getStartIndex();
         for (size_t i = 0; i < str.length(); ++i) {
@@ -110,11 +110,11 @@ namespace CHelper::Node {
         return true;
     }
 
-    bool NodeRelativeFloat::collectSuggestions(size_t index, std::vector<Suggestions> &suggestions, bool canUseCaretNotation) {
-        suggestions.push_back(Suggestions::singleSpaceSuggestion({index, index, false, spaceId}));
-        suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, nodeRelativeNotation->normalId}));
+    bool NodeRelativeFloat::collectSuggestions(size_t index, Suggestions &suggestions, bool canUseCaretNotation) {
+        suggestions.addSpaceSuggestion({index, index, false, spaceId});
+        suggestions.addSymbolSuggestion({index, index, false, nodeRelativeNotation->normalId});
         if (HEDLEY_LIKELY(canUseCaretNotation)) {
-            suggestions.push_back(Suggestions::singleSymbolSuggestion({index, index, false, nodeCaretNotation->normalId}));
+            suggestions.addSymbolSuggestion({index, index, false, nodeCaretNotation->normalId});
         }
         return true;
     }

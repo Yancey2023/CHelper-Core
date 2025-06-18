@@ -6,8 +6,9 @@
 #include <chelper/parser/Parser.h>
 
 int main() {
-    //    testDir();
-    //    testBin();
+    // testDir();
+    // testBin();
+    // return 0;
     bool isSuccess = true;
     isSuccess = outputFile(CHelper::Test::writeSingleJson, "json") && isSuccess;
     isSuccess = outputFile(CHelper::Test::writeBinary, "cpack") && isSuccess;
@@ -93,14 +94,13 @@ namespace CHelper::Test {
         }
         fin.close();
         CHelper::Test::testDir(cpackPath, commands, isTestTime);
-        //        std::vector<std::u16string> commands1;
-        //        for (const auto &item: commands) {
-        //            for (size_t i = 0; i < item.size(); i++) {
-        //                commands1.push_back(item.substr(0, i + 1));
-        //            }
-        //        }
-        //        CHelper::Test::testDir(cpackPath, commands1, isTestTime);
-        //        CHelper::Test::test2(cpackPath, commands1, 10);
+        // std::vector<std::u16string> commands1;
+        // for (const auto &item: commands) {
+        //     for (size_t i = 0; i < item.size(); i++) {
+        //         commands1.push_back(item.substr(0, i + 1));
+        //     }
+        // }
+        // CHelper::Test::test2(cpackPath, commands1, 10);
     }
 
     /**
@@ -196,16 +196,16 @@ namespace CHelper::Test {
                 startStructure = std::chrono::high_resolution_clock::now();
                 auto structure = core->getStructure();
                 endStructure = std::chrono::high_resolution_clock::now();
-                fmt::println("parse successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startParse)));
+                fmt::println("parse: {}", FORMAT_ARG(utf8::utf16to8(command)));
                 if (isTestTime) {
-                    fmt::println("parse successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endParse - startParse)));
-                    fmt::println("get description successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endDescription - startDescription)));
-                    fmt::println("get error successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endErrorReasons - startErrorReasons)));
-                    fmt::println("get suggestions successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endSuggestions - startSuggestions)));
-                    fmt::println("get structure successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startStructure)));
+                    fmt::println("parse in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endParse - startParse)));
+                    fmt::println("get description in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endDescription - startDescription)));
+                    fmt::println("get error in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endErrorReasons - startErrorReasons)));
+                    fmt::println("get suggestions in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endSuggestions - startSuggestions)));
+                    fmt::println("get structure in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startStructure)));
                 }
-                fmt::println("structure: ", utf8::utf16to8(structure));
-                fmt::println("description: ", utf8::utf16to8(description));
+                fmt::println("structure: {}", utf8::utf16to8(structure));
+                fmt::println("description: {}", utf8::utf16to8(description));
                 if (errorReasons.empty()) {
                     fmt::println("no error");
                 } else {
@@ -224,7 +224,7 @@ namespace CHelper::Test {
                 if (suggestions->empty()) {
                     fmt::println("no suggestion");
                 } else {
-                    fmt::println("suggestions: ");
+                    fmt::println("{} suggestions:", suggestions->size());
                     int i = 0;
                     for (const auto &item: *suggestions) {
                         if (i == 30) {
