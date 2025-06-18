@@ -21,7 +21,7 @@ namespace CHelper::Node {
         for (size_t i = 0; i < childNodes.size(); ++i) {
             const auto &item = childNodes[i];
             if (item->getNodeType() == NodeTypeId::WRAPPED) {
-                const NodeWrapped * nodeWrapped = reinterpret_cast<const NodeWrapped *>(item);
+                const NodeWrapped *nodeWrapped = reinterpret_cast<const NodeWrapped *>(item);
                 ASTNode node = nodeWrapped->getASTNodeWithIsMustAfterSpace(tokenReader, cpack, isMustAfterSpace);
                 bool isError = node.isError();
                 childASTNodes.push_back(std::move(node));

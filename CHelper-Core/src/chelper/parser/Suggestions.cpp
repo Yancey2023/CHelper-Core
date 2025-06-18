@@ -12,7 +12,6 @@ namespace CHelper {
 
     }// namespace SuggestionsType
 
-
     Suggestions::Suggestions(SuggestionsType::SuggestionsType suggestionsType)
         : suggestionsType(suggestionsType) {}
 

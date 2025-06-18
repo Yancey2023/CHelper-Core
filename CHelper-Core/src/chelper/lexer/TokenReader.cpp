@@ -89,7 +89,6 @@ namespace CHelper {
         return result;
     }
 
-
     /**
      * 从栈中移除指针，恢复指针
      */

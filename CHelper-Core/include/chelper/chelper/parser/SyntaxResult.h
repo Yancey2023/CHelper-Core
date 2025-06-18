@@ -27,8 +27,8 @@ namespace CHelper {
             NULL_TOKEN,
             RANGE,
             LITERAL
-        };;
-    }
+        };
+    }// namespace SyntaxTokenType
 
     class SyntaxResult {
     public:

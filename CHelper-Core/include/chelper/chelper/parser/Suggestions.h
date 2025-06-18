@@ -35,9 +35,9 @@ namespace CHelper {
     public:
         explicit Suggestions(SuggestionsType::SuggestionsType suggestionsType);
 
-        bool isFiltered()const;
+        bool isFiltered() const;
 
-        size_t hashCode()const;
+        size_t hashCode() const;
 
         void markFiltered();
 

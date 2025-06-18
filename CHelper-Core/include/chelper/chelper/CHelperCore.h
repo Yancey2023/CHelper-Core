@@ -12,7 +12,6 @@
 #include <chelper/resources/CPack.h>
 #include <pch.h>
 
-
 namespace CHelper {
 
     class CHelperCore {
