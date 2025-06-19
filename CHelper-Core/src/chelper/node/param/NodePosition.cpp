@@ -45,7 +45,7 @@ namespace CHelper::Node {
                 return ASTNode::andNode(this, {std::move(result)}, tokens, nullptr, ASTNodeId::NODE_POSITION_POSITIONS_WITH_ERROR);
             }
         }
-        return std::move(result);
+        return result;
     }
 
     bool NodePosition::collectIdError(const ASTNode *astNode,

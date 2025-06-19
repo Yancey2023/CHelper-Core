@@ -29,7 +29,7 @@ int main() {
     std::filesystem::path resourceDir(RESOURCE_DIR);
     for (const auto &cpackPath: std::filesystem::directory_iterator(resourceDir / "run" / "cpack")) {
         std::string fileName = cpackPath.path().filename().string();
-        if (fileName.find("beta-experiment-") != -1) {
+        if (fileName.find("beta-experiment-") != std::string::npos) {
             CHelper::Test::testBin(cpackPath, resourceDir / "test" / "test.txt", true);
             break;
         }

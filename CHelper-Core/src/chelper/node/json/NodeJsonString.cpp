@@ -93,7 +93,7 @@ namespace CHelper::Node {
                         item->errorReason);
             }
         }
-        return std::move(newResult);
+        return newResult;
     }
 
     bool NodeJsonString::collectIdError(const ASTNode *astNode,

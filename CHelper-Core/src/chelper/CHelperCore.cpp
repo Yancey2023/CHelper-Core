@@ -67,7 +67,7 @@ namespace CHelper {
             }
             // 关闭文件
             is.close();
-            return std::move(result);
+            return result;
         });
     }
 #endif

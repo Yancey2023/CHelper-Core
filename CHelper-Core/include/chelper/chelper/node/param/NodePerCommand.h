@@ -188,13 +188,13 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         //node
         Codec<decltype(t.nodes)>::template to_binary<isNeedConvert>(ostream, t.nodes);
         //start
-        Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, t.startNodes.size());
+        Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, static_cast<uint32_t>(t.startNodes.size()));
         for (const auto &item: t.startNodes) {
             Codec<std::string>::template to_binary<isNeedConvert>(ostream, item->innerNode->id.value());
         }
         //ast
         for (const auto &item: t.wrappedNodes) {
-            Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, item.nextNodes.size());
+            Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, static_cast<uint32_t>(item.nextNodes.size()));
             for (const auto &item2: item.nextNodes) {
                 Codec<std::string>::template to_binary<isNeedConvert>(ostream, item2->innerNode->id.value());
             }
@@ -220,7 +220,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         //start
         uint32_t startNodeIdSize;
         Codec<uint32_t>::template from_binary<isNeedConvert>(istream, startNodeIdSize);
-        t.startNodes.reserve(startNodeIdSize);
+        t.startNodes.reserve(static_cast<size_t>(startNodeIdSize));
         for (size_t i = 0; i < startNodeIdSize; ++i) {
             std::string startNodeId;
             Codec<decltype(startNodeId)>::template from_binary<isNeedConvert>(istream, startNodeId);
@@ -245,7 +245,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         for (auto &parentNode: t.wrappedNodes) {
             uint32_t childNodeSize;
             Codec<uint32_t>::template from_binary<isNeedConvert>(istream, childNodeSize);
-            parentNode.nextNodes.reserve(childNodeSize);
+            parentNode.nextNodes.reserve(static_cast<size_t>(childNodeSize));
             for (size_t j = 0; j < childNodeSize; ++j) {
                 std::string childNodeId;
                 Codec<decltype(childNodeId)>::template from_binary<isNeedConvert>(istream, childNodeId);

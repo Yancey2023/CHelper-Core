@@ -140,7 +140,7 @@ namespace CHelper {
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllSpaceError())) {
             auto description = node->collectDescription(this, index);
             if (HEDLEY_UNLIKELY(description.has_value())) {
-                return std::move(description);
+                return description;
             }
         }
         switch (mode) {
@@ -150,7 +150,7 @@ namespace CHelper {
                 for (const ASTNode &astNode: childNodes) {
                     auto description = astNode.collectDescription(index);
                     if (HEDLEY_UNLIKELY(description.has_value())) {
-                        return std::move(description);
+                        return description;
                     }
                 }
                 return std::nullopt;
@@ -321,7 +321,7 @@ namespace CHelper {
 #ifdef CHelperTest
         Profile::pop();
 #endif
-        return std::move(result);
+        return result;
     }
 
     static std::vector<std::shared_ptr<ErrorReason>> sortByLevel(const std::vector<std::shared_ptr<ErrorReason>> &input) {
@@ -338,7 +338,7 @@ namespace CHelper {
             }
             --i;
         }
-        return std::move(output);
+        return output;
     }
 
     std::vector<std::shared_ptr<ErrorReason>> ASTNode::getIdErrors() const {
@@ -402,7 +402,7 @@ namespace CHelper {
 #ifdef CHelperTest
         Profile::pop();
 #endif
-        return std::move(suggestions);
+        return suggestions;
     }
 
     std::u16string ASTNode::getStructure() const {
@@ -418,7 +418,7 @@ namespace CHelper {
         while (HEDLEY_UNLIKELY(!result.empty() && result[result.size() - 1] == '\n')) {
             result.pop_back();
         }
-        return std::move(result);
+        return result;
     }
 
     SyntaxResult ASTNode::getSyntaxResult() const {
@@ -453,7 +453,7 @@ namespace CHelper {
                 } break;
                 case ']':
                 case '}': {
-                    if (brackets.empty() || !(brackets.top() == '[' && ch == ']' || brackets.top() == '{' && ch == '}')) {
+                    if (brackets.empty() || !((brackets.top() == '[' && ch == ']') || (brackets.top() == '{' && ch == '}'))) {
                         break;
                     }
                     switch ((brackets.size() - 1) % 3) {

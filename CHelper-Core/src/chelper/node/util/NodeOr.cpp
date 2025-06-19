@@ -12,10 +12,10 @@ namespace CHelper::Node {
                    const bool noSuggestion,
                    const char16_t *defaultErrorReason,
                    ASTNodeId::ASTNodeId nodeId)
-        : isAttachToEnd(isAttachToEnd),
+        : childNodes(std::move(childNodes)),
+          isAttachToEnd(isAttachToEnd),
           isUseFirst(isUseFirst),
           noSuggestion(noSuggestion),
-          childNodes(std::move(childNodes)),
           defaultErrorReason(defaultErrorReason),
           nodeId(nodeId) {
 #ifdef CHelperDebug
@@ -57,7 +57,7 @@ namespace CHelper::Node {
         } else {
             ASTNode result = ASTNode::orNode(this, std::move(childASTNodes), nullptr, defaultErrorReason, nodeId);
             tokenReader.index = indexes[result.whichBest];
-            return std::move(result);
+            return result;
         }
     }
 

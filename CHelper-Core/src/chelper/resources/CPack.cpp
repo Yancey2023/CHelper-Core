@@ -347,7 +347,7 @@ namespace CHelper {
         serialization::Codec<decltype(manifest)>::template to_json_member<JsonValueType>(result.GetAllocator(), result, "manifest", manifest);
         JsonValueType::ValueType idJson;
         idJson.SetArray();
-        idJson.Reserve(normalIds.size() + namespaceIds.size() + 2, result.GetAllocator());
+        idJson.Reserve(static_cast<rapidjson::SizeType>(normalIds.size() + namespaceIds.size() + 2), result.GetAllocator());
         for (const auto &item: normalIds) {
             JsonValueType::ValueType j;
             j.SetObject();

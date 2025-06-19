@@ -18,7 +18,7 @@ namespace CHelper::JsonUtil {
         while (true) {
             ++it;
             if (HEDLEY_UNLIKELY(it == input.end())) {
-                return std::move(result);
+                return result;
             }
             char16_t ch = *it;
             switch (ch) {
@@ -43,7 +43,7 @@ namespace CHelper::JsonUtil {
         ConvertResult result;
         if (HEDLEY_UNLIKELY(input.empty())) {
             result.errorReason = ErrorReason::incomplete(0, 0, u"json字符串必须在双引号内");
-            return std::move(result);
+            return result;
         }
         size_t index = 0;
         result.result.reserve(input.size());
@@ -162,7 +162,7 @@ namespace CHelper::JsonUtil {
                 break;
             }
         }
-        return std::move(result);
+        return result;
     }
 
 }// namespace CHelper::JsonUtil

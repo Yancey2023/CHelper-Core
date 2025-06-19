@@ -352,7 +352,7 @@ namespace CHelper {
                 nodeValue.get());
         nodeChildren.push_back(std::move(nodeKey));
         nodeChildren.push_back(std::move(nodeValue));
-        return std::move(result);
+        return result;
     }
 
     std::shared_ptr<Node::NodeBase> BlockId::getNode(const BlockPropertyDescriptions &blockPropertyDescriptions) {

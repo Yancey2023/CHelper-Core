@@ -31,6 +31,8 @@ namespace CHelper::Node {
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
+        using NodeBase::init;
+
         void init(const std::vector<std::unique_ptr<NodeSerializable>> &dataList);
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;

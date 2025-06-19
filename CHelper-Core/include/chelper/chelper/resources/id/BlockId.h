@@ -253,7 +253,7 @@ struct serialization::Codec<CHelper::Property> : BaseCodec<CHelper::Property> {
         if (t.valid.has_value()) {
             rapidjson::GenericValue<typename JsonValueType::EncodingType> valid;
             valid.SetArray();
-            valid.Reserve(t.valid.value().size(), allocator);
+            valid.Reserve(static_cast<rapidjson::SizeType>(t.valid.value().size()), allocator);
             for (const auto &item: t.valid.value()) {
                 rapidjson::GenericValue<typename JsonValueType::EncodingType> perValid;
                 Codec<CHelper::PropertyValue>::template to_json<typename JsonValueType::ValueType>(allocator, perValid, item, t.type);
@@ -308,7 +308,7 @@ struct serialization::Codec<CHelper::Property> : BaseCodec<CHelper::Property> {
         Codec<decltype(t.defaultValue)>::template to_binary<isNeedConvert>(ostream, t.defaultValue, t.type);
         Codec<bool>::template to_binary<isNeedConvert>(ostream, t.valid.has_value());
         if (t.valid.has_value()) {
-            Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, t.valid.value().size());
+            Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, static_cast<uint32_t>(t.valid.value().size()));
             for (const auto &item: t.valid.value()) {
                 Codec<CHelper::PropertyValue>::template to_binary<isNeedConvert>(ostream, item, t.type);
             }
@@ -332,8 +332,8 @@ struct serialization::Codec<CHelper::Property> : BaseCodec<CHelper::Property> {
         if (validHasValue) {
             t.valid = std::make_optional<std::vector<CHelper::PropertyValue>>();
             uint32_t size;
-            Codec<decltype(size)>::template from_binary<isNeedConvert>(istream, size);
-            t.valid.value().reserve(size);
+            Codec<uint32_t>::template from_binary<isNeedConvert>(istream, size);
+            t.valid.value().reserve(static_cast<size_t>(size));
             for (size_t i = 0; i < size; ++i) {
                 CHelper::PropertyValue propertyValue;
                 Codec<decltype(propertyValue)>::template from_binary<isNeedConvert>(istream, propertyValue, t.type);
@@ -363,7 +363,7 @@ struct serialization::Codec<CHelper::BlockPropertyDescription> : BaseCodec<CHelp
         Codec<decltype(t.description)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::description_(), t.description);
         rapidjson::GenericValue<typename JsonValueType::EncodingType> values;
         values.SetArray();
-        values.Reserve(t.values.size(), allocator);
+        values.Reserve(static_cast<rapidjson::SizeType>(t.values.size()), allocator);
         for (const auto &item: t.values) {
             rapidjson::GenericValue<typename JsonValueType::EncodingType> perValue;
             perValue.SetObject();
@@ -409,7 +409,7 @@ struct serialization::Codec<CHelper::BlockPropertyDescription> : BaseCodec<CHelp
         Codec<decltype(t.propertyName)>::template to_binary<isNeedConvert>(ostream, t.propertyName);
         Codec<decltype(t.description)>::template to_binary<isNeedConvert>(ostream, t.description);
         Codec<decltype(t.type)>::template to_binary<isNeedConvert>(ostream, t.type);
-        Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, t.values.size());
+        Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, static_cast<uint32_t>(t.values.size()));
         for (const auto &item: t.values) {
             Codec<decltype(item.valueName)>::template to_binary<isNeedConvert>(ostream, item.valueName, t.type);
             Codec<decltype(item.description)>::template to_binary<isNeedConvert>(ostream, item.description);
@@ -425,7 +425,7 @@ struct serialization::Codec<CHelper::BlockPropertyDescription> : BaseCodec<CHelp
         Codec<decltype(t.type)>::template from_binary<isNeedConvert>(istream, t.type);
         uint32_t size;
         Codec<decltype(size)>::template from_binary<isNeedConvert>(istream, size);
-        t.values.reserve(size);
+        t.values.reserve(static_cast<size_t>(size));
         for (size_t i = 0; i < size; ++i) {
             CHelper::BlockPropertyValueDescription blockPropertyValueDescription;
             Codec<decltype(blockPropertyValueDescription.valueName)>::template from_binary<isNeedConvert>(istream, blockPropertyValueDescription.valueName, t.type);

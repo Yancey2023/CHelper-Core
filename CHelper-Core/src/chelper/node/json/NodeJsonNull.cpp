@@ -34,10 +34,7 @@ namespace CHelper::Node {
                                           Suggestions &suggestions) const {
         std::u16string_view str = astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex());
         if (HEDLEY_LIKELY(str.find(u"null") != std::u16string::npos)) {
-            std::shared_ptr<NormalId> id;
-            id->name = u"null";
-            id->description = u"null参数";
-            suggestions.addLiteralSuggestion({astNode->tokens, false, id});
+            suggestions.addLiteralSuggestion({astNode->tokens, false, NormalId::make(u"null", u"null参数")});
         }
         return true;
     }

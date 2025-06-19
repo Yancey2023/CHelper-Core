@@ -105,7 +105,7 @@ namespace CHelper {
             };
         }
 
-        constexpr NodeTypeId::NodeTypeId MAX_TYPE_ID = NodeTypeId::SINGLE_SYMBOL;
+        constexpr NodeTypeId::NodeTypeId MAX_TYPE_ID = NodeTypeId::WRAPPED;
 
         class NodeBase {
         public:

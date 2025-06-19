@@ -8,6 +8,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # export compile commands
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Enable Compile warning
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter")
+elseif (MSVC)
+    add_compile_options("/W4")
+    add_compile_options("/wd4100")
+endif()
+
 # Fix issues in MSVC
 if (MSVC)
     add_compile_options("/utf-8")
@@ -61,10 +69,8 @@ function(init_chelper_library target CHELPER_CORE_DIR)
             ${CHELPER_CORE_DIR}/include/pch
             ${CHELPER_CORE_DIR}/include/chelper
             ${CMAKE_BINARY_DIR}/include/param_deliver
-            ${CHELPER_CORE_DIR}/include/rapidjson/include
-            ${CHELPER_CORE_DIR}/include/serialization
     )
-    target_link_libraries(${target} PUBLIC fmt::fmt-header-only spdlog::spdlog_header_only utf8cpp xxHash::xxhash hedley serialization::serialization)
+    target_link_libraries(${target} PUBLIC fmt::fmt spdlog::spdlog utf8cpp xxHash::xxhash hedley serialization::serialization)
 endfunction()
 
 # CHelper Core

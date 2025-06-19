@@ -176,7 +176,7 @@ namespace CHelper::Old2New {
             return blockId;
         }
         const auto &dataValueToBlockState = blockIdIter->second;
-        auto dataValueIter = dataValueToBlockState.find(dataValue);
+        auto dataValueIter = dataValueToBlockState.find(static_cast<uint32_t>(dataValue));
         if (dataValueIter == dataValueToBlockState.end()) {
             return blockId;
         }
