@@ -32,8 +32,6 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
-        std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const override;
-
         bool collectSuggestions(const ASTNode *astNode,
                                 size_t index,
                                 Suggestions &suggestions) const override;

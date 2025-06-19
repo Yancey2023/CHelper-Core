@@ -79,9 +79,6 @@ namespace CHelper {
                 ASTNodeId::ASTNodeId id,
                 size_t whichBest = -1);
 
-
-        class CPack;
-
     public:
         static ASTNode simpleNode(const Node::NodeBase *node,
                                   const TokensView &tokens,
@@ -123,8 +120,6 @@ namespace CHelper {
             return childNodes[whichBest];
         }
 
-        [[nodiscard]] std::optional<std::u16string> collectDescription(size_t index) const;
-
         void collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
 
         void collectSuggestions(size_t index, Suggestions &suggestions) const;
@@ -132,8 +127,6 @@ namespace CHelper {
         void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 
         void collectSyntaxResult(SyntaxResult &syntaxResult) const;
-
-        [[nodiscard]] std::u16string getDescription(size_t index) const;
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getIdErrors() const;
 

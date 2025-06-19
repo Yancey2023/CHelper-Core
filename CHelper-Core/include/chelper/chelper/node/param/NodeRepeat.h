@@ -29,8 +29,6 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
-        std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const override;
-
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;

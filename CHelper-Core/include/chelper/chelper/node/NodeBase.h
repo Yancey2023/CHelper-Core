@@ -11,7 +11,9 @@
 #include "../parser/ASTNode.h"
 #include "pch.h"
 
-#define CHELPER_NODE_TYPES BLOCK,             \
+#define CHELPER_NODE_TYPES SERIALIZABLE,      \
+                           WRAPPED,           \
+                           BLOCK,             \
                            BOOLEAN,           \
                            COMMAND,           \
                            COMMAND_NAME,      \
@@ -46,46 +48,7 @@
                            EQUAL_ENTRY,       \
                            LIST,              \
                            OR,                \
-                           SINGLE_SYMBOL,     \
-                           WRAPPED
-
-#define CHELPER_SERIALIZABLE_NODE_TYPES BLOCK,             \
-                                        BOOLEAN,           \
-                                        COMMAND,           \
-                                        COMMAND_NAME,      \
-                                        FLOAT,             \
-                                        INTEGER,           \
-                                        INTEGER_WITH_UNIT, \
-                                        ITEM,              \
-                                        LF,                \
-                                        NAMESPACE_ID,      \
-                                        NORMAL_ID,         \
-                                        PER_COMMAND,       \
-                                        POSITION,          \
-                                        RELATIVE_FLOAT,    \
-                                        REPEAT,            \
-                                        STRING,            \
-                                        TARGET_SELECTOR,   \
-                                        TEXT,              \
-                                        RANGE,             \
-                                        JSON,              \
-                                        JSON_BOOLEAN,      \
-                                        JSON_ELEMENT,      \
-                                        JSON_ENTRY,        \
-                                        JSON_FLOAT,        \
-                                        JSON_INTEGER,      \
-                                        JSON_LIST,         \
-                                        JSON_NULL,         \
-                                        JSON_OBJECT,       \
-                                        JSON_STRING,       \
-                                        AND,               \
-                                        ANY,               \
-                                        ENTRY,             \
-                                        EQUAL_ENTRY,       \
-                                        LIST,              \
-                                        OR,                \
-                                        SINGLE_SYMBOL,     \
-                                        WRAPPED
+                           SINGLE_SYMBOL
 
 #define CODEC_NODE(CodecType, ...) \
     CODEC_WITH_PARENT(CodecType, CHelper::Node::NodeSerializable, __VA_ARGS__)
@@ -105,7 +68,7 @@ namespace CHelper {
             };
         }
 
-        constexpr NodeTypeId::NodeTypeId MAX_TYPE_ID = NodeTypeId::WRAPPED;
+        constexpr NodeTypeId::NodeTypeId MAX_TYPE_ID = NodeTypeId::SINGLE_SYMBOL;
 
         class NodeBase {
         public:
@@ -128,9 +91,6 @@ namespace CHelper {
                                    const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE) const;
 
         public:
-            HEDLEY_NON_NULL(2)
-            virtual std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const;
-
             HEDLEY_NON_NULL(2)
             virtual bool collectIdError(const ASTNode *astNode,
                                         std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
@@ -161,8 +121,6 @@ namespace CHelper {
             NodeSerializable(const std::optional<std::string> &id,
                              const std::optional<std::u16string> &description,
                              bool isMustAfterSpace);
-
-            std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const override;
 
         public:
             [[nodiscard]] bool getIsMustAfterSpace() const;

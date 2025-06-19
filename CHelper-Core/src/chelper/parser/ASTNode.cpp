@@ -133,33 +133,6 @@ namespace CHelper {
                                         });
     }
 
-    std::optional<std::u16string> ASTNode::collectDescription(size_t index) const {
-        if (HEDLEY_UNLIKELY(index < tokens.getStartIndex() || index > tokens.getEndIndex())) {
-            return std::nullopt;
-        }
-        if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllSpaceError())) {
-            auto description = node->collectDescription(this, index);
-            if (HEDLEY_UNLIKELY(description.has_value())) {
-                return description;
-            }
-        }
-        switch (mode) {
-            case ASTNodeMode::NONE:
-                return std::nullopt;
-            case ASTNodeMode::AND:
-                for (const ASTNode &astNode: childNodes) {
-                    auto description = astNode.collectDescription(index);
-                    if (HEDLEY_UNLIKELY(description.has_value())) {
-                        return description;
-                    }
-                }
-                return std::nullopt;
-            case ASTNodeMode::OR:
-                return childNodes[whichBest].collectDescription(index);
-        }
-        return std::nullopt;
-    }
-
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllSpaceError())) {
@@ -311,17 +284,6 @@ namespace CHelper {
                 childNodes[whichBest].collectSyntaxResult(syntaxResult);
                 break;
         }
-    }
-
-    std::u16string ASTNode::getDescription(size_t index) const {
-#ifdef CHelperTest
-        Profile::push("start getting description: {}", FORMAT_ARG(utf8::utf16to8(tokens.toString())));
-#endif
-        auto result = collectDescription(index).value_or(u"未知");
-#ifdef CHelperTest
-        Profile::pop();
-#endif
-        return result;
     }
 
     static std::vector<std::shared_ptr<ErrorReason>> sortByLevel(const std::vector<std::shared_ptr<ErrorReason>> &input) {

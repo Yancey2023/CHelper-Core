@@ -18,10 +18,6 @@ namespace CHelper::Node {
         return ASTNode::andNode(this, {std::move(node)}, tokens, nullptr, astNodeId);
     }
 
-    std::optional<std::u16string> NodeBase::collectDescription(const ASTNode *node, size_t index) const {
-        return std::nullopt;
-    }
-
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     bool NodeBase::collectIdError(const ASTNode *astNode,
                                   std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
@@ -50,15 +46,6 @@ namespace CHelper::Node {
         : id(id),
           description(description),
           isMustAfterSpace(isMustAfterSpace) {}
-
-    std::optional<std::u16string> NodeSerializable::collectDescription(const ASTNode *node, size_t index) const {
-#ifdef CHelperDebug
-        if (HEDLEY_UNLIKELY(!description.has_value())) {
-            SPDLOG_WARN("description is null");
-        }
-#endif
-        return description;
-    }
 
     bool NodeSerializable::getIsMustAfterSpace() const {
         return isMustAfterSpace.value_or(false);

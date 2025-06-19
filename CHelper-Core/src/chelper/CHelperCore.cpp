@@ -3,6 +3,7 @@
 //
 
 #include <chelper/CHelperCore.h>
+#include <chelper/parameter_hint/ParameterHint.h>
 #include <chelper/parser/Parser.h>
 
 namespace CHelper {
@@ -97,7 +98,7 @@ namespace CHelper {
     }
 
     [[nodiscard]] std::u16string CHelperCore::getDescription() const {
-        return astNode.getDescription(index);
+        return ParameterHint::getParameterHint(astNode, index).value_or(u"未知");
     }
 
     [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> CHelperCore::getErrorReasons() const {

@@ -27,8 +27,6 @@ namespace CHelper::Node {
 
         [[nodiscard]] ASTNode getASTNodeWithIsMustAfterSpace(TokenReader &tokenReader, const CPack *cpack, bool isMustAfterSpace) const;
 
-        std::optional<std::u16string> collectDescription(const ASTNode *node, size_t index) const override;
-
         bool collectIdError(const ASTNode *astNode,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
 

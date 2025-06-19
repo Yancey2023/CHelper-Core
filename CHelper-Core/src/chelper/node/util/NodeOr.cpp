@@ -61,10 +61,6 @@ namespace CHelper::Node {
         }
     }
 
-    std::optional<std::u16string> NodeOr::collectDescription(const ASTNode *node, size_t index) const {
-        return std::nullopt;
-    }
-
     bool NodeOr::collectSuggestions(const ASTNode *astNode,
                                     size_t index,
                                     Suggestions &suggestions) const {

@@ -55,10 +55,6 @@ namespace CHelper::Node {
         return ASTNode::andNode(this, {std::move(currentASTNode), std::move(nextASTNode)}, tokenReader.collect(), nullptr, ASTNodeId::COMPOUND);
     }
 
-    std::optional<std::u16string> NodeWrapped::collectDescription(const ASTNode *node, size_t index) const {
-        return innerNode->collectDescription(node, index);
-    }
-
     bool NodeWrapped::collectIdError(const ASTNode *astNode,
                                      std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         return innerNode->collectIdError(astNode, idErrorReasons);

@@ -8,7 +8,6 @@
 #define CHELPER_NODETYPE_H
 
 #include "NodeBase.h"
-#include "NodeType.h"
 #include "param/NodeBlock.h"
 #include "param/NodeCommand.h"
 #include "param/NodeCommandName.h"
@@ -102,6 +101,18 @@ namespace CHelper {
             struct UnserializableNodeTypeDetail {
                 static constexpr std::array<NodeCreateStage::NodeCreateStage, 0> nodeCreateStage = {};
                 static constexpr bool isMustAfterSpace = false;
+            };
+
+            template<>
+            struct NodeTypeDetail<NodeTypeId::SERIALIZABLE> : UnserializableNodeTypeDetail {
+                using Type = NodeSerializable;
+                static constexpr auto name = "SERIALIZABLE";
+            };
+
+            template<>
+            struct NodeTypeDetail<NodeTypeId::WRAPPED> : UnserializableNodeTypeDetail {
+                using Type = NodeWrapped;
+                static constexpr auto name = "WRAPPED";
             };
 
             template<>
@@ -323,12 +334,6 @@ namespace CHelper {
                 static constexpr auto name = "SINGLE_SYMBOL";
             };
 
-            template<>
-            struct NodeTypeDetail<NodeTypeId::WRAPPED> : UnserializableNodeTypeDetail {
-                using Type = NodeWrapped;
-                static constexpr auto name = "WRAPPED";
-            };
-
             template<NodeTypeId::NodeTypeId nodeTypeId>
             struct NodeCodec {
 
@@ -404,6 +409,8 @@ namespace CHelper {
                                 const std::unique_ptr<NodeSerializable> &t) {
                 switch (id) {
                     CODEC_PASTE(CHELPER_CODEC_NODE_TO_JSON, CHELPER_NODE_TYPES)
+                    default:
+                        HEDLEY_UNREACHABLE();
                 }
             }
 
@@ -413,6 +420,8 @@ namespace CHelper {
                                   std::unique_ptr<NodeSerializable> &t) {
                 switch (id) {
                     CODEC_PASTE(CHELPER_CODEC_NODE_FROM_JSON, CHELPER_NODE_TYPES)
+                    default:
+                        HEDLEY_UNREACHABLE();
                 }
             }
 
@@ -422,6 +431,8 @@ namespace CHelper {
                                   const std::unique_ptr<NodeSerializable> &t) {
                 switch (id) {
                     CODEC_PASTE(CHELPER_CODEC_NODE_TO_BINARY, CHELPER_NODE_TYPES)
+                    default:
+                        HEDLEY_UNREACHABLE();
                 }
             }
 
@@ -431,14 +442,17 @@ namespace CHelper {
                                     std::unique_ptr<NodeSerializable> &t) {
                 switch (id) {
                     CODEC_PASTE(CHELPER_CODEC_NODE_FROM_BINARY, CHELPER_NODE_TYPES)
+                    default:
+                        HEDLEY_UNREACHABLE();
                 }
             }
 
             static const char *getName(const NodeTypeId::NodeTypeId id) {
                 switch (id) {
                     CODEC_PASTE(CHELPER_CODEC_GET_NAME, CHELPER_NODE_TYPES)
+                    default:
+                        return "UNKNOWN";
                 }
-                return "UNKNOWN";
             }
         };
 

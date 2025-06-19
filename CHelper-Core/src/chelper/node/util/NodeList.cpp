@@ -96,8 +96,4 @@ namespace CHelper::Node {
         }
     }
 
-    std::optional<std::u16string> NodeList::collectDescription(const ASTNode *node, size_t index) const {
-        return std::nullopt;
-    }
-
 }// namespace CHelper::Node

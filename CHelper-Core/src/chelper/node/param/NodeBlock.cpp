@@ -51,16 +51,6 @@ namespace CHelper::Node {
                                 nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
     }
 
-    std::optional<std::u16string> NodeBlock::collectDescription(const ASTNode *node, size_t index) const {
-        if (HEDLEY_LIKELY(node->id == ASTNodeId::NODE_BLOCK_BLOCK_ID)) {
-            return u"方块ID";
-        } else if (HEDLEY_LIKELY(node->id == ASTNodeId::NODE_BLOCK_BLOCK_STATE)) {
-            return u"方块状态";
-        } else {
-            return std::nullopt;
-        }
-    }
-
     bool NodeBlock::collectSuggestions(const ASTNode *astNode,
                                        size_t index,
                                        Suggestions &suggestions) const {

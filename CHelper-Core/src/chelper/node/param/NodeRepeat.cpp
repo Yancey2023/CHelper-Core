@@ -40,14 +40,6 @@ namespace CHelper::Node {
         }
     }
 
-    std::optional<std::u16string> NodeRepeat::collectDescription(const ASTNode *node, size_t index) const {
-        if (HEDLEY_UNLIKELY(node->tokens.isEmpty())) {
-            return description;
-        } else {
-            return std::nullopt;
-        }
-    }
-
     void NodeRepeat::collectStructure(const ASTNode *astNode,
                                       StructureBuilder &structure,
                                       bool isMustHave) const {

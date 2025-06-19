@@ -51,8 +51,4 @@ namespace CHelper::Node {
         return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect());
     }
 
-    std::optional<std::u16string> NodeAnd::collectDescription(const ASTNode *node, size_t index) const {
-        return std::nullopt;
-    }
-
 }// namespace CHelper::Node

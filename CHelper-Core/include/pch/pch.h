@@ -49,6 +49,14 @@
 // 用于字符串转整数或小数
 #include <cinttypes>
 // 字符串格式化
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4244)
+#endif
+#include <fmt/base.h>
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 #include <fmt/chrono.h>
 #include <fmt/color.h>
 #include <fmt/format.h>

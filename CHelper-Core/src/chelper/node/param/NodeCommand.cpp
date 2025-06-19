@@ -63,14 +63,6 @@ namespace CHelper::Node {
                                 tokenReader.collect(), nullptr, ASTNodeId::NODE_COMMAND_COMMAND);
     }
 
-    std::optional<std::u16string> NodeCommand::collectDescription(const ASTNode *astNode, size_t index) const {
-        if (HEDLEY_UNLIKELY(astNode->id == ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
-            return u"命令的名字";
-        } else {
-            return std::nullopt;
-        }
-    }
-
     bool NodeCommand::collectSuggestions(const ASTNode *astNode,
                                          size_t index,
                                          Suggestions &suggestions) const {
