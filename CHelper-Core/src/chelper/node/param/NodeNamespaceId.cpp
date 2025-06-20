@@ -36,27 +36,4 @@ namespace CHelper::Node {
         return NodeTypeId::NAMESPACE_ID;
     }
 
-    ASTNode NodeNamespaceId::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        // namespace:id
-        // 字符串中已经包含冒号，因为冒号不是结束字符
-        DEBUG_GET_NODE_BEGIN(this)
-        auto result = tokenReader.readStringASTNode(this);
-        DEBUG_GET_NODE_END(this)
-        if (HEDLEY_UNLIKELY(result.tokens.isEmpty())) {
-            TokensView tokens = result.tokens;
-            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, u"命令不完整"));
-        }
-        if (HEDLEY_UNLIKELY(!ignoreError.value_or(false))) {
-            TokensView tokens = result.tokens;
-            std::u16string_view str = tokens.toString();
-            XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
-            if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
-                    return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
-                }))) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, fmt::format(u"找不到含义 -> {}", str)));
-            }
-        }
-        return result;
-    }
-
 }// namespace CHelper::Node

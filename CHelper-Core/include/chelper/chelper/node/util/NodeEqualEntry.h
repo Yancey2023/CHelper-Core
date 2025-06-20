@@ -24,20 +24,18 @@ namespace CHelper::Node {
 
     class NodeEqualEntry : public NodeBase {
     public:
+        static std::unique_ptr<NodeBase> nodeEqual;
+        static std::unique_ptr<NodeBase> nodeNotEqual;
+        static std::unique_ptr<NodeBase> nodeEqualOrNotEqual;
         std::vector<EqualData> equalDatas;
-
-    private:
         std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> nodeKeyContent;
         std::unique_ptr<NodeBase> nodeKey;
 
-    public:
         NodeEqualEntry() = default;
 
-        NodeEqualEntry(std::vector<EqualData> equalDatas);
+        explicit NodeEqualEntry(std::vector<EqualData> equalDatas);
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
     };
 
 }// namespace CHelper::Node

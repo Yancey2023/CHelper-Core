@@ -7,9 +7,8 @@
 #ifndef CHELPER_NODEBASE_H
 #define CHELPER_NODEBASE_H
 
-#include "../lexer/TokenReader.h"
-#include "../parser/ASTNode.h"
-#include "pch.h"
+#include <chelper/lexer/TokenReader.h>
+#include <pch.h>
 
 #define CHELPER_NODE_TYPES WRAPPED,           \
                            BLOCK,             \
@@ -78,16 +77,6 @@ namespace CHelper {
             virtual void init(const CPack &cpack);
 
             [[nodiscard]] virtual NodeTypeId::NodeTypeId getNodeType() const = 0;
-
-            [[nodiscard]] virtual ASTNode
-            getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const = 0;
-
-        protected:
-            HEDLEY_NON_NULL(4)
-            ASTNode getByChildNode(TokenReader &tokenReader,
-                                   const CPack *cpack,
-                                   const NodeBase *childNode,
-                                   const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE) const;
         };
 
         class NodeSerializable : public NodeBase {

@@ -10,7 +10,7 @@
 namespace CHelper::Node {
 
     class NodeAny : public NodeBase {
-    private:
+    public:
         std::unique_ptr<NodeBase> node;
 
     private:
@@ -20,8 +20,6 @@ namespace CHelper::Node {
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         void init(const CPack &cpack) override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
         static NodeAny *getNodeAny();
     };

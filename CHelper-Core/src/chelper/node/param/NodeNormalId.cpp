@@ -66,36 +66,4 @@ namespace CHelper::Node {
         return NodeTypeId::NORMAL_ID;
     }
 
-    ASTNode NodeNormalId::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        tokenReader.push();
-        DEBUG_GET_NODE_BEGIN(this)
-        ASTNode result = getNormalIdASTNode(this, tokenReader);
-        DEBUG_GET_NODE_END(this)
-        if (HEDLEY_UNLIKELY(allowMissingID)) {
-            if (HEDLEY_UNLIKELY(result.isError())) {
-                tokenReader.restore();
-                tokenReader.push();
-                return ASTNode::simpleNode(this, tokenReader.collect());
-            }
-            tokenReader.pop();
-            return result;
-        }
-        tokenReader.pop();
-        if (HEDLEY_UNLIKELY(result.tokens.isEmpty())) {
-            TokensView tokens = result.tokens;
-            return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, u"命令不完整"));
-        }
-        if (HEDLEY_UNLIKELY(!ignoreError.value_or(true))) {
-            TokensView tokens = result.tokens;
-            std::u16string_view str = tokens.toString();
-            XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
-            if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
-                    return !item->fastMatch(strHash);
-                }))) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, fmt::format(u"找不到含义 -> {}", str)));
-            }
-        }
-        return result;
-    }
-
 }// namespace CHelper::Node

@@ -24,20 +24,4 @@ namespace CHelper::Node {
         return NodeTypeId::REPEAT;
     }
 
-    ASTNode NodeRepeat::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        tokenReader.push();
-        std::vector<ASTNode> childNodes;
-        while (true) {
-            ASTNode orNode = nodeElement->getASTNode(tokenReader, cpack);
-            bool isAstNodeError = orNode.childNodes[0].isError();
-            bool isBreakAstNodeError = orNode.childNodes[1].isError();
-            if (HEDLEY_UNLIKELY(!isBreakAstNodeError || isAstNodeError ||
-                                (!tokenReader.ready() && repeatData->isEnd[orNode.childNodes[0].whichBest]))) {
-                childNodes.push_back(std::move(orNode));
-                return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect(), nullptr);
-            }
-            childNodes.push_back(std::move(orNode));
-        }
-    }
-
 }// namespace CHelper::Node

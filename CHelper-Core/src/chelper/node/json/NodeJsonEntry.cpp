@@ -13,7 +13,8 @@ namespace CHelper::Node {
 
     static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(u':', u"冒号");
     static std::unique_ptr<NodeBase> jsonString = std::make_unique<NodeJsonString>("JSON_STRING", u"JSON字符串");
-    static std::unique_ptr<NodeBase> nodeAllEntry = std::make_unique<NodeEntry>(
+
+    std::unique_ptr<NodeBase> NodeJsonEntry::nodeAllEntry = std::make_unique<NodeEntry>(
             jsonString.get(), nodeSeparator.get(),
             NodeJsonElement::getNodeJsonElement());
 
@@ -54,10 +55,6 @@ namespace CHelper::Node {
                 std::move(valueNodes), false);
         nodeEntry = std::make_unique<NodeEntry>(
                 nodeKey.get(), nodeSeparator.get(), nodeValue.get());
-    }
-
-    ASTNode NodeJsonEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        return getByChildNode(tokenReader, cpack, HEDLEY_UNLIKELY(nodeEntry == nullptr) ? nodeAllEntry.get() : nodeEntry.get());
     }
 
     NodeBase *NodeJsonEntry::getNodeJsonAllEntry() {

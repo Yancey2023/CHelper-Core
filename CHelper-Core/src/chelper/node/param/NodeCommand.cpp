@@ -24,43 +24,4 @@ namespace CHelper::Node {
         return NodeTypeId::COMMAND;
     }
 
-    ASTNode NodeCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        tokenReader.push();
-        ASTNode commandStart = nodeCommandStart->getASTNode(tokenReader, cpack);
-        if (HEDLEY_UNLIKELY(commandStart.isError())) {
-            tokenReader.restore();
-            tokenReader.push();
-        }
-        ASTNode commandName = tokenReader.readStringASTNode(this, ASTNodeId::NODE_COMMAND_COMMAND_NAME);
-        if (HEDLEY_UNLIKELY(commandName.tokens.size() == 0)) {
-            TokensView tokens = tokenReader.collect();
-            return ASTNode::andNode(this, {std::move(commandName)}, tokens, ErrorReason::contentError(tokens, u"命令名字为空"), ASTNodeId::NODE_COMMAND_COMMAND);
-        }
-        std::u16string_view str = commandName.tokens.toString();
-        const NodePerCommand *currentCommand = nullptr;
-        if (HEDLEY_LIKELY(!commandName.isError())) {
-            bool isBreak = false;
-            for (const auto &item: *commands) {
-                currentCommand = static_cast<NodePerCommand *>(item.get());
-                for (const auto &item2: currentCommand->name) {
-                    if (HEDLEY_UNLIKELY(str == item2)) {
-                        isBreak = true;
-                        break;
-                    }
-                }
-                if (HEDLEY_UNLIKELY(isBreak)) {
-                    break;
-                }
-                currentCommand = nullptr;
-            }
-        }
-        if (HEDLEY_UNLIKELY(currentCommand == nullptr)) {
-            TokensView tokens = tokenReader.collect();
-            return ASTNode::andNode(this, {std::move(commandName)}, tokens, ErrorReason::contentError(tokens, fmt::format(u"命令名字不匹配，找不到名为{}的命令", str)), ASTNodeId::NODE_COMMAND_COMMAND);
-        }
-        ASTNode usage = currentCommand->getASTNode(tokenReader, cpack);
-        return ASTNode::andNode(this, {std::move(commandName), std::move(usage)},
-                                tokenReader.collect(), nullptr, ASTNodeId::NODE_COMMAND_COMMAND);
-    }
-
 }// namespace CHelper::Node

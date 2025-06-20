@@ -14,41 +14,4 @@ namespace CHelper::Node {
         return NodeTypeId::AND;
     }
 
-    ASTNode NodeAnd::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        tokenReader.push();
-        std::vector<ASTNode> childASTNodes;
-        bool isMustAfterSpace = false;
-        for (size_t i = 0; i < childNodes.size(); ++i) {
-            const auto &item = childNodes[i];
-            if (item->getNodeType() == NodeTypeId::WRAPPED) {
-                const NodeWrapped *nodeWrapped = reinterpret_cast<const NodeWrapped *>(item);
-                ASTNode node = nodeWrapped->getASTNodeWithIsMustAfterSpace(tokenReader, cpack, isMustAfterSpace);
-                bool isError = node.isError();
-                childASTNodes.push_back(std::move(node));
-                if (HEDLEY_UNLIKELY(isError)) {
-                    break;
-                }
-                isMustAfterSpace = nodeWrapped->innerNode->getIsMustAfterSpace();
-            } else {
-                ASTNode node = item->getASTNode(tokenReader, cpack);
-                bool isError = node.isError();
-                childASTNodes.push_back(std::move(node));
-                if (HEDLEY_UNLIKELY(isError)) {
-                    break;
-                }
-                if (HEDLEY_UNLIKELY(i < childNodes.size() - 1 &&
-                                    tokenReader.ready() &&
-                                    tokenReader.peek()->type == TokenType::SPACE)) {
-                    tokenReader.push();
-                    tokenReader.skip();
-                    TokensView tokens = tokenReader.collect();
-                    return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect(),
-                                            ErrorReason::contentError(tokens, u"意外的空格"));
-                }
-                isMustAfterSpace = false;
-            }
-        }
-        return ASTNode::andNode(this, std::move(childASTNodes), tokenReader.collect());
-    }
-
 }// namespace CHelper::Node

@@ -15,37 +15,4 @@ namespace CHelper::Node {
         return NodeTypeId::POSITION;
     }
 
-    ASTNode NodePosition::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        tokenReader.push();
-        // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
-        std::vector<ASTNode> threeChildNodes;
-        threeChildNodes.reserve(3);
-        NodeRelativeFloatType::NodeRelativeFloatType types[3];
-        for (NodeRelativeFloatType::NodeRelativeFloatType &type: types) {
-            std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode> node = NodeRelativeFloat::getASTNode(this, cpack, tokenReader);
-            if (threeChildNodes.empty() && node.second.isError() && !node.second.tokens.isEmpty()) {
-                tokenReader.pop();
-                TokensView tokens = node.second.tokens;
-                return ASTNode::andNode(this, {std::move(node.second)}, tokens, nullptr, ASTNodeId::NODE_POSITION_POSITIONS);
-            }
-            type = node.first;
-            threeChildNodes.push_back(std::move(node.second));
-        }
-        //判断有没有错误
-        TokensView tokens = tokenReader.collect();
-        ASTNode result = ASTNode::andNode(this, std::move(threeChildNodes), tokens, nullptr, ASTNodeId::NODE_POSITION_POSITIONS);
-        if (HEDLEY_UNLIKELY(!result.isError())) {
-            uint8_t count = 0;
-            for (NodeRelativeFloatType::NodeRelativeFloatType item: types) {
-                if (HEDLEY_UNLIKELY(item == NodeRelativeFloatType::LOCAL_COORDINATE)) {
-                    count++;
-                }
-            }
-            if (count == 1 || count == 2) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, nullptr, ASTNodeId::NODE_POSITION_POSITIONS_WITH_ERROR);
-            }
-        }
-        return result;
-    }
-
 }// namespace CHelper::Node

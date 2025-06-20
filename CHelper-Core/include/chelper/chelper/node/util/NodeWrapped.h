@@ -22,10 +22,6 @@ namespace CHelper::Node {
         void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
-
-        [[nodiscard]] ASTNode getASTNodeWithIsMustAfterSpace(TokenReader &tokenReader, const CPack *cpack, bool isMustAfterSpace) const;
 };
 
 }

@@ -17,20 +17,15 @@ namespace CHelper::Node {
     class NodeIntegerWithUnit : public NodeSerializable {
     public:
         std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> units;
-
-    private:
         std::unique_ptr<NodeNormalId> nodeUnits;
         std::unique_ptr<NodeAnd> nodeIntegerWithUnit;
         std::unique_ptr<NodeOr> nodeIntegerMaybeHaveUnit;
 
-    public:
         NodeIntegerWithUnit() = default;
 
         void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
     };
 
 }// namespace CHelper::Node

@@ -47,19 +47,4 @@ namespace CHelper::Node {
         return NodeTypeId::PER_COMMAND;
     }
 
-    ASTNode NodePerCommand::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        std::vector<ASTNode> childASTNodes;
-        childASTNodes.reserve(startNodes.size());
-        for (const auto &item: startNodes) {
-            tokenReader.push();
-            DEBUG_GET_NODE_BEGIN(item)
-            childASTNodes.push_back(item->getASTNodeWithIsMustAfterSpace(tokenReader, cpack, true));
-            DEBUG_GET_NODE_END(item)
-            tokenReader.restore();
-        }
-        tokenReader.push();
-        tokenReader.skipToLF();
-        return ASTNode::orNode(this, std::move(childASTNodes), tokenReader.collect());
-    }
-
 }// namespace CHelper::Node

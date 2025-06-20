@@ -20,15 +20,4 @@ namespace CHelper::Node {
         return INSTANCE_WRAPPED.get();
     }
 
-    ASTNode NodeLF::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        tokenReader.push();
-        tokenReader.skipToLF();
-        TokensView tokens = tokenReader.collect();
-        std::shared_ptr<ErrorReason> errorReason;
-        if (HEDLEY_UNLIKELY(tokens.hasValue())) {
-            errorReason = ErrorReason::excess(tokens, u"命令后面有多余部分 -> " + std::u16string(tokens.toString()));
-        }
-        return ASTNode::simpleNode(this, tokens, errorReason);
-    }
-
 }// namespace CHelper::Node

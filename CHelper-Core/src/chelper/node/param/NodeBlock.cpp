@@ -19,35 +19,4 @@ namespace CHelper::Node {
         return NodeTypeId::BLOCK;
     }
 
-    ASTNode NodeBlock::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        tokenReader.push();
-        ASTNode blockId = getByChildNode(tokenReader, cpack, nodeBlockId.get(), ASTNodeId::NODE_BLOCK_BLOCK_ID);
-        if (HEDLEY_UNLIKELY(nodeBlockType == NodeBlockType::BLOCK || blockId.isError())) {
-            tokenReader.pop();
-            return blockId;
-        }
-        tokenReader.push();
-        ASTNode blockStateLeftBracket = nodeBlockStateLeftBracket->getASTNode(tokenReader, cpack);
-        tokenReader.restore();
-        if (HEDLEY_LIKELY(blockStateLeftBracket.isError())) {
-            return ASTNode::andNode(this, {blockId}, tokenReader.collect(),
-                                    nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
-        }
-        std::u16string_view str = blockId.tokens.toString();
-        XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
-        std::shared_ptr<NamespaceId> currentBlock = nullptr;
-        for (const auto &item: *blockIds->blockStateValues) {
-            if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash))) {
-                currentBlock = item;
-                break;
-            }
-        }
-        auto nodeBlockState = currentBlock == nullptr
-                                      ? BlockId::getNodeAllBlockState()
-                                      : std::static_pointer_cast<BlockId>(currentBlock)->getNode(blockIds->blockPropertyDescriptions).get();
-        auto astNodeBlockState = getByChildNode(tokenReader, cpack, nodeBlockState, ASTNodeId::NODE_BLOCK_BLOCK_STATE);
-        return ASTNode::andNode(this, {blockId, astNodeBlockState}, tokenReader.collect(),
-                                nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
-    }
-
 }// namespace CHelper::Node

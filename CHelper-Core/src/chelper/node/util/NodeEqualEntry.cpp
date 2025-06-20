@@ -4,19 +4,18 @@
 
 #include <chelper/node/param/NodeNormalId.h>
 #include <chelper/node/param/NodeText.h>
-#include <chelper/node/util/NodeAny.h>
 #include <chelper/node/util/NodeEqualEntry.h>
 #include <chelper/node/util/NodeOr.h>
 
 namespace CHelper::Node {
 
-    static std::unique_ptr<NodeBase> nodeEqual = std::make_unique<NodeText>(
+    std::unique_ptr<NodeBase> NodeEqualEntry::nodeEqual = std::make_unique<NodeText>(
             "TARGET_SELECTOR_ARGUMENT_EQUAL", u"等于",
             NormalId::make(u"=", u"等于"),
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
                 return tokenReader.readSymbolASTNode(node);
             });
-    static std::unique_ptr<NodeBase> nodeNotEqual = std::make_unique<NodeText>(
+    std::unique_ptr<NodeBase> NodeEqualEntry::nodeNotEqual = std::make_unique<NodeText>(
             "TARGET_SELECTOR_ARGUMENT_NOT_EQUAL", u"不等于",
             NormalId::make(u"=!", u"不等于"),
             [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
@@ -24,7 +23,7 @@ namespace CHelper::Node {
                 auto childNodes = {tokenReader.readSymbolASTNode(node), tokenReader.readSymbolASTNode(node)};
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
             });
-    static std::unique_ptr<NodeBase> nodeEqualOrNotEqual = std::make_unique<NodeOr>(
+    std::unique_ptr<NodeBase> NodeEqualEntry::nodeEqualOrNotEqual = std::make_unique<NodeOr>(
             std::vector<const NodeBase *>{
                     nodeEqual.get(), nodeNotEqual.get()},
             false);
@@ -49,37 +48,6 @@ namespace CHelper::Node {
 
     NodeTypeId::NodeTypeId NodeEqualEntry::getNodeType() const {
         return NodeTypeId::EQUAL_ENTRY;
-    }
-
-    ASTNode NodeEqualEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        tokenReader.push();
-        std::vector<ASTNode> childNodes;
-        // key
-        ASTNode astNodeKey = getByChildNode(tokenReader, cpack, nodeKey.get());
-        childNodes.push_back(astNodeKey);
-        if (HEDLEY_UNLIKELY(astNodeKey.isError())) {
-            return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
-        }
-        std::u16string_view key = astNodeKey.tokens.toString();
-        auto it = std::find_if(equalDatas.begin(), equalDatas.end(), [&key](const auto &t) {
-            return t.name == key;
-        });
-        // = or =!
-        ASTNode astNodeSeparator = getByChildNode(
-                tokenReader, cpack,
-                it == equalDatas.end() || it->canUseNotEqual ? nodeEqualOrNotEqual.get() : nodeEqual.get());
-        childNodes.push_back(astNodeSeparator);
-        if (HEDLEY_UNLIKELY(astNodeSeparator.isError())) {
-            return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
-        }
-        //value
-        if (HEDLEY_UNLIKELY(it == equalDatas.end())) {
-            NodeAny::getNodeAny()->init(*cpack);
-            childNodes.push_back(NodeAny::getNodeAny()->getASTNode(tokenReader, cpack));
-        } else {
-            childNodes.push_back(it->nodeValue->getASTNode(tokenReader, cpack));
-        }
-        return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
     }
 
 }// namespace CHelper::Node

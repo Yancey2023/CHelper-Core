@@ -35,14 +35,6 @@ namespace CHelper::Node {
         void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
-
-        ASTNode getOptionalASTNode(TokenReader &tokenReader,
-                                   const CPack *cpack,
-                                   bool isIgnoreChildNodesError,
-                                   const std::vector<const NodeBase *> &childNodes,
-                                   const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE) const;
     };
 
 }// namespace CHelper::Node

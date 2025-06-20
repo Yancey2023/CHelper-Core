@@ -13,12 +13,10 @@ namespace CHelper::Node {
 
     class NodeJsonList : public NodeSerializable {
     public:
+      static std::unique_ptr<NodeBase> nodeAllList;
         std::string data;
-
-    private:
         std::unique_ptr<NodeBase> nodeList;
 
-    public:
         NodeJsonList() = default;
 
         NodeJsonList(const std::optional<std::string> &id,
@@ -30,8 +28,6 @@ namespace CHelper::Node {
         void init(const std::vector<std::unique_ptr<NodeSerializable>> &dataList);
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
     };
 
 }// namespace CHelper::Node

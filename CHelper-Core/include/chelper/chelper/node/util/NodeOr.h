@@ -29,8 +29,6 @@ namespace CHelper::Node {
                ASTNodeId::ASTNodeId nodeId = ASTNodeId::NONE);
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
     };
 
 }// namespace CHelper::Node

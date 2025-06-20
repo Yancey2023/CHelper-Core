@@ -29,8 +29,4 @@ namespace CHelper::Node {
         return NodeTypeId::JSON;
     }
 
-    ASTNode NodeJson::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        return getByChildNode(tokenReader, cpack, nodeJson);
-    }
-
 }// namespace CHelper::Node

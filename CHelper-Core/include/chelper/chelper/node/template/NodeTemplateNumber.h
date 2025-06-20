@@ -28,14 +28,6 @@ namespace CHelper::Node {
             }
         }
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override {
-            if constexpr (std::numeric_limits<T>::is_integer) {
-                return tokenReader.readIntegerASTNode(this);
-            } else {
-                return tokenReader.readFloatASTNode(this);
-            }
-        }
-
         static auto str2number(const std::string &str, char *&end) {
             if constexpr (std::numeric_limits<T>::is_integer) {
                 return std::strtoimax(str.c_str(), &end, 10);

@@ -17,13 +17,10 @@ namespace CHelper::Node {
     class NodeJsonObject : public NodeSerializable {
     public:
         std::vector<std::unique_ptr<NodeJsonEntry>> data;
-
-    private:
         std::unique_ptr<NodeOr> nodeElement1;
         std::unique_ptr<NodeOr> nodeElement2;
         std::unique_ptr<NodeList> nodeList;
 
-    public:
         NodeJsonObject() = default;
 
         NodeJsonObject(const std::optional<std::string> &id,
@@ -32,8 +29,6 @@ namespace CHelper::Node {
         void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
     };
 
 }// namespace CHelper::Node

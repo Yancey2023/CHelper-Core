@@ -13,7 +13,8 @@ namespace CHelper::Node {
     static std::unique_ptr<NodeBase> nodLeft = std::make_unique<NodeSingleSymbol>(u'[', u"JSON列表左括号");
     static std::unique_ptr<NodeBase> nodeRight = std::make_unique<NodeSingleSymbol>(u']', u"JSON列表右括号");
     static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(u',', u"JSON列表分隔符");
-    static std::unique_ptr<NodeBase> nodeAllList = std::make_unique<NodeList>(
+
+    std::unique_ptr<NodeBase> NodeJsonList::nodeAllList = std::make_unique<NodeList>(
             nodLeft.get(), NodeJsonElement::getNodeJsonElement(), nodeSeparator.get(), nodeRight.get());
 
     NodeJsonList::NodeJsonList(const std::optional<std::string> &id,
@@ -38,26 +39,6 @@ namespace CHelper::Node {
 
     NodeTypeId::NodeTypeId NodeJsonList::getNodeType() const {
         return NodeTypeId::JSON_LIST;
-    }
-
-    ASTNode NodeJsonList::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        if (HEDLEY_UNLIKELY(nodeList == nullptr)) {
-            return getByChildNode(tokenReader, cpack, nodeAllList.get(), ASTNodeId::NODE_JSON_ALL_LIST);
-        }
-        tokenReader.push();
-        ASTNode result1 = nodeList->getASTNode(tokenReader, cpack);
-        if (HEDLEY_LIKELY(!result1.isError())) {
-            return ASTNode::andNode(this, {std::move(result1)}, tokenReader.collect());
-        }
-        size_t index1 = tokenReader.index;
-        tokenReader.restore();
-        tokenReader.push();
-        ASTNode result2 = getByChildNode(tokenReader, cpack, nodeAllList.get(), ASTNodeId::NODE_JSON_ALL_LIST);
-        size_t index2 = tokenReader.index;
-        tokenReader.restore();
-        tokenReader.push();
-        tokenReader.index = result1.isError() ? index2 : index1;
-        return ASTNode::orNode(this, {std::move(result1), std::move(result2)}, tokenReader.collect());
     }
 
 }// namespace CHelper::Node

@@ -26,17 +26,6 @@ namespace CHelper::Node {
             }
         }
 
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack) const override {
-            ASTNode astNode = tokenReader.readStringASTNode(this);
-            std::u16string_view str = astNode.tokens.toString();
-            if (HEDLEY_LIKELY(str == u"true" || str == u"false")) {
-                return astNode;
-            }
-            TokensView tokens = astNode.tokens;
-            return ASTNode::andNode(this, {std::move(astNode)}, tokens,
-                                    ErrorReason::contentError(tokens, fmt::format(u"内容不匹配，应该为布尔值，但当前内容为{}", str)));
-        }
-
         static std::unique_ptr<NodeTemplateBoolean> make(const std::optional<std::string> &id,
                                                          const std::optional<std::u16string> &description,
                                                          const std::optional<std::u16string> &descriptionTrue,

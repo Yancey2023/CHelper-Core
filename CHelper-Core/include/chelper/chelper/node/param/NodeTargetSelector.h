@@ -19,9 +19,12 @@ namespace CHelper::Node {
 
     class NodeTargetSelector : public NodeSerializable {
     public:
+        static std::shared_ptr<NodeBase> nodePlayerName;
+        static std::shared_ptr<NodeBase> nodeWildcard;
+        static std::shared_ptr<NodeBase> nodeAt;
+        static std::shared_ptr<NodeBase> nodeTargetSelectorVariable;
+        static std::shared_ptr<NodeBase> nodeLeft;
         bool isMustPlayer = false, isMustNPC = false, isOnlyOne = false, isWildcard = false;
-
-    private:
         std::unique_ptr<NodeNamespaceId> nodeItem;
         std::unique_ptr<NodeNormalId> nodeFamily, nodeGameMode, nodeSlot;
         std::unique_ptr<NodeNamespaceId> nodeEntities;
@@ -37,8 +40,6 @@ namespace CHelper::Node {
         void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
     };
 
 }// namespace CHelper::Node

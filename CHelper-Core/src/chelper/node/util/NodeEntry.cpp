@@ -17,23 +17,4 @@ namespace CHelper::Node {
         return NodeTypeId::ENTRY;
     }
 
-    ASTNode NodeEntry::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        tokenReader.push();
-        std::vector<ASTNode> childNodes;
-        auto key = nodeKey->getASTNode(tokenReader, cpack);
-        if (HEDLEY_UNLIKELY(key.isError())) {
-            childNodes.push_back(std::move(key));
-            return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
-        }
-        childNodes.push_back(std::move(key));
-        auto separator = nodeSeparator->getASTNode(tokenReader, cpack);
-        if (HEDLEY_UNLIKELY(separator.isError())) {
-            childNodes.push_back(std::move(separator));
-            return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
-        }
-        childNodes.push_back(std::move(separator));
-        childNodes.push_back(nodeValue->getASTNode(tokenReader, cpack));
-        return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
-    }
-
 }// namespace CHelper::Node

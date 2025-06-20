@@ -15,13 +15,11 @@ namespace CHelper::Node {
     //在json数据文件并没有这个类型，添加这个节点类型只是为了更好实现json数据类型中的object类型
     class NodeJsonEntry : public NodeSerializable {
     public:
+        static std::unique_ptr<NodeBase> nodeAllEntry;
         std::u16string key;
         std::vector<std::string> value;
-
-    private:
         std::unique_ptr<NodeBase> nodeKey, nodeValue, nodeEntry;
 
-    public:
         NodeJsonEntry() = default;
 
         NodeJsonEntry(const std::optional<std::string> &id,
@@ -34,8 +32,6 @@ namespace CHelper::Node {
         using NodeBase::init;
 
         void init(const std::vector<std::unique_ptr<NodeSerializable>> &dataList);
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
         static NodeBase *getNodeJsonAllEntry();
     };

@@ -25,8 +25,4 @@ namespace CHelper::Node {
         return NodeTypeId::INTEGER_WITH_UNIT;
     }
 
-    ASTNode NodeIntegerWithUnit::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        return getByChildNode(tokenReader, cpack, nodeIntegerMaybeHaveUnit.get());
-    }
-
 }// namespace CHelper::Node

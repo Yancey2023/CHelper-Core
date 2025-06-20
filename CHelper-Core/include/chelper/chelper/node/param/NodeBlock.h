@@ -25,8 +25,6 @@ namespace CHelper::Node {
     public:
         static std::unique_ptr<Node::NodeSingleSymbol> nodeBlockStateLeftBracket;
         NodeBlockType::NodeBlockType nodeBlockType = NodeBlockType::BLOCK_WITH_BLOCK_STATE;
-
-    private:
         std::shared_ptr<BlockIds> blockIds = nullptr;
         std::shared_ptr<NodeBase> nodeBlockId = nullptr;
 
@@ -36,8 +34,6 @@ namespace CHelper::Node {
         void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
     };
 
 }// namespace CHelper::Node

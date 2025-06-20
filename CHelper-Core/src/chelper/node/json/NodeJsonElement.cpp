@@ -45,10 +45,6 @@ namespace CHelper::Node {
         Profile::pop();
     }
 
-    ASTNode NodeJsonElement::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        return getByChildNode(tokenReader, cpack, start);
-    }
-
     NodeBase *NodeJsonElement::getNodeJsonElement() {
         static std::unique_ptr<NodeBase> jsonString = std::make_unique<NodeJsonString>(
                 "JSON_STRING", u"JSON字符串");

@@ -16,8 +16,6 @@ namespace CHelper::Node {
     public:
         std::vector<std::unique_ptr<NodeSerializable>> nodes;
         std::string startNodeId;
-
-    private:
         NodeBase *start = nullptr;
 
     public:
@@ -26,8 +24,6 @@ namespace CHelper::Node {
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         void init(const CPack &cpack) override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
         static NodeBase *getNodeJsonElement();
     };

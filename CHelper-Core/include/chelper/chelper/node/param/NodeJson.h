@@ -11,16 +11,11 @@
 
 namespace CHelper::Node {
 
-    //TODO 原始JSON文本的目标选择器要支持*，并且不支持
-
     class NodeJson : public NodeSerializable {
     public:
         std::string key;
-
-    private:
         const NodeBase *nodeJson = nullptr;
 
-    public:
         NodeJson(const std::optional<std::string> &id,
                  const std::optional<std::u16string> &description,
                  std::string key);
@@ -30,8 +25,6 @@ namespace CHelper::Node {
         void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
     };
 
 }// namespace CHelper::Node

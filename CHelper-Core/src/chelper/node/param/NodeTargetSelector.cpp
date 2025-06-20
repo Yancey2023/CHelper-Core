@@ -16,13 +16,13 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NodeBase> nodePlayerName = std::make_shared<NodeString>(
+    std::shared_ptr<NodeBase> NodeTargetSelector::nodePlayerName = std::make_shared<NodeString>(
             "TARGET_SELECTOR_PLAYER_NAME", u"玩家名字", false, true, false);
-    static std::shared_ptr<NodeBase> nodeWildcard = std::make_shared<NodeSingleSymbol>(
+    std::shared_ptr<NodeBase> NodeTargetSelector::nodeWildcard = std::make_shared<NodeSingleSymbol>(
             u'*', u"所有正被记分板跟踪的实体");
-    static std::shared_ptr<NodeBase> nodeAt = std::make_shared<NodeSingleSymbol>(
+    std::shared_ptr<NodeBase> NodeTargetSelector::nodeAt = std::make_shared<NodeSingleSymbol>(
             u'@', u"@符号");
-    static std::shared_ptr<NodeBase> nodeTargetSelectorVariable = std::make_shared<NodeNormalId>(
+    std::shared_ptr<NodeBase> NodeTargetSelector::nodeTargetSelectorVariable = std::make_shared<NodeNormalId>(
             "TARGET_SELECTOR_VARIABLE", u"目标选择器变量",
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
                     NormalId::make(u"@e", u"选择所有实体(只选择活着的实体)"),
@@ -37,7 +37,8 @@ namespace CHelper::Node {
                 auto childNodes = {tokenReader.readSymbolASTNode(node), tokenReader.readStringASTNode(node)};
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
             });
-    static std::shared_ptr<NodeBase> nodeLeft = std::make_shared<NodeSingleSymbol>(u'[', u"目标选择器参数左括号");
+    std::shared_ptr<NodeBase> NodeTargetSelector::nodeLeft = std::make_shared<NodeSingleSymbol>(u'[', u"目标选择器参数左括号");
+
     static std::shared_ptr<NodeBase> nodeRight = std::make_shared<NodeSingleSymbol>(u']', u"目标选择器参数右括号");
     static std::shared_ptr<NodeBase> nodeSeparator = std::make_shared<NodeSingleSymbol>(u',', u"目标选择器参数分隔符");
     static std::unique_ptr<NodeBase> nodeEqual = std::make_unique<NodeText>(
@@ -185,55 +186,6 @@ namespace CHelper::Node {
 
     NodeTypeId::NodeTypeId NodeTargetSelector::getNodeType() const {
         return NodeTypeId::TARGET_SELECTOR;
-    }
-
-    ASTNode NodeTargetSelector::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        tokenReader.skipSpace();
-        tokenReader.push();
-        DEBUG_GET_NODE_BEGIN(nodeAt)
-        ASTNode at = nodeAt->getASTNode(tokenReader, cpack);
-        DEBUG_GET_NODE_END(nodeAt)
-        tokenReader.restore();
-        if (HEDLEY_UNLIKELY(at.isError())) {
-            //不是@符号开头
-            if (isWildcard) {
-                // 尝试匹配通配符
-                tokenReader.push();
-                DEBUG_GET_NODE_BEGIN(nodeWildcard)
-                ASTNode wildcard = nodeWildcard->getASTNode(tokenReader, cpack);
-                DEBUG_GET_NODE_END(nodeWildcard)
-                if (wildcard.isError()) {
-                    tokenReader.restore();
-                } else {
-                    tokenReader.pop();
-                    return wildcard;
-                }
-            }
-            // 当作玩家名处理
-            DEBUG_GET_NODE_BEGIN(nodePlayerName)
-            ASTNode result = getByChildNode(tokenReader, cpack, nodePlayerName.get(), ASTNodeId::NODE_TARGET_SELECTOR_PLAYER_NAME);
-            DEBUG_GET_NODE_END(nodePlayerName)
-            return result;
-        }
-        //@符号开头，进入目标选择器检测
-        //目标选择器变量
-        tokenReader.push();
-        DEBUG_GET_NODE_BEGIN(nodeTargetSelectorVariable)
-        ASTNode targetSelectorVariable = nodeTargetSelectorVariable->getASTNode(tokenReader, cpack);
-        DEBUG_GET_NODE_END(nodeTargetSelectorVariable)
-        tokenReader.push();
-        DEBUG_GET_NODE_BEGIN(nodeLeft)
-        ASTNode leftBracket = nodeLeft->getASTNode(tokenReader, cpack);
-        DEBUG_GET_NODE_END(nodeLeft)
-        tokenReader.restore();
-        if (HEDLEY_LIKELY(leftBracket.isError())) {
-            //没有后面的[...]
-            return ASTNode::andNode(this, {targetSelectorVariable}, tokenReader.collect(),
-                                    nullptr, ASTNodeId::NODE_TARGET_SELECTOR_NO_ARGUMENTS);
-        }
-        ASTNode arguments = nodeArguments->getASTNode(tokenReader, cpack);
-        return ASTNode::andNode(this, {targetSelectorVariable, arguments}, tokenReader.collect(),
-                                nullptr, ASTNodeId::NODE_TARGET_SELECTOR_WITH_ARGUMENTS);
     }
 
 }// namespace CHelper::Node

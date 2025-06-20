@@ -19,7 +19,7 @@ namespace CHelper::Node {
             RELATIVE_WORLD_COORDINATE,
             LOCAL_COORDINATE,
         };
-    }
+    }// namespace NodeRelativeFloatType
 
     class NodeRelativeFloat : public NodeSerializable {
     public:
@@ -36,13 +36,6 @@ namespace CHelper::Node {
                           bool canUseCaretNotation);
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
-
-        static std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode>
-        getASTNode(const NodeBase *node,
-                   const CPack *cpack,
-                   TokenReader &tokenReader);
     };
 
 }// namespace CHelper::Node

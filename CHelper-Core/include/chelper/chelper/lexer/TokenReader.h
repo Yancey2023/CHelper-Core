@@ -13,22 +13,6 @@
 #include "Token.h"
 #include "pch.h"
 
-#ifdef CHelperDebug
-#define DEBUG_GET_NODE_BEGIN(node) size_t node##Index = tokenReader.indexStack.size();
-#else
-#define DEBUG_GET_NODE_BEGIN(node)
-#endif
-
-#ifdef CHelperDebug
-#define DEBUG_GET_NODE_END(node)                                                                                      \
-    if (HEDLEY_UNLIKELY(node##Index != tokenReader.indexStack.size())) {                                              \
-        Profile::push("TokenReaderIndexError: {}", FORMAT_ARG(Node::NodeTypeHelper::getName((node)->getNodeType()))); \
-        throw std::runtime_error("TokenReaderIndexError");                                                            \
-    }
-#else
-#define DEBUG_GET_NODE_END(node)
-#endif
-
 namespace CHelper {
 
     namespace Node {
@@ -89,7 +73,7 @@ namespace CHelper {
                                   const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
         ASTNode readUntilSpace(const Node::NodeBase *node,
-                                    const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
+                               const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
         ASTNode readStringOrNumberASTNode(const Node::NodeBase *node,
                                           const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);

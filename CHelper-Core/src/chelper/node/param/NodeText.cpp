@@ -26,20 +26,4 @@ namespace CHelper::Node {
         return NodeTypeId::TEXT;
     }
 
-    ASTNode NodeText::getASTNode(TokenReader &tokenReader, const CPack *cpack) const {
-        DEBUG_GET_NODE_BEGIN(this)
-        auto result = getTextASTNode(this, tokenReader);
-        DEBUG_GET_NODE_END(this)
-        std::u16string_view str = result.tokens.toString();
-        if (HEDLEY_UNLIKELY(str != data->name)) {
-            TokensView tokens = result.tokens;
-            if (HEDLEY_UNLIKELY(str.empty())) {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, u"命令不完整"));
-            } else {
-                return ASTNode::andNode(this, {std::move(result)}, tokens, ErrorReason::contentError(tokens, fmt::format(u"找不到含义 -> {}", str)));
-            }
-        }
-        return result;
-    }
-
 }// namespace CHelper::Node

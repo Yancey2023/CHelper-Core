@@ -16,11 +16,8 @@ namespace CHelper::Node {
     public:
         std::optional<std::vector<TokenType::TokenType>> tokenTypes;
         std::shared_ptr<NormalId> data;
-
-    private:
         std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> getTextASTNode;
 
-    public:
         NodeText() = default;
 
         NodeText(
@@ -35,8 +32,6 @@ namespace CHelper::Node {
         void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
-
-        ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
     };
 
 }// namespace CHelper::Node
