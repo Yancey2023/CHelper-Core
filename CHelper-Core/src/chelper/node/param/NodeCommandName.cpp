@@ -36,10 +36,4 @@ namespace CHelper::Node {
         return true;
     }
 
-    void NodeCommandName::collectStructure(const ASTNode *astNode,
-                                           StructureBuilder &structure,
-                                           bool isMustHave) const {
-        structure.append(isMustHave, u"命令名");
-    }
-
 }// namespace CHelper::Node

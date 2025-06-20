@@ -31,10 +31,4 @@ namespace CHelper::Node {
         return ASTNode::simpleNode(this, tokens, errorReason);
     }
 
-    void NodeLF::collectStructure(const ASTNode *astNode,
-                                  StructureBuilder &structure,
-                                  bool isMustHave) const {
-        structure.append(u"\n");
-    }
-
 }// namespace CHelper::Node

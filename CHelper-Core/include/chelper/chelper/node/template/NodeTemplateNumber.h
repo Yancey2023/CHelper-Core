@@ -75,12 +75,6 @@ namespace CHelper::Node {
             return true;
         }
 
-        void collectStructure(const ASTNode *astNode,
-                              StructureBuilder &structure,
-                              bool isMustHave) const override {
-            structure.append(isMustHave, description.value_or(u"数字"));
-        }
-
         static std::unique_ptr<NodeTemplateNumber<T, isJson>> make(const std::optional<std::string> &id,
                                                                    const std::optional<std::u16string> &description,
                                                                    const std::optional<T> &min0,

@@ -29,10 +29,4 @@ namespace CHelper::Node {
         return getByChildNode(tokenReader, cpack, nodeIntegerMaybeHaveUnit.get());
     }
 
-    void NodeIntegerWithUnit::collectStructure(const ASTNode *astNode,
-                                               StructureBuilder &structure,
-                                               bool isMustHave) const {
-        structure.append(isMustHave, description.value_or(u"可能带单位的整数"));
-    }
-
 }// namespace CHelper::Node

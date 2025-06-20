@@ -63,14 +63,4 @@ namespace CHelper::Node {
                                 tokenReader.collect(), nullptr, ASTNodeId::NODE_COMMAND_COMMAND);
     }
 
-    void NodeCommand::collectStructure(const ASTNode *astNode,
-                                       StructureBuilder &structure,
-                                       bool isMustHave) const {
-        if (HEDLEY_UNLIKELY(astNode == nullptr || (astNode->id == ASTNodeId::NODE_COMMAND_COMMAND && astNode->tokens.size() < 2))) {
-            structure.append(isMustHave, u"命令");
-        } else if (HEDLEY_LIKELY(astNode->id == ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
-            structure.appendSpace().append(std::u16string(astNode->tokens.toString()));
-        }
-    }
-
 }// namespace CHelper::Node

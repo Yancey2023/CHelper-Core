@@ -2,9 +2,9 @@
 // Created by Yancey on 2024/2/21.
 //
 
-#include <chelper/parser/StructureBuilder.h>
+#include <chelper/command_structure/StructureBuilder.h>
 
-namespace CHelper {
+namespace CHelper::CommandStructure {
 
     StructureBuilder &StructureBuilder::appendUnknown(bool isMustHave) {
         return append(isMustHave, u"未知");
@@ -12,19 +12,16 @@ namespace CHelper {
 
     StructureBuilder &StructureBuilder::appendSymbol(char16_t ch) {
         structure.push_back(ch);
-        isDirty = true;
         return *this;
     }
 
     StructureBuilder &StructureBuilder::append(const std::u16string &str) {
         structure.append(str);
-        isDirty = true;
         return *this;
     }
 
     StructureBuilder &StructureBuilder::appendSpace() {
         if (HEDLEY_UNLIKELY(structure.empty())) {
-            isDirty = true;
             return *this;
         }
         return appendSymbol(' ');
@@ -46,4 +43,4 @@ namespace CHelper {
         return std::move(structure);
     }
 
-}// namespace CHelper
+}// namespace CHelper::CommandStructure

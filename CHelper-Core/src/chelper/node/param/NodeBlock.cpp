@@ -50,11 +50,4 @@ namespace CHelper::Node {
                                 nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
     }
 
-    void NodeBlock::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {
-        structure.append(isMustHave, u"方块ID");
-        if (HEDLEY_LIKELY(nodeBlockType == NodeBlockType::BLOCK_WITH_BLOCK_STATE)) {
-            structure.append(false, u"方块状态");
-        }
-    }
-
 }// namespace CHelper::Node

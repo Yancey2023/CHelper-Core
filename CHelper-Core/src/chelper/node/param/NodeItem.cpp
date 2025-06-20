@@ -13,8 +13,8 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NodeBase> nodeCount = NodeInteger::make("ITEM_COUNT", u"物品数量", 0, std::nullopt);
-    static std::shared_ptr<NodeBase> nodeAllData = NodeInteger::make("ITEM_DATA", u"物品附加值", -1, std::nullopt);
+    std::shared_ptr<NodeBase> NodeItem::nodeCount = NodeInteger::make("ITEM_COUNT", u"物品数量", 0, std::nullopt);
+    std::shared_ptr<NodeBase> NodeItem::nodeAllData = NodeInteger::make("ITEM_DATA", u"物品附加值", -1, std::nullopt);
 
     void NodeItem::init(const CPack &cpack) {
         itemIds = cpack.itemIds;
@@ -57,28 +57,6 @@ namespace CHelper::Node {
                 break;
         }
         return ASTNode::andNode(this, std::move(childNodes), tokenReader.collect());
-    }
-
-    void NodeItem::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {
-        switch (nodeItemType) {
-            case NodeItemType::ITEM_GIVE:
-                nodeItemId->collectStructure(nullptr, structure, isMustHave);
-                nodeCount->collectStructure(nullptr, structure, false);
-                nodeAllData->collectStructure(nullptr, structure, false);
-                nodeComponent->collectStructure(nullptr, structure, false);
-                break;
-            case NodeItemType::ITEM_CLEAR:
-                nodeItemId->collectStructure(nullptr, structure, isMustHave);
-                nodeAllData->collectStructure(nullptr, structure, false);
-                nodeCount->collectStructure(nullptr, structure, false);
-                break;
-            default:
-                nodeItemId->collectStructure(nullptr, structure, isMustHave);
-                nodeCount->collectStructure(nullptr, structure, false);
-                nodeAllData->collectStructure(nullptr, structure, false);
-                nodeComponent->collectStructure(nullptr, structure, false);
-                break;
-        }
     }
 
     /**

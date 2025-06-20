@@ -24,10 +24,6 @@ namespace CHelper::Node {
         static NodeWrapped *getInstance();
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
-
-        void collectStructure(const ASTNode *astNode,
-                              StructureBuilder &structure,
-                              bool isMustHave) const override;
     };
 
 }// namespace CHelper::Node

@@ -4,6 +4,7 @@
 
 #include <chelper/CHelperCore.h>
 #include <chelper/auto_suggestion/AutoSuggestion.h>
+#include <chelper/command_structure/CommandStructure.h>
 #include <chelper/parameter_hint/ParameterHint.h>
 #include <chelper/parser/Parser.h>
 #include <chelper/syntax_highlight/SyntaxHighlight.h>
@@ -115,7 +116,7 @@ namespace CHelper {
     }
 
     [[nodiscard]] std::u16string CHelperCore::getStructure() const {
-        return astNode.getStructure();
+        return CommandStructure::getStructure(astNode);
     }
 
     [[nodiscard]] SyntaxHighlight::SyntaxResult CHelperCore::getSyntaxResult() const {

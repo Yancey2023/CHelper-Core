@@ -42,10 +42,4 @@ namespace CHelper::Node {
         return result;
     }
 
-    void NodeText::collectStructure(const ASTNode *astNode,
-                                    StructureBuilder &structure,
-                                    bool isMustHave) const {
-        structure.appendSpace().append(data->name);
-    }
-
 }// namespace CHelper::Node

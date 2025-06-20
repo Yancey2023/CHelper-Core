@@ -66,10 +66,4 @@ namespace CHelper::Node {
         return result;
     }
 
-    void NodeString::collectStructure(const ASTNode *astNode,
-                                      StructureBuilder &structure,
-                                      bool isMustHave) const {
-        structure.append(isMustHave, description.value_or(u"字符串"));
-    }
-
 }// namespace CHelper::Node

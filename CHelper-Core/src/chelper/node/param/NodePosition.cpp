@@ -58,10 +58,4 @@ namespace CHelper::Node {
         }
     }
 
-    void NodePosition::collectStructure(const ASTNode *astNode,
-                                        StructureBuilder &structure,
-                                        bool isMustHave) const {
-        structure.append(isMustHave, u"位置");
-    }
-
 }// namespace CHelper::Node

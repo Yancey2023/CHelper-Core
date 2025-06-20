@@ -18,7 +18,7 @@ namespace CHelper::AutoSuggestion {
 
     template<class NodeType>
     struct AutoSuggestion {
-        static_assert(std::is_base_of_v<Node::NodeBase, NodeType>, "NodeType must be derived from Node::NodeBase");
+        static_assert(std::is_base_of_v<Node::NodeBase, NodeType>, "NodeType must be derived from NodeBase");
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
             return false;
         }
@@ -588,6 +588,5 @@ namespace CHelper::AutoSuggestion {
         collectSuggestions(astNode, index, suggestions);
         return suggestions;
     }
-
 
 }// namespace CHelper::AutoSuggestion

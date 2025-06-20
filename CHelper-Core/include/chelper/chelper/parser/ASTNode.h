@@ -7,9 +7,8 @@
 #ifndef CHELPER_ASTNODE_H
 #define CHELPER_ASTNODE_H
 
-#include "StructureBuilder.h"
-#include "pch.h"
 #include <chelper/parser/ErrorReason.h>
+#include <pch.h>
 
 namespace CHelper {
 
@@ -112,19 +111,13 @@ namespace CHelper {
 
         [[nodiscard]] bool isAllSpaceError() const;
 
-        [[nodiscard]] const ASTNode &getBestNode() const {
-            return childNodes[whichBest];
-        }
+        [[nodiscard]] const ASTNode &getBestNode() const;
 
         void collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
-
-        void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getIdErrors() const;
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
-
-        [[nodiscard]] std::u16string getStructure() const;
     };
 
 }// namespace CHelper

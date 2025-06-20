@@ -104,12 +104,6 @@ namespace CHelper {
             };
 
             template<>
-            struct NodeTypeDetail<NodeTypeId::SERIALIZABLE> : UnserializableNodeTypeDetail {
-                using Type = NodeSerializable;
-                static constexpr auto name = "SERIALIZABLE";
-            };
-
-            template<>
             struct NodeTypeDetail<NodeTypeId::WRAPPED> : UnserializableNodeTypeDetail {
                 using Type = NodeWrapped;
                 static constexpr auto name = "WRAPPED";

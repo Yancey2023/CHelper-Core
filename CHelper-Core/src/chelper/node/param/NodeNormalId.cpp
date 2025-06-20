@@ -113,10 +113,4 @@ namespace CHelper::Node {
         return true;
     }
 
-    void NodeNormalId::collectStructure(const ASTNode *astNode,
-                                        StructureBuilder &structure,
-                                        bool isMustHave) const {
-        structure.append(isMustHave, description.value_or(u"ID"));
-    }
-
 }// namespace CHelper::Node

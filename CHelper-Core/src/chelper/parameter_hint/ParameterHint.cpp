@@ -14,7 +14,7 @@ namespace CHelper::ParameterHint {
 
     template<class NodeType, class = void>
     struct ParameterHint {
-        static_assert(std::is_base_of_v<Node::NodeBase, NodeType>, "NodeType must be derived from Node::NodeBase");
+        static_assert(std::is_base_of_v<Node::NodeBase, NodeType>, "NodeType must be derived from NodeBase");
         static std::optional<std::u16string> getHint(const ASTNode &astNode) {
             return std::nullopt;
         }
@@ -102,7 +102,7 @@ namespace CHelper::ParameterHint {
                 }
                 return std::nullopt;
             case ASTNodeMode::OR:
-                return getParameterHint(astNode.childNodes[astNode.whichBest], index);
+                return getParameterHint(astNode.getBestNode(), index);
             default:
                 HEDLEY_UNREACHABLE();
         }

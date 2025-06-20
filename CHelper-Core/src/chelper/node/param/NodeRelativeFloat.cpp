@@ -93,10 +93,4 @@ namespace CHelper::Node {
         return {type, ASTNode::orNode(node, {std::move(result), std::move(preSymbol)}, nullptr)};
     }
 
-    void NodeRelativeFloat::collectStructure(const ASTNode *astNode,
-                                             StructureBuilder &structure,
-                                             bool isMustHave) const {
-        structure.append(isMustHave, description.value_or(u"坐标"));
-    }
-
 }// namespace CHelper::Node

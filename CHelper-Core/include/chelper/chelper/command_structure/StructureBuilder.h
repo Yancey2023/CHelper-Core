@@ -7,17 +7,15 @@
 #ifndef CHELPER_STRUCTUREBUILDER_H
 #define CHELPER_STRUCTUREBUILDER_H
 
-#include "pch.h"
+#include <pch.h>
 
-namespace CHelper {
+namespace CHelper::CommandStructure {
 
     class StructureBuilder {
     private:
         std::u16string structure;
 
     public:
-        bool isDirty = false;
-
         StructureBuilder &appendUnknown(bool isMustHave);
 
         StructureBuilder &appendSymbol(char16_t ch);
@@ -35,6 +33,6 @@ namespace CHelper {
         std::u16string build();
     };
 
-}// namespace CHelper
+}// namespace CHelper::CommandStructure
 
 #endif//CHELPER_STRUCTUREBUILDER_H

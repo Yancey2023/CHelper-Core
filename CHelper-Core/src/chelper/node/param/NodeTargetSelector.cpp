@@ -236,10 +236,4 @@ namespace CHelper::Node {
                                 nullptr, ASTNodeId::NODE_TARGET_SELECTOR_WITH_ARGUMENTS);
     }
 
-    void NodeTargetSelector::collectStructure(const ASTNode *astNode,
-                                              StructureBuilder &structure,
-                                              bool isMustHave) const {
-        structure.append(isMustHave, u"目标选择器");
-    }
-
 }// namespace CHelper::Node

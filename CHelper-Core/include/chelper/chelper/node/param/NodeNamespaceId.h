@@ -35,10 +35,6 @@ namespace CHelper::Node {
 
         bool collectIdError(const ASTNode *astNode,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
-
-        void collectStructure(const ASTNode *astNode,
-                              StructureBuilder &structure,
-                              bool isMustHave) const override;
     };
 
 }// namespace CHelper::Node

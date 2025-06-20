@@ -46,8 +46,4 @@ namespace CHelper::Node {
         return ASTNode::simpleNode(this, result.tokens, errorReason);
     }
 
-    void NodeRange::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {
-        structure.append(isMustHave, description.value_or(u"范围"));
-    }
-
 }// namespace CHelper::Node

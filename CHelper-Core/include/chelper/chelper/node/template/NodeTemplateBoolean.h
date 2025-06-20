@@ -37,12 +37,6 @@ namespace CHelper::Node {
                                     ErrorReason::contentError(tokens, fmt::format(u"内容不匹配，应该为布尔值，但当前内容为{}", str)));
         }
 
-        void collectStructure(const ASTNode *astNode,
-                              StructureBuilder &structure,
-                              bool isMustHave) const override {
-            structure.append(isMustHave, description.value_or(u"布尔值"));
-        }
-
         static std::unique_ptr<NodeTemplateBoolean> make(const std::optional<std::string> &id,
                                                          const std::optional<std::u16string> &description,
                                                          const std::optional<std::u16string> &descriptionTrue,

@@ -23,14 +23,13 @@ namespace CHelper::Node {
 
     class NodeItem : public NodeSerializable {
     public:
+        static std::shared_ptr<NodeBase> nodeCount;
+        static std::shared_ptr<NodeBase> nodeAllData;
         NodeItemType::NodeItemType nodeItemType = NodeItemType::ITEM_GIVE;
-
-    private:
-        std::unique_ptr<NodeNamespaceId> nodeItemId;
+        std::unique_ptr<NodeBase> nodeItemId;
         std::shared_ptr<std::vector<std::shared_ptr<ItemId>>> itemIds;
         std::unique_ptr<NodeBase> nodeComponent;
 
-    public:
         NodeItem() = default;
 
         void init(const CPack &cpack) override;
@@ -38,10 +37,6 @@ namespace CHelper::Node {
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
-
-        void collectStructure(const ASTNode *astNode,
-                              StructureBuilder &structure,
-                              bool isMustHave) const override;
 
         ASTNode getOptionalASTNode(TokenReader &tokenReader,
                                    const CPack *cpack,

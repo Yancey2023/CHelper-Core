@@ -24,11 +24,6 @@ namespace CHelper::Node {
         return false;
     }
 
-    void NodeBase::collectStructure(const ASTNode *astNode,
-                                    StructureBuilder &structure,
-                                    bool isMustHave) const {
-    }
-
     NodeSerializable::NodeSerializable(const std::optional<std::string> &id,
                                        const std::optional<std::u16string> &description,
                                        bool isMustAfterSpace)

@@ -2,8 +2,6 @@
 // Created by Yancey on 2025-06-20.
 //
 
-#pragma once
-
 #include <chelper/node/NodeType.h>
 #include <chelper/syntax_highlight/SyntaxHighlight.h>
 
@@ -16,7 +14,7 @@ namespace CHelper::SyntaxHighlight {
 
     template<class NodeType>
     struct SyntaxToken {
-        static_assert(std::is_base_of_v<Node::NodeBase, NodeType>, "NodeType must be derived from Node::NodeBase");
+        static_assert(std::is_base_of_v<Node::NodeBase, NodeType>, "NodeType must be derived from NodeBase");
         static bool collectSyntax(const ASTNode &astNode, SyntaxResult &syntaxResult) {
             return false;
         }
@@ -198,9 +196,7 @@ namespace CHelper::SyntaxHighlight {
         bool isNext = astNode.id == ASTNodeId::NEXT_NODE;
         if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
 #ifdef CHelperTest
-            Profile::push("collect color: {} {}",
-                          FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
-                          FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
+            Profile::push("collect color: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(astNode.node->getNodeType())));
 #endif
             bool isDirty;
             switch (astNode.node->getNodeType()) {

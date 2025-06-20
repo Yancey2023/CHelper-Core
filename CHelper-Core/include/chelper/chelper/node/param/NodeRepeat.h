@@ -15,12 +15,9 @@ namespace CHelper::Node {
     class NodeRepeat : public NodeSerializable {
     public:
         std::string key;
-
-    private:
         const RepeatData *repeatData = nullptr;
         const NodeBase *nodeElement = nullptr;
 
-    public:
         NodeRepeat() = default;
 
         void init(const CPack &cpack) override;
@@ -28,10 +25,6 @@ namespace CHelper::Node {
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
-
-        void collectStructure(const ASTNode *astNode,
-                              StructureBuilder &structure,
-                              bool isMustHave) const override;
     };
 
 }// namespace CHelper::Node

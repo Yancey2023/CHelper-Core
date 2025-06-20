@@ -11,8 +11,7 @@
 #include "../parser/ASTNode.h"
 #include "pch.h"
 
-#define CHELPER_NODE_TYPES SERIALIZABLE,      \
-                           WRAPPED,           \
+#define CHELPER_NODE_TYPES WRAPPED,           \
                            BLOCK,             \
                            BOOLEAN,           \
                            COMMAND,           \
@@ -94,10 +93,6 @@ namespace CHelper {
             HEDLEY_NON_NULL(2)
             virtual bool collectIdError(const ASTNode *astNode,
                                         std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
-
-            virtual void collectStructure(const ASTNode *astNode,
-                                          StructureBuilder &structure,
-                                          bool isMustHave) const;
         };
 
         class NodeSerializable : public NodeBase {

@@ -3,8 +3,6 @@
 //
 
 #include <chelper/node/NodeBase.h>
-#include <chelper/node/NodeType.h>
-#include <chelper/node/param/NodeLF.h>
 #include <chelper/parser/ASTNode.h>
 
 namespace CHelper {
@@ -132,6 +130,15 @@ namespace CHelper {
                                         });
     }
 
+    [[nodiscard]] const ASTNode &ASTNode::getBestNode() const {
+#ifdef CHelperDebug
+        if (mode != ASTNodeMode::OR) {
+            throw std::runtime_error("invalid mode");
+        }
+#endif
+        return childNodes[whichBest];
+    }
+
     //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
     void ASTNode::collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
         if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllSpaceError())) {
@@ -159,64 +166,6 @@ namespace CHelper {
             case ASTNodeMode::OR:
                 childNodes[whichBest].collectIdErrors(idErrorReasons);
                 break;
-        }
-    }
-
-    void ASTNode::collectStructure(StructureBuilder &structure, bool isMustHave) const {
-        bool isCompound = id == ASTNodeId::COMPOUND;
-        bool isNext = id == ASTNodeId::NEXT_NODE;
-        if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
-#ifdef CHelperTest
-            Profile::push("collect structure: {} {}",
-                          FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
-                          FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
-#endif
-            node->collectStructure(mode == ASTNodeMode::NONE && isAllSpaceError() ? nullptr : this, structure, isMustHave);
-#ifdef CHelperTest
-            Profile::pop();
-#endif
-            if (HEDLEY_UNLIKELY(structure.isDirty)) {
-                structure.isDirty = false;
-                return;
-            }
-        }
-        switch (mode) {
-            case ASTNodeMode::NONE:
-                node->collectStructure(nullptr, structure, isMustHave);
-                return;
-            case ASTNodeMode::AND:
-                for (const ASTNode &astNode: childNodes) {
-                    astNode.collectStructure(structure, isMustHave);
-                    if (HEDLEY_LIKELY(isMustHave) && astNode.node->getNodeType() == Node::NodeTypeId::NodeTypeId::WRAPPED) {
-                        for (const auto &item: reinterpret_cast<const Node::NodeWrapped *>(astNode.node)->nextNodes) {
-                            if (HEDLEY_UNLIKELY(item == Node::NodeLF::getInstance())) {
-                                isMustHave = false;
-                            }
-                        }
-                    }
-                }
-                break;
-            case ASTNodeMode::OR:
-                if (HEDLEY_UNLIKELY(isNext &&
-                                    (node->getNodeType() != Node::NodeTypeId::NodeTypeId::WRAPPED ||
-                                     reinterpret_cast<const Node::NodeWrapped *>(node)->nextNodes.size() != 1) &&
-                                    childNodes[whichBest].node == Node::NodeLF::getInstance())) {
-                    for (const auto &item: reinterpret_cast<const Node::NodeWrapped *>(node)->nextNodes) {
-                        if (HEDLEY_UNLIKELY(item != Node::NodeLF::getInstance())) {
-                            item->collectStructure(nullptr, structure, isMustHave);
-                            break;
-                        }
-                    }
-                    return;
-                }
-                childNodes[whichBest].collectStructure(structure, isMustHave);
-                break;
-        }
-        if (HEDLEY_UNLIKELY(isCompound &&
-                            childNodes.size() <= 1 &&
-                            node->getNodeType() != Node::NodeTypeId::NodeTypeId::WRAPPED &&
-                            !reinterpret_cast<const Node::NodeWrapped *>(node)->nextNodes.empty())) {
-            reinterpret_cast<const Node::NodeWrapped *>(node)->nextNodes[0]->collectStructure(nullptr, structure, isMustHave);
         }
     }
 
@@ -259,22 +208,6 @@ namespace CHelper {
         Profile::pop();
 #endif
         return sortByLevel(result);
-    }
-
-    std::u16string ASTNode::getStructure() const {
-#ifdef CHelperTest
-        Profile::push("start getting structure: {}", FORMAT_ARG(utf8::utf16to8(tokens.toString())));
-#endif
-        StructureBuilder structureBuilder;
-        collectStructure(structureBuilder, true);
-#ifdef CHelperTest
-        Profile::pop();
-#endif
-        std::u16string result = structureBuilder.build();
-        while (HEDLEY_UNLIKELY(!result.empty() && result[result.size() - 1] == '\n')) {
-            result.pop_back();
-        }
-        return result;
     }
 
 }// namespace CHelper

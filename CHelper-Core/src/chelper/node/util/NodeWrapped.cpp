@@ -55,36 +55,4 @@ namespace CHelper::Node {
         return ASTNode::andNode(this, {std::move(currentASTNode), std::move(nextASTNode)}, tokenReader.collect(), nullptr, ASTNodeId::COMPOUND);
     }
 
-    void NodeWrapped::collectStructure(const ASTNode *astNode,
-                                       StructureBuilder &structure,
-                                       bool isMustHave) const {
-        if (astNode == nullptr) {
-            innerNode->collectStructure(astNode, structure, isMustHave);
-        } else {
-            if (HEDLEY_UNLIKELY(innerNode->brief.has_value())) {
-                structure.append(isMustHave, innerNode->brief.value());
-            } else {
-                structure.isDirty = false;
-                collectStructure(nullptr, structure, isMustHave);
-                if (HEDLEY_UNLIKELY(!structure.isDirty)) {
-                    structure.appendUnknown(isMustHave);
-                    structure.isDirty = false;
-                    return;
-                }
-            }
-            if (HEDLEY_UNLIKELY(nextNodes.empty())) {
-                return;
-            }
-            if (HEDLEY_LIKELY(isMustHave)) {
-                for (const auto &item: nextNodes) {
-                    if (HEDLEY_UNLIKELY(item->innerNode->getNodeType() == NodeTypeId::LF)) {
-                        isMustHave = false;
-                        break;
-                    }
-                }
-            }
-            nextNodes[0]->collectStructure(nullptr, structure, isMustHave);
-        }
-    }
-
 }// namespace CHelper::Node

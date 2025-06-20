@@ -33,10 +33,4 @@ namespace CHelper::Node {
         return getByChildNode(tokenReader, cpack, nodeJson);
     }
 
-    void NodeJson::collectStructure(const ASTNode *astNode,
-                                    StructureBuilder &structure,
-                                    bool isMustHave) const {
-        structure.append(isMustHave, description.value_or(u"JSON文本"));
-    }
-
 }// namespace CHelper::Node
