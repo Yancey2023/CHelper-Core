@@ -7,7 +7,7 @@
 
 #define CHELPER_CODEC_COLLECT_AUTO_SUGGESTION(v1)                                                                                                      \
     case Node::NodeTypeId::v1:                                                                                                                         \
-        isDirty = AutoSuggestion<typename Node::details::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectSuggestions(astNode, index, suggestions); \
+        isDirty = AutoSuggestion<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectSuggestions(astNode, index, suggestions); \
         break;
 
 namespace CHelper::AutoSuggestion {
@@ -525,9 +525,9 @@ namespace CHelper::AutoSuggestion {
         if (HEDLEY_UNLIKELY(astNode.id != ASTNodeId::COMPOUND && astNode.id != ASTNodeId::NEXT_NODE && !astNode.isAllSpaceError())) {
             bool isDirty;
 #ifdef CHelperTest
-            Profile::push("collect suggestions: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())));
+            Profile::push("collect suggestions: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(node->nodeTypeId)));
 #endif
-            switch (astNode.node->getNodeType()) {
+            switch (astNode.node->nodeTypeId) {
                 CODEC_PASTE(CHELPER_CODEC_COLLECT_AUTO_SUGGESTION, CHELPER_NODE_TYPES)
                 default:
                     HEDLEY_UNREACHABLE();

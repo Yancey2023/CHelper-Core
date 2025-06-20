@@ -2,7 +2,7 @@
 // Created by Yancey on 2023/12/15.
 //
 
-#include <chelper/node/NodeBase.h>
+#include <chelper/node/CommandNode.h>
 #include <chelper/parser/ASTNode.h>
 
 namespace CHelper {

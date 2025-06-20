@@ -2,15 +2,7 @@
 // Created by Yancey on 2023/11/7.
 //
 
-#include <chelper/node/NodeBase.h>
-#include <chelper/node/param/NodeString.h>
-#include <chelper/node/param/NodeText.h>
-#include <chelper/node/template/NodeTemplateBoolean.h>
-#include <chelper/node/template/NodeTemplateNumber.h>
-#include <chelper/node/util/NodeEntry.h>
-#include <chelper/node/util/NodeList.h>
-#include <chelper/node/util/NodeOr.h>
-#include <chelper/node/util/NodeSingleSymbol.h>
+#include <chelper/node/CommandNode.h>
 #include <chelper/resources/id/BlockId.h>
 
 namespace CHelper {

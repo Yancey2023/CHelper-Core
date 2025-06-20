@@ -2,8 +2,7 @@
 // Created by Yancey on 2024-6-12.
 //
 
-#include <chelper/node/json/NodeJsonEntry.h>
-#include <chelper/node/param/NodeRelativeFloat.h>
+#include <chelper/node/CommandNode.h>
 #include <chelper/old2new/Old2New.h>
 
 CODEC_REGISTER_JSON_KEY(CHelper::Old2New::DataFix, name, data, newBlockId, blockState)

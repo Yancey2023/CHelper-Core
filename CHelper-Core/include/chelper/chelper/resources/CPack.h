@@ -7,23 +7,13 @@
 #ifndef CHELPER_CPACK_H
 #define CHELPER_CPACK_H
 
-#include "../node/json/NodeJsonElement.h"
-#include "../node/param/NodeCommand.h"
-#include "../node/param/NodePerCommand.h"
-#include "Manifest.h"
-#include "id/BlockId.h"
-#include "id/ItemId.h"
-#include "pch.h"
+#include <chelper/node/CommandNode.h>
+#include <chelper/resources/Manifest.h>
+#include <chelper/resources/id/BlockId.h>
+#include <chelper/resources/id/ItemId.h>
+#include <pch.h>
 
 namespace CHelper {
-
-    class RepeatData {
-    public:
-        std::string id;
-        std::vector<std::unique_ptr<Node::NodeSerializable>> breakNodes;
-        std::vector<std::vector<std::unique_ptr<Node::NodeSerializable>>> repeatNodes;
-        std::vector<bool> isEnd;
-    };
 
     class CPack {
     public:
@@ -33,8 +23,8 @@ namespace CHelper {
         std::shared_ptr<BlockIds> blockIds;
         std::shared_ptr<std::vector<std::shared_ptr<ItemId>>> itemIds;
         std::vector<std::unique_ptr<Node::NodeJsonElement>> jsonNodes;
-        std::vector<RepeatData> repeatNodeData;
-        std::unordered_map<std::string, std::pair<const RepeatData *, const Node::NodeBase *>> repeatNodes;
+        std::vector<Node::RepeatData> repeatNodeData;
+        std::unordered_map<std::string, std::pair<const Node::RepeatData *, const Node::NodeBase *>> repeatNodes;
         std::shared_ptr<std::vector<std::unique_ptr<Node::NodePerCommand>>> commands = std::make_shared<std::vector<std::unique_ptr<Node::NodePerCommand>>>();
         std::unique_ptr<Node::NodeCommand> mainNode;
 
@@ -90,7 +80,5 @@ namespace CHelper {
     };
 
 }// namespace CHelper
-
-CODEC(CHelper::RepeatData, id, breakNodes, repeatNodes, isEnd)
 
 #endif//CHELPER_CPACK_H

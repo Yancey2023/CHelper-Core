@@ -7,7 +7,7 @@
 
 #define CHELPER_CODEC_LINT(v1)                                                                                             \
     case Node::NodeTypeId::v1:                                                                                             \
-        isDirty = Linter<typename Node::details::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::lint(astNode, errorReasons); \
+        isDirty = Linter<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::lint(astNode, errorReasons); \
         break;
 
 namespace CHelper::Linter {
@@ -147,10 +147,10 @@ namespace CHelper::Linter {
     void lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
         if (HEDLEY_UNLIKELY(astNode.id != ASTNodeId::COMPOUND && astNode.id != ASTNodeId::NEXT_NODE && !astNode.isAllSpaceError())) {
 #ifdef CHelperTest
-            Profile::push("collect id errors: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())));
+            Profile::push("collect id errors: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(node->nodeTypeId)));
 #endif
             bool isDirty = false;
-            switch (astNode.node->getNodeType()) {
+            switch (astNode.node->nodeTypeId) {
                 CODEC_PASTE(CHELPER_CODEC_LINT, CHELPER_NODE_TYPES)
                 default:
                     HEDLEY_UNREACHABLE();

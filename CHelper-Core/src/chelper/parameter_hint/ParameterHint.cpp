@@ -7,7 +7,7 @@
 
 #define CHELPER_CODEC_GET_PARAMETER_HINT(v1)                                                                                 \
     case Node::NodeTypeId::v1:                                                                                               \
-        parameterHint = ParameterHint<typename Node::details::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::getHint(astNode); \
+        parameterHint = ParameterHint<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::getHint(astNode); \
         break;
 
 namespace CHelper::ParameterHint {
@@ -75,10 +75,10 @@ namespace CHelper::ParameterHint {
         }
         if (HEDLEY_UNLIKELY(astNode.id != ASTNodeId::COMPOUND && astNode.id != ASTNodeId::NEXT_NODE && !astNode.isAllSpaceError())) {
 #ifdef CHelperTest
-            Profile::push("get parameter hint: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(astNode.node->getNodeType())));
+            Profile::push("get parameter hint: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(astNode.node->nodeTypeId)));
 #endif
             std::optional<std::u16string> parameterHint;
-            switch (astNode.node->getNodeType()) {
+            switch (astNode.node->nodeTypeId) {
                 CODEC_PASTE(CHELPER_CODEC_GET_PARAMETER_HINT, CHELPER_NODE_TYPES)
                 default:
                     HEDLEY_UNREACHABLE();

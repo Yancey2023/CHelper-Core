@@ -3,8 +3,10 @@
 //
 
 #include <chelper/node/NodeType.h>
+#include <chelper/node/NodeInitialization.h>
 #include <chelper/resources/CPack.h>
 #include <chelper/resources/Manifest.h>
+#include <chelper/serialization/Serialization.h>
 
 namespace CHelper {
 
@@ -13,7 +15,7 @@ namespace CHelper {
 #ifdef CHelperDebug
         size_t stackSize = Profile::stack.size();
 #endif
-        Node::currentCreateStage = Node::NodeCreateStage::NONE;
+        currentCreateStage = Node::NodeCreateStage::NONE;
         Profile::push("loading manifest");
         auto jsonManifest = serialization::get_json_from_file(path / "manifest.json");
         serialization::Codec<Manifest>::template from_json(jsonManifest, manifest);
@@ -23,25 +25,25 @@ namespace CHelper {
             applyId(serialization::get_json_from_file(file));
         }
         Profile::next("loading json data");
-        Node::currentCreateStage = Node::NodeCreateStage::JSON_NODE;
+        currentCreateStage = Node::NodeCreateStage::JSON_NODE;
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "json")) {
             Profile::next(R"(loading json data in path "{}")", FORMAT_ARG(utf8::utf16to8(file.path().u16string())));
             applyJson(serialization::get_json_from_file(file));
         }
         Profile::next("loading repeat data");
-        Node::currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
+        currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "repeat")) {
             Profile::next(R"(loading repeat data in path "{}")", FORMAT_ARG(utf8::utf16to8(file.path().u16string())));
             applyRepeat(serialization::get_json_from_file(file));
         }
         Profile::next("loading commands");
-        Node::currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
+        currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "command")) {
             Profile::next(R"(loading command in path "{}")", FORMAT_ARG(utf8::utf16to8(file.path().u16string())));
             applyCommand(serialization::get_json_from_file(file));
         }
         Profile::next("init cpack");
-        Node::currentCreateStage = Node::NodeCreateStage::NONE;
+        currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
 #ifdef CHelperDebug
@@ -57,7 +59,7 @@ namespace CHelper {
 #ifdef CHelperDebug
         size_t stackSize = Profile::stack.size();
 #endif
-        Node::currentCreateStage = Node::NodeCreateStage::NONE;
+        currentCreateStage = Node::NodeCreateStage::NONE;
         Profile::push("loading manifest");
         serialization::Codec<Manifest>::template from_json_member<JsonValueType>(j, "manifest", manifest);
         Profile::next("loading id data");
@@ -65,22 +67,22 @@ namespace CHelper {
             applyId(item);
         }
         Profile::next("loading json data");
-        Node::currentCreateStage = Node::NodeCreateStage::JSON_NODE;
+        currentCreateStage = Node::NodeCreateStage::JSON_NODE;
         for (const auto &item: serialization::find_array_member_or_throw(j, "json")) {
             applyJson(item);
         }
         Profile::next("loading repeat data");
-        Node::currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
+        currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
         for (const auto &item: serialization::find_array_member_or_throw(j, "repeat")) {
             applyRepeat(item);
         }
         Profile::next("loading command data");
-        Node::currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
+        currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
         for (const auto &item: serialization::find_array_member_or_throw(j, "command")) {
             applyCommand(item);
         }
         Profile::next("init cpack");
-        Node::currentCreateStage = Node::NodeCreateStage::NONE;
+        currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
 #ifdef CHelperDebug
@@ -94,7 +96,7 @@ namespace CHelper {
 #ifdef CHelperDebug
         size_t stackSize = Profile::stack.size();
 #endif
-        Node::currentCreateStage = Node::NodeCreateStage::NONE;
+        currentCreateStage = Node::NodeCreateStage::NONE;
         Profile::push("loading manifest");
         serialization::Codec<decltype(manifest)>::template from_binary<false>(istream, manifest);
         Profile::next("loading normal id data");
@@ -106,16 +108,16 @@ namespace CHelper {
         Profile::next("loading block id data");
         serialization::Codec<decltype(blockIds)>::template from_binary<false>(istream, blockIds);
         Profile::next("loading json data");
-        Node::currentCreateStage = Node::NodeCreateStage::JSON_NODE;
+        currentCreateStage = Node::NodeCreateStage::JSON_NODE;
         serialization::Codec<decltype(jsonNodes)>::template from_binary<false>(istream, jsonNodes);
         Profile::next("loading repeat data");
-        Node::currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
+        currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
         serialization::Codec<decltype(repeatNodeData)>::template from_binary<false>(istream, repeatNodeData);
         Profile::next("loading command data");
-        Node::currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
+        currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
         serialization::Codec<decltype(commands)>::template from_binary<false>(istream, commands);
         Profile::next("init cpack");
-        Node::currentCreateStage = Node::NodeCreateStage::NONE;
+        currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
 #ifdef CHelperDebug
@@ -160,7 +162,7 @@ namespace CHelper {
 
     void CPack::applyRepeat(const rapidjson::GenericValue<rapidjson::UTF8<>> &j) {
         using JsonValueType = rapidjson::GenericValue<rapidjson::UTF8<>>;
-        RepeatData item;
+        Node::RepeatData item;
         serialization::Codec<decltype(item)>::template from_json<JsonValueType>(j, item);
         repeatNodeData.push_back(std::move(item));
     }
@@ -176,7 +178,7 @@ namespace CHelper {
         // json nodes
         Profile::push("init json nodes");
         for (const auto &item: jsonNodes) {
-            item->init(*this);
+            Node::initNode(*item, *this);
         }
         // repeat nodes
         Profile::next("init repeat nodes");
@@ -224,16 +226,16 @@ namespace CHelper {
         for (const auto &item: repeatNodeData) {
             for (const auto &item2: item.repeatNodes) {
                 for (const auto &item3: item2) {
-                    item3->init(*this);
+                    Node::initNode(*item3, *this);
                 }
             }
             for (const auto &item2: item.breakNodes) {
-                item2->init(*this);
+                Node::initNode(*item2, *this);
             }
         }
         for (const auto &item: *commands) {
             Profile::next(R"(init command: "{}")", FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", StringUtil::join(item->name, u",")))));
-            item->init(*this);
+            Node::initNode(*item, *this);
         }
         Profile::next("sort command nodes");
         std::sort(commands->begin(), commands->end(),

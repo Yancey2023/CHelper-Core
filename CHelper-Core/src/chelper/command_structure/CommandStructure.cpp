@@ -8,7 +8,7 @@
 
 #define CHELPER_CODEC_COLLECT_STRUCTURE(v1) \
     case Node::NodeTypeId::v1:              \
-        return CommandStructure<typename Node::details::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectStructure(astNode, reinterpret_cast<const typename Node::details::NodeTypeDetail<Node::NodeTypeId::v1>::Type &>(node), structure, isMustHave);
+        return CommandStructure<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectStructure(astNode, reinterpret_cast<const typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type &>(node), structure, isMustHave);
 
 namespace CHelper::CommandStructure {
 
@@ -260,7 +260,7 @@ namespace CHelper::CommandStructure {
                 collectNodeStructureOrUnknown(nullptr, *node.innerNode, structure, isMustHave);
                 if (isMustHave) {
                     for (const auto &item: node.nextNodes) {
-                        if (HEDLEY_UNLIKELY(item->innerNode->getNodeType() == Node::NodeTypeId::LF)) {
+                        if (HEDLEY_UNLIKELY(item->innerNode->nodeTypeId == Node::NodeTypeId::LF)) {
                             isMustHave = false;
                             break;
                         }
@@ -277,7 +277,7 @@ namespace CHelper::CommandStructure {
                 }
                 if (isMustHave) {
                     for (const auto &item: node.nextNodes) {
-                        if (HEDLEY_UNLIKELY(item->innerNode->getNodeType() == Node::NodeTypeId::LF)) {
+                        if (HEDLEY_UNLIKELY(item->innerNode->nodeTypeId == Node::NodeTypeId::LF)) {
                             isMustHave = false;
                             break;
                         }
@@ -294,7 +294,7 @@ namespace CHelper::CommandStructure {
     };
 
     bool collectNodeStructure(const ASTNode *astNode, const Node::NodeBase &node, StructureBuilder &structure, bool isMustHave) {
-        switch (node.getNodeType()) {
+        switch (node.nodeTypeId) {
             CODEC_PASTE(CHELPER_CODEC_COLLECT_STRUCTURE, CHELPER_NODE_TYPES)
             default:
                 HEDLEY_UNREACHABLE();

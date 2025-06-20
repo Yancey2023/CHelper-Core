@@ -7,7 +7,7 @@
 
 #define CHELPER_CODEC_COLLECT_SYNTAX(v1)                                                                                                 \
     case Node::NodeTypeId::v1:                                                                                                           \
-        isDirty = SyntaxToken<typename Node::details::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectSyntax(astNode, syntaxResult); \
+        isDirty = SyntaxToken<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectSyntax(astNode, syntaxResult); \
         break;
 
 namespace CHelper::SyntaxHighlight {
@@ -196,10 +196,10 @@ namespace CHelper::SyntaxHighlight {
         bool isNext = astNode.id == ASTNodeId::NEXT_NODE;
         if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
 #ifdef CHelperTest
-            Profile::push("collect color: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(astNode.node->getNodeType())));
+            Profile::push("collect color: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(astNode.node->nodeTypeId)));
 #endif
             bool isDirty;
-            switch (astNode.node->getNodeType()) {
+            switch (astNode.node->nodeTypeId) {
                 CODEC_PASTE(CHELPER_CODEC_COLLECT_SYNTAX, CHELPER_NODE_TYPES)
                 default:
                     HEDLEY_UNREACHABLE();

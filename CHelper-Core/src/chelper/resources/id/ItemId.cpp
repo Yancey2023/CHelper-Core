@@ -2,9 +2,7 @@
 // Created by Yancey on 2023/11/8.
 //
 
-#include <chelper/node/param/NodeText.h>
-#include <chelper/node/template/NodeTemplateNumber.h>
-#include <chelper/node/util/NodeOr.h>
+#include <chelper/node/CommandNode.h>
 #include <chelper/resources/id/ItemId.h>
 
 namespace CHelper {

@@ -3,7 +3,6 @@
 //
 
 #include <chelper/lexer/TokenReader.h>
-#include <chelper/node/NodeBase.h>
 
 namespace CHelper {
 
@@ -169,7 +168,7 @@ namespace CHelper {
     }
 
     ASTNode TokenReader::readUntilSpace(const Node::NodeBase *node,
-                                             const ASTNodeId::ASTNodeId &astNodeId) {
+                                        const ASTNodeId::ASTNodeId &astNodeId) {
         push();
         while (ready()) {
             TokenType::TokenType tokenType = peek()->type;
