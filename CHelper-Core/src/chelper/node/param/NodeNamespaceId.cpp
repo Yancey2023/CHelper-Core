@@ -80,10 +80,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"ID"));
     }
 
-    bool NodeNamespaceId::collectSyntax(const ASTNode *astNode,
-                                        SyntaxResult &syntaxResult) const {
-        syntaxResult.update(astNode->tokens, SyntaxTokenType::ID);
-        return true;
-    }
-
 }// namespace CHelper::Node

@@ -48,14 +48,4 @@ namespace CHelper::Node {
         structure.appendSpace().append(data->name);
     }
 
-    bool NodeText::collectSyntax(const ASTNode *astNode,
-                                 SyntaxResult &syntaxResult) const {
-        if (id != "TARGET_SELECTOR_ARGUMENT_EQUAL" && id != "TARGET_SELECTOR_ARGUMENT_NOT_EQUAL") {
-            syntaxResult.update(astNode->tokens, SyntaxTokenType::LITERAL);
-        } else {
-            syntaxResult.update(astNode->tokens, SyntaxTokenType::SYMBOL);
-        }
-        return true;
-    }
-
 }// namespace CHelper::Node

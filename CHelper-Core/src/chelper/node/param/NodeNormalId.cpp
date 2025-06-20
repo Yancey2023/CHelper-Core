@@ -119,16 +119,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"ID"));
     }
 
-    bool NodeNormalId::collectSyntax(const ASTNode *astNode,
-                                     SyntaxResult &syntaxResult) const {
-        if (key.has_value()) {
-            syntaxResult.update(astNode->tokens, SyntaxTokenType::ID);
-        } else if (id != "TARGET_SELECTOR_VARIABLE") {
-            syntaxResult.update(astNode->tokens, SyntaxTokenType::LITERAL);
-        } else {
-            syntaxResult.update(astNode->tokens, SyntaxTokenType::TARGET_SELECTOR);
-        }
-        return true;
-    }
-
 }// namespace CHelper::Node

@@ -64,14 +64,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, u"位置");
     }
 
-    bool NodePosition::collectSyntax(const ASTNode *astNode,
-                                     SyntaxResult &syntaxResult) const {
-        if (astNode->id == ASTNodeId::NODE_RELATIVE_FLOAT_NUMBER) {
-            syntaxResult.update(astNode->tokens, SyntaxTokenType::FLOAT);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }// namespace CHelper::Node

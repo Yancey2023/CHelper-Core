@@ -7,7 +7,7 @@
 
 void testCommand(CHelper::CHelperCore *core, const std::u16string &command) {
     core->onTextChanged(command, command.length());
-    CHelper::SyntaxResult syntaxResult = core->getSyntaxResult();
+    CHelper::SyntaxHighlight::SyntaxResult syntaxResult = core->getSyntaxResult();
     std::string stringBuilder;
 
     constexpr uint32_t NO_COLOR = 0xFFFFFFFF;
@@ -42,49 +42,49 @@ void testCommand(CHelper::CHelperCore *core, const std::u16string &command) {
         strChar.push_back(syntaxResult.str[i]);
         uint32_t color = colorUnknown;
         switch (tokenType) {
-            case CHelper::SyntaxTokenType::UNKNOWN:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::UNKNOWN:
                 color = colorUnknown;
                 break;
-            case CHelper::SyntaxTokenType::BOOLEAN:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::BOOLEAN:
                 color = colorBoolean;
                 break;
-            case CHelper::SyntaxTokenType::FLOAT:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::FLOAT:
                 color = colorFloat;
                 break;
-            case CHelper::SyntaxTokenType::INTEGER:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::INTEGER:
                 color = colorInteger;
                 break;
-            case CHelper::SyntaxTokenType::SYMBOL:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::SYMBOL:
                 color = colorSymbol;
                 break;
-            case CHelper::SyntaxTokenType::ID:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::ID:
                 color = colorId;
                 break;
-            case CHelper::SyntaxTokenType::TARGET_SELECTOR:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::TARGET_SELECTOR:
                 color = colorTargetSelector;
                 break;
-            case CHelper::SyntaxTokenType::COMMAND:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::COMMAND:
                 color = colorCommand;
                 break;
-            case CHelper::SyntaxTokenType::BRACKET1:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::BRACKET1:
                 color = colorBrackets1;
                 break;
-            case CHelper::SyntaxTokenType::BRACKET2:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::BRACKET2:
                 color = colorBrackets2;
                 break;
-            case CHelper::SyntaxTokenType::BRACKET3:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::BRACKET3:
                 color = colorBrackets3;
                 break;
-            case CHelper::SyntaxTokenType::STRING:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::STRING:
                 color = colorString;
                 break;
-            case CHelper::SyntaxTokenType::NULL_TOKEN:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::NULL_TOKEN:
                 color = colorNull;
                 break;
-            case CHelper::SyntaxTokenType::RANGE:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::RANGE:
                 color = colorRange;
                 break;
-            case CHelper::SyntaxTokenType::LITERAL:
+            case CHelper::SyntaxHighlight::SyntaxTokenType::LITERAL:
                 color = colorLiteral;
                 break;
             default:

@@ -256,7 +256,7 @@ Java_yancey_chelper_core_CHelperCore_getColors0(
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getColors0 when core is nullptr");
         return nullptr;
     }
-    CHelper::SyntaxResult syntaxResult = core->getSyntaxResult();
+    auto syntaxResult = core->getSyntaxResult();
     size_t size = syntaxResult.tokenTypes.size();
     jint *tokenTypes = new jint[size];
     for (int i = 0; i < size; ++i) {

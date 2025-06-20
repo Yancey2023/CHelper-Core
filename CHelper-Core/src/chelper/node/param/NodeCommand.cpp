@@ -73,13 +73,4 @@ namespace CHelper::Node {
         }
     }
 
-    bool NodeCommand::collectSyntax(const ASTNode *astNode,
-                                    SyntaxResult &syntaxResult) const {
-        if (HEDLEY_LIKELY(astNode->id == ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
-            syntaxResult.update(astNode->tokens, SyntaxTokenType::COMMAND);
-            return true;
-        }
-        return false;
-    }
-
 }// namespace CHelper::Node

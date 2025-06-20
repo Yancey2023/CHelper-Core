@@ -72,10 +72,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"字符串"));
     }
 
-    bool NodeString::collectSyntax(const ASTNode *astNode,
-                                   SyntaxResult &syntaxResult) const {
-        syntaxResult.update(astNode->tokens, SyntaxTokenType::STRING);
-        return true;
-    }
-
 }// namespace CHelper::Node

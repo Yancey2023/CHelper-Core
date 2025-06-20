@@ -42,10 +42,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, u"命令名");
     }
 
-    bool NodeCommandName::collectSyntax(const ASTNode *astNode,
-                                        SyntaxResult &syntaxResult) const {
-        syntaxResult.update(astNode->tokens, SyntaxTokenType::ID);
-        return true;
-    }
-
 }// namespace CHelper::Node

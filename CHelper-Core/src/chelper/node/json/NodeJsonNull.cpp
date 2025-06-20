@@ -29,10 +29,4 @@ namespace CHelper::Node {
         return result;
     }
 
-    bool NodeJsonNull::collectSyntax(const ASTNode *astNode,
-                                     SyntaxResult &syntaxResult) const {
-        syntaxResult.update(astNode->tokens, SyntaxTokenType::NULL_TOKEN);
-        return true;
-    }
-
 }// namespace CHelper::Node

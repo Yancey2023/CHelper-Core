@@ -32,9 +32,6 @@ namespace CHelper::Node {
 
         bool collectIdError(const ASTNode *astNode,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
-
-        bool collectSyntax(const ASTNode *astNode,
-                          SyntaxResult &syntaxResult) const override;
     };
 
 }// namespace CHelper::Node

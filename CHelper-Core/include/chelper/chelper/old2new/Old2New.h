@@ -5,9 +5,9 @@
 #ifndef CHELPER_OLD2NEW_H
 #define CHELPER_OLD2NEW_H
 
-#include "../lexer/Lexer.h"
-#include "../lexer/TokenReader.h"
-#include "pch.h"
+#include <chelper/lexer/Lexer.h>
+#include <chelper/lexer/TokenReader.h>
+#include <pch.h>
 
 namespace CHelper::Old2New {
 

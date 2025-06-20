@@ -11,6 +11,7 @@
 #include <chelper/auto_suggestion/Suggestion.h>
 #include <chelper/parser/ASTNode.h>
 #include <chelper/resources/CPack.h>
+#include <chelper/syntax_highlight/SyntaxResult.h>
 #include <pch.h>
 
 namespace CHelper {
@@ -52,7 +53,7 @@ namespace CHelper {
 
         [[nodiscard]] std::u16string getStructure() const;
 
-        [[nodiscard]] SyntaxResult getSyntaxResult() const;
+        [[nodiscard]] SyntaxHighlight::SyntaxResult getSyntaxResult() const;
 
         [[nodiscard]] std::optional<std::pair<std::u16string, size_t>> onSuggestionClick(size_t which);
 

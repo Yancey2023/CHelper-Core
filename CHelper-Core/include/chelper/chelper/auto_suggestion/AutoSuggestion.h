@@ -4,8 +4,8 @@
 
 #pragma once
 
-#ifndef AUTOSUGGESTION_H
-#define AUTOSUGGESTION_H
+#ifndef CHELPER_AUTOSUGGESTION_H
+#define CHELPER_AUTOSUGGESTION_H
 
 #include <chelper/auto_suggestion/Suggestions.h>
 #include <chelper/parser/ASTNode.h>
@@ -16,4 +16,4 @@ namespace CHelper::AutoSuggestion {
 
 }// namespace CHelper::AutoSuggestion
 
-#endif//AUTOSUGGESTION_H
+#endif//CHELPER_AUTOSUGGESTION_H

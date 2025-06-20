@@ -25,9 +25,6 @@ namespace CHelper::Node {
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
-
-        bool collectSyntax(const ASTNode *astNode,
-                           SyntaxResult &syntaxResult) const override;
     };
 
 }// namespace CHelper::Node

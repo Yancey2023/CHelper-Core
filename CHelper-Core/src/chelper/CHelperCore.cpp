@@ -6,6 +6,7 @@
 #include <chelper/auto_suggestion/AutoSuggestion.h>
 #include <chelper/parameter_hint/ParameterHint.h>
 #include <chelper/parser/Parser.h>
+#include <chelper/syntax_highlight/SyntaxHighlight.h>
 
 namespace CHelper {
 
@@ -117,8 +118,8 @@ namespace CHelper {
         return astNode.getStructure();
     }
 
-    [[nodiscard]] SyntaxResult CHelperCore::getSyntaxResult() const {
-        return astNode.getSyntaxResult();
+    [[nodiscard]] SyntaxHighlight::SyntaxResult CHelperCore::getSyntaxResult() const {
+        return SyntaxHighlight::getSyntaxResult(astNode);
     }
 
     std::optional<std::pair<std::u16string, size_t>> CHelperCore::onSuggestionClick(size_t which) {

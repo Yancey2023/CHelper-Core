@@ -98,10 +98,6 @@ namespace CHelper {
             virtual void collectStructure(const ASTNode *astNode,
                                           StructureBuilder &structure,
                                           bool isMustHave) const;
-
-            HEDLEY_NON_NULL(2)
-            virtual bool collectSyntax(const ASTNode *astNode,
-                                       SyntaxResult &syntaxResult) const;
         };
 
         class NodeSerializable : public NodeBase {

@@ -87,9 +87,4 @@ namespace CHelper::Node {
         }
     }
 
-    bool NodeWrapped::collectSyntax(const ASTNode *astNode,
-                                    SyntaxResult &syntaxResult) const {
-        return innerNode->collectSyntax(astNode, syntaxResult);
-    }
-
 }// namespace CHelper::Node

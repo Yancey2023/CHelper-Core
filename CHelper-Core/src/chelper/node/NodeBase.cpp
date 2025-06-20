@@ -29,11 +29,6 @@ namespace CHelper::Node {
                                     bool isMustHave) const {
     }
 
-    bool NodeBase::collectSyntax(const ASTNode *astNode,
-                                 SyntaxResult &syntaxResult) const {
-        return false;
-    }
-
     NodeSerializable::NodeSerializable(const std::optional<std::string> &id,
                                        const std::optional<std::u16string> &description,
                                        bool isMustAfterSpace)

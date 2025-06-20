@@ -99,14 +99,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"坐标"));
     }
 
-    bool NodeRelativeFloat::collectSyntax(const ASTNode *astNode,
-                                          SyntaxResult &syntaxResult) const {
-        if (astNode->id == ASTNodeId::NODE_RELATIVE_FLOAT_NUMBER) {
-            syntaxResult.update(astNode->tokens, SyntaxTokenType::FLOAT);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }// namespace CHelper::Node

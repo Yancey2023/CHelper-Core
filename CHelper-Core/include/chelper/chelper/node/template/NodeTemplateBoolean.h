@@ -43,12 +43,6 @@ namespace CHelper::Node {
             structure.append(isMustHave, description.value_or(u"布尔值"));
         }
 
-        bool collectSyntax(const ASTNode *astNode,
-                           SyntaxResult &syntaxResult) const override {
-            syntaxResult.update(astNode->tokens, SyntaxTokenType::BOOLEAN);
-            return true;
-        }
-
         static std::unique_ptr<NodeTemplateBoolean> make(const std::optional<std::string> &id,
                                                          const std::optional<std::u16string> &description,
                                                          const std::optional<std::u16string> &descriptionTrue,

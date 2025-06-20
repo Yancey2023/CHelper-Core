@@ -10,7 +10,6 @@
 #include "StructureBuilder.h"
 #include "pch.h"
 #include <chelper/parser/ErrorReason.h>
-#include <chelper/parser/SyntaxResult.h>
 
 namespace CHelper {
 
@@ -121,15 +120,11 @@ namespace CHelper {
 
         void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 
-        void collectSyntaxResult(SyntaxResult &syntaxResult) const;
-
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getIdErrors() const;
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
 
         [[nodiscard]] std::u16string getStructure() const;
-
-        [[nodiscard]] SyntaxResult getSyntaxResult() const;
     };
 
 }// namespace CHelper

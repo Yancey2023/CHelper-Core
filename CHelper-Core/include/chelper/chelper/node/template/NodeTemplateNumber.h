@@ -81,16 +81,6 @@ namespace CHelper::Node {
             structure.append(isMustHave, description.value_or(u"数字"));
         }
 
-        bool collectSyntax(const ASTNode *astNode,
-                           SyntaxResult &syntaxResult) const override {
-            if constexpr (std::numeric_limits<T>::is_integer) {
-                syntaxResult.update(astNode->tokens, SyntaxTokenType::INTEGER);
-            } else {
-                syntaxResult.update(astNode->tokens, SyntaxTokenType::FLOAT);
-            }
-            return true;
-        }
-
         static std::unique_ptr<NodeTemplateNumber<T, isJson>> make(const std::optional<std::string> &id,
                                                                    const std::optional<std::u16string> &description,
                                                                    const std::optional<T> &min0,

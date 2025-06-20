@@ -21,9 +21,6 @@ namespace CHelper::Node {
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
-
-        bool collectSyntax(const ASTNode *astNode,
-                           SyntaxResult &syntaxResult) const override;
     };
 
 }// namespace CHelper::Node

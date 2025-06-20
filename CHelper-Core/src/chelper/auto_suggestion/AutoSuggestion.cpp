@@ -5,9 +5,9 @@
 #include <chelper/auto_suggestion/AutoSuggestion.h>
 #include <chelper/node/NodeType.h>
 
-#define CHELPER_CODEC_COLLECT_AUTO_SUGGESTION(v1)                                                                                                   \
-    case Node::NodeTypeId::v1:                                                                                                                      \
-        flag = AutoSuggestion<typename Node::details::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectSuggestions(astNode, index, suggestions); \
+#define CHELPER_CODEC_COLLECT_AUTO_SUGGESTION(v1)                                                                                                      \
+    case Node::NodeTypeId::v1:                                                                                                                         \
+        isDirty = AutoSuggestion<typename Node::details::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectSuggestions(astNode, index, suggestions); \
         break;
 
 namespace CHelper::AutoSuggestion {
@@ -523,7 +523,7 @@ namespace CHelper::AutoSuggestion {
             return;
         }
         if (HEDLEY_UNLIKELY(astNode.id != ASTNodeId::COMPOUND && astNode.id != ASTNodeId::NEXT_NODE && !astNode.isAllSpaceError())) {
-            bool flag;
+            bool isDirty;
 #ifdef CHelperTest
             Profile::push("collect suggestions: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())));
 #endif
@@ -535,7 +535,7 @@ namespace CHelper::AutoSuggestion {
 #ifdef CHelperTest
             Profile::pop();
 #endif
-            if (HEDLEY_UNLIKELY(flag)) {
+            if (HEDLEY_UNLIKELY(isDirty)) {
                 return;
             }
         }

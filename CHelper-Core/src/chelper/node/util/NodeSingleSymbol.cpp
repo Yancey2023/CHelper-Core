@@ -40,10 +40,4 @@ namespace CHelper::Node {
         return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::contentError(symbolNode.tokens, fmt::format(u"内容不匹配，正确的符号为{:c}，但当前内容为{}", symbol, str)));
     }
 
-    bool NodeSingleSymbol::collectSyntax(const ASTNode *astNode,
-                                         SyntaxResult &syntaxResult) const {
-        syntaxResult.update(astNode->tokens, SyntaxTokenType::SYMBOL);
-        return true;
-    }
-
 }// namespace CHelper::Node

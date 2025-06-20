@@ -50,16 +50,4 @@ namespace CHelper::Node {
         structure.append(isMustHave, description.value_or(u"范围"));
     }
 
-    bool NodeRange::collectSyntax(const ASTNode *astNode,
-                                  SyntaxResult &syntaxResult) const {
-        std::u16string_view str = astNode->tokens.toString();
-        for (size_t i = 0; i < str.length(); ++i) {
-            size_t ch = str[i];
-            syntaxResult.update(
-                    astNode->tokens.startIndex + i,
-                    (ch < '0' || ch > '9') && ch != '-' && ch != '+' ? SyntaxTokenType::RANGE : SyntaxTokenType::INTEGER);
-        }
-        return true;
-    }
-
 }// namespace CHelper::Node

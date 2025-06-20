@@ -220,37 +220,6 @@ namespace CHelper {
         }
     }
 
-    void ASTNode::collectSyntaxResult(SyntaxResult &syntaxResult) const {
-        bool isCompound = id == ASTNodeId::COMPOUND;
-        bool isNext = id == ASTNodeId::NEXT_NODE;
-        if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
-#ifdef CHelperTest
-            Profile::push("collect color: {} {}",
-                          FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
-                          FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
-#endif
-            bool isDirty = node->collectSyntax(this, syntaxResult);
-#ifdef CHelperTest
-            Profile::pop();
-#endif
-            if (HEDLEY_UNLIKELY(isDirty)) {
-                return;
-            }
-        }
-        switch (mode) {
-            case ASTNodeMode::NONE:
-                return;
-            case ASTNodeMode::AND:
-                for (const ASTNode &astNode: childNodes) {
-                    astNode.collectSyntaxResult(syntaxResult);
-                }
-                break;
-            case ASTNodeMode::OR:
-                childNodes[whichBest].collectSyntaxResult(syntaxResult);
-                break;
-        }
-    }
-
     static std::vector<std::shared_ptr<ErrorReason>> sortByLevel(const std::vector<std::shared_ptr<ErrorReason>> &input) {
         std::vector<std::shared_ptr<ErrorReason>> output;
         uint8_t i = ErrorReasonLevel::maxLevel;
@@ -306,66 +275,6 @@ namespace CHelper {
             result.pop_back();
         }
         return result;
-    }
-
-    SyntaxResult ASTNode::getSyntaxResult() const {
-#ifdef CHelperTest
-        Profile::push("start getting colors: {}", FORMAT_ARG(utf8::utf16to8(tokens.toString())));
-#endif
-        SyntaxResult syntacResult(tokens.lexerResult->content);
-        collectSyntaxResult(syntacResult);
-        std::stack<char16_t> brackets;
-        tokens.forEach([&brackets, &syntacResult](const Token &token) {
-            if (HEDLEY_LIKELY(token.type != TokenType::SYMBOL || token.content.empty())) {
-                return;
-            }
-            char16_t ch = token.content[0];
-            switch (ch) {
-                case '[':
-                case '{': {
-                    switch (brackets.size() % 3) {
-                        case 0:
-                            syntacResult.update(token.pos, SyntaxTokenType::BRACKET1);
-                            break;
-                        case 1:
-                            syntacResult.update(token.pos, SyntaxTokenType::BRACKET2);
-                            break;
-                        case 2:
-                            syntacResult.update(token.pos, SyntaxTokenType::BRACKET3);
-                            break;
-                        default:
-                            HEDLEY_UNREACHABLE();
-                    }
-                    brackets.push(ch);
-                } break;
-                case ']':
-                case '}': {
-                    if (brackets.empty() || !((brackets.top() == '[' && ch == ']') || (brackets.top() == '{' && ch == '}'))) {
-                        break;
-                    }
-                    switch ((brackets.size() - 1) % 3) {
-                        case 0:
-                            syntacResult.update(token.pos, SyntaxTokenType::BRACKET1);
-                            break;
-                        case 1:
-                            syntacResult.update(token.pos, SyntaxTokenType::BRACKET2);
-                            break;
-                        case 2:
-                            syntacResult.update(token.pos, SyntaxTokenType::BRACKET3);
-                            break;
-                        default:
-                            HEDLEY_UNREACHABLE();
-                    }
-                    brackets.pop();
-                } break;
-                default:
-                    break;
-            }
-        });
-#ifdef CHelperTest 
-        Profile::pop();
-#endif
-        return syntacResult;
     }
 
 }// namespace CHelper

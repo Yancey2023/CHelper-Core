@@ -5,10 +5,10 @@
 #ifndef CHELPER_SYNTAXRESULT_H
 #define CHELPER_SYNTAXRESULT_H
 
-#include "TokensView.h"
-#include "pch.h"
+#include <chelper/parser/TokensView.h>
+#include <pch.h>
 
-namespace CHelper {
+namespace CHelper::SyntaxHighlight {
 
     namespace SyntaxTokenType {
         enum SyntaxTokenType : uint8_t {
@@ -44,6 +44,6 @@ namespace CHelper {
         void update(const TokensView &tokensView, SyntaxTokenType::SyntaxTokenType syntaxTokenType);
     };
 
-}// namespace CHelper
+}// namespace CHelper::SyntaxHighlight
 
 #endif//CHELPER_SYNTAXRESULT_H

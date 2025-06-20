@@ -2,9 +2,9 @@
 // Created by Yancey on 2024-08-07.
 //
 
-#include <chelper/parser/SyntaxResult.h>
+#include <chelper/syntax_highlight/SyntaxResult.h>
 
-namespace CHelper {
+namespace CHelper::SyntaxHighlight {
 
     SyntaxResult::SyntaxResult(const std::u16string_view &str)
         : str(str),
@@ -47,4 +47,4 @@ namespace CHelper {
         update(tokensView.startIndex, tokensView.endIndex, syntaxTokenType);
     }
 
-}// namespace CHelper
+}// namespace CHelper::SyntaxHighlight
