@@ -29,9 +29,6 @@ namespace CHelper::Node {
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
-
-        bool collectIdError(const ASTNode *astNode,
-                            std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
     };
 
 }// namespace CHelper::Node

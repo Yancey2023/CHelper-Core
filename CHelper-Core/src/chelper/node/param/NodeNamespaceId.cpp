@@ -59,19 +59,4 @@ namespace CHelper::Node {
         return result;
     }
 
-    bool NodeNamespaceId::collectIdError(const ASTNode *astNode,
-                                         std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (HEDLEY_UNLIKELY(astNode->isError())) {
-            return true;
-        }
-        std::u16string_view str = astNode->tokens.toString();
-        XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
-        if (HEDLEY_UNLIKELY(std::all_of(customContents->begin(), customContents->end(), [&strHash](const auto &item) {
-                return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
-            }))) {
-            idErrorReasons.push_back(ErrorReason::idError(astNode->tokens, fmt::format(u"找不到ID -> {}", str)));
-        }
-        return true;
-    }
-
 }// namespace CHelper::Node

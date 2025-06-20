@@ -5,6 +5,7 @@
 #include <chelper/CHelperCore.h>
 #include <chelper/auto_suggestion/AutoSuggestion.h>
 #include <chelper/command_structure/CommandStructure.h>
+#include <chelper/linter/Linter.h>
 #include <chelper/parameter_hint/ParameterHint.h>
 #include <chelper/parser/Parser.h>
 #include <chelper/syntax_highlight/SyntaxHighlight.h>
@@ -105,7 +106,7 @@ namespace CHelper {
     }
 
     [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> CHelperCore::getErrorReasons() const {
-        return astNode.getErrorReasons();
+        return Linter::getErrorReasons(astNode);
     }
 
     std::vector<AutoSuggestion::Suggestion> *CHelperCore::getSuggestions() {

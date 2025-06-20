@@ -112,12 +112,6 @@ namespace CHelper {
         [[nodiscard]] bool isAllSpaceError() const;
 
         [[nodiscard]] const ASTNode &getBestNode() const;
-
-        void collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
-
-        [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getIdErrors() const;
-
-        [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
     };
 
 }// namespace CHelper

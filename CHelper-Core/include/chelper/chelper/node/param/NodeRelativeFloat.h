@@ -39,9 +39,6 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
-        bool collectIdError(const ASTNode *astNode,
-                            std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
-
         static std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode>
         getASTNode(const NodeBase *node,
                    const CPack *cpack,

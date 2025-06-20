@@ -30,21 +30,11 @@ namespace CHelper::Node {
         if (HEDLEY_UNLIKELY(result.second.isError())) {
             return std::move(result.second);
         }
-        if (HEDLEY_UNLIKELY(!canUseCaretNotation && result.first == 2)) {
+        if (HEDLEY_UNLIKELY(!canUseCaretNotation && result.first == NodeRelativeFloatType::LOCAL_COORDINATE)) {
             TokensView tokens = result.second.tokens;
             return ASTNode::andNode(this, {std::move(result.second)}, tokens, nullptr, ASTNodeId::NODE_RELATIVE_FLOAT_WITH_ERROR);
         }
         return result.second;
-    }
-
-    bool NodeRelativeFloat::collectIdError(const ASTNode *astNode,
-                                           std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (HEDLEY_UNLIKELY(!astNode->isError() && astNode->id == ASTNodeId::NODE_RELATIVE_FLOAT_WITH_ERROR)) {
-            idErrorReasons.push_back(ErrorReason::logicError(astNode->tokens, u"不能使用局部坐标"));
-            return true;
-        } else {
-            return false;
-        }
     }
 
     std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode>

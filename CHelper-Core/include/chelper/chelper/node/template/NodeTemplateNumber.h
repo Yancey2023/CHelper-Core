@@ -36,7 +36,6 @@ namespace CHelper::Node {
             }
         }
 
-    private:
         static auto str2number(const std::string &str, char *&end) {
             if constexpr (std::numeric_limits<T>::is_integer) {
                 return std::strtoimax(str.c_str(), &end, 10);
@@ -47,32 +46,6 @@ namespace CHelper::Node {
             } else if constexpr (std::is_same<T, long double>()) {
                 return std::strtold(str.c_str(), &end);
             }
-        }
-
-    public:
-        bool collectIdError(const ASTNode *astNode,
-                            std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override {
-            if (HEDLEY_UNLIKELY(astNode->isError())) {
-                return true;
-            }
-            std::string str = utf8::utf16to8(astNode->tokens.toString());
-            char *end;
-            auto value = str2number(str, end);
-            if (HEDLEY_UNLIKELY(end == str.c_str() || *end != '\0' ||
-                                (std::numeric_limits<T>::has_infinity &&
-                                 (value == std::numeric_limits<T>::infinity() ||
-                                  value == -std::numeric_limits<T>::infinity())) ||
-                                value < min.value_or(std::numeric_limits<T>::lowest()) ||
-                                value > max.value_or(std::numeric_limits<T>::max()))) {
-                idErrorReasons.push_back(ErrorReason::idError(
-                        astNode->tokens,
-                        fmt::format(
-                                u"数值不在范围[{}, {}]内 -> {}",
-                                min.value_or(std::numeric_limits<T>::lowest()),
-                                max.value_or(std::numeric_limits<T>::max()),
-                                astNode->tokens.toString())));
-            }
-            return true;
         }
 
         static std::unique_ptr<NodeTemplateNumber<T, isJson>> make(const std::optional<std::string> &id,

@@ -48,14 +48,4 @@ namespace CHelper::Node {
         return result;
     }
 
-    bool NodePosition::collectIdError(const ASTNode *astNode,
-                                      std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (HEDLEY_UNLIKELY(!astNode->isError() && astNode->id == ASTNodeId::NODE_POSITION_POSITIONS_WITH_ERROR)) {
-            idErrorReasons.push_back(ErrorReason::logicError(astNode->tokens, u"绝对坐标和相对坐标不能与局部坐标混用"));
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }// namespace CHelper::Node

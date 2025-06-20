@@ -96,18 +96,4 @@ namespace CHelper::Node {
         return newResult;
     }
 
-    bool NodeJsonString::collectIdError(const ASTNode *astNode,
-                                        std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        if (HEDLEY_UNLIKELY(astNode->id == ASTNodeId::NODE_STRING_INNER)) {
-            auto convertResult = JsonUtil::jsonString2String(std::u16string(astNode->tokens.toString()));
-            size_t offset = astNode->tokens.getStartIndex() + 1;
-            for (const auto &item: astNode->childNodes[0].getIdErrors()) {
-                item->start = convertResult.convert(item->start) + offset;
-                item->end = convertResult.convert(item->end) + offset;
-                idErrorReasons.push_back(item);
-            }
-        }
-        return true;
-    }
-
 }// namespace CHelper::Node

@@ -88,11 +88,6 @@ namespace CHelper {
                                    const CPack *cpack,
                                    const NodeBase *childNode,
                                    const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE) const;
-
-        public:
-            HEDLEY_NON_NULL(2)
-            virtual bool collectIdError(const ASTNode *astNode,
-                                        std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
         };
 
         class NodeSerializable : public NodeBase {

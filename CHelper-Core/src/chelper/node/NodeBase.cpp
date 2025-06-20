@@ -18,12 +18,6 @@ namespace CHelper::Node {
         return ASTNode::andNode(this, {std::move(node)}, tokens, nullptr, astNodeId);
     }
 
-    //创建AST节点的时候只得到了结构的错误，ID的错误需要调用这个方法得到
-    bool NodeBase::collectIdError(const ASTNode *astNode,
-                                  std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const {
-        return false;
-    }
-
     NodeSerializable::NodeSerializable(const std::optional<std::string> &id,
                                        const std::optional<std::u16string> &description,
                                        bool isMustAfterSpace)
