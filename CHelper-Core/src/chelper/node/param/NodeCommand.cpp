@@ -8,7 +8,7 @@
 
 namespace CHelper::Node {
 
-    static std::unique_ptr<Node::NodeSingleSymbol> nodeCommandStart = std::make_unique<Node::NodeSingleSymbol>(u'/', u"命令开始字符");
+    std::unique_ptr<Node::NodeSingleSymbol> NodeCommand::nodeCommandStart = std::make_unique<Node::NodeSingleSymbol>(u'/', u"命令开始字符");
 
     NodeCommand::NodeCommand(const std::optional<std::string> &id,
                              const std::optional<std::u16string> &description,
@@ -63,70 +63,11 @@ namespace CHelper::Node {
                                 tokenReader.collect(), nullptr, ASTNodeId::NODE_COMMAND_COMMAND);
     }
 
-    bool NodeCommand::collectSuggestions(const ASTNode *astNode,
-                                         size_t index,
-                                         Suggestions &suggestions) const {
-        if (HEDLEY_UNLIKELY(astNode->id != ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
-            return false;
-        }
-        if (HEDLEY_LIKELY(index == 0 && astNode->tokens.isEmpty())) {
-            suggestions.addSymbolSuggestion({0, 0, false, nodeCommandStart->normalId});
-        }
-        std::u16string_view str = astNode->tokens.toString()
-                                          .substr(0, index - astNode->tokens.getStartIndex());
-        std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
-        for (const auto &item: *commands) {
-            //通过名字进行搜索
-            bool flag = false;
-            for (const auto &item2: static_cast<NodePerCommand *>(item.get())->name) {
-                size_t index1 = item2.find(str);
-                if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
-                    if (HEDLEY_UNLIKELY(index1 == 0)) {
-                        nameStartOf.push_back(NormalId::make(item2, item->description));
-                    } else {
-                        nameContain.push_back(NormalId::make(item2, item->description));
-                    }
-                    flag = true;
-                }
-            }
-            if (HEDLEY_UNLIKELY(flag)) {
-                continue;
-            }
-            //通过介绍进行搜索
-            if (HEDLEY_UNLIKELY(item->description.has_value() &&
-                                item->description.value().find(str) != std::u16string::npos)) {
-                for (const auto &item2: static_cast<NodePerCommand *>(item.get())->name) {
-                    descriptionContain.push_back(NormalId::make(item2, item->description));
-                }
-            }
-        }
-        auto compare = [](const auto &item1, const auto &item2) {
-            return item1->name < item2->name;
-        };
-        std::sort(nameStartOf.begin(), nameStartOf.end(), compare);
-        std::sort(nameContain.begin(), nameContain.end(), compare);
-        std::sort(descriptionContain.begin(), descriptionContain.end(), compare);
-        size_t start = astNode->tokens.getStartIndex();
-        size_t end = astNode->tokens.getEndIndex();
-        suggestions.reserveIdSuggestion(nameStartOf.size() + nameContain.size() + descriptionContain.size());
-        for (const auto &item: nameStartOf) {
-            suggestions.addIdSuggestion({start, end, true, item});
-        }
-        for (const auto &item: nameContain) {
-            suggestions.addIdSuggestion({start, end, true, item});
-        }
-        for (const auto &item: descriptionContain) {
-            suggestions.addIdSuggestion({start, end, true, item});
-        }
-        return true;
-    }
-
     void NodeCommand::collectStructure(const ASTNode *astNode,
                                        StructureBuilder &structure,
                                        bool isMustHave) const {
         if (HEDLEY_UNLIKELY(astNode == nullptr || (astNode->id == ASTNodeId::NODE_COMMAND_COMMAND && astNode->tokens.size() < 2))) {
             structure.append(isMustHave, u"命令");
-            return;
         } else if (HEDLEY_LIKELY(astNode->id == ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
             structure.appendSpace().append(std::u16string(astNode->tokens.toString()));
         }

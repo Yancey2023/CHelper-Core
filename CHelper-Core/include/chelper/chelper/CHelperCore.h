@@ -8,6 +8,7 @@
 #define CHELPER_CHELPERCORE_H
 
 #include "old2new/Old2New.h"
+#include <chelper/auto_suggestion/Suggestion.h>
 #include <chelper/parser/ASTNode.h>
 #include <chelper/resources/CPack.h>
 #include <pch.h>
@@ -20,7 +21,7 @@ namespace CHelper {
         size_t index = 0;
         std::unique_ptr<CPack> cpack;
         ASTNode astNode;
-        std::shared_ptr<std::vector<Suggestion>> suggestions;
+        std::shared_ptr<std::vector<AutoSuggestion::Suggestion>> suggestions;
 
     public:
         CHelperCore(std::unique_ptr<CPack> cpack, ASTNode astNode);
@@ -47,7 +48,7 @@ namespace CHelper {
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
 
-        std::vector<Suggestion> *getSuggestions();
+        std::vector<AutoSuggestion::Suggestion> *getSuggestions();
 
         [[nodiscard]] std::u16string getStructure() const;
 

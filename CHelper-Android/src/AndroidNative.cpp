@@ -191,7 +191,7 @@ Java_yancey_chelper_core_CHelperCore_getSuggestion0(
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getSuggestion0 when suggestions->size() <= which");
         return nullptr;
     }
-    CHelper::Suggestion suggestion = suggestions->at(which);
+    CHelper::AutoSuggestion::Suggestion suggestion = suggestions->at(which);
     jobject javaSuggestion = env->AllocObject(suggestionClass);
     env->SetObjectField(javaSuggestion, nameFieldId, u16string2jstring(env, suggestion.content->name));
     env->SetObjectField(javaSuggestion, descriptionFieldId, suggestion.content->description.has_value() ? u16string2jstring(env, suggestion.content->description.value()) : nullptr);
@@ -206,10 +206,10 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions0(
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getSuggestions0 when core is nullptr");
         return env->NewObjectArray(0, suggestionClass, nullptr);
     }
-    const std::vector<CHelper::Suggestion> &suggestions = *core->getSuggestions();
+    const std::vector<CHelper::AutoSuggestion::Suggestion> &suggestions = *core->getSuggestions();
     jobjectArray result = env->NewObjectArray(static_cast<jsize>(suggestions.size()), suggestionClass, nullptr);
     for (int i = 0; i < suggestions.size(); ++i) {
-        const CHelper::Suggestion &item = suggestions[i];
+        const CHelper::AutoSuggestion::Suggestion &item = suggestions[i];
         jobject javaSuggestion = env->AllocObject(suggestionClass);
         env->SetObjectField(javaSuggestion, nameFieldId, u16string2jstring(env, item.content->name));
         env->SetObjectField(javaSuggestion, descriptionFieldId, item.content->description.has_value() ? u16string2jstring(env, item.content->description.value()) : nullptr);

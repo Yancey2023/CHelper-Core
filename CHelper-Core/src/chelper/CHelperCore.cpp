@@ -3,6 +3,7 @@
 //
 
 #include <chelper/CHelperCore.h>
+#include <chelper/auto_suggestion/AutoSuggestion.h>
 #include <chelper/parameter_hint/ParameterHint.h>
 #include <chelper/parser/Parser.h>
 
@@ -105,9 +106,9 @@ namespace CHelper {
         return astNode.getErrorReasons();
     }
 
-    std::vector<Suggestion> *CHelperCore::getSuggestions() {
+    std::vector<AutoSuggestion::Suggestion> *CHelperCore::getSuggestions() {
         if (HEDLEY_LIKELY(suggestions == nullptr)) {
-            suggestions = std::make_shared<std::vector<Suggestion>>(astNode.getSuggestions(index).collect());
+            suggestions = std::make_shared<std::vector<AutoSuggestion::Suggestion>>(AutoSuggestion::getSuggestions(astNode, index).collect());
         }
         return suggestions.get();
     }
@@ -124,7 +125,23 @@ namespace CHelper {
         if (HEDLEY_UNLIKELY(suggestions == nullptr || which >= suggestions->size())) {
             return std::nullopt;
         }
-        return (*suggestions)[which].apply(this, astNode.tokens.toString());
+        const auto &suggestion = (*suggestions)[which];
+        std::u16string_view before = astNode.tokens.toString();
+        if (suggestion.content->name == u" " && (suggestion.start == 0 || before[suggestion.start - 1] == u' ')) {
+            return {{std::u16string(before), suggestion.start}};
+        }
+        std::pair<std::u16string, size_t> result = {
+                std::u16string().append(before.substr(0, suggestion.start)).append(suggestion.content->name).append(before.substr(suggestion.end)),
+                suggestion.start + suggestion.content->name.length()};
+        if (HEDLEY_UNLIKELY(suggestion.end != before.length())) {
+            return result;
+        }
+        onTextChanged(result.first, result.second);
+        if (HEDLEY_LIKELY(suggestion.isAddSpace && astNode.isAllSpaceError())) {
+            result.first.append(u" ");
+            result.second++;
+        }
+        return result;
     }
 
     std::u16string CHelperCore::old2new(const Old2New::BlockFixData &blockFixData, const std::u16string &old) {

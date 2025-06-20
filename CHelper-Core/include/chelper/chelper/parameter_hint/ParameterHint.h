@@ -5,9 +5,7 @@
 #ifndef CHELPER_PARAMETERHINT_H
 #define CHELPER_PARAMETERHINT_H
 
-#include "chelper/node/param/NodeRepeat.h"
 #include "pch.h"
-#include <chelper/node/NodeType.h>
 #include <chelper/parser/ASTNode.h>
 #include <optional>
 

@@ -8,15 +8,17 @@
 #define CHELPER_NODECOMMAND_H
 
 #include "../NodeBase.h"
+#include "../util/NodeSingleSymbol.h"
 #include "NodePerCommand.h"
 
 namespace CHelper::Node {
 
     class NodeCommand : public NodeSerializable {
-    private:
+    public:
+        static std::unique_ptr<Node::NodeSingleSymbol> nodeCommandStart;
+
         std::vector<std::unique_ptr<NodePerCommand>> *commands = nullptr;
 
-    public:
         NodeCommand(const std::optional<std::string> &id,
                     const std::optional<std::u16string> &description,
                     std::vector<std::unique_ptr<NodePerCommand>> *commands);
@@ -29,16 +31,12 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
-        bool collectSuggestions(const ASTNode *astNode,
-                                size_t index,
-                                Suggestions &suggestions) const override;
-
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;
 
         bool collectSyntax(const ASTNode *astNode,
-                          SyntaxResult &syntaxResult) const override;
+                           SyntaxResult &syntaxResult) const override;
     };
 
 }// namespace CHelper::Node

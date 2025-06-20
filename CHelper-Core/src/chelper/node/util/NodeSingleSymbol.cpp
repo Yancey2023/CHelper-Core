@@ -40,16 +40,6 @@ namespace CHelper::Node {
         return ASTNode::simpleNode(this, symbolNode.tokens, ErrorReason::contentError(symbolNode.tokens, fmt::format(u"内容不匹配，正确的符号为{:c}，但当前内容为{}", symbol, str)));
     }
 
-    bool NodeSingleSymbol::collectSuggestions(const ASTNode *astNode,
-                                              size_t index,
-                                              Suggestions &suggestions) const {
-        if (HEDLEY_LIKELY(astNode->tokens.getStartIndex() != index)) {
-            return true;
-        }
-        suggestions.addSymbolSuggestion({index, index, isAddSpace, normalId});
-        return true;
-    }
-
     bool NodeSingleSymbol::collectSyntax(const ASTNode *astNode,
                                          SyntaxResult &syntaxResult) const {
         syntaxResult.update(astNode->tokens, SyntaxTokenType::SYMBOL);

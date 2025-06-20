@@ -39,14 +39,14 @@ namespace CHelper {
     }
 
     bool operator==(const NamespaceId &t1, const NamespaceId &t2) {
-        if (!((NormalId &) t1 == (NormalId &) t2)) {
+        if (!(static_cast<const NormalId &>(t1) == static_cast<const NormalId &>(t2))) {
             return false;
         }
         return t1.idNamespace == t2.idNamespace;
     }
 
     bool operator==(const ItemId &t1, const ItemId &t2) {
-        if (!((NormalId &) t1 == (NormalId &) t2)) {
+        if (!(static_cast<const NamespaceId &>(t1) == static_cast<const NamespaceId &>(t2))) {
             return false;
         }
         return t1.max == t2.max && t1.descriptions == t2.descriptions;
@@ -82,7 +82,7 @@ namespace CHelper {
             if (t1.valid.value().size() != t2.valid.value().size()) {
                 return false;
             }
-            for (int i = 0; i < t1.valid.value().size(); ++i) {
+            for (size_t i = 0; i < t1.valid.value().size(); ++i) {
                 switch (t1.type) {
                     case PropertyType::BOOLEAN:
                         if (t1.valid.value()[i].boolean != t2.valid.value()[i].boolean) {
@@ -108,7 +108,7 @@ namespace CHelper {
     }
 
     bool operator==(const BlockId &t1, const BlockId &t2) {
-        if (!((NamespaceId &) t1 == (NamespaceId &) t2)) {
+        if (!(static_cast<const NamespaceId &>(t1) == static_cast<const NamespaceId &>(t2))) {
             return false;
         }
         return t1.properties == t2.properties;
@@ -121,7 +121,7 @@ namespace CHelper {
         if (t1.values.size() != t2.values.size()) {
             return false;
         }
-        for (int i = 0; i < t1.values.size(); ++i) {
+        for (size_t i = 0; i < t1.values.size(); ++i) {
             switch (t1.type) {
                 case PropertyType::BOOLEAN:
                     if (t1.values[i].valueName.boolean != t2.values[i].valueName.boolean) {
@@ -170,7 +170,7 @@ namespace CHelper {
         }
 
         bool operator==(const NodeJsonBoolean &t1, const NodeJsonBoolean &t2) {
-            if (!((NodeSerializable &) t1 == (NodeSerializable &) t2)) {
+            if (!(static_cast<const NodeSerializable &>(t1) == static_cast<const NodeSerializable &>(t2))) {
                 return false;
             }
             return t1.descriptionTrue == t2.descriptionTrue &&
@@ -178,7 +178,7 @@ namespace CHelper {
         }
 
         bool operator==(const NodeJsonNull &t1, const NodeJsonNull &t2) {
-            if (!((NodeSerializable &) t1 == (NodeSerializable &) t2)) {
+            if (!(static_cast<const NodeSerializable &>(t1) == static_cast<const NodeSerializable &>(t2))) {
                 return false;
             }
             return true;
@@ -186,7 +186,7 @@ namespace CHelper {
 
         template<class T, bool isJson>
         bool operator==(const NodeTemplateNumber<T, isJson> &t1, const NodeTemplateNumber<T, isJson> &t2) {
-            if (!((NodeSerializable &) t1 == (NodeSerializable &) t2)) {
+            if (!(static_cast<const NodeSerializable &>(t1) == static_cast<const NodeSerializable &>(t2))) {
                 return false;
             }
             return t1.min == t2.min && t1.max == t2.max;
@@ -197,7 +197,7 @@ namespace CHelper {
 }// namespace CHelper
 
 template<class T, bool isConvertEndian>
-void test(std::function<T()> getInstance) {
+void test(const std::function<T()>& getInstance) {
     std::ostringstream oss;
     T t1 = getInstance();
     serialization::Codec<T>::template to_binary<isConvertEndian>(oss, t1);
@@ -209,13 +209,13 @@ void test(std::function<T()> getInstance) {
 }
 
 template<class T>
-void test(std::function<T()> getInstance) {
+void test(const std::function<T()>& getInstance) {
     test<T, true>(getInstance);
     test<T, false>(getInstance);
 }
 
 template<class T, bool isConvertEndian>
-void testNode(CHelper::CPack &cpack, std::function<T()> getInstance) {
+void testNode(CHelper::CPack &cpack, const std::function<T()>& getInstance) {
     std::ostringstream oss;
     T t1 = getInstance();
     serialization::Codec<T>::template to_binary<isConvertEndian>(oss, t1);
@@ -228,13 +228,13 @@ void testNode(CHelper::CPack &cpack, std::function<T()> getInstance) {
 }
 
 template<class T>
-void testNode(CHelper::CPack &cpack, std::function<T()> getInstance) {
+void testNode(CHelper::CPack &cpack, const std::function<T()>& getInstance) {
     testNode<T, true>(cpack, getInstance);
     testNode<T, false>(cpack, getInstance);
 }
 
 template<class T>
-void test(std::vector<std::function<T()>> getInstance) {
+void test(const std::vector<std::function<T()>>& getInstance) {
     for (const auto &item: getInstance) {
         test(item);
     }
@@ -242,7 +242,7 @@ void test(std::vector<std::function<T()>> getInstance) {
 
 template<class T>
 void testNode(CHelper::CPack &cpack,
-              std::vector<std::function<T()>> getInstance) {
+              const std::vector<std::function<T()>>& getInstance) {
     for (const auto &item: getInstance) {
         testNode(cpack, item);
     }

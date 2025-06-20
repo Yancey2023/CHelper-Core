@@ -60,10 +60,4 @@ namespace CHelper::Node {
         return ASTNode::orNode(this, {std::move(result1), std::move(result2)}, tokenReader.collect());
     }
 
-    bool NodeJsonList::collectSuggestions(const ASTNode *astNode,
-                                          size_t index,
-                                          Suggestions &suggestions) const {
-        return astNode->id == ASTNodeId::NODE_JSON_ALL_LIST;
-    }
-
 }// namespace CHelper::Node

@@ -8,14 +8,11 @@
 #define CHELPER_ASTNODE_H
 
 #include "StructureBuilder.h"
-#include "Suggestions.h"
 #include "pch.h"
 #include <chelper/parser/ErrorReason.h>
 #include <chelper/parser/SyntaxResult.h>
 
 namespace CHelper {
-
-    static std::shared_ptr<NormalId> spaceId = NormalId::make(u" ", u"空格");
 
     namespace Node {
 
@@ -122,8 +119,6 @@ namespace CHelper {
 
         void collectIdErrors(std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const;
 
-        void collectSuggestions(size_t index, Suggestions &suggestions) const;
-
         void collectStructure(StructureBuilder &structureBuilder, bool isMustHave) const;
 
         void collectSyntaxResult(SyntaxResult &syntaxResult) const;
@@ -131,8 +126,6 @@ namespace CHelper {
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getIdErrors() const;
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
-
-        [[nodiscard]] Suggestions getSuggestions(size_t index) const;
 
         [[nodiscard]] std::u16string getStructure() const;
 

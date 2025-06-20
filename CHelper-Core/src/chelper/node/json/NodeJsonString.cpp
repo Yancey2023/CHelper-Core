@@ -110,69 +110,6 @@ namespace CHelper::Node {
         return true;
     }
 
-    bool NodeJsonString::collectSuggestions(const ASTNode *astNode,
-                                            size_t index,
-                                            Suggestions &suggestions) const {
-        std::u16string_view str = astNode->tokens.toString()
-                                          .substr(0, index - astNode->tokens.getStartIndex());
-        if (HEDLEY_UNLIKELY(str.empty())) {
-            suggestions.addSymbolSuggestion({index, index, false, doubleQuoteMask});
-            return true;
-        }
-        auto convertResult = JsonUtil::jsonString2String(std::u16string(str));
-        if (HEDLEY_UNLIKELY(astNode->id == ASTNodeId::NODE_STRING_INNER)) {
-            size_t offset = astNode->tokens.getStartIndex() + 1;
-            Suggestions suggestions1 = astNode->childNodes[0].getSuggestions(index - offset);
-            suggestions.reserveIdSuggestion(suggestions1.spaceSuggestions.size() +
-                                            suggestions1.symbolSuggestions.size() +
-                                            suggestions1.literalSuggestions.size() +
-                                            suggestions1.idSuggestions.size());
-            for (auto &item: suggestions1.spaceSuggestions) {
-                item.start = convertResult.convert(item.start) + offset;
-                item.end = convertResult.convert(item.end) + offset;
-                std::u16string convertStr = JsonUtil::string2jsonString(item.content->name);
-                if (HEDLEY_UNLIKELY(convertStr.size() != str.size())) {
-                    item.content = NormalId::make(convertStr, item.content->description);
-                }
-                suggestions.addSpaceSuggestion(std::move(item));
-            }
-            for (auto &item: suggestions1.symbolSuggestions) {
-                item.start = convertResult.convert(item.start) + offset;
-                item.end = convertResult.convert(item.end) + offset;
-                std::u16string convertStr = JsonUtil::string2jsonString(item.content->name);
-                if (HEDLEY_UNLIKELY(convertStr.size() != str.size())) {
-                    item.content = NormalId::make(convertStr, item.content->description);
-                }
-                suggestions.addSymbolSuggestion(std::move(item));
-            }
-            for (auto &item: suggestions1.literalSuggestions) {
-                item.start = convertResult.convert(item.start) + offset;
-                item.end = convertResult.convert(item.end) + offset;
-                std::u16string convertStr = JsonUtil::string2jsonString(item.content->name);
-                if (HEDLEY_UNLIKELY(convertStr.size() != str.size())) {
-                    item.content = NormalId::make(convertStr, item.content->description);
-                }
-                suggestions.addLiteralSuggestion(std::move(item));
-            }
-            for (auto &item: suggestions1.idSuggestions) {
-                item.start = convertResult.convert(item.start) + offset;
-                item.end = convertResult.convert(item.end) + offset;
-                std::u16string convertStr = JsonUtil::string2jsonString(item.content->name);
-                if (HEDLEY_UNLIKELY(convertStr.size() != str.size())) {
-                    item.content = NormalId::make(convertStr, item.content->description);
-                }
-                suggestions.addIdSuggestion(std::move(item));
-            }
-            if (HEDLEY_LIKELY(astNode->hasChildNode() && !astNode->childNodes[0].isError() &&
-                              convertResult.errorReason == nullptr && !convertResult.isComplete)) {
-                suggestions.addSymbolSuggestion({index, index, false, doubleQuoteMask});
-            }
-        } else if (HEDLEY_LIKELY(convertResult.errorReason == nullptr && !convertResult.isComplete)) {
-            suggestions.addSymbolSuggestion({index, index, false, doubleQuoteMask});
-        }
-        return true;
-    }
-
     bool NodeJsonString::collectSyntax(const ASTNode *astNode,
                                        SyntaxResult &syntaxResult) const {
         if (astNode->id != ASTNodeId::NODE_STRING_INNER) {

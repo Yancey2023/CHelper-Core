@@ -24,12 +24,6 @@ namespace CHelper::Node {
         return false;
     }
 
-    bool NodeBase::collectSuggestions(const ASTNode *astNode,
-                                      size_t index,
-                                      Suggestions &suggestions) const {
-        return false;
-    }
-
     void NodeBase::collectStructure(const ASTNode *astNode,
                                     StructureBuilder &structure,
                                     bool isMustHave) const {

@@ -22,10 +22,6 @@ namespace CHelper::Node {
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
 
-        bool collectSuggestions(const ASTNode *astNode,
-                                size_t index,
-                                Suggestions &suggestions) const override;
-
         bool collectSyntax(const ASTNode *astNode,
                            SyntaxResult &syntaxResult) const override;
     };

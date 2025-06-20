@@ -6,8 +6,6 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NormalId> doubleQuoteMask = NormalId::make(u"\"", u"双引号");
-
     NodeString::NodeString(const std::optional<std::string> &id,
                            const std::optional<std::u16string> &description,
                            bool allowMissingString,
@@ -66,28 +64,6 @@ namespace CHelper::Node {
             return ASTNode::simpleNode(this, result.tokens, ErrorReason::contentError(result.tokens, fmt::format(u"字符串参数内容双引号不封闭 -> {}", str)));
         }
         return result;
-    }
-
-    bool NodeString::collectSuggestions(const ASTNode *astNode,
-                                        size_t index,
-                                        Suggestions &suggestions) const {
-        if (HEDLEY_UNLIKELY(ignoreLater || !canContainSpace)) {
-            return true;
-        }
-        std::u16string_view str = astNode->tokens.toString()
-                                          .substr(0, index - astNode->tokens.getStartIndex());
-        if (HEDLEY_UNLIKELY(str.empty())) {
-            suggestions.addSymbolSuggestion({index, index, false, doubleQuoteMask});
-            return true;
-        }
-        if (HEDLEY_LIKELY(str[0] != '"')) {
-            return true;
-        }
-        auto convertResult = JsonUtil::jsonString2String(std::u16string(str));
-        if (HEDLEY_LIKELY(!convertResult.isComplete)) {
-            suggestions.addSymbolSuggestion({index, index, false, doubleQuoteMask});
-        }
-        return true;
     }
 
     void NodeString::collectStructure(const ASTNode *astNode,

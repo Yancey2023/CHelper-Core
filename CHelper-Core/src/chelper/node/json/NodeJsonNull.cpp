@@ -29,16 +29,6 @@ namespace CHelper::Node {
         return result;
     }
 
-    bool NodeJsonNull::collectSuggestions(const ASTNode *astNode,
-                                          size_t index,
-                                          Suggestions &suggestions) const {
-        std::u16string_view str = astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex());
-        if (HEDLEY_LIKELY(str.find(u"null") != std::u16string::npos)) {
-            suggestions.addLiteralSuggestion({astNode->tokens, false, NormalId::make(u"null", u"null参数")});
-        }
-        return true;
-    }
-
     bool NodeJsonNull::collectSyntax(const ASTNode *astNode,
                                      SyntaxResult &syntaxResult) const {
         syntaxResult.update(astNode->tokens, SyntaxTokenType::NULL_TOKEN);

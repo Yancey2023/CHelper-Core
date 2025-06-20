@@ -61,10 +61,4 @@ namespace CHelper::Node {
         }
     }
 
-    bool NodeOr::collectSuggestions(const ASTNode *astNode,
-                                    size_t index,
-                                    Suggestions &suggestions) const {
-        return noSuggestion;
-    }
-
 }// namespace CHelper::Node

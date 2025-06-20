@@ -8,11 +8,11 @@
 
 namespace CHelper::Node {
 
-    static std::unique_ptr<NodeSingleSymbol> nodeRelativeNotation = std::make_unique<NodeSingleSymbol>(
-             u'~', u"相对坐标（~x ~y ~z）", false);
-    static std::unique_ptr<NodeSingleSymbol> nodeCaretNotation = std::make_unique<NodeSingleSymbol>(
+    std::unique_ptr<NodeSingleSymbol> NodeRelativeFloat::nodeRelativeNotation = std::make_unique<NodeSingleSymbol>(
+            u'~', u"相对坐标（~x ~y ~z）", false);
+    std::unique_ptr<NodeSingleSymbol> NodeRelativeFloat::nodeCaretNotation = std::make_unique<NodeSingleSymbol>(
             u'^', u"局部坐标（^左 ^上 ^前）", false);
-    static std::unique_ptr<NodeOr> nodePreSymbol = std::make_unique<NodeOr>(
+    std::unique_ptr<NodeOr> NodeRelativeFloat::nodePreSymbol = std::make_unique<NodeOr>(
             std::vector<const NodeBase *>{nodeRelativeNotation.get(), nodeCaretNotation.get()}, false);
 
     NodeRelativeFloat::NodeRelativeFloat(const std::optional<std::string> &id,
@@ -91,32 +91,6 @@ namespace CHelper::Node {
         ASTNode result = ASTNode::andNode(node, std::move(childNodes), tokenReader.collect(), errorReason);
         // 为了获取补全提示，再嵌套一层or节点
         return {type, ASTNode::orNode(node, {std::move(result), std::move(preSymbol)}, nullptr)};
-    }
-
-    bool NodeRelativeFloat::collectSuggestions(const ASTNode *astNode, size_t index, Suggestions &suggestions) const {
-        std::u16string_view str = astNode->tokens.toString();
-        size_t startIndex = astNode->tokens.getStartIndex();
-        for (size_t i = 0; i < str.length(); ++i) {
-            if (HEDLEY_UNLIKELY(startIndex + i == index)) {
-                return collectSuggestions(index, suggestions, canUseCaretNotation);
-            }
-            if (str[i] != ' ') {
-                return true;
-            }
-        }
-        if (HEDLEY_UNLIKELY(startIndex + str.length() == index)) {
-            return collectSuggestions(index, suggestions, canUseCaretNotation);
-        }
-        return true;
-    }
-
-    bool NodeRelativeFloat::collectSuggestions(size_t index, Suggestions &suggestions, bool canUseCaretNotation) {
-        suggestions.addSpaceSuggestion({index, index, false, spaceId});
-        suggestions.addSymbolSuggestion({index, index, false, nodeRelativeNotation->normalId});
-        if (HEDLEY_LIKELY(canUseCaretNotation)) {
-            suggestions.addSymbolSuggestion({index, index, false, nodeCaretNotation->normalId});
-        }
-        return true;
     }
 
     void NodeRelativeFloat::collectStructure(const ASTNode *astNode,

@@ -7,8 +7,7 @@
 
 namespace CHelper::Node {
 
-    static std::unique_ptr<Node::NodeSingleSymbol> nodeBlockStateLeftBracket = std::make_unique<Node::NodeSingleSymbol>(
-            u'[', u"方块状态左括号");
+    std::unique_ptr<Node::NodeSingleSymbol> NodeBlock::nodeBlockStateLeftBracket = std::make_unique<Node::NodeSingleSymbol>(u'[', u"方块状态左括号");
 
     void NodeBlock::init(const CPack &cpack) {
         blockIds = cpack.blockIds;
@@ -49,16 +48,6 @@ namespace CHelper::Node {
         auto astNodeBlockState = getByChildNode(tokenReader, cpack, nodeBlockState, ASTNodeId::NODE_BLOCK_BLOCK_STATE);
         return ASTNode::andNode(this, {blockId, astNodeBlockState}, tokenReader.collect(),
                                 nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
-    }
-
-    bool NodeBlock::collectSuggestions(const ASTNode *astNode,
-                                       size_t index,
-                                       Suggestions &suggestions) const {
-        if (HEDLEY_LIKELY(astNode->id == ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE && !astNode->isError() &&
-                          astNode->childNodes.size() == 1 && index == astNode->tokens.getEndIndex())) {
-            suggestions.addSymbolSuggestion({index, index, false, nodeBlockStateLeftBracket->normalId});
-        }
-        return false;
     }
 
     void NodeBlock::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {

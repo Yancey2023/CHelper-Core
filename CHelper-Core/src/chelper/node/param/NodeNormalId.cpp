@@ -113,43 +113,6 @@ namespace CHelper::Node {
         return true;
     }
 
-    bool NodeNormalId::collectSuggestions(const ASTNode *astNode,
-                                          size_t index,
-                                          Suggestions &suggestions) const {
-        KMPMatcher kmpMatcher(astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex()));
-        std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
-        for (const auto &item: *customContents) {
-            //通过名字进行搜索
-            size_t index1 = kmpMatcher.match(item->name);
-            if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
-                if (HEDLEY_UNLIKELY(index1 == 0)) {
-                    nameStartOf.push_back(item);
-                } else {
-                    nameContain.push_back(item);
-                }
-                continue;
-            }
-            //通过介绍进行搜索
-            if (HEDLEY_UNLIKELY(
-                        item->description.has_value() && kmpMatcher.match(item->description.value()) != std::u16string::npos)) {
-                descriptionContain.push_back(item);
-            }
-        }
-        size_t start = astNode->tokens.getStartIndex();
-        size_t end = astNode->tokens.getEndIndex();
-        suggestions.reserveIdSuggestion(nameStartOf.size() + nameContain.size() + descriptionContain.size());
-        for (const auto &item: nameStartOf) {
-            suggestions.addIdSuggestion({start, end, getIsMustAfterSpace(), item});
-        }
-        for (const auto &item: nameContain) {
-            suggestions.addIdSuggestion({start, end, getIsMustAfterSpace(), item});
-        }
-        for (const auto &item: descriptionContain) {
-            suggestions.addIdSuggestion({start, end, getIsMustAfterSpace(), item});
-        }
-        return true;
-    }
-
     void NodeNormalId::collectStructure(const ASTNode *astNode,
                                         StructureBuilder &structure,
                                         bool isMustHave) const {

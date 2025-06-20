@@ -23,6 +23,7 @@ namespace CHelper::Node {
 
     class NodeBlock : public NodeSerializable {
     public:
+        static std::unique_ptr<Node::NodeSingleSymbol> nodeBlockStateLeftBracket;
         NodeBlockType::NodeBlockType nodeBlockType = NodeBlockType::BLOCK_WITH_BLOCK_STATE;
 
     private:
@@ -37,10 +38,6 @@ namespace CHelper::Node {
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
-
-        bool collectSuggestions(const ASTNode *astNode,
-                                size_t index,
-                                Suggestions &suggestions) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

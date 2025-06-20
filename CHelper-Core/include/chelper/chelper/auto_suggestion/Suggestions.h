@@ -7,9 +7,9 @@
 #ifndef CHELPER_SUGGESTIONS_H
 #define CHELPER_SUGGESTIONS_H
 
-#include "Suggestion.h"
+#include <chelper/auto_suggestion/Suggestion.h>
 
-namespace CHelper {
+namespace CHelper::AutoSuggestion {
 
     class Suggestions {
     public:
@@ -37,6 +37,6 @@ namespace CHelper {
         std::vector<Suggestion> collect();
     };
 
-}// namespace CHelper
+}// namespace CHelper:AutoSuggestion
 
 #endif//CHELPER_SUGGESTIONS_H

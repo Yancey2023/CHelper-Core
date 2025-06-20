@@ -73,9 +73,9 @@ void CHelperApp::onTextChanged(const QString &string) const {
             ui->errorReasonLabel->setText(result);
         }
     }
-    std::vector<CHelper::Suggestion> *suggestions = core->getSuggestions();
+    std::vector<CHelper::AutoSuggestion::Suggestion> *suggestions = core->getSuggestions();
     QStringList list;
-    for (const CHelper::Suggestion &suggestion: *suggestions) {
+    for (const CHelper::AutoSuggestion::Suggestion &suggestion: *suggestions) {
         list.append(QString::fromStdU16String(
                 suggestion.content->description.has_value()
                         ? suggestion.content->name + u" - " + suggestion.content->description.value()

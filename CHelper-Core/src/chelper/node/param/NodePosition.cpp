@@ -58,22 +58,6 @@ namespace CHelper::Node {
         }
     }
 
-    bool NodePosition::collectSuggestions(const ASTNode *astNode, size_t index, Suggestions &suggestions) const {
-        if (HEDLEY_LIKELY(astNode->id != ASTNodeId::NODE_POSITION_POSITIONS)) {
-            return false;
-        }
-        size_t errorCount = 0;
-        for (const auto &item: astNode->childNodes) {
-            if (item.isError()) {
-                errorCount++;
-            }
-        }
-        if (errorCount > 0) {
-            return NodeRelativeFloat::collectSuggestions(index, suggestions, true);
-        }
-        return true;
-    }
-
     void NodePosition::collectStructure(const ASTNode *astNode,
                                         StructureBuilder &structure,
                                         bool isMustHave) const {

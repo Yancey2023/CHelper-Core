@@ -6,7 +6,6 @@
 #include <chelper/node/NodeType.h>
 #include <chelper/node/param/NodeLF.h>
 #include <chelper/parser/ASTNode.h>
-#include <chelper/parser/Suggestions.h>
 
 namespace CHelper {
 
@@ -163,40 +162,6 @@ namespace CHelper {
         }
     }
 
-    void ASTNode::collectSuggestions(size_t index, Suggestions &suggestions) const {
-        if (HEDLEY_LIKELY(index < tokens.getStartIndex() || index > tokens.getEndIndex())) {
-            return;
-        }
-        if (HEDLEY_UNLIKELY(id != ASTNodeId::COMPOUND && id != ASTNodeId::NEXT_NODE && !isAllSpaceError())) {
-#ifdef CHelperTest
-            Profile::push("collect suggestions: {} {}",
-                          FORMAT_ARG(Node::NodeTypeHelper::getName(node->getNodeType())),
-                          FORMAT_ARG(utf8::utf16to8(node->description.value_or(u""))));
-#endif
-            auto flag = node->collectSuggestions(this, index, suggestions);
-#ifdef CHelperTest
-            Profile::pop();
-#endif
-            if (HEDLEY_UNLIKELY(flag)) {
-                return;
-            }
-        }
-        switch (mode) {
-            case ASTNodeMode::NONE:
-                break;
-            case ASTNodeMode::AND:
-                for (const ASTNode &astNode: childNodes) {
-                    astNode.collectSuggestions(index, suggestions);
-                }
-                break;
-            case ASTNodeMode::OR:
-                for (const ASTNode &astNode: childNodes) {
-                    astNode.collectSuggestions(index, suggestions);
-                }
-                break;
-        }
-    }
-
     void ASTNode::collectStructure(StructureBuilder &structure, bool isMustHave) const {
         bool isCompound = id == ASTNodeId::COMPOUND;
         bool isNext = id == ASTNodeId::NEXT_NODE;
@@ -325,46 +290,6 @@ namespace CHelper {
         Profile::pop();
 #endif
         return sortByLevel(result);
-    }
-
-    static bool canAddSpace0(const ASTNode &astNode, size_t index) {
-        if (std::any_of(astNode.errorReasons.begin(), astNode.errorReasons.end(),
-                        [&index](const auto &item) {
-                            return item->level == ErrorReasonLevel::REQUIRE_SPACE && item->start >= index && item->end <= index;
-                        })) {
-            return true;
-        }
-        switch (astNode.mode) {
-            case ASTNodeMode::NONE:
-                return false;
-            case ASTNodeMode::AND:
-                return !astNode.childNodes.empty() && canAddSpace0(astNode.childNodes[astNode.childNodes.size() - 1], index);
-            case ASTNodeMode::OR:
-                for (const auto &item: astNode.childNodes) {
-                    if (HEDLEY_UNLIKELY(canAddSpace0(item, index))) {
-                        return true;
-                    }
-                }
-                return false;
-            default:
-                HEDLEY_UNREACHABLE();
-        }
-    }
-
-    Suggestions ASTNode::getSuggestions(size_t index) const {
-        std::u16string_view str = tokens.toString();
-#ifdef CHelperTest
-        Profile::push("start getting suggestions: {}", FORMAT_ARG(utf8::utf16to8(str)));
-#endif
-        Suggestions suggestions;
-        if (HEDLEY_UNLIKELY(canAddSpace0(*this, index))) {
-            suggestions.addSpaceSuggestion({str.length(), str.length(), false, spaceId});
-        }
-        collectSuggestions(index, suggestions);
-#ifdef CHelperTest
-        Profile::pop();
-#endif
-        return suggestions;
     }
 
     std::u16string ASTNode::getStructure() const {

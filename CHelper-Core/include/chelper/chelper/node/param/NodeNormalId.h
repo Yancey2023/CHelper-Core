@@ -21,11 +21,8 @@ namespace CHelper::Node {
         std::optional<bool> ignoreError;
         bool allowMissingID = false;
         std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> getNormalIdASTNode;
-
-    private:
         std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> customContents;
 
-    public:
         NodeNormalId() = default;
 
         NodeNormalId(
@@ -58,10 +55,6 @@ namespace CHelper::Node {
 
         bool collectIdError(const ASTNode *astNode,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
-
-        bool collectSuggestions(const ASTNode *astNode,
-                                size_t index,
-                                Suggestions &suggestions) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

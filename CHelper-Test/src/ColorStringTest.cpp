@@ -36,7 +36,7 @@ void testCommand(CHelper::CHelperCore *core, const std::u16string &command) {
     constexpr uint32_t colorRange = COLOR_LIGHT_BLUE;
     constexpr uint32_t colorLiteral = COLOR_LIGHT_BLUE;
 
-    for (int i = 0; i < syntaxResult.tokenTypes.size(); ++i) {
+    for (size_t i = 0; i < syntaxResult.tokenTypes.size(); ++i) {
         uint32_t tokenType = syntaxResult.tokenTypes[i];
         std::u16string strChar;
         strChar.push_back(syntaxResult.str[i]);

@@ -37,23 +37,6 @@ namespace CHelper::Node {
                                     ErrorReason::contentError(tokens, fmt::format(u"内容不匹配，应该为布尔值，但当前内容为{}", str)));
         }
 
-        bool collectSuggestions(const ASTNode *astNode,
-                                size_t index,
-                                Suggestions &suggestions) const override {
-            KMPMatcher kmpMatcher(astNode->tokens.toString().substr(0, index - astNode->tokens.getStartIndex()));
-            if (HEDLEY_UNLIKELY(kmpMatcher.match(u"true") != std::u16string::npos)) {
-                suggestions.addLiteralSuggestion({
-                        astNode->tokens, true,
-                        NormalId::make(u"true", descriptionTrue)});
-            }
-            if (HEDLEY_UNLIKELY(kmpMatcher.match(u"false") != std::u16string::npos)) {
-                suggestions.addLiteralSuggestion({
-                        astNode->tokens, true,
-                        NormalId::make(u"false", descriptionFalse)});
-            }
-            return true;
-        }
-
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override {

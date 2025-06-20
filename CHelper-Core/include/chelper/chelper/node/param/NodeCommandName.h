@@ -13,10 +13,9 @@
 namespace CHelper::Node {
 
     class NodeCommandName : public NodeSerializable {
-    private:
+    public:
         std::vector<std::unique_ptr<NodePerCommand>> *commands = nullptr;
 
-    public:
         void init(const CPack &cpack) override;
 
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
@@ -25,10 +24,6 @@ namespace CHelper::Node {
 
         bool collectIdError(const ASTNode *astNode,
                             std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
-
-        bool collectSuggestions(const ASTNode *astNode,
-                                size_t index,
-                                Suggestions &suggestions) const override;
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

@@ -27,13 +27,6 @@ namespace CHelper::Node {
 
         [[nodiscard]] ASTNode getASTNodeWithIsMustAfterSpace(TokenReader &tokenReader, const CPack *cpack, bool isMustAfterSpace) const;
 
-        bool collectIdError(const ASTNode *astNode,
-                            std::vector<std::shared_ptr<ErrorReason>> &idErrorReasons) const override;
-
-        bool collectSuggestions(const ASTNode *astNode,
-                                size_t index,
-                                Suggestions &suggestions) const override;
-
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,
                               bool isMustHave) const override;

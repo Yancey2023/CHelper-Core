@@ -8,6 +8,8 @@
 #define CHELPER_NODERELATIVEFLOAT_H
 
 #include "../NodeBase.h"
+#include "../util/NodeOr.h"
+#include "../util/NodeSingleSymbol.h"
 
 namespace CHelper::Node {
 
@@ -21,6 +23,10 @@ namespace CHelper::Node {
 
     class NodeRelativeFloat : public NodeSerializable {
     public:
+        static std::unique_ptr<NodeSingleSymbol> nodeRelativeNotation;
+        static std::unique_ptr<NodeSingleSymbol> nodeCaretNotation;
+        static std::unique_ptr<NodeOr> nodePreSymbol;
+
         bool canUseCaretNotation = true;
 
         NodeRelativeFloat() = default;
@@ -40,10 +46,6 @@ namespace CHelper::Node {
         getASTNode(const NodeBase *node,
                    const CPack *cpack,
                    TokenReader &tokenReader);
-
-        bool collectSuggestions(const ASTNode *astNode, size_t index, Suggestions &suggestions) const override;
-
-        static bool collectSuggestions(size_t index, Suggestions &suggestions, bool canUseCaretNotation);
 
         void collectStructure(const ASTNode *astNode,
                               StructureBuilder &structure,

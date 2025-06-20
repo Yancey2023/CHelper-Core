@@ -7,8 +7,6 @@
 
 namespace CHelper::Node {
 
-    static std::shared_ptr<NormalId> rangeSymbol = NormalId::make(u"..", u"范围");
-
     NodeRange::NodeRange(const std::optional<std::string> &id,
                          const std::optional<std::u16string> &description)
         : NodeSerializable(id, description, false) {}
@@ -46,32 +44,6 @@ namespace CHelper::Node {
             }
         }
         return ASTNode::simpleNode(this, result.tokens, errorReason);
-    }
-
-    bool NodeRange::collectSuggestions(const ASTNode *astNode,
-                                       size_t index,
-                                       Suggestions &suggestions) const {
-        std::u16string_view str = astNode->tokens.toString();
-        size_t index0 = str.find(u"..");
-        if (HEDLEY_UNLIKELY(index0 != std::u16string::npos)) {
-            index0 += astNode->tokens.getStartIndex();
-            if (HEDLEY_LIKELY(index != index0 && index != index0 + 1 && index != index0 + 2)) {
-                return true;
-            }
-            suggestions.addSymbolSuggestion({index0, index0 + 2, false, rangeSymbol});
-            return true;
-        }
-        size_t index1 = str.find('.');
-        if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
-            index1 += astNode->tokens.getStartIndex();
-            if (HEDLEY_LIKELY(index != index1 && index != index1 + 1)) {
-                return true;
-            }
-            suggestions.addSymbolSuggestion({index0, index0 + 1, false, rangeSymbol});
-            return true;
-        }
-        suggestions.addSymbolSuggestion({index, index, false, rangeSymbol});
-        return true;
     }
 
     void NodeRange::collectStructure(const ASTNode *astNode, StructureBuilder &structure, bool isMustHave) const {

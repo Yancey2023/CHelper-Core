@@ -2,9 +2,9 @@
 // Created by Yancey on 2024-03-12.
 //
 
-#include <chelper/parser/Suggestions.h>
+#include <chelper/auto_suggestion/Suggestions.h>
 
-namespace CHelper {
+namespace CHelper::AutoSuggestion {
 
     void Suggestions::addSuggestion(std::vector<Suggestion> &suggestions, Suggestion &&suggestion) {
         if (seenSuggestionHashes.insert(suggestion.hashCode()).second) {

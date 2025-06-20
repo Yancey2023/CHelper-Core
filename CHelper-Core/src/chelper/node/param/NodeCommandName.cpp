@@ -36,58 +36,6 @@ namespace CHelper::Node {
         return true;
     }
 
-    bool NodeCommandName::collectSuggestions(const ASTNode *astNode,
-                                             size_t index,
-                                             Suggestions &suggestions) const {
-        std::u16string_view str = astNode->tokens.toString()
-                                          .substr(0, index - astNode->tokens.getStartIndex());
-        std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
-        for (const auto &item: *commands) {
-            bool flag = false;
-            for (const auto &item2: static_cast<NodePerCommand *>(item.get())->name) {
-                //通过名字进行搜索
-                size_t index1 = item2.find(str);
-                if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
-                    if (HEDLEY_UNLIKELY(index1 == 0)) {
-                        nameStartOf.push_back(NormalId::make(item2, item->description));
-                    } else {
-                        nameContain.push_back(NormalId::make(item2, item->description));
-                    }
-                    flag = true;
-                }
-            }
-            if (HEDLEY_UNLIKELY(flag)) {
-                continue;
-            }
-            //通过介绍进行搜索
-            if (HEDLEY_UNLIKELY(item->description.has_value() &&
-                                item->description.value().find(str) != std::u16string::npos)) {
-                for (const auto &item2: static_cast<NodePerCommand *>(item.get())->name) {
-                    descriptionContain.push_back(NormalId::make(item2, item->description));
-                }
-            }
-        }
-        auto compare = [](const auto &item1, const auto &item2) {
-            return item1->name < item2->name;
-        };
-        std::sort(nameStartOf.begin(), nameStartOf.end(), compare);
-        std::sort(nameContain.begin(), nameContain.end(), compare);
-        std::sort(descriptionContain.begin(), descriptionContain.end(), compare);
-        size_t start = astNode->tokens.getStartIndex();
-        size_t end = astNode->tokens.getEndIndex();
-        suggestions.reserveIdSuggestion(nameStartOf.size() + nameContain.size() + descriptionContain.size());
-        for (const auto &item: nameStartOf) {
-            suggestions.addIdSuggestion({start, end, true, item});
-        }
-        for (const auto &item: nameContain) {
-            suggestions.addIdSuggestion({start, end, true, item});
-        }
-        for (const auto &item: descriptionContain) {
-            suggestions.addIdSuggestion({start, end, true, item});
-        }
-        return true;
-    }
-
     void NodeCommandName::collectStructure(const ASTNode *astNode,
                                            StructureBuilder &structure,
                                            bool isMustHave) const {

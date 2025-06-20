@@ -8,6 +8,7 @@
 #define CHELPER_NODESINGLESYMBOL_H
 
 #include "../NodeBase.h"
+#include <chelper/resources/id/NormalId.h>
 
 namespace CHelper::Node {
 
@@ -26,10 +27,6 @@ namespace CHelper::Node {
         [[nodiscard]] NodeTypeId::NodeTypeId getNodeType() const override;
 
         ASTNode getASTNode(TokenReader &tokenReader, const CPack *cpack = nullptr) const override;
-
-        bool collectSuggestions(const ASTNode *astNode,
-                                size_t index,
-                                Suggestions &suggestions) const override;
 
         bool collectSyntax(const ASTNode *astNode,
                            SyntaxResult &syntaxResult) const override;
