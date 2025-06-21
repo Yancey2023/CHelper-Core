@@ -7,19 +7,14 @@
 #ifndef CHELPER_TOKENREADER_H
 #define CHELPER_TOKENREADER_H
 
-#include "../parser/ASTNode.h"
-#include "../parser/TokensView.h"
-#include "LexerResult.h"
-#include "Token.h"
-#include "pch.h"
+#include <chelper/parser/ASTNode.h>
+#include <chelper/parser/TokensView.h>
+#include <chelper/lexer/LexerResult.h>
+#include <chelper/lexer/Token.h>
+#include <pch.h>
+#include <chelper/node/NodeWithType.h>
 
 namespace CHelper {
-
-    namespace Node {
-
-        class NodeBase;
-
-    }// namespace Node
 
     class TokenReader {
     public:
@@ -53,29 +48,29 @@ namespace CHelper {
 
         [[nodiscard]] TokensView collect();
 
-        ASTNode readSimpleASTNode(const Node::NodeBase *node,
+        ASTNode readSimpleASTNode(Node::NodeWithType node,
                                   TokenType::TokenType type,
                                   const std::u16string &requireType,
                                   const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE,
                                   std::shared_ptr<ErrorReason> (*check)(const std::u16string_view &str,
                                                                         const TokensView &tokens) = nullptr);
 
-        ASTNode readStringASTNode(const Node::NodeBase *node,
+        ASTNode readStringASTNode(const Node::NodeWithType &node,
                                   const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
-        ASTNode readIntegerASTNode(const Node::NodeBase *node,
+        ASTNode readIntegerASTNode(const Node::NodeWithType &node,
                                    const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
-        ASTNode readFloatASTNode(const Node::NodeBase *node,
+        ASTNode readFloatASTNode(const Node::NodeWithType &node,
                                  const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
-        ASTNode readSymbolASTNode(const Node::NodeBase *node,
+        ASTNode readSymbolASTNode(const Node::NodeWithType &node,
                                   const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
-        ASTNode readUntilSpace(const Node::NodeBase *node,
+        ASTNode readUntilSpace(const Node::NodeWithType &node,
                                const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
 
-        ASTNode readStringOrNumberASTNode(const Node::NodeBase *node,
+        ASTNode readStringOrNumberASTNode(const Node::NodeWithType &node,
                                           const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE);
     };
 

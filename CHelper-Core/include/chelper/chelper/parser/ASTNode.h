@@ -7,16 +7,11 @@
 #ifndef CHELPER_ASTNODE_H
 #define CHELPER_ASTNODE_H
 
+#include <chelper/node/NodeWithType.h>
 #include <chelper/parser/ErrorReason.h>
 #include <pch.h>
 
 namespace CHelper {
-
-    namespace Node {
-
-        class NodeBase;
-
-    }// namespace Node
 
     namespace ASTNodeMode {
         enum ASTNodeMode : uint8_t {
@@ -55,7 +50,7 @@ namespace CHelper {
     public:
         ASTNodeMode::ASTNodeMode mode;
         //一个Node可能会生成多个ASTNode，这些ASTNode使用id进行区分
-        const Node::NodeBase *node;
+        Node::NodeWithType node;
         //子节点为AND类型和OR类型特有
         std::vector<ASTNode> childNodes;
         TokensView tokens;
@@ -67,7 +62,7 @@ namespace CHelper {
         size_t whichBest;
 
         ASTNode(ASTNodeMode::ASTNodeMode mode,
-                const Node::NodeBase *node,
+                const Node::NodeWithType &node,
                 std::vector<ASTNode> &&childNodes,
                 TokensView tokens,
                 const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
@@ -75,12 +70,12 @@ namespace CHelper {
                 size_t whichBest = -1);
 
     public:
-        static ASTNode simpleNode(const Node::NodeBase *node,
+        static ASTNode simpleNode(const Node::NodeWithType &node,
                                   const TokensView &tokens,
                                   const std::shared_ptr<ErrorReason> &errorReason = nullptr,
                                   const ASTNodeId::ASTNodeId &id = ASTNodeId::NONE);
 
-        static ASTNode andNode(const Node::NodeBase *node,
+        static ASTNode andNode(const Node::NodeWithType &node,
                                std::vector<ASTNode> &&childNodes,
                                const TokensView &tokens,
                                const std::shared_ptr<ErrorReason> &errorReason = nullptr,
@@ -88,13 +83,13 @@ namespace CHelper {
 
         // TODO 为什么当时我用的是char*，而不是std::shared_ptr<ErrorReason>
 
-        static ASTNode orNode(const Node::NodeBase *node,
+        static ASTNode orNode(const Node::NodeWithType &node,
                               std::vector<ASTNode> &&childNodes,
                               const TokensView *tokens,
                               const char16_t *errorReason = nullptr,
                               const ASTNodeId::ASTNodeId &id = ASTNodeId::NONE);
 
-        static ASTNode orNode(const Node::NodeBase *node,
+        static ASTNode orNode(const Node::NodeWithType &node,
                               std::vector<ASTNode> &&childNodes,
                               const TokensView &tokens,
                               const char16_t *errorReason = nullptr,

@@ -7,38 +7,36 @@
 
 namespace CHelper {
 
-    std::shared_ptr<Node::NodeBase> ItemId::getNode() {
+   const Node::NodeWithType &ItemId::getNode() {
         if (HEDLEY_UNLIKELY(node == nullptr)) {
             if (HEDLEY_UNLIKELY(max.has_value() && max.value() < 0)) {
                 throw std::runtime_error("item id max data value should be a positive number");
             }
-            auto nodeAllData = std::shared_ptr<Node::NodeInteger>(Node::NodeInteger::make("ITEM_DATA", u"物品附加值", -1, max));
+            auto nodeAllData = new Node::NodeInteger("ITEM_DATA", u"物品附加值", -1, max);
+            nodeChildren.nodes.emplace_back(*nodeAllData);
             if (HEDLEY_LIKELY(!descriptions.has_value())) {
-                node = std::move(nodeAllData);
+                node = std::make_unique<Node::NodeWithType>(*nodeAllData);
             } else {
-                nodeChildren.push_back(nodeAllData);
-                std::vector<const Node::NodeBase *> nodeDataChildren;
+                std::vector<Node::NodeWithType> nodeDataChildren;
                 nodeDataChildren.reserve(descriptions.value().size());
                 size_t i = 0;
                 for (const auto &item: descriptions.value()) {
-                    auto nodeChild = std::make_shared<Node::NodeText>(
+                    auto nodeChild = new Node::NodeText(
                             "ITEM_PER_DATA", item,
                             NormalId::make(utf8::utf8to16(std::to_string(i++)), item),
-                            [](const Node::NodeBase *node1, TokenReader &tokenReader) -> ASTNode {
+                            [](const Node::NodeWithType &node1, TokenReader &tokenReader) -> ASTNode {
                                 return tokenReader.readIntegerASTNode(node1);
                             });
-                    nodeDataChildren.push_back(nodeChild.get());
-                    nodeChildren.push_back(std::move(nodeChild));
+                    nodeDataChildren.emplace_back(*nodeChild);
+                    nodeChildren.nodes.emplace_back(*nodeChild);
                 }
-                auto nodeOr = std::make_shared<Node::NodeOr>(
-                        std::move(nodeDataChildren), false);
-                node = std::make_shared<Node::NodeOr>(
-                        std::vector<const Node::NodeBase *>{nodeOr.get(), nodeAllData.get()},
-                        false, true);
-                nodeChildren.push_back(std::move(nodeOr));
+                nodeDataChildren.emplace_back(*nodeAllData);
+                auto nodeOr = new Node::NodeOr(std::move(nodeDataChildren), false);
+                nodeChildren.nodes.emplace_back(*nodeOr);
+                node = std::make_unique<Node::NodeWithType>(*nodeOr);
             }
         }
-        return node;
+        return *node;
     }
 
 }// namespace CHelper

@@ -14,7 +14,6 @@ namespace CHelper::ParameterHint {
 
     template<class NodeType, class = void>
     struct ParameterHint {
-        static_assert(std::is_base_of_v<Node::NodeBase, NodeType>, "NodeType must be derived from NodeBase");
         static std::optional<std::u16string> getHint(const ASTNode &astNode) {
             return std::nullopt;
         }
@@ -23,7 +22,7 @@ namespace CHelper::ParameterHint {
     template<class NodeType>
     struct ParameterHint<NodeType, std::enable_if_t<std::is_base_of_v<Node::NodeSerializable, NodeType>>> {
         static std::optional<std::u16string> getHint(const ASTNode &astNode) {
-            return reinterpret_cast<const NodeType &>(*astNode.node).description;
+            return static_cast<const NodeType *>(astNode.node.data)->description;
         }
     };
 
@@ -62,7 +61,7 @@ namespace CHelper::ParameterHint {
     struct ParameterHint<Node::NodeRepeat> {
         static std::optional<std::u16string> getHint(const ASTNode &astNode) {
             if (HEDLEY_UNLIKELY(astNode.tokens.isEmpty())) {
-                return reinterpret_cast<const Node::NodeRepeat &>(*astNode.node).description;
+                return static_cast<const Node::NodeRepeat *>(astNode.node.data)->description;
             } else {
                 return std::nullopt;
             }
@@ -78,7 +77,7 @@ namespace CHelper::ParameterHint {
             Profile::push("get parameter hint: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(astNode.node->nodeTypeId)));
 #endif
             std::optional<std::u16string> parameterHint;
-            switch (astNode.node->nodeTypeId) {
+            switch (astNode.node.nodeTypeId) {
                 CODEC_PASTE(CHELPER_GET_PARAMETER_HINT, CHELPER_NODE_TYPES)
                 default:
                     HEDLEY_UNREACHABLE();

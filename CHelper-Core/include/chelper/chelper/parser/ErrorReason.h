@@ -7,8 +7,8 @@
 #ifndef CHELPER_ERRORREASON_H
 #define CHELPER_ERRORREASON_H
 
-#include "TokensView.h"
-#include "pch.h"
+#include <chelper/parser/TokensView.h>
+#include <pch.h>
 
 namespace CHelper {
 

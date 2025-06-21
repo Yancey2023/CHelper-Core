@@ -8,47 +8,11 @@
 #define CHELPER_NODEBASE_H
 
 #include <chelper/lexer/TokenReader.h>
+#include <chelper/node/NodeWithType.h>
 #include <chelper/resources/id/BlockId.h>
+#include <chelper/resources/id/ItemId.h>
 #include <chelper/resources/id/NormalId.h>
 #include <pch.h>
-
-#define CHELPER_NODE_TYPES WRAPPED,           \
-                           BLOCK,             \
-                           BOOLEAN,           \
-                           COMMAND,           \
-                           COMMAND_NAME,      \
-                           FLOAT,             \
-                           INTEGER,           \
-                           INTEGER_WITH_UNIT, \
-                           ITEM,              \
-                           LF,                \
-                           NAMESPACE_ID,      \
-                           NORMAL_ID,         \
-                           PER_COMMAND,       \
-                           POSITION,          \
-                           RELATIVE_FLOAT,    \
-                           REPEAT,            \
-                           STRING,            \
-                           TARGET_SELECTOR,   \
-                           TEXT,              \
-                           RANGE,             \
-                           JSON,              \
-                           JSON_BOOLEAN,      \
-                           JSON_ELEMENT,      \
-                           JSON_ENTRY,        \
-                           JSON_FLOAT,        \
-                           JSON_INTEGER,      \
-                           JSON_LIST,         \
-                           JSON_NULL,         \
-                           JSON_OBJECT,       \
-                           JSON_STRING,       \
-                           AND,               \
-                           ANY,               \
-                           ENTRY,             \
-                           EQUAL_ENTRY,       \
-                           LIST,              \
-                           OR,                \
-                           SINGLE_SYMBOL
 
 namespace CHelper {
 
@@ -56,23 +20,56 @@ namespace CHelper {
 
     namespace Node {
 
-        namespace NodeTypeId {
-            enum NodeTypeId : uint8_t {
-                CHELPER_NODE_TYPES
-            };
-        }
-
-        constexpr NodeTypeId::NodeTypeId MAX_TYPE_ID = NodeTypeId::SINGLE_SYMBOL;
+        class NodeSerializable;
+        class NodeWrapped;
+        class NodeAnd;
+        class NodeAny;
+        class NodeEntry;
+        class NodeEqualEntry;
+        class NodeOr;
+        class NodeList;
+        class NodeSingleSymbol;
+        class NodeBlock;
+        class NodePerCommand;
+        class NodeCommand;
+        class NodeCommandName;
+        class NodeNormalId;
+        class NodeIntegerWithUnit;
+        class NodeItem;
+        class NodeJson;
+        class NodeLF;
+        class NodeNamespaceId;
+        class NodePosition;
+        class NodeRange;
+        class NodeRelativeFloat;
+        class NodeRepeat;
+        class NodeString;
+        class NodeTargetSelector;
+        class NodeText;
+        template<bool isJson>
+        class NodeTemplateBoolean;
+        using NodeBoolean = NodeTemplateBoolean<false>;
+        using NodeJsonBoolean = NodeTemplateBoolean<true>;
+        template<class T, bool isJson>
+        class NodeTemplateNumber;
+        using NodeFloat = NodeTemplateNumber<float, false>;
+        using NodeInteger = NodeTemplateNumber<int32_t, false>;
+        using NodeJsonFloat = NodeTemplateNumber<float, true>;
+        using NodeJsonInteger = NodeTemplateNumber<int32_t, true>;
+        class NodeJsonElement;
+        class NodeJsonEntry;
+        class NodeJsonList;
+        class NodeJsonNull;
+        class NodeJsonObject;
+        class NodeJsonString;
 
         class NodeBase {
         public:
-            NodeTypeId::NodeTypeId nodeTypeId;
-
-            NodeBase() = default;
-
-            explicit NodeBase(NodeTypeId::NodeTypeId nodeTypeId);
+#ifdef CHelperDebug
+            int times = 0;
 
             virtual ~NodeBase();
+#endif
         };
 
         class NodeSerializable : public NodeBase {
@@ -84,8 +81,7 @@ namespace CHelper {
 
             NodeSerializable() = default;
 
-            NodeSerializable(NodeTypeId::NodeTypeId nodeTypeId,
-                             const std::optional<std::string> &id,
+            NodeSerializable(const std::optional<std::string> &id,
                              const std::optional<std::u16string> &description,
                              bool isMustAfterSpace);
 
@@ -94,75 +90,30 @@ namespace CHelper {
 
         class NodeWrapped : public NodeBase {
         public:
-            NodeSerializable *innerNode;
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::WRAPPED;
+            NodeWithType innerNode;
             //存储下一个节点，需要调用构造函数之后再进行添加
             std::vector<NodeWrapped *> nextNodes;
 
-            explicit NodeWrapped(NodeSerializable *innerNode);
+            explicit NodeWrapped(NodeWithType innerNode);
+
+            [[nodiscard]] NodeSerializable &getNodeSerializable() const;
         };
 
         class NodeAnd : public NodeBase {
         public:
-            std::vector<const NodeBase *> childNodes;
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::AND;
+            std::vector<NodeWithType> childNodes;
 
             NodeAnd() = default;
 
-            explicit NodeAnd(const std::vector<const NodeBase *> &childNodes);
-        };
-
-        class NodeAny : public NodeBase {
-        public:
-            std::unique_ptr<NodeBase> node;
-
-        private:
-            NodeAny();
-
-        public:
-            static NodeAny *getNodeAny();
-        };
-
-        class NodeEntry : public NodeBase {
-        public:
-            NodeBase *nodeKey = nullptr;
-            NodeBase *nodeSeparator = nullptr;
-            NodeBase *nodeValue = nullptr;
-
-            NodeEntry() = default;
-
-            NodeEntry(NodeBase *nodeKey,
-                      NodeBase *nodeSeparator,
-                      NodeBase *nodeValue);
-        };
-
-        struct EqualData {
-            std::u16string name;
-            std::optional<std::u16string> description;
-            bool canUseNotEqual;
-            const NodeBase *nodeValue;
-
-            EqualData(std::u16string name,
-                      const std::optional<std::u16string> &description,
-                      bool canUseNotEqual,
-                      const NodeBase *nodeValue);
-        };
-
-        class NodeEqualEntry : public NodeBase {
-        public:
-            static std::unique_ptr<NodeBase> nodeEqual;
-            static std::unique_ptr<NodeBase> nodeNotEqual;
-            static std::unique_ptr<NodeBase> nodeEqualOrNotEqual;
-            std::vector<EqualData> equalDatas;
-            std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> nodeKeyContent;
-            std::unique_ptr<NodeBase> nodeKey;
-
-            NodeEqualEntry() = default;
-
-            explicit NodeEqualEntry(std::vector<EqualData> equalDatas);
+            explicit NodeAnd(const std::vector<NodeWithType> &childNodes);
         };
 
         class NodeOr : public NodeBase {
         public:
-            std::vector<const NodeBase *> childNodes;
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::OR;
+            std::vector<NodeWithType> childNodes;
             bool isAttachToEnd = false, isUseFirst = false;
             bool noSuggestion = false;
             const char16_t *defaultErrorReason = nullptr;
@@ -170,7 +121,7 @@ namespace CHelper {
 
             NodeOr() = default;
 
-            NodeOr(std::vector<const NodeBase *> childNodes,
+            NodeOr(std::vector<NodeWithType> childNodes,
                    bool isAttachToEnd,
                    bool isUseFirst = false,
                    bool noSuggestion = false,
@@ -178,25 +129,115 @@ namespace CHelper {
                    ASTNodeId::ASTNodeId nodeId = ASTNodeId::NONE);
         };
 
+        class NodeAny : public NodeBase {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::ANY;
+            std::optional<NodeOr> node;
+
+        private:
+            NodeAny() = default;
+
+        public:
+            static NodeAny *getNodeAny();
+        };
+
+        class NodeEntry : public NodeBase {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::ENTRY;
+            NodeWithType nodeKey;
+            NodeWithType nodeSeparator;
+            NodeWithType nodeValue;
+
+            NodeEntry() = default;
+
+            NodeEntry(NodeWithType nodeKey,
+                      NodeWithType nodeSeparator,
+                      NodeWithType nodeValue);
+        };
+
+        struct EqualData {
+            std::u16string name;
+            std::optional<std::u16string> description;
+            bool canUseNotEqual;
+            const NodeWithType nodeValue;
+
+            EqualData(std::u16string name,
+                      const std::optional<std::u16string> &description,
+                      bool canUseNotEqual,
+                      NodeWithType nodeValue);
+        };
+
+        class NodeNormalId : public NodeSerializable {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::NORMAL_ID;
+            std::optional<std::string> key;
+            std::optional<std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>> contents;
+            std::optional<bool> ignoreError;
+            bool allowMissingID = false;
+            std::function<ASTNode(const NodeWithType &node, TokenReader &tokenReader)> getNormalIdASTNode;
+            std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> customContents;
+
+            NodeNormalId() = default;
+
+            NodeNormalId(
+                    const std::optional<std::string> &id,
+                    const std::optional<std::u16string> &description,
+                    const std::string &key,
+                    bool ignoreError,
+                    bool allowMissingID = false,
+                    const std::function<ASTNode(const NodeWithType &node, TokenReader &tokenReader)> &getNormalIdASTNode =
+                            [](const NodeWithType &node, TokenReader &tokenReader) -> ASTNode {
+                        return tokenReader.readStringOrNumberASTNode(node);
+                    });
+
+            NodeNormalId(
+                    const std::optional<std::string> &id,
+                    const std::optional<std::u16string> &description,
+                    const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
+                    bool ignoreError,
+                    bool allowMissingID = false,
+                    const std::function<ASTNode(const NodeWithType &node, TokenReader &tokenReader)> &getNormalIdASTNode =
+                            [](const NodeWithType &node, TokenReader &tokenReader) -> ASTNode {
+                        return tokenReader.readStringOrNumberASTNode(node);
+                    });
+        };
+
+        class NodeEqualEntry : public NodeBase {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::EQUAL_ENTRY;
+            static NodeText nodeEqual;
+            static NodeText nodeNotEqual;
+            static NodeOr nodeEqualOrNotEqual;
+            std::vector<EqualData> equalDatas;
+            std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> nodeKeyContent;
+            NodeNormalId nodeKey;
+
+            NodeEqualEntry() = default;
+
+            explicit NodeEqualEntry(std::vector<EqualData> equalDatas);
+        };
+
         class NodeList : public NodeBase {
         public:
-            NodeBase *nodeLeft = nullptr;
-            NodeBase *nodeElement = nullptr;
-            NodeBase *nodeSeparator = nullptr;
-            NodeBase *nodeRight = nullptr;
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::LIST;
+            NodeWithType nodeLeft;
+            NodeWithType nodeElement;
+            NodeWithType nodeSeparator;
+            NodeWithType nodeRight;
             NodeOr nodeElementOrRight;
             NodeOr nodeSeparatorOrRight;
 
             NodeList() = default;
 
-            NodeList(NodeBase *nodeLeft,
-                     NodeBase *nodeElement,
-                     NodeBase *nodeSeparator,
-                     NodeBase *nodeRight);
+            NodeList(const NodeWithType &nodeLeft,
+                     const NodeWithType &nodeElement,
+                     const NodeWithType &nodeSeparator,
+                     const NodeWithType &nodeRight);
         };
 
         class NodeSingleSymbol : public NodeBase {
         public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::SINGLE_SYMBOL;
             char16_t symbol = ' ';
             std::shared_ptr<NormalId> normalId;
             bool isAddSpace = false;
@@ -208,144 +249,9 @@ namespace CHelper {
                              bool isAddSpace = true);
         };
 
-        namespace NodeBlockType {
-            enum NodeBlockType : uint8_t {
-                // <方块ID> [方块状态]
-                BLOCK_WITH_BLOCK_STATE = 0,
-                // <方块ID>
-                BLOCK = 1
-            };
-        }// namespace NodeBlockType
-
-        class NodeBlock : public NodeSerializable {
-        public:
-            static std::unique_ptr<Node::NodeSingleSymbol> nodeBlockStateLeftBracket;
-            NodeBlockType::NodeBlockType nodeBlockType = NodeBlockType::BLOCK_WITH_BLOCK_STATE;
-            std::shared_ptr<BlockIds> blockIds = nullptr;
-            std::shared_ptr<NodeBase> nodeBlockId = nullptr;
-
-            NodeBlock() = default;
-        };
-
-        class NodePerCommand : public NodeBase {
-        public:
-            std::vector<std::u16string> name;
-            std::optional<std::u16string> description;
-            std::vector<std::unique_ptr<Node::NodeSerializable>> nodes;
-            std::vector<Node::NodeWrapped> wrappedNodes;
-            std::vector<Node::NodeWrapped *> startNodes;
-
-            NodePerCommand() = default;
-        };
-
-        class NodeCommand : public NodeSerializable {
-        public:
-            static std::unique_ptr<Node::NodeSingleSymbol> nodeCommandStart;
-
-            std::vector<std::unique_ptr<NodePerCommand>> *commands = nullptr;
-
-            NodeCommand(const std::optional<std::string> &id,
-                        const std::optional<std::u16string> &description,
-                        std::vector<std::unique_ptr<NodePerCommand>> *commands);
-
-            NodeCommand() = default;
-        };
-
-        class NodeCommandName : public NodeSerializable {
-        public:
-            std::vector<std::unique_ptr<NodePerCommand>> *commands = nullptr;
-        };
-
-        class NodeNormalId : public NodeSerializable {
-        public:
-            std::optional<std::string> key;
-            std::optional<std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>> contents;
-            std::optional<bool> ignoreError;
-            bool allowMissingID = false;
-            std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> getNormalIdASTNode;
-            std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> customContents;
-
-            NodeNormalId() = default;
-
-            NodeNormalId(
-                    const std::optional<std::string> &id,
-                    const std::optional<std::u16string> &description,
-                    const std::string &key,
-                    bool ignoreError,
-                    bool allowMissingID = false,
-                    const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode =
-                            [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-                        return tokenReader.readStringOrNumberASTNode(node);
-                    });
-
-            NodeNormalId(
-                    const std::optional<std::string> &id,
-                    const std::optional<std::u16string> &description,
-                    const std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> &contents,
-                    bool ignoreError,
-                    bool allowMissingID = false,
-                    const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getNormalIdASTNode =
-                            [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
-                        return tokenReader.readStringOrNumberASTNode(node);
-                    });
-        };
-
-        class NodeIntegerWithUnit : public NodeSerializable {
-        public:
-            std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> units;
-            std::unique_ptr<NodeNormalId> nodeUnits;
-            std::unique_ptr<NodeAnd> nodeIntegerWithUnit;
-            std::unique_ptr<NodeOr> nodeIntegerMaybeHaveUnit;
-
-            NodeIntegerWithUnit() = default;
-        };
-
-        namespace NodeItemType {
-            enum NodeItemType : uint8_t {
-                // <物品ID> <物品数量> <附加值> [物品组件]
-                ITEM_GIVE = 0,
-                // <物品ID> <附加值> <物品数量>
-                ITEM_CLEAR = 1
-            };
-        }// namespace NodeItemType
-
-        class NodeItem : public NodeSerializable {
-        public:
-            static std::shared_ptr<NodeBase> nodeCount;
-            static std::shared_ptr<NodeBase> nodeAllData;
-            NodeItemType::NodeItemType nodeItemType = NodeItemType::ITEM_GIVE;
-            std::unique_ptr<NodeBase> nodeItemId;
-            std::shared_ptr<std::vector<std::shared_ptr<ItemId>>> itemIds;
-            std::unique_ptr<NodeBase> nodeComponent;
-
-            NodeItem() = default;
-        };
-
-        class NodeJson : public NodeSerializable {
-        public:
-            std::string key;
-            const NodeBase *nodeJson = nullptr;
-
-            NodeJson(const std::optional<std::string> &id,
-                     const std::optional<std::u16string> &description,
-                     std::string key);
-
-            NodeJson() = default;
-        };
-
-        class NodeLF : public NodeSerializable {
-        private:
-            NodeLF() = default;
-
-            NodeLF(const std::optional<std::string> &id,
-                   const std::optional<std::u16string> &description);
-
-        public:
-            static NodeWrapped *getInstance();
-        };
-
         class NodeNamespaceId : public NodeSerializable {
         public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::NAMESPACE_ID;
             std::optional<std::string> key;
             std::optional<std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> contents;
             std::optional<bool> ignoreError;
@@ -359,8 +265,121 @@ namespace CHelper {
                             bool ignoreError);
         };
 
+        namespace NodeBlockType {
+            enum NodeBlockType : uint8_t {
+                // <方块ID> [方块状态]
+                BLOCK_WITH_BLOCK_STATE = 0,
+                // <方块ID>
+                BLOCK = 1
+            };
+        }// namespace NodeBlockType
+
+        class NodeBlock : public NodeSerializable {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::BLOCK;
+            static NodeSingleSymbol nodeBlockStateLeftBracket;
+            NodeBlockType::NodeBlockType nodeBlockType = NodeBlockType::BLOCK_WITH_BLOCK_STATE;
+            std::shared_ptr<BlockIds> blockIds = nullptr;
+            NodeNamespaceId nodeBlockId;
+
+            NodeBlock() = default;
+        };
+
+        class NodePerCommand : public NodeBase {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::PER_COMMAND;
+            std::vector<std::u16string> name;
+            std::optional<std::u16string> description;
+            FreeableNodeWithTypes nodes;
+            std::vector<Node::NodeWrapped> wrappedNodes;
+            std::vector<Node::NodeWrapped *> startNodes;
+
+            NodePerCommand() = default;
+        };
+
+        class NodeCommand : public NodeSerializable {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::COMMAND;
+            static NodeSingleSymbol nodeCommandStart;
+
+            std::vector<NodePerCommand> *commands = nullptr;
+
+            NodeCommand(const std::optional<std::string> &id,
+                        const std::optional<std::u16string> &description,
+                        std::vector<NodePerCommand> *commands);
+
+            NodeCommand() = default;
+        };
+
+        class NodeCommandName : public NodeSerializable {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::COMMAND_NAME;
+            std::vector<NodePerCommand> *commands = nullptr;
+        };
+
+        class NodeIntegerWithUnit : public NodeSerializable {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::INTEGER_WITH_UNIT;
+            std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> units;
+            NodeNormalId nodeUnits;
+            NodeAnd nodeIntegerWithUnit;
+            NodeOr nodeIntegerMaybeHaveUnit;
+
+            NodeIntegerWithUnit() = default;
+        };
+
+        namespace NodeItemType {
+            enum NodeItemType : uint8_t {
+                // <物品ID> <物品数量> <附加值> [物品组件]
+                ITEM_GIVE = 0,
+                // <物品ID> <附加值> <物品数量>
+                ITEM_CLEAR = 1
+            };
+        }// namespace NodeItemType
+
+        class NodeJson : public NodeSerializable {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::JSON;
+            std::string key;
+            NodeWithType nodeJson;
+
+            NodeJson(const std::optional<std::string> &id,
+                     const std::optional<std::u16string> &description,
+                     std::string key);
+
+            NodeJson() = default;
+        };
+
+        class NodeItem : public NodeSerializable {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::ITEM;
+            static NodeInteger nodeCount;
+            static NodeInteger nodeAllData;
+            NodeItemType::NodeItemType nodeItemType = NodeItemType::ITEM_GIVE;
+            NodeNamespaceId nodeItemId;
+            std::shared_ptr<std::vector<std::shared_ptr<ItemId>>> itemIds;
+            NodeJson nodeComponent;
+
+            NodeItem() = default;
+        };
+
+        class NodeLF : public NodeSerializable {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::LF;
+
+        private:
+            NodeLF() = default;
+
+            NodeLF(const std::optional<std::string> &id,
+                   const std::optional<std::u16string> &description);
+
+        public:
+            static NodeWrapped *getInstance();
+        };
+
         class NodePosition : public NodeSerializable {
         public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::POSITION;
             NodePosition(const std::optional<std::string> &id,
                          const std::optional<std::u16string> &description);
 
@@ -369,6 +388,7 @@ namespace CHelper {
 
         class NodeRange : public NodeSerializable {
         public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::RANGE;
             NodeRange() = default;
 
             NodeRange(const std::optional<std::string> &id,
@@ -385,9 +405,10 @@ namespace CHelper {
 
         class NodeRelativeFloat : public NodeSerializable {
         public:
-            static std::unique_ptr<NodeSingleSymbol> nodeRelativeNotation;
-            static std::unique_ptr<NodeSingleSymbol> nodeCaretNotation;
-            static std::unique_ptr<NodeOr> nodePreSymbol;
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::RELATIVE_FLOAT;
+            static NodeSingleSymbol nodeRelativeNotation;
+            static NodeSingleSymbol nodeCaretNotation;
+            static NodeOr nodePreSymbol;
 
             bool canUseCaretNotation = true;
 
@@ -400,22 +421,24 @@ namespace CHelper {
 
         struct RepeatData {
             std::string id;
-            std::vector<std::unique_ptr<Node::NodeSerializable>> breakNodes;
-            std::vector<std::vector<std::unique_ptr<Node::NodeSerializable>>> repeatNodes;
+            std::vector<NodeWithType> breakNodes;
+            std::vector<std::vector<NodeWithType>> repeatNodes;
             std::vector<bool> isEnd;
         };
 
         class NodeRepeat : public NodeSerializable {
         public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::REPEAT;
             std::string key;
             const RepeatData *repeatData = nullptr;
-            const NodeBase *nodeElement = nullptr;
+            NodeWithType nodeElement;
 
             NodeRepeat() = default;
         };
 
         class NodeString : public NodeSerializable {
         public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::STRING;
             bool allowMissingString = false;
             bool canContainSpace = false;
             bool ignoreLater = false;
@@ -431,29 +454,31 @@ namespace CHelper {
 
         class NodeTargetSelector : public NodeSerializable {
         public:
-            static std::shared_ptr<NodeBase> nodePlayerName;
-            static std::shared_ptr<NodeBase> nodeWildcard;
-            static std::shared_ptr<NodeBase> nodeAt;
-            static std::shared_ptr<NodeBase> nodeTargetSelectorVariable;
-            static std::shared_ptr<NodeBase> nodeLeft;
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::TARGET_SELECTOR;
+            static NodeString nodePlayerName;
+            static NodeSingleSymbol nodeWildcard;
+            static NodeSingleSymbol nodeAt;
+            static NodeNormalId nodeTargetSelectorVariable;
+            static NodeSingleSymbol nodeLeft;
             bool isMustPlayer = false, isMustNPC = false, isOnlyOne = false, isWildcard = false;
-            std::unique_ptr<NodeNamespaceId> nodeItem;
-            std::unique_ptr<NodeNormalId> nodeFamily, nodeGameMode, nodeSlot;
-            std::unique_ptr<NodeNamespaceId> nodeEntities;
-            std::unique_ptr<NodeEqualEntry> nodeHasItemElement;
-            std::unique_ptr<NodeList> nodeHasItemList1, nodeHasItemList2;
-            std::unique_ptr<NodeOr> nodeHasItem;
-            std::unique_ptr<NodeEqualEntry> nodeArgument;
-            std::unique_ptr<NodeList> nodeArguments;
+            NodeNamespaceId nodeItem;
+            NodeNormalId nodeFamily, nodeGameMode, nodeSlot;
+            NodeNamespaceId nodeEntities;
+            NodeEqualEntry nodeHasItemElement;
+            NodeList nodeHasItemList1, nodeHasItemList2;
+            NodeOr nodeHasItem;
+            NodeEqualEntry nodeArgument;
+            NodeList nodeArguments;
 
             NodeTargetSelector() = default;
         };
 
         class NodeText : public NodeSerializable {
         public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::TEXT;
             std::optional<std::vector<TokenType::TokenType>> tokenTypes;
             std::shared_ptr<NormalId> data;
-            std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> getTextASTNode;
+            std::function<ASTNode(const NodeWithType &node, TokenReader &tokenReader)> getTextASTNode;
 
             NodeText() = default;
 
@@ -461,8 +486,8 @@ namespace CHelper {
                     const std::optional<std::string> &id,
                     const std::optional<std::u16string> &description,
                     const std::shared_ptr<NormalId> &data,
-                    const std::function<ASTNode(const NodeBase *node, TokenReader &tokenReader)> &getTextASTNode =
-                            [](const NodeBase *node, TokenReader &tokenReader) -> ASTNode {
+                    const std::function<ASTNode(const NodeWithType &node, TokenReader &tokenReader)> &getTextASTNode =
+                            [](const NodeWithType &node, TokenReader &tokenReader) -> ASTNode {
                         return tokenReader.readStringASTNode(node);
                     });
         };
@@ -470,34 +495,36 @@ namespace CHelper {
         template<bool isJson>
         class NodeTemplateBoolean : public NodeSerializable {
         public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = isJson ? NodeTypeId::JSON_BOOLEAN : NodeTypeId::BOOLEAN;
             std::optional<std::u16string> descriptionTrue, descriptionFalse;
 
             NodeTemplateBoolean() = default;
 
-            static std::unique_ptr<NodeTemplateBoolean> make(const std::optional<std::string> &id,
-                                                             const std::optional<std::u16string> &description,
-                                                             const std::optional<std::u16string> &descriptionTrue,
-                                                             const std::optional<std::u16string> &descriptionFalse) {
-                auto node = std::make_unique<NodeTemplateBoolean>();
-                node->nodeTypeId = isJson ? NodeTypeId::JSON_BOOLEAN : NodeTypeId::BOOLEAN;
-                node->id = id;
-                node->description = description;
-                node->isMustAfterSpace = false;
-                node->descriptionTrue = descriptionTrue;
-                node->descriptionFalse = descriptionFalse;
-                return node;
-            }
+            NodeTemplateBoolean(const std::optional<std::string> &id,
+                                const std::optional<std::u16string> &description,
+                                const std::optional<std::u16string> &descriptionTrue,
+                                const std::optional<std::u16string> &descriptionFalse)
+                : NodeSerializable(id, description, false),
+                  descriptionTrue(descriptionTrue),
+                  descriptionFalse(descriptionFalse) {}
         };
-
-        using NodeBoolean = NodeTemplateBoolean<false>;
-        using NodeJsonBoolean = NodeTemplateBoolean<true>;
 
         template<class T, bool isJson>
         class NodeTemplateNumber : public NodeSerializable {
         public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = isJson ? (std::is_same<T, int32_t>() ? NodeTypeId::JSON_INTEGER : NodeTypeId::JSON_FLOAT)
+                                                                        : (std::is_same<T, int32_t>() ? NodeTypeId::INTEGER : NodeTypeId::FLOAT);
             std::optional<T> min, max;
 
             NodeTemplateNumber() = default;
+
+            NodeTemplateNumber(const std::optional<std::string> &id,
+                               const std::optional<std::u16string> &description,
+                               const std::optional<T> &min,
+                               const std::optional<T> &max)
+                : NodeSerializable(id, description, false),
+                  min(min),
+                  max(max) {}
 
             static auto str2number(const std::string &str, char *&end) {
                 if constexpr (std::numeric_limits<T>::is_integer) {
@@ -510,52 +537,29 @@ namespace CHelper {
                     return std::strtold(str.c_str(), &end);
                 }
             }
-
-            static std::unique_ptr<NodeTemplateNumber<T, isJson>> make(const std::optional<std::string> &id,
-                                                                       const std::optional<std::u16string> &description,
-                                                                       const std::optional<T> &min0,
-                                                                       const std::optional<T> &max0) {
-                auto result = std::make_unique<NodeTemplateNumber<T, isJson>>();
-                if constexpr (std::is_same<T, int32_t>() && !isJson) {
-                    result->nodeTypeId = NodeTypeId::INTEGER;
-                } else if constexpr (std::is_same<T, float>() && !isJson) {
-                    result->nodeTypeId = NodeTypeId::FLOAT;
-                } else if constexpr (std::is_same<T, int32_t>() && isJson) {
-                    result->nodeTypeId = NodeTypeId::JSON_INTEGER;
-                } else if constexpr (std::is_same<T, float>() && isJson) {
-                    result->nodeTypeId = NodeTypeId::JSON_FLOAT;
-                }
-                result->id = id;
-                result->description = description;
-                result->isMustAfterSpace = false;
-                result->min = min0;
-                result->max = max0;
-                return std::move(result);
-            }
         };
-
-        using NodeFloat = NodeTemplateNumber<float, false>;
-        using NodeInteger = NodeTemplateNumber<int32_t, false>;
-        using NodeJsonFloat = NodeTemplateNumber<float, true>;
-        using NodeJsonInteger = NodeTemplateNumber<int32_t, true>;
 
         class NodeJsonElement : public NodeSerializable {
         public:
-            std::vector<std::unique_ptr<NodeSerializable>> nodes;
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::JSON_ELEMENT;
+            FreeableNodeWithTypes nodes;
             std::string startNodeId;
-            NodeBase *start = nullptr;
+            NodeWithType start;
 
             NodeJsonElement() = default;
 
-            static NodeBase *getNodeJsonElement();
+            static NodeWithType getNodeJsonElement();
         };
 
         class NodeJsonEntry : public NodeSerializable {
         public:
-            static std::unique_ptr<NodeBase> nodeAllEntry;
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::JSON_ENTRY;
+            static NodeEntry nodeAllEntry;
             std::u16string key;
             std::vector<std::string> value;
-            std::unique_ptr<NodeBase> nodeKey, nodeValue, nodeEntry;
+            NodeText nodeKey;
+            NodeOr nodeValue;
+            std::optional<NodeEntry> nodeEntry;
 
             NodeJsonEntry() = default;
 
@@ -564,17 +568,18 @@ namespace CHelper {
                           std::u16string key = std::u16string(),
                           std::vector<std::string> value = std::vector<std::string>());
 
-            static NodeBase *getNodeJsonAllEntry();
+            static NodeWithType getNodeJsonAllEntry();
         };
 
         class NodeJsonList : public NodeSerializable {
         public:
-            static std::unique_ptr<NodeBase> nodeLeft;
-            static std::unique_ptr<NodeBase> nodeRight;
-            static std::unique_ptr<NodeBase> nodeSeparator;
-            static std::unique_ptr<NodeBase> nodeAllList;
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::JSON_LIST;
+            static NodeSingleSymbol nodeLeft;
+            static NodeSingleSymbol nodeRight;
+            static NodeSingleSymbol nodeSeparator;
+            static NodeList nodeAllList;
             std::string data;
-            std::unique_ptr<NodeBase> nodeList;
+            std::optional<NodeList> nodeList;
 
             NodeJsonList() = default;
 
@@ -585,6 +590,7 @@ namespace CHelper {
 
         class NodeJsonNull : public NodeSerializable {
         public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::JSON_NULL;
             NodeJsonNull() = default;
 
             NodeJsonNull(const std::optional<std::string> &id,
@@ -593,10 +599,11 @@ namespace CHelper {
 
         class NodeJsonObject : public NodeSerializable {
         public:
-            std::vector<std::unique_ptr<NodeJsonEntry>> data;
-            std::unique_ptr<NodeOr> nodeElement1;
-            std::unique_ptr<NodeOr> nodeElement2;
-            std::unique_ptr<NodeList> nodeList;
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::JSON_OBJECT;
+            std::vector<NodeJsonEntry> data;
+            std::optional<NodeOr> nodeElement1;
+            NodeOr nodeElement2;
+            NodeList nodeList;
 
             NodeJsonObject() = default;
 
@@ -606,14 +613,25 @@ namespace CHelper {
 
         class NodeJsonString : public NodeSerializable {
         public:
-            std::optional<std::vector<std::unique_ptr<NodeSerializable>>> data;
-            std::unique_ptr<NodeBase> nodeData;
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::JSON_STRING;
+            std::optional<FreeableNodeWithTypes> data;
+            NodeOr nodeData;
 
             NodeJsonString() = default;
 
             NodeJsonString(const std::optional<std::string> &id,
                            const std::optional<std::u16string> &description);
         };
+
+        template<class NodeType>
+        NodeWithType::NodeWithType(NodeType &node)
+            : nodeTypeId(NodeType::nodeTypeId),
+              data(const_cast<NodeBase *>(static_cast<const NodeBase *>(&node))) {
+            static_assert(!std::is_same_v<NodeType, NodeWithType>, "NodeWithType is not allowed to be used as NodeType");
+            static_assert(!std::is_pointer_v<NodeType>, "NodeType must not be a pointer");
+            static_assert(NodeType::nodeTypeId <= MAX_TYPE_ID, "nodeTypeId is invalid");
+            ++data->times;
+        }
 
     }// namespace Node
 

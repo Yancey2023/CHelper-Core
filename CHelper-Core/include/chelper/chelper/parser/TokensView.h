@@ -7,9 +7,9 @@
 #ifndef CHELPER_TOKENSVIEW_H
 #define CHELPER_TOKENSVIEW_H
 
-#include "../lexer/LexerResult.h"
-#include "../lexer/Token.h"
-#include "pch.h"
+#include <chelper/lexer/LexerResult.h>
+#include <chelper/lexer/Token.h>
+#include <pch.h>
 
 namespace CHelper {
 

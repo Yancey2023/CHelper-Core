@@ -16,21 +16,25 @@
 #define CODEC_NODE_NONE(CodecType) \
     CODEC_NONE_WITH_PARENT(CodecType, CHelper::Node::NodeSerializable)
 
-#define CHELPER_CODEC_NODE_TO_JSON(v1)  \
-    case CHelper::Node::NodeTypeId::v1: \
-        return NodeCodec<CHelper::Node::NodeTypeId::v1>::template to_json<JsonValueType>(allocator, jsonValue, t);
+#define CHELPER_CODEC_NODE_TO_JSON(v1)                                                                      \
+    case CHelper::Node::NodeTypeId::v1:                                                                     \
+        NodeCodec<CHelper::Node::NodeTypeId::v1>::template to_json<JsonValueType>(allocator, jsonValue, t); \
+        break;
 
-#define CHELPER_CODEC_NODE_FROM_JSON(v1) \
-    case CHelper::Node::NodeTypeId::v1:  \
-        return NodeCodec<CHelper::Node::NodeTypeId::v1>::template from_json<JsonValueType>(jsonValue, t);
+#define CHELPER_CODEC_NODE_FROM_JSON(v1)                                                           \
+    case CHelper::Node::NodeTypeId::v1:                                                            \
+        NodeCodec<CHelper::Node::NodeTypeId::v1>::template from_json<JsonValueType>(jsonValue, t); \
+        break;
 
-#define CHELPER_CODEC_NODE_TO_BINARY(v1) \
-    case CHelper::Node::NodeTypeId::v1:  \
-        return NodeCodec<CHelper::Node::NodeTypeId::v1>::template to_binary<isNeedConvert>(ostream, t);
+#define CHELPER_CODEC_NODE_TO_BINARY(v1)                                                         \
+    case CHelper::Node::NodeTypeId::v1:                                                          \
+        NodeCodec<CHelper::Node::NodeTypeId::v1>::template to_binary<isNeedConvert>(ostream, t); \
+        break;
 
-#define CHELPER_CODEC_NODE_FROM_BINARY(v1) \
-    case CHelper::Node::NodeTypeId::v1:    \
-        return NodeCodec<CHelper::Node::NodeTypeId::v1>::template from_binary<isNeedConvert>(istream, t);
+#define CHELPER_CODEC_NODE_FROM_BINARY(v1)                                                         \
+    case CHelper::Node::NodeTypeId::v1:                                                            \
+        NodeCodec<CHelper::Node::NodeTypeId::v1>::template from_binary<isNeedConvert>(istream, t); \
+        break;
 
 #define CHELPER_GET_NAME(v1)            \
     case CHelper::Node::NodeTypeId::v1: \
@@ -39,8 +43,8 @@
 CODEC(CHelper::Node::NodeSerializable, id, brief, description, isMustAfterSpace)
 
 template<>
-struct serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>> : BaseCodec<std::unique_ptr<CHelper::Node::NodeSerializable>> {
-    using Type = std::unique_ptr<CHelper::Node::NodeSerializable>;
+struct serialization::Codec<CHelper::Node::NodeWithType> : BaseCodec<CHelper::Node::NodeWithType> {
+    using Type = CHelper::Node::NodeWithType;
 
     constexpr static bool enable = true;
 
@@ -61,6 +65,39 @@ struct serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>> : 
     static void from_binary(std::istream &istream,
                             Type &t);
 };
+
+template<>
+struct serialization::Codec<CHelper::Node::FreeableNodeWithTypes> : BaseCodec<CHelper::Node::FreeableNodeWithTypes> {
+
+    using Type = CHelper::Node::FreeableNodeWithTypes;
+
+    constexpr static bool enable = true;
+
+    template<class JsonValueType>
+    static void to_json(typename JsonValueType::AllocatorType &allocator,
+                        JsonValueType &jsonValue,
+                        const Type &t) {
+        Codec<decltype(t.nodes)>::template to_json<JsonValueType>(allocator, jsonValue, t.nodes);
+    }
+
+    template<class JsonValueType>
+    static void from_json(const JsonValueType &jsonValue,
+                          Type &t) {
+        Codec<decltype(t.nodes)>::template from_json<JsonValueType>(jsonValue, t.nodes);
+    }
+
+    template<bool isNeedConvert>
+    static void to_binary(std::ostream &ostream,
+                          const Type &t) {
+        Codec<decltype(t.nodes)>::template to_binary<isNeedConvert>(ostream, t.nodes);
+    }
+
+    template<bool isNeedConvert>
+    static void from_binary(std::istream &istream,
+                            Type &t) {
+        Codec<decltype(t.nodes)>::template from_binary<isNeedConvert>(istream, t.nodes);
+    }
+};// namespace serialization
 
 CODEC_REGISTER_JSON_KEY(CHelper::Node::NodePerCommand, name, description, node, start, ast);
 CODEC_REGISTER_JSON_KEY(CHelper::Node::NodeJsonElement, id, node, start);
@@ -138,16 +175,16 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         std::vector<std::string> startIds;
         startIds.reserve(t.startNodes.size());
         for (const auto &item: t.startNodes) {
-            startIds.push_back(item->innerNode->id.value());
+            startIds.push_back(item->getNodeSerializable().id.value());
         }
         Codec<decltype(startIds)>::template to_json_member<JsonValueType>(allocator, jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::start_(), startIds);
         //ast
         std::vector<std::vector<std::string>> ast;
         for (const auto &item: t.wrappedNodes) {
             std::vector<std::string> ast1;
-            ast1.push_back(item.innerNode->id.value());
+            ast1.push_back(item.getNodeSerializable().id.value());
             for (const auto &item2: item.nextNodes) {
-                ast1.push_back(item2->innerNode->id.value());
+                ast1.push_back(item2->getNodeSerializable().id.value());
             }
             ast.push_back(std::move(ast1));
         }
@@ -170,9 +207,9 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         const typename JsonValueType::ConstMemberIterator nodeIter = jsonValue.FindMember(details::JsonKey<Type, typename JsonValueType::Ch>::node_());
         if (HEDLEY_LIKELY(nodeIter != jsonValue.MemberEnd())) {
             Codec<decltype(t.nodes)>::template from_json<typename JsonValueType::ValueType>(nodeIter->value, t.nodes);
-            t.wrappedNodes.reserve(t.nodes.size());
-            for (auto &node: t.nodes) {
-                t.wrappedNodes.emplace_back(node.get());
+            t.wrappedNodes.reserve(t.nodes.nodes.size());
+            for (auto &node: t.nodes.nodes) {
+                t.wrappedNodes.emplace_back(node);
             }
         }
         //start
@@ -188,7 +225,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
             }
             bool flag = true;
             for (auto &node1: t.wrappedNodes) {
-                if (HEDLEY_UNLIKELY(node1.innerNode->id == startNodeId)) {
+                if (HEDLEY_UNLIKELY(node1.getNodeSerializable().id == startNodeId)) {
                     t.startNodes.push_back(&node1);
                     flag = false;
                     break;
@@ -219,7 +256,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
                 }
                 CHelper::Node::NodeWrapped *parentNode = nullptr;
                 for (auto &node1: t.wrappedNodes) {
-                    if (HEDLEY_UNLIKELY(node1.innerNode->id == parentNodeId)) {
+                    if (HEDLEY_UNLIKELY(node1.getNodeSerializable().id == parentNodeId)) {
                         parentNode = &node1;
                         break;
                     }
@@ -241,7 +278,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
                     }
                     CHelper::Node::NodeWrapped *childNode = nullptr;
                     for (auto &node: t.wrappedNodes) {
-                        if (HEDLEY_UNLIKELY(node.innerNode->id == childNodeId)) {
+                        if (HEDLEY_UNLIKELY(node.getNodeSerializable().id == childNodeId)) {
                             childNode = &node;
                             break;
                         }
@@ -269,13 +306,13 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         //start
         Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, static_cast<uint32_t>(t.startNodes.size()));
         for (const auto &item: t.startNodes) {
-            Codec<std::string>::template to_binary<isNeedConvert>(ostream, item->innerNode->id.value());
+            Codec<std::string>::template to_binary<isNeedConvert>(ostream, item->getNodeSerializable().id.value());
         }
         //ast
         for (const auto &item: t.wrappedNodes) {
             Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, static_cast<uint32_t>(item.nextNodes.size()));
             for (const auto &item2: item.nextNodes) {
-                Codec<std::string>::template to_binary<isNeedConvert>(ostream, item2->innerNode->id.value());
+                Codec<std::string>::template to_binary<isNeedConvert>(ostream, item2->getNodeSerializable().id.value());
             }
         }
     }
@@ -292,9 +329,9 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         Codec<decltype(t.description)>::template from_binary<isNeedConvert>(istream, t.description);
         //node
         Codec<decltype(t.nodes)>::template from_binary<isNeedConvert>(istream, t.nodes);
-        t.wrappedNodes.reserve(t.nodes.size());
-        for (auto &node: t.nodes) {
-            t.wrappedNodes.emplace_back(node.get());
+        t.wrappedNodes.reserve(t.nodes.nodes.size());
+        for (auto &node: t.nodes.nodes) {
+            t.wrappedNodes.emplace_back(node);
         }
         //start
         uint32_t startNodeIdSize;
@@ -309,7 +346,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
             }
             bool flag = true;
             for (auto &node: t.wrappedNodes) {
-                if (HEDLEY_UNLIKELY(node.innerNode->id == startNodeId)) {
+                if (HEDLEY_UNLIKELY(node.getNodeSerializable().id == startNodeId)) {
                     t.startNodes.push_back(&node);
                     flag = false;
                     break;
@@ -334,7 +371,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
                 }
                 CHelper::Node::NodeWrapped *childNode = nullptr;
                 for (auto &node1: t.wrappedNodes) {
-                    if (HEDLEY_UNLIKELY(node1.innerNode->id == childNodeId)) {
+                    if (HEDLEY_UNLIKELY(node1.getNodeSerializable().id == childNodeId)) {
                         childNode = &node1;
                         break;
                     }
@@ -347,6 +384,32 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
             }
         }
     }
+};
+
+class NodeTypeHelper {
+public:
+    template<class JsonValueType>
+    static void to_json(const CHelper::Node::NodeTypeId::NodeTypeId id,
+                        typename JsonValueType::AllocatorType &allocator,
+                        JsonValueType &jsonValue,
+                        const CHelper::Node::NodeWithType &t);
+
+    template<class JsonValueType>
+    static void from_json(const CHelper::Node::NodeTypeId::NodeTypeId id,
+                          const JsonValueType &jsonValue,
+                          CHelper::Node::NodeWithType &t);
+
+    template<bool isNeedConvert>
+    static void to_binary(const CHelper::Node::NodeTypeId::NodeTypeId id,
+                          std::ostream &ostream,
+                          const CHelper::Node::NodeWithType &t);
+
+    template<bool isNeedConvert>
+    static void from_binary(const CHelper::Node::NodeTypeId::NodeTypeId id,
+                            std::istream &istream,
+                            CHelper::Node::NodeWithType &t);
+
+    static const char *getName(const CHelper::Node::NodeTypeId::NodeTypeId id);
 };
 
 static CHelper::Node::NodeCreateStage::NodeCreateStage currentCreateStage;
@@ -362,15 +425,15 @@ struct NodeCodec {
     template<class JsonValueType>
     static void to_json(typename JsonValueType::AllocatorType &allocator,
                         JsonValueType &jsonValue,
-                        const std::unique_ptr<CHelper::Node::NodeSerializable> &t) {
+                        const CHelper::Node::NodeWithType &t) {
         if constexpr (serialization::Codec<Type>::enable) {
-            serialization::Codec<Type>::template to_json<JsonValueType>(allocator, jsonValue, *reinterpret_cast<Type *>(t.get()));
+            serialization::Codec<Type>::template to_json<JsonValueType>(allocator, jsonValue, *static_cast<const Type *>(t.data));
         }
     }
 
     template<class JsonValueType>
     static void from_json(const JsonValueType &jsonValue,
-                          std::unique_ptr<CHelper::Node::NodeSerializable> &t) {
+                          CHelper::Node::NodeWithType &t) {
         if constexpr (!serialization::Codec<Type>::enable || nodeCreateStage.empty()) {
             CHelper::Profile::push("unknown node type -> {}", FORMAT_ARG(name));
             throw std::runtime_error("unknown node type");
@@ -379,26 +442,30 @@ struct NodeCodec {
                 CHelper::Profile::push("unknown node type -> {}", FORMAT_ARG(name));
                 throw std::runtime_error("unknown node type");
             }
-            t = std::make_unique<Type>();
-            t->nodeTypeId = nodeTypeId;
-            serialization::Codec<Type>::template from_json<JsonValueType>(jsonValue, *reinterpret_cast<Type *>(t.get()));
-            if (HEDLEY_UNLIKELY(!t->isMustAfterSpace.has_value())) {
-                t->isMustAfterSpace = isMustAfterSpace;
+            Type *node = new Type();
+            serialization::Codec<Type>::template from_json<JsonValueType>(jsonValue, *node);
+            if (HEDLEY_UNLIKELY(!node->isMustAfterSpace.has_value())) {
+                node->isMustAfterSpace = isMustAfterSpace;
             }
+            t.nodeTypeId = nodeTypeId;
+            t.data = node;
+#ifdef CHelperDebug
+            ++t.data->times;
+#endif
         }
     }
 
     template<bool isNeedConvert>
     static void to_binary(std::ostream &ostream,
-                          const std::unique_ptr<CHelper::Node::NodeSerializable> &t) {
+                          const CHelper::Node::NodeWithType &t) {
         if constexpr (serialization::Codec<Type>::enable) {
-            serialization::Codec<Type>::template to_binary<isNeedConvert>(ostream, *reinterpret_cast<Type *>(t.get()));
+            serialization::Codec<Type>::template to_binary<isNeedConvert>(ostream, *static_cast<const Type *>(t.data));
         }
     }
 
     template<bool isNeedConvert>
     static void from_binary(std::istream &istream,
-                            std::unique_ptr<CHelper::Node::NodeSerializable> &t) {
+                            CHelper::Node::NodeWithType &t) {
         if constexpr (!serialization::Codec<Type>::enable || nodeCreateStage.empty()) {
             CHelper::Profile::push("unknown node type -> {}", FORMAT_ARG(name));
             throw std::runtime_error("unknown node type");
@@ -407,68 +474,18 @@ struct NodeCodec {
                 CHelper::Profile::push("unknown node type -> {}", FORMAT_ARG(name));
                 throw std::runtime_error("unknown node type");
             }
-            t = std::make_unique<Type>();
-            t->nodeTypeId = nodeTypeId;
-            serialization::Codec<Type>::template from_binary<isNeedConvert>(istream, *reinterpret_cast<Type *>(t.get()));
-            if (HEDLEY_UNLIKELY(!t->isMustAfterSpace.has_value())) {
-                t->isMustAfterSpace = isMustAfterSpace;
+            Type *node = new Type();
+            serialization::Codec<Type>::template from_binary<isNeedConvert>(istream, *node);
+            if (HEDLEY_UNLIKELY(!node->isMustAfterSpace.has_value())) {
+                node->isMustAfterSpace = isMustAfterSpace;
             }
+            t.nodeTypeId = nodeTypeId;
+            t.data = node;
+#ifdef CHelperDebug
+            ++t.data->times;
+#endif
         }
     }
-};
-
-template<CHelper::Node::NodeTypeId::NodeTypeId nodeTypeId>
-struct BaseNodeUniquePtrCodec : serialization::BaseCodec<std::unique_ptr<typename CHelper::Node::NodeTypeDetail<nodeTypeId>::Type>> {
-
-    using Type = std::unique_ptr<typename CHelper::Node::NodeTypeDetail<nodeTypeId>::Type>;
-
-    static_assert(serialization::Codec<typename Type::element_type>::enable, "fail to find impl of Codec");
-
-    template<class JsonValueType>
-    static void to_json(typename JsonValueType::AllocatorType &allocator,
-                        JsonValueType &jsonValue,
-                        const Type &t) {
-        serialization::Codec<typename Type::element_type>::template to_json<JsonValueType>(allocator, jsonValue, *t);
-    }
-
-    template<class JsonValueType>
-    static void from_json(const JsonValueType &jsonValue,
-                          Type &t) {
-        t = std::make_unique<typename Type::element_type>();
-        t->nodeTypeId = nodeTypeId;
-        serialization::Codec<typename Type::element_type>::template from_json<JsonValueType>(jsonValue, *t);
-    }
-
-    template<bool isNeedConvert>
-    static void to_binary(std::ostream &ostream,
-                          const Type &t) {
-        serialization::Codec<typename Type::element_type>::template to_binary<isNeedConvert>(ostream, *t);
-    }
-
-    template<bool isNeedConvert>
-    static void from_binary(std::istream &istream,
-                            Type &t) {
-        t = std::make_unique<typename Type::element_type>();
-        t->nodeTypeId = nodeTypeId;
-        serialization::Codec<typename Type::element_type>::template from_binary<isNeedConvert>(istream, *t);
-    }
-};
-
-template<>
-struct serialization::Codec<std::unique_ptr<CHelper::Node::NodePerCommand>> : BaseNodeUniquePtrCodec<CHelper::Node::NodeTypeId::PER_COMMAND> {
-    constexpr static bool enable = true;
-};
-
-template<>
-struct serialization::Codec<std::unique_ptr<CHelper::Node::NodeJsonElement>> : BaseNodeUniquePtrCodec<CHelper::Node::NodeTypeId::JSON_ELEMENT> {
-    constexpr static bool enable = true;
-};
-
-CODEC_NODE(CHelper::Node::NodeJsonEntry, key, value)
-
-template<>
-struct serialization::Codec<std::unique_ptr<CHelper::Node::NodeJsonEntry>> : BaseNodeUniquePtrCodec<CHelper::Node::NodeTypeId::JSON_ENTRY> {
-    constexpr static bool enable = true;
 };
 
 CODEC_ENUM(CHelper::Node::NodeBlockType::NodeBlockType, uint8_t);
@@ -497,80 +514,70 @@ CODEC_NODE(CHelper::Node::NodeJsonInteger, min, max)
 CODEC_NODE(CHelper::Node::NodeJsonFloat, min, max)
 CODEC_NODE(CHelper::Node::NodeJsonList, data)
 CODEC_NODE_NONE(CHelper::Node::NodeJsonNull)
+CODEC_NODE(CHelper::Node::NodeJsonEntry, key, value)
 CODEC_NODE(CHelper::Node::NodeJsonObject, data)
 CODEC_NODE(CHelper::Node::NodeJsonString, data)
 
-class NodeTypeHelper {
-public:
-    template<class JsonValueType>
-    static void to_json(const CHelper::Node::NodeTypeId::NodeTypeId id,
-                        typename JsonValueType::AllocatorType &allocator,
-                        JsonValueType &jsonValue,
-                        const std::unique_ptr<CHelper::Node::NodeSerializable> &t) {
-        switch (id) {
-            CODEC_PASTE(CHELPER_CODEC_NODE_TO_JSON, CHELPER_NODE_TYPES)
-            default:
-                HEDLEY_UNREACHABLE();
-        }
+template<class JsonValueType>
+void NodeTypeHelper::to_json(const CHelper::Node::NodeTypeId::NodeTypeId id,
+                             typename JsonValueType::AllocatorType &allocator,
+                             JsonValueType &jsonValue,
+                             const CHelper::Node::NodeWithType &t) {
+    switch (id) {
+        CODEC_PASTE(CHELPER_CODEC_NODE_TO_JSON, CHELPER_NODE_TYPES)
+        default:
+            HEDLEY_UNREACHABLE();
     }
+}
 
-    template<class JsonValueType>
-    static void from_json(const CHelper::Node::NodeTypeId::NodeTypeId id,
-                          const JsonValueType &jsonValue,
-                          std::unique_ptr<CHelper::Node::NodeSerializable> &t) {
-        switch (id) {
-            CODEC_PASTE(CHELPER_CODEC_NODE_FROM_JSON, CHELPER_NODE_TYPES)
-            default:
-                HEDLEY_UNREACHABLE();
-        }
+template<class JsonValueType>
+void NodeTypeHelper::from_json(const CHelper::Node::NodeTypeId::NodeTypeId id,
+                               const JsonValueType &jsonValue,
+                               CHelper::Node::NodeWithType &t) {
+    switch (id) {
+        CODEC_PASTE(CHELPER_CODEC_NODE_FROM_JSON, CHELPER_NODE_TYPES)
+        default:
+            HEDLEY_UNREACHABLE();
     }
+}
 
-    template<bool isNeedConvert>
-    static void to_binary(const CHelper::Node::NodeTypeId::NodeTypeId id,
-                          std::ostream &ostream,
-                          const std::unique_ptr<CHelper::Node::NodeSerializable> &t) {
-        switch (id) {
-            CODEC_PASTE(CHELPER_CODEC_NODE_TO_BINARY, CHELPER_NODE_TYPES)
-            default:
-                HEDLEY_UNREACHABLE();
-        }
+template<bool isNeedConvert>
+void NodeTypeHelper::to_binary(const CHelper::Node::NodeTypeId::NodeTypeId id,
+                               std::ostream &ostream,
+                               const CHelper::Node::NodeWithType &t) {
+    switch (id) {
+        CODEC_PASTE(CHELPER_CODEC_NODE_TO_BINARY, CHELPER_NODE_TYPES)
+        default:
+            HEDLEY_UNREACHABLE();
     }
+}
 
-    template<bool isNeedConvert>
-    static void from_binary(const CHelper::Node::NodeTypeId::NodeTypeId id,
-                            std::istream &istream,
-                            std::unique_ptr<CHelper::Node::NodeSerializable> &t) {
-        switch (id) {
-            CODEC_PASTE(CHELPER_CODEC_NODE_FROM_BINARY, CHELPER_NODE_TYPES)
-            default:
-                HEDLEY_UNREACHABLE();
-        }
+template<bool isNeedConvert>
+void NodeTypeHelper::from_binary(const CHelper::Node::NodeTypeId::NodeTypeId id,
+                                 std::istream &istream,
+                                 CHelper::Node::NodeWithType &t) {
+    switch (id) {
+        CODEC_PASTE(CHELPER_CODEC_NODE_FROM_BINARY, CHELPER_NODE_TYPES)
+        default:
+            HEDLEY_UNREACHABLE();
     }
-
-    static const char *getName(const CHelper::Node::NodeTypeId::NodeTypeId id) {
-        switch (id) {
-            CODEC_PASTE(CHELPER_GET_NAME, CHELPER_NODE_TYPES)
-            default:
-                return "UNKNOWN";
-        }
-    }
-};
+}
 
 CODEC_ENUM(CHelper::Node::NodeTypeId::NodeTypeId, uint8_t);
 
 template<class JsonValueType>
-void serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>>::to_json(
+void serialization::Codec<CHelper::Node::NodeWithType>::to_json(
         typename JsonValueType::AllocatorType &allocator,
         JsonValueType &jsonValue,
         const Type &t) {
-    std::string nodeIdName = NodeTypeHelper::getName(t->nodeTypeId);
-    NodeTypeHelper::template to_json<JsonValueType>(t->nodeTypeId, allocator, jsonValue, t);
+    std::string nodeIdName = NodeTypeHelper::getName(t.nodeTypeId);
+    NodeTypeHelper::template to_json<JsonValueType>(t.nodeTypeId, allocator, jsonValue, t);
     assert(jsonValue.IsObject());
     Codec<decltype(nodeIdName)>::template to_json_member<JsonValueType>(allocator, jsonValue, "type", nodeIdName);
 }
 
 template<class JsonValueType>
-void serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>>::from_json(
+void serialization::Codec<CHelper::Node::NodeWithType>::from_json(
         const JsonValueType &jsonValue,
         Type &t) {
     if (HEDLEY_UNLIKELY(!jsonValue.IsObject())) {
@@ -594,7 +601,7 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>>::fro
             break;
         }
     }
-    if (HEDLEY_UNLIKELY(nodeTypeId == std::nullopt)) {
+    if (HEDLEY_UNLIKELY(!nodeTypeId.has_value())) {
         CHelper::Profile::next("unknown node type -> {}", FORMAT_ARG(type));
         throw std::runtime_error("unknown node type");
     }
@@ -603,15 +610,15 @@ void serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>>::fro
 }
 
 template<bool isNeedConvert>
-void serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>>::to_binary(
+void serialization::Codec<CHelper::Node::NodeWithType>::to_binary(
         std::ostream &ostream,
         const Type &t) {
-    Codec<decltype(t->nodeTypeId)>::template to_binary<isNeedConvert>(ostream, t->nodeTypeId);
-    NodeTypeHelper::template to_binary<isNeedConvert>(t->nodeTypeId, ostream, t);
+    Codec<decltype(t.nodeTypeId)>::template to_binary<isNeedConvert>(ostream, t.nodeTypeId);
+    NodeTypeHelper::template to_binary<isNeedConvert>(t.nodeTypeId, ostream, t);
 }
 
 template<bool isNeedConvert>
-void serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>>::from_binary(
+void serialization::Codec<CHelper::Node::NodeWithType>::from_binary(
         std::istream &istream,
         Type &t) {
     CHelper::Node::NodeTypeId::NodeTypeId nodeTypeId;

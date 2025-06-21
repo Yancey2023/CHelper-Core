@@ -15,12 +15,11 @@ namespace CHelper::Node {
     template<NodeTypeId::NodeTypeId nodeTypeId>
     struct NodeInitialization {
         using NodeType = typename NodeTypeDetail<nodeTypeId>::Type;
-        static_assert(std::is_base_of_v<Node::NodeBase, NodeType>, "NodeType must be derived from NodeBase");
         static void init(NodeType &node, const CPack &cpack) {
         }
     };
 
-    void initNode(Node::NodeBase &node, const CPack &cpack);
+    void initNode(Node::NodeWithType node, const CPack &cpack);
 
 }// namespace CHelper::Node
 

@@ -7,35 +7,24 @@
 
 namespace CHelper {
 
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateLeftBracket = std::make_unique<Node::NodeSingleSymbol>('[', u"方块状态左括号");
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryKey = std::make_unique<Node::NodeString>(
-            "BLOCK_STATE_ENTRY_KEY", u"方块状态键值对的键", false, false, false);
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntrySeparator = std::make_unique<Node::NodeSingleSymbol>('=', u"方块状态键值对分隔符");
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueBoolean = Node::NodeBoolean::make(
-            "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", u"方块状态键值对的值（布尔值）",
-            std::nullopt, std::nullopt);
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueInteger = Node::NodeInteger::make(
-            "BLOCK_STATE_ENTRY_VALUE_INTEGER", u"方块状态键值对的值（整数）",
-            std::nullopt, std::nullopt);
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueFloat = Node::NodeFloat::make(
-            "BLOCK_STATE_ENTRY_VALUE_FLOAT", u"方块状态键值对的值（小数）",
-            std::nullopt, std::nullopt);
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryValueString = std::make_unique<Node::NodeString>(
-            "BLOCK_STATE_ENTRY_VALUE_STRING", u"方块状态键值对的值（字符串）",
-            false, true, false);
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateEntryAllValue = std::make_unique<Node::NodeOr>(
-            std::vector<const Node::NodeBase *>{
-                    nodeBlockStateEntryValueBoolean.get(), nodeBlockStateEntryValueInteger.get(),
-                    nodeBlockStateEntryValueFloat.get(), nodeBlockStateEntryValueString.get()},
+    static Node::NodeSingleSymbol nodeBlockStateLeftBracket('[', u"方块状态左括号");
+    static Node::NodeString nodeBlockStateEntryKey("BLOCK_STATE_ENTRY_KEY", u"方块状态键值对的键", false, false, false);
+    static Node::NodeSingleSymbol nodeBlockStateEntrySeparator('=', u"方块状态键值对分隔符");
+    static Node::NodeBoolean nodeBlockStateEntryValueBoolean("BLOCK_STATE_ENTRY_VALUE_BOOLEAN", u"方块状态键值对的值（布尔值）", std::nullopt, std::nullopt);
+    static Node::NodeInteger nodeBlockStateEntryValueInteger("BLOCK_STATE_ENTRY_VALUE_INTEGER", u"方块状态键值对的值（整数）", std::nullopt, std::nullopt);
+    static Node::NodeFloat nodeBlockStateEntryValueFloat("BLOCK_STATE_ENTRY_VALUE_FLOAT", u"方块状态键值对的值（小数）", std::nullopt, std::nullopt);
+    static Node::NodeString nodeBlockStateEntryValueString("BLOCK_STATE_ENTRY_VALUE_STRING", u"方块状态键值对的值（字符串）", false, true, false);
+    static Node::NodeOr nodeBlockStateEntryAllValue(
+            {nodeBlockStateEntryValueBoolean, nodeBlockStateEntryValueInteger,
+             nodeBlockStateEntryValueFloat, nodeBlockStateEntryValueString},
             false, false, true,
             u"类型不匹配，当前内容不是有效的方块状态值");
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateAllEntry = std::make_unique<Node::NodeEntry>(
-            nodeBlockStateEntryKey.get(), nodeBlockStateEntrySeparator.get(), nodeBlockStateEntryAllValue.get());
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateSeparator = std::make_unique<Node::NodeSingleSymbol>(',', u"方块状态分隔符");
-    static std::unique_ptr<Node::NodeBase> nodeBlockStateRightBracket = std::make_unique<Node::NodeSingleSymbol>(']', u"方块状态右括号");
-    static std::unique_ptr<Node::NodeBase> nodeAllBlockState = std::make_unique<Node::NodeList>(
-            nodeBlockStateLeftBracket.get(), nodeBlockStateAllEntry.get(),
-            nodeBlockStateSeparator.get(), nodeBlockStateRightBracket.get());
+    static Node::NodeEntry nodeBlockStateAllEntry(nodeBlockStateEntryKey, nodeBlockStateEntrySeparator, nodeBlockStateEntryAllValue);
+    static Node::NodeSingleSymbol nodeBlockStateSeparator(',', u"方块状态分隔符");
+    static Node::NodeSingleSymbol nodeBlockStateRightBracket(']', u"方块状态右括号");
+    static Node::NodeList nodeAllBlockState(
+            nodeBlockStateLeftBracket, nodeBlockStateAllEntry,
+            nodeBlockStateSeparator, nodeBlockStateRightBracket);
 
     Property::Property(const Property &aProperty) noexcept {
         type = aProperty.type;
@@ -224,7 +213,7 @@ namespace CHelper {
         throw std::runtime_error("fail to find block property value by block id and property name");
     }
 
-    std::shared_ptr<Node::NodeBase> getBlockStateValueNode(
+    Node::NodeText *getBlockStateValueNode(
             const BlockPropertyValueDescription &blockPropertyValueDescription,
             const PropertyType::PropertyType &type,
             const std::optional<std::u16string> &defaultDescription,
@@ -252,18 +241,18 @@ namespace CHelper {
         }
         switch (type) {
             case PropertyType::STRING:
-                return std::make_shared<Node::NodeText>(
+                return new Node::NodeText(
                         "BLOCK_STATE_ENTRY_VALUE_STRING", u"方块状态键值对的键（字符串）",
                         NormalId::make(u'\"' + *blockPropertyValueDescription.valueName.string + u'\"', description));
             case PropertyType::INTEGER:
-                return std::make_shared<Node::NodeText>(
+                return new Node::NodeText(
                         "BLOCK_STATE_ENTRY_VALUE_INTEGER", u"方块状态键值对的键（整数）",
                         NormalId::make(utf8::utf8to16(std::to_string(blockPropertyValueDescription.valueName.integer)), description),
-                        [](const Node::NodeBase *node1, TokenReader &tokenReader) -> ASTNode {
+                        [](const Node::NodeWithType &node1, TokenReader &tokenReader) -> ASTNode {
                             return tokenReader.readIntegerASTNode(node1);
                         });
             case PropertyType::BOOLEAN:
-                return std::make_shared<Node::NodeText>(
+                return new Node::NodeText(
                         "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", u"方块状态键值对的键（布尔值）",
                         NormalId::make(blockPropertyValueDescription.valueName.boolean ? u"true" : u"false", description));
             default:
@@ -271,12 +260,12 @@ namespace CHelper {
         }
     }
 
-    std::shared_ptr<Node::NodeBase> getBlockStateNode(
-            std::vector<std::shared_ptr<Node::NodeBase>> &nodeChildren,
+    Node::NodeEntry *getBlockStateNode(
+            std::vector<Node::NodeWithType> &nodeChildren,
             const BlockPropertyDescription &blockPropertyDescription,
             PropertyValue defaultValue,
             const std::optional<std::vector<PropertyValue>> &valid) {
-        std::vector<const Node::NodeBase *> valueNodes;
+        std::vector<Node::NodeWithType> valueNodes;
         valueNodes.reserve(blockPropertyDescription.values.size());
         for (auto &item: blockPropertyDescription.values) {
             bool isDefaultValue;
@@ -327,68 +316,66 @@ namespace CHelper {
             } else {
                 isInvalid = false;
             }
-            std::shared_ptr<Node::NodeBase> node = getBlockStateValueNode(
+            Node::NodeText *node = getBlockStateValueNode(
                     item, blockPropertyDescription.type,
                     blockPropertyDescription.description, isDefaultValue, isInvalid);
-            valueNodes.push_back(node.get());
-            nodeChildren.push_back(std::move(node));
+            valueNodes.emplace_back(*node);
+            nodeChildren.emplace_back(*node);
         }
         //key = value
-        auto nodeKey = std::make_shared<Node::NodeText>(
+        auto nodeKey = new Node::NodeText(
                 "BLOCK_STATE_ENTRY_KEY", u"方块状态键值对的键",
                 NormalId::make(u'\"' + blockPropertyDescription.propertyName + u'\"', blockPropertyDescription.description));
-        auto nodeValue = std::make_shared<Node::NodeOr>(std::move(valueNodes), false);
-        auto result = std::make_shared<Node::NodeEntry>(
-                nodeKey.get(),
-                nodeBlockStateEntrySeparator.get(),
-                nodeValue.get());
-        nodeChildren.push_back(std::move(nodeKey));
-        nodeChildren.push_back(std::move(nodeValue));
+        auto nodeValue = new Node::NodeOr(std::move(valueNodes), false);
+        auto result = new Node::NodeEntry(*nodeKey, nodeBlockStateEntrySeparator, *nodeValue);
+        nodeChildren.emplace_back(*nodeKey);
+        nodeChildren.emplace_back(*nodeValue);
         return result;
     }
 
-    std::shared_ptr<Node::NodeBase> BlockId::getNode(const BlockPropertyDescriptions &blockPropertyDescriptions) {
-        if (node == nullptr) {
-            std::vector<const Node::NodeBase *> blockStateEntryChildNode2;
+    const Node::NodeWithType &BlockId::getNode(const BlockPropertyDescriptions &blockPropertyDescriptions) {
+        if (!node.has_value()) {
+            std::vector<Node::NodeWithType> blockStateEntryChildNode2;
             //已知的方块状态
             if (HEDLEY_LIKELY(properties.has_value())) {
                 blockStateEntryChildNode2.reserve(2);
-                std::vector<const Node::NodeBase *> blockStateEntryChildNode1;
+                std::vector<Node::NodeWithType> blockStateEntryChildNode1;
                 blockStateEntryChildNode1.reserve(properties.value().size());
                 std::transform(properties.value().begin(), properties.value().end(),
                                std::back_inserter(blockStateEntryChildNode1),
-                               [this, &blockPropertyDescriptions](const auto &item) -> const Node::NodeBase * {
+                               [this, &blockPropertyDescriptions](const auto &item) -> Node::NodeWithType {
                                    const BlockPropertyDescription &blockPropertyDescription = blockPropertyDescriptions.getPropertyDescription(
                                            getIdWithNamespace()->name,
                                            name,
                                            item.name);
-                                   std::shared_ptr<Node::NodeBase> node1 = getBlockStateNode(
-                                           nodeChildren, blockPropertyDescription,
+                                   Node::NodeEntry *result = getBlockStateNode(
+                                           nodeChildren.nodes, blockPropertyDescription,
                                            item.defaultValue, item.valid);
-                                   Node::NodeBase *nodePtr = node1.get();
-                                   nodeChildren.push_back(std::move(node1));
-                                   return nodePtr;
+                                   nodeChildren.nodes.emplace_back(*result);
+                                   return *result;
                                });
-                auto nodeChild = std::make_shared<Node::NodeOr>(std::move(blockStateEntryChildNode1), false);
-                blockStateEntryChildNode2.push_back(nodeChild.get());
-                nodeChildren.push_back(std::move(nodeChild));
+                Node::NodeOr nodeChild(std::move(blockStateEntryChildNode1), false);
+                blockStateEntryChildNode2.emplace_back(nodeChild);
+                nodeChildren.nodes.emplace_back(nodeChild);
             }
             //其他未知的方块状态
-            blockStateEntryChildNode2.push_back(nodeBlockStateAllEntry.get());
+            blockStateEntryChildNode2.emplace_back(nodeBlockStateAllEntry);
             //把所有方块状态拼在一起
-            auto nodeValue = std::make_shared<Node::NodeOr>(std::move(blockStateEntryChildNode2), false, true);
-            node = std::make_shared<Node::NodeList>(
-                    nodeBlockStateLeftBracket.get(),
-                    nodeValue.get(),
-                    nodeBlockStateSeparator.get(),
-                    nodeBlockStateRightBracket.get());
-            nodeChildren.push_back(std::move(nodeValue));
+            auto nodeValue = new Node::NodeOr(std::move(blockStateEntryChildNode2), false, true);
+            auto result = new Node::NodeList(
+                    nodeBlockStateLeftBracket,
+                    *nodeValue,
+                    nodeBlockStateSeparator,
+                    nodeBlockStateRightBracket);
+            node = *result;
+            nodeChildren.nodes.emplace_back(*result);
+            nodeChildren.nodes.emplace_back(*nodeValue);
         }
-        return node;
+        return node.value();
     }
 
-    Node::NodeBase *BlockId::getNodeAllBlockState() {
-        return nodeAllBlockState.get();
+    Node::NodeWithType BlockId::getNodeAllBlockState() {
+        return nodeAllBlockState;
     }
 
 }// namespace CHelper

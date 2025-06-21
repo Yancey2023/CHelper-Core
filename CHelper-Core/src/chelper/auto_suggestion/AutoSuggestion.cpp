@@ -18,7 +18,6 @@ namespace CHelper::AutoSuggestion {
 
     template<class NodeType>
     struct AutoSuggestion {
-        static_assert(std::is_base_of_v<Node::NodeBase, NodeType>, "NodeType must be derived from NodeBase");
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
             return false;
         }
@@ -29,7 +28,7 @@ namespace CHelper::AutoSuggestion {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
             if (HEDLEY_LIKELY(astNode.id == ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE && !astNode.isError() &&
                               astNode.childNodes.size() == 1 && index == astNode.tokens.getEndIndex())) {
-                suggestions.addSymbolSuggestion({index, index, false, Node::NodeBlock::nodeBlockStateLeftBracket->normalId});
+                suggestions.addSymbolSuggestion({index, index, false, Node::NodeBlock::nodeBlockStateLeftBracket.normalId});
             }
             return false;
         }
@@ -38,7 +37,7 @@ namespace CHelper::AutoSuggestion {
     template<bool isJson>
     struct AutoSuggestion<Node::NodeTemplateBoolean<isJson>> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            const auto &node = reinterpret_cast<const Node::NodeTemplateBoolean<isJson> &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeTemplateBoolean<isJson> *>(astNode.node.data);
             KMPMatcher kmpMatcher(astNode.tokens.toString().substr(0, index - astNode.tokens.getStartIndex()));
             if (HEDLEY_UNLIKELY(kmpMatcher.match(u"true") != std::u16string::npos)) {
                 suggestions.addLiteralSuggestion({astNode.tokens, true,
@@ -55,25 +54,25 @@ namespace CHelper::AutoSuggestion {
     template<>
     struct AutoSuggestion<Node::NodeCommand> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            const auto &node = reinterpret_cast<const Node::NodeCommand &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeCommand *>(astNode.node.data);
             if (HEDLEY_UNLIKELY(astNode.id != ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
                 return false;
             }
             if (HEDLEY_LIKELY(index == 0 && astNode.tokens.isEmpty())) {
-                suggestions.addSymbolSuggestion({0, 0, false, Node::NodeCommand::nodeCommandStart->normalId});
+                suggestions.addSymbolSuggestion({0, 0, false, Node::NodeCommand::nodeCommandStart.normalId});
             }
             std::u16string_view str = astNode.tokens.toString().substr(0, index - astNode.tokens.getStartIndex());
             std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
             for (const auto &item: *node.commands) {
                 //通过名字进行搜索
                 bool flag = false;
-                for (const auto &item2: static_cast<Node::NodePerCommand *>(item.get())->name) {
+                for (const auto &item2: item.name) {
                     size_t index1 = item2.find(str);
                     if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
                         if (HEDLEY_UNLIKELY(index1 == 0)) {
-                            nameStartOf.push_back(NormalId::make(item2, item->description));
+                            nameStartOf.push_back(NormalId::make(item2, item.description));
                         } else {
-                            nameContain.push_back(NormalId::make(item2, item->description));
+                            nameContain.push_back(NormalId::make(item2, item.description));
                         }
                         flag = true;
                     }
@@ -82,10 +81,10 @@ namespace CHelper::AutoSuggestion {
                     continue;
                 }
                 //通过介绍进行搜索
-                if (HEDLEY_UNLIKELY(item->description.has_value() &&
-                                    item->description.value().find(str) != std::u16string::npos)) {
-                    for (const auto &item2: static_cast<Node::NodePerCommand *>(item.get())->name) {
-                        descriptionContain.push_back(NormalId::make(item2, item->description));
+                if (HEDLEY_UNLIKELY(item.description.has_value() &&
+                                    item.description.value().find(str) != std::u16string::npos)) {
+                    for (const auto &item2: item.name) {
+                        descriptionContain.push_back(NormalId::make(item2, item.description));
                     }
                 }
             }
@@ -114,19 +113,19 @@ namespace CHelper::AutoSuggestion {
     template<>
     struct AutoSuggestion<Node::NodeCommandName> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            const auto &node = reinterpret_cast<const Node::NodeCommandName &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeCommandName *>(astNode.node.data);
             std::u16string_view str = astNode.tokens.toString().substr(0, index - astNode.tokens.getStartIndex());
             std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
             for (const auto &item: *node.commands) {
                 bool flag = false;
-                for (const auto &item2: static_cast<Node::NodePerCommand *>(item.get())->name) {
+                for (const auto &item2: item.name) {
                     //通过名字进行搜索
                     size_t index1 = item2.find(str);
                     if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
                         if (HEDLEY_UNLIKELY(index1 == 0)) {
-                            nameStartOf.push_back(NormalId::make(item2, item->description));
+                            nameStartOf.push_back(NormalId::make(item2, item.description));
                         } else {
-                            nameContain.push_back(NormalId::make(item2, item->description));
+                            nameContain.push_back(NormalId::make(item2, item.description));
                         }
                         flag = true;
                     }
@@ -135,10 +134,10 @@ namespace CHelper::AutoSuggestion {
                     continue;
                 }
                 //通过介绍进行搜索
-                if (HEDLEY_UNLIKELY(item->description.has_value() &&
-                                    item->description.value().find(str) != std::u16string::npos)) {
-                    for (const auto &item2: static_cast<Node::NodePerCommand *>(item.get())->name) {
-                        descriptionContain.push_back(NormalId::make(item2, item->description));
+                if (HEDLEY_UNLIKELY(item.description.has_value() &&
+                                    item.description.value().find(str) != std::u16string::npos)) {
+                    for (const auto &item2: item.name) {
+                        descriptionContain.push_back(NormalId::make(item2, item.description));
                     }
                 }
             }
@@ -167,7 +166,7 @@ namespace CHelper::AutoSuggestion {
     template<>
     struct AutoSuggestion<Node::NodeNamespaceId> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            const auto &node = reinterpret_cast<const Node::NodeNamespaceId &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeNamespaceId *>(astNode.node.data);
             KMPMatcher kmpMatcher(astNode.tokens.toString().substr(0, index - astNode.tokens.getStartIndex()));
             std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain;
             std::vector<std::shared_ptr<NormalId>> namespaceStartOf, namespaceContain;
@@ -237,7 +236,7 @@ namespace CHelper::AutoSuggestion {
     template<>
     struct AutoSuggestion<Node::NodeNormalId> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            const auto &node = reinterpret_cast<const Node::NodeNormalId &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeNormalId *>(astNode.node.data);
             KMPMatcher kmpMatcher(astNode.tokens.toString().substr(0, index - astNode.tokens.getStartIndex()));
             std::vector<std::shared_ptr<NormalId>> nameStartOf, nameContain, descriptionContain;
             for (const auto &item: *node.customContents) {
@@ -275,9 +274,9 @@ namespace CHelper::AutoSuggestion {
 
     bool collectNodeRelativeFloatSuggestions(size_t index, Suggestions &suggestions, bool canUseCaretNotation) {
         suggestions.addSpaceSuggestion({index, index, false, spaceId});
-        suggestions.addSymbolSuggestion({index, index, false, Node::NodeRelativeFloat::nodeRelativeNotation->normalId});
+        suggestions.addSymbolSuggestion({index, index, false, Node::NodeRelativeFloat::nodeRelativeNotation.normalId});
         if (HEDLEY_LIKELY(canUseCaretNotation)) {
-            suggestions.addSymbolSuggestion({index, index, false, Node::NodeRelativeFloat::nodeCaretNotation->normalId});
+            suggestions.addSymbolSuggestion({index, index, false, Node::NodeRelativeFloat::nodeCaretNotation.normalId});
         }
         return true;
     }
@@ -304,7 +303,7 @@ namespace CHelper::AutoSuggestion {
     template<>
     struct AutoSuggestion<Node::NodeRelativeFloat> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            const auto &node = reinterpret_cast<const Node::NodeRelativeFloat &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeRelativeFloat *>(astNode.node.data);
             std::u16string_view str = astNode.tokens.toString();
             size_t startIndex = astNode.tokens.getStartIndex();
             for (size_t i = 0; i < str.length(); ++i) {
@@ -325,7 +324,7 @@ namespace CHelper::AutoSuggestion {
     template<>
     struct AutoSuggestion<Node::NodeString> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            const auto &node = reinterpret_cast<const Node::NodeString &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeString *>(astNode.node.data);
             if (HEDLEY_UNLIKELY(node.ignoreLater || !node.canContainSpace)) {
                 return true;
             }
@@ -371,7 +370,7 @@ namespace CHelper::AutoSuggestion {
     template<>
     struct AutoSuggestion<Node::NodeText> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            const auto &node = reinterpret_cast<const Node::NodeText &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeText *>(astNode.node.data);
             std::u16string_view str = astNode.tokens.toString().substr(0, index - astNode.tokens.getStartIndex());
             //通过名字进行搜索
             size_t index1 = node.data->name.find(str);
@@ -501,7 +500,7 @@ namespace CHelper::AutoSuggestion {
     template<>
     struct AutoSuggestion<Node::NodeOr> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            const auto &node = reinterpret_cast<const Node::NodeOr &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeOr *>(astNode.node.data);
             return node.noSuggestion;
         }
     };
@@ -509,7 +508,7 @@ namespace CHelper::AutoSuggestion {
     template<>
     struct AutoSuggestion<Node::NodeSingleSymbol> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            const auto &node = reinterpret_cast<const Node::NodeSingleSymbol &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeSingleSymbol *>(astNode.node.data);
             if (HEDLEY_LIKELY(astNode.tokens.getStartIndex() != index)) {
                 return true;
             }
@@ -527,7 +526,7 @@ namespace CHelper::AutoSuggestion {
 #ifdef CHelperTest
             Profile::push("collect suggestions: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(node->nodeTypeId)));
 #endif
-            switch (astNode.node->nodeTypeId) {
+            switch (astNode.node.nodeTypeId) {
                 CODEC_PASTE(CHELPER_COLLECT_AUTO_SUGGESTION, CHELPER_NODE_TYPES)
                 default:
                     HEDLEY_UNREACHABLE();

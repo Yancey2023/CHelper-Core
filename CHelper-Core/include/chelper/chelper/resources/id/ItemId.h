@@ -7,16 +7,11 @@
 #ifndef CHELPER_ITEMID_H
 #define CHELPER_ITEMID_H
 
-#include "NamespaceId.h"
-#include "pch.h"
+#include <chelper/node/NodeWithType.h>
+#include <chelper/resources/id/NamespaceId.h>
+#include <pch.h>
 
 namespace CHelper {
-
-    namespace Node {
-
-        class NodeBase;
-
-    }// namespace Node
 
     class ItemId : public NamespaceId {
     public:
@@ -24,11 +19,13 @@ namespace CHelper {
         std::optional<std::vector<std::u16string>> descriptions;
 
     private:
-        std::vector<std::shared_ptr<Node::NodeBase>> nodeChildren;
-        std::shared_ptr<Node::NodeBase> node = nullptr;
+        Node::FreeableNodeWithTypes nodeChildren;
+        std::unique_ptr<Node::NodeWithType> node;
 
     public:
-        std::shared_ptr<Node::NodeBase> getNode();
+        ItemId() = default;
+
+        const Node::NodeWithType &getNode();
     };
 
 }// namespace CHelper

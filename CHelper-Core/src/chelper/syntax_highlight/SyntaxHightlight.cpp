@@ -14,7 +14,6 @@ namespace CHelper::SyntaxHighlight {
 
     template<class NodeType>
     struct SyntaxToken {
-        static_assert(std::is_base_of_v<Node::NodeBase, NodeType>, "NodeType must be derived from NodeBase");
         static bool collectSyntax(const ASTNode &astNode, SyntaxResult &syntaxResult) {
             return false;
         }
@@ -92,7 +91,7 @@ namespace CHelper::SyntaxHighlight {
     template<>
     struct SyntaxToken<Node::NodeNormalId> {
         static bool collectSyntax(const ASTNode &astNode, SyntaxResult &syntaxResult) {
-            const auto &node = reinterpret_cast<const Node::NodeNormalId &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeNormalId *>(astNode.node.data);
             if (node.key.has_value()) {
                 syntaxResult.update(astNode.tokens, SyntaxTokenType::ID);
             } else if (node.id != "TARGET_SELECTOR_VARIABLE") {
@@ -153,7 +152,7 @@ namespace CHelper::SyntaxHighlight {
     template<>
     struct SyntaxToken<Node::NodeText> {
         static bool collectSyntax(const ASTNode &astNode, SyntaxResult &syntaxResult) {
-            const auto &node = reinterpret_cast<const Node::NodeText &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeText *>(astNode.node.data);
             if (node.id != "TARGET_SELECTOR_ARGUMENT_EQUAL" && node.id != "TARGET_SELECTOR_ARGUMENT_NOT_EQUAL") {
                 syntaxResult.update(astNode.tokens, SyntaxTokenType::LITERAL);
             } else {
@@ -199,7 +198,7 @@ namespace CHelper::SyntaxHighlight {
             Profile::push("collect color: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(astNode.node->nodeTypeId)));
 #endif
             bool isDirty;
-            switch (astNode.node->nodeTypeId) {
+            switch (astNode.node.nodeTypeId) {
                 CODEC_PASTE(CHELPER_COLLECT_SYNTAX, CHELPER_NODE_TYPES)
                 default:
                     HEDLEY_UNREACHABLE();

@@ -22,14 +22,14 @@ namespace CHelper {
         std::unordered_map<std::string, std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>> namespaceIds;
         std::shared_ptr<BlockIds> blockIds;
         std::shared_ptr<std::vector<std::shared_ptr<ItemId>>> itemIds;
-        std::vector<std::unique_ptr<Node::NodeJsonElement>> jsonNodes;
+        std::vector<Node::NodeJsonElement> jsonNodes;
         std::vector<Node::RepeatData> repeatNodeData;
-        std::unordered_map<std::string, std::pair<const Node::RepeatData *, const Node::NodeBase *>> repeatNodes;
-        std::shared_ptr<std::vector<std::unique_ptr<Node::NodePerCommand>>> commands = std::make_shared<std::vector<std::unique_ptr<Node::NodePerCommand>>>();
-        std::unique_ptr<Node::NodeCommand> mainNode;
+        std::unordered_map<std::string, std::pair<const Node::RepeatData *, Node::NodeWithType>> repeatNodes;
+        std::shared_ptr<std::vector<Node::NodePerCommand>> commands = std::make_shared<std::vector<Node::NodePerCommand>>();
+        Node::NodeCommand mainNode;
 
     private:
-        std::vector<std::unique_ptr<Node::NodeBase>> repeatCacheNodes;
+        Node::FreeableNodeWithTypes cacheNodes;
 
     public:
 #ifndef CHELPER_NO_FILESYSTEM

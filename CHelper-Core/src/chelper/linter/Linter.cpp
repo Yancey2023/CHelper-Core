@@ -14,7 +14,6 @@ namespace CHelper::Linter {
 
     template<class NodeType>
     struct Linter {
-        static_assert(std::is_base_of_v<Node::NodeBase, NodeType>, "NodeType must be derived from NodeBase");
         static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
             return false;
         }
@@ -42,10 +41,10 @@ namespace CHelper::Linter {
             if (HEDLEY_UNLIKELY(astNode.isError())) {
                 return true;
             }
-            const auto &node = reinterpret_cast<const Node::NodeCommandName &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeCommandName *>(astNode.node.data);
             std::u16string_view str = astNode.tokens.toString();
             for (const auto &command: *node.commands) {
-                for (const auto &name: static_cast<Node::NodePerCommand *>(command.get())->name) {
+                for (const auto &name: command.name) {
                     if (HEDLEY_UNLIKELY(str == name)) {
                         return true;
                     }
@@ -62,7 +61,7 @@ namespace CHelper::Linter {
             if (HEDLEY_UNLIKELY(astNode.isError())) {
                 return true;
             }
-            const auto &node = reinterpret_cast<const Node::NodeNamespaceId &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeNamespaceId *>(astNode.node.data);
             std::u16string_view str = astNode.tokens.toString();
             XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
             if (HEDLEY_UNLIKELY(std::all_of(node.customContents->begin(), node.customContents->end(), [&strHash](const auto &item) {
@@ -80,7 +79,7 @@ namespace CHelper::Linter {
             if (HEDLEY_UNLIKELY(astNode.isError())) {
                 return true;
             }
-            const auto &node = reinterpret_cast<const Node::NodeNormalId &>(*astNode.node);
+            const auto &node = *static_cast<const Node::NodeNormalId *>(astNode.node.data);
             std::u16string_view str = astNode.tokens.toString();
             XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
             if (HEDLEY_UNLIKELY(std::all_of(node.customContents->begin(), node.customContents->end(), [&strHash](const auto &item) {
@@ -122,7 +121,7 @@ namespace CHelper::Linter {
             if (HEDLEY_UNLIKELY(astNode.isError())) {
                 return true;
             }
-            const auto &node = reinterpret_cast<const Node::NodeTemplateNumber<T, isJson> &>(*astNode.node);
+            auto &node = *static_cast<const Node::NodeTemplateNumber<T, isJson> *>(astNode.node.data);
             std::string str = utf8::utf16to8(astNode.tokens.toString());
             char *end;
             auto value = Node::NodeTemplateNumber<T, isJson>::str2number(str, end);
@@ -150,7 +149,7 @@ namespace CHelper::Linter {
             Profile::push("collect id errors: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(node->nodeTypeId)));
 #endif
             bool isDirty = false;
-            switch (astNode.node->nodeTypeId) {
+            switch (astNode.node.nodeTypeId) {
                 CODEC_PASTE(CHELPER_LINT, CHELPER_NODE_TYPES)
                 default:
                     HEDLEY_UNREACHABLE();

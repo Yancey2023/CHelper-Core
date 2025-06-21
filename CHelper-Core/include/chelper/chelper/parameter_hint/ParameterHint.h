@@ -6,7 +6,6 @@
 #define CHELPER_PARAMETERHINT_H
 
 #include <chelper/parser/ASTNode.h>
-#include <optional>
 #include <pch.h>
 
 namespace CHelper::ParameterHint {

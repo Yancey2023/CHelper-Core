@@ -102,7 +102,7 @@ namespace CHelper {
         return {lexerResult, getAndPopLastIndex(), index};
     }
 
-    ASTNode TokenReader::readSimpleASTNode(const Node::NodeBase *node,
+    ASTNode TokenReader::readSimpleASTNode(Node::NodeWithType node,
                                            TokenType::TokenType type,
                                            const std::u16string &requireType,
                                            const ASTNodeId::ASTNodeId &astNodeId,
@@ -123,12 +123,12 @@ namespace CHelper {
         return ASTNode::simpleNode(node, tokens, errorReason, astNodeId);
     }
 
-    ASTNode TokenReader::readStringASTNode(const Node::NodeBase *node,
+    ASTNode TokenReader::readStringASTNode(const Node::NodeWithType &node,
                                            const ASTNodeId::ASTNodeId &astNodeId) {
         return readSimpleASTNode(node, TokenType::STRING, u"字符串类型", astNodeId);
     }
 
-    ASTNode TokenReader::readIntegerASTNode(const Node::NodeBase *node,
+    ASTNode TokenReader::readIntegerASTNode(const Node::NodeWithType &node,
                                             const ASTNodeId::ASTNodeId &astNodeId) {
         return readSimpleASTNode(
                 node, TokenType::NUMBER, u"整数类型", astNodeId,
@@ -143,7 +143,7 @@ namespace CHelper {
                 });
     }
 
-    ASTNode TokenReader::readFloatASTNode(const Node::NodeBase *node,
+    ASTNode TokenReader::readFloatASTNode(const Node::NodeWithType &node,
                                           const ASTNodeId::ASTNodeId &astNodeId) {
         return readSimpleASTNode(
                 node, TokenType::NUMBER, u"数字类型", astNodeId,
@@ -162,12 +162,12 @@ namespace CHelper {
                 });
     }
 
-    ASTNode TokenReader::readSymbolASTNode(const Node::NodeBase *node,
+    ASTNode TokenReader::readSymbolASTNode(const Node::NodeWithType &node,
                                            const ASTNodeId::ASTNodeId &astNodeId) {
         return readSimpleASTNode(node, TokenType::SYMBOL, u"符号类型", astNodeId);
     }
 
-    ASTNode TokenReader::readUntilSpace(const Node::NodeBase *node,
+    ASTNode TokenReader::readUntilSpace(const Node::NodeWithType &node,
                                         const ASTNodeId::ASTNodeId &astNodeId) {
         push();
         while (ready()) {
@@ -180,7 +180,7 @@ namespace CHelper {
         return ASTNode::simpleNode(node, collect(), nullptr, astNodeId);
     }
 
-    ASTNode TokenReader::readStringOrNumberASTNode(const Node::NodeBase *node,
+    ASTNode TokenReader::readStringOrNumberASTNode(const Node::NodeWithType &node,
                                                    const ASTNodeId::ASTNodeId &astNodeId) {
         push();
         while (ready()) {

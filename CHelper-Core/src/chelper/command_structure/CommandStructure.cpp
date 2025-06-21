@@ -8,13 +8,13 @@
 
 #define CHELPER_COLLECT_STRUCTURE(v1) \
     case Node::NodeTypeId::v1:        \
-        return CommandStructure<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectStructure(astNode, reinterpret_cast<const typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type &>(node), structure, isMustHave);
+        return CommandStructure<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectStructure(astNode, *static_cast<Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type *>(node.data), structure, isMustHave);
 
 namespace CHelper::CommandStructure {
 
-    bool collectNodeStructure(const ASTNode *astNode, const Node::NodeBase &node, StructureBuilder &structure, bool isMustHave);
+    bool collectNodeStructure(const ASTNode *astNode, const Node::NodeWithType &node, StructureBuilder &structure, bool isMustHave);
 
-    void collectNodeStructureOrUnknown(const ASTNode *astNode, const Node::NodeBase &node, StructureBuilder &structure, bool isMustHave) {
+    void collectNodeStructureOrUnknown(const ASTNode *astNode, const Node::NodeWithType &node, StructureBuilder &structure, bool isMustHave) {
         if (!collectNodeStructure(astNode, node, structure, isMustHave)) {
             structure.appendUnknown(isMustHave);
         }
@@ -22,8 +22,6 @@ namespace CHelper::CommandStructure {
 
     template<class NodeType, class = void>
     struct CommandStructure {
-        static_assert(std::is_base_of_v<Node::NodeBase, NodeType>, "NodeType must be derived from NodeBase");
-        static_assert(!std::is_same_v<Node::NodeBase, NodeType>, "NodeType must not be NodeBase");
         static bool collectStructure(const ASTNode *astNode, const NodeType &node, StructureBuilder &structure, bool isMustHave) {
             return false;
         }
@@ -65,7 +63,7 @@ namespace CHelper::CommandStructure {
             } else {
                 structure.appendSpace().append(std::u16string(astNode->childNodes[0].tokens.toString()));
                 const auto &usage = astNode->childNodes[1];
-                collectNodeStructure(&usage, *usage.node, structure, isMustHave);
+                collectNodeStructure(&usage, usage.node, structure, isMustHave);
             }
             return true;
         }
@@ -92,21 +90,21 @@ namespace CHelper::CommandStructure {
         static bool collectStructure(const ASTNode *astNode, const Node::NodeItem &node, StructureBuilder &structure, bool isMustHave) {
             switch (node.nodeItemType) {
                 case Node::NodeItemType::ITEM_GIVE:
-                    collectNodeStructureOrUnknown(nullptr, *node.nodeItemId, structure, isMustHave);
-                    collectNodeStructureOrUnknown(nullptr, *Node::NodeItem::nodeCount, structure, false);
-                    collectNodeStructureOrUnknown(nullptr, *Node::NodeItem::nodeAllData, structure, false);
-                    collectNodeStructureOrUnknown(nullptr, *node.nodeComponent, structure, false);
+                    collectNodeStructureOrUnknown(nullptr, node.nodeItemId, structure, isMustHave);
+                    collectNodeStructureOrUnknown(nullptr, Node::NodeItem::nodeCount, structure, false);
+                    collectNodeStructureOrUnknown(nullptr, Node::NodeItem::nodeAllData, structure, false);
+                    collectNodeStructureOrUnknown(nullptr, node.nodeComponent, structure, false);
                     break;
                 case Node::NodeItemType::ITEM_CLEAR:
-                    collectNodeStructureOrUnknown(nullptr, *node.nodeItemId, structure, isMustHave);
-                    collectNodeStructureOrUnknown(nullptr, *Node::NodeItem::nodeAllData, structure, false);
-                    collectNodeStructureOrUnknown(nullptr, *Node::NodeItem::nodeCount, structure, false);
+                    collectNodeStructureOrUnknown(nullptr, node.nodeItemId, structure, isMustHave);
+                    collectNodeStructureOrUnknown(nullptr, Node::NodeItem::nodeAllData, structure, false);
+                    collectNodeStructureOrUnknown(nullptr, Node::NodeItem::nodeCount, structure, false);
                     break;
                 default:
-                    collectNodeStructureOrUnknown(nullptr, *node.nodeItemId, structure, isMustHave);
-                    collectNodeStructureOrUnknown(nullptr, *Node::NodeItem::nodeCount, structure, false);
-                    collectNodeStructureOrUnknown(nullptr, *Node::NodeItem::nodeAllData, structure, false);
-                    collectNodeStructureOrUnknown(nullptr, *node.nodeComponent, structure, false);
+                    collectNodeStructureOrUnknown(nullptr, node.nodeItemId, structure, isMustHave);
+                    collectNodeStructureOrUnknown(nullptr, Node::NodeItem::nodeCount, structure, false);
+                    collectNodeStructureOrUnknown(nullptr, Node::NodeItem::nodeAllData, structure, false);
+                    collectNodeStructureOrUnknown(nullptr, node.nodeComponent, structure, false);
                     break;
             }
             return true;
@@ -149,7 +147,7 @@ namespace CHelper::CommandStructure {
     struct CommandStructure<Node::NodePerCommand> {
         static bool collectStructure(const ASTNode *astNode, const Node::NodePerCommand &node, StructureBuilder &structure, bool isMustHave) {
             const auto &bestNode = astNode->getBestNode();
-            collectNodeStructureOrUnknown(&bestNode, *bestNode.node, structure, isMustHave);
+            collectNodeStructureOrUnknown(&bestNode, bestNode.node, structure, isMustHave);
             return true;
         }
     };
@@ -193,16 +191,16 @@ namespace CHelper::CommandStructure {
                     const ASTNode &astNode1 = HEDLEY_LIKELY(item.whichBest == 0)
                                                       ? item.getBestNode().getBestNode()
                                                       : item.getBestNode();
-                    auto node1 = reinterpret_cast<const Node::NodeAnd *>(astNode1.node);
+                    auto node1 = static_cast<const Node::NodeAnd *>(astNode1.node.data);
                     size_t astNodeSize = astNode1.childNodes.size();
                     size_t nodeSize = node1->childNodes.size();
                     if (HEDLEY_LIKELY(astNode1.isError())) {
                         for (size_t i = 0; i < nodeSize; ++i) {
                             if (HEDLEY_LIKELY(i < astNodeSize)) {
                                 const auto &item2 = astNode1.childNodes[i];
-                                collectNodeStructureOrUnknown(&item2, *item2.node, structure, true);
+                                collectNodeStructureOrUnknown(&item2, item2.node, structure, true);
                             } else {
-                                collectNodeStructureOrUnknown(nullptr, *node1->childNodes[i], structure, true);
+                                collectNodeStructureOrUnknown(nullptr, node1->childNodes[i], structure, true);
                             }
                             isAddMiddle = true;
                         }
@@ -222,8 +220,8 @@ namespace CHelper::CommandStructure {
             if (!isAddMoreSymbol || isAddMiddle) {
                 structure.appendSpace().append(u"...");
             }
-            for (const auto &item: reinterpret_cast<const Node::NodeAnd *>(reinterpret_cast<const Node::NodeOr *>(node.nodeElement)->childNodes[1])->childNodes) {
-                collectNodeStructure(nullptr, *item, structure, true);
+            for (const auto &item: static_cast<const Node::NodeAnd *>(static_cast<const Node::NodeOr *>(node.nodeElement.data)->childNodes[1].data)->childNodes) {
+                collectNodeStructure(nullptr, item, structure, true);
             }
             return true;
         }
@@ -257,10 +255,10 @@ namespace CHelper::CommandStructure {
     struct CommandStructure<Node::NodeWrapped> {
         static bool collectStructure(const ASTNode *astNode, const Node::NodeWrapped &node, StructureBuilder &structure, bool isMustHave) {
             if (astNode == nullptr || (astNode->mode == ASTNodeMode::NONE && astNode->isAllSpaceError())) {
-                collectNodeStructureOrUnknown(nullptr, *node.innerNode, structure, isMustHave);
+                collectNodeStructureOrUnknown(nullptr, node.innerNode, structure, isMustHave);
                 if (isMustHave) {
                     for (const auto &item: node.nextNodes) {
-                        if (HEDLEY_UNLIKELY(item->innerNode->nodeTypeId == Node::NodeTypeId::LF)) {
+                        if (HEDLEY_UNLIKELY(item->innerNode.nodeTypeId == Node::NodeTypeId::LF)) {
                             isMustHave = false;
                             break;
                         }
@@ -271,13 +269,13 @@ namespace CHelper::CommandStructure {
                 }
                 return true;
             } else {
-                collectNodeStructureOrUnknown(&astNode->childNodes[0], *node.innerNode, structure, isMustHave);
+                collectNodeStructureOrUnknown(&astNode->childNodes[0], node.innerNode, structure, isMustHave);
                 if (node.nextNodes.empty()) {
                     return true;
                 }
                 if (isMustHave) {
                     for (const auto &item: node.nextNodes) {
-                        if (HEDLEY_UNLIKELY(item->innerNode->nodeTypeId == Node::NodeTypeId::LF)) {
+                        if (HEDLEY_UNLIKELY(item->innerNode.nodeTypeId == Node::NodeTypeId::LF)) {
                             isMustHave = false;
                             break;
                         }
@@ -287,13 +285,13 @@ namespace CHelper::CommandStructure {
                     return collectStructure(nullptr, *node.nextNodes[0], structure, isMustHave);
                 } else {
                     const auto &bestASTNode = astNode->childNodes[1].getBestNode();
-                    return collectNodeStructure(&bestASTNode, *bestASTNode.node, structure, isMustHave);
+                    return collectNodeStructure(&bestASTNode, bestASTNode.node, structure, isMustHave);
                 }
             }
         }
     };
 
-    bool collectNodeStructure(const ASTNode *astNode, const Node::NodeBase &node, StructureBuilder &structure, bool isMustHave) {
+    bool collectNodeStructure(const ASTNode *astNode, const Node::NodeWithType &node, StructureBuilder &structure, bool isMustHave) {
         switch (node.nodeTypeId) {
             CODEC_PASTE(CHELPER_COLLECT_STRUCTURE, CHELPER_NODE_TYPES)
             default:
@@ -303,7 +301,7 @@ namespace CHelper::CommandStructure {
 
     std::u16string getStructure(const ASTNode &astNode) {
         StructureBuilder structureBuilder;
-        collectNodeStructure(&astNode, *astNode.node, structureBuilder, true);
+        collectNodeStructure(&astNode, astNode.node, structureBuilder, true);
         std::u16string result = structureBuilder.build();
         while (HEDLEY_UNLIKELY(!result.empty() && result[result.size() - 1] == '\n')) {
             result.pop_back();

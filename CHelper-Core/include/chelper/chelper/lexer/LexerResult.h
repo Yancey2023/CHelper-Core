@@ -7,8 +7,8 @@
 #ifndef CHELPER_LEXERRESULT_H
 #define CHELPER_LEXERRESULT_H
 
-#include "Token.h"
-#include "pch.h"
+#include <chelper/lexer/Token.h>
+#include <pch.h>
 
 namespace CHelper {
 

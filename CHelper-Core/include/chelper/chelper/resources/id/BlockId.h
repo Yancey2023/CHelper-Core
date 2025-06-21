@@ -4,11 +4,14 @@
 
 #pragma once
 
+
 #ifndef CHELPER_BLOCKID_H
 #define CHELPER_BLOCKID_H
 
-#include "ItemId.h"
-#include "NamespaceId.h"
+#include <chelper/node/NodeWithType.h>
+#include <chelper/resources/id/NamespaceId.h>
+#include <pch.h>
+
 namespace CHelper {
 
     namespace PropertyType {
@@ -97,13 +100,13 @@ namespace CHelper {
         std::optional<std::vector<Property>> properties;
 
     private:
-        std::vector<std::shared_ptr<Node::NodeBase>> nodeChildren;
-        std::shared_ptr<Node::NodeBase> node;
+        Node::FreeableNodeWithTypes nodeChildren;
+        std::optional<Node::NodeWithType> node;
 
     public:
-        std::shared_ptr<Node::NodeBase> getNode(const BlockPropertyDescriptions &blockPropertyDescriptions);
+        const Node::NodeWithType &getNode(const BlockPropertyDescriptions &blockPropertyDescriptions);
 
-        static Node::NodeBase *getNodeAllBlockState();
+        static Node::NodeWithType getNodeAllBlockState();
     };
 
     class BlockIds {

@@ -2,8 +2,8 @@
 // Created by Yancey on 2023/11/7.
 //
 
-#include <chelper/node/NodeType.h>
 #include <chelper/node/NodeInitialization.h>
+#include <chelper/node/NodeType.h>
 #include <chelper/resources/CPack.h>
 #include <chelper/resources/Manifest.h>
 #include <chelper/serialization/Serialization.h>
@@ -155,7 +155,7 @@ namespace CHelper {
 
     void CPack::applyJson(const rapidjson::GenericValue<rapidjson::UTF8<>> &j) {
         using JsonValueType = rapidjson::GenericValue<rapidjson::UTF8<>>;
-        std::unique_ptr<Node::NodeJsonElement> item;
+        Node::NodeJsonElement item;
         serialization::Codec<decltype(item)>::template from_json<JsonValueType>(j, item);
         jsonNodes.push_back(std::move(item));
     }
@@ -169,7 +169,7 @@ namespace CHelper {
 
     void CPack::applyCommand(const rapidjson::GenericValue<rapidjson::UTF8<>> &j) const {
         using JsonValueType = rapidjson::GenericValue<rapidjson::UTF8<>>;
-        std::unique_ptr<Node::NodePerCommand> item;
+        Node::NodePerCommand item;
         serialization::Codec<decltype(item)>::template from_json<JsonValueType>(j, item);
         commands->push_back(std::move(item));
     }
@@ -178,7 +178,7 @@ namespace CHelper {
         // json nodes
         Profile::push("init json nodes");
         for (const auto &item: jsonNodes) {
-            Node::initNode(*item, *this);
+            Node::initNode(item, *this);
         }
         // repeat nodes
         Profile::next("init repeat nodes");
@@ -190,60 +190,56 @@ namespace CHelper {
         }
         // command param nodes
         for (const auto &item: repeatNodeData) {
-            std::vector<const Node::NodeBase *> content;
+            std::vector<Node::NodeWithType> content;
             content.reserve(item.repeatNodes.size());
             for (const auto &item2: item.repeatNodes) {
-                std::vector<const Node::NodeBase *> perContent;
+                std::vector<Node::NodeWithType> perContent;
                 perContent.reserve(item2.size());
                 for (const auto &item3: item2) {
-                    auto nodeWrapped = std::make_unique<Node::NodeWrapped>(item3.get());
-                    perContent.push_back(nodeWrapped.get());
-                    repeatCacheNodes.push_back(std::move(nodeWrapped));
+                    auto nodeWrapped = new Node::NodeWrapped(item3);
+                    perContent.emplace_back(*nodeWrapped);
+                    cacheNodes.nodes.emplace_back(*nodeWrapped);
                 }
-                auto node = std::make_unique<Node::NodeAnd>(std::move(perContent));
-                content.push_back(node.get());
-                repeatCacheNodes.push_back(std::move(node));
+                auto node = new Node::NodeAnd(perContent);
+                content.emplace_back(*node);
+                cacheNodes.nodes.emplace_back(*node);
             }
-            std::vector<const Node::NodeBase *> breakChildNodes;
+            std::vector<Node::NodeWithType> breakChildNodes;
             breakChildNodes.reserve(item.breakNodes.size());
             for (const auto &item2: item.breakNodes) {
-                auto nodeWrapped = std::make_unique<Node::NodeWrapped>(item2.get());
-                breakChildNodes.push_back(nodeWrapped.get());
-                repeatCacheNodes.push_back(std::move(nodeWrapped));
+                auto nodeWrapped = new Node::NodeWrapped(item2);
+                breakChildNodes.emplace_back(*nodeWrapped);
+                cacheNodes.nodes.emplace_back(*nodeWrapped);
             }
-            std::unique_ptr<Node::NodeBase> unBreakNode = std::make_unique<Node::NodeOr>(
-                    std::move(content), false);
-            std::unique_ptr<Node::NodeBase> breakNode = std::make_unique<Node::NodeAnd>(
-                    std::move(breakChildNodes));
-            std::unique_ptr<Node::NodeBase> orNode = std::make_unique<Node::NodeOr>(
-                    std::vector<const Node::NodeBase *>{unBreakNode.get(), breakNode.get()},
-                    false);
-            repeatNodes.emplace(item.id, std::make_pair(&item, orNode.get()));
-            repeatCacheNodes.push_back(std::move(unBreakNode));
-            repeatCacheNodes.push_back(std::move(breakNode));
-            repeatCacheNodes.push_back(std::move(orNode));
+            auto unBreakNode = new Node::NodeOr(content, false);
+            auto breakNode = new Node::NodeAnd(breakChildNodes);
+            auto orNode = new Node::NodeOr({*unBreakNode, *breakNode}, false);
+            repeatNodes.emplace(item.id, std::make_pair<const Node::RepeatData *, Node::NodeWithType>(&item, *orNode));
+            cacheNodes.nodes.emplace_back(*unBreakNode);
+            cacheNodes.nodes.emplace_back(*breakNode);
+            cacheNodes.nodes.emplace_back(*orNode);
         }
         for (const auto &item: repeatNodeData) {
             for (const auto &item2: item.repeatNodes) {
                 for (const auto &item3: item2) {
-                    Node::initNode(*item3, *this);
+                    Node::initNode(item3, *this);
                 }
             }
             for (const auto &item2: item.breakNodes) {
-                Node::initNode(*item2, *this);
+                Node::initNode(item2, *this);
             }
         }
         for (const auto &item: *commands) {
-            Profile::next(R"(init command: "{}")", FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", StringUtil::join(item->name, u",")))));
-            Node::initNode(*item, *this);
+            Profile::next(R"(init command: "{}")", FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", StringUtil::join(item.name, u",")))));
+            Node::initNode(item, *this);
         }
         Profile::next("sort command nodes");
         std::sort(commands->begin(), commands->end(),
                   [](const auto &item1, const auto &item2) {
-                      return item1.get()->name[0] < item2.get()->name[0];
+                      return item1.name[0] < item2.name[0];
                   });
         Profile::next("create main node");
-        mainNode = std::make_unique<Node::NodeCommand>("MAIN_NODE", u"欢迎使用命令助手(作者：Yancey)", commands.get());
+        mainNode = Node::NodeCommand("MAIN_NODE", u"欢迎使用命令助手(作者：Yancey)", commands.get());
         Profile::pop();
     }
 
@@ -327,7 +323,7 @@ namespace CHelper {
         for (const auto &item: jsonNodes) {
             JsonValueType j;
             serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "json" / (item->id.value() + ".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "json" / (item.id.value() + ".json"), j);
         }
         for (const auto &item: repeatNodeData) {
             JsonValueType j;
@@ -337,7 +333,7 @@ namespace CHelper {
         for (const auto &item: *commands) {
             JsonValueType j;
             serialization::Codec<decltype(item)>::template to_json<JsonValueType>(j.GetAllocator(), j, item);
-            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "command" / (utf8::utf16to8(item->name[0]) + ".json"), j);
+            writeJsonToFileWithCreateDirectory<JsonValueType>(path / "command" / (utf8::utf16to8(item.name[0]) + ".json"), j);
         }
     }
 #endif

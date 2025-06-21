@@ -8,7 +8,7 @@
 namespace CHelper {
 
     ASTNode::ASTNode(ASTNodeMode::ASTNodeMode mode,
-                     const Node::NodeBase *node,
+                     const Node::NodeWithType &node,
                      std::vector<ASTNode> &&childNodes,
                      TokensView tokens,
                      const std::vector<std::shared_ptr<ErrorReason>> &errorReasons,
@@ -22,7 +22,7 @@ namespace CHelper {
           id(id),
           whichBest(whichBest) {}
 
-    ASTNode ASTNode::simpleNode(const Node::NodeBase *node,
+    ASTNode ASTNode::simpleNode(const Node::NodeWithType &node,
                                 const TokensView &tokens,
                                 const std::shared_ptr<ErrorReason> &errorReason,
                                 const ASTNodeId::ASTNodeId &id) {
@@ -33,7 +33,7 @@ namespace CHelper {
         return {ASTNodeMode::NONE, node, {}, tokens, errorReasons, id};
     }
 
-    ASTNode ASTNode::andNode(const Node::NodeBase *node,
+    ASTNode ASTNode::andNode(const Node::NodeWithType &node,
                              std::vector<ASTNode> &&childNodes,
                              const TokensView &tokens,
                              const std::shared_ptr<ErrorReason> &errorReason,
@@ -49,7 +49,7 @@ namespace CHelper {
         return {ASTNodeMode::AND, node, std::move(childNodes), tokens, {}, id};
     }
 
-    ASTNode ASTNode::orNode(const Node::NodeBase *node,
+    ASTNode ASTNode::orNode(const Node::NodeWithType &node,
                             std::vector<ASTNode> &&childNodes,
                             const TokensView *tokens,
                             const char16_t *errorReason,
@@ -115,7 +115,7 @@ namespace CHelper {
         return {ASTNodeMode::OR, node, std::move(childNodes), tokens1, errorReasons, id, whichBest};
     }
 
-    ASTNode ASTNode::orNode(const Node::NodeBase *node,
+    ASTNode ASTNode::orNode(const Node::NodeWithType &node,
                             std::vector<ASTNode> &&childNodes,
                             const TokensView &tokens,
                             const char16_t *errorReason,

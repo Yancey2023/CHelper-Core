@@ -7,8 +7,8 @@
 #ifndef CHELPER_LEXER_H
 #define CHELPER_LEXER_H
 
-#include "LexerResult.h"
-#include "pch.h"
+#include <chelper/lexer/LexerResult.h>
+#include <pch.h>
 
 namespace CHelper::Lexer {
 
