@@ -6,8 +6,23 @@
 
 namespace CHelper::Node {
 
+#define CHELPER_DELETE(v1)                                                           \
+    case Node::NodeTypeId::v1:                                                       \
+        delete reinterpret_cast<NodeTypeDetail<Node::NodeTypeId::v1>::Type *>(this); \
+        break;
+
     NodeBase::NodeBase(NodeTypeId::NodeTypeId nodeTypeId)
         : nodeTypeId(nodeTypeId) {}
+
+    NodeBase::~NodeBase() {
+        if (nodeTypeId > MAX_TYPE_ID) {
+#ifdef CHelperDebug
+                SPDLOG_ERROR("Unknown node type id: {}", static_cast<uint8_t>(nodeTypeId));
+#else
+                HEDLEY_UNREACHABLE();
+#endif
+        }
+    }
 
     NodeSerializable::NodeSerializable(NodeTypeId::NodeTypeId nodeTypeId,
                                        const std::optional<std::string> &id,
@@ -156,7 +171,21 @@ namespace CHelper::Node {
 
     NodeAnd::NodeAnd(const std::vector<const NodeBase *> &childNodes)
         : NodeBase(NodeTypeId::TEXT),
-          childNodes(childNodes) {}
+          childNodes(childNodes) {
+#ifdef CHelperDebug
+        for (const auto &item: this->childNodes) {
+            if (HEDLEY_UNLIKELY(item == nullptr)) {
+                throw std::runtime_error("null node in node or");
+            }
+            if (HEDLEY_UNLIKELY(item->nodeTypeId > MAX_TYPE_ID)) {
+                throw std::runtime_error("unknown node type");
+            }
+        }
+#endif
+    }
+
+    NodeAny::NodeAny()
+        : NodeBase(NodeTypeId::ANY) {}
 
     NodeAny *NodeAny::getNodeAny() {
         static NodeAny node;
@@ -245,6 +274,9 @@ namespace CHelper::Node {
         for (const auto &item: this->childNodes) {
             if (HEDLEY_UNLIKELY(item == nullptr)) {
                 throw std::runtime_error("null node in node or");
+            }
+            if (HEDLEY_UNLIKELY(item->nodeTypeId > MAX_TYPE_ID)) {
+                throw std::runtime_error("unknown node type");
             }
         }
 #endif
@@ -337,12 +369,12 @@ namespace CHelper::Node {
         std::vector<const NodeBase *> nodeElementData;
         nodeElementData.push_back(NodeJsonEntry::getNodeJsonAllEntry());
         nodeElement2 = std::make_unique<NodeOr>(std::move(nodeElementData), false, true);
-        static std::unique_ptr<NodeBase> nodLeft = std::make_unique<NodeSingleSymbol>(u'{', u"JSON列表左括号");
-        static std::unique_ptr<NodeBase> nodeRight = std::make_unique<NodeSingleSymbol>(u'}', u"JSON列表右括号");
-        static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(u',', u"JSON列表分隔符");
+        static std::unique_ptr<NodeBase> nodeListLeft = std::make_unique<NodeSingleSymbol>(u'{', u"JSON列表左括号");
+        static std::unique_ptr<NodeBase> nodeListRight = std::make_unique<NodeSingleSymbol>(u'}', u"JSON列表右括号");
+        static std::unique_ptr<NodeBase> nodeListSeparator = std::make_unique<NodeSingleSymbol>(u',', u"JSON列表分隔符");
         nodeList = std::make_unique<NodeList>(
-                nodLeft.get(), nodeElement2.get(),
-                nodeSeparator.get(), nodeRight.get());
+                nodeListLeft.get(), nodeElement2.get(),
+                nodeListSeparator.get(), nodeListRight.get());
     }
 
     NodeJsonString::NodeJsonString(const std::optional<std::string> &id,

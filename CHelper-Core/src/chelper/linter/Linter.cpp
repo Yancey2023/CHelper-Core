@@ -5,8 +5,8 @@
 #include <chelper/linter/Linter.h>
 #include <chelper/node/NodeType.h>
 
-#define CHELPER_CODEC_LINT(v1)                                                                                             \
-    case Node::NodeTypeId::v1:                                                                                             \
+#define CHELPER_LINT(v1)                                                                                          \
+    case Node::NodeTypeId::v1:                                                                                    \
         isDirty = Linter<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::lint(astNode, errorReasons); \
         break;
 
@@ -151,7 +151,7 @@ namespace CHelper::Linter {
 #endif
             bool isDirty = false;
             switch (astNode.node->nodeTypeId) {
-                CODEC_PASTE(CHELPER_CODEC_LINT, CHELPER_NODE_TYPES)
+                CODEC_PASTE(CHELPER_LINT, CHELPER_NODE_TYPES)
                 default:
                     HEDLEY_UNREACHABLE();
             }

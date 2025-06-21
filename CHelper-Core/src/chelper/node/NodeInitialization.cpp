@@ -6,6 +6,11 @@
 #include <chelper/resources/CPack.h>
 #include <chelper/serialization/Serialization.h>
 
+#define CHELPER_INIT(v1)                                                                                                             \
+    case Node::NodeTypeId::v1:                                                                                                       \
+        NodeInitialization<Node::NodeTypeId::v1>::init(reinterpret_cast<NodeTypeDetail<Node::NodeTypeId::v1>::Type &>(node), cpack); \
+        break;
+
 namespace CHelper::Node {
 
     template<>
@@ -353,6 +358,8 @@ namespace CHelper::Node {
     template<>
     struct NodeInitialization<NodeTypeId::JSON_ENTRY> {
         using NodeType = typename NodeTypeDetail<NodeTypeId::JSON_ENTRY>::Type;
+        static void init(NodeType &node, const CPack &cpack) {
+        }
         static void init(NodeType &node, const std::vector<std::unique_ptr<NodeSerializable>> &dataList) {
             std::vector<const NodeBase *> valueNodes;
             for (const auto &item: node.value) {
@@ -373,11 +380,31 @@ namespace CHelper::Node {
             }
             node.nodeKey = std::make_unique<NodeText>(
                     "JSON_OBJECT_ENTRY_KEY", u"JSON对象键",
-                    NormalId::make(fmt::format(u"\"{}\"",node.key), node.description));
+                    NormalId::make(fmt::format(u"\"{}\"", node.key), node.description));
             node.nodeValue = std::make_unique<NodeOr>(
                     std::move(valueNodes), false);
             nodeEntry = std::make_unique<NodeEntry>(
                     node.nodeKey.get(), nodeSeparator.get(), node.nodeValue.get());
+        }
+    };
+
+    template<>
+    struct NodeInitialization<NodeTypeId::JSON_LIST> {
+        using NodeType = typename NodeTypeDetail<NodeTypeId::JSON_LIST>::Type;
+        static void init(NodeType &node, const CPack &cpack) {
+        }
+        static void init(NodeType &node, const std::vector<std::unique_ptr<NodeSerializable>> &dataList) {
+            for (const auto &item: dataList) {
+                if (HEDLEY_UNLIKELY(item->id == node.data)) {
+                    nodeList = std::make_unique<NodeList>(Node::NodeJsonList::nodeLeft.get(), item.get(),
+                                                          nodeSeparator.get(), nodeRight.get());
+                    return;
+                }
+            }
+            Profile::push("linking contents to {}", FORMAT_ARG(node.data));
+            Profile::push("failed to find node id -> {}", FORMAT_ARG(node.data));
+            Profile::push("unknown node id -> {} (in node \"{}\")", FORMAT_ARG(node.id.value_or("UNKNOWN")));
+            throw std::runtime_error("unknown node id");
         }
     };
 
@@ -402,7 +429,7 @@ namespace CHelper::Node {
             }
             for (const auto &item: node.nodes) {
                 if (HEDLEY_UNLIKELY(item->nodeTypeId == NodeTypeId::JSON_LIST)) {
-                    reinterpret_cast<NodeJsonList *>(item.get())->init(node.nodes);
+                    NodeInitialization<NodeTypeId::JSON_LIST>::init(reinterpret_cast<NodeJsonList &>(*item), node.nodes);
                 } else if (HEDLEY_UNLIKELY(item->nodeTypeId == NodeTypeId::JSON_OBJECT)) {
                     for (const auto &item2: reinterpret_cast<NodeJsonObject *>(item.get())->data) {
                         NodeInitialization<NodeTypeId::JSON_ENTRY>::init(*item2, node.nodes);
@@ -414,24 +441,6 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::JSON_LIST> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::JSON_LIST>::Type;
-        static void init(NodeType &node, const std::vector<std::unique_ptr<NodeSerializable>> &dataList) {
-            for (const auto &item: dataList) {
-                if (HEDLEY_UNLIKELY(item->id == node.data)) {
-                    nodeList = std::make_unique<NodeList>(Node::NodeJsonList::nodeLeft.get(), item.get(),
-                                                          nodeSeparator.get(), nodeRight.get());
-                    return;
-                }
-            }
-            Profile::push("linking contents to {}", FORMAT_ARG(node.data));
-            Profile::push("failed to find node id -> {}", FORMAT_ARG(node.data));
-            Profile::push("unknown node id -> {} (in node \"{}\")", FORMAT_ARG(node.id.value_or("UNKNOWN")));
-            throw std::runtime_error("unknown node id");
-        }
-    };
-
-    template<>
     struct NodeInitialization<NodeTypeId::JSON_OBJECT> {
         using NodeType = typename NodeTypeDetail<NodeTypeId::JSON_OBJECT>::Type;
         static void init(NodeType &node, const CPack &cpack) {
@@ -439,12 +448,12 @@ namespace CHelper::Node {
             std::vector<const NodeBase *> nodeElementData;
             nodeElementData.push_back(NodeJsonEntry::getNodeJsonAllEntry());
             node.nodeElement2 = std::make_unique<NodeOr>(std::move(nodeElementData), false, true);
-            static std::unique_ptr<NodeBase> nodLeft = std::make_unique<NodeSingleSymbol>(u'{', u"JSON列表左括号");
-            static std::unique_ptr<NodeBase> nodeRight = std::make_unique<NodeSingleSymbol>(u'}', u"JSON列表右括号");
-            static std::unique_ptr<NodeBase> nodeSeparator = std::make_unique<NodeSingleSymbol>(u',', u"JSON列表分隔符");
+            static std::unique_ptr<NodeBase> nodeObjectLeft = std::make_unique<NodeSingleSymbol>(u'{', u"JSON列表左括号");
+            static std::unique_ptr<NodeBase> nodeObjectRight = std::make_unique<NodeSingleSymbol>(u'}', u"JSON列表右括号");
+            static std::unique_ptr<NodeBase> nodeObjectSeparator = std::make_unique<NodeSingleSymbol>(u',', u"JSON列表分隔符");
             nodeList = std::make_unique<NodeList>(
-                    nodLeft.get(), node.nodeElement2.get(),
-                    nodeSeparator.get(), nodeRight.get());
+                    nodeObjectLeft.get(), node.nodeElement2.get(),
+                    nodeObjectSeparator.get(), nodeObjectRight.get());
         }
     };
 
@@ -468,8 +477,12 @@ namespace CHelper::Node {
         }
     };
 
-    void initNode(const Node::NodeBase &node, const CPack &cpack) {
-
+    void initNode(Node::NodeBase &node, const CPack &cpack) {
+        switch (node.nodeTypeId) {
+            CODEC_PASTE(CHELPER_INIT, CHELPER_NODE_TYPES)
+            default:
+                HEDLEY_UNREACHABLE();
+        }
     }
 
 }// namespace CHelper::Node

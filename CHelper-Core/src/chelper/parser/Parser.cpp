@@ -27,8 +27,8 @@
 #define DEBUG_GET_NODE_END(node, index) ;
 #endif
 
-#define CHELPER_CODEC_GET_AST_NODE(v1) \
-    case Node::NodeTypeId::v1:         \
+#define CHELPER_GET_AST_NODE(v1) \
+    case Node::NodeTypeId::v1:   \
         return Parser<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::getASTNode(reinterpret_cast<const typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type &>(node), tokenReader, cpack);
 
 namespace CHelper::Parser {
@@ -1005,7 +1005,7 @@ namespace CHelper::Parser {
 
     ASTNode parse(const Node::NodeBase &node, TokenReader &tokenReader, const CPack *cpack) {
         switch (node.nodeTypeId) {
-            CODEC_PASTE(CHELPER_CODEC_GET_AST_NODE, CHELPER_NODE_TYPES)
+            CODEC_PASTE(CHELPER_GET_AST_NODE, CHELPER_NODE_TYPES)
             default:
                 HEDLEY_UNREACHABLE();
         }

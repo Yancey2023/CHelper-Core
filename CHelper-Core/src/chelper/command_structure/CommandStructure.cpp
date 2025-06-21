@@ -6,8 +6,8 @@
 #include <chelper/command_structure/StructureBuilder.h>
 #include <chelper/node/NodeType.h>
 
-#define CHELPER_CODEC_COLLECT_STRUCTURE(v1) \
-    case Node::NodeTypeId::v1:              \
+#define CHELPER_COLLECT_STRUCTURE(v1) \
+    case Node::NodeTypeId::v1:        \
         return CommandStructure<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectStructure(astNode, reinterpret_cast<const typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type &>(node), structure, isMustHave);
 
 namespace CHelper::CommandStructure {
@@ -295,7 +295,7 @@ namespace CHelper::CommandStructure {
 
     bool collectNodeStructure(const ASTNode *astNode, const Node::NodeBase &node, StructureBuilder &structure, bool isMustHave) {
         switch (node.nodeTypeId) {
-            CODEC_PASTE(CHELPER_CODEC_COLLECT_STRUCTURE, CHELPER_NODE_TYPES)
+            CODEC_PASTE(CHELPER_COLLECT_STRUCTURE, CHELPER_NODE_TYPES)
             default:
                 HEDLEY_UNREACHABLE();
         }

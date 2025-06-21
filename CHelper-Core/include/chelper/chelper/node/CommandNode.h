@@ -71,6 +71,8 @@ namespace CHelper {
             NodeBase() = default;
 
             explicit NodeBase(NodeTypeId::NodeTypeId nodeTypeId);
+
+            virtual ~NodeBase();
         };
 
         class NodeSerializable : public NodeBase {
@@ -113,7 +115,7 @@ namespace CHelper {
             std::unique_ptr<NodeBase> node;
 
         private:
-            NodeAny() = default;
+            NodeAny();
 
         public:
             static NodeAny *getNodeAny();
@@ -579,8 +581,6 @@ namespace CHelper {
             NodeJsonList(const std::optional<std::string> &id,
                          const std::optional<std::u16string> &description,
                          std::string data = std::string());
-
-            void init(const std::vector<std::unique_ptr<NodeSerializable>> &dataList);
         };
 
         class NodeJsonNull : public NodeSerializable {

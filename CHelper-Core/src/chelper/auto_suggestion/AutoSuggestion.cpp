@@ -5,8 +5,8 @@
 #include <chelper/auto_suggestion/AutoSuggestion.h>
 #include <chelper/node/NodeType.h>
 
-#define CHELPER_CODEC_COLLECT_AUTO_SUGGESTION(v1)                                                                                                      \
-    case Node::NodeTypeId::v1:                                                                                                                         \
+#define CHELPER_COLLECT_AUTO_SUGGESTION(v1)                                                                                                   \
+    case Node::NodeTypeId::v1:                                                                                                                \
         isDirty = AutoSuggestion<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectSuggestions(astNode, index, suggestions); \
         break;
 
@@ -528,7 +528,7 @@ namespace CHelper::AutoSuggestion {
             Profile::push("collect suggestions: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(node->nodeTypeId)));
 #endif
             switch (astNode.node->nodeTypeId) {
-                CODEC_PASTE(CHELPER_CODEC_COLLECT_AUTO_SUGGESTION, CHELPER_NODE_TYPES)
+                CODEC_PASTE(CHELPER_COLLECT_AUTO_SUGGESTION, CHELPER_NODE_TYPES)
                 default:
                     HEDLEY_UNREACHABLE();
             }

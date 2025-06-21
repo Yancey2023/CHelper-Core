@@ -32,7 +32,7 @@
     case CHelper::Node::NodeTypeId::v1:    \
         return NodeCodec<CHelper::Node::NodeTypeId::v1>::template from_binary<isNeedConvert>(istream, t);
 
-#define CHELPER_CODEC_GET_NAME(v1)      \
+#define CHELPER_GET_NAME(v1)            \
     case CHelper::Node::NodeTypeId::v1: \
         return CHelper::Node::NodeTypeDetail<CHelper::Node::NodeTypeId::v1>::name;
 
@@ -62,36 +62,6 @@ struct serialization::Codec<std::unique_ptr<CHelper::Node::NodeSerializable>> : 
                             Type &t);
 };
 
-CODEC_ENUM(CHelper::Node::NodeBlockType::NodeBlockType, uint8_t);
-CODEC_NODE(CHelper::Node::NodeBlock, nodeBlockType)
-CODEC_NODE_NONE(CHelper::Node::NodeCommand)
-CODEC_NODE_NONE(CHelper::Node::NodeCommandName)
-CODEC_NODE(CHelper::Node::NodeIntegerWithUnit, units)
-CODEC_ENUM(CHelper::Node::NodeItemType::NodeItemType, uint8_t);
-CODEC_NODE(CHelper::Node::NodeItem, nodeItemType)
-CODEC_NODE(CHelper::Node::NodeJson, key)
-CODEC_NODE(CHelper::Node::NodeNamespaceId, key, ignoreError, contents)
-CODEC_NODE(CHelper::Node::NodeNormalId, key, ignoreError, contents)
-CODEC_NODE_NONE(CHelper::Node::NodePosition)
-CODEC_NODE_NONE(CHelper::Node::NodeRange)
-CODEC_NODE(CHelper::Node::NodeRelativeFloat, canUseCaretNotation)
-CODEC(CHelper::Node::RepeatData, id, breakNodes, repeatNodes, isEnd)
-CODEC_NODE(CHelper::Node::NodeRepeat, key)
-CODEC_NODE(CHelper::Node::NodeString, canContainSpace, ignoreLater)
-CODEC_NODE(CHelper::Node::NodeTargetSelector, isMustPlayer, isMustNPC, isOnlyOne, isWildcard)
-CODEC_NODE(CHelper::Node::NodeText, tokenTypes, data)
-CODEC_NODE(CHelper::Node::NodeBoolean, descriptionTrue, descriptionFalse)
-CODEC_NODE(CHelper::Node::NodeJsonBoolean, descriptionTrue, descriptionFalse)
-CODEC_NODE(CHelper::Node::NodeFloat, min, max)
-CODEC_NODE(CHelper::Node::NodeInteger, min, max)
-CODEC_NODE(CHelper::Node::NodeJsonInteger, min, max)
-CODEC_NODE(CHelper::Node::NodeJsonFloat, min, max)
-CODEC_NODE(CHelper::Node::NodeJsonEntry, key, value)
-CODEC_UNIQUE_PTR(CHelper::Node::NodeJsonEntry)
-CODEC_NODE(CHelper::Node::NodeJsonList, data)
-CODEC_NODE_NONE(CHelper::Node::NodeJsonNull)
-CODEC_NODE(CHelper::Node::NodeJsonObject, data)
-CODEC_NODE(CHelper::Node::NodeJsonString, data)
 CODEC_REGISTER_JSON_KEY(CHelper::Node::NodePerCommand, name, description, node, start, ast);
 CODEC_REGISTER_JSON_KEY(CHelper::Node::NodeJsonElement, id, node, start);
 
@@ -145,8 +115,6 @@ struct serialization::Codec<CHelper::Node::NodeJsonElement> : BaseCodec<CHelper:
         Codec<decltype(t.startNodeId)>::template from_binary<isNeedConvert>(istream, t.startNodeId);
     }
 };// namespace serialization
-
-CODEC_UNIQUE_PTR(CHelper::Node::NodeJsonElement)
 
 template<>
 struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::Node::NodePerCommand> {
@@ -381,8 +349,6 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
     }
 };
 
-CODEC_UNIQUE_PTR(CHelper::Node::NodePerCommand)
-
 static CHelper::Node::NodeCreateStage::NodeCreateStage currentCreateStage;
 
 template<CHelper::Node::NodeTypeId::NodeTypeId nodeTypeId>
@@ -451,6 +417,89 @@ struct NodeCodec {
     }
 };
 
+template<CHelper::Node::NodeTypeId::NodeTypeId nodeTypeId>
+struct BaseNodeUniquePtrCodec : serialization::BaseCodec<std::unique_ptr<typename CHelper::Node::NodeTypeDetail<nodeTypeId>::Type>> {
+
+    using Type = std::unique_ptr<typename CHelper::Node::NodeTypeDetail<nodeTypeId>::Type>;
+
+    static_assert(serialization::Codec<typename Type::element_type>::enable, "fail to find impl of Codec");
+
+    template<class JsonValueType>
+    static void to_json(typename JsonValueType::AllocatorType &allocator,
+                        JsonValueType &jsonValue,
+                        const Type &t) {
+        serialization::Codec<typename Type::element_type>::template to_json<JsonValueType>(allocator, jsonValue, *t);
+    }
+
+    template<class JsonValueType>
+    static void from_json(const JsonValueType &jsonValue,
+                          Type &t) {
+        t = std::make_unique<typename Type::element_type>();
+        t->nodeTypeId = nodeTypeId;
+        serialization::Codec<typename Type::element_type>::template from_json<JsonValueType>(jsonValue, *t);
+    }
+
+    template<bool isNeedConvert>
+    static void to_binary(std::ostream &ostream,
+                          const Type &t) {
+        serialization::Codec<typename Type::element_type>::template to_binary<isNeedConvert>(ostream, *t);
+    }
+
+    template<bool isNeedConvert>
+    static void from_binary(std::istream &istream,
+                            Type &t) {
+        t = std::make_unique<typename Type::element_type>();
+        t->nodeTypeId = nodeTypeId;
+        serialization::Codec<typename Type::element_type>::template from_binary<isNeedConvert>(istream, *t);
+    }
+};
+
+template<>
+struct serialization::Codec<std::unique_ptr<CHelper::Node::NodePerCommand>> : BaseNodeUniquePtrCodec<CHelper::Node::NodeTypeId::PER_COMMAND> {
+    constexpr static bool enable = true;
+};
+
+template<>
+struct serialization::Codec<std::unique_ptr<CHelper::Node::NodeJsonElement>> : BaseNodeUniquePtrCodec<CHelper::Node::NodeTypeId::JSON_ELEMENT> {
+    constexpr static bool enable = true;
+};
+
+CODEC_NODE(CHelper::Node::NodeJsonEntry, key, value)
+
+template<>
+struct serialization::Codec<std::unique_ptr<CHelper::Node::NodeJsonEntry>> : BaseNodeUniquePtrCodec<CHelper::Node::NodeTypeId::JSON_ENTRY> {
+    constexpr static bool enable = true;
+};
+
+CODEC_ENUM(CHelper::Node::NodeBlockType::NodeBlockType, uint8_t);
+CODEC_NODE(CHelper::Node::NodeBlock, nodeBlockType)
+CODEC_NODE_NONE(CHelper::Node::NodeCommand)
+CODEC_NODE_NONE(CHelper::Node::NodeCommandName)
+CODEC_NODE(CHelper::Node::NodeIntegerWithUnit, units)
+CODEC_ENUM(CHelper::Node::NodeItemType::NodeItemType, uint8_t);
+CODEC_NODE(CHelper::Node::NodeItem, nodeItemType)
+CODEC_NODE(CHelper::Node::NodeJson, key)
+CODEC_NODE(CHelper::Node::NodeNamespaceId, key, ignoreError, contents)
+CODEC_NODE(CHelper::Node::NodeNormalId, key, ignoreError, contents)
+CODEC_NODE_NONE(CHelper::Node::NodePosition)
+CODEC_NODE_NONE(CHelper::Node::NodeRange)
+CODEC_NODE(CHelper::Node::NodeRelativeFloat, canUseCaretNotation)
+CODEC(CHelper::Node::RepeatData, id, breakNodes, repeatNodes, isEnd)
+CODEC_NODE(CHelper::Node::NodeRepeat, key)
+CODEC_NODE(CHelper::Node::NodeString, canContainSpace, ignoreLater)
+CODEC_NODE(CHelper::Node::NodeTargetSelector, isMustPlayer, isMustNPC, isOnlyOne, isWildcard)
+CODEC_NODE(CHelper::Node::NodeText, tokenTypes, data)
+CODEC_NODE(CHelper::Node::NodeBoolean, descriptionTrue, descriptionFalse)
+CODEC_NODE(CHelper::Node::NodeJsonBoolean, descriptionTrue, descriptionFalse)
+CODEC_NODE(CHelper::Node::NodeFloat, min, max)
+CODEC_NODE(CHelper::Node::NodeInteger, min, max)
+CODEC_NODE(CHelper::Node::NodeJsonInteger, min, max)
+CODEC_NODE(CHelper::Node::NodeJsonFloat, min, max)
+CODEC_NODE(CHelper::Node::NodeJsonList, data)
+CODEC_NODE_NONE(CHelper::Node::NodeJsonNull)
+CODEC_NODE(CHelper::Node::NodeJsonObject, data)
+CODEC_NODE(CHelper::Node::NodeJsonString, data)
+
 class NodeTypeHelper {
 public:
     template<class JsonValueType>
@@ -500,7 +549,7 @@ public:
 
     static const char *getName(const CHelper::Node::NodeTypeId::NodeTypeId id) {
         switch (id) {
-            CODEC_PASTE(CHELPER_CODEC_GET_NAME, CHELPER_NODE_TYPES)
+            CODEC_PASTE(CHELPER_GET_NAME, CHELPER_NODE_TYPES)
             default:
                 return "UNKNOWN";
         }

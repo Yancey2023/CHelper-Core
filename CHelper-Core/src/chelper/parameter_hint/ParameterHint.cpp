@@ -5,8 +5,8 @@
 #include <chelper/node/NodeType.h>
 #include <chelper/parameter_hint/ParameterHint.h>
 
-#define CHELPER_CODEC_GET_PARAMETER_HINT(v1)                                                                                 \
-    case Node::NodeTypeId::v1:                                                                                               \
+#define CHELPER_GET_PARAMETER_HINT(v1)                                                                              \
+    case Node::NodeTypeId::v1:                                                                                      \
         parameterHint = ParameterHint<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::getHint(astNode); \
         break;
 
@@ -79,7 +79,7 @@ namespace CHelper::ParameterHint {
 #endif
             std::optional<std::u16string> parameterHint;
             switch (astNode.node->nodeTypeId) {
-                CODEC_PASTE(CHELPER_CODEC_GET_PARAMETER_HINT, CHELPER_NODE_TYPES)
+                CODEC_PASTE(CHELPER_GET_PARAMETER_HINT, CHELPER_NODE_TYPES)
                 default:
                     HEDLEY_UNREACHABLE();
             }

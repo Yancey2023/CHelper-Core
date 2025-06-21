@@ -20,7 +20,7 @@ namespace CHelper::Node {
         }
     };
 
-    void initNode(const Node::NodeBase &node, const CPack &cpack);
+    void initNode(Node::NodeBase &node, const CPack &cpack);
 
 }// namespace CHelper::Node
 
