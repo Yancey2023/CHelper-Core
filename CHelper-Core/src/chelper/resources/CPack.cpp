@@ -12,7 +12,7 @@ namespace CHelper {
 
 #ifndef CHELPER_NO_FILESYSTEM
     CPack::CPack(const std::filesystem::path &path) {
-#ifdef CHelperDebug
+#if defined(CHelperDebug) && !defined(CHELPER_NO_FILESYSTEM)
         size_t stackSize = Profile::stack.size();
 #endif
         currentCreateStage = Node::NodeCreateStage::NONE;
@@ -46,7 +46,7 @@ namespace CHelper {
         currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
-#ifdef CHelperDebug
+#if defined(CHelperDebug) && !defined(CHELPER_NO_FILESYSTEM)
         if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
             SPDLOG_WARN("error profile stack after loading cpack");
         }
@@ -56,7 +56,7 @@ namespace CHelper {
 
     CPack::CPack(const rapidjson::GenericDocument<rapidjson::UTF8<>> &j) {
         using JsonValueType = rapidjson::GenericDocument<rapidjson::UTF8<>>;
-#ifdef CHelperDebug
+#if defined(CHelperDebug) && !defined(CHELPER_NO_FILESYSTEM)
         size_t stackSize = Profile::stack.size();
 #endif
         currentCreateStage = Node::NodeCreateStage::NONE;
@@ -85,7 +85,7 @@ namespace CHelper {
         currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
-#ifdef CHelperDebug
+#if defined(CHelperDebug) && !defined(CHELPER_NO_FILESYSTEM)
         if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
             SPDLOG_WARN("error profile stack after loading cpack");
         }
@@ -93,7 +93,7 @@ namespace CHelper {
     }
 
     CPack::CPack(std::istream &istream) {
-#ifdef CHelperDebug
+#if defined(CHelperDebug) && !defined(CHELPER_NO_FILESYSTEM)
         size_t stackSize = Profile::stack.size();
 #endif
         currentCreateStage = Node::NodeCreateStage::NONE;
@@ -120,7 +120,7 @@ namespace CHelper {
         currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
-#ifdef CHelperDebug
+#if defined(CHelperDebug) && !defined(CHELPER_NO_FILESYSTEM)
         if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
             SPDLOG_WARN("error profile stack after loading cpack");
         }

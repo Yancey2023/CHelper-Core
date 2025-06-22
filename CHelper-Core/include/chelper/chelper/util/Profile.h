@@ -12,19 +12,25 @@
  */
 namespace CHelper::Profile {
 
+#ifndef CHELPER_NO_FILESYSTEM
     extern std::vector<std::string> stack;
+#endif
 
     template<typename... T>
     void push(fmt::format_string<T...> fmt, T &&...args) {
+#ifndef CHELPER_NO_FILESYSTEM
         stack.push_back(fmt::format(fmt, args...));
+#endif
     }
 
     void pop();
 
     template<typename... T>
     void next(const std::string &fmt, T &&...args) {
+#ifndef CHELPER_NO_FILESYSTEM
         pop();
         push(fmt, args...);
+#endif
     }
 
     void clear();
