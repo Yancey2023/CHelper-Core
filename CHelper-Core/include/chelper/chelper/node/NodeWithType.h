@@ -69,19 +69,6 @@ namespace CHelper::Node {
         template<class NodeType>
         NodeWithType(NodeType &node);
 
-#ifdef CHelperDebug
-        ~NodeWithType();
-
-        NodeWithType(NodeWithType &node);
-
-        NodeWithType(const NodeWithType &node);
-
-        NodeWithType(NodeWithType &&node);
-
-        NodeWithType &operator=(const NodeWithType &node);
-
-        NodeWithType &operator=(NodeWithType &&node);
-#else
         NodeWithType(NodeWithType &node) = default;
 
         NodeWithType(const NodeWithType &node) = default;
@@ -91,7 +78,6 @@ namespace CHelper::Node {
         NodeWithType &operator=(const NodeWithType &node) = default;
 
         NodeWithType &operator=(NodeWithType &&node) = default;
-#endif
     };
 
     class FreeableNodeWithTypes {
