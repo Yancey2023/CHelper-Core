@@ -64,12 +64,6 @@ namespace CHelper {
         class NodeJsonString;
 
         class NodeBase {
-#ifdef CHelperDebug
-        public:
-            int times = 0;
-
-            virtual ~NodeBase();
-#endif
         };
 
         class NodeSerializable : public NodeBase {
@@ -421,8 +415,8 @@ namespace CHelper {
 
         struct RepeatData {
             std::string id;
-            std::vector<NodeWithType> breakNodes;
-            std::vector<std::vector<NodeWithType>> repeatNodes;
+            FreeableNodeWithTypes breakNodes;
+            std::vector<FreeableNodeWithTypes> repeatNodes;
             std::vector<bool> isEnd;
         };
 
@@ -476,7 +470,7 @@ namespace CHelper {
         class NodeText : public NodeSerializable {
         public:
             static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::TEXT;
-            std::optional<std::vector<TokenType::TokenType>> tokenTypes;
+            std::optional<std::vector<TokenType::TokenType>> tokenTypes;// TODO 这个似乎是历史遗留
             std::shared_ptr<NormalId> data;
             std::function<ASTNode(const NodeWithType &node, TokenReader &tokenReader)> getTextASTNode;
 
@@ -630,9 +624,6 @@ namespace CHelper {
             static_assert(!std::is_same_v<NodeType, NodeWithType>, "NodeWithType is not allowed to be used as NodeType");
             static_assert(!std::is_pointer_v<NodeType>, "NodeType must not be a pointer");
             static_assert(NodeType::nodeTypeId <= MAX_TYPE_ID, "nodeTypeId is invalid");
-#ifdef CHelperDebug
-            ++data->times;
-#endif
         }
 
     }// namespace Node

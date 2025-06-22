@@ -194,8 +194,8 @@ namespace CHelper {
             content.reserve(item.repeatNodes.size());
             for (const auto &item2: item.repeatNodes) {
                 std::vector<Node::NodeWithType> perContent;
-                perContent.reserve(item2.size());
-                for (const auto &item3: item2) {
+                perContent.reserve(item2.nodes.size());
+                for (const auto &item3: item2.nodes) {
                     auto nodeWrapped = new Node::NodeWrapped(item3);
                     perContent.emplace_back(*nodeWrapped);
                     cacheNodes.nodes.emplace_back(*nodeWrapped);
@@ -205,8 +205,8 @@ namespace CHelper {
                 cacheNodes.nodes.emplace_back(*node);
             }
             std::vector<Node::NodeWithType> breakChildNodes;
-            breakChildNodes.reserve(item.breakNodes.size());
-            for (const auto &item2: item.breakNodes) {
+            breakChildNodes.reserve(item.breakNodes.nodes.size());
+            for (const auto &item2: item.breakNodes.nodes) {
                 auto nodeWrapped = new Node::NodeWrapped(item2);
                 breakChildNodes.emplace_back(*nodeWrapped);
                 cacheNodes.nodes.emplace_back(*nodeWrapped);
@@ -221,11 +221,11 @@ namespace CHelper {
         }
         for (const auto &item: repeatNodeData) {
             for (const auto &item2: item.repeatNodes) {
-                for (const auto &item3: item2) {
+                for (const auto &item3: item2.nodes) {
                     Node::initNode(item3, *this);
                 }
             }
-            for (const auto &item2: item.breakNodes) {
+            for (const auto &item2: item.breakNodes.nodes) {
                 Node::initNode(item2, *this);
             }
         }

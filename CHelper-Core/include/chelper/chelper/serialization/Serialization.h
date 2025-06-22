@@ -449,9 +449,6 @@ struct NodeCodec {
             }
             t.nodeTypeId = nodeTypeId;
             t.data = node;
-#ifdef CHelperDebug
-            ++t.data->times;
-#endif
         }
     }
 
@@ -481,9 +478,6 @@ struct NodeCodec {
             }
             t.nodeTypeId = nodeTypeId;
             t.data = node;
-#ifdef CHelperDebug
-            ++t.data->times;
-#endif
         }
     }
 };

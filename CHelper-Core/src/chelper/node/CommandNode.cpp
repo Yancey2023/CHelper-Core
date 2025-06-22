@@ -6,14 +6,6 @@
 
 namespace CHelper::Node {
 
-#ifdef CHelperDebug
-    NodeBase::~NodeBase() {
-        if (this->times != 0) {
-            fmt::println("node destroy unexpected");
-        }
-    }
-#endif
-
     NodeSerializable::NodeSerializable(const std::optional<std::string> &id,
                                        const std::optional<std::u16string> &description,
                                        bool isMustAfterSpace)
