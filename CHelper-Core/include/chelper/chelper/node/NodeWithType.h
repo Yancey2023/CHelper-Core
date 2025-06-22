@@ -83,6 +83,14 @@ namespace CHelper::Node {
         NodeWithType &operator=(NodeWithType &&node);
 #else
         NodeWithType(NodeWithType &node) = default;
+
+        NodeWithType(const NodeWithType &node) = default;
+
+        NodeWithType(NodeWithType &&node) = default;
+
+        NodeWithType &operator=(const NodeWithType &node) = default;
+
+        NodeWithType &operator=(NodeWithType &&node) = default;
 #endif
     };
 

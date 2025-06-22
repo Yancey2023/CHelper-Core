@@ -64,8 +64,8 @@ namespace CHelper {
         class NodeJsonString;
 
         class NodeBase {
-        public:
 #ifdef CHelperDebug
+        public:
             int times = 0;
 
             virtual ~NodeBase();
@@ -630,7 +630,9 @@ namespace CHelper {
             static_assert(!std::is_same_v<NodeType, NodeWithType>, "NodeWithType is not allowed to be used as NodeType");
             static_assert(!std::is_pointer_v<NodeType>, "NodeType must not be a pointer");
             static_assert(NodeType::nodeTypeId <= MAX_TYPE_ID, "nodeTypeId is invalid");
+#ifdef CHelperDebug
             ++data->times;
+#endif
         }
 
     }// namespace Node
