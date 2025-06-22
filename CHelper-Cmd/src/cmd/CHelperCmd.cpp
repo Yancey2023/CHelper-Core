@@ -6,14 +6,14 @@
 #include <chelper/parser/Parser.h>
 
 int main() {
-    testDir();
+    // testDir();
     // testBin();
-    return 0;
-    // bool isSuccess = true;
-    // isSuccess = outputFile(CHelper::Test::writeSingleJson, "json") && isSuccess;
-    // isSuccess = outputFile(CHelper::Test::writeBinary, "cpack") && isSuccess;
-    // isSuccess = outputOld2New() && isSuccess;
-    // return isSuccess ? 0 : -1;
+    // return 0;
+    bool isSuccess = true;
+    isSuccess = outputFile(CHelper::Test::writeSingleJson, "json") && isSuccess;
+    isSuccess = outputFile(CHelper::Test::writeBinary, "cpack") && isSuccess;
+    isSuccess = outputOld2New() && isSuccess;
+    return isSuccess ? 0 : -1;
 }
 
 [[maybe_unused]] void testDir() {

@@ -27,8 +27,6 @@ namespace CHelper {
     namespace ASTNodeId {
         enum ASTNodeId : uint8_t {
             NONE,
-            COMPOUND,
-            NEXT_NODE,
             NODE_JSON_ALL_LIST,
             NODE_STRING_INNER,
             NODE_BLOCK_BLOCK_ID,

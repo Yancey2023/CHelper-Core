@@ -191,24 +191,20 @@ namespace CHelper::SyntaxHighlight {
     };
 
     void collectSyntaxResult(const ASTNode &astNode, SyntaxResult &syntaxResult) {
-        bool isCompound = astNode.id == ASTNodeId::COMPOUND;
-        bool isNext = astNode.id == ASTNodeId::NEXT_NODE;
-        if (HEDLEY_UNLIKELY(!isCompound && !isNext)) {
 #ifdef CHelperTest
-            Profile::push("collect color: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(astNode.node->nodeTypeId)));
+        Profile::push("collect color: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(astNode.node->nodeTypeId)));
 #endif
-            bool isDirty;
-            switch (astNode.node.nodeTypeId) {
-                CODEC_PASTE(CHELPER_COLLECT_SYNTAX, CHELPER_NODE_TYPES)
-                default:
-                    HEDLEY_UNREACHABLE();
-            }
+        bool isDirty;
+        switch (astNode.node.nodeTypeId) {
+            CODEC_PASTE(CHELPER_COLLECT_SYNTAX, CHELPER_NODE_TYPES)
+            default:
+                HEDLEY_UNREACHABLE();
+        }
 #ifdef CHelperTest
-            Profile::pop();
+        Profile::pop();
 #endif
-            if (HEDLEY_UNLIKELY(isDirty)) {
-                return;
-            }
+        if (HEDLEY_UNLIKELY(isDirty)) {
+            return;
         }
         switch (astNode.mode) {
             case ASTNodeMode::NONE:

@@ -521,7 +521,7 @@ namespace CHelper::AutoSuggestion {
         if (HEDLEY_LIKELY(index < astNode.tokens.getStartIndex() || index > astNode.tokens.getEndIndex())) {
             return;
         }
-        if (HEDLEY_UNLIKELY(astNode.id != ASTNodeId::COMPOUND && astNode.id != ASTNodeId::NEXT_NODE && !astNode.isAllSpaceError())) {
+        if (HEDLEY_UNLIKELY(!astNode.isAllSpaceError())) {
             bool isDirty;
 #ifdef CHelperTest
             Profile::push("collect suggestions: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(node->nodeTypeId)));

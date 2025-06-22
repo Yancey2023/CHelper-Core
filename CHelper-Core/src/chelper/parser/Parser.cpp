@@ -58,7 +58,7 @@ namespace CHelper::Parser {
                 tokenReader.push();
                 if (HEDLEY_UNLIKELY((isMustAfterSpace0 || isMustAfterSpace) && node.innerNode.nodeTypeId != Node::NodeTypeId::LF && tokenReader.skipSpace() == 0)) {
                     TokensView tokens = tokenReader.collect();
-                    return ASTNode::simpleNode(node, tokens, ErrorReason::requireSpace(tokens), ASTNodeId::COMPOUND);
+                    return ASTNode::simpleNode(node, tokens, ErrorReason::requireSpace(tokens));
                 }
                 tokenReader.pop();
             }
@@ -68,7 +68,7 @@ namespace CHelper::Parser {
             ASTNode currentASTNode = parse(node.innerNode, tokenReader, cpack);
             DEBUG_GET_NODE_END(node.innerNode, index);
             if (HEDLEY_UNLIKELY(currentASTNode.isError() || node.nextNodes.empty())) {
-                return ASTNode::andNode(node, {std::move(currentASTNode)}, tokenReader.collect(), nullptr, ASTNodeId::COMPOUND);
+                return ASTNode::andNode(node, {std::move(currentASTNode)}, tokenReader.collect());
             }
             //子节点
             std::vector<ASTNode> childASTNodes;
@@ -80,8 +80,8 @@ namespace CHelper::Parser {
             }
             tokenReader.push();
             tokenReader.skipToLF();
-            ASTNode nextASTNode = ASTNode::orNode(node, std::move(childASTNodes), tokenReader.collect(), nullptr, ASTNodeId::NEXT_NODE);
-            return ASTNode::andNode(node, {std::move(currentASTNode), std::move(nextASTNode)}, tokenReader.collect(), nullptr, ASTNodeId::COMPOUND);
+            ASTNode nextASTNode = ASTNode::orNode(node, std::move(childASTNodes), tokenReader.collect());
+            return ASTNode::andNode(node, {std::move(currentASTNode), std::move(nextASTNode)}, tokenReader.collect());
         }
 
         static ASTNode getASTNode(const Node::NodeWrapped &node, TokenReader &tokenReader, const CPack *cpack) {

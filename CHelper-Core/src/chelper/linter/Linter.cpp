@@ -144,7 +144,7 @@ namespace CHelper::Linter {
     };
 
     void lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
-        if (HEDLEY_UNLIKELY(astNode.id != ASTNodeId::COMPOUND && astNode.id != ASTNodeId::NEXT_NODE && !astNode.isAllSpaceError())) {
+        if (HEDLEY_UNLIKELY(!astNode.isAllSpaceError())) {
 #ifdef CHelperTest
             Profile::push("collect id errors: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(node->nodeTypeId)));
 #endif

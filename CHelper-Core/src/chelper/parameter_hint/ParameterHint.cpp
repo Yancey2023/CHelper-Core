@@ -72,7 +72,7 @@ namespace CHelper::ParameterHint {
         if (HEDLEY_UNLIKELY(index < astNode.tokens.getStartIndex() || index > astNode.tokens.getEndIndex())) {
             return std::nullopt;
         }
-        if (HEDLEY_UNLIKELY(astNode.id != ASTNodeId::COMPOUND && astNode.id != ASTNodeId::NEXT_NODE && !astNode.isAllSpaceError())) {
+        if (HEDLEY_UNLIKELY(!astNode.isAllSpaceError())) {
 #ifdef CHelperTest
             Profile::push("get parameter hint: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(astNode.node->nodeTypeId)));
 #endif
