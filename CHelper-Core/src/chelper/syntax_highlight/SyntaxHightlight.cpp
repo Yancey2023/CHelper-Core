@@ -91,7 +91,7 @@ namespace CHelper::SyntaxHighlight {
     template<>
     struct SyntaxToken<Node::NodeNormalId> {
         static bool collectSyntax(const ASTNode &astNode, SyntaxResult &syntaxResult) {
-            const auto &node = *static_cast<const Node::NodeNormalId *>(astNode.node.data);
+            const auto &node = *reinterpret_cast<const Node::NodeNormalId *>(astNode.node.data);
             if (node.key.has_value()) {
                 syntaxResult.update(astNode.tokens, SyntaxTokenType::ID);
             } else if (node.id != "TARGET_SELECTOR_VARIABLE") {
@@ -152,7 +152,7 @@ namespace CHelper::SyntaxHighlight {
     template<>
     struct SyntaxToken<Node::NodeText> {
         static bool collectSyntax(const ASTNode &astNode, SyntaxResult &syntaxResult) {
-            const auto &node = *static_cast<const Node::NodeText *>(astNode.node.data);
+            const auto &node = *reinterpret_cast<const Node::NodeText *>(astNode.node.data);
             if (node.id != "TARGET_SELECTOR_ARGUMENT_EQUAL" && node.id != "TARGET_SELECTOR_ARGUMENT_NOT_EQUAL") {
                 syntaxResult.update(astNode.tokens, SyntaxTokenType::LITERAL);
             } else {

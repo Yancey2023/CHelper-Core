@@ -61,7 +61,7 @@ namespace CHelper::ParameterHint {
     struct ParameterHint<Node::NodeRepeat> {
         static std::optional<std::u16string> getHint(const ASTNode &astNode) {
             if (HEDLEY_UNLIKELY(astNode.tokens.isEmpty())) {
-                return static_cast<const Node::NodeRepeat *>(astNode.node.data)->description;
+                return reinterpret_cast<const Node::NodeRepeat *>(astNode.node.data)->description;
             } else {
                 return std::nullopt;
             }

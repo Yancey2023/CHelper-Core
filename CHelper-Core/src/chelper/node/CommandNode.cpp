@@ -2,6 +2,8 @@
 // Created by Yancey on 2023/11/10.
 //
 
+#include "chelper/node/NodeType.h"
+
 #include <chelper/node/CommandNode.h>
 
 namespace CHelper::Node {
@@ -256,8 +258,28 @@ namespace CHelper::Node {
           normalId(getNormalId(symbol, description)),
           isAddSpace(isAddSpace) {}
 
+#ifdef CHelperDebug
+#define CHELPER_IS_BASE_OF_NODE_SERIALIZABLE(v1) \
+    case Node::NodeTypeId::v1:                   \
+        return std::is_base_of_v<NodeSerializable, NodeTypeDetail<Node::NodeTypeId::v1>::Type>;
+
+    bool isNodeSerializable(NodeWithType innerNode) {
+        switch (innerNode.nodeTypeId) {
+            CODEC_PASTE(CHELPER_IS_BASE_OF_NODE_SERIALIZABLE, CHELPER_NODE_TYPES)
+            default:
+                return false;
+        }
+    }
+#endif
+
     NodeWrapped::NodeWrapped(NodeWithType innerNode)
-        : innerNode(std::move(innerNode)) {}
+        : innerNode(innerNode) {
+#ifdef CHelperDebug
+        if (!isNodeSerializable(innerNode)) {
+            throw std::runtime_error("invalid innerNode in NodeWrapped");
+        }
+#endif
+    }
 
     [[nodiscard]] NodeSerializable &NodeWrapped::getNodeSerializable() const {
         return *static_cast<NodeSerializable *>(innerNode.data);

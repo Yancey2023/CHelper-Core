@@ -2,21 +2,23 @@
 // Created by Yancey on 2025-06-20.
 //
 
+#include "chelper/node/CommandNode.h"
+
+
 #include <chelper/node/NodeInitialization.h>
 #include <chelper/resources/CPack.h>
 #include <chelper/serialization/Serialization.h>
 
-#define CHELPER_INIT(v1)                                                                                                              \
-    case Node::NodeTypeId::v1:                                                                                                        \
-        NodeInitialization<Node::NodeTypeId::v1>::init(*static_cast<NodeTypeDetail<Node::NodeTypeId::v1>::Type *>(node.data), cpack); \
+#define CHELPER_INIT(v1)                                                                                                                   \
+    case Node::NodeTypeId::v1:                                                                                                             \
+        NodeInitialization<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::init(*reinterpret_cast<NodeTypeDetail<Node::NodeTypeId::v1>::Type *>(node.data), cpack); \
         break;
 
 namespace CHelper::Node {
 
     template<>
-    struct NodeInitialization<NodeTypeId::BLOCK> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::BLOCK>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeBlock> {
+        static void init(NodeBlock &node, const CPack &cpack) {
             node.blockIds = cpack.blockIds;
             node.nodeBlockId = NodeNamespaceId("BLOCK_ID", u"方块ID", "block", true);
             initNode(node.nodeBlockId, cpack);
@@ -24,17 +26,15 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::COMMAND> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::COMMAND>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeCommand> {
+        static void init(NodeCommand &node, const CPack &cpack) {
             node.commands = cpack.commands.get();
         }
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::COMMAND_NAME> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::COMMAND_NAME>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeCommandName> {
+        static void init(NodeCommandName &node, const CPack &cpack) {
             node.commands = cpack.commands.get();
         }
     };
@@ -42,9 +42,8 @@ namespace CHelper::Node {
     static NodeInteger nodeInteger("INTEGER", u"整数", std::nullopt, std::nullopt);
 
     template<>
-    struct NodeInitialization<NodeTypeId::INTEGER_WITH_UNIT> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::INTEGER_WITH_UNIT>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeIntegerWithUnit> {
+        static void init(NodeIntegerWithUnit &node, const CPack &cpack) {
             node.nodeUnits = NodeNormalId("UNITS", u"单位", node.units, false);
             node.nodeIntegerWithUnit = NodeAnd({nodeInteger, node.nodeUnits});
             node.nodeIntegerMaybeHaveUnit = NodeOr({node.nodeIntegerWithUnit, nodeInteger}, false, true);
@@ -52,9 +51,8 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::ITEM> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::ITEM>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeItem> {
+        static void init(NodeItem &node, const CPack &cpack) {
             node.itemIds = cpack.itemIds;
             node.nodeItemId = NodeNamespaceId("ITEM_ID", u"物品ID", "item", true);
             node.nodeComponent = NodeJson("ITEM_COMPONENT", u"物品组件", "components");
@@ -64,9 +62,8 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::JSON> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::JSON>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeJson> {;
+        static void init(NodeJson &node, const CPack &cpack) {
             for (const auto &item: cpack.jsonNodes) {
                 if (HEDLEY_UNLIKELY(item.id == node.key)) {
                     node.nodeJson = item;
@@ -80,9 +77,8 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::NAMESPACE_ID> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::NAMESPACE_ID>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeNamespaceId> {
+        static void init(NodeNamespaceId &node, const CPack &cpack) {
             if (HEDLEY_LIKELY(node.contents.has_value())) {
                 node.customContents = node.contents.value();
             } else if (HEDLEY_LIKELY(node.key.has_value())) {
@@ -101,9 +97,8 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::NORMAL_ID> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::NORMAL_ID>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeNormalId> {
+        static void init(NodeNormalId &node, const CPack &cpack) {
             if (HEDLEY_UNLIKELY(node.getNormalIdASTNode == nullptr)) {
                 node.getNormalIdASTNode = [](const NodeWithType &node, TokenReader &tokenReader) -> ASTNode {
                     return tokenReader.readUntilSpace(node);
@@ -127,9 +122,8 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::PER_COMMAND> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::PER_COMMAND>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodePerCommand> {
+        static void init(NodePerCommand &node, const CPack &cpack) {
             for (const auto &item: node.wrappedNodes) {
                 Profile::push(R"(init node {}: "{}")", FORMAT_ARG(NodeTypeHelper::getName(item.nodeTypeId)), FORMAT_ARG(item.getNodeSerializable().id.value_or("UNKNOWN")));
                 initNode(item.innerNode, cpack);
@@ -167,9 +161,8 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::REPEAT> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::REPEAT>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeRepeat> {
+        static void init(NodeRepeat &node, const CPack &cpack) {
             const auto &it = cpack.repeatNodes.find(node.key);
             if (HEDLEY_LIKELY(it != cpack.repeatNodes.end())) {
                 node.repeatData = it->second.first;
@@ -225,9 +218,8 @@ namespace CHelper::Node {
     static NodeRange nodeHasItemSlotRange("TARGET_SELECTOR_ARGUMENT_HASITEM_SLOT_SLOT_RANGE", u"目标选择器hasitem要检测的槽位范围");
 
     template<>
-    struct NodeInitialization<NodeTypeId::TARGET_SELECTOR> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::TARGET_SELECTOR>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeTargetSelector> {
+        static void init(NodeTargetSelector &node, const CPack &cpack) {
             node.nodeItem = NodeNamespaceId("ITEM_ID", u"物品ID", "item", true),
             node.nodeFamily = NodeNormalId("FAMILIES", u"族", "entityFamily", true);
             node.nodeGameMode = NodeNormalId("GAME_MODES", u"游戏模式", "gameMode", true),
@@ -270,7 +262,7 @@ namespace CHelper::Node {
                             {u"m", u"游戏模式", true, node.nodeGameMode},
                             {u"c", u"目标数量(按照距离排序)", false, nodeIntegerInTargetSelector},
                     }),
-            node.nodeArguments = NodeList(node.nodeLeft, node.nodeArgument, nodeSeparator, nodeRight);
+            node.nodeArguments = NodeList(NodeTargetSelector::nodeLeft, node.nodeArgument, nodeSeparator, nodeRight);
             initNode(node.nodeItem, cpack);
             initNode(node.nodeFamily, cpack);
             initNode(node.nodeGameMode, cpack);
@@ -286,9 +278,8 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::TEXT> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::TEXT>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeText> {
+        static void init(NodeText &node, const CPack &cpack) {
             node.getTextASTNode = [](const NodeWithType &node, TokenReader &tokenReader) -> ASTNode {
                 return tokenReader.readUntilSpace(node);
             };
@@ -305,9 +296,8 @@ namespace CHelper::Node {
     static NodeList nodeList(nodeLeft2, *NodeAny::getNodeAny(), nodeSeparator, nodeRight2);
 
     template<>
-    struct NodeInitialization<NodeTypeId::ANY> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::ANY>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeAny> {
+        static void init(NodeAny &node, const CPack &cpack) {
             if (HEDLEY_UNLIKELY(!node.node.has_value())) {
                 node.node = NodeOr({nodeRelativeFloat, nodeBoolean, nodeString, nodeObject, nodeRange, nodeList}, false);
             }
@@ -315,24 +305,22 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::WRAPPED> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::WRAPPED>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeWrapped> {
+        static void init(NodeWrapped &node, const CPack &cpack) {
             initNode(node.innerNode, cpack);
         }
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::JSON_ENTRY> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::JSON_ENTRY>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeJsonEntry> {
+        static void init(NodeJsonEntry &node, const CPack &cpack) {
         }
-        static void init(NodeType &node, const std::vector<NodeWithType> &dataList) {
+        static void init(NodeJsonEntry &node, const std::vector<NodeWithType> &dataList) {
             std::vector<NodeWithType> valueNodes;
             for (const auto &item: node.value) {
                 bool notFind = true;
                 for (const auto &item2: dataList) {
-                    if (HEDLEY_UNLIKELY(static_cast<const NodeSerializable *>(item2.data)->id == item)) {
+                    if (HEDLEY_UNLIKELY(reinterpret_cast<const NodeSerializable *>(item2.data)->id == item)) {
                         valueNodes.emplace_back(item2);
                         notFind = false;
                         break;
@@ -353,13 +341,12 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::JSON_LIST> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::JSON_LIST>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeJsonList> {
+        static void init(NodeJsonList &node, const CPack &cpack) {
         }
-        static void init(NodeType &node, const std::vector<NodeWithType> &dataList) {
+        static void init(NodeJsonList &node, const std::vector<NodeWithType> &dataList) {
             for (const auto &item: dataList) {
-                if (HEDLEY_UNLIKELY(static_cast<const NodeSerializable *>(item.data)->id == node.data)) {
+                if (HEDLEY_UNLIKELY(reinterpret_cast<const NodeSerializable *>(item.data)->id == node.data)) {
                     node.nodeList = NodeList(Node::NodeJsonList::nodeLeft, item, nodeSeparator, nodeRight);
                     return;
                 }
@@ -372,16 +359,15 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::JSON_ELEMENT> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::JSON_ELEMENT>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeJsonElement> {
+        static void init(NodeJsonElement &node, const CPack &cpack) {
             Profile::push("linking startNode \"{}\" to nodes", FORMAT_ARG(node.startNodeId));
             for (const auto &item: node.nodes.nodes) {
                 initNode(item, cpack);
             }
             if (HEDLEY_LIKELY(node.startNodeId != "LF")) {
                 for (auto &item: node.nodes.nodes) {
-                    if (HEDLEY_UNLIKELY(static_cast<const NodeSerializable *>(item.data)->id == node.startNodeId)) {
+                    if (HEDLEY_UNLIKELY(reinterpret_cast<const NodeSerializable *>(item.data)->id == node.startNodeId)) {
                         node.start = item;
                         break;
                     }
@@ -392,10 +378,10 @@ namespace CHelper::Node {
             }
             for (auto &item: node.nodes.nodes) {
                 if (HEDLEY_UNLIKELY(item.nodeTypeId == NodeTypeId::JSON_LIST)) {
-                    NodeInitialization<NodeTypeId::JSON_LIST>::init(*static_cast<NodeJsonList *>(item.data), node.nodes.nodes);
+                    NodeInitialization<NodeJsonList>::init(*reinterpret_cast<NodeJsonList *>(item.data), node.nodes.nodes);
                 } else if (HEDLEY_UNLIKELY(item.nodeTypeId == NodeTypeId::JSON_OBJECT)) {
-                    for (auto &item2: static_cast<NodeJsonObject *>(item.data)->data) {
-                        NodeInitialization<NodeTypeId::JSON_ENTRY>::init(item2, node.nodes.nodes);
+                    for (auto &item2: reinterpret_cast<NodeJsonObject *>(item.data)->data) {
+                        NodeInitialization<NodeJsonEntry>::init(item2, node.nodes.nodes);
                     }
                 }
             }
@@ -404,9 +390,8 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::JSON_OBJECT> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::JSON_OBJECT>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeJsonObject> {
+        static void init(NodeJsonObject &node, const CPack &cpack) {
             if (HEDLEY_UNLIKELY(node.data.empty())) {
                 node.nodeElement1 = std::nullopt;
             } else {
@@ -432,9 +417,8 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeTypeId::JSON_STRING> {
-        using NodeType = typename NodeTypeDetail<NodeTypeId::JSON_STRING>::Type;
-        static void init(NodeType &node, const CPack &cpack) {
+    struct NodeInitialization<NodeJsonString> {
+        static void init(NodeJsonString &node, const CPack &cpack) {
             if (HEDLEY_UNLIKELY(node.data.has_value())) {
                 for (const auto &item: node.data.value().nodes) {
                     initNode(item, cpack);

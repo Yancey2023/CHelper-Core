@@ -2,10 +2,10 @@
 // Created by Yancey on 2024-5-21.
 //
 
-#include <chelper/node/json/NodeJsonNull.h>
-#include <chelper/node/template/NodeTemplateBoolean.h>
-#include <chelper/node/template/NodeTemplateNumber.h>
+#include <chelper/node/CommandNode.h>
+#include <chelper/node/NodeInitialization.h>
 #include <chelper/resources/CPack.h>
+#include <chelper/serialization/Serialization.h>
 #include <gtest/gtest.h>
 
 namespace std {
@@ -197,7 +197,7 @@ namespace CHelper {
 }// namespace CHelper
 
 template<class T, bool isConvertEndian>
-void test(const std::function<T()>& getInstance) {
+void test(const std::function<T()> &getInstance) {
     std::ostringstream oss;
     T t1 = getInstance();
     serialization::Codec<T>::template to_binary<isConvertEndian>(oss, t1);
@@ -209,32 +209,32 @@ void test(const std::function<T()>& getInstance) {
 }
 
 template<class T>
-void test(const std::function<T()>& getInstance) {
+void test(const std::function<T()> &getInstance) {
     test<T, true>(getInstance);
     test<T, false>(getInstance);
 }
 
 template<class T, bool isConvertEndian>
-void testNode(CHelper::CPack &cpack, const std::function<T()>& getInstance) {
+void testNode(CHelper::CPack &cpack, const std::function<T()> &getInstance) {
     std::ostringstream oss;
     T t1 = getInstance();
     serialization::Codec<T>::template to_binary<isConvertEndian>(oss, t1);
     std::istringstream iss(oss.str());
     T t2;
     serialization::Codec<T>::template from_binary<isConvertEndian>(iss, t2);
-    t2.init(cpack);
+    CHelper::Node::NodeInitialization<T>::init(t2, cpack);
     EXPECT_EQ(t1, t2);
     EXPECT_FALSE(iss.eof());
 }
 
 template<class T>
-void testNode(CHelper::CPack &cpack, const std::function<T()>& getInstance) {
+void testNode(CHelper::CPack &cpack, const std::function<T()> &getInstance) {
     testNode<T, true>(cpack, getInstance);
     testNode<T, false>(cpack, getInstance);
 }
 
 template<class T>
-void test(const std::vector<std::function<T()>>& getInstance) {
+void test(const std::vector<std::function<T()>> &getInstance) {
     for (const auto &item: getInstance) {
         test(item);
     }
@@ -242,7 +242,7 @@ void test(const std::vector<std::function<T()>>& getInstance) {
 
 template<class T>
 void testNode(CHelper::CPack &cpack,
-              const std::vector<std::function<T()>>& getInstance) {
+              const std::vector<std::function<T()>> &getInstance) {
     for (const auto &item: getInstance) {
         testNode(cpack, item);
     }
@@ -325,9 +325,11 @@ TEST(BinaryUtilTest, ItemId) {
             resourceDir / "resources" / "beta" / "vanilla" / "id" / "item.json");
     std::vector<std::function<CHelper::ItemId()>> getInstance;
     for (const auto &item: serialization::find_array_member_or_throw(j, "content")) {
-        CHelper::ItemId itemId;
-        serialization::Codec<CHelper::NamespaceId>::from_json(item, itemId);
-        getInstance.emplace_back([itemId]() { return itemId; });
+        getInstance.emplace_back([&item]() {
+            CHelper::ItemId itemId;
+            serialization::Codec<CHelper::ItemId>::from_json(item, itemId);
+            return itemId;
+        });
     }
     test<CHelper::ItemId>(getInstance);
 }
@@ -438,10 +440,8 @@ TEST(BinaryUtilTest, NodeJsonBoolean) {
         CHelper::Profile::printAndClear(e);
         exit(-1);
     }
-    auto node = CHelper::Node::NodeJsonBoolean::make(
-            "ID", u"description", u"descriptionTrue", u"descriptionFalse");
-    testNode<CHelper::Node::NodeJsonBoolean>(
-            *cpack, [&node]() { return *node; });
+    CHelper::Node::NodeJsonBoolean node("ID", u"description", u"descriptionTrue", u"descriptionFalse");
+    testNode<CHelper::Node::NodeJsonBoolean>(*cpack, [&node]() { return node; });
 }
 
 TEST(BinaryUtilTest, NodeJsonInteger) {

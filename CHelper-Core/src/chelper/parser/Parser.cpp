@@ -53,7 +53,7 @@ namespace CHelper::Parser {
     struct Parser<Node::NodeWrapped> {
         static ASTNode getASTNodeWithIsMustAfterSpace(const Node::NodeWrapped &node, TokenReader &tokenReader, const CPack *cpack, bool isMustAfterSpace) {
             //空格检测
-            bool isMustAfterSpace0 = reinterpret_cast<const Node::NodeSerializable &>(node.innerNode).getIsMustAfterSpace();
+            bool isMustAfterSpace0 = reinterpret_cast<const Node::NodeSerializable *>(node.innerNode.data)->getIsMustAfterSpace();
             if (node.innerNode.nodeTypeId != Node::NodeTypeId::REPEAT) {
                 tokenReader.push();
                 if (HEDLEY_UNLIKELY((isMustAfterSpace0 || isMustAfterSpace) && node.innerNode.nodeTypeId != Node::NodeTypeId::LF && tokenReader.skipSpace() == 0)) {
@@ -756,14 +756,14 @@ namespace CHelper::Parser {
             for (size_t i = 0; i < node.childNodes.size(); ++i) {
                 const auto &item = node.childNodes[i];
                 if (item.nodeTypeId == Node::NodeTypeId::WRAPPED) {
-                    const auto *nodeWrapped = static_cast<const Node::NodeWrapped *>(item.data);
+                    const auto *nodeWrapped = reinterpret_cast<const Node::NodeWrapped *>(item.data);
                     ASTNode childNode = Parser<Node::NodeWrapped>::getASTNodeWithIsMustAfterSpace(*nodeWrapped, tokenReader, cpack, isMustAfterSpace);
                     bool isError = childNode.isError();
                     childASTNodes.push_back(std::move(childNode));
                     if (HEDLEY_UNLIKELY(isError)) {
                         break;
                     }
-                    isMustAfterSpace = static_cast<const Node::NodeSerializable *>(nodeWrapped->innerNode.data)->getIsMustAfterSpace();
+                    isMustAfterSpace = reinterpret_cast<const Node::NodeSerializable *>(nodeWrapped->innerNode.data)->getIsMustAfterSpace();
                 } else {
                     ASTNode childNode = parse(item, tokenReader, cpack);
                     bool isError = childNode.isError();
@@ -848,7 +848,7 @@ namespace CHelper::Parser {
             }
             //value
             if (HEDLEY_UNLIKELY(it == node.equalDatas.end())) {
-                Node::NodeInitialization<Node::NodeTypeId::ANY>::init(*Node::NodeAny::getNodeAny(), *cpack);
+                Node::NodeInitialization<Node::NodeAny>::init(*Node::NodeAny::getNodeAny(), *cpack);
                 childNodes.push_back(parse(*Node::NodeAny::getNodeAny(), tokenReader, cpack));
             } else {
                 childNodes.push_back(parse(it->nodeValue, tokenReader, cpack));

@@ -67,7 +67,7 @@ namespace CHelper::Node {
         NodeWithType() = default;
 
         template<class NodeType>
-        NodeWithType(NodeType &node);
+        NodeWithType(NodeType &node);// NOLINT(*-explicit-constructor)
 
         NodeWithType(NodeWithType &node) = default;
 

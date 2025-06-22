@@ -41,7 +41,7 @@ namespace CHelper::Linter {
             if (HEDLEY_UNLIKELY(astNode.isError())) {
                 return true;
             }
-            const auto &node = *static_cast<const Node::NodeCommandName *>(astNode.node.data);
+            const auto &node = *reinterpret_cast<const Node::NodeCommandName *>(astNode.node.data);
             std::u16string_view str = astNode.tokens.toString();
             for (const auto &command: *node.commands) {
                 for (const auto &name: command.name) {
@@ -61,7 +61,7 @@ namespace CHelper::Linter {
             if (HEDLEY_UNLIKELY(astNode.isError())) {
                 return true;
             }
-            const auto &node = *static_cast<const Node::NodeNamespaceId *>(astNode.node.data);
+            const auto &node = *reinterpret_cast<const Node::NodeNamespaceId *>(astNode.node.data);
             std::u16string_view str = astNode.tokens.toString();
             XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
             if (HEDLEY_UNLIKELY(std::all_of(node.customContents->begin(), node.customContents->end(), [&strHash](const auto &item) {
@@ -79,7 +79,7 @@ namespace CHelper::Linter {
             if (HEDLEY_UNLIKELY(astNode.isError())) {
                 return true;
             }
-            const auto &node = *static_cast<const Node::NodeNormalId *>(astNode.node.data);
+            const auto &node = *reinterpret_cast<const Node::NodeNormalId *>(astNode.node.data);
             std::u16string_view str = astNode.tokens.toString();
             XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
             if (HEDLEY_UNLIKELY(std::all_of(node.customContents->begin(), node.customContents->end(), [&strHash](const auto &item) {

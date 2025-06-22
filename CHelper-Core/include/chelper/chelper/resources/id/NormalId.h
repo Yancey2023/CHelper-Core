@@ -21,6 +21,8 @@ namespace CHelper {
         std::optional<XXH3_state_t> hashState;
 
     public:
+        NormalId() = default;
+
         virtual ~NormalId() = default;
 
         void buildHash();

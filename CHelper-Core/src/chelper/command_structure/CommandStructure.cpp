@@ -8,7 +8,7 @@
 
 #define CHELPER_COLLECT_STRUCTURE(v1) \
     case Node::NodeTypeId::v1:        \
-        return CommandStructure<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectStructure(astNode, *static_cast<Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type *>(node.data), structure, isMustHave);
+        return CommandStructure<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::collectStructure(astNode, *reinterpret_cast<Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type *>(node.data), structure, isMustHave);
 
 namespace CHelper::CommandStructure {
 
@@ -191,7 +191,7 @@ namespace CHelper::CommandStructure {
                     const ASTNode &astNode1 = HEDLEY_LIKELY(item.whichBest == 0)
                                                       ? item.getBestNode().getBestNode()
                                                       : item.getBestNode();
-                    auto node1 = static_cast<const Node::NodeAnd *>(astNode1.node.data);
+                    auto node1 = reinterpret_cast<const Node::NodeAnd *>(astNode1.node.data);
                     size_t astNodeSize = astNode1.childNodes.size();
                     size_t nodeSize = node1->childNodes.size();
                     if (HEDLEY_LIKELY(astNode1.isError())) {
@@ -220,7 +220,7 @@ namespace CHelper::CommandStructure {
             if (!isAddMoreSymbol || isAddMiddle) {
                 structure.appendSpace().append(u"...");
             }
-            for (const auto &item: static_cast<const Node::NodeAnd *>(static_cast<const Node::NodeOr *>(node.nodeElement.data)->childNodes[1].data)->childNodes) {
+            for (const auto &item: reinterpret_cast<const Node::NodeAnd *>(reinterpret_cast<const Node::NodeOr *>(node.nodeElement.data)->childNodes[1].data)->childNodes) {
                 collectNodeStructure(nullptr, item, structure, true);
             }
             return true;

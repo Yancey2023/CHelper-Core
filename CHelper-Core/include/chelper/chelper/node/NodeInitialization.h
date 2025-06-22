@@ -12,9 +12,8 @@
 
 namespace CHelper::Node {
 
-    template<NodeTypeId::NodeTypeId nodeTypeId>
+    template<class NodeType>
     struct NodeInitialization {
-        using NodeType = typename NodeTypeDetail<nodeTypeId>::Type;
         static void init(NodeType &node, const CPack &cpack) {
         }
     };
