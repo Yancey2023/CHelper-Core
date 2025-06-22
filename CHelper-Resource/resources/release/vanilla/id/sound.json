@@ -87,6 +87,9 @@
             "description": "雨：落下"
         },
         {
+            "name": "ambient.weather.the_end_light_flash"
+        },
+        {
             "name": "ambient.weather.thunder",
             "description": "雷鸣"
         },
@@ -334,6 +337,38 @@
         {
             "name": "block.decorated_pot.insert_fail",
             "description": "饰纹陶罐：晃动"
+        },
+        {
+            "name": "block.dried_ghast.ambient",
+            "description": "干燥声"
+        },
+        {
+            "name": "block.dried_ghast.ambient_water",
+            "description": "失水恶魂：补水"
+        },
+        {
+            "name": "block.dried_ghast.break"
+        },
+        {
+            "name": "block.dried_ghast.fall"
+        },
+        {
+            "name": "block.dried_ghast.place"
+        },
+        {
+            "name": "block.dried_ghast.place_in_water",
+            "description": "失水恶魂：浸泡"
+        },
+        {
+            "name": "block.dried_ghast.state_change",
+            "description": "失水恶魂：恢复"
+        },
+        {
+            "name": "block.dried_ghast.step"
+        },
+        {
+            "name": "block.dry_grass.ambient.attached",
+            "description": "风声"
         },
         {
             "name": "block.enchanting_table.use",
@@ -591,10 +626,6 @@
         {
             "name": "block.sand.ambient",
             "description": "沙沙声"
-        },
-        {
-            "name": "block.sand.ambient.attached",
-            "description": "风声"
         },
         {
             "name": "block.scaffolding.break",
@@ -2369,6 +2400,10 @@
             "description": "木头：某物着陆"
         },
         {
+            "name": "lead.break",
+            "description": "拴绳：剪断"
+        },
+        {
             "name": "leashknot.break",
             "description": "拴绳结：被破坏"
         },
@@ -3117,6 +3152,22 @@
             "description": "恶魂：受伤"
         },
         {
+            "name": "mob.ghastling.ambient",
+            "description": "小恶魂：咕咕"
+        },
+        {
+            "name": "mob.ghastling.death",
+            "description": "小恶魂：死亡"
+        },
+        {
+            "name": "mob.ghastling.hurt",
+            "description": "小恶魂：受伤"
+        },
+        {
+            "name": "mob.ghastling.spawn",
+            "description": "小恶魂：出现"
+        },
+        {
             "name": "mob.glow_squid.ambient",
             "description": "发光鱿鱼：游泳"
         },
@@ -3221,6 +3272,37 @@
             "description": "守卫者：弹跳"
         },
         {
+            "name": "mob.happy_ghast.ambient",
+            "description": "快乐恶魂：哼唱"
+        },
+        {
+            "name": "mob.happy_ghast.death",
+            "description": "快乐恶魂：死亡"
+        },
+        {
+            "name": "mob.happy_ghast.goggles_down",
+            "description": "快乐恶魂：就绪"
+        },
+        {
+            "name": "mob.happy_ghast.goggles_up",
+            "description": "快乐恶魂：停下"
+        },
+        {
+            "name": "mob.happy_ghast.harness_equip",
+            "description": "挽具：装备"
+        },
+        {
+            "name": "mob.happy_ghast.harness_unequip",
+            "description": "挽具：卸下"
+        },
+        {
+            "name": "mob.happy_ghast.hurt",
+            "description": "快乐恶魂：受伤"
+        },
+        {
+            "name": "mob.happy_ghast.ride"
+        },
+        {
             "name": "mob.hoglin.ambient",
             "description": "疣猪兽：咆哮"
         },
@@ -3299,6 +3381,9 @@
         {
             "name": "mob.horse.hit",
             "description": "马：受伤"
+        },
+        {
+            "name": "mob.horse.horse_armor_unequip"
         },
         {
             "name": "mob.horse.idle",
@@ -3395,6 +3480,9 @@
         {
             "name": "mob.llama.angry",
             "description": "羊驼：怒吼"
+        },
+        {
+            "name": "mob.llama.carpet_unequip"
         },
         {
             "name": "mob.llama.death",
@@ -4037,6 +4125,9 @@
             "description": "幼年海龟：爬行"
         },
         {
+            "name": "mob.unsaddle"
+        },
+        {
             "name": "mob.vex.ambient",
             "description": "恼鬼：恼人"
         },
@@ -4607,6 +4698,9 @@
         {
             "name": "music.overworld.flower_forest",
             "description": "繁花森林背景音乐"
+        },
+        {
+            "name": "music.overworld.forest"
         },
         {
             "name": "music.overworld.grove",
@@ -5227,6 +5321,10 @@
         {
             "name": "record.strad",
             "description": "音乐唱片（C418 - strad）"
+        },
+        {
+            "name": "record.tears",
+            "description": "音乐唱片（Amos Roddy - Tears）"
         },
         {
             "name": "record.wait",

@@ -4768,6 +4768,20 @@
                 ]
             },
             {
+                "name": "dried_ghast",
+                "description": "失水恶魂",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "rehydration_level",
+                        "defaultValue": 0
+                    }
+                ]
+            },
+            {
                 "name": "dried_kelp_block",
                 "description": "干海带块"
             },

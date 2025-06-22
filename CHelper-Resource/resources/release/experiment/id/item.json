@@ -552,7 +552,7 @@
         },
         {
             "name": "bolt_armor_trim_smithing_template",
-            "description": "镶铆盔甲纹饰锻造模板"
+            "description": "镶铆盔甲纹饰 锻造模板"
         },
         {
             "name": "bone",
@@ -1012,7 +1012,7 @@
         },
         {
             "name": "coast_armor_trim_smithing_template",
-            "description": "海岸盔甲纹饰锻造模板"
+            "description": "海岸盔甲纹饰 锻造模板"
         },
         {
             "name": "cobbled_deepslate",
@@ -1720,7 +1720,7 @@
         },
         {
             "name": "dune_armor_trim_smithing_template",
-            "description": "沙丘盔甲纹饰锻造模板"
+            "description": "沙丘盔甲纹饰 锻造模板"
         },
         {
             "name": "echo_shard",
@@ -1872,7 +1872,7 @@
         },
         {
             "name": "eye_armor_trim_smithing_template",
-            "description": "眼眸盔甲纹饰锻造模板"
+            "description": "眼眸盔甲纹饰 锻造模板"
         },
         {
             "name": "farmland",
@@ -1948,7 +1948,7 @@
         },
         {
             "name": "flow_armor_trim_smithing_template",
-            "description": "涡流盔甲纹饰锻造模板"
+            "description": "涡流盔甲纹饰 锻造模板"
         },
         {
             "name": "flow_banner_pattern",
@@ -2368,7 +2368,7 @@
         },
         {
             "name": "host_armor_trim_smithing_template",
-            "description": "雇主盔甲纹饰锻造模板"
+            "description": "雇主盔甲纹饰 锻造模板"
         },
         {
             "name": "howl_pottery_sherd",
@@ -3223,6 +3223,10 @@
             "description": "音乐唱片 C418 - strad"
         },
         {
+            "name": "music_disc_tears",
+            "description": "音乐唱片 Amos Roddy - Tears"
+        },
+        {
             "name": "music_disc_wait",
             "description": "音乐唱片 C418 - wait"
         },
@@ -3340,7 +3344,7 @@
         },
         {
             "name": "netherite_upgrade_smithing_template",
-            "description": "下界合金升级锻造模板"
+            "description": "下界合金升级 锻造模板"
         },
         {
             "name": "netherrack",
@@ -4096,7 +4100,7 @@
         },
         {
             "name": "raiser_armor_trim_smithing_template",
-            "description": "牧民盔甲纹饰锻造模板"
+            "description": "牧民盔甲纹饰 锻造模板"
         },
         {
             "name": "ravager_spawn_egg",
@@ -4296,7 +4300,7 @@
         },
         {
             "name": "rib_armor_trim_smithing_template",
-            "description": "肋骨盔甲纹饰锻造模板"
+            "description": "肋骨盔甲纹饰 锻造模板"
         },
         {
             "name": "rose_bush",
@@ -4384,11 +4388,11 @@
         },
         {
             "name": "sentry_armor_trim_smithing_template",
-            "description": "哨兵盔甲纹饰锻造模板"
+            "description": "哨兵盔甲纹饰 锻造模板"
         },
         {
             "name": "shaper_armor_trim_smithing_template",
-            "description": "塑造盔甲纹饰锻造模板"
+            "description": "塑造盔甲纹饰 锻造模板"
         },
         {
             "name": "sheaf_pottery_sherd",
@@ -4432,7 +4436,7 @@
         },
         {
             "name": "silence_armor_trim_smithing_template",
-            "description": "幽静盔甲纹饰锻造模板"
+            "description": "幽静盔甲纹饰 锻造模板"
         },
         {
             "name": "silver_glazed_terracotta",
@@ -4552,7 +4556,7 @@
         },
         {
             "name": "snout_armor_trim_smithing_template",
-            "description": "猪鼻盔甲纹饰锻造模板"
+            "description": "猪鼻盔甲纹饰 锻造模板"
         },
         {
             "name": "snow",
@@ -4600,7 +4604,7 @@
         },
         {
             "name": "spire_armor_trim_smithing_template",
-            "description": "尖塔盔甲纹饰锻造模板"
+            "description": "尖塔盔甲纹饰 锻造模板"
         },
         {
             "name": "splash_potion",
@@ -4916,7 +4920,7 @@
         },
         {
             "name": "tide_armor_trim_smithing_template",
-            "description": "潮汐盔甲纹饰锻造模板"
+            "description": "潮汐盔甲纹饰 锻造模板"
         },
         {
             "name": "tinted_glass",
@@ -5064,7 +5068,7 @@
         },
         {
             "name": "vex_armor_trim_smithing_template",
-            "description": "恼鬼盔甲纹饰锻造模板"
+            "description": "恼鬼盔甲纹饰 锻造模板"
         },
         {
             "name": "vex_spawn_egg",
@@ -5088,7 +5092,7 @@
         },
         {
             "name": "ward_armor_trim_smithing_template",
-            "description": "监守盔甲纹饰锻造模板"
+            "description": "监守盔甲纹饰 锻造模板"
         },
         {
             "name": "warden_spawn_egg",
@@ -5320,7 +5324,7 @@
         },
         {
             "name": "wayfinder_armor_trim_smithing_template",
-            "description": "向导盔甲纹饰锻造模板"
+            "description": "向导盔甲纹饰 锻造模板"
         },
         {
             "name": "weathered_chiseled_copper",
@@ -5436,7 +5440,7 @@
         },
         {
             "name": "wild_armor_trim_smithing_template",
-            "description": "荒野盔甲纹饰锻造模板"
+            "description": "荒野盔甲纹饰 锻造模板"
         },
         {
             "name": "wildflowers",

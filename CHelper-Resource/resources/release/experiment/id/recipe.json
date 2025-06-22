@@ -3015,11 +3015,11 @@
         },
         {
             "name": "minecraft:bolt_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>镶铆盔甲纹饰锻造模板+钻石*7+铜块->镶铆盔甲纹饰锻造模板*2"
+            "description": "<工作台>镶铆盔甲纹饰 锻造模板+钻石*7+铜块->镶铆盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:bolt_armor_trim_smithing_template_duplicate_waxed",
-            "description": "<工作台>镶铆盔甲纹饰锻造模板+钻石*7+涂蜡的铜块->镶铆盔甲纹饰锻造模板*2"
+            "description": "<工作台>镶铆盔甲纹饰 锻造模板+钻石*7+涂蜡的铜块->镶铆盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:bone_block",
@@ -3303,7 +3303,7 @@
         },
         {
             "name": "minecraft:coast_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>海岸盔甲纹饰锻造模板+钻石*7+圆石->海岸盔甲纹饰锻造模板*2"
+            "description": "<工作台>海岸盔甲纹饰 锻造模板+钻石*7+圆石->海岸盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:cobbled_deepslate_slab",
@@ -3867,7 +3867,7 @@
         },
         {
             "name": "minecraft:dried_ghast",
-            "description": "<工作台>恶魂之泪*8+骨块->失水恶魂"
+            "description": "<工作台>恶魂之泪*8+灵魂沙->失水恶魂"
         },
         {
             "name": "minecraft:dried_kelp",
@@ -3887,7 +3887,7 @@
         },
         {
             "name": "minecraft:dune_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>沙丘盔甲纹饰锻造模板+钻石*7+砂岩->沙丘盔甲纹饰锻造模板*2"
+            "description": "<工作台>沙丘盔甲纹饰 锻造模板+钻石*7+砂岩->沙丘盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:emerald",
@@ -3947,7 +3947,7 @@
         },
         {
             "name": "minecraft:eye_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>眼眸盔甲纹饰锻造模板+钻石*7+末地石->眼眸盔甲纹饰锻造模板*2"
+            "description": "<工作台>眼眸盔甲纹饰 锻造模板+钻石*7+末地石->眼眸盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:fence",
@@ -3975,7 +3975,7 @@
         },
         {
             "name": "minecraft:flow_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>涡流盔甲纹饰锻造模板+钻石*7+旋风棒->涡流盔甲纹饰锻造模板*2"
+            "description": "<工作台>涡流盔甲纹饰 锻造模板+钻石*7+旋风棒->涡流盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:flower_pot",
@@ -4215,7 +4215,7 @@
         },
         {
             "name": "minecraft:host_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>雇主盔甲纹饰锻造模板+钻石*7+陶瓦->雇主盔甲纹饰锻造模板*2"
+            "description": "<工作台>雇主盔甲纹饰 锻造模板+钻石*7+陶瓦->雇主盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:ingots_from_copper",
@@ -4367,7 +4367,7 @@
         },
         {
             "name": "minecraft:lead",
-            "description": "<工作台>线*4+黏液球->拴绳*2"
+            "description": "<工作台>线*5->拴绳*2"
         },
         {
             "name": "minecraft:leather",
@@ -4863,7 +4863,7 @@
         },
         {
             "name": "minecraft:netherite_upgrade_smithing_template_duplicate",
-            "description": "<工作台>下界合金升级锻造模板+钻石*7+下界岩->下界合金升级锻造模板*2"
+            "description": "<工作台>下界合金升级 锻造模板+钻石*7+下界岩->下界合金升级 锻造模板*2"
         },
         {
             "name": "minecraft:noteblock",
@@ -5379,7 +5379,7 @@
         },
         {
             "name": "minecraft:raiser_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>牧民盔甲纹饰锻造模板+钻石*7+陶瓦->牧民盔甲纹饰锻造模板*2"
+            "description": "<工作台>牧民盔甲纹饰 锻造模板+钻石*7+陶瓦->牧民盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:raw_copper",
@@ -5551,7 +5551,11 @@
         },
         {
             "name": "minecraft:rib_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>肋骨盔甲纹饰锻造模板+钻石*7+下界岩->肋骨盔甲纹饰锻造模板*2"
+            "description": "<工作台>肋骨盔甲纹饰 锻造模板+钻石*7+下界岩->肋骨盔甲纹饰 锻造模板*2"
+        },
+        {
+            "name": "minecraft:saddle",
+            "description": "<工作台>皮革*3+铁锭->鞍"
         },
         {
             "name": "minecraft:sandstone",
@@ -5583,11 +5587,11 @@
         },
         {
             "name": "minecraft:sentry_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>哨兵盔甲纹饰锻造模板+钻石*7+圆石->哨兵盔甲纹饰锻造模板*2"
+            "description": "<工作台>哨兵盔甲纹饰 锻造模板+钻石*7+圆石->哨兵盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:shaper_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>塑造盔甲纹饰锻造模板+钻石*7+陶瓦->塑造盔甲纹饰锻造模板*2"
+            "description": "<工作台>塑造盔甲纹饰 锻造模板+钻石*7+陶瓦->塑造盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:shears",
@@ -5627,7 +5631,7 @@
         },
         {
             "name": "minecraft:silence_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>幽静盔甲纹饰锻造模板+钻石*7+深板岩圆石->幽静盔甲纹饰锻造模板*2"
+            "description": "<工作台>幽静盔甲纹饰 锻造模板+钻石*7+深板岩圆石->幽静盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:slime",
@@ -5667,7 +5671,7 @@
         },
         {
             "name": "minecraft:snout_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>猪鼻盔甲纹饰锻造模板+钻石*7+黑石->猪鼻盔甲纹饰锻造模板*2"
+            "description": "<工作台>猪鼻盔甲纹饰 锻造模板+钻石*7+黑石->猪鼻盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:snow",
@@ -5695,7 +5699,7 @@
         },
         {
             "name": "minecraft:spire_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>尖塔盔甲纹饰锻造模板+钻石*7+紫珀块->尖塔盔甲纹饰锻造模板*2"
+            "description": "<工作台>尖塔盔甲纹饰 锻造模板+钻石*7+紫珀块->尖塔盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:spruce_boat",
@@ -6695,7 +6699,7 @@
         },
         {
             "name": "minecraft:tide_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>潮汐盔甲纹饰锻造模板+钻石*7+海晶石->潮汐盔甲纹饰锻造模板*2"
+            "description": "<工作台>潮汐盔甲纹饰 锻造模板+钻石*7+海晶石->潮汐盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:tinted_glass",
@@ -6755,11 +6759,11 @@
         },
         {
             "name": "minecraft:vex_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>恼鬼盔甲纹饰锻造模板+钻石*7+圆石->恼鬼盔甲纹饰锻造模板*2"
+            "description": "<工作台>恼鬼盔甲纹饰 锻造模板+钻石*7+圆石->恼鬼盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:ward_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>监守盔甲纹饰锻造模板+钻石*7+深板岩圆石->监守盔甲纹饰锻造模板*2"
+            "description": "<工作台>监守盔甲纹饰 锻造模板+钻石*7+深板岩圆石->监守盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:warped_button",
@@ -7019,7 +7023,7 @@
         },
         {
             "name": "minecraft:wayfinder_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>向导盔甲纹饰锻造模板+钻石*7+陶瓦->向导盔甲纹饰锻造模板*2"
+            "description": "<工作台>向导盔甲纹饰 锻造模板+钻石*7+陶瓦->向导盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:weathered_chiseled_copper",
@@ -7095,7 +7099,7 @@
         },
         {
             "name": "minecraft:wild_armor_trim_smithing_template_duplicate",
-            "description": "<工作台>荒野盔甲纹饰锻造模板+钻石*7+苔石->荒野盔甲纹饰锻造模板*2"
+            "description": "<工作台>荒野盔甲纹饰 锻造模板+钻石*7+苔石->荒野盔甲纹饰 锻造模板*2"
         },
         {
             "name": "minecraft:wind_charge",

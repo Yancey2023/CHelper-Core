@@ -127,6 +127,9 @@
             "description": "繁花森林背景音乐"
         },
         {
+            "name": "music.overworld.forest"
+        },
+        {
             "name": "music.overworld.grove",
             "description": "雪林背景音乐"
         },
@@ -225,6 +228,10 @@
         {
             "name": "record.strad",
             "description": "音乐唱片（C418 - strad）"
+        },
+        {
+            "name": "record.tears",
+            "description": "音乐唱片（Amos Roddy - Tears）"
         },
         {
             "name": "record.wait",

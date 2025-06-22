@@ -369,6 +369,9 @@
             "name": "minecraft:optional_lower_cocoa_feature"
         },
         {
+            "name": "minecraft:optional_mountain_spruce_tree_feature"
+        },
+        {
             "name": "minecraft:optional_oak_tree_with_vines_feature"
         },
         {

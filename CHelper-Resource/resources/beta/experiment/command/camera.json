@@ -440,10 +440,33 @@
             "brief": "z方向相对于实体的偏移量",
             "description": "相机视角z方向相对于实体的偏移量",
             "canUseCaretNotation": true
+        },
+        {
+            "type": "TEXT",
+            "id": "fov_clear",
+            "description": " 重置相机的视场角",
+            "data": {
+                "name": "fov_clear",
+                "description": " 重置相机的视场角"
+            }
+        },
+        {
+            "type": "TEXT",
+            "id": "fov_set",
+            "description": "指定相机的视场角",
+            "data": {
+                "name": "fov_set",
+                "description": "指定相机的视场角"
+            }
+        },
+        {
+            "type": "FLOAT",
+            "id": "fovValue",
+            "description": "相机的视场角"
         }
     ],
     "ast": [
-        ["players", "clear", "fade", "remove_target", "set", "target_entity"],
+        ["players", "clear", "fade", "remove_target", "set", "target_entity", "fov_clear", "fov_set"],
         ["clear", "LF"],
         ["fade", "LF", "color", "time"],
         ["color", "red"],
@@ -484,6 +507,9 @@
         ["target_center_offset", "xTargetCenterOffset"],
         ["xTargetCenterOffset", "yTargetCenterOffset"],
         ["yTargetCenterOffset", "zTargetCenterOffset"],
-        ["zTargetCenterOffset", "LF"]
+        ["zTargetCenterOffset", "LF"],
+        ["fov_clear", "LF"],
+        ["fov_set", "fovValue"],
+        ["fovValue", "LF"]
     ]
 }

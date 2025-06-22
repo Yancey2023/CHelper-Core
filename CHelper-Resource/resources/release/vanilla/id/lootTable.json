@@ -508,6 +508,9 @@
             "description": "劫掠兽的掉落物"
         },
         {
+            "name": "\"entities/saddle\""
+        },
+        {
             "name": "\"entities/salmon_large\"",
             "description": "大体型鲑鱼的掉落物"
         },

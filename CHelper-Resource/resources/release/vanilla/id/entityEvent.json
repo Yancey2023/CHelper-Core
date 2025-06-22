@@ -282,6 +282,9 @@
             "name": "minecraft:become_hostile"
         },
         {
+            "name": "minecraft:become_immobile"
+        },
+        {
             "name": "minecraft:become_leatherworker"
         },
         {
@@ -289,6 +292,9 @@
         },
         {
             "name": "minecraft:become_mason"
+        },
+        {
+            "name": "minecraft:become_mobile"
         },
         {
             "name": "minecraft:become_moorish_idol"
@@ -612,6 +618,9 @@
             "name": "minecraft:on_half_puff"
         },
         {
+            "name": "minecraft:on_harnessed"
+        },
+        {
             "name": "minecraft:on_hurt_event"
         },
         {
@@ -625,6 +634,12 @@
         },
         {
             "name": "minecraft:on_not_riding_player"
+        },
+        {
+            "name": "minecraft:on_passenger_dismount"
+        },
+        {
+            "name": "minecraft:on_passenger_mount"
         },
         {
             "name": "minecraft:on_prime"
@@ -642,6 +657,9 @@
             "name": "minecraft:on_sheared"
         },
         {
+            "name": "minecraft:on_stop_tempting"
+        },
+        {
             "name": "minecraft:on_tame"
         },
         {
@@ -654,7 +672,16 @@
             "name": "minecraft:on_trust"
         },
         {
+            "name": "minecraft:on_unharnessed"
+        },
+        {
             "name": "minecraft:on_unleash"
+        },
+        {
+            "name": "minecraft:on_unleashed"
+        },
+        {
+            "name": "minecraft:on_unsaddled"
         },
         {
             "name": "minecraft:panda_aggressive"

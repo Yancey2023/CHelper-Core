@@ -456,6 +456,12 @@
             "name": "animation.guardian.swim"
         },
         {
+            "name": "animation.happy_ghast.move"
+        },
+        {
+            "name": "animation.happy_ghast.scale"
+        },
+        {
             "name": "animation.hoglin.attack"
         },
         {
@@ -625,6 +631,9 @@
         },
         {
             "name": "animation.humanoid.riding.arms.v1.0"
+        },
+        {
+            "name": "animation.humanoid.riding.body"
         },
         {
             "name": "animation.humanoid.riding.legs"
@@ -976,6 +985,9 @@
         },
         {
             "name": "animation.player.riding.legs"
+        },
+        {
+            "name": "animation.player.riding.root"
         },
         {
             "name": "animation.player.shield_block_main_hand"
