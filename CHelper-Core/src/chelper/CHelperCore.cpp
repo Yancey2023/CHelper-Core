@@ -18,11 +18,11 @@ namespace CHelper {
 
     CHelperCore *CHelperCore::create(const std::function<std::unique_ptr<CPack>()> &getCPack) {
         try {
-#ifndef SPDLOG_INFO
+#if SPDLOG_ACTIVE_LEVEL != SPDLOG_LEVEL_OFF
             const auto start = std::chrono::high_resolution_clock::now();
 #endif
             std::unique_ptr<CPack> cPack = getCPack();
-#ifndef SPDLOG_INFO
+#if SPDLOG_ACTIVE_LEVEL != SPDLOG_LEVEL_OFF
             const auto end = std::chrono::high_resolution_clock::now();
 #endif
             SPDLOG_INFO("CPack load successfully ({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(end - start), fg(fmt::color::medium_purple)));
