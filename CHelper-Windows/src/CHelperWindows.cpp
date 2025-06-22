@@ -103,8 +103,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
                 onTextChanged(reinterpret_cast<char16_t *>(buffer));
                 delete[] buffer;
             } else if (LOWORD(wParam) == ID_LIST_VIEW && HIWORD(wParam) == LBN_SELCHANGE) {
-                int index = SendMessage(hWndListBox, LB_GETCURSEL, 0, 0);
-                std::optional<std::pair<std::u16string, size_t>> result = core->onSuggestionClick(index);
+                LRESULT index = SendMessage(hWndListBox, LB_GETCURSEL, 0, 0);
+                std::optional<std::pair<std::u16string, size_t>> result = core->onSuggestionClick(static_cast<size_t>(index));
                 if (result.has_value()) {
                     SetWindowText(hWndInput, reinterpret_cast<const WCHAR *>(result.value().first.c_str()));
                     SendMessage(hWndInput, EM_SETSEL, result.value().second, -1);

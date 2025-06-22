@@ -8,8 +8,9 @@
 #define CHELPER_CHELPERWINDOWS_H
 
 #define UNICODE
+#define NOMINMAX
 
-#include "pch.h"
+#include <pch.h>
 #include <windows.h>
 
 #pragma comment(lib, "comctl32.lib")
