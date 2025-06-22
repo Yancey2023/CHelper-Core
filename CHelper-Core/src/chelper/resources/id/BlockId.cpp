@@ -354,9 +354,9 @@ namespace CHelper {
                                    nodeChildren.nodes.emplace_back(*result);
                                    return *result;
                                });
-                Node::NodeOr nodeChild(std::move(blockStateEntryChildNode1), false);
-                blockStateEntryChildNode2.emplace_back(nodeChild);
-                nodeChildren.nodes.emplace_back(nodeChild);
+                auto nodeChild = new Node::NodeOr(std::move(blockStateEntryChildNode1), false);
+                blockStateEntryChildNode2.emplace_back(*nodeChild);
+                nodeChildren.nodes.emplace_back(*nodeChild);
             }
             //其他未知的方块状态
             blockStateEntryChildNode2.emplace_back(nodeBlockStateAllEntry);
