@@ -26,7 +26,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
     std::filesystem::path resourceDir(RESOURCE_DIR);
     for (const auto &cpackPath: std::filesystem::directory_iterator(resourceDir / "run" / "cpack")) {
         std::string fileName = cpackPath.path().filename().string();
-        if (fileName.find("beta-experiment-") != -1) {
+        if (fileName.find("beta-experiment-") != std::string::npos) {
             core = CHelper::CHelperCore::createByBinary(cpackPath);
             break;
         }
@@ -164,14 +164,14 @@ void onTextChanged(const std::u16string &command) {
         SendMessage(hWndListBox, LB_RESETCONTENT, 0, 0);
         //由于添加全部结果非常耗时，这里只保留前30个
         {
-            int i = 0;
-            for (const auto &suggestion: *suggestions) {
+            for (size_t i = 0; i < suggestions->size(); ++i) {
                 if (++i > 30) {
                     break;
                 }
-                auto content = std::u16string(suggestion.content->name)
+                const auto &item = (*suggestions)[i];
+                auto content = std::u16string(item.content->name)
                                        .append(u" - ")
-                                       .append(suggestion.content->description.value_or(u""));
+                                       .append(item.content->description.value_or(u""));
                 SendMessage(hWndListBox, LB_ADDSTRING, 0, reinterpret_cast<LPARAM>(content.c_str()));
             }
         }
@@ -188,8 +188,8 @@ void onTextChanged(const std::u16string &command) {
             fmt::println("no error");
         } else {
             fmt::println("error reasons:");
-            int i = 0;
-            for (const auto &errorReason: errorReasons) {
+            for (size_t i = 0; i < errorReasons.size(); ++i) {
+                const auto &errorReason= errorReasons[i];
                 fmt::print("{}. {} {}\n{}{}{}\n",
                            ++i,
                            fmt::styled(utf8::utf16to8(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
@@ -203,12 +203,12 @@ void onTextChanged(const std::u16string &command) {
             fmt::println("no suggestion");
         } else {
             fmt::println("suggestions: ");
-            int i = 0;
-            for (const auto &item: *suggestions) {
+            for (size_t i = 0; i < suggestions->size(); ++i) {
                 if (i == 30) {
                     fmt::println("...");
                     break;
                 }
+                const auto &item = (*suggestions)[i];
                 fmt::print("{}. {} {}\n",
                            ++i,
                            fmt::styled(utf8::utf16to8(item.content->name), fg(fmt::color::lime_green)),

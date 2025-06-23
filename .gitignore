@@ -3,7 +3,6 @@
 cmake-build-*
 
 # vscode
-.vscode
 .cache
 build
 
@@ -18,4 +17,3 @@ build
 
 # others
 /plan
-/release

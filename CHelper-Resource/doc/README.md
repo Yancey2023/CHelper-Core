@@ -2,8 +2,7 @@ English | [简体中文](README_CN.md)
 
 # CPack document
 
-Cpack(Command Pack) is the resource pack of CHelper(Command Helper), which is a command helper for Minecraft Bedrock
-Edition.
+Cpack(Command Pack) is the resource pack of CHelper(Command Helper), which is a command helper for Minecraft Bedrock Edition.
 
 ## manifest.json
 
@@ -11,24 +10,22 @@ There should be a file named `manifest.json` in the root directory of the pack:
 
 ```json
 {
-    "name": "example pack",
-    "description": "CHelper official extension pack",
-    "version": "1.20",
-    "versionType": "release",
-    "branch": "release",
-    "author": "Yancey",
-    "updateDate": "2023-11-7",
-    "packID": "ExamplePack-1.20",
-    "requiredPack": [
-        "BasicPack-1.20"
-    ],
-    "versionCode": 1,
-    "isBasicPack": true
+  "name": "example pack",
+  "description": "CHelper official extension pack",
+  "version": "1.20",
+  "versionType": "release",
+  "branch": "release",
+  "author": "Yancey",
+  "updateDate": "2023-11-7",
+  "packID": "ExamplePack-1.20",
+  "requiredPack": ["BasicPack-1.20"],
+  "versionCode": 1,
+  "isBasicPack": true
 }
 ```
 
 |     name     |  type   |         meaning          |                                    Remarks                                     |            Required            |
-|:------------:|:-------:|:------------------------:|:------------------------------------------------------------------------------:|:------------------------------:|
+| :----------: | :-----: | :----------------------: | :----------------------------------------------------------------------------: | :----------------------------: |
 |     name     | string  |        pack name         |                                used for display                                | no (not recommended to ignore) |
 | description  | string  |     pack description     |                                used for display                                |               no               |
 |   version    | string  |    minecraft version     |                                used for display                                |               no               |

@@ -82,7 +82,7 @@ Java_yancey_chelper_core_CHelperCore_create0(
             if (HEDLEY_UNLIKELY(asset == nullptr)) {
                 return reinterpret_cast<jlong>(nullptr);
             }
-            size_t dataFileSize = AAsset_getLength(asset);
+            auto dataFileSize = static_cast<size_t>(AAsset_getLength(asset));
             char *buffer = new char[dataFileSize];
             int numBytesRead = AAsset_read(asset, buffer, dataFileSize);
             AAsset_close(asset);
@@ -152,13 +152,13 @@ Java_yancey_chelper_core_CHelperCore_getErrorReasons0(
     }
     auto errorReasons = core->getErrorReasons();
     jobjectArray result = env->NewObjectArray(static_cast<jsize>(errorReasons.size()), errorReasonClass, nullptr);
-    for (int i = 0; i < errorReasons.size(); ++i) {
+    for (size_t i = 0; i < errorReasons.size(); ++i) {
         const CHelper::ErrorReason &item = *errorReasons[i];
         jobject javaErrorReason = env->AllocObject(errorReasonClass);
         env->SetObjectField(javaErrorReason, errorReasonFieldId, u16string2jstring(env, item.errorReason));
         env->SetIntField(javaErrorReason, startFieldId, static_cast<jint>(item.start));
         env->SetIntField(javaErrorReason, endFieldId, static_cast<jint>(item.end));
-        env->SetObjectArrayElement(result, i, javaErrorReason);
+        env->SetObjectArrayElement(result, static_cast<jint>(i), javaErrorReason);
     }
     return result;
 }
@@ -187,7 +187,7 @@ Java_yancey_chelper_core_CHelperCore_getSuggestion0(
         return nullptr;
     }
     auto suggestions = core->getSuggestions();
-    if (HEDLEY_UNLIKELY(suggestions->size() <= which)) {
+    if (HEDLEY_UNLIKELY(static_cast<jint>(suggestions->size()) <= which)) {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getSuggestion0 when suggestions->size() <= which");
         return nullptr;
     }
@@ -208,12 +208,12 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions0(
     }
     const std::vector<CHelper::AutoSuggestion::Suggestion> &suggestions = *core->getSuggestions();
     jobjectArray result = env->NewObjectArray(static_cast<jsize>(suggestions.size()), suggestionClass, nullptr);
-    for (int i = 0; i < suggestions.size(); ++i) {
+    for (size_t i = 0; i < suggestions.size(); ++i) {
         const CHelper::AutoSuggestion::Suggestion &item = suggestions[i];
         jobject javaSuggestion = env->AllocObject(suggestionClass);
         env->SetObjectField(javaSuggestion, nameFieldId, u16string2jstring(env, item.content->name));
         env->SetObjectField(javaSuggestion, descriptionFieldId, item.content->description.has_value() ? u16string2jstring(env, item.content->description.value()) : nullptr);
-        env->SetObjectArrayElement(result, i, javaSuggestion);
+        env->SetObjectArrayElement(result, static_cast<jint>(i), javaSuggestion);
     }
     return result;
 }
@@ -259,7 +259,7 @@ Java_yancey_chelper_core_CHelperCore_getColors0(
     auto syntaxResult = core->getSyntaxResult();
     size_t size = syntaxResult.tokenTypes.size();
     jint *tokenTypes = new jint[size];
-    for (int i = 0; i < size; ++i) {
+    for (size_t i = 0; i < size; ++i) {
         tokenTypes[i] = static_cast<jint>(syntaxResult.tokenTypes[i]);
     }
     jintArray result = env->NewIntArray(static_cast<jsize>(size));
@@ -284,7 +284,7 @@ Java_yancey_chelper_core_CHelperCore_old2newInit0(
         if (HEDLEY_UNLIKELY(asset == nullptr)) {
             return false;
         }
-        size_t dataFileSize = AAsset_getLength(asset);
+        auto dataFileSize = static_cast<size_t>(AAsset_getLength(asset));
         char *buffer = new char[dataFileSize];
         int numBytesRead = AAsset_read(asset, buffer, dataFileSize);
         AAsset_close(asset);

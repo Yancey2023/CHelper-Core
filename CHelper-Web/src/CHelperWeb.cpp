@@ -88,9 +88,8 @@ public:
             errorReason = errorReasons[0]->errorReason;
         } else {
             errorReason = u"可能的错误原因：";
-            int i = 0;
-            for (const auto &item: errorReasons) {
-                errorReason->append(u"\n").append(utf8::utf8to16(std::to_string(++i)).append(u". ").append(item->errorReason));
+            for (size_t i = 0; i < errorReasons.size(); ++i) {
+                errorReason->append(u"\n").append(utf8::utf8to16(std::to_string(++i)).append(u". ").append(errorReasons[i]->errorReason));
             }
         }
         if (errorReason.has_value()) {

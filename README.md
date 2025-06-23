@@ -14,7 +14,7 @@ git submodule update --init --recursive --progress
 ## Multi-platform
 
 |                             project                              |                                                       description                                                        |
-|:----------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------:|
+| :--------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------: |
 |    [CHelper-Core](https://github.com/Yancey2023/CHelper-Core)    |                                   CHelper-Core is the core of CHelper, written in c++                                    |
 | [CHelper-Android](https://github.com/Yancey2023/CHelper-Android) | CHelper-Android is the Android version of the app, depends on [CHelper-Core](https://github.com/Yancey2023/CHelper-Core) |
 |     [CHelper-Web](https://github.com/Yancey2023/chelper_web)     |     CHelper-Web is the web version of the app, depends on [CHelper-Core](https://github.com/Yancey2023/CHelper-Core)     |
@@ -69,23 +69,21 @@ The desired function has been completed, and the new function to be developed is
 - [x] **CPack** - a resource pack containing IDs and commands
 - [x] **Lexer** - transforms command strings into a token list
 - [x] **Parser** - builds an Abstract Syntax Tree (AST) and find structural errors
-- [x] **ID Error** - finds ID errors based on the AST
+- [x] **Linter** - finds errors based on the AST
 - [x] **Description** - get the description of the currently written command param based on the AST
-- [x] **Suggestion** - get completion suggestions based on the AST
-- [x] **Structure** - get command structure string based on the AST
-- [x] **Target Selector Support** - support target selector command param
-- [x] **Json Support** - support json command param
-- [x] **Block State Support** - support block states command param
+- [x] **Auto Suggestion** - get auto completion suggestions based on the AST
+- [x] **Command Structure** - get command structure string based on the AST
 - [x] **Old 2 New** - convert old command to new command
-- [x] **Syntax Highlight** - get the highlight color for displayed commands
+- [x] **Syntax Highlight** - get the syntax tokens for syntax highlight
 
 ## Third-party
 
 ### CHelper-Core
 
 |                      project                      |                                    description                                     |                                   license                                   |
-|:-------------------------------------------------:|:----------------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|
+| :-----------------------------------------------: | :--------------------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
 |       [fmt](https://github.com/fmtlib/fmt)        |                                 formatting library                                 |      [MIT license](https://github.com/fmtlib/fmt/blob/master/LICENSE)       |
+|    [spdlog](https://github.com/gabime/spdlog)     |                              Fast C++ logging library                              |      [MIT license](https://github.com/gabime/spdlog/blob/v1.x/LICENSE)      |
 | [rapidjson](https://github.com/Tencent/rapidjson) |                        a JSON parser and generator for C++                         | [MIT license](https://github.com/Tencent/rapidjson/blob/master/license.txt) |
 |    [utfcpp](https://github.com/nemtrif/utfcpp)    |                          UTF-8 with C++ in a Portable Way                          |  [BSL-1.0 license](https://github.com/nemtrif/utfcpp/blob/master/LICENSE)   |
 |   [xxHash](https://github.com/Cyan4973/xxHash)    |                  Extremely fast non-cryptographic hash algorithm                   |    [BSD-2-Clause ](https://github.com/Cyan4973/xxHash/blob/dev/LICENSE)     |
@@ -94,31 +92,31 @@ The desired function has been completed, and the new function to be developed is
 ### CHelper-Qt
 
 |         project          |          description          |                     license                      |
-|:------------------------:|:-----------------------------:|:------------------------------------------------:|
+| :----------------------: | :---------------------------: | :----------------------------------------------: |
 | [Qt](https://www.qt.io/) | desktop application framework | [LGPL license](https://doc.qt.io/qt-6/lgpl.html) |
 
 ### CHelper-Android
 
 |                 project                  |          description           |                           license                            |
-|:----------------------------------------:|:------------------------------:|:------------------------------------------------------------:|
+| :--------------------------------------: | :----------------------------: | :----------------------------------------------------------: |
 | [NDK](https://developer.android.com/ndk) | android native development kit | [Apache License](http://www.apache.org/licenses/LICENSE-2.0) |
 
 ### CHelper-Web
 
 |               project                |                description                 |                                                                  license                                                                   |
-|:------------------------------------:|:------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------:|
+| :----------------------------------: | :----------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: |
 | [Emscripten](https://emscripten.org) | complete compiler toolchain to WebAssembly | [the MIT license and the University of Illinois/NCSA Open Source License](https://github.com/emscripten-core/emscripten/blob/main/LICENSE) |
 
 ### CHelper-Test
 
 |                      project                       |         description         |                                              license                                              |
-|:--------------------------------------------------:|:---------------------------:|:-------------------------------------------------------------------------------------------------:|
+| :------------------------------------------------: | :-------------------------: | :-----------------------------------------------------------------------------------------------: |
 | [GoogleTest](https://github.com/google/googletest) | Google's C++ test framework | [BSD 3-Clause "New" or "Revised" License](https://github.com/google/googletest/blob/main/LICENSE) |
 
 ## Special Thanks
 
 |                       project                       |                        description                         |                                   license                                    |
-|:---------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------------------------:|
+| :-------------------------------------------------: | :--------------------------------------------------------: | :--------------------------------------------------------------------------: |
 |  [caidlist](https://github.com/XeroAlpha/caidlist)  | provide IDs and descriptions for Minecraft Bedrock Edition | [GPL-3.0 license](https://github.com/XeroAlpha/caidlist/blob/master/LICENSE) |
 | [chinese minecraft wiki](https://zh.minecraft.wiki) |              provide information in Minecraft              |     [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0)     |
 
