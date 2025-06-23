@@ -2,15 +2,13 @@
 // Created by Yancey on 2025-06-20.
 //
 
-#include "chelper/node/CommandNode.h"
-
-
+#include <chelper/node/CommandNode.h>
 #include <chelper/node/NodeInitialization.h>
 #include <chelper/resources/CPack.h>
 #include <chelper/serialization/Serialization.h>
 
-#define CHELPER_INIT(v1)                                                                                                                   \
-    case Node::NodeTypeId::v1:                                                                                                             \
+#define CHELPER_INIT(v1)                                                                                                                                                        \
+    case Node::NodeTypeId::v1:                                                                                                                                                  \
         NodeInitialization<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::init(*reinterpret_cast<NodeTypeDetail<Node::NodeTypeId::v1>::Type *>(node.data), cpack); \
         break;
 
@@ -62,7 +60,8 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeJson> {;
+    struct NodeInitialization<NodeJson> {
+        ;
         static void init(NodeJson &node, const CPack &cpack) {
             for (const auto &item: cpack.jsonNodes) {
                 if (HEDLEY_UNLIKELY(item.id == node.key)) {

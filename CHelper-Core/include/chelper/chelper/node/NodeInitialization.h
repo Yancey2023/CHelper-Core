@@ -8,7 +8,6 @@
 #define CHELPER_NODEINITIALIZATION_H
 
 #include <chelper/node/CommandNode.h>
-#include <chelper/node/NodeType.h>
 
 namespace CHelper::Node {
 
