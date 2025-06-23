@@ -192,7 +192,7 @@ namespace CHelper::SyntaxHighlight {
 
     void collectSyntaxResult(const ASTNode &astNode, SyntaxResult &syntaxResult) {
 #ifdef CHelperTest
-        Profile::push("collect color: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(astNode.node->nodeTypeId)));
+        Profile::push("collect syntax result: {} {}", FORMAT_ARG(utf8::utf16to8(astNode.tokens.toString())), FORMAT_ARG(Node::getNodeTypeName(astNode.node.nodeTypeId)));
 #endif
         bool isDirty;
         switch (astNode.node.nodeTypeId) {

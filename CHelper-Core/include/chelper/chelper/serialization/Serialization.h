@@ -36,9 +36,6 @@
         NodeCodec<CHelper::Node::NodeTypeId::v1>::template from_binary<isNeedConvert>(istream, t); \
         break;
 
-#define CHELPER_GET_NAME(v1)            \
-    case CHelper::Node::NodeTypeId::v1: \
-        return CHelper::Node::NodeTypeDetail<CHelper::Node::NodeTypeId::v1>::name;
 
 CODEC(CHelper::Node::NodeSerializable, id, brief, description, isMustAfterSpace)
 
@@ -408,8 +405,6 @@ public:
     static void from_binary(const CHelper::Node::NodeTypeId::NodeTypeId id,
                             std::istream &istream,
                             CHelper::Node::NodeWithType &t);
-
-    static const char *getName(const CHelper::Node::NodeTypeId::NodeTypeId id);
 };
 
 static CHelper::Node::NodeCreateStage::NodeCreateStage currentCreateStage;
@@ -564,7 +559,7 @@ void serialization::Codec<CHelper::Node::NodeWithType>::to_json(
         typename JsonValueType::AllocatorType &allocator,
         JsonValueType &jsonValue,
         const Type &t) {
-    std::string nodeIdName = NodeTypeHelper::getName(t.nodeTypeId);
+    std::string nodeIdName = CHelper::Node::getNodeTypeName(t.nodeTypeId);
     NodeTypeHelper::template to_json<JsonValueType>(t.nodeTypeId, allocator, jsonValue, t);
     assert(jsonValue.IsObject());
     Codec<decltype(nodeIdName)>::template to_json_member<JsonValueType>(allocator, jsonValue, "type", nodeIdName);
@@ -588,13 +583,7 @@ void serialization::Codec<CHelper::Node::NodeWithType>::from_json(
     } else {
         CHelper::Profile::next("loading node {} without id", FORMAT_ARG(type));
     }
-    std::optional<CHelper::Node::NodeTypeId::NodeTypeId> nodeTypeId;
-    for (uint8_t i = 0; i <= CHelper::Node::MAX_TYPE_ID; ++i) {
-        if (NodeTypeHelper::getName(static_cast<CHelper::Node::NodeTypeId::NodeTypeId>(i)) == type) {
-            nodeTypeId = static_cast<CHelper::Node::NodeTypeId::NodeTypeId>(i);
-            break;
-        }
-    }
+    std::optional<CHelper::Node::NodeTypeId::NodeTypeId> nodeTypeId = CHelper::Node::getNodeTypeIdByName(type);
     if (HEDLEY_UNLIKELY(!nodeTypeId.has_value())) {
         CHelper::Profile::next("unknown node type -> {}", FORMAT_ARG(type));
         throw std::runtime_error("unknown node type");

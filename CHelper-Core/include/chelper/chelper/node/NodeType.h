@@ -314,6 +314,10 @@ namespace CHelper {
             static constexpr auto name = "SINGLE_SYMBOL";
         };
 
+        const char *getNodeTypeName(const CHelper::Node::NodeTypeId::NodeTypeId id);
+
+        std::optional<NodeTypeId::NodeTypeId> getNodeTypeIdByName(const std::string_view &id);
+
     }// namespace Node
 
 }// namespace CHelper

@@ -146,7 +146,7 @@ namespace CHelper::Linter {
     void lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
         if (HEDLEY_UNLIKELY(!astNode.isAllSpaceError())) {
 #ifdef CHelperTest
-            Profile::push("collect id errors: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(node->nodeTypeId)));
+            Profile::push("collect id errors: {}", FORMAT_ARG(Node::getNodeTypeName(astNode.node.nodeTypeId)));
 #endif
             bool isDirty = false;
             switch (astNode.node.nodeTypeId) {
@@ -195,7 +195,7 @@ namespace CHelper::Linter {
     std::vector<std::shared_ptr<ErrorReason>> getErrorsExceptParseError(const ASTNode &astNode) {
         std::vector<std::shared_ptr<ErrorReason>> input;
 #ifdef CHelperTest
-        Profile::push("start getting id error: {}", FORMAT_ARG(utf8::utf16to8(tokens.toString())));
+        Profile::push("start get errors except parse error: {} {}", FORMAT_ARG(utf8::utf16to8(astNode.tokens.toString())), FORMAT_ARG(Node::getNodeTypeName(astNode.node.nodeTypeId)));
 #endif
         lint(astNode, input);
 #ifdef CHelperTest
@@ -207,7 +207,7 @@ namespace CHelper::Linter {
     std::vector<std::shared_ptr<ErrorReason>> getErrorReasons(const ASTNode &astNode) {
         std::vector<std::shared_ptr<ErrorReason>> result = astNode.errorReasons;
 #ifdef CHelperTest
-        Profile::push("start getting error reasons: {}", FORMAT_ARG(utf8::utf16to8(tokens.toString())));
+        Profile::push("start getting error reasons: {} {}", FORMAT_ARG(utf8::utf16to8(astNode.tokens.toString())), FORMAT_ARG(Node::getNodeTypeName(astNode.node.nodeTypeId)));
 #endif
         lint(astNode, result);
 #ifdef CHelperTest

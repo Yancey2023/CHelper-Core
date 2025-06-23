@@ -125,7 +125,7 @@ namespace CHelper::Node {
     struct NodeInitialization<NodePerCommand> {
         static void init(NodePerCommand &node, const CPack &cpack) {
             for (const auto &item: node.wrappedNodes) {
-                Profile::push(R"(init node {}: "{}")", FORMAT_ARG(NodeTypeHelper::getName(item.nodeTypeId)), FORMAT_ARG(item.getNodeSerializable().id.value_or("UNKNOWN")));
+                Profile::push(R"(init node {}: "{}")", FORMAT_ARG(getNodeTypeName(item.nodeTypeId)), FORMAT_ARG(item.getNodeSerializable().id.value_or("UNKNOWN")));
                 initNode(item.innerNode, cpack);
                 Profile::pop();
             }

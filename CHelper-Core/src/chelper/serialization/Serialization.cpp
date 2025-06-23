@@ -7,11 +7,3 @@
 namespace CHelper::Serialization {
 
 }// namespace CHelper::Serialization
-
-const char *NodeTypeHelper::getName(const CHelper::Node::NodeTypeId::NodeTypeId id) {
-    switch (id) {
-        CODEC_PASTE(CHELPER_GET_NAME, CHELPER_NODE_TYPES)
-        default:
-            return "UNKNOWN";
-    }
-}
