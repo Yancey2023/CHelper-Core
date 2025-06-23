@@ -6,4 +6,12 @@
 
 namespace CHelper::Node {
 
+    const char *getNodeTypeName(const CHelper::Node::NodeTypeId::NodeTypeId id) {
+        switch (id) {
+            CODEC_PASTE(CHELPER_GET_NAME, CHELPER_NODE_TYPES)
+            default:
+            return "UNKNOWN";
+        }
+    }
+
 }// namespace CHelper::Node

@@ -196,7 +196,7 @@ namespace CHelper::Lexer {
 
     LexerResult lex(const std::u16string &content) {
 #ifdef CHelperTest
-        Profile::push("start lex: {}", FORMAT_ARG(utf8::utf16to8(stringReader.content)));
+        Profile::push("start lex: {}", FORMAT_ARG(utf8::utf16to8(content)));
 #endif
         Lexer lexer(content);
         lexer.run();

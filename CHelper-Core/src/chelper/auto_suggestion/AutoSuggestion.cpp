@@ -524,7 +524,7 @@ namespace CHelper::AutoSuggestion {
         if (HEDLEY_UNLIKELY(!astNode.isAllSpaceError())) {
             bool isDirty;
 #ifdef CHelperTest
-            Profile::push("collect suggestions: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(node->nodeTypeId)));
+            Profile::push("collect suggestions: {} {}", FORMAT_ARG(utf8::utf16to8(astNode.tokens.toString())), FORMAT_ARG(Node::getNodeTypeName(astNode.node.nodeTypeId)));
 #endif
             switch (astNode.node.nodeTypeId) {
                 CODEC_PASTE(CHELPER_COLLECT_AUTO_SUGGESTION, CHELPER_NODE_TYPES)

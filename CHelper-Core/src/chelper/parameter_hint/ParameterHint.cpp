@@ -74,7 +74,7 @@ namespace CHelper::ParameterHint {
         }
         if (HEDLEY_UNLIKELY(!astNode.isAllSpaceError())) {
 #ifdef CHelperTest
-            Profile::push("get parameter hint: {}", FORMAT_ARG(Node::NodeTypeHelper::getName(astNode.node->nodeTypeId)));
+            Profile::push("get parameter hint: {} {}", FORMAT_ARG(utf8::utf16to8(astNode.tokens.toString())), FORMAT_ARG(Node::getNodeTypeName(astNode.node.nodeTypeId)));
 #endif
             std::optional<std::u16string> parameterHint;
             switch (astNode.node.nodeTypeId) {

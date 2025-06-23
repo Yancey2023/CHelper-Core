@@ -10,6 +10,10 @@
 #include <chelper/node/CommandNode.h>
 #include <pch.h>
 
+#define CHELPER_GET_NAME(v1)            \
+    case NodeTypeId::v1: \
+        return NodeTypeDetail<CHelper::Node::NodeTypeId::v1>::name;
+
 namespace CHelper {
 
     class CPack;
@@ -313,6 +317,8 @@ namespace CHelper {
             static_assert(Type::nodeTypeId == NodeTypeId::SINGLE_SYMBOL, "nodTypeId not equal");
             static constexpr auto name = "SINGLE_SYMBOL";
         };
+
+        const char *getNodeTypeName(const CHelper::Node::NodeTypeId::NodeTypeId id);
 
     }// namespace Node
 

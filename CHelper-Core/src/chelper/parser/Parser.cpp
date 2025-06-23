@@ -7,7 +7,6 @@
 #include <chelper/node/NodeType.h>
 #include <chelper/parser/Parser.h>
 #include <chelper/resources/CPack.h>
-#include <chelper/serialization/Serialization.h>
 
 #ifdef CHelperDebug
 #define DEBUG_GET_NODE_BEGIN(node, index) size_t index = tokenReader.indexStack.size()
@@ -16,12 +15,12 @@
 #endif
 
 #ifdef CHelperDebug
-#define DEBUG_GET_NODE_END(node, index)                                                                         \
-    do {                                                                                                        \
-        if (HEDLEY_UNLIKELY((index) != tokenReader.indexStack.size())) {                                        \
-            Profile::push("TokenReaderIndexError: {}", FORMAT_ARG(NodeTypeHelper::getName((node).nodeTypeId))); \
-            throw std::runtime_error("TokenReaderIndexError");                                                  \
-        }                                                                                                       \
+#define DEBUG_GET_NODE_END(node, index)                                                                       \
+    do {                                                                                                      \
+        if (HEDLEY_UNLIKELY((index) != tokenReader.indexStack.size())) {                                      \
+            Profile::push("TokenReaderIndexError: {}", FORMAT_ARG(Node::getNodeTypeName((node).nodeTypeId))); \
+            throw std::runtime_error("TokenReaderIndexError");                                                \
+        }                                                                                                     \
     } while (0)
 #else
 #define DEBUG_GET_NODE_END(node, index) ;
