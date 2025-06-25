@@ -210,10 +210,10 @@ namespace CHelper::Test {
                     fmt::println("no error");
                 } else {
                     fmt::println("error reasons:");
-                    int i = 0;
-                    for (const auto &errorReason: errorReasons) {
+                    for (size_t i = 0; i < errorReasons.size(); ++i) {
+                        const auto& errorReason = errorReasons[i];
                         fmt::print("{}. {} {}\n{}{}{}\n",
-                                   ++i,
+                                   i,
                                    fmt::styled(utf8::utf16to8(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
                                    fmt::styled(utf8::utf16to8(errorReason->errorReason), fg(fmt::color::cornflower_blue)),
                                    utf8::utf16to8(command.substr(0, errorReason->start)),
@@ -225,14 +225,14 @@ namespace CHelper::Test {
                     fmt::println("no suggestion");
                 } else {
                     fmt::println("{} suggestions:", suggestions->size());
-                    int i = 0;
-                    for (const auto &item: *suggestions) {
+                    for (size_t i = 0; i < suggestions->size(); ++i) {
+                        const auto &item = (*suggestions)[i];
                         if (i == 30) {
                             fmt::println("...");
                             break;
                         }
                         fmt::println("{}. {} {}",
-                                     ++i,
+                                     i,
                                      fmt::styled(utf8::utf16to8(item.content->name), fg(fmt::color::lime_green)),
                                      fmt::styled(utf8::utf16to8(item.content->description.value_or(u"")), fg(fmt::color::cornflower_blue)));
                         std::u16string result = command.substr(0, item.start)
@@ -261,7 +261,7 @@ namespace CHelper::Test {
     /**
      * 测试程序性能
      */
-    [[maybe_unused]] void test2(const std::filesystem::path &cpackPath, const std::vector<std::u16string> &commands, int times) {
+    [[maybe_unused]] void test2(const std::filesystem::path &cpackPath, const std::vector<std::u16string> &commands, size_t times) {
         CHelperCore *core = nullptr;
         try {
             core = CHelperCore::createByDirectory(cpackPath);
@@ -271,7 +271,7 @@ namespace CHelper::Test {
             }
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
-            for (int i = 0; i < times; ++i) {
+            for (size_t i = 0; i < times; ++i) {
                 for (const auto &command: commands) {
                     core->onTextChanged(command, command.length());
                     auto description = core->getDescription();// NOLINT(*-unused-local-non-trivial-variable)

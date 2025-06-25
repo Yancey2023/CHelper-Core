@@ -89,7 +89,7 @@ public:
         } else {
             errorReason = u"可能的错误原因：";
             for (size_t i = 0; i < errorReasons.size(); ++i) {
-                errorReason->append(u"\n").append(utf8::utf8to16(std::to_string(++i)).append(u". ").append(errorReasons[i]->errorReason));
+                errorReason->append(fmt::format(u"\n{}. {}", i, errorReasons[i]->errorReason));
             }
         }
         if (errorReason.has_value()) {

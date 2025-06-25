@@ -65,12 +65,12 @@ void CHelperApp::onTextChanged(const QString &string) const {
         } else if (HEDLEY_UNLIKELY(errorReasons.size() == 1)) {
             ui->errorReasonLabel->setText(QString::fromStdU16String(errorReasons[0]->errorReason));
         } else {
-            QString result = "可能的错误原因：";
-            int i = 0;
-            for (const auto &item: errorReasons) {
-                result.append("\n").append(QString().setNum(++i)).append(". ").append(QString::fromStdU16String(item->errorReason));
+            std::u16string result = u"可能的错误原因：";
+             for (size_t i = 0; i < errorReasons.size(); ++i) {
+                const auto &errorReason= errorReasons[i];
+                result.append(fmt::format(u"\n{}. {}", i, errorReason->errorReason));
             }
-            ui->errorReasonLabel->setText(result);
+            ui->errorReasonLabel->setText(QString::fromStdU16String(result));
         }
     }
     std::vector<CHelper::AutoSuggestion::Suggestion> *suggestions = core->getSuggestions();

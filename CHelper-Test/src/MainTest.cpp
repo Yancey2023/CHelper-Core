@@ -89,10 +89,10 @@ namespace CHelper::Test {
                     fmt::println("no error");
                 } else {
                     fmt::println("error reasons:");
-                    int i = 0;
-                    for (const auto &errorReason: errorReasons) {
+                    for (size_t i = 0; i < errorReasons.size(); ++i) {
+                        const auto& errorReason = errorReasons[i];
                         fmt::print("{}. {} {}\n{}{}{}\n",
-                                   ++i,
+                                   i,
                                    fmt::styled(utf8::utf16to8(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
                                    fmt::styled(utf8::utf16to8(errorReason->errorReason), fg(fmt::color::cornflower_blue)),
                                    utf8::utf16to8(command.substr(0, errorReason->start)),
@@ -104,14 +104,14 @@ namespace CHelper::Test {
                     fmt::println("no suggestion");
                 } else {
                     fmt::println("{} suggestions:", suggestions->size());
-                    int i = 0;
-                    for (const auto &item: *suggestions) {
+                    for (size_t i = 0; i < suggestions->size(); ++i) {
+                        const auto &item = (*suggestions)[i];
                         if (i == 30) {
                             fmt::println("...");
                             break;
                         }
                         fmt::println("{}. {} {}",
-                                     ++i,
+                                     i,
                                      fmt::styled(utf8::utf16to8(item.content->name), fg(fmt::color::lime_green)),
                                      fmt::styled(utf8::utf16to8(item.content->description.value_or(u"")), fg(fmt::color::cornflower_blue)));
                         std::u16string result = command.substr(0, item.start)
