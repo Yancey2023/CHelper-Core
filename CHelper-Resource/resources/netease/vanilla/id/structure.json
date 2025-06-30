@@ -63,6 +63,10 @@
             "description": "古迹废墟"
         },
         {
+            "name": "trial_chambers",
+            "description": "试炼密室"
+        },
+        {
             "name": "village",
             "description": "村庄"
         }

@@ -12,11 +12,11 @@
         },
         {
             "name": "minecraft:basic_bubble_particle",
-            "description": "实体在水下产生的飞溅粒子，投射物在水下产生的轨迹粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "实体在水下产生的飞溅粒子，投射物在水下产生的轨迹粒子（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:basic_bubble_particle_manual",
-            "description": "漂浮在水面上的实体产生的粒子，水下TNT被点燃时的气泡粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "漂浮在水面上的实体产生的粒子，水下TNT被点燃时的气泡粒子（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:basic_crit_particle",
@@ -59,16 +59,24 @@
             "description": "喂食生物或熊猫吃竹子时的物品碎片粒子"
         },
         {
+            "name": "minecraft:breeze_ground_particle",
+            "description": "旋风人产生的方块碎片粒子"
+        },
+        {
+            "name": "minecraft:breeze_wind_explosion_emitter",
+            "description": "风弹爆炸粒子"
+        },
+        {
             "name": "minecraft:bubble_column_bubble",
-            "description": "气泡柱顶部的实体产生的气泡粒子。该粒子只能在水中生成和存在。"
+            "description": "气泡柱顶部的实体产生的气泡粒子（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:bubble_column_down_particle",
-            "description": "水下岩浆块的涡流气泡柱。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "水下岩浆块的涡流气泡柱（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:bubble_column_up_particle",
-            "description": "水下灵魂沙的涌流气泡柱。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "水下灵魂沙的涌流气泡柱（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:camera_shoot_explosion",
@@ -88,7 +96,7 @@
         },
         {
             "name": "minecraft:cauldron_bubble_particle",
-            "description": "炼药锅气泡粒子（该粒子未被使用）。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "炼药锅气泡粒子（该粒子未被使用）（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:cauldron_explosion_emitter",
@@ -100,7 +108,7 @@
         },
         {
             "name": "minecraft:cauldron_splash_particle",
-            "description": "炼药锅的杂质粒子（该粒子未被使用）。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "炼药锅的杂质粒子（该粒子未被使用）（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:cherry_leaves_particle",
@@ -140,7 +148,7 @@
         },
         {
             "name": "minecraft:dolphin_move_particle",
-            "description": "海豚游泳轨迹粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "海豚游泳轨迹粒子（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:dragon_breath_fire",
@@ -165,6 +173,10 @@
         {
             "name": "minecraft:dragon_dying_explosion",
             "description": "末影龙死亡时的粒子"
+        },
+        {
+            "name": "minecraft:dust_plume",
+            "description": "成功向饰纹陶罐中放置物品的粒子"
         },
         {
             "name": "minecraft:egg_destroy_emitter",
@@ -208,7 +220,7 @@
         },
         {
             "name": "minecraft:eye_of_ender_bubble_particle",
-            "description": "末影之眼在水下运动时的气泡粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "末影之眼在水下运动时的气泡粒子（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:eyeofender_death_explode_particle",
@@ -252,23 +264,23 @@
         },
         {
             "name": "minecraft:fish_hook_particle",
-            "description": "鱼钩的气泡粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "鱼钩的气泡粒子（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:fish_pos_particle",
-            "description": "钓鱼时鱼的位置产生的气泡粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "钓鱼时鱼的位置产生的气泡粒子（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:glow_particle",
-            "description": "发光鱿鱼的发光粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "发光鱿鱼的发光粒子（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:guardian_attack_particle",
-            "description": "守卫者激光气泡粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "守卫者激光气泡粒子（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:guardian_water_move_particle",
-            "description": "守卫者水下移动轨迹粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "守卫者水下移动轨迹粒子（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:heart_particle",
@@ -289,6 +301,14 @@
         {
             "name": "minecraft:ice_evaporation_emitter",
             "description": "冰汽化粒子（该粒子未被使用）"
+        },
+        {
+            "name": "minecraft:infested_ambient",
+            "description": "寄生效果产生的粒子"
+        },
+        {
+            "name": "minecraft:infested_emitter",
+            "description": "带有寄生效果的生物死亡时的粒子"
         },
         {
             "name": "minecraft:ink_emitter",
@@ -375,6 +395,18 @@
             "description": "哭泣的黑曜石滴落的粒子"
         },
         {
+            "name": "minecraft:ominous_spawning_particle",
+            "description": "不祥之物生成器生成物品时释放的粒子"
+        },
+        {
+            "name": "minecraft:oozing_ambient",
+            "description": "渗浆效果产生的粒子"
+        },
+        {
+            "name": "minecraft:oozing_emitter",
+            "description": "带有渗浆效果的生物死亡时的粒子"
+        },
+        {
             "name": "minecraft:phantom_trail_particle",
             "description": "幻翼的飞行轨迹粒子"
         },
@@ -395,8 +427,16 @@
             "description": "激活的重生锚顶部漂浮的粒子"
         },
         {
+            "name": "minecraft:raid_omen_ambient",
+            "description": "袭击之兆效果产生的粒子"
+        },
+        {
+            "name": "minecraft:raid_omen_emitter",
+            "description": "袭击之兆效果产生的粒子"
+        },
+        {
             "name": "minecraft:rain_splash_particle",
-            "description": "实验台制作冰弹（仅教育版）时的飞溅粒子；stalactite_water_drip_particle粒子、water_drip_particle粒子、雨水落地后的飞溅粒子。\u0027\u0027该粒子只能在空气中生成和存在。\u0027\u0027"
+            "description": "实验台制作冰弹（仅教育版）时的飞溅粒子；stalactite_water_drip_particle粒子、water_drip_particle粒子、雨水落地后的飞溅粒子（该粒子只能在空气中生成和存在）"
         },
         {
             "name": "minecraft:redstone_ore_dust_particle",
@@ -447,6 +487,22 @@
             "description": "蠹虫进出方块时的粒子"
         },
         {
+            "name": "minecraft:small_flame_particle",
+            "description": "未知"
+        },
+        {
+            "name": "minecraft:small_soul_fire_flame",
+            "description": "未知"
+        },
+        {
+            "name": "minecraft:smash_ground_particle",
+            "description": "未知"
+        },
+        {
+            "name": "minecraft:smash_ground_particle_center",
+            "description": "未知"
+        },
+        {
             "name": "minecraft:snowflake_particle",
             "description": "细雪中的实体产生的雪花粒子"
         },
@@ -468,7 +524,7 @@
         },
         {
             "name": "minecraft:sponge_absorb_water_particle",
-            "description": "海绵吸水时的粒子（该粒子未被使用）。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "海绵吸水时的粒子（该粒子未被使用）（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:spore_blossom_ambient_particle",
@@ -480,15 +536,15 @@
         },
         {
             "name": "minecraft:squid_flee_particle",
-            "description": "鱿鱼和发光鱿鱼逃亡时的粒子（该粒子未被使用）。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "鱿鱼和发光鱿鱼逃亡时的粒子（该粒子未被使用）（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:squid_ink_bubble",
-            "description": "鱿鱼和发光鱿鱼受击时的粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "鱿鱼和发光鱿鱼受击时的粒子（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:squid_move_particle",
-            "description": "鱿鱼和发光鱿鱼移动时的粒子（该粒子未被使用）。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "鱿鱼和发光鱿鱼移动时的粒子（该粒子未被使用）（该粒子只能在水中生成和存在）"
         },
         {
             "name": "minecraft:stalactite_lava_drip_particle",
@@ -511,8 +567,32 @@
             "description": "激活不死图腾时的粒子"
         },
         {
+            "name": "minecraft:trial_omen_ambient",
+            "description": "试炼之兆效果产生的粒子"
+        },
+        {
+            "name": "minecraft:trial_omen_emitter",
+            "description": "试炼之兆效果产生的粒子"
+        },
+        {
+            "name": "minecraft:trial_omen_single",
+            "description": "试炼之兆效果产生的粒子"
+        },
+        {
+            "name": "minecraft:trial_spawner_detection",
+            "description": "试炼刷怪笼激活瞬间产生的火花粒子"
+        },
+        {
+            "name": "minecraft:trial_spawner_detection_ominous",
+            "description": "不祥试炼刷怪笼激活瞬间产生的火花粒子"
+        },
+        {
             "name": "minecraft:underwater_torch_particle",
-            "description": "水下火把（仅教育版）的粒子。\u0027\u0027该粒子只能在水中生成和存在。\u0027\u0027"
+            "description": "水下火把（仅教育版）的粒子（该粒子只能在水中生成和存在）"
+        },
+        {
+            "name": "minecraft:vault_connection_particle",
+            "description": "玩家附近有可解锁的宝库时引导玩家解锁宝库的粒子"
         },
         {
             "name": "minecraft:vibration_signal",
@@ -548,11 +628,11 @@
         },
         {
             "name": "minecraft:water_splash_particle",
-            "description": "气泡柱顶部的水花飞溅粒子；用实验台制作冰弹（仅教育版）时的粒子；狼离开水后甩水粒子。\u0027\u0027该粒子只能在空气中生成和存在。\u0027\u0027"
+            "description": "气泡柱顶部的水花飞溅粒子；用实验台制作冰弹（仅教育版）时的粒子；狼离开水后甩水粒子（该粒子只能在空气中生成和存在）"
         },
         {
             "name": "minecraft:water_splash_particle_manual",
-            "description": "水中的实体或鱼钩产生的水花飞溅粒子。\u0027\u0027该粒子只能在空气中生成和存在。\u0027\u0027"
+            "description": "水中的实体或鱼钩产生的水花飞溅粒子（该粒子只能在空气中生成和存在）"
         },
         {
             "name": "minecraft:water_wake_particle",
@@ -561,6 +641,30 @@
         {
             "name": "minecraft:wax_particle",
             "description": "用斧给铜块的涂蜡变种除蜡时的粒子，用蜜脾给铜块未涂蜡变种或告示牌涂蜡时的粒子"
+        },
+        {
+            "name": "minecraft:weaving_ambient",
+            "description": "盘丝效果产生的粒子"
+        },
+        {
+            "name": "minecraft:weaving_emitter",
+            "description": "带有盘丝效果的生物死亡时的粒子"
+        },
+        {
+            "name": "minecraft:white_smoke_particle",
+            "description": "合成器掷出物品的粒子"
+        },
+        {
+            "name": "minecraft:wind_charged_ambient",
+            "description": "蓄风效果产生的粒子"
+        },
+        {
+            "name": "minecraft:wind_charged_emitter",
+            "description": "带有蓄风效果的生物死亡时的粒子"
+        },
+        {
+            "name": "minecraft:wind_explosion_emitter",
+            "description": "风弹实体爆炸时的一阵狂风粒子"
         },
         {
             "name": "minecraft:wither_boss_invulnerable",

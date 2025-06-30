@@ -6,19 +6,82 @@
             "name": "controller.animation.agent.move"
         },
         {
+            "name": "controller.animation.allay.dancing"
+        },
+        {
+            "name": "controller.animation.allay.general"
+        },
+        {
+            "name": "controller.animation.allay.holding"
+        },
+        {
+            "name": "controller.animation.allay.look_at_target"
+        },
+        {
+            "name": "controller.animation.armadillo.look_at_target"
+        },
+        {
+            "name": "controller.animation.armadillo.roll_up"
+        },
+        {
+            "name": "controller.animation.armadillo.walk"
+        },
+        {
             "name": "controller.animation.armor_stand.pose"
         },
         {
             "name": "controller.animation.armor_stand.wiggle"
         },
         {
+            "name": "controller.animation.axolotl.general"
+        },
+        {
+            "name": "controller.animation.axolotl.move"
+        },
+        {
             "name": "controller.animation.bat.move"
+        },
+        {
+            "name": "controller.animation.bee.drip"
+        },
+        {
+            "name": "controller.animation.bee.root"
+        },
+        {
+            "name": "controller.animation.bee.sting"
         },
         {
             "name": "controller.animation.blaze.flame"
         },
         {
             "name": "controller.animation.blaze.move"
+        },
+        {
+            "name": "controller.animation.breeze.ground_particles"
+        },
+        {
+            "name": "controller.animation.breeze.idle"
+        },
+        {
+            "name": "controller.animation.breeze.idle_ground_sound"
+        },
+        {
+            "name": "controller.animation.breeze.jump"
+        },
+        {
+            "name": "controller.animation.breeze.look_at"
+        },
+        {
+            "name": "controller.animation.breeze.move"
+        },
+        {
+            "name": "controller.animation.breeze.shoot"
+        },
+        {
+            "name": "controller.animation.camel.general"
+        },
+        {
+            "name": "controller.animation.camel.idle"
         },
         {
             "name": "controller.animation.cat.baby"
@@ -72,10 +135,34 @@
             "name": "controller.animation.fox.move"
         },
         {
+            "name": "controller.animation.frog.croaking"
+        },
+        {
+            "name": "controller.animation.frog.eat_mob"
+        },
+        {
+            "name": "controller.animation.frog.general"
+        },
+        {
             "name": "controller.animation.ghast.move"
         },
         {
             "name": "controller.animation.ghast.scale"
+        },
+        {
+            "name": "controller.animation.goat.move"
+        },
+        {
+            "name": "controller.animation.hoglin.attack"
+        },
+        {
+            "name": "controller.animation.hoglin.baby_scaling"
+        },
+        {
+            "name": "controller.animation.hoglin.look_at_target"
+        },
+        {
+            "name": "controller.animation.hoglin.walk"
         },
         {
             "name": "controller.animation.humanoid.attack"
@@ -105,6 +192,9 @@
             "name": "controller.animation.humanoid.holding"
         },
         {
+            "name": "controller.animation.humanoid.holding_spyglass"
+        },
+        {
             "name": "controller.animation.humanoid.look_at_target"
         },
         {
@@ -112,6 +202,9 @@
         },
         {
             "name": "controller.animation.humanoid.riding"
+        },
+        {
+            "name": "controller.animation.humanoid.riding_legs_only"
         },
         {
             "name": "controller.animation.humanoid.sneaking"
@@ -195,10 +288,16 @@
             "name": "controller.animation.phantom.move"
         },
         {
+            "name": "controller.animation.piglin.attack"
+        },
+        {
             "name": "controller.animation.pillager.attack"
         },
         {
             "name": "controller.animation.pillager.root"
+        },
+        {
+            "name": "controller.animation.player.base"
         },
         {
             "name": "controller.animation.player.crossbow"
@@ -208,6 +307,9 @@
         },
         {
             "name": "controller.animation.player.first_person_map"
+        },
+        {
+            "name": "controller.animation.player.hudplayer"
         },
         {
             "name": "controller.animation.player.root"
@@ -249,13 +351,43 @@
             "name": "controller.animation.skeleton.attack"
         },
         {
-            "name": "controller.animation.snowgolem.move.v1.8"
+            "name": "controller.animation.sniffer.baby"
+        },
+        {
+            "name": "controller.animation.sniffer.dig"
+        },
+        {
+            "name": "controller.animation.sniffer.feeling_happy"
+        },
+        {
+            "name": "controller.animation.sniffer.general"
+        },
+        {
+            "name": "controller.animation.sniffer.long_sniff"
+        },
+        {
+            "name": "controller.animation.sniffer.search"
+        },
+        {
+            "name": "controller.animation.sniffer.sniffsniff"
+        },
+        {
+            "name": "controller.animation.sniffer.stand_up"
+        },
+        {
+            "name": "controller.animation.sniffer.walk"
         },
         {
             "name": "controller.animation.snowgolem.move"
         },
         {
+            "name": "controller.animation.snowgolem.move.v1.8"
+        },
+        {
             "name": "controller.animation.spider.move"
+        },
+        {
+            "name": "controller.animation.tadpole.general"
         },
         {
             "name": "controller.animation.trident.wield"
@@ -268,6 +400,12 @@
         },
         {
             "name": "controller.animation.turtle.move"
+        },
+        {
+            "name": "controller.animation.vex.charge"
+        },
+        {
+            "name": "controller.animation.vex.idle"
         },
         {
             "name": "controller.animation.vex.move"
@@ -298,6 +436,24 @@
         },
         {
             "name": "controller.animation.vindicator.base.v1.0"
+        },
+        {
+            "name": "controller.animation.warden.hurt"
+        },
+        {
+            "name": "controller.animation.warden.melee_attacking"
+        },
+        {
+            "name": "controller.animation.warden.roar"
+        },
+        {
+            "name": "controller.animation.warden.shiver"
+        },
+        {
+            "name": "controller.animation.warden.sniff"
+        },
+        {
+            "name": "controller.animation.warden.sonic_boom"
         },
         {
             "name": "controller.animation.witch.general"
@@ -337,132 +493,6 @@
         },
         {
             "name": "controller.animation.zombie.swimming"
-        },
-        {
-            "name": "controller.animation.bee.drip"
-        },
-        {
-            "name": "controller.animation.bee.sting"
-        },
-        {
-            "name": "controller.animation.bee.root"
-        },
-        {
-            "name": "controller.animation.player.hudplayer"
-        },
-        {
-            "name": "controller.animation.hoglin.baby_scaling"
-        },
-        {
-            "name": "controller.animation.hoglin.look_at_target"
-        },
-        {
-            "name": "controller.animation.hoglin.walk"
-        },
-        {
-            "name": "controller.animation.hoglin.attack"
-        },
-        {
-            "name": "controller.animation.piglin.attack"
-        },
-        {
-            "name": "controller.animation.axolotl.general"
-        },
-        {
-            "name": "controller.animation.axolotl.move"
-        },
-        {
-            "name": "controller.animation.goat.move"
-        },
-        {
-            "name": "controller.animation.humanoid.holding_spyglass"
-        },
-        {
-            "name": "controller.animation.allay.general"
-        },
-        {
-            "name": "controller.animation.allay.holding"
-        },
-        {
-            "name": "controller.animation.frog.general"
-        },
-        {
-            "name": "controller.animation.frog.eat_mob"
-        },
-        {
-            "name": "controller.animation.frog.croaking"
-        },
-        {
-            "name": "controller.animation.tadpole.general"
-        },
-        {
-            "name": "controller.animation.warden.shiver"
-        },
-        {
-            "name": "controller.animation.warden.hurt"
-        },
-        {
-            "name": "controller.animation.warden.sniff"
-        },
-        {
-            "name": "controller.animation.warden.roar"
-        },
-        {
-            "name": "controller.animation.warden.melee_attacking"
-        },
-        {
-            "name": "controller.animation.warden.sonic_boom"
-        },
-        {
-            "name": "controller.animation.allay.dancing"
-        },
-        {
-            "name": "controller.animation.allay.look_at_target"
-        },
-        {
-            "name": "controller.animation.vex.idle"
-        },
-        {
-            "name": "controller.animation.vex.charge"
-        },
-        {
-            "name": "controller.animation.humanoid.riding_legs_only"
-        },
-        {
-            "name": "controller.animation.camel.general"
-        },
-        {
-            "name": "controller.animation.camel.idle"
-        },
-        {
-            "name": "controller.animation.sniffer.baby"
-        },
-        {
-            "name": "controller.animation.sniffer.general"
-        },
-        {
-            "name": "controller.animation.sniffer.walk"
-        },
-        {
-            "name": "controller.animation.sniffer.sniffsniff"
-        },
-        {
-            "name": "controller.animation.sniffer.long_sniff"
-        },
-        {
-            "name": "controller.animation.sniffer.search"
-        },
-        {
-            "name": "controller.animation.sniffer.dig"
-        },
-        {
-            "name": "controller.animation.sniffer.stand_up"
-        },
-        {
-            "name": "controller.animation.sniffer.feeling_happy"
-        },
-        {
-            "name": "controller.animation.player.base"
         }
     ]
 }

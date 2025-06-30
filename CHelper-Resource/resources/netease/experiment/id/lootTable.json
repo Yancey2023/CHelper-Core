@@ -3,13 +3,6 @@
     "type": "normal",
     "content": [
         {
-            "name": "empty",
-            "description": "不生成战利品"
-        },
-        {
-            "name": "\"blocks/tallgrass\""
-        },
-        {
             "name": "\"chests/abandoned_mineshaft\"",
             "description": "废弃矿井宝箱"
         },
@@ -110,6 +103,45 @@
             "description": "要塞图书馆宝箱"
         },
         {
+            "name": "\"chests/trial_chambers/corridor\""
+        },
+        {
+            "name": "\"chests/trial_chambers/entrance\""
+        },
+        {
+            "name": "\"chests/trial_chambers/intersection\""
+        },
+        {
+            "name": "\"chests/trial_chambers/intersection_barrel\""
+        },
+        {
+            "name": "\"chests/trial_chambers/reward\""
+        },
+        {
+            "name": "\"chests/trial_chambers/reward_common\""
+        },
+        {
+            "name": "\"chests/trial_chambers/reward_ominous\""
+        },
+        {
+            "name": "\"chests/trial_chambers/reward_ominous_common\""
+        },
+        {
+            "name": "\"chests/trial_chambers/reward_ominous_rare\""
+        },
+        {
+            "name": "\"chests/trial_chambers/reward_ominous_unique\""
+        },
+        {
+            "name": "\"chests/trial_chambers/reward_rare\""
+        },
+        {
+            "name": "\"chests/trial_chambers/reward_unique\""
+        },
+        {
+            "name": "\"chests/trial_chambers/supply\""
+        },
+        {
             "name": "\"chests/underwater_ruin_big\"",
             "description": "大型海底废墟宝箱"
         },
@@ -190,8 +222,24 @@
             "description": "林地府邸宝箱"
         },
         {
+            "name": "\"dispensers/trial_chambers/chamber\""
+        },
+        {
+            "name": "\"dispensers/trial_chambers/corridor\""
+        },
+        {
+            "name": "\"dispensers/trial_chambers/water\""
+        },
+        {
             "name": "\"empty\"",
             "description": "不生成战利品"
+        },
+        {
+            "name": "empty",
+            "description": "不生成战利品"
+        },
+        {
+            "name": "\"entities/armadillo_brush\""
         },
         {
             "name": "\"entities/armor_set_chain\"",
@@ -228,6 +276,15 @@
         {
             "name": "\"entities/boat\"",
             "description": "船的掉落物"
+        },
+        {
+            "name": "\"entities/bogged\""
+        },
+        {
+            "name": "\"entities/bogged_shear\""
+        },
+        {
+            "name": "\"entities/breeze\""
         },
         {
             "name": "\"entities/brown_mooshroom_shear\"",
@@ -411,6 +468,9 @@
         {
             "name": "\"entities/pillager\"",
             "description": "掠夺者的掉落物"
+        },
+        {
+            "name": "\"entities/pillager_captain\""
         },
         {
             "name": "\"entities/pillager_captain_equipment\"",
@@ -609,8 +669,29 @@
             "name": "\"equipment/low_tier_items\""
         },
         {
+            "name": "\"equipment/trial_chamber\""
+        },
+        {
+            "name": "\"equipment/trial_chamber_chainmail\""
+        },
+        {
+            "name": "\"equipment/trial_chamber_diamond\""
+        },
+        {
+            "name": "\"equipment/trial_chamber_iron\""
+        },
+        {
+            "name": "\"equipment/trial_chamber_melee\""
+        },
+        {
+            "name": "\"equipment/trial_chamber_ranged\""
+        },
+        {
             "name": "\"gameplay/entities/mooshroom_milking\"",
             "description": "对哞菇使用碗所获得的产物"
+        },
+        {
+            "name": "\"gameplay/entities/sniffer_seeds\""
         },
         {
             "name": "\"gameplay/fishing\"",
@@ -639,6 +720,24 @@
         {
             "name": "\"gameplay/jungle_fishing\"",
             "description": "在丛林生物群系中的钓鱼钓到的物品"
+        },
+        {
+            "name": "\"pots/trial_chambers/corridor\""
+        },
+        {
+            "name": "\"spawners/ominous/trial_chamber/consumables\""
+        },
+        {
+            "name": "\"spawners/ominous/trial_chamber/key\""
+        },
+        {
+            "name": "\"spawners/trial_chamber/consumables\""
+        },
+        {
+            "name": "\"spawners/trial_chamber/items_to_drop_when_ominous\""
+        },
+        {
+            "name": "\"spawners/trial_chamber/key\""
         }
     ]
 }

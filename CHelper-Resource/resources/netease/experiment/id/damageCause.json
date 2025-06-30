@@ -11,6 +11,10 @@
             "description": "方块爆炸"
         },
         {
+            "name": "campfire",
+            "description": "营火"
+        },
+        {
             "name": "charging",
             "description": "（未使用）"
         },
@@ -91,6 +95,22 @@
             "description": "弹射物"
         },
         {
+            "name": "ram_attack",
+            "description": "冲撞攻击"
+        },
+        {
+            "name": "self_destruct",
+            "description": "/kill 命令"
+        },
+        {
+            "name": "sonic_boom",
+            "description": "监守者远程攻击"
+        },
+        {
+            "name": "soul_campfire",
+            "description": "灵魂营火"
+        },
+        {
             "name": "stalactite",
             "description": "钟乳石"
         },
@@ -105,10 +125,6 @@
         {
             "name": "suffocation",
             "description": "窒息"
-        },
-        {
-            "name": "suicide",
-            "description": "/kill 命令"
         },
         {
             "name": "temperature",

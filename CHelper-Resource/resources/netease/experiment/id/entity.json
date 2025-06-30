@@ -11,6 +11,10 @@
             "description": "区域效果云"
         },
         {
+            "name": "armadillo",
+            "description": "犰狳"
+        },
+        {
             "name": "armor_stand",
             "description": "盔甲架"
         },
@@ -37,6 +41,18 @@
         {
             "name": "boat",
             "description": "船"
+        },
+        {
+            "name": "bogged",
+            "description": "沼骸"
+        },
+        {
+            "name": "breeze",
+            "description": "旋风人"
+        },
+        {
+            "name": "breeze_wind_charge_projectile",
+            "description": "风弹"
         },
         {
             "name": "camel",
@@ -247,6 +263,10 @@
             "description": "豹猫"
         },
         {
+            "name": "ominous_item_spawner",
+            "description": "不祥之物生成器"
+        },
+        {
             "name": "painting",
             "description": "画"
         },
@@ -417,6 +437,10 @@
         {
             "name": "warden",
             "description": "监守者"
+        },
+        {
+            "name": "wind_charge_projectile",
+            "description": "风弹"
         },
         {
             "name": "witch",

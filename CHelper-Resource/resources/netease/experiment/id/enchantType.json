@@ -19,8 +19,16 @@
             "description": "爆炸保护"
         },
         {
+            "name": "breach",
+            "description": "破甲"
+        },
+        {
             "name": "channeling",
             "description": "引雷"
+        },
+        {
+            "name": "density",
+            "description": "致密"
         },
         {
             "name": "depth_strider",
@@ -153,6 +161,10 @@
         {
             "name": "vanishing",
             "description": "消失诅咒"
+        },
+        {
+            "name": "wind_burst",
+            "description": "风爆"
         }
     ]
 }

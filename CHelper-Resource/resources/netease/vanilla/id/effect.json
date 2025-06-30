@@ -43,6 +43,10 @@
             "description": "饥饿"
         },
         {
+            "name": "infested",
+            "description": "寄生"
+        },
+        {
             "name": "instant_damage",
             "description": "瞬间伤害"
         },
@@ -75,8 +79,16 @@
             "description": "夜视"
         },
         {
+            "name": "oozing",
+            "description": "渗浆"
+        },
+        {
             "name": "poison",
             "description": "中毒"
+        },
+        {
+            "name": "raid_omen",
+            "description": "袭击之兆"
         },
         {
             "name": "regeneration",
@@ -107,6 +119,10 @@
             "description": "力量"
         },
         {
+            "name": "trial_omen",
+            "description": "试炼之兆"
+        },
+        {
             "name": "village_hero",
             "description": "村庄英雄"
         },
@@ -117,6 +133,14 @@
         {
             "name": "weakness",
             "description": "虚弱"
+        },
+        {
+            "name": "weaving",
+            "description": "盘丝"
+        },
+        {
+            "name": "wind_charged",
+            "description": "蓄风"
         },
         {
             "name": "wither",
