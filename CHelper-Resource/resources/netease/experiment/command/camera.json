@@ -312,7 +312,7 @@
     "ast": [
         ["players", "clear", "fade", "set"],
         ["clear", "LF"],
-        ["fade", "color", "time"],
+        ["fade", "LF", "color", "time"],
         ["color", "red"],
         ["red", "green"],
         ["green", "blue"],
@@ -320,20 +320,20 @@
         ["time", "fadeInSeconds"],
         ["fadeInSeconds", "holdSeconds"],
         ["holdSeconds", "fadeOutSeconds"],
-        ["fadeOutSeconds", "color"],
+        ["fadeOutSeconds", "LF", "color"],
         ["set", "preset"],
-        ["preset", "default", "facing", "rot", "ease"],
+        ["preset", "default", "LF", "facing", "pos", "rot", "ease"],
         ["default", "LF"],
+        ["ease", "easeTime"],
+        ["easeTime", "easeType"],
+        ["easeType", "default", "LF", "rot", "facing", "pos"],
         ["facing", "lookAtEntity", "lookAtPosition"],
         ["lookAtEntity", "LF"],
         ["lookAtPosition", "LF"],
         ["pos", "position"],
-        ["position", "facing", "rot"],
+        ["position", "LF", "facing", "rot"],
         ["rot", "xRot"],
         ["xRot", "yRot"],
-        ["yRot", "LF"],
-        ["ease", "easeTime"],
-        ["easeTime", "easeType"],
-        ["easeType", "default", "facing", "pos", "rot"]
+        ["yRot", "LF"]
     ]
 }
