@@ -29,7 +29,7 @@
             "type": "NORMAL_ID",
             "id": "effect",
             "brief": "效果",
-            "description": "给予或者需要移除的效果",
+            "description": "需要给予的效果",
             "ignoreError": true,
             "key": "effect"
         },
