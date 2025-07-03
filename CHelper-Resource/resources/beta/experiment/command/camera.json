@@ -250,104 +250,7 @@
             "brief": "运镜函数",
             "description": "相机视角运镜的移动函数/类型",
             "ignoreError": true,
-            "contents": [
-                {
-                    "name": "linear"
-                },
-                {
-                    "name": "spring"
-                },
-                {
-                    "name": "in_quad"
-                },
-                {
-                    "name": "out_quad"
-                },
-                {
-                    "name": "in_out_quad"
-                },
-                {
-                    "name": "in_cubic"
-                },
-                {
-                    "name": "out_cubic"
-                },
-                {
-                    "name": "in_out_cubic"
-                },
-                {
-                    "name": "in_quart"
-                },
-                {
-                    "name": "out_quart"
-                },
-                {
-                    "name": "in_out_quart"
-                },
-                {
-                    "name": "in_quint"
-                },
-                {
-                    "name": "out_quint"
-                },
-                {
-                    "name": "in_out_quint"
-                },
-                {
-                    "name": "in_sine"
-                },
-                {
-                    "name": "out_sine"
-                },
-                {
-                    "name": "in_out_sine"
-                },
-                {
-                    "name": "in_expo"
-                },
-                {
-                    "name": "out_expo"
-                },
-                {
-                    "name": "in_out_expo"
-                },
-                {
-                    "name": "in_circ"
-                },
-                {
-                    "name": "out_circ"
-                },
-                {
-                    "name": "in_out_circ"
-                },
-                {
-                    "name": "in_bounce"
-                },
-                {
-                    "name": "out_bounce"
-                },
-                {
-                    "name": "in_out_bounce"
-                },
-                {
-                    "name": "in_back"
-                },
-                {
-                    "name": "out_back"
-                },
-                {
-                    "name": "in_out_back"
-                },
-                {
-                    "name": "in_elastic"
-                },
-                {
-                    "name": "out_elastic"
-                },
-                {
-                    "name": "in_out_elastic"
-                }
-            ]
+            "key": "cameraEasing"
         },
         {
             "type": "TEXT",
@@ -466,6 +369,21 @@
             "description": "指定相机的视场角",
             "min": 30,
             "max": 110
+        },
+        {
+            "type": "FLOAT",
+            "id": "fovEaseTime",
+            "brief": "持续时间",
+            "description": "指定相机视场角过渡的持续时间",
+            "min": 0
+        },
+        {
+            "type": "NORMAL_ID",
+            "id": "fovEaseType",
+            "brief": "运镜函数",
+            "description": "相机视角运镜的移动函数/类型",
+            "ignoreError": true,
+            "key": "cameraEasing"
         }
     ],
     "ast": [
@@ -481,9 +399,11 @@
         ["holdSeconds", "fadeOutSeconds"],
         ["fadeOutSeconds", "LF", "color"],
         ["remove_target", "LF"],
-        ["fov_clear", "LF"],
+        ["fov_clear", "LF", "fovEaseTime"],
         ["fov_set", "fov_value"],
-        ["fov_value", "LF"],
+        ["fov_value", "LF", "fovEaseTime"],
+        ["fovEaseTime", "LF", "fovEaseType"],
+        ["fovEaseType", "LF"],
         ["set", "preset"],
         ["preset", "LF", "default", "ease", "entity_offset", "facing", "pos", "rot", "view_offset"],
         ["default", "LF"],
