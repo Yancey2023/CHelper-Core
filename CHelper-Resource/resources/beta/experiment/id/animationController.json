@@ -96,6 +96,15 @@
             "name": "controller.animation.cat.move"
         },
         {
+            "name": "controller.animation.copper_golem.chest_interaction"
+        },
+        {
+            "name": "controller.animation.copper_golem.idle"
+        },
+        {
+            "name": "controller.animation.copper_golem.walk"
+        },
+        {
             "name": "controller.animation.creaking.attack"
         },
         {

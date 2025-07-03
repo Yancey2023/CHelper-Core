@@ -122,6 +122,9 @@
             "description": "锁链盔甲：碰擦"
         },
         {
+            "name": "armor.equip_copper"
+        },
+        {
             "name": "armor.equip_diamond",
             "description": "钻石盔甲：碰擦"
         },
@@ -293,6 +296,24 @@
         {
             "name": "block.copper_bulb.turn_on",
             "description": "铜灯：亮起"
+        },
+        {
+            "name": "block.copper_chest.closed"
+        },
+        {
+            "name": "block.copper_chest.open"
+        },
+        {
+            "name": "block.copper_chest.oxidized.closed"
+        },
+        {
+            "name": "block.copper_chest.oxidized.open"
+        },
+        {
+            "name": "block.copper_chest.weathered.closed"
+        },
+        {
+            "name": "block.copper_chest.weathered.open"
         },
         {
             "name": "block.creaking_heart.ambient",
@@ -2786,6 +2807,57 @@
         {
             "name": "mob.chicken.step",
             "description": "鸡：行走"
+        },
+        {
+            "name": "mob.copper_golem.chest_interaction.put_item"
+        },
+        {
+            "name": "mob.copper_golem.chest_interaction.put_item_fail"
+        },
+        {
+            "name": "mob.copper_golem.chest_interaction.take_item"
+        },
+        {
+            "name": "mob.copper_golem.chest_interaction.take_item_fail"
+        },
+        {
+            "name": "mob.copper_golem.death"
+        },
+        {
+            "name": "mob.copper_golem.hurt"
+        },
+        {
+            "name": "mob.copper_golem.oxidized.death"
+        },
+        {
+            "name": "mob.copper_golem.oxidized.hurt"
+        },
+        {
+            "name": "mob.copper_golem.oxidized.spin"
+        },
+        {
+            "name": "mob.copper_golem.oxidized.step"
+        },
+        {
+            "name": "mob.copper_golem.spawn"
+        },
+        {
+            "name": "mob.copper_golem.spin"
+        },
+        {
+            "name": "mob.copper_golem.step"
+        },
+        {
+            "name": "mob.copper_golem.weathered.death"
+        },
+        {
+            "name": "mob.copper_golem.weathered.hurt"
+        },
+        {
+            "name": "mob.copper_golem.weathered.spin"
+        },
+        {
+            "name": "mob.copper_golem.weathered.step"
         },
         {
             "name": "mob.cow.hurt",
@@ -5289,6 +5361,10 @@
         {
             "name": "record.far",
             "description": "音乐唱片（C418 - far）"
+        },
+        {
+            "name": "record.lava_chicken",
+            "description": "音乐唱片（Hyper Potions - Lava Chicken）"
         },
         {
             "name": "record.mall",

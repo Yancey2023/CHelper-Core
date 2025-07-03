@@ -3358,12 +3358,28 @@
             "description": "<工作台>小麦*2+可可豆->曲奇*8"
         },
         {
+            "name": "minecraft:copper_axe",
+            "description": "<工作台>木棍*2+铜锭*3->铜斧"
+        },
+        {
             "name": "minecraft:copper_block_from_ingots",
             "description": "<工作台>铜锭*9->铜块"
         },
         {
+            "name": "minecraft:copper_boots",
+            "description": "<工作台>铜锭*4->铜靴子"
+        },
+        {
             "name": "minecraft:copper_bulb",
             "description": "<工作台>红石粉+铜块*3+烈焰棒->铜灯*4"
+        },
+        {
+            "name": "minecraft:copper_chest",
+            "description": "<工作台>箱子+铜锭*8->铜箱"
+        },
+        {
+            "name": "minecraft:copper_chestplate",
+            "description": "<工作台>铜锭*8->铜胸甲"
         },
         {
             "name": "minecraft:copper_door",
@@ -3372,6 +3388,38 @@
         {
             "name": "minecraft:copper_grate",
             "description": "<工作台>铜块*4->铜格栅*4"
+        },
+        {
+            "name": "minecraft:copper_helmet",
+            "description": "<工作台>铜锭*5->铜头盔"
+        },
+        {
+            "name": "minecraft:copper_hoe",
+            "description": "<工作台>木棍*2+铜锭*2->铜锄"
+        },
+        {
+            "name": "minecraft:copper_ingot_from_nuggets",
+            "description": "<工作台>铜粒*9->铜锭"
+        },
+        {
+            "name": "minecraft:copper_leggings",
+            "description": "<工作台>铜锭*7->铜护腿"
+        },
+        {
+            "name": "minecraft:copper_nugget",
+            "description": "<工作台>铜锭->铜粒*9"
+        },
+        {
+            "name": "minecraft:copper_pickaxe",
+            "description": "<工作台>木棍*2+铜锭*3->铜镐"
+        },
+        {
+            "name": "minecraft:copper_shovel",
+            "description": "<工作台>木棍*2+铜锭->铜锹"
+        },
+        {
+            "name": "minecraft:copper_sword",
+            "description": "<工作台>木棍+铜锭*2->铜剑"
         },
         {
             "name": "minecraft:copper_trapdoor",

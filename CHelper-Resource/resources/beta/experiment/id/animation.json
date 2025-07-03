@@ -252,6 +252,36 @@
             "name": "animation.common.look_at_target"
         },
         {
+            "name": "animation.copper_golem.chest_interaction.put_item"
+        },
+        {
+            "name": "animation.copper_golem.chest_interaction.put_item_fail"
+        },
+        {
+            "name": "animation.copper_golem.chest_interaction.take_item"
+        },
+        {
+            "name": "animation.copper_golem.chest_interaction.take_item_fail"
+        },
+        {
+            "name": "animation.copper_golem.hold_item"
+        },
+        {
+            "name": "animation.copper_golem.spin"
+        },
+        {
+            "name": "animation.copper_golem.spin.oxidized"
+        },
+        {
+            "name": "animation.copper_golem.spin.weathered"
+        },
+        {
+            "name": "animation.copper_golem.walk"
+        },
+        {
+            "name": "animation.copper_golem.walk_holding_item"
+        },
+        {
             "name": "animation.cow.baby_transform"
         },
         {

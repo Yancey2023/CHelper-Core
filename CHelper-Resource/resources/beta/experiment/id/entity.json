@@ -87,6 +87,10 @@
             "description": "命令方块矿车"
         },
         {
+            "name": "copper_golem",
+            "description": "Copper Golem"
+        },
+        {
             "name": "cow",
             "description": "牛"
         },
