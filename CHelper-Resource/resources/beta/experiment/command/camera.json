@@ -185,7 +185,7 @@
         },
         {
             "type": "TEXT",
-            "id": "rot1",
+            "id": "posRot",
             "description": "相机视角的旋转角度",
             "data": {
                 "name": "rot",
@@ -194,21 +194,21 @@
         },
         {
             "type": "RELATIVE_FLOAT",
-            "id": "xRot1",
+            "id": "xPosRot",
             "brief": "rx",
             "description": "相机视角绕Y轴旋转的旋转角度(-180.0表示北，-90.0表示东，0.0表示南，90.0表示西)",
             "canUseCaretNotation": false
         },
         {
             "type": "RELATIVE_FLOAT",
-            "id": "yRot1",
+            "id": "yPosRot",
             "brief": "ry",
             "description": "相机视角绕X轴旋转的旋转角度(竖直上方为-90.0，至竖直下方90.0)",
             "canUseCaretNotation": false
         },
         {
             "type": "TEXT",
-            "id": "rot2",
+            "id": "rot",
             "description": "相机视角的旋转角度",
             "data": {
                 "name": "rot",
@@ -217,14 +217,14 @@
         },
         {
             "type": "RELATIVE_FLOAT",
-            "id": "xRot2",
+            "id": "xRot",
             "brief": "rx",
             "description": "相机视角绕Y轴旋转的旋转角度(-180.0表示北，-90.0表示东，0.0表示南，90.0表示西)",
             "canUseCaretNotation": false
         },
         {
             "type": "RELATIVE_FLOAT",
-            "id": "yRot2",
+            "id": "yRot",
             "brief": "ry",
             "description": "相机视角绕X轴旋转的旋转角度(竖直上方为-90.0，至竖直下方90.0)",
             "canUseCaretNotation": false
@@ -444,10 +444,10 @@
         {
             "type": "TEXT",
             "id": "fov_clear",
-            "description": " 重置相机的视场角",
+            "description": "重置相机的视场角",
             "data": {
                 "name": "fov_clear",
-                "description": " 重置相机的视场角"
+                "description": "重置相机的视场角"
             }
         },
         {
@@ -461,12 +461,15 @@
         },
         {
             "type": "FLOAT",
-            "id": "fovValue",
-            "description": "相机的视场角"
+            "id": "fov_value",
+            "brief": "视场角",
+            "description": "指定相机的视场角",
+            "min": 30,
+            "max": 110
         }
     ],
     "ast": [
-        ["players", "clear", "fade", "remove_target", "set", "target_entity", "fov_clear", "fov_set"],
+        ["players", "clear", "fade", "fov_clear", "fov_set", "remove_target", "set", "target_entity"],
         ["clear", "LF"],
         ["fade", "LF", "color", "time"],
         ["color", "red"],
@@ -478,23 +481,26 @@
         ["holdSeconds", "fadeOutSeconds"],
         ["fadeOutSeconds", "LF", "color"],
         ["remove_target", "LF"],
+        ["fov_clear", "LF"],
+        ["fov_set", "fov_value"],
+        ["fov_value", "LF"],
         ["set", "preset"],
-        ["preset", "default", "LF", "facing", "pos", "rot2", "ease", "view_offset", "entity_offset"],
+        ["preset", "LF", "default", "ease", "entity_offset", "facing", "pos", "rot", "view_offset"],
         ["default", "LF"],
         ["ease", "easeTime"],
         ["easeTime", "easeType"],
-        ["easeType", "default", "LF", "rot1", "facing", "pos"],
+        ["easeType", "LF", "default", "entity_offset", "facing", "pos", "rot", "view_offset"],
         ["facing", "lookAtEntity", "lookAtPosition"],
         ["lookAtEntity", "LF"],
         ["lookAtPosition", "LF"],
         ["pos", "position"],
-        ["position", "LF", "facing", "rot1"],
-        ["rot1", "xRot1"],
-        ["xRot1", "yRot1"],
-        ["yRot1", "LF"],
-        ["rot2", "xRot2"],
-        ["xRot2", "yRot2"],
-        ["yRot2", "LF", "view_offset"],
+        ["position", "LF", "facing", "posRot"],
+        ["posRot", "xPosRot"],
+        ["xPosRot", "yPosRot"],
+        ["yPosRot", "LF"],
+        ["rot", "xRot"],
+        ["xRot", "yRot"],
+        ["yRot", "LF", "entity_offset", "view_offset"],
         ["view_offset", "xViewOffset"],
         ["xViewOffset", "yViewOffset"],
         ["yViewOffset", "LF", "entity_offset"],
@@ -507,9 +513,6 @@
         ["target_center_offset", "xTargetCenterOffset"],
         ["xTargetCenterOffset", "yTargetCenterOffset"],
         ["yTargetCenterOffset", "zTargetCenterOffset"],
-        ["zTargetCenterOffset", "LF"],
-        ["fov_clear", "LF"],
-        ["fov_set", "fovValue"],
-        ["fovValue", "LF"]
+        ["zTargetCenterOffset", "LF"]
     ]
 }
