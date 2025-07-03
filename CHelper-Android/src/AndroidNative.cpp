@@ -37,31 +37,9 @@ jstring string2jstring(JNIEnv *env, const std::string &string) {
     return env->NewStringUTF(string.c_str());
 }
 
-static jclass errorReasonClass;
-static jfieldID errorReasonFieldId;
-static jfieldID startFieldId;
-static jfieldID endFieldId;
-static jclass suggestionClass;
-static jfieldID nameFieldId;
-static jfieldID descriptionFieldId;
-static jclass clickSuggestionResultClass;
-static jfieldID textFieldId;
-static jfieldID selectionnFieldId;
-
-extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
-Java_yancey_chelper_core_CHelperCore_init0(
-        JNIEnv *env, [[maybe_unused]] jobject thiz) {
+JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     spdlog::set_default_logger(spdlog::android_logger_mt("android", "CHelperNative"));
-    errorReasonClass = env->FindClass("yancey/chelper/core/ErrorReason");
-    errorReasonFieldId = env->GetFieldID(errorReasonClass, "errorReason", "Ljava/lang/String;");
-    startFieldId = env->GetFieldID(errorReasonClass, "start", "I");
-    endFieldId = env->GetFieldID(errorReasonClass, "end", "I");
-    suggestionClass = env->FindClass("yancey/chelper/core/Suggestion");
-    nameFieldId = env->GetFieldID(suggestionClass, "name", "Ljava/lang/String;");
-    descriptionFieldId = env->GetFieldID(suggestionClass, "description", "Ljava/lang/String;");
-    clickSuggestionResultClass = env->FindClass("yancey/chelper/core/ClickSuggestionResult");
-    textFieldId = env->GetFieldID(clickSuggestionResultClass, "text", "Ljava/lang/String;");
-    selectionnFieldId = env->GetFieldID(clickSuggestionResultClass, "selection", "I");
+    return JNI_VERSION_1_6;
 }
 
 extern "C" [[maybe_unused]] JNIEXPORT jlong JNICALL
@@ -146,6 +124,7 @@ extern "C" [[maybe_unused]] JNIEXPORT jobjectArray JNICALL
 Java_yancey_chelper_core_CHelperCore_getErrorReasons0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
     auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
+    jclass errorReasonClass = env->FindClass("yancey/chelper/core/ErrorReason");
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getErrorReasons0 when core is nullptr");
         return env->NewObjectArray(0, errorReasonClass, nullptr);
@@ -155,10 +134,16 @@ Java_yancey_chelper_core_CHelperCore_getErrorReasons0(
     for (size_t i = 0; i < errorReasons.size(); ++i) {
         const CHelper::ErrorReason &item = *errorReasons[i];
         jobject javaErrorReason = env->AllocObject(errorReasonClass);
-        env->SetObjectField(javaErrorReason, errorReasonFieldId, u16string2jstring(env, item.errorReason));
-        env->SetIntField(javaErrorReason, startFieldId, static_cast<jint>(item.start));
-        env->SetIntField(javaErrorReason, endFieldId, static_cast<jint>(item.end));
-        env->SetObjectArrayElement(result, static_cast<jint>(i), javaErrorReason);
+        env->SetObjectField(javaErrorReason,
+                            env->GetFieldID(errorReasonClass, "errorReason", "Ljava/lang/String;"),
+                            u16string2jstring(env, item.errorReason));
+        env->SetIntField(javaErrorReason,
+                         env->GetFieldID(errorReasonClass, "start", "I"),
+                         static_cast<jint>(item.start));
+        env->SetIntField(javaErrorReason,
+                         env->GetFieldID(errorReasonClass, "end", "I"),
+                         static_cast<jint>(item.end));
+        env->SetObjectArrayElement(result, i, javaErrorReason);
     }
     return result;
 }
@@ -192,9 +177,16 @@ Java_yancey_chelper_core_CHelperCore_getSuggestion0(
         return nullptr;
     }
     CHelper::AutoSuggestion::Suggestion suggestion = suggestions->at(which);
+    jclass suggestionClass = env->FindClass("yancey/chelper/core/Suggestion");
     jobject javaSuggestion = env->AllocObject(suggestionClass);
-    env->SetObjectField(javaSuggestion, nameFieldId, u16string2jstring(env, suggestion.content->name));
-    env->SetObjectField(javaSuggestion, descriptionFieldId, suggestion.content->description.has_value() ? u16string2jstring(env, suggestion.content->description.value()) : nullptr);
+    env->SetObjectField(javaSuggestion,
+                        env->GetFieldID(suggestionClass, "name", "Ljava/lang/String;"),
+                        u16string2jstring(env, suggestion.content->name));
+    env->SetObjectField(javaSuggestion,
+                        env->GetFieldID(suggestionClass, "description", "Ljava/lang/String;"),
+                        suggestion.content->description.has_value()
+                                ? u16string2jstring(env, suggestion.content->description.value())
+                                : nullptr);
     return javaSuggestion;
 }
 
@@ -202,6 +194,7 @@ extern "C" [[maybe_unused]] JNIEXPORT jobject JNICALL
 Java_yancey_chelper_core_CHelperCore_getSuggestions0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
     auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
+    jclass suggestionClass = env->FindClass("yancey/chelper/core/Suggestion");
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getSuggestions0 when core is nullptr");
         return env->NewObjectArray(0, suggestionClass, nullptr);
@@ -211,9 +204,15 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions0(
     for (size_t i = 0; i < suggestions.size(); ++i) {
         const CHelper::AutoSuggestion::Suggestion &item = suggestions[i];
         jobject javaSuggestion = env->AllocObject(suggestionClass);
-        env->SetObjectField(javaSuggestion, nameFieldId, u16string2jstring(env, item.content->name));
-        env->SetObjectField(javaSuggestion, descriptionFieldId, item.content->description.has_value() ? u16string2jstring(env, item.content->description.value()) : nullptr);
-        env->SetObjectArrayElement(result, static_cast<jint>(i), javaSuggestion);
+        env->SetObjectField(javaSuggestion,
+                            env->GetFieldID(suggestionClass, "name", "Ljava/lang/String;"),
+                            u16string2jstring(env, item.content->name));
+        env->SetObjectField(javaSuggestion,
+                            env->GetFieldID(suggestionClass, "description", "Ljava/lang/String;"),
+                            item.content->description.has_value()
+                                    ? u16string2jstring(env, item.content->description.value())
+                                    : nullptr);
+        env->SetObjectArrayElement(result, i, javaSuggestion);
     }
     return result;
 }
@@ -239,9 +238,14 @@ Java_yancey_chelper_core_CHelperCore_onSuggestionClick0(
     }
     std::optional<std::pair<std::u16string, size_t>> result = core->onSuggestionClick(which);
     if (HEDLEY_LIKELY(result.has_value())) {
-        jobject javaResult = env->AllocObject(clickSuggestionResultClass);
-        env->SetObjectField(javaResult, textFieldId, u16string2jstring(env, result.value().first));
-        env->SetIntField(javaResult, selectionnFieldId, static_cast<jint>(result.value().second));
+        jclass resultClass = env->FindClass("yancey/chelper/core/ClickSuggestionResult");
+        jobject javaResult = env->AllocObject(resultClass);
+        env->SetObjectField(javaResult,
+                            env->GetFieldID(resultClass, "text", "Ljava/lang/String;"),
+                            u16string2jstring(env, result.value().first));
+        env->SetIntField(javaResult,
+                         env->GetFieldID(resultClass, "selection", "I"),
+                         static_cast<jint>(result.value().second));
         return javaResult;
     } else {
         return nullptr;
