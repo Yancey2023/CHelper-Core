@@ -1,7 +1,7 @@
 {
     "name": "[内置] 测试版实验性玩法",
     "description": "CHelper内置资源包",
-    "version": "1.21.100.22",
+    "version": "1.21.100.23",
     "versionType": "beta",
     "branch": "experiment",
     "author": "Yancey",
