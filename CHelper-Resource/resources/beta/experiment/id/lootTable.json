@@ -317,6 +317,9 @@
             "name": "\"entities/cold_ocean_ruins_brushable_block\""
         },
         {
+            "name": "\"entities/copper_golem\""
+        },
+        {
             "name": "\"entities/cow\"",
             "description": "牛的掉落物"
         },
