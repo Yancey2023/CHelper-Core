@@ -548,6 +548,7 @@ namespace CHelper {
         class NodeJsonEntry : public NodeSerializable {
         public:
             static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::JSON_ENTRY;
+            static NodeSingleSymbol nodeSeparator;
             static NodeEntry nodeAllEntry;
             std::u16string key;
             std::vector<std::string> value;

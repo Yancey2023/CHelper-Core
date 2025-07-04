@@ -300,10 +300,10 @@ namespace CHelper::Node {
         return jsonElement;
     }
 
-    static NodeSingleSymbol nodeEntrySeparator(u':', u"冒号");
+    NodeSingleSymbol NodeJsonEntry::nodeSeparator(u':', u"冒号");
     static NodeJsonString jsonString("JSON_STRING", u"JSON字符串");
 
-    NodeEntry NodeJsonEntry::nodeAllEntry(jsonString, nodeEntrySeparator, NodeJsonElement::getNodeJsonElement());
+    NodeEntry NodeJsonEntry::nodeAllEntry(jsonString, nodeSeparator, NodeJsonElement::getNodeJsonElement());
 
     NodeJsonEntry::NodeJsonEntry(const std::optional<std::string> &id,
                                  const std::optional<std::u16string> &description,

@@ -335,7 +335,7 @@ namespace CHelper::Node {
             node.nodeKey = NodeText("JSON_OBJECT_ENTRY_KEY", u"JSON对象键",
                                     NormalId::make(fmt::format(u"\"{}\"", node.key), node.description));
             node.nodeValue = NodeOr(std::move(valueNodes), false);
-            node.nodeEntry = NodeEntry(node.nodeKey, nodeSeparator, node.nodeValue);
+            node.nodeEntry = NodeEntry(node.nodeKey, Node::NodeJsonEntry::nodeSeparator, node.nodeValue);
         }
     };
 
@@ -346,7 +346,7 @@ namespace CHelper::Node {
         static void init(NodeJsonList &node, const std::vector<NodeWithType> &dataList) {
             for (const auto &item: dataList) {
                 if (HEDLEY_UNLIKELY(reinterpret_cast<const NodeSerializable *>(item.data)->id == node.data)) {
-                    node.nodeList = NodeList(Node::NodeJsonList::nodeLeft, item, nodeSeparator, nodeRight);
+                    node.nodeList = NodeList(Node::NodeJsonList::nodeLeft, item, Node::NodeJsonList::nodeSeparator, nodeRight);
                     return;
                 }
             }
