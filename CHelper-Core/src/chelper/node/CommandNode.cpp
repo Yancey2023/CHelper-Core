@@ -35,7 +35,8 @@ namespace CHelper::Node {
     NodeJson::NodeJson(const std::optional<std::string> &id,
                        const std::optional<std::u16string> &description,
                        std::string key)
-        : key(std::move(key)) {}
+        : NodeSerializable(id, description, false),
+          key(std::move(key)) {}
 
     NodeLF::NodeLF(const std::optional<std::string> &id,
                    const std::optional<std::u16string> &description)
@@ -118,7 +119,6 @@ namespace CHelper::Node {
 
     NodeString NodeTargetSelector::nodePlayerName("TARGET_SELECTOR_PLAYER_NAME", u"玩家名字", false, true, false);
     NodeSingleSymbol NodeTargetSelector::nodeWildcard(u'*', u"所有正被记分板跟踪的实体");
-    NodeSingleSymbol NodeTargetSelector::nodeAt(u'@', u"@符号");
     NodeNormalId NodeTargetSelector::nodeTargetSelectorVariable(
             "TARGET_SELECTOR_VARIABLE", u"目标选择器变量",
             std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
@@ -134,7 +134,10 @@ namespace CHelper::Node {
                 auto childNodes = {tokenReader.readSymbolASTNode(node), tokenReader.readStringASTNode(node)};
                 return ASTNode::andNode(node, childNodes, tokenReader.collect());
             });
-    NodeSingleSymbol NodeTargetSelector::nodeLeft(u'[', u"目标选择器参数左括号");
+    NodeSingleSymbol NodeTargetSelector::nodeSeparator(u',', u"目标选择器参数分隔符");
+    NodeString NodeTargetSelector::nodeString("TARGET_SELECTOR_ARGUMENT_STRING", u"目标选择器参数(字符串)", true, true, false);
+    NodeBoolean NodeTargetSelector::nodeBoolean("BOOLEAN", u"布尔值", std::nullopt, std::nullopt);
+    NodeRelativeFloat NodeTargetSelector::nodeRelativeFloat("TARGET_SELECTOR_ARGUMENT_RELATIVE_FLOAT", u"目标选择器参数(相对坐标)", false);
 
     NodeText::NodeText(const std::optional<std::string> &id,
                        const std::optional<std::u16string> &description,
@@ -151,9 +154,6 @@ namespace CHelper::Node {
             if (HEDLEY_UNLIKELY(item.data == nullptr)) {
                 throw std::runtime_error("null node in node or");
             }
-            if (HEDLEY_UNLIKELY(item.nodeTypeId > MAX_TYPE_ID)) {
-                throw std::runtime_error("unknown node type");
-            }
         }
 #endif
     }
@@ -166,9 +166,9 @@ namespace CHelper::Node {
     NodeEntry::NodeEntry(NodeWithType nodeKey,
                          NodeWithType nodeSeparator,
                          NodeWithType nodeValue)
-        : nodeKey(std::move(nodeKey)),
-          nodeSeparator(std::move(nodeSeparator)),
-          nodeValue(std::move(nodeValue)) {}
+        : nodeKey(nodeKey),
+          nodeSeparator(nodeSeparator),
+          nodeValue(nodeValue) {}
 
     EqualData::EqualData(std::u16string name,
                          const std::optional<std::u16string> &description,
@@ -177,7 +177,7 @@ namespace CHelper::Node {
         : name(std::move(name)),
           description(description),
           canUseNotEqual(canUseNotEqual),
-          nodeValue(std::move(nodeValue)) {}
+          nodeValue(nodeValue) {}
 
     NodeText NodeEqualEntry::nodeEqual(
             "TARGET_SELECTOR_ARGUMENT_EQUAL", u"等于",
@@ -238,9 +238,6 @@ namespace CHelper::Node {
             if (HEDLEY_UNLIKELY(item.data == nullptr)) {
                 throw std::runtime_error("null node in node or");
             }
-            if (HEDLEY_UNLIKELY(item.nodeTypeId > MAX_TYPE_ID)) {
-                throw std::runtime_error("unknown node type");
-            }
         }
 #endif
     }
@@ -257,6 +254,9 @@ namespace CHelper::Node {
         : symbol(symbol),
           normalId(getNormalId(symbol, description)),
           isAddSpace(isAddSpace) {}
+
+    NodeOptional::NodeOptional(NodeWithType optionalNode)
+        : optionalNode(optionalNode) {}
 
 #ifdef CHelperDebug
 #define CHELPER_IS_BASE_OF_NODE_SERIALIZABLE(v1) \
@@ -282,7 +282,7 @@ namespace CHelper::Node {
     }
 
     [[nodiscard]] NodeSerializable &NodeWrapped::getNodeSerializable() const {
-        return *static_cast<NodeSerializable *>(innerNode.data);
+        return *reinterpret_cast<NodeSerializable *>(innerNode.data);
     }
 
     NodeWithType NodeJsonElement::getNodeJsonElement() {

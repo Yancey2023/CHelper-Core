@@ -677,52 +677,7 @@ namespace CHelper::Parser {
     template<>
     struct Parser<Node::NodeTargetSelector> {
         static ASTNode getASTNode(const Node::NodeTargetSelector &node, TokenReader &tokenReader, const CPack *cpack) {
-            tokenReader.skipSpace();
-            tokenReader.push();
-            DEBUG_GET_NODE_BEGIN(Node::NodeTargetSelector::nodeAt, nodeAtIndex);
-            ASTNode at = parse(Node::NodeTargetSelector::nodeAt, tokenReader, cpack);
-            DEBUG_GET_NODE_END(Node::NodeTargetSelector::nodeAt, nodeAtIndex);
-            tokenReader.restore();
-            if (HEDLEY_UNLIKELY(at.isError())) {
-                //不是@符号开头
-                if (node.isWildcard) {
-                    // 尝试匹配通配符
-                    tokenReader.push();
-                    DEBUG_GET_NODE_BEGIN(Node::NodeTargetSelector::nodeWildcard, nodeWildcardIndex);
-                    ASTNode wildcard = parse(Node::NodeTargetSelector::nodeWildcard, tokenReader, cpack);
-                    DEBUG_GET_NODE_END(Node::NodeTargetSelector::nodeWildcard, nodeWildcardIndex);
-                    if (wildcard.isError()) {
-                        tokenReader.restore();
-                    } else {
-                        tokenReader.pop();
-                        return wildcard;
-                    }
-                }
-                // 当作玩家名处理
-                DEBUG_GET_NODE_BEGIN(Node::NodeTargetSelector::nodePlayerName, nodePlayerNameIndex);
-                ASTNode result = parseByChildNode(node, tokenReader, cpack, Node::NodeTargetSelector::nodePlayerName, ASTNodeId::NODE_TARGET_SELECTOR_PLAYER_NAME);
-                DEBUG_GET_NODE_END(Node::NodeTargetSelector::nodePlayerName, nodePlayerNameIndex);
-                return result;
-            }
-            //@符号开头，进入目标选择器检测
-            //目标选择器变量
-            tokenReader.push();
-            DEBUG_GET_NODE_BEGIN(Node::NodeTargetSelector::nodeTargetSelectorVariable, nodeTargetSelectorVariableIndex);
-            ASTNode targetSelectorVariable = parse(Node::NodeTargetSelector::nodeTargetSelectorVariable, tokenReader, cpack);
-            DEBUG_GET_NODE_END(Node::NodeTargetSelector::nodeTargetSelectorVariable, nodeTargetSelectorVariableIndex);
-            tokenReader.push();
-            DEBUG_GET_NODE_BEGIN(Node::NodeTargetSelector::nodeLeft, nodeLeftIndex);
-            ASTNode leftBracket = parse(Node::NodeTargetSelector::nodeLeft, tokenReader, cpack);
-            DEBUG_GET_NODE_END(Node::NodeTargetSelector::nodeLeft, nodeLeftIndex);
-            tokenReader.restore();
-            if (HEDLEY_LIKELY(leftBracket.isError())) {
-                //没有后面的[...]
-                return ASTNode::andNode(node, {targetSelectorVariable}, tokenReader.collect(),
-                                        nullptr, ASTNodeId::NODE_TARGET_SELECTOR_NO_ARGUMENTS);
-            }
-            ASTNode arguments = parse(node.nodeArguments, tokenReader, cpack);
-            return ASTNode::andNode(node, {targetSelectorVariable, arguments}, tokenReader.collect(),
-                                    nullptr, ASTNodeId::NODE_TARGET_SELECTOR_WITH_ARGUMENTS);
+            return parseByChildNode(node, tokenReader, cpack, node.nodeTargetSelector);
         }
     };
 
@@ -771,6 +726,7 @@ namespace CHelper::Parser {
                         break;
                     }
                     if (HEDLEY_UNLIKELY(i < node.childNodes.size() - 1 &&
+                                        node.childNodes[i + 1].nodeTypeId != Node::NodeTypeId::OPTIONAL &&
                                         tokenReader.ready() &&
                                         tokenReader.peek()->type == TokenType::SPACE)) {
                         tokenReader.push();
@@ -976,6 +932,31 @@ namespace CHelper::Parser {
                 return symbolNode;
             }
             return ASTNode::simpleNode(node, symbolNode.tokens, ErrorReason::contentError(symbolNode.tokens, fmt::format(u"内容不匹配，正确的符号为{:c}，但当前内容为{}", node.symbol, str)));
+        }
+    };
+
+    template<>
+    struct Parser<Node::NodeOptional> {
+        static ASTNode getASTNode(const Node::NodeOptional &node, TokenReader &tokenReader, const CPack *cpack) {
+            tokenReader.push();
+            size_t skipSpace = tokenReader.skipSpace();
+            ASTNode astNode = parseByChildNode(node, tokenReader, cpack, node.optionalNode);
+            bool isUseOptionalNode = (skipSpace == 0 && astNode.tokens.isEmpty()) || !astNode.isError();
+            if (!isUseOptionalNode) {
+                for (const auto &item: astNode.errorReasons) {
+                    if (item->start > astNode.tokens.startIndex) {
+                        isUseOptionalNode = true;
+                        break;
+                    }
+                }
+            }
+            if (isUseOptionalNode) {
+                tokenReader.pop();
+                return ASTNode::andNode(node, {(std::move(astNode))}, astNode.tokens);
+            } else {
+                tokenReader.restore();
+                return ASTNode::orNode(node, {ASTNode::simpleNode(node, {tokenReader.lexerResult, tokenReader.index, tokenReader.index}), (std::move(astNode))}, astNode.tokens);
+            }
         }
     };
 

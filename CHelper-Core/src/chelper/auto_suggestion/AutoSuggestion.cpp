@@ -345,29 +345,6 @@ namespace CHelper::AutoSuggestion {
     };
 
     template<>
-    struct AutoSuggestion<Node::NodeTargetSelector> {
-        static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            // const auto &node = reinterpret_cast<const Node::NodeTargetSelector &>(*astNode.node);
-            // if (HEDLEY_UNLIKELY(astNode.tokens.isEmpty())) {
-            //     TokensView tokens = {astNode.tokens.lexerResult, astNode.tokens.end, astNode.tokens.end};
-            //     ASTNode newAstNode = ASTNode::simpleNode(&node, tokens);
-            //     if (node.isWildcard) {
-            //         nodeWildcard->collectSuggestions(astNode, index, suggestions);
-            //     }
-            //     nodeTargetSelectorVariable->collectSuggestions(astNode, index, suggestions);
-            //     nodePlayerName->collectSuggestions(astNode, index, suggestions);
-            //     return true;
-            // }
-            // if (HEDLEY_UNLIKELY(!astNode.isError() && astNode.id == ASTNodeId::NODE_TARGET_SELECTOR_NO_ARGUMENTS)) {
-            //     TokensView tokens = {astNode.tokens.lexerResult, astNode.tokens.end, astNode.tokens.end};
-            //     ASTNode newAstNode = ASTNode::simpleNode(&node, tokens);
-            //     nodeLeft->collectSuggestions(&newAstNode, index, suggestions);
-            // }
-            return false;
-        }
-    };
-
-    template<>
     struct AutoSuggestion<Node::NodeText> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
             const auto &node = *reinterpret_cast<const Node::NodeText *>(astNode.node.data);

@@ -194,7 +194,7 @@ namespace CHelper::CommandStructure {
                     auto node1 = reinterpret_cast<const Node::NodeAnd *>(astNode1.node.data);
                     size_t astNodeSize = astNode1.childNodes.size();
                     size_t nodeSize = node1->childNodes.size();
-                    if (HEDLEY_LIKELY(astNode1.isError())) {
+                    if (HEDLEY_LIKELY(astNode1.isError() || item.whichBest == 1)) {
                         for (size_t i = 0; i < nodeSize; ++i) {
                             if (HEDLEY_LIKELY(i < astNodeSize)) {
                                 const auto &item2 = astNode1.childNodes[i];

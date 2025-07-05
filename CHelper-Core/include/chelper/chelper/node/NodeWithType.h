@@ -45,7 +45,8 @@
                            EQUAL_ENTRY,       \
                            LIST,              \
                            OR,                \
-                           SINGLE_SYMBOL
+                           SINGLE_SYMBOL,     \
+                           OPTIONAL
 
 namespace CHelper::Node {
 
@@ -56,8 +57,6 @@ namespace CHelper::Node {
     }// namespace NodeTypeId
 
     class NodeBase;
-
-    static constexpr NodeTypeId::NodeTypeId MAX_TYPE_ID = NodeTypeId::SINGLE_SYMBOL;
 
     class NodeWithType {
     public:

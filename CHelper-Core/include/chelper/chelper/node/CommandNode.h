@@ -243,6 +243,16 @@ namespace CHelper {
                              bool isAddSpace = true);
         };
 
+        class NodeOptional : public NodeBase {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::OPTIONAL;
+            NodeWithType optionalNode;
+
+            NodeOptional() = default;
+
+            NodeOptional(NodeWithType optionalNode);
+        };
+
         class NodeNamespaceId : public NodeSerializable {
         public:
             static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::NAMESPACE_ID;
@@ -453,7 +463,10 @@ namespace CHelper {
             static NodeSingleSymbol nodeWildcard;
             static NodeSingleSymbol nodeAt;
             static NodeNormalId nodeTargetSelectorVariable;
-            static NodeSingleSymbol nodeLeft;
+            static NodeSingleSymbol nodeSeparator;
+            static NodeString nodeString;
+            static NodeBoolean nodeBoolean;
+            static NodeRelativeFloat nodeRelativeFloat;
             bool isMustPlayer = false, isMustNPC = false, isOnlyOne = false, isWildcard = false;
             NodeNamespaceId nodeItem;
             NodeNormalId nodeFamily, nodeGameMode, nodeSlot;
@@ -463,6 +476,9 @@ namespace CHelper {
             NodeOr nodeHasItem;
             NodeEqualEntry nodeArgument;
             NodeList nodeArguments;
+            NodeOptional nodeOptionalArguments;
+            NodeAnd nodeTargetSelectorVariableWithArgument;
+            NodeOr nodeTargetSelector;
 
             NodeTargetSelector() = default;
         };
@@ -624,7 +640,6 @@ namespace CHelper {
               data(const_cast<NodeBase *>(static_cast<const NodeBase *>(&node))) {
             static_assert(!std::is_same_v<NodeType, NodeWithType>, "NodeWithType is not allowed to be used as NodeType");
             static_assert(!std::is_pointer_v<NodeType>, "NodeType must not be a pointer");
-            static_assert(NodeType::nodeTypeId <= MAX_TYPE_ID, "nodeTypeId is invalid");
         }
 
     }// namespace Node

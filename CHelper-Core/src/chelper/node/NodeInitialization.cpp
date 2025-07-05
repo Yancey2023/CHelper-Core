@@ -37,11 +37,10 @@ namespace CHelper::Node {
         }
     };
 
-    static NodeInteger nodeInteger("INTEGER", u"整数", std::nullopt, std::nullopt);
-
     template<>
     struct NodeInitialization<NodeIntegerWithUnit> {
         static void init(NodeIntegerWithUnit &node, const CPack &cpack) {
+            static NodeInteger nodeInteger("INTEGER", u"整数", std::nullopt, std::nullopt);
             node.nodeUnits = NodeNormalId("UNITS", u"单位", node.units, false);
             node.nodeIntegerWithUnit = NodeAnd({nodeInteger, node.nodeUnits});
             node.nodeIntegerMaybeHaveUnit = NodeOr({node.nodeIntegerWithUnit, nodeInteger}, false, true);
@@ -174,51 +173,47 @@ namespace CHelper::Node {
         }
     };
 
-    static NodeSingleSymbol nodeRight(u']', u"目标选择器参数右括号");
-    static NodeSingleSymbol nodeSeparator(u',', u"目标选择器参数分隔符");
-    static NodeRelativeFloat nodeRelativeFloat("TARGET_SELECTOR_ARGUMENT_RELATIVE_FLOAT", u"目标选择器参数(相对坐标)", false);
-    static NodeInteger nodeIntegerInTargetSelector("TARGET_SELECTOR_ARGUMENT_INTEGER", u"目标选择器参数(整数)", std::nullopt, std::nullopt);
-    static NodeFloat nodeFloat("TARGET_SELECTOR_ARGUMENT_FLOAT", u"目标选择器参数(小数)", std::nullopt, std::nullopt);
-    static NodeString nodeString("TARGET_SELECTOR_ARGUMENT_STRING", u"目标选择器参数(字符串)", true, true, false);
-    static NodeSingleSymbol nodeScoreValueLeft(u'{', u"目标选择器scores参数左括号");
-    static NodeSingleSymbol nodeScoreValueRight(u'}', u"目标选择器scores参数右括号");
-    static NodeSingleSymbol nodeScoreValueSeparator(u',', u"目标选择器scores参数分隔符");
-    static NodeRange nodeScoreRange("TARGET_SELECTOR_ARGUMENT_SCORES_RANGE", u"目标选择器scores参数值的分数范围)");
-    static NodeEntry nodeScoreValueElement(nodeString, NodeEqualEntry::nodeEqualOrNotEqual, nodeScoreRange);
-    static NodeList nodeScore(nodeScoreValueLeft, nodeScoreValueElement, nodeScoreValueSeparator, nodeScoreValueRight);
-    static NodeSingleSymbol nodeHasItemValueLeft1(u'{', u"目标选择器hasitem参数左括号");
-    static NodeSingleSymbol nodeHasItemValueRight1(u'}', u"目标选择器hasitem参数右括号");
-    static NodeSingleSymbol nodeHasItemValueSeparator(u',', u"目标选择器hasitem参数分隔符");
-    static NodeSingleSymbol nodeHasItemValueLeft2(u'[', u"目标选择器hasitem参数左括号");
-    static NodeSingleSymbol nodeHasItemValueRight2(u']', u"目标选择器haspermission参数右括号");
-    static NodeSingleSymbol nodeHasPermissionValueLeft(u'{', u"目标选择器haspermission参数左括号");
-    static NodeSingleSymbol nodeHasPermissionValueRight(u'}', u"目标选择器haspermission参数右括号");
-    static NodeSingleSymbol nodeHasPermissionValueSeparator(u',', u"目标选择器haspermission参数分隔符");
-    static NodeNormalId nodeHasPermissionState(
-            "PERMISSION_STATUS", u"权限状态",
-            std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
-                    NormalId::make(u"enabled", u"启用"),
-                    NormalId::make(u"disabled", u"禁用")}),
-            false);
-    static NodeEqualEntry nodeHasPermissionEntry(
-            std::vector<EqualData>{
-                    {u"camera", u"玩家能否转动相机视角", false, nodeHasPermissionState},
-                    {u"movement", u"玩家能否移动", false, nodeHasPermissionState}});
-    static NodeList nodeHasPermission(nodeHasPermissionValueLeft, nodeHasPermissionEntry, nodeHasPermissionValueSeparator, nodeHasPermissionValueRight);
-    static NodeSingleSymbol nodeHasPropertyValueLeft('{', u"目标选择器has_property参数左括号");
-    static NodeSingleSymbol nodeHasPropertyValueRight('}', u"目标选择器has_property参数右括号");
-    static NodeSingleSymbol nodeHasPropertyValueSeparator(',', u"目标选择器has_property参数分隔符");
-    static NodeBoolean nodeBoolean("BOOLEAN", u"布尔值", std::nullopt, std::nullopt);
-    static NodeOr nodeAny({nodeBoolean, nodeScoreRange, nodeString, nodeFloat}, false);
-    static NodeEntry nodeHasPropertyEntry(nodeString, NodeEqualEntry::nodeEqualOrNotEqual, nodeAny);
-    static NodeList nodeHasProperty(nodeHasPropertyValueLeft, nodeHasPropertyEntry, nodeHasPropertyValueSeparator, nodeHasPropertyValueRight);
-    static NodeInteger nodeHasItemData("TARGET_SELECTOR_ARGUMENT_HASITEM_ITEM_DATA", u"目标选择器hasitem参数物品数据值", 0, 32767);
-    static NodeRange nodeHasItemQuantity("TARGET_SELECTOR_ARGUMENT_HASITEM_ITEM_QUANTITY", u"目标选择器hasitem限制范围内的所有槽位中符合条件的物品的总和数量");
-    static NodeRange nodeHasItemSlotRange("TARGET_SELECTOR_ARGUMENT_HASITEM_SLOT_SLOT_RANGE", u"目标选择器hasitem要检测的槽位范围");
-
     template<>
     struct NodeInitialization<NodeTargetSelector> {
         static void init(NodeTargetSelector &node, const CPack &cpack) {
+            static NodeSingleSymbol nodeLeft(u'[', u"目标选择器参数左括号");
+            static NodeSingleSymbol nodeRight(u']', u"目标选择器参数右括号");
+            static NodeInteger nodeIntegerInTargetSelector("TARGET_SELECTOR_ARGUMENT_INTEGER", u"目标选择器参数(整数)", std::nullopt, std::nullopt);
+            static NodeFloat nodeFloat("TARGET_SELECTOR_ARGUMENT_FLOAT", u"目标选择器参数(小数)", std::nullopt, std::nullopt);
+            static NodeSingleSymbol nodeScoreValueLeft(u'{', u"目标选择器scores参数左括号");
+            static NodeSingleSymbol nodeScoreValueRight(u'}', u"目标选择器scores参数右括号");
+            static NodeSingleSymbol nodeScoreValueSeparator(u',', u"目标选择器scores参数分隔符");
+            static NodeRange nodeScoreRange("TARGET_SELECTOR_ARGUMENT_SCORES_RANGE", u"目标选择器scores参数值的分数范围)");
+            static NodeEntry nodeScoreValueElement(NodeTargetSelector::nodeString, NodeEqualEntry::nodeEqualOrNotEqual, nodeScoreRange);
+            static NodeList nodeScore(nodeScoreValueLeft, nodeScoreValueElement, nodeScoreValueSeparator, nodeScoreValueRight);
+            static NodeSingleSymbol nodeHasItemValueLeft1(u'{', u"目标选择器hasitem参数左括号");
+            static NodeSingleSymbol nodeHasItemValueRight1(u'}', u"目标选择器hasitem参数右括号");
+            static NodeSingleSymbol nodeHasItemValueSeparator(u',', u"目标选择器hasitem参数分隔符");
+            static NodeSingleSymbol nodeHasItemValueLeft2(u'[', u"目标选择器hasitem参数左括号");
+            static NodeSingleSymbol nodeHasItemValueRight2(u']', u"目标选择器haspermission参数右括号");
+            static NodeSingleSymbol nodeHasPermissionValueLeft(u'{', u"目标选择器haspermission参数左括号");
+            static NodeSingleSymbol nodeHasPermissionValueRight(u'}', u"目标选择器haspermission参数右括号");
+            static NodeSingleSymbol nodeHasPermissionValueSeparator(u',', u"目标选择器haspermission参数分隔符");
+            static NodeNormalId nodeHasPermissionState(
+                    "PERMISSION_STATUS", u"权限状态",
+                    std::make_shared<std::vector<std::shared_ptr<NormalId>>>(std::vector<std::shared_ptr<NormalId>>{
+                            NormalId::make(u"enabled", u"启用"),
+                            NormalId::make(u"disabled", u"禁用")}),
+                    false);
+            static NodeEqualEntry nodeHasPermissionEntry(
+                    std::vector<EqualData>{
+                            {u"camera", u"玩家能否转动相机视角", false, nodeHasPermissionState},
+                            {u"movement", u"玩家能否移动", false, nodeHasPermissionState}});
+            static NodeList nodeHasPermission(nodeHasPermissionValueLeft, nodeHasPermissionEntry, nodeHasPermissionValueSeparator, nodeHasPermissionValueRight);
+            static NodeSingleSymbol nodeHasPropertyValueLeft('{', u"目标选择器has_property参数左括号");
+            static NodeSingleSymbol nodeHasPropertyValueRight('}', u"目标选择器has_property参数右括号");
+            static NodeSingleSymbol nodeHasPropertyValueSeparator(',', u"目标选择器has_property参数分隔符");
+            static NodeOr nodeAny({NodeTargetSelector::nodeBoolean, nodeScoreRange, NodeTargetSelector::nodeString, nodeFloat}, false);
+            static NodeEntry nodeHasPropertyEntry(NodeTargetSelector::nodeString, NodeEqualEntry::nodeEqualOrNotEqual, nodeAny);
+            static NodeList nodeHasProperty(nodeHasPropertyValueLeft, nodeHasPropertyEntry, nodeHasPropertyValueSeparator, nodeHasPropertyValueRight);
+            static NodeInteger nodeHasItemData("TARGET_SELECTOR_ARGUMENT_HASITEM_ITEM_DATA", u"目标选择器hasitem参数物品数据值", 0, 32767);
+            static NodeRange nodeHasItemQuantity("TARGET_SELECTOR_ARGUMENT_HASITEM_ITEM_QUANTITY", u"目标选择器hasitem限制范围内的所有槽位中符合条件的物品的总和数量");
+            static NodeRange nodeHasItemSlotRange("TARGET_SELECTOR_ARGUMENT_HASITEM_SLOT_SLOT_RANGE", u"目标选择器hasitem要检测的槽位范围");
             node.nodeItem = NodeNamespaceId("ITEM_ID", u"物品ID", "item", true),
             node.nodeFamily = NodeNormalId("FAMILIES", u"族", "entityFamily", true);
             node.nodeGameMode = NodeNormalId("GAME_MODES", u"游戏模式", "gameMode", true),
@@ -236,17 +231,17 @@ namespace CHelper::Node {
             node.nodeHasItem = NodeOr({node.nodeHasItemList1, node.nodeHasItemList2}, false),
             node.nodeArgument = NodeEqualEntry(
                     std::vector<EqualData>{
-                            {u"x", u"x坐标", false, nodeRelativeFloat},
-                            {u"y", u"y坐标", false, nodeRelativeFloat},
-                            {u"z", u"z坐标", false, nodeRelativeFloat},
+                            {u"x", u"x坐标", false, NodeTargetSelector::nodeRelativeFloat},
+                            {u"y", u"y坐标", false, NodeTargetSelector::nodeRelativeFloat},
+                            {u"z", u"z坐标", false, NodeTargetSelector::nodeRelativeFloat},
                             {u"r", u"最大半径", false, nodeFloat},
                             {u"rm", u"最小半径", false, nodeFloat},
                             {u"dx", u"x坐标差异(检查实体的腿部位置)", false, nodeFloat},
                             {u"dy", u"y坐标差异(检查实体的腿部位置)", false, nodeFloat},
                             {u"dz", u"z坐标差异(检查实体的腿部位置)", false, nodeFloat},
                             {u"scores", u"分数", false, nodeScore},
-                            {u"tag", u"标签", true, nodeString},
-                            {u"name", u"名字", true, nodeString},
+                            {u"tag", u"标签", true, NodeTargetSelector::nodeString},
+                            {u"name", u"名字", true, NodeTargetSelector::nodeString},
                             {u"type", u"实体类型", true, node.nodeEntities},
                             {u"family", u"族", true, node.nodeFamily},
                             {u"rx", u"最大垂直旋转", false, nodeFloat},
@@ -261,7 +256,17 @@ namespace CHelper::Node {
                             {u"m", u"游戏模式", true, node.nodeGameMode},
                             {u"c", u"目标数量(按照距离排序)", false, nodeIntegerInTargetSelector},
                     }),
-            node.nodeArguments = NodeList(NodeTargetSelector::nodeLeft, node.nodeArgument, nodeSeparator, nodeRight);
+            node.nodeArguments = NodeList(nodeLeft, node.nodeArgument, NodeTargetSelector::nodeSeparator, nodeRight);
+            node.nodeOptionalArguments = NodeOptional(node.nodeArguments);
+            node.nodeTargetSelectorVariableWithArgument = NodeAnd({NodeTargetSelector::nodeTargetSelectorVariable, node.nodeOptionalArguments});
+            std::vector<NodeWithType> nodes;
+            nodes.reserve(node.isWildcard ? 3 : 2);
+            if (node.isWildcard) {
+                nodes.emplace_back(Node::NodeTargetSelector::nodeWildcard);
+            }
+            nodes.emplace_back(node.nodeTargetSelectorVariableWithArgument);
+            nodes.emplace_back(NodeTargetSelector::nodePlayerName);
+            node.nodeTargetSelector = NodeOr(std::move(nodes), false);
             initNode(node.nodeItem, cpack);
             initNode(node.nodeFamily, cpack);
             initNode(node.nodeGameMode, cpack);
@@ -273,6 +278,8 @@ namespace CHelper::Node {
             initNode(node.nodeHasItem, cpack);
             initNode(node.nodeArgument, cpack);
             initNode(node.nodeArguments, cpack);
+            initNode(node.nodeTargetSelectorVariableWithArgument, cpack);
+            initNode(node.nodeTargetSelector, cpack);
         }
     };
 
@@ -285,20 +292,19 @@ namespace CHelper::Node {
         }
     };
 
-    static NodeSingleSymbol nodeLeft1(u'{', u"左括号");
-    static NodeSingleSymbol nodeRight1(u'}', u"右括号");
-    static NodeSingleSymbol nodeLeft2(u'[', u"左括号");
-    static NodeSingleSymbol nodeRight2(u']', u"右括号");
-    static NodeRange nodeRange("RANGE", u"范围");
-    static NodeEntry nodeEntry(nodeString, NodeEqualEntry::nodeEqualOrNotEqual, *NodeAny::getNodeAny());
-    static NodeList nodeObject(nodeLeft1, nodeEntry, nodeSeparator, nodeRight1);
-    static NodeList nodeList(nodeLeft2, *NodeAny::getNodeAny(), nodeSeparator, nodeRight2);
-
     template<>
     struct NodeInitialization<NodeAny> {
         static void init(NodeAny &node, const CPack &cpack) {
             if (HEDLEY_UNLIKELY(!node.node.has_value())) {
-                node.node = NodeOr({nodeRelativeFloat, nodeBoolean, nodeString, nodeObject, nodeRange, nodeList}, false);
+                static NodeSingleSymbol nodeLeft1(u'{', u"左括号");
+                static NodeSingleSymbol nodeRight1(u'}', u"右括号");
+                static NodeSingleSymbol nodeLeft2(u'[', u"左括号");
+                static NodeSingleSymbol nodeRight2(u']', u"右括号");
+                static NodeRange nodeRange("RANGE", u"范围");
+                static NodeEntry nodeEntry(NodeTargetSelector::nodeString, NodeEqualEntry::nodeEqualOrNotEqual, *NodeAny::getNodeAny());
+                static NodeList nodeObject(nodeLeft1, nodeEntry, NodeTargetSelector::nodeSeparator, nodeRight1);
+                static NodeList nodeList(nodeLeft2, *NodeAny::getNodeAny(), NodeTargetSelector::nodeSeparator, nodeRight2);
+                node.node = NodeOr({NodeTargetSelector::nodeRelativeFloat, NodeTargetSelector::nodeBoolean, NodeTargetSelector::nodeString, nodeObject, nodeRange, nodeList}, false);
             }
         }
     };
@@ -346,7 +352,7 @@ namespace CHelper::Node {
         static void init(NodeJsonList &node, const std::vector<NodeWithType> &dataList) {
             for (const auto &item: dataList) {
                 if (HEDLEY_UNLIKELY(reinterpret_cast<const NodeSerializable *>(item.data)->id == node.data)) {
-                    node.nodeList = NodeList(Node::NodeJsonList::nodeLeft, item, Node::NodeJsonList::nodeSeparator, nodeRight);
+                    node.nodeList = NodeList(Node::NodeJsonList::nodeLeft, item, Node::NodeJsonList::nodeSeparator, Node::NodeJsonList::nodeRight);
                     return;
                 }
             }

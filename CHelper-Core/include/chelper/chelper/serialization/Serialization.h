@@ -548,7 +548,7 @@ void NodeTypeHelper::from_binary(const CHelper::Node::NodeTypeId::NodeTypeId id,
     switch (id) {
         CODEC_PASTE(CHELPER_CODEC_NODE_FROM_BINARY, CHELPER_NODE_TYPES)
         default:
-            HEDLEY_UNREACHABLE();
+            throw std::runtime_error("unknown node type");
     }
 }
 
@@ -606,9 +606,6 @@ void serialization::Codec<CHelper::Node::NodeWithType>::from_binary(
         Type &t) {
     CHelper::Node::NodeTypeId::NodeTypeId nodeTypeId;
     Codec<decltype(nodeTypeId)>::template from_binary<isNeedConvert>(istream, nodeTypeId);
-    if (HEDLEY_UNLIKELY(nodeTypeId > CHelper::Node::MAX_TYPE_ID)) {
-        throw std::runtime_error("unknown node type");
-    }
     NodeTypeHelper::template from_binary<isNeedConvert>(nodeTypeId, istream, t);
 }
 

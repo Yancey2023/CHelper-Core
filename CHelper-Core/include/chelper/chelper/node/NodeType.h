@@ -314,6 +314,13 @@ namespace CHelper {
             static constexpr auto name = "SINGLE_SYMBOL";
         };
 
+        template<>
+        struct NodeTypeDetail<NodeTypeId::OPTIONAL> : UnserializableNodeTypeDetail {
+            using Type = NodeOptional;
+            static_assert(Type::nodeTypeId == NodeTypeId::OPTIONAL, "nodTypeId not equal");
+            static constexpr auto name = "OPTIONAL";
+        };
+
         const char *getNodeTypeName(const CHelper::Node::NodeTypeId::NodeTypeId id);
 
         std::optional<NodeTypeId::NodeTypeId> getNodeTypeIdByName(const std::string_view &id);
