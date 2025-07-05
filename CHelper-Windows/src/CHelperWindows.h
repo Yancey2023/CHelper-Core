@@ -13,6 +13,8 @@
 #include <pch.h>
 #include <windows.h>
 
+#undef OPTIONAL
+
 #pragma comment(lib, "comctl32.lib")
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);

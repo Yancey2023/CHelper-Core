@@ -250,7 +250,7 @@ namespace CHelper {
 
             NodeOptional() = default;
 
-            NodeOptional(NodeWithType optionalNode);
+            explicit NodeOptional(NodeWithType optionalNode);
         };
 
         class NodeNamespaceId : public NodeSerializable {
