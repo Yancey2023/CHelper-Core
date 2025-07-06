@@ -1,4 +1,4 @@
-# CHelper 安卓接口 / Java接口
+# CHelper 安卓接口 / Java接口文档
 
 如果有不明白的地方，可以直接参考[CHelper 安卓版](https://github.com/Yancey2023/CHelper-Android)的内核对接方式。
 
