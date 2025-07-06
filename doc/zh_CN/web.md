@@ -1,4 +1,4 @@
-# CHelper 的网页接口 / JavaScript 接口
+# CHelper 网页接口 / JavaScript 接口
 
 如果有不明白的地方，可以直接参考[CHelper 网页版](https://github.com/Yancey2023/chelper_web)的内核对接方式。
 
