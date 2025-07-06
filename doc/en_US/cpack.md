@@ -1,4 +1,4 @@
-English | [简体中文](README_CN.md)
+English | [简体中文](../zh_CN/cpack.md)
 
 # CPack document
 
@@ -42,6 +42,6 @@ There should be a file named `manifest.json` in the root directory of the pack:
 
 I am currently too lazy to write the English document.
 
-If you need, please refer to the [Chinese document](README_CN.md).
+If you need, please refer to the [Chinese document](../zh_CN/cpack.md).
 
 The English document will be updated after CHelper is finished.

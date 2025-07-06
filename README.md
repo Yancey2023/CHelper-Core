@@ -54,14 +54,6 @@ CHelper-Web: <https://yancey2023.github.io/chelper_web>
 CHelper-Web lacks some function. To experience more complete functions, please
 use [CHelper-Android](https://github.com/Yancey2023/CHelper-Android).
 
-## CPack Document
-
-Cpack(Command Pack) is the resource pack of CHelper(Command Helper).
-
-[English](CHelper-Resource/doc/README.md)
-
-[Chinese](CHelper-Resource/doc/README_CN.md)
-
 ## Plan
 
 The desired function has been completed, and the new function to be developed is yet to be determined.

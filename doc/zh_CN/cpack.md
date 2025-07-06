@@ -1,6 +1,6 @@
-[English](README.md) | 简体中文
+[English](../en_US/cpack.md) | 简体中文
 
-# CPack 说明文档
+# CPack 文档
 
 ## CPack 是什么
 
