@@ -4,7 +4,7 @@
 
 ## 编译内核（可选）
 
-在[CHelper 内核文档](./core.md)用，包含了内核的编译步骤，你可以甚至可以根据需求定制化内核再进行编译。如果嫌麻烦或者实在不会编译，你也可以直接使用[编译好的内核](https://github.com/Yancey2023/CHelper-Android/raw/refs/heads/master/app/libs/arm64-v8a/libCHelperAndroid.so)。
+在[CHelper 内核文档](./core.md)用，包含了内核的编译步骤，你甚至可以根据需求定制化内核再进行编译。如果嫌麻烦或者实在不会编译，你也可以直接使用[编译好的内核](https://github.com/Yancey2023/CHelper-Android/raw/refs/heads/master/app/libs/arm64-v8a/libCHelperAndroid.so)。
 
 在`build.gradle.kts`中添加以下内容：
 
@@ -14,11 +14,11 @@ sourceSets.all {
 }
 ```
 
-然后再`libs`的目录下对应的架构目录添加编译好的动态库文件。
+然后在`libs`的目录下对应的架构目录添加编译好的动态库文件。
 
 ## 资源包生成（可选）
 
-通过运行代码可以自动读写 json 文件生成更加利于程序读写的二进制文件资源包。如果嫌麻烦或者不会生成，你也可以直接使用[生成好的资源包](https://github.com/Yancey2023/CHelper-Android/tree/master/app/src/main/assets/cpack)。
+通过运行代码可以读取 json 文件生成更加利于程序读写的二进制文件资源包。如果嫌麻烦或者不会生成，你也可以直接使用[生成好的资源包](https://github.com/Yancey2023/CHelper-Android/tree/master/app/src/main/assets/cpack)。
 
 ## 与 java 代码交互
 
