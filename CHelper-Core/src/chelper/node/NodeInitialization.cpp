@@ -14,6 +14,12 @@
 
 namespace CHelper::Node {
 
+    template<class NodeType>
+    struct NodeInitialization {
+        static void init(NodeType &node, const CPack &cpack) {
+        }
+    };
+
     template<>
     struct NodeInitialization<NodeBlock> {
         static void init(NodeBlock &node, const CPack &cpack) {
@@ -293,23 +299,6 @@ namespace CHelper::Node {
     };
 
     template<>
-    struct NodeInitialization<NodeAny> {
-        static void init(NodeAny &node, const CPack &cpack) {
-            if (HEDLEY_UNLIKELY(!node.node.has_value())) {
-                static NodeSingleSymbol nodeLeft1(u'{', u"左括号");
-                static NodeSingleSymbol nodeRight1(u'}', u"右括号");
-                static NodeSingleSymbol nodeLeft2(u'[', u"左括号");
-                static NodeSingleSymbol nodeRight2(u']', u"右括号");
-                static NodeRange nodeRange("RANGE", u"范围");
-                static NodeEntry nodeEntry(NodeTargetSelector::nodeString, NodeEqualEntry::nodeEqualOrNotEqual, *NodeAny::getNodeAny());
-                static NodeList nodeObject(nodeLeft1, nodeEntry, NodeTargetSelector::nodeSeparator, nodeRight1);
-                static NodeList nodeList(nodeLeft2, *NodeAny::getNodeAny(), NodeTargetSelector::nodeSeparator, nodeRight2);
-                node.node = NodeOr({NodeTargetSelector::nodeRelativeFloat, NodeTargetSelector::nodeBoolean, NodeTargetSelector::nodeString, nodeObject, nodeRange, nodeList}, false);
-            }
-        }
-    };
-
-    template<>
     struct NodeInitialization<NodeWrapped> {
         static void init(NodeWrapped &node, const CPack &cpack) {
             initNode(node.innerNode, cpack);
@@ -428,15 +417,13 @@ namespace CHelper::Node {
                 for (const auto &item: node.data.value().nodes) {
                     initNode(item, cpack);
                 }
-            }
-            std::vector<NodeWithType> nodeDataElement;
-            if (HEDLEY_UNLIKELY(node.data.has_value())) {
+                std::vector<NodeWithType> nodeDataElement;
                 nodeDataElement.reserve(node.data.value().nodes.size());
                 for (const auto &item: node.data.value().nodes) {
                     nodeDataElement.push_back(item);
                 }
+                node.nodeData = NodeOr(std::move(nodeDataElement), false);
             }
-            node.nodeData = NodeOr(std::move(nodeDataElement), false);
         }
     };
 

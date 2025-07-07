@@ -20,49 +20,6 @@ namespace CHelper {
 
     namespace Node {
 
-        class NodeSerializable;
-        class NodeWrapped;
-        class NodeAnd;
-        class NodeAny;
-        class NodeEntry;
-        class NodeEqualEntry;
-        class NodeOr;
-        class NodeList;
-        class NodeSingleSymbol;
-        class NodeBlock;
-        class NodePerCommand;
-        class NodeCommand;
-        class NodeCommandName;
-        class NodeNormalId;
-        class NodeIntegerWithUnit;
-        class NodeItem;
-        class NodeJson;
-        class NodeLF;
-        class NodeNamespaceId;
-        class NodePosition;
-        class NodeRange;
-        class NodeRelativeFloat;
-        class NodeRepeat;
-        class NodeString;
-        class NodeTargetSelector;
-        class NodeText;
-        template<bool isJson>
-        class NodeTemplateBoolean;
-        using NodeBoolean = NodeTemplateBoolean<false>;
-        using NodeJsonBoolean = NodeTemplateBoolean<true>;
-        template<class T, bool isJson>
-        class NodeTemplateNumber;
-        using NodeFloat = NodeTemplateNumber<float, false>;
-        using NodeInteger = NodeTemplateNumber<int32_t, false>;
-        using NodeJsonFloat = NodeTemplateNumber<float, true>;
-        using NodeJsonInteger = NodeTemplateNumber<int32_t, true>;
-        class NodeJsonElement;
-        class NodeJsonEntry;
-        class NodeJsonList;
-        class NodeJsonNull;
-        class NodeJsonObject;
-        class NodeJsonString;
-
         class NodeBase {
         };
 
@@ -94,6 +51,61 @@ namespace CHelper {
             [[nodiscard]] NodeSerializable &getNodeSerializable() const;
         };
 
+        template<bool isJson>
+        class NodeTemplateBoolean : public NodeSerializable {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = isJson ? NodeTypeId::JSON_BOOLEAN : NodeTypeId::BOOLEAN;
+            std::optional<std::u16string> descriptionTrue, descriptionFalse;
+
+            NodeTemplateBoolean() = default;
+
+            NodeTemplateBoolean(const std::optional<std::string> &id,
+                                const std::optional<std::u16string> &description,
+                                const std::optional<std::u16string> &descriptionTrue,
+                                const std::optional<std::u16string> &descriptionFalse)
+                : NodeSerializable(id, description, false),
+                  descriptionTrue(descriptionTrue),
+                  descriptionFalse(descriptionFalse) {}
+        };
+
+        using NodeBoolean = NodeTemplateBoolean<false>;
+        using NodeJsonBoolean = NodeTemplateBoolean<true>;
+
+        template<class T, bool isJson>
+        class NodeTemplateNumber : public NodeSerializable {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = isJson ? (std::is_same<T, int32_t>() ? NodeTypeId::JSON_INTEGER : NodeTypeId::JSON_FLOAT)
+                                                                        : (std::is_same<T, int32_t>() ? NodeTypeId::INTEGER : NodeTypeId::FLOAT);
+            std::optional<T> min, max;
+
+            NodeTemplateNumber() = default;
+
+            NodeTemplateNumber(const std::optional<std::string> &id,
+                               const std::optional<std::u16string> &description,
+                               const std::optional<T> &min,
+                               const std::optional<T> &max)
+                : NodeSerializable(id, description, false),
+                  min(min),
+                  max(max) {}
+
+            static auto str2number(const std::string &str, char *&end) {
+                if constexpr (std::numeric_limits<T>::is_integer) {
+                    return std::strtoimax(str.c_str(), &end, 10);
+                } else if constexpr (std::is_same<T, float>()) {
+                    return std::strtof(str.c_str(), &end);
+                } else if constexpr (std::is_same<T, double>()) {
+                    return std::strtod(str.c_str(), &end);
+                } else if constexpr (std::is_same<T, long double>()) {
+                    return std::strtold(str.c_str(), &end);
+                }
+            }
+        };
+
+        using NodeFloat = NodeTemplateNumber<float, false>;
+        using NodeInteger = NodeTemplateNumber<int32_t, false>;
+        using NodeJsonFloat = NodeTemplateNumber<float, true>;
+        using NodeJsonInteger = NodeTemplateNumber<int32_t, true>;
+
         class NodeAnd : public NodeBase {
         public:
             static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::AND;
@@ -101,7 +113,7 @@ namespace CHelper {
 
             NodeAnd() = default;
 
-            explicit NodeAnd(const std::vector<NodeWithType> &childNodes);
+            explicit NodeAnd(std::vector<NodeWithType> childNodes);
         };
 
         class NodeOr : public NodeBase {
@@ -121,18 +133,6 @@ namespace CHelper {
                    bool noSuggestion = false,
                    const char16_t *defaultErrorReason = nullptr,
                    ASTNodeId::ASTNodeId nodeId = ASTNodeId::NONE);
-        };
-
-        class NodeAny : public NodeBase {
-        public:
-            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::ANY;
-            std::optional<NodeOr> node;
-
-        private:
-            NodeAny() = default;
-
-        public:
-            static NodeAny *getNodeAny();
         };
 
         class NodeEntry : public NodeBase {
@@ -196,6 +196,25 @@ namespace CHelper {
                     });
         };
 
+        class NodeText : public NodeSerializable {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::TEXT;
+            std::optional<std::vector<TokenType::TokenType>> tokenTypes;// TODO 这个似乎是历史遗留
+            std::shared_ptr<NormalId> data;
+            std::function<ASTNode(const NodeWithType &node, TokenReader &tokenReader)> getTextASTNode;
+
+            NodeText() = default;
+
+            NodeText(
+                    const std::optional<std::string> &id,
+                    const std::optional<std::u16string> &description,
+                    const std::shared_ptr<NormalId> &data,
+                    const std::function<ASTNode(const NodeWithType &node, TokenReader &tokenReader)> &getTextASTNode =
+                            [](const NodeWithType &node, TokenReader &tokenReader) -> ASTNode {
+                        return tokenReader.readStringASTNode(node);
+                    });
+        };
+
         class NodeEqualEntry : public NodeBase {
         public:
             static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::EQUAL_ENTRY;
@@ -227,6 +246,21 @@ namespace CHelper {
                      const NodeWithType &nodeElement,
                      const NodeWithType &nodeSeparator,
                      const NodeWithType &nodeRight);
+        };
+
+        class NodeAny : public NodeBase {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::ANY;
+            NodeEntry nodeEntry;
+            NodeList nodeObject;
+            NodeList nodeList;
+            NodeOr nodeAny;
+
+        private:
+            NodeAny();
+
+        public:
+            static NodeWithType getNodeAny();
         };
 
         class NodeSingleSymbol : public NodeBase {
@@ -481,72 +515,6 @@ namespace CHelper {
             NodeOr nodeTargetSelector;
 
             NodeTargetSelector() = default;
-        };
-
-        class NodeText : public NodeSerializable {
-        public:
-            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::TEXT;
-            std::optional<std::vector<TokenType::TokenType>> tokenTypes;// TODO 这个似乎是历史遗留
-            std::shared_ptr<NormalId> data;
-            std::function<ASTNode(const NodeWithType &node, TokenReader &tokenReader)> getTextASTNode;
-
-            NodeText() = default;
-
-            NodeText(
-                    const std::optional<std::string> &id,
-                    const std::optional<std::u16string> &description,
-                    const std::shared_ptr<NormalId> &data,
-                    const std::function<ASTNode(const NodeWithType &node, TokenReader &tokenReader)> &getTextASTNode =
-                            [](const NodeWithType &node, TokenReader &tokenReader) -> ASTNode {
-                        return tokenReader.readStringASTNode(node);
-                    });
-        };
-
-        template<bool isJson>
-        class NodeTemplateBoolean : public NodeSerializable {
-        public:
-            static constexpr NodeTypeId::NodeTypeId nodeTypeId = isJson ? NodeTypeId::JSON_BOOLEAN : NodeTypeId::BOOLEAN;
-            std::optional<std::u16string> descriptionTrue, descriptionFalse;
-
-            NodeTemplateBoolean() = default;
-
-            NodeTemplateBoolean(const std::optional<std::string> &id,
-                                const std::optional<std::u16string> &description,
-                                const std::optional<std::u16string> &descriptionTrue,
-                                const std::optional<std::u16string> &descriptionFalse)
-                : NodeSerializable(id, description, false),
-                  descriptionTrue(descriptionTrue),
-                  descriptionFalse(descriptionFalse) {}
-        };
-
-        template<class T, bool isJson>
-        class NodeTemplateNumber : public NodeSerializable {
-        public:
-            static constexpr NodeTypeId::NodeTypeId nodeTypeId = isJson ? (std::is_same<T, int32_t>() ? NodeTypeId::JSON_INTEGER : NodeTypeId::JSON_FLOAT)
-                                                                        : (std::is_same<T, int32_t>() ? NodeTypeId::INTEGER : NodeTypeId::FLOAT);
-            std::optional<T> min, max;
-
-            NodeTemplateNumber() = default;
-
-            NodeTemplateNumber(const std::optional<std::string> &id,
-                               const std::optional<std::u16string> &description,
-                               const std::optional<T> &min,
-                               const std::optional<T> &max)
-                : NodeSerializable(id, description, false),
-                  min(min),
-                  max(max) {}
-
-            static auto str2number(const std::string &str, char *&end) {
-                if constexpr (std::numeric_limits<T>::is_integer) {
-                    return std::strtoimax(str.c_str(), &end, 10);
-                } else if constexpr (std::is_same<T, float>()) {
-                    return std::strtof(str.c_str(), &end);
-                } else if constexpr (std::is_same<T, double>()) {
-                    return std::strtod(str.c_str(), &end);
-                } else if constexpr (std::is_same<T, long double>()) {
-                    return std::strtold(str.c_str(), &end);
-                }
-            }
         };
 
         class NodeJsonElement : public NodeSerializable {

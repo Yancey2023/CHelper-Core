@@ -147,9 +147,12 @@ namespace CHelper::Node {
           data(data),
           getTextASTNode(getTextASTNode) {}
 
-    NodeAnd::NodeAnd(const std::vector<NodeWithType> &childNodes)
-        : childNodes(childNodes) {
+    NodeAnd::NodeAnd(std::vector<NodeWithType> childNodes)
+        : childNodes(std::move(childNodes)) {
 #ifdef CHelperDebug
+        if (this->childNodes.empty()) {
+            throw std::runtime_error("childNodes is empty");
+        }
         for (const auto &item: this->childNodes) {
             if (HEDLEY_UNLIKELY(item.data == nullptr)) {
                 throw std::runtime_error("null node in node or");
@@ -158,9 +161,21 @@ namespace CHelper::Node {
 #endif
     }
 
-    NodeAny *NodeAny::getNodeAny() {
+    NodeAny::NodeAny() {
+        static NodeSingleSymbol nodeLeft1(u'{', u"左括号");
+        static NodeSingleSymbol nodeRight1(u'}', u"右括号");
+        static NodeSingleSymbol nodeLeft2(u'[', u"左括号");
+        static NodeSingleSymbol nodeRight2(u']', u"右括号");
+        static NodeRange nodeRange("RANGE", u"范围");
+        nodeEntry = NodeEntry(NodeTargetSelector::nodeString, NodeEqualEntry::nodeEqualOrNotEqual, *this);
+        nodeObject = NodeList(nodeLeft1, nodeEntry, NodeTargetSelector::nodeSeparator, nodeRight1);
+        nodeList = NodeList(nodeLeft2, *this, NodeTargetSelector::nodeSeparator, nodeRight2);
+        nodeAny = NodeOr({NodeTargetSelector::nodeRelativeFloat, NodeTargetSelector::nodeBoolean, NodeTargetSelector::nodeString, nodeObject, nodeRange, nodeList}, false);
+    }
+
+    NodeWithType NodeAny::getNodeAny() {
         static NodeAny node;
-        return &node;
+        return node;
     }
 
     NodeEntry::NodeEntry(NodeWithType nodeKey,
@@ -234,6 +249,9 @@ namespace CHelper::Node {
           defaultErrorReason(defaultErrorReason),
           nodeId(nodeId) {
 #ifdef CHelperDebug
+        if (this->childNodes.empty()) {
+            throw std::runtime_error("childNodes is empty");
+        }
         for (const auto &item: this->childNodes) {
             if (HEDLEY_UNLIKELY(item.data == nullptr)) {
                 throw std::runtime_error("null node in node or");
@@ -346,8 +364,6 @@ namespace CHelper::Node {
 
     NodeJsonString::NodeJsonString(const std::optional<std::string> &id,
                                    const std::optional<std::u16string> &description)
-        : NodeSerializable(id, description, false) {
-        nodeData = NodeOr({}, false);
-    }
+        : NodeSerializable(id, description, false) {}
 
 }// namespace CHelper::Node

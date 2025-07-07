@@ -745,12 +745,7 @@ namespace CHelper::Parser {
     template<>
     struct Parser<Node::NodeAny> {
         static ASTNode getASTNode(const Node::NodeAny &node, TokenReader &tokenReader, const CPack *cpack) {
-#ifdef CHelperDebug
-            if (HEDLEY_UNLIKELY(!node.node.has_value())) {
-                throw std::runtime_error("not init");
-            }
-#endif
-            return parseByChildNode(node, tokenReader, cpack, *node.node);
+            return parseByChildNode(node, tokenReader, cpack, node.nodeAny);
         }
     };
 
@@ -803,8 +798,7 @@ namespace CHelper::Parser {
             }
             //value
             if (HEDLEY_UNLIKELY(it == node.equalDatas.end())) {
-                Node::NodeInitialization<Node::NodeAny>::init(*Node::NodeAny::getNodeAny(), *cpack);
-                childNodes.push_back(parse(*Node::NodeAny::getNodeAny(), tokenReader, cpack));
+                childNodes.push_back(parse(Node::NodeAny::getNodeAny(), tokenReader, cpack));
             } else {
                 childNodes.push_back(parse(it->nodeValue, tokenReader, cpack));
             }
