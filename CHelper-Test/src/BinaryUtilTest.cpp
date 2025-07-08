@@ -222,7 +222,7 @@ void testNode(CHelper::CPack &cpack, const std::function<T()> &getInstance) {
     std::istringstream iss(oss.str());
     T t2;
     serialization::Codec<T>::template from_binary<isConvertEndian>(iss, t2);
-    CHelper::Node::NodeInitialization<T>::init(t2, cpack);
+    CHelper::Node::initNode(t2, cpack);
     EXPECT_EQ(t1, t2);
     EXPECT_FALSE(iss.eof());
 }
