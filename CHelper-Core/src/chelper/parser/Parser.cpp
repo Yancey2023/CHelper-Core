@@ -933,9 +933,9 @@ namespace CHelper::Parser {
     struct Parser<Node::NodeOptional> {
         static ASTNode getASTNode(const Node::NodeOptional &node, TokenReader &tokenReader, const CPack *cpack) {
             tokenReader.push();
-            size_t skipSpace = tokenReader.skipSpace();
+            tokenReader.skipSpace();
             ASTNode astNode = parseByChildNode(node, tokenReader, cpack, node.optionalNode);
-            bool isUseOptionalNode = (skipSpace == 0 && astNode.tokens.isEmpty()) || !astNode.isError();
+            bool isUseOptionalNode = !astNode.isError();
             if (!isUseOptionalNode) {
                 for (const auto &item: astNode.errorReasons) {
                     if (item->start > astNode.tokens.startIndex) {
