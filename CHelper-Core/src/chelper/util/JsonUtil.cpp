@@ -16,7 +16,6 @@ namespace CHelper::JsonUtil {
         result.reserve(static_cast<size_t>(static_cast<double>(input.size()) * 1.2));
         auto it = input.begin();
         while (true) {
-            ++it;
             if (HEDLEY_UNLIKELY(it == input.end())) {
                 return result;
             }
@@ -36,6 +35,7 @@ namespace CHelper::JsonUtil {
                     break;
             }
             result.push_back(ch);
+            ++it;
         }
     }
 
