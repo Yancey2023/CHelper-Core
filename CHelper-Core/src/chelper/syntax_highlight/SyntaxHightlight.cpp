@@ -34,18 +34,18 @@ namespace CHelper::SyntaxHighlight {
                 syntaxResult.update(astNode.tokens, SyntaxTokenType::STRING);
                 return false;
             }
-            syntaxResult.update(astNode.tokens.getStartIndex(), SyntaxTokenType::STRING);
+            syntaxResult.update(astNode.tokens.startIndex, SyntaxTokenType::STRING);
             std::u16string_view str = astNode.tokens.toString();
             auto convertResult = JsonUtil::jsonString2String(std::u16string(str));
             if (convertResult.isComplete) {
-                syntaxResult.update(astNode.tokens.getEndIndex() - 1, SyntaxTokenType::STRING);
+                syntaxResult.update(astNode.tokens.endIndex - 1, SyntaxTokenType::STRING);
             }
             SyntaxResult syntaxResult1 = getSyntaxResult(astNode.childNodes[0]);
             size_t index = 0;
             for (size_t i = 0; i < convertResult.result.size(); ++i) {
                 size_t end = convertResult.convert(i + 1);
                 while (index < end) {
-                    syntaxResult.update(astNode.tokens.getStartIndex() + index + 1, syntaxResult1.tokenTypes[i]);
+                    syntaxResult.update(astNode.tokens.startIndex + index + 1, syntaxResult1.tokenTypes[i]);
                     index++;
                 }
             }

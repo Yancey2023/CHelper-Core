@@ -26,6 +26,8 @@ public:
 private slots:
     void onTextChanged(const QString &string) const;
 
+    void onSelectionChanged() const;
+
     void onSuggestionClick(const QModelIndex &index) const;
 
     void copy() const;

@@ -19,8 +19,8 @@ namespace CHelper::AutoSuggestion {
     Suggestion::Suggestion(const TokensView &tokens,
                            bool isAddSpace,
                            const std::shared_ptr<NormalId> &content)
-        : start(tokens.getStartIndex()),
-          end(tokens.getEndIndex()),
+        : start(tokens.startIndex),
+          end(tokens.endIndex),
           isAddSpace(isAddSpace),
           content(content) {}
 

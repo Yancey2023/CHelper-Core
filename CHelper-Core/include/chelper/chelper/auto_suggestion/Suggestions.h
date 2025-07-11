@@ -34,9 +34,11 @@ namespace CHelper::AutoSuggestion {
 
         void addIdSuggestion(Suggestion &&suggestion);
 
+        void combine(Suggestions &suggestions, const std::function<bool(Suggestion &suggestion)> &function);
+
         std::vector<Suggestion> collect();
     };
 
-}// namespace CHelper:AutoSuggestion
+}// namespace CHelper::AutoSuggestion
 
 #endif//CHELPER_SUGGESTIONS_H

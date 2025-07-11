@@ -69,7 +69,7 @@ namespace CHelper::ParameterHint {
     };
 
     std::optional<std::u16string> getParameterHint(const ASTNode &astNode, size_t index) {
-        if (HEDLEY_UNLIKELY(index < astNode.tokens.getStartIndex() || index > astNode.tokens.getEndIndex())) {
+        if (HEDLEY_UNLIKELY(index < astNode.tokens.startIndex || index > astNode.tokens.endIndex)) {
             return std::nullopt;
         }
         if (HEDLEY_UNLIKELY(!astNode.isAllSpaceError())) {

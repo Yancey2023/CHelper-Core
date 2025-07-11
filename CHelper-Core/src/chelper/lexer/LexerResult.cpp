@@ -11,4 +11,14 @@ namespace CHelper {
         : content(std::move(content)),
           allTokens(std::move(allTokens)) {}
 
+    [[nodiscard]] size_t LexerResult::getIndex(size_t tokenIndex) const {
+        if (HEDLEY_UNLIKELY(tokenIndex == 0)) {
+            return 0;
+        } else if (HEDLEY_UNLIKELY(tokenIndex == allTokens.size())) {
+            return allTokens[tokenIndex - 1].getEndIndex();
+        } else {
+            return allTokens[tokenIndex].getStartIndex();
+        }
+    }
+
 }// namespace CHelper

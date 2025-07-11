@@ -18,8 +18,8 @@ namespace CHelper::Old2New {
 
     DataFix::DataFix(const TokensView &tokens,
                      std::u16string content)
-        : start(tokens.getStartIndex()),
-          end(tokens.getEndIndex()),
+        : start(tokens.startIndex),
+          end(tokens.endIndex),
           content(std::move(content)) {}
 
     std::u16string trip(std::u16string str) {

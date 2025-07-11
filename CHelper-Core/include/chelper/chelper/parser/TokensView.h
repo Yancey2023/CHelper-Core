@@ -37,12 +37,6 @@ namespace CHelper {
 
         void forEach(std::function<void(const Token &token)> function) const;
 
-        [[nodiscard]] size_t getIndex(size_t tokenIndex) const;
-
-        [[nodiscard]] size_t getStartIndex() const;
-
-        [[nodiscard]] size_t getEndIndex() const;
-
         [[nodiscard]] std::u16string_view toString() const;
     };
 

@@ -25,8 +25,8 @@ namespace CHelper {
                              const TokensView &tokens,
                              std::u16string errorReason)
         : level(level),
-          start(tokens.getStartIndex()),
-          end(tokens.getEndIndex()),
+          start(tokens.startIndex),
+          end(tokens.endIndex),
           errorReason(std::move(errorReason)) {}
 
     bool ErrorReason::operator==(const ErrorReason &reason) const {

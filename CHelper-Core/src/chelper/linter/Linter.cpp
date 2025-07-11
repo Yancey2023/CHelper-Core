@@ -24,7 +24,7 @@ namespace CHelper::Linter {
         static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
             if (HEDLEY_UNLIKELY(astNode.id == ASTNodeId::NODE_STRING_INNER)) {
                 auto convertResult = JsonUtil::jsonString2String(std::u16string(astNode.tokens.toString()));
-                size_t offset = astNode.tokens.getStartIndex() + 1;
+                size_t offset = astNode.tokens.startIndex + 1;
                 for (const auto &item: getErrorsExceptParseError(astNode.childNodes[0])) {
                     item->start = convertResult.convert(item->start) + offset;
                     item->end = convertResult.convert(item->end) + offset;

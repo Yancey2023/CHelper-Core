@@ -18,6 +18,8 @@ namespace CHelper {
         const std::vector<Token> allTokens;
 
         LexerResult(std::u16string content, std::vector<Token> allTokens);
+
+        [[nodiscard]] size_t getIndex(size_t tokenIndex) const;
     };
 
 }// namespace CHelper

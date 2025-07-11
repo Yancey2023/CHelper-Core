@@ -195,7 +195,7 @@ namespace CHelper::Parser {
             if (HEDLEY_LIKELY(!node.data.has_value() || node.data->nodes.empty())) {
                 return ASTNode::simpleNode(node, tokens, errorReason);
             }
-            size_t offset = tokens.getStartIndex() + 1;
+            size_t offset = tokens.startIndex + 1;
             auto innerNode = getInnerASTNode(node, tokens, std::u16string(str), cpack, node.nodeData);
             ASTNode newResult = ASTNode::andNode(node, {std::move(innerNode.first)}, tokens, errorReason, ASTNodeId::NODE_STRING_INNER);
             if (HEDLEY_UNLIKELY(errorReason == nullptr)) {
@@ -661,7 +661,7 @@ namespace CHelper::Parser {
                 return result;
             }
             auto convertResult = JsonUtil::jsonString2String(std::u16string(str));
-            size_t offset = result.tokens.getStartIndex();
+            size_t offset = result.tokens.startIndex;
             if (HEDLEY_UNLIKELY(convertResult.errorReason != nullptr)) {
                 convertResult.errorReason->start += offset;
                 convertResult.errorReason->end += offset;
@@ -934,7 +934,7 @@ namespace CHelper::Parser {
         static ASTNode getASTNode(const Node::NodeOptional &node, TokenReader &tokenReader, const CPack *cpack) {
             tokenReader.push();
             tokenReader.skipSpace();
-            ASTNode astNode = parseByChildNode(node, tokenReader, cpack, node.optionalNode);
+            ASTNode astNode = parse(node.optionalNode, tokenReader, cpack);
             bool isUseOptionalNode = !astNode.isError();
             if (!isUseOptionalNode) {
                 for (const auto &item: astNode.errorReasons) {
@@ -945,11 +945,11 @@ namespace CHelper::Parser {
                 }
             }
             if (isUseOptionalNode) {
-                tokenReader.pop();
-                return ASTNode::andNode(node, {(std::move(astNode))}, astNode.tokens);
+                return ASTNode::andNode(node, {(std::move(astNode))}, tokenReader.collect());
             } else {
                 tokenReader.restore();
-                return ASTNode::orNode(node, {ASTNode::simpleNode(node, {tokenReader.lexerResult, tokenReader.index, tokenReader.index}), (std::move(astNode))}, astNode.tokens);
+                TokensView tokens(tokenReader.lexerResult, tokenReader.index, tokenReader.index);
+                return ASTNode::orNode(node, {ASTNode::simpleNode(node, tokens), (std::move(astNode))}, tokens);
             }
         }
     };

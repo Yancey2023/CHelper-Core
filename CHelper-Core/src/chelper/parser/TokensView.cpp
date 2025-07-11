@@ -10,8 +10,8 @@ namespace CHelper {
         : lexerResult(lexerResult),
           start(start),
           end(end) {
-        startIndex = getIndex(start);
-        endIndex = getIndex(end);
+        startIndex = lexerResult->getIndex(start);
+        endIndex = lexerResult->getIndex(end);
         cacheString = {lexerResult->content.c_str() + startIndex, endIndex - startIndex};
 #ifdef CHelperDebug
         if (HEDLEY_UNLIKELY(start > end)) {
@@ -48,24 +48,6 @@ namespace CHelper {
         std::for_each(lexerResult->allTokens.begin() + static_cast<std::u16string::difference_type>(start),
                       lexerResult->allTokens.begin() + static_cast<std::u16string::difference_type>(end),
                       std::move(function));
-    }
-
-    [[nodiscard]] size_t TokensView::getIndex(size_t tokenIndex) const {
-        if (HEDLEY_UNLIKELY(tokenIndex == 0)) {
-            return 0;
-        } else if (HEDLEY_UNLIKELY(tokenIndex == lexerResult->allTokens.size())) {
-            return lexerResult->allTokens[tokenIndex - 1].getEndIndex();
-        } else {
-            return lexerResult->allTokens[tokenIndex].getStartIndex();
-        }
-    }
-
-    [[nodiscard]] size_t TokensView::getStartIndex() const {
-        return startIndex;
-    }
-
-    [[nodiscard]] size_t TokensView::getEndIndex() const {
-        return endIndex;
     }
 
     [[nodiscard]] std::u16string_view TokensView::toString() const {

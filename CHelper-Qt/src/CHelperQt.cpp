@@ -37,8 +37,9 @@ CHelperApp::CHelperApp(QWidget *parent)
     ui->listView->setSpacing(2);
     onTextChanged(nullptr);
     ui->lineEdit->setFocus();
-    connect(ui->listView, SIGNAL(clicked(QModelIndex)), this, SLOT(onSuggestionClick(QModelIndex)));
-    connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(onTextChanged(QString)));
+    connect(ui->listView, &QListView::clicked, this, &CHelperApp::onSuggestionClick);
+    connect(ui->lineEdit, &QLineEdit::textChanged, this, [this] { onSelectionChanged(); });
+    connect(ui->lineEdit, &QLineEdit::cursorPositionChanged, this, &CHelperApp::onSelectionChanged);
     connect(ui->copyButton, &QPushButton::clicked, this, &CHelperApp::copy);
 }
 
@@ -47,11 +48,16 @@ CHelperApp::~CHelperApp() {
     delete core;
 }
 
-void CHelperApp::onTextChanged(const QString &string) const {
+void CHelperApp::onTextChanged([[maybe_unused]] const QString &string) const {
+    onSelectionChanged();
+}
+
+void CHelperApp::onSelectionChanged() const {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
-    core->onTextChanged(string.toStdU16String(), string.length());
+    QString string = ui->lineEdit->text();
+    core->onTextChanged(string.toStdU16String(), ui->lineEdit->cursorPosition());
     if (HEDLEY_UNLIKELY(string == nullptr)) {
         ui->structureLabel->setText("欢迎使用CHelper");
         ui->descriptionLabel->setText("作者：Yancey");
@@ -66,8 +72,8 @@ void CHelperApp::onTextChanged(const QString &string) const {
             ui->errorReasonLabel->setText(QString::fromStdU16String(errorReasons[0]->errorReason));
         } else {
             std::u16string result = u"可能的错误原因：";
-             for (size_t i = 0; i < errorReasons.size(); ++i) {
-                const auto &errorReason= errorReasons[i];
+            for (size_t i = 0; i < errorReasons.size(); ++i) {
+                const auto &errorReason = errorReasons[i];
                 result.append(fmt::format(u"\n{}. {}", i, errorReason->errorReason));
             }
             ui->errorReasonLabel->setText(QString::fromStdU16String(result));
@@ -92,7 +98,7 @@ void CHelperApp::onSuggestionClick(const QModelIndex &index) const {
     std::optional<std::pair<std::u16string, size_t>> result = core->onSuggestionClick(index.row());
     if (HEDLEY_LIKELY(result.has_value())) {
         ui->lineEdit->setText(QString::fromStdU16String(result.value().first));
-        ui->lineEdit->setSelection(static_cast<int>(result.value().second), static_cast<int>(result.value().second));
+        ui->lineEdit->setCursorPosition(static_cast<int>(result.value().second));
         ui->lineEdit->setFocus();
     } else {
         qDebug() << "suggestion index is out of range: " << index.row();
