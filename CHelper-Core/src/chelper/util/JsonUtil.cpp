@@ -11,7 +11,7 @@ namespace CHelper::JsonUtil {
         return indexConvertList[index];
     }
 
-    std::u16string string2jsonString(const std::u16string &input) {
+    std::u16string string2jsonString(const std::u16string_view &input) {
         std::u16string result;
         result.reserve(static_cast<size_t>(static_cast<double>(input.size()) * 1.2));
         auto it = input.begin();
@@ -39,21 +39,22 @@ namespace CHelper::JsonUtil {
         }
     }
 
-    ConvertResult jsonString2String(const std::u16string &input) {
+    ConvertResult jsonString2String(const std::u16string_view &input) {
         ConvertResult result;
-        if (HEDLEY_UNLIKELY(input.empty())) {
+        if (HEDLEY_UNLIKELY(input.empty() || input[0] != '\"')) {
             result.errorReason = ErrorReason::incomplete(0, 0, u"json字符串必须在双引号内");
             return result;
         }
         size_t index = 0;
         result.result.reserve(input.size());
         result.indexConvertList.reserve(input.size());
-        result.indexConvertList.push_back(index);
         int32_t unicodeValue;
         std::u16string escapeSequence;
         while (true) {
             //结束字符
-            if (HEDLEY_UNLIKELY(++index >= input.size())) {
+            ++index;
+            result.indexConvertList.push_back(index);
+            if (HEDLEY_UNLIKELY(index >= input.size())) {
                 result.isComplete = false;
                 break;
             }
@@ -65,10 +66,10 @@ namespace CHelper::JsonUtil {
             //正常字符
             if (HEDLEY_LIKELY(ch != u'\\')) {
                 result.result.push_back(ch);
-                result.indexConvertList.push_back(index);
                 continue;
             }
             //转义字符
+            ++index;
             if (HEDLEY_UNLIKELY(index >= input.size())) {
                 result.errorReason = ErrorReason::incomplete(
                         index - 1,
@@ -86,22 +87,17 @@ namespace CHelper::JsonUtil {
                     case u'r':
                     case u't':
                         result.result.push_back(ch);
-                        result.indexConvertList.push_back(index);
                         break;
                     case u'u':
-                        for (uint8_t i = 0; i < 4; ++i) {
-                            if (HEDLEY_UNLIKELY(index >= input.size())) {
-                                result.errorReason = ErrorReason::contentError(
-                                        index - 2 - i,
-                                        index,
-                                        fmt::format(u"字符串转义缺失后半部分 -> \\u{}", escapeSequence));
-                                break;
-                            }
-                            escapeSequence.push_back(input[index]);
-                        }
-                        if (HEDLEY_UNLIKELY(escapeSequence.length() < 4)) {
+                        index += 4;
+                        if (HEDLEY_UNLIKELY(index >= input.size())) {
+                            result.errorReason = ErrorReason::contentError(
+                                    index - 5,
+                                    input.size(),
+                                    fmt::format(u"字符串转义缺失后半部分 -> \\u{}", escapeSequence));
                             break;
                         }
+                        escapeSequence = input.substr(index - 4, 4);
                         if (HEDLEY_UNLIKELY(std::any_of(
                                     escapeSequence.begin(), escapeSequence.end(),
                                     [&result, &index, &escapeSequence](const auto &item) {
@@ -109,7 +105,7 @@ namespace CHelper::JsonUtil {
                                             return false;
                                         } else {
                                             result.errorReason = ErrorReason::incomplete(
-                                                    index - escapeSequence.length() - 1,
+                                                    index - 5,
                                                     index + 1,
                                                     fmt::format(u"字符串转义出现非法字符{} -> \\u{}", item, escapeSequence));
                                             return true;
@@ -120,40 +116,23 @@ namespace CHelper::JsonUtil {
                         unicodeValue = std::stoi(utf8::utf16to8(escapeSequence), nullptr, 16);
                         if (HEDLEY_UNLIKELY(unicodeValue <= 0 || unicodeValue > 0x10FFFF)) {
                             result.errorReason = ErrorReason::contentError(
-                                    index - escapeSequence.length() - 1, index + 1,
+                                    index - 5, index + 1,
                                     fmt::format(u"字符串转义的Unicode值无效 -> \\u{}", escapeSequence));
                             break;
                         }
                         escapeSequence.clear();
-                        if (HEDLEY_LIKELY(unicodeValue <= 0x7F)) {
-                            result.result.push_back(static_cast<char>(unicodeValue));
-                        } else if (HEDLEY_LIKELY(unicodeValue <= 0x7FF)) {
-                            result.result.push_back(
-                                    static_cast<char>(0xC0u | (static_cast<uint32_t>(unicodeValue) >> 6u)));
-                            result.result.push_back(
-                                    static_cast<char>(0x80u | (static_cast<uint32_t>(unicodeValue) & 0x3Fu)));
-                        } else if (HEDLEY_LIKELY(unicodeValue <= 0xFFFF)) {
-                            result.result.push_back(
-                                    static_cast<char>(0xE0u | (static_cast<uint32_t>(unicodeValue) >> 12u)));
-                            result.result.push_back(
-                                    static_cast<char>(0x80u | ((static_cast<uint32_t>(unicodeValue) >> 6u) & 0x3Fu)));
-                            result.result.push_back(
-                                    static_cast<char>(0x80u | (static_cast<uint32_t>(unicodeValue) & 0x3Fu)));
+                        if (HEDLEY_LIKELY(unicodeValue <= 0xFFFF)) {
+                            result.result.push_back(static_cast<char16_t>(unicodeValue));
                         } else {
-                            result.result.push_back(
-                                    static_cast<char>(0xF0u | (static_cast<uint32_t>(unicodeValue) >> 18u)));
-                            result.result.push_back(
-                                    static_cast<char>(0x80u | ((static_cast<uint32_t>(unicodeValue) >> 12u) & 0x3Fu)));
-                            result.result.push_back(
-                                    static_cast<char>(0x80u | ((static_cast<uint32_t>(unicodeValue) >> 6u) & 0x3Fu)));
-                            result.result.push_back(
-                                    static_cast<char>(0x80u | (static_cast<uint32_t>(unicodeValue) & 0x3Fu)));
+                            uint32_t adjusted = unicodeValue - 0x10000;
+                            result.result.push_back(static_cast<char16_t>(0xD800 | (adjusted >> 10)));
+                            result.result.push_back(static_cast<char16_t>(0xDC00 | (adjusted & 0x3FF)));
+                            result.indexConvertList.push_back(index - 5);
                         }
-                        result.indexConvertList.push_back(index);
                         break;
                     default:
                         result.errorReason = ErrorReason::contentError(
-                                index - 1, index + 1,
+                                index, index + 1,
                                 fmt::format(u"未知的转义字符 -> \\{:c}", ch));
                         break;
                 }

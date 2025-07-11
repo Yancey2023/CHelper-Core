@@ -50,7 +50,7 @@ namespace CHelper {
                       std::move(function));
     }
 
-    [[nodiscard]] std::u16string_view TokensView::toString() const {
+    [[nodiscard]] std::u16string_view TokensView::string() const {
         return cacheString;
     }
 

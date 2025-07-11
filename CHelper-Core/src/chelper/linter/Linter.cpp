@@ -23,11 +23,10 @@ namespace CHelper::Linter {
     struct Linter<Node::NodeJsonString> {
         static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
             if (HEDLEY_UNLIKELY(astNode.id == ASTNodeId::NODE_STRING_INNER)) {
-                auto convertResult = JsonUtil::jsonString2String(std::u16string(astNode.tokens.toString()));
-                size_t offset = astNode.tokens.startIndex + 1;
+                auto convertResult = JsonUtil::jsonString2String(astNode.tokens.string());
                 for (const auto &item: getErrorsExceptParseError(astNode.childNodes[0])) {
-                    item->start = convertResult.convert(item->start) + offset;
-                    item->end = convertResult.convert(item->end) + offset;
+                    item->start = convertResult.convert(item->start) + astNode.tokens.startIndex;
+                    item->end = convertResult.convert(item->end) + astNode.tokens.startIndex;
                     errorReasons.push_back(item);
                 }
             }
@@ -42,7 +41,7 @@ namespace CHelper::Linter {
                 return true;
             }
             const auto &node = *reinterpret_cast<const Node::NodeCommandName *>(astNode.node.data);
-            std::u16string_view str = astNode.tokens.toString();
+            std::u16string_view str = astNode.tokens.string();
             for (const auto &command: *node.commands) {
                 for (const auto &name: command.name) {
                     if (HEDLEY_UNLIKELY(str == name)) {
@@ -62,7 +61,7 @@ namespace CHelper::Linter {
                 return true;
             }
             const auto &node = *reinterpret_cast<const Node::NodeNamespaceId *>(astNode.node.data);
-            std::u16string_view str = astNode.tokens.toString();
+            std::u16string_view str = astNode.tokens.string();
             XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
             if (HEDLEY_UNLIKELY(std::all_of(node.customContents->begin(), node.customContents->end(), [&strHash](const auto &item) {
                     return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
@@ -80,7 +79,7 @@ namespace CHelper::Linter {
                 return true;
             }
             const auto &node = *reinterpret_cast<const Node::NodeNormalId *>(astNode.node.data);
-            std::u16string_view str = astNode.tokens.toString();
+            std::u16string_view str = astNode.tokens.string();
             XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
             if (HEDLEY_UNLIKELY(std::all_of(node.customContents->begin(), node.customContents->end(), [&strHash](const auto &item) {
                     return !item->fastMatch(strHash);
@@ -122,7 +121,7 @@ namespace CHelper::Linter {
                 return true;
             }
             auto &node = *static_cast<const Node::NodeTemplateNumber<T, isJson> *>(astNode.node.data);
-            std::string str = utf8::utf16to8(astNode.tokens.toString());
+            std::string str = utf8::utf16to8(astNode.tokens.string());
             char *end;
             auto value = Node::NodeTemplateNumber<T, isJson>::str2number(str, end);
             if (HEDLEY_UNLIKELY(end == str.c_str() || *end != '\0' ||
@@ -137,7 +136,7 @@ namespace CHelper::Linter {
                                 u"数值不在范围[{}, {}]内 -> {}",
                                 node.min.value_or(std::numeric_limits<T>::lowest()),
                                 node.max.value_or(std::numeric_limits<T>::max()),
-                                astNode.tokens.toString())));
+                                astNode.tokens.string())));
             }
             return true;
         }

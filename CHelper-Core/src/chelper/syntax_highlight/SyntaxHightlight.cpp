@@ -35,17 +35,17 @@ namespace CHelper::SyntaxHighlight {
                 return false;
             }
             syntaxResult.update(astNode.tokens.startIndex, SyntaxTokenType::STRING);
-            std::u16string_view str = astNode.tokens.toString();
-            auto convertResult = JsonUtil::jsonString2String(std::u16string(str));
+            std::u16string_view str = astNode.tokens.string();
+            auto convertResult = JsonUtil::jsonString2String(str);
             if (convertResult.isComplete) {
                 syntaxResult.update(astNode.tokens.endIndex - 1, SyntaxTokenType::STRING);
             }
             SyntaxResult syntaxResult1 = getSyntaxResult(astNode.childNodes[0]);
-            size_t index = 0;
+            size_t index = convertResult.convert(0);
             for (size_t i = 0; i < convertResult.result.size(); ++i) {
                 size_t end = convertResult.convert(i + 1);
                 while (index < end) {
-                    syntaxResult.update(astNode.tokens.startIndex + index + 1, syntaxResult1.tokenTypes[i]);
+                    syntaxResult.update(astNode.tokens.startIndex + index, syntaxResult1.tokenTypes[i]);
                     index++;
                 }
             }
@@ -118,7 +118,7 @@ namespace CHelper::SyntaxHighlight {
     template<>
     struct SyntaxToken<Node::NodeRange> {
         static bool collectSyntax(const ASTNode &astNode, SyntaxResult &syntaxResult) {
-            std::u16string_view str = astNode.tokens.toString();
+            std::u16string_view str = astNode.tokens.string();
             for (size_t i = 0; i < str.length(); ++i) {
                 size_t ch = str[i];
                 syntaxResult.update(

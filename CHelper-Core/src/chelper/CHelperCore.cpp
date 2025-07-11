@@ -133,7 +133,7 @@ namespace CHelper {
             return std::nullopt;
         }
         const auto &suggestion = (*suggestions)[which];
-        std::u16string_view before = astNode.tokens.toString();
+        std::u16string_view before = astNode.tokens.string();
         if (suggestion.content->name == u" " && (suggestion.start == 0 || before[suggestion.start - 1] == u' ')) {
             return {{std::u16string(before), suggestion.start}};
         }

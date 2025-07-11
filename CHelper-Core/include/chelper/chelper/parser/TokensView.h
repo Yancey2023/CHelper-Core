@@ -37,7 +37,7 @@ namespace CHelper {
 
         void forEach(std::function<void(const Token &token)> function) const;
 
-        [[nodiscard]] std::u16string_view toString() const;
+        [[nodiscard]] std::u16string_view string() const;
     };
 
 }// namespace CHelper

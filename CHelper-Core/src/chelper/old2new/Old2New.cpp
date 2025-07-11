@@ -151,10 +151,10 @@ namespace CHelper::Old2New {
 
     std::u16string blockOld2New(const BlockFixData &blockFixData, const TokensView &blockIdToken, const TokensView &dataValueToken) {
         // get block id
-        auto blockId = std::u16string(blockIdToken.toString());
+        auto blockId = std::u16string(blockIdToken.string());
         // get block data value
         char *end;
-        std::string dataValueStr = utf8::utf16to8(dataValueToken.toString());
+        std::string dataValueStr = utf8::utf16to8(dataValueToken.string());
         std::intmax_t dataValue = std::strtoimax(dataValueStr.c_str(), &end, 10);
         if (HEDLEY_UNLIKELY(end == dataValueStr.c_str() || *end != '\0' ||
                             dataValue == HUGE_VALF || dataValue == -HUGE_VALF ||
@@ -223,7 +223,7 @@ namespace CHelper::Old2New {
         if (depth > 0) {
             dataFixList.emplace_back(tokens1, u"");
         }
-        auto targetSelector = std::u16string(tokens2.toString());
+        auto targetSelector = std::u16string(tokens2.string());
         if (trip(targetSelector) != u"@s") {
             dataFixList.emplace_back(tokens2, u" as" + targetSelector + u" at @s");
         } else {
@@ -236,7 +236,7 @@ namespace CHelper::Old2New {
             }
         });
         if (isHavePosition) {
-            dataFixList.emplace_back(tokens3, u" positioned" + std::u16string(tokens3.toString()));
+            dataFixList.emplace_back(tokens3, u" positioned" + std::u16string(tokens3.string()));
         } else {
             dataFixList.emplace_back(tokens3, u"");
         }

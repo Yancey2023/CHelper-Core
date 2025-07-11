@@ -23,9 +23,9 @@ namespace CHelper {
             [[nodiscard]] size_t convert(size_t index) const;
         };
 
-        std::u16string string2jsonString(const std::u16string &input);
+        std::u16string string2jsonString(const std::u16string_view &input);
 
-        ConvertResult jsonString2String(const std::u16string &input);
+        ConvertResult jsonString2String(const std::u16string_view &input);
 
     }// namespace JsonUtil
 

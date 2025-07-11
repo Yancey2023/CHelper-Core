@@ -61,7 +61,7 @@ namespace CHelper::CommandStructure {
             if (astNode == nullptr || astNode->childNodes.size() < 2 || astNode->tokens.size() < 2) {
                 structure.append(isMustHave, u"命令");
             } else {
-                structure.appendSpace().append(std::u16string(astNode->childNodes[0].tokens.toString()));
+                structure.appendSpace().append(std::u16string(astNode->childNodes[0].tokens.string()));
                 const auto &usage = astNode->childNodes[1];
                 collectNodeStructure(&usage, usage.node, structure, isMustHave);
             }
