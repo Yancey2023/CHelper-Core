@@ -12,48 +12,52 @@
 
 ## 与 JavaScipt 代码交互
 
-通过观察[CHelper-Web](https://github.com/Yancey2023/chelper_web)这个项目，可以发现：在`public`目录下，有 1 个`wasm`格式的文件是生成好的内核，6 个`cpack`格式的文件是生成好的资源包，你可以直接使用这些文件。在`src/core`目录下，`libCHelperWeb.js`用于加载`wasm`文件，并且提供了 js 的调用方式：
+通过观察[CHelper-Web](https://github.com/Yancey2023/chelper_web)这个项目，可以发现：在`src/assets`目录下，有 1 个`wasm`格式的文件是生成好的内核，6 个`cpack`格式的文件是生成好的资源包，你可以直接使用这些文件。在`src/core`目录下，`libCHelperWeb.js`用于加载`wasm`文件，并且提供了 js 的调用方式：
 
 ```js
 export class CHelperCore {
   constructor(cpack) {
     // 构造函数
   }
+
   release() {
     // 释放内存
   }
+
   onTextChanged(content, index) {
     // 文本改变事件
   }
+
   onSelectionChanged(index) {
     // 光标位置改变事件
   }
+
   getStructure() {
     // 获取命令结构
   }
+
   getDescription() {
     // 获取参数注释
   }
-  getErrorReason() {
+
+  getErrorReasons() {
     // 获取错误原因
   }
+
   getSuggestionSize() {
     // 获取补全建议数量
   }
-  getSuggestionTitle(which) {
-    // 获取其中一个补全建议的内容
+
+  getSuggestion(which) {
+    // 获取其中一个补全建议
   }
-  getSuggestionDescription(which) {
-    // 获取其中一个补全建议的注释
+
+  getAllSuggestions() {
+    // 获取所有补全提示
   }
+
   onSuggestionClick(which) {
     // 补全建议使用事件
-  }
-  getStringAfterSuggestionClick() {
-    // 获取使用补全建议后的文本
-  }
-  getSelectionAfterSuggestionClick() {
-    // 获取使用补全建议后的光标位置
   }
 }
 ```
@@ -62,17 +66,17 @@ export class CHelperCore {
 
 ```js
 export async function getCore(branch) {
-    let cpack = cpackCache[branch]
-    if (cpack === undefined) {
-        cpack = await fetch(getRealFileName(branch))
-            .then((response) => response.arrayBuffer())
-            .then(async (cpack) => {
-                return new Uint8Array(cpack);
-            });
-        cpackCache[branch] = cpack;
-    }
-    await createWasmFuture;
-    return new CHelperCore(cpack);
+  let cpack = cpackCache[branch];
+  if (cpack === undefined) {
+    cpack = await fetch(getRealFileName(branch))
+      .then((response) => response.arrayBuffer())
+      .then(async (cpack) => {
+        return new Uint8Array(cpack);
+      });
+    cpackCache[branch] = cpack;
+  }
+  await createWasmFuture;
+  return new CHelperCore(cpack);
 }
 ```
 
