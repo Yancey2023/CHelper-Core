@@ -5291,6 +5291,10 @@
             "description": "音乐唱片（C418 - far）"
         },
         {
+            "name": "record.lava_chicken",
+            "description": "音乐唱片（Hyper Potions - Lava Chicken）"
+        },
+        {
             "name": "record.mall",
             "description": "音乐唱片（C418 - mall）"
         },

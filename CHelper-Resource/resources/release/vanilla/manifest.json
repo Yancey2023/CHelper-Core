@@ -1,12 +1,12 @@
 {
     "name": "正式版原版",
     "description": "CHelper内置资源包",
-    "version": "1.21.92.1",
+    "version": "1.21.93.1",
     "versionType": "release",
     "branch": "vanilla",
     "author": "Yancey",
-    "updateDate": "2025-07-03",
-    "packId": "BasicPack-1.21.92.1-vanilla",
+    "updateDate": "2025-07-12",
+    "packId": "BasicPack-1.21.93.1-vanilla",
     "versionCode": 1,
     "isBasicPack": true,
     "isDefault": true
