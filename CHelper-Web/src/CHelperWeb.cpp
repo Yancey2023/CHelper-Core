@@ -36,29 +36,29 @@ EMSCRIPTEN_KEEPALIVE void onSelectionChanged(CHelper::CHelperCore *core, size_t 
     core->onSelectionChanged(index);
 }
 
-EMSCRIPTEN_KEEPALIVE const uint8_t *getStructure(CHelper::CHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const uint8_t *getStructure(const CHelper::CHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     std::u16string structure = core->getStructure();
-    buffer.resize((reinterpret_cast<size_t>(buffer.data()) % 4) + 4 + structure.size() * 2);
+    buffer.resize((reinterpret_cast<size_t>(buffer.data()) % 4) + 4 + (structure.size() * 2));
     *reinterpret_cast<uint32_t *>(buffer.data()) = static_cast<uint32_t>(structure.size());
     memcpy((reinterpret_cast<size_t>(buffer.data()) % 4) + buffer.data() + 4, structure.data(), structure.size() * 2);
     return buffer.data();
 }
 
-EMSCRIPTEN_KEEPALIVE const uint8_t *getDescription(CHelper::CHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const uint8_t *getDescription(const CHelper::CHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
     std::u16string description = core->getDescription();
-    buffer.resize((reinterpret_cast<size_t>(buffer.data()) % 4) + 4 + description.size() * 2);
+    buffer.resize((reinterpret_cast<size_t>(buffer.data()) % 4) + 4 + (description.size() * 2));
     *reinterpret_cast<uint32_t *>(buffer.data()) = static_cast<uint32_t>(description.size());
     memcpy((reinterpret_cast<size_t>(buffer.data()) % 4) + buffer.data() + 4, description.data(), description.size() * 2);
     return buffer.data();
 }
 
-EMSCRIPTEN_KEEPALIVE const uint8_t *getErrorReasons(CHelper::CHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const uint8_t *getErrorReasons(const CHelper::CHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
@@ -179,6 +179,7 @@ EMSCRIPTEN_KEEPALIVE uint8_t *onSuggestionClick(CHelper::CHelperCore *core, size
     *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(result.value().first.size());
     pointer += 4;
     memcpy(pointer, result.value().first.data(), result.value().first.size() * 2);
+    // ReSharper disable once CppDFAUnusedValue
     pointer += result.value().first.size() * 2;
     return buffer.data();
 }
