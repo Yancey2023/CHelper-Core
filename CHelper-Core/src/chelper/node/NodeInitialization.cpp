@@ -229,7 +229,7 @@ namespace CHelper::Node {
                     std::vector<EqualData>{
                             {u"item", u"要检测的物品", false, node.nodeItem},
                             {u"data", u"要检测的物品的数据值", false, nodeHasItemData},
-                            {u"quantity", u"限制范围内的所有槽位中符合条件的物品的总和数量", false, nodeHasItemQuantity},
+                            {u"quantity", u"限制范围内的所有槽位中符合条件的物品的总和数量", true, nodeHasItemQuantity},
                             {u"location", u"要检测的物品栏", false, node.nodeSlot},
                             {u"slot", u"用于指定要检测的槽位范围", true, nodeHasItemSlotRange}}),
             node.nodeHasItemList1 = NodeList(nodeHasItemValueLeft1, node.nodeHasItemElement, nodeHasItemValueSeparator, nodeHasItemValueRight1),
