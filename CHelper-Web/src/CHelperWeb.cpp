@@ -6,232 +6,180 @@
 #include <emscripten/emscripten.h>
 #include <emscripten/val.h>
 
-class WrappedCHelperCore {
-private:
-    CHelper::CHelperCore *core;
-    std::optional<std::pair<std::u16string, size_t>> newStr;
-    std::optional<std::u16string> errorReason;
-    std::u16string tempStr;
-
-public:
-    explicit WrappedCHelperCore(CHelper::CHelperCore *core)
-        : core(core) {}
-
-    ~WrappedCHelperCore() {
-        delete core;
-    }
-
-    void onTextChanged(const char16_t *content, size_t index) const {
-        core->onTextChanged(content, index);
-    }
-
-    void onSelectionChanged(size_t index0) const {
-        if (HEDLEY_UNLIKELY(core == nullptr)) {
-            return;
-        }
-        core->onSelectionChanged(index0);
-    }
-
-    [[nodiscard]] const char16_t *getStructure() {
-        if (HEDLEY_UNLIKELY(core == nullptr)) {
-            return nullptr;
-        }
-        tempStr = core->getStructure();
-        return tempStr.c_str();
-    }
-
-    [[nodiscard]] const char16_t *getDescription() {
-        if (HEDLEY_UNLIKELY(core == nullptr)) {
-            return nullptr;
-        }
-        tempStr = core->getDescription();
-        return tempStr.c_str();
-    }
-
-    void onSuggestionClick(size_t which) {
-        if (HEDLEY_UNLIKELY(core == nullptr)) {
-            return;
-        }
-        newStr = core->onSuggestionClick(which);
-    }
-
-    [[nodiscard]] const char16_t *getStringAfterSuggestionClick() const {
-        if (HEDLEY_UNLIKELY(core == nullptr)) {
-            return nullptr;
-        }
-        if (newStr.has_value()) {
-            return newStr.value().first.c_str();
-        } else {
-            return nullptr;
-        }
-    }
-
-    [[nodiscard]] size_t getSelectionAfterSuggestionClick() const {
-        if (HEDLEY_UNLIKELY(core == nullptr)) {
-            return 0;
-        }
-        if (newStr.has_value()) {
-            return newStr.value().second;
-        } else {
-            return 0;
-        }
-    }
-
-    const char16_t *getErrorReason() {
-        if (HEDLEY_UNLIKELY(core == nullptr)) {
-            return nullptr;
-        }
-        auto errorReasons = core->getErrorReasons();
-        if (HEDLEY_UNLIKELY(errorReasons.empty())) {
-            errorReason = std::nullopt;
-        } else if (HEDLEY_UNLIKELY(errorReasons.size() == 1)) {
-            errorReason = errorReasons[0]->errorReason;
-        } else {
-            errorReason = u"可能的错误原因：";
-            for (size_t i = 0; i < errorReasons.size(); ++i) {
-                errorReason->append(fmt::format(u"\n{}. {}", i, errorReasons[i]->errorReason));
-            }
-        }
-        if (errorReason.has_value()) {
-            return errorReason->c_str();
-        } else {
-            return nullptr;
-        }
-    }
-
-    [[nodiscard]] size_t getSuggestionSize() const {
-        if (HEDLEY_UNLIKELY(core == nullptr)) {
-            return 0;
-        }
-        auto suggestions = core->getSuggestions();
-        if (suggestions == nullptr) {
-            return 0;
-        }
-        return suggestions->size();
-    }
-
-    [[nodiscard]] const char16_t *getSuggestionTitle(size_t which) const {
-        if (HEDLEY_UNLIKELY(core == nullptr)) {
-            return nullptr;
-        }
-        auto suggestions = core->getSuggestions();
-        if (suggestions == nullptr) {
-            return nullptr;
-        }
-        if (which >= suggestions->size()) {
-            return nullptr;
-        }
-        return (*suggestions)[which].content->name.c_str();
-    }
-
-    [[nodiscard]] const char16_t *getSuggestionDescription(size_t which) const {
-        if (HEDLEY_UNLIKELY(core == nullptr)) {
-            return nullptr;
-        }
-        auto suggestions = core->getSuggestions();
-        if (suggestions == nullptr) {
-            return nullptr;
-        }
-        if (which >= suggestions->size()) {
-            return nullptr;
-        }
-        const std::optional<std::u16string> &suggestDescription = (*suggestions)[which].content->description;
-        if (suggestDescription.has_value()) {
-            return suggestDescription.value().c_str();
-        } else {
-            return nullptr;
-        }
-    }
-};
+std::vector<std::uint8_t> buffer;
 
 extern "C" {
 
-EMSCRIPTEN_KEEPALIVE WrappedCHelperCore *init(const char *cpackPtr, size_t cpackLength) {
-    return new WrappedCHelperCore(CHelper::CHelperCore::create([&cpackPtr, &cpackLength]() -> std::unique_ptr<CHelper::CPack> {
+EMSCRIPTEN_KEEPALIVE CHelper::CHelperCore *init(const char *cpackPtr, size_t cpackLength) {
+    return CHelper::CHelperCore::create([&cpackPtr, &cpackLength]() -> std::unique_ptr<CHelper::CPack> {
         std::string str = std::string(cpackPtr, cpackLength);
         std::istringstream iss(str);
         return CHelper::CPack::createByBinary(iss);
-    }));
+    });
 }
 
-EMSCRIPTEN_KEEPALIVE void release(const WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE void release(const CHelper::CHelperCore *core) {
     delete core;
 }
 
-EMSCRIPTEN_KEEPALIVE void onTextChanged(const WrappedCHelperCore *core, const char16_t *content, size_t index) {
+EMSCRIPTEN_KEEPALIVE void onTextChanged(CHelper::CHelperCore *core, const char16_t *content, size_t index) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
     core->onTextChanged(content, index);
 }
 
-EMSCRIPTEN_KEEPALIVE void onSelectionChanged(const WrappedCHelperCore *core, size_t index) {
+EMSCRIPTEN_KEEPALIVE void onSelectionChanged(CHelper::CHelperCore *core, size_t index) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return;
     }
     core->onSelectionChanged(index);
 }
 
-EMSCRIPTEN_KEEPALIVE const char16_t *getStructure(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const uint8_t *getStructure(CHelper::CHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
-    return core->getStructure();
+    std::u16string structure = core->getStructure();
+    buffer.resize((reinterpret_cast<size_t>(buffer.data()) % 4) + 4 + structure.size() * 2);
+    *reinterpret_cast<uint32_t *>(buffer.data()) = static_cast<uint32_t>(structure.size());
+    memcpy((reinterpret_cast<size_t>(buffer.data()) % 4) + buffer.data() + 4, structure.data(), structure.size() * 2);
+    return buffer.data();
 }
 
-EMSCRIPTEN_KEEPALIVE const char16_t *getDescription(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const uint8_t *getDescription(CHelper::CHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
-    return core->getDescription();
+    std::u16string description = core->getDescription();
+    buffer.resize((reinterpret_cast<size_t>(buffer.data()) % 4) + 4 + description.size() * 2);
+    *reinterpret_cast<uint32_t *>(buffer.data()) = static_cast<uint32_t>(description.size());
+    memcpy((reinterpret_cast<size_t>(buffer.data()) % 4) + buffer.data() + 4, description.data(), description.size() * 2);
+    return buffer.data();
 }
 
-EMSCRIPTEN_KEEPALIVE const char16_t *getErrorReason(WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const uint8_t *getErrorReasons(CHelper::CHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return nullptr;
     }
-    return core->getErrorReason();
+    auto errorReasons = core->getErrorReasons();
+    size_t size = (reinterpret_cast<size_t>(buffer.data()) % 4) + 4;
+    for (const auto &item: errorReasons) {
+        size = size + (reinterpret_cast<size_t>(buffer.data() + size) % 4) + 12 + item->errorReason.size() * 2;
+    }
+    buffer.resize(size);
+    uint8_t *pointer = buffer.data();
+    pointer += reinterpret_cast<size_t>(pointer) % 4;
+    *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(errorReasons.size());
+    pointer += 4;
+    for (const auto &item: errorReasons) {
+        pointer += reinterpret_cast<size_t>(pointer) % 4;
+        *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(item->start);
+        pointer += 4;
+        *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(item->end);
+        pointer += 4;
+        *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(item->errorReason.size());
+        pointer += 4;
+        memcpy(pointer, item->errorReason.data(), item->errorReason.size() * 2);
+        pointer += item->errorReason.size() * 2;
+    }
+    return buffer.data();
 }
 
-EMSCRIPTEN_KEEPALIVE size_t getSuggestionSize(const WrappedCHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE size_t getSuggestionSize(CHelper::CHelperCore *core) {
     if (HEDLEY_UNLIKELY(core == nullptr)) {
         return 0;
     }
-    return core->getSuggestionSize();
-}
-
-EMSCRIPTEN_KEEPALIVE const char16_t *getSuggestionTitle(WrappedCHelperCore *core, size_t which) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
-        return nullptr;
-    }
-    return core->getSuggestionTitle(which);
-}
-
-EMSCRIPTEN_KEEPALIVE const char16_t *getSuggestionDescription(WrappedCHelperCore *core, size_t which) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
-        return nullptr;
-    }
-    return core->getSuggestionDescription(which);
-}
-
-EMSCRIPTEN_KEEPALIVE void onSuggestionClick(WrappedCHelperCore *core, size_t which) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
-        return;
-    }
-    core->onSuggestionClick(which);
-}
-
-EMSCRIPTEN_KEEPALIVE const char16_t *getStringAfterSuggestionClick(const WrappedCHelperCore *core) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
-        return nullptr;
-    }
-    return core->getStringAfterSuggestionClick();
-}
-
-EMSCRIPTEN_KEEPALIVE size_t getSelectionAfterSuggestionClick(const WrappedCHelperCore *core) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    auto suggestions = core->getSuggestions();
+    if (suggestions == nullptr) {
         return 0;
     }
-    return core->getSelectionAfterSuggestionClick();
+    return suggestions->size();
+}
+
+EMSCRIPTEN_KEEPALIVE const uint8_t *getSuggestion(CHelper::CHelperCore *core, size_t which) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
+        return nullptr;
+    }
+    auto suggestions = core->getSuggestions();
+    if (suggestions == nullptr || which >= suggestions->size()) {
+        return nullptr;
+    }
+    const auto &suggestion = (*suggestions)[which];
+    size_t nameSize = suggestion.content->name.size();
+    size_t descriptionSize = suggestion.content->description.has_value() ? suggestion.content->description.value().size() : 0;
+    buffer.resize((reinterpret_cast<size_t>(buffer.data()) % 4) + 8 + ((nameSize + descriptionSize) * 2));
+    uint8_t *pointer = buffer.data();
+    pointer += reinterpret_cast<size_t>(pointer) % 4;
+    *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(nameSize);
+    pointer += 4;
+    *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(descriptionSize);
+    pointer += 4;
+    memcpy(pointer, suggestion.content->name.data(), nameSize * 2);
+    pointer += nameSize * 2;
+    if (descriptionSize != 0) {
+        memcpy(pointer, suggestion.content->description.value().data(), descriptionSize * 2);
+        // ReSharper disable once CppDFAUnusedValue
+        pointer += descriptionSize * 2;
+    }
+    return buffer.data();
+}
+
+EMSCRIPTEN_KEEPALIVE const uint8_t *getAllSuggestions(CHelper::CHelperCore *core) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
+        return nullptr;
+    }
+    auto suggestions = core->getSuggestions();
+    if (suggestions == nullptr) {
+        return nullptr;
+    }
+    size_t size = (reinterpret_cast<size_t>(buffer.data()) % 4) + 4;
+    for (const auto &item: *suggestions) {
+        size_t nameSize = item.content->name.size();
+        size_t descriptionSize = item.content->description.has_value() ? item.content->description.value().size() : 0;
+        size = size + (reinterpret_cast<size_t>(buffer.data() + size) % 4) + 8 + nameSize * 2 + descriptionSize * 2;
+    }
+    buffer.resize(size);
+    uint8_t *pointer = buffer.data();
+    pointer += reinterpret_cast<size_t>(pointer) % 4;
+    *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(suggestions->size());
+    pointer += 4;
+    for (const auto &item: *suggestions) {
+        size_t nameSize = item.content->name.size();
+        size_t descriptionSize = item.content->description.has_value() ? item.content->description.value().size() : 0;
+        pointer += reinterpret_cast<size_t>(pointer) % 4;
+        *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(nameSize);
+        pointer += 4;
+        *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(descriptionSize);
+        pointer += 4;
+        memcpy(pointer, item.content->name.data(), nameSize * 2);
+        pointer += nameSize * 2;
+        if (descriptionSize != 0) {
+            memcpy(pointer, item.content->description.value().data(), descriptionSize * 2);
+            // ReSharper disable once CppDFAUnusedValue
+            pointer += descriptionSize * 2;
+        }
+    }
+    return buffer.data();
+}
+
+EMSCRIPTEN_KEEPALIVE uint8_t *onSuggestionClick(CHelper::CHelperCore *core, size_t which) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
+        return nullptr;
+    }
+    auto result = core->onSuggestionClick(which);
+    if (!result.has_value()) {
+        return nullptr;
+    }
+    buffer.resize((reinterpret_cast<size_t>(buffer.data()) % 4) + 8 + (result->first.size() * 2));
+    uint8_t *pointer = buffer.data();
+    pointer += reinterpret_cast<size_t>(pointer) % 4;
+    *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(result.value().second);
+    pointer += 4;
+    *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(result.value().first.size());
+    pointer += 4;
+    memcpy(pointer, result.value().first.data(), result.value().first.size() * 2);
+    pointer += result.value().first.size() * 2;
+    return buffer.data();
 }
 }

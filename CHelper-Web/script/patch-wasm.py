@@ -16,104 +16,190 @@ for buildDir in buildDirs:
         'createWasm();',
         'export var createWasmFuture = '
     )
-    content = content.replace('\n', '')
     content += ('''
-var UTF16ToString = (ptr) => {
-    let str = '';
-    let i = ptr >> 1;
-    while (true) {
-        const codeUnit = HEAPU16[i];
-        if (codeUnit === 0) break;
-        str += String.fromCharCode(codeUnit);
-        ++i;
-    }
-    return str;
-};
-
-var stringToUTF16 = (str) => {
-    const outPtr = _malloc((str.length + 1) * 2);
-    var start = outPtr / 2;
-    var end  = start + str.length;
-    var i = start;
-    while (i < end) {
-        HEAPU16[i] = str.charCodeAt(i - start);
-        ++i;
-    }
-    HEAPU16[i] = 0;
-    return outPtr;
-};
-
 export class CHelperCore {
-    constructor(cpack) {
-        const cpackPtr = _malloc(cpack.byteLength);
-        HEAP8.set(cpack, cpackPtr);
-        this._corePtr = _init(cpackPtr, cpack.byteLength);
-        _free(cpackPtr);
-        if (this._corePtr === 0) {
-            throw "fail to init CHelper core";
-        }
+  constructor(cpack) {
+    const cpackPtr = _malloc(cpack.byteLength)
+    HEAP8.set(cpack, cpackPtr)
+    this._corePtr = _init(cpackPtr, cpack.byteLength)
+    _free(cpackPtr)
+    if (this._corePtr === 0) {
+      throw 'fail to init CHelper core'
     }
+  }
 
-    release() {
-        _release(this._corePtr);
-        this._corePtr = 0;
-    }
+  release() {
+    _release(this._corePtr)
+    this._corePtr = 0
+  }
 
-    onTextChanged(content, index) {
-        const contentPtr = stringToUTF16(content);
-        _onTextChanged(this._corePtr, contentPtr, index);
-        _free(contentPtr);
+  onTextChanged(content, index) {
+    const ptr = _malloc((content.length + 1) * 2)
+    const start = ptr / 2
+    const end = start + content.length
+    let i = start
+    while (i < end) {
+      HEAPU16[i] = content.charCodeAt(i - start)
+      ++i
     }
+    HEAPU16[i] = 0
+    _onTextChanged(this._corePtr, ptr, index)
+    _free(ptr)
+  }
 
-    onSelectionChanged(index) {
-        _onSelectionChanged(this._corePtr, index);
-    }
+  onSelectionChanged(index) {
+    _onSelectionChanged(this._corePtr, index)
+  }
 
-    getStructure() {
-        return UTF16ToString(_getStructure(this._corePtr));
+  getStructure() {
+    let ptr = _getStructure(this._corePtr)
+    if (ptr === 0) {
+      return ''
     }
+    ptr += ptr % 4
+    const length = HEAPU32[ptr >> 2]
+    ptr += 4
+    let structure = ''
+    for (let i = 0; i < length; i++) {
+      structure += String.fromCharCode(HEAPU16[ptr >> 1])
+      ptr += 2
+    }
+    return structure
+  }
 
-    getDescription() {
-        return UTF16ToString(_getDescription(this._corePtr));
+  getDescription() {
+    let ptr = _getDescription(this._corePtr)
+    if (ptr === 0) {
+      return ''
     }
+    ptr += ptr % 4
+    const length = HEAPU32[ptr >> 2]
+    ptr += 4
+    let description = ''
+    for (let i = 0; i < length; i++) {
+      description += String.fromCharCode(HEAPU16[ptr >> 1])
+      ptr += 2
+    }
+    return description
+  }
 
-    getErrorReason() {
-        return UTF16ToString(_getErrorReason(this._corePtr));
+  getErrorReasons() {
+    let ptr = _getErrorReasons(this._corePtr)
+    if (ptr === 0) {
+      return []
     }
+    ptr += ptr % 4
+    const length = HEAPU32[ptr >> 2]
+    ptr += 4
+    let errorReasons = []
+    for (let i = 0; i < length; i++) {
+      ptr += ptr % 4
+      const start = HEAPU32[ptr >> 2]
+      ptr += 4
+      const end = HEAPU32[ptr >> 2]
+      ptr += 4
+      const errorReasonLength = HEAPU32[ptr >> 2]
+      ptr += 4
+      let errorReason = ''
+      for (let i = 0; i < errorReasonLength; i++) {
+        errorReason += String.fromCharCode(HEAPU16[ptr >> 1])
+        ptr += 2
+      }
+      errorReasons.push({
+        start,
+        end,
+        errorReason,
+      })
+    }
+    return errorReasons
+  }
 
-    getSuggestionSize() {
-        return _getSuggestionSize(this._corePtr);
-    }
+  getSuggestionSize() {
+    return _getSuggestionSize(this._corePtr)
+  }
 
-    getSuggestionTitle(which) {
-        return UTF16ToString(_getSuggestionTitle(this._corePtr, which));
+  getSuggestion(which) {
+    let ptr = _getSuggestion(this._corePtr, which)
+    if (ptr === 0) {
+      return null
     }
+    ptr += ptr % 4
+    const titleLength = HEAPU32[ptr >> 2]
+    ptr += 4
+    const descriptionLength = HEAPU32[ptr >> 2]
+    ptr += 4
+    let title = ''
+    for (let i = 0; i < titleLength; i++) {
+      title += String.fromCharCode(HEAPU16[ptr >> 1])
+      ptr += 2
+    }
+    let description = ''
+    for (let i = 0; i < descriptionLength; i++) {
+      description += String.fromCharCode(HEAPU16[ptr >> 1])
+      ptr += 2
+    }
+    return {
+      title,
+      description,
+    }
+  }
 
-    getSuggestionDescription(which) {
-        return UTF16ToString(_getSuggestionDescription(this._corePtr, which));
+  getAllSuggestions() {
+    let ptr = _getAllSuggestions(this._corePtr)
+    if (ptr === 0) {
+      return []
     }
+    ptr += ptr % 4
+    const length = HEAPU32[ptr >> 2]
+    ptr += 4
+    let suggestions = []
+    for (let i = 0; i < length; i++) {
+      ptr += ptr % 4
+      const titleLength = HEAPU32[ptr >> 2]
+      ptr += 4
+      const descriptionLength = HEAPU32[ptr >> 2]
+      ptr += 4
+      let title = ''
+      for (let i = 0; i < titleLength; i++) {
+        title += String.fromCharCode(HEAPU16[ptr >> 1])
+        ptr += 2
+      }
+      let description = ''
+      for (let i = 0; i < descriptionLength; i++) {
+        description += String.fromCharCode(HEAPU16[ptr >> 1])
+        ptr += 2
+      }
+      suggestions.push({
+        id: i,
+        title,
+        description,
+      })
+    }
+    return suggestions
+  }
 
-    onSuggestionClick(which) {
-        _onSuggestionClick(this._corePtr, which);
+  onSuggestionClick(which) {
+    let ptr = _onSuggestionClick(this._corePtr, which)
+    if (ptr === 0) {
+      return null
     }
+    ptr += ptr % 4
+    const cursorPosition = HEAPU32[ptr >> 2]
+    ptr += 4
+    const length = HEAPU32[ptr >> 2]
+    ptr += 4
+    let newText = ''
+    for (let i = 0; i < length; i++) {
+      newText += String.fromCharCode(HEAPU16[ptr >> 1])
+      ptr += 2
+    }
+    return {
+      cursorPosition,
+      newText,
+    }
+  }
+}
 
-    getStringAfterSuggestionClick() {
-        return UTF16ToString(_getStringAfterSuggestionClick(this._corePtr));
-    }
-
-    getSelectionAfterSuggestionClick() {
-        return UTF16ToString(_getSelectionAfterSuggestionClick(this._corePtr));
-    }
-}'''
-                .replace(' ', '')
-                .replace('\n', '')
-                .replace('const', 'const ')
-                .replace('let', 'var ')
-                .replace('var', 'var ')
-                .replace('return', 'return ')
-                .replace('exportclassCHelperCore', 'export class CHelperCore')
-                .replace('failtoinitCHelpercore', 'fail to init CHelper core')
-                .replace('const ructor', 'constructor')
-                )
+''')
     with open(path.join(buildDir, 'libCHelperWeb.js'), 'w') as fp:
         fp.write(content)
