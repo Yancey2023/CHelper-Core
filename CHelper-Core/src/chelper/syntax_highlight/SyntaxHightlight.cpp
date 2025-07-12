@@ -41,13 +41,11 @@ namespace CHelper::SyntaxHighlight {
                 syntaxResult.update(astNode.tokens.endIndex - 1, SyntaxTokenType::STRING);
             }
             SyntaxResult syntaxResult1 = getSyntaxResult(astNode.childNodes[0]);
-            size_t index = convertResult.convert(0);
+            size_t start = convertResult.convert(0);
             for (size_t i = 0; i < convertResult.result.size(); ++i) {
                 size_t end = convertResult.convert(i + 1);
-                while (index < end) {
-                    syntaxResult.update(astNode.tokens.startIndex + index, syntaxResult1.tokenTypes[i]);
-                    index++;
-                }
+                syntaxResult.update(astNode.tokens.startIndex + start, astNode.tokens.startIndex + end, syntaxResult1.tokenTypes[i]);
+                start = end;
             }
             return true;
         }
