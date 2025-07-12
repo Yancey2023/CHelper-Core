@@ -10,6 +10,7 @@ def insert(content: str, before: str, end: str, string: str) -> str:
 for buildDir in buildDirs:
     with open(path.join(buildDir, 'libCHelperWeb.js'), 'r') as fp:
         content = fp.read()
+    content = 'import wasmUrl from \'@/assets/libCHelperWeb.wasm?url\'\n\n' + content.replace('locateFile("libCHelperWeb.wasm")', 'wasmUrl;')
     content = insert(
         content,
         'var wasmExports;',
