@@ -201,7 +201,6 @@ export class CHelperCore {
     }
   }
 }
-
 ''')
     with open(path.join(buildDir, 'libCHelperWeb.js'), 'w') as fp:
         fp.write(content)
