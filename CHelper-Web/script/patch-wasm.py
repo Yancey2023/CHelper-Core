@@ -140,6 +140,7 @@ export class CHelperCore {
       ptr += 2
     }
     return {
+      id: which,
       title,
       description,
     }
