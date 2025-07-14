@@ -373,7 +373,7 @@ namespace CHelper::AutoSuggestion {
             size_t index0 = str.find(u"..");
             if (HEDLEY_UNLIKELY(index0 != std::u16string::npos)) {
                 index0 += astNode.tokens.startIndex;
-                if (HEDLEY_LIKELY(index != index0 && index != index0 + 1 && index != index0 + 2)) {
+                if (HEDLEY_LIKELY(index < index0 || index > index0 + 2)) {
                     return true;
                 }
                 suggestions.addSymbolSuggestion({index0, index0 + 2, false, rangeSymbol});
@@ -382,10 +382,10 @@ namespace CHelper::AutoSuggestion {
             size_t index1 = str.find('.');
             if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
                 index1 += astNode.tokens.startIndex;
-                if (HEDLEY_LIKELY(index != index1 && index != index1 + 1)) {
+                if (HEDLEY_LIKELY(index < index1 || index > index1 + 1)) {
                     return true;
                 }
-                suggestions.addSymbolSuggestion({index0, index0 + 1, false, rangeSymbol});
+                suggestions.addSymbolSuggestion({index1, index1 + 1, false, rangeSymbol});
                 return true;
             }
             suggestions.addSymbolSuggestion({index, index, false, rangeSymbol});
