@@ -4,7 +4,7 @@
 
 ## 编译内核（可选）
 
-在[CHelper 内核文档](./core.md)用，包含了内核的编译步骤，你甚至可以根据需求定制化内核再进行编译。如果嫌麻烦或者实在不会编译，你也可以直接使用[编译好的内核](https://github.com/Yancey2023/CHelper-Android/raw/refs/heads/master/app/libs/arm64-v8a/libCHelperAndroid.so)。
+在[CHelper 内核文档](./core.md)中已经包含了内核的编译步骤，你甚至可以根据需求定制化内核再进行编译。如果嫌麻烦或者实在不会编译，你也可以直接使用[编译好的内核](https://github.com/Yancey2023/CHelper-Android/raw/refs/heads/master/app/libs/arm64-v8a/libCHelperAndroid.so)。
 
 在`build.gradle.kts`中添加以下内容：
 
