@@ -68,6 +68,10 @@ The desired function has been completed, and the new function to be developed is
 - [x] **Old 2 New** - convert old command to new command
 - [x] **Syntax Highlight** - get the syntax tokens for syntax highlight
 
+## Document
+
+see: <https://yancey2023.github.io/CHelper-Doc/>
+
 ## Third-party
 
 ### CHelper-Core
