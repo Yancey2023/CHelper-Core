@@ -200,6 +200,22 @@ export class CHelperCore {
       newText,
     }
   }
+
+  getSyntaxTokens() {
+    let ptr = _getSyntaxTokens(this._corePtr)
+    if (ptr === 0) {
+      return null
+    }
+    ptr += ptr % 4
+    const length = HEAPU32[ptr >> 2]
+    ptr += 4
+    let syntaxTokens = []
+    for (let i = 0; i < length; i++) {
+      syntaxTokens.push(HEAPU8[ptr])
+      ptr += 1
+    }
+    return syntaxTokens
+  }
 }
 ''')
     with open(path.join(buildDir, 'libCHelperWeb.js'), 'w') as fp:

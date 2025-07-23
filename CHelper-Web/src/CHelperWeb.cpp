@@ -183,4 +183,20 @@ EMSCRIPTEN_KEEPALIVE uint8_t *onSuggestionClick(CHelper::CHelperCore *core, size
     pointer += result.value().first.size() * 2;
     return buffer.data();
 }
+
+EMSCRIPTEN_KEEPALIVE uint8_t *getSyntaxTokens(CHelper::CHelperCore *core) {
+    if (HEDLEY_UNLIKELY(core == nullptr)) {
+        return nullptr;
+    }
+    auto result = core->getSyntaxResult();
+    buffer.resize((reinterpret_cast<size_t>(buffer.data()) % 4) + 8 + result.tokenTypes.size());
+    uint8_t *pointer = buffer.data();
+    pointer += reinterpret_cast<size_t>(pointer) % 4;
+    *reinterpret_cast<uint32_t *>(pointer) = static_cast<uint32_t>(result.tokenTypes.size());
+    pointer += 4;
+    memcpy(pointer, result.tokenTypes.data(), result.tokenTypes.size());
+    // ReSharper disable once CppDFAUnusedValue
+    pointer += result.tokenTypes.size();
+    return buffer.data();
+}
 }
