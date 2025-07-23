@@ -488,19 +488,19 @@
         },
         {
             "name": "minecraft:small_flame_particle",
-            "description": "未知"
+            "description": "试炼刷怪笼运作时的粒子"
         },
         {
             "name": "minecraft:small_soul_fire_flame",
-            "description": "未知"
+            "description": "不祥试炼刷怪笼运作时的粒子"
         },
         {
             "name": "minecraft:smash_ground_particle",
-            "description": "未知"
+            "description": "重锤猛击击中处在地面的生物时在生物周围产生的粒子"
         },
         {
             "name": "minecraft:smash_ground_particle_center",
-            "description": "未知"
+            "description": "重锤猛击击中处在地面的生物时在生物上方产生的粒子"
         },
         {
             "name": "minecraft:snowflake_particle",
@@ -516,7 +516,7 @@
         },
         {
             "name": "minecraft:sparkler_emitter",
-            "description": "使用烟花棒（仅教育版）时的粒子"
+            "description": "使用烟花棒（仅教育版）时的粒子。"
         },
         {
             "name": "minecraft:splash_spell_emitter",

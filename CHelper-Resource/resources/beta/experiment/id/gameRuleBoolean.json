@@ -40,7 +40,7 @@
         },
         {
             "name": "doMobSpawning",
-            "description": "生物是否自然生成。不影响刷怪笼。"
+            "description": "生物是否自然生成。不影响刷怪笼及summon生成生物。"
         },
         {
             "name": "doTileDrops",
