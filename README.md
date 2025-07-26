@@ -1,6 +1,6 @@
 # CHelper
 
-I want to make a command helper for Minecraft Bedrock Edition , so here is CHelper, which means Command Helper.
+I want to make a command helper for Minecraft Bedrock Edition, so here is CHelper, which means Command Helper.
 
 ## Clone Project
 
@@ -24,8 +24,7 @@ git submodule update --init --recursive --progress
 
 ### Help in editing command
 
-When you are inputting command, the app will show you command structure, meaning of the command param you are editing,
-errors of the command, and suggestions to help you complete command. It also supports syntax highlight.
+When you are editing command, the app will show you command structure, param hint, command structure, and auto suggestions. It also supports syntax highlight.
 
 ### Help in converting old version command to new version command
 
@@ -51,8 +50,7 @@ execute as @a at @s positioned ~ ~-1 ~ if block ~ ~-1 ~ stone["stone_type"="gran
 
 CHelper-Web: <https://yancey2023.github.io/chelper_web>
 
-CHelper-Web lacks some function. To experience more complete functions, please
-use [CHelper-Android](https://github.com/Yancey2023/CHelper-Android).
+CHelper-Web lacks some function. To experience more complete functions, please use [CHelper-Android](https://github.com/Yancey2023/CHelper-Android).
 
 ## Plan
 
