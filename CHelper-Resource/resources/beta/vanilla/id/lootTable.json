@@ -249,6 +249,9 @@
             "description": "锁链盔甲装备"
         },
         {
+            "name": "\"entities/armor_set_copper\""
+        },
+        {
             "name": "\"entities/armor_set_diamond\"",
             "description": "钻石盔甲装备"
         },
@@ -315,6 +318,9 @@
         },
         {
             "name": "\"entities/cold_ocean_ruins_brushable_block\""
+        },
+        {
+            "name": "\"entities/copper_golem\""
         },
         {
             "name": "\"entities/cow\"",

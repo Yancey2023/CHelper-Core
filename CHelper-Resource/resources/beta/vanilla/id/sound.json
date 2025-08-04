@@ -122,6 +122,9 @@
             "description": "锁链盔甲：碰擦"
         },
         {
+            "name": "armor.equip_copper"
+        },
+        {
             "name": "armor.equip_diamond",
             "description": "钻石盔甲：碰擦"
         },
@@ -293,6 +296,33 @@
         {
             "name": "block.copper_bulb.turn_on",
             "description": "铜灯：亮起"
+        },
+        {
+            "name": "block.copper_chest.closed"
+        },
+        {
+            "name": "block.copper_chest.open"
+        },
+        {
+            "name": "block.copper_chest.oxidized.closed"
+        },
+        {
+            "name": "block.copper_chest.oxidized.open"
+        },
+        {
+            "name": "block.copper_chest.weathered.closed"
+        },
+        {
+            "name": "block.copper_chest.weathered.open"
+        },
+        {
+            "name": "block.copper_golem_statue.break"
+        },
+        {
+            "name": "block.copper_golem_statue.hit"
+        },
+        {
+            "name": "block.copper_golem_statue.place"
         },
         {
             "name": "block.creaking_heart.ambient",
@@ -650,6 +680,30 @@
         {
             "name": "block.scaffolding.step",
             "description": "脚手架：被踩上"
+        },
+        {
+            "name": "block.shelf.activate"
+        },
+        {
+            "name": "block.shelf.break"
+        },
+        {
+            "name": "block.shelf.deactivate"
+        },
+        {
+            "name": "block.shelf.multi_swap"
+        },
+        {
+            "name": "block.shelf.open"
+        },
+        {
+            "name": "block.shelf.place_item"
+        },
+        {
+            "name": "block.shelf.single_swap"
+        },
+        {
+            "name": "block.shelf.step"
         },
         {
             "name": "block.sign.waxed_interact_fail",
@@ -2786,6 +2840,60 @@
         {
             "name": "mob.chicken.step",
             "description": "鸡：行走"
+        },
+        {
+            "name": "mob.copper_golem.becoming_statue"
+        },
+        {
+            "name": "mob.copper_golem.chest_interaction.put_item"
+        },
+        {
+            "name": "mob.copper_golem.chest_interaction.put_item_fail"
+        },
+        {
+            "name": "mob.copper_golem.chest_interaction.take_item"
+        },
+        {
+            "name": "mob.copper_golem.chest_interaction.take_item_fail"
+        },
+        {
+            "name": "mob.copper_golem.death"
+        },
+        {
+            "name": "mob.copper_golem.hurt"
+        },
+        {
+            "name": "mob.copper_golem.oxidized.death"
+        },
+        {
+            "name": "mob.copper_golem.oxidized.hurt"
+        },
+        {
+            "name": "mob.copper_golem.oxidized.spin"
+        },
+        {
+            "name": "mob.copper_golem.oxidized.step"
+        },
+        {
+            "name": "mob.copper_golem.spawn"
+        },
+        {
+            "name": "mob.copper_golem.spin"
+        },
+        {
+            "name": "mob.copper_golem.step"
+        },
+        {
+            "name": "mob.copper_golem.weathered.death"
+        },
+        {
+            "name": "mob.copper_golem.weathered.hurt"
+        },
+        {
+            "name": "mob.copper_golem.weathered.spin"
+        },
+        {
+            "name": "mob.copper_golem.weathered.step"
         },
         {
             "name": "mob.cow.hurt",

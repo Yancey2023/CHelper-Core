@@ -363,6 +363,9 @@
             "name": "minecraft:become_yellow_tang"
         },
         {
+            "name": "minecraft:begin_oxidizing"
+        },
+        {
             "name": "minecraft:born_default"
         },
         {
@@ -504,6 +507,21 @@
             "name": "minecraft:from_player"
         },
         {
+            "name": "minecraft:from_player_default"
+        },
+        {
+            "name": "minecraft:from_player_exposed"
+        },
+        {
+            "name": "minecraft:from_player_oxidized"
+        },
+        {
+            "name": "minecraft:from_player_weathered"
+        },
+        {
+            "name": "minecraft:from_serialized_entity"
+        },
+        {
             "name": "minecraft:from_village"
         },
         {
@@ -583,6 +601,9 @@
         },
         {
             "name": "minecraft:make_white"
+        },
+        {
+            "name": "minecraft:maximum_oxidation"
         },
         {
             "name": "minecraft:melee_mode"
@@ -690,6 +711,9 @@
             "name": "minecraft:on_unsaddled"
         },
         {
+            "name": "minecraft:oxidize_copper"
+        },
+        {
             "name": "minecraft:panda_aggressive"
         },
         {
@@ -726,6 +750,9 @@
             "name": "minecraft:ranged_mode"
         },
         {
+            "name": "minecraft:remove_oxidation_layer"
+        },
+        {
             "name": "minecraft:remove_persistence"
         },
         {
@@ -733,6 +760,9 @@
         },
         {
             "name": "minecraft:reset_swaying_ticks"
+        },
+        {
+            "name": "minecraft:restart_oxidation_timer"
         },
         {
             "name": "minecraft:resupply_trades"
@@ -769,6 +799,9 @@
         },
         {
             "name": "minecraft:scheduled"
+        },
+        {
+            "name": "minecraft:serialize_entity_succeeded"
         },
         {
             "name": "minecraft:set_trap"
@@ -1005,6 +1038,21 @@
             "name": "minecraft:to_full_puff"
         },
         {
+            "name": "minecraft:transport_items.start_place_fail"
+        },
+        {
+            "name": "minecraft:transport_items.start_place_succeed"
+        },
+        {
+            "name": "minecraft:transport_items.start_take_fail"
+        },
+        {
+            "name": "minecraft:transport_items.start_take_succeed"
+        },
+        {
+            "name": "minecraft:transport_items.stop_interaction"
+        },
+        {
             "name": "minecraft:trigger_raid"
         },
         {
@@ -1063,6 +1111,12 @@
         },
         {
             "name": "minecraft:warm_color"
+        },
+        {
+            "name": "minecraft:wax_off"
+        },
+        {
+            "name": "minecraft:wax_on"
         },
         {
             "name": "navigation_off_land"

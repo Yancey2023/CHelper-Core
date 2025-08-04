@@ -200,6 +200,24 @@
                 ]
             },
             {
+                "name": "acacia_shelf",
+                "description": "金合欢木展示架",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "powered_shelf_type",
+                        "defaultValue": 0
+                    }
+                ]
+            },
+            {
                 "name": "acacia_slab",
                 "description": "金合欢木台阶",
                 "properties": [
@@ -730,6 +748,24 @@
                 ]
             },
             {
+                "name": "bamboo_shelf",
+                "description": "竹展示架",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "powered_shelf_type",
+                        "defaultValue": 0
+                    }
+                ]
+            },
+            {
                 "name": "bamboo_slab",
                 "description": "竹台阶",
                 "properties": [
@@ -1126,6 +1162,24 @@
                         "valid": [
                             "birch"
                         ]
+                    }
+                ]
+            },
+            {
+                "name": "birch_shelf",
+                "description": "白桦木展示架",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "powered_shelf_type",
+                        "defaultValue": 0
                     }
                 ]
             },
@@ -2433,6 +2487,24 @@
                 ]
             },
             {
+                "name": "cherry_shelf",
+                "description": "樱花木展示架",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "powered_shelf_type",
+                        "defaultValue": 0
+                    }
+                ]
+            },
+            {
                 "name": "cherry_slab",
                 "description": "樱花木台阶",
                 "properties": [
@@ -2915,6 +2987,16 @@
                 ]
             },
             {
+                "name": "copper_chest",
+                "description": "铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
+                    }
+                ]
+            },
+            {
                 "name": "copper_door",
                 "description": "铜门",
                 "properties": [
@@ -2937,6 +3019,16 @@
                     {
                         "name": "upper_block_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "copper_golem_statue",
+                "description": "铜傀儡像",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
                     }
                 ]
             },
@@ -3199,6 +3291,24 @@
             {
                 "name": "crimson_roots",
                 "description": "绯红菌索"
+            },
+            {
+                "name": "crimson_shelf",
+                "description": "绯红木展示架",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "powered_shelf_type",
+                        "defaultValue": 0
+                    }
+                ]
             },
             {
                 "name": "crimson_slab",
@@ -3778,6 +3888,24 @@
                         "valid": [
                             "dark_oak"
                         ]
+                    }
+                ]
+            },
+            {
+                "name": "dark_oak_shelf",
+                "description": "深色橡木展示架",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "powered_shelf_type",
+                        "defaultValue": 0
                     }
                 ]
             },
@@ -4987,6 +5115,16 @@
                 ]
             },
             {
+                "name": "exposed_copper_chest",
+                "description": "斑驳的铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
+                    }
+                ]
+            },
+            {
                 "name": "exposed_copper_door",
                 "description": "斑驳的铜门",
                 "properties": [
@@ -5009,6 +5147,16 @@
                     {
                         "name": "upper_block_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "exposed_copper_golem_statue",
+                "description": "斑驳的铜傀儡像",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
                     }
                 ]
             },
@@ -5077,6 +5225,16 @@
                     {
                         "name": "top_slot_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "exposed_lightning_rod",
+                "description": "斑驳的避雷针",
+                "properties": [
+                    {
+                        "name": "facing_direction",
+                        "defaultValue": 0
                     }
                 ]
             },
@@ -6292,6 +6450,24 @@
                         "valid": [
                             "jungle"
                         ]
+                    }
+                ]
+            },
+            {
+                "name": "jungle_shelf",
+                "description": "丛林木展示架",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "powered_shelf_type",
+                        "defaultValue": 0
                     }
                 ]
             },
@@ -7580,6 +7756,24 @@
                 "description": "红树根"
             },
             {
+                "name": "mangrove_shelf",
+                "description": "红树木展示架",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "powered_shelf_type",
+                        "defaultValue": 0
+                    }
+                ]
+            },
+            {
                 "name": "mangrove_slab",
                 "description": "红树木台阶",
                 "properties": [
@@ -8312,6 +8506,24 @@
                 ]
             },
             {
+                "name": "oak_shelf",
+                "description": "橡木展示架",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "powered_shelf_type",
+                        "defaultValue": 0
+                    }
+                ]
+            },
+            {
                 "name": "oak_slab",
                 "description": "橡木台阶",
                 "properties": [
@@ -8593,6 +8805,16 @@
                 ]
             },
             {
+                "name": "oxidized_copper_chest",
+                "description": "氧化的铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
+                    }
+                ]
+            },
+            {
                 "name": "oxidized_copper_door",
                 "description": "氧化的铜门",
                 "properties": [
@@ -8615,6 +8837,16 @@
                     {
                         "name": "upper_block_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "oxidized_copper_golem_statue",
+                "description": "氧化的铜傀儡像",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
                     }
                 ]
             },
@@ -8683,6 +8915,16 @@
                     {
                         "name": "top_slot_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "oxidized_lightning_rod",
+                "description": "氧化的避雷针",
+                "properties": [
+                    {
+                        "name": "facing_direction",
+                        "defaultValue": 0
                     }
                 ]
             },
@@ -8877,6 +9119,24 @@
                     {
                         "name": "age_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "pale_oak_shelf",
+                "description": "苍白橡木展示架",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "powered_shelf_type",
+                        "defaultValue": 0
                     }
                 ]
             },
@@ -11824,6 +12084,24 @@
                 ]
             },
             {
+                "name": "spruce_shelf",
+                "description": "云杉木展示架",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "powered_shelf_type",
+                        "defaultValue": 0
+                    }
+                ]
+            },
+            {
                 "name": "spruce_slab",
                 "description": "云杉木台阶",
                 "properties": [
@@ -13171,6 +13449,24 @@
                 "description": "诡异菌索"
             },
             {
+                "name": "warped_shelf",
+                "description": "诡异木展示架",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
+                    },
+                    {
+                        "name": "powered_shelf_type",
+                        "defaultValue": 0
+                    }
+                ]
+            },
+            {
                 "name": "warped_slab",
                 "description": "诡异木台阶",
                 "properties": [
@@ -13287,6 +13583,16 @@
                 ]
             },
             {
+                "name": "waxed_copper_chest",
+                "description": "涂蜡的铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
+                    }
+                ]
+            },
+            {
                 "name": "waxed_copper_door",
                 "description": "涂蜡的铜门",
                 "properties": [
@@ -13309,6 +13615,16 @@
                     {
                         "name": "upper_block_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "waxed_copper_golem_statue",
+                "description": "涂蜡的铜傀儡像",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
                     }
                 ]
             },
@@ -13403,6 +13719,16 @@
                 ]
             },
             {
+                "name": "waxed_exposed_copper_chest",
+                "description": "涂蜡的斑驳铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
+                    }
+                ]
+            },
+            {
                 "name": "waxed_exposed_copper_door",
                 "description": "涂蜡的斑驳铜门",
                 "properties": [
@@ -13425,6 +13751,16 @@
                     {
                         "name": "upper_block_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "waxed_exposed_copper_golem_statue",
+                "description": "涂蜡的斑驳铜傀儡像",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
                     }
                 ]
             },
@@ -13497,6 +13833,26 @@
                 ]
             },
             {
+                "name": "waxed_exposed_lightning_rod",
+                "description": "涂蜡的斑驳避雷针",
+                "properties": [
+                    {
+                        "name": "facing_direction",
+                        "defaultValue": 0
+                    }
+                ]
+            },
+            {
+                "name": "waxed_lightning_rod",
+                "description": "涂蜡的避雷针",
+                "properties": [
+                    {
+                        "name": "facing_direction",
+                        "defaultValue": 0
+                    }
+                ]
+            },
+            {
                 "name": "waxed_oxidized_chiseled_copper",
                 "description": "涂蜡的氧化雕纹铜块"
             },
@@ -13515,6 +13871,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "waxed_oxidized_copper_chest",
+                "description": "涂蜡的氧化铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
                     }
                 ]
             },
@@ -13541,6 +13907,16 @@
                     {
                         "name": "upper_block_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "waxed_oxidized_copper_golem_statue",
+                "description": "涂蜡的氧化铜傀儡像",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
                     }
                 ]
             },
@@ -13613,6 +13989,16 @@
                 ]
             },
             {
+                "name": "waxed_oxidized_lightning_rod",
+                "description": "涂蜡的氧化避雷针",
+                "properties": [
+                    {
+                        "name": "facing_direction",
+                        "defaultValue": 0
+                    }
+                ]
+            },
+            {
                 "name": "waxed_weathered_chiseled_copper",
                 "description": "涂蜡的锈蚀雕纹铜块"
             },
@@ -13631,6 +14017,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "waxed_weathered_copper_chest",
+                "description": "涂蜡的锈蚀铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
                     }
                 ]
             },
@@ -13657,6 +14053,16 @@
                     {
                         "name": "upper_block_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "waxed_weathered_copper_golem_statue",
+                "description": "涂蜡的锈蚀铜傀儡像",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
                     }
                 ]
             },
@@ -13729,6 +14135,16 @@
                 ]
             },
             {
+                "name": "waxed_weathered_lightning_rod",
+                "description": "涂蜡的锈蚀避雷针",
+                "properties": [
+                    {
+                        "name": "facing_direction",
+                        "defaultValue": 0
+                    }
+                ]
+            },
+            {
                 "name": "weathered_chiseled_copper",
                 "description": "锈蚀的雕纹铜块"
             },
@@ -13747,6 +14163,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "weathered_copper_chest",
+                "description": "锈蚀的铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
                     }
                 ]
             },
@@ -13773,6 +14199,16 @@
                     {
                         "name": "upper_block_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "weathered_copper_golem_statue",
+                "description": "锈蚀的铜傀儡像",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "south"
                     }
                 ]
             },
@@ -13841,6 +14277,16 @@
                     {
                         "name": "top_slot_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "weathered_lightning_rod",
+                "description": "锈蚀的避雷针",
+                "properties": [
+                    {
+                        "name": "facing_direction",
+                        "defaultValue": 0
                     }
                 ]
             },
@@ -16749,6 +17195,27 @@
                         {
                             "valueName": true,
                             "description": "方块被红石信号激活"
+                        }
+                    ]
+                },
+                {
+                    "propertyName": "powered_shelf_type",
+                    "values": [
+                        {
+                            "valueName": 0,
+                            "description": "未被充能，不与其他连接"
+                        },
+                        {
+                            "valueName": 1,
+                            "description": "该被充能，与其他连接，且处于连接的最左侧"
+                        },
+                        {
+                            "valueName": 2,
+                            "description": "该被充能，与其他连接，且处于连接的中间"
+                        },
+                        {
+                            "valueName": 3,
+                            "description": "该被充能，与其他连接，且处于连接的最右侧"
                         }
                     ]
                 },

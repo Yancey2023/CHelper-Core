@@ -16753,6 +16753,27 @@
                     ]
                 },
                 {
+                    "propertyName": "powered_shelf_type",
+                    "values": [
+                        {
+                            "valueName": 0,
+                            "description": "未被充能，不与其他连接"
+                        },
+                        {
+                            "valueName": 1,
+                            "description": "该被充能，与其他连接，且处于连接的最左侧"
+                        },
+                        {
+                            "valueName": 2,
+                            "description": "该被充能，与其他连接，且处于连接的中间"
+                        },
+                        {
+                            "valueName": 3,
+                            "description": "该被充能，与其他连接，且处于连接的最右侧"
+                        }
+                    ]
+                },
+                {
                     "propertyName": "prismarine_block_type",
                     "description": "已弃用，为兼容性而保留 default： 海晶石 dark： 暗海晶石 bricks： 海晶石砖",
                     "values": [

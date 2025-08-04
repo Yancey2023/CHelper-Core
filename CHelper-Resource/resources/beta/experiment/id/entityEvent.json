@@ -363,6 +363,9 @@
             "name": "minecraft:become_yellow_tang"
         },
         {
+            "name": "minecraft:begin_oxidizing"
+        },
+        {
             "name": "minecraft:born_default"
         },
         {
@@ -516,6 +519,9 @@
             "name": "minecraft:from_player_weathered"
         },
         {
+            "name": "minecraft:from_serialized_entity"
+        },
+        {
             "name": "minecraft:from_village"
         },
         {
@@ -595,6 +601,9 @@
         },
         {
             "name": "minecraft:make_white"
+        },
+        {
+            "name": "minecraft:maximum_oxidation"
         },
         {
             "name": "minecraft:melee_mode"
@@ -753,7 +762,7 @@
             "name": "minecraft:reset_swaying_ticks"
         },
         {
-            "name": "minecraft:restart_timer"
+            "name": "minecraft:restart_oxidation_timer"
         },
         {
             "name": "minecraft:resupply_trades"
@@ -790,6 +799,9 @@
         },
         {
             "name": "minecraft:scheduled"
+        },
+        {
+            "name": "minecraft:serialize_entity_succeeded"
         },
         {
             "name": "minecraft:set_trap"

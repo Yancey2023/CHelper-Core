@@ -107,6 +107,10 @@
             "description": "鳕鱼"
         },
         {
+            "name": "copper_golem",
+            "description": "铜傀儡"
+        },
+        {
             "name": "cow",
             "description": "牛"
         },

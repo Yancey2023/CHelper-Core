@@ -2646,6 +2646,10 @@
             "description": "<工作台>金合欢木->金合欢木板*4"
         },
         {
+            "name": "minecraft:acacia_shelf_from_stripped_acacia_log",
+            "description": "<工作台>去皮金合欢原木*6->金合欢木展示架*6"
+        },
+        {
             "name": "minecraft:acacia_stairs",
             "description": "<工作台>金合欢木板*6->金合欢木楼梯*4"
         },
@@ -2750,6 +2754,10 @@
             "description": "<工作台>竹板*5->竹筏"
         },
         {
+            "name": "minecraft:bamboo_shelf_from_stripped_bamboo_block",
+            "description": "<工作台>去皮竹块*6->竹展示架*6"
+        },
+        {
             "name": "minecraft:bamboo_sign",
             "description": "<工作台>竹板*6+木棍->竹告示牌*3"
         },
@@ -2848,6 +2856,10 @@
         {
             "name": "minecraft:birch_planks_from_wood",
             "description": "<工作台>白桦木->白桦木板*4"
+        },
+        {
+            "name": "minecraft:birch_shelf_from_stripped_birch_log",
+            "description": "<工作台>去皮白桦原木*6->白桦木展示架*6"
         },
         {
             "name": "minecraft:birch_stairs",
@@ -3218,6 +3230,10 @@
             "description": "<工作台>樱花木板*2->樱花木压力板"
         },
         {
+            "name": "minecraft:cherry_shelf_from_stripped_cherry_log",
+            "description": "<工作台>去皮樱花原木*6->樱花木展示架*6"
+        },
+        {
             "name": "minecraft:cherry_sign",
             "description": "<工作台>樱花木板*6+木棍->樱花木告示牌*3"
         },
@@ -3375,7 +3391,7 @@
         },
         {
             "name": "minecraft:copper_chest",
-            "description": "<工作台>箱子+铜锭*8->铜箱"
+            "description": "<工作台>箱子+铜锭*8->铜箱子"
         },
         {
             "name": "minecraft:copper_chestplate",
@@ -3582,6 +3598,10 @@
             "description": "<工作台>绯红木板*2->绯红木压力板"
         },
         {
+            "name": "minecraft:crimson_shelf_from_stripped_crimson_stem",
+            "description": "<工作台>去皮绯红菌柄*6->绯红木展示架*6"
+        },
+        {
             "name": "minecraft:crimson_sign",
             "description": "<工作台>绯红木板*6+木棍->绯红木告示牌*3"
         },
@@ -3688,6 +3708,10 @@
         {
             "name": "minecraft:dark_oak_planks_from_wood",
             "description": "<工作台>深色橡木->深色橡木木板*4"
+        },
+        {
+            "name": "minecraft:dark_oak_shelf_from_stripped_dark_oak_log",
+            "description": "<工作台>去皮深色橡木原木*6->深色橡木展示架*6"
         },
         {
             "name": "minecraft:dark_oak_stairs",
@@ -4382,6 +4406,10 @@
             "description": "<工作台>丛林木->丛林木板*4"
         },
         {
+            "name": "minecraft:jungle_shelf_from_stripped_jungle_log",
+            "description": "<工作台>去皮丛林原木*6->丛林木展示架*6"
+        },
+        {
             "name": "minecraft:jungle_stairs",
             "description": "<工作台>丛林木板*6->丛林木楼梯*4"
         },
@@ -4778,6 +4806,10 @@
             "description": "<工作台>红树木板*2->红树木压力板"
         },
         {
+            "name": "minecraft:mangrove_shelf_from_stripped_mangrove_log",
+            "description": "<工作台>去皮红树原木*6->红树木展示架*6"
+        },
+        {
             "name": "minecraft:mangrove_sign",
             "description": "<工作台>红树木板*6+木棍->红树木告示牌*3"
         },
@@ -4942,6 +4974,10 @@
             "description": "<工作台>橡木->橡木木板*4"
         },
         {
+            "name": "minecraft:oak_shelf_from_stripped_oak_log",
+            "description": "<工作台>去皮橡木原木*6->橡木展示架*6"
+        },
+        {
             "name": "minecraft:oak_stairs",
             "description": "<工作台>橡木木板*6->橡木楼梯*4"
         },
@@ -5088,6 +5124,10 @@
         {
             "name": "minecraft:pale_oak_pressure_plate",
             "description": "<工作台>苍白橡木木板*2->苍白橡木压力板"
+        },
+        {
+            "name": "minecraft:pale_oak_shelf_from_stripped_pale_oak_log",
+            "description": "<工作台>去皮苍白橡木原木*6->苍白橡木展示架*6"
         },
         {
             "name": "minecraft:pale_oak_sign",
@@ -5788,6 +5828,10 @@
         {
             "name": "minecraft:spruce_planks_from_wood",
             "description": "<工作台>云杉木->云杉木板*4"
+        },
+        {
+            "name": "minecraft:spruce_shelf_from_stripped_spruce_log",
+            "description": "<工作台>去皮云杉原木*6->云杉木展示架*6"
         },
         {
             "name": "minecraft:spruce_stairs",
@@ -6860,6 +6904,10 @@
         {
             "name": "minecraft:warped_pressure_plate",
             "description": "<工作台>诡异木板*2->诡异木压力板"
+        },
+        {
+            "name": "minecraft:warped_shelf_from_stripped_warped_stem",
+            "description": "<工作台>去皮诡异菌柄*6->诡异木展示架*6"
         },
         {
             "name": "minecraft:warped_sign",
