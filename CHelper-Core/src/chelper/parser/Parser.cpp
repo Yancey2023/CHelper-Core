@@ -27,18 +27,17 @@
 
 #define CHELPER_GET_AST_NODE(v1) \
     case Node::NodeTypeId::v1:   \
-        return Parser<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::getASTNode(*reinterpret_cast<const typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type *>(node.data), tokenReader, cpack);
+        return Parser<typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type>::getASTNode(*reinterpret_cast<const typename Node::NodeTypeDetail<Node::NodeTypeId::v1>::Type *>(node.data), tokenReader);
 
 namespace CHelper::Parser {
 
-    ASTNode parse(const Node::NodeWithType &node, TokenReader &tokenReader, const CPack *cpack);
+    ASTNode parse(const Node::NodeWithType &node, TokenReader &tokenReader);
 
     ASTNode parseByChildNode(const Node::NodeWithType &node,
                              TokenReader &tokenReader,
-                             const CPack *cpack,
                              const Node::NodeWithType &childNode,
                              const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE) {
-        ASTNode childAstNode = parse(childNode, tokenReader, cpack);
+        ASTNode childAstNode = parse(childNode, tokenReader);
         TokensView tokens = childAstNode.tokens;
         return ASTNode::andNode(node, {std::move(childAstNode)}, tokens, nullptr, astNodeId);
     }
@@ -49,7 +48,7 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeWrapped> {
-        static ASTNode getASTNodeWithIsMustAfterSpace(const Node::NodeWrapped &node, TokenReader &tokenReader, const CPack *cpack, bool isMustAfterSpace) {
+        static ASTNode getASTNodeWithIsMustAfterSpace(const Node::NodeWrapped &node, TokenReader &tokenReader, bool isMustAfterSpace) {
             //空格检测
             bool isMustAfterSpace0 = reinterpret_cast<const Node::NodeSerializable *>(node.innerNode.data)->getIsMustAfterSpace();
             if (node.innerNode.nodeTypeId != Node::NodeTypeId::REPEAT) {
@@ -63,7 +62,7 @@ namespace CHelper::Parser {
             //当前节点
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(node.innerNode, index);
-            ASTNode currentASTNode = parse(node.innerNode, tokenReader, cpack);
+            ASTNode currentASTNode = parse(node.innerNode, tokenReader);
             DEBUG_GET_NODE_END(node.innerNode, index);
             if (HEDLEY_UNLIKELY(currentASTNode.isError() || node.nextNodes.empty())) {
                 return ASTNode::andNode(node, {std::move(currentASTNode)}, tokenReader.collect());
@@ -73,7 +72,7 @@ namespace CHelper::Parser {
             childASTNodes.reserve(node.nextNodes.size());
             for (const auto &item: node.nextNodes) {
                 tokenReader.push();
-                childASTNodes.push_back(getASTNodeWithIsMustAfterSpace(*item, tokenReader, cpack, isMustAfterSpace0));
+                childASTNodes.push_back(getASTNodeWithIsMustAfterSpace(*item, tokenReader, isMustAfterSpace0));
                 tokenReader.restore();
             }
             tokenReader.push();
@@ -82,40 +81,40 @@ namespace CHelper::Parser {
             return ASTNode::andNode(node, {std::move(currentASTNode), std::move(nextASTNode)}, tokenReader.collect());
         }
 
-        static ASTNode getASTNode(const Node::NodeWrapped &node, TokenReader &tokenReader, const CPack *cpack) {
-            return getASTNodeWithIsMustAfterSpace(node, tokenReader, cpack, false);
+        static ASTNode getASTNode(const Node::NodeWrapped &node, TokenReader &tokenReader) {
+            return getASTNodeWithIsMustAfterSpace(node, tokenReader, false);
         }
     };
 
     template<>
     struct Parser<Node::NodeJsonElement> {
-        static ASTNode getASTNode(const Node::NodeJsonElement &node, TokenReader &tokenReader, const CPack *cpack) {
-            return parseByChildNode(node, tokenReader, cpack, node.start);
+        static ASTNode getASTNode(const Node::NodeJsonElement &node, TokenReader &tokenReader) {
+            return parseByChildNode(node, tokenReader, node.start);
         }
     };
 
     template<>
     struct Parser<Node::NodeJsonEntry> {
-        static ASTNode getASTNode(const Node::NodeJsonEntry &node, TokenReader &tokenReader, const CPack *cpack) {
-            return parseByChildNode(node, tokenReader, cpack, HEDLEY_LIKELY(node.nodeEntry.has_value()) ? node.nodeEntry.value() : Node::NodeJsonEntry::nodeAllEntry);
+        static ASTNode getASTNode(const Node::NodeJsonEntry &node, TokenReader &tokenReader) {
+            return parseByChildNode(node, tokenReader, HEDLEY_LIKELY(node.nodeEntry.has_value()) ? node.nodeEntry.value() : Node::NodeJsonEntry::nodeAllEntry);
         }
     };
 
     template<>
     struct Parser<Node::NodeJsonList> {
-        static ASTNode getASTNode(const Node::NodeJsonList &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeJsonList &node, TokenReader &tokenReader) {
             if (HEDLEY_UNLIKELY(!node.nodeList.has_value())) {
-                return parseByChildNode(node, tokenReader, cpack, CHelper::Node::NodeJsonList::nodeAllList, ASTNodeId::NODE_JSON_ALL_LIST);
+                return parseByChildNode(node, tokenReader, CHelper::Node::NodeJsonList::nodeAllList, ASTNodeId::NODE_JSON_ALL_LIST);
             }
             tokenReader.push();
-            ASTNode result1 = parse(node.nodeList.value(), tokenReader, cpack);
+            ASTNode result1 = parse(node.nodeList.value(), tokenReader);
             if (HEDLEY_LIKELY(!result1.isError())) {
                 return ASTNode::andNode(node, {std::move(result1)}, tokenReader.collect());
             }
             size_t index1 = tokenReader.index;
             tokenReader.restore();
             tokenReader.push();
-            ASTNode result2 = parseByChildNode(node, tokenReader, cpack, CHelper::Node::NodeJsonList::nodeAllList, ASTNodeId::NODE_JSON_ALL_LIST);
+            ASTNode result2 = parseByChildNode(node, tokenReader, CHelper::Node::NodeJsonList::nodeAllList, ASTNodeId::NODE_JSON_ALL_LIST);
             size_t index2 = tokenReader.index;
             tokenReader.restore();
             tokenReader.push();
@@ -126,7 +125,7 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeJsonNull> {
-        static ASTNode getASTNode(const Node::NodeJsonNull &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeJsonNull &node, TokenReader &tokenReader) {
             tokenReader.push();
             auto result = tokenReader.readStringASTNode(node);
             tokenReader.pop();
@@ -144,8 +143,8 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeJsonObject> {
-        static ASTNode getASTNode(const Node::NodeJsonObject &node, TokenReader &tokenReader, const CPack *cpack) {
-            return parseByChildNode(node, tokenReader, cpack, node.nodeList);
+        static ASTNode getASTNode(const Node::NodeJsonObject &node, TokenReader &tokenReader) {
+            return parseByChildNode(node, tokenReader, node.nodeList);
         }
     };
 
@@ -153,7 +152,6 @@ namespace CHelper::Parser {
     getInnerASTNode(const Node::NodeWithType &node,
                     const TokensView &tokens,
                     const std::u16string &content,
-                    const CPack *cpack,
                     const Node::NodeWithType &mainNode) {
         auto convertResult = JsonUtil::jsonString2String(content);
         if (HEDLEY_UNLIKELY(convertResult.errorReason != nullptr)) {
@@ -164,7 +162,7 @@ namespace CHelper::Parser {
         Profile::push("start parsing: {}", FORMAT_ARG(utf8::utf16to8(content)));
 #endif
         DEBUG_GET_NODE_BEGIN(mainNode, index);
-        ASTNode result = parse(convertResult.result, cpack, mainNode);
+        ASTNode result = parse(convertResult.result, mainNode);
         DEBUG_GET_NODE_END(mainNode, index);
 #ifdef CHelperTest
         Profile::pop();
@@ -174,7 +172,7 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeJsonString> {
-        static ASTNode getASTNode(const Node::NodeJsonString &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeJsonString &node, TokenReader &tokenReader) {
             tokenReader.push();
             ASTNode result = tokenReader.readStringASTNode(node);
             tokenReader.pop();
@@ -192,7 +190,7 @@ namespace CHelper::Parser {
             if (HEDLEY_LIKELY(!node.data.has_value() || node.data->nodes.empty())) {
                 return ASTNode::simpleNode(node, tokens, errorReason);
             }
-            auto [innerNode, convertResult] = getInnerASTNode(node, tokens, std::u16string(str), cpack, node.nodeData);
+            auto [innerNode, convertResult] = getInnerASTNode(node, tokens, std::u16string(str), node.nodeData);
             ASTNode newResult = ASTNode::andNode(node, {std::move(innerNode)}, tokens, errorReason, ASTNodeId::NODE_STRING_INNER);
             if (HEDLEY_UNLIKELY(errorReason == nullptr)) {
                 for (auto &item: newResult.errorReasons) {
@@ -206,15 +204,15 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeBlock> {
-        static ASTNode getASTNode(const Node::NodeBlock &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeBlock &node, TokenReader &tokenReader) {
             tokenReader.push();
-            ASTNode blockId = parseByChildNode(node, tokenReader, cpack, node.nodeBlockId, ASTNodeId::NODE_BLOCK_BLOCK_ID);
+            ASTNode blockId = parseByChildNode(node, tokenReader, node.nodeBlockId, ASTNodeId::NODE_BLOCK_BLOCK_ID);
             if (HEDLEY_UNLIKELY(node.nodeBlockType == Node::NodeBlockType::BLOCK || blockId.isError())) {
                 tokenReader.pop();
                 return blockId;
             }
             tokenReader.push();
-            ASTNode blockStateLeftBracket = parse(CHelper::Node::NodeBlock::nodeBlockStateLeftBracket, tokenReader, cpack);
+            ASTNode blockStateLeftBracket = parse(CHelper::Node::NodeBlock::nodeBlockStateLeftBracket, tokenReader);
             tokenReader.restore();
             if (HEDLEY_LIKELY(blockStateLeftBracket.isError())) {
                 return ASTNode::andNode(node, {(std::move(blockId))}, tokenReader.collect(),
@@ -232,7 +230,7 @@ namespace CHelper::Parser {
             auto nodeBlockState = currentBlock == nullptr
                                           ? BlockId::getNodeAllBlockState()
                                           : std::static_pointer_cast<BlockId>(currentBlock)->getNode(node.blockIds->blockPropertyDescriptions);
-            auto astNodeBlockState = parseByChildNode(node, tokenReader, cpack, nodeBlockState, ASTNodeId::NODE_BLOCK_BLOCK_STATE);
+            auto astNodeBlockState = parseByChildNode(node, tokenReader, nodeBlockState, ASTNodeId::NODE_BLOCK_BLOCK_STATE);
             return ASTNode::andNode(node, {(std::move(blockId)), (std::move(astNodeBlockState))}, tokenReader.collect(),
                                     nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
         }
@@ -240,9 +238,9 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeCommand> {
-        static ASTNode getASTNode(const Node::NodeCommand &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeCommand &node, TokenReader &tokenReader) {
             tokenReader.push();
-            ASTNode commandStart = parse(Node::NodeCommand::nodeCommandStart, tokenReader, cpack);
+            ASTNode commandStart = parse(Node::NodeCommand::nodeCommandStart, tokenReader);
             if (HEDLEY_UNLIKELY(commandStart.isError())) {
                 tokenReader.restore();
                 tokenReader.push();
@@ -273,7 +271,7 @@ namespace CHelper::Parser {
                 TokensView tokens = tokenReader.collect();
                 return ASTNode::andNode(node, {std::move(commandName)}, tokens, ErrorReason::contentError(tokens, fmt::format(u"命令名字不匹配，找不到名为{}的命令", str)), ASTNodeId::NODE_COMMAND_COMMAND);
             }
-            ASTNode usage = parse(*currentCommand, tokenReader, cpack);
+            ASTNode usage = parse(*currentCommand, tokenReader);
             return ASTNode::andNode(node, {std::move(commandName), std::move(usage)},
                                     tokenReader.collect(), nullptr, ASTNodeId::NODE_COMMAND_COMMAND);
         }
@@ -281,21 +279,20 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeCommandName> {
-        static ASTNode getASTNode(const Node::NodeCommandName &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeCommandName &node, TokenReader &tokenReader) {
             return tokenReader.readStringASTNode(node);
         }
     };
 
     template<>
     struct Parser<Node::NodeIntegerWithUnit> {
-        static ASTNode getASTNode(const Node::NodeIntegerWithUnit &node, TokenReader &tokenReader, const CPack *cpack) {
-            return parseByChildNode(node, tokenReader, cpack, node.nodeIntegerMaybeHaveUnit);
+        static ASTNode getASTNode(const Node::NodeIntegerWithUnit &node, TokenReader &tokenReader) {
+            return parseByChildNode(node, tokenReader, node.nodeIntegerMaybeHaveUnit);
         }
     };
 
     ASTNode getOptionalASTNode(const Node::NodeItem &node,
                                TokenReader &tokenReader,
-                               const CPack *cpack,
                                bool isIgnoreChildNodesError,
                                const std::vector<Node::NodeWithType> &childNodes,
                                const ASTNodeId::ASTNodeId &astNodeId = ASTNodeId::NONE) {
@@ -305,7 +302,7 @@ namespace CHelper::Parser {
             tokenReader.push();
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(item, index);
-            ASTNode astNode = parse(item, tokenReader, cpack);
+            ASTNode astNode = parse(item, tokenReader);
             DEBUG_GET_NODE_END(item, index);
             bool isError = astNode.isError();
             const TokensView tokens = tokenReader.collect();
@@ -324,9 +321,9 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeItem> {
-        static ASTNode getASTNode(const Node::NodeItem &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeItem &node, TokenReader &tokenReader) {
             tokenReader.push();
-            ASTNode itemId = parse(node.nodeItemId, tokenReader, cpack);
+            ASTNode itemId = parse(node.nodeItemId, tokenReader);
             std::u16string_view str = itemId.tokens.string();
             XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
             std::shared_ptr<NamespaceId> currentItem = nullptr;
@@ -341,17 +338,17 @@ namespace CHelper::Parser {
             switch (node.nodeItemType) {
                 case Node::NodeItemType::ITEM_GIVE:
                     childNodes.push_back(getOptionalASTNode(
-                            node, tokenReader, cpack, false,
+                            node, tokenReader, false,
                             {Node::NodeItem::nodeCount, nodeData, node.nodeComponent}));
                     break;
                 case Node::NodeItemType::ITEM_CLEAR:
                     childNodes.push_back(getOptionalASTNode(
-                            node, tokenReader, cpack, false,
+                            node, tokenReader, false,
                             {nodeData, Node::NodeItem::nodeCount}));
                     break;
                 default:
                     childNodes.push_back(getOptionalASTNode(
-                            node, tokenReader, cpack, false,
+                            node, tokenReader, false,
                             {Node::NodeItem::nodeCount, nodeData, node.nodeComponent}));
                     break;
             }
@@ -361,15 +358,15 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeJson> {
-        static ASTNode getASTNode(const Node::NodeJson &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeJson &node, TokenReader &tokenReader) {
             //TODO 原始JSON文本的目标选择器要支持*
-            return parseByChildNode(node, tokenReader, cpack, node.nodeJson);
+            return parseByChildNode(node, tokenReader, node.nodeJson);
         }
     };
 
     template<>
     struct Parser<Node::NodeLF> {
-        static ASTNode getASTNode(const Node::NodeLF &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeLF &node, TokenReader &tokenReader) {
             tokenReader.push();
             tokenReader.skipToLF();
             TokensView tokens = tokenReader.collect();
@@ -383,7 +380,7 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeNamespaceId> {
-        static ASTNode getASTNode(const Node::NodeNamespaceId &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeNamespaceId &node, TokenReader &tokenReader) {
             // namespace:id
             // 字符串中已经包含冒号，因为冒号不是结束字符
             DEBUG_GET_NODE_BEGIN(node, index);
@@ -409,7 +406,7 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeNormalId> {
-        static ASTNode getASTNode(const Node::NodeNormalId &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeNormalId &node, TokenReader &tokenReader) {
             tokenReader.push();
             DEBUG_GET_NODE_BEGIN(node, index);
             ASTNode result = node.getNormalIdASTNode(node, tokenReader);
@@ -444,13 +441,13 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodePerCommand> {
-        static ASTNode getASTNode(const Node::NodePerCommand &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodePerCommand &node, TokenReader &tokenReader) {
             std::vector<ASTNode> childASTNodes;
             childASTNodes.reserve(node.startNodes.size());
             for (const auto &item: node.startNodes) {
                 tokenReader.push();
                 DEBUG_GET_NODE_BEGIN(*item, index);
-                childASTNodes.push_back(Parser<Node::NodeWrapped>::getASTNodeWithIsMustAfterSpace(*item, tokenReader, cpack, true));
+                childASTNodes.push_back(Parser<Node::NodeWrapped>::getASTNodeWithIsMustAfterSpace(*item, tokenReader, true));
                 DEBUG_GET_NODE_END(*item, index);
                 tokenReader.restore();
             }
@@ -470,14 +467,13 @@ namespace CHelper::Parser {
 
     std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode>
     getRelativeFloatASTNode(const Node::NodeWithType &node,
-                            const CPack *cpack,
                             TokenReader &tokenReader) {
         tokenReader.push();
         std::vector<ASTNode> childNodes;
         // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
         NodeRelativeFloatType::NodeRelativeFloatType type;
         tokenReader.push();
-        ASTNode preSymbol = parse(Node::NodeRelativeFloat::nodePreSymbol, tokenReader, cpack);
+        ASTNode preSymbol = parse(Node::NodeRelativeFloat::nodePreSymbol, tokenReader);
         if (HEDLEY_UNLIKELY(preSymbol.isError())) {
             type = NodeRelativeFloatType::ABSOLUTE_COORDINATE;
             tokenReader.restore();
@@ -516,14 +512,14 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodePosition> {
-        static ASTNode getASTNode(const Node::NodePosition &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodePosition &node, TokenReader &tokenReader) {
             tokenReader.push();
             // 0 - 绝对坐标，1 - 相对坐标，2 - 局部坐标
             std::vector<ASTNode> threeChildNodes;
             threeChildNodes.reserve(3);
             NodeRelativeFloatType::NodeRelativeFloatType types[3];
             for (NodeRelativeFloatType::NodeRelativeFloatType &type: types) {
-                std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode> childNode = getRelativeFloatASTNode(node, cpack, tokenReader);
+                std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode> childNode = getRelativeFloatASTNode(node, tokenReader);
                 if (threeChildNodes.empty() && childNode.second.isError() && !childNode.second.tokens.isEmpty()) {
                     tokenReader.pop();
                     TokensView tokens = childNode.second.tokens;
@@ -565,7 +561,7 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeRange> {
-        static ASTNode getASTNode(const Node::NodeRange &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeRange &node, TokenReader &tokenReader) {
             ASTNode result = tokenReader.readStringASTNode(node);
             std::u16string_view str = result.tokens.string();
             std::shared_ptr<ErrorReason> errorReason;
@@ -586,8 +582,8 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeRelativeFloat> {
-        static ASTNode getASTNode(const Node::NodeRelativeFloat &node, TokenReader &tokenReader, const CPack *cpack) {
-            std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode> result = getRelativeFloatASTNode(node, cpack, tokenReader);
+        static ASTNode getASTNode(const Node::NodeRelativeFloat &node, TokenReader &tokenReader) {
+            std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode> result = getRelativeFloatASTNode(node, tokenReader);
             if (HEDLEY_UNLIKELY(result.second.isError())) {
                 return std::move(result.second);
             }
@@ -601,11 +597,11 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeRepeat> {
-        static ASTNode getASTNode(const Node::NodeRepeat &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeRepeat &node, TokenReader &tokenReader) {
             tokenReader.push();
             std::vector<ASTNode> childNodes;
             while (true) {
-                ASTNode orNode = parse(node.nodeElement, tokenReader, cpack);
+                ASTNode orNode = parse(node.nodeElement, tokenReader);
                 bool isAstNodeError = orNode.childNodes[0].isError();
                 bool isBreakAstNodeError = orNode.childNodes[1].isError();
                 if (HEDLEY_UNLIKELY(!isBreakAstNodeError || isAstNodeError ||
@@ -620,7 +616,7 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeString> {
-        static ASTNode getASTNode(const Node::NodeString &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeString &node, TokenReader &tokenReader) {
             if (HEDLEY_UNLIKELY(node.ignoreLater)) {
                 //后面的所有内容都算作这个字符串
                 tokenReader.push();
@@ -668,14 +664,14 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeTargetSelector> {
-        static ASTNode getASTNode(const Node::NodeTargetSelector &node, TokenReader &tokenReader, const CPack *cpack) {
-            return parseByChildNode(node, tokenReader, cpack, node.nodeTargetSelector);
+        static ASTNode getASTNode(const Node::NodeTargetSelector &node, TokenReader &tokenReader) {
+            return parseByChildNode(node, tokenReader, node.nodeTargetSelector);
         }
     };
 
     template<>
     struct Parser<Node::NodeText> {
-        static ASTNode getASTNode(const Node::NodeText &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeText &node, TokenReader &tokenReader) {
             tokenReader.skipSpace();
             DEBUG_GET_NODE_BEGIN(node, index);
             auto result = node.getTextASTNode(node, tokenReader);
@@ -695,7 +691,7 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeAnd> {
-        static ASTNode getASTNode(const Node::NodeAnd &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeAnd &node, TokenReader &tokenReader) {
             tokenReader.push();
             std::vector<ASTNode> childASTNodes;
             bool isMustAfterSpace = false;
@@ -703,7 +699,7 @@ namespace CHelper::Parser {
                 const auto &item = node.childNodes[i];
                 if (item.nodeTypeId == Node::NodeTypeId::WRAPPED) {
                     const auto *nodeWrapped = reinterpret_cast<const Node::NodeWrapped *>(item.data);
-                    ASTNode childNode = Parser<Node::NodeWrapped>::getASTNodeWithIsMustAfterSpace(*nodeWrapped, tokenReader, cpack, isMustAfterSpace);
+                    ASTNode childNode = Parser<Node::NodeWrapped>::getASTNodeWithIsMustAfterSpace(*nodeWrapped, tokenReader, isMustAfterSpace);
                     bool isError = childNode.isError();
                     childASTNodes.push_back(std::move(childNode));
                     if (HEDLEY_UNLIKELY(isError)) {
@@ -711,7 +707,7 @@ namespace CHelper::Parser {
                     }
                     isMustAfterSpace = reinterpret_cast<const Node::NodeSerializable *>(nodeWrapped->innerNode.data)->getIsMustAfterSpace();
                 } else {
-                    ASTNode childNode = parse(item, tokenReader, cpack);
+                    ASTNode childNode = parse(item, tokenReader);
                     bool isError = childNode.isError();
                     childASTNodes.push_back(std::move(childNode));
                     if (HEDLEY_UNLIKELY(isError)) {
@@ -736,40 +732,40 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeAny> {
-        static ASTNode getASTNode(const Node::NodeAny &node, TokenReader &tokenReader, const CPack *cpack) {
-            return parseByChildNode(node, tokenReader, cpack, node.nodeAny);
+        static ASTNode getASTNode(const Node::NodeAny &node, TokenReader &tokenReader) {
+            return parseByChildNode(node, tokenReader, node.nodeAny);
         }
     };
 
     template<>
     struct Parser<Node::NodeEntry> {
-        static ASTNode getASTNode(const Node::NodeEntry &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeEntry &node, TokenReader &tokenReader) {
             tokenReader.push();
             std::vector<ASTNode> childNodes;
-            auto key = parse(node.nodeKey, tokenReader, cpack);
+            auto key = parse(node.nodeKey, tokenReader);
             if (HEDLEY_UNLIKELY(key.isError())) {
                 childNodes.push_back(std::move(key));
                 return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
             }
             childNodes.push_back(std::move(key));
-            auto separator = parse(node.nodeSeparator, tokenReader, cpack);
+            auto separator = parse(node.nodeSeparator, tokenReader);
             if (HEDLEY_UNLIKELY(separator.isError())) {
                 childNodes.push_back(std::move(separator));
                 return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
             }
             childNodes.push_back(std::move(separator));
-            childNodes.push_back(parse(node.nodeValue, tokenReader, cpack));
+            childNodes.push_back(parse(node.nodeValue, tokenReader));
             return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
         }
     };
 
     template<>
     struct Parser<Node::NodeEqualEntry> {
-        static ASTNode getASTNode(const Node::NodeEqualEntry &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeEqualEntry &node, TokenReader &tokenReader) {
             tokenReader.push();
             std::vector<ASTNode> childNodes;
             // key
-            ASTNode astNodeKey = parseByChildNode(node, tokenReader, cpack, node.nodeKey);
+            ASTNode astNodeKey = parseByChildNode(node, tokenReader, node.nodeKey);
             childNodes.push_back(astNodeKey);
             if (HEDLEY_UNLIKELY(astNodeKey.isError())) {
                 return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
@@ -780,7 +776,7 @@ namespace CHelper::Parser {
             });
             // = or =!
             ASTNode astNodeSeparator = parseByChildNode(
-                    node, tokenReader, cpack,
+                    node, tokenReader,
                     it == node.equalDatas.end() || it->canUseNotEqual
                             ? Node::NodeWithType(Node::NodeEqualEntry::nodeEqualOrNotEqual)
                             : Node::NodeWithType(Node::NodeEqualEntry::nodeEqual));
@@ -790,9 +786,9 @@ namespace CHelper::Parser {
             }
             //value
             if (HEDLEY_UNLIKELY(it == node.equalDatas.end())) {
-                childNodes.push_back(parse(Node::NodeAny::getNodeAny(), tokenReader, cpack));
+                childNodes.push_back(parse(Node::NodeAny::getNodeAny(), tokenReader));
             } else {
-                childNodes.push_back(parse(it->nodeValue, tokenReader, cpack));
+                childNodes.push_back(parse(it->nodeValue, tokenReader));
             }
             return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
         }
@@ -800,10 +796,10 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeList> {
-        static ASTNode getASTNode(const Node::NodeList &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeList &node, TokenReader &tokenReader) {
             //标记整个[...]，在最后进行收集
             tokenReader.push();
-            ASTNode left = parse(node.nodeLeft, tokenReader, cpack);
+            ASTNode left = parse(node.nodeLeft, tokenReader);
             if (HEDLEY_UNLIKELY(left.isError())) {
                 return ASTNode::andNode(node, {std::move(left)}, tokenReader.collect());
             }
@@ -815,10 +811,10 @@ namespace CHelper::Parser {
                 //检测[]中间有没有内容
                 tokenReader.push();
                 DEBUG_GET_NODE_BEGIN(node.nodeRight, nodeRightIndex);
-                auto rightBracket1 = parse(node.nodeRight, tokenReader, cpack);
+                auto rightBracket1 = parse(node.nodeRight, tokenReader);
                 DEBUG_GET_NODE_END(node.nodeRight, nodeRightIndex);
                 tokenReader.restore();
-                auto elementOrRight = parse(node.nodeElementOrRight, tokenReader, cpack);
+                auto elementOrRight = parse(node.nodeElementOrRight, tokenReader);
                 bool flag = !rightBracket1.isError() || elementOrRight.isError();
                 childNodes.push_back(std::move(elementOrRight));
                 if (HEDLEY_UNLIKELY(flag)) {
@@ -838,11 +834,11 @@ namespace CHelper::Parser {
                 //检测是分隔符还是右括号
                 tokenReader.push();
                 DEBUG_GET_NODE_BEGIN(node.nodeRight, nodeRightIndex);
-                auto rightBracket = parse(node.nodeRight, tokenReader, cpack);
+                auto rightBracket = parse(node.nodeRight, tokenReader);
                 DEBUG_GET_NODE_END(node.nodeRight, nodeRightIndex);
                 tokenReader.restore();
                 DEBUG_GET_NODE_BEGIN(node.nodeSeparatorOrRight, nodeSeparatorOrRightIndex);
-                auto separatorOrRight = parse(node.nodeSeparatorOrRight, tokenReader, cpack);
+                auto separatorOrRight = parse(node.nodeSeparatorOrRight, tokenReader);
                 DEBUG_GET_NODE_END(node.nodeSeparatorOrRight, nodeSeparatorOrRightIndex);
                 bool flag = !rightBracket.isError() || separatorOrRight.isError();
                 childNodes.push_back(std::move(separatorOrRight));
@@ -851,7 +847,7 @@ namespace CHelper::Parser {
                 }
                 //检测是不是元素
                 DEBUG_GET_NODE_BEGIN(node.nodeElement, nodeElementIndex);
-                ASTNode element = parse(node.nodeElement, tokenReader, cpack);
+                ASTNode element = parse(node.nodeElement, tokenReader);
                 DEBUG_GET_NODE_END(node.nodeElement, nodeElementIndex);
                 flag = element.isError();
                 childNodes.push_back(std::move(element));
@@ -870,7 +866,7 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeOr> {
-        static ASTNode getASTNode(const Node::NodeOr &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeOr &node, TokenReader &tokenReader) {
             std::vector<ASTNode> childASTNodes;
             std::vector<size_t> indexes;
             if (HEDLEY_LIKELY(!node.isUseFirst)) {
@@ -879,7 +875,7 @@ namespace CHelper::Parser {
             }
             for (const auto &item: node.childNodes) {
                 tokenReader.push();
-                ASTNode childNode = parse(item, tokenReader, cpack);
+                ASTNode childNode = parse(item, tokenReader);
                 bool isNodeError = childNode.isError();
                 childASTNodes.push_back(std::move(childNode));
                 indexes.push_back(tokenReader.index);
@@ -903,7 +899,7 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeSingleSymbol> {
-        static ASTNode getASTNode(const Node::NodeSingleSymbol &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeSingleSymbol &node, TokenReader &tokenReader) {
             ASTNode symbolNode = tokenReader.readSymbolASTNode(node);
             std::shared_ptr<ErrorReason> errorReason;
             if (HEDLEY_UNLIKELY(symbolNode.isError())) {
@@ -923,10 +919,10 @@ namespace CHelper::Parser {
 
     template<>
     struct Parser<Node::NodeOptional> {
-        static ASTNode getASTNode(const Node::NodeOptional &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeOptional &node, TokenReader &tokenReader) {
             tokenReader.push();
             tokenReader.skipSpace();
-            ASTNode astNode = parse(node.optionalNode, tokenReader, cpack);
+            ASTNode astNode = parse(node.optionalNode, tokenReader);
             bool isUseOptionalNode = !astNode.isError();
             if (!isUseOptionalNode) {
                 for (const auto &item: astNode.errorReasons) {
@@ -948,7 +944,7 @@ namespace CHelper::Parser {
 
     template<bool isJson>
     struct Parser<Node::NodeTemplateBoolean<isJson>> {
-        static ASTNode getASTNode(const Node::NodeTemplateBoolean<isJson> &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeTemplateBoolean<isJson> &node, TokenReader &tokenReader) {
             ASTNode astNode = tokenReader.readStringASTNode(node);
             std::u16string_view str = astNode.tokens.string();
             if (HEDLEY_LIKELY(str == u"true" || str == u"false")) {
@@ -962,7 +958,7 @@ namespace CHelper::Parser {
 
     template<class T, bool isJson>
     struct Parser<Node::NodeTemplateNumber<T, isJson>> {
-        static ASTNode getASTNode(const Node::NodeTemplateNumber<T, isJson> &node, TokenReader &tokenReader, const CPack *cpack) {
+        static ASTNode getASTNode(const Node::NodeTemplateNumber<T, isJson> &node, TokenReader &tokenReader) {
             if constexpr (std::numeric_limits<T>::is_integer) {
                 return tokenReader.readIntegerASTNode(node);
             } else {
@@ -971,7 +967,7 @@ namespace CHelper::Parser {
         }
     };
 
-    ASTNode parse(const Node::NodeWithType &node, TokenReader &tokenReader, const CPack *cpack) {
+    ASTNode parse(const Node::NodeWithType &node, TokenReader &tokenReader) {
         switch (node.nodeTypeId) {
             CODEC_PASTE(CHELPER_GET_AST_NODE, CHELPER_NODE_TYPES)
             default:
@@ -979,13 +975,13 @@ namespace CHelper::Parser {
         }
     }
 
-    ASTNode parse(const std::u16string &content, const CPack *cpack, const Node::NodeWithType &mainNode) {
+    ASTNode parse(const std::u16string &content, const Node::NodeWithType &mainNode) {
         TokenReader tokenReader = TokenReader(std::make_shared<LexerResult>(Lexer::lex(content)));
 #ifdef CHelperTest
         Profile::push("start parsing: {}", FORMAT_ARG(utf8::utf16to8(tokenReader.lexerResult->content)));
 #endif
         DEBUG_GET_NODE_BEGIN(mainNode, index);
-        auto result = parse(mainNode, tokenReader, cpack);
+        auto result = parse(mainNode, tokenReader);
         DEBUG_GET_NODE_END(mainNode, index);
 #ifdef CHelperTest
         Profile::pop();
@@ -994,7 +990,7 @@ namespace CHelper::Parser {
     }
 
     ASTNode parse(const std::u16string &content, const CPack *cpack) {
-        return parse(content, cpack, cpack->mainNode);
+        return parse(content, cpack->mainNode);
     }
 
 }// namespace CHelper::Parser
