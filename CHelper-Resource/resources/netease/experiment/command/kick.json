@@ -20,7 +20,7 @@
             "id": "reason",
             "description": "踢出原因",
             "canContainSpace": true,
-            "ignoreLater": false
+            "ignoreLater": true
         }
     ],
     "ast": [

@@ -86,6 +86,10 @@
                 {
                     "name": "midnight",
                     "description": "午夜(18000t)"
+                },
+                {
+                    "name": "sunrise",
+                    "description": "日出(23000t)"
                 }
             ]
         }

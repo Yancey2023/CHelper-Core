@@ -11,7 +11,9 @@
             "type": "INTEGER",
             "id": "maxPlayers",
             "brief": "玩家数量上限值",
-            "description": "要设置的玩家数量上限值"
+            "description": "要设置的玩家数量上限值",
+            "min": 0,
+            "max": 40
         }
     ],
     "ast": [

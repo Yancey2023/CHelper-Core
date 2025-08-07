@@ -7,7 +7,7 @@
         "add",
         "remove",
         "remove_all",
-        "preload",
+        "preloadText",
         "list"
     ],
     "node": [

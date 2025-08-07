@@ -13,7 +13,7 @@
             "brief": "信息",
             "description": "要显示的信息",
             "canContainSpace": true,
-            "ignoreLater": false
+            "ignoreLater": true
         }
     ],
     "ast": [
