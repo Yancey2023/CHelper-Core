@@ -81,10 +81,10 @@
     "ast": [
         ["query", "queryTargets"],
         ["queryTargets", "queryPermission"],
-        ["queryPermission", "state"],
+        ["queryPermission", "state", "LF"],
         ["state", "LF"],
         ["set", "setTargets"],
         ["setTargets", "setPermission"],
-        ["setPermission", "state", "LF"]
+        ["setPermission", "state"]
     ]
 }
