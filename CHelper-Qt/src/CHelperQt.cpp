@@ -19,7 +19,7 @@ CHelperApp::CHelperApp(QWidget *parent)
     std::filesystem::path resourcePath(RESOURCE_DIR);
     core = CHelper::CHelperCore::createByDirectory(resourcePath / "resources" / "beta" / "vanilla");
 #else
-    QFile file = QDir(QString(":/assets")).entryInfoList()[0].filePath();
+    QFile file = QFile(QDir(":/assets").entryInfoList().first().filePath());
     if (file.open(QIODevice::ReadOnly) && file.isReadable()) {
         std::istringstream iss(file.readAll().toStdString());
         core = CHelper::CHelperCore::create([&iss] {
