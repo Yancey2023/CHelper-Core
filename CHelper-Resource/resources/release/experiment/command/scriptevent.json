@@ -20,8 +20,8 @@
             "id": "message",
             "brief": "文本",
             "description": "要显示的文本",
-            "canContainSpace": false,
-            "ignoreLater": false
+            "canContainSpace": true,
+            "ignoreLater": true
         }
     ],
     "ast": [
