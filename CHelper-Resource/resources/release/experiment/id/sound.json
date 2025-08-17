@@ -122,6 +122,9 @@
             "description": "锁链盔甲：碰擦"
         },
         {
+            "name": "armor.equip_copper"
+        },
+        {
             "name": "armor.equip_diamond",
             "description": "钻石盔甲：碰擦"
         },
@@ -293,6 +296,26 @@
         {
             "name": "block.copper_bulb.turn_on",
             "description": "铜灯：亮起"
+        },
+        {
+            "name": "block.copper_chest.closed",
+            "description": "箱子：关闭"
+        },
+        {
+            "name": "block.copper_chest.open",
+            "description": "箱子：开启"
+        },
+        {
+            "name": "block.copper_chest.oxidized.closed"
+        },
+        {
+            "name": "block.copper_chest.oxidized.open"
+        },
+        {
+            "name": "block.copper_chest.weathered.closed"
+        },
+        {
+            "name": "block.copper_chest.weathered.open"
         },
         {
             "name": "block.creaking_heart.ambient",
@@ -2401,7 +2424,7 @@
         },
         {
             "name": "lead.break",
-            "description": "拴绳：剪断"
+            "description": "拴绳：断开"
         },
         {
             "name": "leashknot.break",
@@ -2786,6 +2809,60 @@
         {
             "name": "mob.chicken.step",
             "description": "鸡：行走"
+        },
+        {
+            "name": "mob.copper_golem.chest_interaction.put_item"
+        },
+        {
+            "name": "mob.copper_golem.chest_interaction.put_item_fail"
+        },
+        {
+            "name": "mob.copper_golem.chest_interaction.take_item"
+        },
+        {
+            "name": "mob.copper_golem.chest_interaction.take_item_fail"
+        },
+        {
+            "name": "mob.copper_golem.death"
+        },
+        {
+            "name": "mob.copper_golem.hurt"
+        },
+        {
+            "name": "mob.copper_golem.oxidized.death"
+        },
+        {
+            "name": "mob.copper_golem.oxidized.hurt"
+        },
+        {
+            "name": "mob.copper_golem.oxidized.spin"
+        },
+        {
+            "name": "mob.copper_golem.oxidized.step"
+        },
+        {
+            "name": "mob.copper_golem.spawn",
+            "description": "铜傀儡：出现"
+        },
+        {
+            "name": "mob.copper_golem.spin",
+            "description": "铜傀儡：旋转头部"
+        },
+        {
+            "name": "mob.copper_golem.step",
+            "description": "铜傀儡：出现"
+        },
+        {
+            "name": "mob.copper_golem.weathered.death"
+        },
+        {
+            "name": "mob.copper_golem.weathered.hurt"
+        },
+        {
+            "name": "mob.copper_golem.weathered.spin"
+        },
+        {
+            "name": "mob.copper_golem.weathered.step"
         },
         {
             "name": "mob.cow.hurt",

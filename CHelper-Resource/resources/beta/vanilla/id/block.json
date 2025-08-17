@@ -2313,16 +2313,6 @@
                 ]
             },
             {
-                "name": "chain",
-                "description": "锁链",
-                "properties": [
-                    {
-                        "name": "pillar_axis",
-                        "defaultValue": "y"
-                    }
-                ]
-            },
-            {
                 "name": "chain_command_block",
                 "description": "连锁型命令方块",
                 "properties": [
@@ -2969,6 +2959,10 @@
                 "description": "潮涌核心"
             },
             {
+                "name": "copper_bars",
+                "description": "铜栏杆"
+            },
+            {
                 "name": "copper_block",
                 "description": "铜块"
             },
@@ -2983,6 +2977,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "copper_chain",
+                "description": "铜链",
+                "properties": [
+                    {
+                        "name": "pillar_axis",
+                        "defaultValue": "y"
                     }
                 ]
             },
@@ -3037,8 +3041,28 @@
                 "description": "铜格栅"
             },
             {
+                "name": "copper_lantern",
+                "description": "铜灯笼",
+                "properties": [
+                    {
+                        "name": "hanging",
+                        "defaultValue": false
+                    }
+                ]
+            },
+            {
                 "name": "copper_ore",
                 "description": "铜矿石"
+            },
+            {
+                "name": "copper_torch",
+                "description": "铜火把",
+                "properties": [
+                    {
+                        "name": "torch_facing_direction",
+                        "defaultValue": "unknown"
+                    }
+                ]
             },
             {
                 "name": "copper_trapdoor",
@@ -5101,6 +5125,10 @@
                 "description": "斑驳的铜块"
             },
             {
+                "name": "exposed_copper_bars",
+                "description": "斑驳的铜栏杆"
+            },
+            {
                 "name": "exposed_copper_bulb",
                 "description": "斑驳的铜灯",
                 "properties": [
@@ -5111,6 +5139,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "exposed_copper_chain",
+                "description": "斑驳的铜链",
+                "properties": [
+                    {
+                        "name": "pillar_axis",
+                        "defaultValue": "y"
                     }
                 ]
             },
@@ -5163,6 +5201,16 @@
             {
                 "name": "exposed_copper_grate",
                 "description": "斑驳的铜格栅"
+            },
+            {
+                "name": "exposed_copper_lantern",
+                "description": "斑驳的铜灯笼",
+                "properties": [
+                    {
+                        "name": "hanging",
+                        "defaultValue": false
+                    }
+                ]
             },
             {
                 "name": "exposed_copper_trapdoor",
@@ -5235,6 +5283,10 @@
                     {
                         "name": "facing_direction",
                         "defaultValue": 0
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
                     }
                 ]
             },
@@ -6190,6 +6242,16 @@
             {
                 "name": "iron_block",
                 "description": "铁块"
+            },
+            {
+                "name": "iron_chain",
+                "description": "铁链",
+                "properties": [
+                    {
+                        "name": "pillar_axis",
+                        "defaultValue": "y"
+                    }
+                ]
             },
             {
                 "name": "iron_door",
@@ -7184,6 +7246,10 @@
                     {
                         "name": "facing_direction",
                         "defaultValue": 0
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
                     }
                 ]
             },
@@ -8791,6 +8857,10 @@
                 "description": "氧化的铜块"
             },
             {
+                "name": "oxidized_copper_bars",
+                "description": "氧化的铜栏杆"
+            },
+            {
                 "name": "oxidized_copper_bulb",
                 "description": "氧化的铜灯",
                 "properties": [
@@ -8801,6 +8871,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "oxidized_copper_chain",
+                "description": "氧化的铜链",
+                "properties": [
+                    {
+                        "name": "pillar_axis",
+                        "defaultValue": "y"
                     }
                 ]
             },
@@ -8853,6 +8933,16 @@
             {
                 "name": "oxidized_copper_grate",
                 "description": "氧化的铜格栅"
+            },
+            {
+                "name": "oxidized_copper_lantern",
+                "description": "氧化的铜灯笼",
+                "properties": [
+                    {
+                        "name": "hanging",
+                        "defaultValue": false
+                    }
+                ]
             },
             {
                 "name": "oxidized_copper_trapdoor",
@@ -8925,6 +9015,10 @@
                     {
                         "name": "facing_direction",
                         "defaultValue": 0
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
                     }
                 ]
             },
@@ -13569,6 +13663,10 @@
                 "description": "涂蜡的铜块"
             },
             {
+                "name": "waxed_copper_bars",
+                "description": "涂蜡的铜栏杆"
+            },
+            {
                 "name": "waxed_copper_bulb",
                 "description": "涂蜡的铜灯",
                 "properties": [
@@ -13579,6 +13677,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "waxed_copper_chain",
+                "description": "涂蜡的铜链",
+                "properties": [
+                    {
+                        "name": "pillar_axis",
+                        "defaultValue": "y"
                     }
                 ]
             },
@@ -13631,6 +13739,16 @@
             {
                 "name": "waxed_copper_grate",
                 "description": "涂蜡的铜格栅"
+            },
+            {
+                "name": "waxed_copper_lantern",
+                "description": "涂蜡的铜灯笼",
+                "properties": [
+                    {
+                        "name": "hanging",
+                        "defaultValue": false
+                    }
+                ]
             },
             {
                 "name": "waxed_copper_trapdoor",
@@ -13705,6 +13823,10 @@
                 "description": "涂蜡的斑驳铜块"
             },
             {
+                "name": "waxed_exposed_copper_bars",
+                "description": "涂蜡的斑驳铜栏杆"
+            },
+            {
                 "name": "waxed_exposed_copper_bulb",
                 "description": "涂蜡的斑驳铜灯",
                 "properties": [
@@ -13715,6 +13837,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "waxed_exposed_copper_chain",
+                "description": "涂蜡的斑驳铜链",
+                "properties": [
+                    {
+                        "name": "pillar_axis",
+                        "defaultValue": "y"
                     }
                 ]
             },
@@ -13767,6 +13899,16 @@
             {
                 "name": "waxed_exposed_copper_grate",
                 "description": "涂蜡的斑驳铜格栅"
+            },
+            {
+                "name": "waxed_exposed_copper_lantern",
+                "description": "涂蜡的斑驳铜灯笼",
+                "properties": [
+                    {
+                        "name": "hanging",
+                        "defaultValue": false
+                    }
+                ]
             },
             {
                 "name": "waxed_exposed_copper_trapdoor",
@@ -13839,6 +13981,10 @@
                     {
                         "name": "facing_direction",
                         "defaultValue": 0
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
                     }
                 ]
             },
@@ -13849,6 +13995,10 @@
                     {
                         "name": "facing_direction",
                         "defaultValue": 0
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
                     }
                 ]
             },
@@ -13861,6 +14011,10 @@
                 "description": "涂蜡的氧化铜块"
             },
             {
+                "name": "waxed_oxidized_copper_bars",
+                "description": "涂蜡的氧化铜栏杆"
+            },
+            {
                 "name": "waxed_oxidized_copper_bulb",
                 "description": "涂蜡的氧化铜灯",
                 "properties": [
@@ -13871,6 +14025,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "waxed_oxidized_copper_chain",
+                "description": "涂蜡的氧化铜链",
+                "properties": [
+                    {
+                        "name": "pillar_axis",
+                        "defaultValue": "y"
                     }
                 ]
             },
@@ -13923,6 +14087,16 @@
             {
                 "name": "waxed_oxidized_copper_grate",
                 "description": "涂蜡的氧化铜格栅"
+            },
+            {
+                "name": "waxed_oxidized_copper_lantern",
+                "description": "涂蜡的氧化铜灯笼",
+                "properties": [
+                    {
+                        "name": "hanging",
+                        "defaultValue": false
+                    }
+                ]
             },
             {
                 "name": "waxed_oxidized_copper_trapdoor",
@@ -13995,6 +14169,10 @@
                     {
                         "name": "facing_direction",
                         "defaultValue": 0
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
                     }
                 ]
             },
@@ -14007,6 +14185,10 @@
                 "description": "涂蜡的锈蚀铜块"
             },
             {
+                "name": "waxed_weathered_copper_bars",
+                "description": "涂蜡的锈蚀铜栏杆"
+            },
+            {
                 "name": "waxed_weathered_copper_bulb",
                 "description": "涂蜡的锈蚀铜灯",
                 "properties": [
@@ -14017,6 +14199,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "waxed_weathered_copper_chain",
+                "description": "涂蜡的锈蚀铜链",
+                "properties": [
+                    {
+                        "name": "pillar_axis",
+                        "defaultValue": "y"
                     }
                 ]
             },
@@ -14069,6 +14261,16 @@
             {
                 "name": "waxed_weathered_copper_grate",
                 "description": "涂蜡的锈蚀铜格栅"
+            },
+            {
+                "name": "waxed_weathered_copper_lantern",
+                "description": "涂蜡的锈蚀铜灯笼",
+                "properties": [
+                    {
+                        "name": "hanging",
+                        "defaultValue": false
+                    }
+                ]
             },
             {
                 "name": "waxed_weathered_copper_trapdoor",
@@ -14141,6 +14343,10 @@
                     {
                         "name": "facing_direction",
                         "defaultValue": 0
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
                     }
                 ]
             },
@@ -14153,6 +14359,10 @@
                 "description": "锈蚀的铜块"
             },
             {
+                "name": "weathered_copper_bars",
+                "description": "锈蚀的铜栏杆"
+            },
+            {
                 "name": "weathered_copper_bulb",
                 "description": "锈蚀的铜灯",
                 "properties": [
@@ -14163,6 +14373,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "weathered_copper_chain",
+                "description": "锈蚀的铜链",
+                "properties": [
+                    {
+                        "name": "pillar_axis",
+                        "defaultValue": "y"
                     }
                 ]
             },
@@ -14215,6 +14435,16 @@
             {
                 "name": "weathered_copper_grate",
                 "description": "锈蚀的铜格栅"
+            },
+            {
+                "name": "weathered_copper_lantern",
+                "description": "锈蚀的铜灯笼",
+                "properties": [
+                    {
+                        "name": "hanging",
+                        "defaultValue": false
+                    }
+                ]
             },
             {
                 "name": "weathered_copper_trapdoor",
@@ -14287,6 +14517,10 @@
                     {
                         "name": "facing_direction",
                         "defaultValue": 0
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
                     }
                 ]
             },

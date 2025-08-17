@@ -299,6 +299,10 @@
             "description": "发光鱿鱼的发光粒子（该粒子只能在水中生成和存在）"
         },
         {
+            "name": "minecraft:green_flame_particle",
+            "description": "铜火把产生的粒子"
+        },
+        {
             "name": "minecraft:guardian_attack_particle",
             "description": "守卫者激光气泡粒子（该粒子只能在水中生成和存在）"
         },

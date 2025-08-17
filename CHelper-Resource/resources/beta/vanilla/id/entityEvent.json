@@ -336,6 +336,9 @@
             "name": "minecraft:become_sheperd"
         },
         {
+            "name": "minecraft:become_statue"
+        },
+        {
             "name": "minecraft:become_stunned"
         },
         {
@@ -516,6 +519,9 @@
             "name": "minecraft:from_player_oxidized"
         },
         {
+            "name": "minecraft:from_player_spawned"
+        },
+        {
             "name": "minecraft:from_player_weathered"
         },
         {
@@ -685,6 +691,9 @@
         },
         {
             "name": "minecraft:on_stop_tempting"
+        },
+        {
+            "name": "minecraft:on_take_flower"
         },
         {
             "name": "minecraft:on_tame"

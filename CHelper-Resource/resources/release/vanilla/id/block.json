@@ -2260,13 +2260,7 @@
             },
             {
                 "name": "chain",
-                "description": "锁链",
-                "properties": [
-                    {
-                        "name": "pillar_axis",
-                        "defaultValue": "y"
-                    }
-                ]
+                "description": "锁链"
             },
             {
                 "name": "chain_command_block",
@@ -7008,6 +7002,10 @@
                     {
                         "name": "facing_direction",
                         "defaultValue": 0
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
                     }
                 ]
             },

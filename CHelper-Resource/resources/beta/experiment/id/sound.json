@@ -298,10 +298,12 @@
             "description": "铜灯：亮起"
         },
         {
-            "name": "block.copper_chest.closed"
+            "name": "block.copper_chest.closed",
+            "description": "箱子：关闭"
         },
         {
-            "name": "block.copper_chest.open"
+            "name": "block.copper_chest.open",
+            "description": "箱子：开启"
         },
         {
             "name": "block.copper_chest.oxidized.closed"
@@ -682,25 +684,30 @@
             "description": "脚手架：被踩上"
         },
         {
-            "name": "block.shelf.activate"
+            "name": "block.shelf.activate",
+            "description": "展示架：激活"
         },
         {
             "name": "block.shelf.break"
         },
         {
-            "name": "block.shelf.deactivate"
+            "name": "block.shelf.deactivate",
+            "description": "展示架：取消激活"
         },
         {
-            "name": "block.shelf.multi_swap"
+            "name": "block.shelf.multi_swap",
+            "description": "物品：交换"
         },
         {
             "name": "block.shelf.open"
         },
         {
-            "name": "block.shelf.place_item"
+            "name": "block.shelf.place_item",
+            "description": "物品：放置"
         },
         {
-            "name": "block.shelf.single_swap"
+            "name": "block.shelf.single_swap",
+            "description": "物品：交换"
         },
         {
             "name": "block.shelf.step"
@@ -2455,7 +2462,7 @@
         },
         {
             "name": "lead.break",
-            "description": "拴绳：剪断"
+            "description": "拴绳：断开"
         },
         {
             "name": "leashknot.break",
@@ -2875,13 +2882,16 @@
             "name": "mob.copper_golem.oxidized.step"
         },
         {
-            "name": "mob.copper_golem.spawn"
+            "name": "mob.copper_golem.spawn",
+            "description": "铜傀儡：出现"
         },
         {
-            "name": "mob.copper_golem.spin"
+            "name": "mob.copper_golem.spin",
+            "description": "铜傀儡：旋转头部"
         },
         {
-            "name": "mob.copper_golem.step"
+            "name": "mob.copper_golem.step",
+            "description": "铜傀儡：出现"
         },
         {
             "name": "mob.copper_golem.weathered.death"

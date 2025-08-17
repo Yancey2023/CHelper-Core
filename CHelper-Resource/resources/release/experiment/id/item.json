@@ -1115,28 +1115,76 @@
             "description": "曲奇"
         },
         {
+            "name": "copper_axe",
+            "description": "铜斧"
+        },
+        {
             "name": "copper_block",
             "description": "铜块"
+        },
+        {
+            "name": "copper_boots",
+            "description": "铜靴子"
         },
         {
             "name": "copper_bulb",
             "description": "铜灯"
         },
         {
+            "name": "copper_chest",
+            "description": "铜箱子"
+        },
+        {
+            "name": "copper_chestplate",
+            "description": "铜胸甲"
+        },
+        {
             "name": "copper_door",
             "description": "铜门"
+        },
+        {
+            "name": "copper_golem_spawn_egg",
+            "description": "铜傀儡刷怪蛋"
         },
         {
             "name": "copper_grate",
             "description": "铜格栅"
         },
         {
+            "name": "copper_helmet",
+            "description": "铜头盔"
+        },
+        {
+            "name": "copper_hoe",
+            "description": "铜锄"
+        },
+        {
             "name": "copper_ingot",
             "description": "铜锭"
         },
         {
+            "name": "copper_leggings",
+            "description": "铜护腿"
+        },
+        {
+            "name": "copper_nugget",
+            "description": "铜粒"
+        },
+        {
             "name": "copper_ore",
             "description": "铜矿石"
+        },
+        {
+            "name": "copper_pickaxe",
+            "description": "铜镐"
+        },
+        {
+            "name": "copper_shovel",
+            "description": "铜锹"
+        },
+        {
+            "name": "copper_sword",
+            "description": "铜剑"
         },
         {
             "name": "copper_trapdoor",
@@ -1845,6 +1893,10 @@
         {
             "name": "exposed_copper_bulb",
             "description": "斑驳的铜灯"
+        },
+        {
+            "name": "exposed_copper_chest",
+            "description": "斑驳的铜箱子"
         },
         {
             "name": "exposed_copper_door",
@@ -3562,6 +3614,10 @@
         {
             "name": "oxidized_copper_bulb",
             "description": "氧化的铜灯"
+        },
+        {
+            "name": "oxidized_copper_chest",
+            "description": "氧化的铜箱子"
         },
         {
             "name": "oxidized_copper_door",
@@ -5342,6 +5398,10 @@
             "description": "涂蜡的铜灯"
         },
         {
+            "name": "waxed_copper_chest",
+            "description": "涂蜡的铜箱子"
+        },
+        {
             "name": "waxed_copper_door",
             "description": "涂蜡的铜门"
         },
@@ -5376,6 +5436,10 @@
         {
             "name": "waxed_exposed_copper_bulb",
             "description": "涂蜡的斑驳铜灯"
+        },
+        {
+            "name": "waxed_exposed_copper_chest",
+            "description": "涂蜡的斑驳铜箱子"
         },
         {
             "name": "waxed_exposed_copper_door",
@@ -5414,6 +5478,10 @@
             "description": "涂蜡的氧化铜灯"
         },
         {
+            "name": "waxed_oxidized_copper_chest",
+            "description": "涂蜡的氧化铜箱子"
+        },
+        {
             "name": "waxed_oxidized_copper_door",
             "description": "涂蜡的氧化铜门"
         },
@@ -5448,6 +5516,10 @@
         {
             "name": "waxed_weathered_copper_bulb",
             "description": "涂蜡的锈蚀铜灯"
+        },
+        {
+            "name": "waxed_weathered_copper_chest",
+            "description": "涂蜡的锈蚀铜箱子"
         },
         {
             "name": "waxed_weathered_copper_door",
@@ -5488,6 +5560,10 @@
         {
             "name": "weathered_copper_bulb",
             "description": "锈蚀的铜灯"
+        },
+        {
+            "name": "weathered_copper_chest",
+            "description": "锈蚀的铜箱子"
         },
         {
             "name": "weathered_copper_door",

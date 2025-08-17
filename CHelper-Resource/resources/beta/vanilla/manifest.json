@@ -1,12 +1,12 @@
 {
     "name": "[内置] 测试版原版",
     "description": "CHelper内置资源包",
-    "version": "1.21.110.22",
+    "version": "1.21.110.24",
     "versionType": "beta",
     "branch": "vanilla",
     "author": "Yancey",
-    "updateDate": "2025-08-05",
-    "packId": "BasicPack-1.21.110.22-vanilla",
+    "updateDate": "2025-08-17",
+    "packId": "BasicPack-1.21.110.24-vanilla",
     "versionCode": 1,
     "isBasicPack": true,
     "isDefault": true

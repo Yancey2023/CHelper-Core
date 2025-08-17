@@ -2260,13 +2260,7 @@
             },
             {
                 "name": "chain",
-                "description": "锁链",
-                "properties": [
-                    {
-                        "name": "pillar_axis",
-                        "defaultValue": "y"
-                    }
-                ]
+                "description": "锁链"
             },
             {
                 "name": "chain_command_block",
@@ -2911,6 +2905,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "copper_chest",
+                "description": "铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
                     }
                 ]
             },
@@ -4987,6 +4991,16 @@
                 ]
             },
             {
+                "name": "exposed_copper_chest",
+                "description": "斑驳的铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
+                    }
+                ]
+            },
+            {
                 "name": "exposed_copper_door",
                 "description": "斑驳的铜门",
                 "properties": [
@@ -7008,6 +7022,10 @@
                     {
                         "name": "facing_direction",
                         "defaultValue": 0
+                    },
+                    {
+                        "name": "powered_bit",
+                        "defaultValue": false
                     }
                 ]
             },
@@ -8589,6 +8607,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "oxidized_copper_chest",
+                "description": "氧化的铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
                     }
                 ]
             },
@@ -13287,6 +13315,16 @@
                 ]
             },
             {
+                "name": "waxed_copper_chest",
+                "description": "涂蜡的铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
+                    }
+                ]
+            },
+            {
                 "name": "waxed_copper_door",
                 "description": "涂蜡的铜门",
                 "properties": [
@@ -13399,6 +13437,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "waxed_exposed_copper_chest",
+                "description": "涂蜡的斑驳铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
                     }
                 ]
             },
@@ -13519,6 +13567,16 @@
                 ]
             },
             {
+                "name": "waxed_oxidized_copper_chest",
+                "description": "涂蜡的氧化铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
+                    }
+                ]
+            },
+            {
                 "name": "waxed_oxidized_copper_door",
                 "description": "涂蜡的氧化铜门",
                 "properties": [
@@ -13635,6 +13693,16 @@
                 ]
             },
             {
+                "name": "waxed_weathered_copper_chest",
+                "description": "涂蜡的锈蚀铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
+                    }
+                ]
+            },
+            {
                 "name": "waxed_weathered_copper_door",
                 "description": "涂蜡的锈蚀铜门",
                 "properties": [
@@ -13747,6 +13815,16 @@
                     {
                         "name": "powered_bit",
                         "defaultValue": false
+                    }
+                ]
+            },
+            {
+                "name": "weathered_copper_chest",
+                "description": "锈蚀的铜箱子",
+                "properties": [
+                    {
+                        "name": "minecraft:cardinal_direction",
+                        "defaultValue": "north"
                     }
                 ]
             },

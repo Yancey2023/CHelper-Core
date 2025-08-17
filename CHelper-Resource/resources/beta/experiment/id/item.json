@@ -815,10 +815,6 @@
             "description": "洞穴蜘蛛刷怪蛋"
         },
         {
-            "name": "chain",
-            "description": "锁链"
-        },
-        {
             "name": "chain_command_block",
             "description": "连锁型命令方块"
         },
@@ -1135,6 +1131,10 @@
             "description": "铜斧"
         },
         {
+            "name": "copper_bars",
+            "description": "铜栏杆"
+        },
+        {
             "name": "copper_block",
             "description": "铜块"
         },
@@ -1145,6 +1145,10 @@
         {
             "name": "copper_bulb",
             "description": "铜灯"
+        },
+        {
+            "name": "copper_chain",
+            "description": "铜链"
         },
         {
             "name": "copper_chest",
@@ -1187,6 +1191,10 @@
             "description": "铜锭"
         },
         {
+            "name": "copper_lantern",
+            "description": "铜灯笼"
+        },
+        {
             "name": "copper_leggings",
             "description": "铜护腿"
         },
@@ -1209,6 +1217,10 @@
         {
             "name": "copper_sword",
             "description": "铜剑"
+        },
+        {
+            "name": "copper_torch",
+            "description": "铜火把"
         },
         {
             "name": "copper_trapdoor",
@@ -1923,8 +1935,16 @@
             "description": "斑驳的铜块"
         },
         {
+            "name": "exposed_copper_bars",
+            "description": "斑驳的铜栏杆"
+        },
+        {
             "name": "exposed_copper_bulb",
             "description": "斑驳的铜灯"
+        },
+        {
+            "name": "exposed_copper_chain",
+            "description": "斑驳的铜链"
         },
         {
             "name": "exposed_copper_chest",
@@ -1941,6 +1961,10 @@
         {
             "name": "exposed_copper_grate",
             "description": "斑驳的铜格栅"
+        },
+        {
+            "name": "exposed_copper_lantern",
+            "description": "斑驳的铜灯笼"
         },
         {
             "name": "exposed_copper_trapdoor",
@@ -2521,6 +2545,10 @@
         {
             "name": "iron_boots",
             "description": "铁靴子"
+        },
+        {
+            "name": "iron_chain",
+            "description": "铁链"
         },
         {
             "name": "iron_chestplate",
@@ -3664,8 +3692,16 @@
             "description": "氧化的铜块"
         },
         {
+            "name": "oxidized_copper_bars",
+            "description": "氧化的铜栏杆"
+        },
+        {
             "name": "oxidized_copper_bulb",
             "description": "氧化的铜灯"
+        },
+        {
+            "name": "oxidized_copper_chain",
+            "description": "氧化的铜链"
         },
         {
             "name": "oxidized_copper_chest",
@@ -3682,6 +3718,10 @@
         {
             "name": "oxidized_copper_grate",
             "description": "氧化的铜格栅"
+        },
+        {
+            "name": "oxidized_copper_lantern",
+            "description": "氧化的铜灯笼"
         },
         {
             "name": "oxidized_copper_trapdoor",
@@ -5466,8 +5506,16 @@
             "description": "涂蜡的铜块"
         },
         {
+            "name": "waxed_copper_bars",
+            "description": "涂蜡的铜栏杆"
+        },
+        {
             "name": "waxed_copper_bulb",
             "description": "涂蜡的铜灯"
+        },
+        {
+            "name": "waxed_copper_chain",
+            "description": "涂蜡的铜链"
         },
         {
             "name": "waxed_copper_chest",
@@ -5484,6 +5532,10 @@
         {
             "name": "waxed_copper_grate",
             "description": "涂蜡的铜格栅"
+        },
+        {
+            "name": "waxed_copper_lantern",
+            "description": "涂蜡的铜灯笼"
         },
         {
             "name": "waxed_copper_trapdoor",
@@ -5510,8 +5562,16 @@
             "description": "涂蜡的斑驳铜块"
         },
         {
+            "name": "waxed_exposed_copper_bars",
+            "description": "涂蜡的斑驳铜栏杆"
+        },
+        {
             "name": "waxed_exposed_copper_bulb",
             "description": "涂蜡的斑驳铜灯"
+        },
+        {
+            "name": "waxed_exposed_copper_chain",
+            "description": "涂蜡的斑驳铜链"
         },
         {
             "name": "waxed_exposed_copper_chest",
@@ -5528,6 +5588,10 @@
         {
             "name": "waxed_exposed_copper_grate",
             "description": "涂蜡的斑驳铜格栅"
+        },
+        {
+            "name": "waxed_exposed_copper_lantern",
+            "description": "涂蜡的斑驳铜灯笼"
         },
         {
             "name": "waxed_exposed_copper_trapdoor",
@@ -5562,8 +5626,16 @@
             "description": "涂蜡的氧化铜块"
         },
         {
+            "name": "waxed_oxidized_copper_bars",
+            "description": "涂蜡的氧化铜栏杆"
+        },
+        {
             "name": "waxed_oxidized_copper_bulb",
             "description": "涂蜡的氧化铜灯"
+        },
+        {
+            "name": "waxed_oxidized_copper_chain",
+            "description": "涂蜡的氧化铜链"
         },
         {
             "name": "waxed_oxidized_copper_chest",
@@ -5580,6 +5652,10 @@
         {
             "name": "waxed_oxidized_copper_grate",
             "description": "涂蜡的氧化铜格栅"
+        },
+        {
+            "name": "waxed_oxidized_copper_lantern",
+            "description": "涂蜡的氧化铜灯笼"
         },
         {
             "name": "waxed_oxidized_copper_trapdoor",
@@ -5610,8 +5686,16 @@
             "description": "涂蜡的锈蚀铜块"
         },
         {
+            "name": "waxed_weathered_copper_bars",
+            "description": "涂蜡的锈蚀铜栏杆"
+        },
+        {
             "name": "waxed_weathered_copper_bulb",
             "description": "涂蜡的锈蚀铜灯"
+        },
+        {
+            "name": "waxed_weathered_copper_chain",
+            "description": "涂蜡的锈蚀铜链"
         },
         {
             "name": "waxed_weathered_copper_chest",
@@ -5628,6 +5712,10 @@
         {
             "name": "waxed_weathered_copper_grate",
             "description": "涂蜡的锈蚀铜格栅"
+        },
+        {
+            "name": "waxed_weathered_copper_lantern",
+            "description": "涂蜡的锈蚀铜灯笼"
         },
         {
             "name": "waxed_weathered_copper_trapdoor",
@@ -5662,8 +5750,16 @@
             "description": "锈蚀的铜块"
         },
         {
+            "name": "weathered_copper_bars",
+            "description": "锈蚀的铜栏杆"
+        },
+        {
             "name": "weathered_copper_bulb",
             "description": "锈蚀的铜灯"
+        },
+        {
+            "name": "weathered_copper_chain",
+            "description": "锈蚀的铜链"
         },
         {
             "name": "weathered_copper_chest",
@@ -5680,6 +5776,10 @@
         {
             "name": "weathered_copper_grate",
             "description": "锈蚀的铜格栅"
+        },
+        {
+            "name": "weathered_copper_lantern",
+            "description": "锈蚀的铜灯笼"
         },
         {
             "name": "weathered_copper_trapdoor",

@@ -323,6 +323,9 @@
             "name": "\"entities/copper_golem\""
         },
         {
+            "name": "\"entities/copper_golem_shear\""
+        },
+        {
             "name": "\"entities/cow\"",
             "description": "牛的掉落物"
         },
