@@ -91,14 +91,6 @@ namespace CHelper::Test {
                     SPDLOG_INFO("error reasons:");
                     for (size_t i = 0; i < errorReasons.size(); ++i) {
                         const auto &errorReason = errorReasons[i];
-                        try {
-                            fmt::styled(utf8::utf16to8(errorReason->errorReason), fg(fmt::color::cornflower_blue));
-                        } catch (const std::exception &e) {
-                            for (int i = 0; i < errorReason->errorReason.length(); ++i) {
-                                SPDLOG_INFO("{}. {}", i, utf8::utf16to8(errorReason->errorReason.substr(0, i)));
-                            }
-                            exit(-1);
-                        }
                         SPDLOG_INFO("{}. {} {}",
                                     i,
                                     fmt::styled(utf8::utf16to8(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
