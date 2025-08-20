@@ -293,7 +293,7 @@ Java_yancey_chelper_core_CHelperCore_old2newInit0(
         int numBytesRead = AAsset_read(asset, buffer, dataFileSize);
         AAsset_close(asset);
         std::istringstream iss(std::string(buffer, numBytesRead));
-        serialization::from_binary<true>(iss, blockFixData0);
+        serialization::from_binary(iss, blockFixData0);
         delete[] buffer;
         return true;
     } catch (const std::exception &e) {

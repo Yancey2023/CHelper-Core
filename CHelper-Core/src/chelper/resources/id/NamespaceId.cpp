@@ -7,7 +7,7 @@
 namespace CHelper {
 
     std::shared_ptr<NormalId> &NamespaceId::getIdWithNamespace() {
-        if (HEDLEY_UNLIKELY(idWithNamespace == nullptr)) {
+        if (idWithNamespace == nullptr) [[unlikely]] {
             idWithNamespace = NormalId::make(
                     idNamespace.value_or(u"minecraft")
                             .append(u":")

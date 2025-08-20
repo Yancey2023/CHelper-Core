@@ -152,16 +152,16 @@ struct serialization::Codec<CHelper::PropertyValue> {
     static CHelper::PropertyType::PropertyType
     from_json(const JsonValueType &jsonValue,
               Type &t) {
-        if (HEDLEY_LIKELY(jsonValue.IsString())) {
+        if (jsonValue.IsString()) [[likely]] {
             t.string = new std::u16string();
             Codec<std::remove_pointer_t<decltype(t.string)>>::template from_json<JsonValueType>(jsonValue, *t.string);
             return CHelper::PropertyType::PropertyType::STRING;
         }
-        if (HEDLEY_LIKELY(jsonValue.IsBool())) {
+        if (jsonValue.IsBool()) [[likely]] {
             Codec<decltype(t.boolean)>::template from_json<JsonValueType>(jsonValue, t.boolean);
             return CHelper::PropertyType::PropertyType::BOOLEAN;
         }
-        if (HEDLEY_LIKELY(jsonValue.IsInt())) {
+        if (jsonValue.IsInt()) [[likely]] {
             Codec<decltype(t.integer)>::template from_json<JsonValueType>(jsonValue, t.integer);
             return CHelper::PropertyType::PropertyType::INTEGER;
         }
@@ -269,25 +269,25 @@ struct serialization::Codec<CHelper::Property> : BaseCodec<CHelper::Property> {
     template<class JsonValueType>
     static void from_json(const JsonValueType &jsonValue,
                           Type &t) {
-        if (HEDLEY_UNLIKELY(!jsonValue.IsObject())) {
+        if (!jsonValue.IsObject()) [[unlikely]] {
             throw exceptions::JsonSerializationTypeException("object", getJsonTypeStr(jsonValue.GetType()));
         }
         t.release();
         Codec<decltype(t.name)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::name_(), t.name);
         t.type = Codec<decltype(t.defaultValue)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::defaultValue_(), t.defaultValue);
         const typename JsonValueType::ConstMemberIterator &it = jsonValue.FindMember(details::JsonKey<CHelper::Property, typename JsonValueType::Ch>::valid_());
-        if (HEDLEY_LIKELY(it == jsonValue.MemberEnd())) {
+        if (it == jsonValue.MemberEnd()) [[likely]] {
             t.valid = std::nullopt;
         } else {
             t.valid = std::make_optional<std::vector<CHelper::PropertyValue>>();
-            if (!HEDLEY_UNLIKELY(it->value.IsArray())) {
+            if (!it->value.IsArray()) [[unlikely]] {
                 throw exceptions::JsonSerializationTypeException("array", getJsonTypeStr(jsonValue.GetType()));
             }
             t.valid.value().reserve(it->value.GetArray().Size());
             for (const auto &item: it->value.GetArray()) {
                 CHelper::PropertyValue propertyValue;
                 CHelper::PropertyType::PropertyType type = Codec<decltype(propertyValue)>::template from_json<typename JsonValueType::ValueType>(item, propertyValue);
-                if (HEDLEY_UNLIKELY(t.type != type)) {
+                if (t.type != type) [[unlikely]] {
                     if (type == CHelper::PropertyType::PropertyType::STRING) {
                         delete propertyValue.string;
                     }
@@ -303,14 +303,14 @@ struct serialization::Codec<CHelper::Property> : BaseCodec<CHelper::Property> {
                           const Type &t) {
         Codec<decltype(t.name)>::template to_binary<isNeedConvert>(ostream, t.name);
 #ifdef CHelperDebug
-        if (t.type != CHelper::PropertyType::BOOLEAN && t.type != CHelper::PropertyType::STRING && t.type != CHelper::PropertyType::INTEGER) {
+        if (t.type != CHelper::PropertyType::BOOLEAN && t.type != CHelper::PropertyType::STRING && t.type != CHelper::PropertyType::INTEGER) [[unlikely]] {
             throw std::runtime_error("error block state property type");
         }
 #endif
         Codec<decltype(t.type)>::template to_binary<isNeedConvert>(ostream, t.type);
         Codec<decltype(t.defaultValue)>::template to_binary<isNeedConvert>(ostream, t.defaultValue, t.type);
         Codec<bool>::template to_binary<isNeedConvert>(ostream, t.valid.has_value());
-        if (t.valid.has_value()) {
+        if (t.valid.has_value()) [[unlikely]] {
             Codec<uint32_t>::template to_binary<isNeedConvert>(ostream, static_cast<uint32_t>(t.valid.value().size()));
             for (const auto &item: t.valid.value()) {
                 Codec<CHelper::PropertyValue>::template to_binary<isNeedConvert>(ostream, item, t.type);
@@ -325,14 +325,14 @@ struct serialization::Codec<CHelper::Property> : BaseCodec<CHelper::Property> {
         Codec<decltype(t.name)>::template from_binary<isNeedConvert>(istream, t.name);
         Codec<decltype(t.type)>::template from_binary<isNeedConvert>(istream, t.type);
 #ifdef CHelperDebug
-        if (t.type != CHelper::PropertyType::BOOLEAN && t.type != CHelper::PropertyType::STRING && t.type != CHelper::PropertyType::INTEGER) {
+        if (t.type != CHelper::PropertyType::BOOLEAN && t.type != CHelper::PropertyType::STRING && t.type != CHelper::PropertyType::INTEGER) [[unlikely]] {
             throw std::runtime_error("error block state property type");
         }
 #endif
         Codec<decltype(t.defaultValue)>::template from_binary<isNeedConvert>(istream, t.defaultValue, t.type);
         bool validHasValue;
         Codec<decltype(validHasValue)>::template from_binary<isNeedConvert>(istream, validHasValue);
-        if (validHasValue) {
+        if (validHasValue) [[unlikely]] {
             t.valid = std::make_optional<std::vector<CHelper::PropertyValue>>();
             uint32_t size;
             Codec<uint32_t>::template from_binary<isNeedConvert>(istream, size);
@@ -380,7 +380,7 @@ struct serialization::Codec<CHelper::BlockPropertyDescription> : BaseCodec<CHelp
     template<class JsonValueType>
     static void from_json(const JsonValueType &jsonValue,
                           Type &t) {
-        if (HEDLEY_UNLIKELY(!jsonValue.IsObject())) {
+        if (!jsonValue.IsObject()) [[unlikely]] {
             throw exceptions::JsonSerializationTypeException("object", getJsonTypeStr(jsonValue.GetType()));
         }
         t.release();
@@ -390,8 +390,8 @@ struct serialization::Codec<CHelper::BlockPropertyDescription> : BaseCodec<CHelp
         for (const auto &item: serialization::find_array_member_or_throw(jsonValue, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::values_())) {
             CHelper::BlockPropertyValueDescription blockPropertyValueDescription;
             CHelper::PropertyType::PropertyType type = Codec<decltype(blockPropertyValueDescription.valueName)>::template from_json_member<typename JsonValueType::ValueType>(item, details::JsonKey<CHelper::BlockPropertyDescription, typename JsonValueType::Ch>::valueName_(), blockPropertyValueDescription.valueName);
-            if (HEDLEY_LIKELY(hasPropertyType)) {
-                if (t.type != type) {
+            if (hasPropertyType) [[unlikely]] {
+                if (t.type != type) [[likely]] {
                     if (type == CHelper::PropertyType::STRING) {
                         delete blockPropertyValueDescription.valueName.string;
                     }

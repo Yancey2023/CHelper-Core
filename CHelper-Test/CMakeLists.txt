@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
 project(CHelperTest LANGUAGES CXX)
 
-# using c++ 17
-set(CMAKE_CXX_STANDARD 17)
+# using c++ 20
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # export compile commands
@@ -25,8 +25,8 @@ endif ()
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 add_subdirectory(include/googletest)
 if (MSVC)
-    target_compile_options(gtest PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
-    target_compile_options(gtest_main PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+    set_property(TARGET gtest PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    set_property(TARGET gtest_main PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif ()
 
 if (NOT TARGET CHelperCore)
@@ -38,5 +38,5 @@ file(GLOB_RECURSE TEST_FILE src/*.h src/*.cpp)
 add_executable(CHelperTest ${TEST_FILE})
 target_link_libraries(CHelperTest PRIVATE CHelper::Core GTest::gtest_main)
 if (MSVC)
-    target_compile_options(CHelperTest PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+    set_property(TARGET CHelperTest PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif ()

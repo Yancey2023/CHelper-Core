@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
 project(CHelperWindows LANGUAGES CXX)
 
-# using c++ 17
-set(CMAKE_CXX_STANDARD 17)
+# using c++ 20
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # export compile commands
@@ -32,6 +32,6 @@ add_executable(CHelperWindows
 )
 if (MSVC)
     set_target_properties(CHelperWindows PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
-    target_compile_options(CHelperWindows PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+    set_property(TARGET CHelperWindows PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif ()
 target_link_libraries(CHelperWindows PRIVATE CHelper::Core)

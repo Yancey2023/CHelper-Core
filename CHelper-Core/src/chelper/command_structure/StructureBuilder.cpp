@@ -21,7 +21,7 @@ namespace CHelper::CommandStructure {
     }
 
     StructureBuilder &StructureBuilder::appendSpace() {
-        if (HEDLEY_UNLIKELY(structure.empty())) {
+        if (structure.empty()) [[unlikely]] {
             return *this;
         }
         return appendSymbol(' ');

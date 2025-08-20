@@ -194,7 +194,7 @@ namespace CHelper {
                         [&propertyName](const BlockPropertyDescription &item1) -> bool {
                             return item1.propertyName == propertyName;
                         });
-                if (HEDLEY_LIKELY(it != item.properties.end())) {
+                if (it != item.properties.end()) [[likely]] {
                     return *it;
                 }
             }
@@ -204,7 +204,7 @@ namespace CHelper {
                 [&propertyName](const BlockPropertyDescription &item1) -> bool {
                     return item1.propertyName == propertyName;
                 });
-        if (HEDLEY_LIKELY(it != common.end())) {
+        if (it != common.end()) [[likely]] {
             return *it;
         }
         Profile::push("fail to find block property value by block id {} and property name {}",
@@ -337,7 +337,7 @@ namespace CHelper {
         if (!node.has_value()) {
             std::vector<Node::NodeWithType> blockStateEntryChildNode2;
             //已知的方块状态
-            if (HEDLEY_LIKELY(properties.has_value())) {
+            if (properties.has_value()) [[likely]] {
                 blockStateEntryChildNode2.reserve(2);
                 std::vector<Node::NodeWithType> blockStateEntryChildNode1;
                 blockStateEntryChildNode1.reserve(properties.value().size());

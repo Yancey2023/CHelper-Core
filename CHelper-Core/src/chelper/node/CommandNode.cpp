@@ -82,7 +82,7 @@ namespace CHelper::Node {
           allowMissingID(allowMissingID),
           getNormalIdASTNode(getNormalIdASTNode) {
 #ifdef CHelperDebug
-        if (HEDLEY_UNLIKELY(contents == nullptr)) {
+        if (contents == nullptr) [[unlikely]] {
             throw std::runtime_error("contents should not be nullptr");
         }
 #endif
@@ -154,7 +154,7 @@ namespace CHelper::Node {
             throw std::runtime_error("childNodes is empty");
         }
         for (const auto &item: this->childNodes) {
-            if (HEDLEY_UNLIKELY(item.data == nullptr)) {
+            if (item.data == nullptr) [[unlikely]] {
                 throw std::runtime_error("null node in node or");
             }
         }
@@ -230,7 +230,7 @@ namespace CHelper::Node {
           nodeElementOrRight({nodeElement, nodeRight}, false),
           nodeSeparatorOrRight({nodeSeparator, nodeRight}, false) {
 #ifdef CHelperDebug
-        if (HEDLEY_UNLIKELY(nodeLeft.data == nullptr || nodeElement.data == nullptr || nodeSeparator.data == nullptr || nodeRight.data == nullptr)) {
+        if (nodeLeft.data == nullptr || nodeElement.data == nullptr || nodeSeparator.data == nullptr || nodeRight.data == nullptr) [[unlikely]] {
             throw std::runtime_error("NodeOr has a null child node");
         }
 #endif
@@ -253,7 +253,7 @@ namespace CHelper::Node {
             throw std::runtime_error("childNodes is empty");
         }
         for (const auto &item: this->childNodes) {
-            if (HEDLEY_UNLIKELY(item.data == nullptr)) {
+            if (item.data == nullptr) [[unlikely]] {
                 throw std::runtime_error("null node in node or");
             }
         }

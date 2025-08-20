@@ -69,7 +69,7 @@ namespace CHelper::Node {
         ;
         static void init(NodeJson &node, const CPack &cpack) {
             for (const auto &item: cpack.jsonNodes) {
-                if (HEDLEY_UNLIKELY(item.id == node.key)) {
+                if (item.id == node.key) [[unlikely]] {
                     node.nodeJson = item;
                     return;
                 }
@@ -83,13 +83,13 @@ namespace CHelper::Node {
     template<>
     struct NodeInitialization<NodeNamespaceId> {
         static void init(NodeNamespaceId &node, const CPack &cpack) {
-            if (HEDLEY_LIKELY(node.contents.has_value())) {
+            if (node.contents.has_value()) [[likely]] {
                 node.customContents = node.contents.value();
-            } else if (HEDLEY_LIKELY(node.key.has_value())) {
+            } else if (node.key.has_value()) [[likely]] {
                 node.customContents = cpack.getNamespaceId(node.key.value());
             }
-            if (HEDLEY_UNLIKELY(node.customContents == nullptr)) {
-                if (HEDLEY_UNLIKELY(node.key.has_value())) {
+            if (node.customContents == nullptr) [[unlikely]] {
+                if (node.key.has_value()) [[unlikely]] {
                     Profile::push("linking contents to {}", FORMAT_ARG(node.key.value()));
                     Profile::push("failed to find namespace id in the cpack -> {}", FORMAT_ARG(node.key.value()));
                     throw std::runtime_error("failed to find namespace id");
@@ -103,18 +103,18 @@ namespace CHelper::Node {
     template<>
     struct NodeInitialization<NodeNormalId> {
         static void init(NodeNormalId &node, const CPack &cpack) {
-            if (HEDLEY_UNLIKELY(node.getNormalIdASTNode == nullptr)) {
+            if (node.getNormalIdASTNode == nullptr) [[unlikely]] {
                 node.getNormalIdASTNode = [](const NodeWithType &node, TokenReader &tokenReader) -> ASTNode {
                     return tokenReader.readUntilSpace(node);
                 };
             }
-            if (HEDLEY_LIKELY(node.contents.has_value())) {
+            if (node.contents.has_value()) [[likely]] {
                 node.customContents = node.contents.value();
-            } else if (HEDLEY_LIKELY(node.key.has_value())) {
+            } else if (node.key.has_value()) [[likely]] {
                 node.customContents = cpack.getNormalId(node.key.value());
             }
-            if (HEDLEY_UNLIKELY(node.customContents == nullptr)) {
-                if (HEDLEY_LIKELY(node.key.has_value())) {
+            if (node.customContents == nullptr) [[unlikely]] {
+                if (node.key.has_value()) [[unlikely]] {
                     Profile::push("linking contents to {}", FORMAT_ARG(node.key.value()));
                     Profile::push("failed to find normal id in the cpack -> ", FORMAT_ARG(node.key.value()));
                     throw std::runtime_error("failed to find normal id");
@@ -134,7 +134,7 @@ namespace CHelper::Node {
                 Profile::pop();
             }
             for (const auto &item: node.wrappedNodes) {
-                if (HEDLEY_UNLIKELY(item.nextNodes.empty())) {
+                if (item.nextNodes.empty()) [[unlikely]] {
                     Profile::push("dismiss child node ids, the parent node is {} (in command {})",
                                   FORMAT_ARG(item.getNodeSerializable().id.value_or("UNKNOWN")),
                                   FORMAT_ARG(utf8::utf16to8(fmt::format(u"", StringUtil::join(node.name, u",")))));
@@ -146,12 +146,12 @@ namespace CHelper::Node {
                 bool flag1 = item.innerNode.nodeTypeId == NodeTypeId::POSITION ||
                              item.innerNode.nodeTypeId == NodeTypeId::RELATIVE_FLOAT;
                 for (const auto &item2: item.nextNodes) {
-                    if (HEDLEY_UNLIKELY(item2 == NodeLF::getInstance())) {
+                    if (item2 == NodeLF::getInstance()) [[unlikely]] {
                         continue;
                     }
                     bool flag2 = item2->innerNode.nodeTypeId == NodeTypeId::POSITION ||
                                  item2->innerNode.nodeTypeId == NodeTypeId::RELATIVE_FLOAT;
-                    if (HEDLEY_UNLIKELY(flag1 && flag2 == item2->getNodeSerializable().isMustAfterSpace)) {
+                    if (flag1 && flag2 == item2->getNodeSerializable().isMustAfterSpace) [[unlikely]] {
                         Profile::push(R"({} should be {} in node "{}")",
                                       "isMustAfterSpace",
                                       item2->getNodeSerializable().isMustAfterSpace ? "false" : "true",
@@ -168,7 +168,7 @@ namespace CHelper::Node {
     struct NodeInitialization<NodeRepeat> {
         static void init(NodeRepeat &node, const CPack &cpack) {
             const auto &it = cpack.repeatNodes.find(node.key);
-            if (HEDLEY_LIKELY(it != cpack.repeatNodes.end())) {
+            if (it != cpack.repeatNodes.end()) [[likely]] {
                 node.repeatData = it->second.first;
                 node.nodeElement = it->second.second;
                 return;
@@ -314,7 +314,7 @@ namespace CHelper::Node {
             for (const auto &item: node.value) {
                 bool notFind = true;
                 for (const auto &item2: dataList) {
-                    if (HEDLEY_UNLIKELY(reinterpret_cast<const NodeSerializable *>(item2.data)->id == item)) {
+                    if (reinterpret_cast<const NodeSerializable *>(item2.data)->id == item) [[unlikely]] {
                         valueNodes.emplace_back(item2);
                         notFind = false;
                         break;
@@ -340,14 +340,14 @@ namespace CHelper::Node {
         }
         static void init(NodeJsonList &node, const std::vector<NodeWithType> &dataList) {
             for (const auto &item: dataList) {
-                if (HEDLEY_UNLIKELY(reinterpret_cast<const NodeSerializable *>(item.data)->id == node.data)) {
+                if (reinterpret_cast<const NodeSerializable *>(item.data)->id == node.data) [[unlikely]] {
                     node.nodeList = NodeList(Node::NodeJsonList::nodeLeft, item, Node::NodeJsonList::nodeSeparator, Node::NodeJsonList::nodeRight);
                     return;
                 }
             }
             Profile::push("linking contents to {}", FORMAT_ARG(node.data));
             Profile::push("failed to find node id -> {}", FORMAT_ARG(node.data));
-            Profile::push("unknown node id -> {} (in node \"{}\")", FORMAT_ARG(node.id.value_or("UNKNOWN")));
+            Profile::push("unknown node id -> {} (in node \"{}\")", FORMAT_ARG(node.data), FORMAT_ARG(node.id.value_or("UNKNOWN")));
             throw std::runtime_error("unknown node id");
         }
     };
@@ -359,21 +359,21 @@ namespace CHelper::Node {
             for (const auto &item: node.nodes.nodes) {
                 initNode(item, cpack);
             }
-            if (HEDLEY_LIKELY(node.startNodeId != "LF")) {
+            if (node.startNodeId != "LF") [[likely]] {
                 for (auto &item: node.nodes.nodes) {
-                    if (HEDLEY_UNLIKELY(reinterpret_cast<const NodeSerializable *>(item.data)->id == node.startNodeId)) {
+                    if (reinterpret_cast<const NodeSerializable *>(item.data)->id == node.startNodeId) [[unlikely]] {
                         node.start = item;
                         break;
                     }
                 }
             }
-            if (HEDLEY_UNLIKELY(node.start.data == nullptr)) {
-                Profile::push("unknown node id -> {} (in node \"{}\")", FORMAT_ARG(node.startNodeId));
+            if (node.start.data == nullptr) [[unlikely]] {
+                Profile::push("unknown node id -> {}", FORMAT_ARG(node.startNodeId));
             }
             for (auto &item: node.nodes.nodes) {
-                if (HEDLEY_UNLIKELY(item.nodeTypeId == NodeTypeId::JSON_LIST)) {
+                if (item.nodeTypeId == NodeTypeId::JSON_LIST) [[unlikely]] {
                     NodeInitialization<NodeJsonList>::init(*reinterpret_cast<NodeJsonList *>(item.data), node.nodes.nodes);
-                } else if (HEDLEY_UNLIKELY(item.nodeTypeId == NodeTypeId::JSON_OBJECT)) {
+                } else if (item.nodeTypeId == NodeTypeId::JSON_OBJECT) [[unlikely]] {
                     for (auto &item2: reinterpret_cast<NodeJsonObject *>(item.data)->data) {
                         NodeInitialization<NodeJsonEntry>::init(item2, node.nodes.nodes);
                     }
@@ -386,7 +386,7 @@ namespace CHelper::Node {
     template<>
     struct NodeInitialization<NodeJsonObject> {
         static void init(NodeJsonObject &node, const CPack &cpack) {
-            if (HEDLEY_UNLIKELY(node.data.empty())) {
+            if (node.data.empty()) [[unlikely]] {
                 node.nodeElement1 = std::nullopt;
             } else {
                 std::vector<NodeWithType> nodeElementData;
@@ -397,7 +397,7 @@ namespace CHelper::Node {
                 node.nodeElement1 = NodeOr(std::move(nodeElementData), false);
             }
             std::vector<NodeWithType> nodeElementData;
-            if (HEDLEY_LIKELY(node.nodeElement1.has_value())) {
+            if (node.nodeElement1.has_value()) [[likely]] {
                 nodeElementData.reserve(2);
                 nodeElementData.emplace_back(node.nodeElement1.value());
             }
@@ -413,7 +413,7 @@ namespace CHelper::Node {
     template<>
     struct NodeInitialization<NodeJsonString> {
         static void init(NodeJsonString &node, const CPack &cpack) {
-            if (HEDLEY_UNLIKELY(node.data.has_value())) {
+            if (node.data.has_value()) [[unlikely]] {
                 for (const auto &item: node.data.value().nodes) {
                     initNode(item, cpack);
                 }

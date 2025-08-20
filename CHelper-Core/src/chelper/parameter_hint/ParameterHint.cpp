@@ -60,7 +60,7 @@ namespace CHelper::ParameterHint {
     template<>
     struct ParameterHint<Node::NodeRepeat> {
         static std::optional<std::u16string> getHint(const ASTNode &astNode) {
-            if (HEDLEY_UNLIKELY(astNode.tokens.isEmpty())) {
+            if (astNode.tokens.isEmpty()) [[unlikely]] {
                 return reinterpret_cast<const Node::NodeRepeat *>(astNode.node.data)->description;
             } else {
                 return std::nullopt;
@@ -69,10 +69,10 @@ namespace CHelper::ParameterHint {
     };
 
     std::optional<std::u16string> getParameterHint(const ASTNode &astNode, size_t index) {
-        if (HEDLEY_UNLIKELY(index < astNode.tokens.startIndex || index > astNode.tokens.endIndex)) {
+        if (index < astNode.tokens.startIndex || index > astNode.tokens.endIndex) [[unlikely]] {
             return std::nullopt;
         }
-        if (HEDLEY_UNLIKELY(!astNode.isAllSpaceError())) {
+        if (!astNode.isAllSpaceError()) [[unlikely]] {
 #ifdef CHelperTest
             Profile::push("get parameter hint: {} {}", FORMAT_ARG(utf8::utf16to8(astNode.tokens.toString())), FORMAT_ARG(Node::getNodeTypeName(astNode.node.nodeTypeId)));
 #endif
@@ -95,7 +95,7 @@ namespace CHelper::ParameterHint {
             case ASTNodeMode::AND:
                 for (const ASTNode &item: astNode.childNodes) {
                     auto parameterHint = getParameterHint(item, index);
-                    if (HEDLEY_UNLIKELY(parameterHint.has_value())) {
+                    if (parameterHint.has_value()) [[unlikely]] {
                         return parameterHint;
                     }
                 }

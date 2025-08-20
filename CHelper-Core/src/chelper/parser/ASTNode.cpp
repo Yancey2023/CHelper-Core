@@ -27,7 +27,7 @@ namespace CHelper {
                                 const std::shared_ptr<ErrorReason> &errorReason,
                                 const ASTNodeId::ASTNodeId &id) {
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
-        if (HEDLEY_LIKELY(errorReason != nullptr)) {
+        if (errorReason != nullptr) [[likely]] {
             errorReasons.push_back(errorReason);
         }
         return {ASTNodeMode::NONE, node, {}, tokens, errorReasons, id};
@@ -38,11 +38,11 @@ namespace CHelper {
                              const TokensView &tokens,
                              const std::shared_ptr<ErrorReason> &errorReason,
                              const ASTNodeId::ASTNodeId &id) {
-        if (HEDLEY_UNLIKELY(errorReason != nullptr)) {
+        if (errorReason != nullptr) [[unlikely]] {
             return {ASTNodeMode::AND, node, std::move(childNodes), tokens, {errorReason}, id};
         }
         for (const auto &item: childNodes) {
-            if (HEDLEY_UNLIKELY(item.isError())) {
+            if (item.isError()) [[unlikely]] {
                 return {ASTNodeMode::AND, node, std::move(childNodes), tokens, item.errorReasons, id};
             }
         }
@@ -57,7 +57,7 @@ namespace CHelper {
         // 收集错误的节点数，如果有节点没有错就设为0
         size_t errorCount = 0;
         for (const auto &item: childNodes) {
-            if (HEDLEY_LIKELY(item.isError())) {
+            if (item.isError()) [[likely]] {
                 errorCount++;
             } else {
                 errorCount = 0;
@@ -66,15 +66,13 @@ namespace CHelper {
         }
         std::vector<std::shared_ptr<ErrorReason>> errorReasons;
         size_t whichBest = 0;
-        if (HEDLEY_UNLIKELY(errorCount == 0)) {
+        if (errorCount == 0) [[unlikely]] {
             // 从没有错误的内容中找出最好的节点
             size_t end = 0;
             errorReasons.clear();
             for (size_t i = 0; i < childNodes.size(); ++i) {
                 const ASTNode &item = childNodes[i];
-                if (HEDLEY_LIKELY(item.isError())) {
-                    continue;
-                } else if (HEDLEY_LIKELY(end < item.tokens.end)) {
+                if (!item.isError() && end < item.tokens.end) {
                     whichBest = i;
                     end = item.tokens.end;
                 }
@@ -86,30 +84,30 @@ namespace CHelper {
             for (size_t i = 0; i < childNodes.size(); ++i) {
                 const ASTNode &item = childNodes[i];
                 for (const auto &item2: item.errorReasons) {
-                    if (HEDLEY_LIKELY(start > item2->start)) {
+                    if (start > item2->start) [[likely]] {
                         continue;
                     }
                     bool isAdd = true;
-                    if (HEDLEY_LIKELY(start < item2->start)) {
+                    if (start < item2->start) [[likely]] {
                         start = item2->start;
                         whichBest = i;
                         errorReasons.clear();
                     } else {
                         for (const auto &item3: errorReasons) {
-                            if (HEDLEY_UNLIKELY(*item2 == *item3)) {
+                            if (*item2 == *item3) [[unlikely]] {
                                 isAdd = false;
                                 break;
                             }
                         }
                     }
-                    if (HEDLEY_LIKELY(isAdd)) {
+                    if (isAdd) [[likely]] {
                         errorReasons.push_back(item2);
                     }
                 }
             }
         }
         TokensView tokens1 = tokens == nullptr ? childNodes[whichBest].tokens : *tokens;
-        if (HEDLEY_UNLIKELY(errorCount > 1 && errorReason != nullptr)) {
+        if (errorCount > 1 && errorReason != nullptr) [[unlikely]] {
             errorReasons = {ErrorReason::contentError(tokens1, errorReason)};
         }
         return {ASTNodeMode::OR, node, std::move(childNodes), tokens1, errorReasons, id, whichBest};

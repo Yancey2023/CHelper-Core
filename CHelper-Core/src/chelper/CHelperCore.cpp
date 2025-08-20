@@ -53,23 +53,23 @@ namespace CHelper {
             // 检查文件名后缀
             std::string fileType = ".cpack";
             std::string cpackPathStr = cpackPath.string();
-            if (HEDLEY_UNLIKELY(cpackPathStr.size() < fileType.size() || cpackPathStr.substr(cpackPathStr.length() - fileType.size()) != fileType)) {
+            if (cpackPathStr.size() < fileType.size() || cpackPathStr.substr(cpackPathStr.length() - fileType.size()) != fileType) [[unlikely]] {
                 Profile::push("error file type -> {}", FORMAT_ARG(cpackPathStr));
                 throw std::runtime_error("error file type");
             }
             // 打开文件
             std::ifstream is(cpackPath, std::ios::binary);
-            if (HEDLEY_UNLIKELY(!is.is_open())) {
+            if (!is.is_open()) [[unlikely]] {
                 Profile::push("fail to read file -> {}", FORMAT_ARG(cpackPathStr));
                 throw std::runtime_error("fail to read file");
             }
             // 读取文件
             std::unique_ptr<CPack> result = CPack::createByBinary(is);
             // 检查文件是否读完
-            if (HEDLEY_UNLIKELY(!is.eof())) {
+            if (!is.eof()) [[unlikely]] {
                 char ch;
                 is.read(&ch, 1);
-                if (HEDLEY_UNLIKELY(is.gcount() > 0)) {
+                if (is.gcount() > 0) [[unlikely]] {
                     Profile::push("file is not read completed -> {}", FORMAT_ARG(cpackPathStr));
                     throw std::runtime_error("file is not read completed");
                 }
@@ -82,7 +82,7 @@ namespace CHelper {
 #endif
 
     void CHelperCore::onTextChanged(const std::u16string &content, size_t index0) {
-        if (HEDLEY_LIKELY(input != content)) {
+        if (input != content) [[likely]] {
             input = content;
             astNode = Parser::parse(input, cpack.get());
             suggestions = nullptr;
@@ -91,7 +91,7 @@ namespace CHelper {
     }
 
     void CHelperCore::onSelectionChanged(size_t index0) {
-        if (HEDLEY_LIKELY(index != index0)) {
+        if (index != index0) [[likely]] {
             index = index0;
             suggestions = nullptr;
         }
@@ -114,7 +114,7 @@ namespace CHelper {
     }
 
     std::vector<AutoSuggestion::Suggestion> *CHelperCore::getSuggestions() {
-        if (HEDLEY_LIKELY(suggestions == nullptr)) {
+        if (suggestions == nullptr) [[likely]] {
             suggestions = std::make_shared<std::vector<AutoSuggestion::Suggestion>>(AutoSuggestion::getSuggestions(astNode, index).collect());
         }
         return suggestions.get();
@@ -129,7 +129,7 @@ namespace CHelper {
     }
 
     std::optional<std::pair<std::u16string, size_t>> CHelperCore::onSuggestionClick(size_t which) {
-        if (HEDLEY_UNLIKELY(suggestions == nullptr || which >= suggestions->size())) {
+        if (suggestions == nullptr || which >= suggestions->size()) [[unlikely]] {
             return std::nullopt;
         }
         const auto &suggestion = (*suggestions)[which];
@@ -140,11 +140,11 @@ namespace CHelper {
         std::pair<std::u16string, size_t> result = {
                 std::u16string().append(before.substr(0, suggestion.start)).append(suggestion.content->name).append(before.substr(suggestion.end)),
                 suggestion.start + suggestion.content->name.length()};
-        if (HEDLEY_UNLIKELY(suggestion.end != before.length())) {
+        if (suggestion.end != before.length()) [[unlikely]] {
             return result;
         }
         onTextChanged(result.first, result.second);
-        if (HEDLEY_LIKELY(suggestion.isAddSpace && astNode.isAllSpaceError())) {
+        if (suggestion.isAddSpace && astNode.isAllSpaceError()) [[likely]] {
             result.first.append(u" ");
             result.second++;
         }

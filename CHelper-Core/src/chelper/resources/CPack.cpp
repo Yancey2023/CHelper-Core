@@ -21,25 +21,25 @@ namespace CHelper {
         serialization::Codec<Manifest>::template from_json(jsonManifest, manifest);
         Profile::next("loading id data");
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "id")) {
-            Profile::next(R"(loading id data in path "{}")", FORMAT_ARG(utf8::utf16to8(file.path().u16string())));
+            Profile::next(R"(loading id data in path "{}")", FORMAT_ARG(file.path().string()));
             applyId(serialization::get_json_from_file(file));
         }
         Profile::next("loading json data");
         currentCreateStage = Node::NodeCreateStage::JSON_NODE;
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "json")) {
-            Profile::next(R"(loading json data in path "{}")", FORMAT_ARG(utf8::utf16to8(file.path().u16string())));
+            Profile::next(R"(loading json data in path "{}")", FORMAT_ARG(file.path().string()));
             applyJson(serialization::get_json_from_file(file));
         }
         Profile::next("loading repeat data");
         currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "repeat")) {
-            Profile::next(R"(loading repeat data in path "{}")", FORMAT_ARG(utf8::utf16to8(file.path().u16string())));
+            Profile::next(R"(loading repeat data in path "{}")", FORMAT_ARG(file.path().string()));
             applyRepeat(serialization::get_json_from_file(file));
         }
         Profile::next("loading commands");
         currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "command")) {
-            Profile::next(R"(loading command in path "{}")", FORMAT_ARG(utf8::utf16to8(file.path().u16string())));
+            Profile::next(R"(loading command in path "{}")", FORMAT_ARG(file.path().string()));
             applyCommand(serialization::get_json_from_file(file));
         }
         Profile::next("init cpack");
@@ -47,7 +47,7 @@ namespace CHelper {
         afterApply();
         Profile::pop();
 #if defined(CHelperDebug) && !defined(CHELPER_NO_FILESYSTEM)
-        if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
+        if (Profile::stack.size() != stackSize) [[unlikely]] {
             SPDLOG_WARN("error profile stack after loading cpack");
         }
 #endif
@@ -86,7 +86,7 @@ namespace CHelper {
         afterApply();
         Profile::pop();
 #if defined(CHelperDebug) && !defined(CHELPER_NO_FILESYSTEM)
-        if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
+        if (Profile::stack.size() != stackSize) [[unlikely]] {
             SPDLOG_WARN("error profile stack after loading cpack");
         }
 #endif
@@ -98,30 +98,30 @@ namespace CHelper {
 #endif
         currentCreateStage = Node::NodeCreateStage::NONE;
         Profile::push("loading manifest");
-        serialization::Codec<decltype(manifest)>::template from_binary<false>(istream, manifest);
+        serialization::from_binary(istream, manifest);
         Profile::next("loading normal id data");
-        serialization::Codec<decltype(normalIds)>::template from_binary<false>(istream, normalIds);
+        serialization::from_binary(istream, normalIds);
         Profile::next("loading namespace id data");
-        serialization::Codec<decltype(namespaceIds)>::template from_binary<false>(istream, namespaceIds);
+        serialization::from_binary(istream, namespaceIds);
         Profile::next("loading item id data");
-        serialization::Codec<decltype(itemIds)>::template from_binary<false>(istream, itemIds);
+        serialization::from_binary(istream, itemIds);
         Profile::next("loading block id data");
-        serialization::Codec<decltype(blockIds)>::template from_binary<false>(istream, blockIds);
+        serialization::from_binary(istream, blockIds);
         Profile::next("loading json data");
         currentCreateStage = Node::NodeCreateStage::JSON_NODE;
-        serialization::Codec<decltype(jsonNodes)>::template from_binary<false>(istream, jsonNodes);
+        serialization::from_binary(istream, jsonNodes);
         Profile::next("loading repeat data");
         currentCreateStage = Node::NodeCreateStage::REPEAT_NODE;
-        serialization::Codec<decltype(repeatNodeData)>::template from_binary<false>(istream, repeatNodeData);
+        serialization::from_binary(istream, repeatNodeData);
         Profile::next("loading command data");
         currentCreateStage = Node::NodeCreateStage::COMMAND_PARAM_NODE;
-        serialization::Codec<decltype(commands)>::template from_binary<false>(istream, commands);
+        serialization::from_binary(istream, commands);
         Profile::next("init cpack");
         currentCreateStage = Node::NodeCreateStage::NONE;
         afterApply();
         Profile::pop();
 #if defined(CHelperDebug) && !defined(CHELPER_NO_FILESYSTEM)
-        if (HEDLEY_UNLIKELY(Profile::stack.size() != stackSize)) {
+        if (Profile::stack.size() != stackSize) [[unlikely]] {
             SPDLOG_WARN("error profile stack after loading cpack");
         }
 #endif
@@ -131,21 +131,21 @@ namespace CHelper {
         using JsonValueType = rapidjson::GenericValue<rapidjson::UTF8<>>;
         std::u16string type;
         serialization::Codec<decltype(type)>::template from_json_member<JsonValueType>(j, "type", type);
-        if (HEDLEY_LIKELY(type == u"normal")) {
+        if (type == u"normal") [[likely]] {
             std::string id;
             serialization::Codec<decltype(id)>::template from_json_member<JsonValueType>(j, "id", id);
             std::shared_ptr<std::vector<std::shared_ptr<NormalId>>> content;
             serialization::Codec<decltype(content)>::template from_json_member<JsonValueType>(j, "content", content);
             normalIds.emplace(std::move(id), std::move(content));
-        } else if (HEDLEY_LIKELY(type == u"namespace")) {
+        } else if (type == u"namespace") [[likely]] {
             std::string id;
             serialization::Codec<decltype(id)>::template from_json_member<JsonValueType>(j, "id", id);
             std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>> content;
             serialization::Codec<decltype(content)>::template from_json_member<JsonValueType>(j, "content", content);
             namespaceIds.emplace(std::move(id), std::move(content));
-        } else if (HEDLEY_LIKELY(type == u"block")) {
+        } else if (type == u"block") [[likely]] {
             serialization::Codec<decltype(blockIds)>::template from_json_member<JsonValueType>(j, "content", blockIds);
-        } else if (HEDLEY_LIKELY(type == u"item")) {
+        } else if (type == u"item") [[likely]] {
             serialization::Codec<decltype(itemIds)>::template from_json_member<JsonValueType>(j, "content", itemIds);
         } else {
             Profile::push("unknown id type -> {}", FORMAT_ARG(utf8::utf16to8(type)));
@@ -183,7 +183,7 @@ namespace CHelper {
         // repeat nodes
         Profile::next("init repeat nodes");
         for (const auto &item: repeatNodeData) {
-            if (HEDLEY_UNLIKELY(item.repeatNodes.size() != item.isEnd.size())) {
+            if (item.repeatNodes.size() != item.isEnd.size()) [[unlikely]] {
                 Profile::push("checking repeat node: {}", FORMAT_ARG(item.id));
                 throw std::runtime_error("fail to check repeat id because repeatNodes size not equal isEnd size");
             }
@@ -234,10 +234,9 @@ namespace CHelper {
             Node::initNode(item, *this);
         }
         Profile::next("sort command nodes");
-        std::sort(commands->begin(), commands->end(),
-                  [](const auto &item1, const auto &item2) {
-                      return item1.name[0] < item2.name[0];
-                  });
+        std::ranges::sort(*commands, [](const auto &item1, const auto &item2) {
+            return item1.name[0] < item2.name[0];
+        });
         Profile::next("create main node");
         mainNode = Node::NodeCommand("MAIN_NODE", u"欢迎使用命令助手(作者：Yancey)", commands.get());
         Profile::pop();
@@ -245,7 +244,7 @@ namespace CHelper {
 
 #ifndef CHELPER_NO_FILESYSTEM
     std::unique_ptr<CPack> CPack::createByDirectory(const std::filesystem::path &path) {
-        Profile::push("start load CPack by DIRECTORY: {}", FORMAT_ARG(utf8::utf16to8(path.u16string())));
+        Profile::push("start load CPack by DIRECTORY: {}", FORMAT_ARG(path.string()));
         std::unique_ptr<CPack> cpack = std::make_unique<CPack>(path);
         Profile::pop();
         return cpack;
@@ -392,24 +391,24 @@ namespace CHelper {
 
     void CPack::writeBinToFile(const std::filesystem::path &path) const {
         std::filesystem::create_directories(path.parent_path());
-        Profile::push("writing binary cpack to file: {}", FORMAT_ARG(utf8::utf16to8(path.u16string())));
+        Profile::push("writing binary cpack to file: {}", FORMAT_ARG(path.string()));
         std::ofstream ostream(path, std::ios::binary);
         //manifest
-        serialization::Codec<decltype(manifest)>::template to_binary<false>(ostream, manifest);
+        serialization::to_binary(ostream, manifest);
         //normal id
-        serialization::Codec<decltype(normalIds)>::template to_binary<false>(ostream, normalIds);
+        serialization::to_binary(ostream, normalIds);
         //namespace id
-        serialization::Codec<decltype(namespaceIds)>::template to_binary<false>(ostream, namespaceIds);
+        serialization::to_binary(ostream, namespaceIds);
         //item id
-        serialization::Codec<decltype(itemIds)>::template to_binary<false>(ostream, itemIds);
+        serialization::to_binary(ostream, itemIds);
         //block id
-        serialization::Codec<decltype(blockIds)>::template to_binary<false>(ostream, blockIds);
+        serialization::to_binary(ostream, blockIds);
         //json node
-        serialization::Codec<decltype(jsonNodes)>::template to_binary<false>(ostream, jsonNodes);
+        serialization::to_binary(ostream, jsonNodes);
         //repeat node
-        serialization::Codec<decltype(repeatNodeData)>::template to_binary<false>(ostream, repeatNodeData);
+        serialization::to_binary(ostream, repeatNodeData);
         //command
-        serialization::Codec<decltype(commands)>::template to_binary<false>(ostream, commands);
+        serialization::to_binary(ostream, commands);
 
         ostream.close();
         Profile::pop();
@@ -419,7 +418,7 @@ namespace CHelper {
     std::shared_ptr<std::vector<std::shared_ptr<NormalId>>>
     CPack::getNormalId(const std::string &key) const {
         auto it = normalIds.find(key);
-        if (HEDLEY_UNLIKELY(it == normalIds.end())) {
+        if (it == normalIds.end()) [[unlikely]] {
 #ifdef CHelperDebug
             SPDLOG_WARN(R"(fail to find normal ids by key: "{}")", FORMAT_ARG(key));
 #endif
@@ -430,13 +429,13 @@ namespace CHelper {
 
     std::shared_ptr<std::vector<std::shared_ptr<NamespaceId>>>
     CPack::getNamespaceId(const std::string &key) const {
-        if (HEDLEY_UNLIKELY(key == "block")) {
+        if (key == "block") [[unlikely]] {
             return std::reinterpret_pointer_cast<std::vector<std::shared_ptr<NamespaceId>>>(blockIds->blockStateValues);
-        } else if (HEDLEY_UNLIKELY(key == "item")) {
+        } else if (key == "item") [[unlikely]] {
             return std::reinterpret_pointer_cast<std::vector<std::shared_ptr<NamespaceId>>>(itemIds);
         }
         auto it = namespaceIds.find(key);
-        if (HEDLEY_UNLIKELY(it == namespaceIds.end())) {
+        if (it == namespaceIds.end()) [[unlikely]] {
 #ifdef CHelperDebug
             SPDLOG_WARN(R"(fail to find namespace ids by key: "{}")", FORMAT_ARG(key));
 #endif

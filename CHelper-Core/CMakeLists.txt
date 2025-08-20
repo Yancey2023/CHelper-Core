@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
 project(CHelperCore LANGUAGES CXX)
 
-# using c++ 17
-set(CMAKE_CXX_STANDARD 17)
+# using c++ 20
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # export compile commands
@@ -24,7 +24,7 @@ endif ()
 # ThirdParty: fmt
 add_subdirectory(include/fmt)
 if (MSVC)
-    target_compile_options(fmt PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+    set_property(TARGET fmt PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif ()
 
 # ThirdParty: utf8cpp
@@ -45,7 +45,7 @@ add_subdirectory(include/serialization)
 set(SPDLOG_FMT_EXTERNAL ON)
 add_subdirectory(include/spdlog)
 if (MSVC)
-    target_compile_options(spdlog PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+    set_property(TARGET spdlog PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif ()
 
 # Param Deliver
@@ -77,7 +77,7 @@ endfunction()
 add_library(CHelperCore STATIC)
 init_chelper_library(CHelperCore ${CMAKE_CURRENT_SOURCE_DIR})
 if (MSVC)
-    target_compile_options(CHelperCore PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+    set_property(TARGET CHelperCore PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif ()
 add_library(CHelper::Core ALIAS CHelperCore)
 
@@ -86,7 +86,7 @@ add_library(CHelperNoFilesystemCore STATIC)
 init_chelper_library(CHelperNoFilesystemCore ${CMAKE_CURRENT_SOURCE_DIR})
 target_compile_definitions(CHelperNoFilesystemCore PUBLIC CHELPER_NO_FILESYSTEM)
 if (MSVC)
-    target_compile_options(CHelperNoFilesystemCore PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+    set_property(TARGET CHelperNoFilesystemCore PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif ()
 add_library(CHelper::NoFilesystemCore ALIAS CHelperNoFilesystemCore)
 

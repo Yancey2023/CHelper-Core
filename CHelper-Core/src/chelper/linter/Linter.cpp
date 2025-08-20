@@ -22,7 +22,7 @@ namespace CHelper::Linter {
     template<>
     struct Linter<Node::NodeJsonString> {
         static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
-            if (HEDLEY_UNLIKELY(astNode.id == ASTNodeId::NODE_STRING_INNER)) {
+            if (astNode.id == ASTNodeId::NODE_STRING_INNER) [[unlikely]] {
                 auto convertResult = JsonUtil::jsonString2String(astNode.tokens.string());
                 for (const auto &item: getErrorsExceptParseError(astNode.childNodes[0])) {
                     item->start = convertResult.convert(item->start) + astNode.tokens.startIndex;
@@ -37,14 +37,14 @@ namespace CHelper::Linter {
     template<>
     struct Linter<Node::NodeCommandName> {
         static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
-            if (HEDLEY_UNLIKELY(astNode.isError())) {
+            if (astNode.isError()) [[unlikely]] {
                 return true;
             }
             const auto &node = *reinterpret_cast<const Node::NodeCommandName *>(astNode.node.data);
             std::u16string_view str = astNode.tokens.string();
             for (const auto &command: *node.commands) {
                 for (const auto &name: command.name) {
-                    if (HEDLEY_UNLIKELY(str == name)) {
+                    if (str == name) [[unlikely]] {
                         return true;
                     }
                 }
@@ -57,15 +57,15 @@ namespace CHelper::Linter {
     template<>
     struct Linter<Node::NodeNamespaceId> {
         static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
-            if (HEDLEY_UNLIKELY(astNode.isError())) {
+            if (astNode.isError()) [[unlikely]] {
                 return true;
             }
             const auto &node = *reinterpret_cast<const Node::NodeNamespaceId *>(astNode.node.data);
             std::u16string_view str = astNode.tokens.string();
             XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
-            if (HEDLEY_UNLIKELY(std::all_of(node.customContents->begin(), node.customContents->end(), [&strHash](const auto &item) {
+            if (std::ranges::all_of(*node.customContents, [&strHash](const auto &item) {
                     return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
-                }))) {
+                })) [[unlikely]] {
                 errorReasons.push_back(ErrorReason::idError(astNode.tokens, fmt::format(u"找不到ID -> {}", str)));
             }
             return true;
@@ -75,15 +75,15 @@ namespace CHelper::Linter {
     template<>
     struct Linter<Node::NodeNormalId> {
         static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
-            if (HEDLEY_UNLIKELY(astNode.isError())) {
+            if (astNode.isError()) [[unlikely]] {
                 return true;
             }
             const auto &node = *reinterpret_cast<const Node::NodeNormalId *>(astNode.node.data);
             std::u16string_view str = astNode.tokens.string();
             XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
-            if (HEDLEY_UNLIKELY(std::all_of(node.customContents->begin(), node.customContents->end(), [&strHash](const auto &item) {
+            if (std::ranges::all_of(*node.customContents, [&strHash](const auto &item) {
                     return !item->fastMatch(strHash);
-                }))) {
+                })) [[unlikely]] {
                 errorReasons.push_back(ErrorReason::idError(astNode.tokens, fmt::format(u"找不到ID -> {}", str)));
             }
             return true;
@@ -93,7 +93,7 @@ namespace CHelper::Linter {
     template<>
     struct Linter<Node::NodePosition> {
         static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
-            if (HEDLEY_UNLIKELY(!astNode.isError() && astNode.id == ASTNodeId::NODE_POSITION_POSITIONS_WITH_ERROR)) {
+            if (!astNode.isError() && astNode.id == ASTNodeId::NODE_POSITION_POSITIONS_WITH_ERROR) [[unlikely]] {
                 errorReasons.push_back(ErrorReason::logicError(astNode.tokens, u"绝对坐标和相对坐标不能与局部坐标混用"));
                 return true;
             } else {
@@ -105,7 +105,7 @@ namespace CHelper::Linter {
     template<>
     struct Linter<Node::NodeRelativeFloat> {
         static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
-            if (HEDLEY_UNLIKELY(!astNode.isError() && astNode.id == ASTNodeId::NODE_RELATIVE_FLOAT_WITH_ERROR)) {
+            if (!astNode.isError() && astNode.id == ASTNodeId::NODE_RELATIVE_FLOAT_WITH_ERROR) [[unlikely]] {
                 errorReasons.push_back(ErrorReason::logicError(astNode.tokens, u"不能使用局部坐标"));
                 return true;
             } else {
@@ -117,19 +117,19 @@ namespace CHelper::Linter {
     template<class T, bool isJson>
     struct Linter<Node::NodeTemplateNumber<T, isJson>> {
         static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
-            if (HEDLEY_UNLIKELY(astNode.isError())) {
+            if (astNode.isError()) [[unlikely]] {
                 return true;
             }
             auto &node = *static_cast<const Node::NodeTemplateNumber<T, isJson> *>(astNode.node.data);
             std::string str = utf8::utf16to8(astNode.tokens.string());
             char *end;
             auto value = Node::NodeTemplateNumber<T, isJson>::str2number(str, end);
-            if (HEDLEY_UNLIKELY(end == str.c_str() || *end != '\0' ||
-                                (std::numeric_limits<T>::has_infinity &&
-                                 (value == std::numeric_limits<T>::infinity() ||
-                                  value == -std::numeric_limits<T>::infinity())) ||
-                                value < node.min.value_or(std::numeric_limits<T>::lowest()) ||
-                                value > node.max.value_or(std::numeric_limits<T>::max()))) {
+            if (end == str.c_str() || *end != '\0' ||
+                (std::numeric_limits<T>::has_infinity &&
+                 (value == std::numeric_limits<T>::infinity() ||
+                  value == -std::numeric_limits<T>::infinity())) ||
+                value < node.min.value_or(std::numeric_limits<T>::lowest()) ||
+                value > node.max.value_or(std::numeric_limits<T>::max())) [[unlikely]] {
                 errorReasons.push_back(ErrorReason::idError(
                         astNode.tokens,
                         fmt::format(
@@ -143,7 +143,7 @@ namespace CHelper::Linter {
     };
 
     void lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
-        if (HEDLEY_UNLIKELY(!astNode.isAllSpaceError())) {
+        if (!astNode.isAllSpaceError()) [[unlikely]] {
 #ifdef CHelperTest
             Profile::push("collect id errors: {}", FORMAT_ARG(Node::getNodeTypeName(astNode.node.nodeTypeId)));
 #endif
@@ -156,7 +156,7 @@ namespace CHelper::Linter {
 #ifdef CHelperTest
             Profile::pop();
 #endif
-            if (HEDLEY_UNLIKELY(isDirty)) {
+            if (isDirty) [[unlikely]] {
                 return;
             }
         }
@@ -179,11 +179,11 @@ namespace CHelper::Linter {
         uint8_t i = ErrorReasonLevel::maxLevel;
         while (true) {
             for (const auto &item: input) {
-                if (HEDLEY_UNLIKELY(item->level == i)) {
+                if (item->level == i) [[unlikely]] {
                     output.push_back(item);
                 }
             }
-            if (HEDLEY_UNLIKELY(i == 0)) {
+            if (i == 0) [[unlikely]] {
                 break;
             }
             --i;

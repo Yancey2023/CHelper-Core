@@ -8,13 +8,13 @@
 namespace CHelper {
 
    const Node::NodeWithType &ItemId::getNode() {
-        if (HEDLEY_UNLIKELY(node == nullptr)) {
-            if (HEDLEY_UNLIKELY(max.has_value() && max.value() < 0)) {
+        if (node == nullptr) [[unlikely]] {
+            if (max.has_value() && max.value() < 0) [[unlikely]] {
                 throw std::runtime_error("item id max data value should be a positive number");
             }
             auto nodeAllData = new Node::NodeInteger("ITEM_DATA", u"物品附加值", -1, max);
             nodeChildren.nodes.emplace_back(*nodeAllData);
-            if (HEDLEY_LIKELY(!descriptions.has_value())) {
+            if (!descriptions.has_value()) [[unlikely]] {
                 node = std::make_unique<Node::NodeWithType>(*nodeAllData);
             } else {
                 std::vector<Node::NodeWithType> nodeDataChildren;

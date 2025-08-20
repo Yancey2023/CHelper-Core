@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
 project(CHelperCmd LANGUAGES CXX)
 
-# using c++ 17
-set(CMAKE_CXX_STANDARD 17)
+# using c++ 20
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # export compile commands
@@ -31,5 +31,5 @@ add_executable(CHelperCmd src/cmd/CHelperCmd.h src/cmd/CHelperCmd.cpp)
 target_link_libraries(CHelperCmd PRIVATE CHelper::Core)
 
 if (MSVC)
-    target_compile_options(CHelperCmd PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+    set_property(TARGET CHelperCmd PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif ()

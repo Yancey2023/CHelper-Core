@@ -17,19 +17,19 @@ namespace CHelper::Profile {
 #endif
 
     template<typename... T>
-    void push(fmt::format_string<T...> fmt, T &&...args) {
+    void push(const fmt::format_string<T...> fmt, T &&...args) {
 #ifndef CHELPER_NO_FILESYSTEM
-        stack.push_back(fmt::format(fmt, args...));
+        stack.push_back(fmt::vformat(fmt.str, fmt::vargs<T...>{{args...}}));
 #endif
     }
 
     void pop();
 
     template<typename... T>
-    void next(const std::string &fmt, T &&...args) {
+    void next(const fmt::format_string<T...> fmt, T &&...args) {
 #ifndef CHELPER_NO_FILESYSTEM
         pop();
-        push(fmt, args...);
+        stack.push_back(fmt::vformat(fmt.str, fmt::vargs<T...>{{args...}}));
 #endif
     }
 

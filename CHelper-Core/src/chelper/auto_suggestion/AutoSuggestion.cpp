@@ -26,8 +26,8 @@ namespace CHelper::AutoSuggestion {
     template<>
     struct AutoSuggestion<Node::NodeBlock> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            if (HEDLEY_LIKELY(astNode.id == ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE && !astNode.isError() &&
-                              astNode.childNodes.size() == 1 && index == astNode.tokens.endIndex)) {
+            if (astNode.id == ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE && !astNode.isError() &&
+                astNode.childNodes.size() == 1 && index == astNode.tokens.endIndex) [[likely]] {
                 suggestions.addSymbolSuggestion({index, index, false, Node::NodeBlock::nodeBlockStateLeftBracket.normalId});
             }
             return false;
@@ -39,11 +39,11 @@ namespace CHelper::AutoSuggestion {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
             const auto &node = *static_cast<const Node::NodeTemplateBoolean<isJson> *>(astNode.node.data);
             KMPMatcher kmpMatcher(astNode.tokens.string().substr(0, index - astNode.tokens.startIndex));
-            if (HEDLEY_UNLIKELY(kmpMatcher.match(u"true") != std::u16string::npos)) {
+            if (kmpMatcher.match(u"true") != std::u16string::npos) [[unlikely]] {
                 suggestions.addLiteralSuggestion({astNode.tokens, true,
                                                   NormalId::make(u"true", node.descriptionTrue)});
             }
-            if (HEDLEY_UNLIKELY(kmpMatcher.match(u"false") != std::u16string::npos)) {
+            if (kmpMatcher.match(u"false") != std::u16string::npos) [[unlikely]] {
                 suggestions.addLiteralSuggestion({astNode.tokens, true,
                                                   NormalId::make(u"false", node.descriptionFalse)});
             }
@@ -55,10 +55,10 @@ namespace CHelper::AutoSuggestion {
     struct AutoSuggestion<Node::NodeCommand> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
             const auto &node = *reinterpret_cast<const Node::NodeCommand *>(astNode.node.data);
-            if (HEDLEY_UNLIKELY(astNode.id != ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
+            if (astNode.id != ASTNodeId::NODE_COMMAND_COMMAND_NAME) [[unlikely]] {
                 return false;
             }
-            if (HEDLEY_LIKELY(index == 0 && astNode.tokens.isEmpty())) {
+            if (index == 0 && astNode.tokens.isEmpty()) [[likely]] {
                 suggestions.addSymbolSuggestion({0, 0, false, Node::NodeCommand::nodeCommandStart.normalId});
             }
             std::u16string_view str = astNode.tokens.string().substr(0, index - astNode.tokens.startIndex);
@@ -68,8 +68,8 @@ namespace CHelper::AutoSuggestion {
                 bool flag = false;
                 for (const auto &item2: item.name) {
                     size_t index1 = item2.find(str);
-                    if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
-                        if (HEDLEY_UNLIKELY(index1 == 0)) {
+                    if (index1 != std::u16string::npos) [[unlikely]] {
+                        if (index1 == 0) [[unlikely]] {
                             nameStartOf.push_back(NormalId::make(item2, item.description));
                         } else {
                             nameContain.push_back(NormalId::make(item2, item.description));
@@ -77,12 +77,12 @@ namespace CHelper::AutoSuggestion {
                         flag = true;
                     }
                 }
-                if (HEDLEY_UNLIKELY(flag)) {
+                if (flag) [[unlikely]] {
                     continue;
                 }
                 //通过介绍进行搜索
-                if (HEDLEY_UNLIKELY(item.description.has_value() &&
-                                    item.description.value().find(str) != std::u16string::npos)) {
+                if (item.description.has_value() &&
+                    item.description.value().find(str) != std::u16string::npos) [[unlikely]] {
                     for (const auto &item2: item.name) {
                         descriptionContain.push_back(NormalId::make(item2, item.description));
                     }
@@ -121,8 +121,8 @@ namespace CHelper::AutoSuggestion {
                 for (const auto &item2: item.name) {
                     //通过名字进行搜索
                     size_t index1 = item2.find(str);
-                    if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
-                        if (HEDLEY_UNLIKELY(index1 == 0)) {
+                    if (index1 != std::u16string::npos) [[unlikely]] {
+                        if (index1 == 0) [[unlikely]] {
                             nameStartOf.push_back(NormalId::make(item2, item.description));
                         } else {
                             nameContain.push_back(NormalId::make(item2, item.description));
@@ -130,12 +130,11 @@ namespace CHelper::AutoSuggestion {
                         flag = true;
                     }
                 }
-                if (HEDLEY_UNLIKELY(flag)) {
+                if (flag) [[unlikely]] {
                     continue;
                 }
                 //通过介绍进行搜索
-                if (HEDLEY_UNLIKELY(item.description.has_value() &&
-                                    item.description.value().find(str) != std::u16string::npos)) {
+                if (item.description.has_value() && item.description.value().find(str) != std::u16string::npos) [[unlikely]] {
                     for (const auto &item2: item.name) {
                         descriptionContain.push_back(NormalId::make(item2, item.description));
                     }
@@ -174,9 +173,9 @@ namespace CHelper::AutoSuggestion {
             for (const auto &item: *node.customContents) {
                 //通过名字进行搜索
                 size_t index1 = kmpMatcher.match(item->getIdWithNamespace()->name);
-                if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
+                if (index1 != std::u16string::npos) [[unlikely]] {
                     //带有命名空间
-                    if (HEDLEY_UNLIKELY(index1 == 0)) {
+                    if (index1 == 0) [[unlikely]] {
                         namespaceStartOf.push_back(item->getIdWithNamespace());
                     } else {
                         namespaceContain.push_back(item->getIdWithNamespace());
@@ -184,16 +183,16 @@ namespace CHelper::AutoSuggestion {
                     //省略minecraft命名空间
                     constexpr size_t defaultNamespaceSize = std::size(u"minecraft");
                     constexpr size_t defaultNamespacePrefixSize = std::size(u"minecraft:");
-                    if (HEDLEY_LIKELY(!item->idNamespace.has_value() || (item->idNamespace.value().size() == defaultNamespaceSize && item->idNamespace.value() == u"minecraft"))) {
-                        if (HEDLEY_UNLIKELY(index1 == defaultNamespacePrefixSize)) {
+                    if (!item->idNamespace.has_value() || (item->idNamespace.value().size() == defaultNamespaceSize && item->idNamespace.value() == u"minecraft")) [[likely]] {
+                        if (index1 == defaultNamespacePrefixSize) [[unlikely]] {
                             nameStartOf.push_back(item);
-                        } else if (HEDLEY_LIKELY(index1 > defaultNamespacePrefixSize)) {
+                        } else if (index1 > defaultNamespacePrefixSize) [[unlikely]] {
                             nameContain.push_back(item);
                         } else {
                             size_t index2 = kmpMatcher.match(item->name);
-                            if (HEDLEY_UNLIKELY(index2 == 0)) {
+                            if (index2 == 0) [[unlikely]] {
                                 nameStartOf.push_back(item);
-                            } else if (HEDLEY_UNLIKELY(index2 != std::u16string::npos)) {
+                            } else if (index2 != std::u16string::npos) [[unlikely]] {
                                 nameContain.push_back(item);
                             }
                         }
@@ -201,8 +200,7 @@ namespace CHelper::AutoSuggestion {
                     continue;
                 }
                 //通过介绍进行搜索
-                if (HEDLEY_UNLIKELY(
-                            item->description.has_value() && kmpMatcher.match(item->description.value()) != std::u16string::npos)) {
+                if (item->description.has_value() && kmpMatcher.match(item->description.value()) != std::u16string::npos) [[unlikely]] {
                     descriptionContain.push_back(item);
                 }
             }
@@ -242,8 +240,8 @@ namespace CHelper::AutoSuggestion {
             for (const auto &item: *node.customContents) {
                 //通过名字进行搜索
                 size_t index1 = kmpMatcher.match(item->name);
-                if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
-                    if (HEDLEY_UNLIKELY(index1 == 0)) {
+                if (index1 != std::u16string::npos) [[unlikely]] {
+                    if (index1 == 0) [[unlikely]] {
                         nameStartOf.push_back(item);
                     } else {
                         nameContain.push_back(item);
@@ -251,8 +249,7 @@ namespace CHelper::AutoSuggestion {
                     continue;
                 }
                 //通过介绍进行搜索
-                if (HEDLEY_UNLIKELY(
-                            item->description.has_value() && kmpMatcher.match(item->description.value()) != std::u16string::npos)) {
+                if (item->description.has_value() && kmpMatcher.match(item->description.value()) != std::u16string::npos) [[unlikely]] {
                     descriptionContain.push_back(item);
                 }
             }
@@ -275,7 +272,7 @@ namespace CHelper::AutoSuggestion {
     bool collectNodeRelativeFloatSuggestions(size_t index, Suggestions &suggestions, bool canUseCaretNotation) {
         suggestions.addSpaceSuggestion({index, index, false, spaceId});
         suggestions.addSymbolSuggestion({index, index, false, Node::NodeRelativeFloat::nodeRelativeNotation.normalId});
-        if (HEDLEY_LIKELY(canUseCaretNotation)) {
+        if (canUseCaretNotation) [[likely]] {
             suggestions.addSymbolSuggestion({index, index, false, Node::NodeRelativeFloat::nodeCaretNotation.normalId});
         }
         return true;
@@ -284,7 +281,7 @@ namespace CHelper::AutoSuggestion {
     template<>
     struct AutoSuggestion<Node::NodePosition> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            if (HEDLEY_LIKELY(astNode.id != ASTNodeId::NODE_POSITION_POSITIONS)) {
+            if (astNode.id != ASTNodeId::NODE_POSITION_POSITIONS) [[likely]] {
                 return false;
             }
             size_t errorCount = 0;
@@ -307,14 +304,14 @@ namespace CHelper::AutoSuggestion {
             std::u16string_view str = astNode.tokens.string();
             size_t startIndex = astNode.tokens.startIndex;
             for (size_t i = 0; i < str.length(); ++i) {
-                if (HEDLEY_UNLIKELY(startIndex + i == index)) {
+                if (startIndex + i == index) [[unlikely]] {
                     return collectNodeRelativeFloatSuggestions(index, suggestions, node.canUseCaretNotation);
                 }
                 if (str[i] != ' ') {
                     return true;
                 }
             }
-            if (HEDLEY_UNLIKELY(startIndex + str.length() == index)) {
+            if (startIndex + str.length() == index) [[unlikely]] {
                 return collectNodeRelativeFloatSuggestions(index, suggestions, node.canUseCaretNotation);
             }
             return true;
@@ -325,19 +322,19 @@ namespace CHelper::AutoSuggestion {
     struct AutoSuggestion<Node::NodeString> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
             const auto &node = *reinterpret_cast<const Node::NodeString *>(astNode.node.data);
-            if (HEDLEY_UNLIKELY(node.ignoreLater || !node.canContainSpace)) {
+            if (node.ignoreLater || !node.canContainSpace) [[unlikely]] {
                 return true;
             }
             std::u16string_view str = astNode.tokens.string().substr(0, index - astNode.tokens.startIndex);
-            if (HEDLEY_UNLIKELY(str.empty())) {
+            if (str.empty()) [[unlikely]] {
                 suggestions.addSymbolSuggestion({index, index, false, doubleQuoteMask});
                 return true;
             }
-            if (HEDLEY_LIKELY(str[0] != '"')) {
+            if (str[0] != '"') [[likely]] {
                 return true;
             }
             auto convertResult = JsonUtil::jsonString2String(str);
-            if (HEDLEY_LIKELY(!convertResult.isComplete)) {
+            if (!convertResult.isComplete) [[likely]] {
                 suggestions.addSymbolSuggestion({index, index, false, doubleQuoteMask});
             }
             return true;
@@ -351,14 +348,14 @@ namespace CHelper::AutoSuggestion {
             std::u16string_view str = astNode.tokens.string().substr(0, index - astNode.tokens.startIndex);
             //通过名字进行搜索
             size_t index1 = node.data->name.find(str);
-            if (HEDLEY_LIKELY(index1 != std::u16string::npos)) {
+            if (index1 != std::u16string::npos) [[likely]] {
                 suggestions.addLiteralSuggestion({astNode.tokens, node.getIsMustAfterSpace(), node.data});
                 return true;
             }
             //通过介绍进行搜索
-            if (HEDLEY_LIKELY(node.data->description.has_value())) {
+            if (node.data->description.has_value()) [[likely]] {
                 size_t index2 = node.data->description.value().find(str);
-                if (HEDLEY_LIKELY(index2 != std::u16string::npos)) {
+                if (index2 != std::u16string::npos) [[likely]] {
                     suggestions.addLiteralSuggestion({astNode.tokens, node.getIsMustAfterSpace(), node.data});
                 }
             }
@@ -371,18 +368,18 @@ namespace CHelper::AutoSuggestion {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
             std::u16string_view str = astNode.tokens.string();
             size_t index0 = str.find(u"..");
-            if (HEDLEY_UNLIKELY(index0 != std::u16string::npos)) {
+            if (index0 != std::u16string::npos) [[unlikely]] {
                 index0 += astNode.tokens.startIndex;
-                if (HEDLEY_LIKELY(index < index0 || index > index0 + 2)) {
+                if (index < index0 || index > index0 + 2) [[likely]] {
                     return true;
                 }
                 suggestions.addSymbolSuggestion({index0, index0 + 2, false, rangeSymbol});
                 return true;
             }
             size_t index1 = str.find('.');
-            if (HEDLEY_UNLIKELY(index1 != std::u16string::npos)) {
+            if (index1 != std::u16string::npos) [[unlikely]] {
                 index1 += astNode.tokens.startIndex;
-                if (HEDLEY_LIKELY(index < index1 || index > index1 + 1)) {
+                if (index < index1 || index > index1 + 1) [[likely]] {
                     return true;
                 }
                 suggestions.addSymbolSuggestion({index1, index1 + 1, false, rangeSymbol});
@@ -404,7 +401,7 @@ namespace CHelper::AutoSuggestion {
     struct AutoSuggestion<Node::NodeJsonNull> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
             std::u16string_view str = astNode.tokens.string().substr(0, index - astNode.tokens.startIndex);
-            if (HEDLEY_LIKELY(str.find(u"null") != std::u16string::npos)) {
+            if (str.find(u"null") != std::u16string::npos) [[likely]] {
                 suggestions.addLiteralSuggestion({astNode.tokens, false, NormalId::make(u"null", u"null参数")});
             }
             return true;
@@ -414,28 +411,28 @@ namespace CHelper::AutoSuggestion {
     template<>
     struct AutoSuggestion<Node::NodeJsonString> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-            if (HEDLEY_UNLIKELY(astNode.tokens.isEmpty())) {
+            if (astNode.tokens.isEmpty()) [[unlikely]] {
                 suggestions.addSymbolSuggestion({index, index, false, doubleQuoteMask});
                 return true;
             }
             auto convertResult = JsonUtil::jsonString2String(astNode.tokens.string());
             auto convertResult1 = JsonUtil::jsonString2String(astNode.tokens.string().substr(0, index - astNode.tokens.startIndex));
-            if (HEDLEY_UNLIKELY(convertResult1.errorReason == nullptr && astNode.id == ASTNodeId::NODE_STRING_INNER)) {
+            if (convertResult1.errorReason == nullptr && astNode.id == ASTNodeId::NODE_STRING_INNER) [[unlikely]] {
                 Suggestions childSuggestions = getSuggestions(astNode.childNodes[0], convertResult1.result.size());
                 suggestions.combine(childSuggestions, [&convertResult, &astNode](Suggestion &suggestion) {
                     std::u16string convertStr = JsonUtil::string2jsonString(suggestion.content->name);
                     suggestion.start = convertResult.convert(suggestion.start) + astNode.tokens.startIndex;
                     suggestion.end = convertResult.convert(suggestion.end) + astNode.tokens.startIndex;
-                    if (HEDLEY_UNLIKELY(convertStr.size() != astNode.tokens.string().size())) {
+                    if (convertStr.size() != astNode.tokens.string().size()) [[unlikely]] {
                         suggestion.content = NormalId::make(convertStr, suggestion.content->description);
                     }
                     return true;
                 });
-                if (HEDLEY_LIKELY(astNode.hasChildNode() && !astNode.childNodes[0].isError() &&
-                                  convertResult.errorReason == nullptr && !convertResult.isComplete)) {
+                if (astNode.hasChildNode() && !astNode.childNodes[0].isError() &&
+                    convertResult.errorReason == nullptr && !convertResult.isComplete) [[likely]] {
                     suggestions.addSymbolSuggestion({index, index, false, doubleQuoteMask});
                 }
-            } else if (HEDLEY_LIKELY(convertResult.errorReason == nullptr && !convertResult.isComplete)) {
+            } else if (convertResult.errorReason == nullptr && !convertResult.isComplete) [[likely]] {
                 suggestions.addSymbolSuggestion({index, index, false, doubleQuoteMask});
             }
             return true;
@@ -454,7 +451,7 @@ namespace CHelper::AutoSuggestion {
     struct AutoSuggestion<Node::NodeSingleSymbol> {
         static bool collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
             const auto &node = *reinterpret_cast<const Node::NodeSingleSymbol *>(astNode.node.data);
-            if (HEDLEY_UNLIKELY(astNode.tokens.startIndex == index)) {
+            if (astNode.tokens.startIndex == index) [[unlikely]] {
                 suggestions.addSymbolSuggestion({index, index, node.isAddSpace, node.normalId});
             }
             return true;
@@ -483,10 +480,10 @@ namespace CHelper::AutoSuggestion {
     };
 
     void collectSuggestions(const ASTNode &astNode, size_t index, Suggestions &suggestions) {
-        if (HEDLEY_LIKELY(index < astNode.tokens.startIndex || index > astNode.tokens.endIndex)) {
+        if (index < astNode.tokens.startIndex || index > astNode.tokens.endIndex) [[likely]] {
             return;
         }
-        if (HEDLEY_UNLIKELY(!astNode.isAllSpaceError())) {
+        if (!astNode.isAllSpaceError()) [[unlikely]] {
             bool isDirty;
 #ifdef CHelperTest
             Profile::push("collect suggestions: {} {}", FORMAT_ARG(utf8::utf16to8(astNode.tokens.toString())), FORMAT_ARG(Node::getNodeTypeName(astNode.node.nodeTypeId)));
@@ -499,7 +496,7 @@ namespace CHelper::AutoSuggestion {
 #ifdef CHelperTest
             Profile::pop();
 #endif
-            if (HEDLEY_UNLIKELY(isDirty)) {
+            if (isDirty) [[unlikely]] {
                 return;
             }
         }
@@ -533,7 +530,7 @@ namespace CHelper::AutoSuggestion {
                 return !astNode.childNodes.empty() && canAddSpace0(astNode.childNodes[astNode.childNodes.size() - 1], index);
             case ASTNodeMode::OR:
                 for (const auto &item: astNode.childNodes) {
-                    if (HEDLEY_UNLIKELY(canAddSpace0(item, index))) {
+                    if (canAddSpace0(item, index)) [[unlikely]] {
                         return true;
                     }
                 }
@@ -546,7 +543,7 @@ namespace CHelper::AutoSuggestion {
     Suggestions getSuggestions(const ASTNode &astNode, size_t index) {
         std::u16string_view str = astNode.tokens.string();
         Suggestions suggestions;
-        if (HEDLEY_UNLIKELY(canAddSpace0(astNode, index))) {
+        if (canAddSpace0(astNode, index)) [[unlikely]] {
             suggestions.addSpaceSuggestion({str.length(), str.length(), false, spaceId});
         }
         collectSuggestions(astNode, index, suggestions);

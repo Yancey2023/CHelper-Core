@@ -16,7 +16,7 @@
 #ifdef CHelperDebug
 #define DEBUG_GET_NODE_END(node, index)                                                                       \
     do {                                                                                                      \
-        if (HEDLEY_UNLIKELY((index) != tokenReader.indexStack.size())) {                                      \
+        if ((index) != tokenReader.indexStack.size()) [[unlikely]] {                                          \
             Profile::push("TokenReaderIndexError: {}", FORMAT_ARG(Node::getNodeTypeName((node).nodeTypeId))); \
             throw std::runtime_error("TokenReaderIndexError");                                                \
         }                                                                                                     \
@@ -53,7 +53,7 @@ namespace CHelper::Parser {
             bool isMustAfterSpace0 = reinterpret_cast<const Node::NodeSerializable *>(node.innerNode.data)->getIsMustAfterSpace();
             if (node.innerNode.nodeTypeId != Node::NodeTypeId::REPEAT) {
                 tokenReader.push();
-                if (HEDLEY_UNLIKELY((isMustAfterSpace0 || isMustAfterSpace) && node.innerNode.nodeTypeId != Node::NodeTypeId::LF && tokenReader.skipSpace() == 0)) {
+                if ((isMustAfterSpace0 || isMustAfterSpace) && node.innerNode.nodeTypeId != Node::NodeTypeId::LF && tokenReader.skipSpace() == 0) [[unlikely]] {
                     TokensView tokens = tokenReader.collect();
                     return ASTNode::simpleNode(node, tokens, ErrorReason::requireSpace(tokens));
                 }
@@ -64,7 +64,7 @@ namespace CHelper::Parser {
             DEBUG_GET_NODE_BEGIN(node.innerNode, index);
             ASTNode currentASTNode = parse(node.innerNode, tokenReader);
             DEBUG_GET_NODE_END(node.innerNode, index);
-            if (HEDLEY_UNLIKELY(currentASTNode.isError() || node.nextNodes.empty())) {
+            if (currentASTNode.isError() || node.nextNodes.empty()) [[unlikely]] {
                 return ASTNode::andNode(node, {std::move(currentASTNode)}, tokenReader.collect());
             }
             //子节点
@@ -96,19 +96,19 @@ namespace CHelper::Parser {
     template<>
     struct Parser<Node::NodeJsonEntry> {
         static ASTNode getASTNode(const Node::NodeJsonEntry &node, TokenReader &tokenReader) {
-            return parseByChildNode(node, tokenReader, HEDLEY_LIKELY(node.nodeEntry.has_value()) ? node.nodeEntry.value() : Node::NodeJsonEntry::nodeAllEntry);
+            return parseByChildNode(node, tokenReader, node.nodeEntry.has_value() ? node.nodeEntry.value() : Node::NodeJsonEntry::nodeAllEntry);
         }
     };
 
     template<>
     struct Parser<Node::NodeJsonList> {
         static ASTNode getASTNode(const Node::NodeJsonList &node, TokenReader &tokenReader) {
-            if (HEDLEY_UNLIKELY(!node.nodeList.has_value())) {
+            if (!node.nodeList.has_value()) [[unlikely]] {
                 return parseByChildNode(node, tokenReader, CHelper::Node::NodeJsonList::nodeAllList, ASTNodeId::NODE_JSON_ALL_LIST);
             }
             tokenReader.push();
             ASTNode result1 = parse(node.nodeList.value(), tokenReader);
-            if (HEDLEY_LIKELY(!result1.isError())) {
+            if (!result1.isError()) [[likely]] {
                 return ASTNode::andNode(node, {std::move(result1)}, tokenReader.collect());
             }
             size_t index1 = tokenReader.index;
@@ -130,10 +130,10 @@ namespace CHelper::Parser {
             auto result = tokenReader.readStringASTNode(node);
             tokenReader.pop();
             std::u16string_view str = result.tokens.string();
-            if (HEDLEY_LIKELY(str.empty())) {
+            if (str.empty()) [[likely]] {
                 TokensView tokens = result.tokens;
                 return ASTNode::andNode(node, {std::move(result)}, tokens, ErrorReason::contentError(tokens, u"null参数为空"));
-            } else if (HEDLEY_LIKELY(str != u"null")) {
+            } else if (str != u"null") [[likely]] {
                 TokensView tokens = result.tokens;
                 return ASTNode::andNode(node, {std::move(result)}, tokens, ErrorReason::contentError(tokens, fmt::format(u"内容不是null -> {}", str)));
             }
@@ -154,7 +154,7 @@ namespace CHelper::Parser {
                     const std::u16string &content,
                     const Node::NodeWithType &mainNode) {
         auto convertResult = JsonUtil::jsonString2String(content);
-        if (HEDLEY_UNLIKELY(convertResult.errorReason != nullptr)) {
+        if (convertResult.errorReason != nullptr) [[unlikely]] {
             return {ASTNode::simpleNode(node, tokens, convertResult.errorReason), std::move(convertResult)};
         }
         auto tokenReader = TokenReader(std::make_shared<LexerResult>(Lexer::lex(convertResult.result)));
@@ -178,21 +178,21 @@ namespace CHelper::Parser {
             tokenReader.pop();
             TokensView tokens = result.tokens;
             std::u16string_view str = tokens.string();
-            if (HEDLEY_UNLIKELY(str.empty())) {
+            if (str.empty()) [[unlikely]] {
                 return ASTNode::simpleNode(node, tokens, ErrorReason::incomplete(tokens, u"字符串参数内容为空"));
-            } else if (HEDLEY_UNLIKELY(str[0] != '"')) {
+            } else if (str[0] != '"') [[unlikely]] {
                 return ASTNode::simpleNode(node, tokens, ErrorReason::contentError(tokens, fmt::format(u"字符串参数内容应该在双引号内 -> {}", str)));
             }
             std::shared_ptr<ErrorReason> errorReason;
-            if (HEDLEY_LIKELY(str.size() <= 1 || str[str.size() - 1] != '"')) {
+            if (str.size() <= 1 || str[str.size() - 1] != '"') [[likely]] {
                 errorReason = ErrorReason::contentError(tokens, fmt::format(u"字符串参数内容应该在双引号内 -> {}", str));
             }
-            if (HEDLEY_LIKELY(!node.data.has_value() || node.data->nodes.empty())) {
+            if (!node.data.has_value() || node.data->nodes.empty()) [[likely]] {
                 return ASTNode::simpleNode(node, tokens, errorReason);
             }
             auto [innerNode, convertResult] = getInnerASTNode(node, tokens, std::u16string(str), node.nodeData);
             ASTNode newResult = ASTNode::andNode(node, {std::move(innerNode)}, tokens, errorReason, ASTNodeId::NODE_STRING_INNER);
-            if (HEDLEY_UNLIKELY(errorReason == nullptr)) {
+            if (errorReason == nullptr) [[unlikely]] {
                 for (auto &item: newResult.errorReasons) {
                     item->start += tokens.startIndex;
                     item->end += tokens.startIndex;
@@ -207,14 +207,14 @@ namespace CHelper::Parser {
         static ASTNode getASTNode(const Node::NodeBlock &node, TokenReader &tokenReader) {
             tokenReader.push();
             ASTNode blockId = parseByChildNode(node, tokenReader, node.nodeBlockId, ASTNodeId::NODE_BLOCK_BLOCK_ID);
-            if (HEDLEY_UNLIKELY(node.nodeBlockType == Node::NodeBlockType::BLOCK || blockId.isError())) {
+            if (node.nodeBlockType == Node::NodeBlockType::BLOCK || blockId.isError()) [[unlikely]] {
                 tokenReader.pop();
                 return blockId;
             }
             tokenReader.push();
             ASTNode blockStateLeftBracket = parse(CHelper::Node::NodeBlock::nodeBlockStateLeftBracket, tokenReader);
             tokenReader.restore();
-            if (HEDLEY_LIKELY(blockStateLeftBracket.isError())) {
+            if (blockStateLeftBracket.isError()) [[likely]] {
                 return ASTNode::andNode(node, {(std::move(blockId))}, tokenReader.collect(),
                                         nullptr, ASTNodeId::NODE_BLOCK_BLOCK_AND_BLOCK_STATE);
             }
@@ -222,7 +222,7 @@ namespace CHelper::Parser {
             XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
             std::shared_ptr<NamespaceId> currentBlock = nullptr;
             for (const auto &item: *node.blockIds->blockStateValues) {
-                if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash))) {
+                if (item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash)) [[unlikely]] {
                     currentBlock = item;
                     break;
                 }
@@ -241,33 +241,33 @@ namespace CHelper::Parser {
         static ASTNode getASTNode(const Node::NodeCommand &node, TokenReader &tokenReader) {
             tokenReader.push();
             ASTNode commandStart = parse(Node::NodeCommand::nodeCommandStart, tokenReader);
-            if (HEDLEY_UNLIKELY(commandStart.isError())) {
+            if (commandStart.isError()) [[unlikely]] {
                 tokenReader.restore();
                 tokenReader.push();
             }
             ASTNode commandName = tokenReader.readStringASTNode(node, ASTNodeId::NODE_COMMAND_COMMAND_NAME);
-            if (HEDLEY_UNLIKELY(commandName.tokens.size() == 0)) {
+            if (commandName.tokens.size() == 0) [[unlikely]] {
                 TokensView tokens = tokenReader.collect();
                 return ASTNode::andNode(node, {std::move(commandName)}, tokens, ErrorReason::contentError(tokens, u"命令名字为空"), ASTNodeId::NODE_COMMAND_COMMAND);
             }
             std::u16string_view str = commandName.tokens.string();
             const Node::NodePerCommand *currentCommand = nullptr;
-            if (HEDLEY_LIKELY(!commandName.isError())) {
+            if (!commandName.isError()) [[likely]] {
                 bool isBreak = false;
                 for (const auto &item: *node.commands) {
                     for (const auto &item2: item.name) {
-                        if (HEDLEY_UNLIKELY(str == item2)) {
+                        if (str == item2) [[unlikely]] {
                             isBreak = true;
                             break;
                         }
                     }
-                    if (HEDLEY_UNLIKELY(isBreak)) {
+                    if (isBreak) [[unlikely]] {
                         currentCommand = &item;
                         break;
                     }
                 }
             }
-            if (HEDLEY_UNLIKELY(currentCommand == nullptr)) {
+            if (currentCommand == nullptr) [[unlikely]] {
                 TokensView tokens = tokenReader.collect();
                 return ASTNode::andNode(node, {std::move(commandName)}, tokens, ErrorReason::contentError(tokens, fmt::format(u"命令名字不匹配，找不到名为{}的命令", str)), ASTNodeId::NODE_COMMAND_COMMAND);
             }
@@ -306,13 +306,13 @@ namespace CHelper::Parser {
             DEBUG_GET_NODE_END(item, index);
             bool isError = astNode.isError();
             const TokensView tokens = tokenReader.collect();
-            if (HEDLEY_UNLIKELY(isError && (isIgnoreChildNodesError || tokens.isEmpty()))) {
+            if (isError && (isIgnoreChildNodesError || tokens.isEmpty())) [[unlikely]] {
                 tokenReader.restore();
                 break;
             }
             childASTNodes.push_back(std::move(astNode));
             tokenReader.pop();
-            if (HEDLEY_UNLIKELY(isError)) {
+            if (isError) [[unlikely]] {
                 break;
             }
         }
@@ -328,7 +328,7 @@ namespace CHelper::Parser {
             XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
             std::shared_ptr<NamespaceId> currentItem = nullptr;
             for (const auto &item: *node.itemIds) {
-                if (HEDLEY_UNLIKELY(item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash))) {
+                if (item->fastMatch(strHash) || item->getIdWithNamespace()->fastMatch(strHash)) [[unlikely]] {
                     currentItem = item;
                     break;
                 }
@@ -371,7 +371,7 @@ namespace CHelper::Parser {
             tokenReader.skipToLF();
             TokensView tokens = tokenReader.collect();
             std::shared_ptr<ErrorReason> errorReason;
-            if (HEDLEY_UNLIKELY(tokens.hasValue())) {
+            if (tokens.hasValue()) [[unlikely]] {
                 errorReason = ErrorReason::excess(tokens, u"命令后面有多余部分 -> " + std::u16string(tokens.string()));
             }
             return ASTNode::simpleNode(node, tokens, errorReason);
@@ -386,17 +386,17 @@ namespace CHelper::Parser {
             DEBUG_GET_NODE_BEGIN(node, index);
             auto result = tokenReader.readStringASTNode(node);
             DEBUG_GET_NODE_END(node, index);
-            if (HEDLEY_UNLIKELY(result.tokens.isEmpty())) {
+            if (result.tokens.isEmpty()) [[unlikely]] {
                 TokensView tokens = result.tokens;
                 return ASTNode::andNode(node, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, u"命令不完整"));
             }
-            if (HEDLEY_UNLIKELY(!node.ignoreError.value_or(false))) {
+            if (!node.ignoreError.value_or(false)) [[unlikely]] {
                 TokensView tokens = result.tokens;
                 std::u16string_view str = tokens.string();
                 XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
-                if (HEDLEY_UNLIKELY(std::all_of(node.customContents->begin(), node.customContents->end(), [&strHash](const auto &item) {
+                if (std::ranges::all_of(*node.customContents, [&strHash](const auto &item) {
                         return !item->fastMatch(strHash) && !item->getIdWithNamespace()->fastMatch(strHash);
-                    }))) {
+                    })) [[unlikely]] {
                     return ASTNode::andNode(node, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, fmt::format(u"找不到含义 -> {}", str)));
                 }
             }
@@ -411,8 +411,8 @@ namespace CHelper::Parser {
             DEBUG_GET_NODE_BEGIN(node, index);
             ASTNode result = node.getNormalIdASTNode(node, tokenReader);
             DEBUG_GET_NODE_END(node, index);
-            if (HEDLEY_UNLIKELY(node.allowMissingID)) {
-                if (HEDLEY_UNLIKELY(result.isError())) {
+            if (node.allowMissingID) [[unlikely]] {
+                if (result.isError()) [[unlikely]] {
                     tokenReader.restore();
                     tokenReader.push();
                     return ASTNode::simpleNode(node, tokenReader.collect());
@@ -421,17 +421,17 @@ namespace CHelper::Parser {
                 return result;
             }
             tokenReader.pop();
-            if (HEDLEY_UNLIKELY(result.tokens.isEmpty())) {
+            if (result.tokens.isEmpty()) [[unlikely]] {
                 TokensView tokens = result.tokens;
                 return ASTNode::andNode(node, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, u"命令不完整"));
             }
-            if (HEDLEY_UNLIKELY(!node.ignoreError.value_or(true))) {
+            if (!node.ignoreError.value_or(true)) [[unlikely]] {
                 TokensView tokens = result.tokens;
                 std::u16string_view str = tokens.string();
                 XXH64_hash_t strHash = XXH3_64bits(str.data(), str.size() * sizeof(decltype(str)::value_type));
-                if (HEDLEY_UNLIKELY(std::all_of(node.customContents->begin(), node.customContents->end(), [&strHash](const auto &item) {
+                if (std::ranges::all_of(*node.customContents, [&strHash](const auto &item) {
                         return !item->fastMatch(strHash);
-                    }))) {
+                    })) [[unlikely]] {
                     return ASTNode::andNode(node, {std::move(result)}, tokens, ErrorReason::incomplete(tokens, fmt::format(u"找不到含义 -> {}", str)));
                 }
             }
@@ -474,18 +474,18 @@ namespace CHelper::Parser {
         NodeRelativeFloatType::NodeRelativeFloatType type;
         tokenReader.push();
         ASTNode preSymbol = parse(Node::NodeRelativeFloat::nodePreSymbol, tokenReader);
-        if (HEDLEY_UNLIKELY(preSymbol.isError())) {
+        if (preSymbol.isError()) [[unlikely]] {
             type = NodeRelativeFloatType::ABSOLUTE_COORDINATE;
             tokenReader.restore();
         } else {
-            if (HEDLEY_LIKELY(preSymbol.childNodes[1].isError())) {
+            if (preSymbol.childNodes[1].isError()) [[likely]] {
                 type = NodeRelativeFloatType::RELATIVE_WORLD_COORDINATE;
             } else {
                 type = NodeRelativeFloatType::LOCAL_COORDINATE;
             }
             tokenReader.pop();
             //空格检测
-            if (HEDLEY_UNLIKELY(tokenReader.ready() && tokenReader.peek()->type == TokenType::SPACE)) {
+            if (tokenReader.ready() && tokenReader.peek()->type == TokenType::SPACE) [[unlikely]] {
                 childNodes.push_back(std::move(preSymbol));
                 return {type, ASTNode::andNode(node, std::move(childNodes), tokenReader.collect())};
             }
@@ -495,9 +495,9 @@ namespace CHelper::Parser {
         tokenReader.push();
         ASTNode number = tokenReader.readFloatASTNode(node, ASTNodeId::NODE_RELATIVE_FLOAT_NUMBER);
         std::shared_ptr<ErrorReason> errorReason;
-        if (HEDLEY_LIKELY(!number.isError())) {
+        if (!number.isError()) [[likely]] {
             tokenReader.pop();
-        } else if (HEDLEY_UNLIKELY(childNodes.empty())) {
+        } else if (childNodes.empty()) [[unlikely]] {
             tokenReader.pop();
             TokensView tokens = number.tokens;
             errorReason = ErrorReason::typeError(tokens, fmt::format(u"类型不匹配，{}不是有效的坐标参数", tokens.string()));
@@ -531,10 +531,10 @@ namespace CHelper::Parser {
             //判断有没有错误
             TokensView tokens = tokenReader.collect();
             ASTNode result = ASTNode::andNode(node, std::move(threeChildNodes), tokens, nullptr, ASTNodeId::NODE_POSITION_POSITIONS);
-            if (HEDLEY_UNLIKELY(!result.isError())) {
+            if (!result.isError()) [[unlikely]] {
                 uint8_t count = 0;
                 for (NodeRelativeFloatType::NodeRelativeFloatType item: types) {
-                    if (HEDLEY_UNLIKELY(item == NodeRelativeFloatType::LOCAL_COORDINATE)) {
+                    if (item == NodeRelativeFloatType::LOCAL_COORDINATE) [[unlikely]] {
                         count++;
                     }
                 }
@@ -547,12 +547,12 @@ namespace CHelper::Parser {
     };
 
     std::shared_ptr<ErrorReason> checkNumber(const TokensView &tokens, std::u16string_view str) {
-        if (HEDLEY_UNLIKELY(str.empty())) {
+        if (str.empty()) [[unlikely]] {
             return ErrorReason::contentError(tokens, u"范围的数值为空");
         }
         for (size_t i = 0; i < str.length(); ++i) {
             size_t ch = str[i];
-            if (HEDLEY_UNLIKELY(ch < '0' || ch > '9') && (i != 0 || (ch != '-' && ch != '+'))) {
+            if ((ch < '0' || ch > '9') && (i != 0 || (ch != '-' && ch != '+'))) [[unlikely]] {
                 return ErrorReason::contentError(tokens, u"范围的数值格式不正确，检测非法字符");
             }
         }
@@ -566,13 +566,13 @@ namespace CHelper::Parser {
             std::u16string_view str = result.tokens.string();
             std::shared_ptr<ErrorReason> errorReason;
             size_t index = str.find(u"..");
-            if (HEDLEY_LIKELY(index == std::u16string::npos)) {
+            if (index == std::u16string::npos) [[likely]] {
                 errorReason = checkNumber(result.tokens, str);
-            } else if (HEDLEY_UNLIKELY(index == 0)) {
+            } else if (index == 0) [[unlikely]] {
                 errorReason = checkNumber(result.tokens, std::u16string_view(str).substr(2));
             } else {
                 errorReason = checkNumber(result.tokens, std::u16string_view(str).substr(0, index));
-                if (HEDLEY_UNLIKELY(errorReason == nullptr && index + 2 < str.length())) {
+                if (errorReason == nullptr && index + 2 < str.length()) [[unlikely]] {
                     errorReason = checkNumber(result.tokens, std::u16string_view(str).substr(index + 2));
                 }
             }
@@ -584,10 +584,10 @@ namespace CHelper::Parser {
     struct Parser<Node::NodeRelativeFloat> {
         static ASTNode getASTNode(const Node::NodeRelativeFloat &node, TokenReader &tokenReader) {
             std::pair<NodeRelativeFloatType::NodeRelativeFloatType, ASTNode> result = getRelativeFloatASTNode(node, tokenReader);
-            if (HEDLEY_UNLIKELY(result.second.isError())) {
+            if (result.second.isError()) [[unlikely]] {
                 return std::move(result.second);
             }
-            if (HEDLEY_UNLIKELY(!node.canUseCaretNotation && result.first == NodeRelativeFloatType::LOCAL_COORDINATE)) {
+            if (!node.canUseCaretNotation && result.first == NodeRelativeFloatType::LOCAL_COORDINATE) [[unlikely]] {
                 TokensView tokens = result.second.tokens;
                 return ASTNode::andNode(node, {std::move(result.second)}, tokens, nullptr, ASTNodeId::NODE_RELATIVE_FLOAT_WITH_ERROR);
             }
@@ -604,8 +604,8 @@ namespace CHelper::Parser {
                 ASTNode orNode = parse(node.nodeElement, tokenReader);
                 bool isAstNodeError = orNode.childNodes[0].isError();
                 bool isBreakAstNodeError = orNode.childNodes[1].isError();
-                if (HEDLEY_UNLIKELY(!isBreakAstNodeError || isAstNodeError ||
-                                    (!tokenReader.ready() && node.repeatData->isEnd[orNode.childNodes[0].whichBest]))) {
+                if (!isBreakAstNodeError || isAstNodeError ||
+                    (!tokenReader.ready() && node.repeatData->isEnd[orNode.childNodes[0].whichBest])) [[unlikely]] {
                     childNodes.push_back(std::move(orNode));
                     return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect(), nullptr);
                 }
@@ -617,12 +617,12 @@ namespace CHelper::Parser {
     template<>
     struct Parser<Node::NodeString> {
         static ASTNode getASTNode(const Node::NodeString &node, TokenReader &tokenReader) {
-            if (HEDLEY_UNLIKELY(node.ignoreLater)) {
+            if (node.ignoreLater) [[unlikely]] {
                 //后面的所有内容都算作这个字符串
                 tokenReader.push();
                 tokenReader.skipToLF();
                 TokensView tokens = tokenReader.collect();
-                if (HEDLEY_UNLIKELY(!node.allowMissingString && tokens.isEmpty())) {
+                if (!node.allowMissingString && tokens.isEmpty()) [[unlikely]] {
                     return ASTNode::simpleNode(node, tokens, ErrorReason::incomplete(tokens, u"字符串参数内容为空"));
                 } else {
                     return ASTNode::simpleNode(node, tokens);
@@ -630,32 +630,32 @@ namespace CHelper::Parser {
             }
             tokenReader.push();
             ASTNode result = tokenReader.readStringASTNode(node);
-            if (HEDLEY_UNLIKELY(node.allowMissingString && result.isError())) {
+            if (node.allowMissingString && result.isError()) [[unlikely]] {
                 tokenReader.restore();
                 tokenReader.push();
                 return ASTNode::simpleNode(node, tokenReader.collect());
             }
             tokenReader.pop();
-            if (HEDLEY_UNLIKELY(!node.allowMissingString && result.tokens.isEmpty())) {
+            if (!node.allowMissingString && result.tokens.isEmpty()) [[unlikely]] {
                 return ASTNode::simpleNode(node, result.tokens, ErrorReason::incomplete(result.tokens, u"字符串参数内容为空"));
             }
-            if (HEDLEY_UNLIKELY(!node.canContainSpace)) {
-                if (HEDLEY_UNLIKELY(result.tokens.string().find(' ') != std::u16string::npos)) {
+            if (!node.canContainSpace) [[unlikely]] {
+                if (result.tokens.string().find(' ') != std::u16string::npos) [[unlikely]] {
                     return ASTNode::simpleNode(node, result.tokens, ErrorReason::contentError(result.tokens, u"字符串参数内容不可以包含空格"));
                 }
                 return result;
             }
             std::u16string_view str = result.tokens.string();
-            if (HEDLEY_LIKELY(str.empty() || str[0] != '"')) {
+            if (str.empty() || str[0] != '"') [[likely]] {
                 return result;
             }
             auto convertResult = JsonUtil::jsonString2String(str);
-            if (HEDLEY_UNLIKELY(convertResult.errorReason != nullptr)) {
+            if (convertResult.errorReason != nullptr) [[unlikely]] {
                 convertResult.errorReason->start += result.tokens.startIndex;
                 convertResult.errorReason->end += result.tokens.startIndex;
                 return ASTNode::simpleNode(node, result.tokens, convertResult.errorReason);
             }
-            if (HEDLEY_UNLIKELY(!convertResult.isComplete)) {
+            if (!convertResult.isComplete) [[unlikely]] {
                 return ASTNode::simpleNode(node, result.tokens, ErrorReason::contentError(result.tokens, fmt::format(u"字符串参数内容双引号不封闭 -> {}", str)));
             }
             return result;
@@ -677,9 +677,9 @@ namespace CHelper::Parser {
             auto result = node.getTextASTNode(node, tokenReader);
             DEBUG_GET_NODE_END(node, index);
             std::u16string_view str = result.tokens.string();
-            if (HEDLEY_UNLIKELY(str != node.data->name)) {
+            if (str != node.data->name) [[unlikely]] {
                 TokensView tokens = result.tokens;
-                if (HEDLEY_UNLIKELY(str.empty())) {
+                if (str.empty()) [[unlikely]] {
                     return ASTNode::andNode(node, {std::move(result)}, tokens, ErrorReason::contentError(tokens, u"命令不完整"));
                 } else {
                     return ASTNode::andNode(node, {std::move(result)}, tokens, ErrorReason::contentError(tokens, fmt::format(u"找不到含义 -> {}", str)));
@@ -702,7 +702,7 @@ namespace CHelper::Parser {
                     ASTNode childNode = Parser<Node::NodeWrapped>::getASTNodeWithIsMustAfterSpace(*nodeWrapped, tokenReader, isMustAfterSpace);
                     bool isError = childNode.isError();
                     childASTNodes.push_back(std::move(childNode));
-                    if (HEDLEY_UNLIKELY(isError)) {
+                    if (isError) [[unlikely]] {
                         break;
                     }
                     isMustAfterSpace = reinterpret_cast<const Node::NodeSerializable *>(nodeWrapped->innerNode.data)->getIsMustAfterSpace();
@@ -710,13 +710,13 @@ namespace CHelper::Parser {
                     ASTNode childNode = parse(item, tokenReader);
                     bool isError = childNode.isError();
                     childASTNodes.push_back(std::move(childNode));
-                    if (HEDLEY_UNLIKELY(isError)) {
+                    if (isError) [[unlikely]] {
                         break;
                     }
-                    if (HEDLEY_UNLIKELY(i < node.childNodes.size() - 1 &&
-                                        node.childNodes[i + 1].nodeTypeId != Node::NodeTypeId::OPTIONAL &&
-                                        tokenReader.ready() &&
-                                        tokenReader.peek()->type == TokenType::SPACE)) {
+                    if (i < node.childNodes.size() - 1 &&
+                        node.childNodes[i + 1].nodeTypeId != Node::NodeTypeId::OPTIONAL &&
+                        tokenReader.ready() &&
+                        tokenReader.peek()->type == TokenType::SPACE) [[unlikely]] {
                         tokenReader.push();
                         tokenReader.skip();
                         TokensView tokens = tokenReader.collect();
@@ -743,13 +743,13 @@ namespace CHelper::Parser {
             tokenReader.push();
             std::vector<ASTNode> childNodes;
             auto key = parse(node.nodeKey, tokenReader);
-            if (HEDLEY_UNLIKELY(key.isError())) {
+            if (key.isError()) [[unlikely]] {
                 childNodes.push_back(std::move(key));
                 return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
             }
             childNodes.push_back(std::move(key));
             auto separator = parse(node.nodeSeparator, tokenReader);
-            if (HEDLEY_UNLIKELY(separator.isError())) {
+            if (separator.isError()) [[unlikely]] {
                 childNodes.push_back(std::move(separator));
                 return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
             }
@@ -767,7 +767,7 @@ namespace CHelper::Parser {
             // key
             ASTNode astNodeKey = parseByChildNode(node, tokenReader, node.nodeKey);
             childNodes.push_back(astNodeKey);
-            if (HEDLEY_UNLIKELY(astNodeKey.isError())) {
+            if (astNodeKey.isError()) [[unlikely]] {
                 return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
             }
             std::u16string_view key = astNodeKey.tokens.string();
@@ -781,11 +781,11 @@ namespace CHelper::Parser {
                             ? Node::NodeWithType(Node::NodeEqualEntry::nodeEqualOrNotEqual)
                             : Node::NodeWithType(Node::NodeEqualEntry::nodeEqual));
             childNodes.push_back(astNodeSeparator);
-            if (HEDLEY_UNLIKELY(astNodeSeparator.isError())) {
+            if (astNodeSeparator.isError()) [[unlikely]] {
                 return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
             }
             //value
-            if (HEDLEY_UNLIKELY(it == node.equalDatas.end())) {
+            if (it == node.equalDatas.end()) [[unlikely]] {
                 childNodes.push_back(parse(Node::NodeAny::getNodeAny(), tokenReader));
             } else {
                 childNodes.push_back(parse(it->nodeValue, tokenReader));
@@ -800,7 +800,7 @@ namespace CHelper::Parser {
             //标记整个[...]，在最后进行收集
             tokenReader.push();
             ASTNode left = parse(node.nodeLeft, tokenReader);
-            if (HEDLEY_UNLIKELY(left.isError())) {
+            if (left.isError()) [[unlikely]] {
                 return ASTNode::andNode(node, {std::move(left)}, tokenReader.collect());
             }
             std::vector<ASTNode> childNodes = {std::move(left)};
@@ -817,11 +817,11 @@ namespace CHelper::Parser {
                 auto elementOrRight = parse(node.nodeElementOrRight, tokenReader);
                 bool flag = !rightBracket1.isError() || elementOrRight.isError();
                 childNodes.push_back(std::move(elementOrRight));
-                if (HEDLEY_UNLIKELY(flag)) {
+                if (flag) [[unlikely]] {
                     return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
                 }
 #ifdef CHelperDebug
-                if (HEDLEY_UNLIKELY(startIndex == tokenReader.index)) {
+                if (startIndex == tokenReader.index) [[unlikely]] {
                     SPDLOG_WARN("NodeList has some error");
                     return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
                 }
@@ -842,7 +842,7 @@ namespace CHelper::Parser {
                 DEBUG_GET_NODE_END(node.nodeSeparatorOrRight, nodeSeparatorOrRightIndex);
                 bool flag = !rightBracket.isError() || separatorOrRight.isError();
                 childNodes.push_back(std::move(separatorOrRight));
-                if (HEDLEY_UNLIKELY(flag)) {
+                if (flag) [[unlikely]] {
                     return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
                 }
                 //检测是不是元素
@@ -851,11 +851,11 @@ namespace CHelper::Parser {
                 DEBUG_GET_NODE_END(node.nodeElement, nodeElementIndex);
                 flag = element.isError();
                 childNodes.push_back(std::move(element));
-                if (HEDLEY_UNLIKELY(flag)) {
+                if (flag) [[unlikely]] {
                     return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
                 }
 #ifdef CHelperDebug
-                if (HEDLEY_UNLIKELY(startIndex == tokenReader.index)) {
+                if (startIndex == tokenReader.index) [[unlikely]] {
                     SPDLOG_WARN("NodeList has some error");
                     return ASTNode::andNode(node, std::move(childNodes), tokenReader.collect());
                 }
@@ -869,7 +869,7 @@ namespace CHelper::Parser {
         static ASTNode getASTNode(const Node::NodeOr &node, TokenReader &tokenReader) {
             std::vector<ASTNode> childASTNodes;
             std::vector<size_t> indexes;
-            if (HEDLEY_LIKELY(!node.isUseFirst)) {
+            if (!node.isUseFirst) [[likely]] {
                 childASTNodes.reserve(node.childNodes.size());
                 indexes.reserve(node.childNodes.size());
             }
@@ -880,11 +880,11 @@ namespace CHelper::Parser {
                 childASTNodes.push_back(std::move(childNode));
                 indexes.push_back(tokenReader.index);
                 tokenReader.restore();
-                if (HEDLEY_UNLIKELY(node.isUseFirst && !isNodeError)) {
+                if (node.isUseFirst && !isNodeError) [[unlikely]] {
                     break;
                 }
             }
-            if (HEDLEY_UNLIKELY(node.isAttachToEnd)) {
+            if (node.isAttachToEnd) [[unlikely]] {
                 tokenReader.push();
                 tokenReader.skipToLF();
                 const TokensView tokens = tokenReader.collect();
@@ -902,15 +902,15 @@ namespace CHelper::Parser {
         static ASTNode getASTNode(const Node::NodeSingleSymbol &node, TokenReader &tokenReader) {
             ASTNode symbolNode = tokenReader.readSymbolASTNode(node);
             std::shared_ptr<ErrorReason> errorReason;
-            if (HEDLEY_UNLIKELY(symbolNode.isError())) {
-                if (HEDLEY_LIKELY(symbolNode.tokens.isEmpty())) {
+            if (symbolNode.isError()) [[unlikely]] {
+                if (symbolNode.tokens.isEmpty()) [[likely]] {
                     return ASTNode::simpleNode(node, symbolNode.tokens, ErrorReason::incomplete(symbolNode.tokens, fmt::format(u"命令不完整，需要符号{:c}", node.symbol)));
                 } else {
                     return ASTNode::simpleNode(node, symbolNode.tokens, ErrorReason::typeError(symbolNode.tokens, fmt::format(u"类型不匹配，需要符号{:c}，但当前内容为{}", node.symbol, symbolNode.tokens.string())));
                 }
             }
             std::u16string_view str = symbolNode.tokens.string();
-            if (HEDLEY_LIKELY(str.length() == 1 && str[0] == node.symbol)) {
+            if (str.length() == 1 && str[0] == node.symbol) [[likely]] {
                 return symbolNode;
             }
             return ASTNode::simpleNode(node, symbolNode.tokens, ErrorReason::contentError(symbolNode.tokens, fmt::format(u"内容不匹配，正确的符号为{:c}，但当前内容为{}", node.symbol, str)));
@@ -947,7 +947,7 @@ namespace CHelper::Parser {
         static ASTNode getASTNode(const Node::NodeTemplateBoolean<isJson> &node, TokenReader &tokenReader) {
             ASTNode astNode = tokenReader.readStringASTNode(node);
             std::u16string_view str = astNode.tokens.string();
-            if (HEDLEY_LIKELY(str == u"true" || str == u"false")) {
+            if (str == u"true" || str == u"false") [[likely]] {
                 return astNode;
             }
             TokensView tokens = astNode.tokens;

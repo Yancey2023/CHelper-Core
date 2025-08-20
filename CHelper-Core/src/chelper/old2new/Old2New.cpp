@@ -156,9 +156,9 @@ namespace CHelper::Old2New {
         char *end;
         std::string dataValueStr = utf8::utf16to8(dataValueToken.string());
         std::intmax_t dataValue = std::strtoimax(dataValueStr.c_str(), &end, 10);
-        if (HEDLEY_UNLIKELY(end == dataValueStr.c_str() || *end != '\0' ||
-                            dataValue == HUGE_VALF || dataValue == -HUGE_VALF ||
-                            dataValue < 0)) {
+        if (end == dataValueStr.c_str() || *end != '\0' ||
+            dataValue == HUGE_VALF || dataValue == -HUGE_VALF ||
+            dataValue < 0) [[unlikely]] {
             // if it is not an integer or in range, return block id directly
             return blockId;
         }
@@ -639,12 +639,12 @@ namespace CHelper::Old2New {
 
     BlockFixData blockFixDataFromJson(const rapidjson::GenericDocument<rapidjson::UTF8<>> &j) {
         using JsonValueType = rapidjson::GenericDocument<rapidjson::UTF8<>>;
-        if (HEDLEY_UNLIKELY(!j.IsArray())) {
+        if (!j.IsArray()) [[unlikely]] {
             throw serialization::exceptions::JsonSerializationTypeException("array", serialization::getJsonTypeStr(j.GetType()));
         }
         BlockFixData blockFixData;
         for (const auto &item: j.GetArray()) {
-            if (HEDLEY_UNLIKELY(!item.IsObject())) {
+            if (!item.IsObject()) [[unlikely]] {
                 throw serialization::exceptions::JsonSerializationTypeException("object", serialization::getJsonTypeStr(j.GetType()));
             }
             std::u16string name;

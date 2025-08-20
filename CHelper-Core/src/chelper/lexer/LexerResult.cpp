@@ -12,9 +12,9 @@ namespace CHelper {
           allTokens(std::move(allTokens)) {}
 
     [[nodiscard]] size_t LexerResult::getIndex(size_t tokenIndex) const {
-        if (HEDLEY_UNLIKELY(tokenIndex == 0)) {
+        if (tokenIndex == 0) [[unlikely]] {
             return 0;
-        } else if (HEDLEY_UNLIKELY(tokenIndex == allTokens.size())) {
+        } else if (tokenIndex == allTokens.size()) [[unlikely]] {
             return allTokens[tokenIndex - 1].getEndIndex();
         } else {
             return allTokens[tokenIndex].getStartIndex();

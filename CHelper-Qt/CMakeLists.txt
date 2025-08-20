@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
 project(CHelperQt LANGUAGES CXX)
 
-# using c++ 17
-set(CMAKE_CXX_STANDARD 17)
+# using c++ 20
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # export compile commands
@@ -42,5 +42,5 @@ add_executable(CHelperQt WIN32
 )
 target_link_libraries(CHelperQt PRIVATE CHelper::Core Qt6::Core Qt6::Gui Qt6::Widgets)
 if (MSVC)
-    target_compile_options(CHelperQt PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
+    set_property(TARGET CHelperQt PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif ()

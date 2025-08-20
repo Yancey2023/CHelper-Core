@@ -119,7 +119,7 @@ struct serialization::Codec<CHelper::Node::NodeJsonElement> : BaseCodec<CHelper:
     template<class JsonValueType>
     static void from_json(const JsonValueType &jsonValue,
                           Type &t) {
-        if (HEDLEY_UNLIKELY(!jsonValue.IsObject())) {
+        if (!jsonValue.IsObject()) [[unlikely]] {
             throw exceptions::JsonSerializationTypeException("object", getJsonTypeStr(jsonValue.GetType()));
         }
         CHelper::Profile::push("loading id");
@@ -191,7 +191,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
     template<class JsonValueType>
     static void from_json(const JsonValueType &jsonValue,
                           Type &t) {
-        if (HEDLEY_UNLIKELY(!jsonValue.IsObject())) {
+        if (!jsonValue.IsObject()) [[unlikely]] {
             throw exceptions::JsonSerializationTypeException("object", getJsonTypeStr(jsonValue.GetType()));
         }
         //name
@@ -202,7 +202,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         Codec<decltype(t.description)>::template from_json_member<JsonValueType>(jsonValue, details::JsonKey<Type, typename JsonValueType::Ch>::description_(), t.description);
         //node
         const typename JsonValueType::ConstMemberIterator nodeIter = jsonValue.FindMember(details::JsonKey<Type, typename JsonValueType::Ch>::node_());
-        if (HEDLEY_LIKELY(nodeIter != jsonValue.MemberEnd())) {
+        if (nodeIter != jsonValue.MemberEnd()) [[likely]] {
             Codec<decltype(t.nodes)>::template from_json<typename JsonValueType::ValueType>(nodeIter->value, t.nodes);
             t.wrappedNodes.reserve(t.nodes.nodes.size());
             for (auto &node: t.nodes.nodes) {
@@ -216,71 +216,71 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         t.startNodes.reserve(startNodeIds.size());
         for (const auto &startNodeId: startNodeIds) {
             CHelper::Profile::next(R"(linking startNode "{}" to nodes)", FORMAT_ARG(startNodeId));
-            if (HEDLEY_UNLIKELY(startNodeId == "LF")) {
+            if (startNodeId == "LF") [[unlikely]] {
                 t.startNodes.push_back(CHelper::Node::NodeLF::getInstance());
                 continue;
             }
             bool flag = true;
             for (auto &node1: t.wrappedNodes) {
-                if (HEDLEY_UNLIKELY(node1.getNodeSerializable().id == startNodeId)) {
+                if (node1.getNodeSerializable().id == startNodeId) [[unlikely]] {
                     t.startNodes.push_back(&node1);
                     flag = false;
                     break;
                 }
             }
-            if (HEDLEY_UNLIKELY(flag)) {
+            if (flag) [[unlikely]] {
                 CHelper::Profile::push(R"("unknown node id -> {} (in command \"{}\")", FORMAT_ARG(startNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                 throw std::runtime_error("unknown node id");
             }
         }
         //ast
         const typename JsonValueType::ConstMemberIterator jsonAstIter = jsonValue.FindMember(details::JsonKey<Type, typename JsonValueType::Ch>::ast_());
-        if (HEDLEY_LIKELY(jsonAstIter != jsonValue.MemberEnd())) {
+        if (jsonAstIter != jsonValue.MemberEnd()) [[likely]] {
             CHelper::Profile::next("loading ast");
             std::vector<std::vector<std::string>> ast;
             Codec<decltype(ast)>::template from_json<typename JsonValueType::ValueType>(jsonAstIter->value, ast);
             for (const auto &childNodes: ast) {
                 CHelper::Profile::next("linking child nodes to parent node");
-                if (HEDLEY_UNLIKELY(childNodes.empty())) {
+                if (childNodes.empty()) [[unlikely]] {
                     CHelper::Profile::push(R"("dismiss parent node id (in command "{}"))", FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                     throw std::runtime_error("dismiss parent node id");
                 }
                 auto parentNodeId = childNodes.at(0);
                 CHelper::Profile::next(R"("linking child nodes to parent node "{}"))", FORMAT_ARG(parentNodeId));
-                if (HEDLEY_UNLIKELY(childNodes.size() == 1)) {
+                if (childNodes.size() == 1) [[unlikely]] {
                     CHelper::Profile::push(R"("dismiss parent node id, the parent node is {} (in command "{}"))", FORMAT_ARG(parentNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                     throw std::runtime_error("dismiss parent node id");
                 }
                 CHelper::Node::NodeWrapped *parentNode = nullptr;
                 for (auto &node1: t.wrappedNodes) {
-                    if (HEDLEY_UNLIKELY(node1.getNodeSerializable().id == parentNodeId)) {
+                    if (node1.getNodeSerializable().id == parentNodeId) [[unlikely]] {
                         parentNode = &node1;
                         break;
                     }
                 }
-                if (HEDLEY_UNLIKELY(parentNode == nullptr)) {
+                if (parentNode == nullptr) [[unlikely]] {
                     CHelper::Profile::push(R"("unknown node id -> {} (in command "{}"))", FORMAT_ARG(parentNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                     throw std::runtime_error("unknown node id");
                 }
-                if (HEDLEY_UNLIKELY(!parentNode->nextNodes.empty())) {
+                if (!parentNode->nextNodes.empty()) [[unlikely]] {
                     CHelper::Profile::push(R"(repeating parent node -> {} (in command "{}"))", FORMAT_ARG(parentNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                     throw std::runtime_error("repeating parent node");
                 }
                 parentNode->nextNodes.reserve(childNodes.size() - 1);
                 for_each(childNodes.begin() + 1, childNodes.end(), [&](const auto &childNodeId) {
                     CHelper::Profile::next(R"(linking child nodes "{}" to parent node "{} (in command "{}"))", FORMAT_ARG(childNodeId), FORMAT_ARG(parentNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
-                    if (HEDLEY_UNLIKELY(childNodeId == "LF")) {
+                    if (childNodeId == "LF") [[unlikely]] {
                         parentNode->nextNodes.push_back(CHelper::Node::NodeLF::getInstance());
                         return;
                     }
                     CHelper::Node::NodeWrapped *childNode = nullptr;
                     for (auto &node: t.wrappedNodes) {
-                        if (HEDLEY_UNLIKELY(node.getNodeSerializable().id == childNodeId)) {
+                        if (node.getNodeSerializable().id == childNodeId) [[unlikely]] {
                             childNode = &node;
                             break;
                         }
                     }
-                    if (HEDLEY_UNLIKELY(childNode == nullptr)) {
+                    if (childNode == nullptr) [[unlikely]] {
                         CHelper::Profile::push(R"("unknown node id -> {} (in command "{}"))", FORMAT_ARG(childNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                         throw std::runtime_error("unknown node id");
                     }
@@ -319,7 +319,7 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
                             Type &t) {
         //name
         Codec<decltype(t.name)>::template from_binary<isNeedConvert>(istream, t.name);
-        if (HEDLEY_UNLIKELY(t.name.empty())) {
+        if (t.name.empty()) [[unlikely]] {
             throw std::runtime_error("command size cannot be zero");
         }
         //description
@@ -337,19 +337,19 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
         for (size_t i = 0; i < startNodeIdSize; ++i) {
             std::string startNodeId;
             Codec<decltype(startNodeId)>::template from_binary<isNeedConvert>(istream, startNodeId);
-            if (HEDLEY_UNLIKELY(startNodeId == "LF")) {
+            if (startNodeId == "LF") [[unlikely]] {
                 t.startNodes.push_back(CHelper::Node::NodeLF::getInstance());
                 continue;
             }
             bool flag = true;
             for (auto &node: t.wrappedNodes) {
-                if (HEDLEY_UNLIKELY(node.getNodeSerializable().id == startNodeId)) {
+                if (node.getNodeSerializable().id == startNodeId) [[unlikely]] {
                     t.startNodes.push_back(&node);
                     flag = false;
                     break;
                 }
             }
-            if (HEDLEY_UNLIKELY(flag)) {
+            if (flag) [[unlikely]] {
                 CHelper::Profile::push(R"("unknown node id -> {} (in command "{}"))", FORMAT_ARG(startNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                 throw std::runtime_error("unknown node id");
             }
@@ -362,18 +362,18 @@ struct serialization::Codec<CHelper::Node::NodePerCommand> : BaseCodec<CHelper::
             for (size_t j = 0; j < childNodeSize; ++j) {
                 std::string childNodeId;
                 Codec<decltype(childNodeId)>::template from_binary<isNeedConvert>(istream, childNodeId);
-                if (HEDLEY_UNLIKELY(childNodeId == "LF")) {
+                if (childNodeId == "LF") [[unlikely]] {
                     parentNode.nextNodes.push_back(CHelper::Node::NodeLF::getInstance());
                     continue;
                 }
                 CHelper::Node::NodeWrapped *childNode = nullptr;
                 for (auto &node1: t.wrappedNodes) {
-                    if (HEDLEY_UNLIKELY(node1.getNodeSerializable().id == childNodeId)) {
+                    if (node1.getNodeSerializable().id == childNodeId) [[unlikely]] {
                         childNode = &node1;
                         break;
                     }
                 }
-                if (HEDLEY_UNLIKELY(childNode == nullptr)) {
+                if (childNode == nullptr) [[unlikely]] {
                     CHelper::Profile::push(R"("unknown node id -> {} (in command "{}"))", FORMAT_ARG(childNodeId), FORMAT_ARG(utf8::utf16to8(fmt::format(u"{}", CHelper::StringUtil::join(t.name, u",")))));
                     throw std::runtime_error("unknown node id");
                 }
@@ -439,7 +439,7 @@ struct NodeCodec {
             }
             Type *node = new Type();
             serialization::Codec<Type>::template from_json<JsonValueType>(jsonValue, *node);
-            if (HEDLEY_UNLIKELY(!node->isMustAfterSpace.has_value())) {
+            if (!node->isMustAfterSpace.has_value()) [[unlikely]] {
                 node->isMustAfterSpace = isMustAfterSpace;
             }
             t.nodeTypeId = nodeTypeId;
@@ -468,7 +468,7 @@ struct NodeCodec {
             }
             Type *node = new Type();
             serialization::Codec<Type>::template from_binary<isNeedConvert>(istream, *node);
-            if (HEDLEY_UNLIKELY(!node->isMustAfterSpace.has_value())) {
+            if (!node->isMustAfterSpace.has_value()) [[unlikely]] {
                 node->isMustAfterSpace = isMustAfterSpace;
             }
             t.nodeTypeId = nodeTypeId;
@@ -569,7 +569,7 @@ template<class JsonValueType>
 void serialization::Codec<CHelper::Node::NodeWithType>::from_json(
         const JsonValueType &jsonValue,
         Type &t) {
-    if (HEDLEY_UNLIKELY(!jsonValue.IsObject())) {
+    if (!jsonValue.IsObject()) [[unlikely]] {
         throw exceptions::JsonSerializationTypeException("object", getJsonTypeStr(jsonValue.GetType()));
     }
     CHelper::Profile::push("loading type");
@@ -578,13 +578,13 @@ void serialization::Codec<CHelper::Node::NodeWithType>::from_json(
     std::optional<std::u16string> id;
     Codec<decltype(id)>::template from_json_member<JsonValueType>(jsonValue, "id", id);
     CHelper::Profile::next("loading node {}", FORMAT_ARG(type));
-    if (HEDLEY_LIKELY(id.has_value())) {
+    if (id.has_value()) [[likely]] {
         CHelper::Profile::next("loading node {} with id \"{}\"", FORMAT_ARG(type), FORMAT_ARG(utf8::utf16to8(id.value())));
     } else {
         CHelper::Profile::next("loading node {} without id", FORMAT_ARG(type));
     }
     std::optional<CHelper::Node::NodeTypeId::NodeTypeId> nodeTypeId = CHelper::Node::getNodeTypeIdByName(type);
-    if (HEDLEY_UNLIKELY(!nodeTypeId.has_value())) {
+    if (!nodeTypeId.has_value()) [[unlikely]] {
         CHelper::Profile::next("unknown node type -> {}", FORMAT_ARG(type));
         throw std::runtime_error("unknown node type");
     }

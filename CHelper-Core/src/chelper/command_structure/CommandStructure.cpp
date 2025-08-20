@@ -48,7 +48,7 @@ namespace CHelper::CommandStructure {
     struct CommandStructure<Node::NodeBlock> {
         static bool collectStructure(const ASTNode *astNode, const Node::NodeBlock &node, StructureBuilder &structure, bool isMustHave) {
             structure.append(isMustHave, u"方块ID");
-            if (HEDLEY_LIKELY(node.nodeBlockType == Node::NodeBlockType::BLOCK_WITH_BLOCK_STATE)) {
+            if (node.nodeBlockType == Node::NodeBlockType::BLOCK_WITH_BLOCK_STATE) [[likely]] {
                 structure.append(false, u"方块状态");
             }
             return true;
@@ -184,19 +184,17 @@ namespace CHelper::CommandStructure {
             if (astNode != nullptr) {
                 for (const auto &item: astNode->childNodes) {
                     //如果内容为空，就跳过
-                    if (HEDLEY_UNLIKELY(item.tokens.isEmpty() || item.tokens.isAllSpace())) {
+                    if (item.tokens.isEmpty() || item.tokens.isAllSpace()) [[unlikely]] {
                         continue;
                     }
                     //获取结构
-                    const ASTNode &astNode1 = HEDLEY_LIKELY(item.whichBest == 0)
-                                                      ? item.getBestNode().getBestNode()
-                                                      : item.getBestNode();
+                    const ASTNode &astNode1 = item.whichBest == 0 ? item.getBestNode().getBestNode() : item.getBestNode();
                     auto node1 = reinterpret_cast<const Node::NodeAnd *>(astNode1.node.data);
                     size_t astNodeSize = astNode1.childNodes.size();
                     size_t nodeSize = node1->childNodes.size();
-                    if (HEDLEY_LIKELY(astNode1.isError() || item.whichBest == 1)) {
+                    if (astNode1.isError() || item.whichBest == 1) [[likely]] {
                         for (size_t i = 0; i < nodeSize; ++i) {
-                            if (HEDLEY_LIKELY(i < astNodeSize)) {
+                            if (i < astNodeSize) [[likely]] {
                                 const auto &item2 = astNode1.childNodes[i];
                                 collectNodeStructureOrUnknown(&item2, item2.node, structure, true);
                             } else {
@@ -210,7 +208,7 @@ namespace CHelper::CommandStructure {
                             structure.appendSpace().append(u"...");
                         }
                     }
-                    if (HEDLEY_UNLIKELY(item.whichBest == 1)) {
+                    if (item.whichBest == 1) [[unlikely]] {
                         //如果是结束语句，就不继续执行了
                         return true;
                     }
@@ -258,7 +256,7 @@ namespace CHelper::CommandStructure {
                 collectNodeStructureOrUnknown(nullptr, node.innerNode, structure, isMustHave);
                 if (isMustHave) {
                     for (const auto &item: node.nextNodes) {
-                        if (HEDLEY_UNLIKELY(item->innerNode.nodeTypeId == Node::NodeTypeId::LF)) {
+                        if (item->innerNode.nodeTypeId == Node::NodeTypeId::LF) [[unlikely]] {
                             isMustHave = false;
                             break;
                         }
@@ -275,7 +273,7 @@ namespace CHelper::CommandStructure {
                 }
                 if (isMustHave) {
                     for (const auto &item: node.nextNodes) {
-                        if (HEDLEY_UNLIKELY(item->innerNode.nodeTypeId == Node::NodeTypeId::LF)) {
+                        if (item->innerNode.nodeTypeId == Node::NodeTypeId::LF) [[unlikely]] {
                             isMustHave = false;
                             break;
                         }
@@ -303,7 +301,7 @@ namespace CHelper::CommandStructure {
         StructureBuilder structureBuilder;
         collectNodeStructure(&astNode, astNode.node, structureBuilder, true);
         std::u16string result = structureBuilder.build();
-        while (HEDLEY_UNLIKELY(!result.empty() && result[result.size() - 1] == '\n')) {
+        while (!result.empty() && result[result.size() - 1] == '\n') [[unlikely]] {
             result.pop_back();
         }
         return result;

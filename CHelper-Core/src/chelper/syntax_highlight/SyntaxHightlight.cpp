@@ -54,7 +54,7 @@ namespace CHelper::SyntaxHighlight {
     template<>
     struct SyntaxToken<Node::NodeCommand> {
         static bool collectSyntax(const ASTNode &astNode, SyntaxResult &syntaxResult) {
-            if (HEDLEY_LIKELY(astNode.id == ASTNodeId::NODE_COMMAND_COMMAND_NAME)) {
+            if (astNode.id == ASTNodeId::NODE_COMMAND_COMMAND_NAME) [[likely]] {
                 syntaxResult.update(astNode.tokens, SyntaxTokenType::COMMAND);
                 return true;
             }
@@ -201,7 +201,7 @@ namespace CHelper::SyntaxHighlight {
 #ifdef CHelperTest
         Profile::pop();
 #endif
-        if (HEDLEY_UNLIKELY(isDirty)) {
+        if (isDirty) [[unlikely]] {
             return;
         }
         switch (astNode.mode) {
@@ -223,7 +223,7 @@ namespace CHelper::SyntaxHighlight {
         collectSyntaxResult(astNode, syntaxResult);
         std::stack<char16_t> brackets;
         astNode.tokens.forEach([&brackets, &syntaxResult](const Token &token) {
-            if (HEDLEY_LIKELY(token.type != TokenType::SYMBOL || token.content.empty())) {
+            if (token.type != TokenType::SYMBOL || token.content.empty()) [[likely]] {
                 return;
             }
             char16_t ch = token.content[0];
