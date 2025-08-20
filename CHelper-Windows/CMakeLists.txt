@@ -14,16 +14,16 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clan
 elseif (MSVC)
     add_compile_options("/W4")
     add_compile_options("/wd4100")
-endif()
+endif ()
 
 # Fix issues in MSVC
 if (MSVC)
     add_compile_options("/utf-8")
 endif ()
 
-if(NOT TARGET CHelperCore)
+if (NOT TARGET CHelperCore)
     message(FATAL_ERROR "CHelper-Core not found.")
-endif()
+endif ()
 
 # Windows Application
 add_executable(CHelperWindows

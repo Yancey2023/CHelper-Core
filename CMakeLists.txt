@@ -11,7 +11,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clan
 elseif (MSVC)
     add_compile_options("/W4")
     add_compile_options("/wd4100")
-endif()
+endif ()
 
 # Fix issues in MSVC
 if (MSVC)
@@ -38,7 +38,7 @@ endif ()
 find_package(Qt6 COMPONENTS Core Gui Widgets)
 if (Qt6_FOUND)
     add_subdirectory(CHelper-Qt)
-endif()
+endif ()
 
 # Android Shared Libary (not support MSVC)
 if (NOT MSVC)

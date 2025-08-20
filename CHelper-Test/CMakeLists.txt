@@ -14,7 +14,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clan
 elseif (MSVC)
     add_compile_options("/W4")
     add_compile_options("/wd4100")
-endif()
+endif ()
 
 # Fix issues in MSVC
 if (MSVC)
@@ -29,9 +29,9 @@ if (MSVC)
     target_compile_options(gtest_main PRIVATE $<$<CONFIG:>:/MT> $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
 endif ()
 
-if(NOT TARGET CHelperCore)
+if (NOT TARGET CHelperCore)
     message(FATAL_ERROR "CHelper-Core not found.")
-endif()
+endif ()
 
 # Using GTest to test codes
 file(GLOB_RECURSE TEST_FILE src/*.h src/*.cpp)

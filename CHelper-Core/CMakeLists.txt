@@ -14,7 +14,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clan
 elseif (MSVC)
     add_compile_options("/W4")
     add_compile_options("/wd4100")
-endif()
+endif ()
 
 # Fix issues in MSVC
 if (MSVC)
