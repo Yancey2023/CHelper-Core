@@ -29,9 +29,9 @@ namespace CHelper::Test {
     [[maybe_unused]] void testLex(const std::vector<std::u16string> &commands) {
         try {
             for (const auto &command: commands) {
-                fmt::println("lex command: {}", FORMAT_ARG(utf8::utf16to8(command)));
+                SPDLOG_INFO("lex command: {}", FORMAT_ARG(utf8::utf16to8(command)));
                 for (const auto &item: Lexer::lex(command).allTokens) {
-                    fmt::println("[{}] {} {}", getTokenTypeStr(item.type), item.pos, FORMAT_ARG(utf8::utf16to8(item.content)));
+                    SPDLOG_INFO("[{}] {} {}", getTokenTypeStr(item.type), item.pos, FORMAT_ARG(utf8::utf16to8(item.content)));
                 }
             }
         } catch (const std::exception &e) {
@@ -77,43 +77,52 @@ namespace CHelper::Test {
                 startStructure = std::chrono::high_resolution_clock::now();
                 auto structure = core->getStructure();
                 endStructure = std::chrono::high_resolution_clock::now();
-                fmt::println("parse: {}", FORMAT_ARG(utf8::utf16to8(command)));
-                fmt::println("parse in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endParse - startParse)));
-                fmt::println("get description in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endDescription - startDescription)));
-                fmt::println("get error in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endErrorReasons - startErrorReasons)));
-                fmt::println("get suggestions in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endSuggestions - startSuggestions)));
-                fmt::println("get structure in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startStructure)));
-                fmt::println("structure: {}", utf8::utf16to8(structure));
-                fmt::println("description: {}", utf8::utf16to8(description));
+                SPDLOG_INFO("parse: {}", FORMAT_ARG(utf8::utf16to8(command)));
+                SPDLOG_INFO("parse in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endParse - startParse)));
+                SPDLOG_INFO("get description in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endDescription - startDescription)));
+                SPDLOG_INFO("get error in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endErrorReasons - startErrorReasons)));
+                SPDLOG_INFO("get suggestions in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endSuggestions - startSuggestions)));
+                SPDLOG_INFO("get structure in {}", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startStructure)));
+                SPDLOG_INFO("structure: {}", utf8::utf16to8(structure));
+                SPDLOG_INFO("description: {}", utf8::utf16to8(description));
                 if (errorReasons.empty()) {
-                    fmt::println("no error");
+                    SPDLOG_INFO("no error");
                 } else {
-                    fmt::println("error reasons:");
+                    SPDLOG_INFO("error reasons:");
                     for (size_t i = 0; i < errorReasons.size(); ++i) {
-                        const auto& errorReason = errorReasons[i];
-                        fmt::print("{}. {} {}\n{}{}{}\n",
-                                   i,
-                                   fmt::styled(utf8::utf16to8(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
-                                   fmt::styled(utf8::utf16to8(errorReason->errorReason), fg(fmt::color::cornflower_blue)),
-                                   utf8::utf16to8(command.substr(0, errorReason->start)),
-                                   fmt::styled(errorReason->start == errorReason->end ? "~" : utf8::utf16to8(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
-                                   utf8::utf16to8(command.substr((errorReason->end))));
+                        const auto &errorReason = errorReasons[i];
+                        try {
+                            fmt::styled(utf8::utf16to8(errorReason->errorReason), fg(fmt::color::cornflower_blue));
+                        } catch (const std::exception &e) {
+                            for (int i = 0; i < errorReason->errorReason.length(); ++i) {
+                                SPDLOG_INFO("{}. {}", i, utf8::utf16to8(errorReason->errorReason.substr(0, i)));
+                            }
+                            exit(-1);
+                        }
+                        SPDLOG_INFO("{}. {} {}",
+                                    i,
+                                    fmt::styled(utf8::utf16to8(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
+                                    fmt::styled(utf8::utf16to8(errorReason->errorReason), fg(fmt::color::cornflower_blue)));
+                        SPDLOG_INFO("{}{}{}",
+                                    utf8::utf16to8(command.substr(0, errorReason->start)),
+                                    fmt::styled(errorReason->start == errorReason->end ? "~" : utf8::utf16to8(command.substr(errorReason->start, errorReason->end - errorReason->start)), fg(fmt::color::red)),
+                                    utf8::utf16to8(command.substr((errorReason->end))));
                     }
                 }
                 if (suggestions->empty()) {
-                    fmt::println("no suggestion");
+                    SPDLOG_INFO("no suggestion");
                 } else {
-                    fmt::println("{} suggestions:", suggestions->size());
+                    SPDLOG_INFO("{} suggestions:", suggestions->size());
                     for (size_t i = 0; i < suggestions->size(); ++i) {
                         const auto &item = (*suggestions)[i];
                         if (i == 30) {
-                            fmt::println("...");
+                            SPDLOG_INFO("...");
                             break;
                         }
-                        fmt::println("{}. {} {}",
-                                     i,
-                                     fmt::styled(utf8::utf16to8(item.content->name), fg(fmt::color::lime_green)),
-                                     fmt::styled(utf8::utf16to8(item.content->description.value_or(u"")), fg(fmt::color::cornflower_blue)));
+                        SPDLOG_INFO("{}. {} {}",
+                                    i,
+                                    fmt::styled(utf8::utf16to8(item.content->name), fg(fmt::color::lime_green)),
+                                    fmt::styled(utf8::utf16to8(item.content->description.value_or(u"")), fg(fmt::color::cornflower_blue)));
                         std::u16string result = command.substr(0, item.start)
                                                         .append(item.content->name)
                                                         .append(command.substr(item.end));
@@ -124,13 +133,13 @@ namespace CHelper::Test {
                                 greenPart.push_back(u' ');
                             }
                         }
-                        fmt::println("{}{}{}",
-                                     utf8::utf16to8(command.substr(0, item.start)),
-                                     fmt::styled(utf8::utf16to8(greenPart), fg(fmt::color::lime_green)),
-                                     utf8::utf16to8(command.substr(item.end)));
+                        SPDLOG_INFO("{}{}{}",
+                                    utf8::utf16to8(command.substr(0, item.start)),
+                                    fmt::styled(utf8::utf16to8(greenPart), fg(fmt::color::lime_green)),
+                                    utf8::utf16to8(command.substr(item.end)));
                     }
                 }
-                fmt::print("\n");
+                SPDLOG_INFO("-----");
             } catch (const std::exception &e) {
                 flag = true;
                 CHelper::Profile::printAndClear(e);

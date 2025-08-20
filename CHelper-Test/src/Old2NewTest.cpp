@@ -39,9 +39,8 @@ namespace CHelper::Test {
                 uR"(setblock ~~~ acacia_door["direction":1])",
         };
         for (const auto &item: oldCommands) {
-            fmt::print("{}\n{}\n", styled(utf8::utf16to8(item), fg(fmt::color::red)),
-                       styled(utf8::utf16to8(Old2New::old2new(blockFixData, item)),
-                              fg(fmt::color::lime_green)));
+            SPDLOG_INFO("{}", styled(utf8::utf16to8(item), fg(fmt::color::red)));
+            SPDLOG_INFO("{}", styled(utf8::utf16to8(Old2New::old2new(blockFixData, item)), fg(fmt::color::lime_green)));
         }
     }
 
