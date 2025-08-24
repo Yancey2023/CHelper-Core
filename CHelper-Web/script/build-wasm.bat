@@ -5,7 +5,7 @@ call cd ..
 
 @REM 编译Release模式
 echo ----- [Release] 加载CMake项目 -----
-call cmake -B cmake-build-emscripten-release -D CMAKE_BUILD_TYPE=Release -D CMAKE_TOOLCHAIN_FILE="D:\emsdk\include\emscripten\cmake\Modules\Platform\Emscripten.cmake" -G "Ninja"
+call cmake -B cmake-build-emscripten-release -D CMAKE_BUILD_TYPE=Release -D CMAKE_TOOLCHAIN_FILE="D:\emsdk\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake" -G "Ninja"
 call cd cmake-build-emscripten-release
 echo ----- [Release] 编译CMake项目 -----
 call cmake --build . --target CHelperWeb --parallel
