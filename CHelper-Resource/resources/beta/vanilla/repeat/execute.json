@@ -52,7 +52,7 @@
                     },
                     {
                         "name": "xz",
-                        "description": "y轴 z轴"
+                        "description": "x轴 z轴"
                     },
                     {
                         "name": "yz",

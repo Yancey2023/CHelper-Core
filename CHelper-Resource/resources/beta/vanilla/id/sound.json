@@ -710,9 +710,6 @@
             "description": "物品：交换"
         },
         {
-            "name": "block.shelf.step"
-        },
-        {
             "name": "block.sign.waxed_interact_fail",
             "description": "告示牌：晃动"
         },
