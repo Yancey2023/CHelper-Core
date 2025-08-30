@@ -48,7 +48,7 @@ namespace CHelper::Test {
         std::shared_ptr<CHelperCore> core;
         try {
             std::unique_ptr<CPack> cPack = CPack::createByDirectory(cpackPath);
-            ASTNode astNode = Parser::parse(u"", cPack.get());
+            ASTNode astNode = Parser::parse(u"", *cPack);
             core = std::make_shared<CHelperCore>(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
             Profile::printAndClear(e);
