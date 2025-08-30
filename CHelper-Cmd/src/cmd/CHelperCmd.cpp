@@ -298,7 +298,7 @@ namespace CHelper::Test {
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return false;
             }
-            const Manifest &manifest = core->getCPack()->manifest;
+            const Manifest &manifest = core->getCPack().manifest;
 
             std::string filename = fmt::format(
                     "{}-{}-{}.{}",
@@ -309,7 +309,7 @@ namespace CHelper::Test {
             std::filesystem::path realOutput = output / filename;
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
-            core->getCPack()->writeJsonToDirectory(realOutput);
+            core->getCPack().writeJsonToDirectory(realOutput);
             end = std::chrono::high_resolution_clock::now();
             SPDLOG_INFO("CPack write successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(end - start)));
             core2 = CHelperCore::createByDirectory(realOutput);
@@ -331,7 +331,7 @@ namespace CHelper::Test {
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return false;
             }
-            const Manifest &manifest = core->getCPack()->manifest;
+            const Manifest &manifest = core->getCPack().manifest;
             std::string filename = fmt::format(
                     "{}-{}-{}.{}",
                     manifest.versionType.has_value() ? utf8::utf16to8(manifest.versionType.value()) : "",
@@ -341,7 +341,7 @@ namespace CHelper::Test {
             std::filesystem::path realOutput = output / filename;
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
-            core->getCPack()->writeJsonToFile(realOutput);
+            core->getCPack().writeJsonToFile(realOutput);
             end = std::chrono::high_resolution_clock::now();
             SPDLOG_INFO("CPack write successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(end - start)));
             core2 = CHelperCore::createByJson(realOutput);
@@ -363,7 +363,7 @@ namespace CHelper::Test {
             if (HEDLEY_UNLIKELY(core == nullptr)) {
                 return false;
             }
-            const Manifest &manifest = core->getCPack()->manifest;
+            const Manifest &manifest = core->getCPack().manifest;
             std::string filename = fmt::format(
                     "{}-{}-{}.{}",
                     manifest.versionType.has_value() ? utf8::utf16to8(manifest.versionType.value()) : "",
@@ -373,7 +373,7 @@ namespace CHelper::Test {
             std::filesystem::path realOutput = output / filename;
             std::chrono::high_resolution_clock::time_point start, end;
             start = std::chrono::high_resolution_clock::now();
-            core->getCPack()->writeBinToFile(realOutput);
+            core->getCPack().writeBinToFile(realOutput);
             end = std::chrono::high_resolution_clock::now();
             SPDLOG_INFO("run successfully({})", FORMAT_ARG(std::chrono::duration_cast<std::chrono::milliseconds>(end - start)));
             core2 = CHelperCore::createByBinary(realOutput);

@@ -26,7 +26,7 @@ namespace CHelper {
             const auto end = std::chrono::high_resolution_clock::now();
 #endif
             SPDLOG_INFO("CPack load successfully ({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(end - start), fg(fmt::color::medium_purple)));
-            ASTNode astNode = Parser::parse(u"", cPack.get());
+            ASTNode astNode = Parser::parse(u"", *cPack);
             return new CHelperCore(std::move(cPack), std::move(astNode));
         } catch (const std::exception &e) {
             SPDLOG_ERROR("CPack load failed");
@@ -84,7 +84,7 @@ namespace CHelper {
     void CHelperCore::onTextChanged(const std::u16string &content, size_t index0) {
         if (input != content) [[likely]] {
             input = content;
-            astNode = Parser::parse(input, cpack.get());
+            astNode = Parser::parse(input, *cpack);
             suggestions = nullptr;
         }
         onSelectionChanged(index0);
@@ -97,8 +97,8 @@ namespace CHelper {
         }
     }
 
-    [[nodiscard]] const CPack *CHelperCore::getCPack() const {
-        return cpack.get();
+    [[nodiscard]] const CPack &CHelperCore::getCPack() const {
+        return *cpack;
     }
 
     [[nodiscard]] const ASTNode *CHelperCore::getAstNode() const {

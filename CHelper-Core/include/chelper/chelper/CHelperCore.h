@@ -41,7 +41,7 @@ namespace CHelper {
 
         void onSelectionChanged(size_t index0);
 
-        [[nodiscard]] const CPack *getCPack() const;
+        [[nodiscard]] const CPack &getCPack() const;
 
         [[nodiscard]] const ASTNode *getAstNode() const;
 

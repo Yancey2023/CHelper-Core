@@ -989,8 +989,8 @@ namespace CHelper::Parser {
         return result;
     }
 
-    ASTNode parse(const std::u16string &content, const CPack *cpack) {
-        return parse(content, cpack->mainNode);
+    ASTNode parse(const std::u16string &content, const CPack &cpack) {
+        return parse(content, cpack.mainNode);
     }
 
 }// namespace CHelper::Parser
