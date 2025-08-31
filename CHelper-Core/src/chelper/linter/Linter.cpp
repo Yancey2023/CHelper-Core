@@ -114,6 +114,42 @@ namespace CHelper::Linter {
         }
     };
 
+    template<>
+    struct Linter<Node::NodeEqualEntry> {
+        static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
+            if (astNode.childNodes.size() == 3 && astNode.childNodes[2].node.data == Node::NodeAny::getNodeAny().data) {
+                errorReasons.push_back(ErrorReason::idError(astNode.tokens, fmt::format(u"未知的目标选择器参数 -> {}", astNode.childNodes[0].tokens.string())));
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
+    template<>
+    struct Linter<Node::NodeJsonList> {
+        static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
+            if (!astNode.isError() && astNode.id == ASTNodeId::NODE_JSON_ALL_LIST) [[unlikely]] {
+                errorReasons.push_back(ErrorReason::idError(astNode.tokens, fmt::format(u"未知的json参数 -> {}", astNode.tokens.string())));
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
+    template<>
+    struct Linter<Node::NodeJsonEntry> {
+        static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
+            if (!reinterpret_cast<Node::NodeJsonEntry *>(astNode.node.data)->nodeEntry.has_value()) [[unlikely]] {
+                errorReasons.push_back(ErrorReason::idError(astNode.tokens, fmt::format(u"未知的json参数 -> {}", astNode.tokens.string())));
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
     template<class T, bool isJson>
     struct Linter<Node::NodeTemplateNumber<T, isJson>> {
         static bool lint(const ASTNode &astNode, std::vector<std::shared_ptr<ErrorReason>> &errorReasons) {
