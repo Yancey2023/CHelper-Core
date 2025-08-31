@@ -140,11 +140,7 @@ struct serialization::Codec<CHelper::PropertyValue> {
                 Codec<decltype(t.integer)>::template to_json<JsonValueType>(allocator, jsonValue, t.integer);
                 break;
             default:
-#ifdef CHelperDebug
-                throw std::runtime_error("error block state property type");
-#else
-                HEDLEY_UNREACHABLE();
-#endif
+                CHELPER_UNREACHABLE();
         }
     }
 
@@ -206,11 +202,7 @@ struct serialization::Codec<CHelper::PropertyValue> {
                 Codec<decltype(t.integer)>::template to_binary<isNeedConvert>(ostream, t.integer);
                 break;
             default:
-#ifdef CHelperDebug
-                throw std::runtime_error("error block state property type");
-#else
-                HEDLEY_UNREACHABLE();
-#endif
+                CHELPER_UNREACHABLE();
         }
     }
 

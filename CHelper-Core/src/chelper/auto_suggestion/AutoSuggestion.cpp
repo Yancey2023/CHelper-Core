@@ -491,7 +491,7 @@ namespace CHelper::AutoSuggestion {
             switch (astNode.node.nodeTypeId) {
                 CODEC_PASTE(CHELPER_COLLECT_AUTO_SUGGESTION, CHELPER_NODE_TYPES)
                 default:
-                    HEDLEY_UNREACHABLE();
+                    CHELPER_UNREACHABLE();
             }
 #ifdef CHelperTest
             Profile::pop();
@@ -536,7 +536,7 @@ namespace CHelper::AutoSuggestion {
                 }
                 return false;
             default:
-                HEDLEY_UNREACHABLE();
+                CHELPER_UNREACHABLE();
         }
     }
 

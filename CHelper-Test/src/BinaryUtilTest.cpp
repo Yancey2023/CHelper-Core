@@ -73,7 +73,7 @@ namespace CHelper {
                 }
                 break;
             default:
-                HEDLEY_UNREACHABLE();
+                CHELPER_UNREACHABLE();
         }
         if (t1.valid.has_value() != t2.valid.has_value()) {
             return false;
@@ -100,7 +100,7 @@ namespace CHelper {
                         }
                         break;
                     default:
-                        HEDLEY_UNREACHABLE();
+                        CHELPER_UNREACHABLE();
                 }
             }
         }
@@ -139,7 +139,7 @@ namespace CHelper {
                     }
                     break;
                 default:
-                    HEDLEY_UNREACHABLE();
+                    CHELPER_UNREACHABLE();
             }
             if (t1.values[i].description != t2.values[i].description) {
                 return false;

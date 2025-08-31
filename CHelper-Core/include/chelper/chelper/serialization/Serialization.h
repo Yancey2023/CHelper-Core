@@ -515,7 +515,7 @@ void NodeTypeHelper::to_json(const CHelper::Node::NodeTypeId::NodeTypeId id,
     switch (id) {
         CODEC_PASTE(CHELPER_CODEC_NODE_TO_JSON, CHELPER_NODE_TYPES)
         default:
-            HEDLEY_UNREACHABLE();
+            CHELPER_UNREACHABLE();
     }
 }
 
@@ -526,7 +526,7 @@ void NodeTypeHelper::from_json(const CHelper::Node::NodeTypeId::NodeTypeId id,
     switch (id) {
         CODEC_PASTE(CHELPER_CODEC_NODE_FROM_JSON, CHELPER_NODE_TYPES)
         default:
-            HEDLEY_UNREACHABLE();
+            CHELPER_UNREACHABLE();
     }
 }
 
@@ -537,7 +537,7 @@ void NodeTypeHelper::to_binary(const CHelper::Node::NodeTypeId::NodeTypeId id,
     switch (id) {
         CODEC_PASTE(CHELPER_CODEC_NODE_TO_BINARY, CHELPER_NODE_TYPES)
         default:
-            HEDLEY_UNREACHABLE();
+            CHELPER_UNREACHABLE();
     }
 }
 

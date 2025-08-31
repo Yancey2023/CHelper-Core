@@ -971,7 +971,7 @@ namespace CHelper::Parser {
         switch (node.nodeTypeId) {
             CODEC_PASTE(CHELPER_GET_AST_NODE, CHELPER_NODE_TYPES)
             default:
-                HEDLEY_UNREACHABLE();
+                CHELPER_UNREACHABLE();
         }
     }
 

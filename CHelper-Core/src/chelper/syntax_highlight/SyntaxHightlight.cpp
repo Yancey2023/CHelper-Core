@@ -196,7 +196,7 @@ namespace CHelper::SyntaxHighlight {
         switch (astNode.node.nodeTypeId) {
             CODEC_PASTE(CHELPER_COLLECT_SYNTAX, CHELPER_NODE_TYPES)
             default:
-                HEDLEY_UNREACHABLE();
+                CHELPER_UNREACHABLE();
         }
 #ifdef CHelperTest
         Profile::pop();
@@ -241,7 +241,7 @@ namespace CHelper::SyntaxHighlight {
                             syntaxResult.update(token.pos, SyntaxTokenType::BRACKET3);
                             break;
                         default:
-                            HEDLEY_UNREACHABLE();
+                            CHELPER_UNREACHABLE();
                     }
                     brackets.push(ch);
                 } break;
@@ -261,7 +261,7 @@ namespace CHelper::SyntaxHighlight {
                             syntaxResult.update(token.pos, SyntaxTokenType::BRACKET3);
                             break;
                         default:
-                            HEDLEY_UNREACHABLE();
+                            CHELPER_UNREACHABLE();
                     }
                     brackets.pop();
                 } break;

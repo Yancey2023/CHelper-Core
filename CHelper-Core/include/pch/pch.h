@@ -55,7 +55,7 @@
 // 字符串格式化
 #ifdef _MSC_VER
 #pragma warning(push)
-#pragma warning(disable: 4244)
+#pragma warning(disable : 4244)
 #endif
 #include <fmt/base.h>
 #ifdef _MSC_VER
@@ -87,5 +87,11 @@
 #include <chelper/util/StringUtil.h>
 // KMP字符串匹配算法
 #include <chelper/util/KMPMatcher.h>
+
+#if defined(_MSC_VER) && !defined(__clang__)
+#define CHELPER_UNREACHABLE() __assume(false)
+#else
+#define CHELPER_UNREACHABLE() __builtin_unreachable()
+#endif
 
 #endif// CHELPER_PCH_H

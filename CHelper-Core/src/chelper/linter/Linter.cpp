@@ -151,7 +151,7 @@ namespace CHelper::Linter {
             switch (astNode.node.nodeTypeId) {
                 CODEC_PASTE(CHELPER_LINT, CHELPER_NODE_TYPES)
                 default:
-                    HEDLEY_UNREACHABLE();
+                    CHELPER_UNREACHABLE();
             }
 #ifdef CHelperTest
             Profile::pop();

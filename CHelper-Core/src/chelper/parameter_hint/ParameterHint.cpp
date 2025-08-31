@@ -80,7 +80,7 @@ namespace CHelper::ParameterHint {
             switch (astNode.node.nodeTypeId) {
                 CODEC_PASTE(CHELPER_GET_PARAMETER_HINT, CHELPER_NODE_TYPES)
                 default:
-                    HEDLEY_UNREACHABLE();
+                    CHELPER_UNREACHABLE();
             }
 #ifdef CHelperTest
             Profile::pop();
@@ -103,7 +103,7 @@ namespace CHelper::ParameterHint {
             case ASTNodeMode::OR:
                 return getParameterHint(astNode.getBestNode(), index);
             default:
-                HEDLEY_UNREACHABLE();
+                CHELPER_UNREACHABLE();
         }
     }
 

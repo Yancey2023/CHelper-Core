@@ -256,7 +256,7 @@ namespace CHelper {
                         "BLOCK_STATE_ENTRY_VALUE_BOOLEAN", u"方块状态键值对的键（布尔值）",
                         NormalId::make(blockPropertyValueDescription.valueName.boolean ? u"true" : u"false", description));
             default:
-                HEDLEY_UNREACHABLE();
+                CHELPER_UNREACHABLE();
         }
     }
 
@@ -280,7 +280,7 @@ namespace CHelper {
                     isDefaultValue = item.valueName.integer == defaultValue.integer;
                     break;
                 default:
-                    HEDLEY_UNREACHABLE();
+                    CHELPER_UNREACHABLE();
             }
             bool isInvalid;
             if (valid.has_value()) {
@@ -311,7 +311,7 @@ namespace CHelper {
                         }
                         break;
                     default:
-                        HEDLEY_UNREACHABLE();
+                        CHELPER_UNREACHABLE();
                 }
             } else {
                 isInvalid = false;

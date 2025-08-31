@@ -293,7 +293,7 @@ namespace CHelper::CommandStructure {
         switch (node.nodeTypeId) {
             CODEC_PASTE(CHELPER_COLLECT_STRUCTURE, CHELPER_NODE_TYPES)
             default:
-                HEDLEY_UNREACHABLE();
+                CHELPER_UNREACHABLE();
         }
     }
 

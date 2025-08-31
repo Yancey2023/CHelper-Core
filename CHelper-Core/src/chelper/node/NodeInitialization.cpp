@@ -431,7 +431,7 @@ namespace CHelper::Node {
         switch (node.nodeTypeId) {
             CODEC_PASTE(CHELPER_INIT, CHELPER_NODE_TYPES)
             default:
-                HEDLEY_UNREACHABLE();
+                CHELPER_UNREACHABLE();
         }
     }
 
