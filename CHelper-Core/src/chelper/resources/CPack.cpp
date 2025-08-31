@@ -18,7 +18,7 @@ namespace CHelper {
         currentCreateStage = Node::NodeCreateStage::NONE;
         Profile::push("loading manifest");
         auto jsonManifest = serialization::get_json_from_file(path / "manifest.json");
-        serialization::Codec<Manifest>::template from_json(jsonManifest, manifest);
+        serialization::Codec<Manifest>::from_json(jsonManifest, manifest);
         Profile::next("loading id data");
         for (const auto &file: std::filesystem::recursive_directory_iterator(path / "id")) {
             Profile::next(R"(loading id data in path "{}")", FORMAT_ARG(file.path().string()));
@@ -175,8 +175,11 @@ namespace CHelper {
     }
 
     void CPack::afterApply() {
+        // selector nodes
+        Profile::push("init selector nodes");
+        targetSelectorData.init(*this);
         // json nodes
-        Profile::push("init json nodes");
+        Profile::next("init json nodes");
         for (const auto &item: jsonNodes) {
             Node::initNode(item, *this);
         }

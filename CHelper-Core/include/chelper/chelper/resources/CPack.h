@@ -25,6 +25,7 @@ namespace CHelper {
         std::vector<Node::NodeJsonElement> jsonNodes;
         std::vector<Node::RepeatData> repeatNodeData;
         std::unordered_map<std::string, std::pair<const Node::RepeatData *, Node::NodeWithType>> repeatNodes;
+        Node::TargetSelectorData targetSelectorData;
         std::shared_ptr<std::vector<Node::NodePerCommand>> commands = std::make_shared<std::vector<Node::NodePerCommand>>();
         Node::NodeCommand mainNode;
 

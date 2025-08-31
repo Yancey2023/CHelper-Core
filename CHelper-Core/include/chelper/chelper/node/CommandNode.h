@@ -490,18 +490,15 @@ namespace CHelper {
                        bool ignoreLater);
         };
 
-        class NodeTargetSelector : public NodeSerializable {
-        public:
-            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::TARGET_SELECTOR;
+        struct TargetSelectorData {
             static NodeString nodePlayerName;
             static NodeSingleSymbol nodeWildcard;
             static NodeSingleSymbol nodeAt;
-            static NodeNormalId nodeTargetSelectorVariable;
             static NodeSingleSymbol nodeSeparator;
             static NodeString nodeString;
             static NodeBoolean nodeBoolean;
             static NodeRelativeFloat nodeRelativeFloat;
-            bool isMustPlayer = false, isMustNPC = false, isOnlyOne = false, isWildcard = false;
+            NodeNormalId nodeTargetSelectorVariable;
             NodeNamespaceId nodeItem;
             NodeNormalId nodeFamily, nodeGameMode, nodeSlot;
             NodeNamespaceId nodeEntities;
@@ -512,6 +509,16 @@ namespace CHelper {
             NodeList nodeArguments;
             NodeOptional nodeOptionalArguments;
             NodeAnd nodeTargetSelectorVariableWithArgument;
+
+            TargetSelectorData();
+
+            void init(const CPack &cpack);
+        };
+
+        class NodeTargetSelector : public NodeSerializable {
+        public:
+            static constexpr NodeTypeId::NodeTypeId nodeTypeId = NodeTypeId::TARGET_SELECTOR;
+            bool isMustPlayer = false, isMustNPC = false, isOnlyOne = false, isWildcard = false;
             NodeOr nodeTargetSelector;
 
             NodeTargetSelector() = default;
