@@ -27,7 +27,7 @@ CHelperApp::CHelperApp(QWidget *parent)
         });
     }
 #endif
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         throw std::runtime_error("fail to load cpack");
     }
     ui->listView->setModel(new QStringListModel(this));
@@ -53,12 +53,12 @@ void CHelperApp::onTextChanged([[maybe_unused]] const QString &string) const {
 }
 
 void CHelperApp::onSelectionChanged() const {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         return;
     }
     QString string = ui->lineEdit->text();
     core->onTextChanged(string.toStdU16String(), ui->lineEdit->cursorPosition());
-    if (HEDLEY_UNLIKELY(string == nullptr)) {
+    if (string == nullptr) [[unlikely]] {
         ui->structureLabel->setText("欢迎使用CHelper");
         ui->descriptionLabel->setText("作者：Yancey");
         ui->errorReasonLabel->setText(nullptr);
@@ -66,9 +66,9 @@ void CHelperApp::onSelectionChanged() const {
         ui->structureLabel->setText(QString::fromStdU16String(core->getStructure()));
         ui->descriptionLabel->setText(QString::fromStdU16String(core->getDescription()));
         std::vector<std::shared_ptr<CHelper::ErrorReason>> errorReasons = core->getErrorReasons();
-        if (HEDLEY_UNLIKELY(errorReasons.empty())) {
+        if (errorReasons.empty()) [[unlikely]] {
             ui->errorReasonLabel->setText(nullptr);
-        } else if (HEDLEY_UNLIKELY(errorReasons.size() == 1)) {
+        } else if (errorReasons.size() == 1) [[unlikely]] {
             ui->errorReasonLabel->setText(QString::fromStdU16String(errorReasons[0]->errorReason));
         } else {
             std::u16string result = u"可能的错误原因：";
@@ -92,11 +92,11 @@ void CHelperApp::onSelectionChanged() const {
 }
 
 void CHelperApp::onSuggestionClick(const QModelIndex &index) const {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         return;
     }
     std::optional<std::pair<std::u16string, size_t>> result = core->onSuggestionClick(index.row());
-    if (HEDLEY_LIKELY(result.has_value())) {
+    if (result.has_value()) [[likely]] {
         ui->lineEdit->setText(QString::fromStdU16String(result.value().first));
         ui->lineEdit->setCursorPosition(static_cast<int>(result.value().second));
         ui->lineEdit->setFocus();

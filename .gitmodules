@@ -6,10 +6,6 @@
 	path = CHelper-Core/include/utfcpp
 	url = https://github.com/nemtrif/utfcpp.git
 	branch = master
-[submodule "CHelper-Core/include/hedley"]
-	path = CHelper-Core/include/hedley
-	url = https://github.com/Yancey2023/hedley.git
-	branch = master
 [submodule "CHelper-Core/include/serialization"]
 	path = CHelper-Core/include/serialization
 	url = https://github.com/Yancey2023/serialization.git

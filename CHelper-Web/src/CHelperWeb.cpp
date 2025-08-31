@@ -23,21 +23,21 @@ EMSCRIPTEN_KEEPALIVE void release(const CHelper::CHelperCore *core) {
 }
 
 EMSCRIPTEN_KEEPALIVE void onTextChanged(CHelper::CHelperCore *core, const char16_t *content, size_t index) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         return;
     }
     core->onTextChanged(content, index);
 }
 
 EMSCRIPTEN_KEEPALIVE void onSelectionChanged(CHelper::CHelperCore *core, size_t index) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         return;
     }
     core->onSelectionChanged(index);
 }
 
 EMSCRIPTEN_KEEPALIVE const uint8_t *getStructure(const CHelper::CHelperCore *core) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         return nullptr;
     }
     std::u16string structure = core->getStructure();
@@ -48,7 +48,7 @@ EMSCRIPTEN_KEEPALIVE const uint8_t *getStructure(const CHelper::CHelperCore *cor
 }
 
 EMSCRIPTEN_KEEPALIVE const uint8_t *getDescription(const CHelper::CHelperCore *core) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         return nullptr;
     }
     std::u16string description = core->getDescription();
@@ -59,7 +59,7 @@ EMSCRIPTEN_KEEPALIVE const uint8_t *getDescription(const CHelper::CHelperCore *c
 }
 
 EMSCRIPTEN_KEEPALIVE const uint8_t *getErrorReasons(const CHelper::CHelperCore *core) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         return nullptr;
     }
     auto errorReasons = core->getErrorReasons();
@@ -87,7 +87,7 @@ EMSCRIPTEN_KEEPALIVE const uint8_t *getErrorReasons(const CHelper::CHelperCore *
 }
 
 EMSCRIPTEN_KEEPALIVE size_t getSuggestionSize(CHelper::CHelperCore *core) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         return 0;
     }
     auto suggestions = core->getSuggestions();
@@ -98,7 +98,7 @@ EMSCRIPTEN_KEEPALIVE size_t getSuggestionSize(CHelper::CHelperCore *core) {
 }
 
 EMSCRIPTEN_KEEPALIVE const uint8_t *getSuggestion(CHelper::CHelperCore *core, size_t which) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         return nullptr;
     }
     auto suggestions = core->getSuggestions();
@@ -126,7 +126,7 @@ EMSCRIPTEN_KEEPALIVE const uint8_t *getSuggestion(CHelper::CHelperCore *core, si
 }
 
 EMSCRIPTEN_KEEPALIVE const uint8_t *getAllSuggestions(CHelper::CHelperCore *core) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         return nullptr;
     }
     auto suggestions = core->getSuggestions();
@@ -164,7 +164,7 @@ EMSCRIPTEN_KEEPALIVE const uint8_t *getAllSuggestions(CHelper::CHelperCore *core
 }
 
 EMSCRIPTEN_KEEPALIVE uint8_t *onSuggestionClick(CHelper::CHelperCore *core, size_t which) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         return nullptr;
     }
     auto result = core->onSuggestionClick(which);
@@ -185,7 +185,7 @@ EMSCRIPTEN_KEEPALIVE uint8_t *onSuggestionClick(CHelper::CHelperCore *core, size
 }
 
 EMSCRIPTEN_KEEPALIVE uint8_t *getSyntaxTokens(CHelper::CHelperCore *core) {
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         return nullptr;
     }
     auto result = core->getSyntaxResult();

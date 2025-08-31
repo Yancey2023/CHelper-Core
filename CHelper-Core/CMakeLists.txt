@@ -35,9 +35,6 @@ set(XXHASH_BUILD_XXHSUM OFF)
 option(BUILD_SHARED_LIBS OFF)
 add_subdirectory(include/xxHash/cmake_unofficial EXCLUDE_FROM_ALL)
 
-# ThirdParty: hedley
-add_subdirectory(include/hedley)
-
 # ThirdParty: serialization
 add_subdirectory(include/serialization)
 
@@ -70,7 +67,7 @@ function(init_chelper_library target CHELPER_CORE_DIR)
             ${CHELPER_CORE_DIR}/include/chelper
             ${CMAKE_BINARY_DIR}/include/param_deliver
     )
-    target_link_libraries(${target} PUBLIC fmt::fmt spdlog::spdlog utf8cpp xxHash::xxhash hedley serialization::serialization)
+    target_link_libraries(${target} PUBLIC fmt::fmt spdlog::spdlog utf8cpp xxHash::xxhash serialization::serialization)
 endfunction()
 
 # CHelper Core

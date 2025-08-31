@@ -67,8 +67,6 @@
 #include <fmt/xchar.h>
 // 日志库
 #include <spdlog/spdlog.h>
-// 编译器特性宏
-#include <hedley.h>
 // 哈希算法
 #define XXH_STATIC_LINKING_ONLY
 #include <xxhash.h>

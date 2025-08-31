@@ -31,7 +31,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
             break;
         }
     }
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         exit(-1);
     }
     //窗口数据
@@ -49,7 +49,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
     wcex.lpszClassName = szWindowClass;
     wcex.hIconSm = LoadIcon(wcex.hInstance, IDI_APPLICATION);
     //注册窗口
-    if (HEDLEY_UNLIKELY(!RegisterClassEx(&wcex))) {
+    if (!RegisterClassEx(&wcex)) [[unlikely]] {
         MessageBox(nullptr, TEXT("Call to RegisterClassEx failed!"), TEXT("CHelper"), 0);
         return 1;
     }
@@ -63,7 +63,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine,
             500, 500,
             nullptr, nullptr,
             hInstance, nullptr);
-    if (HEDLEY_UNLIKELY(hWnd == nullptr)) {
+    if (hWnd == nullptr) [[unlikely]] {
         MessageBox(nullptr, TEXT("Call to CreateWindow failed!"), TEXT("CHelper"), 0);
         return 1;
     }

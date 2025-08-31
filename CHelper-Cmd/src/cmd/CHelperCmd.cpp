@@ -81,13 +81,13 @@ namespace CHelper::Test {
         while (fin.is_open()) {
             std::string str;
             getline(fin, str);
-            if (HEDLEY_UNLIKELY(str.empty())) {
+            if (str.empty()) [[unlikely]] {
                 break;
             }
-            if (HEDLEY_LIKELY(str[0] == '-')) {
+            if (str[0] == '-') [[likely]] {
                 continue;
             }
-            if (HEDLEY_UNLIKELY(str[str.length() - 1] == '\r')) {
+            if (str[str.length() - 1] == '\r') [[unlikely]] {
                 str = str.substr(0, str.length() - 1);
             }
             commands.push_back(utf8::utf8to16(str));
@@ -113,13 +113,13 @@ namespace CHelper::Test {
         while (fin.is_open()) {
             std::string str;
             getline(fin, str);
-            if (HEDLEY_UNLIKELY(str.empty())) {
+            if (str.empty()) [[unlikely]] {
                 break;
             }
-            if (HEDLEY_LIKELY(str[0] == '-')) {
+            if (str[0] == '-') [[likely]] {
                 continue;
             }
-            if (HEDLEY_UNLIKELY(str[str.length() - 1] == '\r')) {
+            if (str[str.length() - 1] == '\r') [[unlikely]] {
                 str = str.substr(0, str.length() - 1);
             }
             commands.push_back(utf8::utf8to16(str));
@@ -137,7 +137,7 @@ namespace CHelper::Test {
         try {
             core = CHelperCore::createByDirectory(cpackPath);
             fmt::print("\n");
-            if (HEDLEY_UNLIKELY(core == nullptr)) {
+            if (core == nullptr) [[unlikely]] {
                 return;
             }
         } catch (const std::exception &e) {
@@ -156,7 +156,7 @@ namespace CHelper::Test {
         try {
             core = CHelperCore::createByBinary(cpackPath);
             fmt::print("\n");
-            if (HEDLEY_UNLIKELY(core == nullptr)) {
+            if (core == nullptr) [[unlikely]] {
                 return;
             }
         } catch (const std::exception &e) {
@@ -172,7 +172,7 @@ namespace CHelper::Test {
     [[maybe_unused]] void
     test(CHelperCore *core, const std::vector<std::u16string> &commands, bool isTestTime) {
         try {
-            if (HEDLEY_UNLIKELY(core == nullptr)) {
+            if (core == nullptr) [[unlikely]] {
                 return;
             }
             for (const auto &command: commands) {
@@ -266,7 +266,7 @@ namespace CHelper::Test {
         try {
             core = CHelperCore::createByDirectory(cpackPath);
             fmt::print("\n");
-            if (HEDLEY_UNLIKELY(core == nullptr)) {
+            if (core == nullptr) [[unlikely]] {
                 return;
             }
             std::chrono::high_resolution_clock::time_point start, end;
@@ -295,7 +295,7 @@ namespace CHelper::Test {
         CHelperCore *core2 = nullptr;
         try {
             core = CHelperCore::createByDirectory(input);
-            if (HEDLEY_UNLIKELY(core == nullptr)) {
+            if (core == nullptr) [[unlikely]] {
                 return false;
             }
             const Manifest &manifest = core->getCPack().manifest;
@@ -328,7 +328,7 @@ namespace CHelper::Test {
         CHelperCore *core2 = nullptr;
         try {
             core = CHelperCore::createByDirectory(input);
-            if (HEDLEY_UNLIKELY(core == nullptr)) {
+            if (core == nullptr) [[unlikely]] {
                 return false;
             }
             const Manifest &manifest = core->getCPack().manifest;
@@ -360,7 +360,7 @@ namespace CHelper::Test {
         CHelperCore *core2 = nullptr;
         try {
             core = CHelperCore::createByDirectory(input);
-            if (HEDLEY_UNLIKELY(core == nullptr)) {
+            if (core == nullptr) [[unlikely]] {
                 return false;
             }
             const Manifest &manifest = core->getCPack().manifest;

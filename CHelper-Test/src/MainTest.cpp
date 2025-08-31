@@ -137,7 +137,7 @@ namespace CHelper::Test {
                 CHelper::Profile::printAndClear(e);
             }
         }
-        if (HEDLEY_UNLIKELY(flag)) {
+        if (flag) [[unlikely]] {
             FAIL();
         }
     }
