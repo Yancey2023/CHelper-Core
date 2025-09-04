@@ -91,9 +91,9 @@ namespace CHelper::AutoSuggestion {
             auto compare = [](const auto &item1, const auto &item2) {
                 return item1->name < item2->name;
             };
-            std::sort(nameStartOf.begin(), nameStartOf.end(), compare);
-            std::sort(nameContain.begin(), nameContain.end(), compare);
-            std::sort(descriptionContain.begin(), descriptionContain.end(), compare);
+            std::ranges::sort(nameStartOf, compare);
+            std::ranges::sort(nameContain, compare);
+            std::ranges::sort(descriptionContain, compare);
             size_t start = astNode.tokens.startIndex;
             size_t end = astNode.tokens.endIndex;
             suggestions.reserveIdSuggestion(nameStartOf.size() + nameContain.size() + descriptionContain.size());
@@ -143,9 +143,9 @@ namespace CHelper::AutoSuggestion {
             auto compare = [](const auto &item1, const auto &item2) {
                 return item1->name < item2->name;
             };
-            std::sort(nameStartOf.begin(), nameStartOf.end(), compare);
-            std::sort(nameContain.begin(), nameContain.end(), compare);
-            std::sort(descriptionContain.begin(), descriptionContain.end(), compare);
+            std::ranges::sort(nameStartOf, compare);
+            std::ranges::sort(nameContain, compare);
+            std::ranges::sort(descriptionContain, compare);
             size_t start = astNode.tokens.startIndex;
             size_t end = astNode.tokens.endIndex;
             suggestions.reserveIdSuggestion(nameStartOf.size() + nameContain.size() + descriptionContain.size());

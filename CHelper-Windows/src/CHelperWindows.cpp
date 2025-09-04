@@ -176,7 +176,7 @@ void onTextChanged(const std::u16string &command) {
             }
         }
         CHelper::Profile::pop();
-        fmt::println("parse successfully({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startParse).count(), fg(fmt::color::medium_purple)));
+        fmt::println("run successfully({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(endStructure - startParse).count(), fg(fmt::color::medium_purple)));
         fmt::println("parse successfully({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(endParse - startParse).count(), fg(fmt::color::medium_purple)));
         fmt::println("get description successfully({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(endDescription - startDescription).count(), fg(fmt::color::medium_purple)));
         fmt::println("get error successfully({})", fmt::styled(std::chrono::duration_cast<std::chrono::milliseconds>(endErrorReasons - startErrorReasons).count(), fg(fmt::color::medium_purple)));
