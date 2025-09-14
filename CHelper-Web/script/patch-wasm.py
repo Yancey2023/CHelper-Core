@@ -68,8 +68,8 @@ export class CHelperCore {
     return structure
   }
 
-  getDescription() {
-    let ptr = _getDescription(this._corePtr)
+  getParamHint() {
+    let ptr = _getParamHint(this._corePtr)
     if (ptr === 0) {
       return ''
     }

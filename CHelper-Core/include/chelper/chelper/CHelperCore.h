@@ -45,7 +45,7 @@ namespace CHelper {
 
         [[nodiscard]] const ASTNode *getAstNode() const;
 
-        [[nodiscard]] std::u16string getDescription() const;
+        [[nodiscard]] std::u16string getParamHint() const;
 
         [[nodiscard]] std::vector<std::shared_ptr<ErrorReason>> getErrorReasons() const;
 

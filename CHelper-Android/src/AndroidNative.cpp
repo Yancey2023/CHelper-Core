@@ -7,7 +7,7 @@
 #include <spdlog/sinks/android_sink.h>
 
 std::u16string jstring2u16string(JNIEnv *env, jstring jString) {
-    if (HEDLEY_UNLIKELY(jString == nullptr)) {
+    if (jString == nullptr) [[unlikely]] {
         SPDLOG_WARN("call jstring2u16string when jString is null");
         return {};
     }
@@ -23,7 +23,7 @@ jstring u16string2jstring(JNIEnv *env, const std::u16string &u16string) {
 }
 
 std::string jstring2string(JNIEnv *env, jstring jString) {
-    if (HEDLEY_UNLIKELY(jString == nullptr)) {
+    if (jString == nullptr) [[unlikely]] {
         SPDLOG_WARN("call jstring2string when jString is null");
         return {};
     }
@@ -51,13 +51,13 @@ Java_yancey_chelper_core_CHelperCore_create0(
     }
     try {
         std::string cpackPath = jstring2string(env, cpack_path);
-        if (HEDLEY_UNLIKELY(assetManager == nullptr)) {
+        if (assetManager == nullptr) [[unlikely]] {
             CHelper::CHelperCore *core = CHelper::CHelperCore::createByBinary(cpackPath);
             return reinterpret_cast<jlong>(core);
         } else {
             AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
             AAsset *asset = AAssetManager_open(mgr, cpackPath.c_str(), AASSET_MODE_BUFFER);
-            if (HEDLEY_UNLIKELY(asset == nullptr)) {
+            if (asset == nullptr) [[unlikely]] {
                 return reinterpret_cast<jlong>(nullptr);
             }
             auto dataFileSize = static_cast<size_t>(AAsset_getLength(asset));
@@ -87,11 +87,11 @@ extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
 Java_yancey_chelper_core_CHelperCore_onTextChanged0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer, jstring text, jint index) {
     auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_onTextChanged0 when core is nullptr");
         return;
     }
-    if (HEDLEY_UNLIKELY(text == nullptr)) {
+    if (text == nullptr) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_onTextChanged0 when core is nullptr");
         return;
     }
@@ -102,7 +102,7 @@ extern "C" [[maybe_unused]] JNIEXPORT void JNICALL
 Java_yancey_chelper_core_CHelperCore_onSelectionChanged0(
         [[maybe_unused]] JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer, jint index) {
     auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_onSelectionChanged0 when core is nullptr");
         return;
     }
@@ -110,14 +110,14 @@ Java_yancey_chelper_core_CHelperCore_onSelectionChanged0(
 }
 
 extern "C" [[maybe_unused]] JNIEXPORT jstring JNICALL
-Java_yancey_chelper_core_CHelperCore_getDescription0(
+Java_yancey_chelper_core_CHelperCore_getParamHint0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
     auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
-        SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getDescription0 when core is nullptr");
+    if (core == nullptr) [[unlikely]] {
+        SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getParamHint0 when core is nullptr");
         return nullptr;
     }
-    return u16string2jstring(env, core->getDescription());
+    return u16string2jstring(env, core->getParamHint());
 }
 
 extern "C" [[maybe_unused]] JNIEXPORT jobjectArray JNICALL
@@ -125,7 +125,7 @@ Java_yancey_chelper_core_CHelperCore_getErrorReasons0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
     auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     jclass errorReasonClass = env->FindClass("yancey/chelper/core/ErrorReason");
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getErrorReasons0 when core is nullptr");
         return env->NewObjectArray(0, errorReasonClass, nullptr);
     }
@@ -152,7 +152,7 @@ extern "C" [[maybe_unused]] JNIEXPORT jlong JNICALL
 Java_yancey_chelper_core_CHelperCore_getSuggestionsSize0(
         [[maybe_unused]] JNIEnv *env, [[maybe_unused]] jint thiz, jlong pointer) {
     auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getSuggestionsSize0 when core is nullptr");
         return 0;
     }
@@ -163,16 +163,16 @@ extern "C" [[maybe_unused]] JNIEXPORT jobject JNICALL
 Java_yancey_chelper_core_CHelperCore_getSuggestion0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer, jint which) {
     auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getSuggestion0 when core is nullptr");
         return nullptr;
     }
-    if (HEDLEY_UNLIKELY(which < 0)) {
+    if (which < 0) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getSuggestion0 when which < 0");
         return nullptr;
     }
     auto suggestions = core->getSuggestions();
-    if (HEDLEY_UNLIKELY(static_cast<jint>(suggestions->size()) <= which)) {
+    if (static_cast<jint>(suggestions->size()) <= which) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getSuggestion0 when suggestions->size() <= which");
         return nullptr;
     }
@@ -195,7 +195,7 @@ Java_yancey_chelper_core_CHelperCore_getSuggestions0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
     auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
     jclass suggestionClass = env->FindClass("yancey/chelper/core/Suggestion");
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getSuggestions0 when core is nullptr");
         return env->NewObjectArray(0, suggestionClass, nullptr);
     }
@@ -221,7 +221,7 @@ extern "C" [[maybe_unused]] JNIEXPORT jstring JNICALL
 Java_yancey_chelper_core_CHelperCore_getStructure0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
     auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getStructure0 when core is nullptr");
         return nullptr;
     }
@@ -232,12 +232,12 @@ extern "C" [[maybe_unused]] JNIEXPORT jobject JNICALL
 Java_yancey_chelper_core_CHelperCore_onSuggestionClick0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer, jint which) {
     auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_onSuggestionClick0 when core is nullptr");
         return nullptr;
     }
     std::optional<std::pair<std::u16string, size_t>> result = core->onSuggestionClick(which);
-    if (HEDLEY_LIKELY(result.has_value())) {
+    if (result.has_value()) [[likely]] {
         jclass resultClass = env->FindClass("yancey/chelper/core/ClickSuggestionResult");
         jobject javaResult = env->AllocObject(resultClass);
         env->SetObjectField(javaResult,
@@ -256,7 +256,7 @@ extern "C" [[maybe_unused]] JNIEXPORT jintArray JNICALL
 Java_yancey_chelper_core_CHelperCore_getColors0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jlong pointer) {
     auto *core = reinterpret_cast<CHelper::CHelperCore *>(pointer);
-    if (HEDLEY_UNLIKELY(core == nullptr)) {
+    if (core == nullptr) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_getColors0 when core is nullptr");
         return nullptr;
     }
@@ -277,7 +277,7 @@ CHelper::Old2New::BlockFixData blockFixData0;
 extern "C" [[maybe_unused]] JNIEXPORT jboolean JNICALL
 Java_yancey_chelper_core_CHelperCore_old2newInit0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jobject assetManager, jstring blockFixDataPath) {
-    if (HEDLEY_UNLIKELY(blockFixDataPath == nullptr)) {
+    if (blockFixDataPath == nullptr) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_old2newInit0 when blockFixDataPath is nullptr");
         return false;
     }
@@ -285,7 +285,7 @@ Java_yancey_chelper_core_CHelperCore_old2newInit0(
     try {
         AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
         AAsset *asset = AAssetManager_open(mgr, blockFixDataPath0.c_str(), AASSET_MODE_BUFFER);
-        if (HEDLEY_UNLIKELY(asset == nullptr)) {
+        if (asset == nullptr) [[unlikely]] {
             return false;
         }
         auto dataFileSize = static_cast<size_t>(AAsset_getLength(asset));
@@ -304,7 +304,7 @@ Java_yancey_chelper_core_CHelperCore_old2newInit0(
 extern "C" [[maybe_unused]] JNIEXPORT jstring JNICALL
 Java_yancey_chelper_core_CHelperCore_old2new0(
         JNIEnv *env, [[maybe_unused]] jobject thiz, jstring old) {
-    if (HEDLEY_UNLIKELY(old == nullptr)) {
+    if (old == nullptr) [[unlikely]] {
         SPDLOG_WARN("call Java_yancey_chelper_core_CHelperCore_old2new0 when old is nullptr");
         return nullptr;
     }

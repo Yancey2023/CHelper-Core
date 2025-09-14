@@ -105,7 +105,7 @@ namespace CHelper {
         return &astNode;
     }
 
-    [[nodiscard]] std::u16string CHelperCore::getDescription() const {
+    [[nodiscard]] std::u16string CHelperCore::getParamHint() const {
         return ParameterHint::getParameterHint(astNode, index).value_or(u"未知");
     }
 

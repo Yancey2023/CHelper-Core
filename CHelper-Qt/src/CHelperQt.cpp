@@ -64,7 +64,7 @@ void CHelperApp::onSelectionChanged() const {
         ui->errorReasonLabel->setText(nullptr);
     } else {
         ui->structureLabel->setText(QString::fromStdU16String(core->getStructure()));
-        ui->descriptionLabel->setText(QString::fromStdU16String(core->getDescription()));
+        ui->descriptionLabel->setText(QString::fromStdU16String(core->getParamHint()));
         std::vector<std::shared_ptr<CHelper::ErrorReason>> errorReasons = core->getErrorReasons();
         if (errorReasons.empty()) [[unlikely]] {
             ui->errorReasonLabel->setText(nullptr);

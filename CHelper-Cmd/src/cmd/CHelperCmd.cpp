@@ -185,7 +185,7 @@ namespace CHelper::Test {
                 core->onTextChanged(command, command.length());
                 endParse = std::chrono::high_resolution_clock::now();
                 startDescription = std::chrono::high_resolution_clock::now();
-                auto description = core->getDescription();
+                auto description = core->getParamHint();
                 endDescription = std::chrono::high_resolution_clock::now();
                 startErrorReasons = std::chrono::high_resolution_clock::now();
                 auto errorReasons = core->getErrorReasons();
@@ -274,7 +274,7 @@ namespace CHelper::Test {
             for (size_t i = 0; i < times; ++i) {
                 for (const auto &command: commands) {
                     core->onTextChanged(command, command.length());
-                    auto description = core->getDescription();// NOLINT(*-unused-local-non-trivial-variable)
+                    auto description = core->getParamHint();// NOLINT(*-unused-local-non-trivial-variable)
                     auto errorReasons = core->getErrorReasons();
                     core->getSuggestions();
                     auto structure = core->getStructure();// NOLINT(*-unused-local-non-trivial-variable)

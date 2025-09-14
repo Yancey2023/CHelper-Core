@@ -66,7 +66,7 @@ namespace CHelper::Test {
                 core->onTextChanged(command, command.length());
                 endParse = std::chrono::high_resolution_clock::now();
                 startDescription = std::chrono::high_resolution_clock::now();
-                auto description = core->getDescription();
+                auto description = core->getParamHint();
                 endDescription = std::chrono::high_resolution_clock::now();
                 startErrorReasons = std::chrono::high_resolution_clock::now();
                 auto errorReasons = core->getErrorReasons();

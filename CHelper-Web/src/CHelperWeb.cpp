@@ -47,11 +47,11 @@ EMSCRIPTEN_KEEPALIVE const uint8_t *getStructure(const CHelper::CHelperCore *cor
     return buffer.data();
 }
 
-EMSCRIPTEN_KEEPALIVE const uint8_t *getDescription(const CHelper::CHelperCore *core) {
+EMSCRIPTEN_KEEPALIVE const uint8_t *getParamHint(const CHelper::CHelperCore *core) {
     if (core == nullptr) [[unlikely]] {
         return nullptr;
     }
-    std::u16string description = core->getDescription();
+    std::u16string description = core->getParamHint();
     buffer.resize((reinterpret_cast<size_t>(buffer.data()) % 4) + 4 + (description.size() * 2));
     *reinterpret_cast<uint32_t *>(buffer.data()) = static_cast<uint32_t>(description.size());
     memcpy((reinterpret_cast<size_t>(buffer.data()) % 4) + buffer.data() + 4, description.data(), description.size() * 2);
