@@ -5900,6 +5900,9 @@
             "description": "织布机：使用"
         },
         {
+            "name": "ui.reject"
+        },
+        {
             "name": "ui.stonecutter.take_result",
             "description": "切石机：使用"
         },
